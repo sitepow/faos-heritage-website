@@ -1,4 +1,4 @@
-import { ProductCard } from "@/components/product-card";
+import { ProductCard } from "@/components/product/product-card";
 
 export default function Home() {
   return (
@@ -9,8 +9,6 @@ export default function Home() {
           name="iPhone 15 Pro"
           price={39900}
           image="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
-          description="สมาร์ทโฟนรุ่นล่าสุด พร้อมชิป A17 Pro"
-          category="มือถือ"
           stock={15}
         />
         <ProductCard
@@ -18,8 +16,6 @@ export default function Home() {
           name="iPhone 15 Pro Max"
           price={44900}
           image="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
-          description="สมาร์ทโฟนรุ่นล่าสุด พร้อมชิป A17 Pro และหน้าจอใหญ่ขึ้น"
-          category="มือถือ"
           stock={15}
         />
         <ProductCard
@@ -27,8 +23,6 @@ export default function Home() {
           name="MacBook Pro"
           price={59900}
           image="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
-          description="โน้ตบุ๊กสำหรับมืออาชีพ"
-          category="คอมพิวเตอร์"
           stock={8}
         />
         <ProductCard
@@ -36,8 +30,34 @@ export default function Home() {
           name="AirPods Pro"
           price={8990}
           image="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
-          description="หูฟังตัดเสียงรบกวนระดับพรีเมียม"
-          category="Audio"
+          stock={0}
+        />
+        <ProductCard
+          id="4"
+          name="AirPods Pro"
+          price={8990}
+          image="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
+          stock={0}
+        />
+        <ProductCard
+          id="4"
+          name="AirPods Pro"
+          price={8990}
+          image="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
+          stock={0}
+        />
+        <ProductCard
+          id="4"
+          name="AirPods Pro"
+          price={8990}
+          image="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
+          stock={0}
+        />
+        <ProductCard
+          id="4"
+          name="AirPods Pro"
+          price={8990}
+          image="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
           stock={0}
         />
       </div>

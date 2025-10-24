@@ -2,7 +2,8 @@ export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
   name: "DemoStore - ร้านค้าออนไลน์",
-  description: "Make beautiful websites regardless of your design experience.",
+  description: "",
+  footer: "Copyright 2025 DemoStore. ร้านค้าออนไลน์",
   navItems: [
     {
       label: "หน้าแรก",
@@ -10,32 +11,25 @@ export const siteConfig = {
     },
     {
       label: "สินค้าทั้งหมด",
-      href: "/products",
+      href: "/",
     },
     {
       label: "เกี่ยวกับเรา",
-      href: "/about",
+      href: "/",
     },
   ],
   navMenuItems: [
     {
-      label: "โปรไฟล์",
-      href: "/profile",
+      label: "หน้าแรก",
+      href: "/",
     },
     {
-      label: "แดชบอร์ด",
-      href: "/dashboard",
+      label: "สินค้าทั้งหมด",
+      href: "/",
     },
     {
-      label: "ออกจากระบบ",
-      href: "/logout",
+      label: "เกี่ยวกับเรา",
+      href: "/",
     },
   ],
-  links: {
-    github: "https://github.com/heroui-inc/heroui",
-    twitter: "https://twitter.com/hero_ui",
-    docs: "https://heroui.com",
-    discord: "https://discord.gg/9b6yyZKmH4",
-    sponsor: "https://patreon.com/jrgarciadev",
-  },
 };
