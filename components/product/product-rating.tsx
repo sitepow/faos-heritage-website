@@ -5,12 +5,12 @@ interface Props {
   rate?: number;
 }
 
-const StarRating: FC<ComponentProps<"div"> & Props> = ({
+const ProductRating: FC<ComponentProps<"div"> & Props> = ({
   rate = 0,
   ...props
 }) => {
   return (
-    <div {...props} className="flex">
+    <div {...props} className="flex items-center gap-0.5">
       {[...Array(5)].map((_, index) => (
         <Star
           key={index}
@@ -21,8 +21,9 @@ const StarRating: FC<ComponentProps<"div"> & Props> = ({
           }
         />
       ))}
+      <span className="text-default-500">({rate})</span>
     </div>
   );
 };
 
-export { StarRating };
+export { ProductRating };

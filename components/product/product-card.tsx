@@ -1,21 +1,31 @@
-import { formatCurrency } from "@/utils/number";
-import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
-import { Image } from "@heroui/image";
-import { FC } from "react";
-import { StarRating } from "./star-rating";
+"use client";
 
-interface ProductCardProps {
-  id: string;
-  name: string;
-  price: number;
-  image: string;
-  stock?: number;
+import { formatCurrency } from "@/utils/number";
+import { Card, CardHeader, CardBody } from "@heroui/card";
+import { Image } from "@heroui/image";
+import { FC, useState } from "react";
+import { ProductRating } from "./product-rating";
+import { Product } from "@/types";
+import clsx from "clsx";
+import { Alert } from "@heroui/alert";
+
+interface Props extends Product {
+  className?: string;
 }
 
-const ProductCard: FC<ProductCardProps> = ({ id, name, price, image }) => {
+const ProductCard: FC<Props> = ({ id, name, price, image, className }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
-    <Card className="size-full flex flex-col cursor-pointer border border-divider">
-      <CardHeader className="p-0 overflow-hidden">
+    <Card
+      className={clsx(
+        "size-full flex flex-col flex-none w-64 md:w-72 cursor-pointer border border-divider",
+        className
+      )}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <CardHeader className="p-0 overflow-hidden relative">
         <Image
           alt={name}
           className="object-cover size-full"
@@ -25,20 +35,28 @@ const ProductCard: FC<ProductCardProps> = ({ id, name, price, image }) => {
           height={250}
           width="100%"
           radius="none"
-          src={image}
+          src={image ?? "/placeholder.svg"}
         />
+
+        {isHovered && (
+          <Alert
+            radius="none"
+            color="primary"
+            className="absolute bottom-0 z-[60]"
+            description="คลิกเพื่อดูรายละเอียดสินค้า"
+          />
+        )}
       </CardHeader>
 
       <CardBody>
         <p className="font-bold text-lg text-default-500">
           {formatCurrency(price)}
         </p>
-        <h4 className="font-bold text-lg">{name}</h4>
-        <StarRating rate={4} />
+        <h4 className="font-bold text-lg truncate">{name}</h4>
+        <ProductRating rate={4} />
       </CardBody>
     </Card>
   );
 };
 
 export { ProductCard };
-export type { ProductCardProps };

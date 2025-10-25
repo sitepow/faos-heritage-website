@@ -13,6 +13,7 @@ import { SearchIcon, ShoppingCart, Triangle, UserIcon } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { Button } from "@heroui/button";
 import { ThemeSwitch } from "./theme-switch";
+import Link from "next/link";
 
 export const Navbar = () => {
   const searchInput = (
@@ -48,11 +49,14 @@ export const Navbar = () => {
         <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
           <NavbarBrand as="li" className="gap-3 max-w-fit">
             <NextLink
-              className="flex justify-start items-center gap-1"
+              className="flex justify-start items-center gap-2"
               href="/"
             >
-              <Triangle />
-              <p className="font-bold text-inherit">DemoStore</p>
+              <Triangle className="text-red-800" />
+              <div className="flex text-inherit flex-col gap-0">
+                <span className="font-bold">DemoStore</span>
+                <span className="text-xs text-red-800">ร้านค้าตัวอย่าง</span>
+              </div>
             </NextLink>
           </NavbarBrand>
           <ul className="hidden lg:flex gap-4 justify-start ml-2">
@@ -79,9 +83,11 @@ export const Navbar = () => {
         >
           <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
           <NavbarItem className="hidden lg:flex">
-            <Button variant="light" startContent={<UserIcon />}>
-              เข้าสู่ระบบ
-            </Button>
+            <Link href={siteConfig.link.login}>
+              <Button variant="light" startContent={<UserIcon />}>
+                เข้าสู่ระบบ
+              </Button>
+            </Link>
           </NavbarItem>
           <NavbarItem className="hidden lg:flex">
             <ThemeSwitch />
