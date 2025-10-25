@@ -93,12 +93,17 @@ export const Navbar = () => {
             <ThemeSwitch />
           </NavbarItem>
           <NavbarItem className="hidden lg:flex">
-            <div className="flex items-center gap-2 cursor-pointer">
-              <ShoppingCart />
-              <div className="size-7 flex items-center text-xs justify-center bg-red-800 rounded-full text-white">
-                <span>99+</span>
-              </div>
-            </div>
+            <Link href={siteConfig.link.cart}>
+              <Button
+                variant="light"
+                startContent={<ShoppingCart />}
+                endContent={
+                  <div className="size-7 font-bold flex items-center text-xs justify-center bg-red-800 rounded-full text-white">
+                    <span>99+</span>
+                  </div>
+                }
+              />
+            </Link>
           </NavbarItem>
         </NavbarContent>
       </HeroUINavbar>
