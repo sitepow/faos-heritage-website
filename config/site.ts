@@ -11,29 +11,29 @@ export const siteConfig = {
   navItems: [
     {
       label: "หน้าแรก",
-      href: "/1",
+      href: "/",
     },
     {
       label: "สินค้าทั้งหมด",
-      href: "/2",
+      href: "/",
     },
     {
       label: "เกี่ยวกับเรา",
-      href: "/3",
+      href: "/",
     },
   ],
   navMenuItems: [
     {
       label: "หน้าแรก",
-      href: "/1",
+      href: "/",
     },
     {
       label: "สินค้าทั้งหมด",
-      href: "/2",
+      href: "/",
     },
     {
       label: "เกี่ยวกับเรา",
-      href: "/3",
+      href: "/",
     },
   ],
 };
