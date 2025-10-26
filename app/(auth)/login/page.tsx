@@ -6,6 +6,7 @@ import { Input } from "@heroui/input";
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { Form } from "@heroui/form";
+import Image from "next/image";
 
 type UserInputs = {
   email: string;
@@ -71,6 +72,34 @@ export default function Login() {
               },
             })}
           />
+        </CardBody>
+
+        <CardBody className="justify-center items-center gap-4">
+          <span>หรือจะเข้าสู่ระบบด้วย</span>
+
+          <div className="flex gap-4">
+            <Image
+              src={"/google.png"}
+              width={50}
+              height={50}
+              alt="google-login"
+              className="rounded-full cursor-pointer"
+              onClick={async () => {
+                await signIn("google");
+              }}
+            />
+
+            <Image
+              src={"/facebook.png"}
+              width={50}
+              height={50}
+              alt="google-login"
+              className="rounded-full cursor-pointer"
+              onClick={async () => {
+                await signIn("facebook");
+              }}
+            />
+          </div>
         </CardBody>
 
         <CardFooter className="flex-col gap-2.5">

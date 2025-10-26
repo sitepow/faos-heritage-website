@@ -8,32 +8,6 @@ export const siteConfig = {
     login: "/login",
     cart: "/cart",
   },
-  navItems: [
-    {
-      label: "หน้าแรก",
-      href: "/",
-    },
-    {
-      label: "สินค้าทั้งหมด",
-      href: "/",
-    },
-    {
-      label: "เกี่ยวกับเรา",
-      href: "/",
-    },
-  ],
-  navMenuItems: [
-    {
-      label: "หน้าแรก",
-      href: "/",
-    },
-    {
-      label: "สินค้าทั้งหมด",
-      href: "/",
-    },
-    {
-      label: "เกี่ยวกับเรา",
-      href: "/",
-    },
-  ],
+  navItems: [],
+  navMenuItems: [],
 };
