@@ -32,7 +32,7 @@ const CategorySection = () => {
           </div>
         </CardHeader>
         <CardBody>
-          <Carousel autoplay step={2} className="items-center">
+          <Carousel autoplay scrollByGroup className="items-center">
             {PRODUCT_CONSTANT?.slice(0, 10).map((product) => (
               <ProductCard key={product.id} {...product} />
             ))}

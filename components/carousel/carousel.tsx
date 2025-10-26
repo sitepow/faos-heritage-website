@@ -11,7 +11,7 @@ import clsx from "clsx";
 interface CarouselProps {
   className?: string;
   children: ReactNode;
-  step?: number | "auto";
+  scrollByGroup?: boolean;
   loop?: boolean;
   autoplay?: boolean;
   autoplayDelay?: number;
@@ -20,7 +20,7 @@ interface CarouselProps {
 const Carousel: FC<CarouselProps> = ({
   className,
   children,
-  step = 1,
+  scrollByGroup,
   loop = false,
   autoplay = false,
   autoplayDelay = 3000,
@@ -30,7 +30,7 @@ const Carousel: FC<CarouselProps> = ({
       dragFree: true,
       align: "start",
       containScroll: "trimSnaps",
-      slidesToScroll: step,
+      slidesToScroll: scrollByGroup ? "auto" : 1,
       loop: loop,
     },
     autoplay

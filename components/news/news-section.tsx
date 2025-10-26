@@ -20,7 +20,7 @@ const NewsSection = () => {
       </CardHeader>
 
       <CardBody>
-        <Carousel autoplay step={2}>
+        <Carousel autoplay scrollByGroup>
           {NEWS_CONSTANT.map((news) => (
             <NewsCard key={news.id} {...news} />
           ))}
