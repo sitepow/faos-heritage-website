@@ -2,13 +2,13 @@
 
 import type { ThemeProviderProps } from "next-themes";
 
-import * as React from "react";
 import { HeroUIProvider } from "@heroui/system";
 import { useRouter } from "next/navigation";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { FC, ReactNode } from "react";
 
-export interface ProvidersProps {
-  children: React.ReactNode;
+export interface Props {
+  children: ReactNode;
   themeProps?: ThemeProviderProps;
 }
 
@@ -20,7 +20,7 @@ declare module "@react-types/shared" {
   }
 }
 
-export function Providers({ children, themeProps }: ProvidersProps) {
+const HeroUIProviders: FC<Props> = ({ children, themeProps }) => {
   const router = useRouter();
 
   return (
@@ -28,4 +28,6 @@ export function Providers({ children, themeProps }: ProvidersProps) {
       <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
     </HeroUIProvider>
   );
-}
+};
+
+export { HeroUIProviders };

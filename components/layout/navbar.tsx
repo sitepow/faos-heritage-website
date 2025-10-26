@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Navbar as HeroUINavbar,
   NavbarContent,
@@ -12,10 +14,14 @@ import { SearchIcon, ShoppingCart, Triangle, UserIcon } from "lucide-react";
 
 import { siteConfig } from "@/config/site";
 import { Button } from "@heroui/button";
-import { ThemeSwitch } from "./theme-switch";
 import Link from "next/link";
 
+import { useSession } from "next-auth/react";
+import { UserPanel } from "../user-panel";
+
 export const Navbar = () => {
+  const { status } = useSession();
+
   const searchInput = (
     <Input
       aria-label="Search"
@@ -82,16 +88,20 @@ export const Navbar = () => {
           justify="end"
         >
           <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
-          <NavbarItem className="hidden lg:flex">
-            <Link href={siteConfig.link.login}>
-              <Button variant="light" startContent={<UserIcon />}>
-                เข้าสู่ระบบ
-              </Button>
-            </Link>
-          </NavbarItem>
-          <NavbarItem className="hidden lg:flex">
-            <ThemeSwitch />
-          </NavbarItem>
+          {status === "unauthenticated" && (
+            <NavbarItem className="hidden lg:flex">
+              <Link href={siteConfig.link.login}>
+                <Button variant="light" startContent={<UserIcon />}>
+                  เข้าสู่ระบบ
+                </Button>
+              </Link>
+            </NavbarItem>
+          )}
+          {status === "authenticated" && (
+            <NavbarItem className="hidden lg:flex">
+              <UserPanel />
+            </NavbarItem>
+          )}
           <NavbarItem className="hidden lg:flex">
             <Link href={siteConfig.link.cart}>
               <Button

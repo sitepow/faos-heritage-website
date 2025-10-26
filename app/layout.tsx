@@ -1,9 +1,10 @@
 import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
 import clsx from "clsx";
-import { Providers } from "./providers";
+import { HeroUIProviders } from "../providers/heroui";
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
+import { NextAuthProviders } from "@/providers/nextauth";
 
 export const metadata: Metadata = {
   title: {
@@ -37,9 +38,13 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-          {children}
-        </Providers>
+        <NextAuthProviders>
+          <HeroUIProviders
+            themeProps={{ attribute: "class", defaultTheme: "dark" }}
+          >
+            {children}
+          </HeroUIProviders>
+        </NextAuthProviders>
       </body>
     </html>
   );
