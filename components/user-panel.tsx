@@ -1,44 +1,43 @@
-"use client";
+'use client'
 
 import {
   Dropdown,
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
-} from "@heroui/dropdown";
-import { User } from "@heroui/user";
-import { LogOutIcon } from "lucide-react";
-
-import { useSession, signOut } from "next-auth/react";
+} from '@heroui/dropdown'
+import { User } from '@heroui/user'
+import { LogOutIcon } from 'lucide-react'
+import { useSession, signOut } from 'next-auth/react'
 
 const UserPanel = () => {
-  const { data: session } = useSession();
+  const { data: session } = useSession()
 
   return (
     <Dropdown>
       <DropdownTrigger>
         <User
-          className="cursor-pointer"
           avatarProps={{
-            src: "/placeholder.svg",
+            src: '/placeholder.svg',
           }}
+          className='cursor-pointer'
           description={session?.user?.email}
           name={session?.user?.name}
         />
       </DropdownTrigger>
-      <DropdownMenu aria-label="Static Actions">
+      <DropdownMenu aria-label='Static Actions'>
         <DropdownItem
-          key="logout"
+          key='logout'
+          className='text-danger'
+          color='danger'
           startContent={<LogOutIcon />}
           onClick={signOut}
-          className="text-danger"
-          color="danger"
         >
           ออกจากระบบ
         </DropdownItem>
       </DropdownMenu>
     </Dropdown>
-  );
-};
+  )
+}
 
-export { UserPanel };
+export { UserPanel }

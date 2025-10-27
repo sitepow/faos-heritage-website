@@ -1,34 +1,37 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { NextResponse } from 'next/server'
+
+import type { NextRequest } from 'next/server'
 
 export function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+  const { pathname } = request.nextUrl
 
   const sessionToken =
-    request.cookies.get("next-auth.session-token")?.value ||
-    request.cookies.get("__Secure-next-auth.session-token")?.value;
+    request.cookies.get('next-auth.session-token')?.value ||
+    request.cookies.get('__Secure-next-auth.session-token')?.value
 
-  const isLoggedIn = !!sessionToken;
+  const isLoggedIn = !!sessionToken
 
-  const protectedPaths = ["/dashboard", "/profile", "/orders", "/account"];
+  const protectedPaths = ['/dashboard', '/profile', '/orders', '/account']
   const isProtectedPath = protectedPaths.some((path) =>
-    pathname.startsWith(path)
-  );
+    pathname.startsWith(path),
+  )
 
-  const authPaths = ["/login", "/register"];
-  const isAuthPath = authPaths.some((path) => pathname.startsWith(path));
+  const authPaths = ['/login', '/register']
+  const isAuthPath = authPaths.some((path) => pathname.startsWith(path))
 
   if (isProtectedPath && !isLoggedIn) {
-    const url = new URL("/login", request.url);
-    url.searchParams.set("callbackUrl", pathname);
-    return NextResponse.redirect(url);
+    const url = new URL('/login', request.url)
+
+    url.searchParams.set('callbackUrl', pathname)
+
+    return NextResponse.redirect(url)
   }
 
   if (isAuthPath && isLoggedIn) {
-    return NextResponse.redirect(new URL("/", request.url));
+    return NextResponse.redirect(new URL('/', request.url))
   }
 
-  return NextResponse.next();
+  return NextResponse.next()
 }
 
 export const config = {
@@ -41,6 +44,6 @@ export const config = {
      * - favicon.ico (favicon file)
      * - public files (public folder)
      */
-    "/((?!api|_next/static|_next/image|favicon.ico|.*\\..*|_next).*)",
+    '/((?!api|_next/static|_next/image|favicon.ico|.*\\..*|_next).*)',
   ],
-};
+}

@@ -1,12 +1,13 @@
-import clsx from "clsx";
-import { ComponentProps, FC } from "react";
+import clsx from 'clsx'
+
+import type { ComponentProps, FC } from 'react'
 
 interface Props {
-  title: string;
-  description: string;
+  title: string
+  description: string
 }
 
-const HeaderTitle: FC<ComponentProps<"div"> & Props> = ({
+const HeaderTitle: FC<ComponentProps<'div'> & Props> = ({
   title,
   description,
   className,
@@ -14,10 +15,10 @@ const HeaderTitle: FC<ComponentProps<"div"> & Props> = ({
 }) => {
   return (
     <div className={clsx(className)} {...props}>
-      <h2 className="text-2xl font-bold">{title}</h2>
+      <h2 className='text-2xl font-bold'>{title}</h2>
       <span>{description}</span>
     </div>
-  );
-};
+  )
+}
 
-export { HeaderTitle };
+export { HeaderTitle }

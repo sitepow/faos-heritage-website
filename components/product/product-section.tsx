@@ -1,17 +1,20 @@
-import { ProductCard } from "./product-card";
-import { Product } from "@/types";
-import { FC } from "react";
+import type { Product } from '@/types'
+import type { FC } from 'react'
+
+import { ProductCard } from './product-card'
 
 interface Props {
-  items: Product[];
+  items: Product[]
 }
 
 const ProductSection: FC<Props> = ({ items = [] }) => {
   return (
-    <div className="grid grid-cols-4 gap-2 md:gap-4 w-full">
-      {items?.map((product) => <ProductCard key={product.id} {...product} />)}
+    <div className='grid w-full gap-2 sm:grid-cols-2 md:gap-4 lg:grid-cols-3 xl:grid-cols-4'>
+      {items?.map((product) => (
+        <ProductCard className='w-full' key={product.id} {...product} />
+      ))}
     </div>
-  );
-};
+  )
+}
 
-export { ProductSection };
+export { ProductSection }

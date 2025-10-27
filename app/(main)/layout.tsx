@@ -1,20 +1,18 @@
-import { Navbar } from "@/components/layout/navbar";
-import { siteConfig } from "@/config/site";
+import type { FC, PropsWithChildren } from 'react'
 
-export default function MainLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+import { Navbar } from '@/components/layout/navbar'
+import { siteConfig } from '@/config/site'
+
+const MainLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
-    <div className="relative flex flex-col h-screen overflow-x-hidden">
+    <div className='relative flex h-screen flex-col overflow-x-hidden'>
       <Navbar />
-      <main className="container mx-auto max-w-7xl p-6 flex-grow">
-        {children}
-      </main>
-      <footer className="w-full flex items-center justify-center py-3">
-        <span className="text-default-600">{siteConfig.footer}</span>
+      <main className='container mx-auto flex-grow p-6'>{children}</main>
+      <footer className='flex w-full items-center justify-center py-3'>
+        <span className='text-default-600'>{siteConfig.footer}</span>
       </footer>
     </div>
-  );
+  )
 }
+
+export default MainLayout

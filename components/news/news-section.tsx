@@ -1,19 +1,21 @@
-import { Button } from "@heroui/button";
-import { Card, CardBody, CardHeader } from "@heroui/card";
-import { ArrowRight } from "lucide-react";
-import { NewsCard } from "./news-card";
-import { Carousel } from "../carousel/carousel";
-import { NEWS_CONSTANT } from "@/utils/const";
+import { Button } from '@heroui/button'
+import { Card, CardBody, CardHeader } from '@heroui/card'
+import { ArrowRight } from 'lucide-react'
+
+import { NewsCard } from './news-card'
+import { Carousel } from '../carousel/carousel'
+
+import { NEWS_CONSTANT } from '@/utils/const'
 
 const NewsSection = () => {
   return (
     <Card fullWidth>
-      <CardHeader className="justify-between">
-        <span className="font-bold">ข่าวสารน่ารู้</span>
+      <CardHeader className='justify-between'>
+        <span className='font-bold'>ข่าวสารน่ารู้</span>
 
         <Button
-          variant="light"
-          endContent={<ArrowRight className="text-divider" />}
+          endContent={<ArrowRight className='text-divider' />}
+          variant='light'
         >
           ดูทั้งหมด
         </Button>
@@ -27,7 +29,7 @@ const NewsSection = () => {
         </Carousel>
       </CardBody>
     </Card>
-  );
-};
+  )
+}
 
-export { NewsSection };
+export { NewsSection }

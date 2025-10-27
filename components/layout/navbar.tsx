@@ -1,122 +1,122 @@
-"use client";
+'use client'
 
+import { Button } from '@heroui/button'
+import { Input } from '@heroui/input'
 import {
   Navbar as HeroUINavbar,
   NavbarContent,
   NavbarBrand,
   NavbarItem,
-} from "@heroui/navbar";
-import { Input } from "@heroui/input";
-import { link as linkStyles } from "@heroui/theme";
-import NextLink from "next/link";
-import clsx from "clsx";
-import { SearchIcon, ShoppingCart, Triangle, UserIcon } from "lucide-react";
+} from '@heroui/navbar'
+// import { link as linkStyles } from '@heroui/theme'
+// import clsx from 'clsx'
+import { SearchIcon, ShoppingCart, Triangle, UserIcon } from 'lucide-react'
+import NextLink from 'next/link'
+import Link from 'next/link'
+import { useSession } from 'next-auth/react'
 
-import { siteConfig } from "@/config/site";
-import { Button } from "@heroui/button";
-import Link from "next/link";
+import { UserPanel } from '../user-panel'
 
-import { useSession } from "next-auth/react";
-import { UserPanel } from "../user-panel";
+import { siteConfig } from '@/config/site'
 
 export const Navbar = () => {
-  const { status } = useSession();
+  const { status } = useSession()
 
   const searchInput = (
     <Input
-      aria-label="Search"
+      aria-label='Search'
       classNames={{
-        inputWrapper: "bg-default-100 ",
-        input: "text-sm",
+        inputWrapper: 'bg-default-100 ',
+        input: 'text-sm',
       }}
-      labelPlacement="outside"
-      placeholder="ค้นหาสิ่งที่ต้องการที่นี่..."
       endContent={
-        <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
+        <SearchIcon className='text-default-400 pointer-events-none flex-shrink-0 text-base' />
       }
-      type="search"
+      labelPlacement='outside'
+      placeholder='ค้นหาสิ่งที่ต้องการที่นี่...'
+      type='search'
     />
-  );
+  )
 
   return (
     <>
-      <div className="items-center text-xs sm:text-sm lg:text-base text-white bg-red-800 py-2.5 px-6">
+      <div className='items-center bg-red-800 px-6 py-2.5 text-xs text-white sm:text-sm lg:text-base'>
         ร้านค้าออนไลน์ ร้านค้าตัวอย่าง ศูนย์รวมสินค้าบ้านของคนไทย ครบเรื่องบ้าน
         ถูกและดี
       </div>
 
       <HeroUINavbar
-        maxWidth="full"
-        position="sticky"
         isBordered
+        className='shadow-md'
         isBlurred={false}
-        className="shadow-md"
+        maxWidth='full'
+        position='sticky'
       >
-        <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
-          <NavbarBrand as="li" className="gap-3 max-w-fit">
+        <NavbarContent className='basis-1/5 sm:basis-full' justify='start'>
+          <NavbarBrand as='li' className='max-w-fit gap-3'>
             <NextLink
-              className="flex justify-start items-center gap-2"
-              href="/"
+              className='flex items-center justify-start gap-2'
+              href='/'
             >
-              <Triangle className="text-red-800" />
-              <div className="flex text-inherit flex-col gap-0">
-                <span className="font-bold">DemoStore</span>
-                <span className="text-xs text-red-800">ร้านค้าตัวอย่าง</span>
+              <Triangle className='text-red-800' />
+              <div className='flex flex-col gap-0 text-inherit'>
+                <span className='font-bold'>DemoStore</span>
+                <span className='text-xs text-red-800'>ร้านค้าตัวอย่าง</span>
               </div>
             </NextLink>
           </NavbarBrand>
-          <ul className="hidden lg:flex gap-4 justify-start ml-2">
-            {siteConfig.navItems.map((item) => (
-              <NavbarItem key={item.href}>
+          <ul className='ml-2 hidden justify-start gap-4 lg:flex'>
+            {/* {siteConfig?.navItems?.map((item) => (
+              <NavbarItem key={item?.href}>
                 <NextLink
                   className={clsx(
-                    linkStyles({ color: "foreground" }),
-                    "data-[active=true]:text-primary data-[active=true]:font-medium"
+                    linkStyles({ color: 'foreground' }),
+                    'data-[active=true]:text-primary data-[active=true]:font-medium',
                   )}
-                  color="foreground"
-                  href={item.href}
+                  color='foreground'
+                  href={item?.href}
                 >
-                  {item.label}
+                  {item?.label}
                 </NextLink>
               </NavbarItem>
-            ))}
+            ))} */}
           </ul>
         </NavbarContent>
 
         <NavbarContent
-          className="hidden sm:flex basis-1/5 sm:basis-full"
-          justify="end"
+          className='hidden basis-1/5 sm:flex sm:basis-full'
+          justify='end'
         >
-          <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
-          {status === "unauthenticated" && (
-            <NavbarItem className="hidden lg:flex">
+          <NavbarItem className='hidden lg:flex'>{searchInput}</NavbarItem>
+          {status === 'unauthenticated' && (
+            <NavbarItem className='hidden lg:flex'>
               <Link href={siteConfig.link.login}>
-                <Button variant="light" startContent={<UserIcon />}>
+                <Button startContent={<UserIcon />} variant='light'>
                   เข้าสู่ระบบ
                 </Button>
               </Link>
             </NavbarItem>
           )}
-          {status === "authenticated" && (
-            <NavbarItem className="hidden lg:flex">
+          {status === 'authenticated' && (
+            <NavbarItem className='hidden lg:flex'>
               <UserPanel />
             </NavbarItem>
           )}
-          <NavbarItem className="hidden lg:flex">
+          <NavbarItem className='hidden lg:flex'>
             <Link href={siteConfig.link.cart}>
               <Button
-                variant="light"
-                startContent={<ShoppingCart />}
                 endContent={
-                  <div className="size-7 font-bold flex items-center text-xs justify-center bg-red-800 rounded-full text-white">
+                  <div className='flex size-7 items-center justify-center rounded-full bg-red-800 text-xs font-bold text-white'>
                     <span>99+</span>
                   </div>
                 }
+                startContent={<ShoppingCart />}
+                variant='light'
               />
             </Link>
           </NavbarItem>
         </NavbarContent>
       </HeroUINavbar>
     </>
-  );
-};
+  )
+}

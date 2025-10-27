@@ -1,23 +1,24 @@
-import { CategoryItem } from "@/types";
-import { Card, CardBody } from "@heroui/card";
-import { LayoutGrid } from "lucide-react";
-import { FC } from "react";
+import { Card, CardBody } from '@heroui/card'
+import { LayoutGrid } from 'lucide-react'
+
+import type { CategoryItem } from '@/types'
+import type { FC } from 'react'
 
 interface CategoryMenuItemProps {
-  item: CategoryItem;
+  item: CategoryItem
 }
 
 const CategoryMenuItem: FC<CategoryMenuItemProps> = ({ item }) => {
   return (
-    <Card shadow="sm" isHoverable className="cursor-pointer">
+    <Card isHoverable className='cursor-pointer' shadow='sm'>
       <CardBody>
-        <div className="flex gap-2.5">
-          <LayoutGrid className="text-divider" />
-          <span className="truncate">{item.name}</span>
+        <div className='flex gap-2.5'>
+          <LayoutGrid className='text-divider' />
+          <span className='truncate'>{item.name}</span>
         </div>
       </CardBody>
     </Card>
-  );
-};
+  )
+}
 
-export { CategoryMenuItem };
+export { CategoryMenuItem }

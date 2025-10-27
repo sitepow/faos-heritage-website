@@ -1,62 +1,66 @@
-"use client";
+'use client'
 
-import { formatCurrency } from "@/utils/number";
-import { Card, CardHeader, CardBody } from "@heroui/card";
-import { Image } from "@heroui/image";
-import { FC, useState } from "react";
-import { ProductRating } from "./product-rating";
-import { Product } from "@/types";
-import clsx from "clsx";
-import { Alert } from "@heroui/alert";
+import { Alert } from '@heroui/alert'
+import { Card, CardHeader, CardBody } from '@heroui/card'
+import { Image } from '@heroui/image'
+import clsx from 'clsx'
+import { useState } from 'react'
+
+import type { Product } from '@/types'
+import type { FC } from 'react'
+
+import { ProductRating } from './product-rating'
+
+import { formatCurrency } from '@/utils/number'
 
 interface Props extends Product {
-  className?: string;
+  className?: string
 }
 
 const ProductCard: FC<Props> = ({ id, name, price, image, className }) => {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isHovered, setIsHovered] = useState(false)
 
   return (
     <Card
       className={clsx(
-        "size-full flex flex-col flex-none w-64 md:w-72 cursor-pointer border border-divider",
-        className
+        'border-divider flex size-full w-64 flex-none cursor-pointer flex-col border md:min-w-72',
+        className,
       )}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <CardHeader className="p-0 overflow-hidden relative">
+      <CardHeader className='relative overflow-hidden p-0'>
         <Image
           alt={name}
-          className="object-cover size-full"
+          className='size-full object-cover'
           classNames={{
-            wrapper: "w-full",
+            wrapper: 'w-full',
           }}
           height={250}
-          width="100%"
-          radius="none"
-          src={image ?? "/placeholder.svg"}
+          radius='none'
+          src={image ?? '/placeholder.svg'}
+          width='100%'
         />
 
         {isHovered && (
           <Alert
-            radius="none"
-            color="primary"
-            className="absolute bottom-0 z-[60]"
-            description="คลิกเพื่อดูรายละเอียดสินค้า"
+            className='absolute bottom-0 z-[60]'
+            color='primary'
+            description='คลิกเพื่อดูรายละเอียดสินค้า'
+            radius='none'
           />
         )}
       </CardHeader>
 
       <CardBody>
-        <p className="font-bold text-lg text-default-500">
+        <p className='text-default-500 text-lg font-bold'>
           {formatCurrency(price)}
         </p>
-        <h4 className="font-bold text-lg truncate">{name}</h4>
+        <h4 className='truncate text-lg font-bold'>{name}</h4>
         <ProductRating rate={4} />
       </CardBody>
     </Card>
-  );
-};
+  )
+}
 
-export { ProductCard };
+export { ProductCard }

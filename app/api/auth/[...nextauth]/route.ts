@@ -1,7 +1,7 @@
-import NextAuth from "next-auth";
-import Credentials from "next-auth/providers/credentials";
-import Facebook from "next-auth/providers/facebook";
-import GoogleProvider from "next-auth/providers/google";
+import NextAuth from 'next-auth'
+import Credentials from 'next-auth/providers/credentials'
+import Facebook from 'next-auth/providers/facebook'
+import GoogleProvider from 'next-auth/providers/google'
 
 const handler = NextAuth({
   providers: [
@@ -15,12 +15,12 @@ const handler = NextAuth({
     }),
     Credentials({
       credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" },
+        email: { label: 'Email', type: 'email' },
+        password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          return null;
+          return null
         }
 
         // TODO: ตรวจสอบกับ database
@@ -30,14 +30,14 @@ const handler = NextAuth({
         // if (!isValid) return null;
 
         return {
-          id: "1",
+          id: '1',
           email: credentials.email,
-          name: "DemoStoreAccount!",
-        };
+          name: 'DemoStoreAccount!',
+        }
       },
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
-});
+})
 
-export { handler as GET, handler as POST };
+export { handler as GET, handler as POST }
