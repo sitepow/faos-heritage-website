@@ -1,5 +1,5 @@
 import { CategorySection } from '@/components/category/category-section'
-import { HeaderTitle } from '@/components/header-title'
+import { HomePageHeaderTitle } from '@/components/homepage/homepage-header-title'
 import { NewsSection } from '@/components/news/news-section'
 import { ProductSection } from '@/components/product/product-section'
 import { PRODUCT_CONSTANT } from '@/utils/const'
@@ -9,7 +9,7 @@ const Home = () => {
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
       <CategorySection />
 
-      <HeaderTitle
+      <HomePageHeaderTitle
         description='ค้นหาสินค้าที่ตรงใจและตอบโจทย์ความต้องการของคุณ'
         title='เลือกสินค้าตามสไตล์'
       />

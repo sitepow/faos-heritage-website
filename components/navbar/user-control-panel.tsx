@@ -10,7 +10,7 @@ import { User } from '@heroui/user'
 import { LogOutIcon } from 'lucide-react'
 import { useSession, signOut } from 'next-auth/react'
 
-const UserPanel = () => {
+const UserControlPanel = () => {
   const { data: session } = useSession()
 
   return (
@@ -40,4 +40,4 @@ const UserPanel = () => {
   )
 }
 
-export { UserPanel }
+export { UserControlPanel }

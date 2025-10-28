@@ -3,7 +3,7 @@ import { Card, CardBody, CardHeader } from '@heroui/card'
 import { ScrollShadow } from '@heroui/scroll-shadow'
 import { ArrowRight } from 'lucide-react'
 
-import { CategoryMenuItem } from './category-item'
+import { CategoryItem } from './category-item'
 import { Carousel } from '../carousel/carousel'
 import { ProductCard } from '../product/product-card'
 
@@ -15,7 +15,7 @@ const CategorySection = () => {
       <ScrollShadow className='w-[300px] p-1'>
         <div className='space-y-1'>
           {CATEGORY_CONSTANT.map((category) => (
-            <CategoryMenuItem key={category.id} item={category} />
+            <CategoryItem key={category.id} item={category} />
           ))}
         </div>
       </ScrollShadow>

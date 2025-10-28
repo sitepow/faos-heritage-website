@@ -1,6 +1,6 @@
 import type { FC, PropsWithChildren } from 'react'
 
-import { Navbar } from '@/components/layout/navbar'
+import { Navbar } from '@/components/navbar/navbar'
 import { siteConfig } from '@/config/site'
 
 const MainLayout: FC<PropsWithChildren> = ({ children }) => {

@@ -5,7 +5,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 
 import type { FC, ReactNode } from 'react'
 
-import { CarouselNavigateButton } from './carousel-navigate-button'
+import CarouselNavigateButton from './carousel-navigate-button'
 
 import { useCarouselNavigation } from '@/hooks/useCarouselMethod'
 

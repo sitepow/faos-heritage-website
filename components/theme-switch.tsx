@@ -10,15 +10,12 @@ import { useTheme } from 'next-themes'
 import type { SwitchProps } from '@heroui/switch'
 import type { FC } from 'react'
 
-export interface ThemeSwitchProps {
+export interface Props {
   className?: string
   classNames?: SwitchProps['classNames']
 }
 
-export const ThemeSwitch: FC<ThemeSwitchProps> = ({
-  className,
-  classNames,
-}) => {
+export const ThemeSwitch: FC<Props> = ({ className, classNames }) => {
   const { theme, setTheme } = useTheme()
   const isSSR = useIsSSR()
 

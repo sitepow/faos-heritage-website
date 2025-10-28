@@ -4,11 +4,11 @@ import { LayoutGrid } from 'lucide-react'
 import type { CategoryItem } from '@/types'
 import type { FC } from 'react'
 
-interface CategoryMenuItemProps {
+interface Props {
   item: CategoryItem
 }
 
-const CategoryMenuItem: FC<CategoryMenuItemProps> = ({ item }) => {
+const CategoryItem: FC<Props> = ({ item }) => {
   return (
     <Card isHoverable className='cursor-pointer' shadow='sm'>
       <CardBody>
@@ -21,4 +21,4 @@ const CategoryMenuItem: FC<CategoryMenuItemProps> = ({ item }) => {
   )
 }
 
-export { CategoryMenuItem }
+export { CategoryItem }

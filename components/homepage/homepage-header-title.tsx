@@ -7,7 +7,7 @@ interface Props {
   description: string
 }
 
-const HeaderTitle: FC<ComponentProps<'div'> & Props> = ({
+const HomePageHeaderTitle: FC<ComponentProps<'div'> & Props> = ({
   title,
   description,
   className,
@@ -21,4 +21,4 @@ const HeaderTitle: FC<ComponentProps<'div'> & Props> = ({
   )
 }
 
-export { HeaderTitle }
+export { HomePageHeaderTitle }

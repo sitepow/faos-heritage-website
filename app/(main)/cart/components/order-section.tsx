@@ -7,7 +7,7 @@ import type { ComponentProps, FC } from 'react'
 
 import { formatNumber } from '@/utils/number'
 
-const OrderSummary: FC<ComponentProps<typeof Card>> = ({
+const OrderSection: FC<ComponentProps<typeof Card>> = ({
   className,
   ...props
 }) => {
@@ -48,4 +48,4 @@ const OrderSummary: FC<ComponentProps<typeof Card>> = ({
   )
 }
 
-export { OrderSummary }
+export { OrderSection }

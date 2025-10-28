@@ -10,12 +10,17 @@ import {
 } from '@heroui/navbar'
 // import { link as linkStyles } from '@heroui/theme'
 // import clsx from 'clsx'
-import { SearchIcon, ShoppingCart, Triangle, UserIcon } from 'lucide-react'
+import {
+  SearchIcon,
+  ShoppingCartIcon,
+  TriangleIcon,
+  UserIcon,
+} from 'lucide-react'
 import NextLink from 'next/link'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 
-import { UserPanel } from '../user-panel'
+import { UserControlPanel } from './user-control-panel'
 
 import { siteConfig } from '@/config/site'
 
@@ -58,7 +63,7 @@ export const Navbar = () => {
               className='flex items-center justify-start gap-2'
               href='/'
             >
-              <Triangle className='text-red-800' />
+              <TriangleIcon className='text-red-800' />
               <div className='flex flex-col gap-0 text-inherit'>
                 <span className='font-bold'>DemoStore</span>
                 <span className='text-xs text-red-800'>ร้านค้าตัวอย่าง</span>
@@ -99,7 +104,7 @@ export const Navbar = () => {
           )}
           {status === 'authenticated' && (
             <NavbarItem className='hidden lg:flex'>
-              <UserPanel />
+              <UserControlPanel />
             </NavbarItem>
           )}
           <NavbarItem className='hidden lg:flex'>
@@ -110,7 +115,7 @@ export const Navbar = () => {
                     <span>99+</span>
                   </div>
                 }
-                startContent={<ShoppingCart />}
+                startContent={<ShoppingCartIcon />}
                 variant='light'
               />
             </Link>

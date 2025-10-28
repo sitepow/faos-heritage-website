@@ -5,7 +5,10 @@ import type { ComponentProps, FC } from 'react'
 
 import { CartItem } from './cart-item'
 
-const CartList: FC<ComponentProps<typeof Card>> = ({ className, ...props }) => {
+const CartSection: FC<ComponentProps<typeof Card>> = ({
+  className,
+  ...props
+}) => {
   return (
     <Card fullWidth className={clsx(className)} {...props}>
       <CardHeader>
@@ -18,4 +21,4 @@ const CartList: FC<ComponentProps<typeof Card>> = ({ className, ...props }) => {
   )
 }
 
-export { CartList }
+export { CartSection }

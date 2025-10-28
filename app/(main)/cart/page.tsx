@@ -1,5 +1,5 @@
-import { CartList } from './components/cart-list'
-import { OrderSummary } from './components/order-summary'
+import { CartSection } from './components/cart-section'
+import { OrderSection } from './components/order-section'
 
 const Cart = () => {
   return (
@@ -12,8 +12,8 @@ const Cart = () => {
       </div>
 
       <div className='grid w-full grid-cols-3 gap-5'>
-        <CartList className='col-span-2' />
-        <OrderSummary />
+        <CartSection className='col-span-2' />
+        <OrderSection />
       </div>
     </section>
   )
