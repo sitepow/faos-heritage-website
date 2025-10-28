@@ -12,13 +12,17 @@ import { CATEGORY_CONSTANT, PRODUCT_CONSTANT } from '@/utils/const'
 const CategorySection = () => {
   return (
     <div className='flex h-[500px] w-full gap-5'>
-      <ScrollShadow className='w-[300px] p-1'>
-        <div className='space-y-1'>
-          {CATEGORY_CONSTANT.map((category) => (
-            <CategoryItem key={category.id} item={category} />
-          ))}
-        </div>
-      </ScrollShadow>
+      <Card className='w-[400px]'>
+        <CardBody>
+          <ScrollShadow className='p-1'>
+            <div className='space-y-1'>
+              {CATEGORY_CONSTANT.map((category) => (
+                <CategoryItem key={category.id} item={category} />
+              ))}
+            </div>
+          </ScrollShadow>
+        </CardBody>
+      </Card>
 
       <Card fullWidth>
         <CardHeader>
