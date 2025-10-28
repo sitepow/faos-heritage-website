@@ -22,7 +22,7 @@ const NewsSection = () => {
       </CardHeader>
 
       <CardBody>
-        <Carousel autoplay scrollByGroup>
+        <Carousel slidesToScroll>
           {NEWS_CONSTANT.map((news) => (
             <NewsCard key={news.id} {...news} />
           ))}
