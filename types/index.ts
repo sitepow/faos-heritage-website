@@ -19,8 +19,7 @@ export interface Product {
 
 export interface NewsItem {
   id: string
-  title: string
+  name: string
   description: string
   image?: string
-  link?: string
 }

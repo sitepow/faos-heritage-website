@@ -1,11 +1,14 @@
 import { Button } from '@heroui/button'
 import { Card, CardBody, CardFooter, CardHeader } from '@heroui/card'
 import { Image } from '@heroui/image'
+import Link from 'next/link'
 
 import type { NewsItem } from '@/types'
 import type { FC } from 'react'
 
-const NewsCard: FC<NewsItem> = ({ id, description, title, image, link }) => {
+import { createSlug } from '@/utils/slug'
+
+const NewsCard: FC<NewsItem> = ({ id, description, name, image }) => {
   return (
     <Card fullWidth className='w-full flex-none md:w-96' shadow='none'>
       <CardHeader>
@@ -21,13 +24,15 @@ const NewsCard: FC<NewsItem> = ({ id, description, title, image, link }) => {
       </CardHeader>
 
       <CardBody className='flex-col gap-5'>
-        <span className='font-bold'>{title}</span>
+        <span className='font-bold'>{name}</span>
 
         <span>{description}</span>
       </CardBody>
 
       <CardFooter>
-        <Button>อ่านต่อ</Button>
+        <Link href={`/articles/${createSlug(name, id)}`}>
+          <Button>อ่านต่อ</Button>
+        </Link>
       </CardFooter>
     </Card>
   )
