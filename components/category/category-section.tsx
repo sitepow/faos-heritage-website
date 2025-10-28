@@ -1,6 +1,6 @@
-import { Button } from '@heroui/button'
-import { Card, CardBody, CardHeader } from '@heroui/card'
-import { ScrollShadow } from '@heroui/scroll-shadow'
+'use client'
+
+import { Button, Card, CardBody, CardHeader, ScrollShadow } from '@heroui/react'
 import { ArrowRight } from 'lucide-react'
 
 import { CategoryItem } from './category-item'

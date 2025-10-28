@@ -1,5 +1,6 @@
-import { Button } from '@heroui/button'
-import { Card, CardBody, CardHeader } from '@heroui/card'
+'use client'
+
+import { Card, CardBody, CardHeader, Button } from '@heroui/react'
 import { ArrowRight } from 'lucide-react'
 
 import { NewsCard } from './news-card'

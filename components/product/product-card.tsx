@@ -1,8 +1,6 @@
 'use client'
 
-import { Alert } from '@heroui/alert'
-import { Card, CardHeader, CardBody } from '@heroui/card'
-import { Image } from '@heroui/image'
+import { Alert, Image, Card, CardHeader, CardBody } from '@heroui/react'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { useState } from 'react'

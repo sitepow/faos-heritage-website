@@ -6,7 +6,7 @@ import type { FC, PropsWithChildren } from 'react'
 
 import { HeroUIProviders } from '../providers/heroui'
 
-import { fontSans } from '@/config/fonts'
+import { fontSukhumvit } from '@/config/fonts'
 import { siteConfig } from '@/config/site'
 import { NextAuthProviders } from '@/providers/nextauth'
 
@@ -35,7 +35,7 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
       <body
         className={clsx(
           'text-foreground bg-background min-h-screen font-sans antialiased',
-          fontSans.variable,
+          fontSukhumvit.variable,
         )}
       >
         <NextAuthProviders>

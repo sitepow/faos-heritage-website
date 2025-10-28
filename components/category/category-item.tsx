@@ -1,4 +1,4 @@
-import { Card, CardBody } from '@heroui/card'
+import { Card, CardBody } from '@heroui/react'
 import { LayoutGrid } from 'lucide-react'
 
 import type { CategoryItem } from '@/types'

@@ -1,13 +1,13 @@
 'use client'
 
-import { useSwitch } from '@heroui/switch'
+import { useSwitch } from '@heroui/react'
 import { useIsSSR } from '@react-aria/ssr'
 import { VisuallyHidden } from '@react-aria/visually-hidden'
 import clsx from 'clsx'
 import { MoonIcon, SunIcon } from 'lucide-react'
 import { useTheme } from 'next-themes'
 
-import type { SwitchProps } from '@heroui/switch'
+import type { SwitchProps } from '@heroui/react'
 import type { FC } from 'react'
 
 export interface Props {

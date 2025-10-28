@@ -4,6 +4,7 @@ import { Card, CardBody, CardFooter, CardHeader } from '@heroui/card'
 import { Form } from '@heroui/form'
 import { Input } from '@heroui/input'
 import Image from 'next/image'
+import { useSearchParams } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
 
@@ -13,6 +14,9 @@ interface UserInputs {
 }
 
 const Login = () => {
+  const searchParams = useSearchParams()
+  const callbackUrl = searchParams.get('callbackUrl') || '/'
+
   const {
     register,
     handleSubmit,
@@ -28,6 +32,7 @@ const Login = () => {
     await signIn('credentials', {
       email: data.email,
       password: data.password,
+      callbackUrl,
     })
   }
 

@@ -5,8 +5,8 @@ import {
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
-} from '@heroui/dropdown'
-import { User } from '@heroui/user'
+  User,
+} from '@heroui/react'
 import { LogOutIcon } from 'lucide-react'
 import { useSession, signOut } from 'next-auth/react'
 

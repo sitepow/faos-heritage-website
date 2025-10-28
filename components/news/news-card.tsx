@@ -1,6 +1,11 @@
-import { Button } from '@heroui/button'
-import { Card, CardBody, CardFooter, CardHeader } from '@heroui/card'
-import { Image } from '@heroui/image'
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Image,
+  Button,
+} from '@heroui/react'
 import Link from 'next/link'
 
 import type { NewsItem } from '@/types'

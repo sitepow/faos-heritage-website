@@ -1,13 +1,13 @@
 'use client'
 
-import { Button } from '@heroui/button'
-import { Input } from '@heroui/input'
 import {
   Navbar as HeroUINavbar,
   NavbarContent,
   NavbarBrand,
   NavbarItem,
-} from '@heroui/navbar'
+  Input,
+  Button,
+} from '@heroui/react'
 // import { link as linkStyles } from '@heroui/theme'
 // import clsx from 'clsx'
 import {
@@ -24,7 +24,7 @@ import { UserControlPanel } from './user-control-panel'
 
 import { siteConfig } from '@/config/site'
 
-export const Navbar = () => {
+const MainNavbar = () => {
   const { status } = useSession()
 
   const searchInput = (
@@ -125,3 +125,5 @@ export const Navbar = () => {
     </>
   )
 }
+
+export { MainNavbar }

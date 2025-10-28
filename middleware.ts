@@ -11,7 +11,7 @@ export function middleware(request: NextRequest) {
 
   const isLoggedIn = !!sessionToken
 
-  const protectedPaths = ['/dashboard', '/profile', '/orders', '/account']
+  const protectedPaths = ['/dashboard', '/cart']
   const isProtectedPath = protectedPaths.some((path) =>
     pathname.startsWith(path),
   )
