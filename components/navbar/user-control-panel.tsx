@@ -7,10 +7,12 @@ import {
   DropdownItem,
   User,
 } from '@heroui/react'
-import { LogOutIcon } from 'lucide-react'
+import { LogOutIcon, Settings, UserIcon } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useSession, signOut } from 'next-auth/react'
 
 const UserControlPanel = () => {
+  const router = useRouter()
   const { data: session } = useSession()
 
   return (
@@ -26,6 +28,24 @@ const UserControlPanel = () => {
         />
       </DropdownTrigger>
       <DropdownMenu aria-label='Static Actions'>
+        <DropdownItem
+          key='account'
+          startContent={<UserIcon />}
+          onClick={() => {
+            router.push('/account')
+          }}
+        >
+          ตั้งค่าบัญชี
+        </DropdownItem>
+        <DropdownItem
+          key='admin-dashboard'
+          startContent={<Settings />}
+          onClick={() => {
+            router.push('/dashboard')
+          }}
+        >
+          จัดการข้อมูลหลังร้าน (เฉพาะเจ้าหน้าที่)
+        </DropdownItem>
         <DropdownItem
           key='logout'
           className='text-danger'

@@ -8,8 +8,8 @@ import {
   Input,
   Button,
 } from '@heroui/react'
-// import { link as linkStyles } from '@heroui/theme'
-// import clsx from 'clsx'
+import { link as linkStyles } from '@heroui/theme'
+import clsx from 'clsx'
 import {
   SearchIcon,
   ShoppingCartIcon,
@@ -71,7 +71,7 @@ const MainNavbar = () => {
             </NextLink>
           </NavbarBrand>
           <ul className='ml-2 hidden justify-start gap-4 lg:flex'>
-            {/* {siteConfig?.navItems?.map((item) => (
+            {siteConfig?.mainNavItems?.map((item) => (
               <NavbarItem key={item?.href}>
                 <NextLink
                   className={clsx(
@@ -84,7 +84,7 @@ const MainNavbar = () => {
                   {item?.label}
                 </NextLink>
               </NavbarItem>
-            ))} */}
+            ))}
           </ul>
         </NavbarContent>
 

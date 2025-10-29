@@ -1,3 +1,7 @@
+'use client'
+
+import { Card, CardHeader, Divider } from '@heroui/react'
+
 import type { ComponentProps } from 'react'
 
 import { TrendCard } from '@/components/chart/trend-card'
@@ -54,6 +58,38 @@ const DashboardHome = () => {
         {mockDashboardData.map((data) => (
           <TrendCard key={data.title} {...data} />
         ))}
+      </div>
+
+      <Divider />
+
+      <div className='grid w-full grid-cols-2 gap-5'>
+        <Card>
+          <CardHeader className='justify-between'>
+            <span className='font-bold'>ออเดอร์ใหม่</span>
+            <span className='text-default-500'>ดูเพิ่มเติม</span>
+          </CardHeader>
+        </Card>
+
+        <Card>
+          <CardHeader className='justify-between'>
+            <span className='font-bold'>ลูกค้าใหม่</span>
+            <span className='text-default-500'>ดูเพิ่มเติม</span>
+          </CardHeader>
+        </Card>
+
+        <Card>
+          <CardHeader className='justify-between'>
+            <span className='font-bold'>สินค้าขายดี</span>
+            <span className='text-default-500'>ดูเพิ่มเติม</span>
+          </CardHeader>
+        </Card>
+
+        <Card>
+          <CardHeader className='justify-between'>
+            <span className='font-bold'>สต็อกกำลังหมด</span>
+            <span className='text-default-500'>ดูเพิ่มเติม</span>
+          </CardHeader>
+        </Card>
       </div>
     </section>
   )
