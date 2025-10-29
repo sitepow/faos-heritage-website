@@ -43,5 +43,9 @@ export const siteConfig = {
       label: 'จัดการข้อมูลออเดอร์',
       href: '/dashboard/order',
     },
+    {
+      label: 'จัดการข้อมูลข่าวสาร',
+      href: '/dashboard/news',
+    },
   ],
 }
