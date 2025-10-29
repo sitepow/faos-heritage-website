@@ -1,7 +1,16 @@
 'use client'
 
-import { Alert, Image, Card, CardHeader, CardBody } from '@heroui/react'
+import {
+  Alert,
+  Image,
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Button,
+} from '@heroui/react'
 import clsx from 'clsx'
+import { ShoppingCartIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
 
@@ -15,9 +24,17 @@ import { createSlug } from '@/utils/slug'
 
 interface Props extends Product {
   className?: string
+  hideIcon?: boolean
 }
 
-const ProductCard: FC<Props> = ({ id, name, price, image, className }) => {
+const ProductCard: FC<Props> = ({
+  id,
+  name,
+  price,
+  image,
+  className,
+  hideIcon = 'true',
+}) => {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
@@ -59,6 +76,12 @@ const ProductCard: FC<Props> = ({ id, name, price, image, className }) => {
           <h4 className='truncate text-lg font-bold'>{name}</h4>
           <ProductRating rate={4} />
         </CardBody>
+
+        {!hideIcon && (
+          <CardFooter className='justify-end'>
+            <Button startContent={<ShoppingCartIcon />}>ใส่รถเข็น</Button>
+          </CardFooter>
+        )}
       </Card>
     </Link>
   )

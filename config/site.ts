@@ -15,7 +15,7 @@ export const siteConfig = {
     },
     {
       label: 'สินค้าทั้งหมด',
-      href: '/product',
+      href: '/products',
     },
     {
       label: 'วิธีการชำระเงิน',

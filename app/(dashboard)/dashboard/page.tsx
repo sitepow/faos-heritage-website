@@ -1,8 +1,12 @@
 'use client'
 
-import { Card, CardHeader, Divider } from '@heroui/react'
+import { Card, CardBody, CardHeader, Divider } from '@heroui/react'
 
 import type { ComponentProps } from 'react'
+
+import { CustomerDashboardItem } from './components/customer-dashboard-item'
+import { OrderDashboardItem } from './components/order-dashboard-item'
+import { ProductDashboardItem } from './components/product-dashboard-item'
 
 import { TrendCard } from '@/components/chart/trend-card'
 
@@ -65,30 +69,46 @@ const DashboardHome = () => {
       <div className='grid w-full grid-cols-2 gap-5'>
         <Card>
           <CardHeader className='justify-between'>
-            <span className='font-bold'>ออเดอร์ใหม่</span>
+            <span className='font-bold'>ออเดอร์ใหม่ (5 รายการล่าสุด)</span>
             <span className='text-default-500'>ดูเพิ่มเติม</span>
           </CardHeader>
+          <CardBody>
+            <OrderDashboardItem />
+            <OrderDashboardItem />
+          </CardBody>
         </Card>
 
         <Card>
           <CardHeader className='justify-between'>
-            <span className='font-bold'>ลูกค้าใหม่</span>
+            <span className='font-bold'>ลูกค้าใหม่ (5 รายการล่าสุด)</span>
             <span className='text-default-500'>ดูเพิ่มเติม</span>
           </CardHeader>
+          <CardBody>
+            <CustomerDashboardItem />
+            <CustomerDashboardItem />
+          </CardBody>
         </Card>
 
         <Card>
           <CardHeader className='justify-between'>
-            <span className='font-bold'>สินค้าขายดี</span>
+            <span className='font-bold'>สินค้าขายดี (5 รายการล่าสุด)</span>
             <span className='text-default-500'>ดูเพิ่มเติม</span>
           </CardHeader>
+          <CardBody>
+            <ProductDashboardItem />
+            <ProductDashboardItem />
+          </CardBody>
         </Card>
 
         <Card>
           <CardHeader className='justify-between'>
-            <span className='font-bold'>สต็อกกำลังหมด</span>
+            <span className='font-bold'>สต็อกกำลังหมด (5 รายการล่าสุด)</span>
             <span className='text-default-500'>ดูเพิ่มเติม</span>
           </CardHeader>
+          <CardBody>
+            <ProductDashboardItem />
+            <ProductDashboardItem />
+          </CardBody>
         </Card>
       </div>
     </section>

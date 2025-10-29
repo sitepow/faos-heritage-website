@@ -6,6 +6,7 @@ import {
   Image,
   Button,
 } from '@heroui/react'
+import { ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
 
 import type { NewsItem } from '@/types'
@@ -29,14 +30,16 @@ const NewsCard: FC<NewsItem> = ({ id, description, name, image }) => {
       </CardHeader>
 
       <CardBody className='flex-col gap-5'>
-        <span className='font-bold'>{name}</span>
-
+        <div className='flex flex-col gap-1'>
+          <span className='font-bold'>{name}</span>
+          <span>(ลิงค์นอกเว็บไซต์)</span>
+        </div>
         <span>{description}</span>
       </CardBody>
 
       <CardFooter>
         <Link href={`/articles/${createSlug(name, id)}`}>
-          <Button>อ่านต่อ</Button>
+          <Button endContent={<ArrowUpRight />}>อ่านต่อ</Button>
         </Link>
       </CardFooter>
     </Card>

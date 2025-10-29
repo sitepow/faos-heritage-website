@@ -1,4 +1,5 @@
 import { Card, CardBody, CardHeader } from '@heroui/card'
+import { Divider } from '@heroui/divider'
 import clsx from 'clsx'
 
 import type { ComponentProps, FC } from 'react'
@@ -15,6 +16,8 @@ const CartSection: FC<ComponentProps<typeof Card>> = ({
         <span className='font-bold'>รายการสินค้า</span>
       </CardHeader>
       <CardBody>
+        <CartItem />
+        <Divider />
         <CartItem />
       </CardBody>
     </Card>

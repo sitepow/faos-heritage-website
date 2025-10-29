@@ -1,7 +1,5 @@
 'use client'
-
-import { Card, CardBody, CardHeader, Button } from '@heroui/react'
-import { ArrowRight } from 'lucide-react'
+import { Card, CardBody, CardHeader } from '@heroui/react'
 
 import { NewsCard } from './news-card'
 import { Carousel } from '../carousel/carousel'
@@ -14,12 +12,7 @@ const NewsSection = () => {
       <CardHeader className='justify-between'>
         <span className='font-bold'>ข่าวสารน่ารู้</span>
 
-        <Button
-          endContent={<ArrowRight className='text-divider' />}
-          variant='light'
-        >
-          ดูทั้งหมด
-        </Button>
+        <span className='cursor-pointer hover:underline'>ดูทั้งหมด</span>
       </CardHeader>
 
       <CardBody>

@@ -35,7 +35,7 @@ const UserControlPanel = () => {
             router.push('/account')
           }}
         >
-          ตั้งค่าบัญชี
+          บัญชีของฉัน
         </DropdownItem>
         <DropdownItem
           key='admin-dashboard'
