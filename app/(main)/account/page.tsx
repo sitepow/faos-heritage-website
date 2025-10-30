@@ -16,7 +16,7 @@ const Account = () => {
       </div>
 
       <div className='w-full'>
-        <Tabs isVertical aria-label='Options'>
+        <Tabs isVertical aria-label='Options' variant='bordered'>
           <Tab key='account' title='จัดการกับบัญชีของฉัน'>
             <AccountTab />
           </Tab>
