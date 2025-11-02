@@ -1,6 +1,12 @@
 import { Card, CardBody, CardHeader, Button } from '@heroui/react'
 
-const AccountTab = () => {
+import type { FC } from 'react'
+
+interface Props {
+  onclick?: () => void
+}
+
+const AccountTab: FC<Props> = ({ onclick }) => {
   return (
     <Card fullWidth>
       <CardHeader>
@@ -31,7 +37,9 @@ const AccountTab = () => {
               <span>0647070943</span>
             </div>
 
-            <Button className='mt-5'>แก้ไขข้อมูลส่วนตัว</Button>
+            <Button className='mt-5' onPress={onclick}>
+              แก้ไขข้อมูลส่วนตัว
+            </Button>
           </div>
         </div>
       </CardBody>
