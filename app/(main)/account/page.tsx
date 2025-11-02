@@ -1,6 +1,7 @@
 'use client'
 
-import { Tab, Tabs } from '@heroui/tabs'
+import { Tab, Tabs } from '@heroui/react'
+import { useState } from 'react'
 
 import { AccountTab } from './components/account-tab'
 import { AddressTab } from './components/address-tab'
@@ -9,6 +10,10 @@ import { OrderTab } from './components/order-tab'
 import { ProfileTab } from './components/profile-tab'
 
 const Account = () => {
+  const [selectedTabKey, setSelectedTabKey] = useState<string | number>(
+    'account',
+  )
+
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
       <div className='w-full text-start'>
@@ -23,10 +28,12 @@ const Account = () => {
           classNames={{
             panel: 'w-full',
           }}
+          selectedKey={selectedTabKey}
           variant='bordered'
+          onSelectionChange={setSelectedTabKey}
         >
           <Tab key='account' title='จัดการกับบัญชีของฉัน'>
-            <AccountTab />
+            <AccountTab onclick={() => setSelectedTabKey('profile')} />
           </Tab>
           <Tab key='order' title='รายการคำสั่งซื้อของฉัน'>
             <OrderTab />
