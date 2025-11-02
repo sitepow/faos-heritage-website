@@ -21,6 +21,7 @@ import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 
 import { UserControlPanel } from './user-control-panel'
+import { ThemeSwitch } from '../theme-switch'
 
 import { siteConfig } from '@/config/site'
 
@@ -119,6 +120,9 @@ const MainNavbar = () => {
                 variant='light'
               />
             </Link>
+          </NavbarItem>
+          <NavbarItem className='hidden lg:flex'>
+            <ThemeSwitch />
           </NavbarItem>
         </NavbarContent>
       </HeroUINavbar>
