@@ -1,4 +1,6 @@
-import { Card, CardHeader } from '@heroui/card'
+import { Card, CardBody, CardHeader } from '@heroui/card'
+
+import { FavoriteItem } from './_components/favorite-item'
 
 const FavoriteTab = () => {
   return (
@@ -6,6 +8,11 @@ const FavoriteTab = () => {
       <CardHeader>
         <span>รายการโปรด</span>
       </CardHeader>
+      <CardBody className='gap-4'>
+        <FavoriteItem />
+        <FavoriteItem />
+        <FavoriteItem />
+      </CardBody>
     </Card>
   )
 }

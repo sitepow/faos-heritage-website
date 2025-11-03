@@ -70,9 +70,16 @@ const ProductCard: FC<Props> = ({
         </CardHeader>
 
         <CardBody>
-          <p className='text-default-500 text-lg font-bold'>
-            {formatCurrency(price)}
-          </p>
+          <div className='mt-auto flex items-center justify-between'>
+            <div className='text-right'>
+              <div className='leading-3 text-red-800'>
+                <span className='text-sm font-bold lg:text-2xl'>
+                  {formatCurrency(price)}
+                </span>
+                <span className='text-xs'> /EACH</span>
+              </div>
+            </div>
+          </div>
           <h4 className='truncate text-lg font-bold'>{name}</h4>
           <ProductRating rate={4} />
         </CardBody>

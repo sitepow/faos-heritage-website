@@ -1,4 +1,5 @@
-import { Card, CardHeader } from '@heroui/card'
+import { Button } from '@heroui/button'
+import { Card, CardBody, CardHeader } from '@heroui/card'
 
 const AddressTab = () => {
   return (
@@ -6,6 +7,22 @@ const AddressTab = () => {
       <CardHeader>
         <span>จัดการที่อยู่ของฉัน</span>
       </CardHeader>
+      <CardBody>
+        <div className='flex w-1/2 flex-col'>
+          <div className='border-divider rounded-t-lg border p-2.5'>
+            <span>ที่อยู่ที่จัดส่ง</span>
+          </div>
+
+          <div className='border-divider flex flex-col gap-5 border-r border-b border-l p-2.5'>
+            <span>
+              117/2 หมู่บ้าน/อาคาร ศุภราช หมู่ที่1, ตำบล/แขวง บางปู, เกาะจันทร์,
+              ชลบุรี 20240
+            </span>
+
+            <Button className='w-fit'>แก้ไขที่อยู่</Button>
+          </div>
+        </div>
+      </CardBody>
     </Card>
   )
 }
