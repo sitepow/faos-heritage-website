@@ -2,8 +2,8 @@
 import { Card, CardBody, CardHeader } from '@heroui/react'
 
 import { NewsCard } from './news-card'
-import { Carousel } from '../carousel/carousel'
 
+import { Carousel } from '@/components/carousel/carousel'
 import { NEWS_CONSTANT } from '@/utils/const'
 
 const NewsSection = () => {

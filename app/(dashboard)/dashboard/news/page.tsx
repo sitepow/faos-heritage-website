@@ -13,7 +13,7 @@ import { Edit, Trash } from 'lucide-react'
 
 import type { ComponentProps } from 'react'
 
-import { TrendCard } from '@/components/chart/trend-card'
+import { TrendCard } from '@/app/(dashboard)/_components/chart/trend-card'
 
 const mockDashboardData: ComponentProps<typeof TrendCard>[] = [
   {

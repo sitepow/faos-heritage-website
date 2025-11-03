@@ -8,7 +8,7 @@ import { CustomerDashboardItem } from './components/customer-dashboard-item'
 import { OrderDashboardItem } from './components/order-dashboard-item'
 import { ProductDashboardItem } from './components/product-dashboard-item'
 
-import { TrendCard } from '@/components/chart/trend-card'
+import { TrendCard } from '@/app/(dashboard)/_components/chart/trend-card'
 
 const mockDashboardData: ComponentProps<typeof TrendCard>[] = [
   {

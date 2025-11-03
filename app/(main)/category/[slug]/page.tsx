@@ -9,7 +9,7 @@ import {
 } from '@heroui/react'
 import { ArrowUpDownIcon, Settings2Icon } from 'lucide-react'
 
-import { ProductSection } from '@/components/product/product-section'
+import { ProductSection } from '@/app/(main)/_components/product/product-section'
 import { PRODUCT_CONSTANT } from '@/utils/const'
 
 const Category = () => {

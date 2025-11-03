@@ -7,7 +7,7 @@ import { Button, Card, CardBody, CardHeader, ScrollShadow } from '@heroui/react'
 import { useRouter } from 'next/navigation'
 
 import { CategoryItem } from './category-item'
-import { Carousel } from '../carousel/carousel'
+import { Carousel } from '../../../../components/carousel/carousel'
 import { ProductCard } from '../product/product-card'
 
 import { CATEGORY_CONSTANT, PRODUCT_CONSTANT } from '@/utils/const'

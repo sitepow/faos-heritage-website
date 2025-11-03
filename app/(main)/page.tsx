@@ -1,7 +1,8 @@
-import { CategorySection } from '@/components/category/category-section'
-import { HomePageHeaderTitle } from '@/components/homepage/homepage-header-title'
-import { NewsSection } from '@/components/news/news-section'
-import { ProductSection } from '@/components/product/product-section'
+import { NewsSection } from './_components/news/news-section'
+
+import { CategorySection } from '@/app/(main)/_components/category/category-section'
+import { ProductSection } from '@/app/(main)/_components/product/product-section'
+import { HomePageHeaderTitle } from '@/app/(main)/_components/section/homepage-header-title'
 import { PRODUCT_CONSTANT } from '@/utils/const'
 
 const Home = () => {

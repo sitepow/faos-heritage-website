@@ -3,11 +3,11 @@
 import { Tab, Tabs } from '@heroui/react'
 import { useState } from 'react'
 
-import { AccountTab } from './components/account-tab'
-import { AddressTab } from './components/address-tab'
-import { FavoriteTab } from './components/favorite-tab'
-import { OrderTab } from './components/order-tab'
-import { ProfileTab } from './components/profile-tab'
+import { AccountTab } from '../_components/account/account-tab'
+import { AddressTab } from '../_components/account/address-tab'
+import { FavoriteTab } from '../_components/account/favorite-tab'
+import { OrderTab } from '../_components/account/order-tab'
+import { ProfileTab } from '../_components/account/profile-tab'
 
 const Account = () => {
   const [selectedTabKey, setSelectedTabKey] = useState<string | number>(
