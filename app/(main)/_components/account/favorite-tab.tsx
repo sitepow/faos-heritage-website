@@ -11,7 +11,6 @@ const FavoriteTab = () => {
       <CardBody className='gap-4'>
         <FavoriteItem />
         <FavoriteItem />
-        <FavoriteItem />
       </CardBody>
     </Card>
   )

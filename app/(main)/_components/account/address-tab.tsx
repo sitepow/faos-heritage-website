@@ -1,5 +1,6 @@
 import { Button } from '@heroui/button'
 import { Card, CardBody, CardHeader } from '@heroui/card'
+import { MapPinIcon } from 'lucide-react'
 
 const AddressTab = () => {
   return (
@@ -14,10 +15,13 @@ const AddressTab = () => {
           </div>
 
           <div className='border-divider flex flex-col gap-5 border-r border-b border-l p-2.5'>
-            <span>
-              117/2 หมู่บ้าน/อาคาร ศุภราช หมู่ที่1, ตำบล/แขวง บางปู, เกาะจันทร์,
-              ชลบุรี 20240
-            </span>
+            <div className='flex items-center gap-4'>
+              <MapPinIcon />
+              <span>
+                117/2 หมู่บ้าน/อาคาร ศุภราช หมู่ที่1, ตำบล/แขวง บางปู,
+                เกาะจันทร์, ชลบุรี 20240
+              </span>
+            </div>
 
             <Button className='w-fit'>แก้ไขที่อยู่</Button>
           </div>
