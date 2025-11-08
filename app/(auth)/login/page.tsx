@@ -108,7 +108,7 @@ const Login = () => {
         </CardBody>
 
         <CardFooter className='flex-col gap-2.5'>
-          <span className='text-default-500 text-center text-xs'>
+          <span className='text-center text-xs text-default-500'>
             หากคุณสมัครสมาชิก จะถือว่าคุณได้ยินยอม{' '}
             <span className='font-bold underline'>ข้อกำหนดและเงื่อนไข</span>{' '}
             พร้อมทั้ง{' '}

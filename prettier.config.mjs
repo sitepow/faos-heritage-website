@@ -13,8 +13,9 @@ const config = {
   trailingComma: 'all',
   useTabs: false,
 
-  plugins: ['prettier-plugin-tailwindcss'],
+  plugins: ['prettier-plugin-organize-imports', 'prettier-plugin-tailwindcss'],
   tailwindFunctions: ['cva', 'cn', 'cx'],
+  tailwindStylesheet: './styles/globals.css',
 }
 
 export default config

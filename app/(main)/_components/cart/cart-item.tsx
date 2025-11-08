@@ -47,7 +47,7 @@ const CartItem: FC<ComponentProps<typeof Card>> = ({ className, ...props }) => {
           </div>
         </div>
 
-        <TrashIcon className='text-default-500 shrink-0 cursor-pointer' />
+        <TrashIcon className='shrink-0 cursor-pointer text-default-500' />
       </CardBody>
     </Card>
   )

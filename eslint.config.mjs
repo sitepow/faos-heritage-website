@@ -1,17 +1,16 @@
-import { defineConfig, globalIgnores } from 'eslint/config'
 import { fixupConfigRules, fixupPluginRules } from '@eslint/compat'
+import { FlatCompat } from '@eslint/eslintrc'
+import js from '@eslint/js'
+import typescriptEslint from '@typescript-eslint/eslint-plugin'
+import tsParser from '@typescript-eslint/parser'
+import _import from 'eslint-plugin-import'
+import jsxA11Y from 'eslint-plugin-jsx-a11y'
 import react from 'eslint-plugin-react'
 import unusedImports from 'eslint-plugin-unused-imports'
-import _import from 'eslint-plugin-import'
-import typescriptEslint from '@typescript-eslint/eslint-plugin'
-import jsxA11Y from 'eslint-plugin-jsx-a11y'
-import prettier from 'eslint-plugin-prettier'
+import { defineConfig, globalIgnores } from 'eslint/config'
 import globals from 'globals'
-import tsParser from '@typescript-eslint/parser'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import js from '@eslint/js'
-import { FlatCompat } from '@eslint/eslintrc'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -48,10 +47,10 @@ export default defineConfig([
     extends: fixupConfigRules(
       compat.extends(
         'plugin:react/recommended',
-        'plugin:prettier/recommended',
         'plugin:react-hooks/recommended',
         'plugin:jsx-a11y/recommended',
         'plugin:@next/next/recommended',
+        'prettier',
       ),
     ),
 
@@ -61,7 +60,6 @@ export default defineConfig([
       import: fixupPluginRules(_import),
       '@typescript-eslint': typescriptEslint,
       'jsx-a11y': fixupPluginRules(jsxA11Y),
-      prettier: fixupPluginRules(prettier),
     },
 
     languageOptions: {
@@ -138,12 +136,12 @@ export default defineConfig([
       'react-hooks/exhaustive-deps': 'off',
       'jsx-a11y/click-events-have-key-events': 'warn',
       'jsx-a11y/interactive-supports-focus': 'warn',
-      'prettier/prettier': 'warn',
+      // ❌ ลบ 'prettier/prettier': 'warn' ออก
       'no-unused-vars': 'off',
       'unused-imports/no-unused-vars': 'off',
       'unused-imports/no-unused-imports': 'warn',
       'import/order': [
-        'error',
+        'warn',
         {
           'newlines-between': 'always',
           groups: [
@@ -160,6 +158,7 @@ export default defineConfig([
             },
           ],
           alphabetize: { order: 'asc' },
+          distinctGroup: false,
         },
       ],
       'padding-line-between-statements': [

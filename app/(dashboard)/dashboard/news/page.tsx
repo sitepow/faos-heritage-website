@@ -3,11 +3,11 @@
 import { Button } from '@heroui/button'
 import {
   Table,
-  TableHeader,
   TableBody,
-  TableColumn,
-  TableRow,
   TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
 } from '@heroui/table'
 import { Edit, Trash } from 'lucide-react'
 
@@ -97,8 +97,8 @@ const News = () => {
               </TableCell>
               <TableCell>{news.status}</TableCell>
               <TableCell className='flex gap-2.5'>
-                <Edit className='text-default-500 cursor-pointer' />
-                <Trash className='text-default-500 cursor-pointer' />
+                <Edit className='cursor-pointer text-default-500' />
+                <Trash className='cursor-pointer text-default-500' />
               </TableCell>
             </TableRow>
           ))}

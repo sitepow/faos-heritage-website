@@ -2,14 +2,14 @@
 
 import {
   Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
   DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
   User,
 } from '@heroui/react'
 import { LogOutIcon, Settings, UserIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { useSession, signOut } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 
 const UserControlPanel = () => {
   const router = useRouter()

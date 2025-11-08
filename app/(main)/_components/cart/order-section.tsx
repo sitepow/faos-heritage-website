@@ -23,12 +23,12 @@ const OrderSection: FC<ComponentProps<typeof Card>> = ({
           รายละเอียดการชำระเงิน
         </span>
 
-        <div className='text-default-500 flex justify-between'>
+        <div className='flex justify-between text-default-500'>
           <span>ราคารวม</span>
           <span>{formatNumber(3990)}</span>
         </div>
 
-        <div className='text-default-500 flex justify-between'>
+        <div className='flex justify-between text-default-500'>
           <span>ค่าจัดส่ง</span>
           <span>{formatNumber(250)}</span>
         </div>

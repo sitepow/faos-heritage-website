@@ -24,7 +24,7 @@ const Account = () => {
         <Tabs
           isVertical
           aria-label='Options'
-          className='light:bg-white h-full rounded-lg'
+          className='h-full rounded-lg light:bg-white'
           classNames={{
             panel: 'w-full',
           }}

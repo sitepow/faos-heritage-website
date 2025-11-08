@@ -2,12 +2,12 @@
 
 import {
   Alert,
-  Image,
+  Button,
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
-  Button,
+  CardHeader,
+  Image,
 } from '@heroui/react'
 import clsx from 'clsx'
 import { ShoppingCartIcon } from 'lucide-react'
@@ -41,7 +41,7 @@ const ProductCard: FC<Props> = ({
     <Link href={`/product/${createSlug(name, id)}`}>
       <Card
         className={clsx(
-          'border-divider flex size-full w-64 flex-none cursor-pointer flex-col border md:min-w-72',
+          'flex size-full w-64 flex-none cursor-pointer flex-col border border-divider md:min-w-72',
           className,
         )}
         onMouseEnter={() => setIsHovered(true)}

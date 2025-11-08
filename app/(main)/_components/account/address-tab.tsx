@@ -10,11 +10,11 @@ const AddressTab = () => {
       </CardHeader>
       <CardBody>
         <div className='flex w-1/2 flex-col'>
-          <div className='border-divider rounded-t-lg border p-2.5'>
+          <div className='rounded-t-lg border border-divider p-2.5'>
             <span>ที่อยู่ที่จัดส่ง</span>
           </div>
 
-          <div className='border-divider flex flex-col gap-5 border-r border-b border-l p-2.5'>
+          <div className='flex flex-col gap-5 border-r border-b border-l border-divider p-2.5'>
             <div className='flex items-center gap-4'>
               <MapPinIcon />
               <span>

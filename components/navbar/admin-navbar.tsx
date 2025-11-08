@@ -1,8 +1,8 @@
 'use client'
 import {
   Navbar as HeroUINavbar,
-  NavbarContent,
   NavbarBrand,
+  NavbarContent,
   NavbarItem,
 } from '@heroui/react'
 import { link as linkStyles } from '@heroui/theme'
@@ -11,8 +11,8 @@ import { TriangleIcon } from 'lucide-react'
 import NextLink from 'next/link'
 import { useSession } from 'next-auth/react'
 
-import { UserControlPanel } from './user-control-panel'
 import { ThemeSwitch } from '../theme-switch'
+import { UserControlPanel } from './user-control-panel'
 
 import { siteConfig } from '@/config/site'
 
@@ -45,7 +45,7 @@ const AdminNavbar = () => {
               <NextLink
                 className={clsx(
                   linkStyles({ color: 'foreground' }),
-                  'data-[active=true]:text-primary data-[active=true]:font-medium',
+                  'data-[active=true]:font-medium data-[active=true]:text-primary',
                 )}
                 color='foreground'
                 href={item?.href}

@@ -10,7 +10,7 @@ const OrderItem = () => {
 
   return (
     <div className='flex flex-col gap-4'>
-      <div className='bg-divider grid grid-cols-5 p-2.5'>
+      <div className='grid grid-cols-5 bg-divider p-2.5'>
         <div className='flex flex-col'>
           <span>เลขที่รายการ</span>
           <span>2452587200</span>
