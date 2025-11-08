@@ -3,6 +3,8 @@ import { Divider } from '@heroui/divider'
 import { ShoppingCart, Trash } from 'lucide-react'
 import Image from 'next/image'
 
+import { PriceRange } from '@/components/price-range'
+
 const FavoriteItem = () => {
   return (
     <div className='flex flex-col gap-4'>
@@ -24,12 +26,7 @@ const FavoriteItem = () => {
             </span>
             <span className='text-sm'>รหัสสินค้า : 60188416</span>
 
-            <div className='mt-auto flex items-center justify-between'>
-              <div className='text-red-800'>
-                ฿<span className='text-2xl font-bold'>148</span>
-                <span className='text-xs'> /EACH</span>
-              </div>
-            </div>
+            <PriceRange price={250} />
           </div>
         </div>
 

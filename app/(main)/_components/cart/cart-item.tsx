@@ -1,11 +1,11 @@
 import { Card, CardBody } from '@heroui/card'
-import { Input } from '@heroui/input'
 import clsx from 'clsx'
-import { CircleMinus, CirclePlus, TrashIcon } from 'lucide-react'
+import { TrashIcon } from 'lucide-react'
 import Image from 'next/image'
 
 import type { ComponentProps, FC } from 'react'
 
+import { StockInput } from '@/components/stock-input'
 import { formatNumber } from '@/utils/number'
 
 const CartItem: FC<ComponentProps<typeof Card>> = ({ className, ...props }) => {
@@ -38,11 +38,7 @@ const CartItem: FC<ComponentProps<typeof Card>> = ({ className, ...props }) => {
             <div className='flex items-center gap-4'>
               <span>จำนวน</span>
 
-              <div className='flex items-center gap-2'>
-                <CirclePlus className='text-default-500 cursor-pointer' />
-                <Input className='w-24' defaultValue='1' />
-                <CircleMinus className='text-default-500 cursor-pointer' />
-              </div>
+              <StockInput />
             </div>
 
             <span className='text-2xl font-bold text-red-800'>

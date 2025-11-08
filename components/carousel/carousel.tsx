@@ -33,9 +33,7 @@ const Carousel: FC<CarouselProps> = ({
   return (
     <div className='relative w-full max-w-full'>
       <div ref={emblaRef} className='overflow-hidden'>
-        <div className={clsx('flex gap-2 px-1 md:gap-4', className)}>
-          {children}
-        </div>
+        <div className={clsx('flex gap-2 px-1', className)}>{children}</div>
       </div>
 
       {!prevDisabled && (
