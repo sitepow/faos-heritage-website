@@ -30,7 +30,7 @@ const ProductImagePreview = ({
 
   return (
     <div className='flex w-[345px] flex-col gap-2'>
-      <div className='relative h-[345px] w-[345px] overflow-hidden rounded-lg'>
+      <div className='relative size-[345px] overflow-hidden rounded-lg'>
         <Image
           fill
           priority
@@ -45,7 +45,7 @@ const ProductImagePreview = ({
           {images.map((image, index) => (
             <button
               key={index}
-              className={`relative size-20 flex-shrink-0 cursor-pointer overflow-hidden rounded-md border-2 transition-all hover:opacity-80 ${
+              className={`relative size-20 flex-shrink-0 cursor-grab overflow-hidden rounded-md border-2 transition-all hover:opacity-80 ${
                 selectedIndex === index ? 'border-red-800' : 'border-gray-200'
               }`}
               onClick={() => setSelectedIndex(index)}
