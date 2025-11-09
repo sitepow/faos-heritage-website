@@ -1,11 +1,11 @@
 'use client'
 
 import {
-  Breadcrumbs,
   BreadcrumbItem,
+  Breadcrumbs,
   Button,
-  Switch,
   Divider,
+  Switch,
 } from '@heroui/react'
 import { ArrowUpDownIcon, Settings2Icon } from 'lucide-react'
 

@@ -1,10 +1,10 @@
 import {
+  Button,
   Card,
   CardBody,
   CardFooter,
   CardHeader,
   Image,
-  Button,
 } from '@heroui/react'
 import { ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
@@ -29,10 +29,10 @@ const NewsCard: FC<NewsItem> = ({ id, description, name, image }) => {
         />
       </CardHeader>
 
-      <CardBody className='flex-col gap-5'>
-        <div className='flex flex-col gap-1'>
+      <CardBody className='flex-col gap-2'>
+        <div className='flex flex-col'>
           <span className='font-bold'>{name}</span>
-          <span>(ลิงค์นอกเว็บไซต์)</span>
+          <span className='text-default-500'>(ลิงค์นอกเว็บไซต์)</span>
         </div>
         <span>{description}</span>
       </CardBody>

@@ -1,11 +1,11 @@
 import {
+  Button,
   Card,
   CardBody,
   CardFooter,
   CardHeader,
-  Input,
-  Button,
   Divider,
+  Input,
 } from '@heroui/react'
 
 const ProfileTab = () => {

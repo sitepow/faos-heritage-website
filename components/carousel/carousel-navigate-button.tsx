@@ -1,7 +1,6 @@
 import { cva } from 'class-variance-authority'
 import clsx from 'clsx'
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
-import React from 'react'
 
 import type { ComponentProps, FC } from 'react'
 

@@ -1,12 +1,12 @@
 'use client'
 
 import {
-  Navbar as HeroUINavbar,
-  NavbarContent,
-  NavbarBrand,
-  NavbarItem,
-  Input,
   Button,
+  Navbar as HeroUINavbar,
+  Input,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
 } from '@heroui/react'
 import { link as linkStyles } from '@heroui/theme'
 import clsx from 'clsx'
@@ -16,12 +16,11 @@ import {
   TriangleIcon,
   UserIcon,
 } from 'lucide-react'
-import NextLink from 'next/link'
-import Link from 'next/link'
+import { default as Link, default as NextLink } from 'next/link'
 import { useSession } from 'next-auth/react'
 
-import { UserControlPanel } from './user-control-panel'
 import { ThemeSwitch } from '../theme-switch'
+import { UserControlPanel } from './user-control-panel'
 
 import { siteConfig } from '@/config/site'
 
@@ -36,7 +35,7 @@ const MainNavbar = () => {
         input: 'text-sm',
       }}
       endContent={
-        <SearchIcon className='text-default-400 pointer-events-none flex-shrink-0 text-base' />
+        <SearchIcon className='pointer-events-none flex-shrink-0 text-base text-default-400' />
       }
       labelPlacement='outside'
       placeholder='ค้นหาสิ่งที่ต้องการที่นี่...'
@@ -77,7 +76,7 @@ const MainNavbar = () => {
                 <NextLink
                   className={clsx(
                     linkStyles({ color: 'foreground' }),
-                    'data-[active=true]:text-primary data-[active=true]:font-medium',
+                    'data-[active=true]:font-medium data-[active=true]:text-primary',
                   )}
                   color='foreground'
                   href={item?.href}

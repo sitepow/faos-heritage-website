@@ -2,12 +2,12 @@
 
 import {
   Alert,
-  Image,
+  Button,
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
-  Button,
+  CardHeader,
+  Image,
 } from '@heroui/react'
 import clsx from 'clsx'
 import { ShoppingCartIcon } from 'lucide-react'
@@ -19,7 +19,7 @@ import type { FC } from 'react'
 
 import { ProductRating } from './product-rating'
 
-import { formatCurrency } from '@/utils/number'
+import { PriceRange } from '@/components/price-range'
 import { createSlug } from '@/utils/slug'
 
 interface Props extends Product {
@@ -41,7 +41,7 @@ const ProductCard: FC<Props> = ({
     <Link href={`/product/${createSlug(name, id)}`}>
       <Card
         className={clsx(
-          'border-divider flex size-full w-64 flex-none cursor-pointer flex-col border md:min-w-72',
+          'flex size-full w-64 flex-none cursor-pointer flex-col border border-divider md:min-w-72',
           className,
         )}
         onMouseEnter={() => setIsHovered(true)}
@@ -70,16 +70,7 @@ const ProductCard: FC<Props> = ({
         </CardHeader>
 
         <CardBody>
-          <div className='mt-auto flex items-center justify-between'>
-            <div className='text-right'>
-              <div className='leading-3 text-red-800'>
-                <span className='text-sm font-bold lg:text-2xl'>
-                  {formatCurrency(price)}
-                </span>
-                <span className='text-xs'> /EACH</span>
-              </div>
-            </div>
-          </div>
+          <PriceRange price={price} />
           <h4 className='truncate text-lg font-bold'>{name}</h4>
           <ProductRating rate={4} />
         </CardBody>

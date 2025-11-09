@@ -34,7 +34,7 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
       <head />
       <body
         className={clsx(
-          'text-foreground bg-background min-h-screen font-sans antialiased',
+          'min-h-screen bg-background font-sans text-foreground antialiased',
           fontSukhumvit.variable,
         )}
       >
