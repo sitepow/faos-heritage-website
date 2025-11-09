@@ -2,6 +2,13 @@
 
 import { Button } from '@heroui/button'
 import {
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+  useDisclosure,
+} from '@heroui/react'
+import {
   Table,
   TableBody,
   TableCell,
@@ -9,9 +16,13 @@ import {
   TableHeader,
   TableRow,
 } from '@heroui/table'
-import { Edit, Trash } from 'lucide-react'
+import { Edit, EllipsisVertical, ImageIcon, Layout, Trash } from 'lucide-react'
 
 import type { ComponentProps } from 'react'
+
+import { ProductForm } from '../components/form/product'
+import { ProductImageForm } from '../components/form/product-image'
+import { ProductVariantForm } from '../components/form/product-variant'
 
 import { TrendCard } from '@/app/(dashboard)/_components/chart/trend-card'
 
@@ -57,8 +68,39 @@ const mockProductData = [
 ]
 
 const Product = () => {
+  const {
+    isOpen: isProductFormOpen,
+    onOpen: onProductFormOpen,
+    onOpenChange: onOpenProductFormChange,
+  } = useDisclosure()
+
+  const {
+    isOpen: isProductImageFormOpen,
+    onOpen: onProductImageFormOpen,
+    onOpenChange: onOpenProductImageFormChange,
+  } = useDisclosure()
+
+  const {
+    isOpen: isProductVarientFormOpen,
+    onOpen: onProductVarientFormOpen,
+    onOpenChange: onOpenProductVarientFormChange,
+  } = useDisclosure()
+
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
+      <ProductForm
+        isOpen={isProductFormOpen}
+        onOpenChange={onOpenProductFormChange}
+      />
+      <ProductImageForm
+        isOpen={isProductImageFormOpen}
+        onOpenChange={onOpenProductImageFormChange}
+      />
+      <ProductVariantForm
+        isOpen={isProductVarientFormOpen}
+        onOpenChange={onOpenProductVarientFormChange}
+      />
+
       <div className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
         {mockDashboardData.map((data) => (
           <TrendCard key={data.title} {...data} />
@@ -66,7 +108,13 @@ const Product = () => {
       </div>
 
       <div className='flex w-full justify-end gap-4'>
-        <Button>เพิ่มสินค้าใหม่</Button>
+        <Button
+          onPress={() => {
+            onProductFormOpen()
+          }}
+        >
+          เพิ่มสินค้าใหม่
+        </Button>
         <Button>ส่งออกไฟล์ XLSX</Button>
         <Button>ลบรายการที่เลือก</Button>
       </div>
@@ -89,8 +137,47 @@ const Product = () => {
               <TableCell>{product.price}</TableCell>
               <TableCell>{product.stock}</TableCell>
               <TableCell className='flex gap-2.5'>
-                <Edit className='cursor-pointer text-default-500' />
-                <Trash className='cursor-pointer text-default-500' />
+                <Dropdown placement='bottom-end'>
+                  <DropdownTrigger>
+                    <Button isIconOnly size='sm' variant='light'>
+                      <EllipsisVertical className='h-5 w-5 text-default-500' />
+                    </Button>
+                  </DropdownTrigger>
+                  <DropdownMenu
+                    aria-label='จัดการสินค้า'
+                    className='min-w-[180px]'
+                  >
+                    <DropdownItem
+                      key='edit'
+                      startContent={<Edit className='h-4 w-4' />}
+                      onClick={() => onProductFormOpen()}
+                    >
+                      แก้ไขข้อมูล
+                    </DropdownItem>
+                    <DropdownItem
+                      key='image'
+                      startContent={<ImageIcon className='h-4 w-4' />}
+                      onClick={() => onProductImageFormOpen()}
+                    >
+                      จัดการรูปภาพ
+                    </DropdownItem>
+                    <DropdownItem
+                      key='variant'
+                      startContent={<Layout className='h-4 w-4' />}
+                      onClick={() => onProductVarientFormOpen()}
+                    >
+                      จัดการตัวเลือก
+                    </DropdownItem>
+                    <DropdownItem
+                      key='delete'
+                      className='text-danger'
+                      color='danger'
+                      startContent={<Trash className='h-4 w-4 text-danger' />}
+                    >
+                      ลบสินค้า
+                    </DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
               </TableCell>
             </TableRow>
           ))}
