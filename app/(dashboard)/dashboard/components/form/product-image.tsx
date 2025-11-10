@@ -12,14 +12,8 @@ import {
 } from '@heroui/react'
 import { useForm } from 'react-hook-form'
 
+import type { ProductImage } from '@prisma/client'
 import type { FC } from 'react'
-
-interface ProductImageFormValues {
-  url: string
-  altText?: string
-  isPrimary: boolean
-  isActive: boolean
-}
 
 interface Props {
   isOpen: boolean
@@ -31,14 +25,13 @@ const ProductImageForm: FC<Props> = ({ isOpen, onOpenChange }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ProductImageFormValues>({
+  } = useForm<ProductImage>({
     defaultValues: {
       isPrimary: false,
-      isActive: true,
     },
   })
 
-  const onSubmit = (data: ProductImageFormValues) => {
+  const onSubmit = (data: ProductImage) => {
     console.log(data)
   }
 
@@ -47,8 +40,7 @@ const ProductImageForm: FC<Props> = ({ isOpen, onOpenChange }) => {
       hideCloseButton
       isDismissable={false}
       isOpen={isOpen}
-      scrollBehavior='inside'
-      size='md'
+      scrollBehavior='outside'
       onOpenChange={onOpenChange}
     >
       <ModalContent>
@@ -57,7 +49,6 @@ const ProductImageForm: FC<Props> = ({ isOpen, onOpenChange }) => {
             <ModalHeader className='flex flex-col gap-1'>
               เพิ่มรูปภาพสินค้า
             </ModalHeader>
-
             <ModalBody className='space-y-4'>
               <Input
                 label='URL ของรูปภาพ'
@@ -72,19 +63,15 @@ const ProductImageForm: FC<Props> = ({ isOpen, onOpenChange }) => {
                 errorMessage={errors.url?.message}
                 isInvalid={!!errors.url}
               />
-
               <Input
                 label='ข้อความอธิบายรูป (alt text)'
                 placeholder='เช่น เสื้อยืดลายแมวสีดำ'
-                {...register('altText')}
+                {...register('alt')}
               />
-
               <div className='flex items-center gap-6'>
                 <Switch {...register('isPrimary')}>ตั้งเป็นรูปหลัก</Switch>
-                <Switch {...register('isActive')}>เปิดใช้งาน</Switch>
               </div>
             </ModalBody>
-
             <ModalFooter>
               <Button color='danger' variant='light' onPress={onClose}>
                 ยกเลิก

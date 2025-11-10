@@ -15,26 +15,8 @@ import {
 } from '@heroui/react'
 import { useForm } from 'react-hook-form'
 
+import type { Product } from '@prisma/client'
 import type { FC } from 'react'
-
-interface ProductFormValues {
-  name: string
-  slug: string
-  sku?: string
-  barcode?: string
-  price: number
-  compareAtPrice?: number
-  costPrice?: number
-  stockQuantity: number
-  lowStockAlert?: number
-  weight?: number
-  categoryId?: string
-  description?: string
-  metaTitle?: string
-  metaDescription?: string
-  isActive: boolean
-  isFeatured: boolean
-}
 
 interface Props {
   isOpen: boolean
@@ -46,14 +28,14 @@ const ProductForm: FC<Props> = ({ isOpen, onOpenChange }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ProductFormValues>({
+  } = useForm<Product>({
     defaultValues: {
       isActive: true,
       isFeatured: false,
     },
   })
 
-  const onSubmit = (data: ProductFormValues) => {
+  const onSubmit = (data: Product) => {
     console.log(data)
   }
 
@@ -72,7 +54,6 @@ const ProductForm: FC<Props> = ({ isOpen, onOpenChange }) => {
             <ModalHeader className='flex flex-col gap-1'>
               เพิ่มสินค้าใหม่
             </ModalHeader>
-
             <ModalBody className='space-y-4'>
               <div className='grid grid-cols-2 gap-4'>
                 <Input
@@ -88,7 +69,6 @@ const ProductForm: FC<Props> = ({ isOpen, onOpenChange }) => {
                   errorMessage={errors.name?.message}
                   isInvalid={!!errors.name}
                 />
-
                 <Input
                   label='Slug'
                   placeholder='เช่น cat-tshirt'
@@ -103,7 +83,6 @@ const ProductForm: FC<Props> = ({ isOpen, onOpenChange }) => {
                   errorMessage={errors.slug?.message}
                   isInvalid={!!errors.slug}
                 />
-
                 <Input
                   label='SKU'
                   placeholder='เช่น CAT-001'
@@ -114,7 +93,6 @@ const ProductForm: FC<Props> = ({ isOpen, onOpenChange }) => {
                   placeholder='เช่น 123456789'
                   {...register('barcode')}
                 />
-
                 <Input
                   label='ราคา (บาท)'
                   placeholder='0.00'
@@ -130,7 +108,6 @@ const ProductForm: FC<Props> = ({ isOpen, onOpenChange }) => {
                   errorMessage={errors.price?.message}
                   isInvalid={!!errors.price}
                 />
-
                 <Input
                   label='ราคาก่อนลด (ถ้ามี)'
                   placeholder='0.00'
@@ -145,7 +122,6 @@ const ProductForm: FC<Props> = ({ isOpen, onOpenChange }) => {
                   errorMessage={errors.compareAtPrice?.message}
                   isInvalid={!!errors.compareAtPrice}
                 />
-
                 <Input
                   label='ราคาทุน (ภายใน)'
                   placeholder='0.00'
@@ -160,7 +136,6 @@ const ProductForm: FC<Props> = ({ isOpen, onOpenChange }) => {
                   errorMessage={errors.costPrice?.message}
                   isInvalid={!!errors.costPrice}
                 />
-
                 <Input
                   label='จำนวนในสต็อก'
                   placeholder='0'
@@ -176,7 +151,6 @@ const ProductForm: FC<Props> = ({ isOpen, onOpenChange }) => {
                   errorMessage={errors.stockQuantity?.message}
                   isInvalid={!!errors.stockQuantity}
                 />
-
                 <Input
                   label='แจ้งเตือนเมื่อสต็อกต่ำกว่า'
                   placeholder='10'
@@ -191,7 +165,6 @@ const ProductForm: FC<Props> = ({ isOpen, onOpenChange }) => {
                   errorMessage={errors.lowStockAlert?.message}
                   isInvalid={!!errors.lowStockAlert}
                 />
-
                 <Input
                   label='น้ำหนัก (กรัม)'
                   placeholder='0'
@@ -207,7 +180,6 @@ const ProductForm: FC<Props> = ({ isOpen, onOpenChange }) => {
                   isInvalid={!!errors.weight}
                 />
               </div>
-
               <Select
                 label='หมวดหมู่สินค้า'
                 placeholder='เลือกหมวดหมู่'
@@ -221,14 +193,12 @@ const ProductForm: FC<Props> = ({ isOpen, onOpenChange }) => {
                 <SelectItem key='accessory'>เครื่องประดับ</SelectItem>
                 <SelectItem key='electronics'>อุปกรณ์อิเล็กทรอนิกส์</SelectItem>
               </Select>
-
               <Textarea
                 label='รายละเอียดสินค้า'
                 minRows={3}
                 placeholder='อธิบายคุณสมบัติ จุดเด่น หรือวัสดุที่ใช้...'
                 {...register('description')}
               />
-
               <Input
                 label='Meta Title'
                 placeholder='ใช้สำหรับ SEO'
@@ -241,7 +211,6 @@ const ProductForm: FC<Props> = ({ isOpen, onOpenChange }) => {
                 errorMessage={errors.metaTitle?.message}
                 isInvalid={!!errors.metaTitle}
               />
-
               <Textarea
                 label='Meta Description'
                 minRows={3}
@@ -255,19 +224,17 @@ const ProductForm: FC<Props> = ({ isOpen, onOpenChange }) => {
                 errorMessage={errors.metaDescription?.message}
                 isInvalid={!!errors.metaDescription}
               />
-
               <div className='flex items-center gap-6'>
                 <Switch {...register('isActive')}>เปิดการขาย</Switch>
                 <Switch {...register('isFeatured')}>แนะนำสินค้า</Switch>
               </div>
             </ModalBody>
-
             <ModalFooter>
               <Button color='danger' variant='light' onPress={onClose}>
                 ยกเลิก
               </Button>
               <Button color='primary' type='submit'>
-                บันทึกข้อมูล
+                บันทึกสินค้า
               </Button>
             </ModalFooter>
           </form>
