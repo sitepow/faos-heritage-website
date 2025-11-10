@@ -12,15 +12,8 @@ import {
 } from '@heroui/react'
 import { useForm } from 'react-hook-form'
 
+import type { ProductVariant } from '@prisma/client'
 import type { FC } from 'react'
-
-interface ProductVariantFormValues {
-  name: string
-  sku?: string
-  price: number
-  stockQuantity: number
-  isActive: boolean
-}
 
 interface Props {
   isOpen: boolean
@@ -32,13 +25,13 @@ const ProductVariantForm: FC<Props> = ({ isOpen, onOpenChange }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ProductVariantFormValues>({
+  } = useForm<ProductVariant>({
     defaultValues: {
       isActive: true,
     },
   })
 
-  const onSubmit = (data: ProductVariantFormValues) => {
+  const onSubmit = (data: ProductVariant) => {
     console.log(data)
   }
 
@@ -47,8 +40,7 @@ const ProductVariantForm: FC<Props> = ({ isOpen, onOpenChange }) => {
       hideCloseButton
       isDismissable={false}
       isOpen={isOpen}
-      scrollBehavior='inside'
-      size='md'
+      scrollBehavior='outside'
       onOpenChange={onOpenChange}
     >
       <ModalContent>
@@ -57,7 +49,6 @@ const ProductVariantForm: FC<Props> = ({ isOpen, onOpenChange }) => {
             <ModalHeader className='flex flex-col gap-1'>
               เพิ่มตัวเลือกสินค้า
             </ModalHeader>
-
             <ModalBody className='space-y-4'>
               <Input
                 label='ชื่อตัวเลือก'
@@ -72,13 +63,11 @@ const ProductVariantForm: FC<Props> = ({ isOpen, onOpenChange }) => {
                 errorMessage={errors.name?.message}
                 isInvalid={!!errors.name}
               />
-
               <Input
                 label='SKU (ถ้ามี)'
                 placeholder='เช่น CAT-BLACK-L'
                 {...register('sku')}
               />
-
               <Input
                 label='ราคา (บาท)'
                 placeholder='0.00'
@@ -94,7 +83,6 @@ const ProductVariantForm: FC<Props> = ({ isOpen, onOpenChange }) => {
                 errorMessage={errors.price?.message}
                 isInvalid={!!errors.price}
               />
-
               <Input
                 label='จำนวนในสต็อก'
                 placeholder='0'
@@ -110,10 +98,8 @@ const ProductVariantForm: FC<Props> = ({ isOpen, onOpenChange }) => {
                 errorMessage={errors.stockQuantity?.message}
                 isInvalid={!!errors.stockQuantity}
               />
-
               <Switch {...register('isActive')}>เปิดใช้งานตัวเลือกนี้</Switch>
             </ModalBody>
-
             <ModalFooter>
               <Button color='danger' variant='light' onPress={onClose}>
                 ยกเลิก

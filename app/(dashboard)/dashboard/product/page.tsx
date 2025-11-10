@@ -20,9 +20,9 @@ import { Edit, EllipsisVertical, ImageIcon, Layout, Trash } from 'lucide-react'
 
 import type { ComponentProps } from 'react'
 
+import { ProductImageManager } from '../components/ProductImageManager'
+import { ProductVariantManager } from '../components/ProductVariantManager'
 import { ProductForm } from '../components/form/product'
-import { ProductImageForm } from '../components/form/product-image'
-import { ProductVariantForm } from '../components/form/product-variant'
 
 import { TrendCard } from '@/app/(dashboard)/_components/chart/trend-card'
 
@@ -92,21 +92,19 @@ const Product = () => {
         isOpen={isProductFormOpen}
         onOpenChange={onOpenProductFormChange}
       />
-      <ProductImageForm
+      <ProductImageManager
         isOpen={isProductImageFormOpen}
         onOpenChange={onOpenProductImageFormChange}
       />
-      <ProductVariantForm
+      <ProductVariantManager
         isOpen={isProductVarientFormOpen}
         onOpenChange={onOpenProductVarientFormChange}
       />
-
       <div className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
         {mockDashboardData.map((data) => (
           <TrendCard key={data.title} {...data} />
         ))}
       </div>
-
       <div className='flex w-full justify-end gap-4'>
         <Button
           onPress={() => {
@@ -118,7 +116,6 @@ const Product = () => {
         <Button>ส่งออกไฟล์ XLSX</Button>
         <Button>ลบรายการที่เลือก</Button>
       </div>
-
       <Table aria-label='ตารางข้อมูลสินค้า' selectionMode='multiple'>
         <TableHeader>
           <TableColumn>รหัสสินค้า</TableColumn>
@@ -140,7 +137,7 @@ const Product = () => {
                 <Dropdown placement='bottom-end'>
                   <DropdownTrigger>
                     <Button isIconOnly size='sm' variant='light'>
-                      <EllipsisVertical className='h-5 w-5 text-default-500' />
+                      <EllipsisVertical className='size-5 text-default-500' />
                     </Button>
                   </DropdownTrigger>
                   <DropdownMenu
@@ -149,21 +146,21 @@ const Product = () => {
                   >
                     <DropdownItem
                       key='edit'
-                      startContent={<Edit className='h-4 w-4' />}
+                      startContent={<Edit className='size-4' />}
                       onClick={() => onProductFormOpen()}
                     >
                       แก้ไขข้อมูล
                     </DropdownItem>
                     <DropdownItem
                       key='image'
-                      startContent={<ImageIcon className='h-4 w-4' />}
+                      startContent={<ImageIcon className='size-4' />}
                       onClick={() => onProductImageFormOpen()}
                     >
                       จัดการรูปภาพ
                     </DropdownItem>
                     <DropdownItem
                       key='variant'
-                      startContent={<Layout className='h-4 w-4' />}
+                      startContent={<Layout className='size-4' />}
                       onClick={() => onProductVarientFormOpen()}
                     >
                       จัดการตัวเลือก
@@ -172,7 +169,7 @@ const Product = () => {
                       key='delete'
                       className='text-danger'
                       color='danger'
-                      startContent={<Trash className='h-4 w-4 text-danger' />}
+                      startContent={<Trash className='size-4 text-danger' />}
                     >
                       ลบสินค้า
                     </DropdownItem>
