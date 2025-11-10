@@ -28,12 +28,7 @@ const ProductForm: FC<Props> = ({ isOpen, onOpenChange }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Product>({
-    defaultValues: {
-      isActive: true,
-      isFeatured: false,
-    },
-  })
+  } = useForm<Product>()
 
   const onSubmit = (data: Product) => {
     console.log(data)

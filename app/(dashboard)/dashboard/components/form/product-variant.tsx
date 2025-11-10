@@ -25,11 +25,7 @@ const ProductVariantForm: FC<Props> = ({ isOpen, onOpenChange }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ProductVariant>({
-    defaultValues: {
-      isActive: true,
-    },
-  })
+  } = useForm<ProductVariant>()
 
   const onSubmit = (data: ProductVariant) => {
     console.log(data)

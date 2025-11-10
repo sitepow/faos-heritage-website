@@ -25,11 +25,7 @@ const ProductImageForm: FC<Props> = ({ isOpen, onOpenChange }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ProductImage>({
-    defaultValues: {
-      isPrimary: false,
-    },
-  })
+  } = useForm<ProductImage>()
 
   const onSubmit = (data: ProductImage) => {
     console.log(data)
