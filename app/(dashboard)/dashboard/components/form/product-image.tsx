@@ -15,6 +15,8 @@ import { useForm } from 'react-hook-form'
 import type { ProductImage } from '@prisma/client'
 import type { FC } from 'react'
 
+type ProductImageInput = Omit<ProductImage, 'id' | 'createdAt' | 'updatedAt'>
+
 interface Props {
   isOpen: boolean
   onOpenChange: () => void
@@ -25,13 +27,9 @@ const ProductImageForm: FC<Props> = ({ isOpen, onOpenChange }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ProductImage>({
-    defaultValues: {
-      isPrimary: false,
-    },
-  })
+  } = useForm<ProductImageInput>()
 
-  const onSubmit = (data: ProductImage) => {
+  const onSubmit = (data: ProductImageInput) => {
     console.log(data)
   }
 

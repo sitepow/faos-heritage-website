@@ -15,6 +15,11 @@ import { useForm } from 'react-hook-form'
 import type { ProductVariant } from '@prisma/client'
 import type { FC } from 'react'
 
+type ProductVariantInput = Omit<
+  ProductVariant,
+  'id' | 'createdAt' | 'updatedAt'
+>
+
 interface Props {
   isOpen: boolean
   onOpenChange: () => void
@@ -25,13 +30,9 @@ const ProductVariantForm: FC<Props> = ({ isOpen, onOpenChange }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ProductVariant>({
-    defaultValues: {
-      isActive: true,
-    },
-  })
+  } = useForm<ProductVariantInput>()
 
-  const onSubmit = (data: ProductVariant) => {
+  const onSubmit = (data: ProductVariantInput) => {
     console.log(data)
   }
 
