@@ -17,7 +17,7 @@ import type { FC } from 'react'
 
 type ProductVariantInput = Omit<
   ProductVariant,
-  'id' | 'productId' | 'createdAt' | 'updatedAt'
+  'id' | 'createdAt' | 'updatedAt'
 >
 
 interface Props {
