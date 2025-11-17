@@ -1,7 +1,7 @@
 import type { FC, PropsWithChildren } from 'react'
 
 import { MainNavbar } from '@/components/navbar/main-navbar'
-import { siteConfig } from '@/config/site'
+import { getFooter } from '@/utils/helper'
 
 const MainLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
@@ -9,7 +9,7 @@ const MainLayout: FC<PropsWithChildren> = ({ children }) => {
       <MainNavbar />
       <main className='container mx-auto flex-grow p-6'>{children}</main>
       <footer className='flex w-full items-center justify-center py-3'>
-        <span className='text-default-600'>{siteConfig.footer}</span>
+        <span className='text-default-600'>{getFooter()}</span>
       </footer>
     </div>
   )

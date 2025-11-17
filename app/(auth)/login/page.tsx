@@ -9,6 +9,8 @@ import { useSearchParams } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
 
+import { siteConfig } from '@/config/site'
+
 interface UserInputs {
   email: string
   password: string
@@ -45,7 +47,7 @@ const Login = () => {
             เข้าสู่ระบบ หรือ สมัครสมาชิก
           </span>
           <span className='text-default-500'>
-            เข้าสู่ DemoStore ด้วย Passport Local
+            เข้าสู่ {siteConfig.name} ด้วย Passport Local
           </span>
         </CardHeader>
 

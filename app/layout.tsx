@@ -12,8 +12,8 @@ import { NextAuthProviders } from '@/providers/nextauth'
 
 export const metadata: Metadata = {
   title: {
-    default: siteConfig.name,
-    template: `%s - ${siteConfig.name}`,
+    default: `${siteConfig.name} - ${siteConfig.title}`,
+    template: `%s - ${siteConfig.name} - ${siteConfig.title}`,
   },
   description: siteConfig.description,
   icons: {

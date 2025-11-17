@@ -32,7 +32,7 @@ const AdminNavbar = () => {
           <NextLink className='flex items-center justify-start gap-2' href='/'>
             <TriangleIcon className='text-red-800' />
             <div className='flex flex-col gap-0 text-inherit'>
-              <span className='font-bold'>DemoStore</span>
+              <span className='font-bold'>{siteConfig.name}</span>
               <span className='text-xs text-red-800'>
                 ร้านค้าตัวอย่าง (จัดการข้อมูลหลังร้าน)
               </span>
