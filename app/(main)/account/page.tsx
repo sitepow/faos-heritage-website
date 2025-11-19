@@ -3,11 +3,11 @@
 import { Tab, Tabs } from '@heroui/react'
 import { useState } from 'react'
 
-import { AccountTab } from '../_components/account/account-tab'
-import { AddressTab } from '../_components/account/address-tab'
-import { FavoriteTab } from '../_components/account/favorite-tab'
-import { OrderTab } from '../_components/account/order-tab'
-import { ProfileTab } from '../_components/account/profile-tab'
+import { AccountCard } from './_components/card/account'
+import { AddressCard } from './_components/card/address'
+import { FavoriteCard } from './_components/card/favorite'
+import { OrderCard } from './_components/card/order'
+import { ProfileCard } from './_components/card/profile'
 
 const Account = () => {
   const [selectedTabKey, setSelectedTabKey] = useState<string | number>(
@@ -33,19 +33,19 @@ const Account = () => {
           onSelectionChange={setSelectedTabKey}
         >
           <Tab key='account' title='จัดการกับบัญชีของฉัน'>
-            <AccountTab onclick={() => setSelectedTabKey('profile')} />
+            <AccountCard onclick={() => setSelectedTabKey('profile')} />
           </Tab>
           <Tab key='order' title='รายการคำสั่งซื้อของฉัน'>
-            <OrderTab />
+            <OrderCard />
           </Tab>
           <Tab key='favorite' title='รายการโปรด'>
-            <FavoriteTab />
+            <FavoriteCard />
           </Tab>
           <Tab key='profile' title='แก้ไขข้อมูลส่วนตัว'>
-            <ProfileTab />
+            <ProfileCard />
           </Tab>
           <Tab key='address' title='จัดการที่อยู่ของฉัน'>
-            <AddressTab />
+            <AddressCard />
           </Tab>
         </Tabs>
       </div>

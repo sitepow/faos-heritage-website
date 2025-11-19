@@ -3,19 +3,20 @@
 import { useSwitch } from '@heroui/react'
 import { useIsSSR } from '@react-aria/ssr'
 import { VisuallyHidden } from '@react-aria/visually-hidden'
-import clsx from 'clsx'
 import { MoonIcon, SunIcon } from 'lucide-react'
 import { useTheme } from 'next-themes'
 
 import type { SwitchProps } from '@heroui/react'
 import type { FC } from 'react'
 
+import { cn } from '@/utils/style'
+
 export interface Props {
   className?: string
   classNames?: SwitchProps['classNames']
 }
 
-export const ThemeSwitch: FC<Props> = ({ className, classNames }) => {
+const ThemeSwitch: FC<Props> = ({ className, classNames }) => {
   const { theme, setTheme } = useTheme()
   const isSSR = useIsSSR()
 
@@ -39,8 +40,8 @@ export const ThemeSwitch: FC<Props> = ({ className, classNames }) => {
   return (
     <Component
       {...getBaseProps({
-        className: clsx(
-          'px-px transition-opacity cursor-pointer',
+        className: cn(
+          'cursor-pointer px-px transition-opacity',
           className,
           classNames?.base,
         ),
@@ -52,7 +53,7 @@ export const ThemeSwitch: FC<Props> = ({ className, classNames }) => {
       <div
         {...getWrapperProps()}
         className={slots.wrapper({
-          class: clsx(
+          class: cn(
             [
               'h-auto w-auto',
               'bg-transparent',
@@ -76,3 +77,5 @@ export const ThemeSwitch: FC<Props> = ({ className, classNames }) => {
     </Component>
   )
 }
+
+export { ThemeSwitch }

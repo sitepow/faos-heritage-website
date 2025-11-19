@@ -1,5 +1,5 @@
-import { CartSection } from '../_components/cart/cart-section'
-import { OrderSection } from '../_components/cart/order-section'
+import { CartSection } from './_components/section/cart'
+import { OrderSection } from './_components/section/order'
 
 const Cart = () => {
   return (

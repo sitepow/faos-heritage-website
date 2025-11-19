@@ -14,28 +14,20 @@ import { Edit, Trash } from 'lucide-react'
 import type { ComponentProps } from 'react'
 
 import { TrendCard } from '@/app/(dashboard)/_components/chart/trend-card'
+import { formatCurrency } from '@/utils/number'
 
 const mockDashboardData: ComponentProps<typeof TrendCard>[] = [
   {
     title: 'คำสั่งซื้อทั้งหมด',
-    value: '328',
-    change: '+15.2%',
-    changeType: 'positive',
-    trendType: 'up',
+    value: 328,
   },
   {
     title: 'ปิดคำสั่งซื้อแล้ว',
-    value: '200',
-    change: '+15.2%',
-    changeType: 'positive',
-    trendType: 'up',
+    value: 200,
   },
   {
     title: 'คำสั่งซื้อล้มเหลว',
-    value: '128',
-    change: '+15.2%',
-    changeType: 'positive',
-    trendType: 'up',
+    value: 128,
   },
 ]
 
@@ -44,14 +36,14 @@ const mockOrderData = [
     id: 'ORD001',
     customer: 'บริษัท ABC จำกัด',
     date: '2024-10-25',
-    total: '45,000',
+    total: 32003,
     status: 'กำลังดำเนินการ',
   },
   {
     id: 'ORD002',
     customer: 'ร้าน XYZ',
     date: '2024-10-26',
-    total: '28,500',
+    total: 25221,
     status: 'เสร็จสิ้น',
   },
 ]
@@ -86,7 +78,7 @@ const Order = () => {
               <TableCell>{order.id}</TableCell>
               <TableCell>{order.customer}</TableCell>
               <TableCell>{order.date}</TableCell>
-              <TableCell>{order.total}</TableCell>
+              <TableCell>{formatCurrency(order.total)}</TableCell>
               <TableCell>{order.status}</TableCell>
               <TableCell className='flex gap-2.5'>
                 <Edit className='cursor-pointer text-default-500' />

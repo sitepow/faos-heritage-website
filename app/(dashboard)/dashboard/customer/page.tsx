@@ -18,10 +18,7 @@ import { TrendCard } from '@/app/(dashboard)/_components/chart/trend-card'
 const mockDashboardData: ComponentProps<typeof TrendCard>[] = [
   {
     title: 'ลูกค้าทั้งหมด',
-    value: '240',
-    change: '+12.5%',
-    changeType: 'positive',
-    trendType: 'up',
+    value: 240,
   },
 ]
 

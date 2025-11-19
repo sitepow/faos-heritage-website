@@ -1,6 +1,6 @@
 import type { FC, PropsWithChildren } from 'react'
 
-import { AdminNavbar } from '@/components/navbar/admin-navbar'
+import { AdminNavbar } from '@/components/navbar/admin'
 import { getFooter } from '@/utils/helper'
 
 const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {

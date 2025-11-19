@@ -9,7 +9,8 @@ import {
 } from '@heroui/react'
 import { ArrowUpDownIcon, Settings2Icon } from 'lucide-react'
 
-import { ProductSection } from '@/app/(main)/_components/product/product-section'
+import { ProductSection } from '../_components/section/product'
+
 import { PRODUCT_CONSTANT } from '@/utils/const'
 
 const Products = () => {
@@ -25,12 +26,12 @@ const Products = () => {
       <span className='text-2xl'>สินค้าทั้งหมด</span>
 
       <div className='flex w-full justify-between'>
-        <span className='text-red-800'>
+        <span className='text-primary-website dark:text-white'>
           สินค้ารายการที่ 1 - 9 จาก ทั้งหมด 350 รายการ
         </span>
 
         <div className='flex gap-2.5'>
-          <Switch defaultSelected color='danger'>
+          <Switch defaultSelected color='primary'>
             แสดงเฉพาะสินค้าพร้อมส่ง
           </Switch>
           <Button startContent={<Settings2Icon />} variant='bordered'>
@@ -43,7 +44,6 @@ const Products = () => {
       </div>
 
       <Divider />
-
       <ProductSection hideIcon={false} items={PRODUCT_CONSTANT?.slice(0, 8)} />
     </section>
   )

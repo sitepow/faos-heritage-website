@@ -4,7 +4,7 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number
 }
 
-export interface CategoryItem {
+export interface CategoryCard {
   id: string
   name: string
 }
@@ -15,9 +15,10 @@ export interface Product {
   price: number
   image?: string
   stock: number
+  unit?: string
 }
 
-export interface NewsItem {
+export interface ArticleCard {
   id: string
   name: string
   description: string

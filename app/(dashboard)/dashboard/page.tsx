@@ -1,57 +1,42 @@
 'use client'
 
-import { Card, CardBody, CardHeader, Divider } from '@heroui/react'
+import { Card, CardBody, CardHeader } from '@heroui/react'
 
 import type { ComponentProps } from 'react'
 
-import { CustomerDashboardItem } from './components/customer-dashboard-item'
-import { OrderDashboardItem } from './components/order-dashboard-item'
-import { ProductDashboardItem } from './components/product-dashboard-item'
+import { CustomerItem } from '../_components/customer-item'
+import { OrderItem } from '../_components/order-item'
+import { ProductItem } from '../_components/product-item'
 
 import { TrendCard } from '@/app/(dashboard)/_components/chart/trend-card'
 
 const mockDashboardData: ComponentProps<typeof TrendCard>[] = [
   {
     title: 'รายได้รวม',
-    value: '฿284,500',
-    change: '+12.5%',
-    changeType: 'positive',
-    trendType: 'up',
+    value: 520234,
+    isCurrency: true,
   },
   {
     title: 'ยอดขายวันนี้',
-    value: '฿18,250',
-    change: '+8.2%',
-    changeType: 'positive',
-    trendType: 'up',
+    value: 43002,
+    isCurrency: true,
   },
   {
     title: 'ลูกค้าใหม่',
-    value: '127',
-    change: '+33%',
-    changeType: 'positive',
-    trendType: 'up',
+    value: 127,
   },
   {
     title: 'Transaction สำเร็จ',
-    value: '456',
-    change: '+15.3%',
-    changeType: 'positive',
-    trendType: 'up',
+    value: 456,
   },
   {
     title: 'ยอดขายเฉลี่ย',
-    value: '฿624',
-    change: '-2.4%',
-    changeType: 'negative',
-    trendType: 'down',
+    value: 624,
+    isCurrency: true,
   },
   {
-    title: 'Refund Rate',
-    value: '2.8%',
-    change: '-0.5%',
-    changeType: 'positive',
-    trendType: 'down',
+    title: 'Refund Rate (%)',
+    value: 2.8,
   },
 ]
 
@@ -64,8 +49,6 @@ const DashboardHome = () => {
         ))}
       </div>
 
-      <Divider />
-
       <div className='grid w-full grid-cols-2 gap-5'>
         <Card>
           <CardHeader className='justify-between'>
@@ -73,8 +56,8 @@ const DashboardHome = () => {
             <span className='text-default-500'>ดูเพิ่มเติม</span>
           </CardHeader>
           <CardBody>
-            <OrderDashboardItem />
-            <OrderDashboardItem />
+            <OrderItem />
+            <OrderItem />
           </CardBody>
         </Card>
 
@@ -84,8 +67,8 @@ const DashboardHome = () => {
             <span className='text-default-500'>ดูเพิ่มเติม</span>
           </CardHeader>
           <CardBody>
-            <CustomerDashboardItem />
-            <CustomerDashboardItem />
+            <CustomerItem />
+            <CustomerItem />
           </CardBody>
         </Card>
 
@@ -95,8 +78,8 @@ const DashboardHome = () => {
             <span className='text-default-500'>ดูเพิ่มเติม</span>
           </CardHeader>
           <CardBody>
-            <ProductDashboardItem />
-            <ProductDashboardItem />
+            <ProductItem />
+            <ProductItem />
           </CardBody>
         </Card>
 
@@ -106,8 +89,8 @@ const DashboardHome = () => {
             <span className='text-default-500'>ดูเพิ่มเติม</span>
           </CardHeader>
           <CardBody>
-            <ProductDashboardItem />
-            <ProductDashboardItem />
+            <ProductItem />
+            <ProductItem />
           </CardBody>
         </Card>
       </div>
