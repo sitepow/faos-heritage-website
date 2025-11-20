@@ -2,11 +2,13 @@ import { Star } from 'lucide-react'
 
 import type { ComponentProps, FC } from 'react'
 
+import { formatNumber } from '@/utils/number'
+
 interface Props {
   rate?: number
 }
 
-const ProductRating: FC<ComponentProps<'div'> & Props> = ({
+const StarRating: FC<ComponentProps<'div'> & Props> = ({
   rate = 0,
   ...props
 }) => {
@@ -22,9 +24,11 @@ const ProductRating: FC<ComponentProps<'div'> & Props> = ({
           size={15}
         />
       ))}
-      <span className='text-default-500'>({rate})</span>
+      <span className='text-default-500'>
+        ({formatNumber(rate)} คะแนน) ({formatNumber(1602)} รีวิว)
+      </span>
     </div>
   )
 }
 
-export { ProductRating }
+export { StarRating }

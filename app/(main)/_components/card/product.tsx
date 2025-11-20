@@ -16,7 +16,7 @@ import { useState } from 'react'
 import type { Product } from '@/types'
 import type { FC } from 'react'
 
-import { ProductRating } from '../product-rating'
+import { StarRating } from '../star-rating'
 
 import { Price } from '@/components/price'
 import { createSlug } from '@/utils/helper'
@@ -74,7 +74,7 @@ const ProductCard: FC<Props> = ({
       <CardBody>
         <Price price={price} unit={unit} />
         <h4 className='truncate text-lg font-bold'>{name}</h4>
-        <ProductRating rate={4} />
+        <StarRating rate={4} />
       </CardBody>
 
       {!hideIcon && (

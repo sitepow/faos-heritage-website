@@ -4,14 +4,14 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
+  NavbarMenuToggle,
 } from '@heroui/react'
 import { link as linkStyles } from '@heroui/theme'
-import { TriangleIcon } from 'lucide-react'
 import NextLink from 'next/link'
 import { useSession } from 'next-auth/react'
 
 import { ThemeSwitch } from '../theme-switch'
-import { ControlPanel } from './control-panel'
+import { Panel } from './etc/panel'
 
 import { siteConfig } from '@/config/site'
 import { cn } from '@/utils/style'
@@ -23,14 +23,12 @@ const AdminNavbar = () => {
     <HeroUINavbar
       isBordered
       className='shadow-md'
-      isBlurred={false}
       maxWidth='full'
       position='sticky'
     >
       <NavbarContent className='basis-1/5 sm:basis-full' justify='start'>
         <NavbarBrand as='li' className='max-w-fit gap-3'>
           <NextLink className='flex items-center justify-start gap-2' href='/'>
-            <TriangleIcon className='text-primary-website dark:text-white' />
             <div className='flex flex-col gap-0 text-inherit'>
               <b className='text-xl'>{siteConfig.name}</b>
               <span className='text-xs text-primary-website dark:text-white'>
@@ -63,13 +61,16 @@ const AdminNavbar = () => {
       >
         {status === 'authenticated' && (
           <NavbarItem className='hidden lg:flex'>
-            <ControlPanel />
+            <Panel />
           </NavbarItem>
         )}
+
+        <NavbarItem className='hidden lg:flex'>
+          <ThemeSwitch />
+        </NavbarItem>
       </NavbarContent>
-      <NavbarItem className='hidden lg:flex'>
-        <ThemeSwitch />
-      </NavbarItem>
+
+      <NavbarMenuToggle className='lg:hidden' />
     </HeroUINavbar>
   )
 }

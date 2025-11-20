@@ -1,3 +1,4 @@
+import { Button } from '@heroui/button'
 import { Card, CardBody, CardHeader } from '@heroui/card'
 
 import { ArticleCard } from '../card/article'
@@ -10,8 +11,7 @@ const ArticleSection = () => {
     <Card fullWidth>
       <CardHeader className='justify-between'>
         <span className='font-bold'>ข่าวสารน่ารู้</span>
-
-        <span className='cursor-pointer hover:underline'>ดูทั้งหมด</span>
+        <Button variant='light'>ดูทั้งหมด</Button>
       </CardHeader>
 
       <CardBody>

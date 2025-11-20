@@ -16,7 +16,7 @@ const Header: FC<ComponentProps<'div'> & Props> = ({
   return (
     <div className={cn(className)} {...props}>
       <h2 className='text-2xl font-bold'>{title}</h2>
-      <span>{description}</span>
+      <span className='text-default-500'>{description}</span>
     </div>
   )
 }

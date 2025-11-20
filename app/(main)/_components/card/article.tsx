@@ -1,6 +1,13 @@
 'use client'
 
-import { Card, CardBody, CardHeader, Image } from '@heroui/react'
+import {
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Image,
+} from '@heroui/react'
 import Link from 'next/link'
 
 import type { ArticleCard } from '@/types'
@@ -26,13 +33,18 @@ const ArticleCard: FC<ArticleCard> = ({ id, description, name, image }) => {
         </Link>
       </CardHeader>
 
-      <CardBody className='flex-col'>
-        <span className='text-lg font-bold'>{name}</span>
-        <span className='mb-3 text-default-500'>
-          วันที่ {formatDate(new Date())}
-        </span>
-        <span className='text-default-500'>{description}</span>
+      <CardBody className='flex-col gap-2'>
+        <div className='flex flex-col'>
+          <span className='text-lg font-bold'>{name}</span>
+          <span className='leading-5'>(วันที่ {formatDate(new Date())})</span>
+        </div>
+
+        <span className='line-clamp-2 text-default-500'>{description}</span>
       </CardBody>
+
+      <CardFooter>
+        <Button variant='faded'>อ่านต่อ</Button>
+      </CardFooter>
     </Card>
   )
 }

@@ -11,7 +11,7 @@ import { LogOutIcon, Settings, UserIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { signOut, useSession } from 'next-auth/react'
 
-const ControlPanel = () => {
+const Panel = () => {
   const router = useRouter()
   const { data: session } = useSession()
 
@@ -60,4 +60,4 @@ const ControlPanel = () => {
   )
 }
 
-export { ControlPanel }
+export { Panel }

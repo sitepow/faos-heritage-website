@@ -1,5 +1,5 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
+ 
+ 
 
 'use client'
 
@@ -17,8 +17,8 @@ const CategorySection = () => {
   const router = useRouter()
 
   return (
-    <div className='flex h-[500px] w-full gap-5'>
-      <Card className='w-[400px]'>
+    <div className='flex w-full flex-col gap-5 md:flex md:h-[500px] md:flex-row'>
+      <Card className='h-[350px] md:h-[500px] md:w-[400px]'>
         <CardHeader>
           <span className='font-bold'>สินค้าของเรา</span>
         </CardHeader>
@@ -33,19 +33,19 @@ const CategorySection = () => {
         </CardBody>
       </Card>
 
-      <Card fullWidth>
+      <Card className='size-full'>
         <CardHeader>
           <div className='flex w-full items-center justify-between'>
             <span className='font-bold'>เสื้อผ้าแฟชั่น</span>
 
-            <span
-              className='cursor-pointer hover:underline'
-              onClick={() => {
+            <Button
+              variant='light'
+              onPress={() => {
                 router.push(`/category/${createSlug('เสื้อผ้าแฟชั่น', '1')}`)
               }}
             >
               ดูทั้งหมด
-            </span>
+            </Button>
           </div>
         </CardHeader>
         <CardBody>
@@ -55,7 +55,8 @@ const CategorySection = () => {
             ))}
 
             <Button
-              onClick={() => {
+              variant='faded'
+              onPress={() => {
                 router.push(`/category/${createSlug('เสื้อผ้าแฟชั่น', '1')}`)
               }}
             >

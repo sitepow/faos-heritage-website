@@ -7,19 +7,19 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
+  NavbarMenu,
+  NavbarMenuItem,
+  NavbarMenuToggle,
 } from '@heroui/react'
 import { link as linkStyles } from '@heroui/theme'
-import {
-  SearchIcon,
-  ShoppingCartIcon,
-  TriangleIcon,
-  UserIcon,
-} from 'lucide-react'
+import { SearchIcon, UserIcon } from 'lucide-react'
 import { default as Link, default as NextLink } from 'next/link'
 import { useSession } from 'next-auth/react'
 
 import { ThemeSwitch } from '../theme-switch'
-import { ControlPanel } from './control-panel'
+import { Cart } from './etc/cart'
+import { Header } from './etc/header'
+import { Panel } from './etc/panel'
 
 import { siteConfig } from '@/config/site'
 import { cn } from '@/utils/style'
@@ -45,14 +45,10 @@ const MainNavbar = () => {
 
   return (
     <>
-      <div className='items-center bg-primary-website px-6 py-2.5 text-xs text-white sm:text-sm lg:text-base'>
-        เปิดร้านออนไลน์ได้ในไม่กี่นาที ไม่ต้องเขียนโค้ด ปลอดภัยทุกการชำระเงิน
-      </div>
-
+      <Header />
       <HeroUINavbar
         isBordered
         className='shadow-md'
-        isBlurred={false}
         maxWidth='full'
         position='sticky'
       >
@@ -65,13 +61,13 @@ const MainNavbar = () => {
               className='flex items-center justify-start gap-2'
               href='/'
             >
-              <TriangleIcon />
               <div className='flex flex-col gap-0 text-inherit'>
                 <b className='text-xl'>{siteConfig.name}</b>
                 <span className='text-xs'>สำหรับร้านค้าออนไลน์</span>
               </div>
             </NextLink>
           </NavbarBrand>
+
           <ul className='ml-2 hidden justify-start gap-4 lg:flex'>
             {siteConfig?.mainNavItems?.map((item) => (
               <NavbarItem key={item?.href}>
@@ -106,26 +102,35 @@ const MainNavbar = () => {
           )}
           {status === 'authenticated' && (
             <NavbarItem className='hidden lg:flex'>
-              <ControlPanel />
+              <Panel />
             </NavbarItem>
           )}
           <NavbarItem className='hidden lg:flex'>
-            <Link href={siteConfig.link.cart}>
-              <Button
-                endContent={
-                  <div className='flex size-7 items-center justify-center rounded-full bg-red-800 text-xs font-bold text-white'>
-                    <span>99+</span>
-                  </div>
-                }
-                startContent={<ShoppingCartIcon />}
-                variant='light'
-              />
-            </Link>
+            <Cart count={18} />
           </NavbarItem>
           <NavbarItem className='hidden lg:flex'>
             <ThemeSwitch />
           </NavbarItem>
         </NavbarContent>
+
+        <NavbarMenuToggle className='lg:hidden' />
+
+        <NavbarMenu className='pt-18 sm:pt-12'>
+          {siteConfig?.mainNavItems?.map((item) => (
+            <NavbarMenuItem key={item?.href}>
+              <NextLink
+                className={cn(
+                  linkStyles({ color: 'foreground' }),
+                  'data-[active=true]:font-medium data-[active=true]:text-primary',
+                )}
+                color='foreground'
+                href={item?.href}
+              >
+                {item?.label}
+              </NextLink>
+            </NavbarMenuItem>
+          ))}
+        </NavbarMenu>
       </HeroUINavbar>
     </>
   )
