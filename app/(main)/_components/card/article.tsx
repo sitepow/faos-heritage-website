@@ -18,7 +18,11 @@ import { createSlug } from '@/utils/helper'
 
 const ArticleCard: FC<ArticleCard> = ({ id, description, name, image }) => {
   return (
-    <Card fullWidth className='w-full flex-none md:w-[40%]' shadow='none'>
+    <Card
+      fullWidth
+      className='w-full flex-none md:w-[45%] lg:w-[30%]'
+      shadow='none'
+    >
       <CardHeader>
         <Link className='size-full' href={`/article/${createSlug(name, id)}`}>
           <Image

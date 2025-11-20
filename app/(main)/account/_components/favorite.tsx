@@ -20,8 +20,8 @@ const Favorite: FC<ComponentProps<typeof Card>> = ({ className, ...props }) => {
       {...props}
     >
       <CardBody>
-        <div className='flex justify-between gap-4'>
-          <div className='flex max-w-1/2 gap-4'>
+        <div className='flex flex-wrap justify-between gap-4'>
+          <div className='flex flex-wrap gap-4 lg:max-w-1/2 lg:flex-nowrap'>
             <Image
               alt='product-image'
               className='size-32'
@@ -43,7 +43,7 @@ const Favorite: FC<ComponentProps<typeof Card>> = ({ className, ...props }) => {
             </div>
           </div>
 
-          <div className='flex gap-2'>
+          <div className='flex flex-wrap items-center gap-2'>
             <Button variant='faded'>เพิ่มเข้าตระกร้า</Button>
             <Button variant='faded'>ลบจากรายการโปรด</Button>
           </div>

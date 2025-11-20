@@ -9,7 +9,7 @@ const DetailSection = () => {
       <span className='text-xl font-bold'>รายละเอียดสินค้า</span>
       <Card>
         <CardBody>
-          <div className='grid grid-cols-3 gap-4'>
+          <div className='grid gap-4 lg:grid-cols-3'>
             <DetailCard />
             <ReviewCard />
           </div>

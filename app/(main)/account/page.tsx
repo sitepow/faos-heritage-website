@@ -9,7 +9,10 @@ import { FavoriteCard } from './_components/card/favorite'
 import { OrderCard } from './_components/card/order'
 import { ProfileCard } from './_components/card/profile'
 
+import { useIsLg } from '@/hooks/useBreakpoints'
+
 const Account = () => {
+  const isLg = useIsLg()
   const [selectedTabKey, setSelectedTabKey] = useState<string | number>(
     'account',
   )
@@ -22,12 +25,14 @@ const Account = () => {
 
       <div className='w-full'>
         <Tabs
-          isVertical
           aria-label='Options'
           className='h-full rounded-lg light:bg-white'
           classNames={{
-            panel: 'w-full',
+            base: 'w-full flex flex-col lg:flex-row lg:w-fit',
+            tabList: 'flex overflow-x-auto lg:flex-col lg:w-fit gap-1 p-2',
+            panel: `w-full`,
           }}
+          isVertical={isLg ? true : false}
           selectedKey={selectedTabKey}
           variant='bordered'
           onSelectionChange={setSelectedTabKey}

@@ -25,12 +25,12 @@ const Category = () => {
 
       <span className='text-2xl'>เสื้อผ้าแฟชั่น</span>
 
-      <div className='flex w-full justify-between'>
+      <div className='flex w-full flex-wrap items-center justify-between gap-3'>
         <span className='text-primary-website dark:text-white'>
           สินค้ารายการที่ 1 - 9 จาก ทั้งหมด 9 รายการ
         </span>
 
-        <div className='flex gap-2.5'>
+        <div className='flex flex-wrap gap-3'>
           <Switch defaultSelected color='primary'>
             แสดงเฉพาะสินค้าพร้อมส่ง
           </Switch>

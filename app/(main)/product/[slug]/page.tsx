@@ -14,8 +14,8 @@ const Product = () => {
         <BreadcrumbItem>หน้าหลัก</BreadcrumbItem>
         <BreadcrumbItem>เครื่องใช้ไฟฟ้า</BreadcrumbItem>
       </Breadcrumbs>
-      <div className='grid grid-cols-3 gap-4'>
-        <ImageSection />
+      <div className='grid gap-4 lg:grid-cols-3'>
+        <ImageSection className='lg:col-span-2' />
         <CartSection />
       </div>
       <DetailSection />

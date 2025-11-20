@@ -18,7 +18,7 @@ const Stepper: FC<Props> = ({
 }) => {
   return (
     <div className={cn('mx-auto w-full max-w-3xl', className)} {...props}>
-      <div className='flex items-center justify-between'>
+      <div className='flex flex-col items-center justify-between md:flex-row'>
         {steps.map((step, index) => {
           const isCompleted = index < currentStep
           const isCurrent = index === currentStep
@@ -51,12 +51,24 @@ const Stepper: FC<Props> = ({
               </div>
 
               {index < steps.length - 1 && (
-                <div className='relative mx-4 h-1 max-w-[150px] flex-1'>
+                <div className='relative mx-4 hidden h-1 max-w-[150px] flex-1 md:block'>
                   <div className='absolute inset-0 rounded bg-divider' />
                   <div
                     className={cn(
                       'absolute inset-0 rounded bg-teal-600 transition-all duration-500',
                       index < currentStep ? 'w-full' : 'w-0',
+                    )}
+                  />
+                </div>
+              )}
+
+              {index < steps.length - 1 && (
+                <div className='relative my-4 block h-8 w-1 md:hidden'>
+                  <div className='absolute inset-0 rounded bg-divider' />
+                  <div
+                    className={cn(
+                      'absolute inset-0 rounded bg-teal-600 transition-all duration-500',
+                      index < currentStep ? 'h-full' : 'h-0',
                     )}
                   />
                 </div>

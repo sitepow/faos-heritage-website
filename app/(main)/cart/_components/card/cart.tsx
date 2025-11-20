@@ -22,42 +22,42 @@ const CartCard: FC<ComponentProps<typeof Card>> = ({ className, ...props }) => {
       {...props}
     >
       <CardBody>
-        <div className='flex justify-around gap-4'>
-          <Image
-            alt='product-image'
-            height={120}
-            src='/placeholder.svg'
-            width={120}
-          />
+        <div className='flex flex-wrap items-center justify-start gap-4 lg:flex-nowrap lg:justify-around'>
+          <div className='flex flex-wrap gap-5 sm:flex-nowrap'>
+            <Image
+              alt='product-image'
+              className='shrink-0 object-cover'
+              height={150}
+              src='/placeholder.svg'
+              width={150}
+            />
 
-          <div className='flex flex-col justify-between'>
-            <div className='flex flex-col'>
-              <span className='line-clamp-2'>
-                หน้าต่างบานเลื่อนอะลูมิเนียม 2 บาน พร้อมมุ้งลวด SS WINKING ขนาด
-                120 x 110 ซม. สีเทา
-              </span>
+            <div className='flex flex-col justify-between gap-3'>
+              <div className='flex flex-col'>
+                <span className='line-clamp-1'>
+                  หน้าต่างบานเลื่อนอะลูมิเนียม 2 บาน พร้อมมุ้งลวด SS WINKING
+                  ขนาด 120 x 110 ซม. สีเทา
+                </span>
 
-              <div className='line-clamp-2 flex gap-2 text-default-500'>
-                <span>รหัสสินค้า: 60429009</span>
-                <span>ราคา: {formatCurrency(4399)}/ชิ้น</span>
+                <div className='flex flex-col text-default-500 sm:flex-row sm:gap-2'>
+                  <span>รหัสสินค้า: 60429009</span>
+                  <span>ราคา: {formatCurrency(4399)}/ชิ้น</span>
+                </div>
               </div>
-            </div>
 
-            <div className='flex justify-between'>
-              <div className='flex items-center gap-4'>
-                <span>จำนวน</span>
+              <div className='flex flex-wrap items-center gap-3'>
                 <Quantity />
+                <span className='text-lg font-bold text-primary-website sm:text-2xl dark:text-white'>
+                  {formatCurrency(52320)}
+                </span>
               </div>
-
-              <span className='text-2xl font-bold text-primary-website dark:text-white'>
-                {formatCurrency(13900)}
-              </span>
             </div>
           </div>
 
           <Button
+            className='w-full lg:w-fit'
             startContent={<TrashIcon className='text-default-500' />}
-            variant='light'
+            variant='faded'
           />
         </div>
       </CardBody>

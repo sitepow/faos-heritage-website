@@ -27,7 +27,7 @@ import { VariantManager } from './_components/manager/varient'
 import { TrendCard } from '@/app/(dashboard)/_components/chart/trend-card'
 import { formatCurrency, formatNumber } from '@/utils/number'
 
-const mockDashboardData: ComponentProps<typeof TrendCard>[] = [
+const MOCKUP_DASHBOARD_CONST: ComponentProps<typeof TrendCard>[] = [
   {
     title: 'สินค้าทั้งหมด',
     value: 156,
@@ -42,7 +42,7 @@ const mockDashboardData: ComponentProps<typeof TrendCard>[] = [
   },
 ]
 
-const mockProductData = [
+const MOCKUP_PRODUCT_CONST = [
   {
     id: 'PRD001',
     name: 'สินค้า A',
@@ -93,11 +93,11 @@ const Product = () => {
         onOpenChange={onOpenProductVarientFormChange}
       />
       <div className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-        {mockDashboardData.map((data) => (
+        {MOCKUP_DASHBOARD_CONST.map((data) => (
           <TrendCard key={data.title} {...data} />
         ))}
       </div>
-      <div className='flex w-full justify-end gap-4'>
+      <div className='flex w-full flex-wrap gap-3 *:shrink-0 md:justify-end'>
         <Button
           onPress={() => {
             onProductFormOpen()
@@ -118,7 +118,7 @@ const Product = () => {
           <TableColumn>จัดการ</TableColumn>
         </TableHeader>
         <TableBody>
-          {mockProductData.map((product) => (
+          {MOCKUP_PRODUCT_CONST.map((product) => (
             <TableRow key={product.id}>
               <TableCell>{product.id}</TableCell>
               <TableCell>{product.name}</TableCell>

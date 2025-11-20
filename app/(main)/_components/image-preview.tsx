@@ -18,8 +18,8 @@ export const ProductImagePreview = ({
   const [selectedIndex, setSelectedIndex] = useState(0)
 
   return (
-    <div className='flex w-[345px] flex-col gap-2'>
-      <div className='relative size-[345px] overflow-hidden rounded-lg'>
+    <div className='flex flex-col gap-2 md:w-[345px]'>
+      <div className='relative h-[345px] overflow-hidden rounded-lg md:w-[345px]'>
         <Image
           fill
           priority

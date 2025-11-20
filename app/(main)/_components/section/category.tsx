@@ -1,6 +1,3 @@
- 
- 
-
 'use client'
 
 import { Button, Card, CardBody, CardHeader, ScrollShadow } from '@heroui/react'
@@ -20,7 +17,7 @@ const CategorySection = () => {
     <div className='flex w-full flex-col gap-5 md:flex md:h-[500px] md:flex-row'>
       <Card className='h-[350px] md:h-[500px] md:w-[400px]'>
         <CardHeader>
-          <span className='font-bold'>สินค้าของเรา</span>
+          <span className='font-bold'>สินค้าตามหมวดหมู่</span>
         </CardHeader>
         <CardBody>
           <ScrollShadow className='p-1'>
@@ -36,7 +33,7 @@ const CategorySection = () => {
       <Card className='size-full'>
         <CardHeader>
           <div className='flex w-full items-center justify-between'>
-            <span className='font-bold'>เสื้อผ้าแฟชั่น</span>
+            <span className='font-bold'>หมวดหมู่เสื้อผ้าแฟชั่น</span>
 
             <Button
               variant='light'

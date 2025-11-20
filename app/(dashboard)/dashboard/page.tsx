@@ -10,7 +10,7 @@ import { ProductItem } from '../_components/product-item'
 
 import { TrendCard } from '@/app/(dashboard)/_components/chart/trend-card'
 
-const mockDashboardData: ComponentProps<typeof TrendCard>[] = [
+const MOCKUP_DASHBOARD_CONST: ComponentProps<typeof TrendCard>[] = [
   {
     title: 'รายได้รวม',
     value: 520234,
@@ -44,52 +44,44 @@ const DashboardHome = () => {
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
       <div className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-        {mockDashboardData.map((data) => (
+        {MOCKUP_DASHBOARD_CONST.map((data) => (
           <TrendCard key={data.title} {...data} />
         ))}
       </div>
 
-      <div className='grid w-full grid-cols-2 gap-5'>
+      <div className='grid w-full gap-5 lg:grid-cols-2'>
         <Card>
-          <CardHeader className='justify-between'>
-            <span className='font-bold'>ออเดอร์ใหม่ (5 รายการล่าสุด)</span>
-            <span className='text-default-500'>ดูเพิ่มเติม</span>
+          <CardHeader>
+            <b>ออเดอร์ใหม่</b>
           </CardHeader>
           <CardBody>
-            <OrderItem />
             <OrderItem />
           </CardBody>
         </Card>
 
         <Card>
-          <CardHeader className='justify-between'>
-            <span className='font-bold'>ลูกค้าใหม่ (5 รายการล่าสุด)</span>
-            <span className='text-default-500'>ดูเพิ่มเติม</span>
+          <CardHeader>
+            <b>ลูกค้าใหม่</b>
           </CardHeader>
           <CardBody>
-            <CustomerItem />
             <CustomerItem />
           </CardBody>
         </Card>
 
         <Card>
-          <CardHeader className='justify-between'>
-            <span className='font-bold'>สินค้าขายดี (5 รายการล่าสุด)</span>
-            <span className='text-default-500'>ดูเพิ่มเติม</span>
+          <CardHeader>
+            <b>สินค้าขายดี</b>
           </CardHeader>
           <CardBody>
-            <ProductItem />
             <ProductItem />
           </CardBody>
         </Card>
 
         <Card>
-          <CardHeader className='justify-between'>
-            <span className='font-bold'>สต็อกกำลังหมด (5 รายการล่าสุด)</span>
-            <span className='text-default-500'>ดูเพิ่มเติม</span>
+          <CardHeader>
+            <b>สต็อกกำลังหมด</b>
           </CardHeader>
           <CardBody>
-            <ProductItem />
             <ProductItem />
           </CardBody>
         </Card>

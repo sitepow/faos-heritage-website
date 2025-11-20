@@ -44,7 +44,7 @@ const Panel = () => {
             router.push('/dashboard')
           }}
         >
-          จัดการข้อมูลหลังร้าน (เฉพาะเจ้าหน้าที่)
+          จัดการข้อมูลหลังร้าน
         </DropdownItem>
         <DropdownItem
           key='logout'

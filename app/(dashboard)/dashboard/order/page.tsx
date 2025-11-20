@@ -2,6 +2,12 @@
 
 import { Button } from '@heroui/button'
 import {
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from '@heroui/dropdown'
+import {
   Table,
   TableBody,
   TableCell,
@@ -9,14 +15,14 @@ import {
   TableHeader,
   TableRow,
 } from '@heroui/table'
-import { Edit, Trash } from 'lucide-react'
+import { Edit, EllipsisVertical } from 'lucide-react'
 
 import type { ComponentProps } from 'react'
 
 import { TrendCard } from '@/app/(dashboard)/_components/chart/trend-card'
 import { formatCurrency } from '@/utils/number'
 
-const mockDashboardData: ComponentProps<typeof TrendCard>[] = [
+const MOCKUP_DASHBOARD_CONST: ComponentProps<typeof TrendCard>[] = [
   {
     title: 'คำสั่งซื้อทั้งหมด',
     value: 328,
@@ -31,7 +37,7 @@ const mockDashboardData: ComponentProps<typeof TrendCard>[] = [
   },
 ]
 
-const mockOrderData = [
+const MOCKUP_ORDER_CONST = [
   {
     id: 'ORD001',
     customer: 'บริษัท ABC จำกัด',
@@ -52,12 +58,12 @@ const Order = () => {
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
       <div className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-        {mockDashboardData.map((data) => (
+        {MOCKUP_DASHBOARD_CONST.map((data) => (
           <TrendCard key={data.title} {...data} />
         ))}
       </div>
 
-      <div className='flex w-full justify-end gap-4'>
+      <div className='flex w-full flex-wrap gap-3 *:shrink-0 md:justify-end'>
         <Button>สร้างคำสั่งซื้อใหม่</Button>
         <Button>ส่งออกไฟล์ XLSX</Button>
         <Button>ลบรายการที่เลือก</Button>
@@ -73,7 +79,7 @@ const Order = () => {
           <TableColumn>จัดการ</TableColumn>
         </TableHeader>
         <TableBody>
-          {mockOrderData.map((order) => (
+          {MOCKUP_ORDER_CONST.map((order) => (
             <TableRow key={order.id}>
               <TableCell>{order.id}</TableCell>
               <TableCell>{order.customer}</TableCell>
@@ -81,8 +87,24 @@ const Order = () => {
               <TableCell>{formatCurrency(order.total)}</TableCell>
               <TableCell>{order.status}</TableCell>
               <TableCell className='flex gap-2.5'>
-                <Edit className='cursor-pointer text-default-500' />
-                <Trash className='cursor-pointer text-default-500' />
+                <Dropdown placement='bottom-end'>
+                  <DropdownTrigger>
+                    <Button isIconOnly size='sm' variant='light'>
+                      <EllipsisVertical className='size-5 text-default-500' />
+                    </Button>
+                  </DropdownTrigger>
+                  <DropdownMenu
+                    aria-label='จัดการออเดอร์'
+                    className='min-w-[180px]'
+                  >
+                    <DropdownItem
+                      key='edit'
+                      startContent={<Edit className='size-4' />}
+                    >
+                      แก้ไขข้อมูล
+                    </DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
               </TableCell>
             </TableRow>
           ))}

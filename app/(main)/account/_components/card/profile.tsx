@@ -15,7 +15,7 @@ const ProfileCard = () => {
         <span>แก้ไขข้อมูลส่วนตัว</span>
       </CardHeader>
       <CardBody>
-        <div className='grid grid-cols-2 gap-5'>
+        <div className='grid gap-5 lg:grid-cols-2'>
           <Input label='ชื่อ' size='sm' />
           <Input label='อีเมล' size='sm' />
           <Input label='หมายเลขโทรศัพท์มือถือ' size='sm' />

@@ -1,13 +1,19 @@
 import { Card, CardBody } from '@heroui/card'
 
+import type { ComponentProps, FC } from 'react'
+
 import { ProductImagePreview } from '@/app/(main)/_components/image-preview'
 import { Share } from '@/components/share'
+import { cn } from '@/utils/style'
 
-const ImageSection = () => {
+const ImageSection: FC<ComponentProps<typeof Card>> = ({
+  className,
+  ...props
+}) => {
   return (
-    <Card className='col-span-2'>
+    <Card className={cn(className)} {...props}>
       <CardBody>
-        <div className='flex gap-5'>
+        <div className='flex flex-col gap-5 md:flex-row'>
           <ProductImagePreview
             images={[
               '/placeholder.svg',
@@ -19,6 +25,7 @@ const ImageSection = () => {
               '/placeholder.svg',
             ]}
           />
+
           <div className='flex flex-col gap-4'>
             <span className='text-xl font-bold'>
               แอร์เคลื่อนที่ 18,000 BTU TCL รุ่น TAC-18CPA/NZ สีขาว

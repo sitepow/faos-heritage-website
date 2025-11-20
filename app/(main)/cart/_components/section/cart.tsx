@@ -17,6 +17,9 @@ const CartSection: FC<ComponentProps<typeof Card>> = ({
       </CardHeader>
       <CardBody>
         <CartCard />
+        <CartCard />
+        <CartCard />
+        <CartCard />
       </CardBody>
     </Card>
   )
