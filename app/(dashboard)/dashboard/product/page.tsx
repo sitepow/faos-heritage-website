@@ -20,50 +20,42 @@ import { Edit, EllipsisVertical, ImageIcon, Layout, Trash } from 'lucide-react'
 
 import type { ComponentProps } from 'react'
 
-import { ProductImageManager } from '../components/ProductImageManager'
-import { ProductVariantManager } from '../components/ProductVariantManager'
-import { ProductForm } from '../components/form/product'
+import { ProductForm } from './_components/form/product'
+import { ImageManager } from './_components/manager/image'
+import { VariantManager } from './_components/manager/varient'
 
 import { TrendCard } from '@/app/(dashboard)/_components/chart/trend-card'
+import { formatCurrency, formatNumber } from '@/utils/number'
 
-const mockDashboardData: ComponentProps<typeof TrendCard>[] = [
+const MOCKUP_DASHBOARD_CONST: ComponentProps<typeof TrendCard>[] = [
   {
     title: 'สินค้าทั้งหมด',
-    value: '156',
-    change: '+8.3%',
-    changeType: 'positive',
-    trendType: 'up',
+    value: 156,
   },
   {
     title: 'พร้อมขาย (ยังมีสินค้า)',
-    value: '150',
-    change: '+8.3%',
-    changeType: 'positive',
-    trendType: 'up',
+    value: 150,
   },
   {
     title: 'ไม่พร้อมขาย (สินค้าหมด)',
-    value: '6',
-    change: '+8.3%',
-    changeType: 'positive',
-    trendType: 'up',
+    value: 6,
   },
 ]
 
-const mockProductData = [
+const MOCKUP_PRODUCT_CONST = [
   {
     id: 'PRD001',
     name: 'สินค้า A',
     category: 'อิเล็กทรอนิกส์',
-    price: '15,000',
-    stock: '45',
+    price: 50202,
+    stock: 23,
   },
   {
     id: 'PRD002',
     name: 'สินค้า B',
     category: 'เครื่องใช้ไฟฟ้า',
-    price: '8,500',
-    stock: '23',
+    price: 5211,
+    stock: 53,
   },
 ]
 
@@ -92,20 +84,20 @@ const Product = () => {
         isOpen={isProductFormOpen}
         onOpenChange={onOpenProductFormChange}
       />
-      <ProductImageManager
+      <ImageManager
         isOpen={isProductImageFormOpen}
         onOpenChange={onOpenProductImageFormChange}
       />
-      <ProductVariantManager
+      <VariantManager
         isOpen={isProductVarientFormOpen}
         onOpenChange={onOpenProductVarientFormChange}
       />
       <div className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-        {mockDashboardData.map((data) => (
+        {MOCKUP_DASHBOARD_CONST.map((data) => (
           <TrendCard key={data.title} {...data} />
         ))}
       </div>
-      <div className='flex w-full justify-end gap-4'>
+      <div className='flex w-full flex-wrap gap-3 *:shrink-0 md:justify-end'>
         <Button
           onPress={() => {
             onProductFormOpen()
@@ -126,13 +118,13 @@ const Product = () => {
           <TableColumn>จัดการ</TableColumn>
         </TableHeader>
         <TableBody>
-          {mockProductData.map((product) => (
+          {MOCKUP_PRODUCT_CONST.map((product) => (
             <TableRow key={product.id}>
               <TableCell>{product.id}</TableCell>
               <TableCell>{product.name}</TableCell>
               <TableCell>{product.category}</TableCell>
-              <TableCell>{product.price}</TableCell>
-              <TableCell>{product.stock}</TableCell>
+              <TableCell>{formatCurrency(product.price)}</TableCell>
+              <TableCell>{formatNumber(product.stock)}</TableCell>
               <TableCell className='flex gap-2.5'>
                 <Dropdown placement='bottom-end'>
                   <DropdownTrigger>

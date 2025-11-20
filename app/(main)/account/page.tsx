@@ -3,13 +3,16 @@
 import { Tab, Tabs } from '@heroui/react'
 import { useState } from 'react'
 
-import { AccountTab } from '../_components/account/account-tab'
-import { AddressTab } from '../_components/account/address-tab'
-import { FavoriteTab } from '../_components/account/favorite-tab'
-import { OrderTab } from '../_components/account/order-tab'
-import { ProfileTab } from '../_components/account/profile-tab'
+import { AccountCard } from './_components/card/account'
+import { AddressCard } from './_components/card/address'
+import { FavoriteCard } from './_components/card/favorite'
+import { OrderCard } from './_components/card/order'
+import { ProfileCard } from './_components/card/profile'
+
+import { useIsLg } from '@/hooks/useBreakpoints'
 
 const Account = () => {
+  const isLg = useIsLg()
   const [selectedTabKey, setSelectedTabKey] = useState<string | number>(
     'account',
   )
@@ -22,30 +25,32 @@ const Account = () => {
 
       <div className='w-full'>
         <Tabs
-          isVertical
           aria-label='Options'
           className='h-full rounded-lg light:bg-white'
           classNames={{
-            panel: 'w-full',
+            base: 'w-full flex flex-col lg:flex-row lg:w-fit',
+            tabList: 'flex overflow-x-auto lg:flex-col lg:w-fit gap-1 p-2',
+            panel: `w-full`,
           }}
+          isVertical={isLg ? true : false}
           selectedKey={selectedTabKey}
           variant='bordered'
           onSelectionChange={setSelectedTabKey}
         >
           <Tab key='account' title='จัดการกับบัญชีของฉัน'>
-            <AccountTab onclick={() => setSelectedTabKey('profile')} />
+            <AccountCard onclick={() => setSelectedTabKey('profile')} />
           </Tab>
           <Tab key='order' title='รายการคำสั่งซื้อของฉัน'>
-            <OrderTab />
+            <OrderCard />
           </Tab>
           <Tab key='favorite' title='รายการโปรด'>
-            <FavoriteTab />
+            <FavoriteCard />
           </Tab>
           <Tab key='profile' title='แก้ไขข้อมูลส่วนตัว'>
-            <ProfileTab />
+            <ProfileCard />
           </Tab>
           <Tab key='address' title='จัดการที่อยู่ของฉัน'>
-            <AddressTab />
+            <AddressCard />
           </Tab>
         </Tabs>
       </div>

@@ -1,3 +1,7 @@
 @import 'tailwindcss';
 
 @config '../tailwind.config.js';
+
+@theme {
+  --color-primary-website: #1d3557;
+}

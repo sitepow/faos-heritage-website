@@ -2,10 +2,10 @@
 
 import { BreadcrumbItem, Breadcrumbs } from '@heroui/react'
 
-import { ProductAddToCartSection } from './_components/product-add-to-cart-section'
-import { ProductDetailSection } from './_components/product-detail-section'
-import { ProductImageDetailSection } from './_components/product-image-detail-section'
-import { ProductSimilarSection } from './_components/product-similar-section'
+import { CartSection } from './_components/section/cart'
+import { DetailSection } from './_components/section/detail'
+import { ImageSection } from './_components/section/image'
+import { SimilarSection } from './_components/section/similar'
 
 const Product = () => {
   return (
@@ -14,12 +14,12 @@ const Product = () => {
         <BreadcrumbItem>หน้าหลัก</BreadcrumbItem>
         <BreadcrumbItem>เครื่องใช้ไฟฟ้า</BreadcrumbItem>
       </Breadcrumbs>
-      <div className='grid grid-cols-3 gap-4'>
-        <ProductImageDetailSection />
-        <ProductAddToCartSection />
+      <div className='grid gap-4 lg:grid-cols-3'>
+        <ImageSection className='lg:col-span-2' />
+        <CartSection />
       </div>
-      <ProductDetailSection />
-      <ProductSimilarSection />
+      <DetailSection />
+      <SimilarSection />
     </section>
   )
 }

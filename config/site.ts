@@ -1,9 +1,9 @@
 export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
-  name: 'DemoStore - ร้านค้าออนไลน์',
+  name: 'ZentraCore',
+  title: 'สร้างร้านค้าออนไลน์ของคุณ',
   description: '',
-  footer: 'Copyright 2025 DemoStore. ร้านค้าออนไลน์',
   link: {
     login: '/login',
     cart: '/cart',
@@ -45,7 +45,7 @@ export const siteConfig = {
     },
     {
       label: 'จัดการข้อมูลข่าวสาร',
-      href: '/dashboard/news',
+      href: '/dashboard/article',
     },
   ],
 }

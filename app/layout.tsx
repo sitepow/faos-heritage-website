@@ -1,5 +1,4 @@
 import '@/styles/globals.css'
-import clsx from 'clsx'
 
 import type { Metadata, Viewport } from 'next'
 import type { FC, PropsWithChildren } from 'react'
@@ -9,11 +8,12 @@ import { HeroUIProviders } from '../providers/heroui'
 import { fontSukhumvit } from '@/config/fonts'
 import { siteConfig } from '@/config/site'
 import { NextAuthProviders } from '@/providers/nextauth'
+import { cn } from '@/utils/style'
 
 export const metadata: Metadata = {
   title: {
-    default: siteConfig.name,
-    template: `%s - ${siteConfig.name}`,
+    default: `${siteConfig.name} - ${siteConfig.title}`,
+    template: `%s - ${siteConfig.name} - ${siteConfig.title}`,
   },
   description: siteConfig.description,
   icons: {
@@ -33,7 +33,7 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
     <html suppressHydrationWarning lang='en'>
       <head />
       <body
-        className={clsx(
+        className={cn(
           'min-h-screen bg-background font-sans text-foreground antialiased',
           fontSukhumvit.variable,
         )}
