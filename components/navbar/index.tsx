@@ -38,12 +38,9 @@ const MainNavbar = () => {
         position='sticky'
       >
         <NavbarContent className='basis-1/5 sm:basis-full' justify='start'>
-          <NavbarBrand
-            as='li'
-            className='max-w-fit gap-3 text-primary-website dark:text-white'
-          >
+          <NavbarBrand as='li' className='max-w-fit gap-3 dark:text-white'>
             <Link className='flex items-center justify-start gap-2' href='/'>
-              <div className='flex flex-col gap-0 text-inherit'>
+              <div className='flex flex-col gap-0 text-primary-website'>
                 <b className='text-xl'>{siteConfig.name}</b>
                 <span className='text-xs'>สำหรับร้านค้าออนไลน์</span>
               </div>

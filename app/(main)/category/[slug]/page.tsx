@@ -26,7 +26,7 @@ const Category = () => {
       <span className='text-2xl'>เสื้อผ้าแฟชั่น</span>
 
       <div className='flex w-full flex-wrap items-center justify-between gap-3'>
-        <span className='text-primary-website dark:text-white'>
+        <span className='text-primary-website'>
           สินค้ารายการที่ 1 - 9 จาก ทั้งหมด 9 รายการ
         </span>
 

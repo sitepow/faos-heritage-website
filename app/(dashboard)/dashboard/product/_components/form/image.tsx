@@ -71,10 +71,10 @@ const ImageForm: FC<Props> = ({ isOpen, onOpenChange }) => {
               </div>
             </ModalBody>
             <ModalFooter>
-              <Button color='danger' variant='light' onPress={onClose}>
+              <Button variant='faded' onPress={onClose}>
                 ยกเลิก
               </Button>
-              <Button color='primary' type='submit'>
+              <Button type='submit' variant='faded'>
                 บันทึกรูปภาพ
               </Button>
             </ModalFooter>

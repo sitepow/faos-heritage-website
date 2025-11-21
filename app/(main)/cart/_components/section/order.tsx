@@ -35,7 +35,7 @@ const OrderSection: FC<ComponentProps<typeof Card>> = ({
 
         <div className='flex items-center justify-between'>
           <span className='font-bold'>ราคารวมสุทธิ :</span>
-          <span className='text-2xl font-bold text-primary-website dark:text-white'>
+          <span className='text-2xl font-bold text-primary-website'>
             {formatCurrency(3990)}
           </span>
         </div>

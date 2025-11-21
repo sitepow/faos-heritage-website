@@ -37,7 +37,7 @@ export const ProductImagePreview = ({
               className={cn(
                 'relative size-12 shrink-0 cursor-pointer rounded-md border',
                 index === selectedIndex
-                  ? 'border-bg-primary-website dark:border-divide'
+                  ? 'border-primary-website'
                   : 'border-gray-200',
               )}
               onClick={() => setSelectedIndex(index)}

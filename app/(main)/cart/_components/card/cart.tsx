@@ -47,7 +47,7 @@ const CartCard: FC<ComponentProps<typeof Card>> = ({ className, ...props }) => {
 
               <div className='flex flex-wrap items-center gap-3'>
                 <Quantity />
-                <span className='text-lg font-bold text-primary-website sm:text-2xl dark:text-white'>
+                <span className='text-lg font-bold text-primary-website sm:text-2xl'>
                   {formatCurrency(52320)}
                 </span>
               </div>

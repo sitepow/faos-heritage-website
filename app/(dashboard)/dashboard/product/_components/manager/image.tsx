@@ -9,6 +9,7 @@ import {
   ModalHeader,
   useDisclosure,
 } from '@heroui/react'
+import { PlusIcon } from 'lucide-react'
 import { useState } from 'react'
 
 import type { ProductImage } from '@prisma/client'
@@ -42,7 +43,13 @@ const ImageManager = ({ isOpen, onOpenChange }: Props) => {
             <>
               <ModalHeader className='flex items-center justify-between'>
                 จัดการรูปภาพสินค้า
-                <Button onPress={onOpen}>เพิ่มรูปภาพ</Button>
+                <Button
+                  startContent={<PlusIcon />}
+                  variant='faded'
+                  onPress={onOpen}
+                >
+                  เพิ่มรูปภาพ
+                </Button>
               </ModalHeader>
               <ModalBody>
                 {images.length === 0 ? (

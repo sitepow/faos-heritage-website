@@ -102,10 +102,10 @@ const VariantForm: FC<Props> = ({ isOpen, onOpenChange }) => {
               <Switch {...register('isActive')}>เปิดใช้งานตัวเลือกนี้</Switch>
             </ModalBody>
             <ModalFooter>
-              <Button color='danger' variant='light' onPress={onClose}>
+              <Button variant='faded' onPress={onClose}>
                 ยกเลิก
               </Button>
-              <Button color='primary' type='submit'>
+              <Button type='submit' variant='faded'>
                 บันทึกตัวเลือก
               </Button>
             </ModalFooter>
