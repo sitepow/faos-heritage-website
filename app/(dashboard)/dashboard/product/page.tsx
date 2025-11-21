@@ -16,7 +16,16 @@ import {
   TableHeader,
   TableRow,
 } from '@heroui/table'
-import { Edit, EllipsisVertical, ImageIcon, Layout, Trash } from 'lucide-react'
+import {
+  ArrowUp,
+  Edit,
+  EllipsisVertical,
+  ImageIcon,
+  Layout,
+  PlusIcon,
+  Trash,
+  XIcon,
+} from 'lucide-react'
 
 import type { ComponentProps } from 'react'
 
@@ -61,36 +70,30 @@ const MOCKUP_PRODUCT_CONST = [
 
 const Product = () => {
   const {
-    isOpen: isProductFormOpen,
-    onOpen: onProductFormOpen,
-    onOpenChange: onOpenProductFormChange,
+    isOpen: isProductOpen,
+    onOpen: onProductOpen,
+    onOpenChange: onOpenProductChange,
   } = useDisclosure()
 
   const {
-    isOpen: isProductImageFormOpen,
-    onOpen: onProductImageFormOpen,
-    onOpenChange: onOpenProductImageFormChange,
+    isOpen: isImageOpen,
+    onOpen: onImageOpen,
+    onOpenChange: onOpenImageChange,
   } = useDisclosure()
 
   const {
-    isOpen: isProductVarientFormOpen,
-    onOpen: onProductVarientFormOpen,
-    onOpenChange: onOpenProductVarientFormChange,
+    isOpen: isVarientOpen,
+    onOpen: onVarientOpen,
+    onOpenChange: onOpenVarientChange,
   } = useDisclosure()
 
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
-      <ProductForm
-        isOpen={isProductFormOpen}
-        onOpenChange={onOpenProductFormChange}
-      />
-      <ImageManager
-        isOpen={isProductImageFormOpen}
-        onOpenChange={onOpenProductImageFormChange}
-      />
+      <ProductForm isOpen={isProductOpen} onOpenChange={onOpenProductChange} />
+      <ImageManager isOpen={isImageOpen} onOpenChange={onOpenImageChange} />
       <VariantManager
-        isOpen={isProductVarientFormOpen}
-        onOpenChange={onOpenProductVarientFormChange}
+        isOpen={isVarientOpen}
+        onOpenChange={onOpenVarientChange}
       />
       <div className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
         {MOCKUP_DASHBOARD_CONST.map((data) => (
@@ -99,14 +102,20 @@ const Product = () => {
       </div>
       <div className='flex w-full flex-wrap gap-3 *:shrink-0 md:justify-end'>
         <Button
+          startContent={<PlusIcon />}
+          variant='faded'
           onPress={() => {
-            onProductFormOpen()
+            onProductOpen()
           }}
         >
           เพิ่มสินค้าใหม่
         </Button>
-        <Button>ส่งออกไฟล์ XLSX</Button>
-        <Button>ลบรายการที่เลือก</Button>
+        <Button startContent={<ArrowUp />} variant='faded'>
+          ส่งออกไฟล์ XLSX
+        </Button>
+        <Button startContent={<XIcon />} variant='faded'>
+          ลบรายการที่เลือก
+        </Button>
       </div>
       <Table aria-label='ตารางข้อมูลสินค้า' selectionMode='multiple'>
         <TableHeader>
@@ -139,21 +148,21 @@ const Product = () => {
                     <DropdownItem
                       key='edit'
                       startContent={<Edit className='size-4' />}
-                      onClick={() => onProductFormOpen()}
+                      onClick={() => onProductOpen()}
                     >
                       แก้ไขข้อมูล
                     </DropdownItem>
                     <DropdownItem
                       key='image'
                       startContent={<ImageIcon className='size-4' />}
-                      onClick={() => onProductImageFormOpen()}
+                      onClick={() => onImageOpen()}
                     >
                       จัดการรูปภาพ
                     </DropdownItem>
                     <DropdownItem
                       key='variant'
                       startContent={<Layout className='size-4' />}
-                      onClick={() => onProductVarientFormOpen()}
+                      onClick={() => onVarientOpen()}
                     >
                       จัดการตัวเลือก
                     </DropdownItem>
@@ -161,7 +170,7 @@ const Product = () => {
                       key='delete'
                       className='text-danger'
                       color='danger'
-                      startContent={<Trash className='size-4 text-danger' />}
+                      startContent={<Trash className='size-4' />}
                     >
                       ลบสินค้า
                     </DropdownItem>

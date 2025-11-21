@@ -20,7 +20,7 @@ const Price: FC<Props & ComponentProps<'div'>> = ({
       {...props}
     >
       <div className=''>
-        <span className='text-2xl font-bold text-primary-website dark:text-white'>
+        <span className='text-2xl font-bold text-primary-website'>
           {formatCurrency(price)}
         </span>
         <span className='text-xs'> /{unit}</span>

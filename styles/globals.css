@@ -3,5 +3,9 @@
 @config '../tailwind.config.js';
 
 @theme {
-  --color-primary-website: #1d3557;
+  --color-primary-website: #8b0000;
+}
+
+.Toastify__toast {
+  font-family: var(--font-sukhumvit), sans-serif !important;
 }

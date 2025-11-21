@@ -8,6 +8,7 @@ import { HeroUIProviders } from '../providers/heroui'
 import { fontSukhumvit } from '@/config/fonts'
 import { siteConfig } from '@/config/site'
 import { NextAuthProviders } from '@/providers/nextauth'
+import QueryProviders from '@/providers/query'
 import { cn } from '@/utils/style'
 
 export const metadata: Metadata = {
@@ -38,13 +39,15 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
           fontSukhumvit.variable,
         )}
       >
-        <NextAuthProviders>
-          <HeroUIProviders
-            themeProps={{ attribute: 'class', defaultTheme: 'dark' }}
-          >
-            {children}
-          </HeroUIProviders>
-        </NextAuthProviders>
+        <QueryProviders>
+          <NextAuthProviders>
+            <HeroUIProviders
+              themeProps={{ attribute: 'class', defaultTheme: 'dark' }}
+            >
+              {children}
+            </HeroUIProviders>
+          </NextAuthProviders>
+        </QueryProviders>
       </body>
     </html>
   )

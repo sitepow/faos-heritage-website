@@ -23,4 +23,18 @@ const getIdFromSlug = (slug: string): string => {
   return /^\d+$/.test(id) ? id : ''
 }
 
-export { createSlug, getFooter, getIdFromSlug }
+const removeEmptyField = <T extends Record<string, unknown>>(
+  obj: T,
+): Partial<T> => {
+  if (!obj || typeof obj !== 'object' || Array.isArray(obj)) {
+    return {} as Partial<T>
+  }
+
+  const cleanedEntries = Object.entries(obj).filter(([_, value]) => {
+    return value != null && value !== ''
+  })
+
+  return Object.fromEntries(cleanedEntries) as Partial<T>
+}
+
+export { createSlug, getFooter, getIdFromSlug, removeEmptyField }

@@ -10,7 +10,7 @@ import {
   ModalHeader,
   useDisclosure,
 } from '@heroui/react'
-import { TrashIcon } from 'lucide-react'
+import { PlusIcon, TrashIcon } from 'lucide-react'
 import { useState } from 'react'
 
 import type { ProductVariant } from '@prisma/client'
@@ -46,7 +46,13 @@ const VariantManager = ({ isOpen, onOpenChange }: Props) => {
             <>
               <ModalHeader className='flex items-center justify-between'>
                 จัดการตัวเลือกสินค้า
-                <Button onPress={onOpen}>เพิ่มตัวเลือก</Button>
+                <Button
+                  startContent={<PlusIcon />}
+                  variant='faded'
+                  onPress={onOpen}
+                >
+                  เพิ่มตัวเลือก
+                </Button>
               </ModalHeader>
               <ModalBody>
                 {variants.length === 0 ? (
