@@ -134,14 +134,16 @@ const Navbar = () => {
 
           {!isAuthenticated && (
             <NavbarItem>
-              <Button
-                as={Link}
-                href={siteConfig.link.login}
-                startContent={<UserIcon />}
-                variant='light'
-              >
-                เข้าสู่ระบบ/สมัครสมาชิก
-              </Button>
+              <div className='border-y border-divider py-2.5'>
+                <Button
+                  as={Link}
+                  href={siteConfig.link.login}
+                  startContent={<UserIcon />}
+                  variant='light'
+                >
+                  เข้าสู่ระบบ/สมัครสมาชิก
+                </Button>
+              </div>
             </NavbarItem>
           )}
         </NavbarMenu>

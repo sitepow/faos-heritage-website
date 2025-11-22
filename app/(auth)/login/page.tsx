@@ -40,8 +40,8 @@ const Login = () => {
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
-      <Card className='w-[450px] p-5'>
+    <Form className='p-5' onSubmit={handleSubmit(onSubmit)}>
+      <Card className='p-5 md:w-[450px]'>
         <CardHeader className='flex w-full flex-col items-center gap-1'>
           <span className='text-lg font-bold'>
             เข้าสู่ระบบ หรือ สมัครสมาชิก
@@ -87,7 +87,7 @@ const Login = () => {
           <div className='flex gap-4'>
             <Image
               alt='google-login'
-              className='cursor-pointer rounded-full'
+              className='shrink-0 cursor-pointer rounded-full'
               height={50}
               src='/google.png'
               width={50}
@@ -98,7 +98,7 @@ const Login = () => {
 
             <Image
               alt='google-login'
-              className='cursor-pointer rounded-full'
+              className='shrink-0 cursor-pointer rounded-full'
               height={50}
               src='/facebook.png'
               width={50}
