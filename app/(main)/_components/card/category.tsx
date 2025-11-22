@@ -10,7 +10,7 @@ interface Props {
 
 const CategoryCard: FC<Props> = ({ item }) => {
   return (
-    <Card isHoverable className='cursor-pointer' shadow='sm'>
+    <Card isHoverable className='cursor-pointer' shadow='none'>
       <CardBody>
         <div className='flex gap-2.5'>
           <LayoutGridIcon className='text-divider' />

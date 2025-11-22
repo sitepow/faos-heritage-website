@@ -1,12 +1,10 @@
 import { Card, CardBody, CardHeader } from '@heroui/card'
-import { Divider } from '@heroui/divider'
 
 const DetailCard = () => {
   return (
     <Card className='col-span-2' shadow='none'>
       <CardHeader className='flex-col items-start gap-4'>
-        <span>รายละเอียด</span>
-        <Divider />
+        <span className='w-fit border-b border-divider pb-1'>รายละเอียด</span>
       </CardHeader>
       <CardBody className='pl-10'>
         <ul className='list-disc'>

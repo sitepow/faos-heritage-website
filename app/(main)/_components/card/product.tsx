@@ -44,6 +44,7 @@ const ProductCard: FC<Props> = ({
         'flex size-full w-64 flex-none flex-col border border-divider md:min-w-72',
         className,
       )}
+      shadow='none'
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

@@ -2,8 +2,7 @@
 
 import {
   Button,
-  Divider,
-  Navbar,
+  Navbar as HeroNavbar,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
@@ -14,6 +13,7 @@ import {
 import { link as linkStyles } from '@heroui/theme'
 import { UserIcon } from 'lucide-react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 
 import { ThemeSwitch } from '../theme-switch'
@@ -25,13 +25,16 @@ import { Search } from './etc/search'
 import { siteConfig } from '@/config/site'
 import { cn } from '@/utils/style'
 
-const MainNavbar = () => {
+const Navbar = () => {
   const { status } = useSession()
+  const pathname = usePathname()
+  const isDashboard = pathname === '/dashboard'
+  const isAuthenticated = status === 'authenticated'
 
   return (
     <>
       <Header />
-      <Navbar
+      <HeroNavbar
         isBordered
         className='shadow-md'
         maxWidth='full'
@@ -48,7 +51,10 @@ const MainNavbar = () => {
           </NavbarBrand>
 
           <ul className='ml-2 hidden justify-start gap-4 lg:flex'>
-            {siteConfig?.mainNavItems?.map((item) => (
+            {(isDashboard
+              ? siteConfig?.adminNavbarItems
+              : siteConfig?.mainNavItems
+            )?.map((item) => (
               <NavbarItem key={item?.href}>
                 <Link
                   className={cn(
@@ -69,10 +75,12 @@ const MainNavbar = () => {
           className='hidden basis-1/5 sm:flex sm:basis-full'
           justify='end'
         >
-          <NavbarItem className='hidden lg:flex'>
-            <Search />
-          </NavbarItem>
-          {status === 'unauthenticated' && (
+          {!isDashboard && (
+            <NavbarItem className='hidden lg:flex'>
+              <Search />
+            </NavbarItem>
+          )}
+          {!isAuthenticated && (
             <NavbarItem className='hidden lg:flex'>
               <Button
                 as={Link}
@@ -84,12 +92,12 @@ const MainNavbar = () => {
               </Button>
             </NavbarItem>
           )}
-          {status === 'authenticated' && (
+          {isAuthenticated && (
             <NavbarItem className='hidden lg:flex'>
               <Panel />
             </NavbarItem>
           )}
-          {status === 'authenticated' && (
+          {isAuthenticated && !isDashboard && (
             <NavbarItem className='hidden lg:flex'>
               <Cart count={18} />
             </NavbarItem>
@@ -115,15 +123,16 @@ const MainNavbar = () => {
             </NavbarMenuItem>
           ))}
 
-          <Divider />
-
-          {status === 'authenticated' && (
+          {isAuthenticated && (
             <NavbarItem>
-              <Panel />
+              <div className='flex items-center justify-between border-y border-divider py-2.5'>
+                <Panel />
+                <ThemeSwitch />
+              </div>
             </NavbarItem>
           )}
 
-          {status === 'unauthenticated' && (
+          {!isAuthenticated && (
             <NavbarItem>
               <Button
                 as={Link}
@@ -137,16 +146,16 @@ const MainNavbar = () => {
           )}
         </NavbarMenu>
 
-        {status === 'authenticated' && (
+        {isAuthenticated && (
           <NavbarItem className='lg:hidden'>
             <Cart count={18} />
           </NavbarItem>
         )}
 
         <NavbarMenuToggle className='lg:hidden' />
-      </Navbar>
+      </HeroNavbar>
     </>
   )
 }
 
-export { MainNavbar }
+export { Navbar }

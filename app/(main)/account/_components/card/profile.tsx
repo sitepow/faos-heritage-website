@@ -4,7 +4,6 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
-  Divider,
   Input,
 } from '@heroui/react'
 
@@ -15,16 +14,15 @@ const ProfileCard = () => {
         <span>แก้ไขข้อมูลส่วนตัว</span>
       </CardHeader>
       <CardBody>
-        <div className='grid gap-5 lg:grid-cols-2'>
+        <div className='grid gap-5 lg:grid-cols-2 xl:grid-cols-3'>
           <Input label='ชื่อ' size='sm' />
           <Input label='อีเมล' size='sm' />
           <Input label='หมายเลขโทรศัพท์มือถือ' size='sm' />
         </div>
       </CardBody>
-      <Divider />
-      <CardFooter className='mx-auto gap-2'>
-        <Button>บันทึกข้อมูล</Button>
-        <Button>ยกเลิก</Button>
+      <CardFooter className='gap-2'>
+        <Button variant='faded'>บันทึกข้อมูล</Button>
+        <Button variant='faded'>ยกเลิก</Button>
       </CardFooter>
     </Card>
   )
