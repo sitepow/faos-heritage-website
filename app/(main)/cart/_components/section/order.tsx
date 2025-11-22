@@ -15,11 +15,13 @@ const OrderSection: FC<ComponentProps<typeof Card>> = ({
     <Card fullWidth className={cn(className, 'h-fit')} {...props}>
       <CardHeader className='gap-5'>
         <Input label='ใส่โค้ดหรือกดใช้คูปอง' />
-        <Button>ใช้คูปอง</Button>
+        <Button className='shrink-0' variant='faded'>
+          ใช้คูปอง
+        </Button>
       </CardHeader>
 
       <CardBody className='gap-1'>
-        <span className='font-bold underline decoration-red-800'>
+        <span className='w-fit border-b border-primary-website pb-1 font-bold'>
           รายละเอียดการชำระเงิน
         </span>
 
@@ -42,7 +44,9 @@ const OrderSection: FC<ComponentProps<typeof Card>> = ({
       </CardBody>
 
       <CardFooter>
-        <Button fullWidth>ดำเนินการต่อ</Button>
+        <Button fullWidth variant='faded'>
+          ดำเนินการต่อ
+        </Button>
       </CardFooter>
     </Card>
   )

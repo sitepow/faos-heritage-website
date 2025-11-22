@@ -6,7 +6,9 @@ import { ReviewCard } from '../card/review'
 const DetailSection = () => {
   return (
     <div className='flex flex-col gap-4'>
-      <span className='text-xl font-bold'>รายละเอียดสินค้า</span>
+      <span className='mx-auto w-fit border-b border-primary-website pb-1 text-xl font-bold'>
+        รายละเอียดสินค้า
+      </span>
       <Card>
         <CardBody>
           <div className='grid gap-4 lg:grid-cols-3'>

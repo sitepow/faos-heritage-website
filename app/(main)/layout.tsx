@@ -3,12 +3,12 @@ import { ToastContainer } from 'react-toastify'
 import type { FC, PropsWithChildren } from 'react'
 
 import { Footer } from '@/components/footer'
-import { MainNavbar } from '@/components/navbar'
+import { Navbar } from '@/components/navbar'
 
-const MainLayout: FC<PropsWithChildren> = ({ children }) => {
+const Layout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <div className='relative flex h-screen flex-col overflow-x-hidden light:bg-[#f1f1f1]'>
-      <MainNavbar />
+      <Navbar />
       <main className='container mx-auto flex-grow p-6'>
         <ToastContainer hideProgressBar stacked />
         {children}
@@ -18,4 +18,4 @@ const MainLayout: FC<PropsWithChildren> = ({ children }) => {
   )
 }
 
-export default MainLayout
+export default Layout

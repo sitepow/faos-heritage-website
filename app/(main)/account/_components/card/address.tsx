@@ -23,7 +23,9 @@ const AddressCard = () => {
               </span>
             </div>
 
-            <Button className='w-fit'>แก้ไขที่อยู่</Button>
+            <Button className='w-fit' variant='faded'>
+              แก้ไขที่อยู่
+            </Button>
           </div>
         </div>
       </CardBody>

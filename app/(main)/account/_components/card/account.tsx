@@ -37,7 +37,7 @@ const AccountCard: FC<Props> = ({ onclick }) => {
               <span>0647070943</span>
             </div>
 
-            <Button className='mt-5' onPress={onclick}>
+            <Button className='mt-5' variant='faded' onPress={onclick}>
               แก้ไขข้อมูลส่วนตัว
             </Button>
           </div>

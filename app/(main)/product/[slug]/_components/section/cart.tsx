@@ -1,6 +1,5 @@
 import { Button } from '@heroui/button'
 import { Card, CardBody, CardHeader } from '@heroui/card'
-import { Divider } from '@heroui/divider'
 import { CopyIcon, HeartIcon, ShoppingCartIcon } from 'lucide-react'
 
 import type { ComponentProps, FC } from 'react'
@@ -19,15 +18,14 @@ const CartSection: FC<ComponentProps<typeof Card>> = ({
         <Price price={250} />
         <div className='flex w-full gap-4'>
           <Quantity />
-          <Button fullWidth startContent={<ShoppingCartIcon />}>
+          <Button fullWidth startContent={<ShoppingCartIcon />} variant='faded'>
             ใส่ตระกร้า
           </Button>
         </div>
       </CardHeader>
 
       <CardBody className='gap-4'>
-        <Divider />
-        <div className='flex justify-center gap-4'>
+        <div className='flex justify-center gap-4 border-y border-divider py-2.5'>
           <div className='flex cursor-pointer gap-2'>
             <HeartIcon />
             <span>รายการโปรด</span>
@@ -37,7 +35,6 @@ const CartSection: FC<ComponentProps<typeof Card>> = ({
             <span>เปรียบเทียบ</span>
           </div>
         </div>
-        <Divider />
       </CardBody>
     </Card>
   )

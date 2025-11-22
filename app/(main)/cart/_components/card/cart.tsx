@@ -2,10 +2,12 @@ import { Button } from '@heroui/button'
 import { Card, CardBody } from '@heroui/card'
 import { TrashIcon } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import type { ComponentProps, FC } from 'react'
 
 import { Quantity } from '@/components/quantity'
+import { createSlug } from '@/utils/helper'
 import { formatCurrency } from '@/utils/number'
 import { cn } from '@/utils/style'
 
@@ -24,13 +26,21 @@ const CartCard: FC<ComponentProps<typeof Card>> = ({ className, ...props }) => {
       <CardBody>
         <div className='flex flex-wrap items-center justify-start gap-4 lg:flex-nowrap lg:justify-around'>
           <div className='flex flex-wrap gap-5 sm:flex-nowrap'>
-            <Image
-              alt='product-image'
-              className='shrink-0 object-cover'
-              height={150}
-              src='/placeholder.svg'
-              width={150}
-            />
+            <Link
+              href={`/product/${createSlug(
+                `หน้าต่างบานเลื่อนอะลูมิเนียม 2 บาน พร้อมมุ้งลวด SS WINKING
+                  ขนาด 120 x 110 ซม. สีเทา`,
+                1,
+              )}`}
+            >
+              <Image
+                alt='product-image'
+                className='shrink-0 object-cover'
+                height={150}
+                src='/placeholder.svg'
+                width={150}
+              />
+            </Link>
 
             <div className='flex flex-col justify-between gap-3'>
               <div className='flex flex-col'>
