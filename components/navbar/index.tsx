@@ -28,7 +28,8 @@ import { cn } from '@/utils/style'
 const Navbar = () => {
   const { status } = useSession()
   const pathname = usePathname()
-  const isDashboard = pathname === '/dashboard'
+  const isDashboard =
+    pathname === '/dashboard' || pathname.startsWith('/dashboard/')
   const isAuthenticated = status === 'authenticated'
 
   return (
@@ -134,14 +135,16 @@ const Navbar = () => {
 
           {!isAuthenticated && (
             <NavbarItem>
-              <Button
-                as={Link}
-                href={siteConfig.link.login}
-                startContent={<UserIcon />}
-                variant='light'
-              >
-                เข้าสู่ระบบ/สมัครสมาชิก
-              </Button>
+              <div className='border-y border-divider py-2.5'>
+                <Button
+                  as={Link}
+                  href={siteConfig.link.login}
+                  startContent={<UserIcon />}
+                  variant='light'
+                >
+                  เข้าสู่ระบบ/สมัครสมาชิก
+                </Button>
+              </div>
             </NavbarItem>
           )}
         </NavbarMenu>

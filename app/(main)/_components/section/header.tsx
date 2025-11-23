@@ -2,12 +2,12 @@ import type { ComponentProps, FC } from 'react'
 
 import { cn } from '@/utils/style'
 
-interface Props {
+interface HeaderProps {
   title: string
   description: string
 }
 
-const Header: FC<ComponentProps<'div'> & Props> = ({
+const Header: FC<ComponentProps<'div'> & HeaderProps> = ({
   title,
   description,
   className,
@@ -21,4 +21,23 @@ const Header: FC<ComponentProps<'div'> & Props> = ({
   )
 }
 
-export { Header }
+interface SubHeaderProps {
+  title: string
+}
+
+const SubHeader: FC<ComponentProps<'span'> & SubHeaderProps> = ({
+  title,
+  className,
+  ...props
+}) => {
+  return (
+    <span
+      className={cn('w-fit border-b border-divider pb-1', className)}
+      {...props}
+    >
+      {title}
+    </span>
+  )
+}
+
+export { Header, SubHeader }
