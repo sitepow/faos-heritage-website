@@ -28,7 +28,8 @@ import { cn } from '@/utils/style'
 const Navbar = () => {
   const { status } = useSession()
   const pathname = usePathname()
-  const isDashboard = pathname === '/dashboard'
+  const isDashboard =
+    pathname === '/dashboard' || pathname.startsWith('/dashboard/')
   const isAuthenticated = status === 'authenticated'
 
   return (

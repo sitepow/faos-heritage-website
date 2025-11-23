@@ -6,6 +6,7 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
+  Pagination,
   useDisclosure,
 } from '@heroui/react'
 import {
@@ -16,6 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from '@heroui/table'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import {
   ArrowUp,
   Edit,
@@ -26,16 +28,19 @@ import {
   Trash,
   XIcon,
 } from 'lucide-react'
-
-import type { ComponentProps } from 'react'
+import { useState, type ComponentProps } from 'react'
 
 import { ProductForm } from './_components/form/product'
 import { ImageManager } from './_components/manager/image'
 import { VariantManager } from './_components/manager/varient'
+import { deleteProduct, getProducts } from './action'
+import { useProductStore } from './store'
 
 import { TrendCard } from '@/app/(dashboard)/_components/chart/trend-card'
-import { formatCurrency, formatNumber } from '@/utils/number'
+import { ModalDelete } from '@/components/modal/delete'
+import { formatCurrency } from '@/utils/number'
 
+const PAGE_LIMIT = 10
 const MOCKUP_DASHBOARD_CONST: ComponentProps<typeof TrendCard>[] = [
   {
     title: 'สินค้าทั้งหมด',
@@ -51,24 +56,36 @@ const MOCKUP_DASHBOARD_CONST: ComponentProps<typeof TrendCard>[] = [
   },
 ]
 
-const MOCKUP_PRODUCT_CONST = [
-  {
-    id: 'PRD001',
-    name: 'สินค้า A',
-    category: 'อิเล็กทรอนิกส์',
-    price: 50202,
-    stock: 23,
-  },
-  {
-    id: 'PRD002',
-    name: 'สินค้า B',
-    category: 'เครื่องใช้ไฟฟ้า',
-    price: 5211,
-    stock: 53,
-  },
-]
-
 const Product = () => {
+  const queryClient = useQueryClient()
+  const { productId, setProductState } = useProductStore()
+
+  const [selectedKeys, setSelectedKeys] = useState<Set<string>>(new Set([]))
+  const selectedProductIds = Array.from(selectedKeys)
+  const [page, setPage] = useState(1)
+
+  const { data } = useQuery({
+    queryKey: ['dashboard', 'products', page, PAGE_LIMIT],
+    queryFn: () => getProducts(page, PAGE_LIMIT),
+  })
+
+  const { mutate: mutateDeteleProduct, isPending: isPendingDeteleProduct } =
+    useMutation({
+      mutationFn: deleteProduct,
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['dashboard', 'products'] })
+        onOpenDeleteChange()
+        setProductState({ productId: null })
+        setSelectedKeys(new Set([]))
+      },
+    })
+
+  const {
+    isOpen: isDeleteOpen,
+    onOpen: onDeleteOpen,
+    onOpenChange: onOpenDeleteChange,
+  } = useDisclosure()
+
   const {
     isOpen: isProductOpen,
     onOpen: onProductOpen,
@@ -89,6 +106,14 @@ const Product = () => {
 
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
+      <ModalDelete
+        isConfirmPending={isPendingDeteleProduct}
+        isOpen={isDeleteOpen}
+        onConfirm={() => {
+          mutateDeteleProduct(productId ? productId : selectedProductIds)
+        }}
+        onOpenChange={onOpenDeleteChange}
+      />
       <ProductForm isOpen={isProductOpen} onOpenChange={onOpenProductChange} />
       <ImageManager isOpen={isImageOpen} onOpenChange={onOpenImageChange} />
       <VariantManager
@@ -102,7 +127,7 @@ const Product = () => {
       </div>
       <div className='flex w-full flex-wrap gap-3 *:shrink-0 md:justify-end'>
         <Button
-          startContent={<PlusIcon />}
+          startContent={<PlusIcon className='text-default-500' />}
           variant='faded'
           onPress={() => {
             onProductOpen()
@@ -110,77 +135,108 @@ const Product = () => {
         >
           เพิ่มสินค้าใหม่
         </Button>
-        <Button startContent={<ArrowUp />} variant='faded'>
+        <Button
+          startContent={<ArrowUp className='text-default-500' />}
+          variant='faded'
+        >
           ส่งออกไฟล์ XLSX
         </Button>
-        <Button startContent={<XIcon />} variant='faded'>
-          ลบรายการที่เลือก
+        <Button
+          isDisabled={selectedProductIds.length === 0}
+          startContent={<XIcon className='text-default-500' />}
+          variant='faded'
+          onPress={() => {
+            setProductState({ productId: null })
+            onDeleteOpen()
+          }}
+        >
+          ลบรายการที่เลือก ({selectedProductIds.length})
         </Button>
       </div>
-      <Table aria-label='ตารางข้อมูลสินค้า' selectionMode='multiple'>
+      <Table
+        aria-label='ตารางข้อมูลสินค้า'
+        selectionMode='multiple'
+        onSelectionChange={(keys) => {
+          setSelectedKeys(keys as Set<string>)
+        }}
+      >
         <TableHeader>
           <TableColumn>รหัสสินค้า</TableColumn>
           <TableColumn>ชื่อสินค้า</TableColumn>
-          <TableColumn>หมวดหมู่</TableColumn>
           <TableColumn>ราคา (บาท)</TableColumn>
-          <TableColumn>คงเหลือ</TableColumn>
           <TableColumn>จัดการ</TableColumn>
         </TableHeader>
-        <TableBody>
-          {MOCKUP_PRODUCT_CONST.map((product) => (
-            <TableRow key={product.id}>
-              <TableCell>{product.id}</TableCell>
-              <TableCell>{product.name}</TableCell>
-              <TableCell>{product.category}</TableCell>
-              <TableCell>{formatCurrency(product.price)}</TableCell>
-              <TableCell>{formatNumber(product.stock)}</TableCell>
-              <TableCell className='flex gap-2.5'>
-                <Dropdown placement='bottom-end'>
-                  <DropdownTrigger>
-                    <Button isIconOnly size='sm' variant='light'>
-                      <EllipsisVertical className='size-5 text-default-500' />
-                    </Button>
-                  </DropdownTrigger>
-                  <DropdownMenu
-                    aria-label='จัดการสินค้า'
-                    className='min-w-[180px]'
-                  >
-                    <DropdownItem
-                      key='edit'
-                      startContent={<Edit className='size-4' />}
-                      onClick={() => onProductOpen()}
+
+        {data?.items?.length !== 0 ? (
+          <TableBody>
+            {(data?.items ?? []).map((product) => (
+              <TableRow key={product.id}>
+                <TableCell>{product.id}</TableCell>
+                <TableCell>{product.name}</TableCell>
+                <TableCell>{formatCurrency(product.price)}</TableCell>
+                <TableCell className='flex gap-2.5'>
+                  <Dropdown placement='bottom-end'>
+                    <DropdownTrigger>
+                      <Button isIconOnly size='sm' variant='light'>
+                        <EllipsisVertical className='size-5 text-default-500' />
+                      </Button>
+                    </DropdownTrigger>
+                    <DropdownMenu
+                      aria-label='จัดการสินค้า'
+                      className='min-w-[180px]'
                     >
-                      แก้ไขข้อมูล
-                    </DropdownItem>
-                    <DropdownItem
-                      key='image'
-                      startContent={<ImageIcon className='size-4' />}
-                      onClick={() => onImageOpen()}
-                    >
-                      จัดการรูปภาพ
-                    </DropdownItem>
-                    <DropdownItem
-                      key='variant'
-                      startContent={<Layout className='size-4' />}
-                      onClick={() => onVarientOpen()}
-                    >
-                      จัดการตัวเลือก
-                    </DropdownItem>
-                    <DropdownItem
-                      key='delete'
-                      className='text-danger'
-                      color='danger'
-                      startContent={<Trash className='size-4' />}
-                    >
-                      ลบสินค้า
-                    </DropdownItem>
-                  </DropdownMenu>
-                </Dropdown>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
+                      <DropdownItem
+                        key='edit'
+                        startContent={<Edit className='size-4' />}
+                        onClick={() => {
+                          setProductState({ productId: product?.id })
+                          onProductOpen()
+                        }}
+                      >
+                        แก้ไขข้อมูล
+                      </DropdownItem>
+                      <DropdownItem
+                        key='image'
+                        startContent={<ImageIcon className='size-4' />}
+                        onClick={() => onImageOpen()}
+                      >
+                        จัดการรูปภาพ
+                      </DropdownItem>
+                      <DropdownItem
+                        key='variant'
+                        startContent={<Layout className='size-4' />}
+                        onClick={() => onVarientOpen()}
+                      >
+                        จัดการตัวเลือก
+                      </DropdownItem>
+                      <DropdownItem
+                        key='delete'
+                        className='text-danger'
+                        color='danger'
+                        startContent={<Trash className='size-4' />}
+                        onClick={() => {
+                          setProductState({ productId: product?.id })
+                          onDeleteOpen()
+                        }}
+                      >
+                        ลบสินค้า
+                      </DropdownItem>
+                    </DropdownMenu>
+                  </Dropdown>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        ) : (
+          <TableBody emptyContent='ไม่มีข้อมูลที่จะแสดง'>{[]}</TableBody>
+        )}
       </Table>
+      <Pagination
+        showControls
+        page={page}
+        total={data?.totalPages ?? 1}
+        onChange={(p) => setPage(p)}
+      />
     </section>
   )
 }
