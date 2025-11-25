@@ -28,6 +28,7 @@ import { SubHeader } from '@/app/(main)/_components/section/header'
 
 const DEFAULT_VALUES: ProductInput = {
   isActive: true,
+  useSeoFromBasicData: true,
   isFeatured: false,
   name: '',
   categoryId: '',
@@ -64,6 +65,7 @@ const ProductForm: FC<Props> = ({ isOpen, onOpenChange }) => {
     control,
     handleSubmit,
     reset,
+    watch,
     formState: { errors },
   } = useForm<ProductInput>({
     resolver: zodResolver(productSchema),
@@ -319,49 +321,62 @@ const ProductForm: FC<Props> = ({ isOpen, onOpenChange }) => {
             />
           </div>
 
-          <SubHeader title='การตั้งค่าสำหรับ SEO' />
-          <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
+          <div className='flex gap-4'>
+            <SubHeader title='การตั้งค่าสำหรับ SEO' />
             <Controller
               control={control}
-              name='slug'
-              render={({ field: { value, ...field } }) => (
-                <Input
-                  {...field}
-                  errorMessage={errors.slug?.message}
-                  isInvalid={!!errors.slug}
-                  label='Slug'
-                  value={value ?? ''}
-                />
-              )}
-            />
-            <Controller
-              control={control}
-              name='metaTitle'
-              render={({ field: { value, ...field } }) => (
-                <Input
-                  {...field}
-                  errorMessage={errors.metaTitle?.message}
-                  isInvalid={!!errors.metaTitle}
-                  label='Meta Title'
-                  value={value ?? ''}
-                />
-              )}
-            />
-            <Controller
-              control={control}
-              name='metaDescription'
-              render={({ field: { value, ...field } }) => (
-                <Textarea
-                  {...field}
-                  errorMessage={errors.metaDescription?.message}
-                  isInvalid={!!errors.metaDescription}
-                  label='Meta Description'
-                  minRows={3}
-                  value={value ?? ''}
-                />
+              name='useSeoFromBasicData'
+              render={({ field: { value, onChange, ...field } }) => (
+                <Switch {...field} isSelected={value} onValueChange={onChange}>
+                  ใช้ตามข้อมูลพื้นฐาน
+                </Switch>
               )}
             />
           </div>
+          {!watch('useSeoFromBasicData') && (
+            <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
+              <Controller
+                control={control}
+                name='slug'
+                render={({ field: { value, ...field } }) => (
+                  <Input
+                    {...field}
+                    errorMessage={errors.slug?.message}
+                    isInvalid={!!errors.slug}
+                    label='Slug'
+                    value={value ?? ''}
+                  />
+                )}
+              />
+              <Controller
+                control={control}
+                name='metaTitle'
+                render={({ field: { value, ...field } }) => (
+                  <Input
+                    {...field}
+                    errorMessage={errors.metaTitle?.message}
+                    isInvalid={!!errors.metaTitle}
+                    label='Meta Title'
+                    value={value ?? ''}
+                  />
+                )}
+              />
+              <Controller
+                control={control}
+                name='metaDescription'
+                render={({ field: { value, ...field } }) => (
+                  <Textarea
+                    {...field}
+                    errorMessage={errors.metaDescription?.message}
+                    isInvalid={!!errors.metaDescription}
+                    label='Meta Description'
+                    minRows={3}
+                    value={value ?? ''}
+                  />
+                )}
+              />
+            </div>
+          )}
         </ModalBody>
 
         <ModalFooter>

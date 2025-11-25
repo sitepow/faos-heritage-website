@@ -86,6 +86,8 @@ model Address {
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+
+    @@unique([userId, isDefault])
 }
 
 model Category {
@@ -107,12 +109,12 @@ model Category {
 
 model Product {
     id             String  @id @default(cuid())
-    name           String
-    slug           String  @unique
+    name           String  @unique
+    slug           String? @unique
     description    String? @db.Text
     price          Float
-    compareAtPrice Float
-    costPrice      Float
+    compareAtPrice Float?
+    costPrice      Float?
     sku            String? @unique
     barcode        String?
     stockQuantity  Int     @default(0)
@@ -122,8 +124,9 @@ model Product {
     categoryId String?
     category   Category? @relation(fields: [categoryId], references: [id])
 
-    isActive   Boolean @default(true)
-    isFeatured Boolean @default(false)
+    isActive            Boolean @default(true)
+    useSeoFromBasicData Boolean @default(true)
+    isFeatured          Boolean @default(false)
 
     images       ProductImage[]
     variants     ProductVariant[]
@@ -160,7 +163,7 @@ model ProductVariant {
     stockQuantity Int     @default(0)
     isActive      Boolean @default(true)
 
-    options Json
+    options Json?
 
     product      Product        @relation(fields: [productId], references: [id], onDelete: Cascade)
     stockHistory StockHistory[]
@@ -210,7 +213,7 @@ model Order {
     guestName  String?
 
     shippingAddressId   String?
-    shippingAddress     Address? @relation(fields: [shippingAddressId], references: [id])
+    shippingAddress     Address? @relation(fields: [shippingAddressId], references: [id], onDelete: SetNull)
     shippingName        String?
     shippingPhone       String?
     shippingAddressText String?  @db.Text

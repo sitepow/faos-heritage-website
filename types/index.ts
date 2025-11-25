@@ -24,3 +24,13 @@ export interface ArticleCard {
   description: string
   image?: string
 }
+
+interface BaseResponse {
+  totalPages: number
+  totalItems: number
+  page: number
+  limit: number
+}
+export interface ProductResponse extends BaseResponse {
+  items: Product[]
+}

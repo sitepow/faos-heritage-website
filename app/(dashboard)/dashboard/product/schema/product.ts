@@ -5,9 +5,7 @@ export const productSchema = z.object({
   name: z
     .string('ชื่อสินค้าต้องเป็นข้อความ')
     .min(1, 'กรุณาระบุชื่อสินค้า (ห้ามว่างเปล่า)'),
-  slug: z
-    .string('Slug ต้องเป็นข้อความที่ถูกต้อง')
-    .min(1, 'กรุณาระบุ Slug (ห้ามว่างเปล่า)'),
+  slug: z.string('Slug ต้องเป็นข้อความที่ถูกต้อง').nullish(),
   sku: z.string().nullish(),
   barcode: z.string().nullish(),
   price: z
@@ -27,6 +25,7 @@ export const productSchema = z.object({
     .string('Meta Description ต้องเป็นข้อความที่ถูกต้อง')
     .nullish(),
   isActive: z.boolean(),
+  useSeoFromBasicData: z.boolean(),
   isFeatured: z.boolean(),
 })
 

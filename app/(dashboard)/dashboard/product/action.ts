@@ -78,6 +78,7 @@ const getProduct = async (productId: string) => {
         metaTitle: true,
         metaDescription: true,
         isActive: true,
+        useSeoFromBasicData: true,
         isFeatured: true,
         createdAt: true,
         updatedAt: true,

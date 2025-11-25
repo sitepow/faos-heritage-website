@@ -20,7 +20,6 @@ const getPrismaError = (error: unknown): never => {
           sessionToken: 'Session Token',
           identifier_token: 'Token การยืนยัน',
           token: 'Token',
-          slug: 'Slug หมวดหมู่',
           sku: 'รหัสสินค้า (SKU)',
           barcode: 'บาร์โค้ด',
           userId_productId: 'สินค้าในตะกร้า',
