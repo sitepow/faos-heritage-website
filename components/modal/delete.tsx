@@ -13,14 +13,14 @@ interface Props {
   isOpen: boolean
   onOpenChange: () => void
   onConfirm: () => void
-  isConfirmPending: boolean
+  isPending: boolean
 }
 
 const ModalDelete: FC<Props> = ({
   isOpen,
   onOpenChange,
   onConfirm,
-  isConfirmPending,
+  isPending,
 }) => {
   return (
     <Modal
@@ -42,16 +42,12 @@ const ModalDelete: FC<Props> = ({
               </span>
             </ModalBody>
             <ModalFooter>
-              <Button
-                disabled={isConfirmPending}
-                variant='faded'
-                onPress={onClose}
-              >
+              <Button disabled={isPending} variant='faded' onPress={onClose}>
                 ยกเลิก
               </Button>
               <Button
-                disabled={isConfirmPending}
-                isLoading={isConfirmPending}
+                disabled={isPending}
+                isLoading={isPending}
                 variant='faded'
                 onPress={onConfirm}
               >

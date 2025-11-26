@@ -2,10 +2,10 @@
 
 import { PrismaClient } from '@prisma/client'
 
-import type { ProductInput } from './schema/product'
+import type { ProductInput } from '../schema/product'
 import type { Prisma } from '@prisma/client'
 
-import { productSchema } from './schema/product'
+import { productSchema } from '../schema/product'
 
 import { removeEmptyField } from '@/utils/helper'
 import { getPrismaError } from '@/utils/prisma'
@@ -103,7 +103,19 @@ const getProducts = async (page: number = 1, limit: number = 10) => {
       prisma.product.findMany({
         skip,
         take: limit,
-        select: { id: true, name: true, price: true },
+        select: {
+          id: true,
+          name: true,
+          price: true,
+          stockQuantity: true,
+          variants: {
+            select: {
+              name: true,
+              price: true,
+              stockQuantity: true,
+            },
+          },
+        },
         orderBy: { createdAt: 'desc' },
       }),
       prisma.product.count(),
@@ -137,7 +149,7 @@ const updateProduct = async (data: ProductInput) => {
     if (!id) throw new Error('ไม่พบรหัสสินค้า')
 
     await prisma.product.update({
-      data: removeEmptyField(payload) as Prisma.ProductUncheckedUpdateInput,
+      data: payload as Prisma.ProductUncheckedUpdateInput,
       where: { id },
     })
   } catch (error) {
@@ -145,4 +157,33 @@ const updateProduct = async (data: ProductInput) => {
   }
 }
 
-export { createProduct, deleteProduct, getProduct, getProducts, updateProduct }
+const getDashboard = async () => {
+  try {
+    const [totalProducts, inStock, outOfStock] = await Promise.all([
+      prisma.product.count(),
+      prisma.product.count({
+        where: { stockQuantity: { gt: 0 } },
+      }),
+      prisma.product.count({
+        where: { stockQuantity: 0 },
+      }),
+    ])
+
+    return [
+      { name: 'สินค้าทั้งหมด', value: totalProducts },
+      { name: 'พร้อมขาย (ยังมีสินค้า)', value: inStock },
+      { name: 'ไม่พร้อมขาย (สินค้าหมด)', value: outOfStock },
+    ]
+  } catch (error) {
+    getPrismaError(error)
+  }
+}
+
+export {
+  createProduct,
+  deleteProduct,
+  getDashboard,
+  getProduct,
+  getProducts,
+  updateProduct,
+}

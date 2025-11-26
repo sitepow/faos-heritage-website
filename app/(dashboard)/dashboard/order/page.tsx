@@ -24,15 +24,15 @@ import { formatCurrency } from '@/utils/number'
 
 const MOCKUP_DASHBOARD_CONST: ComponentProps<typeof TrendCard>[] = [
   {
-    title: 'คำสั่งซื้อทั้งหมด',
+    name: 'คำสั่งซื้อทั้งหมด',
     value: 328,
   },
   {
-    title: 'ปิดคำสั่งซื้อแล้ว',
+    name: 'ปิดคำสั่งซื้อแล้ว',
     value: 200,
   },
   {
-    title: 'คำสั่งซื้อล้มเหลว',
+    name: 'คำสั่งซื้อล้มเหลว',
     value: 128,
   },
 ]
@@ -59,7 +59,7 @@ const Order = () => {
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
       <div className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
         {MOCKUP_DASHBOARD_CONST.map((data) => (
-          <TrendCard key={data.title} {...data} />
+          <TrendCard key={data.name} {...data} />
         ))}
       </div>
 

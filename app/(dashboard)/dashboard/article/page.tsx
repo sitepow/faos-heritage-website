@@ -23,15 +23,15 @@ import { TrendCard } from '@/app/(dashboard)/_components/chart/trend-card'
 
 const MOCKUP_DASHBOARD_CONST: ComponentProps<typeof TrendCard>[] = [
   {
-    title: 'ข่าวสารทั้งหมด',
+    name: 'ข่าวสารทั้งหมด',
     value: 89,
   },
   {
-    title: 'เผยแพร่แล้ว',
+    name: 'เผยแพร่แล้ว',
     value: 20,
   },
   {
-    title: 'ฉบับร่าง',
+    name: 'ฉบับร่าง',
     value: 40,
   },
 ]
@@ -60,7 +60,7 @@ const Article = () => {
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
       <div className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
         {MOCKUP_DASHBOARD_CONST.map((data) => (
-          <TrendCard key={data.title} {...data} />
+          <TrendCard key={data.name} {...data} />
         ))}
       </div>
 
