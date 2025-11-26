@@ -21,8 +21,10 @@ const ProfileCard = () => {
         </div>
       </CardBody>
       <CardFooter className='gap-2'>
-        <Button variant='faded'>บันทึกข้อมูล</Button>
         <Button variant='faded'>ยกเลิก</Button>
+        <Button isDisabled variant='faded'>
+          บันทึกข้อมูล
+        </Button>
       </CardFooter>
     </Card>
   )

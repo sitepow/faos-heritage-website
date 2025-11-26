@@ -8,6 +8,7 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
+  NumberInput,
   Select,
   SelectItem,
   Switch,
@@ -66,7 +67,7 @@ const ProductForm: FC<Props> = ({ isOpen, onOpenChange }) => {
     handleSubmit,
     reset,
     watch,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm<ProductInput>({
     resolver: zodResolver(productSchema),
     defaultValues: DEFAULT_VALUES,
@@ -228,15 +229,13 @@ const ProductForm: FC<Props> = ({ isOpen, onOpenChange }) => {
             <Controller
               control={control}
               name='price'
-              render={({ field: { value, onChange, ...field } }) => (
-                <Input
+              render={({ field: { onChange, ...field } }) => (
+                <NumberInput
                   {...field}
                   errorMessage={errors.price?.message}
                   isInvalid={!!errors.price}
                   label='ราคา (บาท)'
-                  type='number'
-                  value={value?.toString() ?? ''}
-                  onValueChange={(val) => onChange(val ? parseFloat(val) : 0)}
+                  onValueChange={(val) => onChange(val || 0)}
                 />
               )}
             />
@@ -244,14 +243,13 @@ const ProductForm: FC<Props> = ({ isOpen, onOpenChange }) => {
               control={control}
               name='compareAtPrice'
               render={({ field: { value, onChange, ...field } }) => (
-                <Input
+                <NumberInput
                   {...field}
                   errorMessage={errors.compareAtPrice?.message}
                   isInvalid={!!errors.compareAtPrice}
                   label='ราคาก่อนลด'
-                  type='number'
-                  value={value?.toString() ?? ''}
-                  onValueChange={(val) => onChange(val ? parseFloat(val) : 0)}
+                  value={value ?? 0}
+                  onValueChange={(val) => onChange(val || 0)}
                 />
               )}
             />
@@ -259,14 +257,13 @@ const ProductForm: FC<Props> = ({ isOpen, onOpenChange }) => {
               control={control}
               name='costPrice'
               render={({ field: { value, onChange, ...field } }) => (
-                <Input
+                <NumberInput
                   {...field}
                   errorMessage={errors.costPrice?.message}
                   isInvalid={!!errors.costPrice}
                   label='ราคาทุน (ภายใน)'
-                  type='number'
-                  value={value?.toString() ?? ''}
-                  onValueChange={(val) => onChange(val ? parseFloat(val) : 0)}
+                  value={value ?? 0}
+                  onValueChange={(val) => onChange(val || 0)}
                 />
               )}
             />
@@ -278,14 +275,13 @@ const ProductForm: FC<Props> = ({ isOpen, onOpenChange }) => {
               control={control}
               name='stockQuantity'
               render={({ field: { value, onChange, ...field } }) => (
-                <Input
+                <NumberInput
                   {...field}
                   errorMessage={errors.stockQuantity?.message}
                   isInvalid={!!errors.stockQuantity}
                   label='จำนวนในสต็อก'
-                  type='number'
-                  value={value?.toString() ?? ''}
-                  onValueChange={(val) => onChange(val ? parseInt(val) : 0)}
+                  value={value ?? 0}
+                  onValueChange={(val) => onChange(val || 0)}
                 />
               )}
             />
@@ -293,14 +289,13 @@ const ProductForm: FC<Props> = ({ isOpen, onOpenChange }) => {
               control={control}
               name='lowStockAlert'
               render={({ field: { value, onChange, ...field } }) => (
-                <Input
+                <NumberInput
                   {...field}
                   errorMessage={errors.lowStockAlert?.message}
                   isInvalid={!!errors.lowStockAlert}
                   label='แจ้งเตือนเมื่อสต็อกต่ำกว่า'
-                  type='number'
-                  value={value?.toString() ?? ''}
-                  onValueChange={(val) => onChange(val ? parseInt(val) : 0)}
+                  value={value ?? 0}
+                  onValueChange={(val) => onChange(val || 0)}
                 />
               )}
             />
@@ -308,14 +303,13 @@ const ProductForm: FC<Props> = ({ isOpen, onOpenChange }) => {
               control={control}
               name='weight'
               render={({ field: { value, onChange, ...field } }) => (
-                <Input
+                <NumberInput
                   {...field}
                   errorMessage={errors.weight?.message}
                   isInvalid={!!errors.weight}
                   label='น้ำหนัก (กรัม)'
-                  type='number'
-                  value={value?.toString() ?? ''}
-                  onValueChange={(val) => onChange(val ? parseFloat(val) : 0)}
+                  value={value ?? 0}
+                  onValueChange={(val) => onChange(val || 0)}
                 />
               )}
             />
@@ -380,11 +374,11 @@ const ProductForm: FC<Props> = ({ isOpen, onOpenChange }) => {
         </ModalBody>
 
         <ModalFooter>
-          <Button disabled={isPending} variant='faded' onPress={onClose}>
+          <Button isDisabled={isPending} variant='faded' onPress={onClose}>
             ยกเลิก
           </Button>
           <Button
-            disabled={isPending}
+            isDisabled={isPending || !isDirty}
             isLoading={isPending}
             variant='faded'
             onClick={handleSubmit(onSubmit)}

@@ -16,7 +16,7 @@ const CartSection: FC<ComponentProps<typeof Card>> = ({
     <Card className={cn(className)} {...props}>
       <CardHeader className='flex flex-col items-start gap-4'>
         <Price price={250} />
-        <div className='flex w-full gap-4'>
+        <div className='flex w-full items-center gap-4'>
           <Quantity />
           <Button fullWidth startContent={<ShoppingCartIcon />} variant='faded'>
             ใส่ตระกร้า

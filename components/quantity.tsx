@@ -1,17 +1,24 @@
-import { Input } from '@heroui/input'
-import { CircleMinus, CirclePlus } from 'lucide-react'
+'use client'
+
+import { NumberInput } from '@heroui/react'
 
 import type { ComponentProps, FC } from 'react'
 
 import { cn } from '@/utils/style'
 
-const Quantity: FC<ComponentProps<'div'>> = ({ className, ...props }) => {
+const Quantity: FC<ComponentProps<typeof NumberInput>> = ({
+  className,
+  ...props
+}) => {
   return (
-    <div className={cn('flex items-center gap-2', className)} {...props}>
-      <CirclePlus className='shrink-0 cursor-pointer text-default-500' />
-      <Input className='w-24' defaultValue='1' type='number' />
-      <CircleMinus className='shrink-0 cursor-pointer text-default-500' />
-    </div>
+    <NumberInput
+      className={cn('w-fit', className)}
+      defaultValue={1}
+      label='จำนวน'
+      minValue={1}
+      size='sm'
+      {...props}
+    />
   )
 }
 
