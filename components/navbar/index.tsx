@@ -1,7 +1,5 @@
-'use client'
-
+import { Button } from '@heroui/button'
 import {
-  Button,
   Navbar as HeroNavbar,
   NavbarBrand,
   NavbarContent,
@@ -9,7 +7,7 @@ import {
   NavbarMenu,
   NavbarMenuItem,
   NavbarMenuToggle,
-} from '@heroui/react'
+} from '@heroui/navbar'
 import { link as linkStyles } from '@heroui/theme'
 import { UserIcon } from 'lucide-react'
 import Link from 'next/link'

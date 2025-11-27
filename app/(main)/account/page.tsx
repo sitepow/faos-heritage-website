@@ -1,6 +1,6 @@
 'use client'
 
-import { Tab, Tabs } from '@heroui/react'
+import { Tab, Tabs } from '@heroui/tabs'
 import { useState } from 'react'
 
 import { AccountCard } from './_components/card/account'

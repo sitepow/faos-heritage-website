@@ -1,17 +1,16 @@
 'use client'
 
+import { Avatar, AvatarGroup } from '@heroui/avatar'
 import { Button } from '@heroui/button'
 import {
-  Avatar,
-  AvatarGroup,
   Dropdown,
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
-  Pagination,
-  Spinner,
-  useDisclosure,
-} from '@heroui/react'
+} from '@heroui/dropdown'
+import { useDisclosure } from '@heroui/modal'
+import { Pagination } from '@heroui/pagination'
+import { Spinner } from '@heroui/spinner'
 import {
   Table,
   TableBody,

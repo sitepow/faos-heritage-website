@@ -1,14 +1,9 @@
 'use client'
 
-import {
-  Alert,
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Image,
-} from '@heroui/react'
+import { Alert } from '@heroui/alert'
+import { Button } from '@heroui/button'
+import { Card, CardBody, CardFooter, CardHeader } from '@heroui/card'
+import { Image } from '@heroui/image'
 import { HeartIcon, ShoppingCartIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'

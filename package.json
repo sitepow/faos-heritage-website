@@ -1,5 +1,5 @@
 {
-  "name": "online-store-project",
+  "name": "zentra-core",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -77,15 +77,18 @@
     "next-themes": "0.4.6",
     "prettier-plugin-organize-imports": "^4.3.0",
     "prettier-plugin-tailwindcss": "^0.7.1",
+    "pretty-bytes": "^7.1.0",
     "prisma": "^6.18.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
+    "react-dropzone": "^14.3.8",
     "react-hook-form": "^7.66.0",
     "react-responsive": "^10.0.1",
     "react-social-icons": "^6.25.0",
     "react-toastify": "^11.0.5",
     "recharts": "^3.3.0",
     "root": "tanstack/react-query",
+    "sharp": "^0.34.5",
     "tsx": "^4.20.6",
     "zod": "^4.1.12",
     "zustand": "^5.0.8"

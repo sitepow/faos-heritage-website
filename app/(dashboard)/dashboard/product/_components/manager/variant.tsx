@@ -1,21 +1,20 @@
-'use client'
-
+import { Button } from '@heroui/button'
+import { Card, CardBody } from '@heroui/card'
 import {
-  Button,
-  Card,
-  CardBody,
   Dropdown,
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
+} from '@heroui/dropdown'
+import {
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
-  Spinner,
   useDisclosure,
-} from '@heroui/react'
+} from '@heroui/modal'
+import { Spinner } from '@heroui/spinner'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import {
   EditIcon,
@@ -135,6 +134,16 @@ const VariantManager = () => {
                             {variant.stockQuantity
                               ? `สต็อค: ${formatNumber(variant.stockQuantity)}`
                               : '(โปรดระบุสต็อค)'}
+                          </span>
+
+                          <span
+                            className={cn(
+                              variant.isActive
+                                ? 'text-green-500'
+                                : 'text-red-500',
+                            )}
+                          >
+                            {variant.isActive ? '(เปิดใช้งาน)' : '(ปิดใช้งาน)'}
                           </span>
                         </div>
                       </div>

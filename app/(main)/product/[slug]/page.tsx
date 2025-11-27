@@ -1,6 +1,4 @@
-'use client'
-
-import { BreadcrumbItem, Breadcrumbs } from '@heroui/react'
+import { BreadcrumbItem, Breadcrumbs } from '@heroui/breadcrumbs'
 
 import { CartSection } from './_components/section/cart'
 import { DetailSection } from './_components/section/detail'

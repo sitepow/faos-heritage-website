@@ -1,4 +1,5 @@
-import { Button, Card, CardBody, CardHeader } from '@heroui/react'
+import { Button } from '@heroui/button'
+import { Card, CardBody, CardHeader } from '@heroui/card'
 
 import type { FC } from 'react'
 

@@ -1,11 +1,6 @@
-import {
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Input,
-} from '@heroui/react'
+import { Button } from '@heroui/button'
+import { Card, CardBody, CardFooter, CardHeader } from '@heroui/card'
+import { Input } from '@heroui/input'
 
 const ProfileCard = () => {
   return (

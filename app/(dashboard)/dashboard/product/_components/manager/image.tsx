@@ -1,15 +1,15 @@
 'use client'
 
+import { Button } from '@heroui/button'
 import {
-  Button,
-  Image,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
-} from '@heroui/react'
+} from '@heroui/modal'
 import { PlusIcon } from 'lucide-react'
+import Image from 'next/image'
 import { useState } from 'react'
 
 import type { ProductImage } from '@prisma/client'

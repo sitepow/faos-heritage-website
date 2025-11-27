@@ -1,12 +1,7 @@
-'use client'
-
-import {
-  BreadcrumbItem,
-  Breadcrumbs,
-  Button,
-  Divider,
-  Switch,
-} from '@heroui/react'
+import { BreadcrumbItem, Breadcrumbs } from '@heroui/breadcrumbs'
+import { Button } from '@heroui/button'
+import { Divider } from '@heroui/divider'
+import { Switch } from '@heroui/switch'
 import { ArrowUpDownIcon, Settings2Icon } from 'lucide-react'
 
 import { ProductSection } from '../_components/section/product'

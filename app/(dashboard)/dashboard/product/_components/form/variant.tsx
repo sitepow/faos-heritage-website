@@ -1,17 +1,17 @@
 'use client'
 
+import { Button } from '@heroui/button'
+import { Input } from '@heroui/input'
 import {
-  Button,
-  Input,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
-  NumberInput,
-  Spinner,
-  Switch,
-} from '@heroui/react'
+} from '@heroui/modal'
+import { NumberInput } from '@heroui/react'
+import { Spinner } from '@heroui/spinner'
+import { Switch } from '@heroui/switch'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useEffect } from 'react'

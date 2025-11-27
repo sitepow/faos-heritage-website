@@ -1,12 +1,10 @@
-'use client'
-
 import {
   Dropdown,
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
-  User,
-} from '@heroui/react'
+} from '@heroui/dropdown'
+import { User } from '@heroui/user'
 import { LogOutIcon, Settings, UserIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { signOut, useSession } from 'next-auth/react'

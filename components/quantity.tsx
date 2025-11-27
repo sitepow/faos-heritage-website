@@ -1,6 +1,4 @@
-'use client'
-
-import { NumberInput } from '@heroui/react'
+import { NumberInput } from '@heroui/number-input'
 
 import type { ComponentProps, FC } from 'react'
 

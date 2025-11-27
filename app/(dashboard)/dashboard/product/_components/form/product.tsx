@@ -1,20 +1,18 @@
 'use client'
 
+import { Button } from '@heroui/button'
+import { Input, Textarea } from '@heroui/input'
 import {
-  Button,
-  Input,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
-  NumberInput,
-  Select,
-  SelectItem,
-  Spinner,
-  Switch,
-  Textarea,
-} from '@heroui/react'
+} from '@heroui/modal'
+import { NumberInput } from '@heroui/react'
+import { Select, SelectItem } from '@heroui/select'
+import { Spinner } from '@heroui/spinner'
+import { Switch } from '@heroui/switch'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useEffect } from 'react'

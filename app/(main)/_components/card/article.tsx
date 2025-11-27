@@ -1,6 +1,6 @@
-'use client'
-
-import { Button, Card, CardBody, CardHeader, Image } from '@heroui/react'
+import { Button } from '@heroui/button'
+import { Card, CardBody, CardHeader } from '@heroui/card'
+import { Image } from '@heroui/image'
 import Link from 'next/link'
 
 import type { ArticleCard } from '@/types'
