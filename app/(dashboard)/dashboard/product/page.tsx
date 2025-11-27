@@ -9,6 +9,7 @@ import {
   DropdownMenu,
   DropdownTrigger,
   Pagination,
+  Spinner,
   useDisclosure,
 } from '@heroui/react'
 import {
@@ -38,7 +39,10 @@ import { VariantManager } from './_components/manager/variant'
 import { deleteProduct, getDashboard, getProducts } from './action/product'
 import { useProductStore } from './store'
 
-import { TrendCard } from '@/app/(dashboard)/_components/chart/trend-card'
+import {
+  TrendCard,
+  TrendCardSkeleton,
+} from '@/app/(dashboard)/_components/chart/trend-card'
 import { ModalDelete } from '@/components/modal/delete'
 import { formatCurrency, formatNumber } from '@/utils/number'
 
@@ -61,12 +65,12 @@ const Product = () => {
   const { isOpen: isDeleteOpen, onOpenChange: onOpenDeleteChange } =
     useDisclosure()
 
-  const { data: products } = useQuery({
+  const { data: products, isLoading: isLoadingProducts } = useQuery({
     queryKey: ['dashboard', 'products', page, PAGE_LIMIT],
     queryFn: () => getProducts(page, PAGE_LIMIT),
   })
 
-  const { data: dashboard } = useQuery({
+  const { data: dashboard, isLoading: isLoadingDashboard } = useQuery({
     queryKey: ['dashboard', 'products'],
     queryFn: () => getDashboard(),
   })
@@ -96,9 +100,11 @@ const Product = () => {
       <ImageManager />
       <VariantManager />
       <div className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-        {dashboard?.map((data) => (
-          <TrendCard key={data.name} {...data} />
-        ))}
+        {isLoadingDashboard &&
+          [...Array(4)].map((_, index) => <TrendCardSkeleton key={index} />)}
+
+        {!isLoadingDashboard &&
+          dashboard?.map((data) => <TrendCard key={data.name} {...data} />)}
       </div>
       <div className='flex w-full flex-wrap gap-3 *:shrink-0 md:justify-end'>
         <Button
@@ -145,112 +151,106 @@ const Product = () => {
           <TableColumn>จัดการ</TableColumn>
         </TableHeader>
 
-        {products?.items?.length !== 0 ? (
-          <TableBody>
-            {(products?.items ?? []).map((product) => {
-              const variants = product?.variants
+        <TableBody
+          emptyContent='ไม่มีข้อมูลที่จะแสดง'
+          isLoading={isLoadingProducts}
+          loadingContent={<Spinner label='กำลังโหลด...' />}
+        >
+          {(products?.items ?? []).map((product) => (
+            <TableRow key={product.id}>
+              <TableCell>{product.id}</TableCell>
+              <TableCell>
+                <AvatarGroup max={3}>
+                  <Avatar src='/placeholder.svg' />
+                  <Avatar src='/placeholder.svg' />
+                  <Avatar src='/placeholder.svg' />
+                  <Avatar src='/placeholder.svg' />
+                </AvatarGroup>
+              </TableCell>
+              <TableCell className='min-w-60'>{product.name}</TableCell>
+              <TableCell>{formatCurrency(product.price)}</TableCell>
+              <TableCell>{formatNumber(product.stockQuantity)}</TableCell>
+              <TableCell className='min-w-60'>
+                <div className='flex flex-col'>
+                  {product?.variants?.length === 0 && <span>-</span>}
 
-              return (
-                <TableRow key={product.id}>
-                  <TableCell>{product.id}</TableCell>
-                  <TableCell>
-                    <AvatarGroup max={3}>
-                      <Avatar src='/placeholder.svg' />
-                      <Avatar src='/placeholder.svg' />
-                      <Avatar src='/placeholder.svg' />
-                      <Avatar src='/placeholder.svg' />
-                    </AvatarGroup>
-                  </TableCell>
-                  <TableCell className='min-w-60'>{product.name}</TableCell>
-                  <TableCell>{formatCurrency(product.price)}</TableCell>
-                  <TableCell>{formatNumber(product.stockQuantity)}</TableCell>
-                  <TableCell className='min-w-60'>
-                    <div className='flex flex-col'>
-                      {variants?.length === 0 && <span>-</span>}
-
-                      {variants?.length !== 0 &&
-                        variants?.map((variant) => {
-                          return (
-                            <div key={variant.name} className='flex flex-col'>
-                              <span className='line-clamp-1'>
-                                {variant.name}
-                              </span>
-                              <div className='flex gap-2'>
-                                <span className='text-default-500'>
-                                  ราคา: {formatCurrency(variant.price)}
-                                </span>
-                                <span className='text-default-500'>
-                                  สต็อค: {formatNumber(variant.stockQuantity)}
-                                </span>
-                              </div>
-                            </div>
-                          )
-                        })}
-                    </div>
-                  </TableCell>
-                  <TableCell className='flex gap-2.5'>
-                    <Dropdown placement='bottom-end'>
-                      <DropdownTrigger>
-                        <Button isIconOnly size='sm' variant='light'>
-                          <EllipsisVerticalIcon className='size-5 text-default-500' />
-                        </Button>
-                      </DropdownTrigger>
-                      <DropdownMenu
-                        aria-label='จัดการสินค้า'
-                        className='min-w-[180px]'
-                      >
-                        <DropdownItem
-                          key='edit'
-                          startContent={<EditIcon className='size-4' />}
-                          onClick={() => {
-                            setState({ productId: product?.id })
-                            onOpenProductChange()
-                          }}
-                        >
-                          แก้ไขข้อมูล
-                        </DropdownItem>
-                        <DropdownItem
-                          key='image'
-                          startContent={<ImageIcon className='size-4' />}
-                          onClick={() => {
-                            setState({ productId: product?.id })
-                            onOpenImageManagerChange()
-                          }}
-                        >
-                          จัดการรูปภาพ
-                        </DropdownItem>
-                        <DropdownItem
-                          key='variant'
-                          startContent={<LayoutIcon className='size-4' />}
-                          onClick={() => {
-                            setState({ productId: product?.id })
-                            onOpenVariantManagerChange()
-                          }}
-                        >
-                          จัดการตัวเลือก
-                        </DropdownItem>
-                        <DropdownItem
-                          key='delete'
-                          className='text-danger'
-                          color='danger'
-                          startContent={<TrashIcon className='size-4' />}
-                          onClick={() => {
-                            setState({ productId: product?.id })
-                            onOpenDeleteChange()
-                          }}
-                        >
-                          ลบสินค้า
-                        </DropdownItem>
-                      </DropdownMenu>
-                    </Dropdown>
-                  </TableCell>
-                </TableRow>
-              )
-            })}
-          </TableBody>
-        ) : (
-          <TableBody emptyContent='ไม่มีข้อมูลที่จะแสดง'>{[]}</TableBody>
-        )}
+                  {product?.variants?.length !== 0 &&
+                    product?.variants?.map((variant) => {
+                      return (
+                        <div key={variant.name} className='flex flex-col'>
+                          <span className='line-clamp-1'>{variant.name}</span>
+                          <div className='flex gap-2'>
+                            <span className='text-default-500'>
+                              ราคา: {formatCurrency(variant.price)}
+                            </span>
+                            <span className='text-default-500'>
+                              สต็อค: {formatNumber(variant.stockQuantity)}
+                            </span>
+                          </div>
+                        </div>
+                      )
+                    })}
+                </div>
+              </TableCell>
+              <TableCell className='flex gap-2.5'>
+                <Dropdown placement='bottom-end'>
+                  <DropdownTrigger>
+                    <Button isIconOnly size='sm' variant='light'>
+                      <EllipsisVerticalIcon className='size-5 text-default-500' />
+                    </Button>
+                  </DropdownTrigger>
+                  <DropdownMenu
+                    aria-label='จัดการสินค้า'
+                    className='min-w-[180px]'
+                  >
+                    <DropdownItem
+                      key='edit'
+                      startContent={<EditIcon className='size-4' />}
+                      onClick={() => {
+                        setState({ productId: product?.id })
+                        onOpenProductChange()
+                      }}
+                    >
+                      แก้ไขข้อมูล
+                    </DropdownItem>
+                    <DropdownItem
+                      key='image'
+                      startContent={<ImageIcon className='size-4' />}
+                      onClick={() => {
+                        setState({ productId: product?.id })
+                        onOpenImageManagerChange()
+                      }}
+                    >
+                      จัดการรูปภาพ
+                    </DropdownItem>
+                    <DropdownItem
+                      key='variant'
+                      startContent={<LayoutIcon className='size-4' />}
+                      onClick={() => {
+                        setState({ productId: product?.id })
+                        onOpenVariantManagerChange()
+                      }}
+                    >
+                      จัดการตัวเลือก
+                    </DropdownItem>
+                    <DropdownItem
+                      key='delete'
+                      className='text-danger'
+                      color='danger'
+                      startContent={<TrashIcon className='size-4' />}
+                      onClick={() => {
+                        setState({ productId: product?.id })
+                        onOpenDeleteChange()
+                      }}
+                    >
+                      ลบสินค้า
+                    </DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
       </Table>
       <Pagination
         showControls

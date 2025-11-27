@@ -1,5 +1,5 @@
 'use client'
-import { Card } from '@heroui/react'
+import { Card, Skeleton } from '@heroui/react'
 
 import type { FC } from 'react'
 
@@ -26,4 +26,12 @@ const TrendCard: FC<Props> = ({ name, value, isCurrency }) => {
   )
 }
 
-export { TrendCard }
+const TrendCardSkeleton = () => {
+  return (
+    <Skeleton className='rounded-lg'>
+      <div className='h-24 rounded-lg bg-default-300' />
+    </Skeleton>
+  )
+}
+
+export { TrendCard, TrendCardSkeleton }
