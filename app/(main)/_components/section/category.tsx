@@ -3,17 +3,25 @@
 import { Button } from '@heroui/button'
 import { Card, CardBody, CardHeader } from '@heroui/card'
 import { ScrollShadow } from '@heroui/scroll-shadow'
+import { useQuery } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 
 import { CategoryCard } from '../card/category'
-import { ProductCard } from '../card/product'
+import { ProductCard, ProductCardSkeleton } from '../card/product'
 
+import { getProducts } from '@/actions/product'
 import { Carousel } from '@/components/carousel'
-import { CATEGORY_CONSTANT, PRODUCT_CONSTANT } from '@/utils/const'
+import { CATEGORY_CONSTANT } from '@/utils/const'
 import { createSlug } from '@/utils/helper'
 
+const ITEM_PER_PAGE = 8
 const CategorySection = () => {
   const router = useRouter()
+
+  const { data: products, isLoading } = useQuery({
+    queryKey: ['products', 'carousel'],
+    queryFn: () => getProducts({ limit: ITEM_PER_PAGE }),
+  })
 
   return (
     <div className='flex w-full flex-col gap-5 md:flex md:h-[500px] md:flex-row'>
@@ -49,9 +57,15 @@ const CategorySection = () => {
         </CardHeader>
         <CardBody>
           <Carousel slidesToScroll className='items-center'>
-            {PRODUCT_CONSTANT?.slice(0, 10).map((product) => (
-              <ProductCard key={product.id} {...product} />
-            ))}
+            {isLoading &&
+              [...Array(8)].map((_, index) => (
+                <ProductCardSkeleton key={index} />
+              ))}
+
+            {!isLoading &&
+              products?.items?.map((product) => (
+                <ProductCard key={product.id} {...product} />
+              ))}
 
             <Button
               variant='faded'

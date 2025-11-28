@@ -25,8 +25,8 @@ import {
 } from 'lucide-react'
 import Image from 'next/image'
 
-import { deleteFile } from '../../action/file'
-import { deleteImage, getImages } from '../../action/image'
+import { deleteFile } from '../../actions/file'
+import { deleteImage, getImages } from '../../actions/image'
 import { useProductStore } from '../../store'
 import { ImageForm } from '../form/image'
 

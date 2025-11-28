@@ -19,7 +19,7 @@ import { Controller, useForm } from 'react-hook-form'
 
 import type { VariantInput } from '../../schema/variant'
 
-import { createVariant, getVariant, updateVariant } from '../../action/variant'
+import { createVariant, getVariant, updateVariant } from '../../actions/variant'
 import { variantSchema } from '../../schema/variant'
 import { useProductStore } from '../../store'
 

@@ -18,8 +18,8 @@ import { Controller, useForm } from 'react-hook-form'
 
 import type { ImageWithPreview } from '@/components/dropzone/image'
 
-import { deleteFile, uploadFiles } from '../../action/file'
-import { createImage, getImage, updateImage } from '../../action/image'
+import { deleteFile, uploadFiles } from '../../actions/file'
+import { createImage, getImage, updateImage } from '../../actions/image'
 import { imageSchema, type ImageInput } from '../../schema/image'
 import { useProductStore } from '../../store'
 

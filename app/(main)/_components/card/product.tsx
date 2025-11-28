@@ -1,14 +1,16 @@
+/* eslint-disable no-nested-ternary */
 'use client'
 
 import { Alert } from '@heroui/alert'
 import { Button } from '@heroui/button'
 import { Card, CardBody, CardFooter, CardHeader } from '@heroui/card'
 import { Image } from '@heroui/image'
+import { Skeleton } from '@heroui/skeleton'
 import { HeartIcon, ShoppingCartIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
 
-import type { Product } from '@/types'
+import type { ProductItem } from '@/actions/product'
 import type { FC } from 'react'
 
 import { StarRating } from '../star-rating'
@@ -17,7 +19,7 @@ import { Price } from '@/components/price'
 import { createSlug } from '@/utils/helper'
 import { cn } from '@/utils/style'
 
-interface Props extends Product {
+interface Props extends ProductItem {
   className?: string
   hideIcon?: boolean
 }
@@ -26,8 +28,7 @@ const ProductCard: FC<Props> = ({
   id,
   name,
   price,
-  unit,
-  image,
+  images,
   className,
   hideIcon = 'true',
 }) => {
@@ -53,7 +54,13 @@ const ProductCard: FC<Props> = ({
             }}
             height={250}
             radius='none'
-            src={image ?? '/placeholder.svg'}
+            src={
+              images && images.length > 1
+                ? isHovered
+                  ? images[1].url
+                  : images[0].url
+                : images?.[0]?.url || '/placeholder.svg'
+            }
             width='100%'
           />
         </Link>
@@ -68,9 +75,9 @@ const ProductCard: FC<Props> = ({
       </CardHeader>
 
       <CardBody>
-        <Price price={price} unit={unit} />
-        <h4 className='truncate text-lg font-bold'>{name}</h4>
-        <StarRating rate={4} />
+        <Price price={price} unit='ตัว' />
+        <h4 className='line-clamp-2 text-lg font-bold'>{name}</h4>
+        <StarRating rate={5} />
       </CardBody>
 
       {!hideIcon && (
@@ -89,4 +96,12 @@ const ProductCard: FC<Props> = ({
   )
 }
 
-export { ProductCard }
+const ProductCardSkeleton = () => {
+  return (
+    <Skeleton className='size-full w-64 rounded-xl md:min-w-72'>
+      <div className='h-80 rounded-xl bg-default-300' />
+    </Skeleton>
+  )
+}
+
+export { ProductCard, ProductCardSkeleton }

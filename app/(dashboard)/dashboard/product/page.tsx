@@ -35,7 +35,7 @@ import { useState } from 'react'
 import { ProductForm } from './_components/form/product'
 import { ImageManager } from './_components/manager/image'
 import { VariantManager } from './_components/manager/variant'
-import { deleteProduct, getDashboard, getProducts } from './action/product'
+import { deleteProduct, getDashboard, getProducts } from './actions/product'
 import { useProductStore } from './store'
 
 import {
@@ -159,11 +159,15 @@ const Product = () => {
             <TableRow key={product.id}>
               <TableCell>{product.id}</TableCell>
               <TableCell>
-                <AvatarGroup max={3}>
-                  {product?.images?.map((image) => (
-                    <Avatar key={image?.url} src={image?.url} />
-                  ))}
-                </AvatarGroup>
+                {product?.images?.length === 0 && <span>-</span>}
+
+                {product?.images?.length !== 0 && (
+                  <AvatarGroup max={3}>
+                    {product?.images?.map((image) => (
+                      <Avatar key={image?.url} src={image?.url} />
+                    ))}
+                  </AvatarGroup>
+                )}
               </TableCell>
               <TableCell className='min-w-60'>{product.name}</TableCell>
               <TableCell>{formatCurrency(product.price)}</TableCell>

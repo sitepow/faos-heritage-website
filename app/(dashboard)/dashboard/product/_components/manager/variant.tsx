@@ -23,7 +23,7 @@ import {
   TrashIcon,
 } from 'lucide-react'
 
-import { deleteVariant, getVariants } from '../../action/variant'
+import { deleteVariant, getVariants } from '../../actions/variant'
 import { useProductStore } from '../../store'
 import { VariantForm } from '../form/variant'
 

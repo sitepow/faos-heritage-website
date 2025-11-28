@@ -20,7 +20,7 @@ import { Controller, useForm } from 'react-hook-form'
 
 import type { ProductInput } from '../../schema/product'
 
-import { createProduct, getProduct, updateProduct } from '../../action/product'
+import { createProduct, getProduct, updateProduct } from '../../actions/product'
 import { productSchema } from '../../schema/product'
 import { useProductStore } from '../../store'
 
