@@ -98,7 +98,7 @@ const ProductCard: FC<Props> = ({
 
 const ProductCardSkeleton = () => {
   return (
-    <Skeleton className='size-full w-64 rounded-xl md:min-w-72'>
+    <Skeleton className='size-full rounded-xl supports-[display:flex]:min-w-72'>
       <div className='h-80 rounded-xl bg-default-300' />
     </Skeleton>
   )
