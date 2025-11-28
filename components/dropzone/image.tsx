@@ -9,69 +9,66 @@ import type { FC } from 'react'
 
 import { cn } from '@/utils/style'
 
-const ACCEPT_TYPE = ['.png', '.jpg', '.jpeg', '.gif', '.webp']
+const ACCEPT_TYPES = ['.png', '.jpg', '.jpeg', '.gif', '.webp']
+
+export interface ImageWithPreview extends File {
+  preview: string
+}
 
 interface Props {
   multiple?: boolean
   onFilesChange?: (files: ImageWithPreview[]) => void
 }
 
-interface ImageWithPreview extends File {
-  preview: string
-}
+const createPreviewFiles = (files: File[]): ImageWithPreview[] =>
+  files.map((file) =>
+    Object.assign(file, {
+      preview: URL.createObjectURL(file),
+    }),
+  )
 
 const ImageDropzone: FC<Props> = ({ multiple = false, onFilesChange }) => {
   const [files, setFiles] = useState<ImageWithPreview[]>([])
 
+  const notifyChange = (updated: ImageWithPreview[]) => {
+    setFiles(updated)
+    onFilesChange?.(updated)
+  }
+
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
+      const newFiles = createPreviewFiles(acceptedFiles)
+
       if (multiple) {
-        setFiles((prevFiles) => {
-          const newFiles = [
-            ...prevFiles,
-            ...acceptedFiles.map((file) =>
-              Object.assign(file, {
-                preview: URL.createObjectURL(file),
-              }),
-            ),
-          ]
+        const merged = [...files, ...newFiles]
 
-          onFilesChange?.(newFiles)
-
-          return newFiles
-        })
+        notifyChange(merged)
       } else {
-        const newFiles = acceptedFiles.map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file),
-          }),
-        )
-
-        setFiles(newFiles)
-        onFilesChange?.(newFiles)
+        notifyChange(newFiles)
       }
     },
-    [multiple, onFilesChange],
+    [files, multiple, onFilesChange],
   )
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: {
-      'image/*': ACCEPT_TYPE,
+      'image/*': ACCEPT_TYPES,
     },
     multiple,
   })
 
   const removeFile = (fileToRemove: ImageWithPreview) => {
-    const updatedFiles = files.filter((file) => file !== fileToRemove)
-
-    setFiles(updatedFiles)
     URL.revokeObjectURL(fileToRemove.preview)
-    onFilesChange?.(updatedFiles)
+    const updated = files.filter((file) => file !== fileToRemove)
+
+    notifyChange(updated)
   }
 
   useEffect(() => {
-    return () => files.forEach((file) => URL.revokeObjectURL(file.preview))
+    return () => {
+      files.forEach((file) => URL.revokeObjectURL(file.preview))
+    }
   }, [files])
 
   return (
@@ -79,18 +76,23 @@ const ImageDropzone: FC<Props> = ({ multiple = false, onFilesChange }) => {
       {files.length > 0 && (
         <div className={cn('grid', multiple && 'grid-cols-2 gap-4')}>
           {files.map((file) => (
-            <div key={file.name} className='group relative flex flex-col gap-1'>
+            <div
+              key={file.preview}
+              className='group relative flex flex-col gap-1'
+            >
               <img
                 alt={file.name}
                 className='h-40 w-full rounded-lg object-cover'
                 src={file.preview}
               />
+
               <Button
                 className='absolute top-2 right-2'
                 startContent={<XIcon className='size-4 text-default-500' />}
                 variant='faded'
                 onPress={() => removeFile(file)}
               />
+
               <p className='line-clamp-1 text-xs text-default-500'>
                 {file.name} ({prettyBytes(file.size)})
               </p>
@@ -102,13 +104,14 @@ const ImageDropzone: FC<Props> = ({ multiple = false, onFilesChange }) => {
       <div
         {...getRootProps()}
         className={cn(
-          'relative flex min-h-64 cursor-pointer items-center justify-center rounded-xl border-2 border-dashed',
+          'relative flex min-h-64 cursor-pointer items-center justify-center rounded-xl border-2 border-dashed transition',
           isDragActive
             ? 'border-primary-website bg-primary-website/10'
             : 'border-gray-300 hover:border-gray-400',
         )}
       >
         <input {...getInputProps()} />
+
         <div className='flex flex-col items-center justify-center gap-3 p-8 text-center'>
           <div
             className={cn(
@@ -123,20 +126,22 @@ const ImageDropzone: FC<Props> = ({ multiple = false, onFilesChange }) => {
               )}
             />
           </div>
+
           {isDragActive ? (
             <p className='text-primary-website'>วางรูปภาพที่นี่...</p>
           ) : (
             <div className='flex flex-col'>
-              <p className=''>ลากและวางรูปภาพที่นี่</p>
+              <p>ลากและวางรูปภาพที่นี่</p>
+
               <div className='mx-auto flex gap-1 text-sm text-default-500'>
-                {ACCEPT_TYPE?.map((type, idx) => (
-                  <p key={idx}>{type}</p>
+                {ACCEPT_TYPES.map((type) => (
+                  <p key={type}>{type}</p>
                 ))}
               </div>
+
               <p className='text-sm text-default-500'>
-                หรือคลิกเพื่อเลือกไฟล์
-                (ระบบจะปรับขนาดไฟล์ให้โดยอัตโนมัติเพื่อเพิ่ม Performance
-                ของรูปภาพ)
+                หรือคลิกเพื่อเลือกไฟล์ (ระบบจะปรับขนาดไฟล์ให้โดยอัตโนมัติ
+                เพื่อเพิ่ม Performance)
               </p>
             </div>
           )}
@@ -147,4 +152,3 @@ const ImageDropzone: FC<Props> = ({ multiple = false, onFilesChange }) => {
 }
 
 export { ImageDropzone }
-export type { ImageWithPreview }
