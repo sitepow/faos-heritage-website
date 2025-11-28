@@ -53,7 +53,7 @@ const ImageForm = () => {
     reset,
     handleSubmit,
     setValue,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm<ImageInput>({
     resolver: zodResolver(imageSchema),
     defaultValues: DEFAULT_VALUES,
@@ -104,7 +104,7 @@ const ImageForm = () => {
 
   const onFilesChange = async (files: ImageWithPreview[]) => {
     if (files.length === 0) {
-      setValue('url', imageId ? (oldUrl ?? '') : '')
+      setValue('url', oldUrl ?? '', { shouldDirty: true })
 
       return
     }
@@ -118,7 +118,7 @@ const ImageForm = () => {
     setFilePaths((prev) => [...prev, ...imagePaths])
 
     if (imagePaths?.length > 0) {
-      setValue('url', imagePaths[0])
+      setValue('url', imagePaths[0], { shouldDirty: true })
     }
   }
 
@@ -218,7 +218,7 @@ const ImageForm = () => {
               ยกเลิก
             </Button>
             <Button
-              isDisabled={isPending}
+              isDisabled={isPending || !isDirty}
               variant='faded'
               onClick={handleSubmit(onSubmit)}
             >

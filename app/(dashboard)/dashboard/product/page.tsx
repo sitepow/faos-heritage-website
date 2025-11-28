@@ -160,10 +160,9 @@ const Product = () => {
               <TableCell>{product.id}</TableCell>
               <TableCell>
                 <AvatarGroup max={3}>
-                  <Avatar src='/placeholder.svg' />
-                  <Avatar src='/placeholder.svg' />
-                  <Avatar src='/placeholder.svg' />
-                  <Avatar src='/placeholder.svg' />
+                  {product?.images?.map((image) => (
+                    <Avatar key={image?.url} src={image?.url} />
+                  ))}
                 </AvatarGroup>
               </TableCell>
               <TableCell className='min-w-60'>{product.name}</TableCell>
