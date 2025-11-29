@@ -111,6 +111,7 @@ model Product {
     id             String  @id @default(cuid())
     name           String  @unique
     slug           String? @unique
+    shortDescription String? @db.Text
     description    String? @db.Text
     price          Float
     compareAtPrice Float?

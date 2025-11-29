@@ -4,6 +4,8 @@ import { CopyIcon, HeartIcon, ShoppingCartIcon } from 'lucide-react'
 
 import type { ComponentProps, FC } from 'react'
 
+import { useProductStore } from '../../store'
+
 import { Price } from '@/components/price'
 import { Quantity } from '@/components/quantity'
 import { cn } from '@/utils/style'
@@ -12,10 +14,12 @@ const CartSection: FC<ComponentProps<typeof Card>> = ({
   className,
   ...props
 }) => {
+  const { product } = useProductStore()
+
   return (
     <Card className={cn(className)} {...props}>
       <CardHeader className='flex flex-col items-start gap-4'>
-        <Price price={250} />
+        <Price price={product?.price!} />
         <div className='flex w-full items-center gap-4'>
           <Quantity />
           <Button fullWidth startContent={<ShoppingCartIcon />} variant='faded'>

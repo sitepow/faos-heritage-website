@@ -19,6 +19,7 @@ export const productSchema = z.object({
     .nullish(),
   weight: z.number('น้ำหนักสินค้า ต้องเป็นตัวเลขที่ถูกต้อง').nullish(),
   categoryId: z.string('กรุณาเลือกหมวดหมู่สินค้า').nullish(),
+  shortDescription: z.string().nullish(),
   description: z.string().nullish(),
   metaTitle: z.string('Meta Title ต้องเป็นข้อความที่ถูกต้อง').nullish(),
   metaDescription: z

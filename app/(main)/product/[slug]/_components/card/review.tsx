@@ -9,7 +9,7 @@ const ReviewCard = () => {
         <SubHeader title='รีวิวสินค้า' />
       </CardHeader>
       <CardBody>
-        <span>ยังไม่มี ความคิดเห็น สำหรับสินค้านี้</span>
+        <p>ยังไม่มี ความคิดเห็น สำหรับสินค้านี้</p>
       </CardBody>
     </Card>
   )

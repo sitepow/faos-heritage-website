@@ -3,6 +3,7 @@
 import { BreadcrumbItem, Breadcrumbs } from '@heroui/breadcrumbs'
 import { Button } from '@heroui/button'
 import { Divider } from '@heroui/divider'
+import { Spinner } from '@heroui/spinner'
 import { Switch } from '@heroui/switch'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { ArrowUpDownIcon, Settings2Icon } from 'lucide-react'
@@ -13,6 +14,7 @@ import { getProducts, type GetProductsResult } from '@/actions/product'
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
 
 const ITEM_PER_PAGE = 8
+
 const Products = () => {
   const { data, isLoading, fetchNextPage, isFetchingNextPage, hasNextPage } =
     useInfiniteQuery<GetProductsResult>({
@@ -33,9 +35,18 @@ const Products = () => {
     threshold: 300,
   })
 
-  const totalItems = data?.pages[0]?.totalCount ?? 0
-  const currentItems = data?.pages?.flatMap((page) => page?.items) ?? []
-  const currentItemCount = currentItems?.length
+  const totalItems = data?.pages?.[0]?.totalCount ?? 0
+  const items = data?.pages?.flatMap((page) => page.items) ?? []
+  const itemCount = items.length
+
+  if (isLoading)
+    return (
+      <div className='flex items-center justify-center'>
+        <Spinner label='กำลังโหลด...' />
+      </div>
+    )
+
+  if (totalItems === 0) return null
 
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
@@ -50,16 +61,18 @@ const Products = () => {
 
       <div className='flex w-full flex-wrap items-center justify-between gap-3'>
         <span className='text-primary-website'>
-          สินค้ารายการที่ 1 - {currentItemCount} จาก ทั้งหมด {totalItems} รายการ
+          สินค้ารายการที่ 1 – {itemCount} จากทั้งหมด {totalItems} รายการ
         </span>
 
         <div className='flex flex-wrap gap-3'>
           <Switch defaultSelected color='primary'>
             แสดงเฉพาะสินค้าพร้อมส่ง
           </Switch>
+
           <Button startContent={<Settings2Icon />} variant='bordered'>
             ตัวกรอง
           </Button>
+
           <Button startContent={<ArrowUpDownIcon />} variant='bordered'>
             การเรียงลำดับ
           </Button>
@@ -67,11 +80,12 @@ const Products = () => {
       </div>
 
       <Divider />
+
       <ProductSection
         isFetchingNextPage={isFetchingNextPage}
         isLoading={isLoading}
         itemPerPage={ITEM_PER_PAGE}
-        items={currentItems}
+        items={items}
       />
     </section>
   )

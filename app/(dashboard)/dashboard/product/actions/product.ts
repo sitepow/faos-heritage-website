@@ -53,6 +53,8 @@ const deleteProduct = async (productIds: string | string[]) => {
   }
 }
 
+export type GetProductResult = Awaited<ReturnType<typeof getProduct>>
+
 const getProduct = async (productId: string) => {
   try {
     if (!productId) {
@@ -74,6 +76,17 @@ const getProduct = async (productId: string) => {
         lowStockAlert: true,
         weight: true,
         categoryId: true,
+        shortDescription: true,
+        category: {
+          select: {
+            name: true,
+          },
+        },
+        images: {
+          select: {
+            url: true,
+          },
+        },
         description: true,
         metaTitle: true,
         metaDescription: true,

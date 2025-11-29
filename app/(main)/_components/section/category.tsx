@@ -4,7 +4,7 @@ import { Button } from '@heroui/button'
 import { Card, CardBody, CardHeader } from '@heroui/card'
 import { ScrollShadow } from '@heroui/scroll-shadow'
 import { useQuery } from '@tanstack/react-query'
-import { AlertCircleIcon, InfoIcon } from 'lucide-react'
+import { AlertCircleIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
@@ -57,7 +57,7 @@ const CategorySection = () => {
           <ScrollShadow className='p-1'>
             <div className='space-y-1'>
               {isLoadingCategories &&
-                [...Array(4)].map((_, index) => (
+                [...Array(2)].map((_, index) => (
                   <CategoryCardSkeleton key={index} />
                 ))}
 
@@ -92,10 +92,7 @@ const CategorySection = () => {
 
       {!currentCategory?.id && (
         <Card fullWidth>
-          <CardBody className='items-center justify-center gap-2 text-default-500'>
-            <InfoIcon className='size-8' />
-            <span>โปรดเลือกหมวดหมู่สินค้า</span>
-          </CardBody>
+          <CardBody />
         </Card>
       )}
 

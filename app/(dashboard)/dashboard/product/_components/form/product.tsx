@@ -44,6 +44,7 @@ const DEFAULT_VALUES: ProductInput = {
   slug: '',
   metaTitle: '',
   metaDescription: '',
+  shortDescription: '',
   description: '',
 }
 
@@ -230,12 +231,24 @@ const ProductForm = () => {
               />
               <Controller
                 control={control}
+                name='shortDescription'
+                render={({ field: { value, ...field } }) => (
+                  <Textarea
+                    {...field}
+                    label='รายละเอียดสินค้า (ฉบับย่อ)'
+                    minRows={5}
+                    value={value ?? ''}
+                  />
+                )}
+              />
+              <Controller
+                control={control}
                 name='description'
                 render={({ field: { value, ...field } }) => (
                   <Textarea
                     {...field}
-                    label='รายละเอียดสินค้า'
-                    minRows={3}
+                    label='รายละเอียดสินค้า (ฉบับเต็ม)'
+                    minRows={5}
                     value={value ?? ''}
                   />
                 )}
