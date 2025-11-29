@@ -1,6 +1,6 @@
 import { Card, CardBody } from '@heroui/card'
 import { Skeleton } from '@heroui/skeleton'
-import { LayoutGridIcon } from 'lucide-react'
+import Image from 'next/image'
 
 import type { CategoryCard } from '@/types'
 import type { ComponentProps, FC } from 'react'
@@ -24,8 +24,14 @@ const CategoryCard: FC<ComponentProps<typeof CardBody> & Props> = ({
       shadow='none'
     >
       <CardBody {...props}>
-        <div className='flex gap-2.5'>
-          <LayoutGridIcon className='text-divider' />
+        <div className='flex items-center gap-2.5'>
+          <Image
+            alt=''
+            className='rounded-full'
+            height={38}
+            src='/placeholder.svg'
+            width={38}
+          />
           <span className='truncate'>{item.name}</span>
         </div>
       </CardBody>
