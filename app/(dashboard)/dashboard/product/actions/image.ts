@@ -11,7 +11,7 @@ import { getPrismaError } from '@/utils/prisma'
 
 const prisma = new PrismaClient()
 
-const SELECT_FIELD = {
+const FIELD = {
   id: true,
   url: true,
   alt: true,
@@ -43,7 +43,7 @@ const getImages = async (productId: string) => {
   try {
     return prisma.productImage.findMany({
       where: { productId },
-      select: SELECT_FIELD,
+      select: FIELD,
       orderBy: { url: 'desc' },
     })
   } catch (error) {
@@ -59,7 +59,7 @@ const getImage = async (variantId: string) => {
 
     const variant = await prisma.productImage.findUnique({
       where: { id: variantId },
-      select: SELECT_FIELD,
+      select: FIELD,
     })
 
     if (!variant) {

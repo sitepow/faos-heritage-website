@@ -103,7 +103,13 @@ const VariantManager = () => {
             <ModalBody>
               <div className='grid grid-cols-1 gap-3'>
                 {variants?.map((variant) => (
-                  <Card key={variant.id}>
+                  <Card
+                    key={variant.id}
+                    className={cn(
+                      'border-l-4',
+                      variant.isActive && 'border-primary-website',
+                    )}
+                  >
                     <CardBody className='flex-row items-center justify-between'>
                       <div className='line-clamp-1 flex flex-col'>
                         <span className='line-clamp-1'>{variant.name}</span>
@@ -134,16 +140,6 @@ const VariantManager = () => {
                             {variant.stockQuantity
                               ? `สต็อค: ${formatNumber(variant.stockQuantity)}`
                               : '(โปรดระบุสต็อค)'}
-                          </span>
-
-                          <span
-                            className={cn(
-                              variant.isActive
-                                ? 'text-green-500'
-                                : 'text-red-500',
-                            )}
-                          >
-                            {variant.isActive ? '(เปิดใช้งาน)' : '(ปิดใช้งาน)'}
                           </span>
                         </div>
                       </div>

@@ -4,24 +4,48 @@ import { Button } from '@heroui/button'
 import { Card, CardBody, CardHeader } from '@heroui/card'
 import { ScrollShadow } from '@heroui/scroll-shadow'
 import { useQuery } from '@tanstack/react-query'
+import { AlertCircleIcon, InfoIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
-import { CategoryCard } from '../card/category'
+import { CategoryCard, CategoryCardSkeleton } from '../card/category'
 import { ProductCard, ProductCardSkeleton } from '../card/product'
 
 import { getProducts } from '@/actions/product'
+import { getCategories } from '@/app/(dashboard)/dashboard/product/actions/category'
 import { Carousel } from '@/components/carousel'
-import { CATEGORY_CONSTANT } from '@/utils/const'
 import { createSlug } from '@/utils/helper'
 
 const ITEM_PER_PAGE = 8
+
 const CategorySection = () => {
   const router = useRouter()
 
-  const { data: products, isLoading } = useQuery({
-    queryKey: ['products', 'carousel'],
-    queryFn: () => getProducts({ limit: ITEM_PER_PAGE }),
+  const [currentCategory, setCurrentCategory] = useState<{
+    id?: string
+    label?: string
+  }>({})
+
+  const { data: categories, isLoading: isLoadingCategories } = useQuery({
+    queryKey: ['dashboard', 'modal', 'categories'],
+    queryFn: () => getCategories(),
   })
+
+  const { data: products, isLoading: isLoadingProducts } = useQuery({
+    queryKey: ['products', 'carousel', currentCategory.id],
+    queryFn: () =>
+      getProducts({ limit: ITEM_PER_PAGE, categoryId: currentCategory.id }),
+    enabled: !!currentCategory.id,
+  })
+
+  useEffect(() => {
+    if (!isLoadingCategories && categories) {
+      setCurrentCategory({
+        id: categories[0].id,
+        label: categories[0].name,
+      })
+    }
+  }, [categories, isLoadingCategories])
 
   return (
     <div className='flex w-full flex-col gap-5 md:flex md:h-[500px] md:flex-row'>
@@ -32,52 +56,105 @@ const CategorySection = () => {
         <CardBody>
           <ScrollShadow className='p-1'>
             <div className='space-y-1'>
-              {CATEGORY_CONSTANT.map((category) => (
-                <CategoryCard key={category.id} item={category} />
-              ))}
+              {isLoadingCategories &&
+                [...Array(4)].map((_, index) => (
+                  <CategoryCardSkeleton key={index} />
+                ))}
+
+              {!isLoadingCategories && categories?.length === 0 && (
+                <span>ไม่พบหมวดหมู่สินค้า</span>
+              )}
+
+              {!isLoadingCategories &&
+                (categories ?? []).map((category) => (
+                  <CategoryCard
+                    key={category.id}
+                    isActive={currentCategory.id === category.id}
+                    item={category}
+                    onClick={() =>
+                      setCurrentCategory({
+                        id: category.id,
+                        label: category.name,
+                      })
+                    }
+                    onMouseEnter={() =>
+                      setCurrentCategory({
+                        id: category.id,
+                        label: category.name,
+                      })
+                    }
+                  />
+                ))}
             </div>
           </ScrollShadow>
         </CardBody>
       </Card>
 
-      <Card className='size-full'>
-        <CardHeader>
-          <div className='flex w-full items-center justify-between'>
-            <span className='font-bold'>หมวดหมู่เสื้อผ้าแฟชั่น</span>
+      {!currentCategory?.id && (
+        <Card fullWidth>
+          <CardBody className='items-center justify-center gap-2 text-default-500'>
+            <InfoIcon className='size-8' />
+            <span>โปรดเลือกหมวดหมู่สินค้า</span>
+          </CardBody>
+        </Card>
+      )}
 
-            <Button
-              variant='light'
-              onPress={() => {
-                router.push(`/category/${createSlug('เสื้อผ้าแฟชั่น', '1')}`)
-              }}
-            >
-              ดูทั้งหมด
-            </Button>
-          </div>
-        </CardHeader>
-        <CardBody>
-          <Carousel slidesToScroll className='items-center'>
-            {isLoading &&
-              [...Array(8)].map((_, index) => (
-                <ProductCardSkeleton key={index} />
-              ))}
+      {currentCategory?.id && (
+        <Card fullWidth className='size-full'>
+          {currentCategory.id && (
+            <CardHeader>
+              <div className='flex w-full items-center justify-between'>
+                <span className='font-bold'>{currentCategory.label}</span>
 
-            {!isLoading &&
-              products?.items?.map((product) => (
-                <ProductCard key={product.id} {...product} />
-              ))}
+                <Button
+                  variant='light'
+                  onPress={() => {
+                    router.push(
+                      `/category/${createSlug(currentCategory.label!, currentCategory.id!)}`,
+                    )
+                  }}
+                >
+                  ดูทั้งหมด
+                </Button>
+              </div>
+            </CardHeader>
+          )}
 
-            <Button
-              variant='faded'
-              onPress={() => {
-                router.push(`/category/${createSlug('เสื้อผ้าแฟชั่น', '1')}`)
-              }}
-            >
-              ดูทั้งหมด
-            </Button>
-          </Carousel>
-        </CardBody>
-      </Card>
+          <CardBody>
+            <Carousel slidesToScroll className='items-center'>
+              {isLoadingProducts &&
+                [...Array(8)].map((_, index) => (
+                  <ProductCardSkeleton key={index} />
+                ))}
+
+              {!isLoadingProducts && products?.items?.length === 0 && (
+                <div className='flex w-full flex-col items-center justify-center gap-2 text-default-500'>
+                  <AlertCircleIcon className='size-8' />
+                  <span>ไม่พบสินค้าในหมวดหมู่นี้</span>
+                </div>
+              )}
+
+              {!isLoadingProducts &&
+                products?.items?.map((product) => (
+                  <ProductCard key={product.id} {...product} />
+                ))}
+
+              {currentCategory.id && products?.items?.length !== 0 && (
+                <Button
+                  variant='faded'
+                  onPress={() => {
+                    router.push(
+                      `/category/${createSlug(currentCategory.label!, currentCategory.id!)}`,
+                    )
+                  }}
+                >
+                  ดูทั้งหมด
+                </Button>
+              )}
+            </Carousel>
+          </CardBody>
+        </Card>
+      )}
     </div>
   )
 }

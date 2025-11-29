@@ -4,28 +4,44 @@ import { BreadcrumbItem, Breadcrumbs } from '@heroui/breadcrumbs'
 import { Button } from '@heroui/button'
 import { Divider } from '@heroui/divider'
 import { Switch } from '@heroui/switch'
-import { useInfiniteQuery } from '@tanstack/react-query'
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 import { ArrowUpDownIcon, Settings2Icon } from 'lucide-react'
+import { useParams } from 'next/navigation'
 
 import type { GetProductsResult } from '@/actions/product'
 
 import { ProductSection } from '../../_components/section/product'
 
 import { getProducts } from '@/actions/product'
+import { getCategory } from '@/app/(dashboard)/dashboard/product/actions/category'
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
+import { getIdFromSlug } from '@/utils/helper'
 
 const ITEM_PER_PAGE = 8
 const Category = () => {
+  const { slug } = useParams()
+
+  const slugStr = Array.isArray(slug) ? slug[0] : slug
+  const categoryId = getIdFromSlug(slugStr!)
+
+  const { data: category } = useQuery({
+    queryKey: ['categories', 'category', categoryId],
+    queryFn: () => getCategory(categoryId),
+    enabled: !!categoryId,
+  })
+
   const { data, isLoading, fetchNextPage, isFetchingNextPage, hasNextPage } =
     useInfiniteQuery<GetProductsResult>({
-      queryKey: ['products'],
+      queryKey: ['categories', 'products', categoryId],
       initialPageParam: null,
       queryFn: ({ pageParam }) =>
         getProducts({
           cursor: pageParam as string | null,
           limit: ITEM_PER_PAGE,
+          categoryId,
         }),
       getNextPageParam: (lastPage) => lastPage?.nextCursor,
+      enabled: !!categoryId,
     })
 
   useInfiniteScroll({
@@ -44,11 +60,11 @@ const Category = () => {
       <div className='flex w-full justify-start'>
         <Breadcrumbs className='font-bold'>
           <BreadcrumbItem>หน้าหลัก</BreadcrumbItem>
-          <BreadcrumbItem>เสื้อผ้าแฟชั่น</BreadcrumbItem>
+          <BreadcrumbItem>{category?.name}</BreadcrumbItem>
         </Breadcrumbs>
       </div>
 
-      <span className='text-2xl'>เสื้อผ้าแฟชั่น</span>
+      <span className='text-2xl'>{category?.name}</span>
 
       <div className='flex w-full flex-wrap items-center justify-between gap-3'>
         <span className='text-primary-website'>

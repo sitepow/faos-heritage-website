@@ -11,7 +11,7 @@ import { getPrismaError } from '@/utils/prisma'
 
 const prisma = new PrismaClient()
 
-const SELECT_FIELD = {
+const FIELD = {
   id: true,
   name: true,
   sku: true,
@@ -45,7 +45,7 @@ const getVariants = async (productId: string) => {
   try {
     return prisma.productVariant.findMany({
       where: { productId },
-      select: SELECT_FIELD,
+      select: FIELD,
       orderBy: { name: 'desc' },
     })
   } catch (error) {
@@ -61,7 +61,7 @@ const getVariant = async (variantId: string) => {
 
     const variant = await prisma.productVariant.findUnique({
       where: { id: variantId },
-      select: SELECT_FIELD,
+      select: FIELD,
     })
 
     if (!variant) {

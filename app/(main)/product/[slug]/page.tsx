@@ -3,7 +3,6 @@ import { BreadcrumbItem, Breadcrumbs } from '@heroui/breadcrumbs'
 import { CartSection } from './_components/section/cart'
 import { DetailSection } from './_components/section/detail'
 import { ImageSection } from './_components/section/image'
-import { SimilarSection } from './_components/section/similar'
 
 const Product = () => {
   return (
@@ -17,7 +16,7 @@ const Product = () => {
         <CartSection />
       </div>
       <DetailSection />
-      <SimilarSection />
+      {/* <SimilarSection /> */}
     </section>
   )
 }

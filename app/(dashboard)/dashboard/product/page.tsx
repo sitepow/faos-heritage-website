@@ -27,12 +27,14 @@ import {
   ImageIcon,
   LayoutIcon,
   PlusIcon,
+  SettingsIcon,
   TrashIcon,
   XIcon,
 } from 'lucide-react'
 import { useState } from 'react'
 
 import { ProductForm } from './_components/form/product'
+import { CategoryManager } from './_components/manager/category'
 import { ImageManager } from './_components/manager/image'
 import { VariantManager } from './_components/manager/variant'
 import { deleteProduct, getDashboard, getProducts } from './actions/product'
@@ -45,13 +47,13 @@ import {
 import { ModalDelete } from '@/components/modal/delete'
 import { formatCurrency, formatNumber } from '@/utils/number'
 
-const PAGE_LIMIT = 10
-
+const ITEM_PER_PAGE = 10
 const Product = () => {
   const queryClient = useQueryClient()
   const {
     productId,
     setState,
+    onOpenCategoryManagerChange,
     onOpenProductChange,
     onOpenImageManagerChange,
     onOpenVariantManagerChange,
@@ -65,8 +67,8 @@ const Product = () => {
     useDisclosure()
 
   const { data: products, isLoading: isLoadingProducts } = useQuery({
-    queryKey: ['dashboard', 'products', page, PAGE_LIMIT],
-    queryFn: () => getProducts(page, PAGE_LIMIT),
+    queryKey: ['dashboard', 'products', page, ITEM_PER_PAGE],
+    queryFn: () => getProducts(page, ITEM_PER_PAGE),
   })
 
   const { data: dashboard, isLoading: isLoadingDashboard } = useQuery({
@@ -98,6 +100,8 @@ const Product = () => {
       <ProductForm />
       <ImageManager />
       <VariantManager />
+      <CategoryManager />
+
       <div className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
         {isLoadingDashboard &&
           [...Array(4)].map((_, index) => <TrendCardSkeleton key={index} />)}
@@ -114,6 +118,15 @@ const Product = () => {
           }}
         >
           เพิ่มสินค้าใหม่
+        </Button>
+        <Button
+          startContent={<SettingsIcon className='text-default-500' />}
+          variant='faded'
+          onPress={() => {
+            onOpenCategoryManagerChange()
+          }}
+        >
+          จัดการหมวดหมู่สินค้า
         </Button>
         <Button
           startContent={<ArrowUpIcon className='text-default-500' />}
@@ -146,6 +159,7 @@ const Product = () => {
           <TableColumn>ชื่อสินค้า</TableColumn>
           <TableColumn>ราคาหลัก</TableColumn>
           <TableColumn>สต็อคหลัก</TableColumn>
+          <TableColumn>หมวดหมู่</TableColumn>
           <TableColumn>ตัวเลือกสินค้า</TableColumn>
           <TableColumn>จัดการ</TableColumn>
         </TableHeader>
@@ -169,9 +183,14 @@ const Product = () => {
                   </AvatarGroup>
                 )}
               </TableCell>
-              <TableCell className='min-w-60'>{product.name}</TableCell>
+              <TableCell className='max-w-72 min-w-72'>
+                {product?.name ?? '-'}
+              </TableCell>
               <TableCell>{formatCurrency(product.price)}</TableCell>
               <TableCell>{formatNumber(product.stockQuantity)}</TableCell>
+              <TableCell className='max-w-40 min-w-40'>
+                {product?.category?.name ?? '-'}
+              </TableCell>
               <TableCell className='min-w-60'>
                 <div className='flex flex-col'>
                   {product?.variants?.length === 0 && <span>-</span>}

@@ -20,6 +20,7 @@ import { Controller, useForm } from 'react-hook-form'
 
 import type { ProductInput } from '../../schema/product'
 
+import { getCategories } from '../../actions/category'
 import { createProduct, getProduct, updateProduct } from '../../actions/product'
 import { productSchema } from '../../schema/product'
 import { useProductStore } from '../../store'
@@ -50,6 +51,12 @@ const ProductForm = () => {
   const { productId, setState, isProductOpen, onOpenProductChange } =
     useProductStore()
   const queryClient = useQueryClient()
+
+  const { data: categories, isLoading: isLoadingCategories } = useQuery({
+    queryKey: ['dashboard', 'modal', 'categories'],
+    queryFn: () => getCategories(),
+    enabled: isProductOpen,
+  })
 
   const { data: product, isLoading: isLoadingProduct } = useQuery({
     queryKey: ['dashboard', 'product', productId],
@@ -97,7 +104,10 @@ const ProductForm = () => {
     })
 
   const isPending =
-    isLoadingProduct || isPendingCreateProduct || isPendingUpdateProduct
+    isLoadingProduct ||
+    isPendingCreateProduct ||
+    isPendingUpdateProduct ||
+    isLoadingCategories
   const headerLable = productId ? 'แก้ไขสินค้า' : 'เพิ่มสินค้า'
 
   const onSubmit = (data: ProductInput) => {
@@ -198,11 +208,9 @@ const ProductForm = () => {
                       onChange(selected)
                     }}
                   >
-                    <SelectItem key='clothing'>เสื้อผ้า</SelectItem>
-                    <SelectItem key='accessory'>เครื่องประดับ</SelectItem>
-                    <SelectItem key='electronics'>
-                      อุปกรณ์อิเล็กทรอนิกส์
-                    </SelectItem>
+                    {(categories ?? []).map((category) => (
+                      <SelectItem key={category.id}>{category.name}</SelectItem>
+                    ))}
                   </Select>
                 )}
               />

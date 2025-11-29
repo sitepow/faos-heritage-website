@@ -17,10 +17,9 @@ const createSlug = (name: string, id: number | string): string => {
 }
 
 const getIdFromSlug = (slug: string): string => {
-  const parts = slug.split('-')
-  const id = parts[parts.length - 1]
+  const parts = slug.split('-').filter(Boolean)
 
-  return /^\d+$/.test(id) ? id : ''
+  return parts[parts.length - 1] || ''
 }
 
 const removeEmptyField = <T extends Record<string, unknown>>(

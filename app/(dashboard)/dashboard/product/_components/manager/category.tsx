@@ -1,0 +1,188 @@
+import { Button } from '@heroui/button'
+import { Card, CardBody } from '@heroui/card'
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from '@heroui/dropdown'
+import {
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  useDisclosure,
+} from '@heroui/modal'
+import { Spinner } from '@heroui/spinner'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import {
+  EditIcon,
+  EllipsisVerticalIcon,
+  PlusIcon,
+  TrashIcon,
+} from 'lucide-react'
+
+import { deleteCategory, getCategories } from '../../actions/category'
+import { useProductStore } from '../../store'
+import { CategoryForm } from '../form/category'
+
+import { ModalDelete } from '@/components/modal/delete'
+import { cn } from '@/utils/style'
+
+const CategoryManager = () => {
+  const queryClient = useQueryClient()
+  const {
+    categoryId,
+    isCategoryManagerOpen,
+    onOpenCategoryChange,
+    onOpenCategoryManagerChange,
+    setState,
+  } = useProductStore()
+  const QUERY_KEY = ['dashboard', 'modal', 'categories']
+
+  const { isOpen: isDeleteOpen, onOpenChange: onOpenDeleteChange } =
+    useDisclosure()
+
+  const { data: categories, isLoading: isLoadingCategories } = useQuery({
+    queryKey: QUERY_KEY,
+    queryFn: () => getCategories(),
+    enabled: isCategoryManagerOpen,
+  })
+
+  const { mutate: mutateDeteleCategory, isPending: isPendingDeteleCategory } =
+    useMutation({
+      mutationFn: deleteCategory,
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: QUERY_KEY,
+        })
+        onOpenDeleteChange()
+        setState({ categoryId: null })
+      },
+    })
+
+  return (
+    <>
+      <ModalDelete
+        isOpen={isDeleteOpen}
+        isPending={isPendingDeteleCategory}
+        onConfirm={() => {
+          mutateDeteleCategory(categoryId!)
+        }}
+        onOpenChange={onOpenDeleteChange}
+      />
+      <CategoryForm />
+
+      <Modal
+        hideCloseButton
+        isDismissable={false}
+        isOpen={isCategoryManagerOpen}
+        size='2xl'
+        onOpenChange={onOpenCategoryManagerChange}
+      >
+        <ModalContent>
+          <ModalHeader>จัดการหมวดหมู่สินค้า</ModalHeader>
+          {isLoadingCategories && (
+            <ModalBody>
+              <Spinner label='กำลังโหลด...' />
+            </ModalBody>
+          )}
+
+          {categories?.length === 0 && (
+            <ModalBody>
+              <p className='text-center text-default-500'>
+                ยังไม่มีหมวดหมู่สินค้า
+              </p>
+            </ModalBody>
+          )}
+
+          {categories?.length !== 0 && (
+            <ModalBody>
+              <div className='grid grid-cols-1 gap-3'>
+                {categories?.map((category) => (
+                  <Card
+                    key={category.id}
+                    className={cn(
+                      'border-l-4',
+                      category.isActive && 'border-primary-website',
+                    )}
+                  >
+                    <CardBody className='flex-row items-center justify-between'>
+                      <div className='line-clamp-1 flex flex-col'>
+                        <span className='line-clamp-1'>{category.name}</span>
+                      </div>
+
+                      <Dropdown placement='bottom-end'>
+                        <DropdownTrigger>
+                          <Button isIconOnly size='sm' variant='light'>
+                            <EllipsisVerticalIcon className='size-5 text-default-500' />
+                          </Button>
+                        </DropdownTrigger>
+                        <DropdownMenu
+                          aria-label='จัดการสินค้า'
+                          className='min-w-[180px]'
+                        >
+                          <DropdownItem
+                            key='edit'
+                            startContent={<EditIcon className='size-4' />}
+                            onClick={() => {
+                              setState({ categoryId: category.id })
+                              onOpenCategoryManagerChange()
+                              onOpenCategoryChange()
+                            }}
+                          >
+                            แก้ไขข้อมูล
+                          </DropdownItem>
+                          <DropdownItem
+                            key='delete'
+                            className='text-danger'
+                            color='danger'
+                            startContent={<TrashIcon className='size-4' />}
+                            onClick={() => {
+                              setState({ categoryId: category.id })
+                              onOpenDeleteChange()
+                            }}
+                          >
+                            ลบหมวดหมู่
+                          </DropdownItem>
+                        </DropdownMenu>
+                      </Dropdown>
+                    </CardBody>
+                  </Card>
+                ))}
+              </div>
+            </ModalBody>
+          )}
+
+          <ModalFooter>
+            <Button
+              variant='faded'
+              onPress={() => {
+                onOpenCategoryManagerChange()
+                setState({ productId: null, variantId: null })
+                queryClient.invalidateQueries({
+                  queryKey: QUERY_KEY,
+                })
+              }}
+            >
+              ยกเลิก
+            </Button>
+            <Button
+              startContent={<PlusIcon className='text-default-500' />}
+              variant='faded'
+              onPress={() => {
+                onOpenCategoryChange()
+                onOpenCategoryManagerChange()
+              }}
+            >
+              เพิ่มหมวดหมู่
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  )
+}
+
+export { CategoryManager }

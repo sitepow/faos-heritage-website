@@ -93,7 +93,7 @@ model Address {
 model Category {
     id          String  @id @default(cuid())
     name        String
-    slug        String  @unique
+    slug        String?
     description String? @db.Text
     image       String?
     parentId    String?

@@ -12,21 +12,25 @@ export type ProductItem = GetProductsResult['items'][number]
 export const getProducts = async ({
   cursor,
   limit = 8,
+  categoryId,
 }: {
   cursor?: string | null
   limit?: number
+  categoryId?: string | null
 }) => {
   let totalCount: number | undefined
+  const where = categoryId ? { categoryId } : undefined
 
   try {
     if (!cursor) {
-      totalCount = await prisma.product.count()
+      totalCount = await prisma.product.count({ where })
     }
 
     const items = await prisma.product.findMany({
       take: limit + 1,
       skip: cursor ? 1 : 0,
       cursor: cursor ? { id: cursor } : undefined,
+      where,
       select: {
         id: true,
         name: true,
