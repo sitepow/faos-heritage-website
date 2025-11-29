@@ -1,9 +1,9 @@
 /* eslint-disable no-nested-ternary */
 'use client'
 
-import { Alert } from '@heroui/alert'
 import { Button } from '@heroui/button'
 import { Card, CardBody, CardFooter, CardHeader } from '@heroui/card'
+import { Chip } from '@heroui/chip'
 import { Image } from '@heroui/image'
 import { Skeleton } from '@heroui/skeleton'
 import { HeartIcon, ShoppingCartIcon } from 'lucide-react'
@@ -29,6 +29,7 @@ const ProductCard: FC<Props> = ({
   name,
   price,
   images,
+  category,
   className,
   hideIcon = 'true',
 }) => {
@@ -45,13 +46,15 @@ const ProductCard: FC<Props> = ({
       onMouseLeave={() => setIsHovered(false)}
     >
       <CardHeader className='relative overflow-hidden p-0'>
+        <Chip className='absolute bottom-2 left-2 z-50'>
+          {category?.name ?? 'ไม่มีหมวดหมู่'}
+        </Chip>
+
         <Link className='size-full' href={`/product/${createSlug(name, id)}`}>
           <Image
             alt={name}
             className='size-full object-cover'
-            classNames={{
-              wrapper: 'w-full',
-            }}
+            classNames={{ wrapper: 'w-full' }}
             height={250}
             radius='none'
             src={
@@ -64,14 +67,6 @@ const ProductCard: FC<Props> = ({
             width='100%'
           />
         </Link>
-
-        {isHovered && (
-          <Alert
-            className='absolute bottom-0 z-[60]'
-            description='คลิกเพื่อดูรายละเอียดสินค้า'
-            radius='none'
-          />
-        )}
       </CardHeader>
 
       <CardBody>

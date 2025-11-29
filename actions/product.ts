@@ -36,6 +36,11 @@ export const getProducts = async ({
         name: true,
         price: true,
         images: { select: { url: true } },
+        category: {
+          select: {
+            name: true,
+          },
+        },
       },
       orderBy: { createdAt: 'desc' },
     })
