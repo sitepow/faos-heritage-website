@@ -13,7 +13,7 @@ const DetailCard = () => {
         <SubHeader title='รายละเอียด' />
       </CardHeader>
       <CardBody>
-        <p>{product?.description}</p>
+        <p className='whitespace-pre-line'>{product?.description}</p>
       </CardBody>
     </Card>
   )

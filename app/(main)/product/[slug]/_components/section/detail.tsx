@@ -16,7 +16,7 @@ const DetailSection = () => {
       </span>
       <Card>
         <CardBody>
-          <div className='grid gap-4 lg:grid-cols-3'>
+          <div className='grid gap-4 lg:grid-cols-4'>
             <DetailCard />
             <ReviewCard />
           </div>

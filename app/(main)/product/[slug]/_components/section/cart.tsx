@@ -22,7 +22,11 @@ const CartSection: FC<ComponentProps<typeof Card>> = ({
         <Price price={product?.price!} />
         <div className='flex w-full items-center gap-4'>
           <Quantity />
-          <Button fullWidth startContent={<ShoppingCartIcon />} variant='faded'>
+          <Button
+            fullWidth
+            startContent={<ShoppingCartIcon className='text-default-500' />}
+            variant='faded'
+          >
             ใส่ตระกร้า
           </Button>
         </div>
@@ -31,11 +35,11 @@ const CartSection: FC<ComponentProps<typeof Card>> = ({
       <CardBody className='gap-4'>
         <div className='flex justify-center gap-4 border-y border-divider py-2.5'>
           <div className='flex cursor-pointer gap-2'>
-            <HeartIcon />
+            <HeartIcon className='text-default-500' />
             <span>รายการโปรด</span>
           </div>
           <div className='flex cursor-pointer gap-2'>
-            <CopyIcon />
+            <CopyIcon className='text-default-500' />
             <span>เปรียบเทียบ</span>
           </div>
         </div>
