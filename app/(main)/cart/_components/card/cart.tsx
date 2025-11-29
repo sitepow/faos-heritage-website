@@ -35,7 +35,7 @@ const CartCard: FC<ComponentProps<typeof Card>> = ({ className, ...props }) => {
             >
               <Image
                 alt='product-image'
-                className='shrink-0 object-cover'
+                className='shrink-0 rounded-xl object-cover'
                 height={150}
                 src='/placeholder.svg'
                 width={150}

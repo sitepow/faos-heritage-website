@@ -24,7 +24,7 @@ const Favorite: FC<ComponentProps<typeof Card>> = ({ className, ...props }) => {
           <div className='flex flex-wrap gap-4 lg:max-w-1/2 lg:flex-nowrap'>
             <Image
               alt='product-image'
-              className='size-32'
+              className='size-32 rounded-xl'
               height={100}
               src='/placeholder.svg'
               width={100}
