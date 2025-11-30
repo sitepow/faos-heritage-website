@@ -8,8 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "prepare": "husky install",
-    "postinstall": "prisma generate",
-    "prebuild": "prisma generate"
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@heroui/accordion": "2.2.24",
