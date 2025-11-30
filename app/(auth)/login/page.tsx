@@ -44,7 +44,7 @@ const Login = () => {
       <Card className='p-5 md:w-[450px]'>
         <CardHeader className='flex w-full flex-col items-center gap-1'>
           <span className='text-lg font-bold'>เข้าสู่ระบบ หรือ สมัครสมาชิก</span>
-          <span className='text-default-500'>เข้าสู่ {siteConfig.name} ด้วย Passport Local</span>
+          <span className='text-default-500'>เพื่อเข้าใช้งานเว็บไซต์ {siteConfig.name}</span>
         </CardHeader>
 
         <CardBody className='gap-5'>
