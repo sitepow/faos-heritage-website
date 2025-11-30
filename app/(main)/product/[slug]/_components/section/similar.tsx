@@ -17,17 +17,17 @@ const SimilarSection = () => {
     enabled: !!categoryId,
   })
 
-  const items = data?.items?.filter((p) => p.id !== product?.id) ?? []
-
-  if (!items.length) return null
+  const similars = data?.items?.filter((similar) => similar.id !== product?.id) ?? []
 
   return (
     <div className='flex flex-col gap-4'>
-      <span className='mx-auto w-fit border-b border-primary-website pb-1 text-xl font-bold'>
-        สินค้าใกล้เคียง/ทดแทน
-      </span>
+      {similars?.length !== 0 && (
+        <span className='mx-auto w-fit border-b border-primary-website pb-1 text-xl font-bold'>
+          สินค้าใกล้เคียง/ทดแทน
+        </span>
+      )}
 
-      <ProductSection isLoading={isLoading} itemPerPage={ITEM_PER_PAGE} items={items} />
+      <ProductSection isLoading={isLoading} itemPerPage={ITEM_PER_PAGE} items={similars} />
     </div>
   )
 }

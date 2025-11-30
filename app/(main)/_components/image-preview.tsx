@@ -30,10 +30,10 @@ export const ProductImagePreview = ({ images, alt = 'product-image' }: Props) =>
         <Carousel slidesToScroll className='md:gap-2'>
           {images.map((image, index) => (
             <button
-              key={index}
+              key={image}
               className={cn(
                 'relative size-12 shrink-0 cursor-pointer rounded-md border',
-                index === selectedIndex ? 'border-primary-website' : 'border-gray-200',
+                index === selectedIndex ? 'border-primary-website' : 'border-divider',
               )}
               onClick={() => setSelectedIndex(index)}
             >
