@@ -11,10 +11,7 @@ interface Props {
   alt?: string
 }
 
-export const ProductImagePreview = ({
-  images,
-  alt = 'product-image',
-}: Props) => {
+export const ProductImagePreview = ({ images, alt = 'product-image' }: Props) => {
   const [selectedIndex, setSelectedIndex] = useState(0)
 
   return (
@@ -36,9 +33,7 @@ export const ProductImagePreview = ({
               key={index}
               className={cn(
                 'relative size-12 shrink-0 cursor-pointer rounded-md border',
-                index === selectedIndex
-                  ? 'border-primary-website'
-                  : 'border-gray-200',
+                index === selectedIndex ? 'border-primary-website' : 'border-gray-200',
               )}
               onClick={() => setSelectedIndex(index)}
             >

@@ -7,10 +7,7 @@ import type { ComponentProps, FC } from 'react'
 import { formatCurrency } from '@/utils/number'
 import { cn } from '@/utils/style'
 
-const OrderSection: FC<ComponentProps<typeof Card>> = ({
-  className,
-  ...props
-}) => {
+const OrderSection: FC<ComponentProps<typeof Card>> = ({ className, ...props }) => {
   return (
     <Card fullWidth className={cn(className, 'h-fit')} {...props}>
       <CardHeader className='gap-5'>
@@ -37,9 +34,7 @@ const OrderSection: FC<ComponentProps<typeof Card>> = ({
 
         <div className='flex items-center justify-between'>
           <span className='font-bold'>ราคารวมสุทธิ :</span>
-          <span className='text-2xl font-bold text-primary-website'>
-            {formatCurrency(3990)}
-          </span>
+          <span className='text-2xl font-bold text-primary-website'>{formatCurrency(3990)}</span>
         </div>
       </CardBody>
 

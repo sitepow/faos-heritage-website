@@ -25,16 +25,9 @@ interface SubHeaderProps {
   title: string
 }
 
-const SubHeader: FC<ComponentProps<'span'> & SubHeaderProps> = ({
-  title,
-  className,
-  ...props
-}) => {
+const SubHeader: FC<ComponentProps<'span'> & SubHeaderProps> = ({ title, className, ...props }) => {
   return (
-    <span
-      className={cn('w-fit border-b border-divider pb-1', className)}
-      {...props}
-    >
+    <span className={cn('w-fit border-b border-divider pb-1', className)} {...props}>
       {title}
     </span>
   )

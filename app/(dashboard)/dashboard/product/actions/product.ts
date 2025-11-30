@@ -2,8 +2,8 @@
 
 import { PrismaClient } from '@prisma/client'
 
-import type { ProductInput } from '../schema/product'
 import type { Prisma } from '@prisma/client'
+import type { ProductInput } from '../schema/product'
 
 import { productSchema } from '../schema/product'
 
@@ -18,15 +18,12 @@ const createProduct = async (data: ProductInput) => {
 
     if (!validatedData?.success) {
       throw new Error(
-        validatedData?.error?.issues[0]?.message ??
-          'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
+        validatedData?.error?.issues[0]?.message ?? 'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
       )
     }
 
     await prisma.product.create({
-      data: removeEmptyField(
-        validatedData.data,
-      ) as Prisma.ProductUncheckedCreateInput,
+      data: removeEmptyField(validatedData.data) as Prisma.ProductUncheckedCreateInput,
     })
   } catch (error) {
     getPrismaError(error)
@@ -162,8 +159,7 @@ const updateProduct = async (data: ProductInput) => {
 
     if (!validatedData?.success) {
       throw new Error(
-        validatedData?.error?.issues[0]?.message ??
-          'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
+        validatedData?.error?.issues[0]?.message ?? 'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
       )
     }
 
@@ -202,11 +198,4 @@ const getDashboard = async () => {
   }
 }
 
-export {
-  createProduct,
-  deleteProduct,
-  getDashboard,
-  getProduct,
-  getProducts,
-  updateProduct,
-}
+export { createProduct, deleteProduct, getDashboard, getProduct, getProducts, updateProduct }

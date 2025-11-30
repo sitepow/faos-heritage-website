@@ -26,9 +26,7 @@ const ProductItem: FC<ComponentProps<'div'>> = ({ className, ...props }) => {
 
         <div className='flex flex-col *:line-clamp-1'>
           <span>มังคุดกระป๋อง 565 กรัม</span>
-          <span className='text-default-500'>
-            (ยอดขายรวม 83 ชิ้น) (สต็อกคงเหลือ 3 ชิ้น)
-          </span>
+          <span className='text-default-500'>(ยอดขายรวม 83 ชิ้น) (สต็อกคงเหลือ 3 ชิ้น)</span>
         </div>
       </div>
 

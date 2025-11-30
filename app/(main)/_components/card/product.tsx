@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 'use client'
 
 import { Button } from '@heroui/button'
@@ -46,9 +45,7 @@ const ProductCard: FC<Props> = ({
       onMouseLeave={() => setIsHovered(false)}
     >
       <CardHeader className='relative overflow-hidden p-0'>
-        <Chip className='absolute bottom-2 left-2 z-50'>
-          {category?.name ?? 'ไม่มีหมวดหมู่'}
-        </Chip>
+        <Chip className='absolute bottom-2 left-2 z-50'>{category?.name ?? 'ไม่มีหมวดหมู่'}</Chip>
 
         <Link className='size-full' href={`/product/${createSlug(name, id)}`}>
           <Image
@@ -81,10 +78,7 @@ const ProductCard: FC<Props> = ({
             startContent={<ShoppingCartIcon className='text-default-500' />}
             variant='light'
           />
-          <Button
-            startContent={<HeartIcon className='text-default-500' />}
-            variant='light'
-          />
+          <Button startContent={<HeartIcon className='text-default-500' />} variant='light' />
         </CardFooter>
       )}
     </Card>

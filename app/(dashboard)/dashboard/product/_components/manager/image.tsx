@@ -1,12 +1,7 @@
 'use client'
 
 import { Button } from '@heroui/button'
-import {
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
-} from '@heroui/dropdown'
+import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/dropdown'
 import {
   Modal,
   ModalBody,
@@ -17,12 +12,7 @@ import {
 } from '@heroui/modal'
 import { Spinner } from '@heroui/spinner'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import {
-  EditIcon,
-  EllipsisVerticalIcon,
-  PlusIcon,
-  TrashIcon,
-} from 'lucide-react'
+import { EditIcon, EllipsisVerticalIcon, PlusIcon, TrashIcon } from 'lucide-react'
 import Image from 'next/image'
 
 import { deleteFile } from '../../actions/file'
@@ -44,8 +34,7 @@ const ImageManager = () => {
   } = useProductStore()
   const QUERY_KEY = ['dashboard', 'modal', 'images', productId]
 
-  const { isOpen: isDeleteOpen, onOpenChange: onOpenDeleteChange } =
-    useDisclosure()
+  const { isOpen: isDeleteOpen, onOpenChange: onOpenDeleteChange } = useDisclosure()
 
   const { data: images, isLoading: isLoadingImages } = useQuery({
     queryKey: QUERY_KEY,
@@ -53,20 +42,19 @@ const ImageManager = () => {
     enabled: !!productId && isImageManagerOpen,
   })
 
-  const { mutate: mutateDeteleImage, isPending: isPendingDeteleImage } =
-    useMutation({
-      mutationFn: deleteImage,
-      onSuccess: async () => {
-        queryClient.invalidateQueries({
-          queryKey: QUERY_KEY,
-        })
-        onOpenDeleteChange()
-        setState({ imageId: null })
-        const targetImage = images?.find((image) => image?.id === imageId)
+  const { mutate: mutateDeteleImage, isPending: isPendingDeteleImage } = useMutation({
+    mutationFn: deleteImage,
+    onSuccess: async () => {
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEY,
+      })
+      onOpenDeleteChange()
+      setState({ imageId: null })
+      const targetImage = images?.find((image) => image?.id === imageId)
 
-        await deleteFile(targetImage?.url!)
-      },
-    })
+      await deleteFile(targetImage?.url!)
+    },
+  })
 
   return (
     <>
@@ -97,9 +85,7 @@ const ImageManager = () => {
 
           {images?.length === 0 && (
             <ModalBody>
-              <p className='text-center text-default-500'>
-                ยังไม่มีรูปภาพสินค้า
-              </p>
+              <p className='text-center text-default-500'>ยังไม่มีรูปภาพสินค้า</p>
             </ModalBody>
           )}
 
@@ -107,10 +93,7 @@ const ImageManager = () => {
             <ModalBody>
               <div className='grid gap-4'>
                 {images?.map((image) => (
-                  <div
-                    key={image.id}
-                    className='flex items-center justify-between'
-                  >
+                  <div key={image.id} className='flex items-center justify-between'>
                     <div className='flex w-full flex-col gap-1'>
                       <Image
                         alt={image?.alt ?? ''}
@@ -124,19 +107,11 @@ const ImageManager = () => {
 
                     <Dropdown placement='bottom-end'>
                       <DropdownTrigger>
-                        <Button
-                          isIconOnly
-                          className='shrink-0'
-                          size='sm'
-                          variant='light'
-                        >
+                        <Button isIconOnly className='shrink-0' size='sm' variant='light'>
                           <EllipsisVerticalIcon className='size-5 text-default-500' />
                         </Button>
                       </DropdownTrigger>
-                      <DropdownMenu
-                        aria-label='จัดการสินค้า'
-                        className='min-w-[180px]'
-                      >
+                      <DropdownMenu aria-label='จัดการสินค้า' className='min-w-[180px]'>
                         <DropdownItem
                           key='edit'
                           startContent={<EditIcon className='size-4' />}

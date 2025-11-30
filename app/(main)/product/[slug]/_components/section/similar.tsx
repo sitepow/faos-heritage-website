@@ -27,11 +27,7 @@ const SimilarSection = () => {
         สินค้าใกล้เคียง/ทดแทน
       </span>
 
-      <ProductSection
-        isLoading={isLoading}
-        itemPerPage={ITEM_PER_PAGE}
-        items={items}
-      />
+      <ProductSection isLoading={isLoading} itemPerPage={ITEM_PER_PAGE} items={items} />
     </div>
   )
 }

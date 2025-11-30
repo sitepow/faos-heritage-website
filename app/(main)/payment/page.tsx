@@ -20,18 +20,11 @@ const ImagePlaceholder = () => {
 const Payment = () => {
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
-      <Header
-        description='แสดงวิธีและช่องทางการชำระเงินที่รองรับ'
-        title='วิธีการชำระเงิน'
-      />
+      <Header description='แสดงวิธีและช่องทางการชำระเงินที่รองรับ' title='วิธีการชำระเงิน' />
 
       <div className='mx-auto lg:w-1/2'>
         <Accordion variant='splitted'>
-          <AccordionItem
-            key='1'
-            aria-label='วิธีการเริ่มซื้อสินค้า'
-            title='วิธีการเริ่มซื้อสินค้า'
-          >
+          <AccordionItem key='1' aria-label='วิธีการเริ่มซื้อสินค้า' title='วิธีการเริ่มซื้อสินค้า'>
             <ImagePlaceholder />
           </AccordionItem>
           <AccordionItem

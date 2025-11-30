@@ -33,8 +33,7 @@ const CategorySection = () => {
 
   const { data: products, isLoading: isLoadingProducts } = useQuery({
     queryKey: ['products', 'carousel', currentCategory.id],
-    queryFn: () =>
-      getProducts({ limit: ITEM_PER_PAGE, categoryId: currentCategory.id }),
+    queryFn: () => getProducts({ limit: ITEM_PER_PAGE, categoryId: currentCategory.id }),
     enabled: !!currentCategory.id,
   })
 
@@ -57,13 +56,9 @@ const CategorySection = () => {
           <ScrollShadow className='p-1'>
             <div className='space-y-1'>
               {isLoadingCategories &&
-                [...Array(2)].map((_, index) => (
-                  <CategoryCardSkeleton key={index} />
-                ))}
+                [...Array(2)].map((_, index) => <CategoryCardSkeleton key={index} />)}
 
-              {!isLoadingCategories && categories?.length === 0 && (
-                <span>ไม่พบหมวดหมู่สินค้า</span>
-              )}
+              {!isLoadingCategories && categories?.length === 0 && <span>ไม่พบหมวดหมู่สินค้า</span>}
 
               {!isLoadingCategories &&
                 (categories ?? []).map((category) => (
@@ -120,9 +115,7 @@ const CategorySection = () => {
           <CardBody>
             <Carousel slidesToScroll className='items-center'>
               {isLoadingProducts &&
-                [...Array(8)].map((_, index) => (
-                  <ProductCardSkeleton key={index} />
-                ))}
+                [...Array(8)].map((_, index) => <ProductCardSkeleton key={index} />)}
 
               {!isLoadingProducts && products?.items?.length === 0 && (
                 <div className='flex w-full flex-col items-center justify-center gap-2 text-default-500'>
@@ -132,9 +125,7 @@ const CategorySection = () => {
               )}
 
               {!isLoadingProducts &&
-                products?.items?.map((product) => (
-                  <ProductCard key={product.id} {...product} />
-                ))}
+                products?.items?.map((product) => <ProductCard key={product.id} {...product} />)}
 
               {currentCategory.id && products?.items?.length !== 0 && (
                 <Button

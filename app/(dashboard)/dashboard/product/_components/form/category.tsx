@@ -2,13 +2,7 @@
 
 import { Button } from '@heroui/button'
 import { Input } from '@heroui/input'
-import {
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-} from '@heroui/modal'
+import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@heroui/modal'
 import { Spinner } from '@heroui/spinner'
 import { Switch } from '@heroui/switch'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -16,20 +10,13 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
-import {
-  createCategory,
-  getCategory,
-  updateCategory,
-} from '../../actions/category'
+import { createCategory, getCategory, updateCategory } from '../../actions/category'
 import { deleteFile, uploadFiles } from '../../actions/file'
 import { categorySchema, type CategoryInput } from '../../schema/category'
 import { useProductStore } from '../../store'
 
 import { SubHeader } from '@/app/(main)/_components/section/header'
-import {
-  ImageDropzone,
-  type ImageWithPreview,
-} from '@/components/dropzone/image'
+import { ImageDropzone, type ImageWithPreview } from '@/components/dropzone/image'
 
 const DEFAULT_VALUES: CategoryInput = {
   name: '',
@@ -82,30 +69,27 @@ const CategoryForm = () => {
     }
   }, [isCategoryOpen, categoryId, category, isLoadingCategory, reset])
 
-  const { mutate: mutateCreateCategory, isPending: isPendingCreateCategory } =
-    useMutation({
-      mutationFn: createCategory,
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: ['dashboard', 'modal', 'categories'],
-        })
-        onClose()
-      },
-    })
+  const { mutate: mutateCreateCategory, isPending: isPendingCreateCategory } = useMutation({
+    mutationFn: createCategory,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['dashboard', 'modal', 'categories'],
+      })
+      onClose()
+    },
+  })
 
-  const { mutate: mutateUpdateCategory, isPending: isPendingUpdateCategory } =
-    useMutation({
-      mutationFn: updateCategory,
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: ['dashboard', 'modal', 'categories'],
-        })
-        onClose()
-      },
-    })
+  const { mutate: mutateUpdateCategory, isPending: isPendingUpdateCategory } = useMutation({
+    mutationFn: updateCategory,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['dashboard', 'modal', 'categories'],
+      })
+      onClose()
+    },
+  })
 
-  const isPending =
-    isPendingCreateCategory || isLoadingCategory || isPendingUpdateCategory
+  const isPending = isPendingCreateCategory || isLoadingCategory || isPendingUpdateCategory
   const headerLable = categoryId ? 'แก้ไขหมวดหมู่' : 'เพิ่มหมวดหมู่'
 
   const onFilesChange = async (files: ImageWithPreview[]) => {

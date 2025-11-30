@@ -21,8 +21,7 @@ const Order = () => {
 
           <div className='flex flex-col'>
             <span>
-              เลขที่รายการ 2452587200 ({formatNumber(10)} รายการ){' '}
-              {formatCurrency(829)}
+              เลขที่รายการ 2452587200 ({formatNumber(10)} รายการ) {formatCurrency(829)}
             </span>
             <span className='text-default-500'>
               วันที่สั่งซื้อ {formatDate(new Date())} (ชำระเงินแล้ว)

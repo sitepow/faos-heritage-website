@@ -26,15 +26,12 @@ const createVariant = async (data: VariantInput) => {
 
     if (!validatedData?.success) {
       throw new Error(
-        validatedData?.error?.issues[0]?.message ??
-          'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
+        validatedData?.error?.issues[0]?.message ?? 'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
       )
     }
 
     await prisma.productVariant.create({
-      data: removeEmptyField(
-        validatedData.data,
-      ) as Prisma.ProductVariantCreateInput,
+      data: removeEmptyField(validatedData.data) as Prisma.ProductVariantCreateInput,
     })
   } catch (error) {
     getPrismaError(error)
@@ -80,8 +77,7 @@ const updateVariant = async (data: VariantInput) => {
 
     if (!validatedData?.success) {
       throw new Error(
-        validatedData?.error?.issues[0]?.message ??
-          'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
+        validatedData?.error?.issues[0]?.message ?? 'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
       )
     }
 

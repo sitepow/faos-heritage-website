@@ -15,14 +15,9 @@ const Price: FC<Props & ComponentProps<'div'>> = ({
   ...props
 }) => {
   return (
-    <div
-      className={cn('mt-auto flex items-center justify-between', className)}
-      {...props}
-    >
+    <div className={cn('mt-auto flex items-center justify-between', className)} {...props}>
       <div className=''>
-        <span className='text-2xl font-bold text-primary-website'>
-          {formatCurrency(price)}
-        </span>
+        <span className='text-2xl font-bold text-primary-website'>{formatCurrency(price)}</span>
         <span className='text-xs'> /{unit}</span>
       </div>
     </div>

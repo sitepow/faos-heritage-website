@@ -19,10 +19,7 @@ const Product = () => {
   const { setProduct } = useProductStore()
   const { slug } = useParams()
 
-  const slugStr = useMemo(
-    () => (Array.isArray(slug) ? slug[0] : slug) ?? '',
-    [slug],
-  )
+  const slugStr = useMemo(() => (Array.isArray(slug) ? slug[0] : slug) ?? '', [slug])
 
   const productId = useMemo(() => getIdFromSlug(slugStr), [slugStr])
 
@@ -49,9 +46,7 @@ const Product = () => {
     <section className='flex flex-col justify-center gap-4 text-center'>
       <Breadcrumbs className='font-bold'>
         <BreadcrumbItem>หน้าหลัก</BreadcrumbItem>
-        <BreadcrumbItem>
-          {product.category?.name ?? 'ไม่มีหมวดหมู่'}
-        </BreadcrumbItem>
+        <BreadcrumbItem>{product.category?.name ?? 'ไม่มีหมวดหมู่'}</BreadcrumbItem>
       </Breadcrumbs>
 
       <div className='grid gap-4 xl:grid-cols-3'>

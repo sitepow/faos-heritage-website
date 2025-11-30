@@ -15,10 +15,7 @@ const CartCard: FC<ComponentProps<typeof Card>> = ({ className, ...props }) => {
   return (
     <Card
       fullWidth
-      className={cn(
-        className,
-        '[&:not(:last-child)]:border-b [&:not(:last-child)]:border-divider',
-      )}
+      className={cn(className, '[&:not(:last-child)]:border-b [&:not(:last-child)]:border-divider')}
       radius='none'
       shadow='none'
       {...props}
@@ -45,8 +42,8 @@ const CartCard: FC<ComponentProps<typeof Card>> = ({ className, ...props }) => {
             <div className='flex flex-col justify-between gap-3'>
               <div className='flex flex-col'>
                 <span className='line-clamp-1'>
-                  หน้าต่างบานเลื่อนอะลูมิเนียม 2 บาน พร้อมมุ้งลวด SS WINKING
-                  ขนาด 120 x 110 ซม. สีเทา
+                  หน้าต่างบานเลื่อนอะลูมิเนียม 2 บาน พร้อมมุ้งลวด SS WINKING ขนาด 120 x 110 ซม.
+                  สีเทา
                 </span>
 
                 <div className='flex flex-col text-default-500 sm:flex-row sm:gap-2'>

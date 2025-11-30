@@ -41,9 +41,7 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
       >
         <QueryProviders>
           <NextAuthProviders>
-            <HeroUIProviders
-              themeProps={{ attribute: 'class', defaultTheme: 'dark' }}
-            >
+            <HeroUIProviders themeProps={{ attribute: 'class', defaultTheme: 'dark' }}>
               {children}
             </HeroUIProviders>
           </NextAuthProviders>

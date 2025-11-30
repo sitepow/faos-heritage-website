@@ -6,10 +6,7 @@ import { CartCard } from '../card/cart'
 
 import { cn } from '@/utils/style'
 
-const CartSection: FC<ComponentProps<typeof Card>> = ({
-  className,
-  ...props
-}) => {
+const CartSection: FC<ComponentProps<typeof Card>> = ({ className, ...props }) => {
   return (
     <Card fullWidth className={cn(className)} {...props}>
       <CardHeader>

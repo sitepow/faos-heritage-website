@@ -4,9 +4,9 @@ import { Button } from '@heroui/button'
 import { Card, CardBody, CardFooter, CardHeader } from '@heroui/card'
 import { Form } from '@heroui/form'
 import { Input } from '@heroui/input'
+import { signIn } from 'next-auth/react'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
-import { signIn } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
 
 import { siteConfig } from '@/config/site'
@@ -43,12 +43,8 @@ const Login = () => {
     <Form className='p-5' onSubmit={handleSubmit(onSubmit)}>
       <Card className='p-5 md:w-[450px]'>
         <CardHeader className='flex w-full flex-col items-center gap-1'>
-          <span className='text-lg font-bold'>
-            เข้าสู่ระบบ หรือ สมัครสมาชิก
-          </span>
-          <span className='text-default-500'>
-            เข้าสู่ {siteConfig.name} ด้วย Passport Local
-          </span>
+          <span className='text-lg font-bold'>เข้าสู่ระบบ หรือ สมัครสมาชิก</span>
+          <span className='text-default-500'>เข้าสู่ {siteConfig.name} ด้วย Passport Local</span>
         </CardHeader>
 
         <CardBody className='gap-5'>
@@ -112,8 +108,7 @@ const Login = () => {
         <CardFooter className='flex-col gap-2.5'>
           <span className='text-center text-xs text-default-500'>
             หากคุณสมัครสมาชิก จะถือว่าคุณได้ยินยอม{' '}
-            <span className='font-bold underline'>ข้อกำหนดและเงื่อนไข</span>{' '}
-            พร้อมทั้ง{' '}
+            <span className='font-bold underline'>ข้อกำหนดและเงื่อนไข</span> พร้อมทั้ง{' '}
             <span className='font-bold underline'>นโยบายความเป็นส่วนตัว</span>
             และยืนยันแล้วว่าคุณมีอายุ 10 ปีขึ้นไป
           </span>

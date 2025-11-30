@@ -30,10 +30,13 @@ const createPreviewFiles = (files: File[]): ImageWithPreview[] =>
 const ImageDropzone: FC<Props> = ({ multiple = false, onFilesChange }) => {
   const [files, setFiles] = useState<ImageWithPreview[]>([])
 
-  const notifyChange = (updated: ImageWithPreview[]) => {
-    setFiles(updated)
-    onFilesChange?.(updated)
-  }
+  const notifyChange = useCallback(
+    (updated: ImageWithPreview[]) => {
+      setFiles(updated)
+      onFilesChange?.(updated)
+    },
+    [onFilesChange],
+  )
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
@@ -47,7 +50,7 @@ const ImageDropzone: FC<Props> = ({ multiple = false, onFilesChange }) => {
         notifyChange(newFiles)
       }
     },
-    [files, multiple, onFilesChange],
+    [files, multiple, notifyChange],
   )
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -76,10 +79,7 @@ const ImageDropzone: FC<Props> = ({ multiple = false, onFilesChange }) => {
       {files.length > 0 && (
         <div className={cn('grid', multiple && 'grid-cols-2 gap-4')}>
           {files.map((file) => (
-            <div
-              key={file.preview}
-              className='group relative flex flex-col gap-1'
-            >
+            <div key={file.preview} className='group relative flex flex-col gap-1'>
               <img
                 alt={file.name}
                 className='h-40 w-full rounded-lg object-cover'
@@ -120,10 +120,7 @@ const ImageDropzone: FC<Props> = ({ multiple = false, onFilesChange }) => {
             )}
           >
             <ImageIcon
-              className={cn(
-                'size-12 text-default-500',
-                isDragActive && 'text-primary-website',
-              )}
+              className={cn('size-12 text-default-500', isDragActive && 'text-primary-website')}
             />
           </div>
 
@@ -140,8 +137,7 @@ const ImageDropzone: FC<Props> = ({ multiple = false, onFilesChange }) => {
               </div>
 
               <p className='text-sm text-default-500'>
-                หรือคลิกเพื่อเลือกไฟล์ (ระบบจะปรับขนาดไฟล์ให้โดยอัตโนมัติ
-                เพื่อเพิ่ม Performance)
+                หรือคลิกเพื่อเลือกไฟล์ (ระบบจะปรับขนาดไฟล์ให้โดยอัตโนมัติ เพื่อเพิ่ม Performance)
               </p>
             </div>
           )}

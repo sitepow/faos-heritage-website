@@ -13,9 +13,7 @@ import { useIsLg } from '@/hooks/useBreakpoints'
 
 const Account = () => {
   const isLg = useIsLg()
-  const [selectedTabKey, setSelectedTabKey] = useState<string | number>(
-    'account',
-  )
+  const [selectedTabKey, setSelectedTabKey] = useState<string | number>('account')
 
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>

@@ -1,20 +1,8 @@
 'use client'
 
 import { Button } from '@heroui/button'
-import {
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
-} from '@heroui/dropdown'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableColumn,
-  TableHeader,
-  TableRow,
-} from '@heroui/table'
+import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/dropdown'
+import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@heroui/table'
 import { Edit, EllipsisVertical, Trash } from 'lucide-react'
 
 import type { ComponentProps } from 'react'
@@ -88,9 +76,7 @@ const Article = () => {
               <TableCell>{article.author}</TableCell>
               <TableCell>{article.date}</TableCell>
               <TableCell>
-                {article.isExternal
-                  ? 'เนื้อหานอกเว็บไซต์'
-                  : 'เนื้อหาภายในเว็บไซต์'}
+                {article.isExternal ? 'เนื้อหานอกเว็บไซต์' : 'เนื้อหาภายในเว็บไซต์'}
               </TableCell>
               <TableCell>{article.status}</TableCell>
               <TableCell className='flex gap-2.5'>
@@ -100,14 +86,8 @@ const Article = () => {
                       <EllipsisVertical className='size-5 text-default-500' />
                     </Button>
                   </DropdownTrigger>
-                  <DropdownMenu
-                    aria-label='จัดการข่าวสาร'
-                    className='min-w-[180px]'
-                  >
-                    <DropdownItem
-                      key='edit'
-                      startContent={<Edit className='size-4' />}
-                    >
+                  <DropdownMenu aria-label='จัดการข่าวสาร' className='min-w-[180px]'>
+                    <DropdownItem key='edit' startContent={<Edit className='size-4' />}>
                       แก้ไขข้อมูล
                     </DropdownItem>
                     <DropdownItem

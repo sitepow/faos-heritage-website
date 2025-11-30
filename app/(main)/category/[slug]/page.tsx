@@ -24,10 +24,7 @@ const ITEM_PER_PAGE = 8
 const Category = () => {
   const { slug } = useParams()
 
-  const slugStr = useMemo(
-    () => (Array.isArray(slug) ? slug[0] : slug) ?? '',
-    [slug],
-  )
+  const slugStr = useMemo(() => (Array.isArray(slug) ? slug[0] : slug) ?? '', [slug])
 
   const categoryId = useMemo(() => getIdFromSlug(slugStr), [slugStr])
 

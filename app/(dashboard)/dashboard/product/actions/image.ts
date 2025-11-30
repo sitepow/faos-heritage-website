@@ -24,15 +24,12 @@ const createImage = async (data: ImageInput) => {
 
     if (!validatedData?.success) {
       throw new Error(
-        validatedData?.error?.issues[0]?.message ??
-          'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
+        validatedData?.error?.issues[0]?.message ?? 'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
       )
     }
 
     await prisma.productImage.create({
-      data: removeEmptyField(
-        validatedData.data,
-      ) as Prisma.ProductImageCreateInput,
+      data: removeEmptyField(validatedData.data) as Prisma.ProductImageCreateInput,
     })
   } catch (error) {
     getPrismaError(error)
@@ -78,8 +75,7 @@ const updateImage = async (data: ImageInput) => {
 
     if (!validatedData?.success) {
       throw new Error(
-        validatedData?.error?.issues[0]?.message ??
-          'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
+        validatedData?.error?.issues[0]?.message ?? 'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
       )
     }
 

@@ -10,10 +10,7 @@ import { Price } from '@/components/price'
 import { Quantity } from '@/components/quantity'
 import { cn } from '@/utils/style'
 
-const CartSection: FC<ComponentProps<typeof Card>> = ({
-  className,
-  ...props
-}) => {
+const CartSection: FC<ComponentProps<typeof Card>> = ({ className, ...props }) => {
   const { product } = useProductStore()
 
   return (

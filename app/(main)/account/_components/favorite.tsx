@@ -11,10 +11,7 @@ const Favorite: FC<ComponentProps<typeof Card>> = ({ className, ...props }) => {
   return (
     <Card
       fullWidth
-      className={cn(
-        className,
-        '[&:not(:last-child)]:border-b [&:not(:last-child)]:border-divider',
-      )}
+      className={cn(className, '[&:not(:last-child)]:border-b [&:not(:last-child)]:border-divider')}
       radius='none'
       shadow='none'
       {...props}
@@ -33,12 +30,9 @@ const Favorite: FC<ComponentProps<typeof Card>> = ({ className, ...props }) => {
             <div className='flex flex-col *:line-clamp-1'>
               <span>MICRON WARE</span>
               <span className='text-sm text-default-500'>
-                ล่องอเนกประสงค์ซ้อนได้พร้อมฝาล็อก MICRON WARE รุ่น JCP-6658
-                ความจุ 10.5 ลิตร สีขาว
+                ล่องอเนกประสงค์ซ้อนได้พร้อมฝาล็อก MICRON WARE รุ่น JCP-6658 ความจุ 10.5 ลิตร สีขาว
               </span>
-              <span className='text-sm text-default-500'>
-                รหัสสินค้า : 60188416
-              </span>
+              <span className='text-sm text-default-500'>รหัสสินค้า : 60188416</span>
               <Price price={250} />
             </div>
           </div>

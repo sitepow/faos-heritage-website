@@ -10,9 +10,9 @@ import {
 } from '@heroui/navbar'
 import { link as linkStyles } from '@heroui/theme'
 import { UserIcon } from 'lucide-react'
+import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useSession } from 'next-auth/react'
 
 import { ThemeSwitch } from '../theme-switch'
 import { Cart } from './etc/cart'
@@ -26,19 +26,13 @@ import { cn } from '@/utils/style'
 const Navbar = () => {
   const { status } = useSession()
   const pathname = usePathname()
-  const isDashboard =
-    pathname === '/dashboard' || pathname.startsWith('/dashboard/')
+  const isDashboard = pathname === '/dashboard' || pathname.startsWith('/dashboard/')
   const isAuthenticated = status === 'authenticated'
 
   return (
     <>
       <Header />
-      <HeroNavbar
-        isBordered
-        className='shadow-md'
-        maxWidth='full'
-        position='sticky'
-      >
+      <HeroNavbar isBordered className='shadow-md' maxWidth='full' position='sticky'>
         <NavbarContent className='basis-1/5 sm:basis-full' justify='start'>
           <NavbarBrand as='li' className='max-w-fit gap-3 dark:text-white'>
             <Link className='flex items-center justify-start gap-2' href='/'>
@@ -50,30 +44,26 @@ const Navbar = () => {
           </NavbarBrand>
 
           <ul className='ml-2 hidden justify-start gap-4 lg:flex'>
-            {(isDashboard
-              ? siteConfig?.adminNavbarItems
-              : siteConfig?.mainNavItems
-            )?.map((item) => (
-              <NavbarItem key={item?.href}>
-                <Link
-                  className={cn(
-                    linkStyles({ color: 'foreground' }),
-                    'data-[active=true]:font-medium data-[active=true]:text-primary',
-                  )}
-                  color='foreground'
-                  href={item?.href}
-                >
-                  {item?.label}
-                </Link>
-              </NavbarItem>
-            ))}
+            {(isDashboard ? siteConfig?.adminNavbarItems : siteConfig?.mainNavItems)?.map(
+              (item) => (
+                <NavbarItem key={item?.href}>
+                  <Link
+                    className={cn(
+                      linkStyles({ color: 'foreground' }),
+                      'data-[active=true]:font-medium data-[active=true]:text-primary',
+                    )}
+                    color='foreground'
+                    href={item?.href}
+                  >
+                    {item?.label}
+                  </Link>
+                </NavbarItem>
+              ),
+            )}
           </ul>
         </NavbarContent>
 
-        <NavbarContent
-          className='hidden basis-1/5 sm:flex sm:basis-full'
-          justify='end'
-        >
+        <NavbarContent className='hidden basis-1/5 sm:flex sm:basis-full' justify='end'>
           {!isDashboard && (
             <NavbarItem className='hidden lg:flex'>
               <Search />

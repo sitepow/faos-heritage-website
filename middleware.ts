@@ -12,9 +12,7 @@ export function middleware(request: NextRequest) {
   const isLoggedIn = !!sessionToken
 
   const protectedPaths = ['/dashboard', '/cart']
-  const isProtectedPath = protectedPaths.some((path) =>
-    pathname.startsWith(path),
-  )
+  const isProtectedPath = protectedPaths.some((path) => pathname.startsWith(path))
 
   const authPaths = ['/login', '/register']
   const isAuthPath = authPaths.some((path) => pathname.startsWith(path))

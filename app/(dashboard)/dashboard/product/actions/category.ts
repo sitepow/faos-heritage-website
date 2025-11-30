@@ -2,8 +2,8 @@
 
 import { PrismaClient } from '@prisma/client'
 
-import type { CategoryInput } from '../schema/category'
 import type { Prisma } from '@prisma/client'
+import type { CategoryInput } from '../schema/category'
 
 import { categorySchema } from '../schema/category'
 
@@ -26,15 +26,12 @@ const createCategory = async (data: CategoryInput) => {
 
     if (!validatedData?.success) {
       throw new Error(
-        validatedData?.error?.issues[0]?.message ??
-          'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
+        validatedData?.error?.issues[0]?.message ?? 'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
       )
     }
 
     await prisma.category.create({
-      data: removeEmptyField(
-        validatedData.data,
-      ) as Prisma.ProductVariantCreateInput,
+      data: removeEmptyField(validatedData.data) as Prisma.ProductVariantCreateInput,
     })
   } catch (error) {
     getPrismaError(error)
@@ -81,8 +78,7 @@ const updateCategory = async (data: CategoryInput) => {
 
     if (!validatedData?.success) {
       throw new Error(
-        validatedData?.error?.issues[0]?.message ??
-          'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
+        validatedData?.error?.issues[0]?.message ?? 'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
       )
     }
 
@@ -119,10 +115,4 @@ const deleteCategory = async (categoryIds: string | string[]) => {
   }
 }
 
-export {
-  createCategory,
-  deleteCategory,
-  getCategories,
-  getCategory,
-  updateCategory,
-}
+export { createCategory, deleteCategory, getCategories, getCategory, updateCategory }

@@ -22,9 +22,7 @@ const getIdFromSlug = (slug: string): string => {
   return parts[parts.length - 1] || ''
 }
 
-const removeEmptyField = <T extends Record<string, unknown>>(
-  obj: T,
-): Partial<T> => {
+const removeEmptyField = <T extends Record<string, unknown>>(obj: T): Partial<T> => {
   if (!obj || typeof obj !== 'object' || Array.isArray(obj)) {
     return {} as Partial<T>
   }

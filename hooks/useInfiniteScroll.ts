@@ -16,8 +16,7 @@ export const useInfiniteScroll = ({
   useEffect(() => {
     const onScroll = () => {
       const isAtBottom =
-        window.innerHeight + window.scrollY >=
-        document.documentElement.scrollHeight - threshold
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - threshold
 
       if (isAtBottom && hasNextPage && !isFetchingNextPage) {
         fetchNextPage()

@@ -2,9 +2,7 @@ import { z } from 'zod'
 
 export const categorySchema = z.object({
   id: z.string().nullish(),
-  name: z
-    .string('ชื่อหมวดหมู่ต้องเป็นข้อความ')
-    .min(1, 'กรุณาระบุชื่อหมวดหมู่ (ห้ามว่างเปล่า)'),
+  name: z.string('ชื่อหมวดหมู่ต้องเป็นข้อความ').min(1, 'กรุณาระบุชื่อหมวดหมู่ (ห้ามว่างเปล่า)'),
   slug: z.string().nullish(),
   image: z.string().nullish(),
   description: z.string().nullish(),

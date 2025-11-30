@@ -31,18 +31,14 @@ export const getPrismaError = (error: unknown): never => {
           throw new Error(`${fieldName} นี้มีอยู่ในระบบแล้ว กรุณาใช้ข้อมูลอื่น`)
         }
 
-        throw new Error(
-          `ข้อมูลซ้ำ (unique constraint) - รายละเอียด: ${JSON.stringify(error.meta)}`,
-        )
+        throw new Error(`ข้อมูลซ้ำ (unique constraint) - รายละเอียด: ${JSON.stringify(error.meta)}`)
       }
 
       case 'P2003': {
         const field = error.meta?.field_name
 
         throw new Error(
-          field
-            ? `ข้อมูล ${field} ไม่ถูกต้อง (foreign key ผิด)`
-            : 'ข้อมูลอ้างอิงไม่ถูกต้อง',
+          field ? `ข้อมูล ${field} ไม่ถูกต้อง (foreign key ผิด)` : 'ข้อมูลอ้างอิงไม่ถูกต้อง',
         )
       }
 
@@ -59,9 +55,7 @@ export const getPrismaError = (error: unknown): never => {
       case 'P2012': {
         const path = error.meta?.path
 
-        throw new Error(
-          path ? `ข้อมูล ${path} จำเป็นต้องมี` : 'ข้อมูลบางอย่างขาดหายไป',
-        )
+        throw new Error(path ? `ข้อมูล ${path} จำเป็นต้องมี` : 'ข้อมูลบางอย่างขาดหายไป')
       }
 
       case 'P2014':
@@ -84,9 +78,7 @@ export const getPrismaError = (error: unknown): never => {
 
       default:
         throw new Error(
-          `Prisma Error (${error.code}): ${error.message} | meta: ${JSON.stringify(
-            error.meta,
-          )}`,
+          `Prisma Error (${error.code}): ${error.message} | meta: ${JSON.stringify(error.meta)}`,
         )
     }
   }
