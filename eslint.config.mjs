@@ -43,6 +43,7 @@ export default defineConfig([
     '!**/react-shim.js',
     '!**/tsup.config.ts',
   ]),
+
   {
     extends: fixupConfigRules(
       compat.extends(
@@ -64,14 +65,11 @@ export default defineConfig([
 
     languageOptions: {
       globals: {
-        ...Object.fromEntries(
-          Object.entries(globals.browser).map(([key]) => [key, 'off']),
-        ),
         ...globals.node,
       },
 
       parser: tsParser,
-      ecmaVersion: 12,
+      ecmaVersion: 2020,
       sourceType: 'module',
 
       parserOptions: {
@@ -91,88 +89,48 @@ export default defineConfig([
 
     rules: {
       'no-console': 'warn',
-      'no-nested-ternary': 'error',
-      '@typescript-eslint/no-unused-vars': [
+
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': 'off',
+
+      'unused-imports/no-unused-vars': [
         'warn',
         {
+          vars: 'all',
+          varsIgnorePattern: '^_',
           args: 'after-used',
-          ignoreRestSiblings: false,
-          argsIgnorePattern: '^_.*?$',
+          argsIgnorePattern: '^_',
         },
       ],
+
+      'unused-imports/no-unused-imports': 'warn',
+
       '@typescript-eslint/consistent-type-imports': 'error',
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/no-empty-object-type': 'warn',
       '@typescript-eslint/consistent-type-definitions': 'warn',
+
       'react/prop-types': 'off',
       'react/jsx-uses-react': 'off',
       'react/react-in-jsx-scope': 'off',
       'react/self-closing-comp': 'error',
       'react/display-name': 'off',
-      'react/function-component-definition': [
-        'error',
-        {
-          namedComponents: ['arrow-function'],
-          unnamedComponents: ['function-expression'],
-        },
-      ],
-      'react/jsx-curly-brace-presence': [
-        'warn',
-        { props: 'never', children: 'never' },
-      ],
-      'react/no-unstable-nested-components': ['warn'],
-      'react/jsx-no-useless-fragment': ['error'],
-      'react/no-array-index-key': ['warn'],
-      'react/jsx-boolean-value': ['error'],
-      'react/jsx-sort-props': [
-        'warn',
-        {
-          callbacksLast: true,
-          shorthandFirst: true,
-          noSortAlphabetically: false,
-          reservedFirst: true,
-        },
-      ],
-      'react-hooks/exhaustive-deps': 'off',
+      'react/function-component-definition': 'off',
+      'react/jsx-curly-brace-presence': ['warn', { props: 'never', children: 'never' }],
+      'react/no-unstable-nested-components': 'warn',
+      'react/jsx-no-useless-fragment': 'error',
+      'react/no-array-index-key': 'warn',
+      'react/jsx-boolean-value': 'error',
+
       'jsx-a11y/click-events-have-key-events': 'warn',
       'jsx-a11y/interactive-supports-focus': 'warn',
-      // ❌ ลบ 'prettier/prettier': 'warn' ออก
-      'no-unused-vars': 'off',
-      'unused-imports/no-unused-vars': 'off',
-      'unused-imports/no-unused-imports': 'warn',
-      'import/order': [
-        'warn',
-        {
-          'newlines-between': 'always',
-          groups: [
-            ['builtin', 'external'],
-            'type',
-            'internal',
-            ['parent', 'sibling', 'index'],
-          ],
-          pathGroups: [
-            {
-              pattern: '~/**',
-              group: 'external',
-              position: 'after',
-            },
-          ],
-          alphabetize: { order: 'asc' },
-          distinctGroup: false,
-        },
-      ],
+
+      'import/order': 'off',
+
       'padding-line-between-statements': [
         'warn',
-        {
-          blankLine: 'always',
-          prev: '*',
-          next: 'return',
-        },
-        {
-          blankLine: 'always',
-          prev: ['const', 'let', 'var'],
-          next: '*',
-        },
+        { blankLine: 'always', prev: '*', next: 'return' },
+        { blankLine: 'always', prev: ['const', 'let', 'var'], next: '*' },
         {
           blankLine: 'any',
           prev: ['const', 'let', 'var'],

@@ -5,17 +5,33 @@
 const config = {
   arrowParens: 'always',
   endOfLine: 'lf',
-  jsxSingleQuote: true,
-  printWidth: 80,
+  printWidth: 100,
   semi: false,
   singleQuote: true,
+  jsxSingleQuote: true,
   tabWidth: 2,
   trailingComma: 'all',
   useTabs: false,
 
   plugins: ['prettier-plugin-organize-imports', 'prettier-plugin-tailwindcss'],
+
   tailwindFunctions: ['cva', 'cn', 'cx'],
   tailwindStylesheet: './styles/globals.css',
+
+  importOrder: [
+    '^react$',
+    '^next',
+    '^next/(.*)$',
+    '',
+    '^@/components/(.*)$',
+    '^@/lib/(.*)$',
+    '^@/hooks/(.*)$',
+    '^@/styles/(.*)$',
+    '',
+    '^[./]',
+  ],
+  importOrderSeparation: true,
+  importOrderSortSpecifiers: true,
 }
 
 export default config
