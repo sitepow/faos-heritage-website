@@ -2,13 +2,13 @@ import { Card, CardBody } from '@heroui/card'
 import { Skeleton } from '@heroui/skeleton'
 import Image from 'next/image'
 
-import type { CategoryCard } from '@/types'
+import type { GetCategoryResult } from '@/app/(dashboard)/dashboard/product/actions/category'
 import type { ComponentProps, FC } from 'react'
 
 import { cn } from '@/utils/style'
 
 interface Props {
-  item: CategoryCard
+  item: GetCategoryResult
   isActive?: boolean
 }
 
@@ -27,12 +27,12 @@ const CategoryCard: FC<ComponentProps<typeof CardBody> & Props> = ({
         <div className='flex items-center gap-2.5'>
           <Image
             alt=''
-            className='rounded-full'
+            className='aspect-square rounded-full object-cover'
             height={38}
-            src='/placeholder.svg'
+            src={item?.image ?? '/placeholder.svg'}
             width={38}
           />
-          <span className='truncate'>{item.name}</span>
+          <span className='truncate'>{item?.name}</span>
         </div>
       </CardBody>
     </Card>

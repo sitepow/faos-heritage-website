@@ -52,6 +52,8 @@ const getCategories = async () => {
   }
 }
 
+export type GetCategoryResult = Awaited<ReturnType<typeof getCategory>>
+
 const getCategory = async (categoryId: string) => {
   try {
     if (!categoryId) {
