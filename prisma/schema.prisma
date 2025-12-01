@@ -31,7 +31,6 @@ model User {
 enum Role {
     CUSTOMER
     ADMIN
-    STAFF
 }
 
 model Account {

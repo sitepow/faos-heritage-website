@@ -1,4 +1,14 @@
-import { Prisma } from '@prisma/client'
+import { Prisma, PrismaClient } from '@prisma/client'
+
+const globalForPrisma = global as unknown as { prisma: PrismaClient }
+
+export const prisma =
+  globalForPrisma.prisma ||
+  new PrismaClient({
+    log: ['query'],
+  })
+
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
 
 export const getPrismaError = (error: unknown): never => {
   if (error instanceof Prisma.PrismaClientKnownRequestError) {
@@ -84,7 +94,7 @@ export const getPrismaError = (error: unknown): never => {
   }
 
   if (error instanceof Prisma.PrismaClientValidationError) {
-    throw new Error('ข้อมูลไม่ถูกต้องตาม schema ที่กำหนด')
+    throw new Error('ข้อมูลไม่ถูกต้องตาม Schema ที่กำหนด')
   }
 
   if (error instanceof Prisma.PrismaClientInitializationError) {

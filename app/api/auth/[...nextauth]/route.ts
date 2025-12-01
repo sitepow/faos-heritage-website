@@ -1,51 +1,118 @@
+import { prisma } from '@/utils/prisma'
+import { Role } from '@prisma/client'
+import { compare } from 'bcryptjs'
 import NextAuth from 'next-auth'
-import Credentials from 'next-auth/providers/credentials'
-import Facebook from 'next-auth/providers/facebook'
+import CredentialsProvider from 'next-auth/providers/credentials'
+import FacebookProvider from 'next-auth/providers/facebook'
 import GoogleProvider from 'next-auth/providers/google'
 
 const handler = NextAuth({
+  session: { strategy: 'jwt' },
+
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
-    Facebook({
+
+    FacebookProvider({
       clientId: process.env.FACEBOOK_CLIENT_ID!,
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET!,
     }),
-    Credentials({
+
+    CredentialsProvider({
+      name: 'credentials',
       credentials: {
         email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' },
       },
+
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
-          return null
+        const email = credentials?.email?.toLowerCase()
+        const password = credentials?.password
+
+        if (!email || !password) {
+          throw new Error('กรุณากรอกอีเมลและรหัสผ่าน')
         }
 
-        // TODO: ตรวจสอบกับ database
-        // const user = await getUserByEmail(credentials.email);
-        // if (!user) return null;
-        // const isValid = await compare(credentials.password, user.hashedPassword);
-        // if (!isValid) return null;
-
-        return {
-          id: '1',
-          email: credentials.email,
-          name: 'ZentraCoreAccount!',
+        if (password.length < 6) {
+          throw new Error('รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร')
         }
+
+        const user = await prisma.user.findUnique({ where: { email } })
+
+        if (!user) {
+          throw new Error('ไม่พบบัญชีผู้ใช้นี้')
+        }
+
+        if (!user.password) {
+          throw new Error('บัญชีนี้สมัครด้วย Google / Facebook กรุณาเข้าสู่ระบบด้วยวิธีเดิม')
+        }
+
+        const valid = await compare(password, user.password)
+
+        if (!valid) {
+          throw new Error('รหัสผ่านไม่ถูกต้อง')
+        }
+
+        return user
       },
     }),
   ],
+
   callbacks: {
-    async redirect({ url, baseUrl }) {
-      if (url.startsWith('/')) return `${baseUrl}${url}`
+    async signIn({ user, account }) {
+      if (account?.provider === 'credentials') return true
 
-      if (url.startsWith(baseUrl)) return url
+      const email = user.email?.toLowerCase()
 
-      return baseUrl
+      if (!email) return false
+
+      const existing = await prisma.user.findUnique({
+        where: { email },
+      })
+
+      if (!existing) {
+        await prisma.user.create({
+          data: {
+            email,
+            name: user.name ?? '',
+            image: user.image ?? '',
+            role: Role.CUSTOMER,
+            password: null,
+          },
+        })
+      }
+
+      return true
+    },
+
+    async jwt({ token }) {
+      if (token.email) {
+        const user = await prisma.user.findUnique({
+          where: { email: token.email.toLowerCase() },
+          select: { id: true, role: true },
+        })
+
+        if (user) {
+          token.id = user.id
+          token.role = user.role
+        }
+      }
+
+      return token
+    },
+
+    async session({ session, token }) {
+      if (session.user) {
+        session.user.id = token.id
+        session.user.role = token.role
+      }
+
+      return session
     },
   },
+
   secret: process.env.NEXTAUTH_SECRET,
 })
 
