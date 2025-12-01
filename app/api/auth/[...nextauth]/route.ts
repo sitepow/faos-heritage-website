@@ -88,12 +88,19 @@ const handler = NextAuth({
       if (token.email) {
         const user = await prisma.user.findUnique({
           where: { email: token.email.toLowerCase() },
-          select: { id: true, role: true },
+          select: {
+            id: true,
+            role: true,
+            name: true,
+            image: true,
+          },
         })
 
         if (user) {
           token.id = user.id
           token.role = user.role
+          token.name = user.name
+          token.picture = user.image
         }
       }
 
