@@ -21,8 +21,16 @@ const createUser = async (data: UserRegisterInput) => {
       where: { email: email.toLowerCase() },
     })
 
+    if (!exists?.password) {
+      if (exists) {
+        throw new Error(
+          'ไม่สามารถสมัครบัญชีได้ เนื่องจากบัญชีนี้สมัครด้วย Google / Facebook กรุณาเข้าสู่ระบบด้วยวิธีเดิม',
+        )
+      }
+    }
+
     if (exists) {
-      throw new Error('อีเมลนี้ถูกใช้ไปแล้ว โปรดใช้อีเมลอื่น')
+      throw new Error('อีเมลนี้ถูกใช้ไปแล้ว กรุณาใช้อีเมลอื่นแล้วลองใหม่อีกครั้ง')
     }
 
     const hashed = await hash(password, 10)

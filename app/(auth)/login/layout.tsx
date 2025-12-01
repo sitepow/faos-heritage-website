@@ -9,7 +9,7 @@ const AuthLayout: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <Suspense>
-      <div className='flex min-h-screen items-center justify-center light:bg-[#f1f1f1]'>
+      <div className='flex min-h-screen items-center justify-center py-10 light:bg-[#f1f1f1]'>
         <ToastContainer
           closeOnClick
           hideProgressBar

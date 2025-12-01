@@ -103,11 +103,11 @@ export default function Login() {
               />
             </CardBody>
 
-            <CardFooter className='justify-end gap-2'>
+            <CardFooter className='justify-center gap-2'>
               <Button isDisabled={isPending} onPress={() => router.push('/')} variant='faded'>
-                กลับหน้าแรก
+                ย้อนกลับ
               </Button>
-              <Button isDisabled={isPending} type='submit' variant='faded'>
+              <Button isDisabled={isPending} isLoading={isPending} type='submit' variant='faded'>
                 เข้าสู่ระบบ
               </Button>
             </CardFooter>
@@ -149,11 +149,11 @@ export default function Login() {
               />
             </CardBody>
 
-            <CardFooter className='justify-end gap-2'>
+            <CardFooter className='justify-center gap-2'>
               <Button isDisabled={isPending} onPress={() => router.push('/')} variant='faded'>
-                กลับหน้าแรก
+                ย้อนกลับ
               </Button>
-              <Button type='submit' variant='faded' isDisabled={isPending}>
+              <Button type='submit' variant='faded' isDisabled={isPending} isLoading={isPending}>
                 สมัครสมาชิก
               </Button>
             </CardFooter>
@@ -162,7 +162,7 @@ export default function Login() {
       </Tabs>
 
       <CardBody className='items-center justify-center gap-4'>
-        <span className='border-b border-divider'>หรือเข้าสู่ระบบด้วย</span>
+        <span className='w-full border-b border-divider text-center'>หรือเข้าสู่ระบบด้วย</span>
 
         <div className='flex gap-4'>
           <Image

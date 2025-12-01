@@ -41,12 +41,10 @@ const handler = NextAuth({
 
         const user = await prisma.user.findUnique({ where: { email } })
 
-        if (!user) {
-          throw new Error('ไม่พบบัญชีผู้ใช้นี้')
-        }
-
-        if (!user.password) {
-          throw new Error('บัญชีนี้สมัครด้วย Google / Facebook กรุณาเข้าสู่ระบบด้วยวิธีเดิม')
+        if (!user || !user.password) {
+          throw new Error(
+            'ไม่พบบัญชีผู้ใช้นี้ หรือ บัญชีนี้สมัครด้วย Google / Facebook กรุณาเข้าสู่ระบบด้วยวิธีเดิม',
+          )
         }
 
         const valid = await compare(password, user.password)
@@ -77,7 +75,6 @@ const handler = NextAuth({
           data: {
             email,
             name: user.name ?? '',
-            image: user.image ?? '',
             role: Role.CUSTOMER,
             password: null,
           },
