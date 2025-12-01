@@ -4,7 +4,6 @@ import { BreadcrumbItem, Breadcrumbs } from '@heroui/breadcrumbs'
 import { Button } from '@heroui/button'
 import { Divider } from '@heroui/divider'
 import { Spinner } from '@heroui/spinner'
-import { Switch } from '@heroui/switch'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { ArrowUpDownIcon, Settings2Icon } from 'lucide-react'
 
@@ -65,15 +64,14 @@ const Products = () => {
         </span>
 
         <div className='flex flex-wrap gap-3'>
-          <Switch defaultSelected color='primary'>
-            แสดงเฉพาะสินค้าพร้อมส่ง
-          </Switch>
-
-          <Button startContent={<Settings2Icon />} variant='bordered'>
+          <Button startContent={<Settings2Icon className='text-default-500' />} variant='bordered'>
             ตัวกรอง
           </Button>
 
-          <Button startContent={<ArrowUpDownIcon />} variant='bordered'>
+          <Button
+            startContent={<ArrowUpDownIcon className='text-default-500' />}
+            variant='bordered'
+          >
             การเรียงลำดับ
           </Button>
         </div>
