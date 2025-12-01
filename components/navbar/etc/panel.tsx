@@ -3,13 +3,19 @@ import { User } from '@heroui/user'
 import { Role } from '@prisma/client'
 import { LogOutIcon, Settings, UserIcon } from 'lucide-react'
 import { signOut, useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
+import type { FC } from 'react'
 
-const Panel = () => {
+interface Props {
+  setIsMenuOpen: (state: boolean) => void
+}
+
+const Panel: FC<Props> = ({ setIsMenuOpen }) => {
   const router = useRouter()
   const { data: session } = useSession()
   const user = session?.user
   const isAdmin = user?.role === Role.ADMIN
+  const isDashboard = usePathname().startsWith('/dashboard')
 
   const menuItems = [
     {
@@ -18,7 +24,7 @@ const Panel = () => {
       icon: <UserIcon />,
       action: () => router.push('/account'),
     },
-    ...(isAdmin
+    ...(isAdmin && !isDashboard
       ? [
           {
             key: 'admin-dashboard',
@@ -56,7 +62,10 @@ const Panel = () => {
             key={item.key}
             startContent={item.icon}
             className={item.className}
-            onClick={item.action}
+            onClick={() => {
+              item.action()
+              setIsMenuOpen(false)
+            }}
           >
             {item.label}
           </DropdownItem>

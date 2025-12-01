@@ -1,3 +1,5 @@
+'use client'
+
 import { Button } from '@heroui/button'
 import {
   Navbar as HeroNavbar,
@@ -20,46 +22,59 @@ import { Header } from './etc/header'
 import { Panel } from './etc/panel'
 import { Search } from './etc/search'
 
+import type { NavItem } from '@/config/site'
 import { siteConfig } from '@/config/site'
 import { cn } from '@/utils/style'
+import { useState } from 'react'
 
 const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { status } = useSession()
   const pathname = usePathname()
-  const isDashboard = pathname === '/dashboard' || pathname.startsWith('/dashboard/')
+
   const isAuthenticated = status === 'authenticated'
+  const isDashboard = pathname.startsWith('/dashboard')
+
+  const menuItems = isDashboard ? siteConfig.adminNavbarItems : siteConfig.mainNavItems
+
+  const renderLink = (item: NavItem) => (
+    <Link
+      href={item.href}
+      className={cn(
+        linkStyles({ color: 'foreground' }),
+        'data-[active=true]:font-medium data-[active=true]:text-primary',
+      )}
+    >
+      {item.label}
+    </Link>
+  )
 
   return (
     <>
       <Header />
-      <HeroNavbar isBordered className='shadow-md' maxWidth='full' position='sticky'>
+
+      <HeroNavbar
+        isMenuOpen={isMenuOpen}
+        onMenuOpenChange={setIsMenuOpen}
+        isBordered
+        className='shadow-md'
+        maxWidth='full'
+        position='sticky'
+      >
         <NavbarContent className='basis-1/5 sm:basis-full' justify='start'>
           <NavbarBrand as='li' className='max-w-fit gap-3 dark:text-white'>
-            <Link className='flex items-center justify-start gap-2' href='/'>
-              <div className='flex flex-col gap-0 text-primary-website'>
+            <Link className='flex items-center gap-2' href='/'>
+              <div className='flex flex-col text-primary-website'>
                 <b className='text-xl'>{siteConfig.name}</b>
                 <span className='text-xs'>สำหรับร้านค้าออนไลน์</span>
               </div>
             </Link>
           </NavbarBrand>
 
-          <ul className='ml-2 hidden justify-start gap-4 lg:flex'>
-            {(isDashboard ? siteConfig?.adminNavbarItems : siteConfig?.mainNavItems)?.map(
-              (item) => (
-                <NavbarItem key={item?.href}>
-                  <Link
-                    className={cn(
-                      linkStyles({ color: 'foreground' }),
-                      'data-[active=true]:font-medium data-[active=true]:text-primary',
-                    )}
-                    color='foreground'
-                    href={item?.href}
-                  >
-                    {item?.label}
-                  </Link>
-                </NavbarItem>
-              ),
-            )}
+          <ul className='ml-2 hidden gap-4 lg:flex'>
+            {menuItems?.map((item) => (
+              <NavbarItem key={item.href}>{renderLink(item)}</NavbarItem>
+            ))}
           </ul>
         </NavbarContent>
 
@@ -69,7 +84,8 @@ const Navbar = () => {
               <Search />
             </NavbarItem>
           )}
-          {!isAuthenticated && (
+
+          {!isAuthenticated ? (
             <NavbarItem className='hidden lg:flex'>
               <Button
                 as={Link}
@@ -80,48 +96,38 @@ const Navbar = () => {
                 เข้าสู่ระบบ/สมัครสมาชิก
               </Button>
             </NavbarItem>
-          )}
-          {isAuthenticated && (
+          ) : (
             <NavbarItem className='hidden lg:flex'>
-              <Panel />
+              <Panel setIsMenuOpen={setIsMenuOpen} />
             </NavbarItem>
           )}
+
           {isAuthenticated && !isDashboard && (
             <NavbarItem className='hidden lg:flex'>
               <Cart count={18} />
             </NavbarItem>
           )}
+
           <NavbarItem className='hidden lg:flex'>
             <ThemeSwitch />
           </NavbarItem>
         </NavbarContent>
 
         <NavbarMenu className='pt-18 sm:pt-12'>
-          {siteConfig?.mainNavItems?.map((item) => (
-            <NavbarMenuItem key={item?.href}>
-              <Link
-                className={cn(
-                  linkStyles({ color: 'foreground' }),
-                  'data-[active=true]:font-medium data-[active=true]:text-primary',
-                )}
-                color='foreground'
-                href={item?.href}
-              >
-                {item?.label}
-              </Link>
+          {menuItems.map((item) => (
+            <NavbarMenuItem onClick={() => setIsMenuOpen(false)} key={item.href}>
+              {renderLink(item)}
             </NavbarMenuItem>
           ))}
 
-          {isAuthenticated && (
+          {isAuthenticated ? (
             <NavbarItem>
               <div className='flex items-center justify-between border-y border-divider py-2.5'>
-                <Panel />
+                <Panel setIsMenuOpen={setIsMenuOpen} />
                 <ThemeSwitch />
               </div>
             </NavbarItem>
-          )}
-
-          {!isAuthenticated && (
+          ) : (
             <NavbarItem>
               <div className='border-y border-divider py-2.5'>
                 <Button
@@ -143,7 +149,7 @@ const Navbar = () => {
           </NavbarItem>
         )}
 
-        <NavbarMenuToggle className='lg:hidden' />
+        <NavbarMenuToggle className='cursor-pointer lg:hidden' />
       </HeroNavbar>
     </>
   )

@@ -1,5 +1,10 @@
 export type SiteConfig = typeof siteConfig
 
+export interface NavItem {
+  label: string
+  href: string
+}
+
 export const siteConfig = {
   name: 'ZentraCore',
   title: 'สร้างร้านค้าออนไลน์ของคุณ',
@@ -25,7 +30,7 @@ export const siteConfig = {
       label: 'เกี่ยวกับเรา',
       href: '/about',
     },
-  ],
+  ] satisfies NavItem[],
   adminNavbarItems: [
     {
       label: 'ภาพรวม',
@@ -47,5 +52,5 @@ export const siteConfig = {
       label: 'จัดการข้อมูลข่าวสาร',
       href: '/dashboard/article',
     },
-  ],
+  ] satisfies NavItem[],
 }
