@@ -37,8 +37,8 @@ export const siteConfig = {
       href: '/dashboard',
     },
     {
-      label: 'จัดการข้อมูลลูกค้า',
-      href: '/dashboard/customer',
+      label: 'จัดการข้อมูลผู้ใช้งาน',
+      href: '/dashboard/user',
     },
     {
       label: 'จัดการข้อมูลสินค้า',

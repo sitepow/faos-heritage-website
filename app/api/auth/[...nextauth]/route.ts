@@ -47,10 +47,16 @@ const handler = NextAuth({
           )
         }
 
+        if (!user?.isActive) {
+          throw new Error(
+            'บัญชีนี้ถูกระงับการใช้งาน โปรดติดต่อผู้แลระบบเพื่อขอเข้าการใช้งานอีกครั้ง',
+          )
+        }
+
         const valid = await compare(password, user.password)
 
         if (!valid) {
-          throw new Error('รหัสผ่านไม่ถูกต้อง')
+          throw new Error('รหัสผ่านไม่ถูกต้อง โปรดลองใหม่อีกครั้ง')
         }
 
         return user

@@ -33,6 +33,7 @@ import { ModalDelete } from '@/components/modal/delete'
 import { formatCurrency, formatNumber } from '@/utils/number'
 
 const ITEM_PER_PAGE = 10
+
 const Product = () => {
   const queryClient = useQueryClient()
   const {
@@ -244,6 +245,7 @@ const Product = () => {
           ))}
         </TableBody>
       </Table>
+
       <Pagination
         showControls
         page={page}

@@ -198,18 +198,16 @@ const ImageForm = () => {
           </ModalBody>
         )}
         <ModalFooter>
-          <ModalFooter>
-            <Button isDisabled={isPending} variant='faded' onPress={onClose}>
-              ยกเลิก
-            </Button>
-            <Button
-              isDisabled={isPending || !isDirty}
-              variant='faded'
-              onClick={handleSubmit(onSubmit)}
-            >
-              {isPending ? 'กำลังดำเนินการ' : 'บันทึกข้อมูล'}
-            </Button>
-          </ModalFooter>
+          <Button isDisabled={isPending} variant='faded' onPress={onClose}>
+            ยกเลิก
+          </Button>
+          <Button
+            isDisabled={isPending || !isDirty}
+            variant='faded'
+            onClick={handleSubmit(onSubmit)}
+          >
+            {isPending ? 'กำลังดำเนินการ' : 'บันทึกข้อมูล'}
+          </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
