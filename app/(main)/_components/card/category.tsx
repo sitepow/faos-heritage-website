@@ -38,7 +38,7 @@ const CategoryCard: FC<ComponentProps<typeof CardBody> & Props> = ({
 const CategoryCardSkeleton = () => {
   return (
     <Skeleton className='size-full rounded-xl'>
-      <div className='h-12 rounded-xl bg-default-300' />
+      <div className='h-14 rounded-xl bg-default-300' />
     </Skeleton>
   )
 }

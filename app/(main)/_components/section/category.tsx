@@ -15,6 +15,7 @@ import { getProducts } from '@/actions/product'
 import { getCategories } from '@/app/(dashboard)/dashboard/product/actions/category'
 import { Carousel } from '@/components/carousel'
 import { createSlug } from '@/utils/helper'
+import { Skeleton } from '@heroui/skeleton'
 
 const ITEM_PER_PAGE = 8
 
@@ -55,7 +56,7 @@ const CategorySection = () => {
         <CardBody>
           <ScrollShadow className='p-1'>
             <div className='space-y-1'>
-              {isLoadingCategories && [...Array(8)].map((_) => <CategoryCardSkeleton key={_} />)}
+              {isLoadingCategories && [...Array(4)].map((_) => <CategoryCardSkeleton key={_} />)}
 
               {!isLoadingCategories && categories?.length === 0 && <span>ไม่พบหมวดหมู่สินค้า</span>}
 
@@ -84,11 +85,7 @@ const CategorySection = () => {
         </CardBody>
       </Card>
 
-      {!currentCategory?.id && (
-        <Card fullWidth>
-          <CardBody />
-        </Card>
-      )}
+      {!currentCategory?.id && <Skeleton className='size-full rounded-xl' />}
 
       {currentCategory?.id && (
         <Card fullWidth className='size-full'>
