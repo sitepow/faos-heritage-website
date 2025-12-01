@@ -55,8 +55,7 @@ const CategorySection = () => {
         <CardBody>
           <ScrollShadow className='p-1'>
             <div className='space-y-1'>
-              {isLoadingCategories &&
-                [...Array(2)].map((_, index) => <CategoryCardSkeleton key={index} />)}
+              {isLoadingCategories && [...Array(8)].map((_) => <CategoryCardSkeleton key={_} />)}
 
               {!isLoadingCategories && categories?.length === 0 && <span>ไม่พบหมวดหมู่สินค้า</span>}
 
@@ -114,8 +113,7 @@ const CategorySection = () => {
 
           <CardBody>
             <Carousel slidesToScroll className='items-center'>
-              {isLoadingProducts &&
-                [...Array(8)].map((_, index) => <ProductCardSkeleton key={index} />)}
+              {isLoadingProducts && [...Array(8)].map((_) => <ProductCardSkeleton key={_} />)}
 
               {!isLoadingProducts && products?.items?.length === 0 && (
                 <div className='flex w-full flex-col items-center justify-center gap-2 text-default-500'>
