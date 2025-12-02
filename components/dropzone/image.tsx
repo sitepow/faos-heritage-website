@@ -82,7 +82,7 @@ const ImageDropzone: FC<Props> = ({ multiple = false, onFilesChange }) => {
             <div key={file.preview} className='group relative flex flex-col gap-1'>
               <img
                 alt={file.name}
-                className='h-40 w-full rounded-lg object-cover'
+                className='max-h-96 min-h-40 w-full rounded-lg object-cover'
                 src={file.preview}
               />
 

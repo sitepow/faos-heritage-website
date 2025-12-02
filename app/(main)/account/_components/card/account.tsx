@@ -1,5 +1,9 @@
+import { getUser } from '@/app/(dashboard)/dashboard/user/actions/user'
 import { Button } from '@heroui/button'
 import { Card, CardBody, CardHeader } from '@heroui/card'
+import { Role } from '@prisma/client'
+import { useQuery } from '@tanstack/react-query'
+import { useSession } from 'next-auth/react'
 
 import type { FC } from 'react'
 
@@ -8,13 +12,24 @@ interface Props {
 }
 
 const AccountCard: FC<Props> = ({ onclick }) => {
+  const { data: session } = useSession()
+  const userId = session?.user?.id
+
+  const QUERY_KEY = ['account', 'user', userId]
+
+  const { data: user } = useQuery({
+    queryKey: QUERY_KEY,
+    queryFn: () => getUser(userId!),
+    enabled: !!userId,
+  })
+
   return (
     <Card fullWidth>
       <CardHeader>
         <span>จัดการกับบัญชีของฉัน</span>
       </CardHeader>
       <CardBody>
-        <div className='flex flex-col lg:w-1/2'>
+        <div className='flex flex-col'>
           <div className='rounded-t-lg border border-divider p-2.5'>
             <span>ข้อมูลส่วนตัว</span>
           </div>
@@ -23,19 +38,19 @@ const AccountCard: FC<Props> = ({ onclick }) => {
             <div>
               <span>ชื่อ - นามสกุล</span>
               <span>:</span>
-              <span>ธีรพัฒน์ แสงก่ำ</span>
+              <span>{user?.name}</span>
             </div>
 
             <div>
               <span>อีเมล</span>
               <span>:</span>
-              <span>kteeraphatt@gmail.com</span>
+              <span>{user?.email}</span>
             </div>
 
             <div>
-              <span>เบอร์มือถือ</span>
+              <span>สิทธิ์การใช้งาน</span>
               <span>:</span>
-              <span>0647070943</span>
+              <span>{user?.role === Role.ADMIN ? 'ผู้ดูแลระบบ' : 'ลูกค้า'}</span>
             </div>
 
             <Button className='mt-5' variant='faded' onPress={onclick}>

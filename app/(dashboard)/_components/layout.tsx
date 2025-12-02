@@ -18,7 +18,7 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
   const isAdmin = session?.user?.role === Role.ADMIN
 
   useEffect(() => {
-    if (session && isAdmin) {
+    if (session && !isAdmin) {
       router.push('/')
     }
   }, [isAdmin, router, session])

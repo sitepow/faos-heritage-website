@@ -10,15 +10,19 @@ import { OrderCard } from './_components/card/order'
 import { ProfileCard } from './_components/card/profile'
 
 import { useIsLg } from '@/hooks/useBreakpoints'
+import { useSession } from 'next-auth/react'
 
 const Account = () => {
+  const { data: session } = useSession()
+  const user = session?.user
+
   const isLg = useIsLg()
   const [selectedTabKey, setSelectedTabKey] = useState<string | number>('account')
 
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
       <div className='w-full text-start'>
-        <span className='text-xl font-bold'>บัญชีของคุณ ธีรพัฒน์ แสงก่ำ</span>
+        <span className='text-xl font-bold'>บัญชีของคุณ {user?.name}</span>
       </div>
 
       <div className='w-full'>
