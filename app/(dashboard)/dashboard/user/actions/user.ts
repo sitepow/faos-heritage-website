@@ -1,16 +1,12 @@
 'use server'
 
-import { PrismaClient } from '@prisma/client'
-
 import type { Prisma, Role } from '@prisma/client'
 
 import { removeEmptyField } from '@/utils/helper'
-import { getPrismaError } from '@/utils/prisma'
+import { getPrismaError, prisma } from '@/utils/prisma'
 import { hash } from 'bcryptjs'
 import type { UserCreateInput, UserUpdateInput } from '../schema/user'
 import { userCreateSchema, userUpdateSchema } from '../schema/user'
-
-const prisma = new PrismaClient()
 
 const FIELD = {
   id: true,

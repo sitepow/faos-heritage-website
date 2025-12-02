@@ -1,15 +1,11 @@
 'use server'
 
-import { PrismaClient } from '@prisma/client'
-
 import type { Prisma } from '@prisma/client'
 
 import { variantSchema, type VariantInput } from '../schema/variant'
 
 import { removeEmptyField } from '@/utils/helper'
-import { getPrismaError } from '@/utils/prisma'
-
-const prisma = new PrismaClient()
+import { getPrismaError, prisma } from '@/utils/prisma'
 
 const FIELD = {
   id: true,

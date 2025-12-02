@@ -1,10 +1,6 @@
 'use server'
 
-import { PrismaClient } from '@prisma/client'
-
-import { getPrismaError } from '@/utils/prisma'
-
-const prisma = new PrismaClient()
+import { getPrismaError, prisma } from '@/utils/prisma'
 
 export type GetProductsResult = Awaited<ReturnType<typeof getProducts>>
 export type ProductItem = GetProductsResult['items'][number]
