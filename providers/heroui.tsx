@@ -22,7 +22,12 @@ const HeroUIProviders: FC<Props> = ({ children, themeProps }) => {
   const router = useRouter()
 
   return (
-    <HeroUIProvider navigate={router.push}>
+    <HeroUIProvider
+      navigate={router.push}
+      disableAnimation
+      disableRipple
+      skipFramerMotionAnimations
+    >
       <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
     </HeroUIProvider>
   )

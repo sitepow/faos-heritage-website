@@ -11,11 +11,14 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@commitlint/types": "^20.0.0",
+    "@eslint/js": "^9.39.1",
     "@heroui/accordion": "2.2.24",
     "@heroui/alert": "^2.2.27",
     "@heroui/autocomplete": "2.3.29",
     "@heroui/avatar": "2.2.22",
     "@heroui/badge": "2.2.17",
+    "@heroui/breadcrumbs": "^2.2.22",
     "@heroui/button": "2.2.27",
     "@heroui/card": "2.2.25",
     "@heroui/chip": "2.2.22",
@@ -33,6 +36,7 @@
     "@heroui/listbox": "2.3.26",
     "@heroui/modal": "2.2.24",
     "@heroui/navbar": "2.2.25",
+    "@heroui/number-input": "^2.0.18",
     "@heroui/pagination": "2.2.24",
     "@heroui/popover": "2.3.27",
     "@heroui/progress": "2.2.22",
@@ -75,8 +79,6 @@
     "next": "15.3.1",
     "next-auth": "^4.24.11",
     "next-themes": "0.4.6",
-    "prettier-plugin-organize-imports": "^4.3.0",
-    "prettier-plugin-tailwindcss": "^0.7.1",
     "pretty-bytes": "^7.1.0",
     "prisma": "^6.18.0",
     "react": "18.3.1",
@@ -89,6 +91,7 @@
     "recharts": "^3.3.0",
     "root": "tanstack/react-query",
     "sharp": "^0.34.5",
+    "tailwind-merge": "^3.4.0",
     "tsx": "^4.20.6",
     "zod": "^4.1.12",
     "zustand": "^5.0.8"
@@ -120,6 +123,8 @@
     "husky": "^8.0.0",
     "postcss": "8.5.6",
     "prettier": "^3.7.1",
+    "prettier-plugin-organize-imports": "^4.3.0",
+    "prettier-plugin-tailwindcss": "^0.7.2",
     "tailwind-variants": "3.1.1",
     "tailwindcss": "4.1.11",
     "typescript": "5.6.3"
