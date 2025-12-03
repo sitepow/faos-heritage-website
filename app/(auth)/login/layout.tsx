@@ -1,28 +1,18 @@
-'use client'
+import type { FC, PropsWithChildren } from 'react'
+import LoginLayout from './components/layout'
 
-import { useTheme } from 'next-themes'
-import { Suspense, type FC, type PropsWithChildren } from 'react'
-import { ToastContainer } from 'react-toastify'
-
-const AuthLayout: FC<PropsWithChildren> = ({ children }) => {
-  const { theme } = useTheme()
-
-  return (
-    <Suspense>
-      <div className='flex min-h-screen items-center justify-center py-10 light:bg-[#f1f1f1]'>
-        <ToastContainer
-          closeOnClick
-          hideProgressBar
-          stacked
-          autoClose={3000}
-          closeButton={false}
-          theme={theme === 'dark' ? 'dark' : 'light'}
-        />
-
-        {children}
-      </div>
-    </Suspense>
-  )
+export const metadata = {
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    noarchive: true,
+    nosnippet: true,
+  },
 }
 
-export default AuthLayout
+const Layout: FC<PropsWithChildren> = ({ children }) => {
+  return <LoginLayout>{children}</LoginLayout>
+}
+
+export default Layout

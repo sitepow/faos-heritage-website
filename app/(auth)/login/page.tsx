@@ -78,8 +78,9 @@ export default function Login() {
   return (
     <Card className='p-5 md:w-[450px]'>
       <CardHeader className='flex w-full flex-col items-center gap-1'>
+        <b className='text-xl text-primary-website'>{siteConfig.name}</b>
         <span className='text-lg font-bold'>เข้าสู่ระบบ หรือ สมัครสมาชิก</span>
-        <span className='text-default-500'>เพื่อเข้าใช้งานเว็บไซต์ {siteConfig.name}</span>
+        <span className='text-default-500'>เพื่อเข้าใช้งานเว็บไซต์</span>
       </CardHeader>
 
       <Tabs defaultSelectedKey='login'>
@@ -103,11 +104,14 @@ export default function Login() {
               />
             </CardBody>
 
-            <CardFooter className='justify-center gap-2'>
-              <Button isDisabled={isPending} onPress={() => router.push('/')} variant='faded'>
-                ย้อนกลับ
-              </Button>
-              <Button isDisabled={isPending} isLoading={isPending} type='submit' variant='faded'>
+            <CardFooter>
+              <Button
+                className='mx-auto'
+                isDisabled={isPending}
+                isLoading={isPending}
+                type='submit'
+                variant='faded'
+              >
                 เข้าสู่ระบบ
               </Button>
             </CardFooter>
@@ -150,10 +154,13 @@ export default function Login() {
             </CardBody>
 
             <CardFooter className='justify-center gap-2'>
-              <Button isDisabled={isPending} onPress={() => router.push('/')} variant='faded'>
-                ย้อนกลับ
-              </Button>
-              <Button type='submit' variant='faded' isDisabled={isPending} isLoading={isPending}>
+              <Button
+                type='submit'
+                variant='faded'
+                isDisabled={isPending}
+                isLoading={isPending}
+                className='mx-auto'
+              >
                 สมัครสมาชิก
               </Button>
             </CardFooter>
