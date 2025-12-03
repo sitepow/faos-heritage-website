@@ -104,7 +104,7 @@ const Navbar = () => {
 
           {isAuthenticated && !isDashboard && (
             <NavbarItem className='hidden lg:flex'>
-              <Cart count={18} />
+              <Cart />
             </NavbarItem>
           )}
 
@@ -145,7 +145,7 @@ const Navbar = () => {
 
         {isAuthenticated && (
           <NavbarItem className='lg:hidden'>
-            <Cart count={18} />
+            <Cart />
           </NavbarItem>
         )}
 

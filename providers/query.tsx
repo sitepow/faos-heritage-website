@@ -21,9 +21,6 @@ const QueryProviders: FC<PropsWithChildren> = ({ children }) => {
           onError: (error) => {
             toast.error(error?.message || 'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง')
           },
-          onSuccess: () => {
-            toast.success('ดำเนินการเสร็จสินแล้ว')
-          },
         }),
       }),
   )
