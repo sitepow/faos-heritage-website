@@ -34,6 +34,8 @@ const createCategory = async (data: CategoryInput) => {
   }
 }
 
+export type GetCategoriesResult = Awaited<ReturnType<typeof getCategories>>
+
 const getCategories = async () => {
   try {
     return prisma.category.findMany({
@@ -42,6 +44,8 @@ const getCategories = async () => {
     })
   } catch (error) {
     getPrismaError(error)
+
+    return []
   }
 }
 
