@@ -1,63 +1,50 @@
-'use client'
-
-import { BreadcrumbItem, Breadcrumbs } from '@heroui/breadcrumbs'
-import { Spinner } from '@heroui/spinner'
-import { useQuery } from '@tanstack/react-query'
-import { useParams } from 'next/navigation'
-import { useEffect, useMemo } from 'react'
-
+import { getProduct } from '@/app/(dashboard)/dashboard/product/actions/product'
+import { CategoryBreadcrumbs } from '@/components/breadcrumbs'
+import { getIdFromSlug } from '@/utils/helper'
+import { AlertCircleIcon } from 'lucide-react'
+import type { FC } from 'react'
 import { CartSection } from './_components/section/cart'
 import { DetailSection } from './_components/section/detail'
 import { ImageSection } from './_components/section/image'
 import { SimilarSection } from './_components/section/similar'
-import { useProductStore } from './store'
 
-import { getProduct } from '@/app/(dashboard)/dashboard/product/actions/product'
-import { getIdFromSlug } from '@/utils/helper'
+interface Props {
+  params: { slug: string }
+}
 
-const Product = () => {
-  const { setProduct } = useProductStore()
-  const { slug } = useParams()
+const ProductPage: FC<Props> = async ({ params }) => {
+  const slugStr = Array.isArray(params.slug) ? params.slug[0] : params.slug
+  const productId = getIdFromSlug(slugStr)
+  let product = null
 
-  const slugStr = useMemo(() => (Array.isArray(slug) ? slug[0] : slug) ?? '', [slug])
-
-  const productId = useMemo(() => getIdFromSlug(slugStr), [slugStr])
-
-  const { data: product, isLoading } = useQuery({
-    queryKey: ['product', productId],
-    queryFn: () => getProduct(productId),
-    enabled: !!productId,
-  })
-
-  useEffect(() => {
-    if (product) setProduct(product)
-  }, [product, setProduct])
-
-  if (isLoading)
+  try {
+    product = await getProduct(productId)
+  } catch {
     return (
-      <div className='flex items-center justify-center'>
-        <Spinner label='กำลังโหลด...' />
+      <div className='flex flex-col items-center justify-center gap-2 text-center text-default-500'>
+        <AlertCircleIcon className='h-6 w-6' />
+        <span>
+          ขออภัยครับ! รหัสสินค้า &quot;{productId}&quot; ไม่ตรงกับสิ่งใดเลย
+          <br />
+          โปรดลองหาสินค้าใหม่ได้ที่หน้าหลัก
+        </span>
       </div>
     )
-
-  if (!product) return null
+  }
 
   return (
     <section className='flex flex-col justify-center gap-4 text-center'>
-      <Breadcrumbs className='font-bold'>
-        <BreadcrumbItem>หน้าหลัก</BreadcrumbItem>
-        <BreadcrumbItem>{product.category?.name ?? 'ไม่มีหมวดหมู่'}</BreadcrumbItem>
-      </Breadcrumbs>
+      <CategoryBreadcrumbs categoryName={product?.category?.name} />
 
       <div className='grid gap-4 xl:grid-cols-3'>
-        <ImageSection className='xl:col-span-2' />
-        <CartSection />
+        <ImageSection className='xl:col-span-2' product={product} />
+        <CartSection product={product} />
       </div>
 
-      <DetailSection />
-      <SimilarSection />
+      <DetailSection product={product} />
+      <SimilarSection product={product} />
     </section>
   )
 }
 
-export default Product
+export default ProductPage

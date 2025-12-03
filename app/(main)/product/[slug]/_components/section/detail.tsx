@@ -1,12 +1,15 @@
 import { Card, CardBody } from '@heroui/card'
 
-import { useProductStore } from '../../store'
+import type { GetProductResult } from '@/app/(dashboard)/dashboard/product/actions/product'
+import type { FC } from 'react'
 import { DetailCard } from '../card/detail'
 import { ReviewCard } from '../card/review'
 
-const DetailSection = () => {
-  const { product } = useProductStore()
+interface Props {
+  product?: GetProductResult
+}
 
+const DetailSection: FC<Props> = ({ product }) => {
   if (!product?.description) return null
 
   return (
@@ -17,7 +20,7 @@ const DetailSection = () => {
       <Card>
         <CardBody>
           <div className='grid gap-4 lg:grid-cols-4'>
-            <DetailCard />
+            <DetailCard product={product} />
             <ReviewCard />
           </div>
         </CardBody>

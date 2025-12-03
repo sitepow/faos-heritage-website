@@ -1,14 +1,19 @@
+'use client'
+
 import { useQuery } from '@tanstack/react-query'
 
-import { useProductStore } from '../../store'
-
 import { getProducts } from '@/actions/product'
+import type { GetProductResult } from '@/app/(dashboard)/dashboard/product/actions/product'
 import { ProductSection } from '@/app/(main)/_components/section/product'
+import type { FC } from 'react'
 
 const ITEM_PER_PAGE = 8
 
-const SimilarSection = () => {
-  const { product } = useProductStore()
+interface Props {
+  product?: GetProductResult
+}
+
+const SimilarSection: FC<Props> = ({ product }) => {
   const categoryId = product?.categoryId
 
   const { data, isLoading } = useQuery({

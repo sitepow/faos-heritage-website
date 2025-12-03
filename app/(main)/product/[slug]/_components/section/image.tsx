@@ -2,16 +2,17 @@ import { Card, CardBody } from '@heroui/card'
 
 import type { ComponentProps, FC } from 'react'
 
-import { useProductStore } from '../../store'
-
+import type { GetProductResult } from '@/app/(dashboard)/dashboard/product/actions/product'
 import { ProductImagePreview } from '@/app/(main)/_components/image-preview'
 import { StarRating } from '@/app/(main)/_components/star-rating'
 import { Share } from '@/components/share'
 import { cn } from '@/utils/style'
 
-const ImageSection: FC<ComponentProps<typeof Card>> = ({ className, ...props }) => {
-  const { product } = useProductStore()
+type Props = ComponentProps<typeof Card> & {
+  product?: GetProductResult
+}
 
+const ImageSection: FC<Props> = ({ className, product, ...props }) => {
   return (
     <Card className={cn(className)} {...props}>
       <CardBody>

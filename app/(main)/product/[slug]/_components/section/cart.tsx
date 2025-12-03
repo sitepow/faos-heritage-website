@@ -1,11 +1,12 @@
+'use client'
+
 import { Button } from '@heroui/button'
 import { Card, CardBody, CardHeader } from '@heroui/card'
 import { CopyIcon, HeartIcon, ShoppingCartIcon } from 'lucide-react'
 
 import type { ComponentProps, FC } from 'react'
 
-import { useProductStore } from '../../store'
-
+import type { GetProductResult } from '@/app/(dashboard)/dashboard/product/actions/product'
 import { createCart } from '@/app/(main)/cart/actions/cart'
 import { Price } from '@/components/price'
 import { Quantity } from '@/components/quantity'
@@ -16,14 +17,16 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
-const CartSection: FC<ComponentProps<typeof Card>> = ({ className, ...props }) => {
+const CartSection: FC<
+  ComponentProps<typeof Card> & {
+    product?: GetProductResult
+  }
+> = ({ className, product, ...props }) => {
   const router = useRouter()
   const queryClient = useQueryClient()
 
   const { data: session } = useSession()
   const user = session?.user
-
-  const { product } = useProductStore()
 
   const { mutate: mutateCreateCart, isPending: isPendingCreateCart } = useMutation({
     mutationFn: () => createCart(user!.id, product!.id, 1),
