@@ -4,7 +4,7 @@ import { CategorySectionClient } from './client/category'
 
 const ITEM_PER_PAGE = 8
 
-export async function CategorySection() {
+const CategorySection = async () => {
   const categories = await getCategories()
 
   const categoryId = categories?.[0]?.id
@@ -20,3 +20,5 @@ export async function CategorySection() {
     />
   )
 }
+
+export { CategorySection }
