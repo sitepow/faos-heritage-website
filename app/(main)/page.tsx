@@ -1,5 +1,4 @@
 import { CategorySection } from '@/app/(main)/_components/section/category'
-import { ArticleSection } from './_components/section/article'
 import { Header } from './_components/section/header'
 import { ProductSection } from './_components/section/product'
 
@@ -19,8 +18,6 @@ const Home = async () => {
       />
 
       <ProductSection isLoading={false} itemPerPage={ITEM_PER_PAGE} items={products?.items ?? []} />
-
-      <ArticleSection />
     </section>
   )
 }
