@@ -45,7 +45,7 @@ export const siteConfig = {
       href: '/dashboard/product',
     },
     {
-      label: 'จัดการข้อมูลออเดอร์',
+      label: 'จัดการข้อมูลคำสั่งซื้อ',
       href: '/dashboard/order',
     },
   ] satisfies NavItem[],

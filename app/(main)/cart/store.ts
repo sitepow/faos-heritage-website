@@ -21,6 +21,7 @@ const useCartStore = create<CartStore>()((set) => ({
     set((state) => ({
       isDeleteOpen: open ?? !state.isDeleteOpen,
     })),
+
   setState: (state) => set(state),
 }))
 

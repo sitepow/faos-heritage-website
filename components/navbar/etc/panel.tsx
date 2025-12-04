@@ -14,6 +14,7 @@ const Panel: FC<Props> = ({ setIsMenuOpen }) => {
   const router = useRouter()
   const { data: session } = useSession()
   const user = session?.user
+
   const isAdmin = user?.role === Role.ADMIN
   const isDashboard = usePathname().startsWith('/dashboard')
 

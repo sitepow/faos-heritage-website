@@ -3,8 +3,11 @@ import { Header } from './_components/section/header'
 import { ProductSection } from './_components/section/product'
 
 import { getProducts } from '@/actions/product'
+import { Button } from '@heroui/button'
+import { ArrowRight } from 'lucide-react'
+import Link from 'next/link'
 
-const ITEM_PER_PAGE = 8
+const ITEM_PER_PAGE = 12
 
 const Home = async () => {
   const products = await getProducts({ limit: ITEM_PER_PAGE })
@@ -18,6 +21,12 @@ const Home = async () => {
       />
 
       <ProductSection isLoading={false} itemPerPage={ITEM_PER_PAGE} items={products?.items ?? []} />
+
+      <Link href='/products'>
+        <Button endContent={<ArrowRight className='text-default-500' />} variant='faded'>
+          สำรวจสินค้าทั้งหมด
+        </Button>
+      </Link>
     </section>
   )
 }

@@ -1,32 +1,39 @@
+'use client'
+
 import { Button } from '@heroui/button'
 import { Card, CardBody, CardFooter } from '@heroui/card'
-
 import type { ComponentProps, FC } from 'react'
 
 import { formatCurrency } from '@/utils/number'
 import { cn } from '@/utils/style'
+import { useMemo } from 'react'
+import { useCartStore } from '../../store'
 
 const OrderSection: FC<ComponentProps<typeof Card>> = ({ className, ...props }) => {
+  const { carts } = useCartStore()
+
+  const { subTotal, shippingCost, total } = useMemo(() => {
+    const subTotal = carts?.reduce((sum, cart) => sum + cart.quantity * cart.product.price, 0) ?? 0
+
+    const shippingCost = 0
+    const total = subTotal + shippingCost
+
+    return { subTotal, shippingCost, total }
+  }, [carts])
+
   return (
     <Card fullWidth className={cn(className, 'h-fit')} {...props}>
-      <CardBody className='gap-1'>
+      <CardBody className='gap-3'>
         <span className='w-fit border-b border-primary-website pb-1 font-bold'>
           รายละเอียดการชำระเงิน
         </span>
 
-        <div className='flex justify-between text-default-500'>
-          <span>ราคารวม</span>
-          <span>{formatCurrency(0)}</span>
-        </div>
+        <SummaryRow label='ราคารวม' value={subTotal} />
+        <SummaryRow label='ค่าจัดส่ง' value={shippingCost} />
 
-        <div className='flex justify-between text-default-500'>
-          <span>ค่าจัดส่ง</span>
-          <span>{formatCurrency(0)}</span>
-        </div>
-
-        <div className='flex items-center justify-between'>
+        <div className='flex items-center justify-between pt-1'>
           <span className='font-bold'>ราคารวมสุทธิ :</span>
-          <span className='text-2xl font-bold text-primary-website'>{formatCurrency(0)}</span>
+          <span className='text-2xl font-bold text-primary-website'>{formatCurrency(total)}</span>
         </div>
       </CardBody>
 
@@ -38,5 +45,12 @@ const OrderSection: FC<ComponentProps<typeof Card>> = ({ className, ...props }) 
     </Card>
   )
 }
+
+const SummaryRow = ({ label, value }: { label: string; value: number }) => (
+  <div className='flex justify-between text-default-500'>
+    <span>{label}</span>
+    <span>{formatCurrency(value)}</span>
+  </div>
+)
 
 export { OrderSection }

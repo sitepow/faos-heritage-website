@@ -30,6 +30,7 @@ const ProfileCard = () => {
 
   const { data: session } = useSession()
   const userId = session?.user?.id
+
   const QUERY_KEY = ['account', 'user', userId]
 
   const [filePaths, setFilePaths] = useState<string[]>([])

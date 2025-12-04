@@ -22,9 +22,12 @@ const ModalDelete: FC<Props> = ({ isOpen, onOpenChange, onConfirm, isPending }) 
       <ModalContent>
         {(onClose) => (
           <>
-            <ModalHeader className='flex flex-col gap-1'>คุณกำลังจะลบข้อมูล?</ModalHeader>
+            <ModalHeader className='flex flex-col gap-1'>คุณกำลังจะลบข้อมูลนี้หรือไม่?</ModalHeader>
             <ModalBody>
-              <span>คุณแน่ใจแล้วหรือไม่ที่จะลบข้อมูลดังกล่าวนี้และจะไม่สามารถกู้คืนกลับมาได้</span>
+              <span>
+                คุณแน่ใจหรือไม่ว่าต้องการลบข้อมูลนี้?
+                การลบครั้งนี้เป็นการลบถาวรและไม่สามารถกู้คืนได้
+              </span>
             </ModalBody>
             <ModalFooter>
               <Button disabled={isPending} variant='faded' onPress={onClose}>

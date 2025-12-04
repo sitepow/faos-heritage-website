@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import type { ComponentProps, FC } from 'react'
 import { useState } from 'react'
 
 import { Carousel } from '@/components/carousel'
@@ -11,11 +12,16 @@ interface Props {
   alt?: string
 }
 
-export const ProductImagePreview = ({ images, alt = 'product-image' }: Props) => {
+export const ProductImagePreview: FC<ComponentProps<'div'> & Props> = ({
+  images,
+  className,
+  alt = 'product-image',
+  ...props
+}) => {
   const [selectedIndex, setSelectedIndex] = useState(0)
 
   return (
-    <div className='flex flex-col gap-2 md:w-[345px]'>
+    <div className={cn('flex flex-col gap-2 md:w-[345px]', className)} {...props}>
       <div className='relative h-[345px] overflow-hidden rounded-lg md:w-[345px]'>
         <Image
           fill

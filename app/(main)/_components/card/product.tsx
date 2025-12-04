@@ -5,7 +5,7 @@ import { Card, CardBody, CardFooter, CardHeader } from '@heroui/card'
 import { Chip } from '@heroui/chip'
 import { Image } from '@heroui/image'
 import { Skeleton } from '@heroui/skeleton'
-import { HeartIcon, ShoppingCartIcon } from 'lucide-react'
+import { FileIcon, HeartIcon, ShoppingCartIcon, TagIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
 
@@ -45,7 +45,12 @@ const ProductCard: FC<Props> = ({
       onMouseLeave={() => setIsHovered(false)}
     >
       <CardHeader className='relative overflow-hidden p-0'>
-        <Chip className='absolute bottom-2 left-2 z-50'>{category?.name ?? 'ไม่มีหมวดหมู่'}</Chip>
+        <div className='absolute bottom-2 left-2 z-50 flex flex-wrap gap-2'>
+          <Chip startContent={<FileIcon className='size-4 text-default-500' />}>สินค้าดิจิทัล</Chip>
+          <Chip startContent={<TagIcon className='size-4 text-default-500' />}>
+            {category?.name ?? 'ไม่มีหมวดหมู่'}
+          </Chip>
+        </div>
 
         <Link className='size-full' href={`/product/${createSlug(name, id)}`}>
           <Image

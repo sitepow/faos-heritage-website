@@ -14,8 +14,11 @@ import { useRouter } from 'next/navigation'
 const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
   const { theme } = useTheme()
   const router = useRouter()
+
   const { data: session } = useSession()
-  const isAdmin = session?.user?.role === Role.ADMIN
+  const user = session?.user
+
+  const isAdmin = user?.role === Role.ADMIN
 
   useEffect(() => {
     if (session && !isAdmin) {
