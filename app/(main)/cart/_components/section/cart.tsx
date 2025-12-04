@@ -2,16 +2,34 @@
 
 import { Card, CardBody, CardHeader } from '@heroui/card'
 
-import type { ComponentProps, FC } from 'react'
+import { useEffect, type ComponentProps, type FC } from 'react'
 
 import { CartCard, CartCardSkeleton } from '../card/cart'
 
 import { cn } from '@/utils/style'
+import { useQuery } from '@tanstack/react-query'
 import { AlertCircleIcon } from 'lucide-react'
+import { useSession } from 'next-auth/react'
+import { getCarts } from '../../actions/cart'
 import { useCartStore } from '../../store'
 
 const CartSection: FC<ComponentProps<typeof Card>> = ({ className, ...props }) => {
-  const { carts, isLoading } = useCartStore()
+  const { setState } = useCartStore()
+
+  const { data: session } = useSession()
+  const userId = session?.user?.id
+
+  const { data: carts, isLoading: isLoadingCarts } = useQuery({
+    queryKey: ['carts', userId],
+    queryFn: () => getCarts(userId!),
+    enabled: !!userId,
+  })
+
+  useEffect(() => {
+    if (carts) {
+      setState({ carts })
+    }
+  }, [carts, setState])
 
   return (
     <Card fullWidth className={cn(className)} {...props}>
@@ -19,16 +37,16 @@ const CartSection: FC<ComponentProps<typeof Card>> = ({ className, ...props }) =
         <b>รายการสินค้า</b>
       </CardHeader>
       <CardBody className='flex-col gap-4'>
-        {isLoading && [...Array(1)].map((_, index) => <CartCardSkeleton key={index} />)}
+        {isLoadingCarts && [...Array(1)].map((_, index) => <CartCardSkeleton key={index} />)}
 
-        {!isLoading && carts?.length === 0 && (
+        {!isLoadingCarts && carts?.length === 0 && (
           <div className='flex size-full flex-col items-center justify-center gap-2 text-default-500'>
             <AlertCircleIcon />
             <span>ไม่มีสินค้าในตระกร้า</span>
           </div>
         )}
 
-        {!isLoading &&
+        {!isLoadingCarts &&
           carts?.length !== 0 &&
           carts?.map((cart) => <CartCard key={cart?.id} {...cart} />)}
       </CardBody>

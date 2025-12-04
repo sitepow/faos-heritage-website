@@ -19,7 +19,7 @@ const StarRating: FC<ComponentProps<'div'> & Props> = ({ rate = 0, ...props }) =
           size={15}
         />
       ))}
-      <span className='text-default-500'>
+      <span className='flex-wrap text-default-500'>
         ({formatNumber(rate)} คะแนน) ({formatNumber(1602)} รีวิว)
       </span>
     </div>

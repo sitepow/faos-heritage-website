@@ -5,8 +5,8 @@ import { Button } from '@heroui/button'
 import { Divider } from '@heroui/divider'
 import { Spinner } from '@heroui/spinner'
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
-import { ArrowUpDownIcon, Settings2Icon } from 'lucide-react'
-import type { FC } from 'react'
+import { ArrowUpDownIcon } from 'lucide-react'
+import { useMemo, useState, type FC } from 'react'
 
 import type { GetProductsResult } from '@/actions/product'
 
@@ -14,6 +14,8 @@ import { getProducts } from '@/actions/product'
 import { getCategory } from '@/app/(dashboard)/dashboard/product/actions/category'
 import { ProductSection } from '@/app/(main)/_components/section/product'
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
+import { SORT_MAP } from '@/utils/const'
+import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/dropdown'
 
 interface Props {
   initialProducts: GetProductsResult
@@ -22,6 +24,14 @@ interface Props {
 }
 
 const CategoryClient: FC<Props> = ({ initialProducts, categoryId, itemPerPage }) => {
+  const [selectedKeys, setSelectedKeys] = useState(new Set(['newest']))
+
+  const sortBy = useMemo(() => {
+    const key = Array.from(selectedKeys)[0] as keyof typeof SORT_MAP
+
+    return SORT_MAP[key]
+  }, [selectedKeys])
+
   const { data: category } = useQuery({
     queryKey: ['category', categoryId],
     queryFn: () => getCategory(categoryId),
@@ -30,20 +40,22 @@ const CategoryClient: FC<Props> = ({ initialProducts, categoryId, itemPerPage })
 
   const { data, isLoading, fetchNextPage, isFetchingNextPage, hasNextPage } =
     useInfiniteQuery<GetProductsResult>({
-      queryKey: ['categoryProducts', categoryId],
+      queryKey: ['products', categoryId, , sortBy?.label, sortBy?.order],
       initialPageParam: null,
       queryFn: ({ pageParam }) =>
         getProducts({
           cursor: pageParam as string | null,
           limit: itemPerPage,
           categoryId,
+          sortBy,
         }),
       getNextPageParam: (lastPage) => lastPage?.nextCursor,
       enabled: !!categoryId,
-      initialData: {
-        pages: [initialProducts],
-        pageParams: [null],
-      },
+      placeholderData: (prev) =>
+        prev ?? {
+          pages: [initialProducts],
+          pageParams: [null],
+        },
     })
 
   useInfiniteScroll({
@@ -82,18 +94,32 @@ const CategoryClient: FC<Props> = ({ initialProducts, categoryId, itemPerPage })
           สินค้ารายการที่ 1 – {currentItemCount} จากทั้งหมด {totalItems} รายการ
         </span>
 
-        <div className='flex flex-wrap gap-3'>
-          <Button startContent={<Settings2Icon className='text-default-500' />} variant='bordered'>
-            ตัวกรอง
-          </Button>
+        <Dropdown>
+          <DropdownTrigger>
+            <Button
+              startContent={<ArrowUpDownIcon className='text-default-500' />}
+              variant='bordered'
+            >
+              การเรียงลำดับ {sortBy?.label}
+            </Button>
+          </DropdownTrigger>
+          <DropdownMenu
+            disallowEmptySelection
+            aria-label='Product Sort'
+            selectedKeys={selectedKeys}
+            selectionMode='single'
+            variant='flat'
+            onSelectionChange={(keys) => {
+              if (keys === 'all') return
 
-          <Button
-            startContent={<ArrowUpDownIcon className='text-default-500' />}
-            variant='bordered'
+              setSelectedKeys(new Set(keys as Set<string>))
+            }}
           >
-            การเรียงลำดับ
-          </Button>
-        </div>
+            {Object.entries(SORT_MAP).map(([key, value]) => (
+              <DropdownItem key={key}>{value.label}</DropdownItem>
+            ))}
+          </DropdownMenu>
+        </Dropdown>
       </div>
 
       <Divider />

@@ -129,7 +129,7 @@ const Navbar = () => {
             </NavbarItem>
           ) : (
             <NavbarItem>
-              <div className='border-y border-divider py-2.5'>
+              <div className='flex justify-between border-y border-divider py-2.5'>
                 <Button
                   as={Link}
                   href={siteConfig.link.login}
@@ -138,6 +138,8 @@ const Navbar = () => {
                 >
                   เข้าสู่ระบบ/สมัครสมาชิก
                 </Button>
+
+                <ThemeSwitch />
               </div>
             </NavbarItem>
           )}

@@ -20,6 +20,7 @@ const Cart = () => {
     mutationFn: deleteCart,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['carts', user?.id] })
+      queryClient.invalidateQueries({ queryKey: ['carts', 'count', user?.id] })
       onOpenDeleteChange()
       setState({ cartId: null })
     },

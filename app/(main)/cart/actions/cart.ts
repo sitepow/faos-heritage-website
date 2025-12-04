@@ -111,4 +111,20 @@ const clearCart = async (userId: string) => {
   }
 }
 
-export { clearCart, createCart, deleteCart, getCarts, updateCart }
+const getDashboard = async (userId: string) => {
+  try {
+    const totalCarts = await prisma.cartItem.count({
+      where: {
+        userId,
+      },
+    })
+
+    return {
+      totalCarts,
+    }
+  } catch (error) {
+    getPrismaError(error)
+  }
+}
+
+export { clearCart, createCart, deleteCart, getCarts, getDashboard, updateCart }

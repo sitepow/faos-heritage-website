@@ -5,7 +5,6 @@ interface CartStore {
   cartId: string | null
   carts: GetCartsResult
 
-  isLoading: boolean
   isDeleteOpen: boolean
   onOpenDeleteChange: (open?: boolean) => void
 
@@ -16,7 +15,6 @@ const useCartStore = create<CartStore>()((set) => ({
   cartId: '',
   carts: [],
 
-  isLoading: false,
   isDeleteOpen: false,
 
   onOpenDeleteChange: (open) =>

@@ -32,7 +32,7 @@ const CartSection: FC<
     mutationFn: () => createCart(user!.id, product!.id, 1),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['carts', user?.id],
+        queryKey: ['carts', 'count', user?.id],
       })
     },
   })
@@ -52,7 +52,10 @@ const CartSection: FC<
     <Card className={cn(className)} {...props}>
       <CardHeader className='flex flex-col items-start gap-4'>
         <Price price={product?.price!} />
-        <Alert description={`ขณะนี้มีสินค้าในคลังพร้อมขายจำนวน ${product?.stockQuantity} ชิ้น`} />
+        <Alert
+          className='text-start'
+          description={`ขณะนี้มีสินค้าในคลังพร้อมขายจำนวน ${product?.stockQuantity} ชิ้น`}
+        />
         <div className='flex w-full items-center gap-4'>
           <Quantity maxValue={product?.stockQuantity} />
           <Button

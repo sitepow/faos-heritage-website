@@ -5,12 +5,14 @@ import { Button } from '@heroui/button'
 import { Divider } from '@heroui/divider'
 import { Spinner } from '@heroui/spinner'
 import { useInfiniteQuery } from '@tanstack/react-query'
-import { ArrowUpDownIcon, Settings2Icon } from 'lucide-react'
 
 import { getProducts, type GetProductsResult } from '@/actions/product'
 import { ProductSection } from '@/app/(main)/_components/section/product'
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
-import type { FC } from 'react'
+import { SORT_MAP } from '@/utils/const'
+import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/dropdown'
+import { ArrowUpDownIcon } from 'lucide-react'
+import { useMemo, useState, type FC } from 'react'
 
 interface Props {
   initialProducts: GetProductsResult
@@ -18,20 +20,30 @@ interface Props {
 }
 
 const ProductClient: FC<Props> = ({ initialProducts, itemPerPage }) => {
+  const [selectedKeys, setSelectedKeys] = useState(new Set(['newest']))
+
+  const sortBy = useMemo(() => {
+    const key = Array.from(selectedKeys)[0] as keyof typeof SORT_MAP
+
+    return SORT_MAP[key]
+  }, [selectedKeys])
+
   const { data, isLoading, fetchNextPage, isFetchingNextPage, hasNextPage } =
     useInfiniteQuery<GetProductsResult>({
-      queryKey: ['products'],
+      queryKey: ['products', sortBy?.label, sortBy?.order],
       initialPageParam: null,
       queryFn: ({ pageParam }) =>
         getProducts({
           cursor: pageParam as string | null,
           limit: itemPerPage,
+          sortBy,
         }),
       getNextPageParam: (lastPage) => lastPage?.nextCursor,
-      initialData: {
-        pages: [initialProducts],
-        pageParams: [null],
-      },
+      placeholderData: (prev) =>
+        prev ?? {
+          pages: [initialProducts],
+          pageParams: [null],
+        },
     })
 
   useInfiniteScroll({
@@ -65,23 +77,37 @@ const ProductClient: FC<Props> = ({ initialProducts, itemPerPage }) => {
 
       <span className='text-2xl'>สินค้าทั้งหมด</span>
 
-      <div className='flex w-full flex-wrap items-center justify-between gap-3'>
+      <div className='flex w-full flex-wrap items-center justify-center gap-3 sm:justify-between'>
         <span className='text-primary-website'>
           สินค้ารายการที่ 1 – {itemCount} จากทั้งหมด {totalItems} รายการ
         </span>
 
-        <div className='flex flex-wrap gap-3'>
-          <Button startContent={<Settings2Icon className='text-default-500' />} variant='bordered'>
-            ตัวกรอง
-          </Button>
+        <Dropdown>
+          <DropdownTrigger>
+            <Button
+              startContent={<ArrowUpDownIcon className='text-default-500' />}
+              variant='bordered'
+            >
+              การเรียงลำดับ {sortBy?.label}
+            </Button>
+          </DropdownTrigger>
+          <DropdownMenu
+            disallowEmptySelection
+            aria-label='Product Sort'
+            selectedKeys={selectedKeys}
+            selectionMode='single'
+            variant='flat'
+            onSelectionChange={(keys) => {
+              if (keys === 'all') return
 
-          <Button
-            startContent={<ArrowUpDownIcon className='text-default-500' />}
-            variant='bordered'
+              setSelectedKeys(new Set(keys as Set<string>))
+            }}
           >
-            การเรียงลำดับ
-          </Button>
-        </div>
+            {Object.entries(SORT_MAP).map(([key, value]) => (
+              <DropdownItem key={key}>{value.label}</DropdownItem>
+            ))}
+          </DropdownMenu>
+        </Dropdown>
       </div>
 
       <Divider />

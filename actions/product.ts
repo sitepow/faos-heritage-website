@@ -1,19 +1,31 @@
 'use server'
 
 import { getPrismaError, prisma } from '@/utils/prisma'
+import type { Product } from '@prisma/client'
 
 export type GetProductsResult = Awaited<ReturnType<typeof getProducts>>
 export type ProductItem = GetProductsResult['items'][number]
+
+type SortOrder = 'asc' | 'desc'
+
+interface SortByItem {
+  readonly field: keyof Product
+  readonly order: SortOrder
+}
+
+interface Props {
+  cursor?: string | null
+  limit?: number
+  categoryId?: string | null
+  sortBy?: SortByItem
+}
 
 export const getProducts = async ({
   cursor,
   limit = 8,
   categoryId,
-}: {
-  cursor?: string | null
-  limit?: number
-  categoryId?: string | null
-}) => {
+  sortBy = { field: 'createdAt', order: 'desc' },
+}: Props) => {
   let totalCount: number | undefined
   const where = categoryId ? { categoryId } : undefined
 
@@ -38,7 +50,9 @@ export const getProducts = async ({
           },
         },
       },
-      orderBy: { createdAt: 'desc' },
+      orderBy: {
+        [sortBy.field]: sortBy.order,
+      },
     })
 
     const hasNextPage = items.length > limit
