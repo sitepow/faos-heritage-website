@@ -28,7 +28,9 @@ const HeroUIProviders: FC<Props> = ({ children, themeProps }) => {
       disableRipple
       skipFramerMotionAnimations
     >
-      <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
+      <NextThemesProvider {...themeProps} defaultTheme='light'>
+        {children}
+      </NextThemesProvider>
     </HeroUIProvider>
   )
 }
