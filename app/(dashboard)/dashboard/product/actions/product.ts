@@ -48,7 +48,7 @@ const deleteProduct = async (productIds: string | string[]) => {
 
 export type GetProductResult = Awaited<ReturnType<typeof getProduct>>
 
-const getProduct = async (productId: string) => {
+const getProduct = async (productId: string, userId?: string) => {
   try {
     if (!productId) {
       throw new Error('โปรดระบุรหัสสินค้าที่ต้องการ')
@@ -70,6 +70,30 @@ const getProduct = async (productId: string) => {
         weight: true,
         categoryId: true,
         shortDescription: true,
+        cart: userId
+          ? {
+              where: { userId },
+              select: { variantId: true },
+            }
+          : false,
+        wishlist: userId
+          ? {
+              where: {
+                userId: userId,
+              },
+              select: {
+                id: true,
+              },
+            }
+          : false,
+        variants: {
+          select: {
+            id: true,
+            name: true,
+            price: true,
+            stockQuantity: true,
+          },
+        },
         category: {
           select: {
             name: true,

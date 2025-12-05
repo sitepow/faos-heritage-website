@@ -20,7 +20,7 @@ model User {
     addresses Address[]
     orders    Order[]
     reviews   Review[]
-    cart      CartItem[]
+    cart      Cart[]
     wishlist  Wishlist[]
 
     createdAt DateTime @default(now())
@@ -96,7 +96,7 @@ model Product {
     variants     ProductVariant[]
     reviews      Review[]
     orderItems   OrderItem[]
-    cartItems    CartItem[]
+    cart    Cart[]
     wishlist     Wishlist[]
     stockHistory StockHistory[]
 
@@ -132,10 +132,11 @@ model ProductVariant {
     stockHistory StockHistory[]
 }
 
-model CartItem {
+model Cart {
     id        String @id @default(cuid())
     userId    String
     productId String
+    variantId String?
     quantity  Int    @default(1)
 
     user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)

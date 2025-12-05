@@ -58,6 +58,7 @@ const Navbar = () => {
         isMenuOpen={isMenuOpen}
         onMenuOpenChange={setIsMenuOpen}
         isBordered
+        isBlurred={false}
         className='shadow-md'
         maxWidth='full'
         position='sticky'

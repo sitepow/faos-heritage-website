@@ -27,10 +27,16 @@ const ImageSection: FC<Props> = ({ className, product, ...props }) => {
               <StarRating rate={5} />
 
               <div className='flex flex-wrap gap-2'>
-                <Chip startContent={<FileIcon className='size-4 text-default-500' />}>
+                <Chip
+                  variant='faded'
+                  startContent={<FileIcon className='size-4 text-default-500' />}
+                >
                   สินค้าดิจิทัล
                 </Chip>
-                <Chip startContent={<TagIcon className='size-4 text-default-500' />}>
+                <Chip
+                  variant='faded'
+                  startContent={<TagIcon className='size-4 text-default-500' />}
+                >
                   {product?.category?.name ?? 'ไม่มีหมวดหมู่'}
                 </Chip>
               </div>

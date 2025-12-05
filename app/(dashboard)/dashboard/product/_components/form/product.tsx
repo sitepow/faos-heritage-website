@@ -138,7 +138,7 @@ const ProductForm = () => {
         {!isPending && (
           <ModalBody>
             <SubHeader title='สถานะสินค้า' />
-            <div className='flex gap-6'>
+            <div className='flex flex-wrap gap-6'>
               <Controller
                 control={control}
                 name='isActive'
@@ -216,7 +216,7 @@ const ProductForm = () => {
                   <Textarea
                     {...field}
                     label='รายละเอียดสินค้า (ฉบับย่อ)'
-                    minRows={5}
+                    minRows={10}
                     value={value ?? ''}
                   />
                 )}
@@ -228,7 +228,7 @@ const ProductForm = () => {
                   <Textarea
                     {...field}
                     label='รายละเอียดสินค้า (ฉบับเต็ม)'
-                    minRows={5}
+                    minRows={10}
                     value={value ?? ''}
                   />
                 )}
@@ -332,7 +332,7 @@ const ProductForm = () => {
               />
             </div>
 
-            <div className='flex gap-4'>
+            <div className='flex flex-wrap gap-4'>
               <SubHeader title='การตั้งค่าสำหรับ SEO' />
               <Controller
                 control={control}

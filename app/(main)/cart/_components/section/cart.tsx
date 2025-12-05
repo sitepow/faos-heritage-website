@@ -52,7 +52,7 @@ const CartSection: FC<ComponentProps<typeof Card>> = ({ className, ...props }) =
 
         {!isLoadingCarts &&
           carts?.length !== 0 &&
-          carts?.map((cart) => <CartCard key={cart?.id} {...cart} />)}
+          carts?.map((cart) => <CartCard key={cart?.id} cart={cart} />)}
       </CardBody>
     </Card>
   )

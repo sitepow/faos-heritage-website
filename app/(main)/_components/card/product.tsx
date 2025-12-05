@@ -46,8 +46,10 @@ const ProductCard: FC<Props> = ({
     >
       <CardHeader className='relative overflow-hidden p-0'>
         <div className='absolute bottom-2 left-2 z-50 flex flex-wrap gap-2'>
-          <Chip startContent={<FileIcon className='size-4 text-default-500' />}>สินค้าดิจิทัล</Chip>
-          <Chip startContent={<TagIcon className='size-4 text-default-500' />}>
+          <Chip variant='faded' startContent={<FileIcon className='size-4 text-default-500' />}>
+            สินค้าดิจิทัล
+          </Chip>
+          <Chip variant='faded' startContent={<TagIcon className='size-4 text-default-500' />}>
             {category?.name ?? 'ไม่มีหมวดหมู่'}
           </Chip>
         </div>

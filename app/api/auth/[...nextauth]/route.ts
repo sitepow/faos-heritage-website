@@ -1,12 +1,12 @@
 import { prisma } from '@/utils/prisma'
 import { Role } from '@prisma/client'
 import { compare } from 'bcryptjs'
-import NextAuth from 'next-auth'
+import NextAuth, { type NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import FacebookProvider from 'next-auth/providers/facebook'
 import GoogleProvider from 'next-auth/providers/google'
 
-const handler = NextAuth({
+export const authOptions: NextAuthOptions = {
   session: { strategy: 'jwt' },
 
   providers: [
@@ -115,8 +115,8 @@ const handler = NextAuth({
 
     async session({ session, token }) {
       if (session.user) {
-        session.user.id = token.id
-        session.user.role = token.role
+        session.user.id = token.id as string
+        session.user.role = token.role as Role
       }
 
       return session
@@ -124,6 +124,8 @@ const handler = NextAuth({
   },
 
   secret: process.env.NEXTAUTH_SECRET,
-})
+}
+
+const handler = NextAuth(authOptions)
 
 export { handler as GET, handler as POST }

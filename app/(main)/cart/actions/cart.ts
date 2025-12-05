@@ -6,7 +6,7 @@ export type GetCartsResult = Awaited<ReturnType<typeof getCarts>>
 
 const getCarts = async (userId: string) => {
   try {
-    return await prisma.cartItem.findMany({
+    return await prisma.cart.findMany({
       where: { userId },
       include: {
         product: {
@@ -15,6 +15,14 @@ const getCarts = async (userId: string) => {
             name: true,
             price: true,
             stockQuantity: true,
+            variants: {
+              select: {
+                id: true,
+                name: true,
+                price: true,
+                stockQuantity: true,
+              },
+            },
             images: {
               select: {
                 url: true,
@@ -30,7 +38,15 @@ const getCarts = async (userId: string) => {
   }
 }
 
-const createCart = async (userId: string, productId: string) => {
+const createCart = async ({
+  userId,
+  productId,
+  variantId,
+}: {
+  userId: string
+  productId: string
+  variantId?: string
+}) => {
   try {
     const product = await prisma.product.findUnique({
       where: { id: productId },
@@ -39,7 +55,7 @@ const createCart = async (userId: string, productId: string) => {
 
     if (!product) throw new Error('ไม่พบสินค้าที่ต้องการ')
 
-    const existing = await prisma.cartItem.findFirst({
+    const existing = await prisma.cart.findFirst({
       where: { userId, productId },
     })
 
@@ -52,9 +68,9 @@ const createCart = async (userId: string, productId: string) => {
         )
       }
 
-      await prisma.cartItem.update({
+      await prisma.cart.update({
         where: { id: existing.id },
-        data: { quantity: newQty },
+        data: { quantity: newQty, variantId: variantId ?? null },
       })
 
       throw new Error('คุณได้เพิ่มสินค้านี้เข้าในตระกร้าไว้แล้ว โปรดเลือกสินค้าชิ้นใหม่ที่ต้องการ')
@@ -66,10 +82,11 @@ const createCart = async (userId: string, productId: string) => {
       )
     }
 
-    return await prisma.cartItem.create({
+    return await prisma.cart.create({
       data: {
         userId,
         productId,
+        variantId,
         quantity: 1,
       },
     })
@@ -78,15 +95,26 @@ const createCart = async (userId: string, productId: string) => {
   }
 }
 
-const updateCart = async ({ cartId, quantity }: { cartId: string; quantity: number }) => {
+const updateCart = async ({
+  cartId,
+  quantity,
+  variantId,
+}: {
+  cartId: string
+  quantity: number
+  variantId?: string
+}) => {
   try {
     if (quantity <= 0) {
       return await deleteCart(cartId)
     }
 
-    await prisma.cartItem.update({
+    await prisma.cart.update({
       where: { id: cartId },
-      data: { quantity },
+      data: {
+        quantity,
+        variantId: variantId ?? null,
+      },
     })
   } catch (error) {
     getPrismaError(error)
@@ -95,7 +123,7 @@ const updateCart = async ({ cartId, quantity }: { cartId: string; quantity: numb
 
 const deleteCart = async (cartId: string) => {
   try {
-    await prisma.cartItem.delete({
+    await prisma.cart.delete({
       where: { id: cartId },
     })
   } catch (error) {
@@ -105,7 +133,7 @@ const deleteCart = async (cartId: string) => {
 
 const clearCart = async (userId: string) => {
   try {
-    await prisma.cartItem.deleteMany({
+    await prisma.cart.deleteMany({
       where: { userId },
     })
   } catch (error) {
@@ -115,7 +143,7 @@ const clearCart = async (userId: string) => {
 
 const getDashboard = async (userId: string) => {
   try {
-    const totalCarts = await prisma.cartItem.count({
+    const totalCarts = await prisma.cart.count({
       where: {
         userId,
       },

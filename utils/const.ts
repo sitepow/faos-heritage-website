@@ -2,32 +2,32 @@ const SORT_MAP = {
   newest: {
     field: 'createdAt',
     order: 'desc',
-    label: 'ใหม่ล่าสุด',
+    label: 'สินค้า (ใหม่-เก่า)',
   },
   oldest: {
     field: 'createdAt',
     order: 'asc',
-    label: 'เก่าสุด',
+    label: 'สินค้า (เก่า-ใหม่)',
   },
   price_low: {
     field: 'price',
     order: 'asc',
-    label: 'ราคาต่ำไปสูง',
+    label: 'ราคา (น้อย-มาก)',
   },
   price_high: {
     field: 'price',
     order: 'desc',
-    label: 'ราคาสูงไปต่ำ',
+    label: 'ราคา (มาก-น้อย)',
   },
   stock_low: {
     field: 'stockQuantity',
     order: 'asc',
-    label: 'สต็อกน้อยไปมาก',
+    label: 'สต็อก (น้อย-มาก)',
   },
   stock_high: {
     field: 'stockQuantity',
     order: 'desc',
-    label: 'สต็อกมากไปน้อย',
+    label: 'สต็อก (มาก-น้อย)',
   },
 } as const
 

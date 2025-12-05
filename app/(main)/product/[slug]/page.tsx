@@ -1,7 +1,10 @@
 import { getProduct } from '@/app/(dashboard)/dashboard/product/actions/product'
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import { BannerAdvertise } from '@/components/banner-advertise'
 import { CategoryBreadcrumbs } from '@/components/breadcrumbs'
 import { getIdFromSlug } from '@/utils/helper'
 import { AlertCircleIcon } from 'lucide-react'
+import { getServerSession } from 'next-auth'
 import type { FC } from 'react'
 import { CartSection } from './_components/section/cart'
 import { DetailSection } from './_components/section/detail'
@@ -15,10 +18,14 @@ interface Props {
 const ProductPage: FC<Props> = async ({ params }) => {
   const slugStr = Array.isArray(params.slug) ? params.slug[0] : params.slug
   const productId = getIdFromSlug(slugStr)
+
+  const session = await getServerSession(authOptions)
+  const userId = session?.user?.id
+
   let product = null
 
   try {
-    product = await getProduct(productId)
+    product = await getProduct(productId, userId)
   } catch {
     return (
       <div className='flex flex-col items-center justify-center gap-2 text-center text-default-500'>
@@ -40,6 +47,8 @@ const ProductPage: FC<Props> = async ({ params }) => {
         <ImageSection className='xl:col-span-2' product={product} />
         <CartSection product={product} />
       </div>
+
+      <BannerAdvertise />
 
       <DetailSection product={product} />
       <SimilarSection product={product} />

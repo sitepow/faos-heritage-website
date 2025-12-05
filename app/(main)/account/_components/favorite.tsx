@@ -46,7 +46,7 @@ const Favorite: FC<Props> = ({ className, favorite, ...props }) => {
   }
 
   const { mutate: mutateCreateCart, isPending: isPendingCreateCart } = useMutation({
-    mutationFn: () => createCart(userId!, productId),
+    mutationFn: () => createCart({ userId: userId!, productId: productId! }),
     onSuccess: async () => {
       await deleteFavorite({ userId, productId })
 

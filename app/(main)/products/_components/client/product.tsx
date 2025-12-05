@@ -104,7 +104,12 @@ const ProductClient: FC<Props> = ({ initialProducts, itemPerPage }) => {
             }}
           >
             {Object.entries(SORT_MAP).map(([key, value]) => (
-              <DropdownItem key={key}>{value.label}</DropdownItem>
+              <DropdownItem
+                startContent={<ArrowUpDownIcon className='text-default-500' />}
+                key={key}
+              >
+                {value.label}
+              </DropdownItem>
             ))}
           </DropdownMenu>
         </Dropdown>
