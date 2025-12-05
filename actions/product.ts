@@ -20,7 +20,7 @@ interface Props {
   sortBy?: SortByItem
 }
 
-export const getProducts = async ({
+const getProducts = async ({
   cursor,
   limit = 8,
   categoryId,
@@ -74,3 +74,5 @@ export const getProducts = async ({
     return { items: [], nextCursor: null, totalCount: cursor ? undefined : 0 }
   }
 }
+
+export { getProducts }

@@ -7,6 +7,7 @@ import { HeartIcon, ShoppingCartIcon } from 'lucide-react'
 import type { ComponentProps, FC } from 'react'
 
 import type { GetProductResult } from '@/app/(dashboard)/dashboard/product/actions/product'
+import { createFavorite } from '@/app/(main)/account/actions/favorite'
 import { createCart } from '@/app/(main)/cart/actions/cart'
 import { Price } from '@/components/price'
 import { cn } from '@/utils/style'
@@ -27,16 +28,36 @@ const CartSection: FC<
   const { data: session } = useSession()
   const userId = session?.user?.id
 
+  const CART_COUT_QUERY_KEY = ['carts', 'count', userId]
+  const FAVORITE_QUERY_KEY = ['account', 'favorites', userId]
+  const FAVORITE_COUNT_QUERY_KEY = ['favorites', 'count', userId]
+
   const { mutate: mutateCreateCart, isPending: isPendingCreateCart } = useMutation({
     mutationFn: () => createCart(userId!, product!.id),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['carts', 'count', userId],
+        queryKey: CART_COUT_QUERY_KEY,
       })
+
+      toast.success('เพิ่มสินค้าเข้าตระกร้าเรียบร้อยแล้ว')
     },
   })
 
-  const onSumit = () => {
+  const { mutate: mutateCreateFavorite, isPending: isPendingCreateFavorite } = useMutation({
+    mutationFn: () => createFavorite(userId!, product!.id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: FAVORITE_QUERY_KEY,
+      })
+      queryClient.invalidateQueries({
+        queryKey: FAVORITE_COUNT_QUERY_KEY,
+      })
+
+      toast.success('เพิ่มสินค้าเข้ารายการโปรดเรียบร้อยแล้ว')
+    },
+  })
+
+  const onSumitCart = () => {
     if (!userId) {
       toast.error('กรุณาเข้าสู่ระบบก่อนเพิ่มสินค้าเข้าตระกร้า')
       router.push('/login')
@@ -45,6 +66,17 @@ const CartSection: FC<
     }
 
     mutateCreateCart()
+  }
+
+  const onSumitFavorite = () => {
+    if (!userId) {
+      toast.error('กรุณาเข้าสู่ระบบก่อนเพิ่มสินค้าเข้ารายการโปรด')
+      router.push('/login')
+
+      return
+    }
+
+    mutateCreateFavorite()
   }
 
   return (
@@ -58,7 +90,14 @@ const CartSection: FC<
       </CardHeader>
 
       <CardBody className='flex flex-col justify-center gap-2 sm:flex-row'>
-        <Button fullWidth startContent={<HeartIcon className='text-default-500' />} variant='faded'>
+        <Button
+          fullWidth
+          isDisabled={isPendingCreateFavorite}
+          isLoading={isPendingCreateFavorite}
+          onClick={() => onSumitFavorite()}
+          startContent={!isPendingCreateFavorite && <HeartIcon className='text-default-500' />}
+          variant='faded'
+        >
           เพิ่มในรายการโปรด
         </Button>
 
@@ -66,7 +105,7 @@ const CartSection: FC<
           fullWidth
           isDisabled={isPendingCreateCart}
           isLoading={isPendingCreateCart}
-          onClick={() => onSumit()}
+          onClick={() => onSumitCart()}
           startContent={!isPendingCreateCart && <ShoppingCartIcon className='text-default-500' />}
           variant='faded'
         >

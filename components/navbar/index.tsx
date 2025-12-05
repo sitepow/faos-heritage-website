@@ -26,6 +26,7 @@ import type { NavItem } from '@/config/site'
 import { siteConfig } from '@/config/site'
 import { cn } from '@/utils/style'
 import { useState } from 'react'
+import { Favorite } from './etc/favorite'
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -103,8 +104,9 @@ const Navbar = () => {
           )}
 
           {isAuthenticated && !isDashboard && (
-            <NavbarItem className='hidden lg:flex'>
+            <NavbarItem className='hidden gap-4 lg:flex'>
               <Cart />
+              <Favorite />
             </NavbarItem>
           )}
 
@@ -146,8 +148,9 @@ const Navbar = () => {
         </NavbarMenu>
 
         {isAuthenticated && (
-          <NavbarItem className='lg:hidden'>
+          <NavbarItem className='flex gap-4 lg:hidden'>
             <Cart />
+            <Favorite />
           </NavbarItem>
         )}
 

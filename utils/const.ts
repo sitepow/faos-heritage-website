@@ -31,4 +31,12 @@ const SORT_MAP = {
   },
 } as const
 
-export { SORT_MAP }
+enum ACCOUNT_TABS {
+  ACCOUNT = 'account',
+  ORDER = 'order',
+  FAVORITE = 'favorite',
+  PROFILE = 'profile',
+  ADDRESS = 'address',
+}
+
+export { ACCOUNT_TABS, SORT_MAP }

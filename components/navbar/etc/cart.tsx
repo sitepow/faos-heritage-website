@@ -1,4 +1,3 @@
-import { Button } from '@heroui/button'
 import { ShoppingCartIcon } from 'lucide-react'
 import Link from 'next/link'
 
@@ -18,15 +17,13 @@ const Cart = () => {
   })
 
   return (
-    <Link href={siteConfig.link.cart}>
-      <Button variant='light'>
-        <ShoppingCartIcon />
-        {data?.totalCarts && (
-          <div className='absolute top-0 right-5 flex h-5 w-5 items-center justify-center rounded-full bg-red-800 text-xs font-bold text-white'>
-            {data.totalCarts > 99 ? '99+' : data.totalCarts}
-          </div>
-        )}
-      </Button>
+    <Link href={siteConfig.link.cart} className='relative inline-block'>
+      <ShoppingCartIcon className='size-6' />
+      {!!data?.totalCarts && (
+        <div className='absolute -top-2 -right-2 flex size-5 items-center justify-center rounded-full bg-red-800 text-xs font-bold text-white'>
+          {data.totalCarts > 99 ? '99+' : data.totalCarts}
+        </div>
+      )}
     </Link>
   )
 }
