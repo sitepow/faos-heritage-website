@@ -52,7 +52,7 @@ const Navbar = () => {
 
   return (
     <>
-      <Header />
+      {!isMenuOpen && <Header />}
 
       <HeroNavbar
         isMenuOpen={isMenuOpen}
@@ -115,9 +115,13 @@ const Navbar = () => {
           </NavbarItem>
         </NavbarContent>
 
-        <NavbarMenu className='pt-18 sm:pt-12'>
+        <NavbarMenu className='bg-white dark:bg-inherit'>
           {menuItems.map((item) => (
-            <NavbarMenuItem onClick={() => setIsMenuOpen(false)} key={item.href}>
+            <NavbarMenuItem
+              onClick={() => setIsMenuOpen(false)}
+              key={item.href}
+              className='text-base'
+            >
               {renderLink(item)}
             </NavbarMenuItem>
           ))}
