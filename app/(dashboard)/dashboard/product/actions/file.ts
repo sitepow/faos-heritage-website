@@ -2,10 +2,10 @@
 
 import { promises as fs } from 'fs'
 import path from 'path'
-import sharp from 'sharp'
 
 const uploadFiles = async (formData: FormData) => {
   const files = formData.getAll('files') as File[]
+  const sharp = (await import('@/lib/sharp')).default
 
   if (!files || files.length === 0) {
     throw new Error('ไม่ได้ระบุไฟล์ที่ต้องการอัพโหลด')
