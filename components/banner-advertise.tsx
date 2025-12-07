@@ -25,7 +25,7 @@ const AdvertiseItem = ({ message }: { message: string }) => {
 
 const BannerAdvertise = () => {
   return (
-    <div className='flex w-full flex-col gap-6 rounded-xl bg-primary-website p-6 text-white'>
+    <div className='flex w-full flex-col gap-6 rounded-xl bg-primary-website p-6 text-white shadow-xl'>
       <h2 className='mx-auto text-center text-2xl leading-tight font-bold sm:max-w-10/12 md:max-w-1/2 xl:max-w-1/3'>
         ทำไมต้องเลือกใช้ซอฟต์แวร์ ZentraCore ในการเปิดร้านค้าออนไลน์เป็นของตัวเอง?
       </h2>

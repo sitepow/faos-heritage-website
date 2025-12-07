@@ -4,22 +4,26 @@ import { BreadcrumbItem, Breadcrumbs } from '@heroui/breadcrumbs'
 import { Button } from '@heroui/button'
 import { Divider } from '@heroui/divider'
 import { Spinner } from '@heroui/spinner'
-import { useInfiniteQuery } from '@tanstack/react-query'
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
+import { ArrowUpDownIcon } from 'lucide-react'
+import { useMemo, useState, type FC } from 'react'
 
-import { getProducts, type GetProductsResult } from '@/actions/product'
+import type { GetProductsResult } from '@/actions/product'
+
+import { getProducts } from '@/actions/product'
+import { getCategory } from '@/app/(dashboard)/dashboard/product/actions/category'
 import { ProductSection } from '@/app/(main)/_components/section/product'
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
 import { SORT_MAP } from '@/utils/const'
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/dropdown'
-import { ArrowUpDownIcon } from 'lucide-react'
-import { useMemo, useState, type FC } from 'react'
 
 interface Props {
   initialProducts: GetProductsResult
+  categoryId: string
   itemPerPage: number
 }
 
-const ProductClient: FC<Props> = ({ initialProducts, itemPerPage }) => {
+const CategoryLayout: FC<Props> = ({ initialProducts, categoryId, itemPerPage }) => {
   const [selectedKeys, setSelectedKeys] = useState(new Set(['newest']))
 
   const sortBy = useMemo(() => {
@@ -28,17 +32,25 @@ const ProductClient: FC<Props> = ({ initialProducts, itemPerPage }) => {
     return SORT_MAP[key]
   }, [selectedKeys])
 
+  const { data: category } = useQuery({
+    queryKey: ['category', categoryId],
+    queryFn: () => getCategory(categoryId),
+    enabled: !!categoryId,
+  })
+
   const { data, isLoading, fetchNextPage, isFetchingNextPage, hasNextPage } =
     useInfiniteQuery<GetProductsResult>({
-      queryKey: ['products', sortBy?.label, sortBy?.order],
+      queryKey: ['products', categoryId, , sortBy?.label, sortBy?.order],
       initialPageParam: null,
       queryFn: ({ pageParam }) =>
         getProducts({
           cursor: pageParam as string | null,
           limit: itemPerPage,
+          categoryId,
           sortBy,
         }),
       getNextPageParam: (lastPage) => lastPage?.nextCursor,
+      enabled: !!categoryId,
       placeholderData: (prev) =>
         prev ?? {
           pages: [initialProducts],
@@ -54,8 +66,8 @@ const ProductClient: FC<Props> = ({ initialProducts, itemPerPage }) => {
   })
 
   const totalItems = data?.pages?.[0]?.totalCount ?? 0
-  const items = data?.pages?.flatMap((page) => page.items) ?? []
-  const itemCount = items.length
+  const currentItems = data?.pages?.flatMap((page) => page.items) ?? []
+  const currentItemCount = currentItems.length
 
   if (isLoading)
     return (
@@ -71,15 +83,15 @@ const ProductClient: FC<Props> = ({ initialProducts, itemPerPage }) => {
       <div className='flex w-full justify-start'>
         <Breadcrumbs className='font-bold'>
           <BreadcrumbItem>หน้าหลัก</BreadcrumbItem>
-          <BreadcrumbItem>สินค้าทั้งหมด</BreadcrumbItem>
+          <BreadcrumbItem>{category?.name}</BreadcrumbItem>
         </Breadcrumbs>
       </div>
 
-      <span className='text-2xl'>สินค้าทั้งหมด</span>
+      <span className='text-2xl'>{category?.name}</span>
 
-      <div className='flex w-full flex-wrap items-center justify-center gap-3 sm:justify-between'>
+      <div className='flex w-full flex-wrap items-center justify-between gap-3'>
         <span className='text-primary-website'>
-          สินค้ารายการที่ 1 – {itemCount} จากทั้งหมด {totalItems} รายการ
+          สินค้ารายการที่ 1 – {currentItemCount} จากทั้งหมด {totalItems} รายการ
         </span>
 
         <Dropdown>
@@ -105,8 +117,8 @@ const ProductClient: FC<Props> = ({ initialProducts, itemPerPage }) => {
           >
             {Object.entries(SORT_MAP).map(([key, value]) => (
               <DropdownItem
-                startContent={<ArrowUpDownIcon className='text-default-500' />}
                 key={key}
+                startContent={<ArrowUpDownIcon className='text-default-500' />}
               >
                 {value.label}
               </DropdownItem>
@@ -121,10 +133,10 @@ const ProductClient: FC<Props> = ({ initialProducts, itemPerPage }) => {
         isFetchingNextPage={isFetchingNextPage}
         isLoading={isLoading}
         itemPerPage={itemPerPage}
-        items={items}
+        items={currentItems}
       />
     </section>
   )
 }
 
-export default ProductClient
+export { CategoryLayout }

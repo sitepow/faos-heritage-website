@@ -28,11 +28,18 @@ const CartCard: FC<
   const { data: session } = useSession()
   const { setState, onOpenDeleteChange } = useCartStore()
 
-  const [selectedVariantId, setSelectedVariantId] = useState<string | null>(cart?.variantId)
+  const [selectedVariantId, setSelectedVariantId] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (cart?.variantId) {
+      setSelectedVariantId(cart?.variantId)
+    }
+  }, [cart?.variantId])
 
   const [qty, setQty] = useState(cart?.quantity)
 
   const userId = session?.user?.id
+  const PRODUCT_QUERY_KEY = ['product', cart?.product?.id]
   const CART_QUERY_KEY = ['carts', userId]
   const CART_COUNT_QUERY_KEY = ['carts', 'count', userId]
 
@@ -42,6 +49,7 @@ const CartCard: FC<
     mutationFn: updateCart,
     onSuccess: () => {
       Promise.all([
+        queryClient.invalidateQueries({ queryKey: PRODUCT_QUERY_KEY }),
         queryClient.invalidateQueries({ queryKey: CART_QUERY_KEY }),
         queryClient.invalidateQueries({ queryKey: CART_COUNT_QUERY_KEY }),
       ])
@@ -138,7 +146,10 @@ const CartCard: FC<
         <CardBody>
           <div className='flex flex-wrap items-center justify-start gap-4 lg:flex-nowrap lg:justify-around'>
             <div className='flex flex-wrap gap-5 sm:flex-nowrap'>
-              <Link href={`/product/${createSlug(cart?.product?.name, cart?.product?.id)}`}>
+              <Link
+                href={`/product/${createSlug(cart?.product?.name, cart?.product?.id)}`}
+                className='shrink-0'
+              >
                 <Image
                   alt='product-image'
                   className='shrink-0 rounded-xl object-cover'
@@ -160,6 +171,7 @@ const CartCard: FC<
 
                 <div className='flex flex-col gap-3'>
                   <NumberInput
+                    variant='faded'
                     value={qty}
                     onChange={handleQuantityChange}
                     maxValue={stockQuantity}

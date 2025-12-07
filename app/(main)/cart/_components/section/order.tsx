@@ -13,7 +13,15 @@ const OrderSection: FC<ComponentProps<typeof Card>> = ({ className, ...props }) 
   const { carts } = useCartStore()
 
   const { subTotal, shippingCost, total } = useMemo(() => {
-    const subTotal = carts?.reduce((sum, cart) => sum + cart.quantity * cart.product.price, 0) ?? 0
+    const subTotal =
+      carts?.reduce((sum, cart) => {
+        const variants = cart?.product?.variants ?? []
+        const variant = variants.find((v) => v.id === cart?.variantId)
+
+        const price = variant?.price ?? cart?.product?.price ?? 0
+
+        return sum + price * cart.quantity
+      }, 0) ?? 0
 
     const shippingCost = 0
     const total = subTotal + shippingCost

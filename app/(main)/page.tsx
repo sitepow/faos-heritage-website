@@ -9,7 +9,7 @@ import { ProductSection } from './_components/section/product'
 
 const ITEM_PER_PAGE = 12
 
-const Home = async () => {
+const Index = async () => {
   const products = await getProducts({ limit: ITEM_PER_PAGE })
 
   return (
@@ -30,4 +30,4 @@ const Home = async () => {
   )
 }
 
-export default Home
+export default Index

@@ -13,7 +13,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { HeartIcon, ShoppingCartIcon } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { useMemo, useState, type ComponentProps, type FC } from 'react'
+import { useEffect, useMemo, useState, type ComponentProps, type FC } from 'react'
 import { toast } from 'react-toastify'
 
 const CartSection: FC<
@@ -25,9 +25,13 @@ const CartSection: FC<
   const queryClient = useQueryClient()
   const { data: session } = useSession()
 
-  const [selectedVariantId, setSelectedVariantId] = useState<string | null>(
-    product?.cart[0]?.variantId!,
-  )
+  const [selectedVariantId, setSelectedVariantId] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (product?.cart?.[0]?.variantId) {
+      setSelectedVariantId(product.cart[0].variantId)
+    }
+  }, [product?.cart])
 
   const userId = session?.user?.id
   const hasVariants = product?.variants && product.variants.length > 0
@@ -44,6 +48,7 @@ const CartSection: FC<
 
   const isOutOfStock = (stockQuantity ?? 0) <= 0
 
+  const CART_QUERY_KEY = ['carts', userId]
   const CART_COUT_QUERY_KEY = ['carts', 'count', userId]
   const FAVORITE_QUERY_KEY = ['account', 'favorites', userId]
   const FAVORITE_COUNT_QUERY_KEY = ['favorites', 'count', userId]
@@ -62,11 +67,18 @@ const CartSection: FC<
         variantId: selectedVariantId!,
       })
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: CART_COUT_QUERY_KEY })
+    onSuccess: async () => {
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: CART_QUERY_KEY }),
+        queryClient.invalidateQueries({ queryKey: CART_COUT_QUERY_KEY }),
+      ])
       goToCart()
     },
-    onError: () => {
+    onError: async () => {
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: CART_QUERY_KEY }),
+        queryClient.invalidateQueries({ queryKey: CART_COUT_QUERY_KEY }),
+      ])
       goToCart()
     },
   })
@@ -150,11 +162,7 @@ const CartSection: FC<
             placeholder='เลือกตัวเลือกสินค้า'
             items={product.variants!}
             selectedKeys={selectedVariantId ? [selectedVariantId] : []}
-            onSelectionChange={(keys) => {
-              const selected = Array.from(keys)[0]
-
-              setSelectedVariantId(String(selected))
-            }}
+            onSelectionChange={(keys) => setSelectedVariantId(Array.from(keys)[0] as string)}
           >
             {(variant) => <SelectItem key={variant.id}>{variant.name}</SelectItem>}
           </Select>

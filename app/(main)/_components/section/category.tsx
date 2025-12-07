@@ -1,6 +1,6 @@
 import { getProducts } from '@/actions/product'
 import { getCategories } from '@/app/(dashboard)/dashboard/product/actions/category'
-import { CategorySectionClient } from './client/category'
+import { CategoryLayout } from './layout'
 
 const ITEM_PER_PAGE = 8
 
@@ -13,7 +13,7 @@ const CategorySection = async () => {
     : { items: [], nextCursor: null, totalCount: 0 }
 
   return (
-    <CategorySectionClient
+    <CategoryLayout
       initialCategories={categories}
       initialProducts={products}
       itemPerPage={ITEM_PER_PAGE}

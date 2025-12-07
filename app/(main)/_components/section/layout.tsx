@@ -16,8 +16,8 @@ import { getCategories } from '@/app/(dashboard)/dashboard/product/actions/categ
 import { Carousel } from '@/components/carousel'
 import { createSlug } from '@/utils/helper'
 import { Skeleton } from '@heroui/skeleton'
-import { CategoryCard, CategoryCardSkeleton } from '../../card/category'
-import { ProductCard, ProductCardSkeleton } from '../../card/product'
+import { CategoryCard, CategoryCardSkeleton } from '../card/category'
+import { ProductCard, ProductCardSkeleton } from '../card/product'
 
 interface Props {
   initialCategories: GetCategoriesResult
@@ -25,7 +25,7 @@ interface Props {
   itemPerPage: number
 }
 
-const CategorySectionClient: FC<Props> = ({ initialCategories, initialProducts, itemPerPage }) => {
+const CategoryLayout: FC<Props> = ({ initialCategories, initialProducts, itemPerPage }) => {
   const router = useRouter()
 
   const [currentCategory, setCurrentCategory] = useState<{
@@ -150,4 +150,4 @@ const CategorySectionClient: FC<Props> = ({ initialCategories, initialProducts, 
   )
 }
 
-export { CategorySectionClient }
+export { CategoryLayout }
