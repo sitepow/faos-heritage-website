@@ -111,7 +111,7 @@ const CategoryLayout: FC<Props> = ({
         <Card fullWidth className='size-full'>
           {currentCategory.id && (
             <CardHeader>
-              <div className='flex w-full items-center justify-between'>
+              <div className='flex w-full flex-wrap items-center justify-between'>
                 <span className='font-bold'>{currentCategory.label}</span>
 
                 <Button
@@ -134,7 +134,7 @@ const CategoryLayout: FC<Props> = ({
                 [...Array(8)].map((_) => <ProductCardSkeleton key={_} />)}
 
               {!isLoadingProducts && products?.items?.length === 0 && (
-                <div className='flex w-full flex-col items-center justify-center gap-2 text-default-500'>
+                <div className='flex w-full flex-col items-center justify-center gap-2 text-center text-default-500'>
                   <AlertCircleIcon className='size-8' />
                   <span>
                     ไม่พบสินค้าในหมวดหมู่นี้
