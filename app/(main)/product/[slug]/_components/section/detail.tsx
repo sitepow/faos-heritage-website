@@ -2,6 +2,7 @@ import { Card, CardBody } from '@heroui/card'
 
 import type { GetProductResult } from '@/app/(dashboard)/dashboard/product/actions/product'
 import type { FC } from 'react'
+
 import { DetailCard } from '../card/detail'
 import { ReviewCard } from '../card/review'
 

@@ -1,18 +1,19 @@
 'use client'
 
 import { Tab, Tabs } from '@heroui/tabs'
+import Head from 'next/head'
+import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 
-import { useIsLg } from '@/hooks/useBreakpoints'
-import { useQueryParams } from '@/hooks/useQueryParams'
-import { ACCOUNT_TABS } from '@/utils/const'
-import { useSession } from 'next-auth/react'
-import Head from 'next/head'
 import { AccountCard } from './card/account'
 import { AddressCard } from './card/address'
 import { FavoriteCard } from './card/favorite'
 import { OrderCard } from './card/order'
 import { ProfileCard } from './card/profile'
+
+import { useIsLg } from '@/hooks/useBreakpoints'
+import { useQueryParams } from '@/hooks/useQueryParams'
+import { ACCOUNT_TABS } from '@/utils/const'
 
 const AccountLayout = () => {
   const { data: session } = useSession()
@@ -41,7 +42,7 @@ const AccountLayout = () => {
   return (
     <>
       <Head>
-        <meta name='robots' content='noindex, nofollow' />
+        <meta content='noindex, nofollow' name='robots' />
       </Head>
 
       <section className='flex flex-col items-center justify-center gap-4 text-center'>
@@ -64,7 +65,9 @@ const AccountLayout = () => {
             onSelectionChange={handleTabChange}
           >
             <Tab key={ACCOUNT_TABS.ACCOUNT} title='จัดการกับบัญชีของฉัน'>
-              <AccountCard onclick={() => handleTabChange(ACCOUNT_TABS.PROFILE)} />
+              <AccountCard
+                onclick={() => handleTabChange(ACCOUNT_TABS.PROFILE)}
+              />
             </Tab>
             <Tab key={ACCOUNT_TABS.ORDER} title='รายการคำสั่งซื้อของฉัน'>
               <OrderCard />

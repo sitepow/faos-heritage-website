@@ -1,6 +1,11 @@
 import { Button } from '@heroui/button'
 import { Card, CardBody } from '@heroui/card'
-import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/dropdown'
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from '@heroui/dropdown'
 import {
   Modal,
   ModalBody,
@@ -11,7 +16,12 @@ import {
 } from '@heroui/modal'
 import { Spinner } from '@heroui/spinner'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { EditIcon, EllipsisVerticalIcon, PlusIcon, TrashIcon } from 'lucide-react'
+import {
+  EditIcon,
+  EllipsisVerticalIcon,
+  PlusIcon,
+  TrashIcon,
+} from 'lucide-react'
 import Image from 'next/image'
 
 import { deleteCategory, getCategories } from '../../actions/category'
@@ -32,7 +42,8 @@ const CategoryManager = () => {
   } = useProductStore()
   const QUERY_KEY = ['dashboard', 'modal', 'categories']
 
-  const { isOpen: isDeleteOpen, onOpenChange: onOpenDeleteChange } = useDisclosure()
+  const { isOpen: isDeleteOpen, onOpenChange: onOpenDeleteChange } =
+    useDisclosure()
 
   const { data: categories, isLoading: isLoadingCategories } = useQuery({
     queryKey: QUERY_KEY,
@@ -40,16 +51,17 @@ const CategoryManager = () => {
     enabled: isCategoryManagerOpen,
   })
 
-  const { mutate: mutateDeteleCategory, isPending: isPendingDeteleCategory } = useMutation({
-    mutationFn: deleteCategory,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: QUERY_KEY,
-      })
-      onOpenDeleteChange()
-      setState({ categoryId: null })
-    },
-  })
+  const { mutate: mutateDeteleCategory, isPending: isPendingDeteleCategory } =
+    useMutation({
+      mutationFn: deleteCategory,
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: QUERY_KEY,
+        })
+        onOpenDeleteChange()
+        setState({ categoryId: null })
+      },
+    })
 
   return (
     <>
@@ -67,8 +79,8 @@ const CategoryManager = () => {
         hideCloseButton
         isDismissable={false}
         isOpen={isCategoryManagerOpen}
-        size='2xl'
         scrollBehavior='inside'
+        size='2xl'
         onOpenChange={onOpenCategoryManagerChange}
       >
         <ModalContent>
@@ -81,7 +93,9 @@ const CategoryManager = () => {
 
           {categories?.length === 0 && (
             <ModalBody>
-              <p className='text-center text-default-500'>ยังไม่มีหมวดหมู่สินค้า</p>
+              <p className='text-center text-default-500'>
+                ยังไม่มีหมวดหมู่สินค้า
+              </p>
             </ModalBody>
           )}
 
@@ -91,7 +105,10 @@ const CategoryManager = () => {
                 {categories?.map((category) => (
                   <Card
                     key={category.id}
-                    className={cn('border-l-4', category.isActive && 'border-primary-website')}
+                    className={cn(
+                      'border-l-4',
+                      category.isActive && 'border-primary-website',
+                    )}
                   >
                     <CardBody className='flex-row items-center justify-between'>
                       <div className='flex items-center gap-2'>
@@ -111,7 +128,10 @@ const CategoryManager = () => {
                             <EllipsisVerticalIcon className='size-5 text-default-500' />
                           </Button>
                         </DropdownTrigger>
-                        <DropdownMenu aria-label='จัดการสินค้า' className='min-w-[180px]'>
+                        <DropdownMenu
+                          aria-label='จัดการสินค้า'
+                          className='min-w-[180px]'
+                        >
                           <DropdownItem
                             key='edit'
                             startContent={<EditIcon className='size-4' />}

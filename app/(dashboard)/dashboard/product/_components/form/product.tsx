@@ -2,7 +2,13 @@
 
 import { Button } from '@heroui/button'
 import { Input, Textarea } from '@heroui/input'
-import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@heroui/modal'
+import {
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+} from '@heroui/modal'
 import { NumberInput } from '@heroui/react'
 import { Select, SelectItem } from '@heroui/select'
 import { Spinner } from '@heroui/spinner'
@@ -43,7 +49,8 @@ const DEFAULT_VALUES: ProductInput = {
 }
 
 const ProductForm = () => {
-  const { productId, setState, isProductOpen, onOpenProductChange } = useProductStore()
+  const { productId, setState, isProductOpen, onOpenProductChange } =
+    useProductStore()
   const queryClient = useQueryClient()
 
   const { data: categories, isLoading: isLoadingCategories } = useQuery({
@@ -79,24 +86,29 @@ const ProductForm = () => {
     }
   }, [isProductOpen, productId, product, isLoadingProduct, reset])
 
-  const { mutate: mutateCreateProduct, isPending: isPendingCreateProduct } = useMutation({
-    mutationFn: createProduct,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['dashboard', 'products'] })
-      onClose()
-    },
-  })
+  const { mutate: mutateCreateProduct, isPending: isPendingCreateProduct } =
+    useMutation({
+      mutationFn: createProduct,
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['dashboard', 'products'] })
+        onClose()
+      },
+    })
 
-  const { mutate: mutateUpdateProduct, isPending: isPendingUpdateProduct } = useMutation({
-    mutationFn: updateProduct,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['dashboard', 'products'] })
-      onClose()
-    },
-  })
+  const { mutate: mutateUpdateProduct, isPending: isPendingUpdateProduct } =
+    useMutation({
+      mutationFn: updateProduct,
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['dashboard', 'products'] })
+        onClose()
+      },
+    })
 
   const isPending =
-    isLoadingProduct || isPendingCreateProduct || isPendingUpdateProduct || isLoadingCategories
+    isLoadingProduct ||
+    isPendingCreateProduct ||
+    isPendingUpdateProduct ||
+    isLoadingCategories
   const headerLable = productId ? 'แก้ไขสินค้า' : 'เพิ่มสินค้า'
 
   const onSubmit = (data: ProductInput) => {
@@ -143,7 +155,11 @@ const ProductForm = () => {
                 control={control}
                 name='isActive'
                 render={({ field: { value, onChange, ...field } }) => (
-                  <Switch {...field} isSelected={value} onValueChange={onChange}>
+                  <Switch
+                    {...field}
+                    isSelected={value}
+                    onValueChange={onChange}
+                  >
                     เปิดการขายสินค้า
                   </Switch>
                 )}
@@ -152,7 +168,11 @@ const ProductForm = () => {
                 control={control}
                 name='isFeatured'
                 render={({ field: { value, onChange, ...field } }) => (
-                  <Switch {...field} isSelected={value} onValueChange={onChange}>
+                  <Switch
+                    {...field}
+                    isSelected={value}
+                    onValueChange={onChange}
+                  >
                     แนะนำสินค้า
                   </Switch>
                 )}
@@ -338,7 +358,11 @@ const ProductForm = () => {
                 control={control}
                 name='useSeoFromBasicData'
                 render={({ field: { value, onChange, ...field } }) => (
-                  <Switch {...field} isSelected={value} onValueChange={onChange}>
+                  <Switch
+                    {...field}
+                    isSelected={value}
+                    onValueChange={onChange}
+                  >
                     ใช้ตามข้อมูลพื้นฐาน
                   </Switch>
                 )}

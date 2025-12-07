@@ -10,7 +10,12 @@ interface Props extends ComponentProps<'div'> {
   currentStep?: number
 }
 
-const Stepper: FC<Props> = ({ steps, className, currentStep = 0, ...props }) => {
+const Stepper: FC<Props> = ({
+  steps,
+  className,
+  currentStep = 0,
+  ...props
+}) => {
   return (
     <div className={cn('mx-auto w-full max-w-3xl', className)} {...props}>
       <div className='flex flex-col items-center justify-between md:flex-row'>

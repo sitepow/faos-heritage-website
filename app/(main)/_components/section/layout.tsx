@@ -3,21 +3,22 @@
 import { Button } from '@heroui/button'
 import { Card, CardBody, CardHeader } from '@heroui/card'
 import { ScrollShadow } from '@heroui/scroll-shadow'
+import { Skeleton } from '@heroui/skeleton'
 import { useQuery } from '@tanstack/react-query'
 import { AlertCircleIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import type { FC } from 'react'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type FC } from 'react'
 
 import type { GetProductsResult } from '@/actions/product'
-import { getProducts } from '@/actions/product'
 import type { GetCategoriesResult } from '@/app/(dashboard)/dashboard/product/actions/category'
+
+import { CategoryCard, CategoryCardSkeleton } from '../card/category'
+import { ProductCard, ProductCardSkeleton } from '../card/product'
+
+import { getProducts } from '@/actions/product'
 import { getCategories } from '@/app/(dashboard)/dashboard/product/actions/category'
 import { Carousel } from '@/components/carousel'
 import { createSlug } from '@/utils/helper'
-import { Skeleton } from '@heroui/skeleton'
-import { CategoryCard, CategoryCardSkeleton } from '../card/category'
-import { ProductCard, ProductCardSkeleton } from '../card/product'
 
 interface Props {
   initialCategories: GetCategoriesResult
@@ -25,7 +26,11 @@ interface Props {
   itemPerPage: number
 }
 
-const CategoryLayout: FC<Props> = ({ initialCategories, initialProducts, itemPerPage }) => {
+const CategoryLayout: FC<Props> = ({
+  initialCategories,
+  initialProducts,
+  itemPerPage,
+}) => {
   const router = useRouter()
 
   const [currentCategory, setCurrentCategory] = useState<{
@@ -41,9 +46,13 @@ const CategoryLayout: FC<Props> = ({ initialCategories, initialProducts, itemPer
 
   const { data: products, isLoading: isLoadingProducts } = useQuery({
     queryKey: ['products', 'carousel', currentCategory.id],
-    queryFn: () => getProducts({ limit: itemPerPage, categoryId: currentCategory.id }),
+    queryFn: () =>
+      getProducts({ limit: itemPerPage, categoryId: currentCategory.id }),
     enabled: !!currentCategory.id,
-    initialData: currentCategory.id === initialCategories?.[0]?.id ? initialProducts : undefined,
+    initialData:
+      currentCategory.id === initialCategories?.[0]?.id
+        ? initialProducts
+        : undefined,
   })
 
   useEffect(() => {
@@ -64,9 +73,12 @@ const CategoryLayout: FC<Props> = ({ initialCategories, initialProducts, itemPer
         <CardBody>
           <ScrollShadow className='p-1'>
             <div className='space-y-1'>
-              {isLoadingCategories && [...Array(4)].map((_) => <CategoryCardSkeleton key={_} />)}
+              {isLoadingCategories &&
+                [...Array(4)].map((_) => <CategoryCardSkeleton key={_} />)}
 
-              {!isLoadingCategories && categories?.length === 0 && <span>ไม่พบหมวดหมู่สินค้า</span>}
+              {!isLoadingCategories && categories?.length === 0 && (
+                <span>ไม่พบหมวดหมู่สินค้า</span>
+              )}
 
               {!isLoadingCategories &&
                 (categories ?? []).map((category) => (
@@ -118,17 +130,23 @@ const CategoryLayout: FC<Props> = ({ initialCategories, initialProducts, itemPer
 
           <CardBody>
             <Carousel slidesToScroll className='items-center'>
-              {isLoadingProducts && [...Array(8)].map((_) => <ProductCardSkeleton key={_} />)}
+              {isLoadingProducts &&
+                [...Array(8)].map((_) => <ProductCardSkeleton key={_} />)}
 
               {!isLoadingProducts && products?.items?.length === 0 && (
                 <div className='flex w-full flex-col items-center justify-center gap-2 text-default-500'>
                   <AlertCircleIcon className='size-8' />
-                  <span>ไม่พบสินค้าในหมวดหมู่นี้</span>
+                  <span>
+                    ไม่พบสินค้าในหมวดหมู่นี้
+                    กรุณาเลือกหมวดหมู่อื่นเพื่อดูสินค้ารายการอื่น
+                  </span>
                 </div>
               )}
 
               {!isLoadingProducts &&
-                products?.items?.map((product) => <ProductCard key={product.id} {...product} />)}
+                products?.items?.map((product) => (
+                  <ProductCard key={product.id} {...product} />
+                ))}
 
               {currentCategory.id && products?.items?.length !== 0 && (
                 <Button

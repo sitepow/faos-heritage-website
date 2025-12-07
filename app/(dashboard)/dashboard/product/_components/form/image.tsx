@@ -2,7 +2,13 @@
 
 import { Button } from '@heroui/button'
 import { Input } from '@heroui/input'
-import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@heroui/modal'
+import {
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+} from '@heroui/modal'
 import { Spinner } from '@heroui/spinner'
 import { Switch } from '@heroui/switch'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -29,8 +35,14 @@ const DEFAULT_VALUES: ImageInput = {
 const ImageForm = () => {
   const queryClient = useQueryClient()
 
-  const { isImageOpen, onOpenImageChange, onOpenImageManagerChange, imageId, productId, setState } =
-    useProductStore()
+  const {
+    isImageOpen,
+    onOpenImageChange,
+    onOpenImageManagerChange,
+    imageId,
+    productId,
+    setState,
+  } = useProductStore()
   const [filePaths, setFilePaths] = useState<string[]>([])
   const [oldUrl, setOldUrl] = useState<string | null>(null)
 
@@ -64,27 +76,30 @@ const ImageForm = () => {
     }
   }, [isImageOpen, imageId, image, isLoadingImage, reset])
 
-  const { mutate: mutateCreateImage, isPending: isPendingCreateImage } = useMutation({
-    mutationFn: createImage,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['dashboard', 'modal', 'images'],
-      })
-      onClose()
-    },
-  })
+  const { mutate: mutateCreateImage, isPending: isPendingCreateImage } =
+    useMutation({
+      mutationFn: createImage,
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ['dashboard', 'modal', 'images'],
+        })
+        onClose()
+      },
+    })
 
-  const { mutate: mutateUpdateImage, isPending: isPendingUpdateImage } = useMutation({
-    mutationFn: updateImage,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['dashboard', 'modal', 'images'],
-      })
-      onClose()
-    },
-  })
+  const { mutate: mutateUpdateImage, isPending: isPendingUpdateImage } =
+    useMutation({
+      mutationFn: updateImage,
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ['dashboard', 'modal', 'images'],
+        })
+        onClose()
+      },
+    })
 
-  const isPending = isPendingCreateImage || isLoadingImage || isPendingUpdateImage
+  const isPending =
+    isPendingCreateImage || isLoadingImage || isPendingUpdateImage
   const headerLable = imageId ? 'แก้ไขรูปภาพสินค้า' : 'เพิ่มรูปภาพสินค้า'
 
   const onFilesChange = async (files: ImageWithPreview[]) => {

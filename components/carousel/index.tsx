@@ -15,7 +15,11 @@ interface CarouselProps {
   slidesToScroll?: boolean
 }
 
-const Carousel: FC<CarouselProps> = ({ className, children, slidesToScroll }) => {
+const Carousel: FC<CarouselProps> = ({
+  className,
+  children,
+  slidesToScroll,
+}) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     dragFree: true,
     align: 'start',
@@ -23,12 +27,15 @@ const Carousel: FC<CarouselProps> = ({ className, children, slidesToScroll }) =>
     slidesToScroll: slidesToScroll ? 'auto' : 1,
   })
 
-  const { prevDisabled, nextDisabled, onPrev, onNext } = useCarouselNavigation(emblaApi)
+  const { prevDisabled, nextDisabled, onPrev, onNext } =
+    useCarouselNavigation(emblaApi)
 
   return (
     <div className='relative w-full max-w-full'>
       <div ref={emblaRef} className='overflow-hidden'>
-        <div className={cn('flex gap-2 px-1 md:gap-4', className)}>{children}</div>
+        <div className={cn('flex gap-2 px-1 md:gap-4', className)}>
+          {children}
+        </div>
       </div>
 
       {!prevDisabled && (

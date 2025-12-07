@@ -1,6 +1,7 @@
+import { CategoryLayout } from './layout'
+
 import { getProducts } from '@/actions/product'
 import { getCategories } from '@/app/(dashboard)/dashboard/product/actions/category'
-import { CategoryLayout } from './layout'
 
 const ITEM_PER_PAGE = 8
 

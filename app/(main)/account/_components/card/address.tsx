@@ -18,7 +18,8 @@ const AddressCard = () => {
             <div className='flex flex-wrap items-center gap-4'>
               <MapPinIcon className='shrink-0 text-default-500' />
               <span>
-                117/2 หมู่บ้าน/อาคาร ศุภราช หมู่ที่1, ตำบล/แขวง บางปู, เกาะจันทร์, ชลบุรี 20240
+                117/2 หมู่บ้าน/อาคาร ศุภราช หมู่ที่1, ตำบล/แขวง บางปู,
+                เกาะจันทร์, ชลบุรี 20240
               </span>
             </div>
 

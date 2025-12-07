@@ -6,13 +6,12 @@ import { Form } from '@heroui/form'
 import { Input } from '@heroui/input'
 import { Tab, Tabs } from '@heroui/tabs'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { signIn } from 'next-auth/react'
+import { useMutation } from '@tanstack/react-query'
 import Image from 'next/image'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { signIn } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
 
-import { siteConfig } from '@/config/site'
-import { useMutation } from '@tanstack/react-query'
 import { createUser } from './actions/user'
 import {
   userLoginSchema,
@@ -21,7 +20,7 @@ import {
   type UserRegisterInput,
 } from './schema/user'
 
-export default function Login() {
+const Login = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
   const callbackUrl = searchParams.get('callbackUrl') || '/'
@@ -34,18 +33,19 @@ export default function Login() {
     resolver: zodResolver(userRegisterSchema),
   })
 
-  const { mutate: registerMutation, isPending: isPendingRegister } = useMutation({
-    mutationFn: createUser,
-    onSuccess: async (_, form) => {
-      await signIn('credentials', {
-        email: form.email,
-        password: form.password,
-        redirect: false,
-      })
+  const { mutate: registerMutation, isPending: isPendingRegister } =
+    useMutation({
+      mutationFn: createUser,
+      onSuccess: async (_, form) => {
+        await signIn('credentials', {
+          email: form.email,
+          password: form.password,
+          redirect: false,
+        })
 
-      router.push(callbackUrl)
-    },
-  })
+        router.push(callbackUrl)
+      },
+    })
 
   const { mutate: loginMutation, isPending: isPendingLogin } = useMutation({
     mutationFn: async (form: UserLoginInput) => {
@@ -75,10 +75,13 @@ export default function Login() {
     registerMutation(data)
   }
 
+  const goToIndex = () => {
+    router.push('/')
+  }
+
   return (
     <Card className='p-5 md:w-[450px]'>
       <CardHeader className='flex w-full flex-col items-center gap-1'>
-        <b className='text-xl text-primary-website'>{siteConfig.name}</b>
         <span className='text-lg font-bold'>เข้าสู่ระบบ หรือ สมัครสมาชิก</span>
         <span className='text-default-500'>เพื่อเข้าใช้งานเว็บไซต์</span>
       </CardHeader>
@@ -91,22 +94,25 @@ export default function Login() {
                 label='อีเมล'
                 type='email'
                 {...formLogin.register('email')}
-                isInvalid={!!formLogin.formState.errors.email}
                 errorMessage={formLogin.formState.errors.email?.message}
+                isInvalid={!!formLogin.formState.errors.email}
               />
 
               <Input
                 label='รหัสผ่าน'
                 type='password'
                 {...formLogin.register('password')}
-                isInvalid={!!formLogin.formState.errors.password}
                 errorMessage={formLogin.formState.errors.password?.message}
+                isInvalid={!!formLogin.formState.errors.password}
               />
             </CardBody>
 
-            <CardFooter>
+            <CardFooter className='justify-end gap-2'>
+              <Button variant='faded' onClick={goToIndex}>
+                กลับหน้าหลัก
+              </Button>
+
               <Button
-                className='mx-auto'
                 isDisabled={isPending}
                 isLoading={isPending}
                 type='submit'
@@ -124,42 +130,47 @@ export default function Login() {
               <Input
                 label='ชื่อ'
                 {...formRegister.register('name')}
-                isInvalid={!!formRegister.formState.errors.name}
                 errorMessage={formRegister.formState.errors.name?.message}
+                isInvalid={!!formRegister.formState.errors.name}
               />
 
               <Input
                 label='อีเมล'
                 {...formRegister.register('email')}
-                type='email'
-                isInvalid={!!formRegister.formState.errors.email}
                 errorMessage={formRegister.formState.errors.email?.message}
+                isInvalid={!!formRegister.formState.errors.email}
+                type='email'
               />
 
               <Input
                 label='รหัสผ่าน'
                 {...formRegister.register('password')}
-                type='password'
-                isInvalid={!!formRegister.formState.errors.password}
                 errorMessage={formRegister.formState.errors.password?.message}
+                isInvalid={!!formRegister.formState.errors.password}
+                type='password'
               />
 
               <Input
                 label='ยืนยันรหัสผ่าน'
                 {...formRegister.register('confirmPassword')}
-                type='password'
+                errorMessage={
+                  formRegister.formState.errors.confirmPassword?.message
+                }
                 isInvalid={!!formRegister.formState.errors.confirmPassword}
-                errorMessage={formRegister.formState.errors.confirmPassword?.message}
+                type='password'
               />
             </CardBody>
 
-            <CardFooter className='justify-center gap-2'>
+            <CardFooter className='justify-end gap-2'>
+              <Button variant='faded' onClick={goToIndex}>
+                กลับหน้าหลัก
+              </Button>
+
               <Button
-                type='submit'
-                variant='faded'
                 isDisabled={isPending}
                 isLoading={isPending}
-                className='mx-auto'
+                type='submit'
+                variant='faded'
               >
                 สมัครสมาชิก
               </Button>
@@ -169,23 +180,27 @@ export default function Login() {
       </Tabs>
 
       <CardBody className='items-center justify-center gap-4'>
-        <span className='w-full border-b border-divider text-center'>หรือเข้าสู่ระบบด้วย</span>
+        <div className='relative flex w-full items-center'>
+          <div className='flex-grow border-t border-divider' />
+          <span className='px-4 text-gray-500'>หรือเข้าสู่ระบบด้วย</span>
+          <div className='flex-grow border-t border-divider' />
+        </div>
 
         <div className='flex gap-4'>
           <Image
-            src='/google.png'
-            width={50}
-            height={50}
             alt='google'
             className='cursor-pointer rounded-full'
+            height={35}
+            src='/google.png'
+            width={35}
             onClick={() => signIn('google')}
           />
           <Image
-            src='/facebook.png'
-            width={50}
-            height={50}
             alt='facebook'
             className='cursor-pointer rounded-full'
+            height={35}
+            src='/facebook.png'
+            width={35}
             onClick={() => signIn('facebook')}
           />
         </div>
@@ -201,3 +216,5 @@ export default function Login() {
     </Card>
   )
 }
+
+export default Login

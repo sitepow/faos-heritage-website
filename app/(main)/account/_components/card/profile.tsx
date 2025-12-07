@@ -1,12 +1,3 @@
-import { deleteFile, uploadFiles } from '@/app/(dashboard)/dashboard/product/actions/file'
-import { getUser, updateUser } from '@/app/(dashboard)/dashboard/user/actions/user'
-import {
-  userUpdateSchema,
-  type UserUpdateInput,
-} from '@/app/(dashboard)/dashboard/user/schema/user'
-import { SubHeader } from '@/app/(main)/_components/section/header'
-import type { ImageWithPreview } from '@/components/dropzone/image'
-import { ImageDropzone } from '@/components/dropzone/image'
 import { Button } from '@heroui/button'
 import { Card, CardBody, CardFooter, CardHeader } from '@heroui/card'
 import { Input } from '@heroui/input'
@@ -16,6 +7,23 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
+
+import type { ImageWithPreview } from '@/components/dropzone/image'
+
+import {
+  deleteFile,
+  uploadFiles,
+} from '@/app/(dashboard)/dashboard/product/actions/file'
+import {
+  getUser,
+  updateUser,
+} from '@/app/(dashboard)/dashboard/user/actions/user'
+import {
+  userUpdateSchema,
+  type UserUpdateInput,
+} from '@/app/(dashboard)/dashboard/user/schema/user'
+import { SubHeader } from '@/app/(main)/_components/section/header'
+import { ImageDropzone } from '@/components/dropzone/image'
 
 const DEFAULT_VALUES: UserUpdateInput = {
   name: '',
@@ -63,12 +71,13 @@ const ProfileCard = () => {
     }
   }, [isLoadingUser, reset, user, userId])
 
-  const { mutate: mutateUpdateUser, isPending: isPendingUpdateUser } = useMutation({
-    mutationFn: updateUser,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEY })
-    },
-  })
+  const { mutate: mutateUpdateUser, isPending: isPendingUpdateUser } =
+    useMutation({
+      mutationFn: updateUser,
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: QUERY_KEY })
+      },
+    })
 
   const onSubmit = async (data: UserUpdateInput) => {
     if (oldUrl && data.image !== oldUrl) {
@@ -191,7 +200,11 @@ const ProfileCard = () => {
         <Button isDisabled={isPending} variant='faded' onPress={onClose}>
           ยกเลิก
         </Button>
-        <Button isDisabled={isPending || !isDirty} variant='faded' onClick={handleSubmit(onSubmit)}>
+        <Button
+          isDisabled={isPending || !isDirty}
+          variant='faded'
+          onClick={handleSubmit(onSubmit)}
+        >
           {isPending ? 'กำลังดำเนินการ' : 'บันทึกข้อมูล'}
         </Button>
       </CardFooter>

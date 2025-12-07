@@ -7,7 +7,7 @@ import { variantSchema, type VariantInput } from '../schema/variant'
 import { removeEmptyField } from '@/utils/helper'
 import { getPrismaError, prisma } from '@/utils/prisma'
 
-const FIELD = {
+const SELECTED_FIELD = {
   id: true,
   name: true,
   sku: true,
@@ -22,12 +22,15 @@ const createVariant = async (data: VariantInput) => {
 
     if (!validatedData?.success) {
       throw new Error(
-        validatedData?.error?.issues[0]?.message ?? 'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
+        validatedData?.error?.issues[0]?.message ??
+          'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
       )
     }
 
     await prisma.productVariant.create({
-      data: removeEmptyField(validatedData.data) as Prisma.ProductVariantCreateInput,
+      data: removeEmptyField(
+        validatedData.data,
+      ) as Prisma.ProductVariantCreateInput,
     })
   } catch (error) {
     getPrismaError(error)
@@ -38,7 +41,7 @@ const getVariants = async (productId: string) => {
   try {
     return prisma.productVariant.findMany({
       where: { productId },
-      select: FIELD,
+      select: SELECTED_FIELD,
       orderBy: { name: 'desc' },
     })
   } catch (error) {
@@ -54,7 +57,7 @@ const getVariant = async (variantId: string) => {
 
     const variant = await prisma.productVariant.findUnique({
       where: { id: variantId },
-      select: FIELD,
+      select: SELECTED_FIELD,
     })
 
     if (!variant) {
@@ -73,7 +76,8 @@ const updateVariant = async (data: VariantInput) => {
 
     if (!validatedData?.success) {
       throw new Error(
-        validatedData?.error?.issues[0]?.message ?? 'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
+        validatedData?.error?.issues[0]?.message ??
+          'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
       )
     }
 

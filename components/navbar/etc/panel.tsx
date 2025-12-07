@@ -1,9 +1,15 @@
-import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/dropdown'
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from '@heroui/dropdown'
 import { User } from '@heroui/user'
 import { Role } from '@prisma/client'
 import { LogOutIcon, Settings, UserIcon } from 'lucide-react'
-import { signOut, useSession } from 'next-auth/react'
 import { usePathname, useRouter } from 'next/navigation'
+import { signOut, useSession } from 'next-auth/react'
+
 import type { FC } from 'react'
 
 interface Props {
@@ -61,8 +67,8 @@ const Panel: FC<Props> = ({ setIsMenuOpen }) => {
         {menuItems.map((item) => (
           <DropdownItem
             key={item.key}
-            startContent={item.icon}
             className={item.className}
+            startContent={item.icon}
             onClick={() => {
               item.action()
               setIsMenuOpen(false)

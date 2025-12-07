@@ -1,9 +1,11 @@
 'use server'
 
-import { getPrismaError, prisma } from '@/utils/prisma'
 import { Role } from '@prisma/client'
 import { hash } from 'bcryptjs'
+
 import { userRegisterSchema, type UserRegisterInput } from '../schema/user'
+
+import { getPrismaError, prisma } from '@/utils/prisma'
 
 const createUser = async (data: UserRegisterInput) => {
   try {
@@ -11,7 +13,8 @@ const createUser = async (data: UserRegisterInput) => {
 
     if (!validatedData?.success) {
       throw new Error(
-        validatedData?.error?.issues[0]?.message ?? 'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
+        validatedData?.error?.issues[0]?.message ??
+          'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
       )
     }
 
@@ -30,7 +33,9 @@ const createUser = async (data: UserRegisterInput) => {
     }
 
     if (exists) {
-      throw new Error('อีเมลนี้ถูกใช้ไปแล้ว กรุณาใช้อีเมลอื่นแล้วลองใหม่อีกครั้ง')
+      throw new Error(
+        'อีเมลนี้ถูกใช้ไปแล้ว กรุณาใช้อีเมลอื่นแล้วลองใหม่อีกครั้ง',
+      )
     }
 
     const hashed = await hash(password, 10)

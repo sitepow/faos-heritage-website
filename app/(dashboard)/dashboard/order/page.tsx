@@ -1,8 +1,20 @@
 'use client'
 
 import { Button } from '@heroui/button'
-import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/dropdown'
-import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@heroui/table'
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from '@heroui/dropdown'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
+} from '@heroui/table'
 import { Edit, EllipsisVertical } from 'lucide-react'
 
 import type { ComponentProps } from 'react'
@@ -81,8 +93,14 @@ const Order = () => {
                       <EllipsisVertical className='size-5 text-default-500' />
                     </Button>
                   </DropdownTrigger>
-                  <DropdownMenu aria-label='จัดการออเดอร์' className='min-w-[180px]'>
-                    <DropdownItem key='edit' startContent={<Edit className='size-4' />}>
+                  <DropdownMenu
+                    aria-label='จัดการออเดอร์'
+                    className='min-w-[180px]'
+                  >
+                    <DropdownItem
+                      key='edit'
+                      startContent={<Edit className='size-4' />}
+                    >
                       แก้ไขข้อมูล
                     </DropdownItem>
                   </DropdownMenu>

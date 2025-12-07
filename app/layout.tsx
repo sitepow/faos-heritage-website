@@ -1,14 +1,17 @@
 import '@/styles/globals.css'
 
+import { SpeedInsights } from '@vercel/speed-insights/next'
+
+import type { Metadata, Viewport } from 'next'
+import type { FC, PropsWithChildren } from 'react'
+
+import { HeroUIProviders } from '../providers/heroui'
+
 import { fontSukhumvit } from '@/config/fonts'
 import { siteConfig } from '@/config/site'
 import { NextAuthProviders } from '@/providers/nextauth'
 import QueryProviders from '@/providers/query'
 import { cn } from '@/utils/style'
-import { SpeedInsights } from '@vercel/speed-insights/next'
-import type { Metadata, Viewport } from 'next'
-import type { FC, PropsWithChildren } from 'react'
-import { HeroUIProviders } from '../providers/heroui'
 
 export const metadata: Metadata = {
   title: {
@@ -40,7 +43,9 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
       >
         <QueryProviders>
           <NextAuthProviders>
-            <HeroUIProviders themeProps={{ attribute: 'class', defaultTheme: 'dark' }}>
+            <HeroUIProviders
+              themeProps={{ attribute: 'class', defaultTheme: 'dark' }}
+            >
               <SpeedInsights />
               {children}
             </HeroUIProviders>

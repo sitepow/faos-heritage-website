@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 'use client'
 
 import { Button } from '@heroui/button'
@@ -46,10 +47,16 @@ const ProductCard: FC<Props> = ({
     >
       <CardHeader className='relative overflow-hidden p-0'>
         <div className='absolute bottom-2 left-2 z-50 flex flex-wrap gap-2'>
-          <Chip variant='faded' startContent={<FileIcon className='size-4 text-default-500' />}>
+          <Chip
+            startContent={<FileIcon className='size-4 text-default-500' />}
+            variant='faded'
+          >
             สินค้าดิจิทัล
           </Chip>
-          <Chip variant='faded' startContent={<TagIcon className='size-4 text-default-500' />}>
+          <Chip
+            startContent={<TagIcon className='size-4 text-default-500' />}
+            variant='faded'
+          >
             {category?.name ?? 'ไม่มีหมวดหมู่'}
           </Chip>
         </div>
@@ -85,7 +92,10 @@ const ProductCard: FC<Props> = ({
             startContent={<ShoppingCartIcon className='text-default-500' />}
             variant='light'
           />
-          <Button startContent={<HeartIcon className='text-default-500' />} variant='light' />
+          <Button
+            startContent={<HeartIcon className='text-default-500' />}
+            variant='light'
+          />
         </CardFooter>
       )}
     </Card>

@@ -1,15 +1,14 @@
 'use client'
 
+import { Role } from '@prisma/client'
+import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
 import { useTheme } from 'next-themes'
-import { ToastContainer } from 'react-toastify'
-
 import { useEffect, type FC, type PropsWithChildren } from 'react'
+import { ToastContainer } from 'react-toastify'
 
 import { Footer } from '@/components/footer'
 import { Navbar } from '@/components/navbar'
-import { Role } from '@prisma/client'
-import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
 
 const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
   const { theme } = useTheme()

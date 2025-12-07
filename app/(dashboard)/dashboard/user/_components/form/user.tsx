@@ -2,25 +2,32 @@
 
 import { Button } from '@heroui/button'
 import { Input } from '@heroui/input'
-import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@heroui/modal'
+import {
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+} from '@heroui/modal'
+import { Select, SelectItem } from '@heroui/select'
 import { Spinner } from '@heroui/spinner'
+import { Switch } from '@heroui/switch'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Role } from '@prisma/client'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
+import type { UserCreateInput, UserUpdateInput } from '../../schema/user'
 import type { ImageWithPreview } from '@/components/dropzone/image'
+
+import { deleteFile, uploadFiles } from '../../../product/actions/file'
+import { createUser, getUser, updateUser } from '../../actions/user'
+import { userCreateSchema, userUpdateSchema } from '../../schema/user'
+import { useUserStore } from '../../store'
 
 import { SubHeader } from '@/app/(main)/_components/section/header'
 import { ImageDropzone } from '@/components/dropzone/image'
-import { Select, SelectItem } from '@heroui/select'
-import { Switch } from '@heroui/switch'
-import { Role } from '@prisma/client'
-import { deleteFile, uploadFiles } from '../../../product/actions/file'
-import { createUser, getUser, updateUser } from '../../actions/user'
-import type { UserCreateInput, UserUpdateInput } from '../../schema/user'
-import { userCreateSchema, userUpdateSchema } from '../../schema/user'
-import { useUserStore } from '../../store'
 
 const DEFAULT_VALUES = {
   email: '',
@@ -71,25 +78,27 @@ const UserForm = () => {
     }
   }, [isLoadingUser, isUserOpen, reset, user, userId])
 
-  const { mutate: mutateCreateUser, isPending: isPendingCreateUser } = useMutation({
-    mutationFn: createUser,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['dashboard', 'users'],
-      })
-      onClose()
-    },
-  })
+  const { mutate: mutateCreateUser, isPending: isPendingCreateUser } =
+    useMutation({
+      mutationFn: createUser,
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ['dashboard', 'users'],
+        })
+        onClose()
+      },
+    })
 
-  const { mutate: mutateUpdateUser, isPending: isPendingUpdateUser } = useMutation({
-    mutationFn: updateUser,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['dashboard', 'users'],
-      })
-      onClose()
-    },
-  })
+  const { mutate: mutateUpdateUser, isPending: isPendingUpdateUser } =
+    useMutation({
+      mutationFn: updateUser,
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ['dashboard', 'users'],
+        })
+        onClose()
+      },
+    })
 
   const isPending = isPendingCreateUser || isLoadingUser || isPendingUpdateUser
   const headerLable = userId ? 'แก้ไขผู้ใช้งาน' : 'เพิ่มผู้ใช้งาน'
@@ -179,10 +188,10 @@ const UserForm = () => {
               render={({ field: { value, onChange, ...field } }) => (
                 <Select
                   {...field}
-                  label='สถานะบัญชี'
-                  selectedKeys={value ? [value] : []}
                   errorMessage={errors.role?.message}
                   isInvalid={!!errors.role}
+                  label='สถานะบัญชี'
+                  selectedKeys={value ? [value] : []}
                   onSelectionChange={(keys) => {
                     const selected = Array.from(keys)[0] as Role
 

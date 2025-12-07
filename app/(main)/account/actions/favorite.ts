@@ -1,7 +1,8 @@
 'use server'
 
-import { getPrismaError, prisma } from '@/utils/prisma'
 import type { Wishlist } from '@prisma/client'
+
+import { getPrismaError, prisma } from '@/utils/prisma'
 
 export type GetFavoritesResult = Awaited<ReturnType<typeof getFavorites>>
 export type FavoriteItem = GetFavoritesResult['items'][number]

@@ -1,8 +1,9 @@
 import { Card, CardBody, CardHeader } from '@heroui/card'
 
 import type { GetProductResult } from '@/app/(dashboard)/dashboard/product/actions/product'
-import { SubHeader } from '@/app/(main)/_components/section/header'
 import type { FC } from 'react'
+
+import { SubHeader } from '@/app/(main)/_components/section/header'
 
 interface Props {
   product: GetProductResult

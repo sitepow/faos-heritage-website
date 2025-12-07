@@ -7,7 +7,7 @@ import { imageSchema, type ImageInput } from '../schema/image'
 import { removeEmptyField } from '@/utils/helper'
 import { getPrismaError, prisma } from '@/utils/prisma'
 
-const FIELD = {
+const SELECTED_FIELD = {
   id: true,
   url: true,
   alt: true,
@@ -20,12 +20,15 @@ const createImage = async (data: ImageInput) => {
 
     if (!validatedData?.success) {
       throw new Error(
-        validatedData?.error?.issues[0]?.message ?? 'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
+        validatedData?.error?.issues[0]?.message ??
+          'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
       )
     }
 
     await prisma.productImage.create({
-      data: removeEmptyField(validatedData.data) as Prisma.ProductImageCreateInput,
+      data: removeEmptyField(
+        validatedData.data,
+      ) as Prisma.ProductImageCreateInput,
     })
   } catch (error) {
     getPrismaError(error)
@@ -36,7 +39,7 @@ const getImages = async (productId: string) => {
   try {
     return prisma.productImage.findMany({
       where: { productId },
-      select: FIELD,
+      select: SELECTED_FIELD,
       orderBy: { url: 'desc' },
     })
   } catch (error) {
@@ -52,7 +55,7 @@ const getImage = async (variantId: string) => {
 
     const variant = await prisma.productImage.findUnique({
       where: { id: variantId },
-      select: FIELD,
+      select: SELECTED_FIELD,
     })
 
     if (!variant) {
@@ -71,7 +74,8 @@ const updateImage = async (data: ImageInput) => {
 
     if (!validatedData?.success) {
       throw new Error(
-        validatedData?.error?.issues[0]?.message ?? 'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
+        validatedData?.error?.issues[0]?.message ??
+          'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
       )
     }
 

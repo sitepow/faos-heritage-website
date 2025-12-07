@@ -2,11 +2,23 @@
 
 import { Avatar, AvatarGroup } from '@heroui/avatar'
 import { Button } from '@heroui/button'
-import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/dropdown'
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from '@heroui/dropdown'
 import { useDisclosure } from '@heroui/modal'
 import { Pagination } from '@heroui/pagination'
 import { Spinner } from '@heroui/spinner'
-import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@heroui/table'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
+} from '@heroui/table'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import {
   ArrowUpIcon,
@@ -28,7 +40,10 @@ import { VariantManager } from './_components/manager/variant'
 import { deleteProduct, getDashboard, getProducts } from './actions/product'
 import { useProductStore } from './store'
 
-import { TrendCard, TrendCardSkeleton } from '@/app/(dashboard)/_components/chart/trend-card'
+import {
+  TrendCard,
+  TrendCardSkeleton,
+} from '@/app/(dashboard)/_components/chart/trend-card'
 import { ModalDelete } from '@/components/modal/delete'
 import { formatCurrency, formatNumber } from '@/utils/number'
 
@@ -49,7 +64,8 @@ const Product = () => {
   const selectedProductIds = Array.from(selectedKeys)
   const [page, setPage] = useState(1)
 
-  const { isOpen: isDeleteOpen, onOpenChange: onOpenDeleteChange } = useDisclosure()
+  const { isOpen: isDeleteOpen, onOpenChange: onOpenDeleteChange } =
+    useDisclosure()
 
   const { data: products, isLoading: isLoadingProducts } = useQuery({
     queryKey: ['dashboard', 'products', page, ITEM_PER_PAGE],
@@ -61,15 +77,16 @@ const Product = () => {
     queryFn: () => getDashboard(),
   })
 
-  const { mutate: mutateDeteleProduct, isPending: isPendingDeteleProduct } = useMutation({
-    mutationFn: deleteProduct,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['dashboard', 'products'] })
-      onOpenDeleteChange()
-      setState({ productId: null })
-      setSelectedKeys(new Set([]))
-    },
-  })
+  const { mutate: mutateDeteleProduct, isPending: isPendingDeteleProduct } =
+    useMutation({
+      mutationFn: deleteProduct,
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['dashboard', 'products'] })
+        onOpenDeleteChange()
+        setState({ productId: null })
+        setSelectedKeys(new Set([]))
+      },
+    })
 
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
@@ -87,9 +104,11 @@ const Product = () => {
       <CategoryManager />
 
       <div className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-        {isLoadingDashboard && [...Array(4)].map((_, index) => <TrendCardSkeleton key={index} />)}
+        {isLoadingDashboard &&
+          [...Array(4)].map((_, index) => <TrendCardSkeleton key={index} />)}
 
-        {!isLoadingDashboard && dashboard?.map((data) => <TrendCard key={data.name} {...data} />)}
+        {!isLoadingDashboard &&
+          dashboard?.map((data) => <TrendCard key={data.name} {...data} />)}
       </div>
       <div className='flex w-full flex-wrap gap-3 *:shrink-0 md:justify-end'>
         <Button
@@ -110,7 +129,10 @@ const Product = () => {
         >
           จัดการหมวดหมู่สินค้า
         </Button>
-        <Button startContent={<ArrowUpIcon className='text-default-500' />} variant='faded'>
+        <Button
+          startContent={<ArrowUpIcon className='text-default-500' />}
+          variant='faded'
+        >
           ส่งออกไฟล์ XLSX
         </Button>
         <Button
@@ -162,10 +184,14 @@ const Product = () => {
                   </AvatarGroup>
                 )}
               </TableCell>
-              <TableCell className='max-w-72 min-w-72'>{product?.name ?? '-'}</TableCell>
+              <TableCell className='max-w-72 min-w-72'>
+                {product?.name ?? '-'}
+              </TableCell>
               <TableCell>{formatCurrency(product.price)}</TableCell>
               <TableCell>{formatNumber(product.stockQuantity)}</TableCell>
-              <TableCell className='max-w-40 min-w-40'>{product?.category?.name ?? '-'}</TableCell>
+              <TableCell className='max-w-40 min-w-40'>
+                {product?.category?.name ?? '-'}
+              </TableCell>
               <TableCell className='min-w-60'>
                 <div className='flex flex-col'>
                   {product?.variants?.length === 0 && <span>-</span>}
@@ -195,7 +221,10 @@ const Product = () => {
                       <EllipsisVerticalIcon className='size-5 text-default-500' />
                     </Button>
                   </DropdownTrigger>
-                  <DropdownMenu aria-label='จัดการสินค้า' className='min-w-[180px]'>
+                  <DropdownMenu
+                    aria-label='จัดการสินค้า'
+                    className='min-w-[180px]'
+                  >
                     <DropdownItem
                       key='edit'
                       startContent={<EditIcon className='size-4' />}

@@ -21,7 +21,14 @@ const ThemeSwitch: FC<Props> = ({ className, classNames }) => {
     theme === 'light' ? setTheme('dark') : setTheme('light')
   }
 
-  const { Component, slots, isSelected, getBaseProps, getInputProps, getWrapperProps } = useSwitch({
+  const {
+    Component,
+    slots,
+    isSelected,
+    getBaseProps,
+    getInputProps,
+    getWrapperProps,
+  } = useSwitch({
     isSelected: theme === 'light' || isSSR,
     'aria-label': `Switch to ${theme === 'light' || isSSR ? 'dark' : 'light'} mode`,
     onChange,
@@ -30,7 +37,11 @@ const ThemeSwitch: FC<Props> = ({ className, classNames }) => {
   return (
     <Component
       {...getBaseProps({
-        className: cn('cursor-pointer px-px transition-opacity', className, classNames?.base),
+        className: cn(
+          'cursor-pointer px-px transition-opacity',
+          className,
+          classNames?.base,
+        ),
       })}
     >
       <VisuallyHidden>
@@ -55,9 +66,9 @@ const ThemeSwitch: FC<Props> = ({ className, classNames }) => {
         })}
       >
         {!isSelected || isSSR ? (
-          <SunIcon className='text-white' size={22} />
+          <SunIcon className='text-default-500' size={22} />
         ) : (
-          <MoonIcon className='text-black' size={22} />
+          <MoonIcon className='text-default-500' size={22} />
         )}
       </div>
     </Component>

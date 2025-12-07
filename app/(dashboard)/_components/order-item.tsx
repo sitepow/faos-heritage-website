@@ -27,7 +27,9 @@ const OrderItem: FC<ComponentProps<'div'>> = ({ className, ...props }) => {
 
         <div className='flex flex-col *:line-clamp-1'>
           <span>เลขที่รายการ #2514814107 ยอดรวม {formatCurrency(1302)}</span>
-          <span className='text-default-500'>วันที่ ({formatDate(new Date())})</span>
+          <span className='text-default-500'>
+            วันที่ ({formatDate(new Date())})
+          </span>
           <span className='text-default-500'>(9 รายการ)(กำลังรอชำระเงิน)</span>
         </div>
       </div>

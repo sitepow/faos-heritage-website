@@ -1,6 +1,11 @@
 import { Button } from '@heroui/button'
 import { Card, CardBody } from '@heroui/card'
-import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/dropdown'
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from '@heroui/dropdown'
 import {
   Modal,
   ModalBody,
@@ -11,7 +16,12 @@ import {
 } from '@heroui/modal'
 import { Spinner } from '@heroui/spinner'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { EditIcon, EllipsisVerticalIcon, PlusIcon, TrashIcon } from 'lucide-react'
+import {
+  EditIcon,
+  EllipsisVerticalIcon,
+  PlusIcon,
+  TrashIcon,
+} from 'lucide-react'
 
 import { deleteVariant, getVariants } from '../../actions/variant'
 import { useProductStore } from '../../store'
@@ -33,7 +43,8 @@ const VariantManager = () => {
   } = useProductStore()
   const QUERY_KEY = ['dashboard', 'modal', 'variants', productId]
 
-  const { isOpen: isDeleteOpen, onOpenChange: onOpenDeleteChange } = useDisclosure()
+  const { isOpen: isDeleteOpen, onOpenChange: onOpenDeleteChange } =
+    useDisclosure()
 
   const { data: variants, isLoading: isLoadingVariants } = useQuery({
     queryKey: QUERY_KEY,
@@ -41,16 +52,17 @@ const VariantManager = () => {
     enabled: !!productId && isVariantManagerOpen,
   })
 
-  const { mutate: mutateDeteleVariant, isPending: isPendingDeteleVariant } = useMutation({
-    mutationFn: deleteVariant,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: QUERY_KEY,
-      })
-      onOpenDeleteChange()
-      setState({ variantId: null })
-    },
-  })
+  const { mutate: mutateDeteleVariant, isPending: isPendingDeteleVariant } =
+    useMutation({
+      mutationFn: deleteVariant,
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: QUERY_KEY,
+        })
+        onOpenDeleteChange()
+        setState({ variantId: null })
+      },
+    })
 
   return (
     <>
@@ -81,7 +93,9 @@ const VariantManager = () => {
 
           {variants?.length === 0 && (
             <ModalBody>
-              <p className='text-center text-default-500'>ยังไม่มีตัวเลือกสินค้า</p>
+              <p className='text-center text-default-500'>
+                ยังไม่มีตัวเลือกสินค้า
+              </p>
             </ModalBody>
           )}
 
@@ -91,18 +105,26 @@ const VariantManager = () => {
                 {variants?.map((variant) => (
                   <Card
                     key={variant.id}
-                    className={cn('border-l-4', variant.isActive && 'border-primary-website')}
+                    className={cn(
+                      'border-l-4',
+                      variant.isActive && 'border-primary-website',
+                    )}
                   >
                     <CardBody className='flex-row items-center justify-between'>
                       <div className='line-clamp-1 flex flex-col'>
                         <span className='line-clamp-1'>{variant.name}</span>
                         <div className='flex gap-2 text-sm'>
                           {!!variant.sku && (
-                            <span className='text-default-500'>sku: {variant.sku}</span>
+                            <span className='text-default-500'>
+                              sku: {variant.sku}
+                            </span>
                           )}
 
                           <span
-                            className={cn('text-default-500', !variant.price && 'text-red-500')}
+                            className={cn(
+                              'text-default-500',
+                              !variant.price && 'text-red-500',
+                            )}
                           >
                             {variant.price
                               ? `ราคา: ${formatCurrency(variant.price)}`
@@ -128,7 +150,10 @@ const VariantManager = () => {
                             <EllipsisVerticalIcon className='size-5 text-default-500' />
                           </Button>
                         </DropdownTrigger>
-                        <DropdownMenu aria-label='จัดการสินค้า' className='min-w-[180px]'>
+                        <DropdownMenu
+                          aria-label='จัดการสินค้า'
+                          className='min-w-[180px]'
+                        >
                           <DropdownItem
                             key='edit'
                             startContent={<EditIcon className='size-4' />}

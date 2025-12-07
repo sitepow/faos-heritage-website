@@ -1,24 +1,46 @@
 'use client'
 
-import { Button } from '@heroui/button'
-import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/dropdown'
-import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@heroui/table'
-import { ArrowUpIcon, EditIcon, EllipsisVertical, PlusIcon, TrashIcon, XIcon } from 'lucide-react'
-
-import { useState } from 'react'
-
-import { TrendCard, TrendCardSkeleton } from '@/app/(dashboard)/_components/chart/trend-card'
-import { ModalDelete } from '@/components/modal/delete'
 import { Avatar } from '@heroui/avatar'
+import { Button } from '@heroui/button'
 import { Chip } from '@heroui/chip'
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from '@heroui/dropdown'
 import { useDisclosure } from '@heroui/modal'
 import { Pagination } from '@heroui/pagination'
 import { Spinner } from '@heroui/spinner'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
+} from '@heroui/table'
 import { Role } from '@prisma/client'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import {
+  ArrowUpIcon,
+  EditIcon,
+  EllipsisVertical,
+  PlusIcon,
+  TrashIcon,
+  XIcon,
+} from 'lucide-react'
+import { useState } from 'react'
+
 import { UserForm } from './_components/form/user'
 import { deleteUser, getDashboard, getUsers } from './actions/user'
 import { useUserStore } from './store'
+
+import {
+  TrendCard,
+  TrendCardSkeleton,
+} from '@/app/(dashboard)/_components/chart/trend-card'
+import { ModalDelete } from '@/components/modal/delete'
 
 const ITEM_PER_PAGE = 10
 
@@ -26,7 +48,8 @@ const Customer = () => {
   const queryClient = useQueryClient()
   const { userId, setState, onOpenUserChange } = useUserStore()
 
-  const { isOpen: isDeleteOpen, onOpenChange: onOpenDeleteChange } = useDisclosure()
+  const { isOpen: isDeleteOpen, onOpenChange: onOpenDeleteChange } =
+    useDisclosure()
 
   const [selectedKeys, setSelectedKeys] = useState<Set<string>>(new Set([]))
   const selectedUserIds = Array.from(selectedKeys)
@@ -42,15 +65,16 @@ const Customer = () => {
     queryFn: () => getDashboard(),
   })
 
-  const { mutate: mutateDeteleUser, isPending: isPendingDeteleUser } = useMutation({
-    mutationFn: deleteUser,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['dashboard', 'users'] })
-      onOpenDeleteChange()
-      setState({ userId: null })
-      setSelectedKeys(new Set([]))
-    },
-  })
+  const { mutate: mutateDeteleUser, isPending: isPendingDeteleUser } =
+    useMutation({
+      mutationFn: deleteUser,
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['dashboard', 'users'] })
+        onOpenDeleteChange()
+        setState({ userId: null })
+        setSelectedKeys(new Set([]))
+      },
+    })
 
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
@@ -65,9 +89,11 @@ const Customer = () => {
       <UserForm />
 
       <div className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-        {isLoadingDashboard && [...Array(4)].map((_, index) => <TrendCardSkeleton key={index} />)}
+        {isLoadingDashboard &&
+          [...Array(4)].map((_, index) => <TrendCardSkeleton key={index} />)}
 
-        {!isLoadingDashboard && dashboard?.map((data) => <TrendCard key={data.name} {...data} />)}
+        {!isLoadingDashboard &&
+          dashboard?.map((data) => <TrendCard key={data.name} {...data} />)}
       </div>
 
       <div className='flex w-full flex-wrap gap-3 *:shrink-0 md:justify-end'>
@@ -80,7 +106,10 @@ const Customer = () => {
         >
           เพิ่มผู้ใช้งานใหม่
         </Button>
-        <Button startContent={<ArrowUpIcon className='text-default-500' />} variant='faded'>
+        <Button
+          startContent={<ArrowUpIcon className='text-default-500' />}
+          variant='faded'
+        >
           ส่งออกไฟล์ XLSX
         </Button>
         <Button
@@ -124,16 +153,23 @@ const Customer = () => {
                 {user?.image?.length === 0 && <span>-</span>}
 
                 {user?.image?.length !== 0 && (
-                  <Avatar key={user?.image} src={user?.image ?? '/placeholder.svg'} />
+                  <Avatar
+                    key={user?.image}
+                    src={user?.image ?? '/placeholder.svg'}
+                  />
                 )}
               </TableCell>
               <TableCell className='max-w-40 min-w-40'>{user.name}</TableCell>
               <TableCell>{user.email}</TableCell>
               <TableCell>
-                <Chip>{user.role === Role.ADMIN ? 'ผู้ดูแลระบบ' : 'ลูกค้า'}</Chip>
+                <Chip>
+                  {user.role === Role.ADMIN ? 'ผู้ดูแลระบบ' : 'ลูกค้า'}
+                </Chip>
               </TableCell>
               <TableCell>
-                <Chip>{user.isActive ? 'เปิดการใช้งาน' : 'ถูกระงับการใช้งาน'}</Chip>
+                <Chip>
+                  {user.isActive ? 'เปิดการใช้งาน' : 'ถูกระงับการใช้งาน'}
+                </Chip>
               </TableCell>
               <TableCell className='flex gap-2.5'>
                 <Dropdown placement='bottom-end'>
@@ -142,7 +178,10 @@ const Customer = () => {
                       <EllipsisVertical className='size-5 text-default-500' />
                     </Button>
                   </DropdownTrigger>
-                  <DropdownMenu aria-label='จัดการผู้ใช้งาน' className='min-w-[180px]'>
+                  <DropdownMenu
+                    aria-label='จัดการผู้ใช้งาน'
+                    className='min-w-[180px]'
+                  >
                     <DropdownItem
                       key='edit'
                       startContent={<EditIcon className='size-4' />}

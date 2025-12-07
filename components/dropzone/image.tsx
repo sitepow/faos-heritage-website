@@ -79,7 +79,10 @@ const ImageDropzone: FC<Props> = ({ multiple = false, onFilesChange }) => {
       {files.length > 0 && (
         <div className={cn('grid', multiple && 'grid-cols-2 gap-4')}>
           {files.map((file) => (
-            <div key={file.preview} className='group relative flex flex-col gap-1'>
+            <div
+              key={file.preview}
+              className='group relative flex flex-col gap-1'
+            >
               <img
                 alt={file.name}
                 className='max-h-96 min-h-40 w-full rounded-lg object-cover'
@@ -120,7 +123,10 @@ const ImageDropzone: FC<Props> = ({ multiple = false, onFilesChange }) => {
             )}
           >
             <ImageIcon
-              className={cn('size-12 text-default-500', isDragActive && 'text-primary-website')}
+              className={cn(
+                'size-12 text-default-500',
+                isDragActive && 'text-primary-website',
+              )}
             />
           </div>
 
@@ -137,7 +143,8 @@ const ImageDropzone: FC<Props> = ({ multiple = false, onFilesChange }) => {
               </div>
 
               <p className='text-sm text-default-500'>
-                หรือคลิกเพื่อเลือกไฟล์ (ระบบจะปรับขนาดไฟล์ให้โดยอัตโนมัติ เพื่อเพิ่ม Performance)
+                หรือคลิกเพื่อเลือกไฟล์ (ระบบจะปรับขนาดไฟล์ให้โดยอัตโนมัติ
+                เพื่อเพิ่ม Performance)
               </p>
             </div>
           )}

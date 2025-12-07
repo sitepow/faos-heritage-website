@@ -1,11 +1,14 @@
 import { z } from 'zod'
 
-export const userLoginSchema = z.object({
+type UserLoginInput = z.infer<typeof userLoginSchema>
+type UserRegisterInput = z.infer<typeof userRegisterSchema>
+
+const userLoginSchema = z.object({
   email: z.email('อีเมลไม่ถูกต้อง'),
   password: z.string().min(1, 'กรุณากรอกรหัสผ่าน'),
 })
 
-export const userRegisterSchema = z
+const userRegisterSchema = z
   .object({
     name: z.string().min(1, 'กรุณากรอกชื่อ'),
     email: z.email('รูปแบบอีเมลไม่ถูกต้อง'),
@@ -17,5 +20,5 @@ export const userRegisterSchema = z
     path: ['confirmPassword'],
   })
 
-export type UserLoginInput = z.infer<typeof userLoginSchema>
-export type UserRegisterInput = z.infer<typeof userRegisterSchema>
+export type { UserLoginInput, UserRegisterInput }
+export { userLoginSchema, userRegisterSchema }

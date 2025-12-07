@@ -1,14 +1,14 @@
 'use server'
 
-import type { Prisma } from '@prisma/client'
 import type { CategoryInput } from '../schema/category'
+import type { Prisma } from '@prisma/client'
 
 import { categorySchema } from '../schema/category'
 
 import { removeEmptyField } from '@/utils/helper'
 import { getPrismaError, prisma } from '@/utils/prisma'
 
-const FIELD = {
+const SELECTED_FIELD = {
   id: true,
   name: true,
   slug: true,
@@ -22,12 +22,15 @@ const createCategory = async (data: CategoryInput) => {
 
     if (!validatedData?.success) {
       throw new Error(
-        validatedData?.error?.issues[0]?.message ?? 'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
+        validatedData?.error?.issues[0]?.message ??
+          'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
       )
     }
 
     await prisma.category.create({
-      data: removeEmptyField(validatedData.data) as Prisma.ProductVariantCreateInput,
+      data: removeEmptyField(
+        validatedData.data,
+      ) as Prisma.ProductVariantCreateInput,
     })
   } catch (error) {
     getPrismaError(error)
@@ -39,7 +42,7 @@ export type GetCategoriesResult = Awaited<ReturnType<typeof getCategories>>
 const getCategories = async () => {
   try {
     return prisma.category.findMany({
-      select: FIELD,
+      select: SELECTED_FIELD,
       orderBy: { name: 'desc' },
     })
   } catch (error) {
@@ -59,7 +62,7 @@ const getCategory = async (categoryId: string) => {
 
     const variant = await prisma.category.findUnique({
       where: { id: categoryId },
-      select: FIELD,
+      select: SELECTED_FIELD,
     })
 
     if (!variant) {
@@ -78,7 +81,8 @@ const updateCategory = async (data: CategoryInput) => {
 
     if (!validatedData?.success) {
       throw new Error(
-        validatedData?.error?.issues[0]?.message ?? 'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
+        validatedData?.error?.issues[0]?.message ??
+          'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
       )
     }
 
@@ -115,4 +119,10 @@ const deleteCategory = async (categoryIds: string | string[]) => {
   }
 }
 
-export { createCategory, deleteCategory, getCategories, getCategory, updateCategory }
+export {
+  createCategory,
+  deleteCategory,
+  getCategories,
+  getCategory,
+  updateCategory,
+}

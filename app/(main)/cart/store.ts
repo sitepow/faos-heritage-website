@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+
 import type { GetCartsResult } from './actions/cart'
 
 interface CartStore {

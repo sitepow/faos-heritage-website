@@ -2,14 +2,19 @@
 
 import { Button } from '@heroui/button'
 import { Card, CardBody, CardFooter } from '@heroui/card'
+import { useMemo } from 'react'
+
 import type { ComponentProps, FC } from 'react'
+
+import { useCartStore } from '../../store'
 
 import { formatCurrency } from '@/utils/number'
 import { cn } from '@/utils/style'
-import { useMemo } from 'react'
-import { useCartStore } from '../../store'
 
-const OrderSection: FC<ComponentProps<typeof Card>> = ({ className, ...props }) => {
+const OrderSection: FC<ComponentProps<typeof Card>> = ({
+  className,
+  ...props
+}) => {
   const { carts } = useCartStore()
 
   const { subTotal, shippingCost, total } = useMemo(() => {
@@ -41,12 +46,14 @@ const OrderSection: FC<ComponentProps<typeof Card>> = ({ className, ...props }) 
 
         <div className='flex items-center justify-between pt-1'>
           <span className='font-bold'>ราคารวมสุทธิ :</span>
-          <span className='text-2xl font-bold text-primary-website'>{formatCurrency(total)}</span>
+          <span className='text-2xl font-bold text-primary-website'>
+            {formatCurrency(total)}
+          </span>
         </div>
       </CardBody>
 
       <CardFooter>
-        <Button isDisabled fullWidth variant='faded'>
+        <Button fullWidth isDisabled variant='faded'>
           ดำเนินการต่อ
         </Button>
       </CardFooter>

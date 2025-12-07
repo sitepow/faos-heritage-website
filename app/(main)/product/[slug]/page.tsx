@@ -1,9 +1,12 @@
+import { getServerSession } from 'next-auth'
+
+import type { FC } from 'react'
+
+import { ProductLayout } from './_components/layout'
+
 import { getProduct } from '@/app/(dashboard)/dashboard/product/actions/product'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import { getIdFromSlug } from '@/utils/helper'
-import { getServerSession } from 'next-auth'
-import type { FC } from 'react'
-import { ProductLayout } from './_components/layout'
 
 interface Props {
   params: { slug: string }
@@ -20,7 +23,13 @@ const Product: FC<Props> = async ({ params }) => {
 
   const product = await getProduct(productId, userId)
 
-  return <ProductLayout initialProduct={product} productId={productId!} userId={userId!} />
+  return (
+    <ProductLayout
+      initialProduct={product}
+      productId={productId!}
+      userId={userId!}
+    />
+  )
 }
 
 export default Product

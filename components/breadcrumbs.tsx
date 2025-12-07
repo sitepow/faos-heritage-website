@@ -1,6 +1,7 @@
 'use client'
 
 import { BreadcrumbItem, Breadcrumbs } from '@heroui/breadcrumbs'
+
 import type { FC } from 'react'
 
 interface Props {

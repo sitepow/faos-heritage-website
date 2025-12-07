@@ -1,7 +1,9 @@
+import type { FC } from 'react'
+
+import { CategoryLayout } from './_components/layout'
+
 import { getProducts } from '@/actions/product'
 import { getIdFromSlug } from '@/utils/helper'
-import type { FC } from 'react'
-import { CategoryLayout } from './_components/layout'
 
 const ITEM_PER_PAGE = 8
 
@@ -18,9 +20,9 @@ const Category: FC<Props> = async ({ params }) => {
 
   return (
     <CategoryLayout
+      categoryId={categoryId}
       initialProducts={products}
       itemPerPage={ITEM_PER_PAGE}
-      categoryId={categoryId}
     />
   )
 }

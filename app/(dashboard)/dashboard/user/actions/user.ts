@@ -1,14 +1,16 @@
 'use server'
 
+import { hash } from 'bcryptjs'
+
+import type { UserCreateInput, UserUpdateInput } from '../schema/user'
 import type { Prisma, Role } from '@prisma/client'
+
+import { userCreateSchema, userUpdateSchema } from '../schema/user'
 
 import { removeEmptyField } from '@/utils/helper'
 import { getPrismaError, prisma } from '@/utils/prisma'
-import { hash } from 'bcryptjs'
-import type { UserCreateInput, UserUpdateInput } from '../schema/user'
-import { userCreateSchema, userUpdateSchema } from '../schema/user'
 
-const FIELD = {
+const SELECTED_FIELD = {
   id: true,
   email: true,
   name: true,
@@ -23,7 +25,8 @@ const createUser = async (data: UserCreateInput) => {
 
     if (!validatedData?.success) {
       throw new Error(
-        validatedData?.error?.issues[0]?.message ?? 'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
+        validatedData?.error?.issues[0]?.message ??
+          'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
       )
     }
 
@@ -40,7 +43,9 @@ const createUser = async (data: UserCreateInput) => {
     })
 
     if (exists) {
-      throw new Error('อีเมลนี้ถูกใช้ไปแล้ว กรุณาใช้อีเมลอื่นแล้วลองใหม่อีกครั้ง')
+      throw new Error(
+        'อีเมลนี้ถูกใช้ไปแล้ว กรุณาใช้อีเมลอื่นแล้วลองใหม่อีกครั้ง',
+      )
     }
 
     const hashed = await hash(password!, 10)
@@ -64,7 +69,7 @@ const getUsers = async (page: number = 1, limit: number = 10) => {
       prisma.user.findMany({
         skip,
         take: limit,
-        select: FIELD,
+        select: SELECTED_FIELD,
         orderBy: { createdAt: 'desc' },
       }),
       prisma.product.count(),
@@ -90,7 +95,7 @@ const getUser = async (userId: string) => {
 
     const variant = await prisma.user.findUnique({
       where: { id: userId },
-      select: FIELD,
+      select: SELECTED_FIELD,
     })
 
     if (!variant) {
@@ -109,7 +114,8 @@ const updateUser = async (data: UserUpdateInput) => {
 
     if (!validatedData.success) {
       throw new Error(
-        validatedData.error?.issues[0]?.message ?? 'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
+        validatedData.error?.issues[0]?.message ??
+          'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
       )
     }
 

@@ -1,12 +1,12 @@
 'use client'
 
 import { Card, CardBody, CardHeader } from '@heroui/card'
-
 import { Skeleton } from '@heroui/skeleton'
 import { useQuery } from '@tanstack/react-query'
 import { AlertCircleIcon } from 'lucide-react'
-import { useSession } from 'next-auth/react'
 import Link from 'next/link'
+import { useSession } from 'next-auth/react'
+
 import { getFavorites } from '../../actions/favorite'
 import { Favorite } from '../favorite'
 
@@ -44,7 +44,9 @@ const FavoriteCard = () => {
 
         {!isLoadingFaorites &&
           favoritesTotal !== 0 &&
-          favorites?.items?.map((favorite) => <Favorite key={favorite?.id} favorite={favorite} />)}
+          favorites?.items?.map((favorite) => (
+            <Favorite key={favorite?.id} favorite={favorite} />
+          ))}
       </CardBody>
     </Card>
   )

@@ -2,7 +2,13 @@
 
 import { Button } from '@heroui/button'
 import { Input } from '@heroui/input'
-import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@heroui/modal'
+import {
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+} from '@heroui/modal'
 import { NumberInput } from '@heroui/react'
 import { Spinner } from '@heroui/spinner'
 import { Switch } from '@heroui/switch'
@@ -65,27 +71,30 @@ const VariantForm = () => {
     }
   }, [isVariantOpen, variantId, variant, isLoadingVariant, reset])
 
-  const { mutate: mutateCreateVariant, isPending: isPendingCreateVariant } = useMutation({
-    mutationFn: createVariant,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['dashboard', 'modal', 'variants'],
-      })
-      onClose()
-    },
-  })
+  const { mutate: mutateCreateVariant, isPending: isPendingCreateVariant } =
+    useMutation({
+      mutationFn: createVariant,
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ['dashboard', 'modal', 'variants'],
+        })
+        onClose()
+      },
+    })
 
-  const { mutate: mutateUpdateVariant, isPending: isPendingUpdateVariant } = useMutation({
-    mutationFn: updateVariant,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['dashboard', 'modal', 'variants'],
-      })
-      onClose()
-    },
-  })
+  const { mutate: mutateUpdateVariant, isPending: isPendingUpdateVariant } =
+    useMutation({
+      mutationFn: updateVariant,
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ['dashboard', 'modal', 'variants'],
+        })
+        onClose()
+      },
+    })
 
-  const isPending = isPendingCreateVariant || isLoadingVariant || isPendingUpdateVariant
+  const isPending =
+    isPendingCreateVariant || isLoadingVariant || isPendingUpdateVariant
   const headerLable = variantId ? 'แก้ไขตัวเลือกสินค้า' : 'เพิ่มตัวเลือกสินค้า'
 
   const onSubmit = (data: VariantInput) => {

@@ -3,16 +3,21 @@
 import { BreadcrumbItem, Breadcrumbs } from '@heroui/breadcrumbs'
 import { Button } from '@heroui/button'
 import { Divider } from '@heroui/divider'
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from '@heroui/dropdown'
 import { Spinner } from '@heroui/spinner'
 import { useInfiniteQuery } from '@tanstack/react-query'
+import { ArrowUpDownIcon } from 'lucide-react'
+import { useMemo, useState, type FC } from 'react'
 
 import { getProducts, type GetProductsResult } from '@/actions/product'
 import { ProductSection } from '@/app/(main)/_components/section/product'
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
 import { SORT_MAP } from '@/utils/const'
-import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/dropdown'
-import { ArrowUpDownIcon } from 'lucide-react'
-import { useMemo, useState, type FC } from 'react'
 
 interface Props {
   initialProducts: GetProductsResult
@@ -105,8 +110,8 @@ const ProductLayout: FC<Props> = ({ initialProducts, itemPerPage }) => {
           >
             {Object.entries(SORT_MAP).map(([key, value]) => (
               <DropdownItem
-                startContent={<ArrowUpDownIcon className='text-default-500' />}
                 key={key}
+                startContent={<ArrowUpDownIcon className='text-default-500' />}
               >
                 {value.label}
               </DropdownItem>

@@ -28,7 +28,9 @@ const CustomerItem: FC<ComponentProps<'div'>> = ({ className, ...props }) => {
 
           <div className='flex flex-col *:line-clamp-1'>
             <span>Teeraphat Saengkum (kteeraphatt@gmail.com)</span>
-            <span className='text-default-500'>วันที่ ({formatDate(new Date())})</span>
+            <span className='text-default-500'>
+              วันที่ ({formatDate(new Date())})
+            </span>
           </div>
         </div>
 

@@ -1,8 +1,9 @@
 'use client'
 
 import Image from 'next/image'
-import type { ComponentProps, FC } from 'react'
 import { useState } from 'react'
+
+import type { ComponentProps, FC } from 'react'
 
 import { Carousel } from '@/components/carousel'
 import { cn } from '@/utils/style'
@@ -21,8 +22,11 @@ export const ProductImagePreview: FC<ComponentProps<'div'> & Props> = ({
   const [selectedIndex, setSelectedIndex] = useState(0)
 
   return (
-    <div className={cn('flex flex-col gap-2 md:w-[345px]', className)} {...props}>
-      <div className='relative h-[345px] overflow-hidden rounded-lg md:w-[345px]'>
+    <div
+      className={cn('flex flex-col gap-2 md:w-[325px] lg:w-[425px]', className)}
+      {...props}
+    >
+      <div className='relative h-[345px] overflow-hidden rounded-lg md:w-[325px] lg:w-[425px]'>
         <Image
           fill
           priority
@@ -38,8 +42,10 @@ export const ProductImagePreview: FC<ComponentProps<'div'> & Props> = ({
             <button
               key={image}
               className={cn(
-                'relative size-12 shrink-0 cursor-pointer rounded-md border',
-                index === selectedIndex ? 'border-primary-website' : 'border-divider',
+                'relative size-20 shrink-0 cursor-pointer rounded-md border',
+                index === selectedIndex
+                  ? 'border-primary-website'
+                  : 'border-divider',
               )}
               onClick={() => setSelectedIndex(index)}
             >

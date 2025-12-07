@@ -2,10 +2,11 @@
 
 import { useQuery } from '@tanstack/react-query'
 
-import { getProducts } from '@/actions/product'
 import type { GetProductResult } from '@/app/(dashboard)/dashboard/product/actions/product'
-import { ProductSection } from '@/app/(main)/_components/section/product'
 import type { FC } from 'react'
+
+import { getProducts } from '@/actions/product'
+import { ProductSection } from '@/app/(main)/_components/section/product'
 
 const ITEM_PER_PAGE = 8
 
@@ -22,7 +23,8 @@ const SimilarSection: FC<Props> = ({ product }) => {
     enabled: !!categoryId,
   })
 
-  const similars = data?.items?.filter((similar) => similar.id !== product?.id) ?? []
+  const similars =
+    data?.items?.filter((similar) => similar.id !== product?.id) ?? []
 
   return (
     <div className='flex flex-col gap-4'>
@@ -32,7 +34,11 @@ const SimilarSection: FC<Props> = ({ product }) => {
         </span>
       )}
 
-      <ProductSection isLoading={isLoading} itemPerPage={ITEM_PER_PAGE} items={similars} />
+      <ProductSection
+        isLoading={isLoading}
+        itemPerPage={ITEM_PER_PAGE}
+        items={similars}
+      />
     </div>
   )
 }

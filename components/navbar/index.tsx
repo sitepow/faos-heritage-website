@@ -12,21 +12,22 @@ import {
 } from '@heroui/navbar'
 import { link as linkStyles } from '@heroui/theme'
 import { UserIcon } from 'lucide-react'
-import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useSession } from 'next-auth/react'
+import { useState } from 'react'
+
+import type { NavItem } from '@/config/site'
 
 import { ThemeSwitch } from '../theme-switch'
 import { Cart } from './etc/cart'
+import { Favorite } from './etc/favorite'
 import { Header } from './etc/header'
 import { Panel } from './etc/panel'
 import { Search } from './etc/search'
 
-import type { NavItem } from '@/config/site'
 import { siteConfig } from '@/config/site'
 import { cn } from '@/utils/style'
-import { useState } from 'react'
-import { Favorite } from './etc/favorite'
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -36,15 +37,17 @@ const Navbar = () => {
   const isAuthenticated = status === 'authenticated'
   const isDashboard = pathname.startsWith('/dashboard')
 
-  const menuItems = isDashboard ? siteConfig.adminNavbarItems : siteConfig.mainNavItems
+  const menuItems = isDashboard
+    ? siteConfig.adminNavbarItems
+    : siteConfig.mainNavItems
 
   const renderLink = (item: NavItem) => (
     <Link
-      href={item.href}
       className={cn(
         linkStyles({ color: 'foreground' }),
         'data-[active=true]:font-medium data-[active=true]:text-primary',
       )}
+      href={item.href}
     >
       {item.label}
     </Link>
@@ -55,13 +58,13 @@ const Navbar = () => {
       {!isMenuOpen && <Header />}
 
       <HeroNavbar
-        isMenuOpen={isMenuOpen}
-        onMenuOpenChange={setIsMenuOpen}
         isBordered
-        isBlurred={false}
         className='shadow-md'
+        isBlurred={false}
+        isMenuOpen={isMenuOpen}
         maxWidth='full'
         position='sticky'
+        onMenuOpenChange={setIsMenuOpen}
       >
         <NavbarContent className='basis-1/5 sm:basis-full' justify='start'>
           <NavbarBrand as='li' className='max-w-fit gap-3 dark:text-white'>
@@ -80,7 +83,10 @@ const Navbar = () => {
           </ul>
         </NavbarContent>
 
-        <NavbarContent className='hidden basis-1/5 sm:flex sm:basis-full' justify='end'>
+        <NavbarContent
+          className='hidden basis-1/5 sm:flex sm:basis-full'
+          justify='end'
+        >
           {!isDashboard && (
             <NavbarItem className='hidden lg:flex'>
               <Search />
@@ -92,7 +98,7 @@ const Navbar = () => {
               <Button
                 as={Link}
                 href={siteConfig.link.login}
-                startContent={<UserIcon />}
+                startContent={<UserIcon className='text-default-500' />}
                 variant='light'
               >
                 เข้าสู่ระบบ/สมัครสมาชิก
@@ -119,9 +125,9 @@ const Navbar = () => {
         <NavbarMenu className='bg-white dark:bg-inherit'>
           {menuItems.map((item) => (
             <NavbarMenuItem
-              onClick={() => setIsMenuOpen(false)}
               key={item.href}
               className='text-base'
+              onClick={() => setIsMenuOpen(false)}
             >
               {renderLink(item)}
             </NavbarMenuItem>

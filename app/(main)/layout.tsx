@@ -1,9 +1,8 @@
 'use client'
 
 import { useTheme } from 'next-themes'
-import { ToastContainer } from 'react-toastify'
-
 import { type FC, type PropsWithChildren } from 'react'
+import { ToastContainer } from 'react-toastify'
 
 import { Footer } from '@/components/footer'
 import { Navbar } from '@/components/navbar'

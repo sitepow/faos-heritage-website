@@ -3,6 +3,12 @@
 import { BreadcrumbItem, Breadcrumbs } from '@heroui/breadcrumbs'
 import { Button } from '@heroui/button'
 import { Divider } from '@heroui/divider'
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from '@heroui/dropdown'
 import { Spinner } from '@heroui/spinner'
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 import { ArrowUpDownIcon } from 'lucide-react'
@@ -15,7 +21,6 @@ import { getCategory } from '@/app/(dashboard)/dashboard/product/actions/categor
 import { ProductSection } from '@/app/(main)/_components/section/product'
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
 import { SORT_MAP } from '@/utils/const'
-import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/dropdown'
 
 interface Props {
   initialProducts: GetProductsResult
@@ -23,7 +28,11 @@ interface Props {
   itemPerPage: number
 }
 
-const CategoryLayout: FC<Props> = ({ initialProducts, categoryId, itemPerPage }) => {
+const CategoryLayout: FC<Props> = ({
+  initialProducts,
+  categoryId,
+  itemPerPage,
+}) => {
   const [selectedKeys, setSelectedKeys] = useState(new Set(['newest']))
 
   const sortBy = useMemo(() => {

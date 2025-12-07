@@ -1,5 +1,11 @@
 import { Button } from '@heroui/button'
-import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@heroui/modal'
+import {
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+} from '@heroui/modal'
 
 import type { FC } from 'react'
 
@@ -10,7 +16,12 @@ interface Props {
   isPending: boolean
 }
 
-const ModalDelete: FC<Props> = ({ isOpen, onOpenChange, onConfirm, isPending }) => {
+const ModalDelete: FC<Props> = ({
+  isOpen,
+  onOpenChange,
+  onConfirm,
+  isPending,
+}) => {
   return (
     <Modal
       hideCloseButton
@@ -22,7 +33,9 @@ const ModalDelete: FC<Props> = ({ isOpen, onOpenChange, onConfirm, isPending }) 
       <ModalContent>
         {(onClose) => (
           <>
-            <ModalHeader className='flex flex-col gap-1'>คุณกำลังจะลบข้อมูลนี้หรือไม่?</ModalHeader>
+            <ModalHeader className='flex flex-col gap-1'>
+              คุณกำลังจะลบข้อมูลนี้หรือไม่?
+            </ModalHeader>
             <ModalBody>
               <span>
                 คุณแน่ใจหรือไม่ว่าต้องการลบข้อมูลนี้?

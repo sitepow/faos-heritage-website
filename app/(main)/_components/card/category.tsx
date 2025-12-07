@@ -18,7 +18,11 @@ const CategoryCard: FC<ComponentProps<typeof CardBody> & Props> = ({
   ...props
 }) => {
   return (
-    <Card isHoverable className={cn('cursor-pointer', isActive && 'bg-default-100')} shadow='none'>
+    <Card
+      isHoverable
+      className={cn('cursor-pointer', isActive && 'bg-default-100')}
+      shadow='none'
+    >
       <CardBody {...props}>
         <div className='flex items-center gap-2.5'>
           <Image

@@ -1,6 +1,8 @@
 import { z } from 'zod'
 
-export const imageSchema = z.object({
+type ImageInput = z.infer<typeof imageSchema>
+
+const imageSchema = z.object({
   id: z.string().nullish(),
   productId: z.string().nullish(),
   url: z.string().nullish(),
@@ -8,4 +10,5 @@ export const imageSchema = z.object({
   isPrimary: z.boolean(),
 })
 
-export type ImageInput = z.infer<typeof imageSchema>
+export type { ImageInput }
+export { imageSchema }

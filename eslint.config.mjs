@@ -5,6 +5,7 @@ import typescriptEslint from '@typescript-eslint/eslint-plugin'
 import tsParser from '@typescript-eslint/parser'
 import _import from 'eslint-plugin-import'
 import jsxA11Y from 'eslint-plugin-jsx-a11y'
+import prettier from 'eslint-plugin-prettier'
 import react from 'eslint-plugin-react'
 import unusedImports from 'eslint-plugin-unused-imports'
 import { defineConfig, globalIgnores } from 'eslint/config'
@@ -43,15 +44,14 @@ export default defineConfig([
     '!**/react-shim.js',
     '!**/tsup.config.ts',
   ]),
-
   {
     extends: fixupConfigRules(
       compat.extends(
         'plugin:react/recommended',
+        'plugin:prettier/recommended',
         'plugin:react-hooks/recommended',
         'plugin:jsx-a11y/recommended',
         'plugin:@next/next/recommended',
-        'prettier',
       ),
     ),
 
@@ -61,15 +61,19 @@ export default defineConfig([
       import: fixupPluginRules(_import),
       '@typescript-eslint': typescriptEslint,
       'jsx-a11y': fixupPluginRules(jsxA11Y),
+      prettier: fixupPluginRules(prettier),
     },
 
     languageOptions: {
       globals: {
+        ...Object.fromEntries(
+          Object.entries(globals.browser).map(([key]) => [key, 'off']),
+        ),
         ...globals.node,
       },
 
       parser: tsParser,
-      ecmaVersion: 2020,
+      ecmaVersion: 12,
       sourceType: 'module',
 
       parserOptions: {
@@ -89,48 +93,87 @@ export default defineConfig([
 
     rules: {
       'no-console': 'warn',
-
-      'no-unused-vars': 'off',
-      '@typescript-eslint/no-unused-vars': 'off',
-
-      'unused-imports/no-unused-vars': [
+      'no-nested-ternary': 'error',
+      '@typescript-eslint/no-unused-vars': [
         'warn',
         {
-          vars: 'all',
-          varsIgnorePattern: '^_',
           args: 'after-used',
-          argsIgnorePattern: '^_',
+          ignoreRestSiblings: false,
+          argsIgnorePattern: '^_.*?$',
         },
       ],
-
-      'unused-imports/no-unused-imports': 'warn',
-
       '@typescript-eslint/consistent-type-imports': 'error',
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/no-empty-object-type': 'warn',
       '@typescript-eslint/consistent-type-definitions': 'warn',
-
       'react/prop-types': 'off',
       'react/jsx-uses-react': 'off',
       'react/react-in-jsx-scope': 'off',
       'react/self-closing-comp': 'error',
       'react/display-name': 'off',
-      'react/function-component-definition': 'off',
-      'react/jsx-curly-brace-presence': ['warn', { props: 'never', children: 'never' }],
-      'react/no-unstable-nested-components': 'warn',
-      'react/jsx-no-useless-fragment': 'error',
-      'react/no-array-index-key': 'warn',
-      'react/jsx-boolean-value': 'error',
-
+      'react/function-component-definition': [
+        'error',
+        {
+          namedComponents: ['arrow-function'],
+          unnamedComponents: ['function-expression'],
+        },
+      ],
+      'react/jsx-curly-brace-presence': [
+        'warn',
+        { props: 'never', children: 'never' },
+      ],
+      'react/no-unstable-nested-components': ['warn'],
+      'react/jsx-no-useless-fragment': ['error'],
+      'react/no-array-index-key': ['warn'],
+      'react/jsx-boolean-value': ['error'],
+      'react/jsx-sort-props': [
+        'warn',
+        {
+          callbacksLast: true,
+          shorthandFirst: true,
+          noSortAlphabetically: false,
+          reservedFirst: true,
+        },
+      ],
+      'react-hooks/exhaustive-deps': 'off',
       'jsx-a11y/click-events-have-key-events': 'warn',
       'jsx-a11y/interactive-supports-focus': 'warn',
-
-      'import/order': 'off',
-
+      'prettier/prettier': 'warn',
+      'no-unused-vars': 'off',
+      'unused-imports/no-unused-vars': 'off',
+      'unused-imports/no-unused-imports': 'warn',
+      'import/order': [
+        'error',
+        {
+          'newlines-between': 'always',
+          groups: [
+            ['builtin', 'external'],
+            'type',
+            'internal',
+            ['parent', 'sibling', 'index'],
+          ],
+          pathGroups: [
+            {
+              pattern: '~/**',
+              group: 'external',
+              position: 'after',
+            },
+          ],
+          alphabetize: { order: 'asc' },
+        },
+      ],
       'padding-line-between-statements': [
         'warn',
-        { blankLine: 'always', prev: '*', next: 'return' },
-        { blankLine: 'always', prev: ['const', 'let', 'var'], next: '*' },
+        {
+          blankLine: 'always',
+          prev: '*',
+          next: 'return',
+        },
+        {
+          blankLine: 'always',
+          prev: ['const', 'let', 'var'],
+          next: '*',
+        },
         {
           blankLine: 'any',
           prev: ['const', 'let', 'var'],

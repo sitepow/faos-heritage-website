@@ -1,4 +1,5 @@
 import type { FC, PropsWithChildren } from 'react'
+
 import LoginLayout from './components/layout'
 
 export const metadata = {

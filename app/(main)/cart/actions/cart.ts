@@ -73,7 +73,9 @@ const createCart = async ({
         data: { quantity: newQty, variantId: variantId ?? null },
       })
 
-      throw new Error('คุณได้เพิ่มสินค้านี้เข้าในตระกร้าไว้แล้ว โปรดเลือกสินค้าชิ้นใหม่ที่ต้องการ')
+      throw new Error(
+        'คุณได้เพิ่มสินค้านี้เข้าในตระกร้าไว้แล้ว โปรดเลือกสินค้าชิ้นใหม่ที่ต้องการ',
+      )
     }
 
     if (product.stockQuantity < 1) {
