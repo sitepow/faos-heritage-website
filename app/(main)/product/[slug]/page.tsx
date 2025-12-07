@@ -16,7 +16,8 @@ interface Props {
 }
 
 const ProductPage: FC<Props> = async ({ params }) => {
-  const slugStr = Array.isArray(params.slug) ? params.slug[0] : params.slug
+  const { slug } = await params
+  const slugStr = Array.isArray(slug) ? slug[0] : slug
   const productId = getIdFromSlug(slugStr)
 
   const session = await getServerSession(authOptions)

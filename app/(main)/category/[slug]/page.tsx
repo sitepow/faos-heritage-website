@@ -10,7 +10,8 @@ interface Props {
 }
 
 const CategorySection: FC<Props> = async ({ params }) => {
-  const slugStr = Array.isArray(params.slug) ? params.slug[0] : params.slug
+  const { slug } = await params
+  const slugStr = Array.isArray(slug) ? slug[0] : slug
   const categoryId = getIdFromSlug(slugStr)
 
   const products = await getProducts({ limit: ITEM_PER_PAGE })
