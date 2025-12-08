@@ -178,23 +178,38 @@ const Login = () => {
           <div className='flex-grow border-t border-divider' />
         </div>
 
-        <div className='flex gap-4'>
-          <Image
-            alt='google'
-            className='cursor-pointer rounded-full'
-            height={35}
-            src='/google.png'
-            width={35}
-            onClick={() => signIn('google')}
-          />
-          <Image
-            alt='facebook'
-            className='cursor-pointer rounded-full'
-            height={35}
-            src='/facebook.png'
-            width={35}
-            onClick={() => signIn('facebook')}
-          />
+        <div className='flex w-full flex-col gap-4'>
+          <Card className='cursor-pointer'>
+            <CardBody onClick={() => signIn('google')}>
+              <div className='flex items-center justify-center gap-2'>
+                <Image
+                  alt='google'
+                  className='rounded-full'
+                  height={35}
+                  src='/google.png'
+                  width={35}
+                />
+
+                <span>ดำเนินการด้วยบัญชี Google</span>
+              </div>
+            </CardBody>
+          </Card>
+
+          <Card className='cursor-pointer'>
+            <CardBody onClick={() => signIn('facebook')}>
+              <div className='flex items-center justify-center gap-2'>
+                <Image
+                  alt='facebook'
+                  className='rounded-full'
+                  height={35}
+                  src='/facebook.png'
+                  width={35}
+                />
+
+                <span>ดำเนินการด้วยบัญชี Facebook</span>
+              </div>
+            </CardBody>
+          </Card>
         </div>
       </CardBody>
 
