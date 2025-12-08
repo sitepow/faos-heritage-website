@@ -30,6 +30,7 @@ const productSchema = z.object({
   isActive: z.boolean(),
   useSeoFromBasicData: z.boolean(),
   isFeatured: z.boolean(),
+  isDigitalProduct: z.boolean(),
 })
 
 export type { ProductInput }

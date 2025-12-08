@@ -73,6 +73,7 @@ const getProduct = async (productId: string, userId?: string) => {
         weight: true,
         categoryId: true,
         shortDescription: true,
+        isDigitalProduct: true,
         cart: userId
           ? {
               where: { userId },
@@ -140,6 +141,7 @@ const getProducts = async (page: number = 1, limit: number = 10) => {
           id: true,
           name: true,
           price: true,
+          isDigitalProduct: true,
           stockQuantity: true,
           images: {
             select: {

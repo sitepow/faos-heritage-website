@@ -170,78 +170,76 @@ const CartCard: FC<
         {...props}
       >
         <CardBody>
-          <div className='flex flex-wrap items-center justify-start gap-4 lg:flex-nowrap lg:justify-around'>
-            <div className='flex flex-wrap gap-5 sm:flex-nowrap'>
+          <div className='grid gap-4 sm:grid-cols-3'>
+            <div className='flex size-full sm:items-center sm:justify-center'>
               <Link
-                className='shrink-0'
+                className='size-[150px] shrink-0 border border-divider'
                 href={`/product/${createSlug(cart?.product?.name, cart?.product?.id)}`}
               >
                 <Image
                   alt='product-image'
-                  className='shrink-0 rounded-xl object-cover'
+                  className='size-full shrink-0 object-cover'
                   height={150}
                   src={cart?.product?.images?.[0]?.url ?? '/placeholder.svg'}
                   width={150}
                 />
               </Link>
+            </div>
 
-              <div className='flex max-w-96 flex-col justify-between gap-3'>
-                <div className='flex flex-col'>
-                  <span className='line-clamp-1'>{cart?.product?.name}</span>
+            <div className='col-span-2 flex flex-col justify-between gap-3'>
+              <div className='flex flex-col'>
+                <span className='line-clamp-1'>{cart?.product?.name}</span>
+                <span className='text-default-500'>
+                  รหัสสินค้า: {cart?.product?.id}
+                </span>
+                <div className='flex flex-wrap gap-2'>
                   <span className='text-default-500'>
-                    รหัสสินค้า: {cart?.product?.id}
+                    ราคา: {formatCurrency(price!)}/ชิ้น
                   </span>
-                  <div className='flex flex-wrap gap-2'>
-                    <span className='text-default-500'>
-                      ราคา: {formatCurrency(price!)}/ชิ้น
-                    </span>
-                    <span className='text-default-500'>
-                      จำนวนคงเหลือ: {formatNumber(stockQuantity!)}/ชิ้น
-                    </span>
-                  </div>
-                </div>
-
-                <div className='flex flex-col gap-3'>
-                  <NumberInput
-                    isDisabled={isPendingUpdateCart}
-                    label='จำนวน'
-                    maxValue={stockQuantity}
-                    value={qty}
-                    variant='faded'
-                    onChange={onQuantityChange}
-                  />
-
-                  {cart?.product?.variants?.length !== 0 && (
-                    <Select
-                      items={cart?.product?.variants || []}
-                      label='ตัวเลือกสินค้า'
-                      placeholder='เลือกตัวเลือกสินค้า'
-                      selectedKeys={
-                        selectedVariantId ? [selectedVariantId] : []
-                      }
-                      variant='faded'
-                      onSelectionChange={onVariantChange}
-                    >
-                      {(variant) => (
-                        <SelectItem key={variant?.id}>
-                          {variant?.name}
-                        </SelectItem>
-                      )}
-                    </Select>
-                  )}
-
-                  <span className='text-lg font-bold text-primary-website sm:text-2xl'>
-                    {formatCurrency(price! * qty!)}
+                  <span className='text-default-500'>
+                    จำนวนคงเหลือ: {formatNumber(stockQuantity!)}/ชิ้น
                   </span>
                 </div>
               </div>
-            </div>
 
-            <Button
-              startContent={<TrashIcon className='text-default-500' />}
-              variant='faded'
-              onClick={onDeleteCart}
-            />
+              <div className='flex flex-col gap-3'>
+                <NumberInput
+                  disabled
+                  isDisabled={isPendingUpdateCart}
+                  label='จำนวน'
+                  maxValue={stockQuantity}
+                  value={qty}
+                  variant='faded'
+                  onChange={onQuantityChange}
+                />
+
+                {cart?.product?.variants?.length !== 0 && (
+                  <Select
+                    items={cart?.product?.variants || []}
+                    label='ตัวเลือกสินค้า'
+                    placeholder='เลือกตัวเลือกสินค้า'
+                    selectedKeys={selectedVariantId ? [selectedVariantId] : []}
+                    variant='faded'
+                    onSelectionChange={onVariantChange}
+                  >
+                    {(variant) => (
+                      <SelectItem key={variant?.id}>{variant?.name}</SelectItem>
+                    )}
+                  </Select>
+                )}
+
+                <Button
+                  className='w-fit'
+                  startContent={<TrashIcon className='text-default-500' />}
+                  variant='faded'
+                  onClick={onDeleteCart}
+                />
+
+                <span className='text-lg font-bold text-primary-website sm:text-2xl'>
+                  {formatCurrency(price! * qty!)}
+                </span>
+              </div>
+            </div>
           </div>
         </CardBody>
       </Card>

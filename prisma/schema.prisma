@@ -89,6 +89,7 @@ model Product {
     category   Category? @relation(fields: [categoryId], references: [id])
 
     isActive            Boolean @default(true)
+    isDigitalProduct Boolean @default(false)
     useSeoFromBasicData Boolean @default(true)
     isFeatured          Boolean @default(false)
 

@@ -2,6 +2,7 @@
 
 import { Avatar, AvatarGroup } from '@heroui/avatar'
 import { Button } from '@heroui/button'
+import { Chip } from '@heroui/chip'
 import {
   Dropdown,
   DropdownItem,
@@ -24,6 +25,7 @@ import {
   ArrowUpIcon,
   EditIcon,
   EllipsisVerticalIcon,
+  FileIcon,
   ImageIcon,
   LayoutIcon,
   PlusIcon,
@@ -156,6 +158,7 @@ const Product = () => {
       >
         <TableHeader>
           <TableColumn>รหัสสินค้า</TableColumn>
+          <TableColumn>สินค้าดิจิทัล</TableColumn>
           <TableColumn>รูปภาพ</TableColumn>
           <TableColumn>ชื่อสินค้า</TableColumn>
           <TableColumn>ราคาหลัก</TableColumn>
@@ -174,6 +177,20 @@ const Product = () => {
             <TableRow key={product.id}>
               <TableCell>{product.id}</TableCell>
               <TableCell>
+                {product?.isDigitalProduct ? (
+                  <Chip
+                    startContent={
+                      <FileIcon className='size-4 text-default-500' />
+                    }
+                    variant='faded'
+                  >
+                    สินค้าดิจิทัล
+                  </Chip>
+                ) : (
+                  '-'
+                )}
+              </TableCell>
+              <TableCell>
                 {product?.images?.length === 0 && <span>-</span>}
 
                 {product?.images?.length !== 0 && (
@@ -189,7 +206,7 @@ const Product = () => {
               </TableCell>
               <TableCell>{formatCurrency(product.price)}</TableCell>
               <TableCell>{formatNumber(product.stockQuantity)}</TableCell>
-              <TableCell className='max-w-40 min-w-40'>
+              <TableCell className='max-w-52 min-w-52'>
                 {product?.category?.name ?? '-'}
               </TableCell>
               <TableCell className='min-w-60'>

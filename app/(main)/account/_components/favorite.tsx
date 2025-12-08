@@ -97,12 +97,12 @@ const Favorite: FC<Props> = ({ className, favorite, ...props }) => {
           <div className='flex flex-wrap justify-between gap-4'>
             <div className='flex flex-wrap gap-4 lg:max-w-1/2 lg:flex-nowrap'>
               <Link
-                className='shrink-0'
+                className='size-[150px] shrink-0 border border-divider'
                 href={`/product/${createSlug(favorite?.product?.name, favorite?.product?.id)}`}
               >
                 <Image
                   alt='product-image'
-                  className='size-32 rounded-xl'
+                  className='size-full'
                   height={100}
                   src={
                     favorite?.product?.images?.[0]?.url ?? '/placeholder.svg'

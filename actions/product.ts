@@ -28,7 +28,10 @@ const getProducts = async ({
   sortBy = { field: 'createdAt', order: 'desc' },
 }: Props) => {
   let totalCount: number | undefined
-  const where = categoryId ? { categoryId } : undefined
+  let where = {
+    isActive: true,
+    ...(categoryId && { categoryId }),
+  }
 
   try {
     if (!cursor) {
@@ -44,6 +47,7 @@ const getProducts = async ({
         id: true,
         name: true,
         price: true,
+        isDigitalProduct: true,
         images: { select: { url: true } },
         category: {
           select: {
