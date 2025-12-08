@@ -2,7 +2,6 @@
 
 import { Skeleton } from '@heroui/skeleton'
 import { useQuery } from '@tanstack/react-query'
-import { AlertCircleIcon } from 'lucide-react'
 
 import type { FC } from 'react'
 
@@ -17,6 +16,7 @@ import {
 } from '@/app/(dashboard)/dashboard/product/actions/product'
 import { BannerAdvertise } from '@/components/banner-advertise'
 import { CategoryBreadcrumbs } from '@/components/breadcrumbs'
+import { NotFound } from '@/components/not-found'
 
 interface Props {
   initialProduct: GetProductResult
@@ -32,16 +32,15 @@ const ProductLayout: FC<Props> = ({ initialProduct, productId, userId }) => {
     enabled: !!productId,
   })
 
-  if (!initialProduct) {
+  if (!product) {
     return (
-      <div className='flex flex-col items-center justify-center gap-2 text-center text-default-500'>
-        <AlertCircleIcon className='size-6' />
-        <span>
-          ขออภัยครับ! รหัสสินค้า &quot;{productId}&quot; ไม่ตรงกับสิ่งใดเลย
-          <br />
-          โปรดลองหาสินค้าใหม่ได้ที่หน้าหลัก
-        </span>
-      </div>
+      <NotFound>
+        ขออภัยครับ!{' '}
+        <span className='text-primary-website'>
+          รหัสสินค้า &quot;{productId}&quot;
+        </span>{' '}
+        ไม่ตรงกับสิ่งใดเลย โปรดลองหาสินค้าใหม่ได้ที่หน้าหลัก
+      </NotFound>
     )
   }
 

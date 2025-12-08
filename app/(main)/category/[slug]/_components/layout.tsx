@@ -19,6 +19,7 @@ import type { GetProductsResult } from '@/actions/product'
 import { getProducts } from '@/actions/product'
 import { getCategory } from '@/app/(dashboard)/dashboard/product/actions/category'
 import { ProductSection } from '@/app/(main)/_components/section/product'
+import { NotFound } from '@/components/not-found'
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
 import { SORT_MAP } from '@/utils/const'
 
@@ -85,7 +86,14 @@ const CategoryLayout: FC<Props> = ({
       </div>
     )
 
-  if (totalItems === 0) return null
+  if (totalItems === 0)
+    return (
+      <NotFound>
+        ขออภัยครับ! รหัสหมวดหมู่สินค้า{' '}
+        <span className='text-primary-website'>&quot;{categoryId}&quot;</span>{' '}
+        ไม่ตรงกับสิ่งใดเลย โปรดลองหาสินค้าใหม่ได้ที่หน้าหลัก
+      </NotFound>
+    )
 
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>

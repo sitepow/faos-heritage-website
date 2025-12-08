@@ -42,7 +42,7 @@ model Address {
     subDistrict String?
     province    String
     postalCode  String
-    isDefault   Boolean @default(false)
+    country    String
 
     user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
     orders Order[]
@@ -50,7 +50,7 @@ model Address {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    @@unique([userId, isDefault])
+    @@unique([userId])
 }
 
 model Category {

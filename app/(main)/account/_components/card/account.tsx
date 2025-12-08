@@ -1,5 +1,6 @@
 import { Button } from '@heroui/button'
 import { Card, CardBody, CardHeader } from '@heroui/card'
+import { Skeleton } from '@heroui/skeleton'
 import { Role } from '@prisma/client'
 import { useQuery } from '@tanstack/react-query'
 import { useSession } from 'next-auth/react'
@@ -18,7 +19,7 @@ const AccountCard: FC<Props> = ({ onclick }) => {
 
   const QUERY_KEY = ['account', 'user', userId]
 
-  const { data: user } = useQuery({
+  const { data: user, isLoading: isLoadingUser } = useQuery({
     queryKey: QUERY_KEY,
     queryFn: () => getUser(userId!),
     enabled: !!userId,
@@ -30,37 +31,41 @@ const AccountCard: FC<Props> = ({ onclick }) => {
         <span>จัดการกับบัญชีของฉัน</span>
       </CardHeader>
       <CardBody>
-        <div className='flex flex-col'>
-          <div className='rounded-t-lg border border-divider p-2.5'>
-            <span>ข้อมูลส่วนตัว</span>
+        {isLoadingUser && <Skeleton className='h-40 max-w-1/2 rounded-lg' />}
+
+        {!isLoadingUser && (
+          <div className='flex flex-col sm:max-w-1/2'>
+            <div className='rounded-t-lg border border-divider p-2.5'>
+              <span>ข้อมูลส่วนตัว</span>
+            </div>
+
+            <div className='rounded-b-lg border-x border-b border-divider p-2.5 *:flex *:gap-3'>
+              <div>
+                <span>ชื่อ - นามสกุล</span>
+                <span>:</span>
+                <span>{user?.name}</span>
+              </div>
+
+              <div>
+                <span>อีเมล</span>
+                <span>:</span>
+                <span>{user?.email}</span>
+              </div>
+
+              <div>
+                <span>สิทธิ์การใช้งาน</span>
+                <span>:</span>
+                <span>
+                  {user?.role === Role.ADMIN ? 'ผู้ดูแลระบบ' : 'ลูกค้า'}
+                </span>
+              </div>
+
+              <Button className='mt-5' variant='faded' onPress={onclick}>
+                แก้ไขข้อมูลส่วนตัว
+              </Button>
+            </div>
           </div>
-
-          <div className='rounded-b-lg border-x border-b border-divider p-2.5 *:flex *:gap-3'>
-            <div>
-              <span>ชื่อ - นามสกุล</span>
-              <span>:</span>
-              <span>{user?.name}</span>
-            </div>
-
-            <div>
-              <span>อีเมล</span>
-              <span>:</span>
-              <span>{user?.email}</span>
-            </div>
-
-            <div>
-              <span>สิทธิ์การใช้งาน</span>
-              <span>:</span>
-              <span>
-                {user?.role === Role.ADMIN ? 'ผู้ดูแลระบบ' : 'ลูกค้า'}
-              </span>
-            </div>
-
-            <Button className='mt-5' variant='faded' onPress={onclick}>
-              แก้ไขข้อมูลส่วนตัว
-            </Button>
-          </div>
-        </div>
+        )}
       </CardBody>
     </Card>
   )

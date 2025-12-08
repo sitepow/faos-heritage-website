@@ -6,6 +6,7 @@ import { ProductLayout } from './_components/layout'
 
 import { getProduct } from '@/app/(dashboard)/dashboard/product/actions/product'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import { NotFound } from '@/components/not-found'
 import { getIdFromSlug } from '@/utils/helper'
 
 interface Props {
@@ -21,7 +22,19 @@ const Product: FC<Props> = async ({ params }) => {
   const slugStr = Array.isArray(slug) ? slug[0] : slug
   const productId = getIdFromSlug(slugStr)
 
-  const product = await getProduct(productId, userId)
+  let product
+
+  try {
+    product = await getProduct(productId, userId)
+  } catch {
+    return (
+      <NotFound>
+        ขออภัยครับ! รหัสสินค้า{' '}
+        <span className='text-primary-website'>&quot;{productId}&quot;</span>{' '}
+        ไม่ตรงกับสิ่งใดเลย โปรดลองหาสินค้าใหม่ได้ที่หน้าหลัก
+      </NotFound>
+    )
+  }
 
   return (
     <ProductLayout

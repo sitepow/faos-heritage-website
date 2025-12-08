@@ -1,33 +1,82 @@
+import { Alert } from '@heroui/alert'
 import { Button } from '@heroui/button'
 import { Card, CardBody, CardHeader } from '@heroui/card'
-import { MapPinIcon } from 'lucide-react'
+import { Skeleton } from '@heroui/skeleton'
+import { useQuery } from '@tanstack/react-query'
+import { MapPinIcon, PlusIcon } from 'lucide-react'
+import { useSession } from 'next-auth/react'
+
+import { getAddress } from '../../actions/address'
+import { useAddressStore } from '../../store/address'
+import { AddressForm } from '../form/address'
+
+import { getFullAddress } from '@/utils/helper'
 
 const AddressCard = () => {
+  const { onOpenAddressChange, setState } = useAddressStore()
+  const { data: session } = useSession()
+  const userId = session?.user?.id
+
+  const ADDRESS_QUERY_KEY = ['account', 'address', userId]
+
+  const { data: address, isLoading: isLoadingAddress } = useQuery({
+    queryKey: ADDRESS_QUERY_KEY,
+    queryFn: () => getAddress(userId!),
+    enabled: !!userId,
+  })
+
   return (
     <Card fullWidth>
-      <CardHeader>
+      <CardHeader className='items-center justify-between'>
         <span>จัดการที่อยู่ของฉัน</span>
+
+        {!isLoadingAddress && !address && (
+          <Button
+            startContent={<PlusIcon className='text-default-500' />}
+            variant='faded'
+            onClick={() => onOpenAddressChange()}
+          >
+            เพิ่มที่อยู่จัดส่ง
+          </Button>
+        )}
       </CardHeader>
       <CardBody>
-        <div className='flex flex-col'>
-          <div className='rounded-t-lg border border-divider p-2.5'>
-            <span>ที่อยู่ที่จัดส่ง</span>
-          </div>
+        <AddressForm />
 
-          <div className='flex flex-col gap-5 border-r border-b border-l border-divider p-2.5'>
-            <div className='flex flex-wrap items-center gap-4'>
-              <MapPinIcon className='shrink-0 text-default-500' />
-              <span>
-                117/2 หมู่บ้าน/อาคาร ศุภราช หมู่ที่1, ตำบล/แขวง บางปู,
-                เกาะจันทร์, ชลบุรี 20240
-              </span>
+        {isLoadingAddress && <Skeleton className='h-40 max-w-1/2 rounded-lg' />}
+
+        {!isLoadingAddress && !address && (
+          <Alert
+            description='คุณยังไม่มีข้อมูลที่อยู่สำหรับจัดส่ง กรุณาเพิ่มที่อยู่ก่อนดำเนินการสั่งซื้อสินค้า'
+            variant='bordered'
+          />
+        )}
+
+        {!isLoadingAddress && address && (
+          <div className='flex flex-col sm:max-w-1/2'>
+            <div className='rounded-t-lg border border-divider p-2.5'>
+              <span>ที่อยู่ที่จัดส่ง</span>
             </div>
 
-            <Button className='w-fit' variant='faded'>
-              แก้ไขที่อยู่
-            </Button>
+            <div className='flex flex-col gap-5 border-r border-b border-l border-divider p-2.5'>
+              <div className='flex flex-wrap items-center gap-4'>
+                <MapPinIcon className='shrink-0 text-default-500' />
+                <span>{getFullAddress(address)}</span>
+              </div>
+
+              <Button
+                className='w-fit'
+                variant='faded'
+                onClick={() => {
+                  setState({ addressId: address?.id })
+                  onOpenAddressChange()
+                }}
+              >
+                แก้ไขที่อยู่
+              </Button>
+            </div>
           </div>
-        </div>
+        )}
       </CardBody>
     </Card>
   )

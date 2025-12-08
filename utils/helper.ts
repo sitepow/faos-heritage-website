@@ -1,3 +1,5 @@
+import type { GetAddressResult } from '@/app/(main)/account/actions/address'
+
 import { siteConfig } from '@/config/site'
 
 const getFooter = () => {
@@ -36,4 +38,40 @@ const removeEmptyField = <T extends Record<string, unknown>>(
   return Object.fromEntries(cleanedEntries) as Partial<T>
 }
 
-export { createSlug, getFooter, getIdFromSlug, removeEmptyField }
+const getFullAddress = (address: GetAddressResult) => {
+  if (!address) return 'ไม่ทราบที่อยู่จัดส่งสินค้า'
+
+  const {
+    name,
+    address: addr,
+    subDistrict,
+    district,
+    province,
+    country,
+    postalCode,
+    phone,
+  } = address
+
+  const full = [
+    name ? `ชื่อสำหรับจัดส่ง. ${name}` : null,
+    addr ? `บ้านเลขที่ ${addr}` : null,
+    subDistrict ? `ตำบล ${subDistrict}` : null,
+    district ? `อำเภอ ${district}` : null,
+    province ? `จังหวัด ${province}` : null,
+    country ? `ประเทศ ${country}` : null,
+    postalCode ? `รหัสไปรษณีย์ ${postalCode}` : null,
+    phone ? `โทร ${phone}` : null,
+  ]
+    .filter(Boolean)
+    .join(' ')
+
+  return full
+}
+
+export {
+  createSlug,
+  getFooter,
+  getIdFromSlug,
+  removeEmptyField,
+  getFullAddress,
+}

@@ -20,6 +20,8 @@ import {
   type UserRegisterInput,
 } from './schema/user'
 
+import { siteConfig } from '@/config/site'
+
 const Login = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -75,15 +77,13 @@ const Login = () => {
     registerMutation(data)
   }
 
-  const goToIndex = () => {
-    router.push('/')
-  }
-
   return (
     <Card className='p-5 md:w-[450px]'>
       <CardHeader className='flex w-full flex-col items-center gap-1'>
         <span className='text-lg font-bold'>เข้าสู่ระบบ หรือ สมัครสมาชิก</span>
-        <span className='text-default-500'>เพื่อเข้าใช้งานเว็บไซต์</span>
+        <span className='text-default-500'>
+          เพื่อเข้าใช้งานเว็บไซต์ {siteConfig?.name}
+        </span>
       </CardHeader>
 
       <Tabs defaultSelectedKey='login'>
@@ -108,10 +108,6 @@ const Login = () => {
             </CardBody>
 
             <CardFooter className='justify-end gap-2'>
-              <Button variant='faded' onClick={goToIndex}>
-                กลับหน้าหลัก
-              </Button>
-
               <Button
                 isDisabled={isPending}
                 isLoading={isPending}
@@ -162,10 +158,6 @@ const Login = () => {
             </CardBody>
 
             <CardFooter className='justify-end gap-2'>
-              <Button variant='faded' onClick={goToIndex}>
-                กลับหน้าหลัก
-              </Button>
-
               <Button
                 isDisabled={isPending}
                 isLoading={isPending}

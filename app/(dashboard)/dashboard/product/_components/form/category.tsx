@@ -52,7 +52,8 @@ const CategoryForm = () => {
   const [oldUrl, setOldUrl] = useState<string | null>(null)
 
   const queryClient = useQueryClient()
-  const QUERY_KEY = ['dashboard', 'modal', 'categories', categoryId]
+  const CATEGORY_QUERY_KEY = ['dashboard', 'modal', 'categories', categoryId]
+  const CATEGORIES_QUERY_KEY = ['dashboard', 'modal', 'categories']
 
   const {
     control,
@@ -66,7 +67,7 @@ const CategoryForm = () => {
   })
 
   const { data: category, isLoading: isLoadingCategory } = useQuery({
-    queryKey: QUERY_KEY,
+    queryKey: CATEGORY_QUERY_KEY,
     queryFn: () => getCategory(categoryId!),
     enabled: !!categoryId && isCategoryOpen,
   })
@@ -87,7 +88,7 @@ const CategoryForm = () => {
       mutationFn: createCategory,
       onSuccess: () => {
         queryClient.invalidateQueries({
-          queryKey: ['dashboard', 'modal', 'categories'],
+          queryKey: CATEGORIES_QUERY_KEY,
         })
         onClose()
       },
@@ -98,7 +99,7 @@ const CategoryForm = () => {
       mutationFn: updateCategory,
       onSuccess: () => {
         queryClient.invalidateQueries({
-          queryKey: ['dashboard', 'modal', 'categories'],
+          queryKey: CATEGORIES_QUERY_KEY,
         })
         onClose()
       },
@@ -152,7 +153,7 @@ const CategoryForm = () => {
     setFilePaths([])
 
     queryClient.removeQueries({
-      queryKey: QUERY_KEY,
+      queryKey: CATEGORY_QUERY_KEY,
     })
     reset(DEFAULT_VALUES)
     setState({ categoryId: null })

@@ -16,6 +16,7 @@ import { useMemo, useState, type FC } from 'react'
 
 import { getProducts, type GetProductsResult } from '@/actions/product'
 import { ProductSection } from '@/app/(main)/_components/section/product'
+import { NotFound } from '@/components/not-found'
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
 import { SORT_MAP } from '@/utils/const'
 
@@ -69,7 +70,12 @@ const ProductLayout: FC<Props> = ({ initialProducts, itemPerPage }) => {
       </div>
     )
 
-  if (totalItems === 0) return null
+  if (totalItems === 0)
+    return (
+      <NotFound>
+        ขออภัยครับ ไม่พบสินค้าในระบบ กรุณาลองค้นหาสินค้าใหม่ที่หน้าหลัก
+      </NotFound>
+    )
 
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>

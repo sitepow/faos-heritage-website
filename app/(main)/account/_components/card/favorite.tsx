@@ -27,7 +27,7 @@ const FavoriteCard = () => {
         <span>รายการโปรด</span>
       </CardHeader>
       <CardBody className='gap-4'>
-        {isLoadingFaorites && <Skeleton className='h-24 w-full rounded-xl' />}
+        {isLoadingFaorites && <Skeleton className='h-40 w-full rounded-xl' />}
 
         {!isLoadingFaorites && favoritesTotal === 0 && (
           <div className='flex flex-col items-center gap-2 text-default-500'>
