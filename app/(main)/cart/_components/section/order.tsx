@@ -3,16 +3,20 @@
 import { Alert } from '@heroui/alert'
 import { Button } from '@heroui/button'
 import { Card, CardBody, CardFooter } from '@heroui/card'
-import { useQuery } from '@tanstack/react-query'
+import { Input } from '@heroui/input'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import { useMemo } from 'react'
+import { toast } from 'react-toastify'
 
 import type { ComponentProps, FC } from 'react'
 
 import { useCartStore } from '../../store'
 
+import { createOrder } from '@/actions/order'
 import { getAddress } from '@/app/(main)/account/actions/address'
+import { ACCOUNT_TABS } from '@/utils/const'
 import { getFullAddress } from '@/utils/helper'
 import { formatCurrency } from '@/utils/number'
 import { cn } from '@/utils/style'
@@ -21,17 +25,25 @@ const OrderSection: FC<ComponentProps<typeof Card>> = ({
   className,
   ...props
 }) => {
+  const queryClient = useQueryClient()
   const { carts } = useCartStore()
+
   const router = useRouter()
 
   const goToAddress = () => {
-    router.push('/account?tab=address')
+    router.push(`/account?tab=${ACCOUNT_TABS?.ACCOUNT}`)
+  }
+  const goToOrder = () => {
+    router.push(`/account?tab=${ACCOUNT_TABS?.ORDER}`)
   }
 
   const { data: session } = useSession()
   const userId = session?.user?.id
 
   const ADDRESS_QUERY_KEY = ['account', 'address', userId]
+  const CART_QUERY_KEY = ['carts', userId]
+  const CART_COUNT_QUERY_KEY = ['carts', 'count', userId]
+  const ORDER_QUERY_KEY = ['account', 'orders', userId]
 
   const { data: address, isLoading: isLoadingAddress } = useQuery({
     queryKey: ADDRESS_QUERY_KEY,
@@ -43,7 +55,9 @@ const OrderSection: FC<ComponentProps<typeof Card>> = ({
     const subTotal =
       carts?.reduce((sum, cart) => {
         const variants = cart?.product?.variants ?? []
-        const variant = variants.find((v) => v.id === cart?.variantId)
+        const variant = variants.find(
+          (variant) => variant.id === cart?.variantId,
+        )
 
         const price = variant?.price ?? cart?.product?.price ?? 0
 
@@ -56,9 +70,56 @@ const OrderSection: FC<ComponentProps<typeof Card>> = ({
     return { subTotal, shippingCost, total }
   }, [carts])
 
+  const { mutate: mutateCreateOrder, isPending: isPendingCreateOrder } =
+    useMutation({
+      mutationFn: createOrder,
+      onSuccess: async () => {
+        toast.success(
+          'คำสั่งซื้อของคุณถูกสร้างขึ้นแล้ว โปรดตรวจสอบและชำระเงินผ่าน Stripe',
+        )
+
+        await Promise.all([
+          queryClient.invalidateQueries({ queryKey: CART_QUERY_KEY }),
+          queryClient.invalidateQueries({ queryKey: CART_COUNT_QUERY_KEY }),
+          queryClient.invalidateQueries({ queryKey: ORDER_QUERY_KEY }),
+        ])
+
+        goToOrder()
+      },
+    })
+
+  const onCreateOrder = () => {
+    if (!address || !carts) return
+
+    mutateCreateOrder({
+      addressId: address.id,
+      userId: userId!,
+      items: (carts ?? []).map((cart) => {
+        const { productId, variantId, quantity } = cart
+
+        return {
+          productId,
+          variantId: variantId!,
+          quantity,
+        }
+      }),
+    })
+  }
+
   return (
     <Card fullWidth className={cn(className, 'h-fit')} {...props}>
       <CardBody className='gap-3'>
+        <span className='w-fit border-b border-primary-website pb-1 font-bold'>
+          โค้ดส่วนลด
+        </span>
+
+        <div className='flex items-center gap-2'>
+          <Input isDisabled label='โค้ดส่วนลด' />
+          <Button isDisabled variant='faded'>
+            ใช้ส่วนลด
+          </Button>
+        </div>
+
         {!isLoadingAddress && !address && (
           <Alert
             description={
@@ -100,6 +161,7 @@ const OrderSection: FC<ComponentProps<typeof Card>> = ({
 
         <SummaryRow label='ราคารวม' value={subTotal} />
         <SummaryRow label='ค่าจัดส่ง' value={shippingCost} />
+        <SummaryRow label='ส่วนลด' value={shippingCost} />
 
         <div className='flex items-center justify-between pt-1'>
           <span className='font-bold'>ราคารวมสุทธิ :</span>
@@ -110,7 +172,13 @@ const OrderSection: FC<ComponentProps<typeof Card>> = ({
       </CardBody>
 
       <CardFooter>
-        <Button fullWidth isDisabled={!address} variant='faded'>
+        <Button
+          fullWidth
+          isDisabled={!address || carts?.length === 0}
+          isLoading={isPendingCreateOrder}
+          variant='faded'
+          onClick={onCreateOrder}
+        >
           สั่งซื้อสินค้า
         </Button>
       </CardFooter>

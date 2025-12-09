@@ -9,6 +9,7 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from '@heroui/dropdown'
+import { Skeleton } from '@heroui/skeleton'
 import { Spinner } from '@heroui/spinner'
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 import { ArrowUpDownIcon } from 'lucide-react'
@@ -42,7 +43,7 @@ const CategoryLayout: FC<Props> = ({
     return SORT_MAP[key]
   }, [selectedKeys])
 
-  const { data: category } = useQuery({
+  const { data: category, isLoading: isLoadingCategory } = useQuery({
     queryKey: ['category', categoryId],
     queryFn: () => getCategory(categoryId),
     enabled: !!categoryId,
@@ -97,16 +98,22 @@ const CategoryLayout: FC<Props> = ({
 
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
-      <div className='flex w-full justify-start'>
-        <Breadcrumbs className='font-bold'>
-          <BreadcrumbItem>หน้าหลัก</BreadcrumbItem>
-          <BreadcrumbItem>{category?.name}</BreadcrumbItem>
-        </Breadcrumbs>
+      <div className='flex w-full items-center justify-start'>
+        {isLoadingCategory && <Skeleton className='h-10 w-64 rounded-lg' />}
+
+        {!isLoadingCategory && (
+          <Breadcrumbs className='font-bold'>
+            <BreadcrumbItem>หน้าหลัก</BreadcrumbItem>
+            <BreadcrumbItem>{category?.name}</BreadcrumbItem>
+          </Breadcrumbs>
+        )}
       </div>
 
-      <span className='text-2xl'>{category?.name}</span>
+      {isLoadingCategory && <Skeleton className='h-10 w-64 rounded-lg' />}
 
-      <div className='flex w-full flex-wrap items-center justify-between gap-3'>
+      {!isLoadingCategory && <span className='text-2xl'>{category?.name}</span>}
+
+      <div className='flex w-full flex-wrap items-center justify-center gap-3 sm:justify-between'>
         <span className='text-primary-website'>
           สินค้ารายการที่ 1 – {currentItemCount} จากทั้งหมด {totalItems} รายการ
         </span>

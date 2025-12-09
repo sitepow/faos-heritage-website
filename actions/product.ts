@@ -5,7 +5,7 @@ import type { Product } from '@prisma/client'
 import { getPrismaError, prisma } from '@/utils/prisma'
 
 export type GetProductsResult = Awaited<ReturnType<typeof getProducts>>
-export type ProductItem = GetProductsResult['items'][number]
+export type GetProductResult = GetProductsResult['items'][number]
 
 type SortOrder = 'asc' | 'desc'
 
@@ -47,7 +47,9 @@ const getProducts = async ({
         id: true,
         name: true,
         price: true,
+        stockQuantity: true,
         isDigitalProduct: true,
+        isDemoProduct: true,
         images: { select: { url: true } },
         category: {
           select: {

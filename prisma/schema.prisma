@@ -90,6 +90,7 @@ model Product {
 
     isActive            Boolean @default(true)
     isDigitalProduct Boolean @default(false)
+    isDemoProduct Boolean @default(false)
     useSeoFromBasicData Boolean @default(true)
     isFeatured          Boolean @default(false)
 
@@ -164,7 +165,6 @@ model Wishlist {
 
 model Order {
     id          String      @id @default(cuid())
-    orderNumber String      @unique
     userId      String?
     status      OrderStatus @default(PENDING)
 
@@ -173,9 +173,6 @@ model Order {
     tax          Float
     shippingCost Float
     total        Float
-
-    guestEmail String?
-    guestName  String?
 
     shippingAddressId   String?
     shippingAddress     Address? @relation(fields: [shippingAddressId], references: [id], onDelete: SetNull)
@@ -213,7 +210,6 @@ enum OrderStatus {
     PENDING
     PAID
     PROCESSING
-    SHIPPED
     DELIVERED
     CANCELLED
     REFUNDED

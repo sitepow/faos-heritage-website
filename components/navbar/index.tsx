@@ -1,6 +1,5 @@
 'use client'
 
-import { Button } from '@heroui/button'
 import {
   Navbar as HeroNavbar,
   NavbarBrand,
@@ -11,7 +10,7 @@ import {
   NavbarMenuToggle,
 } from '@heroui/navbar'
 import { link as linkStyles } from '@heroui/theme'
-import { UserIcon } from 'lucide-react'
+import { LogInIcon } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useSession } from 'next-auth/react'
@@ -21,7 +20,6 @@ import type { NavItem } from '@/config/site'
 
 import { ThemeSwitch } from '../theme-switch'
 import { Cart } from './etc/cart'
-import { Favorite } from './etc/favorite'
 import { Header } from './etc/header'
 import { Panel } from './etc/panel'
 import { Search } from './etc/search'
@@ -69,9 +67,13 @@ const Navbar = () => {
         <NavbarContent className='basis-1/5 sm:basis-full' justify='start'>
           <NavbarBrand as='li' className='max-w-fit gap-3 dark:text-white'>
             <Link className='flex items-center gap-2' href='/'>
-              <div className='flex flex-col text-primary-website'>
-                <b className='text-xl'>{siteConfig.name}</b>
-                <span className='text-xs'>สำหรับร้านค้าออนไลน์</span>
+              <div className='flex flex-col'>
+                <b className='text-xl text-primary-website'>
+                  {siteConfig.name}
+                </b>
+                <span className='text-xs text-default-500'>
+                  สำหรับร้านค้าออนไลน์
+                </span>
               </div>
             </Link>
           </NavbarBrand>
@@ -93,36 +95,27 @@ const Navbar = () => {
             </NavbarItem>
           )}
 
-          {!isAuthenticated ? (
-            <NavbarItem className='hidden lg:flex'>
-              <Button
-                as={Link}
-                href={siteConfig.link.login}
-                startContent={<UserIcon className='text-default-500' />}
-                variant='light'
-              >
-                เข้าสู่ระบบ/สมัครสมาชิก
-              </Button>
-            </NavbarItem>
-          ) : (
-            <NavbarItem className='hidden lg:flex'>
+          {isAuthenticated && (
+            <NavbarItem className='hidden items-center gap-4 lg:flex'>
               <Panel setIsMenuOpen={setIsMenuOpen} />
+
+              {!isDashboard && <Cart />}
+
+              <ThemeSwitch />
             </NavbarItem>
           )}
 
-          {isAuthenticated && !isDashboard && (
-            <NavbarItem className='hidden gap-4 lg:flex'>
-              <Cart />
-              <Favorite />
+          {!isAuthenticated && (
+            <NavbarItem className='hidden items-center gap-4 lg:flex'>
+              <Link href={siteConfig.link.login}>
+                <LogInIcon className='text-default-500' />
+              </Link>
+              <ThemeSwitch />
             </NavbarItem>
           )}
-
-          <NavbarItem className='hidden lg:flex'>
-            <ThemeSwitch />
-          </NavbarItem>
         </NavbarContent>
 
-        <NavbarMenu className='bg-white dark:bg-inherit'>
+        <NavbarMenu className='border-t border-divider bg-white dark:bg-inherit'>
           {menuItems.map((item) => (
             <NavbarMenuItem
               key={item.href}
@@ -132,40 +125,26 @@ const Navbar = () => {
               {renderLink(item)}
             </NavbarMenuItem>
           ))}
-
-          {isAuthenticated ? (
-            <NavbarItem>
-              <div className='flex items-center justify-between border-y border-divider py-2.5'>
-                <Panel setIsMenuOpen={setIsMenuOpen} />
-                <ThemeSwitch />
-              </div>
-            </NavbarItem>
-          ) : (
-            <NavbarItem>
-              <div className='flex justify-between border-y border-divider py-2.5'>
-                <Button
-                  as={Link}
-                  href={siteConfig.link.login}
-                  startContent={<UserIcon />}
-                  variant='light'
-                >
-                  เข้าสู่ระบบ/สมัครสมาชิก
-                </Button>
-
-                <ThemeSwitch />
-              </div>
-            </NavbarItem>
-          )}
         </NavbarMenu>
 
         {isAuthenticated && (
-          <NavbarItem className='flex gap-4 lg:hidden'>
-            <Cart />
-            <Favorite />
+          <NavbarItem className='flex items-center gap-3 lg:hidden'>
+            <Panel setIsMenuOpen={setIsMenuOpen} />
+            {!isDashboard && <Cart />}
+            <ThemeSwitch />
           </NavbarItem>
         )}
 
-        <NavbarMenuToggle className='cursor-pointer lg:hidden' />
+        {!isAuthenticated && !isDashboard && (
+          <NavbarItem className='flex items-center gap-3 lg:hidden'>
+            <Link href={siteConfig.link.login}>
+              <LogInIcon className='text-default-500' />
+            </Link>
+            <ThemeSwitch />
+          </NavbarItem>
+        )}
+
+        <NavbarMenuToggle className='cursor-pointer text-default-500 lg:hidden' />
       </HeroNavbar>
     </>
   )

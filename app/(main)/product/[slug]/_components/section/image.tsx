@@ -1,6 +1,6 @@
 import { Card, CardBody } from '@heroui/card'
 import { Chip } from '@heroui/chip'
-import { FileIcon, TagIcon } from 'lucide-react'
+import { CircleQuestionMarkIcon, FileIcon, TagIcon } from 'lucide-react'
 
 import type { GetProductResult } from '@/app/(dashboard)/dashboard/product/actions/product'
 import type { ComponentProps, FC } from 'react'
@@ -29,6 +29,17 @@ const ImageSection: FC<Props> = ({ className, product, ...props }) => {
               <StarRating rate={5} />
 
               <div className='flex flex-wrap gap-2'>
+                {product?.isDemoProduct && (
+                  <Chip
+                    startContent={
+                      <CircleQuestionMarkIcon className='size-4 text-default-500' />
+                    }
+                    variant='faded'
+                  >
+                    สินค้าตัวอย่าง
+                  </Chip>
+                )}
+
                 {product?.isDigitalProduct && (
                   <Chip
                     startContent={

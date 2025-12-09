@@ -1,3 +1,5 @@
+import type { OrderStatus } from '@prisma/client'
+
 const SORT_MAP = {
   newest: {
     field: 'createdAt',
@@ -39,4 +41,22 @@ enum ACCOUNT_TABS {
   ADDRESS = 'address',
 }
 
-export { ACCOUNT_TABS, SORT_MAP }
+const ORDER_ALL_STATUS: Record<OrderStatus, string> = {
+  PENDING: 'รอชำระเงิน',
+  PAID: 'ชำระเงินแล้ว',
+  PROCESSING: 'จัดเตรียมสินค้า',
+  DELIVERED: 'จัดส่งสำเร็จ',
+  CANCELLED: 'ยกเลิกสินค้า',
+  REFUNDED: 'คืนสินค้า',
+}
+
+const ORDER_STATUS: Partial<Record<OrderStatus, string>> = {
+  PENDING: ORDER_ALL_STATUS.PENDING,
+  PAID: ORDER_ALL_STATUS.PAID,
+  PROCESSING: ORDER_ALL_STATUS.PROCESSING,
+  DELIVERED: ORDER_ALL_STATUS.DELIVERED,
+}
+
+const ORDER_STEPS = Object.entries(ORDER_STATUS) as [OrderStatus, string][]
+
+export { ACCOUNT_TABS, SORT_MAP, ORDER_STATUS, ORDER_ALL_STATUS, ORDER_STEPS }

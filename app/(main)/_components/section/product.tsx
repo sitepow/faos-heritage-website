@@ -1,11 +1,11 @@
 /* eslint-disable react/no-array-index-key */
-import type { ProductItem } from '@/actions/product'
+import type { GetProductResult } from '@/actions/product'
 import type { FC } from 'react'
 
 import { ProductCard, ProductCardSkeleton } from '../card/product'
 
 interface Props {
-  items: ProductItem[]
+  items: GetProductResult[]
   hideIcon?: boolean
   isLoading?: boolean
   itemPerPage?: number
@@ -28,8 +28,8 @@ const ProductSection: FC<Props> = ({
           <ProductCard
             key={product.id}
             className='w-full'
-            {...product}
             hideIcon={hideIcon}
+            product={product}
           />
         ))}
 

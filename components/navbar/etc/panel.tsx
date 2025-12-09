@@ -1,3 +1,4 @@
+import { Avatar } from '@heroui/avatar'
 import {
   Dropdown,
   DropdownItem,
@@ -6,11 +7,13 @@ import {
 } from '@heroui/dropdown'
 import { User } from '@heroui/user'
 import { Role } from '@prisma/client'
-import { LogOutIcon, Settings, UserIcon } from 'lucide-react'
+import { HeartIcon, LogOutIcon, SettingsIcon, UserIcon } from 'lucide-react'
 import { usePathname, useRouter } from 'next/navigation'
 import { signOut, useSession } from 'next-auth/react'
 
 import type { FC } from 'react'
+
+import { ACCOUNT_TABS } from '@/utils/const'
 
 interface Props {
   setIsMenuOpen: (state: boolean) => void
@@ -27,16 +30,22 @@ const Panel: FC<Props> = ({ setIsMenuOpen }) => {
   const menuItems = [
     {
       key: 'account',
-      label: 'บัญชีของฉัน',
-      icon: <UserIcon />,
+      label: 'ตั้งค่าบัญชีของฉัน',
+      icon: <UserIcon className='text-default-500' />,
       action: () => router.push('/account'),
+    },
+    {
+      key: 'favorite',
+      label: 'ดูรายการโปรด',
+      icon: <HeartIcon className='text-default-500' />,
+      action: () => router.push(`/account?tab=${ACCOUNT_TABS?.FAVORITE}`),
     },
     ...(isAdmin && !isDashboard
       ? [
           {
             key: 'admin-dashboard',
-            label: 'จัดการข้อมูลหลังร้าน (เฉพาะเจ้าหน้าที่)',
-            icon: <Settings />,
+            label: 'จัดการข้อมูลหลังร้าน',
+            icon: <SettingsIcon className='text-default-500' />,
             action: () => router.push('/dashboard'),
           },
         ]
@@ -54,14 +63,21 @@ const Panel: FC<Props> = ({ setIsMenuOpen }) => {
   return (
     <Dropdown>
       <DropdownTrigger>
-        <User
-          avatarProps={{
-            src: `${user?.image ?? '/placeholder.svg'}`,
-          }}
-          className='cursor-pointer'
-          description={user?.email}
-          name={user?.name}
-        />
+        <div>
+          <User
+            avatarProps={{
+              src: `${user?.image ?? '/placeholder.svg'}`,
+            }}
+            className='hidden cursor-pointer sm:flex'
+            description={user?.email}
+            name={user?.name}
+          />
+
+          <Avatar
+            className='sm:hidden'
+            src={`${user?.image ?? '/placeholder.svg'}`}
+          />
+        </div>
       </DropdownTrigger>
       <DropdownMenu aria-label='Static Actions'>
         {menuItems.map((item) => (

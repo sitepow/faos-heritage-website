@@ -145,7 +145,7 @@ const CategoryLayout: FC<Props> = ({
 
               {!isLoadingProducts &&
                 products?.items?.map((product) => (
-                  <ProductCard key={product.id} {...product} />
+                  <ProductCard key={product.id} product={product} />
                 ))}
 
               {currentCategory.id && products?.items?.length !== 0 && (

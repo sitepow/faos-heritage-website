@@ -30,6 +30,7 @@ import { SubHeader } from '@/app/(main)/_components/section/header'
 const DEFAULT_VALUES: ProductInput = {
   isActive: true,
   isDigitalProduct: false,
+  isDemoProduct: false,
   useSeoFromBasicData: true,
   isFeatured: false,
   name: '',
@@ -188,6 +189,19 @@ const ProductForm = () => {
                     onValueChange={onChange}
                   >
                     สินค้าดิจิทัลไฟล์
+                  </Switch>
+                )}
+              />
+              <Controller
+                control={control}
+                name='isDemoProduct'
+                render={({ field: { value, onChange, ...field } }) => (
+                  <Switch
+                    {...field}
+                    isSelected={value}
+                    onValueChange={onChange}
+                  >
+                    สินค้าตัวอย่าง
                   </Switch>
                 )}
               />

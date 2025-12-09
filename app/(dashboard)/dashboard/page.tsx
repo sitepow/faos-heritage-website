@@ -1,65 +1,97 @@
-import { Card, CardBody, CardHeader } from '@heroui/card'
+'use client'
 
-import type { ComponentProps } from 'react'
+import { Alert } from '@heroui/alert'
+import { Button } from '@heroui/button'
+import { Card, CardBody, CardHeader } from '@heroui/card'
+import { Skeleton } from '@heroui/skeleton'
+import { useQuery } from '@tanstack/react-query'
+import { useRouter } from 'next/navigation'
 
 import { CustomerItem } from '../_components/customer-item'
-import { OrderItem } from '../_components/order-item'
 import { ProductItem } from '../_components/product-item'
+import { getOrderSum, getOrdersWithoutPagination } from '../actions/order'
 
-import { TrendCard } from '@/app/(dashboard)/_components/chart/trend-card'
+import {
+  TrendCard,
+  TrendCardSkeleton,
+} from '@/app/(dashboard)/_components/chart/trend-card'
+import { SubHeader } from '@/app/(main)/_components/section/header'
+import { Order } from '@/app/(main)/account/_components/order'
 
-const MOCKUP_DASHBOARD_CONST: ComponentProps<typeof TrendCard>[] = [
-  {
-    name: 'รายได้รวม',
-    value: 520234,
-    isCurrency: true,
-  },
-  {
-    name: 'ยอดขายวันนี้',
-    value: 43002,
-    isCurrency: true,
-  },
-  {
-    name: 'ลูกค้าใหม่',
-    value: 127,
-  },
-  {
-    name: 'Transaction สำเร็จ',
-    value: 456,
-  },
-  {
-    name: 'ยอดขายเฉลี่ย',
-    value: 624,
-    isCurrency: true,
-  },
-  {
-    name: 'Refund Rate (%)',
-    value: 2.8,
-  },
-]
+const ITEM_PER_PAGE = 4
 
-const DashboardHome = () => {
+const Index = () => {
+  const router = useRouter()
+
+  const { data: dashboard, isLoading: isLoadingDashboard } = useQuery({
+    queryKey: ['dashboard', 'orders', 'sum'],
+    queryFn: () => getOrderSum(),
+  })
+
+  const { data: orders, isLoading: isLoadingOrders } = useQuery({
+    queryKey: ['dashboard', 'orders', 'recap'],
+    queryFn: () => getOrdersWithoutPagination(ITEM_PER_PAGE),
+  })
+
+  const goToOrder = () => {
+    router.push('/dashboard/order')
+  }
+  const goToCustomer = () => {
+    router.push('/dashboard/user')
+  }
+  const goToProduct = () => {
+    router.push('/dashboard/product')
+  }
+
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
       <div className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-        {MOCKUP_DASHBOARD_CONST.map((data) => (
-          <TrendCard key={data.name} {...data} />
-        ))}
+        {isLoadingDashboard &&
+          [...Array(4)].map((_, index) => <TrendCardSkeleton key={index} />)}
+
+        {!isLoadingDashboard &&
+          dashboard?.map((data) => <TrendCard key={data.name} {...data} />)}
       </div>
 
       <div className='grid w-full gap-5 lg:grid-cols-2'>
-        <Card>
-          <CardHeader>
-            <b>ออเดอร์ใหม่</b>
+        <Card className='sm:col-span-2'>
+          <CardHeader className='flex-wrap items-center justify-between'>
+            <SubHeader title='ออเดอร์ใหม่' />
+            <Button variant='faded' onClick={goToOrder}>
+              ดูทั้งหมด
+            </Button>
           </CardHeader>
-          <CardBody>
-            <OrderItem />
-          </CardBody>
+
+          {isLoadingDashboard && (
+            <CardBody>
+              <Skeleton className='h-24 w-full rounded-lg' />
+            </CardBody>
+          )}
+
+          {!isLoadingOrders && !orders && (
+            <CardBody>
+              <Alert
+                description='คุณยังไม่มีคำสั่งซื้อจากลูกค้า'
+                variant='bordered'
+              />
+            </CardBody>
+          )}
+
+          {!isLoadingOrders && orders && (
+            <CardBody className='grid gap-4 lg:grid-cols-2'>
+              {orders?.map((order) => (
+                <Order key={order?.id} hideButton order={order} />
+              ))}
+            </CardBody>
+          )}
         </Card>
 
         <Card>
-          <CardHeader>
-            <b>ลูกค้าใหม่</b>
+          <CardHeader className='flex-wrap items-center justify-between'>
+            <SubHeader title='ลูกค้าใหม่' />
+            <Button variant='faded' onClick={goToCustomer}>
+              ดูทั้งหมด
+            </Button>
           </CardHeader>
           <CardBody>
             <CustomerItem />
@@ -67,8 +99,11 @@ const DashboardHome = () => {
         </Card>
 
         <Card>
-          <CardHeader>
-            <b>สินค้าขายดี</b>
+          <CardHeader className='flex-wrap items-center justify-between'>
+            <SubHeader title='สินค้าขายดี' />
+            <Button variant='faded' onClick={goToProduct}>
+              ดูทั้งหมด
+            </Button>
           </CardHeader>
           <CardBody>
             <ProductItem />
@@ -76,8 +111,11 @@ const DashboardHome = () => {
         </Card>
 
         <Card>
-          <CardHeader>
-            <b>สต็อกกำลังหมด</b>
+          <CardHeader className='flex-wrap items-center justify-between'>
+            <SubHeader title='สต็อกกำลังหมด' />
+            <Button variant='faded' onClick={goToProduct}>
+              ดูทั้งหมด
+            </Button>
           </CardHeader>
           <CardBody>
             <ProductItem />
@@ -88,4 +126,4 @@ const DashboardHome = () => {
   )
 }
 
-export default DashboardHome
+export default Index

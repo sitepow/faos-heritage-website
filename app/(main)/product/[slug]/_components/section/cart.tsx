@@ -165,7 +165,11 @@ const CartSection: FC<
       <CardBody className='flex-wrap gap-4'>
         <Alert
           className='text-start'
-          description={`สินค้าพร้อมจำหน่าย มีจำนวนเพียง ${stockQuantity ?? 0} ชิ้นในสต็อก`}
+          description={
+            stockQuantity === 0
+              ? `สินค้านี้หมดชั่วคราว โปรดดูสินค้าใกล้เคียง/ทดแทน`
+              : `สินค้าพร้อมจำหน่าย มีจำนวนเพียง ${stockQuantity ?? 0} ชิ้นในสต็อก`
+          }
           variant='bordered'
         />
 

@@ -1,3 +1,5 @@
+import { ACCOUNT_TABS } from '@/utils/const'
+
 export type SiteConfig = typeof siteConfig
 
 export interface NavItem {
@@ -25,6 +27,10 @@ export const siteConfig = {
     {
       label: 'วิธีการชำระเงิน',
       href: '/payment',
+    },
+    {
+      label: 'คำสั่งซื้อของฉัน',
+      href: `/account?tab=${ACCOUNT_TABS?.ORDER}`,
     },
     {
       label: 'เกี่ยวกับเรา',

@@ -22,7 +22,7 @@ import {
 
 import { siteConfig } from '@/config/site'
 
-const Login = () => {
+const Index = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
   const callbackUrl = searchParams.get('callbackUrl') || '/'
@@ -78,11 +78,12 @@ const Login = () => {
   }
 
   return (
-    <Card className='p-5 md:w-[450px]'>
+    <Card className='p-5 md:w-[350px]'>
       <CardHeader className='flex w-full flex-col items-center gap-1'>
         <span className='text-lg font-bold'>เข้าสู่ระบบ หรือ สมัครสมาชิก</span>
         <span className='text-default-500'>
-          เพื่อเข้าใช้งานเว็บไซต์ {siteConfig?.name}
+          เพื่อเข้าใช้งานเว็บไซต์{' '}
+          <span className='text-primary-website'>{siteConfig?.name}</span>
         </span>
       </CardHeader>
 
@@ -114,7 +115,7 @@ const Login = () => {
                 type='submit'
                 variant='faded'
               >
-                เข้าสู่ระบบ
+                ดำเนินการต่อ
               </Button>
             </CardFooter>
           </Form>
@@ -164,7 +165,7 @@ const Login = () => {
                 type='submit'
                 variant='faded'
               >
-                สมัครสมาชิก
+                ดำเนินการต่อ
               </Button>
             </CardFooter>
           </Form>
@@ -178,50 +179,38 @@ const Login = () => {
           <div className='flex-grow border-t border-divider' />
         </div>
 
-        <div className='flex w-full flex-col gap-4'>
-          <Card className='cursor-pointer'>
-            <CardBody onClick={() => signIn('google')}>
-              <div className='flex items-center justify-center gap-2'>
+        <div className='flex w-full flex-wrap justify-center gap-2'>
+          <Card className='w-fit cursor-pointer'>
+            <CardBody className='p-2' onClick={() => signIn('google')}>
+              <div className='flex items-center gap-4'>
                 <Image
                   alt='google'
                   className='rounded-full'
-                  height={35}
+                  height={30}
                   src='/google.png'
-                  width={35}
+                  width={30}
                 />
-
-                <span>ดำเนินการด้วยบัญชี Google</span>
               </div>
             </CardBody>
           </Card>
 
-          <Card className='cursor-pointer'>
-            <CardBody onClick={() => signIn('facebook')}>
-              <div className='flex items-center justify-center gap-2'>
+          <Card className='w-fit cursor-pointer'>
+            <CardBody className='p-2' onClick={() => signIn('facebook')}>
+              <div className='flex items-center gap-4'>
                 <Image
                   alt='facebook'
                   className='rounded-full'
-                  height={35}
+                  height={30}
                   src='/facebook.png'
-                  width={35}
+                  width={30}
                 />
-
-                <span>ดำเนินการด้วยบัญชี Facebook</span>
               </div>
             </CardBody>
           </Card>
         </div>
       </CardBody>
-
-      <CardFooter className='flex-col gap-2.5'>
-        <span className='text-center text-xs text-default-500'>
-          เมื่อสมัครสมาชิก ถือว่าคุณยอมรับ{' '}
-          <span className='font-bold underline'>ข้อกำหนดและเงื่อนไข</span> และ{' '}
-          <span className='font-bold underline'>นโยบายความเป็นส่วนตัว</span>
-        </span>
-      </CardFooter>
     </Card>
   )
 }
 
-export default Login
+export default Index

@@ -1,16 +1,23 @@
 /* eslint-disable no-nested-ternary */
 'use client'
 
+import { Alert } from '@heroui/alert'
 import { Button } from '@heroui/button'
 import { Card, CardBody, CardFooter, CardHeader } from '@heroui/card'
 import { Chip } from '@heroui/chip'
 import { Image } from '@heroui/image'
 import { Skeleton } from '@heroui/skeleton'
-import { FileIcon, HeartIcon, ShoppingCartIcon, TagIcon } from 'lucide-react'
+import {
+  CircleQuestionMarkIcon,
+  FileIcon,
+  HeartIcon,
+  ShoppingCartIcon,
+  TagIcon,
+} from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
 
-import type { ProductItem } from '@/actions/product'
+import type { GetProductResult } from '@/actions/product'
 import type { FC } from 'react'
 
 import { StarRating } from '../star-rating'
@@ -19,21 +26,13 @@ import { Price } from '@/components/price'
 import { createSlug } from '@/utils/helper'
 import { cn } from '@/utils/style'
 
-interface Props extends ProductItem {
+interface Props {
   className?: string
   hideIcon?: boolean
+  product: GetProductResult
 }
 
-const ProductCard: FC<Props> = ({
-  id,
-  name,
-  price,
-  images,
-  category,
-  isDigitalProduct,
-  className,
-  hideIcon = 'true',
-}) => {
+const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
@@ -47,8 +46,28 @@ const ProductCard: FC<Props> = ({
       onMouseLeave={() => setIsHovered(false)}
     >
       <CardHeader className='relative overflow-hidden p-0'>
+        {product?.stockQuantity === 0 && (
+          <Alert
+            hideIcon
+            className='absolute top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2'
+            description='สินค้านี้หมดชั่วคราว'
+            radius='none'
+          />
+        )}
+
         <div className='absolute bottom-2 left-2 z-50 flex flex-wrap gap-2'>
-          {isDigitalProduct && (
+          {product?.isDemoProduct && (
+            <Chip
+              startContent={
+                <CircleQuestionMarkIcon className='size-4 text-default-500' />
+              }
+              variant='faded'
+            >
+              สินค้าตัวอย่าง
+            </Chip>
+          )}
+
+          {product?.isDigitalProduct && (
             <Chip
               startContent={<FileIcon className='size-4 text-default-500' />}
               variant='faded'
@@ -61,23 +80,26 @@ const ProductCard: FC<Props> = ({
             startContent={<TagIcon className='size-4 text-default-500' />}
             variant='faded'
           >
-            {category?.name ?? 'ไม่มีหมวดหมู่'}
+            {product?.category?.name ?? 'ไม่มีหมวดหมู่'}
           </Chip>
         </div>
 
-        <Link className='size-full' href={`/product/${createSlug(name, id)}`}>
+        <Link
+          className='size-full'
+          href={`/product/${createSlug(product?.name, product?.id)}`}
+        >
           <Image
-            alt={name}
+            alt={product?.name}
             className='size-full object-cover'
             classNames={{ wrapper: 'w-full' }}
             height={250}
             radius='none'
             src={
-              images && images.length > 1
+              product?.images && product?.images.length > 1
                 ? isHovered
-                  ? images[1].url
-                  : images[0].url
-                : images?.[0]?.url || '/placeholder.svg'
+                  ? product?.images[1].url
+                  : product?.images[0].url
+                : product?.images?.[0]?.url || '/placeholder.svg'
             }
             width='100%'
           />
@@ -85,8 +107,8 @@ const ProductCard: FC<Props> = ({
       </CardHeader>
 
       <CardBody>
-        <Price price={price} unit='ตัว' />
-        <h4 className='line-clamp-2 text-lg font-bold'>{name}</h4>
+        <Price price={product?.price} unit='ตัว' />
+        <h4 className='line-clamp-2 text-lg font-bold'>{product?.name}</h4>
         <StarRating rate={5} />
       </CardBody>
 

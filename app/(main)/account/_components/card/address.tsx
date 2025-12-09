@@ -43,7 +43,9 @@ const AddressCard = () => {
       <CardBody>
         <AddressForm />
 
-        {isLoadingAddress && <Skeleton className='h-40 max-w-1/2 rounded-lg' />}
+        {isLoadingAddress && (
+          <Skeleton className='h-40 rounded-lg sm:max-w-1/2' />
+        )}
 
         {!isLoadingAddress && !address && (
           <Alert

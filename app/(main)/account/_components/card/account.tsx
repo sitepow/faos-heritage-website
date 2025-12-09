@@ -31,7 +31,7 @@ const AccountCard: FC<Props> = ({ onclick }) => {
         <span>จัดการกับบัญชีของฉัน</span>
       </CardHeader>
       <CardBody>
-        {isLoadingUser && <Skeleton className='h-40 max-w-1/2 rounded-lg' />}
+        {isLoadingUser && <Skeleton className='h-40 rounded-lg sm:max-w-1/2' />}
 
         {!isLoadingUser && (
           <div className='flex flex-col sm:max-w-1/2'>

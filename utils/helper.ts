@@ -1,4 +1,7 @@
 import type { GetAddressResult } from '@/app/(main)/account/actions/address'
+import type { OrderStatus } from '@prisma/client'
+
+import { ORDER_ALL_STATUS } from './const'
 
 import { siteConfig } from '@/config/site'
 
@@ -68,10 +71,13 @@ const getFullAddress = (address: GetAddressResult) => {
   return full
 }
 
+const getOrderStatus = (key: OrderStatus) => ORDER_ALL_STATUS[key] ?? key
+
 export {
   createSlug,
   getFooter,
   getIdFromSlug,
   removeEmptyField,
   getFullAddress,
+  getOrderStatus,
 }

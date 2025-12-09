@@ -22,7 +22,6 @@ import {
 } from '@heroui/table'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import {
-  ArrowUpIcon,
   EditIcon,
   EllipsisVerticalIcon,
   FileIcon,
@@ -130,12 +129,6 @@ const Product = () => {
           }}
         >
           จัดการหมวดหมู่สินค้า
-        </Button>
-        <Button
-          startContent={<ArrowUpIcon className='text-default-500' />}
-          variant='faded'
-        >
-          ส่งออกไฟล์ XLSX
         </Button>
         <Button
           isDisabled={selectedProductIds.length === 0}

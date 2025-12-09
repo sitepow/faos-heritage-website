@@ -23,7 +23,6 @@ import {
 import { Role } from '@prisma/client'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import {
-  ArrowUpIcon,
   EditIcon,
   EllipsisVertical,
   PlusIcon,
@@ -61,7 +60,7 @@ const Customer = () => {
   })
 
   const { data: dashboard, isLoading: isLoadingDashboard } = useQuery({
-    queryKey: ['dashboard', 'products'],
+    queryKey: ['dashboard', 'users'],
     queryFn: () => getDashboard(),
   })
 
@@ -105,12 +104,6 @@ const Customer = () => {
           }}
         >
           เพิ่มผู้ใช้งานใหม่
-        </Button>
-        <Button
-          startContent={<ArrowUpIcon className='text-default-500' />}
-          variant='faded'
-        >
-          ส่งออกไฟล์ XLSX
         </Button>
         <Button
           isDisabled={selectedUserIds.length === 0}

@@ -143,8 +143,8 @@ const ImageDropzone: FC<Props> = ({ multiple = false, onFilesChange }) => {
               </div>
 
               <p className='text-sm text-default-500'>
-                หรือคลิกเพื่อเลือกไฟล์ (ระบบจะปรับขนาดไฟล์ให้โดยอัตโนมัติ
-                เพื่อเพิ่ม Performance)
+                หรือคลิกเพื่อเลือกไฟล์ (ระบบจะปรับขนาดไฟล์ให้อัตโนมัติ
+                เพื่อประสิทธิภาพที่ดีขึ้น)
               </p>
             </div>
           )}

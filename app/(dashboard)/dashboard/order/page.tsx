@@ -1,12 +1,16 @@
 'use client'
 
+import { Avatar, AvatarGroup } from '@heroui/avatar'
 import { Button } from '@heroui/button'
+import { Chip } from '@heroui/chip'
 import {
   Dropdown,
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
 } from '@heroui/dropdown'
+import { Pagination } from '@heroui/pagination'
+import { Spinner } from '@heroui/spinner'
 import {
   Table,
   TableBody,
@@ -15,93 +19,96 @@ import {
   TableHeader,
   TableRow,
 } from '@heroui/table'
-import { Edit, EllipsisVertical } from 'lucide-react'
+import { useQuery } from '@tanstack/react-query'
+import { EllipsisVerticalIcon } from 'lucide-react'
+import { useState } from 'react'
 
-import type { ComponentProps } from 'react'
+import { getDashboard, getOrders } from '../../actions/order'
 
-import { TrendCard } from '@/app/(dashboard)/_components/chart/trend-card'
+import {
+  TrendCard,
+  TrendCardSkeleton,
+} from '@/app/(dashboard)/_components/chart/trend-card'
+import { formatDate } from '@/utils/date'
+import { getOrderStatus } from '@/utils/helper'
 import { formatCurrency } from '@/utils/number'
 
-const MOCKUP_DASHBOARD_CONST: ComponentProps<typeof TrendCard>[] = [
-  {
-    name: 'คำสั่งซื้อทั้งหมด',
-    value: 328,
-  },
-  {
-    name: 'ปิดคำสั่งซื้อแล้ว',
-    value: 200,
-  },
-  {
-    name: 'คำสั่งซื้อล้มเหลว',
-    value: 128,
-  },
-]
-
-const MOCKUP_ORDER_CONST = [
-  {
-    id: 'ORD001',
-    customer: 'บริษัท ABC จำกัด',
-    date: '2024-10-25',
-    total: 32003,
-    status: 'กำลังดำเนินการ',
-  },
-  {
-    id: 'ORD002',
-    customer: 'ร้าน XYZ',
-    date: '2024-10-26',
-    total: 25221,
-    status: 'เสร็จสิ้น',
-  },
-]
+const ITEM_PER_PAGE = 10
 
 const Order = () => {
+  const [page, setPage] = useState(1)
+
+  const { data: orders, isLoading: isLoadingOrders } = useQuery({
+    queryKey: ['dashboard', 'orders', page, ITEM_PER_PAGE],
+    queryFn: () => getOrders(page, ITEM_PER_PAGE),
+  })
+
+  const { data: dashboard, isLoading: isLoadingDashboard } = useQuery({
+    queryKey: ['dashboard', 'orders'],
+    queryFn: () => getDashboard(),
+  })
+
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
       <div className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-        {MOCKUP_DASHBOARD_CONST.map((data) => (
-          <TrendCard key={data.name} {...data} />
-        ))}
-      </div>
+        {isLoadingDashboard &&
+          [...Array(4)].map((_, index) => <TrendCardSkeleton key={index} />)}
 
-      <div className='flex w-full flex-wrap gap-3 *:shrink-0 md:justify-end'>
-        <Button>สร้างคำสั่งซื้อใหม่</Button>
-        <Button>ส่งออกไฟล์ XLSX</Button>
-        <Button>ลบรายการที่เลือก</Button>
+        {!isLoadingDashboard &&
+          dashboard?.map((data) => <TrendCard key={data.name} {...data} />)}
       </div>
 
       <Table aria-label='ตารางข้อมูลคำสั่งซื้อ' selectionMode='multiple'>
         <TableHeader>
           <TableColumn>รหัสคำสั่งซื้อ</TableColumn>
-          <TableColumn>ลูกค้า</TableColumn>
+          <TableColumn>รูปภาพ</TableColumn>
+          <TableColumn>ชื่อลูกค้า</TableColumn>
           <TableColumn>วันที่สั่งซื้อ</TableColumn>
-          <TableColumn>ยอดรวม (บาท)</TableColumn>
+          <TableColumn>ยอดรวม</TableColumn>
           <TableColumn>สถานะ</TableColumn>
           <TableColumn>จัดการ</TableColumn>
         </TableHeader>
-        <TableBody>
-          {MOCKUP_ORDER_CONST.map((order) => (
+        <TableBody
+          emptyContent='ไม่มีข้อมูลที่จะแสดง'
+          isLoading={isLoadingOrders}
+          loadingContent={<Spinner label='กำลังโหลด...' />}
+        >
+          {(orders?.items ?? []).map((order) => (
             <TableRow key={order.id}>
               <TableCell>{order.id}</TableCell>
-              <TableCell>{order.customer}</TableCell>
-              <TableCell>{order.date}</TableCell>
+              <TableCell>
+                <AvatarGroup max={3}>
+                  {order?.items?.map((item) => (
+                    <Avatar
+                      key={item?.product?.images?.[0]?.url}
+                      src={
+                        item?.product?.images?.[0]?.url ?? '/placeholder.svg'
+                      }
+                    />
+                  ))}
+                </AvatarGroup>
+              </TableCell>
+              <TableCell>{order?.user?.name ?? '-'}</TableCell>
+              <TableCell className='max-w-52 min-w-52'>
+                {formatDate(order?.createdAt)}
+              </TableCell>
               <TableCell>{formatCurrency(order.total)}</TableCell>
-              <TableCell>{order.status}</TableCell>
+              <TableCell>
+                <Chip>{getOrderStatus(order.status)}</Chip>
+              </TableCell>
               <TableCell className='flex gap-2.5'>
                 <Dropdown placement='bottom-end'>
                   <DropdownTrigger>
                     <Button isIconOnly size='sm' variant='light'>
-                      <EllipsisVertical className='size-5 text-default-500' />
+                      <EllipsisVerticalIcon className='size-5 text-default-500' />
                     </Button>
                   </DropdownTrigger>
                   <DropdownMenu
-                    aria-label='จัดการออเดอร์'
+                    aria-label='จัดการคำสั่งซื้อ'
                     className='min-w-[180px]'
                   >
-                    <DropdownItem
-                      key='edit'
-                      startContent={<Edit className='size-4' />}
-                    >
-                      แก้ไขข้อมูล
+                    <DropdownItem key='edit'>
+                      อัพเดตสถานะคำสั่งซื้อ
                     </DropdownItem>
                   </DropdownMenu>
                 </Dropdown>
@@ -110,6 +117,13 @@ const Order = () => {
           ))}
         </TableBody>
       </Table>
+
+      <Pagination
+        showControls
+        page={page}
+        total={orders?.totalPages ?? 1}
+        onChange={(p) => setPage(p)}
+      />
     </section>
   )
 }

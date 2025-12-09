@@ -74,6 +74,7 @@ const getProduct = async (productId: string, userId?: string) => {
         categoryId: true,
         shortDescription: true,
         isDigitalProduct: true,
+        isDemoProduct: true,
         cart: userId
           ? {
               where: { userId },

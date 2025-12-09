@@ -1,4 +1,3 @@
-import { Button } from '@heroui/button'
 import Image from 'next/image'
 
 import type { ComponentProps, FC } from 'react'
@@ -31,10 +30,6 @@ const ProductItem: FC<ComponentProps<'div'>> = ({ className, ...props }) => {
           </span>
         </div>
       </div>
-
-      <Button className='shrink-0' variant='faded'>
-        รายละเอียด
-      </Button>
     </div>
   )
 }
