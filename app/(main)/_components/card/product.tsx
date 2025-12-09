@@ -55,7 +55,7 @@ const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
           />
         )}
 
-        <div className='absolute bottom-2 left-2 z-50 flex flex-wrap gap-2'>
+        <div className='absolute bottom-2 left-2 z-50 flex flex-wrap gap-1'>
           {product?.isDemoProduct && (
             <Chip
               startContent={
