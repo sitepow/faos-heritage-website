@@ -30,13 +30,13 @@ const Panel: FC<Props> = ({ setIsMenuOpen }) => {
   const menuItems = [
     {
       key: 'account',
-      label: 'ตั้งค่าบัญชีของฉัน',
+      label: 'บัญชีของฉัน',
       icon: <UserIcon className='text-default-500' />,
       action: () => router.push('/account'),
     },
     {
       key: 'favorite',
-      label: 'ดูรายการโปรด',
+      label: 'รายการโปรด',
       icon: <HeartIcon className='text-default-500' />,
       action: () => router.push(`/account?tab=${ACCOUNT_TABS?.FAVORITE}`),
     },
@@ -44,7 +44,7 @@ const Panel: FC<Props> = ({ setIsMenuOpen }) => {
       ? [
           {
             key: 'admin-dashboard',
-            label: 'จัดการข้อมูลหลังร้าน',
+            label: 'จัดการข้อมูลหลังร้าน (เฉพาะเจ้าหน้าที่)',
             icon: <SettingsIcon className='text-default-500' />,
             action: () => router.push('/dashboard'),
           },

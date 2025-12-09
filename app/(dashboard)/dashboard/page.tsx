@@ -7,8 +7,6 @@ import { Skeleton } from '@heroui/skeleton'
 import { useQuery } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 
-import { CustomerItem } from '../_components/customer-item'
-import { ProductItem } from '../_components/product-item'
 import { getOrderSum, getOrdersWithoutPagination } from '../actions/order'
 
 import {
@@ -35,12 +33,6 @@ const Index = () => {
 
   const goToOrder = () => {
     router.push('/dashboard/order')
-  }
-  const goToCustomer = () => {
-    router.push('/dashboard/user')
-  }
-  const goToProduct = () => {
-    router.push('/dashboard/product')
   }
 
   return (
@@ -84,42 +76,6 @@ const Index = () => {
               ))}
             </CardBody>
           )}
-        </Card>
-
-        <Card>
-          <CardHeader className='flex-wrap items-center justify-between'>
-            <SubHeader title='ลูกค้าใหม่' />
-            <Button variant='faded' onClick={goToCustomer}>
-              ดูทั้งหมด
-            </Button>
-          </CardHeader>
-          <CardBody>
-            <CustomerItem />
-          </CardBody>
-        </Card>
-
-        <Card>
-          <CardHeader className='flex-wrap items-center justify-between'>
-            <SubHeader title='สินค้าขายดี' />
-            <Button variant='faded' onClick={goToProduct}>
-              ดูทั้งหมด
-            </Button>
-          </CardHeader>
-          <CardBody>
-            <ProductItem />
-          </CardBody>
-        </Card>
-
-        <Card>
-          <CardHeader className='flex-wrap items-center justify-between'>
-            <SubHeader title='สต็อกกำลังหมด' />
-            <Button variant='faded' onClick={goToProduct}>
-              ดูทั้งหมด
-            </Button>
-          </CardHeader>
-          <CardBody>
-            <ProductItem />
-          </CardBody>
         </Card>
       </div>
     </section>
