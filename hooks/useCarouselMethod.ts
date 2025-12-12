@@ -10,7 +10,7 @@ interface UseCarouselNavigation {
   onNext: () => void
 }
 
-export const useCarouselNavigation = (
+const useCarouselNavigation = (
   emblaApi: EmblaCarouselType | undefined,
 ): UseCarouselNavigation => {
   const [prevDisabled, setPrevDisabled] = useState(true)
@@ -46,3 +46,5 @@ export const useCarouselNavigation = (
     onNext,
   }
 }
+
+export { useCarouselNavigation }

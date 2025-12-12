@@ -27,11 +27,7 @@ const TrendCard: FC<Props> = ({ name, value, isCurrency }) => {
 }
 
 const TrendCardSkeleton = () => {
-  return (
-    <Skeleton className='rounded-lg'>
-      <div className='h-24 rounded-lg bg-default-300' />
-    </Skeleton>
-  )
+  return <Skeleton className='h-24 rounded-lg' />
 }
 
 export { TrendCard, TrendCardSkeleton }

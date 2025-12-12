@@ -14,13 +14,17 @@ interface Props {
   onOpenChange: () => void
   onConfirm: () => void
   isPending: boolean
+  title?: string
+  description?: string
 }
 
-const ModalDelete: FC<Props> = ({
+const ModalConfirm: FC<Props> = ({
   isOpen,
   onOpenChange,
   onConfirm,
   isPending,
+  title = 'คุณกำลังจะลบข้อมูลนี้หรือไม่?',
+  description = 'คุณแน่ใจหรือไม่ว่าต้องการลบข้อมูลนี้? การลบครั้งนี้เป็นการลบถาวรและไม่สามารถกู้คืนได้',
 }) => {
   return (
     <Modal
@@ -33,14 +37,9 @@ const ModalDelete: FC<Props> = ({
       <ModalContent>
         {(onClose) => (
           <>
-            <ModalHeader className='flex flex-col gap-1'>
-              คุณกำลังจะลบข้อมูลนี้หรือไม่?
-            </ModalHeader>
+            <ModalHeader className='flex flex-col gap-1'>{title}</ModalHeader>
             <ModalBody>
-              <span>
-                คุณแน่ใจหรือไม่ว่าต้องการลบข้อมูลนี้?
-                การลบครั้งนี้เป็นการลบถาวรและไม่สามารถกู้คืนได้
-              </span>
+              <span>{description}</span>
             </ModalBody>
             <ModalFooter>
               <Button disabled={isPending} variant='faded' onPress={onClose}>
@@ -62,4 +61,4 @@ const ModalDelete: FC<Props> = ({
   )
 }
 
-export { ModalDelete }
+export { ModalConfirm }

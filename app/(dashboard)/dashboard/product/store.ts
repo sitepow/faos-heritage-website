@@ -5,7 +5,6 @@ interface ProductStore {
   variantId: string | null
   imageId: string | null
   categoryId: string | null
-
   isProductOpen: boolean
   isImageManagerOpen: boolean
   isVariantManagerOpen: boolean
@@ -28,7 +27,6 @@ const useProductStore = create<ProductStore>()((set) => ({
   variantId: null,
   imageId: null,
   categoryId: null,
-
   isProductOpen: false,
   isImageManagerOpen: false,
   isVariantManagerOpen: false,

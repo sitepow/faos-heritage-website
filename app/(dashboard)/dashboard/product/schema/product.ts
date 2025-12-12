@@ -1,3 +1,4 @@
+import { ProductUnit } from '@prisma/client'
 import { z } from 'zod'
 
 type ProductInput = z.infer<typeof productSchema>
@@ -32,6 +33,7 @@ const productSchema = z.object({
   isFeatured: z.boolean(),
   isDigitalProduct: z.boolean(),
   isDemoProduct: z.boolean(),
+  unit: z.enum(ProductUnit),
 })
 
 export type { ProductInput }

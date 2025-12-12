@@ -2,7 +2,6 @@ import { create } from 'zustand'
 
 interface UserStore {
   userId: string | null
-
   isUserOpen: boolean
   onOpenUserChange: (open?: boolean) => void
   setState: (state: Partial<UserStore>) => void

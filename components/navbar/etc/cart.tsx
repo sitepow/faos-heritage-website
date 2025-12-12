@@ -10,8 +10,12 @@ const Cart = () => {
   const { data: session } = useSession()
   const userId = session?.user?.id
 
+  const QUERY = {
+    CART_COUNT: ['carts', 'count', userId],
+  }
+
   const { data } = useQuery({
-    queryKey: ['carts', 'count', userId],
+    queryKey: QUERY.CART_COUNT,
     queryFn: () => getDashboard(userId!),
     enabled: !!userId,
   })

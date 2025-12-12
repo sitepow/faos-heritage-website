@@ -13,7 +13,7 @@ interface Props {
   alt?: string
 }
 
-export const ProductImagePreview: FC<ComponentProps<'div'> & Props> = ({
+const ProductImagePreview: FC<ComponentProps<'div'> & Props> = ({
   images,
   className,
   alt = 'product-image',
@@ -62,3 +62,5 @@ export const ProductImagePreview: FC<ComponentProps<'div'> & Props> = ({
     </div>
   )
 }
+
+export { ProductImagePreview }

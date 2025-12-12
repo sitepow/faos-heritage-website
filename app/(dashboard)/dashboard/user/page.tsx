@@ -32,14 +32,14 @@ import {
 import { useState } from 'react'
 
 import { UserForm } from './_components/form/user'
-import { deleteUser, getDashboard, getUsers } from './actions/user'
+import { deleteUser, getUserDashboard, getUsers } from './actions/user'
 import { useUserStore } from './store'
 
 import {
   TrendCard,
   TrendCardSkeleton,
-} from '@/app/(dashboard)/_components/chart/trend-card'
-import { ModalDelete } from '@/components/modal/delete'
+} from '@/app/(dashboard)/_components/trend-card'
+import { ModalConfirm } from '@/components/modal/confirm'
 
 const ITEM_PER_PAGE = 10
 
@@ -54,21 +54,26 @@ const Customer = () => {
   const selectedUserIds = Array.from(selectedKeys)
   const [page, setPage] = useState(1)
 
+  const QUERY = {
+    DASHBOARD: ['dashboard', 'users', 'card'],
+    USERS: ['dashboard', 'users', 'pagination', page],
+  }
+
   const { data: users, isLoading: isLoadingUsers } = useQuery({
-    queryKey: ['dashboard', 'users', page, ITEM_PER_PAGE],
+    queryKey: QUERY.USERS,
     queryFn: () => getUsers(page, ITEM_PER_PAGE),
   })
 
   const { data: dashboard, isLoading: isLoadingDashboard } = useQuery({
-    queryKey: ['dashboard', 'users'],
-    queryFn: () => getDashboard(),
+    queryKey: QUERY.DASHBOARD,
+    queryFn: () => getUserDashboard(),
   })
 
   const { mutate: mutateDeteleUser, isPending: isPendingDeteleUser } =
     useMutation({
       mutationFn: deleteUser,
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['dashboard', 'users'] })
+        queryClient.invalidateQueries({ queryKey: QUERY.DASHBOARD })
         onOpenDeleteChange()
         setState({ userId: null })
         setSelectedKeys(new Set([]))
@@ -77,7 +82,7 @@ const Customer = () => {
 
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
-      <ModalDelete
+      <ModalConfirm
         isOpen={isDeleteOpen}
         isPending={isPendingDeteleUser}
         onConfirm={() => {
@@ -89,7 +94,7 @@ const Customer = () => {
 
       <div className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
         {isLoadingDashboard &&
-          [...Array(4)].map((_, index) => <TrendCardSkeleton key={index} />)}
+          [...Array(4)].map((_) => <TrendCardSkeleton key={_} />)}
 
         {!isLoadingDashboard &&
           dashboard?.map((data) => <TrendCard key={data.name} {...data} />)}
@@ -155,12 +160,12 @@ const Customer = () => {
               <TableCell className='max-w-40 min-w-40'>{user.name}</TableCell>
               <TableCell>{user.email}</TableCell>
               <TableCell>
-                <Chip>
+                <Chip variant='bordered'>
                   {user.role === Role.ADMIN ? 'ผู้ดูแลระบบ' : 'ลูกค้า'}
                 </Chip>
               </TableCell>
               <TableCell>
-                <Chip>
+                <Chip variant='bordered'>
                   {user.isActive ? 'เปิดการใช้งาน' : 'ถูกระงับการใช้งาน'}
                 </Chip>
               </TableCell>
@@ -208,8 +213,8 @@ const Customer = () => {
       <Pagination
         showControls
         page={page}
-        total={users?.totalPages ?? 1}
-        onChange={(p) => setPage(p)}
+        total={users?.totalPages || 1}
+        onChange={(page) => setPage(page)}
       />
     </section>
   )

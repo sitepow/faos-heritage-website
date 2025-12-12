@@ -13,7 +13,7 @@ import { signOut, useSession } from 'next-auth/react'
 
 import type { FC } from 'react'
 
-import { ACCOUNT_TABS } from '@/utils/const'
+import { ACCOUNT_TAB } from '@/utils/const'
 
 interface Props {
   setIsMenuOpen: (state: boolean) => void
@@ -30,15 +30,15 @@ const Panel: FC<Props> = ({ setIsMenuOpen }) => {
   const menuItems = [
     {
       key: 'account',
-      label: 'บัญชีของฉัน',
+      label: 'จัดการบัญชีของฉัน',
       icon: <UserIcon className='text-default-500' />,
       action: () => router.push('/account'),
     },
     {
       key: 'favorite',
-      label: 'รายการโปรด',
+      label: 'จัดการรายการโปรด',
       icon: <HeartIcon className='text-default-500' />,
-      action: () => router.push(`/account?tab=${ACCOUNT_TABS?.FAVORITE}`),
+      action: () => router.push(`/account?tab=${ACCOUNT_TAB?.FAVORITE}`),
     },
     ...(isAdmin && !isDashboard
       ? [

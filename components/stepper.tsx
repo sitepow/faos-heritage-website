@@ -1,18 +1,37 @@
-import { CheckIcon } from 'lucide-react'
+import { CheckIcon, XIcon } from 'lucide-react'
 import React from 'react'
 
 import type { OrderStatus } from '@prisma/client'
 import type { ComponentProps, FC } from 'react'
 
 import { ORDER_STEPS } from '@/utils/const'
+import { getOrderStatus } from '@/utils/helper'
 import { cn } from '@/utils/style'
 
 interface Props extends ComponentProps<'div'> {
-  currentStep?: OrderStatus
+  status?: OrderStatus
 }
 
-const Stepper: FC<Props> = ({ className, currentStep, ...props }) => {
-  const currentIndex = ORDER_STEPS.findIndex(([key]) => key === currentStep)
+const Stepper: FC<Props> = ({ className, status, ...props }) => {
+  const isCancelledFlow = status === 'CANCELLED' || status === 'REFUNDED'
+
+  if (isCancelledFlow) {
+    return (
+      <div className={cn('mx-auto w-full max-w-3xl', className)} {...props}>
+        <div className='flex flex-col items-center justify-center py-4'>
+          <div className='flex size-10 items-center justify-center rounded-full bg-divider text-default-500'>
+            <XIcon />
+          </div>
+
+          <p className='mt-3 text-center text-sm font-medium text-default-500'>
+            {getOrderStatus(status)}
+          </p>
+        </div>
+      </div>
+    )
+  }
+
+  const currentIndex = ORDER_STEPS.findIndex(([key]) => key === status)
 
   return (
     <div className={cn('mx-auto w-full max-w-3xl', className)} {...props}>
@@ -26,10 +45,10 @@ const Stepper: FC<Props> = ({ className, currentStep, ...props }) => {
               <div className='flex flex-col items-center'>
                 <div
                   className={cn(
-                    'flex size-10 items-center justify-center rounded-full transition-all duration-300 ease-in-out',
+                    'flex size-10 items-center justify-center rounded-full',
                     isCompleted && 'bg-teal-600 text-white',
                     isCurrent && 'bg-teal-600 text-white ring-4 ring-teal-200',
-                    !isCompleted && !isCurrent && 'bg-divider text-gray-400',
+                    !isCompleted && !isCurrent && 'bg-divider text-default-500',
                   )}
                 >
                   {isCompleted ? (
@@ -42,7 +61,7 @@ const Stepper: FC<Props> = ({ className, currentStep, ...props }) => {
                 <p
                   className={cn(
                     'mt-3 max-w-[120px] text-center text-sm font-medium',
-                    !isCompleted && !isCurrent && 'text-gray-400',
+                    !isCompleted && !isCurrent && 'text-default-500',
                   )}
                 >
                   {label}

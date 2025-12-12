@@ -1,7 +1,7 @@
 import type { GetAddressResult } from '@/app/(main)/account/actions/address'
-import type { OrderStatus } from '@prisma/client'
+import type { OrderStatus, ProductUnit } from '@prisma/client'
 
-import { ORDER_ALL_STATUS } from './const'
+import { ORDER_ALL_STATUS, PRODUCT_UNIT } from './const'
 
 import { siteConfig } from '@/config/site'
 
@@ -72,6 +72,28 @@ const getFullAddress = (address: GetAddressResult) => {
 }
 
 const getOrderStatus = (key: OrderStatus) => ORDER_ALL_STATUS[key] ?? key
+const getProductUnit = (key: ProductUnit) => PRODUCT_UNIT[key] ?? key
+
+const getPriceMinMaxFromVariants = (
+  variants: Array<{ price: number }> | undefined | null,
+) => {
+  if (!variants || variants.length === 0) {
+    return { min: null, max: null }
+  }
+
+  const prices = variants
+    .map((variant) => variant.price)
+    .filter((price): price is number => typeof price === 'number')
+
+  if (prices.length === 0) {
+    return { min: null, max: null }
+  }
+
+  return {
+    priceMin: Math.min(...prices),
+    priceMax: Math.max(...prices),
+  }
+}
 
 export {
   createSlug,
@@ -80,4 +102,6 @@ export {
   removeEmptyField,
   getFullAddress,
   getOrderStatus,
+  getProductUnit,
+  getPriceMinMaxFromVariants,
 }

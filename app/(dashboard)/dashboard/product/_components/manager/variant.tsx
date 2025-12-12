@@ -27,7 +27,7 @@ import { deleteVariant, getVariants } from '../../actions/variant'
 import { useProductStore } from '../../store'
 import { VariantForm } from '../form/variant'
 
-import { ModalDelete } from '@/components/modal/delete'
+import { ModalConfirm } from '@/components/modal/confirm'
 import { formatCurrency, formatNumber } from '@/utils/number'
 import { cn } from '@/utils/style'
 
@@ -41,13 +41,16 @@ const VariantManager = () => {
     onOpenVariantManagerChange,
     setState,
   } = useProductStore()
-  const QUERY_KEY = ['dashboard', 'modal', 'variants', productId]
+
+  const QUERY = {
+    VARIANTS: ['dashboard', 'variants', 'modal', productId],
+  }
 
   const { isOpen: isDeleteOpen, onOpenChange: onOpenDeleteChange } =
     useDisclosure()
 
   const { data: variants, isLoading: isLoadingVariants } = useQuery({
-    queryKey: QUERY_KEY,
+    queryKey: QUERY.VARIANTS,
     queryFn: () => getVariants(productId!),
     enabled: !!productId && isVariantManagerOpen,
   })
@@ -57,16 +60,24 @@ const VariantManager = () => {
       mutationFn: deleteVariant,
       onSuccess: () => {
         queryClient.invalidateQueries({
-          queryKey: QUERY_KEY,
+          queryKey: QUERY.VARIANTS,
         })
         onOpenDeleteChange()
         setState({ variantId: null })
       },
     })
 
+  const onClose = () => {
+    queryClient.invalidateQueries({
+      queryKey: QUERY.VARIANTS,
+    })
+    setState({ productId: null, variantId: null })
+    onOpenVariantManagerChange()
+  }
+
   return (
     <>
-      <ModalDelete
+      <ModalConfirm
         isOpen={isDeleteOpen}
         isPending={isPendingDeteleVariant}
         onConfirm={() => {
@@ -187,16 +198,7 @@ const VariantManager = () => {
           )}
 
           <ModalFooter>
-            <Button
-              variant='faded'
-              onPress={() => {
-                onOpenVariantManagerChange()
-                setState({ productId: null, variantId: null })
-                queryClient.invalidateQueries({
-                  queryKey: QUERY_KEY,
-                })
-              }}
-            >
+            <Button variant='faded' onPress={onClose}>
               ยกเลิก
             </Button>
             <Button

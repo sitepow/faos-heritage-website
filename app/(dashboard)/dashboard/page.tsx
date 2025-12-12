@@ -1,82 +1,70 @@
 'use client'
 
-import { Alert } from '@heroui/alert'
-import { Button } from '@heroui/button'
-import { Card, CardBody, CardHeader } from '@heroui/card'
-import { Skeleton } from '@heroui/skeleton'
 import { useQuery } from '@tanstack/react-query'
-import { useRouter } from 'next/navigation'
 
-import { getOrderSum, getOrdersWithoutPagination } from '../actions/order'
+import { getOrderDashboard, getOrderSum } from './order/actions/order'
+import { getProductDashboard } from './product/actions/product'
+import { getUserDashboard } from './user/actions/user'
 
 import {
   TrendCard,
   TrendCardSkeleton,
-} from '@/app/(dashboard)/_components/chart/trend-card'
-import { SubHeader } from '@/app/(main)/_components/section/header'
-import { Order } from '@/app/(main)/account/_components/order'
-
-const ITEM_PER_PAGE = 4
+} from '@/app/(dashboard)/_components/trend-card'
 
 const Index = () => {
-  const router = useRouter()
+  const QUERY = {
+    ORDER_SUM: ['dashboard', 'orders', 'card', 'sum'],
+    ORDER: ['dashboard', 'orders', 'card'],
+    PRODUCT: ['dashboard', 'products', 'card'],
+    USER: ['dashboard', 'users', 'card'],
+  }
 
-  const { data: dashboard, isLoading: isLoadingDashboard } = useQuery({
-    queryKey: ['dashboard', 'orders', 'sum'],
+  const { data: orderSum, isLoading: isLoadingOrderSum } = useQuery({
+    queryKey: QUERY.ORDER_SUM,
     queryFn: () => getOrderSum(),
   })
 
-  const { data: orders, isLoading: isLoadingOrders } = useQuery({
-    queryKey: ['dashboard', 'orders', 'recap'],
-    queryFn: () => getOrdersWithoutPagination(ITEM_PER_PAGE),
+  const { data: order, isLoading: isLoadingOrder } = useQuery({
+    queryKey: QUERY.ORDER,
+    queryFn: () => getOrderDashboard(),
   })
 
-  const goToOrder = () => {
-    router.push('/dashboard/order')
-  }
+  const { data: product, isLoading: isLoadingProduct } = useQuery({
+    queryKey: QUERY.PRODUCT,
+    queryFn: () => getProductDashboard(),
+  })
+
+  const { data: user, isLoading: isLoadingUser } = useQuery({
+    queryKey: QUERY.USER,
+    queryFn: () => getUserDashboard(),
+  })
 
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
       <div className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-        {isLoadingDashboard &&
-          [...Array(4)].map((_, index) => <TrendCardSkeleton key={index} />)}
+        {isLoadingOrderSum &&
+          [...Array(4)].map((_) => <TrendCardSkeleton key={_} />)}
 
-        {!isLoadingDashboard &&
-          dashboard?.map((data) => <TrendCard key={data.name} {...data} />)}
-      </div>
+        {!isLoadingOrderSum &&
+          orderSum?.map((data) => <TrendCard key={data.name} {...data} />)}
 
-      <div className='grid w-full gap-5 lg:grid-cols-2'>
-        <Card className='sm:col-span-2'>
-          <CardHeader className='flex-wrap items-center justify-between'>
-            <SubHeader title='ออเดอร์ใหม่' />
-            <Button variant='faded' onClick={goToOrder}>
-              ดูทั้งหมด
-            </Button>
-          </CardHeader>
+        {isLoadingOrder &&
+          [...Array(4)].map((_) => <TrendCardSkeleton key={_} />)}
 
-          {isLoadingDashboard && (
-            <CardBody>
-              <Skeleton className='h-24 w-full rounded-lg' />
-            </CardBody>
-          )}
+        {!isLoadingOrder &&
+          order?.map((data) => <TrendCard key={data.name} {...data} />)}
 
-          {!isLoadingOrders && !orders && (
-            <CardBody>
-              <Alert
-                description='คุณยังไม่มีคำสั่งซื้อจากลูกค้า'
-                variant='bordered'
-              />
-            </CardBody>
-          )}
+        {isLoadingProduct &&
+          [...Array(4)].map((_) => <TrendCardSkeleton key={_} />)}
 
-          {!isLoadingOrders && orders && (
-            <CardBody className='grid gap-4 lg:grid-cols-2'>
-              {orders?.map((order) => (
-                <Order key={order?.id} hideButton order={order} />
-              ))}
-            </CardBody>
-          )}
-        </Card>
+        {!isLoadingOrderSum &&
+          product?.map((data) => <TrendCard key={data.name} {...data} />)}
+
+        {isLoadingUser &&
+          [...Array(4)].map((_) => <TrendCardSkeleton key={_} />)}
+
+        {!isLoadingUser &&
+          user?.map((data) => <TrendCard key={data.name} {...data} />)}
       </div>
     </section>
   )

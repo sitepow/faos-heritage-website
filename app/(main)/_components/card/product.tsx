@@ -23,7 +23,7 @@ import type { FC } from 'react'
 import { StarRating } from '../star-rating'
 
 import { Price } from '@/components/price'
-import { createSlug } from '@/utils/helper'
+import { createSlug, getProductUnit } from '@/utils/helper'
 import { cn } from '@/utils/style'
 
 interface Props {
@@ -107,9 +107,14 @@ const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
       </CardHeader>
 
       <CardBody>
-        <Price price={product?.price} unit='ตัว' />
+        <Price
+          price={product?.price}
+          priceMax={product?.priceMax!}
+          priceMin={product?.priceMin!}
+          unit={getProductUnit(product?.unit)}
+        />
         <h4 className='line-clamp-2 text-lg font-bold'>{product?.name}</h4>
-        <StarRating rate={5} />
+        <StarRating rate={3} />
       </CardBody>
 
       {!hideIcon && (
@@ -130,9 +135,7 @@ const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
 
 const ProductCardSkeleton = () => {
   return (
-    <Skeleton className='size-full rounded-xl supports-[display:flex]:min-w-72'>
-      <div className='h-80 rounded-xl bg-default-300' />
-    </Skeleton>
+    <Skeleton className='h-80 w-full rounded-xl supports-[display:flex]:min-w-72' />
   )
 }
 

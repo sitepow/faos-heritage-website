@@ -2,10 +2,11 @@
 
 import type { Wishlist } from '@prisma/client'
 
+import { getPriceMinMaxFromVariants } from '@/utils/helper'
 import { getPrismaError, prisma } from '@/utils/prisma'
 
-export type GetFavoritesResult = Awaited<ReturnType<typeof getFavorites>>
-export type FavoriteItem = GetFavoritesResult['items'][number]
+type GetFavoritesResult = Awaited<ReturnType<typeof getFavorites>>
+type GetFavoriteResult = GetFavoritesResult['items'][number]
 
 type SortOrder = 'asc' | 'desc'
 
@@ -47,6 +48,12 @@ const getFavorites = async ({
             id: true,
             name: true,
             price: true,
+            unit: true,
+            variants: {
+              select: {
+                price: true,
+              },
+            },
             shortDescription: true,
             images: {
               select: {
@@ -62,7 +69,21 @@ const getFavorites = async ({
     })
 
     const hasNextPage = items.length > limit
-    const resultItems = hasNextPage ? items.slice(0, limit) : items
+
+    const resultItems = (hasNextPage ? items.slice(0, limit) : items).map(
+      (product) => {
+        const { priceMin, priceMax } = getPriceMinMaxFromVariants(
+          product?.product?.variants,
+        )
+
+        return {
+          ...product,
+          priceMin,
+          priceMax,
+        }
+      },
+    )
+
     let nextCursor: string | null = null
 
     if (hasNextPage) {
@@ -155,4 +176,5 @@ const getDashboard = async (userId: string) => {
   }
 }
 
+export type { GetFavoritesResult, GetFavoriteResult }
 export { createFavorite, deleteFavorite, getDashboard, getFavorites }

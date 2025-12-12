@@ -17,8 +17,12 @@ interface Props {
 const SimilarSection: FC<Props> = ({ product }) => {
   const categoryId = product?.categoryId
 
+  const QUERY = {
+    SIMILAR: ['similarProducts', categoryId],
+  }
+
   const { data, isLoading } = useQuery({
-    queryKey: ['similarProducts', categoryId],
+    queryKey: QUERY.SIMILAR,
     queryFn: () => getProducts({ limit: ITEM_PER_PAGE, categoryId }),
     enabled: !!categoryId,
   })

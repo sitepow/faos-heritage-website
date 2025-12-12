@@ -6,57 +6,30 @@ import { getOrderStatus } from '@/utils/helper'
 import { prisma, getPrismaError } from '@/utils/prisma'
 
 export type GetOrdersResult = Awaited<ReturnType<typeof getOrders>>
-export type getOrdersWithoutPaginationResult = Awaited<
-  ReturnType<typeof getOrdersWithoutPagination>
->
+export type GetOrderResult = GetOrdersResult['items'][number]
 
-const getOrdersWithoutPagination = async (limit: number) => {
-  try {
-    return await prisma.order.findMany({
-      take: limit,
-      select: {
-        id: true,
-        status: true,
-        createdAt: true,
-        total: true,
-        user: {
-          select: {
-            name: true,
-          },
-        },
-        items: {
-          select: {
-            quantity: true,
-            product: {
-              select: {
-                name: true,
-                images: {
-                  select: { url: true },
-                },
-              },
-            },
-          },
-        },
-      },
-    })
-  } catch (error) {
-    getPrismaError(error)
-
-    return []
-  }
-}
-
-const getOrders = async (page: number = 1, limit: number = 10) => {
+const getOrders = async (
+  page: number = 1,
+  limit: number = 10,
+  userId?: string,
+) => {
   try {
     const skip = (page - 1) * limit
+
+    const where = {
+      ...(userId && { userId }),
+    }
 
     const [items, total] = await Promise.all([
       prisma.order.findMany({
         skip,
         take: limit,
+        where,
         select: {
           id: true,
           status: true,
+          trackingWebsite: true,
+          trackingNumber: true,
           createdAt: true,
           total: true,
           user: {
@@ -80,7 +53,7 @@ const getOrders = async (page: number = 1, limit: number = 10) => {
         },
         orderBy: { createdAt: 'desc' },
       }),
-      prisma.product.count(),
+      prisma.order.count(),
     ])
 
     return {
@@ -92,10 +65,12 @@ const getOrders = async (page: number = 1, limit: number = 10) => {
     }
   } catch (error) {
     getPrismaError(error)
+
+    return { items: [], total: 0, page, limit, totalPages: 0 }
   }
 }
 
-const getDashboard = async () => {
+const getOrderDashboard = async () => {
   try {
     const [totalOrders, pending, success] = await Promise.all([
       prisma.order.count(),
@@ -119,25 +94,22 @@ const getDashboard = async () => {
 
 const getOrderSum = async () => {
   try {
-    const [orderDelivered, orderPending, orderCancelled, totalOrders] =
-      await Promise.all([
-        prisma.order.aggregate({
-          where: { status: OrderStatus.DELIVERED },
-          _sum: { total: true },
-        }),
-        prisma.order.aggregate({
-          where: { status: OrderStatus.PENDING },
-          _sum: { total: true },
-        }),
-        prisma.order.aggregate({
-          where: { status: OrderStatus.CANCELLED },
-          _sum: { total: true },
-        }),
-        prisma.order.count(),
-      ])
+    const [orderDelivered, orderPending, orderCancelled] = await Promise.all([
+      prisma.order.aggregate({
+        where: { status: OrderStatus.DELIVERED },
+        _sum: { total: true },
+      }),
+      prisma.order.aggregate({
+        where: { status: OrderStatus.PENDING },
+        _sum: { total: true },
+      }),
+      prisma.order.aggregate({
+        where: { status: OrderStatus.CANCELLED },
+        _sum: { total: true },
+      }),
+    ])
 
     return [
-      { name: 'คำสั่งซื้อทั้งหมด', value: totalOrders },
       {
         name: `ยอดชำระทั้งหมด (${getOrderStatus('DELIVERED')})`,
         value: orderDelivered._sum.total ?? 0,
@@ -159,4 +131,4 @@ const getOrderSum = async () => {
   }
 }
 
-export { getOrders, getDashboard, getOrderSum, getOrdersWithoutPagination }
+export { getOrders, getOrderDashboard, getOrderSum }

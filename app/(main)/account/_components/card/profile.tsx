@@ -39,7 +39,9 @@ const ProfileCard = () => {
   const { data: session } = useSession()
   const userId = session?.user?.id
 
-  const QUERY_KEY = ['account', 'user', userId]
+  const QUERY = {
+    USER: ['account', 'user', userId],
+  }
 
   const [filePaths, setFilePaths] = useState<string[]>([])
   const [oldUrl, setOldUrl] = useState<string | null>(null)
@@ -57,7 +59,7 @@ const ProfileCard = () => {
   })
 
   const { data: user, isLoading: isLoadingUser } = useQuery({
-    queryKey: QUERY_KEY,
+    queryKey: QUERY.USER,
     queryFn: () => getUser(userId!),
     enabled: !!userId,
   })
@@ -75,7 +77,7 @@ const ProfileCard = () => {
     useMutation({
       mutationFn: updateUser,
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: QUERY_KEY })
+        queryClient.invalidateQueries({ queryKey: QUERY.USER })
       },
     })
 
@@ -98,7 +100,7 @@ const ProfileCard = () => {
     setDropzoneKey((prev) => prev + 1)
 
     queryClient.removeQueries({
-      queryKey: QUERY_KEY,
+      queryKey: QUERY.USER,
     })
     reset(DEFAULT_VALUES)
   }
@@ -146,6 +148,7 @@ const ProfileCard = () => {
                 isInvalid={!!errors.image}
                 label='URL ของรูปภาพ'
                 value={value ?? ''}
+                variant='bordered'
               />
             )}
           />
@@ -160,6 +163,7 @@ const ProfileCard = () => {
                 isInvalid={!!errors.name}
                 label='ชื่อ'
                 value={value ?? ''}
+                variant='bordered'
               />
             )}
           />
@@ -176,6 +180,7 @@ const ProfileCard = () => {
                 label='ชื่อ'
                 type='email'
                 value={value ?? ''}
+                variant='bordered'
               />
             )}
           />
@@ -191,6 +196,7 @@ const ProfileCard = () => {
                 label='เปลี่ยนรหัสผ่าน'
                 type='password'
                 value={value ?? ''}
+                variant='bordered'
               />
             )}
           />

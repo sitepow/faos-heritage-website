@@ -21,8 +21,12 @@ const CartSection: FC<ComponentProps<typeof Card>> = ({
   const { data: session } = useSession()
   const userId = session?.user?.id
 
+  const QUERY = {
+    CART: ['carts', userId],
+  }
+
   const { data: carts, isLoading: isLoadingCarts } = useQuery({
-    queryKey: ['carts', userId],
+    queryKey: QUERY.CART,
     queryFn: () => getCarts(userId!),
     enabled: !!userId,
   })
@@ -40,7 +44,7 @@ const CartSection: FC<ComponentProps<typeof Card>> = ({
       </CardHeader>
       <CardBody className='flex-col gap-4'>
         {isLoadingCarts &&
-          [...Array(1)].map((_, index) => <CartCardSkeleton key={index} />)}
+          [...Array(1)].map((_) => <CartCardSkeleton key={_} />)}
 
         {!isLoadingCarts && carts?.length === 0 && (
           <div className='flex size-full flex-col items-center justify-center gap-2 text-default-500'>

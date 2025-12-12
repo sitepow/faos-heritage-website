@@ -5,8 +5,10 @@ import type { Prisma } from '@prisma/client'
 
 import { productSchema } from '../schema/product'
 
-import { removeEmptyField } from '@/utils/helper'
+import { getPriceMinMaxFromVariants, removeEmptyField } from '@/utils/helper'
 import { getPrismaError, prisma } from '@/utils/prisma'
+
+type GetProductResult = Awaited<ReturnType<typeof getProduct>>
 
 const createProduct = async (data: ProductInput) => {
   try {
@@ -49,8 +51,6 @@ const deleteProduct = async (productIds: string | string[]) => {
   }
 }
 
-export type GetProductResult = Awaited<ReturnType<typeof getProduct>>
-
 const getProduct = async (productId: string, userId?: string) => {
   try {
     if (!productId) {
@@ -75,6 +75,7 @@ const getProduct = async (productId: string, userId?: string) => {
         shortDescription: true,
         isDigitalProduct: true,
         isDemoProduct: true,
+        unit: true,
         cart: userId
           ? {
               where: { userId },
@@ -124,7 +125,9 @@ const getProduct = async (productId: string, userId?: string) => {
       throw new Error('ไม่พบข้อมูลสินค้า')
     }
 
-    return product
+    const { priceMin, priceMax } = getPriceMinMaxFromVariants(product.variants)
+
+    return { ...product, priceMin, priceMax }
   } catch (error) {
     getPrismaError(error)
   }
@@ -142,6 +145,7 @@ const getProducts = async (page: number = 1, limit: number = 10) => {
           id: true,
           name: true,
           price: true,
+          unit: true,
           isDigitalProduct: true,
           stockQuantity: true,
           images: {
@@ -203,7 +207,7 @@ const updateProduct = async (data: ProductInput) => {
   }
 }
 
-const getDashboard = async () => {
+const getProductDashboard = async () => {
   try {
     const [totalProducts, inStock, outOfStock] = await Promise.all([
       prisma.product.count(),
@@ -217,18 +221,19 @@ const getDashboard = async () => {
 
     return [
       { name: 'สินค้าทั้งหมด', value: totalProducts },
-      { name: 'พร้อมขาย (ยังมีสินค้า)', value: inStock },
-      { name: 'ไม่พร้อมขาย (สินค้าหมด)', value: outOfStock },
+      { name: 'สินค้าทั้งหมด (พร้อมขาย)', value: inStock },
+      { name: 'สินค้าทั้งหมด (ไม่พร้อมขาย)', value: outOfStock },
     ]
   } catch (error) {
     getPrismaError(error)
   }
 }
 
+export type { GetProductResult }
 export {
   createProduct,
   deleteProduct,
-  getDashboard,
+  getProductDashboard,
   getProduct,
   getProducts,
   updateProduct,

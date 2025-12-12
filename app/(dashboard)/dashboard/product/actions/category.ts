@@ -8,13 +8,16 @@ import { categorySchema } from '../schema/category'
 import { removeEmptyField } from '@/utils/helper'
 import { getPrismaError, prisma } from '@/utils/prisma'
 
-const SELECTED_FIELD = {
+const EXECUTE_FIELD = {
   id: true,
   name: true,
   slug: true,
   isActive: true,
   image: true,
 }
+
+type GetCategoryResult = Awaited<ReturnType<typeof getCategory>>
+type GetCategoriesResult = Awaited<ReturnType<typeof getCategories>>
 
 const createCategory = async (data: CategoryInput) => {
   try {
@@ -37,12 +40,10 @@ const createCategory = async (data: CategoryInput) => {
   }
 }
 
-export type GetCategoriesResult = Awaited<ReturnType<typeof getCategories>>
-
 const getCategories = async () => {
   try {
     return prisma.category.findMany({
-      select: SELECTED_FIELD,
+      select: EXECUTE_FIELD,
       orderBy: { name: 'desc' },
     })
   } catch (error) {
@@ -52,8 +53,6 @@ const getCategories = async () => {
   }
 }
 
-export type GetCategoryResult = Awaited<ReturnType<typeof getCategory>>
-
 const getCategory = async (categoryId: string) => {
   try {
     if (!categoryId) {
@@ -62,7 +61,7 @@ const getCategory = async (categoryId: string) => {
 
     const variant = await prisma.category.findUnique({
       where: { id: categoryId },
-      select: SELECTED_FIELD,
+      select: EXECUTE_FIELD,
     })
 
     if (!variant) {
@@ -119,6 +118,7 @@ const deleteCategory = async (categoryIds: string | string[]) => {
   }
 }
 
+export type { GetCategoryResult, GetCategoriesResult }
 export {
   createCategory,
   deleteCategory,

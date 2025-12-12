@@ -30,7 +30,7 @@ import { deleteImage, getImages } from '../../actions/image'
 import { useProductStore } from '../../store'
 import { ImageForm } from '../form/image'
 
-import { ModalDelete } from '@/components/modal/delete'
+import { ModalConfirm } from '@/components/modal/confirm'
 
 const ImageManager = () => {
   const queryClient = useQueryClient()
@@ -42,13 +42,16 @@ const ImageManager = () => {
     setState,
     imageId,
   } = useProductStore()
-  const QUERY_KEY = ['dashboard', 'modal', 'images', productId]
+
+  const QUERY = {
+    IMAGES: ['dashboard', 'images', 'modal', productId],
+  }
 
   const { isOpen: isDeleteOpen, onOpenChange: onOpenDeleteChange } =
     useDisclosure()
 
   const { data: images, isLoading: isLoadingImages } = useQuery({
-    queryKey: QUERY_KEY,
+    queryKey: QUERY.IMAGES,
     queryFn: () => getImages(productId!),
     enabled: !!productId && isImageManagerOpen,
   })
@@ -58,7 +61,7 @@ const ImageManager = () => {
       mutationFn: deleteImage,
       onSuccess: async () => {
         queryClient.invalidateQueries({
-          queryKey: QUERY_KEY,
+          queryKey: QUERY.IMAGES,
         })
         onOpenDeleteChange()
         setState({ imageId: null })
@@ -71,7 +74,7 @@ const ImageManager = () => {
   return (
     <>
       <ImageForm />
-      <ModalDelete
+      <ModalConfirm
         isOpen={isDeleteOpen}
         isPending={isPendingDeteleImage}
         onConfirm={() => {
@@ -85,6 +88,7 @@ const ImageManager = () => {
         isDismissable={false}
         isOpen={isImageManagerOpen}
         scrollBehavior='inside'
+        size='xl'
         onOpenChange={onOpenImageManagerChange}
       >
         <ModalContent>

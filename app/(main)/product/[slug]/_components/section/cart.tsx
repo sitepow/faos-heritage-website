@@ -21,7 +21,8 @@ import type { GetProductResult } from '@/app/(dashboard)/dashboard/product/actio
 import { createFavorite } from '@/app/(main)/account/actions/favorite'
 import { createCart } from '@/app/(main)/cart/actions/cart'
 import { Price } from '@/components/price'
-import { ACCOUNT_TABS } from '@/utils/const'
+import { ACCOUNT_TAB } from '@/utils/const'
+import { getProductUnit } from '@/utils/helper'
 import { cn } from '@/utils/style'
 
 const CartSection: FC<
@@ -31,170 +32,173 @@ const CartSection: FC<
 > = ({ className, product, ...props }) => {
   const router = useRouter()
   const queryClient = useQueryClient()
-  const { data: session } = useSession()
+  const [variantId, setVariantId] = useState<string | null>(null)
 
-  const [selectedVariantId, setSelectedVariantId] = useState<string | null>(
-    null,
-  )
+  const { data: session } = useSession()
+  const userId = session?.user?.id
+
+  const init = {
+    variants: product?.variants,
+    wishlist: product?.wishlist,
+    cart: product?.cart,
+    defaultVariantId: product?.cart?.[0]?.variantId,
+    price: product?.price,
+    stockQuantity: product?.stockQuantity,
+  }
+  const hasVariants = Boolean(init?.variants?.length)
+  const hasFavorite = Boolean(init?.wishlist?.length)
 
   useEffect(() => {
-    if (product?.cart?.[0]?.variantId) {
-      setSelectedVariantId(product.cart[0].variantId)
-    }
-  }, [product?.cart])
+    const variantId = init?.defaultVariantId
 
-  const userId = session?.user?.id
-  const hasVariants = product?.variants && product.variants.length > 0
-  const isFavorite = product?.wishlist?.length !== 0
+    if (variantId) setVariantId(variantId)
+  }, [init?.cart])
+
+  useEffect(() => {
+    if (!hasVariants || variantId) return
+
+    const variant = init?.variants?.[0]?.id
+
+    if (variant) setVariantId(variant)
+  }, [hasVariants, init?.variants, variantId])
 
   const currentVariant = useMemo(() => {
-    if (!selectedVariantId || !product?.variants) return undefined
+    return init?.variants?.find((variant) => variant.id === variantId)
+  }, [init?.variants, variantId])
 
-    return product.variants.find((variant) => variant.id === selectedVariantId)
-  }, [product?.variants, selectedVariantId])
+  const currentPrice = currentVariant?.price ?? init?.price
+  const currentStockQuantity =
+    currentVariant?.stockQuantity ?? init?.stockQuantity ?? 0
 
-  const price = currentVariant?.price ?? product?.price
-  const stockQuantity = currentVariant?.stockQuantity ?? product?.stockQuantity
+  const isOutOfStock = currentStockQuantity <= 0
+  const priceMin = variantId ? null : product?.priceMin
+  const priceMax = variantId ? null : product?.priceMax
 
-  const isOutOfStock = (stockQuantity ?? 0) <= 0
+  const QUERY = {
+    PRODUCT: ['product', product?.id],
+    CART: ['carts', userId],
+    CART_COUNT: ['carts', 'count', userId],
+    FAVORITE: ['account', 'favorites', userId],
+    FAVORITE_COUNT: ['favorites', 'count', userId],
+  }
 
-  const CART_QUERY_KEY = ['carts', userId]
-  const CART_COUT_QUERY_KEY = ['carts', 'count', userId]
-  const FAVORITE_QUERY_KEY = ['account', 'favorites', userId]
-  const FAVORITE_COUNT_QUERY_KEY = ['favorites', 'count', userId]
+  const GOTO = {
+    CART: () => router.push('/cart'),
+    LOGIN: () => router.push('/login'),
+    FAVORITE: () => router.push(`/account?tab=${ACCOUNT_TAB.FAVORITE}`),
+  }
 
-  const goToCart = () => router.push('/cart')
-  const goToFavorite = () =>
-    router.push(`/account?tab=${ACCOUNT_TABS?.FAVORITE}`)
-  const goToLogin = () => router.push('/login')
+  const requireAuthAndProduct = (actionName: string): boolean => {
+    if (!userId) {
+      toast.error(`กรุณาเข้าสู่ระบบก่อน${actionName}`)
+      GOTO.LOGIN()
+
+      return false
+    }
+    if (!product?.id) {
+      toast.error('ไม่พบข้อมูลสินค้า')
+
+      return false
+    }
+
+    return true
+  }
 
   const { mutate: mutateCreateCart, isPending: isPendingCreateCart } =
     useMutation({
       mutationFn: () => {
-        if (!product || !userId)
-          throw new Error('โปรดระบุรหัสสินค้าหรือรหัสผู้ใช้งาน!')
+        if (!product || !userId) throw new Error('ข้อมูลไม่ครบ')
 
         return createCart({
-          userId: userId,
+          userId,
           productId: product.id,
-          variantId: selectedVariantId!,
+          variantId: variantId!,
         })
       },
-      onSuccess: async () => {
+      onSettled: async () => {
         await Promise.all([
-          queryClient.invalidateQueries({ queryKey: CART_QUERY_KEY }),
-          queryClient.invalidateQueries({ queryKey: CART_COUT_QUERY_KEY }),
+          queryClient.invalidateQueries({ queryKey: QUERY.CART }),
+          queryClient.invalidateQueries({ queryKey: QUERY.CART_COUNT }),
+          queryClient.invalidateQueries({ queryKey: QUERY.PRODUCT }),
         ])
-        goToCart()
-      },
-      onError: async () => {
-        await Promise.all([
-          queryClient.invalidateQueries({ queryKey: CART_QUERY_KEY }),
-          queryClient.invalidateQueries({ queryKey: CART_COUT_QUERY_KEY }),
-        ])
-        goToCart()
+        GOTO.CART()
       },
     })
 
   const { mutate: mutateCreateFavorite, isPending: isPendingCreateFavorite } =
     useMutation({
       mutationFn: () => {
-        if (!product || !userId)
-          throw new Error('โปรดระบุรหัสสินค้าหรือรหัสผู้ใช้งาน!')
+        if (!product || !userId) throw new Error('ข้อมูลไม่ครบ')
 
         return createFavorite(userId, product.id)
       },
-      onSuccess: () => {
-        Promise.all([
-          queryClient.invalidateQueries({ queryKey: FAVORITE_QUERY_KEY }),
-          queryClient.invalidateQueries({ queryKey: FAVORITE_COUNT_QUERY_KEY }),
+      onSettled: async () => {
+        await Promise.all([
+          queryClient.invalidateQueries({ queryKey: QUERY.FAVORITE }),
+          queryClient.invalidateQueries({ queryKey: QUERY.FAVORITE_COUNT }),
         ])
-        goToFavorite()
-      },
-      onError: () => {
-        goToFavorite()
+        GOTO.FAVORITE()
       },
     })
 
   const onSubmitCart = () => {
-    if (!userId) {
-      toast.error('กรุณาเข้าสู่ระบบก่อนเพิ่มสินค้าเข้าตระกร้า')
-      goToLogin()
-
-      return
-    }
-
-    if (!product || !product.id) {
-      toast.error('ไม่พบข้อมูลสินค้า')
-
-      return
-    }
-
-    if (isOutOfStock) {
-      toast.error('สินค้าหมดสต็อก')
-
-      return
-    }
-
+    if (!requireAuthAndProduct('เพิ่มสินค้าเข้าตระกร้า')) return
+    if (isOutOfStock) return toast.error('สินค้าหมดสต็อก')
     mutateCreateCart()
   }
 
   const onSubmitFavorite = () => {
-    if (!userId) {
-      toast.error('กรุณาเข้าสู่ระบบก่อนเพิ่มสินค้าเข้ารายการโปรด')
-      goToLogin()
-
-      return
-    }
-
-    if (!product || !product.id) {
-      toast.error('ไม่พบข้อมูลสินค้า')
-
-      return
-    }
-
+    if (!requireAuthAndProduct('เพิ่มสินค้าเข้ารายการโปรด')) return
     mutateCreateFavorite()
   }
+
+  const productUnit = getProductUnit(product?.unit!)
 
   return (
     <Card className={cn(className, 'h-fit')} {...props}>
       <CardHeader className='flex flex-col items-start gap-4'>
-        {price && <Price price={price} />}
+        {currentPrice && (
+          <Price
+            price={currentPrice}
+            priceMax={priceMax!}
+            priceMin={priceMin!}
+            unit={productUnit}
+          />
+        )}
       </CardHeader>
 
       <CardBody className='flex-wrap gap-4'>
         <Alert
           className='text-start'
           description={
-            stockQuantity === 0
-              ? `สินค้านี้หมดชั่วคราว โปรดดูสินค้าใกล้เคียง/ทดแทน`
-              : `สินค้าพร้อมจำหน่าย มีจำนวนเพียง ${stockQuantity ?? 0} ชิ้นในสต็อก`
+            isOutOfStock
+              ? 'สินค้านี้หมดชั่วคราว โปรดดูสินค้าใกล้เคียง/ทดแทน'
+              : `สินค้าพร้อมจำหน่าย มีจำนวน ${currentStockQuantity} ${productUnit} ในสต็อก`
           }
           variant='bordered'
         />
 
         {hasVariants && (
           <Select
+            disallowEmptySelection
             fullWidth
-            items={product.variants!}
+            items={product!.variants!}
             label='ตัวเลือกสินค้า'
             placeholder='เลือกตัวเลือกสินค้า'
-            selectedKeys={selectedVariantId ? [selectedVariantId] : []}
-            variant='faded'
+            selectedKeys={variantId ? [variantId] : []}
+            variant='bordered'
             onSelectionChange={(keys) =>
-              setSelectedVariantId(Array.from(keys)[0] as string)
+              setVariantId(Array.from(keys)[0] as string)
             }
           >
-            {(variant) => (
-              <SelectItem key={variant.id}>{variant.name}</SelectItem>
-            )}
+            {(v) => <SelectItem key={v.id}>{v.name}</SelectItem>}
           </Select>
         )}
 
-        <div className='flex flex-col gap-4 sm:flex-row'>
+        <div className='flex flex-col gap-2 sm:flex-row'>
           <Button
             fullWidth
-            isDisabled={isPendingCreateFavorite || isFavorite}
+            isDisabled={isPendingCreateFavorite || hasFavorite}
             isLoading={isPendingCreateFavorite}
             startContent={
               !isPendingCreateFavorite && (
@@ -204,12 +208,14 @@ const CartSection: FC<
             variant='faded'
             onClick={onSubmitFavorite}
           >
-            {isFavorite ? 'อยู่ในรายการโปรดนี้แล้ว' : 'เพิ่มในรายการโปรด'}
+            {hasFavorite ? 'อยู่ในรายการโปรดแล้ว' : 'เพิ่มในรายการโปรด'}
           </Button>
 
           <Button
             fullWidth
-            isDisabled={isPendingCreateCart || isOutOfStock}
+            isDisabled={
+              isPendingCreateCart || isOutOfStock || (hasVariants && !variantId)
+            }
             isLoading={isPendingCreateCart}
             startContent={
               !isPendingCreateCart && (

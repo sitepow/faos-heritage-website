@@ -13,7 +13,7 @@ import { ProfileCard } from './card/profile'
 
 import { useIsLg } from '@/hooks/useBreakpoints'
 import { useQueryParams } from '@/hooks/useQueryParams'
-import { ACCOUNT_TABS } from '@/utils/const'
+import { ACCOUNT_TAB } from '@/utils/const'
 
 const AccountLayout = () => {
   const { data: session } = useSession()
@@ -21,9 +21,9 @@ const AccountLayout = () => {
   const isLg = useIsLg()
   const { setQueryParam, getQueryParam } = useQueryParams()
 
-  const tabParam = getQueryParam('tab') as ACCOUNT_TABS | null
-  const [selectedTabKey, setSelectedTabKey] = useState<ACCOUNT_TABS>(
-    tabParam ?? ACCOUNT_TABS.ACCOUNT,
+  const tabParam = getQueryParam('tab') as ACCOUNT_TAB | null
+  const [selectedTabKey, setSelectedTabKey] = useState<ACCOUNT_TAB>(
+    tabParam ?? ACCOUNT_TAB.ACCOUNT,
   )
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const AccountLayout = () => {
   }, [selectedTabKey, tabParam])
 
   const handleTabChange = (key: React.Key) => {
-    const tabKey = key as ACCOUNT_TABS
+    const tabKey = key as ACCOUNT_TAB
 
     setSelectedTabKey(tabKey)
     setQueryParam('tab', tabKey)
@@ -64,21 +64,21 @@ const AccountLayout = () => {
             variant='bordered'
             onSelectionChange={handleTabChange}
           >
-            <Tab key={ACCOUNT_TABS.ACCOUNT} title='จัดการกับบัญชีของฉัน'>
+            <Tab key={ACCOUNT_TAB.ACCOUNT} title='จัดการกับบัญชีของฉัน'>
               <AccountCard
-                onclick={() => handleTabChange(ACCOUNT_TABS.PROFILE)}
+                onclick={() => handleTabChange(ACCOUNT_TAB.PROFILE)}
               />
             </Tab>
-            <Tab key={ACCOUNT_TABS.ORDER} title='รายการคำสั่งซื้อของฉัน'>
+            <Tab key={ACCOUNT_TAB.ORDER} title='รายการคำสั่งซื้อของฉัน'>
               <OrderCard />
             </Tab>
-            <Tab key={ACCOUNT_TABS.FAVORITE} title='รายการโปรด'>
+            <Tab key={ACCOUNT_TAB.FAVORITE} title='รายการโปรด'>
               <FavoriteCard />
             </Tab>
-            <Tab key={ACCOUNT_TABS.PROFILE} title='แก้ไขข้อมูลส่วนตัว'>
+            <Tab key={ACCOUNT_TAB.PROFILE} title='แก้ไขข้อมูลส่วนตัว'>
               <ProfileCard />
             </Tab>
-            <Tab key={ACCOUNT_TABS.ADDRESS} title='จัดการที่อยู่ของฉัน'>
+            <Tab key={ACCOUNT_TAB.ADDRESS} title='จัดการที่อยู่ของฉัน'>
               <AddressCard />
             </Tab>
           </Tabs>

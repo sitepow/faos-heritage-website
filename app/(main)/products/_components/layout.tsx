@@ -27,16 +27,19 @@ interface Props {
 
 const ProductLayout: FC<Props> = ({ initialProducts, itemPerPage }) => {
   const [selectedKeys, setSelectedKeys] = useState(new Set(['newest']))
-
   const sortBy = useMemo(() => {
     const key = Array.from(selectedKeys)[0] as keyof typeof SORT_MAP
 
     return SORT_MAP[key]
   }, [selectedKeys])
 
+  const QUERY = {
+    PRODUCTS: ['products', sortBy?.label, sortBy?.order],
+  }
+
   const { data, isLoading, fetchNextPage, isFetchingNextPage, hasNextPage } =
     useInfiniteQuery<GetProductsResult>({
-      queryKey: ['products', sortBy?.label, sortBy?.order],
+      queryKey: QUERY.PRODUCTS,
       initialPageParam: null,
       queryFn: ({ pageParam }) =>
         getProducts({

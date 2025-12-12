@@ -70,6 +70,28 @@ model Category {
     updatedAt DateTime @updatedAt
 }
 
+enum ProductUnit {
+  PIECE
+  ITEM
+  SET
+  BOX
+  PACK
+  BAG
+  BOTTLE
+  CAN
+  KG
+  G
+  L
+  ML
+  PAIR
+  ROLL
+  SHEET
+  UNIT
+  CAR
+  HOUSE
+}
+
+
 model Product {
     id             String  @id @default(cuid())
     name           String  @unique
@@ -84,6 +106,7 @@ model Product {
     stockQuantity  Int     @default(0)
     lowStockAlert  Int     @default(10)
     weight         Float
+    unit ProductUnit @default(UNIT)
 
     categoryId String?
     category   Category? @relation(fields: [categoryId], references: [id])
@@ -185,6 +208,7 @@ model Order {
     paidAt        DateTime?
 
     shippingMethod String?
+    trackingWebsite String?
     trackingNumber String?
     shippedAt      DateTime?
     deliveredAt    DateTime?
@@ -226,6 +250,7 @@ model OrderItem {
     id          String  @id @default(cuid())
     orderId     String
     productId   String?
+    variantId   String?
     productName String
     sku         String?
     quantity    Int

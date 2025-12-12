@@ -7,7 +7,7 @@ import { variantSchema, type VariantInput } from '../schema/variant'
 import { removeEmptyField } from '@/utils/helper'
 import { getPrismaError, prisma } from '@/utils/prisma'
 
-const SELECTED_FIELD = {
+const EXECUTE_FIELD = {
   id: true,
   name: true,
   sku: true,
@@ -41,7 +41,7 @@ const getVariants = async (productId: string) => {
   try {
     return prisma.productVariant.findMany({
       where: { productId },
-      select: SELECTED_FIELD,
+      select: EXECUTE_FIELD,
       orderBy: { name: 'desc' },
     })
   } catch (error) {
@@ -57,7 +57,7 @@ const getVariant = async (variantId: string) => {
 
     const variant = await prisma.productVariant.findUnique({
       where: { id: variantId },
-      select: SELECTED_FIELD,
+      select: EXECUTE_FIELD,
     })
 
     if (!variant) {

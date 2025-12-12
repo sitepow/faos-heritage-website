@@ -5,7 +5,7 @@ import type { FC } from 'react'
 import { ProductLayout } from './_components/layout'
 
 import { getProduct } from '@/app/(dashboard)/dashboard/product/actions/product'
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import { NEXT_AUTH_OPTIONS } from '@/app/api/auth/[...nextauth]/route'
 import { NotFound } from '@/components/not-found'
 import { getIdFromSlug } from '@/utils/helper'
 
@@ -16,7 +16,7 @@ interface Props {
 const Product: FC<Props> = async ({ params }) => {
   const { slug } = await params
 
-  const session = await getServerSession(authOptions)
+  const session = await getServerSession(NEXT_AUTH_OPTIONS)
   const userId = session?.user?.id
 
   const slugStr = Array.isArray(slug) ? slug[0] : slug

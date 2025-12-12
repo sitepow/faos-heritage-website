@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 
 import type { NextRequest } from 'next/server'
 
-export function middleware(request: NextRequest) {
+const middleware = (request: NextRequest) => {
   const { pathname } = request.nextUrl
 
   const sessionToken =
@@ -47,3 +47,5 @@ export const config = {
     '/((?!api|_next/static|_next/image|favicon.ico|.*\\..*|_next).*)',
   ],
 }
+
+export { middleware }

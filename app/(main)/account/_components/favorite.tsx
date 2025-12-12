@@ -5,25 +5,28 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { ShoppingBagIcon, TrashIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 
-import type { FavoriteItem } from '../actions/favorite'
+import type { GetFavoriteResult } from '../actions/favorite'
 import type { ComponentProps, FC } from 'react'
 
 import { createCart } from '../../cart/actions/cart'
 import { deleteFavorite } from '../actions/favorite'
 
-import { ModalDelete } from '@/components/modal/delete'
+import { ModalConfirm } from '@/components/modal/confirm'
 import { Price } from '@/components/price'
-import { createSlug } from '@/utils/helper'
+import { createSlug, getProductUnit } from '@/utils/helper'
 import { cn } from '@/utils/style'
 
 type Props = ComponentProps<typeof Card> & {
-  favorite: FavoriteItem
+  favorite: GetFavoriteResult
 }
 
 const Favorite: FC<Props> = ({ className, favorite, ...props }) => {
   const queryClient = useQueryClient()
+  const router = useRouter()
+
   const {
     isOpen: isOpenDeleteFavorite,
     onOpenChange: onOpenDeleteFavoriteChange,
@@ -33,20 +36,30 @@ const Favorite: FC<Props> = ({ className, favorite, ...props }) => {
   const userId = session?.user?.id
   const productId = favorite?.product?.id
 
-  const FAVORITE_QUERY_KEY = ['account', 'favorites', userId]
-  const CART_COUNT_QUERY_KEY = ['carts', 'count', userId]
-  const FAVORITE_COUNT_QUERY_KEY = ['favorites', 'count', userId]
+  const QUERY = {
+    FAVORITES: ['account', 'favorites', userId],
+    CART: ['carts', userId],
+    CART_COUNT: ['carts', 'count', userId],
+  }
 
-  const onRefetch = () => {
-    queryClient.invalidateQueries({
-      queryKey: CART_COUNT_QUERY_KEY,
-    })
-    queryClient.invalidateQueries({
-      queryKey: FAVORITE_QUERY_KEY,
-    })
-    queryClient.invalidateQueries({
-      queryKey: FAVORITE_COUNT_QUERY_KEY,
-    })
+  const onRefetch = async () => {
+    await Promise.all([
+      queryClient.invalidateQueries({
+        queryKey: QUERY.CART,
+      }),
+      queryClient.invalidateQueries({
+        queryKey: QUERY.CART_COUNT,
+      }),
+      queryClient.invalidateQueries({
+        queryKey: QUERY.FAVORITES,
+      }),
+    ])
+
+    goTo.cart()
+  }
+
+  const goTo = {
+    cart: () => router.push('/cart'),
   }
 
   const { mutate: mutateCreateCart, isPending: isPendingCreateCart } =
@@ -74,7 +87,7 @@ const Favorite: FC<Props> = ({ className, favorite, ...props }) => {
 
   return (
     <>
-      <ModalDelete
+      <ModalConfirm
         isOpen={isOpenDeleteFavorite}
         isPending={isPendingDeleteFavorite}
         onConfirm={() => {
@@ -119,7 +132,12 @@ const Favorite: FC<Props> = ({ className, favorite, ...props }) => {
                 <span className='text-sm text-default-500'>
                   รหัสสินค้า : {favorite?.product?.id}
                 </span>
-                <Price price={favorite?.product?.price} />
+                <Price
+                  price={favorite?.product?.price}
+                  priceMax={favorite?.priceMax!}
+                  priceMin={favorite?.priceMin!}
+                  unit={getProductUnit(favorite?.product?.unit)}
+                />
               </div>
             </div>
 

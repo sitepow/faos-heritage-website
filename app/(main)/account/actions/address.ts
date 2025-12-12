@@ -7,7 +7,7 @@ import { addressSchema, type AddressInput } from '../schema/address'
 import { removeEmptyField } from '@/utils/helper'
 import { getPrismaError, prisma } from '@/utils/prisma'
 
-const SELECTED_FIELD = {
+const EXECUTE_FIELD = {
   id: true,
   name: true,
   userId: true,
@@ -20,7 +20,7 @@ const SELECTED_FIELD = {
   postalCode: true,
 }
 
-export type GetAddressResult = Awaited<ReturnType<typeof getAddress>>
+type GetAddressResult = Awaited<ReturnType<typeof getAddress>>
 
 const createAddress = async (data: AddressInput) => {
   try {
@@ -51,7 +51,7 @@ const getAddress = async (userId: string) => {
 
     const address = await prisma.address.findUnique({
       where: { userId: userId },
-      select: SELECTED_FIELD,
+      select: EXECUTE_FIELD,
     })
 
     if (!address) {
@@ -88,4 +88,5 @@ const updateAddress = async (data: AddressInput) => {
   }
 }
 
+export type { GetAddressResult }
 export { createAddress, updateAddress, getAddress }

@@ -36,22 +36,26 @@ const CategoryLayout: FC<Props> = ({
   itemPerPage,
 }) => {
   const [selectedKeys, setSelectedKeys] = useState(new Set(['newest']))
-
   const sortBy = useMemo(() => {
     const key = Array.from(selectedKeys)[0] as keyof typeof SORT_MAP
 
     return SORT_MAP[key]
   }, [selectedKeys])
 
+  const QUERY = {
+    CATEGORY: ['category', categoryId],
+    PRODUCTS: ['products', categoryId, , sortBy?.label, sortBy?.order],
+  }
+
   const { data: category, isLoading: isLoadingCategory } = useQuery({
-    queryKey: ['category', categoryId],
+    queryKey: QUERY.CATEGORY,
     queryFn: () => getCategory(categoryId),
     enabled: !!categoryId,
   })
 
   const { data, isLoading, fetchNextPage, isFetchingNextPage, hasNextPage } =
     useInfiniteQuery<GetProductsResult>({
-      queryKey: ['products', categoryId, , sortBy?.label, sortBy?.order],
+      queryKey: QUERY.PRODUCTS,
       initialPageParam: null,
       queryFn: ({ pageParam }) =>
         getProducts({
@@ -77,8 +81,8 @@ const CategoryLayout: FC<Props> = ({
   })
 
   const totalItems = data?.pages?.[0]?.totalCount ?? 0
-  const currentItems = data?.pages?.flatMap((page) => page.items) ?? []
-  const currentItemCount = currentItems.length
+  const items = data?.pages?.flatMap((page) => page.items) ?? []
+  const itemCount = items.length
 
   if (isLoading)
     return (
@@ -115,7 +119,7 @@ const CategoryLayout: FC<Props> = ({
 
       <div className='flex w-full flex-wrap items-center justify-center gap-3 sm:justify-between'>
         <span className='text-primary-website'>
-          สินค้ารายการที่ 1 – {currentItemCount} จากทั้งหมด {totalItems} รายการ
+          สินค้ารายการที่ 1 – {itemCount} จากทั้งหมด {totalItems} รายการ
         </span>
 
         <Dropdown>
@@ -157,7 +161,7 @@ const CategoryLayout: FC<Props> = ({
         isFetchingNextPage={isFetchingNextPage}
         isLoading={isLoading}
         itemPerPage={itemPerPage}
-        items={currentItems}
+        items={items}
       />
     </section>
   )

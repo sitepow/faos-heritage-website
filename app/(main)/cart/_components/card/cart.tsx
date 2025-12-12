@@ -19,101 +19,113 @@ import {
   type FC,
 } from 'react'
 
-import { updateCart, type GetCartsResult } from '../../actions/cart'
+import type { GetCartResult } from '../../actions/cart'
+
+import { updateCart } from '../../actions/cart'
 import { useCartStore } from '../../store'
 
-import { ModalDelete } from '@/components/modal/delete'
-import { createSlug } from '@/utils/helper'
+import { ModalConfirm } from '@/components/modal/confirm'
+import { createSlug, getProductUnit } from '@/utils/helper'
 import { formatCurrency, formatNumber } from '@/utils/number'
 import { cn } from '@/utils/style'
 
 const CartCard: FC<
   ComponentProps<typeof Card> & {
-    cart: NonNullable<GetCartsResult>[number]
+    cart: GetCartResult
   }
 > = ({ className, cart, ...props }) => {
   const queryClient = useQueryClient()
+
   const { data: session } = useSession()
   const { setState, onOpenDeleteChange } = useCartStore()
-
-  const [selectedVariantId, setSelectedVariantId] = useState<string | null>(
-    null,
-  )
-
-  useEffect(() => {
-    if (cart?.variantId) {
-      setSelectedVariantId(cart?.variantId)
-    }
-  }, [cart?.variantId])
-
-  const [qty, setQty] = useState(cart?.quantity)
-
-  const userId = session?.user?.id
-  const PRODUCT_QUERY_KEY = ['product', cart?.product?.id]
-  const CART_QUERY_KEY = ['carts', userId]
-  const CART_COUNT_QUERY_KEY = ['carts', 'count', userId]
-
   const { isOpen: isDeleteQtyOpen, onOpenChange: onOpenDeleteQtyChange } =
     useDisclosure()
+  const [variantId, setVariantId] = useState<string | null>(null)
+  const [quantity, setQuantity] = useState(cart?.quantity)
+
+  const userId = session?.user?.id
+  const init = {
+    cartId: cart?.id,
+    variantId: cart?.variantId,
+    price: cart?.product?.price,
+    variants: cart?.product?.variants,
+    unit: cart?.product?.unit,
+    stockQuantity: cart?.product?.stockQuantity,
+    quantity: cart?.quantity,
+    productId: cart?.product?.id,
+    productName: cart?.product?.name,
+    productImages: cart?.product?.images,
+  }
+  const productUnit = getProductUnit(init.unit)
+
+  useEffect(() => {
+    if (init.variantId) {
+      setVariantId(init.variantId)
+    }
+  }, [init.variantId])
+
+  const QUERY = {
+    PRODUCT: ['product', init.productId],
+    CART: ['carts', userId],
+    CART_COUNT: ['carts', 'count', userId],
+  }
 
   const { mutate: mutateUpdateCart, isPending: isPendingUpdateCart } =
     useMutation({
       mutationFn: updateCart,
       onSuccess: () => {
         Promise.all([
-          queryClient.invalidateQueries({ queryKey: PRODUCT_QUERY_KEY }),
-          queryClient.invalidateQueries({ queryKey: CART_QUERY_KEY }),
-          queryClient.invalidateQueries({ queryKey: CART_COUNT_QUERY_KEY }),
+          queryClient.invalidateQueries({ queryKey: QUERY.PRODUCT }),
+          queryClient.invalidateQueries({ queryKey: QUERY.CART }),
+          queryClient.invalidateQueries({ queryKey: QUERY.CART_COUNT }),
         ])
       },
     })
 
   const currentVariant = useMemo(() => {
-    return cart?.product?.variants?.find(
-      (variant) => variant?.id === selectedVariantId,
-    )
-  }, [cart?.product?.variants, selectedVariantId])
+    return init.variants?.find((variant) => variant?.id === variantId)
+  }, [init.variants, variantId])
 
-  const price = currentVariant?.price ?? cart?.product?.price
-  const stockQuantity =
-    currentVariant?.stockQuantity ?? cart?.product?.stockQuantity
+  const currentPrice = currentVariant?.price ?? init.price
+  const currentStockQuantity =
+    currentVariant?.stockQuantity ?? init.stockQuantity
 
   useEffect(() => {
-    setQty(cart?.quantity)
-  }, [cart?.quantity])
+    setQuantity(init.quantity)
+  }, [init.quantity])
 
   useEffect(() => {
-    if (!cart?.id || qty === cart?.quantity) return
+    if (!init.cartId || quantity === init.quantity) return
 
     const handler = setTimeout(() => {
-      if (qty === 0) {
+      if (quantity === 0) {
         onOpenDeleteQtyChange()
 
         return
       }
 
       mutateUpdateCart({
-        cartId: cart.id,
-        quantity: Number(qty),
-        variantId: selectedVariantId!,
+        cartId: init.cartId,
+        quantity: Number(quantity),
+        variantId: variantId!,
       })
     }, 500)
 
     return () => clearTimeout(handler)
   }, [
-    cart.id,
+    init.cartId,
     mutateUpdateCart,
     onOpenDeleteQtyChange,
-    qty,
-    cart?.quantity,
-    selectedVariantId,
+    quantity,
+    init.quantity,
+    variantId,
   ])
 
   const onQuantityChange = (value: unknown) => {
     const newQty = Number(value)
 
-    if (newQty > stockQuantity) {
-      setQty(stockQuantity)
+    if (newQty > currentStockQuantity) {
+      setQuantity(currentStockQuantity)
 
       return
     }
@@ -124,38 +136,36 @@ const CartCard: FC<
       return
     }
 
-    setQty(newQty)
+    setQuantity(newQty)
   }
 
   const onVariantChange = (keys: Iterable<unknown> | ArrayLike<unknown>) => {
     const selected = Array.from(keys)[0]
-    const newVariantId = String(selected)
+    const variantId = String(selected)
 
-    setSelectedVariantId(newVariantId)
-    if (cart?.id && qty) {
+    setVariantId(variantId)
+    if (init.cartId && quantity) {
       mutateUpdateCart({
-        cartId: cart.id,
-        quantity: Number(qty),
-        variantId: newVariantId!,
+        cartId: init.cartId,
+        quantity: Number(quantity),
+        variantId: variantId!,
       })
     }
   }
 
-  const onModalDeleteConfirm = () => {
-    mutateUpdateCart({ cartId: cart?.id!, quantity: 0 })
-  }
-
   const onDeleteCart = () => {
-    setState({ cartId: cart?.id })
+    setState({ cartId: init.cartId })
     onOpenDeleteChange()
   }
 
   return (
     <>
-      <ModalDelete
+      <ModalConfirm
         isOpen={isDeleteQtyOpen}
         isPending={isPendingUpdateCart}
-        onConfirm={onModalDeleteConfirm}
+        onConfirm={() =>
+          mutateUpdateCart({ cartId: init.cartId!, quantity: 0 })
+        }
         onOpenChange={onOpenDeleteQtyChange}
       />
 
@@ -174,13 +184,13 @@ const CartCard: FC<
             <div className='flex size-full sm:items-center sm:justify-center'>
               <Link
                 className='size-[150px] shrink-0 border border-divider'
-                href={`/product/${createSlug(cart?.product?.name, cart?.product?.id)}`}
+                href={`/product/${createSlug(init?.productName, init?.productId)}`}
               >
                 <Image
                   alt='product-image'
                   className='size-full shrink-0 object-cover'
                   height={150}
-                  src={cart?.product?.images?.[0]?.url ?? '/placeholder.svg'}
+                  src={init?.productImages?.[0]?.url ?? '/placeholder.svg'}
                   width={150}
                 />
               </Link>
@@ -188,16 +198,17 @@ const CartCard: FC<
 
             <div className='col-span-2 flex flex-col justify-between gap-3'>
               <div className='flex flex-col'>
-                <span className='line-clamp-1'>{cart?.product?.name}</span>
+                <span className='line-clamp-1'>{init?.productName}</span>
                 <span className='text-default-500'>
-                  รหัสสินค้า: {cart?.product?.id}
+                  รหัสสินค้า: {init?.productId}
                 </span>
                 <div className='flex flex-wrap gap-2'>
                   <span className='text-default-500'>
-                    ราคา: {formatCurrency(price!)}/ชิ้น
+                    ราคา: {formatCurrency(currentPrice!)}/{productUnit}
                   </span>
                   <span className='text-default-500'>
-                    จำนวนคงเหลือ: {formatNumber(stockQuantity!)}/ชิ้น
+                    จำนวนคงเหลือ: {formatNumber(currentStockQuantity!)}/
+                    {productUnit}
                   </span>
                 </div>
               </div>
@@ -207,19 +218,20 @@ const CartCard: FC<
                   disabled
                   isDisabled={isPendingUpdateCart}
                   label='จำนวน'
-                  maxValue={stockQuantity}
-                  value={qty}
-                  variant='faded'
+                  maxValue={currentStockQuantity}
+                  value={quantity}
+                  variant='bordered'
                   onChange={onQuantityChange}
                 />
 
-                {cart?.product?.variants?.length !== 0 && (
+                {init.variants.length !== 0 && (
                   <Select
-                    items={cart?.product?.variants || []}
+                    disallowEmptySelection
+                    items={init.variants || []}
                     label='ตัวเลือกสินค้า'
                     placeholder='เลือกตัวเลือกสินค้า'
-                    selectedKeys={selectedVariantId ? [selectedVariantId] : []}
-                    variant='faded'
+                    selectedKeys={variantId ? [variantId] : []}
+                    variant='bordered'
                     onSelectionChange={onVariantChange}
                   >
                     {(variant) => (
@@ -236,7 +248,7 @@ const CartCard: FC<
                 />
 
                 <span className='text-lg font-bold text-primary-website sm:text-2xl'>
-                  {formatCurrency(price! * qty!)}
+                  {formatCurrency(currentPrice! * quantity!)}
                 </span>
               </div>
             </div>

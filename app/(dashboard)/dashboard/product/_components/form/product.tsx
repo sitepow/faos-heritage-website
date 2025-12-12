@@ -14,6 +14,7 @@ import { Select, SelectItem } from '@heroui/select'
 import { Spinner } from '@heroui/spinner'
 import { Switch } from '@heroui/switch'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { ProductUnit } from '@prisma/client'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
@@ -26,6 +27,7 @@ import { productSchema } from '../../schema/product'
 import { useProductStore } from '../../store'
 
 import { SubHeader } from '@/app/(main)/_components/section/header'
+import { PRODUCT_UNIT_ALL } from '@/utils/const'
 
 const DEFAULT_VALUES: ProductInput = {
   isActive: true,
@@ -48,6 +50,7 @@ const DEFAULT_VALUES: ProductInput = {
   metaDescription: '',
   shortDescription: '',
   description: '',
+  unit: ProductUnit?.UNIT,
 }
 
 const ProductForm = () => {
@@ -55,14 +58,20 @@ const ProductForm = () => {
     useProductStore()
   const queryClient = useQueryClient()
 
+  const QUERY = {
+    CATEGORIES: ['dashboard', 'categories', 'modal'],
+    PRODUCT: ['dashboard', 'product', productId],
+    PRODUCTS: ['dashboard', 'products'],
+  }
+
   const { data: categories, isLoading: isLoadingCategories } = useQuery({
-    queryKey: ['dashboard', 'modal', 'categories'],
+    queryKey: QUERY.CATEGORIES,
     queryFn: () => getCategories(),
     enabled: isProductOpen,
   })
 
   const { data: product, isLoading: isLoadingProduct } = useQuery({
-    queryKey: ['dashboard', 'product', productId],
+    queryKey: QUERY.PRODUCT,
     queryFn: () => getProduct(productId!),
     enabled: !!productId && isProductOpen,
   })
@@ -92,7 +101,7 @@ const ProductForm = () => {
     useMutation({
       mutationFn: createProduct,
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['dashboard', 'products'] })
+        queryClient.invalidateQueries({ queryKey: QUERY.PRODUCTS })
         onClose()
       },
     })
@@ -101,7 +110,7 @@ const ProductForm = () => {
     useMutation({
       mutationFn: updateProduct,
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['dashboard', 'products'] })
+        queryClient.invalidateQueries({ queryKey: QUERY.PRODUCTS })
         onClose()
       },
     })
@@ -122,7 +131,7 @@ const ProductForm = () => {
   }
 
   const onClose = () => {
-    queryClient.removeQueries({ queryKey: ['dashboard', 'product', productId] })
+    queryClient.removeQueries({ queryKey: QUERY.PRODUCT })
     setState({ productId: null })
     reset(DEFAULT_VALUES)
     onOpenProductChange()
@@ -188,7 +197,7 @@ const ProductForm = () => {
                     isSelected={value}
                     onValueChange={onChange}
                   >
-                    สินค้าดิจิทัลไฟล์
+                    สินค้าไฟล์ดิจิทัล
                   </Switch>
                 )}
               />
@@ -218,6 +227,7 @@ const ProductForm = () => {
                     errorMessage={errors.name?.message}
                     isInvalid={!!errors.name}
                     label='ชื่อสินค้า'
+                    variant='bordered'
                   />
                 )}
               />
@@ -231,6 +241,7 @@ const ProductForm = () => {
                     isInvalid={!!errors.categoryId}
                     label='หมวดหมู่สินค้า'
                     selectedKeys={value ? [value] : []}
+                    variant='bordered'
                     onSelectionChange={(keys) => {
                       const selected = Array.from(keys)[0]
 
@@ -245,16 +256,51 @@ const ProductForm = () => {
               />
               <Controller
                 control={control}
+                name='unit'
+                render={({ field: { value, onChange, ...field } }) => (
+                  <Select
+                    {...field}
+                    disallowEmptySelection
+                    errorMessage={errors.unit?.message}
+                    isInvalid={!!errors.unit}
+                    label='หน่วยนับสินค้า'
+                    selectedKeys={value ? [value] : []}
+                    variant='bordered'
+                    onSelectionChange={(keys) => {
+                      const selected = Array.from(keys)[0]
+
+                      onChange(selected)
+                    }}
+                  >
+                    {(PRODUCT_UNIT_ALL ?? []).map(([key, label]) => (
+                      <SelectItem key={key}>{label}</SelectItem>
+                    ))}
+                  </Select>
+                )}
+              />
+              <Controller
+                control={control}
                 name='sku'
                 render={({ field: { value, ...field } }) => (
-                  <Input {...field} label='SKU' value={value ?? ''} />
+                  <Input
+                    variant='bordered'
+                    {...field}
+                    label='SKU'
+                    value={value ?? ''}
+                  />
                 )}
               />
               <Controller
                 control={control}
                 name='barcode'
                 render={({ field: { value, ...field } }) => (
-                  <Input {...field} label='บาร์โค้ด' value={value ?? ''} />
+                  <Input
+                    {...field}
+                    className='sm:col-span-2'
+                    label='บาร์โค้ด'
+                    value={value ?? ''}
+                    variant='bordered'
+                  />
                 )}
               />
               <Controller
@@ -266,6 +312,7 @@ const ProductForm = () => {
                     label='รายละเอียดสินค้า (ฉบับย่อ)'
                     minRows={10}
                     value={value ?? ''}
+                    variant='bordered'
                   />
                 )}
               />
@@ -278,6 +325,7 @@ const ProductForm = () => {
                     label='รายละเอียดสินค้า (ฉบับเต็ม)'
                     minRows={10}
                     value={value ?? ''}
+                    variant='bordered'
                   />
                 )}
               />
@@ -295,6 +343,7 @@ const ProductForm = () => {
                     isInvalid={!!errors.price}
                     label='ราคา (บาท)'
                     minValue={0}
+                    variant='bordered'
                     onValueChange={(val) => onChange(val || 0)}
                   />
                 )}
@@ -310,6 +359,7 @@ const ProductForm = () => {
                     label='ราคาก่อนลด'
                     minValue={0}
                     value={value ?? 0}
+                    variant='bordered'
                     onValueChange={(val) => onChange(val || 0)}
                   />
                 )}
@@ -325,6 +375,7 @@ const ProductForm = () => {
                     label='ราคาทุน (ภายใน)'
                     minValue={0}
                     value={value ?? 0}
+                    variant='bordered'
                     onValueChange={(val) => onChange(val || 0)}
                   />
                 )}
@@ -344,6 +395,7 @@ const ProductForm = () => {
                     label='จำนวนในสต็อก'
                     minValue={0}
                     value={value ?? 0}
+                    variant='bordered'
                     onValueChange={(val) => onChange(val || 0)}
                   />
                 )}
@@ -359,6 +411,7 @@ const ProductForm = () => {
                     label='แจ้งเตือนเมื่อสต็อกต่ำกว่า'
                     minValue={0}
                     value={value ?? 0}
+                    variant='bordered'
                     onValueChange={(val) => onChange(val || 0)}
                   />
                 )}
@@ -374,6 +427,7 @@ const ProductForm = () => {
                     label='น้ำหนัก (กรัม)'
                     minValue={0}
                     value={value ?? 0}
+                    variant='bordered'
                     onValueChange={(val) => onChange(val || 0)}
                   />
                 )}
@@ -408,6 +462,7 @@ const ProductForm = () => {
                       isInvalid={!!errors.slug}
                       label='Slug'
                       value={value ?? ''}
+                      variant='bordered'
                     />
                   )}
                 />
@@ -421,6 +476,7 @@ const ProductForm = () => {
                       isInvalid={!!errors.metaTitle}
                       label='Meta Title'
                       value={value ?? ''}
+                      variant='bordered'
                     />
                   )}
                 />
@@ -435,6 +491,7 @@ const ProductForm = () => {
                       label='Meta Description'
                       minRows={3}
                       value={value ?? ''}
+                      variant='bordered'
                     />
                   )}
                 />

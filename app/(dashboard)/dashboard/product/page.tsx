@@ -38,14 +38,18 @@ import { ProductForm } from './_components/form/product'
 import { CategoryManager } from './_components/manager/category'
 import { ImageManager } from './_components/manager/image'
 import { VariantManager } from './_components/manager/variant'
-import { deleteProduct, getDashboard, getProducts } from './actions/product'
+import {
+  deleteProduct,
+  getProducts,
+  getProductDashboard,
+} from './actions/product'
 import { useProductStore } from './store'
 
 import {
   TrendCard,
   TrendCardSkeleton,
-} from '@/app/(dashboard)/_components/chart/trend-card'
-import { ModalDelete } from '@/components/modal/delete'
+} from '@/app/(dashboard)/_components/trend-card'
+import { ModalConfirm } from '@/components/modal/confirm'
 import { formatCurrency, formatNumber } from '@/utils/number'
 
 const ITEM_PER_PAGE = 10
@@ -68,21 +72,26 @@ const Product = () => {
   const { isOpen: isDeleteOpen, onOpenChange: onOpenDeleteChange } =
     useDisclosure()
 
+  const QUERY = {
+    DASHBOARD: ['dashboard', 'products', 'card'],
+    PRODUCTS: ['dashboard', 'products', 'pagination', page],
+  }
+
   const { data: products, isLoading: isLoadingProducts } = useQuery({
-    queryKey: ['dashboard', 'products', page, ITEM_PER_PAGE],
+    queryKey: QUERY.PRODUCTS,
     queryFn: () => getProducts(page, ITEM_PER_PAGE),
   })
 
   const { data: dashboard, isLoading: isLoadingDashboard } = useQuery({
-    queryKey: ['dashboard', 'products'],
-    queryFn: () => getDashboard(),
+    queryKey: QUERY.DASHBOARD,
+    queryFn: () => getProductDashboard(),
   })
 
   const { mutate: mutateDeteleProduct, isPending: isPendingDeteleProduct } =
     useMutation({
       mutationFn: deleteProduct,
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['dashboard', 'products'] })
+        queryClient.invalidateQueries({ queryKey: QUERY.DASHBOARD })
         onOpenDeleteChange()
         setState({ productId: null })
         setSelectedKeys(new Set([]))
@@ -91,7 +100,7 @@ const Product = () => {
 
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
-      <ModalDelete
+      <ModalConfirm
         isOpen={isDeleteOpen}
         isPending={isPendingDeteleProduct}
         onConfirm={() => {
@@ -106,7 +115,7 @@ const Product = () => {
 
       <div className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
         {isLoadingDashboard &&
-          [...Array(4)].map((_, index) => <TrendCardSkeleton key={index} />)}
+          [...Array(4)].map((_) => <TrendCardSkeleton key={_} />)}
 
         {!isLoadingDashboard &&
           dashboard?.map((data) => <TrendCard key={data.name} {...data} />)}
@@ -200,7 +209,7 @@ const Product = () => {
               <TableCell>{formatCurrency(product.price)}</TableCell>
               <TableCell>{formatNumber(product.stockQuantity)}</TableCell>
               <TableCell className='max-w-52 min-w-52'>
-                {product?.category?.name ?? '-'}
+                <Chip variant='bordered'>{product?.category?.name ?? '-'}</Chip>
               </TableCell>
               <TableCell className='min-w-60'>
                 <div className='flex flex-col'>
@@ -288,8 +297,8 @@ const Product = () => {
       <Pagination
         showControls
         page={page}
-        total={products?.totalPages ?? 1}
-        onChange={(p) => setPage(p)}
+        total={products?.totalPages || 1}
+        onChange={(page) => setPage(page)}
       />
     </section>
   )

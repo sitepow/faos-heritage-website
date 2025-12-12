@@ -12,29 +12,31 @@ import { OrderSection } from './_components/section/order'
 import { clearCart, deleteCart } from './actions/cart'
 import { useCartStore } from './store'
 
-import { ModalDelete } from '@/components/modal/delete'
+import { ModalConfirm } from '@/components/modal/confirm'
 
 const Cart = () => {
   const queryClient = useQueryClient()
-  const { data: session } = useSession()
-  const userId = session?.user?.id
-
-  const CART_QUERY_KEY = ['carts', userId]
-  const CART_COUNT_QUERY_KEY = ['carts', 'count', userId]
-
   const { carts, setState, cartId, onOpenDeleteChange, isDeleteOpen } =
     useCartStore()
   const { isOpen: isClearOpen, onOpenChange: onOpenClearChange } =
     useDisclosure()
 
+  const { data: session } = useSession()
+  const userId = session?.user?.id
+
+  const QUERY = {
+    CART: ['carts', userId],
+    CART_COUNT: ['carts', 'count', userId],
+  }
+
   const { mutate: mutateDeteleCart, isPending: isPendingDeteleCart } =
     useMutation({
       mutationFn: deleteCart,
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: CART_QUERY_KEY })
-        queryClient.invalidateQueries({ queryKey: CART_COUNT_QUERY_KEY })
-        onOpenDeleteChange()
+        queryClient.invalidateQueries({ queryKey: QUERY.CART })
+        queryClient.invalidateQueries({ queryKey: QUERY.CART_COUNT })
         setState({ cartId: null })
+        onOpenDeleteChange()
       },
     })
 
@@ -42,8 +44,8 @@ const Cart = () => {
     useMutation({
       mutationFn: clearCart,
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: CART_QUERY_KEY })
-        queryClient.invalidateQueries({ queryKey: CART_COUNT_QUERY_KEY })
+        queryClient.invalidateQueries({ queryKey: QUERY.CART })
+        queryClient.invalidateQueries({ queryKey: QUERY.CART_COUNT })
         onOpenClearChange()
       },
     })
@@ -57,7 +59,7 @@ const Cart = () => {
       </Head>
 
       <section className='flex flex-col items-center justify-center gap-4 text-center'>
-        <ModalDelete
+        <ModalConfirm
           isOpen={isDeleteOpen}
           isPending={isPending}
           onConfirm={() => {
@@ -66,7 +68,7 @@ const Cart = () => {
           onOpenChange={onOpenDeleteChange}
         />
 
-        <ModalDelete
+        <ModalConfirm
           isOpen={isClearOpen}
           isPending={isPending}
           onConfirm={() => {

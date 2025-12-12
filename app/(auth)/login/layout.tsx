@@ -1,6 +1,6 @@
 import type { FC, PropsWithChildren } from 'react'
 
-import LoginLayout from './components/layout'
+import LoginLayout from './_components/layout'
 
 export const metadata = {
   robots: {

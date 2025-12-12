@@ -14,12 +14,16 @@ const FavoriteCard = () => {
   const { data: session } = useSession()
   const userId = session?.user?.id
 
+  const QUERY = {
+    FAVORITES: ['account', 'favorites', userId],
+  }
+
   const { data: favorites, isLoading: isLoadingFaorites } = useQuery({
-    queryKey: ['account', 'favorites', userId],
+    queryKey: QUERY.FAVORITES,
     queryFn: () => getFavorites({ userId }),
   })
 
-  const favoritesTotal = favorites?.items?.length
+  const favoritesLength = favorites?.items?.length
 
   return (
     <Card fullWidth>
@@ -29,7 +33,7 @@ const FavoriteCard = () => {
       <CardBody className='gap-4'>
         {isLoadingFaorites && <Skeleton className='h-40 w-full rounded-xl' />}
 
-        {!isLoadingFaorites && favoritesTotal === 0 && (
+        {!isLoadingFaorites && favoritesLength === 0 && (
           <div className='flex flex-col items-center gap-2 text-default-500'>
             <AlertCircleIcon />
             <span className='text-center'>
@@ -43,7 +47,7 @@ const FavoriteCard = () => {
         )}
 
         {!isLoadingFaorites &&
-          favoritesTotal !== 0 &&
+          favoritesLength !== 0 &&
           favorites?.items?.map((favorite) => (
             <Favorite key={favorite?.id} favorite={favorite} />
           ))}

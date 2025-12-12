@@ -46,7 +46,9 @@ const ImageForm = () => {
   const [filePaths, setFilePaths] = useState<string[]>([])
   const [oldUrl, setOldUrl] = useState<string | null>(null)
 
-  const QUERY_KEY = ['dashboard', 'modal', 'image', imageId]
+  const QUERY = {
+    IMAGE: ['dashboard', 'image', 'modal', imageId],
+  }
 
   const {
     control,
@@ -60,7 +62,7 @@ const ImageForm = () => {
   })
 
   const { data: image, isLoading: isLoadingImage } = useQuery({
-    queryKey: QUERY_KEY,
+    queryKey: QUERY.IMAGE,
     queryFn: () => getImage(imageId!),
     enabled: !!imageId && isImageOpen,
   })
@@ -146,7 +148,7 @@ const ImageForm = () => {
     setFilePaths([])
 
     queryClient.removeQueries({
-      queryKey: QUERY_KEY,
+      queryKey: QUERY.IMAGE,
     })
     reset(DEFAULT_VALUES)
     setState({ imageId: null })
@@ -194,6 +196,7 @@ const ImageForm = () => {
                   isInvalid={!!errors.url}
                   label='URL ของรูปภาพ'
                   value={value ?? ''}
+                  variant='bordered'
                 />
               )}
             />
@@ -207,6 +210,7 @@ const ImageForm = () => {
                   isInvalid={!!errors.alt}
                   label='ข้อความอธิบายรูป (alt text)'
                   value={value ?? ''}
+                  variant='bordered'
                 />
               )}
             />

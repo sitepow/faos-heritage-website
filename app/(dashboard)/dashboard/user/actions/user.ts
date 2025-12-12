@@ -10,7 +10,7 @@ import { userCreateSchema, userUpdateSchema } from '../schema/user'
 import { removeEmptyField } from '@/utils/helper'
 import { getPrismaError, prisma } from '@/utils/prisma'
 
-const SELECTED_FIELD = {
+const EXECUTE_FIELD = {
   id: true,
   email: true,
   name: true,
@@ -69,7 +69,7 @@ const getUsers = async (page: number = 1, limit: number = 10) => {
       prisma.user.findMany({
         skip,
         take: limit,
-        select: SELECTED_FIELD,
+        select: EXECUTE_FIELD,
         orderBy: { createdAt: 'desc' },
       }),
       prisma.product.count(),
@@ -95,7 +95,7 @@ const getUser = async (userId: string) => {
 
     const variant = await prisma.user.findUnique({
       where: { id: userId },
-      select: SELECTED_FIELD,
+      select: EXECUTE_FIELD,
     })
 
     if (!variant) {
@@ -164,7 +164,7 @@ const deleteUser = async (userIds: string | string[]) => {
   }
 }
 
-const getDashboard = async () => {
+const getUserDashboard = async () => {
   try {
     const [totalUsers, isActive, unActive] = await Promise.all([
       prisma.user.count(),
@@ -178,12 +178,19 @@ const getDashboard = async () => {
 
     return [
       { name: 'ผู้ใช้งานทั้งหมด', value: totalUsers },
-      { name: 'เปิดการใช้งาน', value: isActive },
-      { name: 'ถูกระงับการใช้งาน', value: unActive },
+      { name: 'ผู้ใช้งานทั้งหมด (เปิดการใช้งาน)', value: isActive },
+      { name: 'ผู้ใช้งานทั้งหมด (ปิดการใช้งาน)', value: unActive },
     ]
   } catch (error) {
     getPrismaError(error)
   }
 }
 
-export { createUser, deleteUser, getDashboard, getUser, getUsers, updateUser }
+export {
+  createUser,
+  deleteUser,
+  getUserDashboard,
+  getUser,
+  getUsers,
+  updateUser,
+}

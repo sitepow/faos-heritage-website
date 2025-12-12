@@ -7,7 +7,7 @@ import { imageSchema, type ImageInput } from '../schema/image'
 import { removeEmptyField } from '@/utils/helper'
 import { getPrismaError, prisma } from '@/utils/prisma'
 
-const SELECTED_FIELD = {
+const EXECUTE_FIELD = {
   id: true,
   url: true,
   alt: true,
@@ -39,7 +39,7 @@ const getImages = async (productId: string) => {
   try {
     return prisma.productImage.findMany({
       where: { productId },
-      select: SELECTED_FIELD,
+      select: EXECUTE_FIELD,
       orderBy: { url: 'desc' },
     })
   } catch (error) {
@@ -55,7 +55,7 @@ const getImage = async (variantId: string) => {
 
     const variant = await prisma.productImage.findUnique({
       where: { id: variantId },
-      select: SELECTED_FIELD,
+      select: EXECUTE_FIELD,
     })
 
     if (!variant) {

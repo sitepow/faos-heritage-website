@@ -1,13 +1,13 @@
-import { ACCOUNT_TABS } from '@/utils/const'
+import { ACCOUNT_TAB } from '@/utils/const'
 
-export type SiteConfig = typeof siteConfig
+type SiteConfig = typeof siteConfig
 
-export interface NavItem {
+interface NavItem {
   label: string
   href: string
 }
 
-export const siteConfig = {
+const siteConfig = {
   name: 'ZentraCore',
   title: 'สร้างร้านค้าออนไลน์ของคุณ',
   description: '',
@@ -30,7 +30,7 @@ export const siteConfig = {
     },
     {
       label: 'คำสั่งซื้อของฉัน',
-      href: `/account?tab=${ACCOUNT_TABS?.ORDER}`,
+      href: `/account?tab=${ACCOUNT_TAB?.ORDER}`,
     },
     {
       label: 'เกี่ยวกับเรา',
@@ -56,3 +56,6 @@ export const siteConfig = {
     },
   ] satisfies NavItem[],
 }
+
+export type { SiteConfig, NavItem }
+export { siteConfig }

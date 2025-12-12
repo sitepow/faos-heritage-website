@@ -17,10 +17,12 @@ const AccountCard: FC<Props> = ({ onclick }) => {
   const { data: session } = useSession()
   const userId = session?.user?.id
 
-  const QUERY_KEY = ['account', 'user', userId]
+  const QUERY = {
+    ACCOUNT: ['account', 'user', userId],
+  }
 
   const { data: user, isLoading: isLoadingUser } = useQuery({
-    queryKey: QUERY_KEY,
+    queryKey: QUERY.ACCOUNT,
     queryFn: () => getUser(userId!),
     enabled: !!userId,
   })

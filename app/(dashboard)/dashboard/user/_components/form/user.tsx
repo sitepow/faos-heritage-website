@@ -45,7 +45,10 @@ const UserForm = () => {
   const [filePaths, setFilePaths] = useState<string[]>([])
   const [oldUrl, setOldUrl] = useState<string | null>(null)
 
-  const QUERY_KEY = ['dashboard', 'user', userId]
+  const QUERY = {
+    DASHBOARD: ['dashboard', 'users', 'card'],
+    USER: ['dashboard', 'user', userId],
+  }
 
   type UserInput = UserCreateInput | UserUpdateInput
   const userSchema = userId ? userUpdateSchema : userCreateSchema
@@ -62,7 +65,7 @@ const UserForm = () => {
   })
 
   const { data: user, isLoading: isLoadingUser } = useQuery({
-    queryKey: QUERY_KEY,
+    queryKey: QUERY.USER,
     queryFn: () => getUser(userId!),
     enabled: !!userId && isUserOpen,
   })
@@ -83,7 +86,7 @@ const UserForm = () => {
       mutationFn: createUser,
       onSuccess: () => {
         queryClient.invalidateQueries({
-          queryKey: ['dashboard', 'users'],
+          queryKey: QUERY.DASHBOARD,
         })
         onClose()
       },
@@ -94,7 +97,7 @@ const UserForm = () => {
       mutationFn: updateUser,
       onSuccess: () => {
         queryClient.invalidateQueries({
-          queryKey: ['dashboard', 'users'],
+          queryKey: QUERY.DASHBOARD,
         })
         onClose()
       },
@@ -147,7 +150,7 @@ const UserForm = () => {
     setFilePaths([])
 
     queryClient.removeQueries({
-      queryKey: QUERY_KEY,
+      queryKey: QUERY.USER,
     })
     reset(DEFAULT_VALUES)
     setState({ userId: null })
@@ -192,6 +195,7 @@ const UserForm = () => {
                   isInvalid={!!errors.role}
                   label='สถานะบัญชี'
                   selectedKeys={value ? [value] : []}
+                  variant='bordered'
                   onSelectionChange={(keys) => {
                     const selected = Array.from(keys)[0] as Role
 
@@ -219,6 +223,7 @@ const UserForm = () => {
                   isInvalid={!!errors.image}
                   label='URL ของรูปภาพ'
                   value={value ?? ''}
+                  variant='bordered'
                 />
               )}
             />
@@ -232,6 +237,7 @@ const UserForm = () => {
                   isInvalid={!!errors.name}
                   label='ชื่อ'
                   value={value ?? ''}
+                  variant='bordered'
                 />
               )}
             />
@@ -245,6 +251,7 @@ const UserForm = () => {
                   isInvalid={!!errors.email}
                   label='อีเมล'
                   value={value ?? ''}
+                  variant='bordered'
                 />
               )}
             />
@@ -259,6 +266,7 @@ const UserForm = () => {
                   label={userId ? 'เปลี่ยนรหัสผ่าน' : 'รหัสผ่าน'}
                   type='password'
                   value={value ?? ''}
+                  variant='bordered'
                 />
               )}
             />

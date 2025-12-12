@@ -38,14 +38,19 @@ const CategoryLayout: FC<Props> = ({
     label?: string
   }>({})
 
+  const QUERY = {
+    CAROUSEL_PRODUCTS: ['carousel', 'products', currentCategory.id],
+    CATEGORIES: ['dashboard', 'categories', 'modal'],
+  }
+
   const { data: categories, isLoading: isLoadingCategories } = useQuery({
-    queryKey: ['dashboard', 'modal', 'categories'],
+    queryKey: QUERY.CATEGORIES,
     queryFn: () => getCategories(),
     initialData: initialCategories,
   })
 
   const { data: products, isLoading: isLoadingProducts } = useQuery({
-    queryKey: ['products', 'carousel', currentCategory.id],
+    queryKey: QUERY.CAROUSEL_PRODUCTS,
     queryFn: () =>
       getProducts({ limit: itemPerPage, categoryId: currentCategory.id }),
     enabled: !!currentCategory.id,

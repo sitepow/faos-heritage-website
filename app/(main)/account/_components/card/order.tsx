@@ -1,59 +1,47 @@
 import { Card, CardBody, CardHeader } from '@heroui/card'
+import { Pagination } from '@heroui/pagination'
 import { Skeleton } from '@heroui/skeleton'
-import { useInfiniteQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { AlertCircleIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
+import { useState } from 'react'
 
 import { Order } from '../order'
 
-import { getOrders, type GetOrdersResult } from '@/actions/order'
-import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
+import { getOrders } from '@/app/(dashboard)/dashboard/order/actions/order'
 
 const ITEM_PER_PAGE = 8
 
 const OrderCard = () => {
+  const [page, setPage] = useState(1)
+
   const { data: session } = useSession()
   const userId = session?.user?.id
 
-  const ORDER_QUERY_KEY = ['account', 'orders', userId]
+  const QUERY = {
+    ORDERS: ['account', 'orders', 'pagination', userId, page],
+  }
 
-  const { data, isLoading, fetchNextPage, isFetchingNextPage, hasNextPage } =
-    useInfiniteQuery<GetOrdersResult>({
-      queryKey: ORDER_QUERY_KEY,
-      initialPageParam: null,
-      queryFn: ({ pageParam }) =>
-        getOrders({
-          userId: userId!,
-          cursor: pageParam as string | null,
-          limit: ITEM_PER_PAGE,
-        }),
-      getNextPageParam: (lastPage) => lastPage?.nextCursor,
-      enabled: !!userId,
-    })
-
-  useInfiniteScroll({
-    hasNextPage,
-    isFetchingNextPage,
-    fetchNextPage,
-    threshold: 300,
+  const { data: orders, isLoading: isLoadingOrders } = useQuery({
+    queryKey: QUERY.ORDERS,
+    queryFn: () => getOrders(page, ITEM_PER_PAGE, userId),
   })
 
-  const items = data?.pages?.flatMap((page) => page.items) ?? []
-  const ordersTotal = items?.length
+  const ordersLength = orders?.items?.length
 
   return (
     <Card fullWidth>
       <CardHeader>
         <span>รายการคำสั่งซื้อของฉัน</span>
       </CardHeader>
-      {isLoading && (
+      {isLoadingOrders && (
         <CardBody>
           <Skeleton className='h-20 w-full rounded-lg' />
         </CardBody>
       )}
 
-      {!isLoading && ordersTotal === 0 && (
+      {!isLoadingOrders && ordersLength === 0 && (
         <CardBody>
           <div className='flex flex-col items-center gap-2 text-default-500'>
             <AlertCircleIcon />
@@ -68,12 +56,22 @@ const OrderCard = () => {
         </CardBody>
       )}
 
-      {!isLoading && ordersTotal !== 0 && (
+      {!isLoadingOrders && ordersLength !== 0 && (
         <CardBody className='gap-4'>
-          {items?.map((order) => (
+          {orders?.items?.map((order) => (
             <Order key={order?.id} order={order} />
           ))}
         </CardBody>
+      )}
+
+      {!isLoadingOrders && ordersLength !== 0 && (
+        <Pagination
+          showControls
+          className='mx-auto my-2.5'
+          page={page}
+          total={orders?.totalPages || 1}
+          onChange={(page) => setPage(page)}
+        />
       )}
     </Card>
   )

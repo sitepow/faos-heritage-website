@@ -7,7 +7,7 @@ interface UseInfiniteScrollOptions {
   threshold?: number
 }
 
-export const useInfiniteScroll = ({
+const useInfiniteScroll = ({
   hasNextPage,
   isFetchingNextPage,
   fetchNextPage,
@@ -44,3 +44,5 @@ export const useInfiniteScroll = ({
     }
   }, [hasNextPage, isFetchingNextPage, fetchNextPage, threshold])
 }
+
+export { useInfiniteScroll }

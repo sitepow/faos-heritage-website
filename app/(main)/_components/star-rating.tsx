@@ -17,9 +17,7 @@ const StarRating: FC<ComponentProps<'div'> & Props> = ({
       {[...Array(5)].map((_, index) => (
         <Star
           key={index}
-          className={
-            index < Math.floor(rate) ? 'text-[#f47920]' : 'text-gray-300'
-          }
+          className={index < Math.floor(rate) ? 'text-divider' : 'text-divider'}
           fill={index < Math.floor(rate) ? 'currentColor' : 'none'}
           size={15}
         />

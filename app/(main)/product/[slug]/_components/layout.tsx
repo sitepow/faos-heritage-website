@@ -25,8 +25,12 @@ interface Props {
 }
 
 const ProductLayout: FC<Props> = ({ initialProduct, productId, userId }) => {
+  const QUERY = {
+    PRODUCT: ['product', productId],
+  }
+
   const { data: product, isLoading: isLoadingProduct } = useQuery({
-    queryKey: ['product', productId],
+    queryKey: QUERY.PRODUCT,
     queryFn: () => getProduct(productId, userId),
     placeholderData: initialProduct,
     enabled: !!productId,

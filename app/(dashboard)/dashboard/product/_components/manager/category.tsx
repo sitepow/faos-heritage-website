@@ -28,7 +28,7 @@ import { deleteCategory, getCategories } from '../../actions/category'
 import { useProductStore } from '../../store'
 import { CategoryForm } from '../form/category'
 
-import { ModalDelete } from '@/components/modal/delete'
+import { ModalConfirm } from '@/components/modal/confirm'
 import { cn } from '@/utils/style'
 
 const CategoryManager = () => {
@@ -40,13 +40,16 @@ const CategoryManager = () => {
     onOpenCategoryManagerChange,
     setState,
   } = useProductStore()
-  const QUERY_KEY = ['dashboard', 'modal', 'categories']
+
+  const QUERY = {
+    CATEGORIES: ['dashboard', 'categories', 'modal'],
+  }
 
   const { isOpen: isDeleteOpen, onOpenChange: onOpenDeleteChange } =
     useDisclosure()
 
   const { data: categories, isLoading: isLoadingCategories } = useQuery({
-    queryKey: QUERY_KEY,
+    queryKey: QUERY.CATEGORIES,
     queryFn: () => getCategories(),
     enabled: isCategoryManagerOpen,
   })
@@ -56,16 +59,24 @@ const CategoryManager = () => {
       mutationFn: deleteCategory,
       onSuccess: () => {
         queryClient.invalidateQueries({
-          queryKey: QUERY_KEY,
+          queryKey: QUERY.CATEGORIES,
         })
         onOpenDeleteChange()
         setState({ categoryId: null })
       },
     })
 
+  const onClose = () => {
+    queryClient.invalidateQueries({
+      queryKey: QUERY.CATEGORIES,
+    })
+    setState({ productId: null, variantId: null })
+    onOpenCategoryManagerChange()
+  }
+
   return (
     <>
-      <ModalDelete
+      <ModalConfirm
         isOpen={isDeleteOpen}
         isPending={isPendingDeteleCategory}
         onConfirm={() => {
@@ -165,16 +176,7 @@ const CategoryManager = () => {
           )}
 
           <ModalFooter>
-            <Button
-              variant='faded'
-              onPress={() => {
-                onOpenCategoryManagerChange()
-                setState({ productId: null, variantId: null })
-                queryClient.invalidateQueries({
-                  queryKey: QUERY_KEY,
-                })
-              }}
-            >
+            <Button variant='faded' onPress={onClose}>
               ยกเลิก
             </Button>
             <Button

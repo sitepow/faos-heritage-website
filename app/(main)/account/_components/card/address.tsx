@@ -17,10 +17,12 @@ const AddressCard = () => {
   const { data: session } = useSession()
   const userId = session?.user?.id
 
-  const ADDRESS_QUERY_KEY = ['account', 'address', userId]
+  const QUERY = {
+    ADDRESS: ['account', 'address', userId],
+  }
 
   const { data: address, isLoading: isLoadingAddress } = useQuery({
-    queryKey: ADDRESS_QUERY_KEY,
+    queryKey: QUERY.ADDRESS,
     queryFn: () => getAddress(userId!),
     enabled: !!userId,
   })

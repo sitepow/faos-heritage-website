@@ -143,6 +143,7 @@ const AddressForm = () => {
                   errorMessage={errors.name?.message}
                   isInvalid={!!errors.name}
                   label='ชื่อสำหรับจัดส่ง'
+                  variant='bordered'
                 />
               )}
             />
@@ -156,6 +157,7 @@ const AddressForm = () => {
                   errorMessage={errors.phone?.message}
                   isInvalid={!!errors.phone}
                   label='เบอร์โทรศัพท์'
+                  variant='bordered'
                 />
               )}
             />
@@ -169,6 +171,7 @@ const AddressForm = () => {
                   errorMessage={errors.address?.message}
                   isInvalid={!!errors.address}
                   label='ที่อยู่ (บ้านเลขที่ / ถนน / หมู่บ้าน)'
+                  variant='bordered'
                 />
               )}
             />
@@ -183,6 +186,7 @@ const AddressForm = () => {
                   isInvalid={!!errors.subDistrict}
                   label='ตำบล/แขวง'
                   value={value!}
+                  variant='bordered'
                 />
               )}
             />
@@ -196,6 +200,7 @@ const AddressForm = () => {
                   errorMessage={errors.district?.message}
                   isInvalid={!!errors.district}
                   label='อำเภอ/เขต'
+                  variant='bordered'
                 />
               )}
             />
@@ -209,6 +214,7 @@ const AddressForm = () => {
                   errorMessage={errors.province?.message}
                   isInvalid={!!errors.province}
                   label='จังหวัด'
+                  variant='bordered'
                 />
               )}
             />
@@ -222,6 +228,7 @@ const AddressForm = () => {
                   errorMessage={errors.postalCode?.message}
                   isInvalid={!!errors.postalCode}
                   label='รหัสไปรษณีย์'
+                  variant='bordered'
                 />
               )}
             />
@@ -235,6 +242,7 @@ const AddressForm = () => {
                   errorMessage={errors.country?.message}
                   isInvalid={!!errors.country}
                   label='ประเทศ'
+                  variant='bordered'
                 />
               )}
             />

@@ -2,7 +2,8 @@
 
 import { getPrismaError, prisma } from '@/utils/prisma'
 
-export type GetCartsResult = Awaited<ReturnType<typeof getCarts>>
+type GetCartsResult = Awaited<ReturnType<typeof getCarts>>
+type GetCartResult = GetCartsResult[number]
 
 const getCarts = async (userId: string) => {
   try {
@@ -14,6 +15,7 @@ const getCarts = async (userId: string) => {
             id: true,
             name: true,
             price: true,
+            unit: true,
             stockQuantity: true,
             variants: {
               select: {
@@ -35,6 +37,8 @@ const getCarts = async (userId: string) => {
     })
   } catch (error) {
     getPrismaError(error)
+
+    return []
   }
 }
 
@@ -68,14 +72,10 @@ const createCart = async ({
         )
       }
 
-      await prisma.cart.update({
+      return await prisma.cart.update({
         where: { id: existing.id },
         data: { quantity: newQty, variantId: variantId ?? null },
       })
-
-      throw new Error(
-        'คุณได้เพิ่มสินค้านี้เข้าในตระกร้าไว้แล้ว โปรดเลือกสินค้าชิ้นใหม่ที่ต้องการ',
-      )
     }
 
     if (product.stockQuantity < 1) {
@@ -159,4 +159,5 @@ const getDashboard = async (userId: string) => {
   }
 }
 
+export type { GetCartsResult, GetCartResult }
 export { clearCart, createCart, deleteCart, getCarts, getDashboard, updateCart }

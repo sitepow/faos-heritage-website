@@ -9,7 +9,7 @@ const LoginLayout: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <Suspense>
-      <div className='flex min-h-screen items-center justify-center p-5 sm:p-10 light:bg-[#f1f1f1]'>
+      <div className='flex justify-center p-5 sm:p-10 light:bg-[#f1f1f1]'>
         <ToastContainer
           closeOnClick
           hideProgressBar

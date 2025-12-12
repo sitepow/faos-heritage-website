@@ -23,36 +23,46 @@ import { useQuery } from '@tanstack/react-query'
 import { EllipsisVerticalIcon } from 'lucide-react'
 import { useState } from 'react'
 
-import { getDashboard, getOrders } from '../../actions/order'
+import { OrderForm } from './_components/form/order'
+import { getOrderDashboard, getOrders } from './actions/order'
+import { useOrderStore } from './store'
 
 import {
   TrendCard,
   TrendCardSkeleton,
-} from '@/app/(dashboard)/_components/chart/trend-card'
+} from '@/app/(dashboard)/_components/trend-card'
 import { formatDate } from '@/utils/date'
 import { getOrderStatus } from '@/utils/helper'
 import { formatCurrency } from '@/utils/number'
 
-const ITEM_PER_PAGE = 10
+const ITEM_PER_PAGE = 8
 
 const Order = () => {
   const [page, setPage] = useState(1)
+  const { onOpenOrderChange, setState } = useOrderStore()
+
+  const QUERY = {
+    DASHBOARD: ['dashboard', 'orders', 'card'],
+    ORDERS: ['dashboard', 'orders', 'pagination', page],
+  }
 
   const { data: orders, isLoading: isLoadingOrders } = useQuery({
-    queryKey: ['dashboard', 'orders', page, ITEM_PER_PAGE],
+    queryKey: QUERY.ORDERS,
     queryFn: () => getOrders(page, ITEM_PER_PAGE),
   })
 
   const { data: dashboard, isLoading: isLoadingDashboard } = useQuery({
-    queryKey: ['dashboard', 'orders'],
-    queryFn: () => getDashboard(),
+    queryKey: QUERY.DASHBOARD,
+    queryFn: () => getOrderDashboard(),
   })
 
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
+      <OrderForm />
+
       <div className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
         {isLoadingDashboard &&
-          [...Array(4)].map((_, index) => <TrendCardSkeleton key={index} />)}
+          [...Array(4)].map((_) => <TrendCardSkeleton key={_} />)}
 
         {!isLoadingDashboard &&
           dashboard?.map((data) => <TrendCard key={data.name} {...data} />)}
@@ -88,13 +98,15 @@ const Order = () => {
                   ))}
                 </AvatarGroup>
               </TableCell>
-              <TableCell>{order?.user?.name ?? '-'}</TableCell>
+              <TableCell className='max-w-52 min-w-52'>
+                {order?.user?.name ?? '-'}
+              </TableCell>
               <TableCell className='max-w-52 min-w-52'>
                 {formatDate(order?.createdAt)}
               </TableCell>
               <TableCell>{formatCurrency(order.total)}</TableCell>
               <TableCell>
-                <Chip>{getOrderStatus(order.status)}</Chip>
+                <Chip variant='bordered'>{getOrderStatus(order.status)}</Chip>
               </TableCell>
               <TableCell className='flex gap-2.5'>
                 <Dropdown placement='bottom-end'>
@@ -107,8 +119,14 @@ const Order = () => {
                     aria-label='จัดการคำสั่งซื้อ'
                     className='min-w-[180px]'
                   >
-                    <DropdownItem key='edit'>
-                      อัพเดตสถานะคำสั่งซื้อ
+                    <DropdownItem
+                      key='edit'
+                      onClick={() => {
+                        setState({ orderId: order?.id })
+                        onOpenOrderChange()
+                      }}
+                    >
+                      แก้ไขข้อมูล
                     </DropdownItem>
                   </DropdownMenu>
                 </Dropdown>
@@ -121,8 +139,8 @@ const Order = () => {
       <Pagination
         showControls
         page={page}
-        total={orders?.totalPages ?? 1}
-        onChange={(p) => setPage(p)}
+        total={orders?.totalPages || 1}
+        onChange={(page) => setPage(page)}
       />
     </section>
   )

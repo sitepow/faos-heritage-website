@@ -43,7 +43,11 @@ const VariantForm = () => {
     setState,
   } = useProductStore()
   const queryClient = useQueryClient()
-  const QUERY_KEY = ['dashboard', 'modal', 'variant', variantId]
+
+  const QUERY = {
+    VARIANT: ['dashboard', 'variant', 'modal', variantId],
+    VARIANTS: ['dashboard', 'variants', 'modal'],
+  }
 
   const {
     control,
@@ -56,7 +60,7 @@ const VariantForm = () => {
   })
 
   const { data: variant, isLoading: isLoadingVariant } = useQuery({
-    queryKey: QUERY_KEY,
+    queryKey: QUERY.VARIANT,
     queryFn: () => getVariant(variantId!),
     enabled: !!variantId && isVariantOpen,
   })
@@ -76,7 +80,7 @@ const VariantForm = () => {
       mutationFn: createVariant,
       onSuccess: () => {
         queryClient.invalidateQueries({
-          queryKey: ['dashboard', 'modal', 'variants'],
+          queryKey: QUERY.VARIANTS,
         })
         onClose()
       },
@@ -87,7 +91,7 @@ const VariantForm = () => {
       mutationFn: updateVariant,
       onSuccess: () => {
         queryClient.invalidateQueries({
-          queryKey: ['dashboard', 'modal', 'variants'],
+          queryKey: QUERY.VARIANTS,
         })
         onClose()
       },
@@ -107,7 +111,7 @@ const VariantForm = () => {
 
   const onClose = () => {
     queryClient.removeQueries({
-      queryKey: QUERY_KEY,
+      queryKey: QUERY.VARIANT,
     })
     reset(DEFAULT_VALUES)
     setState({ variantId: null })
@@ -150,6 +154,7 @@ const VariantForm = () => {
                   errorMessage={errors.name?.message}
                   isInvalid={!!errors.name}
                   label='ชื่อตัวเลือก'
+                  variant='bordered'
                 />
               )}
             />
@@ -163,6 +168,7 @@ const VariantForm = () => {
                   isInvalid={!!errors.sku}
                   label='SKU (ถ้ามี)'
                   value={value ?? ''}
+                  variant='bordered'
                 />
               )}
             />
@@ -177,6 +183,7 @@ const VariantForm = () => {
                   isInvalid={!!errors.price}
                   label='ราคา (บาท)'
                   minValue={0}
+                  variant='bordered'
                   onValueChange={(val) => onChange(val || 0)}
                 />
               )}
@@ -191,6 +198,7 @@ const VariantForm = () => {
                   isInvalid={!!errors.stockQuantity}
                   label='จำนวนในสต็อก'
                   minValue={0}
+                  variant='bordered'
                   onValueChange={(val) => onChange(val || 0)}
                 />
               )}

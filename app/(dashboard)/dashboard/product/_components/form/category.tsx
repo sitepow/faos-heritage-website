@@ -52,8 +52,10 @@ const CategoryForm = () => {
   const [oldUrl, setOldUrl] = useState<string | null>(null)
 
   const queryClient = useQueryClient()
-  const CATEGORY_QUERY_KEY = ['dashboard', 'modal', 'categories', categoryId]
-  const CATEGORIES_QUERY_KEY = ['dashboard', 'modal', 'categories']
+  const QUERY = {
+    CATEGORY: ['dashboard', 'categories', 'modal', categoryId],
+    CATEGORIES: ['dashboard', 'categories', 'modal'],
+  }
 
   const {
     control,
@@ -67,7 +69,7 @@ const CategoryForm = () => {
   })
 
   const { data: category, isLoading: isLoadingCategory } = useQuery({
-    queryKey: CATEGORY_QUERY_KEY,
+    queryKey: QUERY.CATEGORY,
     queryFn: () => getCategory(categoryId!),
     enabled: !!categoryId && isCategoryOpen,
   })
@@ -88,7 +90,7 @@ const CategoryForm = () => {
       mutationFn: createCategory,
       onSuccess: () => {
         queryClient.invalidateQueries({
-          queryKey: CATEGORIES_QUERY_KEY,
+          queryKey: QUERY.CATEGORIES,
         })
         onClose()
       },
@@ -99,7 +101,7 @@ const CategoryForm = () => {
       mutationFn: updateCategory,
       onSuccess: () => {
         queryClient.invalidateQueries({
-          queryKey: CATEGORIES_QUERY_KEY,
+          queryKey: QUERY.CATEGORIES,
         })
         onClose()
       },
@@ -153,7 +155,7 @@ const CategoryForm = () => {
     setFilePaths([])
 
     queryClient.removeQueries({
-      queryKey: CATEGORY_QUERY_KEY,
+      queryKey: QUERY.CATEGORY,
     })
     reset(DEFAULT_VALUES)
     setState({ categoryId: null })
@@ -200,6 +202,7 @@ const CategoryForm = () => {
                   isInvalid={!!errors.image}
                   label='URL ของรูปภาพ'
                   value={value ?? ''}
+                  variant='bordered'
                 />
               )}
             />
@@ -212,6 +215,7 @@ const CategoryForm = () => {
                   errorMessage={errors.name?.message}
                   isInvalid={!!errors.name}
                   label='ชื่อหมวดหมู่'
+                  variant='bordered'
                 />
               )}
             />
@@ -225,6 +229,7 @@ const CategoryForm = () => {
                   isInvalid={!!errors.slug}
                   label='Slug'
                   value={value ?? ''}
+                  variant='bordered'
                 />
               )}
             />
