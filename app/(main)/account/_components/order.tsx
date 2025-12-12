@@ -29,7 +29,11 @@ const Order: FC<Props> = ({ order, hideButton }) => {
   }
 
   const trackingInfo = order.trackingNumber && (
-    <Link href={order.trackingWebsite ?? ''} target='_blank'>
+    <Link
+      className='underline'
+      href={order.trackingWebsite ?? ''}
+      target='_blank'
+    >
       หมายเลขสำหรับติดตามสินค้า{' '}
       <span className='text-primary-website'>{order.trackingNumber}</span>
     </Link>
@@ -46,7 +50,7 @@ const Order: FC<Props> = ({ order, hideButton }) => {
           </AvatarGroup>
 
           <div className='flex flex-col'>
-            <span className='line-clamp-2'>
+            <span>
               เลขที่รายการ {orderInfo.id} ({formatNumber(orderInfo.totalItems)}{' '}
               รายการ) {orderInfo.totalPrice}
             </span>
