@@ -1,5 +1,6 @@
 'use client'
 
+import { Avatar } from '@heroui/avatar'
 import { Button } from '@heroui/button'
 import { Input, Textarea } from '@heroui/input'
 import {
@@ -20,7 +21,11 @@ import type { UpdateOrderInput } from '@/actions/order'
 import { useOrderStore } from '../../store'
 
 import { getOrder, updateOrder } from '@/actions/order'
-import { ORDER_STATUS_FLOW, ORDER_STEPS_ALL } from '@/utils/const'
+import {
+  ORDER_STATUS_FLOW,
+  ORDER_STEPS_ALL,
+  SHIPPING_PROVIDERS,
+} from '@/utils/const'
 
 const OrderForm = () => {
   const queryClient = useQueryClient()
@@ -45,13 +50,16 @@ const OrderForm = () => {
 
   const [reason, setReason] = useState('')
   const [trackingNumber, setTrackingNumber] = useState('')
-  const [trackingWebsite, setTrackingWebsite] = useState('')
+  const [trackingWebsite, setTrackingWebsite] = useState(
+    SHIPPING_PROVIDERS[0]?.value,
+  )
 
   useEffect(() => {
     if (order?.status) {
       setSelectedStatus(order.status)
+      setTrackingWebsite(order?.trackingWebsite ?? SHIPPING_PROVIDERS[0]?.value)
       setTrackingNumber(order?.trackingNumber ?? '')
-      setTrackingWebsite(order?.trackingWebsite ?? '')
+      setReason(order?.cancelReason ?? '')
     }
   }, [order])
 
@@ -100,7 +108,11 @@ const OrderForm = () => {
       }),
     })
   }
+
   const isPending = isPendingUpdateOrder || isLoadingOrder || !selectedStatus
+  const isFinalStatus =
+    currentStatus === OrderStatus.CANCELLED ||
+    currentStatus === OrderStatus.REFUNDED
 
   return (
     <Modal
@@ -120,6 +132,7 @@ const OrderForm = () => {
           <ModalBody>
             <Select
               disallowEmptySelection
+              isDisabled={isFinalStatus}
               label='สถานะคำสั่งซื้อ'
               selectedKeys={selectedStatus ? [selectedStatus] : []}
               variant='bordered'
@@ -133,6 +146,7 @@ const OrderForm = () => {
                 <SelectItem
                   key={key}
                   isDisabled={
+                    isFinalStatus ||
                     ORDER_STATUS_FLOW[key] < ORDER_STATUS_FLOW[currentStatus]
                   }
                 >
@@ -143,6 +157,7 @@ const OrderForm = () => {
 
             {requireReason && (
               <Textarea
+                isDisabled={isFinalStatus}
                 label='เหตุผล'
                 minRows={5}
                 placeholder='กรุณากรอกเหตุผลในการยกเลิก / คืนเงิน'
@@ -154,16 +169,35 @@ const OrderForm = () => {
 
             {requireTracking && (
               <>
-                <Input
-                  label='เว็บไซต์ขนส่ง'
-                  placeholder='กรอกเว็บไซต์ขนส่ง [ตัวอย่าง: https://track.thailandpost.com]'
-                  value={trackingWebsite}
+                <Select
+                  disallowEmptySelection
+                  label='ขนส่ง'
+                  selectedKeys={trackingWebsite ? [trackingWebsite] : []}
                   variant='bordered'
-                  onChange={(e) => setTrackingWebsite(e.target.value)}
-                />
+                  onSelectionChange={(keys) => {
+                    const selected = Array.from(keys)[0] as OrderStatus
+
+                    setTrackingWebsite(selected)
+                  }}
+                >
+                  {SHIPPING_PROVIDERS?.map((provider) => (
+                    <SelectItem
+                      key={provider.value}
+                      startContent={
+                        <Avatar src={provider?.image || '/placeholder.svg'} />
+                      }
+                    >
+                      {provider.label}
+                    </SelectItem>
+                  ))}
+                </Select>
                 <Input
                   label='หมายเลข Tracking'
-                  placeholder='กรอกหมายเลขสิ่งของ 13 หลัก [ตัวอย่าง : EF582568151TH]'
+                  placeholder={`กรอกหมายเลข Tracking [ตัวอย่าง: ${
+                    SHIPPING_PROVIDERS.find(
+                      (provider) => provider.value === trackingWebsite,
+                    )?.placeholder
+                  }]`}
                   value={trackingNumber}
                   variant='bordered'
                   onChange={(e) => setTrackingNumber(e.target.value)}
@@ -182,7 +216,8 @@ const OrderForm = () => {
             isDisabled={
               !selectedStatus ||
               (requireReason && !reason.trim()) ||
-              (requireTracking && !trackingNumber.trim())
+              (requireTracking && !trackingNumber.trim()) ||
+              isFinalStatus
             }
             variant='faded'
             onClick={onSubmit}
