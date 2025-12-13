@@ -5,7 +5,10 @@ import type { Prisma } from '@prisma/client'
 
 import { productSchema } from '../schema/product'
 
-import { getPriceMinMaxFromVariants, removeEmptyField } from '@/utils/helper'
+import {
+  getPriceAndStockMinMaxFromVariants,
+  removeEmptyField,
+} from '@/utils/helper'
 import { getPrismaError, prisma } from '@/utils/prisma'
 
 type GetProductResult = Awaited<ReturnType<typeof getProduct>>
@@ -125,9 +128,10 @@ const getProduct = async (productId: string, userId?: string) => {
       throw new Error('ไม่พบข้อมูลสินค้า')
     }
 
-    const { priceMin, priceMax } = getPriceMinMaxFromVariants(product.variants)
+    const { priceMin, priceMax, stockMin, stockMax } =
+      getPriceAndStockMinMaxFromVariants(product.variants)
 
-    return { ...product, priceMin, priceMax }
+    return { ...product, priceMin, priceMax, stockMin, stockMax }
   } catch (error) {
     getPrismaError(error)
   }
@@ -171,8 +175,21 @@ const getProducts = async (page: number = 1, limit: number = 10) => {
       prisma.product.count(),
     ])
 
+    const resultItems = items?.map((product) => {
+      const { priceMin, priceMax, stockMin, stockMax } =
+        getPriceAndStockMinMaxFromVariants(product?.variants)
+
+      return {
+        ...product,
+        priceMin,
+        priceMax,
+        stockMin,
+        stockMax,
+      }
+    })
+
     return {
-      items,
+      items: resultItems,
       total,
       page,
       limit,

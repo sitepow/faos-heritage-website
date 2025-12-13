@@ -37,6 +37,40 @@ const getOrder = async (orderId: string) => {
 
     const order = await prisma.order.findUnique({
       where: { id: orderId },
+      select: {
+        id: true,
+        status: true,
+        shippingAddressText: true,
+        trackingNumber: true,
+        trackingWebsite: true,
+        cancelReason: true,
+        createdAt: true,
+        paidAt: true,
+        shippedAt: true,
+        deliveredAt: true,
+        total: true,
+        subtotal: true,
+        items: {
+          select: {
+            id: true,
+            productId: true,
+            variantId: true,
+            productName: true,
+            price: true,
+            quantity: true,
+            product: {
+              select: {
+                images: {
+                  select: {
+                    url: true,
+                  },
+                },
+                unit: true,
+              },
+            },
+          },
+        },
+      },
     })
 
     if (!order) throw new Error('ไม่พบคำสั่งซื้อ')
@@ -253,8 +287,11 @@ const updateOrder = async (data: UpdateOrderInput) => {
           paidAt: new Date(),
         },
 
-        [OrderStatus.DELIVERED]: {
+        [OrderStatus.PROCESSING]: {
           shippedAt: new Date(),
+        },
+
+        [OrderStatus.DELIVERED]: {
           deliveredAt: new Date(),
           trackingWebsite,
           trackingNumber,

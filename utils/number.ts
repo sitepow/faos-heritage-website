@@ -22,4 +22,10 @@ const formatNumber = (value: number) => {
   return new Intl.NumberFormat().format(value)
 }
 
-export { formatCurrencyRange, formatCurrency, formatNumber }
+const formatNumberRange = (min: number, max: number, locale = 'th-TH') => {
+  return new Intl.NumberFormat(locale, {
+    maximumFractionDigits: 0,
+  }).formatRange(min, max)
+}
+
+export { formatCurrencyRange, formatCurrency, formatNumber, formatNumberRange }

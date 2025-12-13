@@ -124,7 +124,7 @@ const OrderForm = () => {
       onOpenChange={onOpenOrderChange}
     >
       <ModalContent>
-        <ModalHeader>แก้ไขคำสั่งซื้อ</ModalHeader>
+        <ModalHeader>สถานะคำสั่งซื้อ</ModalHeader>
 
         {isPending && <Spinner label='กำลังโหลด...' />}
 

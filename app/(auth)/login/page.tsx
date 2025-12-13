@@ -87,7 +87,7 @@ const Index = () => {
         </span>
       </CardHeader>
 
-      <Tabs fullWidth defaultSelectedKey='login'>
+      <Tabs fullWidth defaultSelectedKey='login' variant='bordered'>
         <Tab key='login' title='เข้าสู่ระบบ'>
           <Form onSubmit={formLogin.handleSubmit(submitLogin)}>
             <Input
@@ -173,32 +173,40 @@ const Index = () => {
       <CardBody className='items-center justify-center gap-4'>
         <div className='relative flex w-full items-center'>
           <div className='flex-grow border-t border-divider' />
-          <span className='px-4 text-gray-500'>หรือ</span>
+          <span className='px-4 text-gray-500'>หรือดำเนินการด้วย</span>
           <div className='flex-grow border-t border-divider' />
         </div>
 
         <div className='flex w-full flex-wrap justify-center gap-2'>
           <Card className='w-fit cursor-pointer'>
-            <CardBody className='p-2' onClick={() => signIn('google')}>
+            <CardBody
+              className='flex-row items-center gap-2 p-2'
+              onClick={() => signIn('google')}
+            >
               <Image
                 alt='google'
-                className='rounded-full'
+                className='shrink-0 rounded-full'
                 height={30}
                 src='/google.png'
                 width={30}
               />
+              <span>Google</span>
             </CardBody>
           </Card>
 
           <Card className='w-fit cursor-pointer'>
-            <CardBody className='p-2' onClick={() => signIn('facebook')}>
+            <CardBody
+              className='flex-row items-center gap-2 p-2'
+              onClick={() => signIn('facebook')}
+            >
               <Image
                 alt='facebook'
-                className='rounded-full'
+                className='shrink-0 rounded-full'
                 height={30}
                 src='/facebook.png'
                 width={30}
               />
+              <span>Facebook</span>
             </CardBody>
           </Card>
         </div>

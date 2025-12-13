@@ -5,6 +5,7 @@ import Link from 'next/link'
 import type { GetOrderResult } from '@/app/(dashboard)/dashboard/order/actions/order'
 import type { FC } from 'react'
 
+import { useOrderStore } from '@/app/(dashboard)/dashboard/order/store'
 import { Stepper } from '@/components/stepper'
 import { formatDate } from '@/utils/date'
 import { getOrderStatus } from '@/utils/helper'
@@ -16,6 +17,8 @@ interface Props {
 }
 
 const Order: FC<Props> = ({ order, hideButton }) => {
+  const { onOpenViewChange, setState } = useOrderStore()
+
   const productImages = order.items?.map(
     (item) => item.product?.images?.[0]?.url ?? '/placeholder.svg',
   )
@@ -63,14 +66,28 @@ const Order: FC<Props> = ({ order, hideButton }) => {
         </div>
 
         {!hideButton && (
-          <div className='flex items-center gap-2 sm:justify-center'>
-            <Button variant='faded'>รายละเอียด</Button>
-            <Button variant='faded'>ชำระเงิน</Button>
+          <div className='flex items-center gap-2 sm:justify-end'>
+            <Button
+              variant='faded'
+              onClick={() => {
+                setState({ orderId: order?.id })
+                onOpenViewChange()
+              }}
+            >
+              รายละเอียด
+            </Button>
+            <Button variant='faded'>ชำระเงินสินค้า</Button>
           </div>
         )}
       </div>
 
-      <Stepper status={order.status} />
+      <Stepper
+        createdAt={order?.createdAt!}
+        deliveredAt={order?.deliveredAt!}
+        paidAt={order?.paidAt!}
+        shippedAt={order?.shippedAt!}
+        status={order.status}
+      />
     </div>
   )
 }

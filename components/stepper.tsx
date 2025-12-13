@@ -1,18 +1,31 @@
+import { OrderStatus } from '@prisma/client'
 import { CheckIcon, XIcon } from 'lucide-react'
 import React from 'react'
 
-import type { OrderStatus } from '@prisma/client'
 import type { ComponentProps, FC } from 'react'
 
 import { ORDER_STEPS } from '@/utils/const'
+import { formatDate } from '@/utils/date'
 import { getOrderStatus } from '@/utils/helper'
 import { cn } from '@/utils/style'
 
 interface Props extends ComponentProps<'div'> {
-  status?: OrderStatus
+  status: OrderStatus
+  createdAt: Date
+  paidAt: Date
+  shippedAt: Date
+  deliveredAt: Date
 }
 
-const Stepper: FC<Props> = ({ className, status, ...props }) => {
+const Stepper: FC<Props> = ({
+  className,
+  status,
+  createdAt,
+  paidAt,
+  shippedAt,
+  deliveredAt,
+  ...props
+}) => {
   const isCancelledFlow = status === 'CANCELLED' || status === 'REFUNDED'
 
   if (isCancelledFlow) {
@@ -64,7 +77,19 @@ const Stepper: FC<Props> = ({ className, status, ...props }) => {
                     !isCompleted && !isCurrent && 'text-default-500',
                   )}
                 >
-                  {label}
+                  {label}{' '}
+                  {statusKey === OrderStatus.PENDING &&
+                    createdAt &&
+                    formatDate(createdAt!)}
+                  {statusKey === OrderStatus.PAID &&
+                    paidAt &&
+                    formatDate(paidAt!)}
+                  {statusKey === OrderStatus.PROCESSING &&
+                    shippedAt &&
+                    formatDate(shippedAt!)}
+                  {statusKey === OrderStatus.DELIVERED &&
+                    deliveredAt &&
+                    formatDate(deliveredAt!)}
                 </p>
               </div>
 

@@ -74,24 +74,48 @@ const getFullAddress = (address: GetAddressResult) => {
 const getOrderStatus = (key: OrderStatus) => ORDER_ALL_STATUS[key] ?? key
 const getProductUnit = (key: ProductUnit) => PRODUCT_UNIT[key] ?? key
 
-const getPriceMinMaxFromVariants = (
-  variants: Array<{ price: number }> | undefined | null,
+interface Variant {
+  price?: number
+  stockQuantity?: number
+}
+
+const getPriceAndStockMinMaxFromVariants = (
+  variants: Variant[] | undefined | null,
 ) => {
   if (!variants || variants.length === 0) {
-    return { min: null, max: null }
+    return {
+      priceMin: null,
+      priceMax: null,
+      stockMin: null,
+      stockMax: null,
+    }
   }
 
-  const prices = variants
-    .map((variant) => variant.price)
-    .filter((price): price is number => typeof price === 'number')
+  let priceMin: number | null = null
+  let priceMax: number | null = null
+  let stockMin: number | null = null
+  let stockMax: number | null = null
 
-  if (prices.length === 0) {
-    return { min: null, max: null }
-  }
+  variants.forEach(({ price, stockQuantity }) => {
+    if (typeof price === 'number') {
+      priceMin = priceMin === null ? price : Math.min(priceMin, price)
+      priceMax = priceMax === null ? price : Math.max(priceMax, price)
+    }
+
+    if (typeof stockQuantity === 'number') {
+      stockMin =
+        stockMin === null ? stockQuantity : Math.min(stockMin, stockQuantity)
+
+      stockMax =
+        stockMax === null ? stockQuantity : Math.max(stockMax, stockQuantity)
+    }
+  })
 
   return {
-    priceMin: Math.min(...prices),
-    priceMax: Math.max(...prices),
+    priceMin,
+    priceMax,
+    stockMin,
+    stockMax,
   }
 }
 
@@ -103,5 +127,5 @@ export {
   getFullAddress,
   getOrderStatus,
   getProductUnit,
-  getPriceMinMaxFromVariants,
+  getPriceAndStockMinMaxFromVariants,
 }

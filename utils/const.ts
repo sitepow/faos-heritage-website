@@ -42,7 +42,7 @@ enum ACCOUNT_TAB {
 }
 
 const ORDER_ALL_STATUS: Record<OrderStatus, string> = {
-  PENDING: 'รอชำระเงิน',
+  PENDING: 'สร้างคำสั่งซื้อ',
   PAID: 'ชำระเงินแล้ว',
   PROCESSING: 'จัดเตรียมสินค้า',
   DELIVERED: 'ส่งให้ขนส่งแล้ว',

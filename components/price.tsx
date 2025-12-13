@@ -1,7 +1,7 @@
-/* eslint-disable no-nested-ternary */
 import type { ComponentProps, FC } from 'react'
 
 import { formatCurrency, formatCurrencyRange } from '@/utils/number'
+import { getRangeDisplayValue } from '@/utils/range'
 import { cn } from '@/utils/style'
 
 interface Props {
@@ -19,19 +19,17 @@ const Price: FC<Props & ComponentProps<'div'>> = ({
   className,
   ...props
 }) => {
-  const hasVariant =
-    priceMin !== null &&
-    priceMax !== null &&
-    typeof priceMin === 'number' &&
-    typeof priceMax === 'number'
-
-  const isRange = hasVariant && priceMin !== priceMax
-
-  const displayPrice = hasVariant
-    ? isRange
-      ? formatCurrencyRange(priceMin, priceMax)
-      : formatCurrency(priceMin)
-    : formatCurrency(price)
+  const displayPrice = getRangeDisplayValue(
+    {
+      min: priceMin,
+      max: priceMax,
+      fallback: price,
+    },
+    {
+      formatSingle: formatCurrency,
+      formatRange: formatCurrencyRange,
+    },
+  )
 
   return (
     <div

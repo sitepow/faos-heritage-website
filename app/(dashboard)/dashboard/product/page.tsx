@@ -50,7 +50,13 @@ import {
   TrendCardSkeleton,
 } from '@/app/(dashboard)/_components/trend-card'
 import { ModalConfirm } from '@/components/modal/confirm'
-import { formatCurrency, formatNumber } from '@/utils/number'
+import {
+  formatCurrency,
+  formatCurrencyRange,
+  formatNumber,
+  formatNumberRange,
+} from '@/utils/number'
+import { getRangeDisplayValue } from '@/utils/range'
 
 const ITEM_PER_PAGE = 10
 
@@ -175,122 +181,150 @@ const Product = () => {
           isLoading={isLoadingProducts}
           loadingContent={<Spinner label='กำลังโหลด...' />}
         >
-          {(products?.items ?? []).map((product) => (
-            <TableRow key={product.id}>
-              <TableCell>{product.id}</TableCell>
-              <TableCell>
-                {product?.isDigitalProduct ? (
-                  <Chip
-                    startContent={
-                      <FileIcon className='size-4 text-default-500' />
-                    }
-                    variant='faded'
-                  >
-                    สินค้าดิจิทัล
+          {(products?.items ?? []).map((product) => {
+            const price = getRangeDisplayValue(
+              {
+                min: product?.priceMin,
+                max: product?.priceMax,
+                fallback: product?.price,
+              },
+              {
+                formatSingle: formatCurrency,
+                formatRange: formatCurrencyRange,
+              },
+            )
+
+            const stock = getRangeDisplayValue(
+              {
+                min: product?.stockMin,
+                max: product?.stockMax,
+                fallback: product?.stockQuantity,
+              },
+              {
+                formatSingle: formatNumber,
+                formatRange: formatNumberRange,
+              },
+            )
+
+            return (
+              <TableRow key={product.id}>
+                <TableCell>{product.id}</TableCell>
+                <TableCell>
+                  {product?.isDigitalProduct ? (
+                    <Chip
+                      startContent={
+                        <FileIcon className='size-4 text-default-500' />
+                      }
+                      variant='faded'
+                    >
+                      สินค้าดิจิทัล
+                    </Chip>
+                  ) : (
+                    '-'
+                  )}
+                </TableCell>
+                <TableCell>
+                  {product?.images?.length === 0 && <span>-</span>}
+
+                  {product?.images?.length !== 0 && (
+                    <AvatarGroup max={3}>
+                      {product?.images?.map((image) => (
+                        <Avatar key={image?.url} src={image?.url} />
+                      ))}
+                    </AvatarGroup>
+                  )}
+                </TableCell>
+                <TableCell className='max-w-72 min-w-72'>
+                  {product?.name ?? '-'}
+                </TableCell>
+                <TableCell>{price}</TableCell>
+                <TableCell>{stock}</TableCell>
+                <TableCell className='max-w-52 min-w-52'>
+                  <Chip variant='bordered'>
+                    {product?.category?.name ?? '-'}
                   </Chip>
-                ) : (
-                  '-'
-                )}
-              </TableCell>
-              <TableCell>
-                {product?.images?.length === 0 && <span>-</span>}
+                </TableCell>
+                <TableCell className='min-w-60'>
+                  <div className='flex flex-col'>
+                    {product?.variants?.length === 0 && <span>-</span>}
 
-                {product?.images?.length !== 0 && (
-                  <AvatarGroup max={3}>
-                    {product?.images?.map((image) => (
-                      <Avatar key={image?.url} src={image?.url} />
-                    ))}
-                  </AvatarGroup>
-                )}
-              </TableCell>
-              <TableCell className='max-w-72 min-w-72'>
-                {product?.name ?? '-'}
-              </TableCell>
-              <TableCell>{formatCurrency(product.price)}</TableCell>
-              <TableCell>{formatNumber(product.stockQuantity)}</TableCell>
-              <TableCell className='max-w-52 min-w-52'>
-                <Chip variant='bordered'>{product?.category?.name ?? '-'}</Chip>
-              </TableCell>
-              <TableCell className='min-w-60'>
-                <div className='flex flex-col'>
-                  {product?.variants?.length === 0 && <span>-</span>}
-
-                  {product?.variants?.length !== 0 &&
-                    product?.variants?.map((variant) => {
-                      return (
-                        <div key={variant.name} className='flex flex-col'>
-                          <span className='line-clamp-1'>{variant.name}</span>
-                          <div className='flex gap-2'>
-                            <span className='text-default-500'>
-                              ราคา: {formatCurrency(variant.price)}
-                            </span>
-                            <span className='text-default-500'>
-                              สต็อค: {formatNumber(variant.stockQuantity)}
-                            </span>
+                    {product?.variants?.length !== 0 &&
+                      product?.variants?.map((variant) => {
+                        return (
+                          <div key={variant.name} className='flex flex-col'>
+                            <span className='line-clamp-1'>{variant.name}</span>
+                            <div className='flex gap-2'>
+                              <span className='text-default-500'>
+                                ราคา: {formatCurrency(variant.price)}
+                              </span>
+                              <span className='text-default-500'>
+                                สต็อค: {formatNumber(variant.stockQuantity)}
+                              </span>
+                            </div>
                           </div>
-                        </div>
-                      )
-                    })}
-                </div>
-              </TableCell>
-              <TableCell className='flex gap-2.5'>
-                <Dropdown placement='bottom-end'>
-                  <DropdownTrigger>
-                    <Button isIconOnly size='sm' variant='light'>
-                      <EllipsisVerticalIcon className='size-5 text-default-500' />
-                    </Button>
-                  </DropdownTrigger>
-                  <DropdownMenu
-                    aria-label='จัดการสินค้า'
-                    className='min-w-[180px]'
-                  >
-                    <DropdownItem
-                      key='edit'
-                      startContent={<EditIcon className='size-4' />}
-                      onClick={() => {
-                        setState({ productId: product?.id })
-                        onOpenProductChange()
-                      }}
+                        )
+                      })}
+                  </div>
+                </TableCell>
+                <TableCell className='flex gap-2.5'>
+                  <Dropdown placement='bottom-end'>
+                    <DropdownTrigger>
+                      <Button isIconOnly size='sm' variant='light'>
+                        <EllipsisVerticalIcon className='size-5 text-default-500' />
+                      </Button>
+                    </DropdownTrigger>
+                    <DropdownMenu
+                      aria-label='จัดการสินค้า'
+                      className='min-w-[180px]'
                     >
-                      แก้ไขข้อมูล
-                    </DropdownItem>
-                    <DropdownItem
-                      key='image'
-                      startContent={<ImageIcon className='size-4' />}
-                      onClick={() => {
-                        setState({ productId: product?.id })
-                        onOpenImageManagerChange()
-                      }}
-                    >
-                      จัดการรูปภาพ
-                    </DropdownItem>
-                    <DropdownItem
-                      key='variant'
-                      startContent={<LayoutIcon className='size-4' />}
-                      onClick={() => {
-                        setState({ productId: product?.id })
-                        onOpenVariantManagerChange()
-                      }}
-                    >
-                      จัดการตัวเลือก
-                    </DropdownItem>
-                    <DropdownItem
-                      key='delete'
-                      className='text-danger'
-                      color='danger'
-                      startContent={<TrashIcon className='size-4' />}
-                      onClick={() => {
-                        setState({ productId: product?.id })
-                        onOpenDeleteChange()
-                      }}
-                    >
-                      ลบสินค้า
-                    </DropdownItem>
-                  </DropdownMenu>
-                </Dropdown>
-              </TableCell>
-            </TableRow>
-          ))}
+                      <DropdownItem
+                        key='edit'
+                        startContent={<EditIcon className='size-4' />}
+                        onClick={() => {
+                          setState({ productId: product?.id })
+                          onOpenProductChange()
+                        }}
+                      >
+                        แก้ไขข้อมูล
+                      </DropdownItem>
+                      <DropdownItem
+                        key='image'
+                        startContent={<ImageIcon className='size-4' />}
+                        onClick={() => {
+                          setState({ productId: product?.id })
+                          onOpenImageManagerChange()
+                        }}
+                      >
+                        จัดการรูปภาพ
+                      </DropdownItem>
+                      <DropdownItem
+                        key='variant'
+                        startContent={<LayoutIcon className='size-4' />}
+                        onClick={() => {
+                          setState({ productId: product?.id })
+                          onOpenVariantManagerChange()
+                        }}
+                      >
+                        จัดการตัวเลือก
+                      </DropdownItem>
+                      <DropdownItem
+                        key='delete'
+                        className='text-danger'
+                        color='danger'
+                        startContent={<TrashIcon className='size-4' />}
+                        onClick={() => {
+                          setState({ productId: product?.id })
+                          onOpenDeleteChange()
+                        }}
+                      >
+                        ลบสินค้า
+                      </DropdownItem>
+                    </DropdownMenu>
+                  </Dropdown>
+                </TableCell>
+              </TableRow>
+            )
+          })}
         </TableBody>
       </Table>
 

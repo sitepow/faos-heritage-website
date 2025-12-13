@@ -3,6 +3,8 @@ const formatDate = (
   locale = 'th-TH',
   options?: Intl.DateTimeFormatOptions,
 ) => {
+  if (!value) return 'ไม่ทราบวันที่'
+
   const date = value instanceof Date ? value : new Date(value)
 
   return new Intl.DateTimeFormat(

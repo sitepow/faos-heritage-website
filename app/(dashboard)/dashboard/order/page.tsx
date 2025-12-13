@@ -20,10 +20,11 @@ import {
   TableRow,
 } from '@heroui/table'
 import { useQuery } from '@tanstack/react-query'
-import { EllipsisVerticalIcon } from 'lucide-react'
+import { ArchiveRestoreIcon, EllipsisVerticalIcon, EyeIcon } from 'lucide-react'
 import { useState } from 'react'
 
 import { OrderForm } from './_components/form/order'
+import { OrderView } from './_components/view/order'
 import { getOrderDashboard, getOrders } from './actions/order'
 import { useOrderStore } from './store'
 
@@ -39,7 +40,7 @@ const ITEM_PER_PAGE = 8
 
 const Order = () => {
   const [page, setPage] = useState(1)
-  const { onOpenOrderChange, setState } = useOrderStore()
+  const { onOpenOrderChange, onOpenViewChange, setState } = useOrderStore()
 
   const QUERY = {
     DASHBOARD: ['dashboard', 'orders', 'card'],
@@ -59,6 +60,7 @@ const Order = () => {
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
       <OrderForm />
+      <OrderView />
 
       <div className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
         {isLoadingDashboard &&
@@ -76,6 +78,7 @@ const Order = () => {
           <TableColumn>วันที่สั่งซื้อ</TableColumn>
           <TableColumn>ยอดรวม</TableColumn>
           <TableColumn>สถานะ</TableColumn>
+          <TableColumn>หมายเลข Tracking</TableColumn>
           <TableColumn>จัดการ</TableColumn>
         </TableHeader>
         <TableBody
@@ -108,6 +111,13 @@ const Order = () => {
               <TableCell>
                 <Chip variant='bordered'>{getOrderStatus(order.status)}</Chip>
               </TableCell>
+              <TableCell>
+                {order?.trackingNumber ? (
+                  <Chip variant='bordered'>{order?.trackingNumber}</Chip>
+                ) : (
+                  '-'
+                )}
+              </TableCell>
               <TableCell className='flex gap-2.5'>
                 <Dropdown placement='bottom-end'>
                   <DropdownTrigger>
@@ -121,12 +131,23 @@ const Order = () => {
                   >
                     <DropdownItem
                       key='edit'
+                      startContent={<ArchiveRestoreIcon className='size-4' />}
                       onClick={() => {
                         setState({ orderId: order?.id })
                         onOpenOrderChange()
                       }}
                     >
-                      แก้ไขข้อมูล
+                      สถานะคำสั่งซื้อ
+                    </DropdownItem>
+                    <DropdownItem
+                      key='view'
+                      startContent={<EyeIcon className='size-4' />}
+                      onClick={() => {
+                        setState({ orderId: order?.id })
+                        onOpenViewChange()
+                      }}
+                    >
+                      ดูรายละเอียด
                     </DropdownItem>
                   </DropdownMenu>
                 </Dropdown>

@@ -31,6 +31,9 @@ const getOrders = async (
           trackingWebsite: true,
           trackingNumber: true,
           createdAt: true,
+          deliveredAt: true,
+          shippedAt: true,
+          paidAt: true,
           total: true,
           user: {
             select: {

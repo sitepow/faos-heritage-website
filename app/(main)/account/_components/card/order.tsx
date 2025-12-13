@@ -9,6 +9,7 @@ import { useState } from 'react'
 
 import { Order } from '../order'
 
+import { OrderView } from '@/app/(dashboard)/dashboard/order/_components/view/order'
 import { getOrders } from '@/app/(dashboard)/dashboard/order/actions/order'
 
 const ITEM_PER_PAGE = 8
@@ -31,49 +32,53 @@ const OrderCard = () => {
   const ordersLength = orders?.items?.length
 
   return (
-    <Card fullWidth>
-      <CardHeader>
-        <span>รายการคำสั่งซื้อของฉัน</span>
-      </CardHeader>
-      {isLoadingOrders && (
-        <CardBody>
-          <Skeleton className='h-20 w-full rounded-lg' />
-        </CardBody>
-      )}
+    <div>
+      <OrderView />
 
-      {!isLoadingOrders && ordersLength === 0 && (
-        <CardBody>
-          <div className='flex flex-col items-center gap-2 text-default-500'>
-            <AlertCircleIcon />
-            <span className='text-center'>
-              คุณยังไม่มีคำสั่งซื้อสินค้า
-              <br />
-              <Link className='underline' href='/products'>
-                สำรวจสินค้าทั้งหมด
-              </Link>
-            </span>
-          </div>
-        </CardBody>
-      )}
+      <Card fullWidth>
+        <CardHeader>
+          <span>รายการคำสั่งซื้อของฉัน</span>
+        </CardHeader>
+        {isLoadingOrders && (
+          <CardBody>
+            <Skeleton className='h-20 w-full rounded-lg' />
+          </CardBody>
+        )}
 
-      {!isLoadingOrders && ordersLength !== 0 && (
-        <CardBody className='gap-4'>
-          {orders?.items?.map((order) => (
-            <Order key={order?.id} order={order} />
-          ))}
-        </CardBody>
-      )}
+        {!isLoadingOrders && ordersLength === 0 && (
+          <CardBody>
+            <div className='flex flex-col items-center gap-2 text-default-500'>
+              <AlertCircleIcon />
+              <span className='text-center'>
+                คุณยังไม่มีคำสั่งซื้อสินค้า
+                <br />
+                <Link className='underline' href='/products'>
+                  สำรวจสินค้าทั้งหมด
+                </Link>
+              </span>
+            </div>
+          </CardBody>
+        )}
 
-      {!isLoadingOrders && ordersLength !== 0 && (
-        <Pagination
-          showControls
-          className='mx-auto my-2.5'
-          page={page}
-          total={orders?.totalPages || 1}
-          onChange={(page) => setPage(page)}
-        />
-      )}
-    </Card>
+        {!isLoadingOrders && ordersLength !== 0 && (
+          <CardBody className='gap-4'>
+            {orders?.items?.map((order) => (
+              <Order key={order?.id} order={order} />
+            ))}
+          </CardBody>
+        )}
+
+        {!isLoadingOrders && ordersLength !== 0 && (
+          <Pagination
+            showControls
+            className='mx-auto my-2.5'
+            page={page}
+            total={orders?.totalPages || 1}
+            onChange={(page) => setPage(page)}
+          />
+        )}
+      </Card>
+    </div>
   )
 }
 
