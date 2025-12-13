@@ -1,7 +1,9 @@
-import type { GetAddressResult } from '@/app/(main)/account/actions/address'
-import type { OrderStatus, ProductUnit } from '@prisma/client'
+import { OrderStatus } from '@prisma/client'
 
-import { ORDER_ALL_STATUS, PRODUCT_UNIT } from './const'
+import type { GetAddressResult } from '@/app/(main)/account/actions/address'
+import type { ProductUnit } from '@prisma/client'
+
+import { ORDER_ALL_STATUS, ORDER_STATUS_FLOW, PRODUCT_UNIT } from './const'
 
 import { siteConfig } from '@/config/site'
 
@@ -119,6 +121,23 @@ const getPriceAndStockMinMaxFromVariants = (
   }
 }
 
+const canSelectStatus = (current: OrderStatus, next: OrderStatus) => {
+  const currentStep = ORDER_STATUS_FLOW[current]
+  const nextStep = ORDER_STATUS_FLOW[next]
+
+  if (current === next) return false
+
+  if (next === OrderStatus.CANCELLED) {
+    return current === OrderStatus.PENDING
+  }
+
+  if (next === OrderStatus.REFUNDED) {
+    return current === OrderStatus.DELIVERED
+  }
+
+  return nextStep === currentStep + 1
+}
+
 export {
   createSlug,
   getFooter,
@@ -128,4 +147,5 @@ export {
   getOrderStatus,
   getProductUnit,
   getPriceAndStockMinMaxFromVariants,
+  canSelectStatus,
 }

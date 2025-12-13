@@ -1,5 +1,6 @@
 import { Avatar, AvatarGroup } from '@heroui/avatar'
 import { Button } from '@heroui/button'
+import { OrderStatus } from '@prisma/client'
 import Link from 'next/link'
 
 import type { GetOrderResult } from '@/app/(dashboard)/dashboard/order/actions/order'
@@ -9,38 +10,29 @@ import { useOrderStore } from '@/app/(dashboard)/dashboard/order/store'
 import { Stepper } from '@/components/stepper'
 import { formatDate } from '@/utils/date'
 import { getOrderStatus } from '@/utils/helper'
-import { formatCurrency, formatNumber } from '@/utils/number'
+import { formatNumber } from '@/utils/number'
 
 interface Props {
   order: GetOrderResult
   hideButton?: boolean
 }
 
+const DISABLE_RECEIPT_STATUSES: OrderStatus[] = [
+  OrderStatus.CANCELLED,
+  OrderStatus.PAID,
+  OrderStatus.PROCESSING,
+  OrderStatus.REFUNDED,
+]
+
 const Order: FC<Props> = ({ order, hideButton }) => {
-  const { onOpenViewChange, setState } = useOrderStore()
+  const { onOpenViewChange, onOpenOrderCancelChange, setState } =
+    useOrderStore()
 
   const productImages = order.items?.map(
     (item) => item.product?.images?.[0]?.url ?? '/placeholder.svg',
   )
 
-  const orderInfo = {
-    id: order.id,
-    totalItems: order.items.length,
-    totalPrice: formatCurrency(order.total),
-    createdAt: formatDate(order.createdAt),
-    statusText: getOrderStatus(order.status),
-  }
-
-  const trackingInfo = order.trackingNumber && (
-    <Link
-      className='underline'
-      href={order.trackingWebsite ?? ''}
-      target='_blank'
-    >
-      หมายเลขสำหรับติดตามสินค้า{' '}
-      <span className='text-primary-website'>{order.trackingNumber}</span>
-    </Link>
-  )
+  const isDisableReceipt = DISABLE_RECEIPT_STATUSES.includes(order.status)
 
   return (
     <div className='flex flex-col gap-4'>
@@ -54,19 +46,31 @@ const Order: FC<Props> = ({ order, hideButton }) => {
 
           <div className='flex flex-col'>
             <span>
-              เลขที่รายการ {orderInfo.id} ({formatNumber(orderInfo.totalItems)}{' '}
-              รายการ) {orderInfo.totalPrice}
+              เลขที่รายการ {order?.id} ({formatNumber(order?.items?.length)}{' '}
+              รายการ) {order?.total}
             </span>
 
             <span className='text-default-500'>
-              วันที่สั่งซื้อ {orderInfo.createdAt} ({orderInfo.statusText}){' '}
-              {trackingInfo}
+              วันที่สั่งซื้อ {formatDate(order.createdAt)} (
+              {getOrderStatus(order.status)}){' '}
+              {order.trackingNumber && (
+                <Link
+                  className='underline'
+                  href={order.trackingWebsite ?? ''}
+                  target='_blank'
+                >
+                  หมายเลขสำหรับติดตามสินค้า{' '}
+                  <span className='text-primary-website'>
+                    {order.trackingNumber}
+                  </span>
+                </Link>
+              )}
             </span>
           </div>
         </div>
 
         {!hideButton && (
-          <div className='flex items-center gap-2 sm:justify-end'>
+          <div className='flex flex-wrap items-center gap-2 sm:justify-end'>
             <Button
               variant='faded'
               onClick={() => {
@@ -76,7 +80,25 @@ const Order: FC<Props> = ({ order, hideButton }) => {
             >
               รายละเอียด
             </Button>
-            <Button variant='faded'>ชำระเงินสินค้า</Button>
+            {order?.status === OrderStatus.PENDING && (
+              <Button
+                variant='faded'
+                onClick={() => {
+                  setState({ orderId: order?.id })
+                  onOpenOrderCancelChange()
+                }}
+              >
+                ยกเลิกสินค้า/เปลี่ยนใจ
+              </Button>
+            )}
+            {order?.status === OrderStatus.PENDING && (
+              <Button variant='faded'>ชำระเงินสินค้า</Button>
+            )}
+            {order?.status !== OrderStatus.PENDING && (
+              <Button isDisabled={isDisableReceipt} variant='faded'>
+                ดาว์นโหลดใบเสร็จรับเงิน
+              </Button>
+            )}
           </div>
         )}
       </div>

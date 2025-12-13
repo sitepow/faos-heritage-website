@@ -83,6 +83,14 @@ const OrderView = () => {
                   </Link>
                 </span>
               )}
+              {order?.cancelReason && (
+                <span>
+                  หมายเหตุยกเลิก:{' '}
+                  <span className='text-default-500'>
+                    {order?.cancelReason}
+                  </span>
+                </span>
+              )}
               <span>
                 ค่าจัดส่ง:{' '}
                 <span className='text-default-500'>{formatCurrency(0)}</span>

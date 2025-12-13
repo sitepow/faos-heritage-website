@@ -4,8 +4,7 @@ import { OrderStatus, PaymentStatus, StockMovementType } from '@prisma/client'
 
 import type { Prisma } from '@prisma/client'
 
-import { ORDER_STATUS_FLOW } from '@/utils/const'
-import { getFullAddress } from '@/utils/helper'
+import { canSelectStatus, getFullAddress } from '@/utils/helper'
 import { prisma, getPrismaError } from '@/utils/prisma'
 
 interface UpdateOrderInput {
@@ -231,15 +230,8 @@ const updateOrder = async (data: UpdateOrderInput) => {
 
       const prevStatus = order.status
 
-      if (ORDER_STATUS_FLOW[status] < ORDER_STATUS_FLOW[prevStatus]) {
-        throw new Error('ไม่สามารถย้อนสถานะออเดอร์ออเดอร์นี้ได้')
-      }
-
-      if (
-        CANCEL_OR_REFUND.includes(status) &&
-        prevStatus === OrderStatus.DELIVERED
-      ) {
-        throw new Error('ออเดอร์นี้ถูกจัดส่งแล้ว ไม่สามารถยกเลิกออเดอร์นี้ได้')
+      if (!canSelectStatus(prevStatus, status)) {
+        throw new Error('ไม่สามารถเปลี่ยนสถานะออเดอร์นี้ได้')
       }
 
       const isCancelOrRefund = CANCEL_OR_REFUND.includes(status)

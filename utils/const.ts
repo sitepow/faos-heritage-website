@@ -46,8 +46,8 @@ const ORDER_ALL_STATUS: Record<OrderStatus, string> = {
   PAID: 'ชำระเงินแล้ว',
   PROCESSING: 'จัดเตรียมสินค้า',
   DELIVERED: 'ส่งให้ขนส่งแล้ว',
-  CANCELLED: 'ยกเลิกสินค้า',
-  REFUNDED: 'คืนสินค้า',
+  CANCELLED: 'ยกเลิกคำสั่งซื้อ',
+  REFUNDED: 'คืนเงินแล้ว/ยกเลิกสินค้า',
 }
 
 const ORDER_STATUS: Partial<Record<OrderStatus, string>> = {

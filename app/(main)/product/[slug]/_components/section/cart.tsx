@@ -37,38 +37,30 @@ const CartSection: FC<
   const { data: session } = useSession()
   const userId = session?.user?.id
 
-  const init = {
-    variants: product?.variants,
-    wishlist: product?.wishlist,
-    cart: product?.cart,
-    defaultVariantId: product?.cart?.[0]?.variantId,
-    price: product?.price,
-    stockQuantity: product?.stockQuantity,
-  }
-  const hasVariants = Boolean(init?.variants?.length)
-  const hasFavorite = Boolean(init?.wishlist?.length)
+  const hasVariants = Boolean(product?.variants?.length)
+  const hasFavorite = Boolean(product?.wishlist?.length)
 
   useEffect(() => {
-    const variantId = init?.defaultVariantId
+    const variantId = product?.cart?.[0]?.variantId
 
     if (variantId) setVariantId(variantId)
-  }, [init?.cart])
+  }, [product?.cart])
 
   useEffect(() => {
     if (!hasVariants || variantId) return
 
-    const variant = init?.variants?.[0]?.id
+    const variant = product?.variants?.[0]?.id
 
     if (variant) setVariantId(variant)
-  }, [hasVariants, init?.variants, variantId])
+  }, [hasVariants, product?.variants, variantId])
 
   const currentVariant = useMemo(() => {
-    return init?.variants?.find((variant) => variant.id === variantId)
-  }, [init?.variants, variantId])
+    return product?.variants?.find((variant) => variant.id === variantId)
+  }, [product?.variants, variantId])
 
-  const currentPrice = currentVariant?.price ?? init?.price
+  const currentPrice = currentVariant?.price ?? product?.price
   const currentStockQuantity =
-    currentVariant?.stockQuantity ?? init?.stockQuantity ?? 0
+    currentVariant?.stockQuantity ?? product?.stockQuantity ?? 0
 
   const isOutOfStock = currentStockQuantity <= 0
   const priceMin = variantId ? null : product?.priceMin

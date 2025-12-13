@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 import { useState } from 'react'
 
+import { OrderForm } from '../form/order'
 import { Order } from '../order'
 
 import { OrderView } from '@/app/(dashboard)/dashboard/order/_components/view/order'
@@ -34,6 +35,7 @@ const OrderCard = () => {
   return (
     <div>
       <OrderView />
+      <OrderForm />
 
       <Card fullWidth>
         <CardHeader>

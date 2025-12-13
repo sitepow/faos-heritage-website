@@ -44,28 +44,16 @@ const CartCard: FC<
   const [quantity, setQuantity] = useState(cart?.quantity)
 
   const userId = session?.user?.id
-  const init = {
-    cartId: cart?.id,
-    variantId: cart?.variantId,
-    price: cart?.product?.price,
-    variants: cart?.product?.variants,
-    unit: cart?.product?.unit,
-    stockQuantity: cart?.product?.stockQuantity,
-    quantity: cart?.quantity,
-    productId: cart?.product?.id,
-    productName: cart?.product?.name,
-    productImages: cart?.product?.images,
-  }
-  const productUnit = getProductUnit(init.unit)
+  const productUnit = getProductUnit(cart?.product?.unit)
 
   useEffect(() => {
-    if (init.variantId) {
-      setVariantId(init.variantId)
+    if (cart?.variantId) {
+      setVariantId(cart?.variantId)
     }
-  }, [init.variantId])
+  }, [cart?.variantId])
 
   const QUERY = {
-    PRODUCT: ['product', init.productId],
+    PRODUCT: ['product', cart?.product?.id],
     CART: ['carts', userId],
     CART_COUNT: ['carts', 'count', userId],
   }
@@ -83,19 +71,19 @@ const CartCard: FC<
     })
 
   const currentVariant = useMemo(() => {
-    return init.variants?.find((variant) => variant?.id === variantId)
-  }, [init.variants, variantId])
+    return cart?.product?.variants?.find((variant) => variant?.id === variantId)
+  }, [cart?.product?.variants, variantId])
 
-  const currentPrice = currentVariant?.price ?? init.price
+  const currentPrice = currentVariant?.price ?? cart?.product?.price
   const currentStockQuantity =
-    currentVariant?.stockQuantity ?? init.stockQuantity
+    currentVariant?.stockQuantity ?? cart?.product?.stockQuantity
 
   useEffect(() => {
-    setQuantity(init.quantity)
-  }, [init.quantity])
+    setQuantity(cart?.quantity)
+  }, [cart?.quantity])
 
   useEffect(() => {
-    if (!init.cartId || quantity === init.quantity) return
+    if (!cart?.id || quantity === cart?.quantity) return
 
     const handler = setTimeout(() => {
       if (quantity === 0) {
@@ -105,7 +93,7 @@ const CartCard: FC<
       }
 
       mutateUpdateCart({
-        cartId: init.cartId,
+        cartId: cart?.id,
         quantity: Number(quantity),
         variantId: variantId!,
       })
@@ -113,11 +101,11 @@ const CartCard: FC<
 
     return () => clearTimeout(handler)
   }, [
-    init.cartId,
+    cart?.id,
     mutateUpdateCart,
     onOpenDeleteQtyChange,
     quantity,
-    init.quantity,
+    cart?.quantity,
     variantId,
   ])
 
@@ -144,9 +132,9 @@ const CartCard: FC<
     const variantId = String(selected)
 
     setVariantId(variantId)
-    if (init.cartId && quantity) {
+    if (cart?.id && quantity) {
       mutateUpdateCart({
-        cartId: init.cartId,
+        cartId: cart?.id,
         quantity: Number(quantity),
         variantId: variantId!,
       })
@@ -154,7 +142,7 @@ const CartCard: FC<
   }
 
   const onDeleteCart = () => {
-    setState({ cartId: init.cartId })
+    setState({ cartId: cart?.id })
     onOpenDeleteChange()
   }
 
@@ -163,9 +151,7 @@ const CartCard: FC<
       <ModalConfirm
         isOpen={isDeleteQtyOpen}
         isPending={isPendingUpdateCart}
-        onConfirm={() =>
-          mutateUpdateCart({ cartId: init.cartId!, quantity: 0 })
-        }
+        onConfirm={() => mutateUpdateCart({ cartId: cart?.id!, quantity: 0 })}
         onOpenChange={onOpenDeleteQtyChange}
       />
 
@@ -184,13 +170,13 @@ const CartCard: FC<
             <div className='flex size-full sm:items-center sm:justify-center'>
               <Link
                 className='size-[150px] shrink-0 border border-divider'
-                href={`/product/${createSlug(init?.productName, init?.productId)}`}
+                href={`/product/${createSlug(cart?.product?.name, cart?.product?.id)}`}
               >
                 <Image
                   alt='product-image'
                   className='size-full shrink-0 object-cover'
                   height={150}
-                  src={init?.productImages?.[0]?.url ?? '/placeholder.svg'}
+                  src={cart?.product?.images?.[0]?.url ?? '/placeholder.svg'}
                   width={150}
                 />
               </Link>
@@ -198,9 +184,9 @@ const CartCard: FC<
 
             <div className='col-span-2 flex flex-col justify-between gap-3'>
               <div className='flex flex-col'>
-                <span className='line-clamp-1'>{init?.productName}</span>
+                <span className='line-clamp-1'>{cart?.product?.name}</span>
                 <span className='text-default-500'>
-                  รหัสสินค้า: {init?.productId}
+                  รหัสสินค้า: {cart?.product?.id}
                 </span>
                 <div className='flex flex-wrap gap-2'>
                   <span className='text-default-500'>
@@ -224,10 +210,10 @@ const CartCard: FC<
                   onChange={onQuantityChange}
                 />
 
-                {init.variants.length !== 0 && (
+                {cart?.product?.variants.length !== 0 && (
                   <Select
                     disallowEmptySelection
-                    items={init.variants || []}
+                    items={cart?.product?.variants || []}
                     label='ตัวเลือกสินค้า'
                     placeholder='เลือกตัวเลือกสินค้า'
                     selectedKeys={variantId ? [variantId] : []}

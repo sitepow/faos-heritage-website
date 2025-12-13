@@ -2,7 +2,7 @@
 
 import { Avatar } from '@heroui/avatar'
 import { Button } from '@heroui/button'
-import { Input, Textarea } from '@heroui/input'
+import { Textarea } from '@heroui/input'
 import {
   Modal,
   ModalBody,
@@ -12,107 +12,107 @@ import {
 } from '@heroui/modal'
 import { Select, SelectItem } from '@heroui/select'
 import { Spinner } from '@heroui/spinner'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { OrderStatus } from '@prisma/client'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { Controller, useForm } from 'react-hook-form'
 
+import type { OrderStatusInput } from '../../schema/order'
 import type { UpdateOrderInput } from '@/actions/order'
 
+import { orderStatusSchema } from '../../schema/order'
 import { useOrderStore } from '../../store'
 
 import { getOrder, updateOrder } from '@/actions/order'
-import {
-  ORDER_STATUS_FLOW,
-  ORDER_STEPS_ALL,
-  SHIPPING_PROVIDERS,
-} from '@/utils/const'
+import { ORDER_STEPS_ALL, SHIPPING_PROVIDERS } from '@/utils/const'
+import { canSelectStatus } from '@/utils/helper'
+
+const DEFAULT_VALUES: OrderStatusInput = {
+  status: OrderStatus.PENDING,
+  tempStatus: OrderStatus.PENDING,
+  reason: '',
+  trackingWebsite: '',
+  trackingNumber: '',
+}
 
 const OrderForm = () => {
   const queryClient = useQueryClient()
   const { isOrderOpen, onOpenOrderChange, orderId, setState } = useOrderStore()
 
+  const {
+    control,
+    reset,
+    handleSubmit,
+    watch,
+    formState: { errors, isDirty },
+  } = useForm<OrderStatusInput>({
+    resolver: zodResolver(orderStatusSchema),
+    defaultValues: DEFAULT_VALUES,
+  })
+
+  const { status, tempStatus, trackingWebsite } = watch()
+
   const QUERY = {
-    order: ['dashboard', 'order', orderId],
-    orders: ['dashboard', 'orders'],
+    ORDER: ['dashboard', 'order', orderId],
+    ORDERS: ['dashboard', 'orders'],
   }
 
   const { data: order, isLoading: isLoadingOrder } = useQuery({
-    queryKey: QUERY.order,
+    queryKey: QUERY.ORDER,
     queryFn: () => getOrder(orderId!),
     enabled: !!orderId,
   })
 
-  const currentStatus = order?.status as OrderStatus
-
-  const [selectedStatus, setSelectedStatus] = useState<OrderStatus>(
-    OrderStatus.PENDING,
-  )
-
-  const [reason, setReason] = useState('')
-  const [trackingNumber, setTrackingNumber] = useState('')
-  const [trackingWebsite, setTrackingWebsite] = useState(
-    SHIPPING_PROVIDERS[0]?.value,
-  )
-
   useEffect(() => {
-    if (order?.status) {
-      setSelectedStatus(order.status)
-      setTrackingWebsite(order?.trackingWebsite ?? SHIPPING_PROVIDERS[0]?.value)
-      setTrackingNumber(order?.trackingNumber ?? '')
-      setReason(order?.cancelReason ?? '')
-    }
-  }, [order])
+    if (!order) return
 
-  const requireReason =
-    selectedStatus === OrderStatus.CANCELLED ||
-    selectedStatus === OrderStatus.REFUNDED
-
-  const requireTracking = selectedStatus === OrderStatus.DELIVERED
+    reset({
+      status: order.status,
+      tempStatus: order.status,
+      reason: order.cancelReason ?? '',
+      trackingWebsite: order.trackingWebsite ?? SHIPPING_PROVIDERS[0]?.value,
+      trackingNumber: order.trackingNumber ?? '',
+    })
+  }, [order, reset])
 
   const { mutate: mutateUpdateOrder, isPending: isPendingUpdateOrder } =
     useMutation({
       mutationFn: (payload: UpdateOrderInput) => updateOrder(payload),
-
       onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: QUERY.orders,
-        })
-
+        queryClient.invalidateQueries({ queryKey: QUERY.ORDERS })
         onClose()
       },
     })
 
   const onClose = () => {
-    queryClient.invalidateQueries({
-      queryKey: QUERY.order,
-    })
-
+    queryClient.invalidateQueries({ queryKey: QUERY.ORDER })
     setState({ orderId: null })
-    setSelectedStatus(OrderStatus.PENDING)
-    setReason('')
-    setTrackingNumber('')
-    setTrackingWebsite('')
+    reset(DEFAULT_VALUES)
     onOpenOrderChange()
   }
 
-  const onSubmit = () => {
+  const isDelivered = tempStatus === OrderStatus.DELIVERED
+  const isFinalStatus =
+    status === OrderStatus.CANCELLED || status === OrderStatus.REFUNDED
+  const isCancelled =
+    tempStatus === OrderStatus.CANCELLED || tempStatus === OrderStatus.REFUNDED
+
+  const onSubmit = (data: OrderStatusInput) => {
     if (!orderId) return
 
     mutateUpdateOrder({
       orderId,
-      status: selectedStatus,
-      ...(requireReason && { reason }),
-      ...(requireTracking && {
-        trackingNumber,
-        trackingWebsite,
+      status: data.tempStatus,
+      ...(isCancelled && { reason: data.reason }),
+      ...(isDelivered && {
+        trackingWebsite: data.trackingWebsite,
+        trackingNumber: data.trackingNumber,
       }),
     })
   }
 
-  const isPending = isPendingUpdateOrder || isLoadingOrder || !selectedStatus
-  const isFinalStatus =
-    currentStatus === OrderStatus.CANCELLED ||
-    currentStatus === OrderStatus.REFUNDED
+  const isPending = isPendingUpdateOrder || isLoadingOrder
 
   return (
     <Modal
@@ -130,77 +130,98 @@ const OrderForm = () => {
 
         {!isPending && (
           <ModalBody>
-            <Select
-              disallowEmptySelection
-              isDisabled={isFinalStatus}
-              label='สถานะคำสั่งซื้อ'
-              selectedKeys={selectedStatus ? [selectedStatus] : []}
-              variant='bordered'
-              onSelectionChange={(keys) => {
-                const selected = Array.from(keys)[0] as OrderStatus
-
-                setSelectedStatus(selected)
-              }}
-            >
-              {ORDER_STEPS_ALL?.map(([key, label]) => (
-                <SelectItem
-                  key={key}
-                  isDisabled={
-                    isFinalStatus ||
-                    ORDER_STATUS_FLOW[key] < ORDER_STATUS_FLOW[currentStatus]
+            <Controller
+              control={control}
+              name='tempStatus'
+              render={({ field: { value, onChange, ...field } }) => (
+                <Select
+                  {...field}
+                  disallowEmptySelection
+                  errorMessage={errors.tempStatus?.message}
+                  isInvalid={!!errors.tempStatus}
+                  label='สถานะคำสั่งซื้อ'
+                  selectedKeys={value ? [value] : []}
+                  variant='bordered'
+                  onSelectionChange={(keys) =>
+                    onChange(Array.from(keys)[0] as OrderStatus)
                   }
                 >
-                  {label}
-                </SelectItem>
-              ))}
-            </Select>
-
-            {requireReason && (
-              <Textarea
-                isDisabled={isFinalStatus}
-                label='เหตุผล'
-                minRows={5}
-                placeholder='กรุณากรอกเหตุผลในการยกเลิก / คืนเงิน'
-                value={reason}
-                variant='bordered'
-                onChange={(e) => setReason(e.target.value)}
-              />
-            )}
-
-            {requireTracking && (
-              <>
-                <Select
-                  disallowEmptySelection
-                  label='ขนส่ง'
-                  selectedKeys={trackingWebsite ? [trackingWebsite] : []}
-                  variant='bordered'
-                  onSelectionChange={(keys) => {
-                    const selected = Array.from(keys)[0] as OrderStatus
-
-                    setTrackingWebsite(selected)
-                  }}
-                >
-                  {SHIPPING_PROVIDERS?.map((provider) => (
+                  {ORDER_STEPS_ALL.map(([key, label]) => (
                     <SelectItem
-                      key={provider.value}
-                      startContent={
-                        <Avatar src={provider?.image || '/placeholder.svg'} />
-                      }
+                      key={key}
+                      isDisabled={!canSelectStatus(status, key)}
                     >
-                      {provider.label}
+                      {label}
                     </SelectItem>
                   ))}
                 </Select>
-                <Input
-                  label='หมายเลข Tracking'
-                  placeholder={`กรอกหมายเลข Tracking [ตัวอย่าง: ${
-                    SHIPPING_PROVIDERS.find(
-                      (provider) => provider.value === trackingWebsite,
-                    )?.placeholder
-                  }]`}
-                  value={trackingNumber}
-                  variant='bordered'
-                  onChange={(e) => setTrackingNumber(e.target.value)}
+              )}
+            />
+
+            {isCancelled && (
+              <Controller
+                control={control}
+                name='reason'
+                render={({ field }) => (
+                  <Textarea
+                    {...field}
+                    label='เหตุผล'
+                    placeholder='กรุณากรอกเหตุผลในการยกเลิก / คืนเงิน'
+                    variant='bordered'
+                  />
+                )}
+              />
+            )}
+
+            {isDelivered && (
+              <>
+                <Controller
+                  control={control}
+                  name='trackingWebsite'
+                  render={({ field: { value, onChange, ...field } }) => (
+                    <Select
+                      {...field}
+                      disallowEmptySelection
+                      errorMessage={errors.trackingWebsite?.message}
+                      isInvalid={!!errors.trackingWebsite}
+                      label='ขนส่ง'
+                      selectedKeys={value ? [value] : []}
+                      variant='bordered'
+                      onSelectionChange={(keys) =>
+                        onChange(Array.from(keys)[0])
+                      }
+                    >
+                      {SHIPPING_PROVIDERS.map((provider) => (
+                        <SelectItem
+                          key={provider.value}
+                          startContent={
+                            <Avatar
+                              src={provider.image || '/placeholder.svg'}
+                            />
+                          }
+                        >
+                          {provider.label}
+                        </SelectItem>
+                      ))}
+                    </Select>
+                  )}
+                />
+
+                <Controller
+                  control={control}
+                  name='trackingNumber'
+                  render={({ field }) => (
+                    <Textarea
+                      {...field}
+                      label='หมายเลข Tracking'
+                      placeholder={`ตัวอย่าง: ${
+                        SHIPPING_PROVIDERS.find(
+                          (p) => p.value === trackingWebsite,
+                        )?.placeholder
+                      }`}
+                      variant='bordered'
+                    />
+                  )}
                 />
               </>
             )}
@@ -208,21 +229,15 @@ const OrderForm = () => {
         )}
 
         <ModalFooter>
-          <Button variant='faded' onClick={onClose}>
+          <Button isDisabled={isPending} variant='faded' onPress={onClose}>
             ยกเลิก
           </Button>
-
           <Button
-            isDisabled={
-              !selectedStatus ||
-              (requireReason && !reason.trim()) ||
-              (requireTracking && !trackingNumber.trim()) ||
-              isFinalStatus
-            }
+            isDisabled={isPending || !isDirty || isFinalStatus}
             variant='faded'
-            onClick={onSubmit}
+            onClick={handleSubmit(onSubmit)}
           >
-            บันทึกข้อมูล
+            {isPending ? 'กำลังดำเนินการ' : 'บันทึกข้อมูล'}
           </Button>
         </ModalFooter>
       </ModalContent>

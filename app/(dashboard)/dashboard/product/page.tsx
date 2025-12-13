@@ -237,8 +237,8 @@ const Product = () => {
                 <TableCell className='max-w-72 min-w-72'>
                   {product?.name ?? '-'}
                 </TableCell>
-                <TableCell>{price}</TableCell>
-                <TableCell>{stock}</TableCell>
+                <TableCell className='max-w-32 min-w-32'>{price}</TableCell>
+                <TableCell className='max-w-32 min-w-32'>{stock}</TableCell>
                 <TableCell className='max-w-52 min-w-52'>
                   <Chip variant='bordered'>
                     {product?.category?.name ?? '-'}
