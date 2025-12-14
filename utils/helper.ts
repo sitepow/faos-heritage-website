@@ -138,6 +138,16 @@ const canSelectStatus = (current: OrderStatus, next: OrderStatus) => {
   return nextStep === currentStep + 1
 }
 
+const isActivePath = (pathname: string, href: string) => {
+  const cleanHref = href.split('?')[0]
+
+  if (cleanHref === '/') {
+    return pathname === '/'
+  }
+
+  return pathname === cleanHref
+}
+
 export {
   createSlug,
   getFooter,
@@ -148,4 +158,5 @@ export {
   getProductUnit,
   getPriceAndStockMinMaxFromVariants,
   canSelectStatus,
+  isActivePath,
 }

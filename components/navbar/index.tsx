@@ -25,6 +25,7 @@ import { Panel } from './etc/panel'
 import { Search } from './etc/search'
 
 import { siteConfig } from '@/config/site'
+import { isActivePath } from '@/utils/helper'
 import { cn } from '@/utils/style'
 
 const Navbar = () => {
@@ -39,17 +40,22 @@ const Navbar = () => {
     ? siteConfig.adminNavbarItems
     : siteConfig.mainNavItems
 
-  const renderLink = (item: NavItem) => (
-    <Link
-      className={cn(
-        linkStyles({ color: 'foreground' }),
-        'data-[active=true]:font-medium data-[active=true]:text-primary',
-      )}
-      href={item.href}
-    >
-      {item.label}
-    </Link>
-  )
+  const renderLink = (item: NavItem) => {
+    const isCurrent = isActivePath(pathname, item.href)
+
+    return (
+      <Link
+        className={cn(
+          linkStyles({ color: 'foreground' }),
+          'data-[active=true]:font-medium data-[active=true]:text-primary',
+          isCurrent && 'border-b-2 border-primary-website',
+        )}
+        href={item.href}
+      >
+        {item.label}
+      </Link>
+    )
+  }
 
   return (
     <HeroNavbar

@@ -50,7 +50,7 @@ const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
           <Alert
             hideIcon
             className='absolute top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2'
-            description='สินค้านี้หมดชั่วคราว'
+            description='This item is temporarily out of stock.'
             radius='none'
           />
         )}
@@ -63,7 +63,7 @@ const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
               }
               variant='faded'
             >
-              สินค้าตัวอย่าง
+              Product samples
             </Chip>
           )}
 
@@ -72,7 +72,7 @@ const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
               startContent={<FileIcon className='size-4 text-default-500' />}
               variant='faded'
             >
-              สินค้าดิจิทัล
+              Digital products
             </Chip>
           )}
 
@@ -80,7 +80,7 @@ const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
             startContent={<TagIcon className='size-4 text-default-500' />}
             variant='faded'
           >
-            {product?.category?.name ?? 'ไม่มีหมวดหมู่'}
+            {product?.category?.name ?? 'No category'}
           </Chip>
         </div>
 

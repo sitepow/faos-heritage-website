@@ -3,7 +3,7 @@
 @config '../tailwind.config.js';
 
 @theme {
-  --color-primary-website: #8b0000;
+  --color-primary-website: #d4af37;
 }
 
 .Toastify__toast {
