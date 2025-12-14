@@ -21,13 +21,13 @@ import { Controller, useForm } from 'react-hook-form'
 import type { UserCreateInput, UserUpdateInput } from '../../schema/user'
 import type { ImageWithPreview } from '@/components/dropzone/image'
 
-import { deleteFile, uploadFiles } from '../../../product/actions/file'
 import { createUser, getUser, updateUser } from '../../actions/user'
 import { userCreateSchema, userUpdateSchema } from '../../schema/user'
 import { useUserStore } from '../../store'
 
 import { SubHeader } from '@/app/(main)/_components/section/header'
 import { ImageDropzone } from '@/components/dropzone/image'
+import { useImageUpload } from '@/hooks/useImageUpload'
 
 const DEFAULT_VALUES = {
   email: '',
@@ -40,14 +40,19 @@ const DEFAULT_VALUES = {
 
 const UserForm = () => {
   const queryClient = useQueryClient()
-
   const { isUserOpen, onOpenUserChange, userId, setState } = useUserStore()
-  const [filePaths, setFilePaths] = useState<string[]>([])
-  const [oldUrl, setOldUrl] = useState<string | null>(null)
+
+  const [previewFiles, setPreviewFiles] = useState<ImageWithPreview[]>([])
+  const [oldImage, setOldImage] = useState<string | null>(null)
+  const { resolveImagePath } = useImageUpload({
+    oldImage,
+    previewFiles,
+  })
 
   const QUERY = {
     DASHBOARD: ['dashboard', 'users', 'card'],
     USER: ['dashboard', 'user', userId],
+    USERS: ['dashboard', 'users', 'pagination'],
   }
 
   type UserInput = UserCreateInput | UserUpdateInput
@@ -71,83 +76,80 @@ const UserForm = () => {
   })
 
   useEffect(() => {
-    if (isUserOpen) {
-      if (userId && !isLoadingUser && user) {
-        reset(user)
-        setOldUrl(user.image)
-      } else if (!userId) {
-        reset(DEFAULT_VALUES)
-      }
+    if (userId && !isLoadingUser && user) {
+      reset(
+        { ...user, name: user?.name! },
+        {
+          keepDirty: false,
+          keepTouched: false,
+        },
+      )
+      setOldImage(user.image)
     }
-  }, [isLoadingUser, isUserOpen, reset, user, userId])
+  }, [isLoadingUser, reset, user, userId])
+
+  const onRefetch = async () => {
+    Promise.all([
+      queryClient.invalidateQueries({
+        queryKey: QUERY.DASHBOARD,
+      }),
+      queryClient.invalidateQueries({
+        queryKey: QUERY.USER,
+      }),
+      queryClient.invalidateQueries({
+        queryKey: QUERY.USERS,
+      }),
+    ])
+
+    onClose()
+  }
 
   const { mutate: mutateCreateUser, isPending: isPendingCreateUser } =
     useMutation({
       mutationFn: createUser,
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: QUERY.DASHBOARD,
-        })
-        onClose()
-      },
+      onSuccess: onRefetch,
     })
 
   const { mutate: mutateUpdateUser, isPending: isPendingUpdateUser } =
     useMutation({
       mutationFn: updateUser,
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: QUERY.DASHBOARD,
-        })
-        onClose()
-      },
+      onSuccess: onRefetch,
     })
 
   const isPending = isPendingCreateUser || isLoadingUser || isPendingUpdateUser
   const headerLable = userId ? 'แก้ไขผู้ใช้งาน' : 'เพิ่มผู้ใช้งาน'
 
-  const onFilesChange = async (files: ImageWithPreview[]) => {
-    if (files.length === 0) {
-      setValue('image', oldUrl ?? '', { shouldDirty: true })
+  const onFilesChange = (files: ImageWithPreview[]) => {
+    setPreviewFiles(files)
 
-      return
-    }
-
-    const formData = new FormData()
-
-    files.forEach((file) => formData.append('files', file))
-
-    const imagePaths = await uploadFiles(formData)
-
-    setFilePaths((prev) => [...prev, ...imagePaths])
-
-    if (imagePaths?.length > 0) {
-      setValue('image', imagePaths[0], { shouldDirty: true })
-    }
+    setValue(
+      'image',
+      files.length ? 'มีการเปลี่ยนแปลงของไฟล์รูปภาพ' : (oldImage ?? ''),
+      {
+        shouldDirty: true,
+        shouldTouch: true,
+      },
+    )
   }
 
   const onSubmit = async (data: UserInput) => {
-    const isUpdate = !!userId
+    const imagePath = await resolveImagePath()
 
-    if (isUpdate && oldUrl && data.image !== oldUrl) {
-      await deleteFile(oldUrl)
+    const payload = {
+      ...data,
+      image: imagePath,
     }
 
-    if (!isUpdate) {
-      mutateCreateUser(data as UserCreateInput)
+    if (userId) {
+      mutateUpdateUser(payload as UserUpdateInput)
     } else {
-      mutateUpdateUser(data as UserUpdateInput)
+      mutateCreateUser(payload as UserCreateInput)
     }
-
-    setFilePaths([])
   }
 
-  const onClose = async () => {
-    if (filePaths.length > 0) {
-      await Promise.all(filePaths.map((path) => deleteFile(path)))
-    }
-
-    setFilePaths([])
+  const onClose = () => {
+    setPreviewFiles([])
+    setOldImage(null)
 
     queryClient.removeQueries({
       queryKey: QUERY.USER,
@@ -163,7 +165,6 @@ const UserForm = () => {
       isDismissable={false}
       isOpen={isUserOpen}
       scrollBehavior='inside'
-      size='xl'
       onOpenChange={onOpenUserChange}
     >
       <ModalContent>
@@ -218,8 +219,8 @@ const UserForm = () => {
               render={({ field: { value, ...field } }) => (
                 <Input
                   {...field}
+                  isDisabled
                   errorMessage={errors.image?.message}
-                  isDisabled={!!filePaths}
                   isInvalid={!!errors.image}
                   label='URL ของรูปภาพ'
                   value={value ?? ''}

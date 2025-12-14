@@ -3,6 +3,7 @@
 import type { CategoryInput } from '../schema/category'
 import type { Prisma } from '@prisma/client'
 
+import { deleteFile } from './file'
 import { categorySchema } from '../schema/category'
 
 import { removeEmptyField } from '@/utils/helper'
@@ -103,16 +104,32 @@ const deleteCategory = async (categoryIds: string | string[]) => {
     const ids = Array.isArray(categoryIds) ? categoryIds : [categoryIds]
 
     if (!ids.length) {
-      throw new Error('โปรดระบุรหัสตัวเลือกสินค้าที่ต้องการ')
+      throw new Error('โปรดระบุรหัสหมวดหมู่ที่ต้องการลบ')
     }
 
-    await prisma.category.deleteMany({
+    const categories = await prisma.category.findMany({
       where: {
-        id: {
-          in: ids,
-        },
+        id: { in: ids },
+      },
+      select: {
+        image: true,
       },
     })
+
+    await Promise.all(
+      categories
+        .map((category) => category.image)
+        .filter(Boolean)
+        .map((imagePath) => deleteFile(imagePath!)),
+    )
+
+    await prisma.$transaction([
+      prisma.category.deleteMany({
+        where: {
+          id: { in: ids },
+        },
+      }),
+    ])
   } catch (error) {
     getPrismaError(error)
   }

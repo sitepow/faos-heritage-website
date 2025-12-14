@@ -11,10 +11,6 @@ import { Controller, useForm } from 'react-hook-form'
 import type { ImageWithPreview } from '@/components/dropzone/image'
 
 import {
-  deleteFile,
-  uploadFiles,
-} from '@/app/(dashboard)/dashboard/product/actions/file'
-import {
   getUser,
   updateUser,
 } from '@/app/(dashboard)/dashboard/user/actions/user'
@@ -24,6 +20,7 @@ import {
 } from '@/app/(dashboard)/dashboard/user/schema/user'
 import { SubHeader } from '@/app/(main)/_components/section/header'
 import { ImageDropzone } from '@/components/dropzone/image'
+import { useImageUpload } from '@/hooks/useImageUpload'
 
 const DEFAULT_VALUES: UserUpdateInput = {
   name: '',
@@ -43,9 +40,12 @@ const ProfileCard = () => {
     USER: ['account', 'user', userId],
   }
 
-  const [filePaths, setFilePaths] = useState<string[]>([])
-  const [oldUrl, setOldUrl] = useState<string | null>(null)
-  const [dropzoneKey, setDropzoneKey] = useState(0)
+  const [previewFiles, setPreviewFiles] = useState<ImageWithPreview[]>([])
+  const [oldImage, setOldImage] = useState<string | null>(null)
+  const { resolveImagePath } = useImageUpload({
+    oldImage,
+    previewFiles,
+  })
 
   const {
     control,
@@ -66,10 +66,14 @@ const ProfileCard = () => {
 
   useEffect(() => {
     if (userId && !isLoadingUser && user) {
-      reset(user)
-      setOldUrl(user.image)
-    } else if (!userId) {
-      reset(DEFAULT_VALUES)
+      reset(
+        { ...user, name: user?.name! },
+        {
+          keepDirty: false,
+          keepTouched: false,
+        },
+      )
+      setOldImage(user.image)
     }
   }, [isLoadingUser, reset, user, userId])
 
@@ -82,47 +86,38 @@ const ProfileCard = () => {
     })
 
   const onSubmit = async (data: UserUpdateInput) => {
-    if (oldUrl && data.image !== oldUrl) {
-      await deleteFile(oldUrl)
-    }
-
-    mutateUpdateUser(data)
+    mutateUpdateUser({
+      ...data,
+      image: await resolveImagePath(),
+    })
   }
 
   const isPending = isPendingUpdateUser || isLoadingUser
-  const onClose = async () => {
-    if (filePaths.length > 0) {
-      await Promise.all(filePaths.map((path) => deleteFile(path)))
-    }
 
-    setFilePaths([])
+  const onFilesChange = (files: ImageWithPreview[]) => {
+    setPreviewFiles(files)
 
-    setDropzoneKey((prev) => prev + 1)
-
-    queryClient.removeQueries({
-      queryKey: QUERY.USER,
-    })
-    reset(DEFAULT_VALUES)
+    setValue(
+      'image',
+      files.length ? 'มีการเปลี่ยนแปลงของไฟล์รูปภาพ' : (oldImage ?? ''),
+      {
+        shouldDirty: true,
+        shouldTouch: true,
+      },
+    )
   }
 
-  const onFilesChange = async (files: ImageWithPreview[]) => {
-    if (files.length === 0) {
-      setValue('image', oldUrl ?? '', { shouldDirty: true })
+  const onClose = () => {
+    setPreviewFiles([])
+    setOldImage(null)
 
-      return
-    }
-
-    const formData = new FormData()
-
-    files.forEach((file) => formData.append('files', file))
-
-    const imagePaths = await uploadFiles(formData)
-
-    setFilePaths((prev) => [...prev, ...imagePaths])
-
-    if (imagePaths?.length > 0) {
-      setValue('image', imagePaths[0], { shouldDirty: true })
-    }
+    reset(
+      { ...user, name: user?.name! },
+      {
+        keepDirty: false,
+        keepTouched: false,
+      },
+    )
   }
 
   return (
@@ -132,7 +127,7 @@ const ProfileCard = () => {
       </CardHeader>
       <CardBody className='gap-4'>
         <div className='mx-auto max-w-2xl'>
-          <ImageDropzone key={dropzoneKey} onFilesChange={onFilesChange} />
+          <ImageDropzone onFilesChange={onFilesChange} />
         </div>
 
         <SubHeader title='ข้อมูลพื้นฐาน' />
@@ -143,8 +138,8 @@ const ProfileCard = () => {
             render={({ field: { value, ...field } }) => (
               <Input
                 {...field}
+                isDisabled
                 errorMessage={errors.image?.message}
-                isDisabled={!!filePaths}
                 isInvalid={!!errors.image}
                 label='URL ของรูปภาพ'
                 value={value ?? ''}

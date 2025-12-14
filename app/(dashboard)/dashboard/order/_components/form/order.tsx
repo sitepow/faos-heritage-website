@@ -120,7 +120,6 @@ const OrderForm = () => {
       isDismissable={false}
       isOpen={isOrderOpen}
       scrollBehavior='inside'
-      size='xl'
       onOpenChange={onOpenOrderChange}
     >
       <ModalContent>

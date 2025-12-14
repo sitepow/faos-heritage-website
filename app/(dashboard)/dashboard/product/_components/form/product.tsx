@@ -143,7 +143,7 @@ const ProductForm = () => {
       isDismissable={false}
       isOpen={isProductOpen}
       scrollBehavior='inside'
-      size='3xl'
+      size='2xl'
       onOpenChange={(open) => {
         if (!open) {
           onClose()

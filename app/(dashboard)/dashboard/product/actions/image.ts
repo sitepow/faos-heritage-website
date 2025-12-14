@@ -2,6 +2,7 @@
 
 import type { Prisma } from '@prisma/client'
 
+import { deleteFile } from './file'
 import { imageSchema, type ImageInput } from '../schema/image'
 
 import { removeEmptyField } from '@/utils/helper'
@@ -92,21 +93,37 @@ const updateImage = async (data: ImageInput) => {
   }
 }
 
-const deleteImage = async (variantIds: string | string[]) => {
+const deleteImage = async (imageIds: string | string[]) => {
   try {
-    const ids = Array.isArray(variantIds) ? variantIds : [variantIds]
+    const ids = Array.isArray(imageIds) ? imageIds : [imageIds]
 
     if (!ids.length) {
       throw new Error('โปรดระบุรหัสรูปภาพสินค้าที่ต้องการ')
     }
 
-    await prisma.productImage.deleteMany({
+    const images = await prisma.productImage.findMany({
       where: {
-        id: {
-          in: ids,
-        },
+        id: { in: ids },
+      },
+      select: {
+        url: true,
       },
     })
+
+    await Promise.all(
+      images
+        .map((image) => image.url)
+        .filter(Boolean)
+        .map((imagePath) => deleteFile(imagePath!)),
+    )
+
+    await prisma.$transaction([
+      prisma.productImage.deleteMany({
+        where: {
+          id: { in: ids },
+        },
+      }),
+    ])
   } catch (error) {
     getPrismaError(error)
   }

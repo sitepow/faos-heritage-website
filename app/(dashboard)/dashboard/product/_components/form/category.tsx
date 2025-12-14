@@ -21,7 +21,6 @@ import {
   getCategory,
   updateCategory,
 } from '../../actions/category'
-import { deleteFile, uploadFiles } from '../../actions/file'
 import { categorySchema, type CategoryInput } from '../../schema/category'
 import { useProductStore } from '../../store'
 
@@ -30,6 +29,7 @@ import {
   ImageDropzone,
   type ImageWithPreview,
 } from '@/components/dropzone/image'
+import { useImageUpload } from '@/hooks/useImageUpload'
 
 const DEFAULT_VALUES: CategoryInput = {
   name: '',
@@ -40,6 +40,7 @@ const DEFAULT_VALUES: CategoryInput = {
 }
 
 const CategoryForm = () => {
+  const queryClient = useQueryClient()
   const {
     isCategoryOpen,
     onOpenCategoryChange,
@@ -48,10 +49,13 @@ const CategoryForm = () => {
     setState,
   } = useProductStore()
 
-  const [filePaths, setFilePaths] = useState<string[]>([])
-  const [oldUrl, setOldUrl] = useState<string | null>(null)
+  const [previewFiles, setPreviewFiles] = useState<ImageWithPreview[]>([])
+  const [oldImage, setOldImage] = useState<string | null>(null)
+  const { resolveImagePath } = useImageUpload({
+    oldImage,
+    previewFiles,
+  })
 
-  const queryClient = useQueryClient()
   const QUERY = {
     CATEGORY: ['dashboard', 'categories', 'modal', categoryId],
     CATEGORIES: ['dashboard', 'categories', 'modal'],
@@ -75,84 +79,70 @@ const CategoryForm = () => {
   })
 
   useEffect(() => {
-    if (isCategoryOpen) {
-      if (categoryId && !isLoadingCategory && category) {
-        reset(category)
-        setOldUrl(category.image)
-      } else if (!categoryId) {
-        reset(DEFAULT_VALUES)
-      }
+    if (categoryId && !isLoadingCategory && category) {
+      reset(category, {
+        keepDirty: false,
+        keepTouched: false,
+      })
+      setOldImage(category.image)
     }
-  }, [isCategoryOpen, categoryId, category, isLoadingCategory, reset])
+  }, [isLoadingCategory, reset, category, category])
+
+  const onRefetch = async () => {
+    queryClient.invalidateQueries({
+      queryKey: QUERY.CATEGORIES,
+    })
+
+    onClose()
+  }
 
   const { mutate: mutateCreateCategory, isPending: isPendingCreateCategory } =
     useMutation({
       mutationFn: createCategory,
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: QUERY.CATEGORIES,
-        })
-        onClose()
-      },
+      onSuccess: onRefetch,
     })
 
   const { mutate: mutateUpdateCategory, isPending: isPendingUpdateCategory } =
     useMutation({
       mutationFn: updateCategory,
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: QUERY.CATEGORIES,
-        })
-        onClose()
-      },
+      onSuccess: onRefetch,
     })
 
   const isPending =
     isPendingCreateCategory || isLoadingCategory || isPendingUpdateCategory
   const headerLable = categoryId ? 'แก้ไขหมวดหมู่' : 'เพิ่มหมวดหมู่'
 
-  const onFilesChange = async (files: ImageWithPreview[]) => {
-    if (files.length === 0) {
-      setValue('image', oldUrl ?? '', { shouldDirty: true })
+  const onFilesChange = (files: ImageWithPreview[]) => {
+    setPreviewFiles(files)
 
-      return
-    }
-
-    const formData = new FormData()
-
-    files.forEach((file) => formData.append('files', file))
-
-    const imagePaths = await uploadFiles(formData)
-
-    setFilePaths((prev) => [...prev, ...imagePaths])
-
-    if (imagePaths?.length > 0) {
-      setValue('image', imagePaths[0], { shouldDirty: true })
-    }
+    setValue(
+      'image',
+      files.length ? 'มีการเปลี่ยนแปลงของไฟล์รูปภาพ' : (oldImage ?? ''),
+      {
+        shouldDirty: true,
+        shouldTouch: true,
+      },
+    )
   }
 
   const onSubmit = async (data: CategoryInput) => {
-    const isUpdate = !!categoryId
+    const imagePath = await resolveImagePath()
 
-    if (isUpdate && oldUrl && data.image !== oldUrl) {
-      await deleteFile(oldUrl)
+    const payload = {
+      ...data,
+      image: imagePath,
     }
 
-    if (!isUpdate) {
-      mutateCreateCategory(data)
+    if (categoryId) {
+      mutateUpdateCategory(payload)
     } else {
-      mutateUpdateCategory(data)
+      mutateCreateCategory(payload)
     }
-
-    setFilePaths([])
   }
 
-  const onClose = async () => {
-    if (filePaths.length > 0) {
-      await Promise.all(filePaths.map((path) => deleteFile(path)))
-    }
-
-    setFilePaths([])
+  const onClose = () => {
+    setPreviewFiles([])
+    setOldImage(null)
 
     queryClient.removeQueries({
       queryKey: QUERY.CATEGORY,
@@ -197,8 +187,8 @@ const CategoryForm = () => {
               render={({ field: { value, ...field } }) => (
                 <Input
                   {...field}
+                  isDisabled
                   errorMessage={errors.image?.message}
-                  isDisabled={!!filePaths}
                   isInvalid={!!errors.image}
                   label='URL ของรูปภาพ'
                   value={value ?? ''}

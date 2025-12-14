@@ -25,7 +25,6 @@ import {
 } from 'lucide-react'
 import Image from 'next/image'
 
-import { deleteFile } from '../../actions/file'
 import { deleteImage, getImages } from '../../actions/image'
 import { useProductStore } from '../../store'
 import { ImageForm } from '../form/image'
@@ -65,9 +64,6 @@ const ImageManager = () => {
         })
         onOpenDeleteChange()
         setState({ imageId: null })
-        const targetImage = images?.find((image) => image?.id === imageId)
-
-        await deleteFile(targetImage?.url!)
       },
     })
 
@@ -88,7 +84,6 @@ const ImageManager = () => {
         isDismissable={false}
         isOpen={isImageManagerOpen}
         scrollBehavior='inside'
-        size='xl'
         onOpenChange={onOpenImageManagerChange}
       >
         <ModalContent>
@@ -118,7 +113,7 @@ const ImageManager = () => {
                     <div className='flex w-full flex-col gap-1'>
                       <Image
                         alt={image?.alt ?? ''}
-                        className='h-40 w-full rounded-xl object-cover'
+                        className='h-40 w-full border border-divider object-cover'
                         height={200}
                         src={image.url}
                         width={200}

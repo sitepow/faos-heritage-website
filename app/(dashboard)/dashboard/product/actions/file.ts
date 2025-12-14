@@ -59,7 +59,7 @@ const deleteFile = async (relativePath: string) => {
 
     await fs.unlink(fullPathToDelete)
   } catch {
-    throw new Error(`เกิดข้อผิดพลาดในการลบไฟล์จากเซิร์ฟเวอร์`)
+    return
   }
 }
 

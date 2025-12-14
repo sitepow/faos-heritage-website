@@ -18,13 +18,13 @@ import { Controller, useForm } from 'react-hook-form'
 
 import type { ImageWithPreview } from '@/components/dropzone/image'
 
-import { deleteFile, uploadFiles } from '../../actions/file'
 import { createImage, getImage, updateImage } from '../../actions/image'
 import { imageSchema, type ImageInput } from '../../schema/image'
 import { useProductStore } from '../../store'
 
 import { SubHeader } from '@/app/(main)/_components/section/header'
 import { ImageDropzone } from '@/components/dropzone/image'
+import { useImageUpload } from '@/hooks/useImageUpload'
 
 const DEFAULT_VALUES: ImageInput = {
   url: '',
@@ -43,11 +43,17 @@ const ImageForm = () => {
     productId,
     setState,
   } = useProductStore()
-  const [filePaths, setFilePaths] = useState<string[]>([])
-  const [oldUrl, setOldUrl] = useState<string | null>(null)
+
+  const [previewFiles, setPreviewFiles] = useState<ImageWithPreview[]>([])
+  const [oldImage, setOldImage] = useState<string | null>(null)
+  const { resolveImagePath } = useImageUpload({
+    oldImage,
+    previewFiles,
+  })
 
   const QUERY = {
     IMAGE: ['dashboard', 'image', 'modal', imageId],
+    IMAGES: ['dashboard', 'images', 'modal', productId],
   }
 
   const {
@@ -68,84 +74,74 @@ const ImageForm = () => {
   })
 
   useEffect(() => {
-    if (isImageOpen) {
-      if (imageId && !isLoadingImage && image) {
-        reset(image)
-        setOldUrl(image.url)
-      } else if (!imageId) {
-        reset(DEFAULT_VALUES)
-      }
+    if (imageId && !isLoadingImage && image) {
+      reset(image, {
+        keepDirty: false,
+        keepTouched: false,
+      })
+      setOldImage(image.url)
     }
-  }, [isImageOpen, imageId, image, isLoadingImage, reset])
+  }, [isLoadingImage, reset, image])
+
+  const onRefetch = () => {
+    queryClient.invalidateQueries({
+      queryKey: QUERY.IMAGE,
+    })
+    queryClient.invalidateQueries({
+      queryKey: QUERY.IMAGES,
+    })
+
+    onClose()
+  }
 
   const { mutate: mutateCreateImage, isPending: isPendingCreateImage } =
     useMutation({
       mutationFn: createImage,
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: ['dashboard', 'modal', 'images'],
-        })
-        onClose()
-      },
+      onSuccess: onRefetch,
     })
 
   const { mutate: mutateUpdateImage, isPending: isPendingUpdateImage } =
     useMutation({
       mutationFn: updateImage,
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: ['dashboard', 'modal', 'images'],
-        })
-        onClose()
-      },
+      onSuccess: onRefetch,
     })
 
   const isPending =
     isPendingCreateImage || isLoadingImage || isPendingUpdateImage
   const headerLable = imageId ? 'แก้ไขรูปภาพสินค้า' : 'เพิ่มรูปภาพสินค้า'
 
-  const onFilesChange = async (files: ImageWithPreview[]) => {
-    if (files.length === 0) {
-      setValue('url', oldUrl ?? '', { shouldDirty: true })
+  const onFilesChange = (files: ImageWithPreview[]) => {
+    setPreviewFiles(files)
 
-      return
-    }
-
-    const formData = new FormData()
-
-    files.forEach((file) => formData.append('files', file))
-
-    const imagePaths = await uploadFiles(formData)
-
-    setFilePaths((prev) => [...prev, ...imagePaths])
-
-    if (imagePaths?.length > 0) {
-      setValue('url', imagePaths[0], { shouldDirty: true })
-    }
+    setValue(
+      'url',
+      files.length ? 'มีการเปลี่ยนแปลงของไฟล์รูปภาพ' : (oldImage ?? ''),
+      {
+        shouldDirty: true,
+        shouldTouch: true,
+      },
+    )
   }
 
   const onSubmit = async (data: ImageInput) => {
-    const isUpdate = !!imageId
+    const imagePath = await resolveImagePath()
 
-    if (isUpdate && oldUrl && data.url !== oldUrl) {
-      await deleteFile(oldUrl)
+    const payload = {
+      ...data,
+      url: imagePath,
+      productId,
     }
 
-    if (!isUpdate) {
-      mutateCreateImage({ ...data, productId })
+    if (imageId) {
+      mutateUpdateImage(payload)
     } else {
-      mutateUpdateImage({ ...data, productId })
+      mutateCreateImage(payload)
     }
-
-    setFilePaths([])
   }
 
-  const onClose = async () => {
-    if (filePaths.length > 0) {
-      await Promise.all(filePaths.map((path) => deleteFile(path)))
-    }
-
-    setFilePaths([])
+  const onClose = () => {
+    setPreviewFiles([])
+    setOldImage(null)
 
     queryClient.removeQueries({
       queryKey: QUERY.IMAGE,
@@ -162,7 +158,6 @@ const ImageForm = () => {
       isDismissable={false}
       isOpen={isImageOpen}
       scrollBehavior='inside'
-      size='xl'
       onOpenChange={onOpenImageChange}
     >
       <ModalContent>
@@ -191,8 +186,8 @@ const ImageForm = () => {
               render={({ field: { value, ...field } }) => (
                 <Input
                   {...field}
+                  isDisabled
                   errorMessage={errors.url?.message}
-                  isDisabled={!!filePaths}
                   isInvalid={!!errors.url}
                   label='URL ของรูปภาพ'
                   value={value ?? ''}
