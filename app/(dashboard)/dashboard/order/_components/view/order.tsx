@@ -142,7 +142,7 @@ const OrderView = () => {
                         </span>
                         <span className='text-default-500'>
                           (ราคารวม{' '}
-                          {formatCurrency(item?.price * item?.quantity)}
+                          {formatCurrency(item?.price * item?.quantity)})
                         </span>
                         {item?.productId && !item?.variantId && (
                           <span className='text-default-500'>
