@@ -1,16 +1,19 @@
 import { Avatar, AvatarGroup } from '@heroui/avatar'
 import { Button } from '@heroui/button'
 import { OrderStatus } from '@prisma/client'
+import { useMutation } from '@tanstack/react-query'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 import type { GetOrderResult } from '@/app/(dashboard)/dashboard/order/actions/order'
 import type { FC } from 'react'
 
+import { createStripeCheckout } from '@/actions/stripe'
 import { useOrderStore } from '@/app/(dashboard)/dashboard/order/store'
 import { Stepper } from '@/components/stepper'
 import { formatDate } from '@/utils/date'
 import { getOrderStatus } from '@/utils/helper'
-import { formatNumber } from '@/utils/number'
+import { formatCurrency, formatNumber } from '@/utils/number'
 
 interface Props {
   order: GetOrderResult
@@ -25,8 +28,18 @@ const DISABLE_RECEIPT_STATUSES: OrderStatus[] = [
 ]
 
 const Order: FC<Props> = ({ order, hideButton }) => {
+  const router = useRouter()
   const { onOpenViewChange, onOpenOrderCancelChange, setState } =
     useOrderStore()
+
+  const { mutate: mutateCheckout, isPending: isPendingCheckout } = useMutation({
+    mutationFn: () => createStripeCheckout({ orderId: order?.id! }),
+    onSuccess: ({ checkoutUrl }) => {
+      if (checkoutUrl) {
+        router.push(checkoutUrl)
+      }
+    },
+  })
 
   const productImages = order.items?.map(
     (item) => item.product?.images?.[0]?.url ?? '/placeholder.svg',
@@ -47,7 +60,7 @@ const Order: FC<Props> = ({ order, hideButton }) => {
           <div className='flex flex-col'>
             <span>
               เลขที่รายการ {order?.id} ({formatNumber(order?.items?.length)}{' '}
-              รายการ) {order?.total}
+              รายการ) {formatCurrency(order?.total)}
             </span>
 
             <span className='text-default-500'>
@@ -92,7 +105,16 @@ const Order: FC<Props> = ({ order, hideButton }) => {
               </Button>
             )}
             {order?.status === OrderStatus.PENDING && (
-              <Button variant='faded'>ชำระเงินสินค้า</Button>
+              <Button
+                isDisabled={isPendingCheckout}
+                isLoading={isPendingCheckout}
+                variant='faded'
+                onClick={() => {
+                  mutateCheckout()
+                }}
+              >
+                ชำระเงินสินค้า
+              </Button>
             )}
             {order?.status !== OrderStatus.PENDING && (
               <Button isDisabled={isDisableReceipt} variant='faded'>
