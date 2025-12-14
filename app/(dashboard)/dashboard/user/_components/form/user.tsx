@@ -117,14 +117,16 @@ const UserForm = () => {
     })
 
   const isPending = isPendingCreateUser || isLoadingUser || isPendingUpdateUser
-  const headerLable = userId ? 'แก้ไขผู้ใช้งาน' : 'เพิ่มผู้ใช้งาน'
+  const headerLable = userId ? 'Edit User' : 'Add users'
 
   const onFilesChange = (files: ImageWithPreview[]) => {
     setPreviewFiles(files)
 
     setValue(
       'image',
-      files.length ? 'มีการเปลี่ยนแปลงของไฟล์รูปภาพ' : (oldImage ?? ''),
+      files.length
+        ? 'There have been changes to the image files.'
+        : (oldImage ?? ''),
       {
         shouldDirty: true,
         shouldTouch: true,
@@ -170,19 +172,19 @@ const UserForm = () => {
       <ModalContent>
         <ModalHeader className='flex flex-col gap-1'>{headerLable}</ModalHeader>
 
-        {isPending && <Spinner label='กำลังโหลด...' />}
+        {isPending && <Spinner label='Loading...' />}
 
         {!isPending && (
           <ModalBody>
             <ImageDropzone onFilesChange={onFilesChange} />
 
-            <SubHeader title='สิทธิ์การใช้งาน' />
+            <SubHeader title='License' />
             <Controller
               control={control}
               name='isActive'
               render={({ field: { value, onChange, ...field } }) => (
                 <Switch {...field} isSelected={value} onValueChange={onChange}>
-                  เปิดใช้งานบัญชี
+                  Activate account
                 </Switch>
               )}
             />
@@ -194,7 +196,7 @@ const UserForm = () => {
                   {...field}
                   errorMessage={errors.role?.message}
                   isInvalid={!!errors.role}
-                  label='สถานะบัญชี'
+                  label='Account status'
                   selectedKeys={value ? [value] : []}
                   variant='bordered'
                   onSelectionChange={(keys) => {
@@ -205,14 +207,14 @@ const UserForm = () => {
                 >
                   {Object.values(Role).map((role) => (
                     <SelectItem key={role}>
-                      {role === 'ADMIN' ? 'ผู้ดูแลระบบ' : 'ลูกค้า'}
+                      {role === 'ADMIN' ? 'System administrator' : 'Customer'}
                     </SelectItem>
                   ))}
                 </Select>
               )}
             />
 
-            <SubHeader title='ข้อมูลพื้นฐาน' />
+            <SubHeader title='Basic information' />
             <Controller
               control={control}
               name='image'
@@ -222,7 +224,7 @@ const UserForm = () => {
                   isDisabled
                   errorMessage={errors.image?.message}
                   isInvalid={!!errors.image}
-                  label='URL ของรูปภาพ'
+                  label='Image URL'
                   value={value ?? ''}
                   variant='bordered'
                 />
@@ -236,7 +238,7 @@ const UserForm = () => {
                   {...field}
                   errorMessage={errors.name?.message}
                   isInvalid={!!errors.name}
-                  label='ชื่อ'
+                  label='Name'
                   value={value ?? ''}
                   variant='bordered'
                 />
@@ -250,7 +252,7 @@ const UserForm = () => {
                   {...field}
                   errorMessage={errors.email?.message}
                   isInvalid={!!errors.email}
-                  label='อีเมล'
+                  label='Email'
                   value={value ?? ''}
                   variant='bordered'
                 />
@@ -264,7 +266,7 @@ const UserForm = () => {
                   {...field}
                   errorMessage={errors.password?.message}
                   isInvalid={!!errors.password}
-                  label={userId ? 'เปลี่ยนรหัสผ่าน' : 'รหัสผ่าน'}
+                  label={userId ? 'Change password' : 'Password'}
                   type='password'
                   value={value ?? ''}
                   variant='bordered'
@@ -275,14 +277,14 @@ const UserForm = () => {
         )}
         <ModalFooter>
           <Button isDisabled={isPending} variant='faded' onPress={onClose}>
-            ยกเลิก
+            Cancel
           </Button>
           <Button
             isDisabled={isPending || !isDirty}
             variant='faded'
             onClick={handleSubmit(onSubmit)}
           >
-            {isPending ? 'กำลังดำเนินการ' : 'บันทึกข้อมูล'}
+            {isPending ? 'In progress' : 'Record data'}
           </Button>
         </ModalFooter>
       </ModalContent>

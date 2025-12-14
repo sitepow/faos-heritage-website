@@ -59,12 +59,12 @@ const Order: FC<Props> = ({ order, hideButton }) => {
 
           <div className='flex flex-col'>
             <span>
-              เลขที่รายการ {order?.id} ({formatNumber(order?.items?.length)}{' '}
-              รายการ) {formatCurrency(order?.total)}
+              Item number {order?.id} ({formatNumber(order?.items?.length)}{' '}
+              list) {formatCurrency(order?.total)}
             </span>
 
             <span className='text-default-500'>
-              วันที่สั่งซื้อ {formatDate(order.createdAt)} (
+              Order date {formatDate(order.createdAt)} (
               {getOrderStatus(order.status)}){' '}
               {order.trackingNumber && (
                 <Link
@@ -72,7 +72,7 @@ const Order: FC<Props> = ({ order, hideButton }) => {
                   href={order.trackingWebsite ?? ''}
                   target='_blank'
                 >
-                  หมายเลขสำหรับติดตามสินค้า{' '}
+                  Tracking number{' '}
                   <span className='text-primary-website'>
                     {order.trackingNumber}
                   </span>
@@ -91,7 +91,7 @@ const Order: FC<Props> = ({ order, hideButton }) => {
                 onOpenViewChange()
               }}
             >
-              รายละเอียด
+              details
             </Button>
             {order?.status === OrderStatus.PENDING && (
               <Button
@@ -101,7 +101,7 @@ const Order: FC<Props> = ({ order, hideButton }) => {
                   onOpenOrderCancelChange()
                 }}
               >
-                ยกเลิกสินค้า/เปลี่ยนใจ
+                Cancel order / Change of mind
               </Button>
             )}
             {order?.status === OrderStatus.PENDING && (
@@ -113,12 +113,12 @@ const Order: FC<Props> = ({ order, hideButton }) => {
                   mutateCheckout()
                 }}
               >
-                ชำระเงินสินค้า
+                Pay for the goods
               </Button>
             )}
             {order?.status !== OrderStatus.PENDING && (
               <Button isDisabled={isDisableReceipt} variant='faded'>
-                ดาว์นโหลดใบเสร็จรับเงิน
+                Download the receipt
               </Button>
             )}
           </div>

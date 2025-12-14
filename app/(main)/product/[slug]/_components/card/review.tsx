@@ -6,10 +6,10 @@ const ReviewCard = () => {
   return (
     <Card className='col-span-2 lg:border-l lg:border-divider' shadow='none'>
       <CardHeader className='flex-col items-start gap-4'>
-        <SubHeader title='รีวิวสินค้า' />
+        <SubHeader title='Product review' />
       </CardHeader>
       <CardBody>
-        <p>ยังไม่มี ความคิดเห็น สำหรับสินค้านี้</p>
+        <p>There are no reviews for this product yet.</p>
       </CardBody>
     </Card>
   )

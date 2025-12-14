@@ -15,16 +15,22 @@ export const getPrismaError = (error: unknown) => {
     switch (error.code) {
       case 'P2002': {
         const target = error.meta?.target as string[] | undefined
-        const field = target?.[0] ?? 'ข้อมูลนี้'
+        const field = target?.[0] ?? 'This information'
 
-        throw new Error(`${field} มีอยู่ในระบบแล้ว โปรดลองใหม่อีกครั้ง`)
+        throw new Error(
+          `${field} It's already in the system. Please try again.`,
+        )
       }
 
       case 'P2025':
-        throw new Error('ไม่พบข้อมูลที่ต้องการ โปรดลองใหม่อีกครั้ง')
+        throw new Error(
+          'The requested information was not found. Please try again.',
+        )
 
       case 'P2003':
-        throw new Error('ข้อมูลอ้างอิงไม่ถูกต้อง โปรดลองใหม่อีกครั้ง')
+        throw new Error(
+          'The reference information is incorrect. Please try again.',
+        )
 
       default:
         throw new Error(error.message)
@@ -32,20 +38,20 @@ export const getPrismaError = (error: unknown) => {
   }
 
   if (error instanceof Prisma.PrismaClientValidationError) {
-    throw new Error('ข้อมูลไม่ถูกต้อง โปรดลองใหม่อีกครั้ง')
+    throw new Error('The information is incorrect. Please try again.')
   }
 
   if (error instanceof Prisma.PrismaClientInitializationError) {
-    throw new Error('ไม่สามารถเชื่อมต่อฐานข้อมูล')
+    throw new Error('Unable to connect to the database.')
   }
 
   if (error instanceof Prisma.PrismaClientUnknownRequestError) {
-    throw new Error(`เกิดข้อผิดพลาด: ${error.message}`)
+    throw new Error(`An error occurred: ${error.message}`)
   }
 
   if (error instanceof Error) {
     throw new Error(error.message)
   }
 
-  throw new Error('เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ')
+  throw new Error('An error of unknown cause occurred.')
 }

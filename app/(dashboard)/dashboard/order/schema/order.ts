@@ -4,11 +4,15 @@ import { z } from 'zod'
 type OrderStatusInput = z.infer<typeof orderStatusSchema>
 
 const orderStatusSchema = z.object({
-  reason: z.string('โปรดระบุหมายเหตุ').optional(),
+  reason: z.string('Please specify a note').optional(),
   status: z.enum(OrderStatus),
   tempStatus: z.enum(OrderStatus),
-  trackingWebsite: z.string('โปรดระบุเว็บไซต์ของขนส่ง').optional(),
-  trackingNumber: z.string('โปรดระบุหมายเลข Tracking สินค้า').optional(),
+  trackingWebsite: z
+    .string(`Please provide the shipping company's website`)
+    .optional(),
+  trackingNumber: z
+    .string(`Please provide the item's tracking number`)
+    .optional(),
 })
 
 export type { OrderStatusInput }

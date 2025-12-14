@@ -53,27 +53,27 @@ const OrderView = () => {
       onOpenChange={onOpenViewChange}
     >
       <ModalContent>
-        <ModalHeader>รายละเอียดคำสั่งซื้อ</ModalHeader>
+        <ModalHeader>Order details</ModalHeader>
 
-        {isLoadingOrder && <Spinner label='กำลังโหลด...' />}
+        {isLoadingOrder && <Spinner label='Loading...' />}
 
         {!isLoadingOrder && (
           <ModalBody>
-            <SubHeader title='ข้อมูลพื้นฐาน' />
+            <SubHeader title='Basic information' />
             <div className='flex flex-col'>
               <span>
-                หมายเลขคำสั่งซื้อ:{' '}
+                Order number:{' '}
                 <span className='text-default-500'>{order?.id}</span>
               </span>
               <span>
-                ที่อยู่จัดส่ง:{' '}
+                Shipping address:{' '}
                 <span className='text-default-500'>
                   {order?.shippingAddressText}
                 </span>
               </span>
               {order?.trackingNumber && (
                 <span>
-                  หมายเลข Tracking:{' '}
+                  Tracking number:{' '}
                   <Link
                     className='text-primary-website underline'
                     href={order?.trackingWebsite ?? ''}
@@ -85,28 +85,28 @@ const OrderView = () => {
               )}
               {order?.cancelReason && (
                 <span>
-                  หมายเหตุยกเลิก:{' '}
+                  Cancellation Note:{' '}
                   <span className='text-default-500'>
                     {order?.cancelReason}
                   </span>
                 </span>
               )}
               <span>
-                ค่าจัดส่ง:{' '}
+                Shipping cost:{' '}
                 <span className='text-default-500'>{formatCurrency(0)}</span>
               </span>
               <span>
-                ส่วนลดเพิ่มเติม:{' '}
+                Additional discount:{' '}
                 <span className='text-default-500'>{formatCurrency(0)}</span>
               </span>
               <span>
-                ราคารวมสุทธิ:{' '}
+                Net total price:{' '}
                 <span className='text-default-500'>
                   {formatCurrency(order?.total!)}
                 </span>
               </span>
             </div>
-            <SubHeader title='สถานะการจัดส่ง' />
+            <SubHeader title='Shipping status' />
             <Stepper
               createdAt={order?.createdAt!}
               deliveredAt={order?.deliveredAt!}
@@ -115,7 +115,7 @@ const OrderView = () => {
               status={order?.status!}
             />
 
-            <SubHeader title='รายการสินค้า' />
+            <SubHeader title='Product list' />
             <div className='flex flex-col gap-2'>
               {order?.items?.map((item) => (
                 <Card key={item?.id}>
@@ -132,26 +132,26 @@ const OrderView = () => {
                       <span>
                         {item?.productName}{' '}
                         <span className='text-default-500'>
-                          (ราคาต่อ
+                          (Price per
                           {getProductUnit(item?.product?.unit!)}{' '}
                           {formatCurrency(item?.price)})
                         </span>
                         <span className='text-default-500'>
-                          (จำนวน {formatNumber(item?.quantity)}{' '}
+                          (Quantity {formatNumber(item?.quantity)}{' '}
                           {getProductUnit(item?.product?.unit!)})
                         </span>
                         <span className='text-default-500'>
-                          (ราคารวม{' '}
+                          (Total price{' '}
                           {formatCurrency(item?.price * item?.quantity)})
                         </span>
                         {item?.productId && !item?.variantId && (
                           <span className='text-default-500'>
-                            (รหัสสินค้า {item?.productId})
+                            (Product code {item?.productId})
                           </span>
                         )}
                         {item?.productId && item?.variantId && (
                           <span className='text-default-500'>
-                            (รหัสตัวเลือกสินค้า {item?.variantId})
+                            (Product option code {item?.variantId})
                           </span>
                         )}
                       </span>
@@ -165,7 +165,7 @@ const OrderView = () => {
 
         <ModalFooter>
           <Button variant='faded' onClick={onClose}>
-            ปิดหน้าต่าง
+            Close the window
           </Button>
         </ModalFooter>
       </ModalContent>

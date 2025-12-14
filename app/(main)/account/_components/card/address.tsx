@@ -30,7 +30,7 @@ const AddressCard = () => {
   return (
     <Card fullWidth>
       <CardHeader className='items-center justify-between'>
-        <span>จัดการที่อยู่ของฉัน</span>
+        <span>Manage my address</span>
 
         {!isLoadingAddress && !address && (
           <Button
@@ -38,7 +38,7 @@ const AddressCard = () => {
             variant='faded'
             onClick={() => onOpenAddressChange()}
           >
-            เพิ่มที่อยู่จัดส่ง
+            Add shipping address
           </Button>
         )}
       </CardHeader>
@@ -51,7 +51,7 @@ const AddressCard = () => {
 
         {!isLoadingAddress && !address && (
           <Alert
-            description='คุณยังไม่มีข้อมูลที่อยู่สำหรับจัดส่ง กรุณาเพิ่มที่อยู่ก่อนดำเนินการสั่งซื้อสินค้า'
+            description='You do not yet have a shipping address. Please add your address before proceeding with your order.'
             variant='bordered'
           />
         )}
@@ -59,7 +59,7 @@ const AddressCard = () => {
         {!isLoadingAddress && address && (
           <div className='flex flex-col sm:max-w-1/2'>
             <div className='rounded-t-lg border border-divider p-2.5'>
-              <span>ที่อยู่ที่จัดส่ง</span>
+              <span>Delivery address</span>
             </div>
 
             <div className='flex flex-col gap-5 border-r border-b border-l border-divider p-2.5'>
@@ -76,7 +76,7 @@ const AddressCard = () => {
                   onOpenAddressChange()
                 }}
               >
-                แก้ไขที่อยู่
+                Edit address
               </Button>
             </div>
           </div>

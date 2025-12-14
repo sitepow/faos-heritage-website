@@ -8,7 +8,7 @@ const uploadFiles = async (formData: FormData) => {
   const files = formData.getAll('files') as File[]
 
   if (!files || files.length === 0) {
-    throw new Error('ไม่ได้ระบุไฟล์ที่ต้องการอัพโหลด')
+    throw new Error('The file to be uploaded has not been specified.')
   }
 
   const uploadDir = path.join(process.cwd(), 'public', 'uploads')
@@ -49,7 +49,9 @@ const uploadFiles = async (formData: FormData) => {
 
 const deleteFile = async (relativePath: string) => {
   if (!relativePath) {
-    throw new Error('ไม่ได้ระบุ relativePath ของไฟล์ที่ต้องการลบ')
+    throw new Error(
+      'The relative path of the file to be deleted was not specified.',
+    )
   }
 
   const fullPathToDelete = path.join(process.cwd(), 'public', relativePath)

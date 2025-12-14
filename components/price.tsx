@@ -15,7 +15,7 @@ const Price: FC<Props & ComponentProps<'div'>> = ({
   price,
   priceMin,
   priceMax,
-  unit = 'ชิ้น',
+  unit = 'item',
   className,
   ...props
 }) => {

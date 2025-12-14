@@ -33,31 +33,31 @@ const NEXT_AUTH_OPTIONS: NextAuthOptions = {
         const password = credentials?.password
 
         if (!email || !password) {
-          throw new Error('กรุณากรอกอีเมลและรหัสผ่าน')
+          throw new Error('Please enter your email and password.')
         }
 
         if (password.length < 6) {
-          throw new Error('รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร')
+          throw new Error('The password must be at least 6 characters long.')
         }
 
         const user = await prisma.user.findUnique({ where: { email } })
 
         if (!user || !user.password) {
           throw new Error(
-            'ไม่พบบัญชีผู้ใช้นี้ หรือ บัญชีนี้สมัครด้วย Google / Facebook กรุณาเข้าสู่ระบบด้วยวิธีเดิม',
+            'This account was not found, or this account was registered with Google / Facebook. Please log in using the same method you used before.',
           )
         }
 
         if (!user?.isActive) {
           throw new Error(
-            'บัญชีนี้ถูกระงับการใช้งาน โปรดติดต่อผู้แลระบบเพื่อขอเข้าการใช้งานอีกครั้ง',
+            'This account has been suspended. Please contact your administrator to request access again.',
           )
         }
 
         const valid = await compare(password, user.password)
 
         if (!valid) {
-          throw new Error('รหัสผ่านไม่ถูกต้อง โปรดลองใหม่อีกครั้ง')
+          throw new Error('The password is incorrect. Please try again.')
         }
 
         return user

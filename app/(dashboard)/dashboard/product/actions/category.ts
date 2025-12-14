@@ -27,7 +27,7 @@ const createCategory = async (data: CategoryInput) => {
     if (!validatedData?.success) {
       throw new Error(
         validatedData?.error?.issues[0]?.message ??
-          'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
+          'An error occurred. Please try again.',
       )
     }
 
@@ -57,7 +57,7 @@ const getCategories = async () => {
 const getCategory = async (categoryId: string) => {
   try {
     if (!categoryId) {
-      throw new Error('โปรดระบุรหัสตัวเลือกสินค้าที่ต้องการ')
+      throw new Error('Please specify the product code you want.')
     }
 
     const variant = await prisma.category.findUnique({
@@ -66,7 +66,7 @@ const getCategory = async (categoryId: string) => {
     })
 
     if (!variant) {
-      throw new Error('ไม่พบข้อมูลตัวเลือกสินค้า')
+      throw new Error('No product option information found.')
     }
 
     return variant
@@ -82,13 +82,13 @@ const updateCategory = async (data: CategoryInput) => {
     if (!validatedData?.success) {
       throw new Error(
         validatedData?.error?.issues[0]?.message ??
-          'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
+          'An error occurred. Please try again.',
       )
     }
 
     const { id, ...payload } = validatedData.data
 
-    if (!id) throw new Error('ไม่พบรหัสสินค้า')
+    if (!id) throw new Error('Product code not found.')
 
     await prisma.category.update({
       data: payload as Prisma.ProductVariantCreateInput,
@@ -104,7 +104,7 @@ const deleteCategory = async (categoryIds: string | string[]) => {
     const ids = Array.isArray(categoryIds) ? categoryIds : [categoryIds]
 
     if (!ids.length) {
-      throw new Error('โปรดระบุรหัสหมวดหมู่ที่ต้องการลบ')
+      throw new Error('Please specify the category code you wish to delete.')
     }
 
     const categories = await prisma.category.findMany({

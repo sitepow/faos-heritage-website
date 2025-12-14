@@ -8,8 +8,8 @@ interface NavItem {
 }
 
 const siteConfig = {
-  name: 'ZentraCore',
-  title: 'สร้างร้านค้าออนไลน์ของคุณ',
+  name: 'FAOS',
+  title: 'Premium Organic Olive Oil & Honey | Pure Natural Collection',
   description: '',
   link: {
     login: '/login',
@@ -17,41 +17,41 @@ const siteConfig = {
   },
   mainNavItems: [
     {
-      label: 'หน้าหลัก',
+      label: 'Home',
       href: '/',
     },
     {
-      label: 'สินค้าทั้งหมด',
+      label: 'All Products',
       href: '/products',
     },
     {
-      label: 'วิธีการชำระเงิน',
+      label: 'Payment Methods',
       href: '/payment',
     },
     {
-      label: 'คำสั่งซื้อของฉัน',
+      label: 'My Orders',
       href: `/account?tab=${ACCOUNT_TAB?.ORDER}`,
     },
     {
-      label: 'เกี่ยวกับเรา',
+      label: 'About Us',
       href: '/about',
     },
   ] satisfies NavItem[],
   adminNavbarItems: [
     {
-      label: 'ภาพรวม',
+      label: 'Overview',
       href: '/dashboard',
     },
     {
-      label: 'จัดการข้อมูลผู้ใช้งาน',
+      label: 'User Management',
       href: '/dashboard/user',
     },
     {
-      label: 'จัดการข้อมูลสินค้า',
+      label: 'Product Management',
       href: '/dashboard/product',
     },
     {
-      label: 'จัดการข้อมูลคำสั่งซื้อ',
+      label: 'Order Management',
       href: '/dashboard/order',
     },
   ] satisfies NavItem[],

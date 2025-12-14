@@ -80,18 +80,18 @@ const Index = () => {
   return (
     <Card className='size-full p-5 sm:w-[400px]'>
       <CardHeader className='flex w-full flex-col items-center gap-1'>
-        <span className='text-lg font-bold'>เข้าสู่ระบบ หรือ สมัครสมาชิก</span>
+        <span className='text-lg font-bold'>Log in or register.</span>
         <span className='text-default-500'>
-          เพื่อเข้าใช้งานเว็บไซต์{' '}
+          To access the website.{' '}
           <span className='text-primary-website'>{siteConfig?.name}</span>
         </span>
       </CardHeader>
 
       <Tabs fullWidth defaultSelectedKey='login' variant='bordered'>
-        <Tab key='login' title='เข้าสู่ระบบ'>
+        <Tab key='login' title='Login'>
           <Form onSubmit={formLogin.handleSubmit(submitLogin)}>
             <Input
-              label='อีเมล'
+              label='Email'
               type='email'
               variant='bordered'
               {...formLogin.register('email')}
@@ -99,7 +99,7 @@ const Index = () => {
               isInvalid={!!formLogin.formState.errors.email}
             />
             <Input
-              label='รหัสผ่าน'
+              label='Password'
               type='password'
               variant='bordered'
               {...formLogin.register('password')}
@@ -113,15 +113,15 @@ const Index = () => {
               type='submit'
               variant='faded'
             >
-              เข้าสู่ระบบ
+              Log in
             </Button>
           </Form>
         </Tab>
 
-        <Tab key='register' title='สมัครสมาชิก'>
+        <Tab key='register' title='Register'>
           <Form onSubmit={formRegister.handleSubmit(submitRegister)}>
             <Input
-              label='ชื่อ'
+              label='Name'
               variant='bordered'
               {...formRegister.register('name')}
               errorMessage={formRegister.formState.errors.name?.message}
@@ -129,7 +129,7 @@ const Index = () => {
             />
 
             <Input
-              label='อีเมล'
+              label='Email'
               {...formRegister.register('email')}
               errorMessage={formRegister.formState.errors.email?.message}
               isInvalid={!!formRegister.formState.errors.email}
@@ -138,7 +138,7 @@ const Index = () => {
             />
 
             <Input
-              label='รหัสผ่าน'
+              label='Password'
               variant='bordered'
               {...formRegister.register('password')}
               errorMessage={formRegister.formState.errors.password?.message}
@@ -147,7 +147,7 @@ const Index = () => {
             />
 
             <Input
-              label='ยืนยันรหัสผ่าน'
+              label='Confirm password'
               variant='bordered'
               {...formRegister.register('confirmPassword')}
               errorMessage={
@@ -164,7 +164,7 @@ const Index = () => {
               type='submit'
               variant='faded'
             >
-              สมัครสมาชิก
+              Register
             </Button>
           </Form>
         </Tab>
@@ -173,7 +173,7 @@ const Index = () => {
       <CardBody className='items-center justify-center gap-4'>
         <div className='relative flex w-full items-center'>
           <div className='flex-grow border-t border-divider' />
-          <span className='px-4 text-gray-500'>หรือดำเนินการด้วย</span>
+          <span className='px-4 text-gray-500'>Or proceed as follows</span>
           <div className='flex-grow border-t border-divider' />
         </div>
 

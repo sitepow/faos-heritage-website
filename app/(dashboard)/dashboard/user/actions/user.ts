@@ -26,7 +26,7 @@ const createUser = async (data: UserCreateInput) => {
     if (!validatedData?.success) {
       throw new Error(
         validatedData?.error?.issues[0]?.message ??
-          'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
+          'An error occurred. Please try again.',
       )
     }
 
@@ -34,7 +34,7 @@ const createUser = async (data: UserCreateInput) => {
 
     if (!password || password.trim().length < 6) {
       throw new Error(
-        'กรุณาระบุรหัสผ่าน (ห้ามว่าง) และต้องมีอักษรมากกว่า 6 ตัวขึ้นไป โปรดลองใหม่อีกครั้ง',
+        'Please enter a password (must not be left blank) and it must be at least 6 characters long. Please try again.',
       )
     }
 
@@ -44,7 +44,7 @@ const createUser = async (data: UserCreateInput) => {
 
     if (exists) {
       throw new Error(
-        'อีเมลนี้ถูกใช้ไปแล้ว กรุณาใช้อีเมลอื่นแล้วลองใหม่อีกครั้ง',
+        'This email address has already been used. Please use a different email address and try again.',
       )
     }
 
@@ -90,7 +90,7 @@ const getUsers = async (page: number = 1, limit: number = 10) => {
 const getUser = async (userId: string) => {
   try {
     if (!userId) {
-      throw new Error('โปรดระบุไอดีผู้ใช้งานที่ต้องการ')
+      throw new Error('Please specify the user ID you wish to use.')
     }
 
     const variant = await prisma.user.findUnique({
@@ -99,7 +99,7 @@ const getUser = async (userId: string) => {
     })
 
     if (!variant) {
-      throw new Error('ไม่พบผู้ใช้งาน')
+      throw new Error('No user found.')
     }
 
     return variant
@@ -115,13 +115,13 @@ const updateUser = async (data: UserUpdateInput) => {
     if (!validatedData.success) {
       throw new Error(
         validatedData.error?.issues[0]?.message ??
-          'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
+          'An error occurred. Please try again.',
       )
     }
 
     const { id, password, ...payload } = validatedData.data
 
-    if (!id) throw new Error('ไม่พบผู้ใช้งาน')
+    if (!id) throw new Error('No user found.')
 
     const updateData: Prisma.UserUpdateInput = {
       ...removeEmptyField(payload),
@@ -146,7 +146,7 @@ const deleteUser = async (userIds: string | string[]) => {
     const ids = Array.isArray(userIds) ? userIds : [userIds]
 
     if (!ids.length) {
-      throw new Error('โปรดระบุไอดีผู้ใช้งานที่ต้องการ')
+      throw new Error('Please specify the user ID you wish to use.')
     }
 
     await prisma.user.updateMany({
@@ -177,9 +177,9 @@ const getUserDashboard = async () => {
     ])
 
     return [
-      { name: 'ผู้ใช้งานทั้งหมด', value: totalUsers },
-      { name: 'ผู้ใช้งานทั้งหมด (เปิดการใช้งาน)', value: isActive },
-      { name: 'ผู้ใช้งานทั้งหมด (ปิดการใช้งาน)', value: unActive },
+      { name: 'All users', value: totalUsers },
+      { name: 'All users (Enable)', value: isActive },
+      { name: 'All users (Disable)', value: unActive },
     ]
   } catch (error) {
     getPrismaError(error)

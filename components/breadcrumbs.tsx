@@ -11,8 +11,8 @@ interface Props {
 const CategoryBreadcrumbs: FC<Props> = ({ categoryName }) => {
   return (
     <Breadcrumbs className='font-bold'>
-      <BreadcrumbItem>หน้าหลัก</BreadcrumbItem>
-      <BreadcrumbItem>{categoryName ?? 'ไม่มีหมวดหมู่'}</BreadcrumbItem>
+      <BreadcrumbItem>Homepage</BreadcrumbItem>
+      <BreadcrumbItem>{categoryName ?? 'No category'}</BreadcrumbItem>
     </Breadcrumbs>
   )
 }

@@ -14,7 +14,6 @@ import {
   getProduct,
   type GetProductResult,
 } from '@/app/(dashboard)/dashboard/product/actions/product'
-import { BannerAdvertise } from '@/components/banner-advertise'
 import { CategoryBreadcrumbs } from '@/components/breadcrumbs'
 import { NotFound } from '@/components/not-found'
 
@@ -39,11 +38,11 @@ const ProductLayout: FC<Props> = ({ initialProduct, productId, userId }) => {
   if (!product) {
     return (
       <NotFound>
-        ขออภัยครับ!{' '}
+        I&apos;m sorry.!{' '}
         <span className='text-primary-website'>
-          รหัสสินค้า &quot;{productId}&quot;
+          Product code &quot;{productId}&quot;
         </span>{' '}
-        ไม่ตรงกับสิ่งใดเลย โปรดลองหาสินค้าใหม่ได้ที่หน้าหลัก
+        Nothing matches. Please try searching for new products on the homepage.
       </NotFound>
     )
   }
@@ -64,8 +63,6 @@ const ProductLayout: FC<Props> = ({ initialProduct, productId, userId }) => {
         {isLoadingProduct && <Skeleton />}
         {!isLoadingProduct && <CartSection product={product} />}
       </div>
-
-      <BannerAdvertise />
 
       <DetailSection product={product} />
       <SimilarSection product={product} />

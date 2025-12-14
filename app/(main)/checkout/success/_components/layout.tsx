@@ -12,20 +12,20 @@ const SuccessLayout = () => {
     <section className='flex flex-col items-center justify-center gap-3 text-center'>
       <div className='flex flex-col items-center gap-4'>
         <CheckCircle2Icon className='size-10 text-teal-600' />
-        <h1 className='text-2xl'>ชำระเงินสำเร็จ</h1>
+        <h1 className='text-2xl'>Payment successful</h1>
       </div>
 
       <span className='text-default-500 sm:w-4/5 lg:w-1/2'>
-        ขอบคุณสำหรับการสั่งซื้อกับทางเรา
-        ระบบได้ทำการตรวจสอบและยืนยันการชำระเงินของคุณเรียบร้อยแล้ว
+        Thank you for your order. Your payment has been verified and confirmed.
         {orderId && (
           <>
             {' '}
-            โดยคำสั่งซื้อนี้มีหมายเลขอ้างอิงคือ{' '}
+            This order has the following reference number{' '}
             <span className='text-primary-website underline'>
               {orderId}
             </span>{' '}
-            กรุณาเก็บหมายเลขคำสั่งซื้อนี้ไว้สำหรับการตรวจสอบสถานะหรือการติดต่อฝ่ายบริการลูกค้าในภายหลัง
+            Please keep this order number for later status checks or to contact
+            customer service.
           </>
         )}
       </span>

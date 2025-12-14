@@ -23,7 +23,7 @@ const createVariant = async (data: VariantInput) => {
     if (!validatedData?.success) {
       throw new Error(
         validatedData?.error?.issues[0]?.message ??
-          'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
+          'An error occurred. Please try again.',
       )
     }
 
@@ -52,7 +52,7 @@ const getVariants = async (productId: string) => {
 const getVariant = async (variantId: string) => {
   try {
     if (!variantId) {
-      throw new Error('โปรดระบุรหัสตัวเลือกสินค้าที่ต้องการ')
+      throw new Error('Please specify the product code you want.')
     }
 
     const variant = await prisma.productVariant.findUnique({
@@ -61,7 +61,7 @@ const getVariant = async (variantId: string) => {
     })
 
     if (!variant) {
-      throw new Error('ไม่พบข้อมูลตัวเลือกสินค้า')
+      throw new Error('No product option information found.')
     }
 
     return variant
@@ -77,13 +77,13 @@ const updateVariant = async (data: VariantInput) => {
     if (!validatedData?.success) {
       throw new Error(
         validatedData?.error?.issues[0]?.message ??
-          'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
+          'An error occurred. Please try again.',
       )
     }
 
     const { id, ...payload } = validatedData.data
 
-    if (!id) throw new Error('ไม่พบรหัสสินค้า')
+    if (!id) throw new Error('Product code not found.')
 
     await prisma.productVariant.update({
       data: payload as Prisma.ProductVariantCreateInput,
@@ -99,7 +99,7 @@ const deleteVariant = async (variantIds: string | string[]) => {
     const ids = Array.isArray(variantIds) ? variantIds : [variantIds]
 
     if (!ids.length) {
-      throw new Error('โปรดระบุรหัสตัวเลือกสินค้าที่ต้องการ')
+      throw new Error('Please specify the product code you want.')
     }
 
     await prisma.productVariant.deleteMany({

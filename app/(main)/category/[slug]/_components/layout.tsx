@@ -87,16 +87,16 @@ const CategoryLayout: FC<Props> = ({
   if (isLoading)
     return (
       <div className='flex items-center justify-center'>
-        <Spinner label='กำลังโหลด...' />
+        <Spinner label='Loading...' />
       </div>
     )
 
   if (totalItems === 0)
     return (
       <NotFound>
-        ขออภัยครับ! รหัสหมวดหมู่สินค้า{' '}
+        Sorry! Product category code.{' '}
         <span className='text-primary-website'>&quot;{categoryId}&quot;</span>{' '}
-        ไม่ตรงกับสิ่งใดเลย โปรดลองหาสินค้าใหม่ได้ที่หน้าหลัก
+        Nothing matches. Please try searching for new products on the homepage.
       </NotFound>
     )
 
@@ -107,7 +107,7 @@ const CategoryLayout: FC<Props> = ({
 
         {!isLoadingCategory && (
           <Breadcrumbs className='font-bold'>
-            <BreadcrumbItem>หน้าหลัก</BreadcrumbItem>
+            <BreadcrumbItem>Homepage</BreadcrumbItem>
             <BreadcrumbItem>{category?.name}</BreadcrumbItem>
           </Breadcrumbs>
         )}
@@ -119,7 +119,7 @@ const CategoryLayout: FC<Props> = ({
 
       <div className='flex w-full flex-wrap items-center justify-center gap-3 sm:justify-between'>
         <span className='text-primary-website'>
-          สินค้ารายการที่ 1 – {itemCount} จากทั้งหมด {totalItems} รายการ
+          Item number 1 – {itemCount} From all {totalItems} list
         </span>
 
         <Dropdown>
@@ -128,7 +128,7 @@ const CategoryLayout: FC<Props> = ({
               startContent={<ArrowUpDownIcon className='text-default-500' />}
               variant='bordered'
             >
-              การเรียงลำดับ {sortBy?.label}
+              Sorting {sortBy?.label}
             </Button>
           </DropdownTrigger>
           <DropdownMenu

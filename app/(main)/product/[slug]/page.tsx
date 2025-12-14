@@ -29,9 +29,9 @@ const Product: FC<Props> = async ({ params }) => {
   } catch {
     return (
       <NotFound>
-        ขออภัยครับ! รหัสสินค้า{' '}
+        Sorry! Product code...{' '}
         <span className='text-primary-website'>&quot;{productId}&quot;</span>{' '}
-        ไม่ตรงกับสิ่งใดเลย โปรดลองหาสินค้าใหม่ได้ที่หน้าหลัก
+        Nothing matches. Please try searching for new products on the homepage.
       </NotFound>
     )
   }

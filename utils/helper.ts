@@ -44,7 +44,7 @@ const removeEmptyField = <T extends Record<string, unknown>>(
 }
 
 const getFullAddress = (address: GetAddressResult) => {
-  if (!address) return 'ไม่ทราบที่อยู่จัดส่งสินค้า'
+  if (!address) return 'The shipping address is unknown.'
 
   const {
     name,
@@ -58,14 +58,14 @@ const getFullAddress = (address: GetAddressResult) => {
   } = address
 
   const full = [
-    name ? `ชื่อสำหรับจัดส่ง. ${name}` : null,
-    addr ? `บ้านเลขที่ ${addr}` : null,
-    subDistrict ? `ตำบล ${subDistrict}` : null,
-    district ? `อำเภอ ${district}` : null,
-    province ? `จังหวัด ${province}` : null,
-    country ? `ประเทศ ${country}` : null,
-    postalCode ? `รหัสไปรษณีย์ ${postalCode}` : null,
-    phone ? `โทร ${phone}` : null,
+    name ? `Shipping name. ${name}` : null,
+    addr ? `House number ${addr}` : null,
+    subDistrict ? `district ${subDistrict}` : null,
+    district ? `district ${district}` : null,
+    province ? `province ${province}` : null,
+    country ? `country ${country}` : null,
+    postalCode ? `zip code ${postalCode}` : null,
+    phone ? `phone ${phone}` : null,
   ]
     .filter(Boolean)
     .join(' ')

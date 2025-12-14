@@ -8,92 +8,98 @@ const Payment = () => {
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
       <Header
-        description='แสดงวิธีและช่องทางการชำระเงินที่รองรับ'
-        title='วิธีการชำระเงิน'
+        description='Details of supported payment methods and channels'
+        title='Payment Methods'
       />
 
       <div className='mx-auto lg:w-1/2'>
         <Accordion variant='splitted'>
           <AccordionItem
             key='1'
-            aria-label='วิธีการเริ่มซื้อสินค้า'
-            title='วิธีการเริ่มซื้อสินค้า'
+            aria-label='How to start purchasing products'
+            title='How to Start Shopping'
           >
             <div className='space-y-3 text-left'>
               <p>
-                1. เลือกสินค้าที่ต้องการแล้วกด{' '}
-                <strong className='text-primary-website'>
-                  “เพิ่มลงตะกร้า”
-                </strong>
+                1. Select the product you want and click{' '}
+                <strong className='text-primary-website'>“Add to Cart”</strong>
               </p>
-              <p>2. เปิดตะกร้าสินค้าเพื่อตรวจสอบรายการ</p>
+              <p>2. Open your cart to review the selected items</p>
               <p>
-                3. เมื่อพร้อมชำระเงิน กดปุ่ม{' '}
-                <strong className='text-primary-website'>
-                  “สั่งซื้อสินค้า”
-                </strong>
+                3. When you are ready to pay, click{' '}
+                <strong className='text-primary-website'>“Place Order”</strong>
               </p>
-              <p>4. ระบบจะพาคุณไปยังหน้าชำระเงินที่มีความปลอดภัยของ Stripe</p>
+              <p>4. You will be redirected to Stripe’s secure checkout page</p>
             </div>
           </AccordionItem>
 
           <AccordionItem
             key='2'
-            aria-label='วิธีการชำระเงินด้วยบัตรเดบิต/เครดิต'
-            title='วิธีการชำระเงินด้วยบัตรเดบิต/เครดิต'
+            aria-label='How to pay with debit or credit card'
+            title='Pay with Debit / Credit Card'
           >
             <div className='space-y-3 text-left'>
               <p>
-                ระบบรองรับบัตรเดบิตและเครดิตทุกธนาคารที่มีสัญลักษณ์
+                We accept debit and credit cards from all banks with the
                 <strong className='text-primary-website'>
                   {' '}
-                  Visa, Mastercard, JCB
+                  Visa, Mastercard, or JCB
                 </strong>{' '}
-                และบัตรเสมือนของธนาคารต่าง ๆ
+                logo, including virtual cards issued by banks.
               </p>
-              <p>ขั้นตอน:</p>
+              <p>Steps:</p>
               <ul className='list-disc space-y-2 pl-5'>
-                <li>กรอกหมายเลขบัตร วันหมดอายุ และ CVC ตามที่แสดงบนบัตร</li>
-                <li>ยืนยันตัวตนผ่าน OTP หากธนาคารของคุณกำหนด</li>
-                <li>หลังชำระเงินสำเร็จ ระบบจะส่งอีเมลยืนยันอัตโนมัติ</li>
+                <li>
+                  Enter your card number, expiration date, and CVC as shown on
+                  your card
+                </li>
+                <li>Complete OTP verification if required by your bank</li>
+                <li>
+                  After successful payment, a confirmation email will be sent
+                  automatically
+                </li>
               </ul>
               <p className='text-default-500'>
-                ข้อมูลบัตรของคุณถูกเข้ารหัสและจัดการโดย Stripe โดยตรง
-                ทางเราไม่สามารถเข้าถึงข้อมูลบัตรของคุณได้
+                Your card information is encrypted and processed directly by
+                Stripe. We do not have access to your card details.
               </p>
             </div>
           </AccordionItem>
 
           <AccordionItem
             key='3'
-            aria-label='วิธีการชำระเงินด้วย QR Code'
-            title='วิธีการชำระเงินด้วย QR Code'
+            aria-label='How to pay using QR Code'
+            title='Pay with QR Code'
           >
             <div className='space-y-3 text-left'>
               <p>
-                หากคุณต้องการชำระเงินผ่าน{' '}
+                If you choose to pay via{' '}
                 <strong className='text-primary-website'>
                   PromptPay QR Code
-                </strong>{' '}
-                ระบบจะสร้าง QR Code ชำระเงินให้คุณโดยอัตโนมัติบนหน้า Checkout
-                ของ Stripe
+                </strong>
+                , a payment QR code will be generated automatically on Stripe’s
+                checkout page.
               </p>
 
-              <p>ขั้นตอน:</p>
+              <p>Steps:</p>
               <ul className='list-disc space-y-2 pl-5'>
                 <li>
-                  เลือกวิธีชำระเงินเป็น{' '}
+                  Select{' '}
                   <strong className='text-primary-website'>
                     PromptPay (QR Code)
-                  </strong>
+                  </strong>{' '}
+                  as your payment method
                 </li>
-                <li>สแกน QR ด้วย Mobile Banking ของคุณ</li>
-                <li>ชำระเงินและรอการยืนยัน (ใช้เวลาภายในไม่กี่วินาที)</li>
-                <li>ระบบจะอัปเดตสถานะการสั่งซื้อให้อัตโนมัติ</li>
+                <li>Scan the QR code using your mobile banking app</li>
+                <li>
+                  Complete the payment and wait for confirmation (usually within
+                  a few seconds)
+                </li>
+                <li>Your order status will be updated automatically</li>
               </ul>
 
               <p className='text-default-500'>
-                รองรับธนาคารไทยทุกธนาคารที่สามารถสแกน QR PromptPay
+                Supported by all Thai banks that offer PromptPay QR scanning.
               </p>
             </div>
           </AccordionItem>

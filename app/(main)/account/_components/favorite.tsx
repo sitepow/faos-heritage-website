@@ -130,7 +130,7 @@ const Favorite: FC<Props> = ({ className, favorite, ...props }) => {
                   {favorite?.product?.shortDescription}
                 </span>
                 <span className='text-sm text-default-500'>
-                  รหัสสินค้า : {favorite?.product?.id}
+                  Product code : {favorite?.product?.id}
                 </span>
                 <Price
                   price={favorite?.product?.price}
@@ -155,7 +155,7 @@ const Favorite: FC<Props> = ({ className, favorite, ...props }) => {
                   mutateCreateCart()
                 }}
               >
-                เพิ่มเข้าตระกร้า
+                Add to cart
               </Button>
               <Button
                 isDisabled={isPendingDeleteFavorite}
@@ -168,7 +168,7 @@ const Favorite: FC<Props> = ({ className, favorite, ...props }) => {
                 variant='faded'
                 onClick={onOpenDeleteFavoriteChange}
               >
-                ลบรายการโปรด
+                Remove from favorites
               </Button>
             </div>
           </div>

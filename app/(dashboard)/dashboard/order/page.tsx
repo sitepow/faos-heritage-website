@@ -70,21 +70,21 @@ const Order = () => {
           dashboard?.map((data) => <TrendCard key={data.name} {...data} />)}
       </div>
 
-      <Table aria-label='ตารางข้อมูลคำสั่งซื้อ' selectionMode='multiple'>
+      <Table aria-label='Order data table' selectionMode='multiple'>
         <TableHeader>
-          <TableColumn>รหัสคำสั่งซื้อ</TableColumn>
-          <TableColumn>รูปภาพ</TableColumn>
-          <TableColumn>ชื่อลูกค้า</TableColumn>
-          <TableColumn>วันที่สั่งซื้อ</TableColumn>
-          <TableColumn>ยอดรวม</TableColumn>
-          <TableColumn>สถานะ</TableColumn>
-          <TableColumn>หมายเลข Tracking</TableColumn>
-          <TableColumn>จัดการ</TableColumn>
+          <TableColumn>Order ID</TableColumn>
+          <TableColumn>Image</TableColumn>
+          <TableColumn>Customer Name</TableColumn>
+          <TableColumn>Order Date</TableColumn>
+          <TableColumn>Total Amount</TableColumn>
+          <TableColumn>Status</TableColumn>
+          <TableColumn>Tracking Number</TableColumn>
+          <TableColumn>Actions</TableColumn>
         </TableHeader>
         <TableBody
-          emptyContent='ไม่มีข้อมูลที่จะแสดง'
+          emptyContent='There is no information to display'
           isLoading={isLoadingOrders}
-          loadingContent={<Spinner label='กำลังโหลด...' />}
+          loadingContent={<Spinner label='Loading...' />}
         >
           {(orders?.items ?? []).map((order) => (
             <TableRow key={order.id}>
@@ -126,7 +126,7 @@ const Order = () => {
                     </Button>
                   </DropdownTrigger>
                   <DropdownMenu
-                    aria-label='จัดการคำสั่งซื้อ'
+                    aria-label='Manage orders'
                     className='min-w-[180px]'
                   >
                     <DropdownItem
@@ -137,7 +137,7 @@ const Order = () => {
                         onOpenOrderChange()
                       }}
                     >
-                      สถานะคำสั่งซื้อ
+                      Order status
                     </DropdownItem>
                     <DropdownItem
                       key='view'
@@ -147,7 +147,7 @@ const Order = () => {
                         onOpenViewChange()
                       }}
                     >
-                      ดูรายละเอียด
+                      See details
                     </DropdownItem>
                   </DropdownMenu>
                 </Dropdown>

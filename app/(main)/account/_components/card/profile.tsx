@@ -99,7 +99,9 @@ const ProfileCard = () => {
 
     setValue(
       'image',
-      files.length ? 'มีการเปลี่ยนแปลงของไฟล์รูปภาพ' : (oldImage ?? ''),
+      files.length
+        ? 'There have been changes to the image files.'
+        : (oldImage ?? ''),
       {
         shouldDirty: true,
         shouldTouch: true,
@@ -123,14 +125,14 @@ const ProfileCard = () => {
   return (
     <Card fullWidth>
       <CardHeader>
-        <span>แก้ไขข้อมูลส่วนตัว</span>
+        <span>Edit personal information</span>
       </CardHeader>
       <CardBody className='gap-4'>
         <div className='mx-auto max-w-2xl'>
           <ImageDropzone onFilesChange={onFilesChange} />
         </div>
 
-        <SubHeader title='ข้อมูลพื้นฐาน' />
+        <SubHeader title='Basic information' />
         <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
           <Controller
             control={control}
@@ -141,7 +143,7 @@ const ProfileCard = () => {
                 isDisabled
                 errorMessage={errors.image?.message}
                 isInvalid={!!errors.image}
-                label='URL ของรูปภาพ'
+                label='Image URL'
                 value={value ?? ''}
                 variant='bordered'
               />
@@ -156,7 +158,7 @@ const ProfileCard = () => {
                 {...field}
                 errorMessage={errors.name?.message}
                 isInvalid={!!errors.name}
-                label='ชื่อ'
+                label='Name'
                 value={value ?? ''}
                 variant='bordered'
               />
@@ -172,7 +174,7 @@ const ProfileCard = () => {
                 isDisabled
                 errorMessage={errors.email?.message}
                 isInvalid={!!errors.email}
-                label='ชื่อ'
+                label='Email'
                 type='email'
                 value={value ?? ''}
                 variant='bordered'
@@ -188,7 +190,7 @@ const ProfileCard = () => {
                 {...field}
                 errorMessage={errors.password?.message}
                 isInvalid={!!errors.password}
-                label='เปลี่ยนรหัสผ่าน'
+                label='Password'
                 type='password'
                 value={value ?? ''}
                 variant='bordered'
@@ -199,14 +201,14 @@ const ProfileCard = () => {
       </CardBody>
       <CardFooter className='gap-2'>
         <Button isDisabled={isPending} variant='faded' onPress={onClose}>
-          ยกเลิก
+          Cancel
         </Button>
         <Button
           isDisabled={isPending || !isDirty}
           variant='faded'
           onClick={handleSubmit(onSubmit)}
         >
-          {isPending ? 'กำลังดำเนินการ' : 'บันทึกข้อมูล'}
+          {isPending ? 'In progress' : 'Record data'}
         </Button>
       </CardFooter>
     </Card>

@@ -57,7 +57,7 @@ const createCart = async ({
       select: { stockQuantity: true },
     })
 
-    if (!product) throw new Error('ไม่พบสินค้าที่ต้องการ')
+    if (!product) throw new Error('The requested product was not found.')
 
     const existing = await prisma.cart.findFirst({
       where: { userId, productId },
@@ -68,7 +68,7 @@ const createCart = async ({
 
       if (newQty > product.stockQuantity) {
         throw new Error(
-          'คุณไม่สามารถเพิ่มสินค้าได้ เนื่องจากจำนวนที่ต้องการเกินจำนวนสต็อกที่มีอยู่ในคลังสินค้า',
+          'You cannot add the product because the requested quantity exceeds the available stock in the warehouse.',
         )
       }
 
@@ -80,7 +80,7 @@ const createCart = async ({
 
     if (product.stockQuantity < 1) {
       throw new Error(
-        'ไม่สามารถเพิ่มสินค้าได้ เนื่องจากจำนวนสต็อกของสินค้ารายการนี้หมดหรือมีไม่เพียงพอต่อการทำรายการ',
+        'The item cannot be added because the stock quantity for this item is out of stock or there is insufficient stock to process the order.',
       )
     }
 

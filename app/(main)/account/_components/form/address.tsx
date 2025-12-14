@@ -93,8 +93,8 @@ const AddressForm = () => {
   const isPending =
     isPendingCreateAddress || isLoadingAddress || isPendingUpdateAddress
   const headerLable = addressId
-    ? 'แก้ไขที่อยู่สำหรับการจัดส่ง'
-    : 'เพิ่มที่อยู่สำหรับการจัดส่ง'
+    ? 'Edit the shipping address.'
+    : 'Add a shipping address.'
 
   const onSubmit = async (data: AddressInput) => {
     const isUpdate = !!addressId
@@ -125,12 +125,12 @@ const AddressForm = () => {
     >
       <ModalContent>
         <ModalHeader>{headerLable}</ModalHeader>
-        {isPending && <Spinner label='กำลังโหลด...' />}
+        {isPending && <Spinner label='Loading...' />}
 
         {!isPending && (
           <ModalBody>
             <Alert
-              description='กรุณาตรวจสอบที่อยู่ให้ถูกต้องเพื่อหลีกเลี่ยงปัญหาที่อาจเกิดขึ้นในการจัดส่งสินค้า'
+              description='Please ensure your address is correct to avoid potential delivery issues.'
               variant='bordered'
             />
 
@@ -142,7 +142,7 @@ const AddressForm = () => {
                   {...field}
                   errorMessage={errors.name?.message}
                   isInvalid={!!errors.name}
-                  label='ชื่อสำหรับจัดส่ง'
+                  label='Shipping name'
                   variant='bordered'
                 />
               )}
@@ -156,7 +156,7 @@ const AddressForm = () => {
                   {...field}
                   errorMessage={errors.phone?.message}
                   isInvalid={!!errors.phone}
-                  label='เบอร์โทรศัพท์'
+                  label='telephone number'
                   variant='bordered'
                 />
               )}
@@ -170,7 +170,7 @@ const AddressForm = () => {
                   {...field}
                   errorMessage={errors.address?.message}
                   isInvalid={!!errors.address}
-                  label='ที่อยู่ (บ้านเลขที่ / ถนน / หมู่บ้าน)'
+                  label='Address (house number / street / village)'
                   variant='bordered'
                 />
               )}
@@ -184,7 +184,7 @@ const AddressForm = () => {
                   {...field}
                   errorMessage={errors.subDistrict?.message}
                   isInvalid={!!errors.subDistrict}
-                  label='ตำบล/แขวง'
+                  label='Subdistrict/District'
                   value={value!}
                   variant='bordered'
                 />
@@ -199,7 +199,7 @@ const AddressForm = () => {
                   {...field}
                   errorMessage={errors.district?.message}
                   isInvalid={!!errors.district}
-                  label='อำเภอ/เขต'
+                  label='District/Area'
                   variant='bordered'
                 />
               )}
@@ -213,7 +213,7 @@ const AddressForm = () => {
                   {...field}
                   errorMessage={errors.province?.message}
                   isInvalid={!!errors.province}
-                  label='จังหวัด'
+                  label='province'
                   variant='bordered'
                 />
               )}
@@ -227,7 +227,7 @@ const AddressForm = () => {
                   {...field}
                   errorMessage={errors.postalCode?.message}
                   isInvalid={!!errors.postalCode}
-                  label='รหัสไปรษณีย์'
+                  label='zip code'
                   variant='bordered'
                 />
               )}
@@ -241,7 +241,7 @@ const AddressForm = () => {
                   {...field}
                   errorMessage={errors.country?.message}
                   isInvalid={!!errors.country}
-                  label='ประเทศ'
+                  label='country'
                   variant='bordered'
                 />
               )}
@@ -251,14 +251,14 @@ const AddressForm = () => {
 
         <ModalFooter>
           <Button isDisabled={isPending} variant='faded' onPress={onClose}>
-            ยกเลิก
+            Cancel
           </Button>
           <Button
             isDisabled={isPending || !isDirty}
             variant='faded'
             onClick={handleSubmit(onSubmit)}
           >
-            {isPending ? 'กำลังดำเนินการ' : 'บันทึกข้อมูล'}
+            {isPending ? 'In progress' : 'Record data'}
           </Button>
         </ModalFooter>
       </ModalContent>

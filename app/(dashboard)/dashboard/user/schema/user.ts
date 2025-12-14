@@ -6,15 +6,17 @@ type UserUpdateInput = z.infer<typeof userUpdateSchema>
 
 const baseUserSchema = z.object({
   id: z.string().nullish(),
-  email: z.email('รูปแบบอีเมลไม่ถูกต้อง'),
-  name: z.string().min(1, 'โปรดระบุชื่อผู้ใช้งาน'),
+  email: z.email('The email format is incorrect.'),
+  name: z.string().min(1, 'Please specify the username.'),
   image: z.string().nullish(),
   isActive: z.boolean(),
   role: z.enum(Role),
 })
 
 const userCreateSchema = baseUserSchema.extend({
-  password: z.string().min(6, 'รหัสผ่านต้องอย่างน้อย 6 ตัวอักษร'),
+  password: z
+    .string()
+    .min(6, 'The password must be at least 6 characters long.'),
 })
 
 const userUpdateSchema = baseUserSchema.extend({

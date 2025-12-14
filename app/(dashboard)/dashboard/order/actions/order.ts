@@ -86,9 +86,9 @@ const getOrderDashboard = async () => {
     ])
 
     return [
-      { name: 'คำสั่งซื้อทั้งหมด', value: totalOrders },
-      { name: `คำสั่งซื้อ (${getOrderStatus('PENDING')})`, value: pending },
-      { name: `คำสั่งซื้อ (${getOrderStatus('DELIVERED')})`, value: success },
+      { name: 'All orders', value: totalOrders },
+      { name: `Order (${getOrderStatus('PENDING')})`, value: pending },
+      { name: `Order (${getOrderStatus('DELIVERED')})`, value: success },
     ]
   } catch (error) {
     getPrismaError(error)
@@ -114,17 +114,17 @@ const getOrderSum = async () => {
 
     return [
       {
-        name: `ยอดชำระทั้งหมด (${getOrderStatus('DELIVERED')})`,
+        name: `Total payment (${getOrderStatus('DELIVERED')})`,
         value: orderDelivered._sum.total ?? 0,
         isCurrency: true,
       },
       {
-        name: `ยอดชำระทั้งหมด (${getOrderStatus('CANCELLED')})`,
+        name: `Total payment (${getOrderStatus('CANCELLED')})`,
         value: orderCancelled._sum.total ?? 0,
         isCurrency: true,
       },
       {
-        name: `ยอดชำระทั้งหมด (${getOrderStatus('PENDING')})`,
+        name: `Total payment (${getOrderStatus('PENDING')})`,
         value: orderPending._sum.total ?? 0,
         isCurrency: true,
       },

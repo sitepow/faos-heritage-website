@@ -47,7 +47,7 @@ const AccountLayout = () => {
 
       <section className='flex flex-col items-center justify-center gap-4 text-center'>
         <div className='w-full text-start'>
-          <span className='text-xl font-bold'>บัญชีของคุณ {user?.name}</span>
+          <span className='text-xl font-bold'>Your account {user?.name}</span>
         </div>
 
         <div className='w-full'>
@@ -64,21 +64,21 @@ const AccountLayout = () => {
             variant='bordered'
             onSelectionChange={handleTabChange}
           >
-            <Tab key={ACCOUNT_TAB.ACCOUNT} title='จัดการกับบัญชีของฉัน'>
+            <Tab key={ACCOUNT_TAB.ACCOUNT} title='Manage my account'>
               <AccountCard
                 onclick={() => handleTabChange(ACCOUNT_TAB.PROFILE)}
               />
             </Tab>
-            <Tab key={ACCOUNT_TAB.ORDER} title='รายการคำสั่งซื้อของฉัน'>
+            <Tab key={ACCOUNT_TAB.ORDER} title='My Orders'>
               <OrderCard />
             </Tab>
-            <Tab key={ACCOUNT_TAB.FAVORITE} title='รายการโปรด'>
+            <Tab key={ACCOUNT_TAB.FAVORITE} title='Favorites'>
               <FavoriteCard />
             </Tab>
-            <Tab key={ACCOUNT_TAB.PROFILE} title='แก้ไขข้อมูลส่วนตัว'>
+            <Tab key={ACCOUNT_TAB.PROFILE} title='Edit personal information'>
               <ProfileCard />
             </Tab>
-            <Tab key={ACCOUNT_TAB.ADDRESS} title='จัดการที่อยู่ของฉัน'>
+            <Tab key={ACCOUNT_TAB.ADDRESS} title='Manage my address'>
               <AddressCard />
             </Tab>
           </Tabs>

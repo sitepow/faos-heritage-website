@@ -69,14 +69,15 @@ const ProductLayout: FC<Props> = ({ initialProducts, itemPerPage }) => {
   if (isLoading)
     return (
       <div className='flex items-center justify-center'>
-        <Spinner label='กำลังโหลด...' />
+        <Spinner label='Loading...' />
       </div>
     )
 
   if (totalItems === 0)
     return (
       <NotFound>
-        ขออภัยครับ ไม่พบสินค้าในระบบ กรุณาลองค้นหาสินค้าใหม่ที่หน้าหลัก
+        We apologize, the product was not found in our system. Please try
+        searching for the product again on the homepage.
       </NotFound>
     )
 
@@ -84,16 +85,16 @@ const ProductLayout: FC<Props> = ({ initialProducts, itemPerPage }) => {
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
       <div className='flex w-full justify-start'>
         <Breadcrumbs className='font-bold'>
-          <BreadcrumbItem>หน้าหลัก</BreadcrumbItem>
-          <BreadcrumbItem>สินค้าทั้งหมด</BreadcrumbItem>
+          <BreadcrumbItem>Homepage</BreadcrumbItem>
+          <BreadcrumbItem>All products</BreadcrumbItem>
         </Breadcrumbs>
       </div>
 
-      <span className='text-2xl'>สินค้าทั้งหมด</span>
+      <span className='text-2xl'>All products</span>
 
       <div className='flex w-full flex-wrap items-center justify-center gap-3 sm:justify-between'>
         <span className='text-primary-website'>
-          สินค้ารายการที่ 1 – {itemCount} จากทั้งหมด {totalItems} รายการ
+          Item number 1 – {itemCount} From all {totalItems} list
         </span>
 
         <Dropdown>
@@ -102,7 +103,7 @@ const ProductLayout: FC<Props> = ({ initialProducts, itemPerPage }) => {
               startContent={<ArrowUpDownIcon className='text-default-500' />}
               variant='bordered'
             >
-              การเรียงลำดับ {sortBy?.label}
+              Sorting {sortBy?.label}
             </Button>
           </DropdownTrigger>
           <DropdownMenu

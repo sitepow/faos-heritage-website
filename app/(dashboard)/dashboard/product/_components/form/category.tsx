@@ -110,14 +110,16 @@ const CategoryForm = () => {
 
   const isPending =
     isPendingCreateCategory || isLoadingCategory || isPendingUpdateCategory
-  const headerLable = categoryId ? 'แก้ไขหมวดหมู่' : 'เพิ่มหมวดหมู่'
+  const headerLable = categoryId ? 'Edit Category' : 'Add a category'
 
   const onFilesChange = (files: ImageWithPreview[]) => {
     setPreviewFiles(files)
 
     setValue(
       'image',
-      files.length ? 'มีการเปลี่ยนแปลงของไฟล์รูปภาพ' : (oldImage ?? ''),
+      files.length
+        ? 'There have been changes to the image files.'
+        : (oldImage ?? ''),
       {
         shouldDirty: true,
         shouldTouch: true,
@@ -164,23 +166,23 @@ const CategoryForm = () => {
       <ModalContent>
         <ModalHeader className='flex flex-col gap-1'>{headerLable}</ModalHeader>
 
-        {isPending && <Spinner label='กำลังโหลด...' />}
+        {isPending && <Spinner label='Loading...' />}
 
         {!isPending && (
           <ModalBody>
             <ImageDropzone onFilesChange={onFilesChange} />
 
-            <SubHeader title='สถานะตัวเลือก' />
+            <SubHeader title='Option status' />
             <Controller
               control={control}
               name='isActive'
               render={({ field: { value, onChange, ...field } }) => (
                 <Switch {...field} isSelected={value} onValueChange={onChange}>
-                  เปิดใช้งานหมวดหมู่นี้
+                  Enable this category
                 </Switch>
               )}
             />
-            <SubHeader title='ข้อมูลพื้นฐาน' />
+            <SubHeader title='Basic information' />
             <Controller
               control={control}
               name='image'
@@ -190,7 +192,7 @@ const CategoryForm = () => {
                   isDisabled
                   errorMessage={errors.image?.message}
                   isInvalid={!!errors.image}
-                  label='URL ของรูปภาพ'
+                  label='Image URL'
                   value={value ?? ''}
                   variant='bordered'
                 />
@@ -204,7 +206,7 @@ const CategoryForm = () => {
                   {...field}
                   errorMessage={errors.name?.message}
                   isInvalid={!!errors.name}
-                  label='ชื่อหมวดหมู่'
+                  label='Category Name'
                   variant='bordered'
                 />
               )}
@@ -228,14 +230,14 @@ const CategoryForm = () => {
 
         <ModalFooter>
           <Button isDisabled={isPending} variant='faded' onPress={onClose}>
-            ยกเลิก
+            Cancel
           </Button>
           <Button
             isDisabled={isPending || !isDirty}
             variant='faded'
             onClick={handleSubmit(onSubmit)}
           >
-            {isPending ? 'กำลังดำเนินการ' : 'บันทึกข้อมูล'}
+            {isPending ? 'In progress' : 'Record data'}
           </Button>
         </ModalFooter>
       </ModalContent>

@@ -1,9 +1,9 @@
 const formatDate = (
   value: Date | string | number,
-  locale = 'th-TH',
+  locale = 'en-EN',
   options?: Intl.DateTimeFormatOptions,
 ) => {
-  if (!value) return 'ไม่ทราบวันที่'
+  if (!value) return 'Date unknown'
 
   const date = value instanceof Date ? value : new Date(value)
 

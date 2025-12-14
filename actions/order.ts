@@ -32,7 +32,7 @@ const CANCEL_OR_REFUND: OrderStatus[] = [
 
 const getOrder = async (orderId: string) => {
   try {
-    if (!orderId) throw new Error('โปรดระบุไอดีคำสั่งซื้อ')
+    if (!orderId) throw new Error('Please specify the order ID.')
 
     const order = await prisma.order.findUnique({
       where: { id: orderId },
@@ -72,7 +72,7 @@ const getOrder = async (orderId: string) => {
       },
     })
 
-    if (!order) throw new Error('ไม่พบคำสั่งซื้อ')
+    if (!order) throw new Error('No order found.')
 
     return order
   } catch (error) {
@@ -89,9 +89,9 @@ const createOrder = async (data: CreateOrderInput) => {
         where: { id: addressId },
       })
 
-      if (!address) throw new Error('ไม่พบที่อยู่จัดส่ง')
+      if (!address) throw new Error('Shipping address not found.')
       if (!items || items.length === 0)
-        throw new Error('ไม่พบรายการสินค้าในคำสั่งซื้อ')
+        throw new Error('No items were found in your order.')
 
       const products = await tx.product.findMany({
         where: { id: { in: items.map((i) => i.productId) } },
@@ -116,13 +116,15 @@ const createOrder = async (data: CreateOrderInput) => {
       const productItems = items.map((item) => {
         const product = productsMap.get(item.productId)
 
-        if (!product) throw new Error('ไม่พบสินค้า')
+        if (!product) throw new Error('No products found.')
 
         const variant =
           product.variants.find((v) => v.id === item.variantId) ?? null
 
         if (product.variants.length > 0 && !variant) {
-          throw new Error(`${product.name} สินค้านี้ต้องเลือกตัวเลือกสินค้า`)
+          throw new Error(
+            `${product.name} This product requires selecting a product option.`,
+          )
         }
 
         const stock = variant ? variant.stockQuantity : product.stockQuantity
@@ -130,7 +132,7 @@ const createOrder = async (data: CreateOrderInput) => {
         if (stock < item.quantity) {
           const name = variant ? variant.name : product.name
 
-          throw new Error(`สินค้า ${name} สต็อกไม่พอ`)
+          throw new Error(`Product ${name} Insufficient stock.`)
         }
 
         const price = variant ? variant.price : product.price
@@ -174,7 +176,7 @@ const createOrder = async (data: CreateOrderInput) => {
           })
 
           if (updated.count === 0)
-            throw new Error(`สินค้า ${item.productName} ถูกขายไปก่อนหน้า`)
+            throw new Error(`Product ${item.productName} Sold previously.`)
 
           await tx.stockHistory.create({
             data: {
@@ -194,7 +196,7 @@ const createOrder = async (data: CreateOrderInput) => {
           })
 
           if (updated.count === 0)
-            throw new Error(`สินค้า ${item.productName} ถูกขายไปก่อนหน้า`)
+            throw new Error(`Product ${item.productName} Sold previously.`)
 
           await tx.stockHistory.create({
             data: {
@@ -226,12 +228,12 @@ const updateOrder = async (data: UpdateOrderInput) => {
         include: { items: true },
       })
 
-      if (!order) throw new Error('ไม่พบออเดอร์')
+      if (!order) throw new Error('No order found.')
 
       const prevStatus = order.status
 
       if (!canSelectStatus(prevStatus, status)) {
-        throw new Error('ไม่สามารถเปลี่ยนสถานะออเดอร์นี้ได้')
+        throw new Error('This order status cannot be changed.')
       }
 
       const isCancelOrRefund = CANCEL_OR_REFUND.includes(status)

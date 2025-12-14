@@ -27,11 +27,11 @@ const Category: FC<Props> = async ({ params }) => {
   } catch {
     return (
       <NotFound>
-        ขออภัยครับ! รหัสหมวดหมู่สินค้า{' '}
+        Sorry! Product category code.{' '}
         <span className='text-primary-website'>&quot;{categoryId}&quot;</span>{' '}
-        ไม่ตรงกับสิ่งใดเลย
+        It doesn&apos;t match anything at all.
         <br />
-        โปรดลองหาสินค้าใหม่ได้ที่หน้าหลัก
+        Please try searching for new products on the homepage.
       </NotFound>
     )
   }

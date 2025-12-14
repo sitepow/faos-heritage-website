@@ -87,17 +87,17 @@ const ImageManager = () => {
         onOpenChange={onOpenImageManagerChange}
       >
         <ModalContent>
-          <ModalHeader>จัดการรูปภาพสินค้า</ModalHeader>
+          <ModalHeader>Manage product images</ModalHeader>
           {isLoadingImages && (
             <ModalBody>
-              <Spinner label='กำลังโหลด...' />
+              <Spinner label='Loading...' />
             </ModalBody>
           )}
 
           {images?.length === 0 && (
             <ModalBody>
               <p className='text-center text-default-500'>
-                ยังไม่มีรูปภาพสินค้า
+                There are no product images yet.
               </p>
             </ModalBody>
           )}
@@ -133,7 +133,7 @@ const ImageManager = () => {
                         </Button>
                       </DropdownTrigger>
                       <DropdownMenu
-                        aria-label='จัดการสินค้า'
+                        aria-label='Manage products'
                         className='min-w-[180px]'
                       >
                         <DropdownItem
@@ -145,7 +145,7 @@ const ImageManager = () => {
                             onOpenImageChange()
                           }}
                         >
-                          แก้ไขข้อมูล
+                          Edit information
                         </DropdownItem>
                         <DropdownItem
                           key='delete'
@@ -157,7 +157,7 @@ const ImageManager = () => {
                             onOpenDeleteChange()
                           }}
                         >
-                          ลบตัวเลือก
+                          Remove option
                         </DropdownItem>
                       </DropdownMenu>
                     </Dropdown>
@@ -173,7 +173,7 @@ const ImageManager = () => {
                 onOpenImageManagerChange()
               }}
             >
-              ยกเลิก
+              Cancel
             </Button>
             <Button
               startContent={<PlusIcon className='text-default-500' />}
@@ -183,7 +183,7 @@ const ImageManager = () => {
                 onOpenImageChange()
               }}
             >
-              เพิ่มรูปภาพ
+              Add image
             </Button>
           </ModalFooter>
         </ModalContent>

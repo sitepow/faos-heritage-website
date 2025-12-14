@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client'
 
 import {
@@ -20,7 +21,6 @@ import type { NavItem } from '@/config/site'
 
 import { ThemeSwitch } from '../theme-switch'
 import { Cart } from './etc/cart'
-import { Header } from './etc/header'
 import { Panel } from './etc/panel'
 import { Search } from './etc/search'
 
@@ -52,101 +52,90 @@ const Navbar = () => {
   )
 
   return (
-    <>
-      {!isMenuOpen && <Header />}
+    <HeroNavbar
+      isBordered
+      className='shadow-md'
+      isBlurred={false}
+      isMenuOpen={isMenuOpen}
+      maxWidth='full'
+      position='sticky'
+      onMenuOpenChange={setIsMenuOpen}
+    >
+      <NavbarContent className='basis-1/5 sm:basis-full' justify='start'>
+        <NavbarBrand as='li' className='max-w-fit gap-3'>
+          <Link href='/'>
+            <img alt='faos-logo' height={50} src='/logo.png' width={50} />
+          </Link>
+        </NavbarBrand>
 
-      <HeroNavbar
-        isBordered
-        className='shadow-md'
-        isBlurred={false}
-        isMenuOpen={isMenuOpen}
-        maxWidth='full'
-        position='sticky'
-        onMenuOpenChange={setIsMenuOpen}
-      >
-        <NavbarContent className='basis-1/5 sm:basis-full' justify='start'>
-          <NavbarBrand as='li' className='max-w-fit gap-3 dark:text-white'>
-            <Link className='flex items-center gap-2' href='/'>
-              <div className='flex flex-col'>
-                <b className='text-xl text-primary-website'>
-                  {siteConfig.name}
-                </b>
-                <span className='text-xs text-default-500'>
-                  สำหรับร้านค้าออนไลน์
-                </span>
-              </div>
-            </Link>
-          </NavbarBrand>
-
-          <ul className='ml-2 hidden gap-4 lg:flex'>
-            {menuItems?.map((item) => (
-              <NavbarItem key={item.href}>{renderLink(item)}</NavbarItem>
-            ))}
-          </ul>
-        </NavbarContent>
-
-        <NavbarContent
-          className='hidden basis-1/5 sm:flex sm:basis-full'
-          justify='end'
-        >
-          {!isDashboard && (
-            <NavbarItem className='hidden lg:flex'>
-              <Search />
-            </NavbarItem>
-          )}
-
-          {isAuthenticated && (
-            <NavbarItem className='hidden items-center gap-4 lg:flex'>
-              <Panel setIsMenuOpen={setIsMenuOpen} />
-
-              {!isDashboard && <Cart />}
-
-              <ThemeSwitch />
-            </NavbarItem>
-          )}
-
-          {!isAuthenticated && (
-            <NavbarItem className='hidden items-center gap-4 lg:flex'>
-              <Link href={siteConfig.link.login}>
-                <LogInIcon className='text-default-500' />
-              </Link>
-              <ThemeSwitch />
-            </NavbarItem>
-          )}
-        </NavbarContent>
-
-        <NavbarMenu className='border-t border-divider bg-white dark:bg-inherit'>
-          {menuItems.map((item) => (
-            <NavbarMenuItem
-              key={item.href}
-              className='text-base'
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {renderLink(item)}
-            </NavbarMenuItem>
+        <ul className='ml-2 hidden gap-4 lg:flex'>
+          {menuItems?.map((item) => (
+            <NavbarItem key={item.href}>{renderLink(item)}</NavbarItem>
           ))}
-        </NavbarMenu>
+        </ul>
+      </NavbarContent>
+
+      <NavbarContent
+        className='hidden basis-1/5 sm:flex sm:basis-full'
+        justify='end'
+      >
+        {!isDashboard && (
+          <NavbarItem className='hidden lg:flex'>
+            <Search />
+          </NavbarItem>
+        )}
 
         {isAuthenticated && (
-          <NavbarItem className='flex items-center gap-3 lg:hidden'>
+          <NavbarItem className='hidden items-center gap-4 lg:flex'>
             <Panel setIsMenuOpen={setIsMenuOpen} />
+
             {!isDashboard && <Cart />}
+
             <ThemeSwitch />
           </NavbarItem>
         )}
 
-        {!isAuthenticated && !isDashboard && (
-          <NavbarItem className='flex items-center gap-3 lg:hidden'>
+        {!isAuthenticated && (
+          <NavbarItem className='hidden items-center gap-4 lg:flex'>
             <Link href={siteConfig.link.login}>
               <LogInIcon className='text-default-500' />
             </Link>
             <ThemeSwitch />
           </NavbarItem>
         )}
+      </NavbarContent>
 
-        <NavbarMenuToggle className='cursor-pointer text-default-500 lg:hidden' />
-      </HeroNavbar>
-    </>
+      <NavbarMenu className='border-t border-divider bg-white dark:bg-inherit'>
+        {menuItems.map((item) => (
+          <NavbarMenuItem
+            key={item.href}
+            className='text-base'
+            onClick={() => setIsMenuOpen(false)}
+          >
+            {renderLink(item)}
+          </NavbarMenuItem>
+        ))}
+      </NavbarMenu>
+
+      {isAuthenticated && (
+        <NavbarItem className='flex items-center gap-3 lg:hidden'>
+          <Panel setIsMenuOpen={setIsMenuOpen} />
+          {!isDashboard && <Cart />}
+          <ThemeSwitch />
+        </NavbarItem>
+      )}
+
+      {!isAuthenticated && !isDashboard && (
+        <NavbarItem className='flex items-center gap-3 lg:hidden'>
+          <Link href={siteConfig.link.login}>
+            <LogInIcon className='text-default-500' />
+          </Link>
+          <ThemeSwitch />
+        </NavbarItem>
+      )}
+
+      <NavbarMenuToggle className='cursor-pointer text-default-500 lg:hidden' />
+    </HeroNavbar>
   )
 }
 

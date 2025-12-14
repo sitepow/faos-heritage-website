@@ -20,7 +20,7 @@ const createProduct = async (data: ProductInput) => {
     if (!validatedData?.success) {
       throw new Error(
         validatedData?.error?.issues[0]?.message ??
-          'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
+          'An error occurred. Please try again.',
       )
     }
 
@@ -39,7 +39,7 @@ const deleteProduct = async (productIds: string | string[]) => {
     const ids = Array.isArray(productIds) ? productIds : [productIds]
 
     if (!ids.length) {
-      throw new Error('โปรดระบุรหัสสินค้าที่ต้องการ')
+      throw new Error('Please specify the product code you want.')
     }
 
     await prisma.product.deleteMany({
@@ -57,7 +57,7 @@ const deleteProduct = async (productIds: string | string[]) => {
 const getProduct = async (productId: string, userId?: string) => {
   try {
     if (!productId) {
-      throw new Error('โปรดระบุรหัสสินค้าที่ต้องการ')
+      throw new Error('Please specify the product code you want.')
     }
 
     const product = await prisma.product.findUnique({
@@ -125,7 +125,7 @@ const getProduct = async (productId: string, userId?: string) => {
     })
 
     if (!product) {
-      throw new Error('ไม่พบข้อมูลสินค้า')
+      throw new Error('No product information found.')
     }
 
     const { priceMin, priceMax, stockMin, stockMax } =
@@ -207,13 +207,13 @@ const updateProduct = async (data: ProductInput) => {
     if (!validatedData?.success) {
       throw new Error(
         validatedData?.error?.issues[0]?.message ??
-          'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
+          'An error occurred. Please try again.',
       )
     }
 
     const { id, ...payload } = validatedData.data
 
-    if (!id) throw new Error('ไม่พบรหัสสินค้า')
+    if (!id) throw new Error('Product code not found.')
 
     await prisma.product.update({
       data: payload as Prisma.ProductUncheckedUpdateInput,
@@ -237,9 +237,9 @@ const getProductDashboard = async () => {
     ])
 
     return [
-      { name: 'สินค้าทั้งหมด', value: totalProducts },
-      { name: 'สินค้าทั้งหมด (พร้อมขาย)', value: inStock },
-      { name: 'สินค้าทั้งหมด (ไม่พร้อมขาย)', value: outOfStock },
+      { name: 'All products', value: totalProducts },
+      { name: 'All products (Ready for sale)', value: inStock },
+      { name: 'All products (Not available for sale)', value: outOfStock },
     ]
   } catch (error) {
     getPrismaError(error)

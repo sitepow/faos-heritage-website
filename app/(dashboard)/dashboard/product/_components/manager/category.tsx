@@ -94,17 +94,17 @@ const CategoryManager = () => {
         onOpenChange={onOpenCategoryManagerChange}
       >
         <ModalContent>
-          <ModalHeader>จัดการหมวดหมู่สินค้า</ModalHeader>
+          <ModalHeader>Manage product categories</ModalHeader>
           {isLoadingCategories && (
             <ModalBody>
-              <Spinner label='กำลังโหลด...' />
+              <Spinner label='Loading...' />
             </ModalBody>
           )}
 
           {categories?.length === 0 && (
             <ModalBody>
               <p className='text-center text-default-500'>
-                ยังไม่มีหมวดหมู่สินค้า
+                There are no product categories yet
               </p>
             </ModalBody>
           )}
@@ -139,7 +139,7 @@ const CategoryManager = () => {
                           </Button>
                         </DropdownTrigger>
                         <DropdownMenu
-                          aria-label='จัดการสินค้า'
+                          aria-label='Manage products'
                           className='min-w-[180px]'
                         >
                           <DropdownItem
@@ -151,7 +151,7 @@ const CategoryManager = () => {
                               onOpenCategoryChange()
                             }}
                           >
-                            แก้ไขข้อมูล
+                            Edit information
                           </DropdownItem>
                           <DropdownItem
                             key='delete'
@@ -163,7 +163,7 @@ const CategoryManager = () => {
                               onOpenDeleteChange()
                             }}
                           >
-                            ลบหมวดหมู่
+                            Remove category
                           </DropdownItem>
                         </DropdownMenu>
                       </Dropdown>
@@ -176,7 +176,7 @@ const CategoryManager = () => {
 
           <ModalFooter>
             <Button variant='faded' onPress={onClose}>
-              ยกเลิก
+              Cancel
             </Button>
             <Button
               startContent={<PlusIcon className='text-default-500' />}
@@ -186,7 +186,7 @@ const CategoryManager = () => {
                 onOpenCategoryManagerChange()
               }}
             >
-              เพิ่มหมวดหมู่
+              Add a category
             </Button>
           </ModalFooter>
         </ModalContent>

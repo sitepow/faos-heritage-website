@@ -99,7 +99,7 @@ const VariantForm = () => {
 
   const isPending =
     isPendingCreateVariant || isLoadingVariant || isPendingUpdateVariant
-  const headerLable = variantId ? 'แก้ไขตัวเลือกสินค้า' : 'เพิ่มตัวเลือกสินค้า'
+  const headerLable = variantId ? 'Edit product options' : 'Add product options'
 
   const onSubmit = (data: VariantInput) => {
     if (!variantId) {
@@ -130,21 +130,21 @@ const VariantForm = () => {
       <ModalContent>
         <ModalHeader className='flex flex-col gap-1'>{headerLable}</ModalHeader>
 
-        {isPending && <Spinner label='กำลังโหลด...' />}
+        {isPending && <Spinner label='Loading...' />}
 
         {!isPending && (
           <ModalBody>
-            <SubHeader title='สถานะตัวเลือก' />
+            <SubHeader title='Option status' />
             <Controller
               control={control}
               name='isActive'
               render={({ field: { value, onChange, ...field } }) => (
                 <Switch {...field} isSelected={value} onValueChange={onChange}>
-                  เปิดใช้งานตัวเลือกนี้
+                  Enable this option
                 </Switch>
               )}
             />
-            <SubHeader title='ข้อมูลพื้นฐาน' />
+            <SubHeader title='Basic information' />
             <Controller
               control={control}
               name='name'
@@ -153,7 +153,7 @@ const VariantForm = () => {
                   {...field}
                   errorMessage={errors.name?.message}
                   isInvalid={!!errors.name}
-                  label='ชื่อตัวเลือก'
+                  label='Option name'
                   variant='bordered'
                 />
               )}
@@ -166,13 +166,13 @@ const VariantForm = () => {
                   {...field}
                   errorMessage={errors.sku?.message}
                   isInvalid={!!errors.sku}
-                  label='SKU (ถ้ามี)'
+                  label='SKU (if any))'
                   value={value ?? ''}
                   variant='bordered'
                 />
               )}
             />
-            <SubHeader title='ราคาและสต็อกสินค้า' />
+            <SubHeader title='Prices and stock availability' />
             <Controller
               control={control}
               name='price'
@@ -181,7 +181,7 @@ const VariantForm = () => {
                   {...field}
                   errorMessage={errors.price?.message}
                   isInvalid={!!errors.price}
-                  label='ราคา (บาท)'
+                  label='Price (Baht)'
                   minValue={0}
                   variant='bordered'
                   onValueChange={(val) => onChange(val || 0)}
@@ -196,7 +196,7 @@ const VariantForm = () => {
                   {...field}
                   errorMessage={errors.stockQuantity?.message}
                   isInvalid={!!errors.stockQuantity}
-                  label='จำนวนในสต็อก'
+                  label='Quantity in stock'
                   minValue={0}
                   variant='bordered'
                   onValueChange={(val) => onChange(val || 0)}
@@ -208,14 +208,14 @@ const VariantForm = () => {
 
         <ModalFooter>
           <Button isDisabled={isPending} variant='faded' onPress={onClose}>
-            ยกเลิก
+            Cancel
           </Button>
           <Button
             isDisabled={isPending || !isDirty}
             variant='faded'
             onClick={handleSubmit(onSubmit)}
           >
-            {isPending ? 'กำลังดำเนินการ' : 'บันทึกข้อมูล'}
+            {isPending ? 'In progress' : 'Record data'}
           </Button>
         </ModalFooter>
       </ModalContent>

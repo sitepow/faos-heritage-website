@@ -23,8 +23,8 @@ const ModalConfirm: FC<Props> = ({
   onOpenChange,
   onConfirm,
   isPending,
-  title = 'คุณกำลังจะลบข้อมูลนี้หรือไม่?',
-  description = 'คุณแน่ใจหรือไม่ว่าต้องการลบข้อมูลนี้? การลบครั้งนี้เป็นการลบถาวรและไม่สามารถกู้คืนได้',
+  title = 'Are you about to delete this information?',
+  description = 'Are you sure you want to delete this data? This deletion is permanent and irrecoverable.',
 }) => {
   return (
     <Modal
@@ -43,7 +43,7 @@ const ModalConfirm: FC<Props> = ({
             </ModalBody>
             <ModalFooter>
               <Button disabled={isPending} variant='faded' onPress={onClose}>
-                ยกเลิก
+                Cancel
               </Button>
               <Button
                 disabled={isPending}
@@ -51,7 +51,7 @@ const ModalConfirm: FC<Props> = ({
                 variant='faded'
                 onPress={onConfirm}
               >
-                ตกลง
+                Agree
               </Button>
             </ModalFooter>
           </>

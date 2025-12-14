@@ -13,7 +13,8 @@ const CategorySection = async () => {
   } catch {
     return (
       <NotFound>
-        ขออภัยครับ ไม่พบสินค้าในระบบ กรุณาลองค้นหาสินค้าใหม่ที่หน้าหลัก
+        We apologize, the product was not found in our system. Please try
+        searching for the product again on the homepage.
       </NotFound>
     )
   }

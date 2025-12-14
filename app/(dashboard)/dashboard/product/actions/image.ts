@@ -22,7 +22,7 @@ const createImage = async (data: ImageInput) => {
     if (!validatedData?.success) {
       throw new Error(
         validatedData?.error?.issues[0]?.message ??
-          'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
+          'An error occurred. Please try again.',
       )
     }
 
@@ -51,7 +51,7 @@ const getImages = async (productId: string) => {
 const getImage = async (variantId: string) => {
   try {
     if (!variantId) {
-      throw new Error('โปรดระบุรหัสตัวรูปภาพสินค้าที่ต้องการ')
+      throw new Error('Please specify the product image code you want.')
     }
 
     const variant = await prisma.productImage.findUnique({
@@ -60,7 +60,7 @@ const getImage = async (variantId: string) => {
     })
 
     if (!variant) {
-      throw new Error('ไม่พบรูปภาพสินค้า')
+      throw new Error('No product images found.')
     }
 
     return variant
@@ -76,13 +76,13 @@ const updateImage = async (data: ImageInput) => {
     if (!validatedData?.success) {
       throw new Error(
         validatedData?.error?.issues[0]?.message ??
-          'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
+          'An error occurred. Please try again.',
       )
     }
 
     const { id, ...payload } = validatedData.data
 
-    if (!id) throw new Error('ไม่พบรูปภาพสินค้า')
+    if (!id) throw new Error('No product images found.')
 
     await prisma.productImage.update({
       data: payload as Prisma.ProductImageCreateInput,
@@ -98,7 +98,7 @@ const deleteImage = async (imageIds: string | string[]) => {
     const ids = Array.isArray(imageIds) ? imageIds : [imageIds]
 
     if (!ids.length) {
-      throw new Error('โปรดระบุรหัสรูปภาพสินค้าที่ต้องการ')
+      throw new Error('Please specify the image code of the product you want.')
     }
 
     const images = await prisma.productImage.findMany({

@@ -134,7 +134,7 @@ const Product = () => {
             onOpenProductChange()
           }}
         >
-          เพิ่มสินค้าใหม่
+          Add new products
         </Button>
         <Button
           startContent={<SettingsIcon className='text-default-500' />}
@@ -143,7 +143,7 @@ const Product = () => {
             onOpenCategoryManagerChange()
           }}
         >
-          จัดการหมวดหมู่สินค้า
+          Manage product categories
         </Button>
         <Button
           isDisabled={selectedProductIds.length === 0}
@@ -154,7 +154,7 @@ const Product = () => {
             onOpenDeleteChange()
           }}
         >
-          ลบรายการที่เลือก ({selectedProductIds.length})
+          Delete selected items ({selectedProductIds.length})
         </Button>
       </div>
       <Table
@@ -165,21 +165,21 @@ const Product = () => {
         }}
       >
         <TableHeader>
-          <TableColumn>รหัสสินค้า</TableColumn>
-          <TableColumn>สินค้าดิจิทัล</TableColumn>
-          <TableColumn>รูปภาพ</TableColumn>
-          <TableColumn>ชื่อสินค้า</TableColumn>
-          <TableColumn>ราคาหลัก</TableColumn>
-          <TableColumn>สต็อคหลัก</TableColumn>
-          <TableColumn>หมวดหมู่</TableColumn>
-          <TableColumn>ตัวเลือกสินค้า</TableColumn>
-          <TableColumn>จัดการ</TableColumn>
+          <TableColumn>Product ID</TableColumn>
+          <TableColumn>Digital Product</TableColumn>
+          <TableColumn>Image</TableColumn>
+          <TableColumn>Product Name</TableColumn>
+          <TableColumn>Main Price</TableColumn>
+          <TableColumn>Main Stock</TableColumn>
+          <TableColumn>Category</TableColumn>
+          <TableColumn>Product Options</TableColumn>
+          <TableColumn>Actions</TableColumn>
         </TableHeader>
 
         <TableBody
-          emptyContent='ไม่มีข้อมูลที่จะแสดง'
+          emptyContent='There is no information to display'
           isLoading={isLoadingProducts}
-          loadingContent={<Spinner label='กำลังโหลด...' />}
+          loadingContent={<Spinner label='Loading...' />}
         >
           {(products?.items ?? []).map((product) => {
             const price = getRangeDisplayValue(
@@ -217,7 +217,7 @@ const Product = () => {
                       }
                       variant='faded'
                     >
-                      สินค้าดิจิทัล
+                      Digital products
                     </Chip>
                   ) : (
                     '-'
@@ -255,10 +255,10 @@ const Product = () => {
                             <span className='line-clamp-1'>{variant.name}</span>
                             <div className='flex gap-2'>
                               <span className='text-default-500'>
-                                ราคา: {formatCurrency(variant.price)}
+                                Price: {formatCurrency(variant.price)}
                               </span>
                               <span className='text-default-500'>
-                                สต็อค: {formatNumber(variant.stockQuantity)}
+                                Stock: {formatNumber(variant.stockQuantity)}
                               </span>
                             </div>
                           </div>
@@ -274,7 +274,7 @@ const Product = () => {
                       </Button>
                     </DropdownTrigger>
                     <DropdownMenu
-                      aria-label='จัดการสินค้า'
+                      aria-label='Manage products'
                       className='min-w-[180px]'
                     >
                       <DropdownItem
@@ -285,7 +285,7 @@ const Product = () => {
                           onOpenProductChange()
                         }}
                       >
-                        แก้ไขข้อมูล
+                        Edit information
                       </DropdownItem>
                       <DropdownItem
                         key='image'
@@ -295,7 +295,7 @@ const Product = () => {
                           onOpenImageManagerChange()
                         }}
                       >
-                        จัดการรูปภาพ
+                        Manage images
                       </DropdownItem>
                       <DropdownItem
                         key='variant'
@@ -305,7 +305,7 @@ const Product = () => {
                           onOpenVariantManagerChange()
                         }}
                       >
-                        จัดการตัวเลือก
+                        Manage options
                       </DropdownItem>
                       <DropdownItem
                         key='delete'
@@ -317,7 +317,7 @@ const Product = () => {
                           onOpenDeleteChange()
                         }}
                       >
-                        ลบสินค้า
+                        Remove product
                       </DropdownItem>
                     </DropdownMenu>
                   </Dropdown>

@@ -29,7 +29,7 @@ const createAddress = async (data: AddressInput) => {
     if (!validatedData?.success) {
       throw new Error(
         validatedData?.error?.issues[0]?.message ??
-          'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
+          'An error occurred. Please try again.',
       )
     }
 
@@ -46,7 +46,7 @@ const createAddress = async (data: AddressInput) => {
 const getAddress = async (userId: string) => {
   try {
     if (!userId) {
-      throw new Error('โปรดระบุไอดีผู้ใช้งานที่ต้องการ')
+      throw new Error('Please specify the user ID you wish to use')
     }
 
     const address = await prisma.address.findUnique({
@@ -71,13 +71,13 @@ const updateAddress = async (data: AddressInput) => {
     if (!validatedData.success) {
       throw new Error(
         validatedData.error?.issues[0]?.message ??
-          'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
+          'An error occurred. Please try again.',
       )
     }
 
     const { id, ...payload } = validatedData.data
 
-    if (!id) throw new Error('ไม่พบไอดีที่อยู่ของลูกค้า')
+    if (!id) throw new Error('Customer address ID not found')
 
     await prisma.address.update({
       data: payload,

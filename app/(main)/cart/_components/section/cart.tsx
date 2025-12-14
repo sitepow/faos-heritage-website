@@ -40,7 +40,7 @@ const CartSection: FC<ComponentProps<typeof Card>> = ({
   return (
     <Card fullWidth className={cn(className)} {...props}>
       <CardHeader>
-        <b>รายการสินค้า</b>
+        <b>Product list</b>
       </CardHeader>
       <CardBody className='flex-col gap-4'>
         {isLoadingCarts &&
@@ -50,9 +50,10 @@ const CartSection: FC<ComponentProps<typeof Card>> = ({
           <div className='flex size-full flex-col items-center justify-center gap-2 text-default-500'>
             <AlertCircleIcon />
             <span className='text-center'>
-              ไม่มีสินค้าในตระกร้า คุณสามารถเลือกชมสินค้าได้ที่หน้าหลัก
+              There are no items in your cart You can browse products on the
+              homepage
               <br />
-              แล้วเพิ่มสินค้าเข้าตระกร้าเพื่อดำเนินการต่อ
+              Then add the items to your cart to proceed
             </span>
           </div>
         )}

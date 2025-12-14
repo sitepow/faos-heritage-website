@@ -23,7 +23,9 @@ const QueryProviders: FC<PropsWithChildren> = ({ children }) => {
         },
         mutationCache: new MutationCache({
           onError: (error) => {
-            toast.error(error?.message || 'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง')
+            toast.error(
+              error?.message || 'An error occurred. Please try again.',
+            )
           },
         }),
       }),

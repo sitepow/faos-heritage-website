@@ -34,7 +34,7 @@ const SimilarSection: FC<Props> = ({ product }) => {
     <div className='flex flex-col gap-4'>
       {similars?.length !== 0 && (
         <span className='mx-auto w-fit border-b border-primary-website pb-1 text-xl font-bold'>
-          สินค้าใกล้เคียง/ทดแทน
+          Similar/Replacement Products
         </span>
       )}
 

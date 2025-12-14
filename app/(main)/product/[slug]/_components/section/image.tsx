@@ -36,7 +36,7 @@ const ImageSection: FC<Props> = ({ className, product, ...props }) => {
                     }
                     variant='faded'
                   >
-                    สินค้าตัวอย่าง
+                    Product samples
                   </Chip>
                 )}
 
@@ -47,14 +47,14 @@ const ImageSection: FC<Props> = ({ className, product, ...props }) => {
                     }
                     variant='faded'
                   >
-                    สินค้าดิจิทัล
+                    Digital products
                   </Chip>
                 )}
                 <Chip
                   startContent={<TagIcon className='size-4 text-default-500' />}
                   variant='faded'
                 >
-                  {product?.category?.name ?? 'ไม่มีหมวดหมู่'}
+                  {product?.category?.name ?? 'No category'}
                 </Chip>
               </div>
             </div>

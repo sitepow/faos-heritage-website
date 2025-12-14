@@ -14,7 +14,7 @@ const createUser = async (data: UserRegisterInput) => {
     if (!validatedData?.success) {
       throw new Error(
         validatedData?.error?.issues[0]?.message ??
-          'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง',
+          'An error occurred. Please try again.',
       )
     }
 
@@ -27,14 +27,14 @@ const createUser = async (data: UserRegisterInput) => {
     if (!exists?.password) {
       if (exists) {
         throw new Error(
-          'ไม่สามารถสมัครบัญชีได้ เนื่องจากบัญชีนี้สมัครด้วย Google / Facebook กรุณาเข้าสู่ระบบด้วยวิธีเดิม',
+          'You cannot register an account because this account was already registered with Google/Facebook. Please log in using the same method you used before',
         )
       }
     }
 
     if (exists) {
       throw new Error(
-        'อีเมลนี้ถูกใช้ไปแล้ว กรุณาใช้อีเมลอื่นแล้วลองใหม่อีกครั้ง',
+        'This email address has already been used. Please use a different email address and try again',
       )
     }
 

@@ -108,7 +108,7 @@ const Customer = () => {
             onOpenUserChange()
           }}
         >
-          เพิ่มผู้ใช้งานใหม่
+          Add new users
         </Button>
         <Button
           isDisabled={selectedUserIds.length === 0}
@@ -119,7 +119,7 @@ const Customer = () => {
             onOpenDeleteChange()
           }}
         >
-          ลบรายการที่เลือก ({selectedUserIds.length})
+          Delete selected items ({selectedUserIds.length})
         </Button>
       </div>
 
@@ -131,18 +131,18 @@ const Customer = () => {
         }}
       >
         <TableHeader>
-          <TableColumn>รหัสลูกค้า</TableColumn>
-          <TableColumn>รูปภาพ</TableColumn>
-          <TableColumn>ชื่อลูกค้า</TableColumn>
-          <TableColumn>อีเมล</TableColumn>
-          <TableColumn>สิทธิ์การใช้งาน</TableColumn>
-          <TableColumn>สถานะบัญชี</TableColumn>
-          <TableColumn>จัดการ</TableColumn>
+          <TableColumn>Customer ID</TableColumn>
+          <TableColumn>Image</TableColumn>
+          <TableColumn>Customer Name</TableColumn>
+          <TableColumn>Email</TableColumn>
+          <TableColumn>Role</TableColumn>
+          <TableColumn>Account Status</TableColumn>
+          <TableColumn>Actions</TableColumn>
         </TableHeader>
         <TableBody
-          emptyContent='ไม่มีข้อมูลที่จะแสดง'
+          emptyContent='There is no information to display'
           isLoading={isLoadingUsers}
-          loadingContent={<Spinner label='กำลังโหลด...' />}
+          loadingContent={<Spinner label='Loading...' />}
         >
           {(users?.items ?? []).map((user) => (
             <TableRow key={user.id}>
@@ -161,12 +161,14 @@ const Customer = () => {
               <TableCell>{user.email}</TableCell>
               <TableCell>
                 <Chip variant='bordered'>
-                  {user.role === Role.ADMIN ? 'ผู้ดูแลระบบ' : 'ลูกค้า'}
+                  {user.role === Role.ADMIN
+                    ? 'System administrator'
+                    : 'Customer'}
                 </Chip>
               </TableCell>
               <TableCell>
                 <Chip variant='bordered'>
-                  {user.isActive ? 'เปิดการใช้งาน' : 'ถูกระงับการใช้งาน'}
+                  {user.isActive ? 'Enable' : 'Account suspended'}
                 </Chip>
               </TableCell>
               <TableCell className='flex gap-2.5'>
@@ -177,7 +179,7 @@ const Customer = () => {
                     </Button>
                   </DropdownTrigger>
                   <DropdownMenu
-                    aria-label='จัดการผู้ใช้งาน'
+                    aria-label='Manage users'
                     className='min-w-[180px]'
                   >
                     <DropdownItem
@@ -188,7 +190,7 @@ const Customer = () => {
                         onOpenUserChange()
                       }}
                     >
-                      แก้ไขข้อมูล
+                      Edit information
                     </DropdownItem>
                     <DropdownItem
                       key='delete'
@@ -200,7 +202,7 @@ const Customer = () => {
                         onOpenDeleteChange()
                       }}
                     >
-                      ปิดบัญชี (Soft Delete)
+                      Close account (Soft Delete)
                     </DropdownItem>
                   </DropdownMenu>
                 </Dropdown>

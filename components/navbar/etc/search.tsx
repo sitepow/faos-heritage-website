@@ -5,7 +5,7 @@ const Search = () => {
   return (
     <Input
       endContent={<SearchIcon className='text-default-500' />}
-      placeholder='ค้นหาสิ่งที่ต้องการที่นี่...'
+      placeholder='Find what you need here....'
       variant='faded'
     />
   )

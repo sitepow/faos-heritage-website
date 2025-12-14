@@ -4,19 +4,19 @@ type UserLoginInput = z.infer<typeof userLoginSchema>
 type UserRegisterInput = z.infer<typeof userRegisterSchema>
 
 const userLoginSchema = z.object({
-  email: z.email('อีเมลไม่ถูกต้อง'),
-  password: z.string().min(1, 'กรุณากรอกรหัสผ่าน'),
+  email: z.email('Invalid email'),
+  password: z.string().min(1, 'Please enter your password'),
 })
 
 const userRegisterSchema = z
   .object({
-    name: z.string().min(1, 'กรุณากรอกชื่อ'),
-    email: z.email('รูปแบบอีเมลไม่ถูกต้อง'),
-    password: z.string().min(6, 'รหัสผ่านต้อง 6 ตัวขึ้นไป'),
+    name: z.string().min(1, 'Please enter your name'),
+    email: z.email('Invalid email format'),
+    password: z.string().min(6, 'Password must be at least 6 characters'),
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: 'รหัสผ่านไม่ตรงกัน',
+    message: 'Passwords do not match',
     path: ['confirmPassword'],
   })
 

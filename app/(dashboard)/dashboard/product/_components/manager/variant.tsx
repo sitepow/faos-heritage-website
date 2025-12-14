@@ -95,17 +95,17 @@ const VariantManager = () => {
         onOpenChange={onOpenVariantManagerChange}
       >
         <ModalContent>
-          <ModalHeader>จัดการตัวเลือกสินค้า</ModalHeader>
+          <ModalHeader>Manage product options</ModalHeader>
           {isLoadingVariants && (
             <ModalBody>
-              <Spinner label='กำลังโหลด...' />
+              <Spinner label='Loading...' />
             </ModalBody>
           )}
 
           {variants?.length === 0 && (
             <ModalBody>
               <p className='text-center text-default-500'>
-                ยังไม่มีตัวเลือกสินค้า
+                There are no product options yet.
               </p>
             </ModalBody>
           )}
@@ -138,8 +138,8 @@ const VariantManager = () => {
                             )}
                           >
                             {variant.price
-                              ? `ราคา: ${formatCurrency(variant.price)}`
-                              : `(โปรดระบุราคา)`}
+                              ? `Price: ${formatCurrency(variant.price)}`
+                              : `(Please specify the price)`}
                           </span>
 
                           <span
@@ -149,8 +149,8 @@ const VariantManager = () => {
                             )}
                           >
                             {variant.stockQuantity
-                              ? `สต็อค: ${formatNumber(variant.stockQuantity)}`
-                              : '(โปรดระบุสต็อค)'}
+                              ? `Stock: ${formatNumber(variant.stockQuantity)}`
+                              : '(Please specify stock availability)'}
                           </span>
                         </div>
                       </div>
@@ -162,7 +162,7 @@ const VariantManager = () => {
                           </Button>
                         </DropdownTrigger>
                         <DropdownMenu
-                          aria-label='จัดการสินค้า'
+                          aria-label='Manage products'
                           className='min-w-[180px]'
                         >
                           <DropdownItem
@@ -174,7 +174,7 @@ const VariantManager = () => {
                               onOpenVariantChange()
                             }}
                           >
-                            แก้ไขข้อมูล
+                            Edit information
                           </DropdownItem>
                           <DropdownItem
                             key='delete'
@@ -186,7 +186,7 @@ const VariantManager = () => {
                               onOpenDeleteChange()
                             }}
                           >
-                            ลบตัวเลือก
+                            Remove option
                           </DropdownItem>
                         </DropdownMenu>
                       </Dropdown>
@@ -199,7 +199,7 @@ const VariantManager = () => {
 
           <ModalFooter>
             <Button variant='faded' onPress={onClose}>
-              ยกเลิก
+              Cancel
             </Button>
             <Button
               startContent={<PlusIcon className='text-default-500' />}
@@ -209,7 +209,7 @@ const VariantManager = () => {
                 onOpenVariantManagerChange()
               }}
             >
-              เพิ่มตัวเลือก
+              Add options
             </Button>
           </ModalFooter>
         </ModalContent>

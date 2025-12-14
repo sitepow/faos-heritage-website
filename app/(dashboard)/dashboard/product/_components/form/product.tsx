@@ -120,7 +120,7 @@ const ProductForm = () => {
     isPendingCreateProduct ||
     isPendingUpdateProduct ||
     isLoadingCategories
-  const headerLable = productId ? 'แก้ไขสินค้า' : 'เพิ่มสินค้า'
+  const headerLable = productId ? 'Edit product' : 'Add product'
 
   const onSubmit = (data: ProductInput) => {
     if (!productId) {
@@ -154,13 +154,13 @@ const ProductForm = () => {
         <ModalHeader className='flex flex-col gap-1'>{headerLable}</ModalHeader>
         {isPending && (
           <ModalBody>
-            <Spinner label='กำลังโหลด...' />
+            <Spinner label='Loading...' />
           </ModalBody>
         )}
 
         {!isPending && (
           <ModalBody>
-            <SubHeader title='สถานะสินค้า' />
+            <SubHeader title='Product status' />
             <div className='flex flex-wrap gap-6'>
               <Controller
                 control={control}
@@ -171,7 +171,7 @@ const ProductForm = () => {
                     isSelected={value}
                     onValueChange={onChange}
                   >
-                    เปิดการขายสินค้า
+                    Open for product sales
                   </Switch>
                 )}
               />
@@ -184,7 +184,7 @@ const ProductForm = () => {
                     isSelected={value}
                     onValueChange={onChange}
                   >
-                    ปักหมุดสินค้าแนะนำ
+                    Pin this as a recommended product
                   </Switch>
                 )}
               />
@@ -197,7 +197,7 @@ const ProductForm = () => {
                     isSelected={value}
                     onValueChange={onChange}
                   >
-                    สินค้าไฟล์ดิจิทัล
+                    Digital file products
                   </Switch>
                 )}
               />
@@ -210,13 +210,13 @@ const ProductForm = () => {
                     isSelected={value}
                     onValueChange={onChange}
                   >
-                    สินค้าตัวอย่าง
+                    Product samples
                   </Switch>
                 )}
               />
             </div>
 
-            <SubHeader title='ข้อมูลพื้นฐาน' />
+            <SubHeader title='Basic information' />
             <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
               <Controller
                 control={control}
@@ -226,7 +226,7 @@ const ProductForm = () => {
                     {...field}
                     errorMessage={errors.name?.message}
                     isInvalid={!!errors.name}
-                    label='ชื่อสินค้า'
+                    label='Product Name'
                     variant='bordered'
                   />
                 )}
@@ -239,7 +239,7 @@ const ProductForm = () => {
                     {...field}
                     errorMessage={errors.categoryId?.message}
                     isInvalid={!!errors.categoryId}
-                    label='หมวดหมู่สินค้า'
+                    label='Product Categories'
                     selectedKeys={value ? [value] : []}
                     variant='bordered'
                     onSelectionChange={(keys) => {
@@ -263,7 +263,7 @@ const ProductForm = () => {
                     disallowEmptySelection
                     errorMessage={errors.unit?.message}
                     isInvalid={!!errors.unit}
-                    label='หน่วยนับสินค้า'
+                    label='Unit of measurement'
                     selectedKeys={value ? [value] : []}
                     variant='bordered'
                     onSelectionChange={(keys) => {
@@ -297,7 +297,7 @@ const ProductForm = () => {
                   <Input
                     {...field}
                     className='sm:col-span-2'
-                    label='บาร์โค้ด'
+                    label='Barcode'
                     value={value ?? ''}
                     variant='bordered'
                   />
@@ -309,7 +309,7 @@ const ProductForm = () => {
                 render={({ field: { value, ...field } }) => (
                   <Textarea
                     {...field}
-                    label='รายละเอียดสินค้า (ฉบับย่อ)'
+                    label='Product details (short version)'
                     minRows={10}
                     value={value ?? ''}
                     variant='bordered'
@@ -322,7 +322,7 @@ const ProductForm = () => {
                 render={({ field: { value, ...field } }) => (
                   <Textarea
                     {...field}
-                    label='รายละเอียดสินค้า (ฉบับเต็ม)'
+                    label='Product details (full version)'
                     minRows={10}
                     value={value ?? ''}
                     variant='bordered'
@@ -331,7 +331,7 @@ const ProductForm = () => {
               />
             </div>
 
-            <SubHeader title='ราคาสินค้า' />
+            <SubHeader title='Product price' />
             <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
               <Controller
                 control={control}
@@ -341,7 +341,7 @@ const ProductForm = () => {
                     {...field}
                     errorMessage={errors.price?.message}
                     isInvalid={!!errors.price}
-                    label='ราคา (บาท)'
+                    label='Price (Baht)'
                     minValue={0}
                     variant='bordered'
                     onValueChange={(val) => onChange(val || 0)}
@@ -356,7 +356,7 @@ const ProductForm = () => {
                     {...field}
                     errorMessage={errors.compareAtPrice?.message}
                     isInvalid={!!errors.compareAtPrice}
-                    label='ราคาก่อนลด'
+                    label='Price before discount'
                     minValue={0}
                     value={value ?? 0}
                     variant='bordered'
@@ -372,7 +372,7 @@ const ProductForm = () => {
                     {...field}
                     errorMessage={errors.costPrice?.message}
                     isInvalid={!!errors.costPrice}
-                    label='ราคาทุน (ภายใน)'
+                    label='Cost price (internal)'
                     minValue={0}
                     value={value ?? 0}
                     variant='bordered'
@@ -382,7 +382,7 @@ const ProductForm = () => {
               />
             </div>
 
-            <SubHeader title='สต็อกสินค้า' />
+            <SubHeader title='Stock' />
             <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
               <Controller
                 control={control}
@@ -392,7 +392,7 @@ const ProductForm = () => {
                     {...field}
                     errorMessage={errors.stockQuantity?.message}
                     isInvalid={!!errors.stockQuantity}
-                    label='จำนวนในสต็อก'
+                    label='Quantity in stock'
                     minValue={0}
                     value={value ?? 0}
                     variant='bordered'
@@ -408,7 +408,7 @@ const ProductForm = () => {
                     {...field}
                     errorMessage={errors.lowStockAlert?.message}
                     isInvalid={!!errors.lowStockAlert}
-                    label='แจ้งเตือนเมื่อสต็อกต่ำกว่า'
+                    label='Receive alerts when stock is low'
                     minValue={0}
                     value={value ?? 0}
                     variant='bordered'
@@ -424,7 +424,7 @@ const ProductForm = () => {
                     {...field}
                     errorMessage={errors.weight?.message}
                     isInvalid={!!errors.weight}
-                    label='น้ำหนัก (กรัม)'
+                    label='Weight (grams)'
                     minValue={0}
                     value={value ?? 0}
                     variant='bordered'
@@ -435,7 +435,7 @@ const ProductForm = () => {
             </div>
 
             <div className='flex flex-wrap gap-4'>
-              <SubHeader title='การตั้งค่าสำหรับ SEO' />
+              <SubHeader title='Settings for SEO' />
               <Controller
                 control={control}
                 name='useSeoFromBasicData'
@@ -445,7 +445,7 @@ const ProductForm = () => {
                     isSelected={value}
                     onValueChange={onChange}
                   >
-                    ใช้ตามข้อมูลพื้นฐาน
+                    Use based on the available information
                   </Switch>
                 )}
               />
@@ -502,14 +502,14 @@ const ProductForm = () => {
 
         <ModalFooter>
           <Button isDisabled={isPending} variant='faded' onPress={onClose}>
-            ยกเลิก
+            Cancel
           </Button>
           <Button
             isDisabled={isPending || !isDirty}
             variant='faded'
             onClick={handleSubmit(onSubmit)}
           >
-            {isPending ? 'กำลังดำเนินการ' : 'บันทึกข้อมูล'}
+            {isPending ? 'In progress' : 'Record data'}
           </Button>
         </ModalFooter>
       </ModalContent>

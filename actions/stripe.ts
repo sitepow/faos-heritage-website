@@ -24,10 +24,10 @@ const createStripeCheckout = async ({ orderId }: Params) => {
     },
   })
 
-  if (!order) throw new Error('ไม่พบคำสั่งซื้อ')
+  if (!order) throw new Error('No order found.')
 
   if (order.status !== OrderStatus.PENDING)
-    throw new Error('คำสั่งซื้อนี้ไม่สามารถชำระเงินได้')
+    throw new Error('This order could not be paid for.')
 
   const session = await stripe.checkout.sessions.create({
     mode: 'payment',

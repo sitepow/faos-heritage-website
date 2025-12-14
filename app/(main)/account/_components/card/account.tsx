@@ -30,7 +30,7 @@ const AccountCard: FC<Props> = ({ onclick }) => {
   return (
     <Card fullWidth>
       <CardHeader>
-        <span>จัดการกับบัญชีของฉัน</span>
+        <span>Manage my account</span>
       </CardHeader>
       <CardBody>
         {isLoadingUser && <Skeleton className='h-40 rounded-lg sm:max-w-1/2' />}
@@ -38,32 +38,34 @@ const AccountCard: FC<Props> = ({ onclick }) => {
         {!isLoadingUser && (
           <div className='flex flex-col sm:max-w-1/2'>
             <div className='rounded-t-lg border border-divider p-2.5'>
-              <span>ข้อมูลส่วนตัว</span>
+              <span>personal information</span>
             </div>
 
             <div className='rounded-b-lg border-x border-b border-divider p-2.5 *:flex *:gap-3'>
               <div>
-                <span>ชื่อ - นามสกุล</span>
+                <span>Name - Surname</span>
                 <span>:</span>
                 <span>{user?.name}</span>
               </div>
 
               <div>
-                <span>อีเมล</span>
+                <span>Email</span>
                 <span>:</span>
                 <span>{user?.email}</span>
               </div>
 
               <div>
-                <span>สิทธิ์การใช้งาน</span>
+                <span>License</span>
                 <span>:</span>
                 <span>
-                  {user?.role === Role.ADMIN ? 'ผู้ดูแลระบบ' : 'ลูกค้า'}
+                  {user?.role === Role.ADMIN
+                    ? 'System administrator'
+                    : 'Customer'}
                 </span>
               </div>
 
               <Button className='mt-5' variant='faded' onPress={onclick}>
-                แก้ไขข้อมูลส่วนตัว
+                Edit personal information
               </Button>
             </div>
           </div>

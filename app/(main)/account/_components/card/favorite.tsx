@@ -28,7 +28,7 @@ const FavoriteCard = () => {
   return (
     <Card fullWidth>
       <CardHeader>
-        <span>รายการโปรด</span>
+        <span>Favorites</span>
       </CardHeader>
       <CardBody className='gap-4'>
         {isLoadingFaorites && <Skeleton className='h-40 w-full rounded-xl' />}
@@ -37,10 +37,10 @@ const FavoriteCard = () => {
           <div className='flex flex-col items-center gap-2 text-default-500'>
             <AlertCircleIcon />
             <span className='text-center'>
-              คุณยังไม่มีสินค้าในรายการโปรด
+              You don&apos;t have any items in your favorites list yet.
               <br />
               <Link className='underline' href='/products'>
-                สำรวจสินค้าทั้งหมด
+                Explore all products.
               </Link>
             </span>
           </div>

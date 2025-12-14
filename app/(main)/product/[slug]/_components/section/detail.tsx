@@ -16,7 +16,7 @@ const DetailSection: FC<Props> = ({ product }) => {
   return (
     <div className='flex flex-col gap-4'>
       <span className='mx-auto w-fit border-b border-primary-website pb-1 text-xl font-bold'>
-        รายละเอียดสินค้า
+        Product details
       </span>
       <Card>
         <CardBody>

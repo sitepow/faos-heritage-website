@@ -13,7 +13,7 @@ const Share: FC<ComponentProps<'div'>> = ({ className, ...props }) => {
       )}
       {...props}
     >
-      <span>แชร์ : </span>
+      <span>share : </span>
       <SocialIcon network='facebook' style={{ width: 35, height: 35 }} />
       <SocialIcon network='line.me' style={{ width: 35, height: 35 }} />
       <SocialIcon network='sharethis' style={{ width: 35, height: 35 }} />

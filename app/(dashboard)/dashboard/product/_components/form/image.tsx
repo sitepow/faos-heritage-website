@@ -108,14 +108,16 @@ const ImageForm = () => {
 
   const isPending =
     isPendingCreateImage || isLoadingImage || isPendingUpdateImage
-  const headerLable = imageId ? 'แก้ไขรูปภาพสินค้า' : 'เพิ่มรูปภาพสินค้า'
+  const headerLable = imageId ? 'Edit product image' : 'Add product images'
 
   const onFilesChange = (files: ImageWithPreview[]) => {
     setPreviewFiles(files)
 
     setValue(
       'url',
-      files.length ? 'มีการเปลี่ยนแปลงของไฟล์รูปภาพ' : (oldImage ?? ''),
+      files.length
+        ? 'There have been changes to the image files.'
+        : (oldImage ?? ''),
       {
         shouldDirty: true,
         shouldTouch: true,
@@ -163,23 +165,23 @@ const ImageForm = () => {
       <ModalContent>
         <ModalHeader className='flex flex-col gap-1'>{headerLable}</ModalHeader>
 
-        {isPending && <Spinner label='กำลังโหลด...' />}
+        {isPending && <Spinner label='Loading...' />}
 
         {!isPending && (
           <ModalBody>
             <ImageDropzone onFilesChange={onFilesChange} />
 
-            <SubHeader title='สถานะตัวเลือก' />
+            <SubHeader title='Option status' />
             <Controller
               control={control}
               name='isPrimary'
               render={({ field: { value, onChange, ...field } }) => (
                 <Switch {...field} isSelected={value} onValueChange={onChange}>
-                  ตั้งเป็นรูปหลัก
+                  Set as main profile picture
                 </Switch>
               )}
             />
-            <SubHeader title='ข้อมูลพื้นฐาน' />
+            <SubHeader title='Basic information' />
             <Controller
               control={control}
               name='url'
@@ -189,7 +191,7 @@ const ImageForm = () => {
                   isDisabled
                   errorMessage={errors.url?.message}
                   isInvalid={!!errors.url}
-                  label='URL ของรูปภาพ'
+                  label='Image URL'
                   value={value ?? ''}
                   variant='bordered'
                 />
@@ -203,7 +205,7 @@ const ImageForm = () => {
                   {...field}
                   errorMessage={errors.alt?.message}
                   isInvalid={!!errors.alt}
-                  label='ข้อความอธิบายรูป (alt text)'
+                  label='Image description (alt text)'
                   value={value ?? ''}
                   variant='bordered'
                 />
@@ -213,14 +215,14 @@ const ImageForm = () => {
         )}
         <ModalFooter>
           <Button isDisabled={isPending} variant='faded' onPress={onClose}>
-            ยกเลิก
+            Cancel
           </Button>
           <Button
             isDisabled={isPending || !isDirty}
             variant='faded'
             onClick={handleSubmit(onSubmit)}
           >
-            {isPending ? 'กำลังดำเนินการ' : 'บันทึกข้อมูล'}
+            {isPending ? 'In progress' : 'Record data'}
           </Button>
         </ModalFooter>
       </ModalContent>

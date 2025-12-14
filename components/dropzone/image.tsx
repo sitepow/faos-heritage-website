@@ -131,10 +131,10 @@ const ImageDropzone: FC<Props> = ({ multiple = false, onFilesChange }) => {
           </div>
 
           {isDragActive ? (
-            <p className='text-primary-website'>วางรูปภาพที่นี่...</p>
+            <p className='text-primary-website'>Place the image here....</p>
           ) : (
             <div className='flex flex-col'>
-              <p>ลากและวางรูปภาพที่นี่</p>
+              <p>Drag and drop the image here.</p>
 
               <div className='mx-auto flex gap-1 text-sm text-default-500'>
                 {ACCEPT_TYPES.map((type) => (
@@ -143,8 +143,8 @@ const ImageDropzone: FC<Props> = ({ multiple = false, onFilesChange }) => {
               </div>
 
               <p className='text-sm text-default-500'>
-                หรือคลิกเพื่อเลือกไฟล์ (ระบบจะปรับขนาดไฟล์ให้อัตโนมัติ
-                เพื่อประสิทธิภาพที่ดีขึ้น)
+                Or click to select a file (the system will automatically resize
+                the file for better performance).
               </p>
             </div>
           )}

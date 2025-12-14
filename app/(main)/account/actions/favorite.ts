@@ -106,7 +106,9 @@ const getFavorites = async ({
 const createFavorite = async (userId: string, productId: string) => {
   try {
     if (!userId || !productId) {
-      throw new Error('กรุณาระบุข้อมูลให้ถูกต้อง (ไอดีผู้ใช้งาน, รหัสสินค้า)')
+      throw new Error(
+        'Please provide the correct information (User ID, Product Code)',
+      )
     }
 
     const existing = await prisma.wishlist.findUnique({
@@ -120,7 +122,7 @@ const createFavorite = async (userId: string, productId: string) => {
 
     if (existing) {
       throw new Error(
-        'คุณได้เพิ่มสินค้านี้เข้าในรายการโปรดไว้แล้ว โปรดเลือกสินค้าชิ้นใหม่ที่ต้องการ',
+        'You have added this item to your favorites. Please select a new item you would like',
       )
     }
 

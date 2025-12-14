@@ -82,13 +82,13 @@ const CartSection: FC<
 
   const requireAuthAndProduct = (actionName: string): boolean => {
     if (!userId) {
-      toast.error(`กรุณาเข้าสู่ระบบก่อน${actionName}`)
+      toast.error(`Please log in first ${actionName}`)
       GOTO.LOGIN()
 
       return false
     }
     if (!product?.id) {
-      toast.error('ไม่พบข้อมูลสินค้า')
+      toast.error('No product information found.')
 
       return false
     }
@@ -99,7 +99,7 @@ const CartSection: FC<
   const { mutate: mutateCreateCart, isPending: isPendingCreateCart } =
     useMutation({
       mutationFn: () => {
-        if (!product || !userId) throw new Error('ข้อมูลไม่ครบ')
+        if (!product || !userId) throw new Error('Incomplete information.')
 
         return createCart({
           userId,
@@ -134,13 +134,14 @@ const CartSection: FC<
     })
 
   const onSubmitCart = () => {
-    if (!requireAuthAndProduct('เพิ่มสินค้าเข้าตระกร้า')) return
-    if (isOutOfStock) return toast.error('สินค้าหมดสต็อก')
+    if (!requireAuthAndProduct('Add the product to your cart.')) return
+    if (isOutOfStock) return toast.error('Out of stock.')
     mutateCreateCart()
   }
 
   const onSubmitFavorite = () => {
-    if (!requireAuthAndProduct('เพิ่มสินค้าเข้ารายการโปรด')) return
+    if (!requireAuthAndProduct('Add the product to your favorites list.'))
+      return
     mutateCreateFavorite()
   }
 
@@ -164,8 +165,8 @@ const CartSection: FC<
           className='text-start'
           description={
             isOutOfStock
-              ? 'สินค้านี้หมดชั่วคราว โปรดดูสินค้าใกล้เคียง/ทดแทน'
-              : `สินค้าพร้อมจำหน่าย มีจำนวน ${currentStockQuantity} ${productUnit} ในสต็อก`
+              ? 'This item is temporarily out of stock. Please see similar/alternative items.'
+              : `The product is available for sale. Quantity available. ${currentStockQuantity} ${productUnit} In stock`
           }
           variant='bordered'
         />
@@ -175,8 +176,8 @@ const CartSection: FC<
             disallowEmptySelection
             fullWidth
             items={product!.variants!}
-            label='ตัวเลือกสินค้า'
-            placeholder='เลือกตัวเลือกสินค้า'
+            label='Product options'
+            placeholder='Product options'
             selectedKeys={variantId ? [variantId] : []}
             variant='bordered'
             onSelectionChange={(keys) =>
@@ -200,7 +201,9 @@ const CartSection: FC<
             variant='faded'
             onClick={onSubmitFavorite}
           >
-            {hasFavorite ? 'อยู่ในรายการโปรดแล้ว' : 'เพิ่มในรายการโปรด'}
+            {hasFavorite
+              ? `It's already in my favorites list.`
+              : 'Add to favorites'}
           </Button>
 
           <Button
@@ -217,7 +220,7 @@ const CartSection: FC<
             variant='faded'
             onClick={onSubmitCart}
           >
-            หยิบใส่ตระกร้า
+            Add to cart
           </Button>
         </div>
       </CardBody>

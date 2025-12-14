@@ -123,9 +123,9 @@ const OrderForm = () => {
       onOpenChange={onOpenOrderChange}
     >
       <ModalContent>
-        <ModalHeader>สถานะคำสั่งซื้อ</ModalHeader>
+        <ModalHeader>Order status</ModalHeader>
 
-        {isPending && <Spinner label='กำลังโหลด...' />}
+        {isPending && <Spinner label='Loading...' />}
 
         {!isPending && (
           <ModalBody>
@@ -138,7 +138,7 @@ const OrderForm = () => {
                   disallowEmptySelection
                   errorMessage={errors.tempStatus?.message}
                   isInvalid={!!errors.tempStatus}
-                  label='สถานะคำสั่งซื้อ'
+                  label='Order status'
                   selectedKeys={value ? [value] : []}
                   variant='bordered'
                   onSelectionChange={(keys) =>
@@ -164,8 +164,8 @@ const OrderForm = () => {
                 render={({ field }) => (
                   <Textarea
                     {...field}
-                    label='เหตุผล'
-                    placeholder='กรุณากรอกเหตุผลในการยกเลิก / คืนเงิน'
+                    label='Reason'
+                    placeholder='Please enter the reason for cancellation/refund.'
                     variant='bordered'
                   />
                 )}
@@ -183,7 +183,7 @@ const OrderForm = () => {
                       disallowEmptySelection
                       errorMessage={errors.trackingWebsite?.message}
                       isInvalid={!!errors.trackingWebsite}
-                      label='ขนส่ง'
+                      label='Transport'
                       selectedKeys={value ? [value] : []}
                       variant='bordered'
                       onSelectionChange={(keys) =>
@@ -212,8 +212,8 @@ const OrderForm = () => {
                   render={({ field }) => (
                     <Textarea
                       {...field}
-                      label='หมายเลข Tracking'
-                      placeholder={`ตัวอย่าง: ${
+                      label='Tracking number'
+                      placeholder={`Example: ${
                         SHIPPING_PROVIDERS.find(
                           (p) => p.value === trackingWebsite,
                         )?.placeholder
@@ -229,14 +229,14 @@ const OrderForm = () => {
 
         <ModalFooter>
           <Button isDisabled={isPending} variant='faded' onPress={onClose}>
-            ยกเลิก
+            Cancel
           </Button>
           <Button
             isDisabled={isPending || !isDirty || isFinalStatus}
             variant='faded'
             onClick={handleSubmit(onSubmit)}
           >
-            {isPending ? 'กำลังดำเนินการ' : 'บันทึกข้อมูล'}
+            {isPending ? 'In progress' : 'Record data'}
           </Button>
         </ModalFooter>
       </ModalContent>

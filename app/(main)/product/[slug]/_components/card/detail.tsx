@@ -13,7 +13,7 @@ const DetailCard: FC<Props> = ({ product }) => {
   return (
     <Card className='col-span-2' shadow='none'>
       <CardHeader className='flex-col items-start gap-4'>
-        <SubHeader title='รายละเอียด' />
+        <SubHeader title='Details' />
       </CardHeader>
       <CardBody>
         <p className='whitespace-pre-line'>{product?.description}</p>

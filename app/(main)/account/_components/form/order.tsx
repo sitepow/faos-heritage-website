@@ -66,15 +66,15 @@ const OrderForm = () => {
       onOpenChange={onOpenOrderCancelChange}
     >
       <ModalContent>
-        <ModalHeader>ยกเลิกสินค้า/เปลี่ยนใจ</ModalHeader>
+        <ModalHeader>Cancel order / Change of mind</ModalHeader>
 
-        {isPendingUpdateOrder && <Spinner label='กำลังโหลด...' />}
+        {isPendingUpdateOrder && <Spinner label='Loading...' />}
 
         {!isPendingUpdateOrder && (
           <ModalBody>
             <Textarea
-              label='เหตุผล'
-              placeholder='กรุณากรอกเหตุผลในการยกเลิก / คืนเงิน'
+              label='Reason'
+              placeholder='Please enter the reason for cancellation/refund.'
               variant='bordered'
               onValueChange={setReason}
             />
@@ -87,14 +87,14 @@ const OrderForm = () => {
             variant='faded'
             onClick={onClose}
           >
-            ยกเลิก
+            Cancel
           </Button>
           <Button
             isDisabled={isPendingUpdateOrder || !reason}
             variant='faded'
             onClick={onSubmit}
           >
-            {isPendingUpdateOrder ? 'กำลังดำเนินการ' : 'บันทึกข้อมูล'}
+            {isPendingUpdateOrder ? 'In progress' : 'Record data'}
           </Button>
         </ModalFooter>
       </ModalContent>

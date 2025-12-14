@@ -186,14 +186,14 @@ const CartCard: FC<
               <div className='flex flex-col'>
                 <span className='line-clamp-1'>{cart?.product?.name}</span>
                 <span className='text-default-500'>
-                  รหัสสินค้า: {cart?.product?.id}
+                  Product code: {cart?.product?.id}
                 </span>
                 <div className='flex flex-wrap gap-2'>
                   <span className='text-default-500'>
-                    ราคา: {formatCurrency(currentPrice!)}/{productUnit}
+                    Price: {formatCurrency(currentPrice!)}/{productUnit}
                   </span>
                   <span className='text-default-500'>
-                    จำนวนคงเหลือ: {formatNumber(currentStockQuantity!)}/
+                    Remaining quantity: {formatNumber(currentStockQuantity!)}/
                     {productUnit}
                   </span>
                 </div>
@@ -203,7 +203,7 @@ const CartCard: FC<
                 <NumberInput
                   disabled
                   isDisabled={isPendingUpdateCart}
-                  label='จำนวน'
+                  label='Quantity'
                   maxValue={currentStockQuantity}
                   value={quantity}
                   variant='bordered'
@@ -214,8 +214,8 @@ const CartCard: FC<
                   <Select
                     disallowEmptySelection
                     items={cart?.product?.variants || []}
-                    label='ตัวเลือกสินค้า'
-                    placeholder='เลือกตัวเลือกสินค้า'
+                    label='Product options'
+                    placeholder='Select product options'
                     selectedKeys={variantId ? [variantId] : []}
                     variant='bordered'
                     onSelectionChange={onVariantChange}

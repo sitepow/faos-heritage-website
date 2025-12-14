@@ -39,7 +39,7 @@ const OrderCard = () => {
 
       <Card fullWidth>
         <CardHeader>
-          <span>รายการคำสั่งซื้อของฉัน</span>
+          <span>My Orders</span>
         </CardHeader>
         {isLoadingOrders && (
           <CardBody>
@@ -52,10 +52,10 @@ const OrderCard = () => {
             <div className='flex flex-col items-center gap-2 text-default-500'>
               <AlertCircleIcon />
               <span className='text-center'>
-                คุณยังไม่มีคำสั่งซื้อสินค้า
+                You do not have any orders yet.
                 <br />
                 <Link className='underline' href='/products'>
-                  สำรวจสินค้าทั้งหมด
+                  Explore all products.
                 </Link>
               </span>
             </div>

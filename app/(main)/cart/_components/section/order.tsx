@@ -77,7 +77,9 @@ const OrderSection: FC<ComponentProps<typeof Card>> = ({
     useMutation({
       mutationFn: createOrder,
       onSuccess: async () => {
-        toast.success('คำสั่งซื้อของคุณถูกสร้างขึ้นแล้ว โปรดตรวจสอบและชำระเงิน')
+        toast.success(
+          'Your order has been created. Please review and proceed with payment.',
+        )
 
         await Promise.all([
           queryClient.invalidateQueries({ queryKey: QUERY.CART }),
@@ -111,10 +113,10 @@ const OrderSection: FC<ComponentProps<typeof Card>> = ({
   return (
     <div>
       <ModalConfirm
-        description='โปรดยืนยันความถูกต้องของรายการสินค้าและที่อยู่จัดส่ง หากถูกต้องแล้วสามารถดำเนินการสั่งซื้อได้ทันที'
+        description='Please confirm the accuracy of your product list and shipping address. If everything is correct, you can proceed with your order immediately.'
         isOpen={isOpenConfirmOrder}
         isPending={isPendingCreateOrder}
-        title='คุณกำลังจะสั่งซื้อสินค้าหรือไม่?'
+        title='Are you about to place an order??'
         onConfirm={onCreateOrder}
         onOpenChange={onOpenConfirmOrderChange}
       />
@@ -122,13 +124,13 @@ const OrderSection: FC<ComponentProps<typeof Card>> = ({
       <Card fullWidth className={cn(className, 'h-fit')} {...props}>
         <CardBody className='gap-3'>
           <span className='w-fit border-b border-primary-website pb-1 font-bold'>
-            โค้ดส่วนลด
+            Discount code
           </span>
 
           <div className='flex items-center gap-2'>
-            <Input isDisabled label='โค้ดส่วนลด' variant='bordered' />
+            <Input isDisabled label='Discount code' variant='bordered' />
             <Button isDisabled variant='faded'>
-              ใช้ส่วนลด
+              Use the discount
             </Button>
           </div>
 
@@ -136,12 +138,12 @@ const OrderSection: FC<ComponentProps<typeof Card>> = ({
             <Alert
               description={
                 <span>
-                  กรุณาเพิ่มที่อยู่สำหรับการจัดส่งก่อนทำการสั่งซื้อสินค้า{' '}
+                  Please add your shipping address before placing your order{' '}
                   <button
                     className='cursor-pointer text-primary-website underline'
                     onClick={GOTO.ADDRESS}
                   >
-                    เพิ่มที่อยู่ของคุณ
+                    Add your address
                   </button>
                 </span>
               }
@@ -152,7 +154,7 @@ const OrderSection: FC<ComponentProps<typeof Card>> = ({
           {!isLoadingAddress && address && (
             <>
               <span className='w-fit border-b border-primary-website pb-1 font-bold'>
-                ที่อยู่สำหรับจัดส่ง
+                Shipping address
               </span>
 
               <span>
@@ -161,22 +163,22 @@ const OrderSection: FC<ComponentProps<typeof Card>> = ({
                   className='cursor-pointer text-primary-website underline'
                   onClick={GOTO.ADDRESS}
                 >
-                  แก้ไขที่อยู่
+                  Edit address
                 </button>
               </span>
             </>
           )}
 
           <span className='w-fit border-b border-primary-website pb-1 font-bold'>
-            รายละเอียดการชำระเงิน
+            Payment details
           </span>
 
-          <SummaryRow label='ราคารวม' value={tempSubTotal} />
-          <SummaryRow label='ค่าจัดส่ง' value={tempShippingCost} />
-          <SummaryRow label='ส่วนลด' value={tempShippingCost} />
+          <SummaryRow label='Total price' value={tempSubTotal} />
+          <SummaryRow label='Shipping cost' value={tempShippingCost} />
+          <SummaryRow label='discount' value={tempShippingCost} />
 
           <div className='flex items-center justify-between pt-1'>
-            <span className='font-bold'>ราคารวมสุทธิ :</span>
+            <span className='font-bold'>Net total price :</span>
             <span className='text-2xl font-bold text-primary-website'>
               {formatCurrency(tempTotal)}
             </span>
@@ -190,7 +192,7 @@ const OrderSection: FC<ComponentProps<typeof Card>> = ({
             variant='faded'
             onClick={onOpenConfirmOrderChange}
           >
-            สั่งซื้อสินค้า
+            Order products
           </Button>
         </CardFooter>
       </Card>

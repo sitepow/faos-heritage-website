@@ -3,7 +3,6 @@
 import { Button } from '@heroui/button'
 import { Card, CardBody, CardHeader } from '@heroui/card'
 import { ScrollShadow } from '@heroui/scroll-shadow'
-import { Skeleton } from '@heroui/skeleton'
 import { useQuery } from '@tanstack/react-query'
 import { AlertCircleIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
@@ -52,10 +51,10 @@ const CategoryLayout: FC<Props> = ({
   const { data: products, isLoading: isLoadingProducts } = useQuery({
     queryKey: QUERY.CAROUSEL_PRODUCTS,
     queryFn: () =>
-      getProducts({ limit: itemPerPage, categoryId: currentCategory.id }),
-    enabled: !!currentCategory.id,
+      getProducts({ limit: itemPerPage, categoryId: currentCategory?.id }),
+    enabled: !!currentCategory?.id,
     initialData:
-      currentCategory.id === initialCategories?.[0]?.id
+      currentCategory?.id === initialCategories?.[0]?.id
         ? initialProducts
         : undefined,
   })
@@ -63,27 +62,27 @@ const CategoryLayout: FC<Props> = ({
   useEffect(() => {
     if (!isLoadingCategories && categories) {
       setCurrentCategory({
-        id: categories[0].id,
-        label: categories[0].name,
+        id: categories?.[0]?.id,
+        label: categories?.[0]?.name,
       })
     }
   }, [categories, isLoadingCategories])
+
+  if (!isLoadingCategories && categories?.length === 0) {
+    return
+  }
 
   return (
     <div className='flex w-full flex-col gap-5 md:flex md:h-[500px] md:flex-row'>
       <Card className='h-[350px] md:h-[500px] md:w-[400px]'>
         <CardHeader>
-          <span className='font-bold'>สินค้าตามหมวดหมู่</span>
+          <span className='font-bold'>Products by category</span>
         </CardHeader>
         <CardBody>
           <ScrollShadow className='p-1'>
             <div className='space-y-1'>
               {isLoadingCategories &&
                 [...Array(4)].map((_) => <CategoryCardSkeleton key={_} />)}
-
-              {!isLoadingCategories && categories?.length === 0 && (
-                <span>ไม่พบหมวดหมู่สินค้า</span>
-              )}
 
               {!isLoadingCategories &&
                 (categories ?? []).map((category) => (
@@ -110,7 +109,7 @@ const CategoryLayout: FC<Props> = ({
         </CardBody>
       </Card>
 
-      {!currentCategory?.id && <Skeleton className='size-full rounded-xl' />}
+      {!currentCategory?.id && <Card fullWidth />}
 
       {currentCategory?.id && (
         <Card fullWidth className='size-full'>
@@ -127,7 +126,7 @@ const CategoryLayout: FC<Props> = ({
                     )
                   }}
                 >
-                  ดูทั้งหมด
+                  See all
                 </Button>
               </div>
             </CardHeader>
@@ -142,8 +141,8 @@ const CategoryLayout: FC<Props> = ({
                 <div className='flex w-full flex-col items-center justify-center gap-2 text-center text-default-500'>
                   <AlertCircleIcon className='size-8' />
                   <span>
-                    ไม่พบสินค้าในหมวดหมู่นี้
-                    กรุณาเลือกหมวดหมู่อื่นเพื่อดูสินค้ารายการอื่น
+                    No products found in this category. Please select another
+                    category to view other items.
                   </span>
                 </div>
               )}
@@ -162,7 +161,7 @@ const CategoryLayout: FC<Props> = ({
                     )
                   }}
                 >
-                  ดูทั้งหมด
+                  See all
                 </Button>
               )}
             </Carousel>

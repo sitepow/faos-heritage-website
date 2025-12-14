@@ -4,32 +4,32 @@ const SORT_MAP = {
   newest: {
     field: 'createdAt',
     order: 'desc',
-    label: 'สินค้า (ใหม่-เก่า)',
+    label: 'Newest to Oldest',
   },
   oldest: {
     field: 'createdAt',
     order: 'asc',
-    label: 'สินค้า (เก่า-ใหม่)',
+    label: 'Oldest to Newest',
   },
   price_low: {
     field: 'price',
     order: 'asc',
-    label: 'ราคา (น้อย-มาก)',
+    label: 'Price Low to High',
   },
   price_high: {
     field: 'price',
     order: 'desc',
-    label: 'ราคา (มาก-น้อย)',
+    label: 'Price High to Low',
   },
   stock_low: {
     field: 'stockQuantity',
     order: 'asc',
-    label: 'สต็อก (น้อย-มาก)',
+    label: 'Stock Low to High',
   },
   stock_high: {
     field: 'stockQuantity',
     order: 'desc',
-    label: 'สต็อก (มาก-น้อย)',
+    label: 'Stock High to Low',
   },
 } as const
 
@@ -42,12 +42,12 @@ enum ACCOUNT_TAB {
 }
 
 const ORDER_ALL_STATUS: Record<OrderStatus, string> = {
-  PENDING: 'สร้างคำสั่งซื้อ',
-  PAID: 'ชำระเงินแล้ว',
-  PROCESSING: 'จัดเตรียมสินค้า',
-  DELIVERED: 'ส่งให้ขนส่งแล้ว',
-  CANCELLED: 'ยกเลิกคำสั่งซื้อ',
-  REFUNDED: 'คืนเงินแล้ว/ยกเลิกสินค้า',
+  PENDING: 'Order Created',
+  PAID: 'Payment Completed',
+  PROCESSING: 'Preparing Order',
+  DELIVERED: 'Shipped',
+  CANCELLED: 'Order Cancelled',
+  REFUNDED: 'Refunded / Order Cancelled',
 }
 
 const ORDER_STATUS: Partial<Record<OrderStatus, string>> = {
@@ -73,24 +73,24 @@ const ORDER_STATUS_FLOW: Record<OrderStatus, number> = {
 }
 
 const PRODUCT_UNIT: Record<ProductUnit, string> = {
-  PIECE: 'ชิ้น',
-  ITEM: 'อัน',
-  SET: 'ชุด',
-  BOX: 'กล่อง',
-  PACK: 'แพ็ค',
-  BAG: 'ถุง',
-  BOTTLE: 'ขวด',
-  CAN: 'กระป๋อง',
-  KG: 'กิโลกรัม',
-  G: 'กรัม',
-  L: 'ลิตร',
-  ML: 'มิลลิลิตร',
-  PAIR: 'คู่',
-  ROLL: 'ม้วน',
-  SHEET: 'แผ่น',
-  UNIT: 'หน่วย',
-  CAR: 'คัน',
-  HOUSE: 'หลัง',
+  PIECE: 'Piece',
+  ITEM: 'Item',
+  SET: 'Set',
+  BOX: 'Box',
+  PACK: 'Pack',
+  BAG: 'Bag',
+  BOTTLE: 'Bottle',
+  CAN: 'Can',
+  KG: 'Kilogram',
+  G: 'Gram',
+  L: 'Liter',
+  ML: 'Milliliter',
+  PAIR: 'Pair',
+  ROLL: 'Roll',
+  SHEET: 'Sheet',
+  UNIT: 'Unit',
+  CAR: 'Car',
+  HOUSE: 'House',
 }
 
 const PRODUCT_UNIT_ALL = Object.entries(PRODUCT_UNIT) as [ProductUnit, string][]
@@ -171,7 +171,7 @@ const SHIPPING_PROVIDERS = [
   {
     image: '/providers/thailand-post.svg',
     value: 'https://track.thailandpost.com',
-    label: 'Thailand Post (ไปรษณีย์ไทย)',
+    label: 'Thailand Post',
     placeholder: 'RR123456789TH',
   },
   {

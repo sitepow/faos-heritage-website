@@ -78,10 +78,10 @@ const Cart = () => {
         />
         <div className='flex w-full flex-wrap justify-between gap-2 text-start'>
           <span className='text-xl font-bold'>
-            ตระกร้าของคุณ {carts?.length !== 0 && `(${carts?.length} ชิ้น)`}
+            Your basket {carts?.length !== 0 && `(${carts?.length} list)`}
           </span>
           <span className='text-default-500'>
-            หมายเลขตระกร้าสินค้า {userId}
+            Shopping cart number {userId}
           </span>
         </div>
 
@@ -92,7 +92,7 @@ const Cart = () => {
               variant='faded'
               onClick={() => onOpenClearChange()}
             >
-              ล้างตระกร้าทั้งหมด
+              Empty all baskets
             </Button>
           </div>
         )}
