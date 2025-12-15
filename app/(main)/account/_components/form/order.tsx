@@ -94,7 +94,7 @@ const OrderForm = () => {
             variant='faded'
             onClick={onSubmit}
           >
-            {isPendingUpdateOrder ? 'In progress' : 'Record data'}
+            {isPendingUpdateOrder ? 'In progress' : 'Save'}
           </Button>
         </ModalFooter>
       </ModalContent>

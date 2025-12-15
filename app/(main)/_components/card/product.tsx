@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable no-nested-ternary */
 'use client'
 
@@ -13,7 +14,6 @@ import {
   ShoppingCartIcon,
   TagIcon,
 } from 'lucide-react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 
@@ -37,8 +37,8 @@ const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
   const imageSrc =
     product?.images?.length > 1
       ? isHovered
-        ? product.images[1].url
-        : product.images[0].url
+        ? product?.images[1]?.url
+        : product?.images[0]?.url
       : product?.images?.[0]?.url || '/placeholder.svg'
 
   return (
@@ -94,13 +94,11 @@ const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
           className='size-full'
           href={`/product/${createSlug(product?.name, product?.id)}`}
         >
-          <Image
+          <img
             key={imageSrc}
             alt={product?.name}
             className='h-[250px] w-full object-cover'
-            height={250}
             src={imageSrc}
-            width={250}
           />
         </Link>
       </CardHeader>

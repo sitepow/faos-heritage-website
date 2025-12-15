@@ -27,8 +27,8 @@ const ProductIndex: FC<Props> = ({ initialProducts, itemPerPage }) => {
   return (
     <>
       <Header
-        description='Find the perfect product to meet your needs.'
-        title='Choose products according to your style.'
+        description='Find the perfect product to meet your needs'
+        title='Choose products according to your style'
       />
       <ProductSection
         isLoading={isLoadingProducts}

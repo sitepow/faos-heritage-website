@@ -65,7 +65,7 @@ const Panel: FC<Props> = ({ setIsMenuOpen }) => {
         <div>
           <User
             avatarProps={{
-              src: `${user?.image ?? '/placeholder.svg'}`,
+              src: `${user?.image ?? '/no-image.png'}`,
             }}
             className='hidden cursor-pointer sm:flex'
             description={user?.email}
@@ -73,10 +73,6 @@ const Panel: FC<Props> = ({ setIsMenuOpen }) => {
           />
 
           <UserIcon className='text-default-500 sm:hidden' />
-          {/* <Avatar
-            className='sm:hidden'
-            src={`${user?.image ?? '/placeholder.svg'}`}
-          /> */}
         </div>
       </DropdownTrigger>
       <DropdownMenu aria-label='Static Actions'>

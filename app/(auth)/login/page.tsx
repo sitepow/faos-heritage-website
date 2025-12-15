@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client'
 
 import { Button } from '@heroui/button'
@@ -7,7 +8,6 @@ import { Input } from '@heroui/input'
 import { Tab, Tabs } from '@heroui/tabs'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
-import Image from 'next/image'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
@@ -183,12 +183,10 @@ const Index = () => {
               className='flex-row items-center gap-2 p-2'
               onClick={() => signIn('google')}
             >
-              <Image
+              <img
                 alt='google'
-                className='shrink-0 rounded-full'
-                height={30}
+                className='size-[35px] shrink-0 rounded-full'
                 src='/google.png'
-                width={30}
               />
               <span>Google</span>
             </CardBody>
@@ -199,12 +197,10 @@ const Index = () => {
               className='flex-row items-center gap-2 p-2'
               onClick={() => signIn('facebook')}
             >
-              <Image
+              <img
                 alt='facebook'
-                className='shrink-0 rounded-full'
-                height={30}
+                className='size-[35px] shrink-0 rounded-full'
                 src='/facebook.png'
-                width={30}
               />
               <span>Facebook</span>
             </CardBody>

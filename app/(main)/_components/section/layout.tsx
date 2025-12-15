@@ -126,7 +126,7 @@ const CategoryLayout: FC<Props> = ({
                     )
                   }}
                 >
-                  See all
+                  Explore all products
                 </Button>
               </div>
             </CardHeader>
@@ -152,19 +152,6 @@ const CategoryLayout: FC<Props> = ({
                 products?.items?.map((product) => (
                   <ProductCard key={product.id} product={product} />
                 ))}
-
-              {currentCategory.id && products?.items?.length !== 0 && (
-                <Button
-                  variant='faded'
-                  onPress={() => {
-                    router.push(
-                      `/category/${createSlug(currentCategory.label!, currentCategory.id!)}`,
-                    )
-                  }}
-                >
-                  See all
-                </Button>
-              )}
             </Carousel>
           </CardBody>
         </Card>

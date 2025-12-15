@@ -240,7 +240,7 @@ const CategoryForm = () => {
             variant='faded'
             onClick={handleSubmit(onSubmit)}
           >
-            {isPending ? 'In progress' : 'Record data'}
+            {isPending ? 'In progress' : 'Save'}
           </Button>
         </ModalFooter>
       </ModalContent>

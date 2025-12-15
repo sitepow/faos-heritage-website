@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client'
 
 import { Button } from '@heroui/button'
@@ -23,7 +24,6 @@ import {
   PlusIcon,
   TrashIcon,
 } from 'lucide-react'
-import Image from 'next/image'
 
 import { deleteImage, getImages } from '../../actions/image'
 import { useProductStore } from '../../store'
@@ -112,12 +112,10 @@ const ImageManager = () => {
                     className='flex items-center justify-between'
                   >
                     <div className='flex w-full flex-col gap-1'>
-                      <Image
+                      <img
                         alt={image?.alt ?? ''}
                         className='h-40 w-full border border-divider object-cover'
-                        height={200}
-                        src={image.url}
-                        width={200}
+                        src={image?.url || '/no-image.png'}
                       />
                     </div>
 

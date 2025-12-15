@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { Button } from '@heroui/button'
 import { Card, CardBody } from '@heroui/card'
 import {
@@ -22,7 +23,6 @@ import {
   PlusIcon,
   TrashIcon,
 } from 'lucide-react'
-import Image from 'next/image'
 
 import { deleteCategory, getCategories } from '../../actions/category'
 import { useProductStore } from '../../store'
@@ -122,12 +122,10 @@ const CategoryManager = () => {
                   >
                     <CardBody className='flex-row items-center justify-between'>
                       <div className='flex items-center gap-2'>
-                        <Image
+                        <img
                           alt={category.name}
-                          className='aspect-square rounded-full object-cover'
-                          height={38}
-                          src={category?.image ?? '/placeholder.svg'}
-                          width={38}
+                          className='aspect-square size-[45px] rounded-full object-cover'
+                          src={category?.image || '/no-image.png'}
                         />
                         <span className='line-clamp-1'>{category.name}</span>
                       </div>

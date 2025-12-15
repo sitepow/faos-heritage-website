@@ -94,9 +94,7 @@ const Order = () => {
                   {order?.items?.map((item) => (
                     <Avatar
                       key={item?.product?.images?.[0]?.url}
-                      src={
-                        item?.product?.images?.[0]?.url ?? '/placeholder.svg'
-                      }
+                      src={item?.product?.images?.[0]?.url ?? '/no-image.png'}
                     />
                   ))}
                 </AvatarGroup>

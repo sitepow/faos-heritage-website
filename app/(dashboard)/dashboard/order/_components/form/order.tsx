@@ -194,9 +194,7 @@ const OrderForm = () => {
                         <SelectItem
                           key={provider.value}
                           startContent={
-                            <Avatar
-                              src={provider.image || '/placeholder.svg'}
-                            />
+                            <Avatar src={provider.image || '/no-image.png'} />
                           }
                         >
                           {provider.label}
@@ -236,7 +234,7 @@ const OrderForm = () => {
             variant='faded'
             onClick={handleSubmit(onSubmit)}
           >
-            {isPending ? 'In progress' : 'Record data'}
+            {isPending ? 'In progress' : 'Save'}
           </Button>
         </ModalFooter>
       </ModalContent>

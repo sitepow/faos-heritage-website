@@ -29,7 +29,7 @@ const AddressCard = () => {
 
   return (
     <Card fullWidth>
-      <CardHeader className='items-center justify-between'>
+      <CardHeader className='flex-wrap items-center justify-between gap-2'>
         <span>Manage my address</span>
 
         {!isLoadingAddress && !address && (
