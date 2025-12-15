@@ -1,9 +1,4 @@
-import { Button } from '@heroui/button'
-import { ArrowRight } from 'lucide-react'
-import Link from 'next/link'
-
-import { Header } from './_components/section/header'
-import { ProductSection } from './_components/section/product'
+import { ProductIndex } from './_components/section/product-index'
 
 import { getProducts } from '@/actions/product'
 import { CategorySection } from '@/app/(main)/_components/section/category'
@@ -18,25 +13,7 @@ const Index = async () => {
       <CategorySection />
 
       {products?.items?.length !== 0 && (
-        <>
-          <Header
-            description='Find the perfect product to meet your needs.'
-            title='Choose products according to your style.'
-          />
-          <ProductSection
-            isLoading={false}
-            itemPerPage={ITEM_PER_PAGE}
-            items={products?.items ?? []}
-          />
-          <Link href='/products'>
-            <Button
-              endContent={<ArrowRight className='text-default-500' />}
-              variant='faded'
-            >
-              Explore all products
-            </Button>
-          </Link>
-        </>
+        <ProductIndex initialProducts={products} itemPerPage={ITEM_PER_PAGE} />
       )}
     </section>
   )
