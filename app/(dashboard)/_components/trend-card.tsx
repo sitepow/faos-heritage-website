@@ -17,7 +17,7 @@ const TrendCard: FC<Props> = ({ name, value, isCurrency }) => {
       <div className='flex p-4'>
         <div className='flex flex-col items-start gap-y-2'>
           <dt className='text-small font-medium text-default-500'>{name}</dt>
-          <dd className='text-2xl font-semibold text-default-700'>
+          <dd className='text-2xl font-semibold text-primary-website'>
             {isCurrency ? formatCurrency(value) : formatNumber(value)}
           </dd>
         </div>

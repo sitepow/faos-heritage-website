@@ -309,6 +309,7 @@ const ProductForm = () => {
                 render={({ field: { value, ...field } }) => (
                   <Textarea
                     {...field}
+                    className='sm:col-span-2'
                     label='Product details (short version)'
                     minRows={10}
                     value={value ?? ''}
@@ -322,6 +323,7 @@ const ProductForm = () => {
                 render={({ field: { value, ...field } }) => (
                   <Textarea
                     {...field}
+                    className='sm:col-span-2'
                     label='Product details (full version)'
                     minRows={10}
                     value={value ?? ''}

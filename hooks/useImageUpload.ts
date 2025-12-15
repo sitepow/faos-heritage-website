@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
 import {
-  deleteFile,
-  uploadFiles,
+  deleteFileSupabase,
+  uploadFilesSupabase,
 } from '@/app/(dashboard)/dashboard/product/actions/file'
 
 interface Params {
@@ -25,12 +25,12 @@ const useImageUpload = ({ oldImage, previewFiles }: Params) => {
 
       previewFiles.forEach((file) => formData.append('files', file))
 
-      const uploaded = await uploadFiles(formData)
+      const uploaded = await uploadFilesSupabase(formData)
 
       imagePath = uploaded[0]
 
       if (oldImage && imagePath !== oldImage) {
-        await deleteFile(oldImage)
+        await deleteFileSupabase(oldImage)
       }
 
       return imagePath

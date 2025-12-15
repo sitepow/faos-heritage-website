@@ -1,4 +1,3 @@
-import { Avatar } from '@heroui/avatar'
 import {
   Dropdown,
   DropdownItem,
@@ -73,10 +72,11 @@ const Panel: FC<Props> = ({ setIsMenuOpen }) => {
             name={user?.name}
           />
 
-          <Avatar
+          <UserIcon className='text-default-500 sm:hidden' />
+          {/* <Avatar
             className='sm:hidden'
             src={`${user?.image ?? '/placeholder.svg'}`}
-          />
+          /> */}
         </div>
       </DropdownTrigger>
       <DropdownMenu aria-label='Static Actions'>

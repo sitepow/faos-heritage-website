@@ -24,7 +24,7 @@ const Cart = () => {
     <Link className='relative inline-block' href={siteConfig.link.cart}>
       <ShoppingCartIcon className='size-6 text-default-500' />
       {!!data?.totalCarts && (
-        <div className='absolute -top-2 -right-2 flex size-5 items-center justify-center rounded-full bg-red-800 text-xs font-bold text-white'>
+        <div className='absolute -top-2 -right-2 flex size-5 items-center justify-center rounded-full bg-primary-website text-xs font-bold text-white'>
           {data.totalCarts > 99 ? '99+' : data.totalCarts}
         </div>
       )}

@@ -127,7 +127,7 @@ const OrderSection: FC<ComponentProps<typeof Card>> = ({
             Discount code
           </span>
 
-          <div className='flex items-center gap-2'>
+          <div className='flex flex-wrap items-center gap-2 sm:flex-nowrap lg:flex-wrap'>
             <Input isDisabled label='Discount code' variant='bordered' />
             <Button isDisabled variant='faded'>
               Use the discount

@@ -141,8 +141,9 @@ const CategoryLayout: FC<Props> = ({
                 <div className='flex w-full flex-col items-center justify-center gap-2 text-center text-default-500'>
                   <AlertCircleIcon className='size-8' />
                   <span>
-                    No products found in this category. Please select another
-                    category to view other items.
+                    No products found in this category.
+                    <br />
+                    Please select another category to view other items.
                   </span>
                 </div>
               )}

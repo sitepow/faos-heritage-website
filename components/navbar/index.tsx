@@ -48,7 +48,7 @@ const Navbar = () => {
         className={cn(
           linkStyles({ color: 'foreground' }),
           'data-[active=true]:font-medium data-[active=true]:text-primary',
-          isCurrent && 'border-b-2 border-primary-website',
+          isCurrent && 'border-b border-primary-website',
         )}
         href={item.href}
       >
