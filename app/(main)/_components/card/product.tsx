@@ -5,7 +5,6 @@ import { Alert } from '@heroui/alert'
 import { Button } from '@heroui/button'
 import { Card, CardBody, CardFooter, CardHeader } from '@heroui/card'
 import { Chip } from '@heroui/chip'
-import { Image } from '@heroui/image'
 import { Skeleton } from '@heroui/skeleton'
 import {
   CircleQuestionMarkIcon,
@@ -14,6 +13,7 @@ import {
   ShoppingCartIcon,
   TagIcon,
 } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 
@@ -34,6 +34,12 @@ interface Props {
 
 const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
   const [isHovered, setIsHovered] = useState(false)
+  const imageSrc =
+    product?.images?.length > 1
+      ? isHovered
+        ? product.images[1].url
+        : product.images[0].url
+      : product?.images?.[0]?.url || '/placeholder.svg'
 
   return (
     <Card
@@ -89,19 +95,12 @@ const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
           href={`/product/${createSlug(product?.name, product?.id)}`}
         >
           <Image
+            key={imageSrc}
             alt={product?.name}
-            className='size-full object-cover'
-            classNames={{ wrapper: 'w-full' }}
+            className='h-[250px] w-full object-cover'
             height={250}
-            radius='none'
-            src={
-              product?.images && product?.images.length > 1
-                ? isHovered
-                  ? product?.images[1].url
-                  : product?.images[0].url
-                : product?.images?.[0]?.url || '/placeholder.svg'
-            }
-            width='100%'
+            src={imageSrc}
+            width={250}
           />
         </Link>
       </CardHeader>

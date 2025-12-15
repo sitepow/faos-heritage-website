@@ -84,6 +84,7 @@ const ImageManager = () => {
         isDismissable={false}
         isOpen={isImageManagerOpen}
         scrollBehavior='inside'
+        size='xl'
         onOpenChange={onOpenImageManagerChange}
       >
         <ModalContent>
@@ -104,7 +105,7 @@ const ImageManager = () => {
 
           {images?.length !== 0 && (
             <ModalBody>
-              <div className='grid gap-4'>
+              <div className='grid gap-4 sm:grid-cols-2'>
                 {images?.map((image) => (
                   <div
                     key={image.id}
@@ -118,7 +119,6 @@ const ImageManager = () => {
                         src={image.url}
                         width={200}
                       />
-                      <span className='line-clamp-1 text-sm'>{image.url}</span>
                     </div>
 
                     <Dropdown placement='bottom-end'>

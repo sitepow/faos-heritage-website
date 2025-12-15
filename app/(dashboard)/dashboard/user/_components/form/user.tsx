@@ -44,7 +44,7 @@ const UserForm = () => {
 
   const [previewFiles, setPreviewFiles] = useState<ImageWithPreview[]>([])
   const [oldImage, setOldImage] = useState<string | null>(null)
-  const { resolveImagePath } = useImageUpload({
+  const { resolveImagePath, isUploading } = useImageUpload({
     oldImage,
     previewFiles,
   })
@@ -116,7 +116,8 @@ const UserForm = () => {
       onSuccess: onRefetch,
     })
 
-  const isPending = isPendingCreateUser || isLoadingUser || isPendingUpdateUser
+  const isPending =
+    isPendingCreateUser || isLoadingUser || isPendingUpdateUser || isUploading
   const headerLable = userId ? 'Edit User' : 'Add users'
 
   const onFilesChange = (files: ImageWithPreview[]) => {

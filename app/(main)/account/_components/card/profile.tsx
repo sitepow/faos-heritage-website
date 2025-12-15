@@ -42,7 +42,7 @@ const ProfileCard = () => {
 
   const [previewFiles, setPreviewFiles] = useState<ImageWithPreview[]>([])
   const [oldImage, setOldImage] = useState<string | null>(null)
-  const { resolveImagePath } = useImageUpload({
+  const { resolveImagePath, isUploading } = useImageUpload({
     oldImage,
     previewFiles,
   })
@@ -92,7 +92,7 @@ const ProfileCard = () => {
     })
   }
 
-  const isPending = isPendingUpdateUser || isLoadingUser
+  const isPending = isPendingUpdateUser || isLoadingUser || isUploading
 
   const onFilesChange = (files: ImageWithPreview[]) => {
     setPreviewFiles(files)

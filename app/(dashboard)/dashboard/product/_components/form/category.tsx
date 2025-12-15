@@ -51,7 +51,7 @@ const CategoryForm = () => {
 
   const [previewFiles, setPreviewFiles] = useState<ImageWithPreview[]>([])
   const [oldImage, setOldImage] = useState<string | null>(null)
-  const { resolveImagePath } = useImageUpload({
+  const { resolveImagePath, isUploading } = useImageUpload({
     oldImage,
     previewFiles,
   })
@@ -109,7 +109,10 @@ const CategoryForm = () => {
     })
 
   const isPending =
-    isPendingCreateCategory || isLoadingCategory || isPendingUpdateCategory
+    isPendingCreateCategory ||
+    isLoadingCategory ||
+    isPendingUpdateCategory ||
+    isUploading
   const headerLable = categoryId ? 'Edit Category' : 'Add a category'
 
   const onFilesChange = (files: ImageWithPreview[]) => {

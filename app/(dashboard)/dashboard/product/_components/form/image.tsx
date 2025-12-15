@@ -46,7 +46,7 @@ const ImageForm = () => {
 
   const [previewFiles, setPreviewFiles] = useState<ImageWithPreview[]>([])
   const [oldImage, setOldImage] = useState<string | null>(null)
-  const { resolveImagePath } = useImageUpload({
+  const { resolveImagePath, isUploading } = useImageUpload({
     oldImage,
     previewFiles,
   })
@@ -107,7 +107,10 @@ const ImageForm = () => {
     })
 
   const isPending =
-    isPendingCreateImage || isLoadingImage || isPendingUpdateImage
+    isPendingCreateImage ||
+    isLoadingImage ||
+    isPendingUpdateImage ||
+    isUploading
   const headerLable = imageId ? 'Edit product image' : 'Add product images'
 
   const onFilesChange = (files: ImageWithPreview[]) => {
