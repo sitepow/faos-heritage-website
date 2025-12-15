@@ -2,7 +2,7 @@
 
 import type { Prisma } from '@prisma/client'
 
-import { deleteFile } from './file'
+import { deleteFileSupabase } from './file'
 import { imageSchema, type ImageInput } from '../schema/image'
 
 import { removeEmptyField } from '@/utils/helper'
@@ -114,7 +114,7 @@ const deleteImage = async (imageIds: string | string[]) => {
       images
         .map((image) => image.url)
         .filter(Boolean)
-        .map((imagePath) => deleteFile(imagePath!)),
+        .map((imagePath) => deleteFileSupabase(imagePath!)),
     )
 
     await prisma.$transaction([

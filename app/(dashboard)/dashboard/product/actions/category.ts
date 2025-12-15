@@ -3,7 +3,7 @@
 import type { CategoryInput } from '../schema/category'
 import type { Prisma } from '@prisma/client'
 
-import { deleteFile } from './file'
+import { deleteFileSupabase } from './file'
 import { categorySchema } from '../schema/category'
 
 import { removeEmptyField } from '@/utils/helper'
@@ -120,7 +120,7 @@ const deleteCategory = async (categoryIds: string | string[]) => {
       categories
         .map((category) => category.image)
         .filter(Boolean)
-        .map((imagePath) => deleteFile(imagePath!)),
+        .map((imagePath) => deleteFileSupabase(imagePath!)),
     )
 
     await prisma.$transaction([
