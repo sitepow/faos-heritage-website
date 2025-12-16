@@ -30,8 +30,8 @@ const Product: FC<Props> = async ({ params }) => {
     return (
       <NotFound>
         Sorry! Product code...{' '}
-        <span className='text-primary-website'>&quot;{productId}&quot;</span>{' '}
-        Nothing matches. Please try searching for new products on the homepage.
+        <span className='text-primary'>&quot;{productId}&quot;</span> Nothing
+        matches. Please try searching for new products on the homepage.
       </NotFound>
     )
   }

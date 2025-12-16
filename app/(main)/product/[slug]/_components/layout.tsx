@@ -40,7 +40,7 @@ const ProductLayout: FC<Props> = ({ initialProduct, productId, userId }) => {
     return (
       <NotFound>
         I&apos;m sorry.!{' '}
-        <span className='text-primary-website'>
+        <span className='text-primary'>
           Product code &quot;{productId}&quot;
         </span>{' '}
         Nothing matches. Please try searching for new products on the homepage.

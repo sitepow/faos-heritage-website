@@ -22,12 +22,12 @@ const Payment = () => {
             <div className='space-y-3 text-left'>
               <p>
                 1. Select the product you want and click{' '}
-                <strong className='text-primary-website'>“Add to Cart”</strong>
+                <strong className='text-primary'>“Add to Cart”</strong>
               </p>
               <p>2. Open your cart to review the selected items</p>
               <p>
                 3. When you are ready to pay, click{' '}
-                <strong className='text-primary-website'>“Place Order”</strong>
+                <strong className='text-primary'>“Place Order”</strong>
               </p>
               <p>4. You will be redirected to Stripe’s secure checkout page</p>
             </div>
@@ -41,7 +41,7 @@ const Payment = () => {
             <div className='space-y-3 text-left'>
               <p>
                 We accept debit and credit cards from all banks with the
-                <strong className='text-primary-website'>
+                <strong className='text-primary'>
                   {' '}
                   Visa, Mastercard, or JCB
                 </strong>{' '}
@@ -74,10 +74,8 @@ const Payment = () => {
             <div className='space-y-3 text-left'>
               <p>
                 If you choose to pay via{' '}
-                <strong className='text-primary-website'>
-                  PromptPay QR Code
-                </strong>
-                , a payment QR code will be generated automatically on Stripe’s
+                <strong className='text-primary'>PromptPay QR Code</strong>, a
+                payment QR code will be generated automatically on Stripe’s
                 checkout page.
               </p>
 
@@ -85,9 +83,7 @@ const Payment = () => {
               <ul className='list-disc space-y-2 pl-5'>
                 <li>
                   Select{' '}
-                  <strong className='text-primary-website'>
-                    PromptPay (QR Code)
-                  </strong>{' '}
+                  <strong className='text-primary'>PromptPay (QR Code)</strong>{' '}
                   as your payment method
                 </li>
                 <li>Scan the QR code using your mobile banking app</li>

@@ -109,7 +109,7 @@ const ImageDropzone: FC<Props> = ({ multiple = false, onFilesChange }) => {
         className={cn(
           'relative flex min-h-64 cursor-pointer items-center justify-center rounded-xl border-2 border-dashed transition',
           isDragActive
-            ? 'border-primary-website bg-primary-website/10'
+            ? 'border-primary bg-primary/10'
             : 'border-gray-300 hover:border-gray-400',
         )}
       >
@@ -119,19 +119,19 @@ const ImageDropzone: FC<Props> = ({ multiple = false, onFilesChange }) => {
           <div
             className={cn(
               'rounded-full p-4 transition-colors',
-              isDragActive && 'bg-primary-website/25',
+              isDragActive && 'bg-primary/25',
             )}
           >
             <ImageIcon
               className={cn(
                 'size-12 text-default-500',
-                isDragActive && 'text-primary-website',
+                isDragActive && 'text-primary',
               )}
             />
           </div>
 
           {isDragActive ? (
-            <p className='text-primary-website'>Place the image here....</p>
+            <p className='text-primary'>Place the image here....</p>
           ) : (
             <div className='flex flex-col'>
               <p>Drag and drop the image here.</p>

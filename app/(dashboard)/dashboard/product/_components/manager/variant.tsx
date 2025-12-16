@@ -118,7 +118,7 @@ const VariantManager = () => {
                     key={variant.id}
                     className={cn(
                       'border-l-4',
-                      variant.isActive && 'border-primary-website',
+                      variant.isActive && 'border-primary',
                     )}
                   >
                     <CardBody className='flex-row items-center justify-between'>

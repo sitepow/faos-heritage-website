@@ -123,7 +123,7 @@ const OrderSection: FC<ComponentProps<typeof Card>> = ({
 
       <Card fullWidth className={cn(className, 'h-fit')} {...props}>
         <CardBody className='gap-3'>
-          <span className='w-fit border-b border-primary-website pb-1 font-bold'>
+          <span className='w-fit border-b border-primary pb-1 font-bold'>
             Discount code
           </span>
 
@@ -140,7 +140,7 @@ const OrderSection: FC<ComponentProps<typeof Card>> = ({
                 <span>
                   Please add your shipping address before placing your order{' '}
                   <button
-                    className='cursor-pointer text-primary-website underline'
+                    className='cursor-pointer text-primary underline'
                     onClick={GOTO.ADDRESS}
                   >
                     Add your address
@@ -153,14 +153,14 @@ const OrderSection: FC<ComponentProps<typeof Card>> = ({
 
           {!isLoadingAddress && address && (
             <>
-              <span className='w-fit border-b border-primary-website pb-1 font-bold'>
+              <span className='w-fit border-b border-primary pb-1 font-bold'>
                 Shipping address
               </span>
 
               <span>
                 {getFullAddress(address)}{' '}
                 <button
-                  className='cursor-pointer text-primary-website underline'
+                  className='cursor-pointer text-primary underline'
                   onClick={GOTO.ADDRESS}
                 >
                   Edit address
@@ -169,7 +169,7 @@ const OrderSection: FC<ComponentProps<typeof Card>> = ({
             </>
           )}
 
-          <span className='w-fit border-b border-primary-website pb-1 font-bold'>
+          <span className='w-fit border-b border-primary pb-1 font-bold'>
             Payment details
           </span>
 
@@ -179,7 +179,7 @@ const OrderSection: FC<ComponentProps<typeof Card>> = ({
 
           <div className='flex items-center justify-between pt-1'>
             <span className='font-bold'>Net total price :</span>
-            <span className='text-2xl font-bold text-primary-website'>
+            <span className='text-2xl font-bold text-primary'>
               {formatCurrency(tempTotal)}
             </span>
           </div>

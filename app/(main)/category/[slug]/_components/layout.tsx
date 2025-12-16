@@ -95,8 +95,8 @@ const CategoryLayout: FC<Props> = ({
     return (
       <NotFound>
         Sorry! Product category code.{' '}
-        <span className='text-primary-website'>&quot;{categoryId}&quot;</span>{' '}
-        Nothing matches. Please try searching for new products on the homepage.
+        <span className='text-primary'>&quot;{categoryId}&quot;</span> Nothing
+        matches. Please try searching for new products on the homepage.
       </NotFound>
     )
 
@@ -118,7 +118,7 @@ const CategoryLayout: FC<Props> = ({
       {!isLoadingCategory && <span className='text-2xl'>{category?.name}</span>}
 
       <div className='flex w-full flex-wrap items-center justify-center gap-3 sm:justify-between'>
-        <span className='text-primary-website'>
+        <span className='text-primary'>
           Item number 1 – {itemCount} From all {totalItems} list
         </span>
 

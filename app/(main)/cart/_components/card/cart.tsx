@@ -233,7 +233,7 @@ const CartCard: FC<
                   onClick={onDeleteCart}
                 />
 
-                <span className='text-lg font-bold text-primary-website sm:text-2xl'>
+                <span className='text-lg font-bold text-primary sm:text-2xl'>
                   {formatCurrency(currentPrice! * quantity!)}
                 </span>
               </div>

@@ -117,7 +117,7 @@ const CategoryManager = () => {
                     key={category.id}
                     className={cn(
                       'border-l-4',
-                      category.isActive && 'border-primary-website',
+                      category.isActive && 'border-primary',
                     )}
                   >
                     <CardBody className='flex-row items-center justify-between'>

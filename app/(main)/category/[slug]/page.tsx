@@ -28,8 +28,8 @@ const Category: FC<Props> = async ({ params }) => {
     return (
       <NotFound>
         Sorry! Product category code.{' '}
-        <span className='text-primary-website'>&quot;{categoryId}&quot;</span>{' '}
-        It doesn&apos;t match anything at all.
+        <span className='text-primary'>&quot;{categoryId}&quot;</span> It
+        doesn&apos;t match anything at all.
         <br />
         Please try searching for new products on the homepage.
       </NotFound>

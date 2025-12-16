@@ -73,9 +73,7 @@ const Order: FC<Props> = ({ order, hideButton }) => {
                   target='_blank'
                 >
                   Tracking number{' '}
-                  <span className='text-primary-website'>
-                    {order.trackingNumber}
-                  </span>
+                  <span className='text-primary'>{order.trackingNumber}</span>
                 </Link>
               )}
             </span>

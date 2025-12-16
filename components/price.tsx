@@ -37,9 +37,7 @@ const Price: FC<Props & ComponentProps<'div'>> = ({
       {...props}
     >
       <div>
-        <span className='text-2xl font-bold text-primary-website'>
-          {displayPrice}
-        </span>
+        <span className='text-2xl font-bold text-primary'>{displayPrice}</span>
         <span className='text-xs'> /{unit}</span>
       </div>
     </div>

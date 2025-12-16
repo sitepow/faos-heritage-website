@@ -83,7 +83,7 @@ const Index = () => {
         <span className='text-lg font-bold'>Log in or register.</span>
         <span className='text-default-500'>
           To access the website.{' '}
-          <span className='text-primary-website'>{siteConfig?.name}</span>
+          <span className='text-primary'>{siteConfig?.name}</span>
         </span>
       </CardHeader>
 

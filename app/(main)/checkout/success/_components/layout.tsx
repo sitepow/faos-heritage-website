@@ -21,10 +21,8 @@ const SuccessLayout = () => {
           <>
             {' '}
             This order has the following reference number{' '}
-            <span className='text-primary-website underline'>
-              {orderId}
-            </span>{' '}
-            Please keep this order number for later status checks or to contact
+            <span className='text-primary underline'>{orderId}</span> Please
+            keep this order number for later status checks or to contact
             customer service.
           </>
         )}

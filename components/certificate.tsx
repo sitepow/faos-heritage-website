@@ -14,7 +14,7 @@ const Certificate = () => {
         <h2 className='mx-auto max-w-11/12 text-center text-2xl leading-tight font-bold sm:max-w-10/12 md:max-w-1/2 xl:max-w-1/3'>
           FAOS products are certified and licensed for safety by the relevant
           authorities, ensuring their{' '}
-          <span className='text-primary-website underline'>
+          <span className='text-primary underline'>
             quality and reliability.
           </span>
         </h2>

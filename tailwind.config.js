@@ -15,7 +15,22 @@ const config = {
     },
   },
   darkMode: 'class',
-  plugins: [heroui()],
+  plugins: [
+    heroui({
+      themes: {
+        light: {
+          colors: {
+            primary: '#ba8c25',
+          },
+        },
+        dark: {
+          colors: {
+            primary: '#ba8c25',
+          },
+        },
+      },
+    }),
+  ],
 }
 
 module.exports = config

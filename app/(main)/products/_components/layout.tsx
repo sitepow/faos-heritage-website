@@ -93,7 +93,7 @@ const ProductLayout: FC<Props> = ({ initialProducts, itemPerPage }) => {
       <span className='text-2xl'>All products</span>
 
       <div className='flex w-full flex-wrap items-center justify-center gap-3 sm:justify-between'>
-        <span className='text-primary-website'>
+        <span className='text-primary'>
           Item number 1 – {itemCount} From all {totalItems} list
         </span>
 

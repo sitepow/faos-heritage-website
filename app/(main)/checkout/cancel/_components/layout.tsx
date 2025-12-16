@@ -22,9 +22,9 @@ const CancelLayout = () => {
           <>
             {' '}
             This order has the following reference number{' '}
-            <span className='text-primary-website underline'>{orderId}</span> To
-            place a new order, you can go back and start the process
-            immediately. Or use this number to contact customer service.
+            <span className='text-primary underline'>{orderId}</span> To place a
+            new order, you can go back and start the process immediately. Or use
+            this number to contact customer service.
           </>
         )}
       </span>

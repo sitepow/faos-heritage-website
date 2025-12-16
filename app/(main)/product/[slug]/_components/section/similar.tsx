@@ -33,7 +33,7 @@ const SimilarSection: FC<Props> = ({ product }) => {
   return (
     <div className='flex flex-col gap-4'>
       {similars?.length !== 0 && (
-        <span className='mx-auto w-fit border-b border-primary-website pb-1 text-xl font-bold'>
+        <span className='mx-auto w-fit border-b border-primary pb-1 text-xl font-bold'>
           Similar/Replacement Products
         </span>
       )}

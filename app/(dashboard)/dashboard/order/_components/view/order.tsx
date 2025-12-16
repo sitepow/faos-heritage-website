@@ -75,7 +75,7 @@ const OrderView = () => {
                 <span>
                   Tracking number:{' '}
                   <Link
-                    className='text-primary-website underline'
+                    className='text-primary underline'
                     href={order?.trackingWebsite ?? ''}
                     target='_blank'
                   >

@@ -43,9 +43,7 @@ const ProductImagePreview: FC<ComponentProps<'div'> & Props> = ({
               key={image}
               className={cn(
                 'relative size-20 shrink-0 cursor-pointer rounded-md border',
-                index === selectedIndex
-                  ? 'border-primary-website'
-                  : 'border-divider',
+                index === selectedIndex ? 'border-primary' : 'border-divider',
               )}
               onClick={() => setSelectedIndex(index)}
             >
