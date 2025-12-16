@@ -17,9 +17,12 @@ interface Props {
   itemPerPage: number
 }
 
-const ProductIndex: FC<Props> = ({ initialProducts, itemPerPage }) => {
+const ProductHomePage: FC<Props> = ({ initialProducts, itemPerPage }) => {
+  const QUERY = {
+    HOMEPAGE: ['products', 'homepage', { limit: itemPerPage }],
+  }
   const { data: products, isLoading: isLoadingProducts } = useQuery({
-    queryKey: ['products', 'index', itemPerPage],
+    queryKey: QUERY.HOMEPAGE,
     queryFn: () => getProducts({ limit: itemPerPage }),
     initialData: initialProducts,
   })
@@ -47,4 +50,4 @@ const ProductIndex: FC<Props> = ({ initialProducts, itemPerPage }) => {
   )
 }
 
-export { ProductIndex }
+export { ProductHomePage }

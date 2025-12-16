@@ -65,7 +65,7 @@ const Navbar = () => {
       >
         <NavbarContent className='basis-1/5 sm:basis-full' justify='start'>
           <Link className='shrink-0' href='/'>
-            <img alt='faos-logo' height={50} src='/logo.png' width={50} />
+            <img alt='faos-logo' height={55} src='/logo.png' width={55} />
           </Link>
 
           <ul className='ml-2 hidden gap-4 lg:flex'>

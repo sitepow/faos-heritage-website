@@ -4,7 +4,7 @@ import { OrderStatus, PaymentStatus, StockMovementType } from '@prisma/client'
 
 import type { Prisma } from '@prisma/client'
 
-import { canSelectStatus, getFullAddress } from '@/utils/helper'
+import { checkOrderStatus, getFullAddress } from '@/utils/helper'
 import { prisma, getPrismaError } from '@/utils/prisma'
 
 interface UpdateOrderInput {
@@ -232,7 +232,7 @@ const updateOrder = async (data: UpdateOrderInput) => {
 
       const prevStatus = order.status
 
-      if (!canSelectStatus(prevStatus, status)) {
+      if (!checkOrderStatus(prevStatus, status)) {
         throw new Error('This order status cannot be changed.')
       }
 

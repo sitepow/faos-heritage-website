@@ -54,6 +54,8 @@ const ImageForm = () => {
   const QUERY = {
     IMAGE: ['dashboard', 'image', 'modal', imageId],
     IMAGES: ['dashboard', 'images', 'modal', productId],
+    HOMEPAGE: ['products', 'homepage'],
+    CAROUSEL: ['carousel', 'products', productId],
   }
 
   const {
@@ -89,6 +91,12 @@ const ImageForm = () => {
     })
     queryClient.invalidateQueries({
       queryKey: QUERY.IMAGES,
+    })
+    queryClient.invalidateQueries({
+      queryKey: QUERY.HOMEPAGE,
+    })
+    queryClient.invalidateQueries({
+      queryKey: QUERY.CAROUSEL,
     })
 
     onClose()

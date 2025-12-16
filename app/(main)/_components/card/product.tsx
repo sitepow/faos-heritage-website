@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 /* eslint-disable no-nested-ternary */
 'use client'
 
@@ -6,6 +5,7 @@ import { Alert } from '@heroui/alert'
 import { Button } from '@heroui/button'
 import { Card, CardBody, CardFooter, CardHeader } from '@heroui/card'
 import { Chip } from '@heroui/chip'
+import { Image } from '@heroui/react'
 import { Skeleton } from '@heroui/skeleton'
 import {
   CircleQuestionMarkIcon,
@@ -23,7 +23,7 @@ import type { FC } from 'react'
 import { StarRating } from '../star-rating'
 
 import { Price } from '@/components/price'
-import { createSlug, getProductUnit } from '@/utils/helper'
+import { checkOutOfStock, createSlug, getProductUnit } from '@/utils/helper'
 import { cn } from '@/utils/style'
 
 interface Props {
@@ -41,6 +41,9 @@ const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
         : product?.images[0]?.url
       : product?.images?.[0]?.url || '/placeholder.svg'
 
+  const { stockMin, stockMax, stockQuantity } = product
+  const isOutOfStock = checkOutOfStock({ stockMin, stockMax, stockQuantity })
+
   return (
     <Card
       className={cn(
@@ -52,11 +55,11 @@ const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
       onMouseLeave={() => setIsHovered(false)}
     >
       <CardHeader className='relative overflow-hidden p-0'>
-        {product?.stockQuantity === 0 && (
+        {isOutOfStock && (
           <Alert
-            hideIcon
             className='absolute top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2'
-            description='This item is temporarily out of stock.'
+            color='danger'
+            description='This item is temporarily out of stock'
             radius='none'
           />
         )}
@@ -94,11 +97,14 @@ const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
           className='size-full'
           href={`/product/${createSlug(product?.name, product?.id)}`}
         >
-          <img
-            key={imageSrc}
+          <Image
             alt={product?.name}
-            className='h-[250px] w-full object-cover'
+            className='size-full object-contain'
+            classNames={{ wrapper: 'w-full' }}
+            height={250}
+            radius='none'
             src={imageSrc}
+            width='100%'
           />
         </Link>
       </CardHeader>

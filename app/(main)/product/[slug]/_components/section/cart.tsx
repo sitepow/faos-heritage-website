@@ -150,19 +150,18 @@ const CartSection: FC<
   return (
     <Card className={cn(className, 'h-fit')} {...props}>
       <CardHeader className='flex flex-col items-start gap-4'>
-        {currentPrice && (
-          <Price
-            price={currentPrice}
-            priceMax={priceMax!}
-            priceMin={priceMin!}
-            unit={productUnit}
-          />
-        )}
+        <Price
+          price={currentPrice!}
+          priceMax={priceMax!}
+          priceMin={priceMin!}
+          unit={productUnit}
+        />
       </CardHeader>
 
       <CardBody className='flex-wrap gap-4'>
         <Alert
           className='text-start'
+          color={isOutOfStock ? 'danger' : 'default'}
           description={
             isOutOfStock
               ? 'This item is temporarily out of stock. Please see similar/alternative items.'

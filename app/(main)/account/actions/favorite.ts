@@ -2,7 +2,7 @@
 
 import type { Wishlist } from '@prisma/client'
 
-import { getPriceAndStockMinMaxFromVariants } from '@/utils/helper'
+import { getVariantPriceStockMinMax } from '@/utils/helper'
 import { getPrismaError, prisma } from '@/utils/prisma'
 
 type GetFavoritesResult = Awaited<ReturnType<typeof getFavorites>>
@@ -73,7 +73,7 @@ const getFavorites = async ({
     const resultItems = (hasNextPage ? items.slice(0, limit) : items).map(
       (product) => {
         const { priceMin, priceMax, stockMin, stockMax } =
-          getPriceAndStockMinMaxFromVariants(product?.product?.variants)
+          getVariantPriceStockMinMax(product?.product?.variants)
 
         return {
           ...product,

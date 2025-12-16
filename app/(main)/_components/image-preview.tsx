@@ -1,6 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
 'use client'
 
+import Image from 'next/image'
 import { useState } from 'react'
 
 import type { ComponentProps, FC } from 'react'
@@ -27,10 +27,12 @@ const ProductImagePreview: FC<ComponentProps<'div'> & Props> = ({
       {...props}
     >
       <div className='relative h-[345px] overflow-hidden rounded-lg md:w-[325px] lg:w-[425px]'>
-        <img
+        <Image
+          fill
+          priority
           alt={alt}
-          className='size-full object-cover'
-          src={images[selectedIndex] || '/no-image.png'}
+          className='object-contain'
+          src={images[selectedIndex] || '/placeholder.svg'}
         />
       </div>
 
@@ -47,10 +49,11 @@ const ProductImagePreview: FC<ComponentProps<'div'> & Props> = ({
               )}
               onClick={() => setSelectedIndex(index)}
             >
-              <img
+              <Image
+                fill
                 alt={`${alt}-${index}`}
-                className='rounded-md object-cover'
-                src={image || '/no-image.png'}
+                className='rounded-md object-contain'
+                src={image || '/placeholder.svg'}
               />
             </button>
           ))}

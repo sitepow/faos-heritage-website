@@ -1,4 +1,4 @@
-import { ProductIndex } from './_components/section/product-index'
+import { ProductHomePage } from './_components/section/product-home-page'
 
 import { getProducts } from '@/actions/product'
 import { CategorySection } from '@/app/(main)/_components/section/category'
@@ -13,7 +13,10 @@ const Index = async () => {
       <CategorySection />
 
       {products?.items?.length !== 0 && (
-        <ProductIndex initialProducts={products} itemPerPage={ITEM_PER_PAGE} />
+        <ProductHomePage
+          initialProducts={products}
+          itemPerPage={ITEM_PER_PAGE}
+        />
       )}
     </section>
   )

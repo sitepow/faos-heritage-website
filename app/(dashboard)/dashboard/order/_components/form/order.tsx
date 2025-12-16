@@ -26,7 +26,7 @@ import { useOrderStore } from '../../store'
 
 import { getOrder, updateOrder } from '@/actions/order'
 import { ORDER_STEPS_ALL, SHIPPING_PROVIDERS } from '@/utils/const'
-import { canSelectStatus } from '@/utils/helper'
+import { checkOrderStatus } from '@/utils/helper'
 
 const DEFAULT_VALUES: OrderStatusInput = {
   status: OrderStatus.PENDING,
@@ -148,7 +148,7 @@ const OrderForm = () => {
                   {ORDER_STEPS_ALL.map(([key, label]) => (
                     <SelectItem
                       key={key}
-                      isDisabled={!canSelectStatus(status, key)}
+                      isDisabled={!checkOrderStatus(status, key)}
                     >
                       {label}
                     </SelectItem>

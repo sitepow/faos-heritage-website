@@ -62,6 +62,8 @@ const ProductForm = () => {
     CATEGORIES: ['dashboard', 'categories', 'modal'],
     PRODUCT: ['dashboard', 'product', productId],
     PRODUCTS: ['dashboard', 'products'],
+    HOMEPAGE: ['products', 'homepage'],
+    CAROUSEL: ['carousel', 'products', productId],
   }
 
   const { data: categories, isLoading: isLoadingCategories } = useQuery({
@@ -97,22 +99,26 @@ const ProductForm = () => {
     }
   }, [isProductOpen, productId, product, isLoadingProduct, reset])
 
+  const onRefetch = async () => {
+    await Promise.all([
+      queryClient.invalidateQueries({ queryKey: QUERY.PRODUCTS }),
+      queryClient.invalidateQueries({ queryKey: QUERY.HOMEPAGE }),
+      queryClient.invalidateQueries({ queryKey: QUERY.CAROUSEL }),
+    ])
+
+    onClose()
+  }
+
   const { mutate: mutateCreateProduct, isPending: isPendingCreateProduct } =
     useMutation({
       mutationFn: createProduct,
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: QUERY.PRODUCTS })
-        onClose()
-      },
+      onSuccess: onRefetch,
     })
 
   const { mutate: mutateUpdateProduct, isPending: isPendingUpdateProduct } =
     useMutation({
       mutationFn: updateProduct,
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: QUERY.PRODUCTS })
-        onClose()
-      },
+      onSuccess: onRefetch,
     })
 
   const isPending =

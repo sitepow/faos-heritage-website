@@ -2,7 +2,7 @@
 
 import type { Product } from '@prisma/client'
 
-import { getPriceAndStockMinMaxFromVariants } from '@/utils/helper'
+import { getVariantPriceStockMinMax } from '@/utils/helper'
 import { getPrismaError, prisma } from '@/utils/prisma'
 
 export type GetProductsResult = Awaited<ReturnType<typeof getProducts>>
@@ -56,6 +56,7 @@ const getProducts = async ({
         variants: {
           select: {
             price: true,
+            stockQuantity: true,
           },
         },
         category: {
@@ -74,7 +75,7 @@ const getProducts = async ({
     const resultItems = (hasNextPage ? items.slice(0, limit) : items).map(
       (product) => {
         const { priceMin, priceMax, stockMin, stockMax } =
-          getPriceAndStockMinMaxFromVariants(product?.variants)
+          getVariantPriceStockMinMax(product?.variants)
 
         return {
           ...product,

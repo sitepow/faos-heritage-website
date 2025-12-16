@@ -1,9 +1,9 @@
-/* eslint-disable @next/next/no-img-element */
 import { Button } from '@heroui/button'
 import { Card, CardBody } from '@heroui/card'
 import { useDisclosure } from '@heroui/modal'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { ShoppingBagIcon, TrashIcon } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
@@ -54,8 +54,6 @@ const Favorite: FC<Props> = ({ className, favorite, ...props }) => {
         queryKey: QUERY.FAVORITES,
       }),
     ])
-
-    goTo.cart()
   }
 
   const goTo = {
@@ -69,11 +67,13 @@ const Favorite: FC<Props> = ({ className, favorite, ...props }) => {
         await deleteFavorite({ userId, productId })
 
         onRefetch()
+        goTo.cart()
       },
       onError: async () => {
         await deleteFavorite({ userId, productId })
 
         onRefetch()
+        goTo.cart()
       },
     })
 
@@ -113,10 +113,14 @@ const Favorite: FC<Props> = ({ className, favorite, ...props }) => {
                 className='size-[150px] shrink-0 border border-divider'
                 href={`/product/${createSlug(favorite?.product?.name, favorite?.product?.id)}`}
               >
-                <img
+                <Image
                   alt='product-image'
-                  className='size-full object-cover'
-                  src={favorite?.product?.images?.[0]?.url ?? '/no-image.png'}
+                  className='size-full object-contain'
+                  height={100}
+                  src={
+                    favorite?.product?.images?.[0]?.url ?? '/placeholder.svg'
+                  }
+                  width={100}
                 />
               </Link>
 

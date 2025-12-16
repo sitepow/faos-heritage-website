@@ -81,9 +81,7 @@ interface Variant {
   stockQuantity?: number
 }
 
-const getPriceAndStockMinMaxFromVariants = (
-  variants: Variant[] | undefined | null,
-) => {
+const getVariantPriceStockMinMax = (variants: Variant[] | undefined | null) => {
   if (!variants || variants.length === 0) {
     return {
       priceMin: null,
@@ -121,7 +119,7 @@ const getPriceAndStockMinMaxFromVariants = (
   }
 }
 
-const canSelectStatus = (current: OrderStatus, next: OrderStatus) => {
+const checkOrderStatus = (current: OrderStatus, next: OrderStatus) => {
   const currentStep = ORDER_STATUS_FLOW[current]
   const nextStep = ORDER_STATUS_FLOW[next]
 
@@ -138,6 +136,22 @@ const canSelectStatus = (current: OrderStatus, next: OrderStatus) => {
   return nextStep === currentStep + 1
 }
 
+const checkOutOfStock = ({
+  stockMin,
+  stockMax,
+  stockQuantity,
+}: {
+  stockMin: number | null
+  stockMax: number | null
+  stockQuantity: number | null
+}): boolean => {
+  const hasMinMax = stockMin != null || stockMax != null
+
+  return hasMinMax
+    ? !((stockMin ?? 0) > 0 || (stockMax ?? 0) > 0)
+    : (stockQuantity ?? 0) <= 0
+}
+
 export {
   createSlug,
   getFooter,
@@ -146,6 +160,7 @@ export {
   getFullAddress,
   getOrderStatus,
   getProductUnit,
-  getPriceAndStockMinMaxFromVariants,
-  canSelectStatus,
+  getVariantPriceStockMinMax,
+  checkOrderStatus,
+  checkOutOfStock,
 }

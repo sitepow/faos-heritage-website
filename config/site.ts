@@ -9,7 +9,7 @@ interface NavItem {
 
 const siteConfig = {
   name: 'FAOS',
-  title: 'Premium Organic Olive Oil & Honey | Pure Natural Collection',
+  title: 'Premium Organic Olive Oil & Honey — 100% Pure Natural Collection',
   description: '',
   link: {
     login: '/login',

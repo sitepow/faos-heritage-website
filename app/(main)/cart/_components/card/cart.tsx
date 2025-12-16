@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 'use client'
 
 import { Button } from '@heroui/button'
@@ -9,6 +8,7 @@ import { Select, SelectItem } from '@heroui/select'
 import { Skeleton } from '@heroui/skeleton'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { TrashIcon } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 import {
@@ -172,10 +172,12 @@ const CartCard: FC<
                 className='size-[150px] shrink-0 border border-divider'
                 href={`/product/${createSlug(cart?.product?.name, cart?.product?.id)}`}
               >
-                <img
+                <Image
                   alt='product-image'
-                  className='size-full shrink-0 object-cover'
-                  src={cart?.product?.images?.[0]?.url || '/no-image.png'}
+                  className='size-full object-contain'
+                  height={100}
+                  src={cart?.product?.images?.[0]?.url ?? '/placeholder.svg'}
+                  width={100}
                 />
               </Link>
             </div>

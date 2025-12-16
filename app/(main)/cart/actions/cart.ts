@@ -54,7 +54,14 @@ const createCart = async ({
   try {
     const product = await prisma.product.findUnique({
       where: { id: productId },
-      select: { stockQuantity: true },
+      select: {
+        stockQuantity: true,
+        variants: {
+          select: {
+            stockQuantity: true,
+          },
+        },
+      },
     })
 
     if (!product) throw new Error('The requested product was not found.')

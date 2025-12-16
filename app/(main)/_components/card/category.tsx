@@ -1,6 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
 import { Card, CardBody } from '@heroui/card'
 import { Skeleton } from '@heroui/skeleton'
+import Image from 'next/image'
 
 import type { GetCategoryResult } from '@/app/(dashboard)/dashboard/product/actions/category'
 import type { ComponentProps, FC } from 'react'
@@ -25,10 +25,12 @@ const CategoryCard: FC<ComponentProps<typeof CardBody> & Props> = ({
     >
       <CardBody {...props}>
         <div className='flex items-center gap-2.5'>
-          <img
-            alt={item?.name}
-            className='aspect-square size-[45px] rounded-full object-cover'
-            src={item?.image || '/no-image.png'}
+          <Image
+            alt=''
+            className='aspect-square rounded-full object-cover'
+            height={38}
+            src={item?.image ?? '/placeholder.svg'}
+            width={38}
           />
           <span className='truncate'>{item?.name}</span>
         </div>
