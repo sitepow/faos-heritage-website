@@ -124,7 +124,9 @@ const OrderView = () => {
                       <Avatar
                         className='shrink-0'
                         size='lg'
-                        src={item?.product?.images?.[0]?.url ?? '/no-image.png'}
+                        src={
+                          item?.product?.images?.[0]?.url ?? '/placeholder.svg'
+                        }
                       />
 
                       <span>

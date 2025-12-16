@@ -194,7 +194,9 @@ const OrderForm = () => {
                         <SelectItem
                           key={provider.value}
                           startContent={
-                            <Avatar src={provider.image || '/no-image.png'} />
+                            <Avatar
+                              src={provider.image || '/placeholder.svg'}
+                            />
                           }
                         >
                           {provider.label}

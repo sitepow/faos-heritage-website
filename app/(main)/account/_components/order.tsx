@@ -42,7 +42,7 @@ const Order: FC<Props> = ({ order, hideButton }) => {
   })
 
   const productImages = order.items?.map(
-    (item) => item.product?.images?.[0]?.url ?? '/no-image.png',
+    (item) => item.product?.images?.[0]?.url ?? '/placeholder.svg',
   )
 
   const isDisableReceipt = DISABLE_RECEIPT_STATUSES.includes(order.status)

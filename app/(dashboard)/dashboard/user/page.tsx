@@ -153,7 +153,7 @@ const Customer = () => {
                 {user?.image?.length !== 0 && (
                   <Avatar
                     key={user?.image}
-                    src={user?.image ?? '/no-image.png'}
+                    src={user?.image ?? '/placeholder.svg'}
                   />
                 )}
               </TableCell>
