@@ -1,12 +1,9 @@
-/* eslint-disable jsx-a11y/iframe-has-title */
+import LazyPdfViewer from '@/components/pdf-viewer/lazy-pdf-viewer'
 
 const About = () => {
   return (
-    <section className='flex flex-col items-center justify-center gap-4 text-center text-default-500'>
-      <iframe
-        className='h-[80vh] w-full max-w-7xl rounded-lg border'
-        src='/Brochure.pdf'
-      />
+    <section className='flex justify-center'>
+      <LazyPdfViewer fileUrl='/Brochure.pdf' />
     </section>
   )
 }
