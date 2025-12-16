@@ -83,17 +83,21 @@ const Order: FC<Props> = ({ order, hideButton }) => {
         {!hideButton && (
           <div className='flex flex-wrap items-center gap-2 sm:justify-end'>
             <Button
-              variant='faded'
+              className='bg-white text-primary dark:bg-divider'
+              color='primary'
+              variant='bordered'
               onClick={() => {
                 setState({ orderId: order?.id })
                 onOpenViewChange()
               }}
             >
-              details
+              Details
             </Button>
             {order?.status === OrderStatus.PENDING && (
               <Button
-                variant='faded'
+                className='bg-white text-primary dark:bg-divider'
+                color='primary'
+                variant='bordered'
                 onClick={() => {
                   setState({ orderId: order?.id })
                   onOpenOrderCancelChange()
@@ -104,9 +108,11 @@ const Order: FC<Props> = ({ order, hideButton }) => {
             )}
             {order?.status === OrderStatus.PENDING && (
               <Button
+                className='bg-white text-primary dark:bg-divider'
+                color='primary'
                 isDisabled={isPendingCheckout}
                 isLoading={isPendingCheckout}
-                variant='faded'
+                variant='bordered'
                 onClick={() => {
                   mutateCheckout()
                 }}
@@ -115,7 +121,12 @@ const Order: FC<Props> = ({ order, hideButton }) => {
               </Button>
             )}
             {order?.status !== OrderStatus.PENDING && (
-              <Button isDisabled={isDisableReceipt} variant='faded'>
+              <Button
+                className='bg-white text-primary dark:bg-divider'
+                color='primary'
+                isDisabled={isDisableReceipt}
+                variant='bordered'
+              >
                 Download the receipt
               </Button>
             )}

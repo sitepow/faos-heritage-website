@@ -40,8 +40,10 @@ const ProductHomePage: FC<Props> = ({ initialProducts, itemPerPage }) => {
       />
       <Link href='/products'>
         <Button
-          endContent={<ArrowRight className='text-default-500' />}
-          variant='faded'
+          className='bg-white text-primary dark:bg-divider'
+          color='primary'
+          endContent={<ArrowRight className='text-primary' />}
+          variant='bordered'
         >
           Explore all products
         </Button>

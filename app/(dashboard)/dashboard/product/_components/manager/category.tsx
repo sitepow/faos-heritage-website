@@ -175,12 +175,19 @@ const CategoryManager = () => {
           )}
 
           <ModalFooter>
-            <Button variant='faded' onPress={onClose}>
+            <Button
+              className='bg-white text-primary dark:bg-divider'
+              color='primary'
+              variant='bordered'
+              onPress={onClose}
+            >
               Cancel
             </Button>
             <Button
-              startContent={<PlusIcon className='text-default-500' />}
-              variant='faded'
+              className='bg-white text-primary dark:bg-divider'
+              color='primary'
+              startContent={<PlusIcon className='text-primary' />}
+              variant='bordered'
               onPress={() => {
                 onOpenCategoryChange()
                 onOpenCategoryManagerChange()

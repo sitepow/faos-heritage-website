@@ -128,8 +128,10 @@ const Product = () => {
       </div>
       <div className='flex w-full flex-wrap gap-3 *:shrink-0 md:justify-end'>
         <Button
-          startContent={<PlusIcon className='text-default-500' />}
-          variant='faded'
+          className='bg-white text-primary dark:bg-divider'
+          color='primary'
+          startContent={<PlusIcon className='text-primary' />}
+          variant='bordered'
           onPress={() => {
             onOpenProductChange()
           }}
@@ -137,8 +139,10 @@ const Product = () => {
           Add new products
         </Button>
         <Button
-          startContent={<SettingsIcon className='text-default-500' />}
-          variant='faded'
+          className='bg-white text-primary dark:bg-divider'
+          color='primary'
+          startContent={<SettingsIcon className='text-primary' />}
+          variant='bordered'
           onPress={() => {
             onOpenCategoryManagerChange()
           }}
@@ -146,9 +150,11 @@ const Product = () => {
           Manage product categories
         </Button>
         <Button
+          className='bg-white text-primary dark:bg-divider'
+          color='primary'
           isDisabled={selectedProductIds.length === 0}
-          startContent={<XIcon className='text-default-500' />}
-          variant='faded'
+          startContent={<XIcon className='text-primary' />}
+          variant='bordered'
           onPress={() => {
             setState({ productId: null })
             onOpenDeleteChange()
@@ -165,6 +171,7 @@ const Product = () => {
         }}
       >
         <TableHeader>
+          <TableColumn>Actions</TableColumn>
           <TableColumn>Product ID</TableColumn>
           <TableColumn>Digital Product</TableColumn>
           <TableColumn>Image</TableColumn>
@@ -173,7 +180,6 @@ const Product = () => {
           <TableColumn>Main Stock</TableColumn>
           <TableColumn>Category</TableColumn>
           <TableColumn>Product Options</TableColumn>
-          <TableColumn>Actions</TableColumn>
         </TableHeader>
 
         <TableBody
@@ -208,64 +214,6 @@ const Product = () => {
 
             return (
               <TableRow key={product.id}>
-                <TableCell>{product.id}</TableCell>
-                <TableCell>
-                  {product?.isDigitalProduct ? (
-                    <Chip
-                      startContent={
-                        <FileIcon className='size-4 text-default-500' />
-                      }
-                      variant='faded'
-                    >
-                      Digital products
-                    </Chip>
-                  ) : (
-                    '-'
-                  )}
-                </TableCell>
-                <TableCell>
-                  {product?.images?.length === 0 && <span>-</span>}
-
-                  {product?.images?.length !== 0 && (
-                    <AvatarGroup max={3}>
-                      {product?.images?.map((image) => (
-                        <Avatar key={image?.url} src={image?.url} />
-                      ))}
-                    </AvatarGroup>
-                  )}
-                </TableCell>
-                <TableCell className='max-w-72 min-w-72'>
-                  {product?.name ?? '-'}
-                </TableCell>
-                <TableCell className='max-w-32 min-w-32'>{price}</TableCell>
-                <TableCell className='max-w-32 min-w-32'>{stock}</TableCell>
-                <TableCell className='max-w-52 min-w-52'>
-                  <Chip variant='bordered'>
-                    {product?.category?.name ?? '-'}
-                  </Chip>
-                </TableCell>
-                <TableCell className='min-w-60'>
-                  <div className='flex flex-col'>
-                    {product?.variants?.length === 0 && <span>-</span>}
-
-                    {product?.variants?.length !== 0 &&
-                      product?.variants?.map((variant) => {
-                        return (
-                          <div key={variant.name} className='flex flex-col'>
-                            <span className='line-clamp-1'>{variant.name}</span>
-                            <div className='flex gap-2'>
-                              <span className='text-default-500'>
-                                Price: {formatCurrency(variant.price)}
-                              </span>
-                              <span className='text-default-500'>
-                                Stock: {formatNumber(variant.stockQuantity)}
-                              </span>
-                            </div>
-                          </div>
-                        )
-                      })}
-                  </div>
-                </TableCell>
                 <TableCell className='flex gap-2.5'>
                   <Dropdown placement='bottom-end'>
                     <DropdownTrigger>
@@ -322,6 +270,65 @@ const Product = () => {
                     </DropdownMenu>
                   </Dropdown>
                 </TableCell>
+                <TableCell>{product.id}</TableCell>
+                <TableCell>
+                  {product?.isDigitalProduct ? (
+                    <Chip
+                      color='primary'
+                      startContent={
+                        <FileIcon className='size-4 text-primary' />
+                      }
+                      variant='bordered'
+                    >
+                      Digital products
+                    </Chip>
+                  ) : (
+                    '-'
+                  )}
+                </TableCell>
+                <TableCell>
+                  {product?.images?.length === 0 && <span>-</span>}
+
+                  {product?.images?.length !== 0 && (
+                    <AvatarGroup max={3}>
+                      {product?.images?.map((image) => (
+                        <Avatar key={image?.url} src={image?.url} />
+                      ))}
+                    </AvatarGroup>
+                  )}
+                </TableCell>
+                <TableCell className='max-w-72 min-w-72'>
+                  {product?.name ?? '-'}
+                </TableCell>
+                <TableCell className='max-w-32 min-w-32'>{price}</TableCell>
+                <TableCell className='max-w-32 min-w-32'>{stock}</TableCell>
+                <TableCell className='max-w-52 min-w-52'>
+                  <Chip color='primary' variant='bordered'>
+                    {product?.category?.name ?? '-'}
+                  </Chip>
+                </TableCell>
+                <TableCell className='min-w-60'>
+                  <div className='flex flex-col'>
+                    {product?.variants?.length === 0 && <span>-</span>}
+
+                    {product?.variants?.length !== 0 &&
+                      product?.variants?.map((variant) => {
+                        return (
+                          <div key={variant.name} className='flex flex-col'>
+                            <span className='line-clamp-1'>{variant.name}</span>
+                            <div className='flex gap-2'>
+                              <span className='text-default-500'>
+                                Price: {formatCurrency(variant.price)}
+                              </span>
+                              <span className='text-default-500'>
+                                Stock: {formatNumber(variant.stockQuantity)}
+                              </span>
+                            </div>
+                          </div>
+                        )
+                      })}
+                  </div>
+                </TableCell>
               </TableRow>
             )
           })}
@@ -330,6 +337,7 @@ const Product = () => {
 
       <Pagination
         showControls
+        className='text-white'
         page={page}
         total={products?.totalPages || 1}
         onChange={(page) => setPage(page)}

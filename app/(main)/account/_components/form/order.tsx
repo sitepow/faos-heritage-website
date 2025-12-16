@@ -83,15 +83,19 @@ const OrderForm = () => {
 
         <ModalFooter>
           <Button
+            className='bg-white text-primary dark:bg-divider'
+            color='primary'
             isDisabled={isPendingUpdateOrder}
-            variant='faded'
+            variant='bordered'
             onClick={onClose}
           >
             Cancel
           </Button>
           <Button
+            className='bg-white text-primary dark:bg-divider'
+            color='primary'
             isDisabled={isPendingUpdateOrder || !reason}
-            variant='faded'
+            variant='bordered'
             onClick={onSubmit}
           >
             {isPendingUpdateOrder ? 'In progress' : 'Save'}

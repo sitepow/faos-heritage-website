@@ -73,8 +73,8 @@ const CategoryLayout: FC<Props> = ({
   }
 
   return (
-    <div className='flex w-full flex-col gap-5 md:flex md:h-[500px] md:flex-row'>
-      <Card className='h-[350px] md:h-[500px] md:w-[400px]'>
+    <div className='flex w-full flex-col items-stretch gap-5 md:flex md:min-h-[500px] md:flex-row'>
+      <Card className='h-[350px] md:h-auto md:w-[400px]'>
         <CardHeader>
           <span className='font-bold'>Products by category</span>
         </CardHeader>
@@ -119,7 +119,9 @@ const CategoryLayout: FC<Props> = ({
                 <span className='font-bold'>{currentCategory.label}</span>
 
                 <Button
-                  variant='light'
+                  className='bg-white text-primary dark:bg-divider'
+                  color='primary'
+                  variant='bordered'
                   onPress={() => {
                     router.push(
                       `/category/${createSlug(currentCategory.label!, currentCategory.id!)}`,
@@ -133,7 +135,7 @@ const CategoryLayout: FC<Props> = ({
           )}
 
           <CardBody>
-            <Carousel slidesToScroll className='items-center'>
+            <Carousel slidesToScroll className='items-stretch'>
               {isLoadingProducts &&
                 [...Array(8)].map((_) => <ProductCardSkeleton key={_} />)}
 

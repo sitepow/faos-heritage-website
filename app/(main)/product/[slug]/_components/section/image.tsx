@@ -31,10 +31,11 @@ const ImageSection: FC<Props> = ({ className, product, ...props }) => {
               <div className='flex flex-wrap gap-2'>
                 {product?.isDemoProduct && (
                   <Chip
+                    color='primary'
                     startContent={
-                      <CircleQuestionMarkIcon className='size-4 text-default-500' />
+                      <CircleQuestionMarkIcon className='size-4 text-primary' />
                     }
-                    variant='faded'
+                    variant='bordered'
                   >
                     Product samples
                   </Chip>
@@ -42,17 +43,17 @@ const ImageSection: FC<Props> = ({ className, product, ...props }) => {
 
                 {product?.isDigitalProduct && (
                   <Chip
-                    startContent={
-                      <FileIcon className='size-4 text-default-500' />
-                    }
-                    variant='faded'
+                    color='primary'
+                    startContent={<FileIcon className='size-4 text-primary' />}
+                    variant='bordered'
                   >
                     Digital products
                   </Chip>
                 )}
                 <Chip
-                  startContent={<TagIcon className='size-4 text-default-500' />}
-                  variant='faded'
+                  color='primary'
+                  startContent={<TagIcon className='size-4 text-primary' />}
+                  variant='bordered'
                 >
                   {product?.category?.name ?? 'No category'}
                 </Chip>

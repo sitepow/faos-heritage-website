@@ -100,7 +100,9 @@ const ProductLayout: FC<Props> = ({ initialProducts, itemPerPage }) => {
         <Dropdown>
           <DropdownTrigger>
             <Button
-              startContent={<ArrowUpDownIcon className='text-default-500' />}
+              className='bg-white text-primary dark:bg-divider'
+              color='primary'
+              startContent={<ArrowUpDownIcon className='text-primary' />}
               variant='bordered'
             >
               Sorting {sortBy?.label}

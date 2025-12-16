@@ -59,8 +59,8 @@ const Stepper: FC<Props> = ({
                 <div
                   className={cn(
                     'flex size-10 items-center justify-center rounded-full',
-                    isCompleted && 'bg-teal-600 text-white',
-                    isCurrent && 'bg-teal-600 text-white ring-4 ring-teal-200',
+                    isCompleted && 'bg-primary text-white',
+                    isCurrent && 'bg-primary text-white ring-4 ring-primary/50',
                     !isCompleted && !isCurrent && 'bg-divider text-default-500',
                   )}
                 >
@@ -98,7 +98,7 @@ const Stepper: FC<Props> = ({
                   <div className='absolute inset-0 rounded bg-divider' />
                   <div
                     className={cn(
-                      'absolute inset-0 rounded bg-teal-600 transition-all duration-500',
+                      'absolute inset-0 rounded bg-primary transition-all duration-500',
                       index < currentIndex ? 'w-full' : 'w-0',
                     )}
                   />
@@ -110,7 +110,7 @@ const Stepper: FC<Props> = ({
                   <div className='absolute inset-0 rounded bg-divider' />
                   <div
                     className={cn(
-                      'absolute inset-0 rounded bg-teal-600 transition-all duration-500',
+                      'absolute inset-0 rounded bg-primary transition-all duration-500',
                       index < currentIndex ? 'h-full' : 'h-0',
                     )}
                   />

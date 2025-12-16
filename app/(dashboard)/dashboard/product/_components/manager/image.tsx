@@ -168,7 +168,9 @@ const ImageManager = () => {
           )}
           <ModalFooter>
             <Button
-              variant='faded'
+              className='bg-white text-primary dark:bg-divider'
+              color='primary'
+              variant='bordered'
               onPress={() => {
                 onOpenImageManagerChange()
               }}
@@ -176,8 +178,10 @@ const ImageManager = () => {
               Cancel
             </Button>
             <Button
-              startContent={<PlusIcon className='text-default-500' />}
-              variant='faded'
+              className='bg-white text-primary dark:bg-divider'
+              color='primary'
+              startContent={<PlusIcon className='text-primary' />}
+              variant='bordered'
               onPress={() => {
                 onOpenImageManagerChange()
                 onOpenImageChange()

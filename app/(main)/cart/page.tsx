@@ -88,8 +88,10 @@ const Cart = () => {
         {carts?.length !== 0 && (
           <div className='flex w-full flex-wrap justify-end gap-2'>
             <Button
-              startContent={<XIcon className='text-default-500' />}
-              variant='faded'
+              className='bg-white text-primary dark:bg-divider'
+              color='primary'
+              startContent={<XIcon className='text-primary' />}
+              variant='bordered'
               onClick={() => onOpenClearChange()}
             >
               Empty all baskets

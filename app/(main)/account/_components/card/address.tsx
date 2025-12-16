@@ -34,8 +34,10 @@ const AddressCard = () => {
 
         {!isLoadingAddress && !address && (
           <Button
-            startContent={<PlusIcon className='text-default-500' />}
-            variant='faded'
+            className='bg-white text-primary dark:bg-divider'
+            color='primary'
+            startContent={<PlusIcon className='text-primary' />}
+            variant='bordered'
             onClick={() => onOpenAddressChange()}
           >
             Add shipping address
@@ -69,8 +71,9 @@ const AddressCard = () => {
               </div>
 
               <Button
-                className='w-fit'
-                variant='faded'
+                className='w-fit bg-white text-primary dark:bg-divider'
+                color='primary'
+                variant='bordered'
                 onClick={() => {
                   setState({ addressId: address?.id })
                   onOpenAddressChange()

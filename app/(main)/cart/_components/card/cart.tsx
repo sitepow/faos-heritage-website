@@ -227,9 +227,10 @@ const CartCard: FC<
                 )}
 
                 <Button
-                  className='w-fit'
-                  startContent={<TrashIcon className='text-default-500' />}
-                  variant='faded'
+                  className='w-fit bg-white text-primary dark:bg-divider'
+                  color='primary'
+                  startContent={<TrashIcon className='text-primary' />}
+                  variant='bordered'
                   onClick={onDeleteCart}
                 />
 

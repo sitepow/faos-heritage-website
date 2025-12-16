@@ -47,7 +47,7 @@ const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
   return (
     <Card
       className={cn(
-        'flex size-full h-96 w-64 flex-none flex-col border border-divider md:min-w-72',
+        'flex size-full w-64 flex-none flex-col border border-divider md:min-w-72',
         className,
       )}
       shadow='none'
@@ -57,41 +57,12 @@ const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
       <CardHeader className='relative overflow-hidden p-0'>
         {isOutOfStock && (
           <Alert
-            className='absolute top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2'
+            className='absolute top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2 bg-white/50 backdrop-blur-md'
             description='This item is temporarily out of stock'
             radius='none'
             variant='faded'
           />
         )}
-
-        <div className='absolute bottom-2 left-2 z-50 flex flex-wrap gap-1'>
-          {product?.isDemoProduct && (
-            <Chip
-              startContent={
-                <CircleQuestionMarkIcon className='size-4 text-default-500' />
-              }
-              variant='faded'
-            >
-              Product samples
-            </Chip>
-          )}
-
-          {product?.isDigitalProduct && (
-            <Chip
-              startContent={<FileIcon className='size-4 text-default-500' />}
-              variant='faded'
-            >
-              Digital products
-            </Chip>
-          )}
-
-          <Chip
-            startContent={<TagIcon className='size-4 text-default-500' />}
-            variant='faded'
-          >
-            {product?.category?.name ?? 'No category'}
-          </Chip>
-        </div>
 
         <Link
           className='size-full'
@@ -116,8 +87,46 @@ const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
           priceMin={product?.priceMin!}
           unit={getProductUnit(product?.unit)}
         />
-        <h4 className='line-clamp-2 text-lg font-bold'>{product?.name}</h4>
-        <StarRating rate={0} />
+
+        <h4 className='mb-1.5 line-clamp-2 text-lg font-bold'>
+          {product?.name}
+        </h4>
+
+        <div className='flex flex-wrap items-center justify-between gap-2'>
+          <StarRating rate={0} />
+
+          <div className='flex flex-wrap gap-1'>
+            {product?.isDemoProduct && (
+              <Chip
+                color='primary'
+                startContent={
+                  <CircleQuestionMarkIcon className='size-4 text-primary' />
+                }
+                variant='bordered'
+              >
+                Product samples
+              </Chip>
+            )}
+
+            {product?.isDigitalProduct && (
+              <Chip
+                color='primary'
+                startContent={<FileIcon className='size-4 text-primary' />}
+                variant='bordered'
+              >
+                Digital products
+              </Chip>
+            )}
+
+            <Chip
+              color='primary'
+              startContent={<TagIcon className='size-4 text-primary' />}
+              variant='bordered'
+            >
+              {product?.category?.name ?? 'No category'}
+            </Chip>
+          </div>
+        </div>
       </CardBody>
 
       {!hideIcon && (

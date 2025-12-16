@@ -64,7 +64,12 @@ const AccountCard: FC<Props> = ({ onclick }) => {
                 </span>
               </div>
 
-              <Button className='mt-5' variant='faded' onPress={onclick}>
+              <Button
+                className='mt-5 bg-white text-primary dark:bg-divider'
+                color='primary'
+                variant='bordered'
+                onPress={onclick}
+              >
                 Edit personal information
               </Button>
             </div>

@@ -226,12 +226,20 @@ const OrderForm = () => {
         )}
 
         <ModalFooter>
-          <Button isDisabled={isPending} variant='faded' onPress={onClose}>
+          <Button
+            className='bg-white text-primary dark:bg-divider'
+            color='primary'
+            isDisabled={isPending}
+            variant='bordered'
+            onPress={onClose}
+          >
             Cancel
           </Button>
           <Button
+            className='bg-white text-primary dark:bg-divider'
+            color='primary'
             isDisabled={isPending || !isDirty || isFinalStatus}
-            variant='faded'
+            variant='bordered'
             onClick={handleSubmit(onSubmit)}
           >
             {isPending ? 'In progress' : 'Save'}

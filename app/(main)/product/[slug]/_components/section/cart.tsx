@@ -191,33 +191,33 @@ const CartSection: FC<
         <div className='flex flex-col gap-2 sm:flex-row'>
           <Button
             fullWidth
+            className='bg-white text-primary dark:bg-divider'
+            color='primary'
             isDisabled={isPendingCreateFavorite || hasFavorite}
             isLoading={isPendingCreateFavorite}
             startContent={
-              !isPendingCreateFavorite && (
-                <HeartIcon className='text-default-500' />
-              )
+              !isPendingCreateFavorite && <HeartIcon className='text-primary' />
             }
-            variant='faded'
+            variant='bordered'
             onClick={onSubmitFavorite}
           >
-            {hasFavorite
-              ? `It's already in my favorites list.`
-              : 'Add to favorites'}
+            Add to favorites
           </Button>
 
           <Button
             fullWidth
+            className='bg-white text-primary dark:bg-divider'
+            color='primary'
             isDisabled={
               isPendingCreateCart || isOutOfStock || (hasVariants && !variantId)
             }
             isLoading={isPendingCreateCart}
             startContent={
               !isPendingCreateCart && (
-                <ShoppingCartIcon className='text-default-500' />
+                <ShoppingCartIcon className='text-primary' />
               )
             }
-            variant='faded'
+            variant='bordered'
             onClick={onSubmitCart}
           >
             Add to cart

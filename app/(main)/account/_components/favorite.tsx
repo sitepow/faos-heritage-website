@@ -141,14 +141,16 @@ const Favorite: FC<Props> = ({ className, favorite, ...props }) => {
 
             <div className='flex flex-wrap items-center gap-2'>
               <Button
+                className='bg-white text-primary dark:bg-divider'
+                color='primary'
                 isDisabled={isPendingCreateCart}
                 isLoading={isPendingCreateCart}
                 startContent={
                   !isPendingCreateCart && (
-                    <ShoppingBagIcon className='text-default-500' />
+                    <ShoppingBagIcon className='text-primary' />
                   )
                 }
-                variant='faded'
+                variant='bordered'
                 onClick={async () => {
                   mutateCreateCart()
                 }}
@@ -156,14 +158,16 @@ const Favorite: FC<Props> = ({ className, favorite, ...props }) => {
                 Add to cart
               </Button>
               <Button
+                className='bg-white text-primary dark:bg-divider'
+                color='primary'
                 isDisabled={isPendingDeleteFavorite}
                 isLoading={isPendingDeleteFavorite}
                 startContent={
                   !isPendingDeleteFavorite && (
-                    <TrashIcon className='text-default-500' />
+                    <TrashIcon className='text-primary' />
                   )
                 }
-                variant='faded'
+                variant='bordered'
                 onClick={onOpenDeleteFavoriteChange}
               >
                 Remove from favorites

@@ -43,7 +43,7 @@ const Panel: FC<Props> = ({ setIsMenuOpen }) => {
       ? [
           {
             key: 'admin-dashboard',
-            label: 'Manage back-end data (for staff only)',
+            label: 'Admin Panel',
             icon: <SettingsIcon className='text-default-500' />,
             action: () => router.push('/dashboard'),
           },

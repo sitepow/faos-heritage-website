@@ -107,11 +107,15 @@ const Order = () => {
               </TableCell>
               <TableCell>{formatCurrency(order.total)}</TableCell>
               <TableCell>
-                <Chip variant='bordered'>{getOrderStatus(order.status)}</Chip>
+                <Chip color='primary' variant='bordered'>
+                  {getOrderStatus(order.status)}
+                </Chip>
               </TableCell>
               <TableCell>
                 {order?.trackingNumber ? (
-                  <Chip variant='bordered'>{order?.trackingNumber}</Chip>
+                  <Chip color='primary' variant='bordered'>
+                    {order?.trackingNumber}
+                  </Chip>
                 ) : (
                   '-'
                 )}
