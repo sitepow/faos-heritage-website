@@ -58,8 +58,10 @@ const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
         {isOutOfStock && (
           <Alert
             className='absolute top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2'
+            color='danger'
             description='This item is temporarily out of stock'
             radius='none'
+            variant='faded'
           />
         )}
 

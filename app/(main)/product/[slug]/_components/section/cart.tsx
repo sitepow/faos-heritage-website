@@ -161,13 +161,14 @@ const CartSection: FC<
       <CardBody className='flex-wrap gap-4'>
         <Alert
           className='text-start'
-          color={isOutOfStock ? 'danger' : 'default'}
+          color={isOutOfStock ? 'danger' : 'success'}
           description={
             isOutOfStock
               ? 'This item is temporarily out of stock. Please see similar/alternative items.'
               : `The product is available for sale. Quantity available. ${currentStockQuantity} ${productUnit} In stock`
           }
-          variant='bordered'
+          radius='none'
+          variant='faded'
         />
 
         {hasVariants && (

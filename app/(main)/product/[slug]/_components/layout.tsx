@@ -15,6 +15,7 @@ import {
   type GetProductResult,
 } from '@/app/(dashboard)/dashboard/product/actions/product'
 import { CategoryBreadcrumbs } from '@/components/breadcrumbs'
+import { Certificate } from '@/components/certificate'
 import { NotFound } from '@/components/not-found'
 
 interface Props {
@@ -53,18 +54,16 @@ const ProductLayout: FC<Props> = ({ initialProduct, productId, userId }) => {
       {!isLoadingProduct && (
         <CategoryBreadcrumbs categoryName={product?.category?.name} />
       )}
-
       <div className='grid gap-4 xl:grid-cols-3'>
         {isLoadingProduct && <Skeleton className='h-[455px] xl:col-span-2' />}
         {!isLoadingProduct && (
           <ImageSection className='xl:col-span-2' product={product} />
         )}
-
         {isLoadingProduct && <Skeleton />}
         {!isLoadingProduct && <CartSection product={product} />}
       </div>
-
       <DetailSection product={product} />
+      <Certificate />
       <SimilarSection product={product} />
     </section>
   )
