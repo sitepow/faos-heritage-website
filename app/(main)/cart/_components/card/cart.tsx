@@ -174,7 +174,7 @@ const CartCard: FC<
               >
                 <Image
                   alt='product-image'
-                  className='size-full object-contain'
+                  className='aspect-square size-full object-cover'
                   height={100}
                   src={cart?.product?.images?.[0]?.url ?? '/no-image.png'}
                   width={100}
