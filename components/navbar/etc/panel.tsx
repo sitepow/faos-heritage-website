@@ -65,7 +65,7 @@ const Panel: FC<Props> = ({ setIsMenuOpen }) => {
         <div>
           <User
             avatarProps={{
-              src: `${user?.image ?? '/placeholder.svg'}`,
+              src: `${user?.image ?? '/no-image.png'}`,
             }}
             className='hidden cursor-pointer sm:flex'
             description={user?.email}

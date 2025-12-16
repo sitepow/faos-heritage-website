@@ -29,7 +29,7 @@ const CategoryCard: FC<ComponentProps<typeof CardBody> & Props> = ({
             alt=''
             className='aspect-square rounded-full object-cover'
             height={38}
-            src={item?.image ?? '/placeholder.svg'}
+            src={item?.image ?? '/no-image.png'}
             width={38}
           />
           <span className='truncate'>{item?.name}</span>

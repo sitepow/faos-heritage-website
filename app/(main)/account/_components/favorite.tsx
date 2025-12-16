@@ -117,9 +117,7 @@ const Favorite: FC<Props> = ({ className, favorite, ...props }) => {
                   alt='product-image'
                   className='size-full object-contain'
                   height={100}
-                  src={
-                    favorite?.product?.images?.[0]?.url ?? '/placeholder.svg'
-                  }
+                  src={favorite?.product?.images?.[0]?.url ?? '/no-image.png'}
                   width={100}
                 />
               </Link>

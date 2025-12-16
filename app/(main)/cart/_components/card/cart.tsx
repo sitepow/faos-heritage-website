@@ -176,7 +176,7 @@ const CartCard: FC<
                   alt='product-image'
                   className='size-full object-contain'
                   height={100}
-                  src={cart?.product?.images?.[0]?.url ?? '/placeholder.svg'}
+                  src={cart?.product?.images?.[0]?.url ?? '/no-image.png'}
                   width={100}
                 />
               </Link>

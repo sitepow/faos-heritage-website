@@ -39,7 +39,7 @@ const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
       ? isHovered
         ? product?.images[1]?.url
         : product?.images[0]?.url
-      : product?.images?.[0]?.url || '/placeholder.svg'
+      : product?.images?.[0]?.url || '/no-image.png'
 
   const { stockMin, stockMax, stockQuantity } = product
   const isOutOfStock = checkOutOfStock({ stockMin, stockMax, stockQuantity })

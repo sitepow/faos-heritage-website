@@ -32,7 +32,7 @@ const ProductImagePreview: FC<ComponentProps<'div'> & Props> = ({
           priority
           alt={alt}
           className='aspect-square shrink-0 object-cover'
-          src={images[selectedIndex] || '/placeholder.svg'}
+          src={images[selectedIndex] || '/no-image.png'}
         />
       </div>
 
@@ -53,7 +53,7 @@ const ProductImagePreview: FC<ComponentProps<'div'> & Props> = ({
                 fill
                 alt={`${alt}-${index}`}
                 className='aspect-square shrink-0 rounded-md object-cover'
-                src={image || '/placeholder.svg'}
+                src={image || '/no-image.png'}
               />
             </button>
           ))}

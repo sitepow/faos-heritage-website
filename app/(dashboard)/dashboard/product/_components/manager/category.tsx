@@ -126,7 +126,7 @@ const CategoryManager = () => {
                           alt={category.name}
                           className='aspect-square rounded-full object-cover'
                           height={38}
-                          src={category?.image ?? '/placeholder.svg'}
+                          src={category?.image ?? '/no-image.png'}
                           width={38}
                         />
                         <span className='line-clamp-1'>{category.name}</span>
