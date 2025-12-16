@@ -112,7 +112,7 @@ const CategoryLayout: FC<Props> = ({
       {!currentCategory?.id && <Card fullWidth />}
 
       {currentCategory?.id && (
-        <Card fullWidth className='size-full'>
+        <Card fullWidth className='size-full h-auto'>
           {currentCategory.id && (
             <CardHeader>
               <div className='flex w-full flex-wrap items-center justify-between'>
