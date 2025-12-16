@@ -45,7 +45,7 @@ const getCategories = async () => {
   try {
     return prisma.category.findMany({
       select: EXECUTE_FIELD,
-      orderBy: { name: 'desc' },
+      orderBy: { name: 'asc' },
     })
   } catch (error) {
     getPrismaError(error)
