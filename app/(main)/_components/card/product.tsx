@@ -47,7 +47,7 @@ const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
   return (
     <Card
       className={cn(
-        'flex size-full w-64 flex-none flex-col border border-divider md:min-w-72',
+        'flex size-full h-96 w-64 flex-none flex-col border border-divider md:min-w-72',
         className,
       )}
       shadow='none'
@@ -58,7 +58,6 @@ const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
         {isOutOfStock && (
           <Alert
             className='absolute top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2'
-            color='danger'
             description='This item is temporarily out of stock'
             radius='none'
           />
@@ -99,7 +98,7 @@ const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
         >
           <Image
             alt={product?.name}
-            className='size-full object-contain'
+            className='aspect-square size-full object-cover'
             classNames={{ wrapper: 'w-full' }}
             height={250}
             radius='none'
@@ -117,7 +116,7 @@ const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
           unit={getProductUnit(product?.unit)}
         />
         <h4 className='line-clamp-2 text-lg font-bold'>{product?.name}</h4>
-        <StarRating rate={3} />
+        <StarRating rate={0} />
       </CardBody>
 
       {!hideIcon && (

@@ -31,7 +31,7 @@ const ProductImagePreview: FC<ComponentProps<'div'> & Props> = ({
           fill
           priority
           alt={alt}
-          className='object-contain'
+          className='aspect-square shrink-0 object-cover'
           src={images[selectedIndex] || '/placeholder.svg'}
         />
       </div>
@@ -52,7 +52,7 @@ const ProductImagePreview: FC<ComponentProps<'div'> & Props> = ({
               <Image
                 fill
                 alt={`${alt}-${index}`}
-                className='rounded-md object-contain'
+                className='aspect-square shrink-0 rounded-md object-cover'
                 src={image || '/placeholder.svg'}
               />
             </button>

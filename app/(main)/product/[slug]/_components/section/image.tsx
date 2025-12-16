@@ -26,7 +26,7 @@ const ImageSection: FC<Props> = ({ className, product, ...props }) => {
           <div className='flex flex-col gap-4'>
             <div className='flex flex-col gap-2 border-b border-divider pb-2'>
               <span className='text-xl font-bold'>{product?.name}</span>
-              <StarRating rate={3} />
+              <StarRating rate={0} />
 
               <div className='flex flex-wrap gap-2'>
                 {product?.isDemoProduct && (
