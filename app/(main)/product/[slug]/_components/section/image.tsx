@@ -37,7 +37,7 @@ const ImageSection: FC<Props> = ({ className, product, ...props }) => {
                     }
                     variant='bordered'
                   >
-                    Product samples
+                    Demo product
                   </Chip>
                 )}
 
@@ -47,7 +47,7 @@ const ImageSection: FC<Props> = ({ className, product, ...props }) => {
                     startContent={<FileIcon className='size-4 text-primary' />}
                     variant='bordered'
                   >
-                    Digital products
+                    Digital product
                   </Chip>
                 )}
                 <Chip

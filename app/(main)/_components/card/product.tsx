@@ -4,9 +4,16 @@
 import { Alert } from '@heroui/alert'
 import { Button } from '@heroui/button'
 import { Card, CardBody, CardFooter, CardHeader } from '@heroui/card'
+import { Chip } from '@heroui/chip'
 import { Image } from '@heroui/react'
 import { Skeleton } from '@heroui/skeleton'
-import { HeartIcon, ShoppingCartIcon } from 'lucide-react'
+import {
+  CircleQuestionMarkIcon,
+  FileIcon,
+  HeartIcon,
+  ShoppingCartIcon,
+  TagIcon,
+} from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
 
@@ -73,16 +80,46 @@ const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
       </CardHeader>
 
       <CardBody>
+        <div className='flex flex-wrap gap-1'>
+          {product?.isDemoProduct && (
+            <Chip
+              color='primary'
+              startContent={
+                <CircleQuestionMarkIcon className='size-4 text-primary' />
+              }
+              variant='bordered'
+            >
+              Demo product
+            </Chip>
+          )}
+
+          {product?.isDigitalProduct && (
+            <Chip
+              color='primary'
+              startContent={<FileIcon className='size-4 text-primary' />}
+              variant='bordered'
+            >
+              Digital product
+            </Chip>
+          )}
+
+          <Chip
+            color='primary'
+            startContent={<TagIcon className='size-4 text-primary' />}
+            variant='bordered'
+          >
+            {product?.category?.name ?? 'No category'}
+          </Chip>
+        </div>
+
+        <h4 className='line-clamp-2 text-lg font-bold'>{product?.name}</h4>
+
         <Price
           price={product?.price}
           priceMax={product?.priceMax!}
           priceMin={product?.priceMin!}
           unit={getProductUnit(product?.unit)}
         />
-
-        <h4 className='mb-1.5 line-clamp-2 text-lg font-bold'>
-          {product?.name}
-        </h4>
 
         <StarRating rate={0} />
       </CardBody>

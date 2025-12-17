@@ -287,7 +287,7 @@ const Product = () => {
                       }
                       variant='bordered'
                     >
-                      Digital products
+                      Digital product
                     </Chip>
                   ) : (
                     '-'
