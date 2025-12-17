@@ -14,7 +14,6 @@ const formatCurrencyRange = (
   return new Intl.NumberFormat(locale, {
     style: 'currency',
     currency: currency,
-    maximumFractionDigits: 0,
   }).formatRange(min, max)
 }
 
@@ -23,9 +22,7 @@ const formatNumber = (value: number) => {
 }
 
 const formatNumberRange = (min: number, max: number, locale = 'th-TH') => {
-  return new Intl.NumberFormat(locale, {
-    maximumFractionDigits: 0,
-  }).formatRange(min, max)
+  return new Intl.NumberFormat(locale, {}).formatRange(min, max)
 }
 
 export { formatCurrencyRange, formatCurrency, formatNumber, formatNumberRange }
