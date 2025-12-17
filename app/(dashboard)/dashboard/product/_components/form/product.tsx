@@ -63,7 +63,7 @@ const ProductForm = () => {
     PRODUCT: ['dashboard', 'product', productId],
     PRODUCTS: ['dashboard', 'products'],
     HOMEPAGE: ['products', 'homepage'],
-    CAROUSEL: ['carousel', 'products', productId],
+    CAROUSEL: ['carousel', 'products'],
   }
 
   const { data: categories, isLoading: isLoadingCategories } = useQuery({

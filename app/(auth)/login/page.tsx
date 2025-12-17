@@ -80,9 +80,9 @@ const Index = () => {
   return (
     <Card className='size-full p-5 sm:w-[400px]'>
       <CardHeader className='flex w-full flex-col items-center gap-1'>
-        <span className='text-lg font-bold'>Log in or register.</span>
+        <span className='text-lg font-bold'>Log in or register</span>
         <span className='text-default-500'>
-          To access the website.{' '}
+          To access the website{' '}
           <span className='text-primary'>{siteConfig?.name}</span>
         </span>
       </CardHeader>

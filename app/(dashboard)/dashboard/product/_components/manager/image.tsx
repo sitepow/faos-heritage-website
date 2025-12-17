@@ -44,6 +44,8 @@ const ImageManager = () => {
 
   const QUERY = {
     IMAGES: ['dashboard', 'images', 'modal', productId],
+    HOMEPAGE: ['products', 'homepage'],
+    CAROUSEL: ['carousel', 'products'],
   }
 
   const { isOpen: isDeleteOpen, onOpenChange: onOpenDeleteChange } =
@@ -55,13 +57,27 @@ const ImageManager = () => {
     enabled: !!productId && isImageManagerOpen,
   })
 
+  const onRefetchAfterDelete = async () => {
+    await Promise.all([
+      queryClient.invalidateQueries({
+        queryKey: QUERY.IMAGES,
+      }),
+
+      queryClient.invalidateQueries({
+        queryKey: QUERY.HOMEPAGE,
+      }),
+
+      queryClient.invalidateQueries({
+        queryKey: QUERY.CAROUSEL,
+      }),
+    ])
+  }
+
   const { mutate: mutateDeteleImage, isPending: isPendingDeteleImage } =
     useMutation({
       mutationFn: deleteImage,
       onSuccess: async () => {
-        queryClient.invalidateQueries({
-          queryKey: QUERY.IMAGES,
-        })
+        await onRefetchAfterDelete()
         onOpenDeleteChange()
         setState({ imageId: null })
       },

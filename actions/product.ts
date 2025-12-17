@@ -1,5 +1,7 @@
 'use server'
 
+import { unstable_noStore as noStore } from 'next/cache'
+
 import type { Product } from '@prisma/client'
 
 import { getVariantPriceStockMinMax } from '@/utils/helper'
@@ -28,6 +30,8 @@ const getProducts = async ({
   categoryId,
   sortBy = { field: 'createdAt', order: 'desc' },
 }: Props) => {
+  noStore()
+
   let totalCount: number | undefined
   let where = {
     isActive: true,

@@ -25,6 +25,8 @@ const ProductHomePage: FC<Props> = ({ initialProducts, itemPerPage }) => {
     queryKey: QUERY.HOMEPAGE,
     queryFn: () => getProducts({ limit: itemPerPage }),
     initialData: initialProducts,
+    staleTime: 1000 * 10,
+    refetchOnMount: true,
   })
 
   return (

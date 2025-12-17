@@ -38,7 +38,14 @@ const CategoryLayout: FC<Props> = ({
   }>({})
 
   const QUERY = {
-    CAROUSEL_PRODUCTS: ['carousel', 'products', currentCategory.id],
+    CAROUSEL_PRODUCTS: [
+      'carousel',
+      'products',
+      {
+        categoryId: currentCategory?.id,
+        limit: itemPerPage,
+      },
+    ],
     CATEGORIES: ['dashboard', 'categories', 'modal'],
   }
 
@@ -51,22 +58,27 @@ const CategoryLayout: FC<Props> = ({
   const { data: products, isLoading: isLoadingProducts } = useQuery({
     queryKey: QUERY.CAROUSEL_PRODUCTS,
     queryFn: () =>
-      getProducts({ limit: itemPerPage, categoryId: currentCategory?.id }),
+      getProducts({
+        limit: itemPerPage,
+        categoryId: currentCategory?.id,
+      }),
     enabled: !!currentCategory?.id,
     initialData:
       currentCategory?.id === initialCategories?.[0]?.id
         ? initialProducts
         : undefined,
+    staleTime: 1000 * 10,
+    refetchOnMount: true,
   })
 
   useEffect(() => {
-    if (!isLoadingCategories && categories) {
+    if (!currentCategory.id && categories?.length) {
       setCurrentCategory({
-        id: categories?.[0]?.id,
-        label: categories?.[0]?.name,
+        id: categories[0].id,
+        label: categories[0].name,
       })
     }
-  }, [categories, isLoadingCategories])
+  }, [categories, currentCategory.id])
 
   if (!isLoadingCategories && categories?.length === 0) {
     return

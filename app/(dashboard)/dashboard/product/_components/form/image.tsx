@@ -55,7 +55,7 @@ const ImageForm = () => {
     IMAGE: ['dashboard', 'image', 'modal', imageId],
     IMAGES: ['dashboard', 'images', 'modal', productId],
     HOMEPAGE: ['products', 'homepage'],
-    CAROUSEL: ['carousel', 'products', productId],
+    CAROUSEL: ['carousel', 'products'],
   }
 
   const {
