@@ -3,7 +3,8 @@
 import { createClient } from '@supabase/supabase-js'
 import { promises as fs } from 'fs'
 import path from 'path'
-import sharp from 'sharp'
+
+import { optimizeImage } from '@/utils/image'
 
 const supabase = createClient(
   process.env.SUPABASE_URL!,
@@ -20,15 +21,7 @@ const uploadFilesSupabase = async (formData: FormData) => {
   const urls: string[] = []
 
   for (const file of files) {
-    const buffer = await sharp(Buffer.from(await file.arrayBuffer()))
-      .resize({
-        width: 1200,
-        height: 1200,
-        fit: 'inside',
-        withoutEnlargement: true,
-      })
-      .webp({ quality: 80 })
-      .toBuffer()
+    const buffer = await optimizeImage(await file.arrayBuffer())
 
     const fileName = `${crypto.randomUUID()}.webp`
 
@@ -86,24 +79,10 @@ const uploadFiles = async (formData: FormData) => {
     const relativePath = `/uploads/${filename}`
     const filePath = path.join(uploadDir, filename)
 
-    const arrayBuffer = await file.arrayBuffer()
+    const buffer = await optimizeImage(await file.arrayBuffer())
 
-    const uint8Array = new Uint8Array(
-      await sharp(arrayBuffer)
-        .resize({
-          width: 1200,
-          height: 1200,
-          fit: 'inside',
-          withoutEnlargement: true,
-        })
-        .webp({
-          quality: 80,
-        })
-        .toBuffer(),
-    )
-
+    await fs.writeFile(filePath, new Uint8Array(buffer))
     filePaths.push(relativePath)
-    await fs.writeFile(filePath, uint8Array)
   }
 
   return filePaths
