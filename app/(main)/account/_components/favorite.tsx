@@ -141,7 +141,6 @@ const Favorite: FC<Props> = ({ className, favorite, ...props }) => {
 
             <div className='flex flex-wrap items-center gap-2'>
               <Button
-                className='bg-white text-primary dark:bg-divider'
                 color='primary'
                 isDisabled={isPendingCreateCart}
                 isLoading={isPendingCreateCart}
@@ -158,7 +157,6 @@ const Favorite: FC<Props> = ({ className, favorite, ...props }) => {
                 Add to cart
               </Button>
               <Button
-                className='bg-white text-primary dark:bg-divider'
                 color='primary'
                 isDisabled={isPendingDeleteFavorite}
                 isLoading={isPendingDeleteFavorite}

@@ -129,12 +129,7 @@ const OrderSection: FC<ComponentProps<typeof Card>> = ({
 
           <div className='flex items-center gap-2'>
             <Input isDisabled label='Discount code' variant='bordered' />
-            <Button
-              isDisabled
-              className='bg-white text-primary dark:bg-divider'
-              color='primary'
-              variant='bordered'
-            >
+            <Button isDisabled color='primary' variant='bordered'>
               Enter
             </Button>
           </div>
@@ -193,7 +188,6 @@ const OrderSection: FC<ComponentProps<typeof Card>> = ({
         <CardFooter>
           <Button
             fullWidth
-            className='bg-white text-primary dark:bg-divider'
             color='primary'
             isDisabled={!address || carts?.length === 0}
             variant='bordered'

@@ -88,7 +88,6 @@ const Cart = () => {
         {carts?.length !== 0 && (
           <div className='flex w-full flex-wrap justify-end gap-2'>
             <Button
-              className='bg-white text-primary dark:bg-divider'
               color='primary'
               startContent={<XIcon className='text-primary' />}
               variant='bordered'

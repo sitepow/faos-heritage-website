@@ -162,12 +162,7 @@ const OrderView = () => {
         )}
 
         <ModalFooter>
-          <Button
-            className='bg-white text-primary dark:bg-divider'
-            color='primary'
-            variant='bordered'
-            onClick={onClose}
-          >
+          <Button color='primary' variant='bordered' onClick={onClose}>
             Close the window
           </Button>
         </ModalFooter>

@@ -83,7 +83,6 @@ const Order: FC<Props> = ({ order, hideButton }) => {
         {!hideButton && (
           <div className='flex flex-wrap items-center gap-2 sm:justify-end'>
             <Button
-              className='bg-white text-primary dark:bg-divider'
               color='primary'
               variant='bordered'
               onClick={() => {
@@ -95,7 +94,6 @@ const Order: FC<Props> = ({ order, hideButton }) => {
             </Button>
             {order?.status === OrderStatus.PENDING && (
               <Button
-                className='bg-white text-primary dark:bg-divider'
                 color='primary'
                 variant='bordered'
                 onClick={() => {
@@ -108,7 +106,6 @@ const Order: FC<Props> = ({ order, hideButton }) => {
             )}
             {order?.status === OrderStatus.PENDING && (
               <Button
-                className='bg-white text-primary dark:bg-divider'
                 color='primary'
                 isDisabled={isPendingCheckout}
                 isLoading={isPendingCheckout}
@@ -122,7 +119,6 @@ const Order: FC<Props> = ({ order, hideButton }) => {
             )}
             {order?.status !== OrderStatus.PENDING && (
               <Button
-                className='bg-white text-primary dark:bg-divider'
                 color='primary'
                 isDisabled={isDisableReceipt}
                 variant='bordered'

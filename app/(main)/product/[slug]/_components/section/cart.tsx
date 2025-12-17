@@ -191,7 +191,6 @@ const CartSection: FC<
         <div className='flex flex-col gap-2 sm:flex-row'>
           <Button
             fullWidth
-            className='bg-white text-primary dark:bg-divider'
             color='primary'
             isDisabled={isPendingCreateFavorite || hasFavorite}
             isLoading={isPendingCreateFavorite}
@@ -206,7 +205,6 @@ const CartSection: FC<
 
           <Button
             fullWidth
-            className='bg-white text-primary dark:bg-divider'
             color='primary'
             isDisabled={
               isPendingCreateCart || isOutOfStock || (hasVariants && !variantId)

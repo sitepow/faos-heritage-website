@@ -102,7 +102,6 @@ const Customer = () => {
 
       <div className='flex w-full flex-wrap gap-3 *:shrink-0 md:justify-end'>
         <Button
-          className='bg-white text-primary dark:bg-divider'
           color='primary'
           startContent={<PlusIcon className='text-primary' />}
           variant='bordered'
@@ -113,7 +112,6 @@ const Customer = () => {
           Add new users
         </Button>
         <Button
-          className='bg-white text-primary dark:bg-divider'
           color='primary'
           isDisabled={selectedUserIds.length === 0}
           startContent={<XIcon className='text-primary' />}

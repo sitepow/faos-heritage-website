@@ -43,7 +43,6 @@ const ModalConfirm: FC<Props> = ({
             </ModalBody>
             <ModalFooter className='gap-2'>
               <Button
-                className='bg-white text-primary dark:bg-divider'
                 color='primary'
                 disabled={isPending}
                 variant='bordered'
@@ -52,7 +51,6 @@ const ModalConfirm: FC<Props> = ({
                 Cancel
               </Button>
               <Button
-                className='bg-white text-primary dark:bg-divider'
                 color='primary'
                 disabled={isPending}
                 isLoading={isPending}

@@ -34,7 +34,6 @@ const AddressCard = () => {
 
         {!isLoadingAddress && !address && (
           <Button
-            className='bg-white text-primary dark:bg-divider'
             color='primary'
             startContent={<PlusIcon className='text-primary' />}
             variant='bordered'

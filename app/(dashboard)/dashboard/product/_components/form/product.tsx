@@ -510,7 +510,6 @@ const ProductForm = () => {
 
         <ModalFooter>
           <Button
-            className='bg-white text-primary dark:bg-divider'
             color='primary'
             isDisabled={isPending}
             variant='bordered'
@@ -519,7 +518,6 @@ const ProductForm = () => {
             Cancel
           </Button>
           <Button
-            className='bg-white text-primary dark:bg-divider'
             color='primary'
             isDisabled={isPending || !isDirty}
             variant='bordered'

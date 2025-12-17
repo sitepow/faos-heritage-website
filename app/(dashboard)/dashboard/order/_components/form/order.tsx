@@ -227,7 +227,6 @@ const OrderForm = () => {
 
         <ModalFooter>
           <Button
-            className='bg-white text-primary dark:bg-divider'
             color='primary'
             isDisabled={isPending}
             variant='bordered'
@@ -236,7 +235,6 @@ const OrderForm = () => {
             Cancel
           </Button>
           <Button
-            className='bg-white text-primary dark:bg-divider'
             color='primary'
             isDisabled={isPending || !isDirty || isFinalStatus}
             variant='bordered'

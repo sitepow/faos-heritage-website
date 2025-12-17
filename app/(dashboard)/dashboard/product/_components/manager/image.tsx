@@ -193,16 +193,10 @@ const ImageManager = () => {
             </ModalBody>
           )}
           <ModalFooter>
-            <Button
-              className='bg-white text-primary dark:bg-divider'
-              color='primary'
-              variant='bordered'
-              onPress={onClose}
-            >
+            <Button color='primary' variant='bordered' onPress={onClose}>
               Cancel
             </Button>
             <Button
-              className='bg-white text-primary dark:bg-divider'
               color='primary'
               startContent={<PlusIcon className='text-primary' />}
               variant='bordered'

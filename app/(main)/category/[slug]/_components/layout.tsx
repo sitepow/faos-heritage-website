@@ -125,7 +125,6 @@ const CategoryLayout: FC<Props> = ({
         <Dropdown>
           <DropdownTrigger>
             <Button
-              className='bg-white text-primary dark:bg-divider'
               color='primary'
               startContent={<ArrowUpDownIcon className='text-primary' />}
               variant='bordered'

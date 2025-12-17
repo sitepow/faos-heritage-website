@@ -135,7 +135,6 @@ const Product = () => {
       </div>
       <div className='flex w-full flex-wrap gap-3 *:shrink-0 md:justify-end'>
         <Button
-          className='bg-white text-primary dark:bg-divider'
           color='primary'
           startContent={<PlusIcon className='text-primary' />}
           variant='bordered'
@@ -146,7 +145,6 @@ const Product = () => {
           Add new products
         </Button>
         <Button
-          className='bg-white text-primary dark:bg-divider'
           color='primary'
           startContent={<SettingsIcon className='text-primary' />}
           variant='bordered'
@@ -157,7 +155,6 @@ const Product = () => {
           Manage product categories
         </Button>
         <Button
-          className='bg-white text-primary dark:bg-divider'
           color='primary'
           isDisabled={selectedProductIds.length === 0}
           startContent={<XIcon className='text-primary' />}

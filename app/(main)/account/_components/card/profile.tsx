@@ -201,7 +201,6 @@ const ProfileCard = () => {
       </CardBody>
       <CardFooter className='gap-2'>
         <Button
-          className='bg-white text-primary dark:bg-divider'
           color='primary'
           isDisabled={isPending}
           variant='bordered'
@@ -210,7 +209,6 @@ const ProfileCard = () => {
           Cancel
         </Button>
         <Button
-          className='bg-white text-primary dark:bg-divider'
           color='primary'
           isDisabled={isPending || !isDirty}
           variant='bordered'

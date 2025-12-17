@@ -233,7 +233,6 @@ const CategoryForm = () => {
 
         <ModalFooter>
           <Button
-            className='bg-white text-primary dark:bg-divider'
             color='primary'
             isDisabled={isPending}
             variant='bordered'
@@ -242,7 +241,6 @@ const CategoryForm = () => {
             Cancel
           </Button>
           <Button
-            className='bg-white text-primary dark:bg-divider'
             color='primary'
             isDisabled={isPending || !isDirty}
             variant='bordered'

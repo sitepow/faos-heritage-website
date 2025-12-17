@@ -208,7 +208,6 @@ const VariantForm = () => {
 
         <ModalFooter>
           <Button
-            className='bg-white text-primary dark:bg-divider'
             color='primary'
             isDisabled={isPending}
             variant='bordered'
@@ -217,7 +216,6 @@ const VariantForm = () => {
             Cancel
           </Button>
           <Button
-            className='bg-white text-primary dark:bg-divider'
             color='primary'
             isDisabled={isPending || !isDirty}
             variant='bordered'

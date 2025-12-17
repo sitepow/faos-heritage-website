@@ -251,7 +251,6 @@ const AddressForm = () => {
 
         <ModalFooter>
           <Button
-            className='bg-white text-primary dark:bg-divider'
             color='primary'
             isDisabled={isPending}
             variant='bordered'
@@ -260,7 +259,6 @@ const AddressForm = () => {
             Cancel
           </Button>
           <Button
-            className='bg-white text-primary dark:bg-divider'
             color='primary'
             isDisabled={isPending || !isDirty}
             variant='bordered'
