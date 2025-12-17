@@ -29,13 +29,13 @@ const Panel: FC<Props> = ({ setIsMenuOpen }) => {
   const menuItems = [
     {
       key: 'account',
-      label: 'Manage my account',
+      label: 'My account',
       icon: <UserIcon className='text-default-500' />,
       action: () => router.push('/account'),
     },
     {
       key: 'favorite',
-      label: 'Manage favorites',
+      label: 'Favorites',
       icon: <HeartIcon className='text-default-500' />,
       action: () => router.push(`/account?tab=${ACCOUNT_TAB?.FAVORITE}`),
     },
@@ -43,7 +43,7 @@ const Panel: FC<Props> = ({ setIsMenuOpen }) => {
       ? [
           {
             key: 'admin-dashboard',
-            label: 'Admin Panel',
+            label: 'Admin dashboard',
             icon: <SettingsIcon className='text-default-500' />,
             action: () => router.push('/dashboard'),
           },

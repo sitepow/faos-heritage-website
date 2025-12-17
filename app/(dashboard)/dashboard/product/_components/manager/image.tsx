@@ -43,6 +43,7 @@ const ImageManager = () => {
   } = useProductStore()
 
   const QUERY = {
+    PRODUCT: ['dashboard', 'products', 'pagination'],
     IMAGES: ['dashboard', 'images', 'modal', productId],
     HOMEPAGE: ['products', 'homepage'],
     CAROUSEL: ['carousel', 'products'],
@@ -70,6 +71,10 @@ const ImageManager = () => {
       queryClient.invalidateQueries({
         queryKey: QUERY.CAROUSEL,
       }),
+
+      queryClient.invalidateQueries({
+        queryKey: QUERY.PRODUCT,
+      }),
     ])
   }
 
@@ -82,6 +87,11 @@ const ImageManager = () => {
         setState({ imageId: null })
       },
     })
+
+  const onClose = () => {
+    setState({ productId: null })
+    onOpenImageManagerChange()
+  }
 
   return (
     <>
@@ -114,7 +124,7 @@ const ImageManager = () => {
           {images?.length === 0 && (
             <ModalBody>
               <p className='text-center text-default-500'>
-                There are no product images yet.
+                There are no product images yet
               </p>
             </ModalBody>
           )}
@@ -173,7 +183,7 @@ const ImageManager = () => {
                             onOpenDeleteChange()
                           }}
                         >
-                          Remove option
+                          Remove image
                         </DropdownItem>
                       </DropdownMenu>
                     </Dropdown>
@@ -187,9 +197,7 @@ const ImageManager = () => {
               className='bg-white text-primary dark:bg-divider'
               color='primary'
               variant='bordered'
-              onPress={() => {
-                onOpenImageManagerChange()
-              }}
+              onPress={onClose}
             >
               Cancel
             </Button>

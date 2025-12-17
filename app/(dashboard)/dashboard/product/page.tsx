@@ -93,11 +93,18 @@ const Product = () => {
     queryFn: () => getProductDashboard(),
   })
 
+  const onRefetch = async () => {
+    await Promise.all([
+      queryClient.invalidateQueries({ queryKey: QUERY.DASHBOARD }),
+      queryClient.invalidateQueries({ queryKey: QUERY.PRODUCTS }),
+    ])
+  }
+
   const { mutate: mutateDeteleProduct, isPending: isPendingDeteleProduct } =
     useMutation({
       mutationFn: deleteProduct,
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: QUERY.DASHBOARD })
+        onRefetch()
         onOpenDeleteChange()
         setState({ productId: null })
         setSelectedKeys(new Set([]))
@@ -303,9 +310,13 @@ const Product = () => {
                 <TableCell className='max-w-32 min-w-32'>{price}</TableCell>
                 <TableCell className='max-w-32 min-w-32'>{stock}</TableCell>
                 <TableCell className='max-w-52 min-w-52'>
-                  <Chip color='primary' variant='bordered'>
-                    {product?.category?.name ?? '-'}
-                  </Chip>
+                  {product?.category?.name ? (
+                    <Chip color='primary' variant='bordered'>
+                      {product?.category?.name}
+                    </Chip>
+                  ) : (
+                    '-'
+                  )}
                 </TableCell>
                 <TableCell className='min-w-60'>
                   <div className='flex flex-col'>

@@ -14,7 +14,7 @@ const optimizeImage = async (
   input: Buffer | ArrayBuffer,
   options: Params = {},
 ) => {
-  const { width = 400, height = 400, quality = 70 } = options
+  const { width = 800, height, quality = 88 } = options
 
   return sharp(toBuffer(input))
     .resize({
@@ -22,11 +22,12 @@ const optimizeImage = async (
       height,
       fit: 'inside',
       withoutEnlargement: true,
+      kernel: sharp.kernel.lanczos3,
     })
     .webp({
       quality,
-      effort: 6,
-      smartSubsample: true,
+      effort: 4,
+      smartSubsample: false,
     })
     .toBuffer()
 }

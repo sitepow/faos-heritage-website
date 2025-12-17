@@ -166,7 +166,7 @@ const VariantForm = () => {
                   {...field}
                   errorMessage={errors.sku?.message}
                   isInvalid={!!errors.sku}
-                  label='SKU (if any)'
+                  label='SKU'
                   value={value ?? ''}
                   variant='bordered'
                 />

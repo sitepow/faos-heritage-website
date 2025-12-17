@@ -3,6 +3,7 @@
 import type { ProductInput } from '../schema/product'
 import type { Prisma } from '@prisma/client'
 
+import { deleteFileSupabase } from './file'
 import { productSchema } from '../schema/product'
 
 import { getVariantPriceStockMinMax, removeEmptyField } from '@/utils/helper'
@@ -39,11 +40,29 @@ const deleteProduct = async (productIds: string | string[]) => {
       throw new Error('Please specify the product code you want.')
     }
 
+    const products = await prisma.product.findMany({
+      where: {
+        id: { in: ids },
+      },
+      select: {
+        id: true,
+        images: {
+          select: {
+            url: true,
+          },
+        },
+      },
+    })
+
+    for (const product of products) {
+      for (const image of product.images) {
+        await deleteFileSupabase(image.url)
+      }
+    }
+
     await prisma.product.deleteMany({
       where: {
-        id: {
-          in: ids,
-        },
+        id: { in: ids },
       },
     })
   } catch (error) {

@@ -177,7 +177,7 @@ const ProductForm = () => {
                     isSelected={value}
                     onValueChange={onChange}
                   >
-                    Open for product sales
+                    Available for sale
                   </Switch>
                 )}
               />
@@ -190,7 +190,7 @@ const ProductForm = () => {
                     isSelected={value}
                     onValueChange={onChange}
                   >
-                    Pin this as a recommended product
+                    Featured product
                   </Switch>
                 )}
               />
@@ -203,7 +203,7 @@ const ProductForm = () => {
                     isSelected={value}
                     onValueChange={onChange}
                   >
-                    Digital file products
+                    Digital product
                   </Switch>
                 )}
               />
@@ -216,7 +216,7 @@ const ProductForm = () => {
                     isSelected={value}
                     onValueChange={onChange}
                   >
-                    Product samples
+                    Demo product
                   </Switch>
                 )}
               />
@@ -453,7 +453,7 @@ const ProductForm = () => {
                     isSelected={value}
                     onValueChange={onChange}
                   >
-                    Use based on the available information
+                    Auto-generate SEO from basic data
                   </Switch>
                 )}
               />

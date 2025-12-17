@@ -181,7 +181,7 @@ const CategoryForm = () => {
               name='isActive'
               render={({ field: { value, onChange, ...field } }) => (
                 <Switch {...field} isSelected={value} onValueChange={onChange}>
-                  Enable this category
+                  Enable
                 </Switch>
               )}
             />

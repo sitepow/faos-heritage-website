@@ -43,6 +43,7 @@ const VariantManager = () => {
   } = useProductStore()
 
   const QUERY = {
+    PRODUCT: ['dashboard', 'products', 'pagination'],
     VARIANTS: ['dashboard', 'variants', 'modal', productId],
   }
 
@@ -55,22 +56,29 @@ const VariantManager = () => {
     enabled: !!productId && isVariantManagerOpen,
   })
 
+  const onRefetch = async () => {
+    await Promise.all([
+      queryClient.invalidateQueries({
+        queryKey: QUERY.VARIANTS,
+      }),
+      queryClient.invalidateQueries({
+        queryKey: QUERY.PRODUCT,
+      }),
+    ])
+  }
+
   const { mutate: mutateDeteleVariant, isPending: isPendingDeteleVariant } =
     useMutation({
       mutationFn: deleteVariant,
       onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: QUERY.VARIANTS,
-        })
+        onRefetch()
         onOpenDeleteChange()
         setState({ variantId: null })
       },
     })
 
-  const onClose = () => {
-    queryClient.invalidateQueries({
-      queryKey: QUERY.VARIANTS,
-    })
+  const onClose = async () => {
+    await onRefetch()
     setState({ productId: null, variantId: null })
     onOpenVariantManagerChange()
   }
