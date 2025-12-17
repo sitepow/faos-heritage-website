@@ -161,6 +161,7 @@ const Order = () => {
 
       <Pagination
         showControls
+        className='text-white'
         page={page}
         total={orders?.totalPages || 1}
         onChange={(page) => setPage(page)}

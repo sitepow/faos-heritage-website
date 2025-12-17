@@ -4,16 +4,9 @@
 import { Alert } from '@heroui/alert'
 import { Button } from '@heroui/button'
 import { Card, CardBody, CardFooter, CardHeader } from '@heroui/card'
-import { Chip } from '@heroui/chip'
 import { Image } from '@heroui/react'
 import { Skeleton } from '@heroui/skeleton'
-import {
-  CircleQuestionMarkIcon,
-  FileIcon,
-  HeartIcon,
-  ShoppingCartIcon,
-  TagIcon,
-} from 'lucide-react'
+import { HeartIcon, ShoppingCartIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
 
@@ -91,41 +84,7 @@ const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
           {product?.name}
         </h4>
 
-        <div className='flex flex-wrap items-center justify-between gap-2'>
-          <StarRating rate={0} />
-
-          <div className='flex flex-wrap gap-1'>
-            {product?.isDemoProduct && (
-              <Chip
-                color='primary'
-                startContent={
-                  <CircleQuestionMarkIcon className='size-4 text-primary' />
-                }
-                variant='bordered'
-              >
-                Product samples
-              </Chip>
-            )}
-
-            {product?.isDigitalProduct && (
-              <Chip
-                color='primary'
-                startContent={<FileIcon className='size-4 text-primary' />}
-                variant='bordered'
-              >
-                Digital products
-              </Chip>
-            )}
-
-            <Chip
-              color='primary'
-              startContent={<TagIcon className='size-4 text-primary' />}
-              variant='bordered'
-            >
-              {product?.category?.name ?? 'No category'}
-            </Chip>
-          </div>
-        </div>
+        <StarRating rate={0} />
       </CardBody>
 
       {!hideIcon && (
