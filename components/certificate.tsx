@@ -1,5 +1,6 @@
 import { Card, CardBody } from '@heroui/card'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const CERTIFICATE_IMAGES = [
   '/certificate/certificate_1.png',
@@ -10,13 +11,20 @@ const CERTIFICATE_IMAGES = [
 const Certificate = () => {
   return (
     <Card fullWidth>
-      <CardBody className='flex w-full flex-col items-center justify-center gap-10 rounded-xl px-5 py-10'>
-        <h2 className='mx-auto max-w-11/12 text-center text-2xl leading-tight font-bold sm:max-w-10/12 md:max-w-1/2 xl:max-w-1/3'>
+      <CardBody
+        className='flex w-full flex-col items-center justify-center gap-10 rounded-xl px-5 py-10'
+        style={{
+          backgroundImage: 'url(/banner.jpg)',
+          backgroundPosition: 'top',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
+        <h2 className='mx-auto max-w-11/12 text-center text-2xl leading-tight font-bold text-white sm:max-w-10/12 md:max-w-1/2 xl:max-w-1/3'>
           FAOS products are certified and licensed for safety by the relevant
           authorities, ensuring their{' '}
-          <span className='text-primary underline'>
-            quality and reliability.
-          </span>
+          <Link href='/about'>
+            <span className='underline'>quality and reliability.</span>
+          </Link>
         </h2>
 
         <div className='flex flex-wrap gap-2'>

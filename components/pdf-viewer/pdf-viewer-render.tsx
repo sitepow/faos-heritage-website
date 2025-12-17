@@ -18,7 +18,7 @@ const PdfViewerRender: FC<Props> = ({ fileUrl }) => {
     <div className='h-[80vh] w-full max-w-7xl overflow-hidden rounded-lg border'>
       <Worker workerUrl='/pdf.worker.min.js'>
         <Viewer
-          defaultScale={SpecialZoomLevel.PageFit}
+          defaultScale={SpecialZoomLevel.PageWidth}
           fileUrl={fileUrl}
           plugins={[defaultLayoutPluginInstance]}
         />

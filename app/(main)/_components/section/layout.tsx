@@ -4,7 +4,7 @@ import { Button } from '@heroui/button'
 import { Card, CardBody, CardHeader } from '@heroui/card'
 import { ScrollShadow } from '@heroui/scroll-shadow'
 import { useQuery } from '@tanstack/react-query'
-import { AlertCircleIcon } from 'lucide-react'
+import { AlertCircleIcon, ArrowRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState, type FC } from 'react'
 
@@ -131,9 +131,9 @@ const CategoryLayout: FC<Props> = ({
                 <span className='font-bold'>{currentCategory.label}</span>
 
                 <Button
-                  className='bg-white text-primary dark:bg-divider'
                   color='primary'
-                  variant='bordered'
+                  endContent={<ArrowRight className='text-primary' />}
+                  variant='light'
                   onPress={() => {
                     router.push(
                       `/category/${createSlug(currentCategory.label!, currentCategory.id!)}`,
