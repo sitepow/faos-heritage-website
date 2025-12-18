@@ -6,12 +6,12 @@ const SORT_MAP = {
   newest: {
     field: 'createdAt',
     order: 'desc',
-    label: 'Newest',
+    label: 'Newest first',
   },
   oldest: {
     field: 'createdAt',
     order: 'asc',
-    label: 'Oldest',
+    label: 'Oldest first',
   },
   price_low: {
     field: 'price',

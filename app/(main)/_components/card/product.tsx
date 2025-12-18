@@ -7,20 +7,12 @@ import { Card, CardBody, CardFooter, CardHeader } from '@heroui/card'
 import { Chip } from '@heroui/chip'
 import { Image } from '@heroui/react'
 import { Skeleton } from '@heroui/skeleton'
-import {
-  CircleQuestionMarkIcon,
-  FileIcon,
-  HeartIcon,
-  ShoppingCartIcon,
-  TagIcon,
-} from 'lucide-react'
+import { HeartIcon, ShoppingCartIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
 
 import type { GetProductResult } from '@/app/(main)/actions/product'
 import type { FC } from 'react'
-
-import { ProductRating } from '../product-rating'
 
 import { ProductPrice } from '@/app/(main)/_components/product-price'
 import { checkOutOfStock, createSlug, getProductUnit } from '@/utils/helper'
@@ -47,7 +39,7 @@ const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
   return (
     <Card
       className={cn(
-        'flex size-full h-auto w-64 flex-none flex-col border border-divider md:min-w-72',
+        'flex size-full w-72 flex-none flex-col border border-divider md:min-w-80',
         className,
       )}
       shadow='none'
@@ -57,9 +49,11 @@ const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
       <CardHeader className='relative overflow-hidden p-0'>
         {isOutOfStock && (
           <Alert
-            className='absolute top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2 bg-white/50 backdrop-blur-md'
-            description='This item is temporarily out of stock'
+            className='absolute top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2'
+            color='danger'
+            description='Out of stock. Please check similar items'
             radius='none'
+            variant='faded'
           />
         )}
 
@@ -82,37 +76,23 @@ const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
       <CardBody>
         <div className='flex flex-wrap gap-1'>
           {product?.isDemoProduct && (
-            <Chip
-              color='primary'
-              startContent={
-                <CircleQuestionMarkIcon className='size-4 text-primary' />
-              }
-              variant='bordered'
-            >
+            <Chip className='text-white' color='primary'>
               Demo product
             </Chip>
           )}
 
           {product?.isDigitalProduct && (
-            <Chip
-              color='primary'
-              startContent={<FileIcon className='size-4 text-primary' />}
-              variant='bordered'
-            >
+            <Chip className='text-white' color='primary'>
               Digital product
             </Chip>
           )}
 
-          <Chip
-            color='primary'
-            startContent={<TagIcon className='size-4 text-primary' />}
-            variant='bordered'
-          >
+          <Chip className='text-white' color='primary'>
             {product?.category?.name ?? 'No category'}
           </Chip>
         </div>
 
-        <h4 className='line-clamp-2 text-lg font-bold'>{product?.name}</h4>
+        <h4 className='line-clamp-1 text-lg font-bold'>{product?.name}</h4>
 
         <ProductPrice
           price={product?.price}
@@ -120,8 +100,6 @@ const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
           priceMin={product?.priceMin!}
           unit={getProductUnit(product?.unit)}
         />
-
-        <ProductRating rate={0} />
       </CardBody>
 
       {!hideIcon && (

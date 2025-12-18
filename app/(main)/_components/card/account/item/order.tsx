@@ -2,6 +2,7 @@ import { Avatar, AvatarGroup } from '@heroui/avatar'
 import { Button } from '@heroui/button'
 import { OrderStatus } from '@prisma/client'
 import { useMutation } from '@tanstack/react-query'
+import { CreditCardIcon, DownloadIcon, EyeIcon, XIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
@@ -83,47 +84,51 @@ const OrderItem: FC<Props> = ({ order, hideButton }) => {
         {!hideButton && (
           <div className='flex flex-wrap items-center gap-2 sm:justify-end'>
             <Button
+              className='text-white'
               color='primary'
-              variant='bordered'
+              startContent={<EyeIcon />}
               onClick={() => {
                 setState({ orderId: order?.id })
                 onOpenViewChange()
               }}
             >
-              Details
+              Order details
             </Button>
             {order?.status === OrderStatus.PENDING && (
               <Button
+                className='text-white'
                 color='primary'
-                variant='bordered'
+                startContent={<XIcon />}
                 onClick={() => {
                   setState({ orderId: order?.id })
                   onOpenOrderCancelChange()
                 }}
               >
-                Cancel order / Change of mind
+                Cancel order
               </Button>
             )}
             {order?.status === OrderStatus.PENDING && (
               <Button
+                className='text-white'
                 color='primary'
                 isDisabled={isPendingCheckout}
                 isLoading={isPendingCheckout}
-                variant='bordered'
+                startContent={!isPendingCheckout && <CreditCardIcon />}
                 onClick={() => {
                   mutateCheckout()
                 }}
               >
-                Pay for the goods
+                Pay now
               </Button>
             )}
             {order?.status !== OrderStatus.PENDING && (
               <Button
+                className='text-white'
                 color='primary'
                 isDisabled={isDisableReceipt}
-                variant='bordered'
+                startContent={<DownloadIcon />}
               >
-                Download the receipt
+                Download receipt
               </Button>
             )}
           </div>

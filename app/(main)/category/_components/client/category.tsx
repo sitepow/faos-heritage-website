@@ -119,16 +119,12 @@ const CategoryClient: FC<Props> = ({
 
       <div className='flex w-full flex-wrap items-center justify-center gap-3 sm:justify-between'>
         <span className='text-primary'>
-          Item number 1 – {itemCount} From all {totalItems} list
+          Showing 1–{itemCount} of {totalItems} items
         </span>
 
         <Dropdown>
           <DropdownTrigger>
-            <Button
-              color='primary'
-              startContent={<ArrowUpDownIcon className='text-primary' />}
-              variant='bordered'
-            >
+            <Button startContent={<ArrowUpDownIcon />} variant='faded'>
               Sorting {sortBy?.label}
             </Button>
           </DropdownTrigger>

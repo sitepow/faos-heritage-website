@@ -3,7 +3,7 @@ import { Button } from '@heroui/button'
 import { Card, CardBody, CardHeader } from '@heroui/card'
 import { Skeleton } from '@heroui/skeleton'
 import { useQuery } from '@tanstack/react-query'
-import { MapPinIcon, PlusIcon } from 'lucide-react'
+import { EditIcon, PlusIcon } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 
 import { AddressForm } from '@/app/(main)/_components/form/address'
@@ -33,9 +33,8 @@ const AddressCard = () => {
 
         {!isLoadingAddress && !address && (
           <Button
-            color='primary'
-            startContent={<PlusIcon className='text-primary' />}
-            variant='bordered'
+            startContent={<PlusIcon />}
+            variant='faded'
             onClick={() => onOpenAddressChange()}
           >
             Add shipping address
@@ -64,14 +63,13 @@ const AddressCard = () => {
 
             <div className='flex flex-col gap-5 border-r border-b border-l border-divider p-2.5'>
               <div className='flex flex-wrap items-center gap-4'>
-                <MapPinIcon className='shrink-0 text-default-500' />
                 <span>{getFullAddress(address)}</span>
               </div>
 
               <Button
-                className='w-fit bg-white text-primary dark:bg-divider'
+                className='w-fit text-white'
                 color='primary'
-                variant='bordered'
+                startContent={<EditIcon />}
                 onClick={() => {
                   setState({ addressId: address?.id })
                   onOpenAddressChange()

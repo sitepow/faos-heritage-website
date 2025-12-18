@@ -93,9 +93,9 @@ const CategoryClient = ({
         <CardHeader className='flex flex-wrap items-center justify-between'>
           <span className='font-bold'>{activeCategory?.name}</span>
           <Button
+            className='text-white'
             color='primary'
             endContent={<ArrowRight className='size-4' />}
-            variant='light'
             onPress={() =>
               router.push(
                 `/category/${createSlug(activeCategory?.name!, activeCategory?.id!)}`,

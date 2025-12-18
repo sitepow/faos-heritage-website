@@ -9,7 +9,6 @@ import {
 } from '@heroui/react'
 import { Skeleton } from '@heroui/skeleton'
 import { useQuery } from '@tanstack/react-query'
-import { CircleQuestionMarkIcon, FileIcon, TagIcon } from 'lucide-react'
 
 import type { GetProductResult } from '@/app/(dashboard)/actions/product'
 import type { FC } from 'react'
@@ -19,7 +18,6 @@ import { DetailCard } from '@/app/(main)/_components/card/product/detail'
 import { ReviewCard } from '@/app/(main)/_components/card/product/review'
 import { ImagePreview } from '@/app/(main)/_components/image-preview'
 import { PageNotFound } from '@/app/(main)/_components/page-not-found'
-import { ProductRating } from '@/app/(main)/_components/product-rating'
 import { CartSection } from '@/app/(main)/_components/section/product/cart'
 import { SimilarSection } from '@/app/(main)/_components/section/product/similar'
 import { SocialShare } from '@/app/(main)/_components/social-share'
@@ -47,9 +45,7 @@ const ProductClient: FC<Props> = ({ initialProduct, productId, userId }) => {
     return (
       <PageNotFound>
         I&apos;m sorry.!{' '}
-        <span className='text-primary'>
-          Product code &quot;{productId}&quot;
-        </span>{' '}
+        <span className='text-primary'>Product ID &quot;{productId}&quot;</span>{' '}
         Nothing matches. Please try searching for new products on the homepage.
       </PageNotFound>
     )
@@ -74,46 +70,29 @@ const ProductClient: FC<Props> = ({ initialProduct, productId, userId }) => {
                 images={product?.images?.flatMap((image) => image?.url) ?? []}
               />
 
-              <div className='flex flex-col gap-4'>
-                <div className='flex flex-col gap-2 border-b border-divider pb-2'>
-                  <span className='text-xl font-bold'>{product?.name}</span>
-                  <ProductRating rate={0} />
+              <div className='flex w-full flex-col gap-4 rounded-l-xl sm:border-l sm:border-divider sm:pl-2.5'>
+                <div className='flex flex-col gap-2'>
+                  <span className='text-2xl font-bold'>{product?.name}</span>
 
                   <div className='flex flex-wrap gap-2'>
                     {product?.isDemoProduct && (
-                      <Chip
-                        color='primary'
-                        startContent={
-                          <CircleQuestionMarkIcon className='size-4 text-primary' />
-                        }
-                        variant='bordered'
-                      >
+                      <Chip className='text-white' color='primary'>
                         Demo product
                       </Chip>
                     )}
 
                     {product?.isDigitalProduct && (
-                      <Chip
-                        color='primary'
-                        startContent={
-                          <FileIcon className='size-4 text-primary' />
-                        }
-                        variant='bordered'
-                      >
+                      <Chip className='text-white' color='primary'>
                         Digital product
                       </Chip>
                     )}
-                    <Chip
-                      color='primary'
-                      startContent={<TagIcon className='size-4 text-primary' />}
-                      variant='bordered'
-                    >
+                    <Chip className='text-white' color='primary'>
                       {product?.category?.name ?? 'No category'}
                     </Chip>
                   </div>
                 </div>
 
-                <span>{product?.shortDescription}</span>
+                <span>{product?.shortDescription || '-'}</span>
                 <SocialShare />
               </div>
             </div>

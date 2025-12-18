@@ -2,7 +2,7 @@ import { Button } from '@heroui/button'
 import { Card, CardBody } from '@heroui/card'
 import { useDisclosure } from '@heroui/modal'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { TrashIcon } from 'lucide-react'
+import { XIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
@@ -104,7 +104,7 @@ const FavoriteItem: FC<Props> = ({ className, favorite, ...props }) => {
                   {favorite?.product?.shortDescription}
                 </span>
                 <span className='text-sm text-default-500'>
-                  Product code : {favorite?.product?.id}
+                  Product ID : {favorite?.product?.id}
                 </span>
                 <ProductPrice
                   price={favorite?.product?.price}
@@ -117,15 +117,11 @@ const FavoriteItem: FC<Props> = ({ className, favorite, ...props }) => {
 
             <div className='flex flex-wrap items-center gap-2'>
               <Button
+                className='text-white'
                 color='primary'
                 isDisabled={isPendingDeleteFavorite}
                 isLoading={isPendingDeleteFavorite}
-                startContent={
-                  !isPendingDeleteFavorite && (
-                    <TrashIcon className='text-primary' />
-                  )
-                }
-                variant='bordered'
+                startContent={!isPendingDeleteFavorite && <XIcon />}
                 onClick={onOpenDeleteFavoriteChange}
               >
                 Remove Favorite

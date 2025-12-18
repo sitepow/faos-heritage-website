@@ -42,19 +42,14 @@ const ModalConfirm: FC<Props> = ({
               <span>{description}</span>
             </ModalBody>
             <ModalFooter className='gap-2'>
-              <Button
-                color='primary'
-                disabled={isPending}
-                variant='bordered'
-                onPress={onClose}
-              >
+              <Button disabled={isPending} variant='faded' onPress={onClose}>
                 Cancel
               </Button>
               <Button
+                className='text-white'
                 color='primary'
                 disabled={isPending}
                 isLoading={isPending}
-                variant='bordered'
                 onPress={onConfirm}
               >
                 OK

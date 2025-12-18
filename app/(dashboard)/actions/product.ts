@@ -229,7 +229,7 @@ const updateProduct = async (data: ProductInput) => {
 
     const { id, ...payload } = validatedData.data
 
-    if (!id) throw new Error('Product code not found.')
+    if (!id) throw new Error('Product ID not found.')
 
     await prisma.product.update({
       data: payload as Prisma.ProductUncheckedUpdateInput,

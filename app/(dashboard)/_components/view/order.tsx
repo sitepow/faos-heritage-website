@@ -144,7 +144,7 @@ const OrderView = () => {
                         </span>
                         {item?.productId && !item?.variantId && (
                           <span className='text-default-500'>
-                            (Product code {item?.productId})
+                            (Product ID {item?.productId})
                           </span>
                         )}
                         {item?.productId && item?.variantId && (
@@ -162,8 +162,8 @@ const OrderView = () => {
         )}
 
         <ModalFooter>
-          <Button color='primary' variant='bordered' onClick={onClose}>
-            Close the window
+          <Button className='text-white' color='primary' onClick={onClose}>
+            Close
           </Button>
         </ModalFooter>
       </ModalContent>

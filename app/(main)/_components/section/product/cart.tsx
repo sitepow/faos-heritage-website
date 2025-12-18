@@ -161,11 +161,11 @@ const CartSection: FC<
       <CardBody className='flex-wrap gap-4'>
         <Alert
           className='text-start'
-          color={isOutOfStock ? 'danger' : 'success'}
+          color={isOutOfStock ? 'danger' : 'default'}
           description={
             isOutOfStock
-              ? 'This item is temporarily out of stock. Please see similar/alternative items.'
-              : `The product is available for sale. Quantity available. ${currentStockQuantity} ${productUnit} In stock`
+              ? 'Out of stock. Please check similar items.'
+              : `In stock: ${currentStockQuantity} ${productUnit} available`
           }
           radius='none'
           variant='faded'
@@ -191,13 +191,10 @@ const CartSection: FC<
         <div className='flex flex-col gap-2 sm:flex-row'>
           <Button
             fullWidth
-            color='primary'
             isDisabled={isPendingCreateFavorite || hasFavorite}
             isLoading={isPendingCreateFavorite}
-            startContent={
-              !isPendingCreateFavorite && <HeartIcon className='text-primary' />
-            }
-            variant='bordered'
+            startContent={!isPendingCreateFavorite && <HeartIcon />}
+            variant='faded'
             onClick={onSubmitFavorite}
           >
             Add to favorites
@@ -205,17 +202,13 @@ const CartSection: FC<
 
           <Button
             fullWidth
+            className='text-white'
             color='primary'
             isDisabled={
               isPendingCreateCart || isOutOfStock || (hasVariants && !variantId)
             }
             isLoading={isPendingCreateCart}
-            startContent={
-              !isPendingCreateCart && (
-                <ShoppingCartIcon className='text-primary' />
-              )
-            }
-            variant='bordered'
+            startContent={!isPendingCreateCart && <ShoppingCartIcon />}
             onClick={onSubmitCart}
           >
             Add to cart

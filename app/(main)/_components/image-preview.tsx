@@ -32,7 +32,7 @@ const ImagePreview = ({
       )}
       {...props}
     >
-      <div className='relative aspect-square w-full overflow-hidden rounded-xl border border-divider'>
+      <div className='relative aspect-square w-full overflow-hidden rounded-xl'>
         <Image
           fill
           priority
@@ -55,7 +55,7 @@ const ImagePreview = ({
                   'relative aspect-square size-20 shrink-0 overflow-hidden rounded-lg border-2 transition-all',
                   isActive
                     ? 'border-primary ring-2 ring-primary/10'
-                    : 'border-transparent hover:border-default-300',
+                    : 'border-divider hover:border-default-300',
                 )}
                 type='button'
                 onClick={() => setSelectedIndex(index)}

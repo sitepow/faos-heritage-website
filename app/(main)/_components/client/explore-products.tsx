@@ -44,9 +44,9 @@ const ExploreProducts: FC<Props> = ({ initialProducts, itemPerPage }) => {
       />
       <Link href='/products'>
         <Button
+          className='text-white'
           color='primary'
-          endContent={<ArrowRight className='text-primary' />}
-          variant='light'
+          endContent={<ArrowRight />}
         >
           Explore Products
         </Button>

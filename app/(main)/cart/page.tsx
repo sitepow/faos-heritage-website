@@ -78,22 +78,20 @@ const Cart = () => {
         />
         <div className='flex w-full flex-wrap justify-between gap-2 text-start'>
           <span className='text-xl font-bold'>
-            Your basket {carts?.length !== 0 && `(${carts?.length} list)`}
+            Your cart {carts?.length !== 0 && `(${carts?.length} items)`}
           </span>
-          <span className='text-default-500'>
-            Shopping cart number {userId}
-          </span>
+          <span className='text-default-500'>Cart ID: {userId}</span>
         </div>
 
         {carts?.length !== 0 && (
           <div className='flex w-full flex-wrap justify-end gap-2'>
             <Button
+              className='text-white'
               color='primary'
-              startContent={<XIcon className='text-primary' />}
-              variant='bordered'
+              startContent={<XIcon />}
               onClick={() => onOpenClearChange()}
             >
-              Empty all baskets
+              Clear cart
             </Button>
           </div>
         )}

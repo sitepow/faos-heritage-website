@@ -66,7 +66,7 @@ const OrderForm = () => {
       onOpenChange={onOpenOrderCancelChange}
     >
       <ModalContent>
-        <ModalHeader>Cancel order / Change of mind</ModalHeader>
+        <ModalHeader>Cancel order</ModalHeader>
 
         {isPendingUpdateOrder && <Spinner label='Loading...' />}
 
@@ -83,17 +83,16 @@ const OrderForm = () => {
 
         <ModalFooter>
           <Button
-            color='primary'
             isDisabled={isPendingUpdateOrder}
-            variant='bordered'
+            variant='faded'
             onClick={onClose}
           >
             Cancel
           </Button>
           <Button
+            className='text-white'
             color='primary'
             isDisabled={isPendingUpdateOrder || !reason}
-            variant='bordered'
             onClick={onSubmit}
           >
             {isPendingUpdateOrder ? 'In progress' : 'Save'}

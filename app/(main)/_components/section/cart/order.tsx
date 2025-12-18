@@ -3,9 +3,9 @@
 import { Alert } from '@heroui/alert'
 import { Button } from '@heroui/button'
 import { Card, CardBody, CardFooter } from '@heroui/card'
-import { Input } from '@heroui/input'
 import { useDisclosure } from '@heroui/modal'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { ArrowRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import { useMemo } from 'react'
@@ -56,7 +56,7 @@ const OrderSection: FC<ComponentProps<typeof Card>> = ({
   const userId = session?.user?.id
 
   const GOTO = {
-    ADDRESS: () => router.push(`/account?tab=${ACCOUNT_TAB?.ACCOUNT}`),
+    ADDRESS: () => router.push(`/account?tab=${ACCOUNT_TAB?.ADDRESS}`),
     ORDER: () => router.push(`/account?tab=${ACCOUNT_TAB?.ORDER}`),
   }
 
@@ -123,34 +123,6 @@ const OrderSection: FC<ComponentProps<typeof Card>> = ({
 
       <Card fullWidth className={cn(className, 'h-fit')} {...props}>
         <CardBody className='gap-3'>
-          <span className='w-fit border-b border-primary pb-1 font-bold'>
-            Discount code
-          </span>
-
-          <div className='flex items-center gap-2'>
-            <Input isDisabled label='Discount code' variant='bordered' />
-            <Button isDisabled color='primary' variant='bordered'>
-              Enter
-            </Button>
-          </div>
-
-          {!isLoadingAddress && !address && (
-            <Alert
-              description={
-                <span>
-                  Please add your shipping address before placing your order{' '}
-                  <button
-                    className='cursor-pointer text-primary underline'
-                    onClick={GOTO.ADDRESS}
-                  >
-                    Add your address
-                  </button>
-                </span>
-              }
-              variant='bordered'
-            />
-          )}
-
           {!isLoadingAddress && address && (
             <>
               <span className='w-fit border-b border-primary pb-1 font-bold'>
@@ -185,16 +157,37 @@ const OrderSection: FC<ComponentProps<typeof Card>> = ({
           </div>
         </CardBody>
 
-        <CardFooter>
-          <Button
-            fullWidth
-            color='primary'
-            isDisabled={!address || carts?.length === 0}
-            variant='bordered'
-            onClick={onOpenConfirmOrderChange}
-          >
-            Order products
-          </Button>
+        <CardFooter className='flex-col gap-2'>
+          {!isLoadingAddress && !address && (
+            <Alert
+              className='text-start'
+              color='danger'
+              description={
+                <span>
+                  Please add your shipping address before placing your order{' '}
+                  <button
+                    className='cursor-pointer underline'
+                    onClick={GOTO.ADDRESS}
+                  >
+                    Add your address
+                  </button>
+                </span>
+              }
+              variant='bordered'
+            />
+          )}
+
+          {!isLoadingAddress && address && (
+            <Button
+              className='text-white'
+              color='primary'
+              endContent={<ArrowRight />}
+              isDisabled={!address || carts?.length === 0}
+              onClick={onOpenConfirmOrderChange}
+            >
+              Proceed to checkout
+            </Button>
+          )}
         </CardFooter>
       </Card>
     </div>

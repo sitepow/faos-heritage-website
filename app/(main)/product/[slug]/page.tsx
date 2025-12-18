@@ -26,7 +26,7 @@ const Product: FC<Props> = async ({ params }) => {
   } catch {
     return (
       <PageNotFound>
-        Sorry! Product code...{' '}
+        Sorry! Product ID...{' '}
         <span className='text-primary'>&quot;{productId}&quot;</span> Nothing
         matches. Please try searching for new products on the homepage.
       </PageNotFound>

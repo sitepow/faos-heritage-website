@@ -83,7 +83,7 @@ const updateVariant = async (data: VariantInput) => {
 
     const { id, ...payload } = validatedData.data
 
-    if (!id) throw new Error('Product code not found.')
+    if (!id) throw new Error('Product ID not found.')
 
     await prisma.productVariant.update({
       data: payload as Prisma.ProductVariantCreateInput,

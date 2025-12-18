@@ -8,9 +8,7 @@ const ReviewCard = () => {
       <CardHeader className='flex-col items-start gap-4'>
         <SubHeading title='Product review' />
       </CardHeader>
-      <CardBody>
-        <p>There are no reviews for this product yet.</p>
-      </CardBody>
+      <CardBody>-</CardBody>
     </Card>
   )
 }

@@ -16,7 +16,7 @@ const DetailCard: FC<Props> = ({ product }) => {
         <SubHeading title='Details' />
       </CardHeader>
       <CardBody>
-        <p className='whitespace-pre-line'>{product?.description}</p>
+        <p className='whitespace-pre-line'>{product?.description || '-'}</p>
       </CardBody>
     </Card>
   )

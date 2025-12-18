@@ -186,7 +186,7 @@ const CartItemCard: FC<
               <div className='flex flex-col'>
                 <span className='line-clamp-1'>{cart?.product?.name}</span>
                 <span className='text-default-500'>
-                  Product code: {cart?.product?.id}
+                  Product ID: {cart?.product?.id}
                 </span>
                 <div className='flex flex-wrap gap-2'>
                   <span className='text-default-500'>
@@ -200,37 +200,40 @@ const CartItemCard: FC<
               </div>
 
               <div className='flex flex-col gap-3'>
-                <NumberInput
-                  disabled
-                  isDisabled={isPendingUpdateCart}
-                  label='Quantity'
-                  maxValue={currentStockQuantity}
-                  value={quantity}
-                  variant='bordered'
-                  onChange={onQuantityChange}
-                />
-
-                {cart?.product?.variants.length !== 0 && (
-                  <Select
-                    disallowEmptySelection
-                    items={cart?.product?.variants || []}
-                    label='Product options'
-                    placeholder='Select product options'
-                    selectedKeys={variantId ? [variantId] : []}
+                <div className='flex flex-col gap-2 sm:flex-row'>
+                  <NumberInput
+                    disabled
+                    isDisabled={isPendingUpdateCart}
+                    label='Quantity'
+                    maxValue={currentStockQuantity}
+                    value={quantity}
                     variant='bordered'
-                    onSelectionChange={onVariantChange}
-                  >
-                    {(variant) => (
-                      <SelectItem key={variant?.id}>{variant?.name}</SelectItem>
-                    )}
-                  </Select>
-                )}
+                    onChange={onQuantityChange}
+                  />
+
+                  {cart?.product?.variants.length !== 0 && (
+                    <Select
+                      disallowEmptySelection
+                      items={cart?.product?.variants || []}
+                      label='Product options'
+                      placeholder='Select product options'
+                      selectedKeys={variantId ? [variantId] : []}
+                      variant='bordered'
+                      onSelectionChange={onVariantChange}
+                    >
+                      {(variant) => (
+                        <SelectItem key={variant?.id}>
+                          {variant?.name}
+                        </SelectItem>
+                      )}
+                    </Select>
+                  )}
+                </div>
 
                 <Button
-                  className='w-fit bg-white text-primary dark:bg-divider'
-                  color='primary'
-                  startContent={<TrashIcon className='text-primary' />}
-                  variant='bordered'
+                  className='w-fit'
+                  startContent={<TrashIcon />}
+                  variant='faded'
                   onClick={onDeleteCart}
                 />
 
