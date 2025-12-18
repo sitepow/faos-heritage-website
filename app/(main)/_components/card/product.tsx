@@ -17,12 +17,12 @@ import {
 import Link from 'next/link'
 import { useState } from 'react'
 
-import type { GetProductResult } from '@/actions/product'
+import type { GetProductResult } from '@/app/(main)/actions/product'
 import type { FC } from 'react'
 
-import { StarRating } from '../star-rating'
+import { ProductRating } from '../product-rating'
 
-import { Price } from '@/components/price'
+import { ProductPrice } from '@/app/(main)/_components/product-price'
 import { checkOutOfStock, createSlug, getProductUnit } from '@/utils/helper'
 import { cn } from '@/utils/style'
 
@@ -114,14 +114,14 @@ const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
 
         <h4 className='line-clamp-2 text-lg font-bold'>{product?.name}</h4>
 
-        <Price
+        <ProductPrice
           price={product?.price}
           priceMax={product?.priceMax!}
           priceMin={product?.priceMin!}
           unit={getProductUnit(product?.unit)}
         />
 
-        <StarRating rate={0} />
+        <ProductRating rate={0} />
       </CardBody>
 
       {!hideIcon && (

@@ -2,7 +2,7 @@ import { Card, CardBody } from '@heroui/card'
 import { Skeleton } from '@heroui/skeleton'
 import Image from 'next/image'
 
-import type { GetCategoryResult } from '@/app/(dashboard)/dashboard/product/actions/category'
+import type { GetCategoryResult } from '@/app/(dashboard)/actions/category'
 import type { ComponentProps, FC } from 'react'
 
 import { cn } from '@/utils/style'

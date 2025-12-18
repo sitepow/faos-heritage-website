@@ -1,70 +1,51 @@
 'use client'
 
-import { useQuery } from '@tanstack/react-query'
+import { useQueries } from '@tanstack/react-query'
 
-import { getOrderDashboard, getOrderSum } from './order/actions/order'
-import { getProductDashboard } from './product/actions/product'
-import { getUserDashboard } from './user/actions/user'
+import { getOrderStat, getOrderStatCash } from '../actions/order'
+import { getProductStat } from '../actions/product'
+import { getUserStat } from '../actions/user'
 
 import {
-  TrendCard,
-  TrendCardSkeleton,
-} from '@/app/(dashboard)/_components/trend-card'
+  StatCard,
+  StatCardSkeleton,
+} from '@/app/(dashboard)/_components/card/stat'
+
+interface StatItem {
+  name: string
+  value: number
+}
 
 const Index = () => {
-  const QUERY = {
-    ORDER_SUM: ['dashboard', 'orders', 'card', 'sum'],
-    ORDER: ['dashboard', 'orders', 'card'],
-    PRODUCT: ['dashboard', 'products', 'card'],
-    USER: ['dashboard', 'users', 'card'],
-  }
+  const statsConfig = [
+    {
+      queryKey: ['dashboard', 'orders', 'stat', 'cash'],
+      queryFn: getOrderStatCash,
+    },
+    { queryKey: ['dashboard', 'orders', 'stat'], queryFn: getOrderStat },
+    { queryKey: ['dashboard', 'products', 'stat'], queryFn: getProductStat },
+    { queryKey: ['dashboard', 'users', 'stat'], queryFn: getUserStat },
+  ]
 
-  const { data: orderSum, isLoading: isLoadingOrderSum } = useQuery({
-    queryKey: QUERY.ORDER_SUM,
-    queryFn: () => getOrderSum(),
-  })
-
-  const { data: order, isLoading: isLoadingOrder } = useQuery({
-    queryKey: QUERY.ORDER,
-    queryFn: () => getOrderDashboard(),
-  })
-
-  const { data: product, isLoading: isLoadingProduct } = useQuery({
-    queryKey: QUERY.PRODUCT,
-    queryFn: () => getProductDashboard(),
-  })
-
-  const { data: user, isLoading: isLoadingUser } = useQuery({
-    queryKey: QUERY.USER,
-    queryFn: () => getUserDashboard(),
+  const results = useQueries({
+    queries: statsConfig.map((conf) => ({
+      queryKey: conf.queryKey,
+      queryFn: conf.queryFn as () => Promise<StatItem[]>,
+    })),
   })
 
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
       <div className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-        {isLoadingOrderSum &&
-          [...Array(4)].map((_) => <TrendCardSkeleton key={_} />)}
+        {results.map((result, index) => {
+          if (result.isLoading) {
+            return <StatCardSkeleton key={`skeleton-${index}`} />
+          }
 
-        {!isLoadingOrderSum &&
-          orderSum?.map((data) => <TrendCard key={data.name} {...data} />)}
-
-        {isLoadingOrder &&
-          [...Array(4)].map((_) => <TrendCardSkeleton key={_} />)}
-
-        {!isLoadingOrder &&
-          order?.map((data) => <TrendCard key={data.name} {...data} />)}
-
-        {isLoadingProduct &&
-          [...Array(4)].map((_) => <TrendCardSkeleton key={_} />)}
-
-        {!isLoadingOrderSum &&
-          product?.map((data) => <TrendCard key={data.name} {...data} />)}
-
-        {isLoadingUser &&
-          [...Array(4)].map((_) => <TrendCardSkeleton key={_} />)}
-
-        {!isLoadingUser &&
-          user?.map((data) => <TrendCard key={data.name} {...data} />)}
+          return result.data?.map((item) => (
+            <StatCard key={item.name} {...item} />
+          ))
+        })}
       </div>
     </section>
   )

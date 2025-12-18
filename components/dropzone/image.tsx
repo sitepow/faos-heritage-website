@@ -27,7 +27,7 @@ const createPreviewFiles = (files: File[]): ImageWithPreview[] =>
     }),
   )
 
-const ImageDropzone: FC<Props> = ({ multiple = false, onFilesChange }) => {
+const DropzoneImage: FC<Props> = ({ multiple = false, onFilesChange }) => {
   const [files, setFiles] = useState<ImageWithPreview[]>([])
 
   const notifyChange = useCallback(
@@ -154,4 +154,4 @@ const ImageDropzone: FC<Props> = ({ multiple = false, onFilesChange }) => {
   )
 }
 
-export { ImageDropzone }
+export { DropzoneImage }

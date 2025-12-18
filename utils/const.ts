@@ -1,35 +1,37 @@
 import type { OrderStatus, ProductUnit } from '@prisma/client'
 
+const ITEM_PER_PAGE = 8
+
 const SORT_MAP = {
   newest: {
     field: 'createdAt',
     order: 'desc',
-    label: 'Newest to Oldest',
+    label: 'Newest',
   },
   oldest: {
     field: 'createdAt',
     order: 'asc',
-    label: 'Oldest to Newest',
+    label: 'Oldest',
   },
   price_low: {
     field: 'price',
     order: 'asc',
-    label: 'Price Low to High',
+    label: 'Price: Low to High',
   },
   price_high: {
     field: 'price',
     order: 'desc',
-    label: 'Price High to Low',
+    label: 'Price: High to Low',
   },
   stock_low: {
     field: 'stockQuantity',
     order: 'asc',
-    label: 'Stock Low to High',
+    label: 'Stock: Low to High',
   },
   stock_high: {
     field: 'stockQuantity',
     order: 'desc',
-    label: 'Stock High to Low',
+    label: 'Stock: High to Low',
   },
 } as const
 
@@ -93,7 +95,7 @@ const PRODUCT_UNIT: Record<ProductUnit, string> = {
   HOUSE: 'House',
 }
 
-const PRODUCT_UNIT_ALL = Object.entries(PRODUCT_UNIT) as [ProductUnit, string][]
+const PRODUCT_UNITS = Object.entries(PRODUCT_UNIT) as [ProductUnit, string][]
 
 const SHIPPING_PROVIDERS = [
   {
@@ -206,6 +208,9 @@ const SHIPPING_PROVIDERS = [
   },
 ]
 
+const PROTECTED_PATHS = ['/dashboard', '/cart']
+const AUTH_PATHS = ['/login', '/register']
+
 export {
   ACCOUNT_TAB,
   SORT_MAP,
@@ -215,6 +220,9 @@ export {
   ORDER_STEPS_ALL,
   ORDER_STATUS_FLOW,
   PRODUCT_UNIT,
-  PRODUCT_UNIT_ALL,
+  PRODUCT_UNITS,
   SHIPPING_PROVIDERS,
+  PROTECTED_PATHS,
+  AUTH_PATHS,
+  ITEM_PER_PAGE,
 }

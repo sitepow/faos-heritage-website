@@ -72,7 +72,7 @@ const Panel: FC<Props> = ({ setIsMenuOpen }) => {
             name={user?.name}
           />
 
-          <UserIcon className='text-default-500 sm:hidden' />
+          <UserIcon className='sm:hidden' />
         </div>
       </DropdownTrigger>
       <DropdownMenu aria-label='Static Actions'>

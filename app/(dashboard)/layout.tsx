@@ -1,29 +1,18 @@
 import { Role } from '@prisma/client'
-import { redirect } from 'next/navigation'
-import { getServerSession } from 'next-auth'
 
 import type { FC, PropsWithChildren } from 'react'
 
-export const metadata = {
-  robots: {
-    index: false,
-    follow: false,
-    nocache: true,
-    noarchive: true,
-    nosnippet: true,
-  },
-}
+export const metadata = disableSeoConfig
 
-import { DashboardLayout } from './_components/layout'
-import { NEXT_AUTH_OPTIONS } from '../api/auth/[...nextauth]/route'
+import { DashboardClient } from './_components/client'
+
+import { disableSeoConfig } from '@/config/site'
+import { requireRole } from '@/lib/auth/require-role'
 
 const Layout: FC<PropsWithChildren> = async ({ children }) => {
-  const session = await getServerSession(NEXT_AUTH_OPTIONS)
+  await requireRole(Role.ADMIN)
 
-  if (!session?.user) redirect('/login')
-  if (session.user.role !== Role.ADMIN) redirect('/')
-
-  return <DashboardLayout>{children}</DashboardLayout>
+  return <DashboardClient>{children}</DashboardClient>
 }
 
 export default Layout

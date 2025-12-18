@@ -7,10 +7,10 @@ import { XIcon } from 'lucide-react'
 import Head from 'next/head'
 import { useSession } from 'next-auth/react'
 
-import { CartSection } from './_components/section/cart'
-import { OrderSection } from './_components/section/order'
-import { clearCart, deleteCart } from './actions/cart'
-import { useCartStore } from './store'
+import { CartSection } from '../_components/section/cart/cart'
+import { OrderSection } from '../_components/section/cart/order'
+import { clearCart, deleteCart } from '../actions/cart'
+import { useCartStore } from '../store/cart'
 
 import { ModalConfirm } from '@/components/modal/confirm'
 

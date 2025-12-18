@@ -1,6 +1,6 @@
 import { OrderStatus } from '@prisma/client'
 
-import type { GetAddressResult } from '@/app/(main)/account/actions/address'
+import type { GetAddressResult } from '@/app/(main)/actions/address'
 import type { ProductUnit } from '@prisma/client'
 
 import { ORDER_ALL_STATUS, ORDER_STATUS_FLOW, PRODUCT_UNIT } from './const'

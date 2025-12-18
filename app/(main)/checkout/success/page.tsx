@@ -2,12 +2,12 @@
 
 import { Suspense } from 'react'
 
-import { SuccessLayout } from './_components/layout'
+import { SuccessClient } from '@/app/(main)/checkout/_components/client/success'
 
 const Success = () => {
   return (
     <Suspense>
-      <SuccessLayout />
+      <SuccessClient />
     </Suspense>
   )
 }

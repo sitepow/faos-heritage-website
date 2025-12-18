@@ -1,19 +1,13 @@
 import type { FC, PropsWithChildren } from 'react'
 
-import LoginLayout from './_components/layout'
+import { LoginClient } from './_components/client'
 
-export const metadata = {
-  robots: {
-    index: false,
-    follow: false,
-    nocache: true,
-    noarchive: true,
-    nosnippet: true,
-  },
-}
+import { disableSeoConfig } from '@/config/site'
+
+export const metadata = disableSeoConfig
 
 const Layout: FC<PropsWithChildren> = ({ children }) => {
-  return <LoginLayout>{children}</LoginLayout>
+  return <LoginClient>{children}</LoginClient>
 }
 
 export default Layout

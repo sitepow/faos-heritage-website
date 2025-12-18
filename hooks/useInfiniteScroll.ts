@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-interface UseInfiniteScrollOptions {
+interface Params {
   hasNextPage?: boolean
   isFetchingNextPage: boolean
   fetchNextPage: () => void
@@ -12,7 +12,7 @@ const useInfiniteScroll = ({
   isFetchingNextPage,
   fetchNextPage,
   threshold = 300,
-}: UseInfiniteScrollOptions) => {
+}: Params) => {
   useEffect(() => {
     const onScroll = () => {
       const isAtBottom =

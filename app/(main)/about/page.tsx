@@ -1,4 +1,4 @@
-import LazyPdfViewer from '@/components/pdf-viewer/lazy-pdf-viewer'
+import LazyPdfViewer from '@/components/pdf/viewer/lazy-pdf-viewer'
 
 const About = () => {
   return (

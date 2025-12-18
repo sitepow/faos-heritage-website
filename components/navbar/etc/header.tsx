@@ -2,7 +2,9 @@ import type { ComponentProps, FC } from 'react'
 
 import { cn } from '@/utils/style'
 
-const Header: FC<ComponentProps<'div'>> = ({ className, ...props }) => {
+type HeaderProps = ComponentProps<'div'>
+
+const Header: FC<HeaderProps> = ({ className, ...props }) => {
   return (
     <div
       className={cn('bg-primary px-6 py-2.5 text-white', className)}

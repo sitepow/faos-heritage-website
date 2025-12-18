@@ -2,14 +2,14 @@
 
 import { Accordion, AccordionItem } from '@heroui/accordion'
 
-import { Header } from '../_components/section/header'
+import { SectionHeader } from '../../../components/heading'
 
 const Payment = () => {
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
-      <Header
+      <SectionHeader
         description='Details of supported payment methods and channels'
-        title='Payment Methods'
+        title='Payments'
       />
 
       <div className='mx-auto lg:w-1/2'>

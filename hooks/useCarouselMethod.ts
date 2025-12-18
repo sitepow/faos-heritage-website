@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react'
 
 type EmblaCarouselType = NonNullable<UseEmblaCarouselType['1']>
 
-interface UseCarouselNavigation {
+interface Params {
   prevDisabled: boolean
   nextDisabled: boolean
   onPrev: () => void
@@ -12,7 +12,7 @@ interface UseCarouselNavigation {
 
 const useCarouselNavigation = (
   emblaApi: EmblaCarouselType | undefined,
-): UseCarouselNavigation => {
+): Params => {
   const [prevDisabled, setPrevDisabled] = useState(true)
   const [nextDisabled, setNextDisabled] = useState(true)
 

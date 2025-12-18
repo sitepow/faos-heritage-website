@@ -8,34 +8,42 @@ import { Tab, Tabs } from '@heroui/tabs'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
 import Image from 'next/image'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
 
-import { createUser } from './actions/user'
+import { createUser } from '@/app/(main)/actions/user'
 import {
   userLoginSchema,
   userRegisterSchema,
   type UserLoginInput,
   type UserRegisterInput,
-} from './schema/user'
-
+} from '@/app/(main)/schema/user'
 import { siteConfig } from '@/config/site'
+import { useQueryParams } from '@/hooks/useQueryParams'
 
 const Index = () => {
   const router = useRouter()
-  const searchParams = useSearchParams()
-  const callbackUrl = searchParams.get('callbackUrl') || '/'
+  const { getQueryParam } = useQueryParams()
+  const callbackUrl = getQueryParam('callbackUrl') || '/'
 
-  const formLogin = useForm<UserLoginInput>({
+  const {
+    register: registerLogin,
+    handleSubmit: handleSubmitLogin,
+    formState: { errors: errorsLogin },
+  } = useForm<UserLoginInput>({
     resolver: zodResolver(userLoginSchema),
   })
 
-  const formRegister = useForm<UserRegisterInput>({
+  const {
+    register: register,
+    handleSubmit: handleSubmitRegister,
+    formState: { errors: errorsRegister },
+  } = useForm<UserRegisterInput>({
     resolver: zodResolver(userRegisterSchema),
   })
 
-  const { mutate: registerMutation, isPending: isPendingRegister } =
+  const { mutate: mutationRegister, isPending: isPendingRegister } =
     useMutation({
       mutationFn: createUser,
       onSuccess: async (_, form) => {
@@ -49,7 +57,7 @@ const Index = () => {
       },
     })
 
-  const { mutate: loginMutation, isPending: isPendingLogin } = useMutation({
+  const { mutate: mutationLogin, isPending: isPendingLogin } = useMutation({
     mutationFn: async (form: UserLoginInput) => {
       const res = await signIn('credentials', {
         ...form,
@@ -70,11 +78,11 @@ const Index = () => {
   const isPending = isPendingRegister || isPendingLogin
 
   const submitLogin = (data: UserLoginInput) => {
-    loginMutation(data)
+    mutationLogin(data)
   }
 
   const submitRegister = (data: UserRegisterInput) => {
-    registerMutation(data)
+    mutationRegister(data)
   }
 
   return (
@@ -89,22 +97,22 @@ const Index = () => {
 
       <Tabs fullWidth defaultSelectedKey='login' variant='bordered'>
         <Tab key='login' title='Login'>
-          <Form onSubmit={formLogin.handleSubmit(submitLogin)}>
+          <Form onSubmit={handleSubmitLogin(submitLogin)}>
             <Input
               label='Email'
               type='email'
               variant='bordered'
-              {...formLogin.register('email')}
-              errorMessage={formLogin.formState.errors.email?.message}
-              isInvalid={!!formLogin.formState.errors.email}
+              {...registerLogin('email')}
+              errorMessage={errorsLogin.email?.message}
+              isInvalid={!!errorsLogin.email}
             />
             <Input
               label='Password'
               type='password'
               variant='bordered'
-              {...formLogin.register('password')}
-              errorMessage={formLogin.formState.errors.password?.message}
-              isInvalid={!!formLogin.formState.errors.password}
+              {...registerLogin('password')}
+              errorMessage={errorsLogin.password?.message}
+              isInvalid={!!errorsLogin.password}
             />
             <Button
               fullWidth
@@ -119,20 +127,20 @@ const Index = () => {
         </Tab>
 
         <Tab key='register' title='Register'>
-          <Form onSubmit={formRegister.handleSubmit(submitRegister)}>
+          <Form onSubmit={handleSubmitRegister(submitRegister)}>
             <Input
               label='Name'
               variant='bordered'
-              {...formRegister.register('name')}
-              errorMessage={formRegister.formState.errors.name?.message}
-              isInvalid={!!formRegister.formState.errors.name}
+              {...register('name')}
+              errorMessage={errorsRegister.name?.message}
+              isInvalid={!!errorsRegister.name}
             />
 
             <Input
               label='Email'
-              {...formRegister.register('email')}
-              errorMessage={formRegister.formState.errors.email?.message}
-              isInvalid={!!formRegister.formState.errors.email}
+              {...register('email')}
+              errorMessage={errorsRegister.email?.message}
+              isInvalid={!!errorsRegister.email}
               type='email'
               variant='bordered'
             />
@@ -140,20 +148,18 @@ const Index = () => {
             <Input
               label='Password'
               variant='bordered'
-              {...formRegister.register('password')}
-              errorMessage={formRegister.formState.errors.password?.message}
-              isInvalid={!!formRegister.formState.errors.password}
+              {...register('password')}
+              errorMessage={errorsRegister.password?.message}
+              isInvalid={!!errorsRegister.password}
               type='password'
             />
 
             <Input
               label='Confirm password'
               variant='bordered'
-              {...formRegister.register('confirmPassword')}
-              errorMessage={
-                formRegister.formState.errors.confirmPassword?.message
-              }
-              isInvalid={!!formRegister.formState.errors.confirmPassword}
+              {...register('confirmPassword')}
+              errorMessage={errorsRegister.confirmPassword?.message}
+              isInvalid={!!errorsRegister.confirmPassword}
               type='password'
             />
 

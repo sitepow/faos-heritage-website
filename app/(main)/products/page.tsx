@@ -1,9 +1,7 @@
-import { ProductLayout } from './_components/layout'
-
-import { getProducts } from '@/actions/product'
-import { NotFound } from '@/components/not-found'
-
-const ITEM_PER_PAGE = 8
+import { PageNotFound } from '@/app/(main)/_components/page-not-found'
+import { getProducts } from '@/app/(main)/actions/product'
+import { ProductsClient } from '@/app/(main)/products/_components/client/products'
+import { ITEM_PER_PAGE } from '@/utils/const'
 
 const CategorySection = async () => {
   let products
@@ -12,15 +10,15 @@ const CategorySection = async () => {
     products = await getProducts({ limit: ITEM_PER_PAGE })
   } catch {
     return (
-      <NotFound>
+      <PageNotFound>
         We apologize, the product was not found in our system. Please try
         searching for the product again on the homepage.
-      </NotFound>
+      </PageNotFound>
     )
   }
 
   return (
-    <ProductLayout initialProducts={products} itemPerPage={ITEM_PER_PAGE} />
+    <ProductsClient initialProducts={products} itemPerPage={ITEM_PER_PAGE} />
   )
 }
 

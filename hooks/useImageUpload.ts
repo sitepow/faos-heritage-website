@@ -1,9 +1,6 @@
 import { useState } from 'react'
 
-import {
-  deleteFileSupabase,
-  uploadFilesSupabase,
-} from '@/app/(dashboard)/dashboard/product/actions/file'
+import { deleteFileSupabase, uploadFilesSupabase } from '@/actions/file'
 
 interface Params {
   oldImage?: string | null

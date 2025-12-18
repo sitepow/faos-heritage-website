@@ -2,24 +2,20 @@ import { NextResponse } from 'next/server'
 
 import type { NextRequest } from 'next/server'
 
+import { AUTH_PATHS, PROTECTED_PATHS } from './utils/const'
+
 const middleware = (request: NextRequest) => {
   const { pathname } = request.nextUrl
 
-  const sessionToken =
-    request.cookies.get('next-auth.session-token')?.value ||
-    request.cookies.get('__Secure-next-auth.session-token')?.value
-
-  const isLoggedIn = !!sessionToken
-
-  const protectedPaths = ['/dashboard', '/cart']
-  const isProtectedPath = protectedPaths.some((path) =>
-    pathname.startsWith(path),
+  const isLoggedIn = Boolean(
+    request.cookies.get('next-auth.session-token') ||
+    request.cookies.get('__Secure-next-auth.session-token'),
   )
 
-  const authPaths = ['/login', '/register']
-  const isAuthPath = authPaths.some((path) => pathname.startsWith(path))
+  const isProtected = PROTECTED_PATHS.some((path) => pathname.startsWith(path))
+  const isAuthPage = AUTH_PATHS.some((path) => pathname.startsWith(path))
 
-  if (isProtectedPath && !isLoggedIn) {
+  if (isProtected && !isLoggedIn) {
     const url = new URL('/login', request.url)
 
     url.searchParams.set('callbackUrl', pathname)
@@ -27,7 +23,7 @@ const middleware = (request: NextRequest) => {
     return NextResponse.redirect(url)
   }
 
-  if (isAuthPath && isLoggedIn) {
+  if (isAuthPage && isLoggedIn) {
     return NextResponse.redirect(new URL('/', request.url))
   }
 

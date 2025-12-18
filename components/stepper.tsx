@@ -26,9 +26,17 @@ const Stepper: FC<Props> = ({
   deliveredAt,
   ...props
 }) => {
-  const isCancelledFlow = status === 'CANCELLED' || status === 'REFUNDED'
+  const isCancelled = status === 'CANCELLED' || status === 'REFUNDED'
+  const currentIndex = ORDER_STEPS.findIndex(([key]) => key === status)
 
-  if (isCancelledFlow) {
+  const statusDates: Record<string, Date | null> = {
+    [OrderStatus.PENDING]: createdAt,
+    [OrderStatus.PAID]: paidAt,
+    [OrderStatus.PROCESSING]: shippedAt,
+    [OrderStatus.DELIVERED]: deliveredAt,
+  }
+
+  if (isCancelled) {
     return (
       <div className={cn('mx-auto w-full max-w-3xl', className)} {...props}>
         <div className='flex flex-col items-center justify-center py-4'>
@@ -44,14 +52,13 @@ const Stepper: FC<Props> = ({
     )
   }
 
-  const currentIndex = ORDER_STEPS.findIndex(([key]) => key === status)
-
   return (
     <div className={cn('mx-auto w-full max-w-3xl', className)} {...props}>
       <div className='flex flex-col items-center justify-between md:flex-row'>
         {ORDER_STEPS.map(([statusKey, label], index) => {
           const isCompleted = index < currentIndex
           const isCurrent = index === currentIndex
+          const date = statusDates[statusKey]
 
           return (
             <React.Fragment key={statusKey}>
@@ -77,19 +84,7 @@ const Stepper: FC<Props> = ({
                     !isCompleted && !isCurrent && 'text-default-500',
                   )}
                 >
-                  {label}{' '}
-                  {statusKey === OrderStatus.PENDING &&
-                    createdAt &&
-                    formatDate(createdAt!)}
-                  {statusKey === OrderStatus.PAID &&
-                    paidAt &&
-                    formatDate(paidAt!)}
-                  {statusKey === OrderStatus.PROCESSING &&
-                    shippedAt &&
-                    formatDate(shippedAt!)}
-                  {statusKey === OrderStatus.DELIVERED &&
-                    deliveredAt &&
-                    formatDate(deliveredAt!)}
+                  {label} {formatDate(date!)}
                 </p>
               </div>
 

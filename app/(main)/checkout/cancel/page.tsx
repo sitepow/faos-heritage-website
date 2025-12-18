@@ -2,12 +2,12 @@
 
 import { Suspense } from 'react'
 
-import { CancelLayout } from './_components/layout'
+import { CancelClient } from '@/app/(main)/checkout/_components/client/cancel'
 
 const Cancel = () => {
   return (
     <Suspense>
-      <CancelLayout />
+      <CancelClient />
     </Suspense>
   )
 }

@@ -7,6 +7,16 @@ interface NavItem {
   href: string
 }
 
+const disableSeoConfig = {
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    noarchive: true,
+    nosnippet: true,
+  },
+}
+
 const siteConfig = {
   name: 'FAOS',
   title: 'Premium Organic Olive Oil & Honey — 100% Pure Natural Collection',
@@ -16,46 +26,19 @@ const siteConfig = {
     cart: '/cart',
   },
   mainNavItems: [
-    {
-      label: 'Home',
-      href: '/',
-    },
-    {
-      label: 'All Products',
-      href: '/products',
-    },
-    {
-      label: 'Payment Methods',
-      href: '/payment',
-    },
-    {
-      label: 'My Orders',
-      href: `/account?tab=${ACCOUNT_TAB?.ORDER}`,
-    },
-    {
-      label: 'About Us',
-      href: '/about',
-    },
+    { label: 'Home', href: '/' },
+    { label: 'Products', href: '/products' },
+    { label: 'Payments', href: '/payment' },
+    { label: 'My Orders', href: `/account?tab=${ACCOUNT_TAB?.ORDER}` },
+    { label: 'About', href: '/about' },
   ] satisfies NavItem[],
   adminNavbarItems: [
-    {
-      label: 'Overview',
-      href: '/dashboard',
-    },
-    {
-      label: 'User Management',
-      href: '/dashboard/user',
-    },
-    {
-      label: 'Product Management',
-      href: '/dashboard/product',
-    },
-    {
-      label: 'Order Management',
-      href: '/dashboard/order',
-    },
+    { label: 'Dashboard', href: '/dashboard' },
+    { label: 'Users', href: '/dashboard/manager/user' },
+    { label: 'Products', href: '/dashboard/manager/product' },
+    { label: 'Orders', href: '/dashboard/manager/order' },
   ] satisfies NavItem[],
 }
 
 export type { SiteConfig, NavItem }
-export { siteConfig }
+export { siteConfig, disableSeoConfig }
