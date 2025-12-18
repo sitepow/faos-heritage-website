@@ -1,116 +1,58 @@
-'use client'
+import type { Metadata } from 'next'
 
-import { Accordion, AccordionItem } from '@heroui/accordion'
+import PaymentClient from './payment.client'
 
-import { SectionHeader } from '../../../components/heading'
+import { siteConfig } from '@/config/site'
+import { OG_IMAGE } from '@/utils/helper'
 
-const Payment = () => {
+export const metadata: Metadata = {
+  title: `Payments FAOS | ${siteConfig.title}`,
+  description:
+    'Learn about FAOS payment methods including credit card and PromptPay QR code. Secure payments powered by Stripe.',
+  keywords: [
+    'FAOS payment',
+    'credit card payment',
+    'PromptPay',
+    'Stripe checkout',
+    'secure payment',
+  ],
+  alternates: {
+    canonical: 'https://faos.asia/payment',
+  },
+
+  openGraph: {
+    title: `Payments FAOS | ${siteConfig.title}`,
+    description:
+      'Secure payment methods including credit card and PromptPay QR code.',
+    url: 'https://faos.asia/payment',
+    siteName: siteConfig.name,
+    type: 'article',
+    images: [
+      {
+        url: OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: 'FAOS secure payment methods',
+      },
+    ],
+  },
+
+  twitter: {
+    card: 'summary_large_image',
+    title: `Payments | ${siteConfig.title}`,
+    description:
+      'Secure payment methods including credit card and PromptPay QR code.',
+    images: [OG_IMAGE],
+  },
+}
+
+const PaymentPage = () => {
   return (
-    <section className='flex flex-col items-center justify-center gap-4 text-center'>
-      <SectionHeader
-        description='Details of supported payment methods and channels'
-        title='Payments'
-      />
-
-      <div className='mx-auto lg:w-1/2'>
-        <Accordion variant='splitted'>
-          <AccordionItem
-            key='1'
-            aria-label='How to start purchasing products'
-            title='How to Start Shopping'
-          >
-            <div className='space-y-3 text-left'>
-              <p>
-                1. Select the product you want and click{' '}
-                <strong className='text-primary underline'>
-                  “Add to Cart”
-                </strong>
-              </p>
-              <p>2. Open your cart to review the selected items</p>
-              <p>
-                3. When you are ready to pay, click{' '}
-                <strong className='text-primary underline'>
-                  “Place Order”
-                </strong>
-              </p>
-              <p>4. You will be redirected to Stripe’s secure checkout page</p>
-            </div>
-          </AccordionItem>
-
-          <AccordionItem
-            key='2'
-            aria-label='How to pay with debit or credit card'
-            title='Pay with Debit / Credit Card'
-          >
-            <div className='space-y-3 text-left'>
-              <p>
-                We accept debit and credit cards from all banks with the
-                <strong className='text-primary underline'>
-                  {' '}
-                  Visa, Mastercard, or JCB
-                </strong>{' '}
-                logo, including virtual cards issued by banks.
-              </p>
-              <p>Steps:</p>
-              <ul className='list-disc space-y-2 pl-5'>
-                <li>
-                  Enter your card number, expiration date, and CVC as shown on
-                  your card
-                </li>
-                <li>Complete OTP verification if required by your bank</li>
-                <li>
-                  After successful payment, a confirmation email will be sent
-                  automatically
-                </li>
-              </ul>
-              <p className='text-default-500'>
-                Your card information is encrypted and processed directly by
-                Stripe. We do not have access to your card details.
-              </p>
-            </div>
-          </AccordionItem>
-
-          <AccordionItem
-            key='3'
-            aria-label='How to pay using QR Code'
-            title='Pay with QR Code'
-          >
-            <div className='space-y-3 text-left'>
-              <p>
-                If you choose to pay via{' '}
-                <strong className='text-primary underline'>
-                  PromptPay QR Code
-                </strong>
-                , a payment QR code will be generated automatically on Stripe’s
-                checkout page.
-              </p>
-
-              <p>Steps:</p>
-              <ul className='list-disc space-y-2 pl-5'>
-                <li>
-                  Select{' '}
-                  <strong className='text-primary underline'>
-                    PromptPay (QR Code)
-                  </strong>{' '}
-                  as your payment method
-                </li>
-                <li>Scan the QR code using your mobile banking app</li>
-                <li>
-                  Complete the payment and wait for confirmation (usually within
-                  a few seconds)
-                </li>
-                <li>Your order status will be updated automatically</li>
-              </ul>
-
-              <p className='text-default-500'>
-                Supported by all Thai banks that offer PromptPay QR scanning.
-              </p>
-            </div>
-          </AccordionItem>
-        </Accordion>
-      </div>
-    </section>
+    <>
+      <h1 className='sr-only'>Payment Methods at FAOS</h1>
+      <PaymentClient />
+    </>
   )
 }
 
-export default Payment
+export default PaymentPage

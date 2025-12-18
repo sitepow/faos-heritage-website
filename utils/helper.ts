@@ -7,6 +7,8 @@ import { ORDER_ALL_STATUS, ORDER_STATUS_FLOW, PRODUCT_UNIT } from './const'
 
 import { siteConfig } from '@/config/site'
 
+const OG_IMAGE = 'https://faos.asia/faos-healthy-food-organic.png'
+
 const getFooter = () => {
   return ` Copyright ${new Date().getFullYear()} ${siteConfig.name} - ${siteConfig.title}`
 }
@@ -27,6 +29,14 @@ const getIdFromSlug = (slug: string): string => {
   const parts = slug.split('-').filter(Boolean)
 
   return parts[parts.length - 1] || ''
+}
+
+export const getNameFromSlug = (slug: string) => {
+  return slug
+    .split('-')
+    .slice(0, -1)
+    .join(' ')
+    .replace(/\b\w/g, (c) => c.toUpperCase())
 }
 
 const removeEmptyField = <T extends Record<string, unknown>>(
@@ -153,6 +163,7 @@ const checkOutOfStock = ({
 }
 
 export {
+  OG_IMAGE,
   createSlug,
   getFooter,
   getIdFromSlug,
