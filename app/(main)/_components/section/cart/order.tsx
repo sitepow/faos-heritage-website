@@ -116,7 +116,7 @@ const OrderSection: FC<ComponentProps<typeof Card>> = ({
         description='Please confirm the accuracy of your product list and shipping address. If everything is correct, you can proceed with your order immediately.'
         isOpen={isOpenConfirmOrder}
         isPending={isPendingCreateOrder}
-        title='Are you about to place an order??'
+        title='Are you about to place an order?'
         onConfirm={onCreateOrder}
         onOpenChange={onOpenConfirmOrderChange}
       />

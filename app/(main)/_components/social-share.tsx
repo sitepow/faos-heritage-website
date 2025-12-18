@@ -13,13 +13,18 @@ interface SocialShareProps extends ComponentPropsWithoutRef<'div'> {
 }
 
 const SocialShare = ({
-  url = '',
   label = 'Share :',
   size = 35,
   className,
   ...props
 }: SocialShareProps) => {
-  const networks = ['facebook', 'line.me', 'sharethis']
+  const urls = [
+    'https://web.facebook.com',
+    'https://www.line.me',
+    'https://www.whatsapp.com',
+    'https://www.instagram.com',
+    'https://www.tiktok.com',
+  ]
 
   return (
     <div
@@ -31,11 +36,10 @@ const SocialShare = ({
       )}
 
       <div className='flex items-center gap-1.5'>
-        {networks.map((network) => (
+        {urls.map((url) => (
           <SocialIcon
-            key={network}
+            key={url}
             className='transition-transform hover:scale-110 active:scale-95'
-            network={network}
             style={{ width: size, height: size }}
             target='_blank'
             url={url}
