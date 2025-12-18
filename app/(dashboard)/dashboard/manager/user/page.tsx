@@ -101,9 +101,9 @@ const Customer = () => {
 
       <div className='flex w-full flex-wrap gap-3 *:shrink-0 md:justify-end'>
         <Button
+          className='text-white'
           color='primary'
-          startContent={<PlusIcon className='text-primary' />}
-          variant='bordered'
+          startContent={<PlusIcon />}
           onPress={() => {
             onOpenUserChange()
           }}
@@ -111,10 +111,10 @@ const Customer = () => {
           Add new users
         </Button>
         <Button
+          className='text-white'
           color='primary'
           isDisabled={selectedUserIds.length === 0}
-          startContent={<XIcon className='text-primary' />}
-          variant='bordered'
+          startContent={<XIcon />}
           onPress={() => {
             setState({ userId: null })
             onOpenDeleteChange()

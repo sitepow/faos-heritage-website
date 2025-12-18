@@ -3,7 +3,6 @@ import { Card, CardBody, CardHeader } from '@heroui/card'
 import { Skeleton } from '@heroui/skeleton'
 import { Role } from '@prisma/client'
 import { useQuery } from '@tanstack/react-query'
-import { EditIcon } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 
 import type { FC } from 'react'
@@ -68,7 +67,6 @@ const OverviewCard: FC<Props> = ({ onclick }) => {
               <Button
                 className='mt-5 text-white'
                 color='primary'
-                startContent={<EditIcon />}
                 onPress={onclick}
               >
                 Edit personal information

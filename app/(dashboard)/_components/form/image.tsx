@@ -225,18 +225,13 @@ const ImageForm = () => {
           </ModalBody>
         )}
         <ModalFooter>
-          <Button
-            color='primary'
-            isDisabled={isPending}
-            variant='bordered'
-            onPress={onClose}
-          >
+          <Button isDisabled={isPending} variant='faded' onPress={onClose}>
             Cancel
           </Button>
           <Button
+            className='text-white'
             color='primary'
             isDisabled={isPending || !isDirty}
-            variant='bordered'
             onClick={handleSubmit(onSubmit)}
           >
             {isPending ? 'In progress' : 'Save'}

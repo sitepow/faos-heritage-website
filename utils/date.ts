@@ -3,7 +3,7 @@ const formatDate = (
   locale = 'en-EN',
   options?: Intl.DateTimeFormatOptions,
 ) => {
-  if (!value) return 'Date unknown'
+  if (!value) return null
 
   const date = value instanceof Date ? value : new Date(value)
 

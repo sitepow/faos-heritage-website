@@ -3,7 +3,7 @@ import { Button } from '@heroui/button'
 import { Card, CardBody, CardHeader } from '@heroui/card'
 import { Skeleton } from '@heroui/skeleton'
 import { useQuery } from '@tanstack/react-query'
-import { EditIcon, PlusIcon } from 'lucide-react'
+import { PlusIcon } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 
 import { AddressForm } from '@/app/(main)/_components/form/address'
@@ -69,7 +69,6 @@ const AddressCard = () => {
               <Button
                 className='w-fit text-white'
                 color='primary'
-                startContent={<EditIcon />}
                 onClick={() => {
                   setState({ addressId: address?.id })
                   onOpenAddressChange()

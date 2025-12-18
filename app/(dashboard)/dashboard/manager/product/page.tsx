@@ -134,9 +134,9 @@ const Product = () => {
       </div>
       <div className='flex w-full flex-wrap gap-3 *:shrink-0 md:justify-end'>
         <Button
+          className='text-white'
           color='primary'
-          startContent={<PlusIcon className='text-primary' />}
-          variant='bordered'
+          startContent={<PlusIcon />}
           onPress={() => {
             onOpenProductChange()
           }}
@@ -144,9 +144,9 @@ const Product = () => {
           Add new products
         </Button>
         <Button
+          className='text-white'
           color='primary'
-          startContent={<SettingsIcon className='text-primary' />}
-          variant='bordered'
+          startContent={<SettingsIcon />}
           onPress={() => {
             onOpenCategoryManagerChange()
           }}
@@ -156,8 +156,7 @@ const Product = () => {
         <Button
           color='primary'
           isDisabled={selectedProductIds.length === 0}
-          startContent={<XIcon className='text-primary' />}
-          variant='bordered'
+          startContent={<XIcon />}
           onPress={() => {
             setState({ productId: null })
             onOpenDeleteChange()

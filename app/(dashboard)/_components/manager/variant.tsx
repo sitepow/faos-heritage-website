@@ -206,13 +206,13 @@ const VariantManager = () => {
           )}
 
           <ModalFooter>
-            <Button color='primary' variant='bordered' onPress={onClose}>
+            <Button variant='faded' onPress={onClose}>
               Cancel
             </Button>
             <Button
+              className='text-white'
               color='primary'
-              startContent={<PlusIcon className='text-primary' />}
-              variant='bordered'
+              startContent={<PlusIcon />}
               onPress={() => {
                 onOpenVariantChange()
                 onOpenVariantManagerChange()

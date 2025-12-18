@@ -25,6 +25,12 @@ const AccountClient = () => {
     tabParam ?? ACCOUNT_TAB.ACCOUNT,
   )
 
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   useEffect(() => {
     if (tabParam && tabParam !== selectedTabKey) {
       setSelectedTabKey(tabParam)
@@ -50,37 +56,39 @@ const AccountClient = () => {
         </div>
 
         <div className='w-full'>
-          <Tabs
-            aria-label='Options'
-            className='h-full rounded-lg light:bg-white'
-            classNames={{
-              base: 'w-full flex flex-col lg:flex-row lg:w-fit',
-              tabList: 'flex overflow-x-auto lg:flex-col lg:w-fit gap-1 p-2',
-              panel: `w-full`,
-            }}
-            isVertical={isLg ? true : false}
-            selectedKey={selectedTabKey}
-            variant='bordered'
-            onSelectionChange={handleTabChange}
-          >
-            <Tab key={ACCOUNT_TAB.ACCOUNT} title='Manage my account'>
-              <OverviewCard
-                onclick={() => handleTabChange(ACCOUNT_TAB.PROFILE)}
-              />
-            </Tab>
-            <Tab key={ACCOUNT_TAB.ORDER} title='My Orders'>
-              <OrderCard />
-            </Tab>
-            <Tab key={ACCOUNT_TAB.FAVORITE} title='Favorites'>
-              <FavoriteCard />
-            </Tab>
-            <Tab key={ACCOUNT_TAB.PROFILE} title='Edit personal information'>
-              <ProfileCard />
-            </Tab>
-            <Tab key={ACCOUNT_TAB.ADDRESS} title='Manage my address'>
-              <AddressCard />
-            </Tab>
-          </Tabs>
+          {mounted && (
+            <Tabs
+              aria-label='Options'
+              className='h-full rounded-lg light:bg-white'
+              classNames={{
+                base: 'w-full flex flex-col lg:flex-row lg:w-fit',
+                tabList: 'flex overflow-x-auto lg:flex-col lg:w-fit gap-1 p-2',
+                panel: `w-full`,
+              }}
+              isVertical={isLg ? true : false}
+              selectedKey={selectedTabKey}
+              variant='bordered'
+              onSelectionChange={handleTabChange}
+            >
+              <Tab key={ACCOUNT_TAB.ACCOUNT} title='Manage my account'>
+                <OverviewCard
+                  onclick={() => handleTabChange(ACCOUNT_TAB.PROFILE)}
+                />
+              </Tab>
+              <Tab key={ACCOUNT_TAB.ORDER} title='My Orders'>
+                <OrderCard />
+              </Tab>
+              <Tab key={ACCOUNT_TAB.FAVORITE} title='Favorites'>
+                <FavoriteCard />
+              </Tab>
+              <Tab key={ACCOUNT_TAB.PROFILE} title='Edit personal information'>
+                <ProfileCard />
+              </Tab>
+              <Tab key={ACCOUNT_TAB.ADDRESS} title='Manage my address'>
+                <AddressCard />
+              </Tab>
+            </Tabs>
+          )}
         </div>
       </section>
     </>
