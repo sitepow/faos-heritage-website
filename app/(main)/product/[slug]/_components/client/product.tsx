@@ -188,7 +188,9 @@ const ProductClient: FC<Props> = ({ initialProduct, productId }) => {
                 fullWidth
                 isDisabled={hasFavorite}
                 isLoading={createFavoriteMutation.isPending}
-                startContent={<HeartIcon />}
+                startContent={
+                  !createFavoriteMutation.isPending && <HeartIcon />
+                }
                 variant='faded'
                 onClick={() =>
                   requireAuth('add favorite') && createFavoriteMutation.mutate()
