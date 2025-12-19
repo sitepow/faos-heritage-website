@@ -98,7 +98,7 @@ const Navbar = () => {
           {!isAuthenticated && (
             <NavbarItem className='hidden items-center gap-4 lg:flex'>
               <Link href={siteConfig.link.login}>
-                <LogInIcon />
+                <LogInIcon className='text-default-400' />
               </Link>
               <ThemeSwitch />
             </NavbarItem>
@@ -128,13 +128,13 @@ const Navbar = () => {
         {!isAuthenticated && !isDashboard && (
           <NavbarItem className='flex items-center gap-3 lg:hidden'>
             <Link href={siteConfig.link.login}>
-              <LogInIcon />
+              <LogInIcon className='text-default-400' />
             </Link>
             <ThemeSwitch />
           </NavbarItem>
         )}
 
-        <NavbarMenuToggle className='cursor-pointer text-default-500 lg:hidden' />
+        <NavbarMenuToggle className='cursor-pointer lg:hidden' />
       </HeroNavbar>
     </>
   )

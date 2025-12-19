@@ -1,22 +1,25 @@
-import { Card, CardBody, CardHeader } from '@heroui/card'
+import { Card, CardBody } from '@heroui/card'
 
 import type { GetProductResult } from '@/app/(dashboard)/actions/product'
 import type { FC } from 'react'
-
-import { SubHeading } from '@/components/heading'
 
 interface Props {
   product: GetProductResult
 }
 
 const DetailCard: FC<Props> = ({ product }) => {
+  if (!product?.description) {
+    return
+  }
+
   return (
-    <Card className='col-span-2 lg:border-l lg:border-divider' shadow='none'>
-      <CardHeader className='flex-col items-start gap-4'>
-        <SubHeading title='Details' />
-      </CardHeader>
-      <CardBody>
-        <p className='whitespace-pre-line'>{product?.description || '-'}</p>
+    <Card>
+      <CardBody className='mx-auto max-w-4xl'>
+        <article className='prose prose-neutral dark:prose-invert'>
+          <div className='whitespace-pre-line text-default-600'>
+            {product.description}
+          </div>
+        </article>
       </CardBody>
     </Card>
   )

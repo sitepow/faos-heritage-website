@@ -39,7 +39,7 @@ const ProductCard: FC<Props> = ({ className, product }) => {
   return (
     <Card
       className={cn(
-        'flex size-full w-72 flex-none flex-col border border-divider md:min-w-80',
+        'flex size-full min-h-[420px] w-72 flex-none flex-col border border-divider md:min-w-80',
         className,
       )}
       shadow='none'
@@ -91,9 +91,7 @@ const ProductCard: FC<Props> = ({ className, product }) => {
             </Chip>
           </div>
 
-          <h4 className='line-clamp-1 text-lg font-bold hover:underline'>
-            {product?.name}
-          </h4>
+          <h4 className='line-clamp-2 text-lg font-bold'>{product?.name}</h4>
 
           <ProductPrice
             price={product?.price}

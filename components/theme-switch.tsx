@@ -65,7 +65,11 @@ const ThemeSwitch: FC<Props> = ({ className, classNames }) => {
           ),
         })}
       >
-        {!isSelected || isSSR ? <SunIcon /> : <MoonIcon />}
+        {!isSelected || isSSR ? (
+          <SunIcon className='text-default-400' />
+        ) : (
+          <MoonIcon className='text-default-400' />
+        )}
       </div>
     </Component>
   )

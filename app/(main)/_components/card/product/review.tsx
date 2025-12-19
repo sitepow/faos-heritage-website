@@ -1,16 +1,7 @@
-import { Card, CardBody, CardHeader } from '@heroui/card'
-
-import { SubHeading } from '@/components/heading'
+import { Card } from '@heroui/card'
 
 const ReviewCard = () => {
-  return (
-    <Card className='col-span-2 lg:border-l lg:border-divider' shadow='none'>
-      <CardHeader className='flex-col items-start gap-4'>
-        <SubHeading title='Product review' />
-      </CardHeader>
-      <CardBody>-</CardBody>
-    </Card>
-  )
+  return <Card />
 }
 
 export { ReviewCard }

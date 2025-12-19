@@ -22,7 +22,7 @@ const Cart = () => {
 
   return (
     <Link className='relative inline-block' href={siteConfig.link.cart}>
-      <ShoppingCartIcon />
+      <ShoppingCartIcon className='text-default-400' />
       {hasItems && (
         <div className='absolute -top-2 -right-2 flex size-5 items-center justify-center rounded-full bg-primary text-xs font-bold text-white'>
           {displayCount}

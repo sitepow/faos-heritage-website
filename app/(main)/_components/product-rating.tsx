@@ -22,7 +22,7 @@ const ProductRating: FC<ComponentProps<'div'> & Props> = ({
           size={15}
         />
       ))}
-      <span className='flex-wrap text-default-500'>({formatNumber(0)})</span>
+      <span className='flex-wrap text-default-400'>({formatNumber(0)})</span>
     </div>
   )
 }

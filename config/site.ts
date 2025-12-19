@@ -1,5 +1,3 @@
-import { ACCOUNT_TAB } from '@/utils/const'
-
 type SiteConfig = typeof siteConfig
 
 interface NavItem {
@@ -29,7 +27,6 @@ const siteConfig = {
     { label: 'Home', href: '/' },
     { label: 'Products', href: '/products' },
     { label: 'Payments', href: '/payment' },
-    { label: 'My Orders', href: `/account?tab=${ACCOUNT_TAB?.ORDER}` },
     { label: 'About', href: '/about' },
   ] satisfies NavItem[],
   adminNavbarItems: [

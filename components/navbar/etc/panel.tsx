@@ -31,7 +31,13 @@ const Panel: FC<Props> = ({ setIsMenuOpen }) => {
       key: 'account',
       label: 'My account',
       icon: <UserIcon className='text-default-500' />,
-      action: () => router.push('/account'),
+      action: () => router.push(`/account?tab=${ACCOUNT_TAB?.ACCOUNT}`),
+    },
+    {
+      key: 'account',
+      label: 'My orders',
+      icon: <UserIcon className='text-default-500' />,
+      action: () => router.push(`/account?tab=${ACCOUNT_TAB?.ORDER}`),
     },
     {
       key: 'favorite',
@@ -72,7 +78,7 @@ const Panel: FC<Props> = ({ setIsMenuOpen }) => {
             name={user?.name}
           />
 
-          <UserIcon className='sm:hidden' />
+          <UserIcon className='text-default-400 sm:hidden' />
         </div>
       </DropdownTrigger>
       <DropdownMenu aria-label='Static Actions'>

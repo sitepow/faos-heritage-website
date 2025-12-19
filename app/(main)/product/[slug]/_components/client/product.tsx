@@ -9,6 +9,8 @@ import {
   Alert,
   Select,
   SelectItem,
+  Tab,
+  Tabs,
 } from '@heroui/react'
 import { Skeleton } from '@heroui/skeleton'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
@@ -158,8 +160,12 @@ const ProductClient: FC<Props> = ({ initialProduct, productId }) => {
             <h1 className='text-2xl font-bold'>{product.name}</h1>
             <ProductRating />
 
-            <Alert color={isOutOfStock ? 'danger' : 'default'} variant='faded'>
-              <div className='flex flex-col gap-1 text-sm'>
+            <Alert
+              hideIcon
+              color={isOutOfStock ? 'danger' : 'default'}
+              variant='bordered'
+            >
+              <div className='flex flex-col gap-1 text-sm text-default-600'>
                 <span>{product.shortDescription || 'Description: -'}</span>
                 <span className='font-medium'>
                   {isOutOfStock
@@ -173,6 +179,7 @@ const ProductClient: FC<Props> = ({ initialProduct, productId }) => {
               <Select
                 label='Product options'
                 selectedKeys={variantId ? [variantId] : []}
+                variant='bordered'
                 onSelectionChange={(k) =>
                   setVariantId(Array.from(k)[0] as string)
                 }
@@ -233,8 +240,15 @@ const ProductClient: FC<Props> = ({ initialProduct, productId }) => {
         </Card>
       </div>
 
-      <DetailCard product={product} />
-      <ReviewCard />
+      <Tabs className='mx-auto' variant='bordered'>
+        <Tab title='Description'>
+          <DetailCard product={product} />
+        </Tab>
+        <Tab title='Review'>
+          <ReviewCard />
+        </Tab>
+      </Tabs>
+
       <BannerCertificate />
       <BannerAdvertise />
       <SimilarSection product={product} />
