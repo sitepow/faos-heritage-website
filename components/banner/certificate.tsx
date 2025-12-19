@@ -14,8 +14,11 @@ const BannerCertificate = () => {
       <CardBody
         className='flex w-full flex-col items-center justify-center gap-10 rounded-xl px-5 py-10'
         style={{
-          backgroundImage: 'url(/banner/faos-moutain-green.jpg)',
-          backgroundPosition: 'top',
+          backgroundImage: `
+          linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,1)),
+          url(/banner/faos-moutain-green.jpg)
+          `,
+          backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
         }}
       >

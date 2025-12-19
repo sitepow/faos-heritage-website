@@ -40,7 +40,7 @@ const Carousel: FC<CarouselProps> = ({
 
       {!prevDisabled && (
         <CarouselNavigateButton
-          className='absolute top-1/2 left-4 hidden -translate-y-1/2 bg-black/20 hover:bg-black/30 md:flex'
+          className='absolute top-1/2 left-4 flex -translate-y-1/2 bg-black/20 hover:bg-black/30'
           direction='prev'
           onClick={onPrev}
         />
@@ -48,7 +48,7 @@ const Carousel: FC<CarouselProps> = ({
 
       {!nextDisabled && (
         <CarouselNavigateButton
-          className='absolute top-1/2 right-4 hidden -translate-y-1/2 bg-black/20 hover:bg-black/30 md:flex'
+          className='absolute top-1/2 right-4 flex -translate-y-1/2 bg-black/20 hover:bg-black/30'
           direction='next'
           onClick={onNext}
         />

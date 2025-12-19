@@ -196,7 +196,7 @@ const ProductClient: FC<Props> = ({ initialProduct, productId }) => {
                   requireAuth('add favorite') && createFavoriteMutation.mutate()
                 }
               >
-                Add to favorites
+                <span className='hidden md:block'>Add to favorites</span>
               </Button>
 
               <Button
@@ -218,7 +218,7 @@ const ProductClient: FC<Props> = ({ initialProduct, productId }) => {
                   createCartMutation.mutate()
                 }}
               >
-                Add to cart
+                <span className='hidden md:block'>Add to cart</span>
               </Button>
             </div>
 
