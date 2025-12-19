@@ -154,6 +154,7 @@ const Product = () => {
           Manage product categories
         </Button>
         <Button
+          className='text-white'
           color='primary'
           isDisabled={selectedProductIds.length === 0}
           startContent={<XIcon />}
