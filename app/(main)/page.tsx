@@ -5,6 +5,7 @@ import { CategoryClient } from './_components/client/category'
 
 import { ExploreProducts } from '@/app/(main)/_components/client/explore-products'
 import { getProducts } from '@/app/(main)/actions/product'
+import { BannerAdvertise } from '@/components/banner/advertise'
 import { BannerCertificate } from '@/components/banner/certificate'
 import { siteConfig } from '@/config/site'
 import { ITEM_PER_PAGE } from '@/utils/const'
@@ -74,6 +75,8 @@ const Index = async () => {
           itemPerPage={ITEM_PER_PAGE}
         />
       )}
+
+      <BannerAdvertise />
     </section>
   )
 }

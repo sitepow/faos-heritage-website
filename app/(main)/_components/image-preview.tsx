@@ -26,19 +26,16 @@ const ImagePreview = ({
 
   return (
     <div
-      className={cn(
-        'flex w-full flex-col gap-3 md:max-w-[325px] lg:max-w-[425px]',
-        className,
-      )}
+      className={cn('flex size-full w-full flex-col gap-3', className)}
       {...props}
     >
-      <div className='relative aspect-square w-full overflow-hidden rounded-xl'>
+      <div className='relative aspect-square h-[500px] w-full overflow-hidden rounded-xl'>
         <Image
           fill
           priority
           alt={alt}
-          className='object-cover transition-opacity duration-300'
-          sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+          className='aspect-square object-cover transition-opacity duration-300'
+          // sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
           src={mainImage}
         />
       </div>

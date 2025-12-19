@@ -11,7 +11,7 @@ interface Props {
 
 const DetailCard: FC<Props> = ({ product }) => {
   return (
-    <Card className='col-span-2' shadow='none'>
+    <Card className='col-span-2 lg:border-l lg:border-divider' shadow='none'>
       <CardHeader className='flex-col items-start gap-4'>
         <SubHeading title='Details' />
       </CardHeader>

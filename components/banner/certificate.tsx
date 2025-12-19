@@ -14,16 +14,16 @@ const BannerCertificate = () => {
       <CardBody
         className='flex w-full flex-col items-center justify-center gap-10 rounded-xl px-5 py-10'
         style={{
-          backgroundImage: 'url(/banner.jpg)',
+          backgroundImage: 'url(/banner/faos-moutain-green.jpg)',
           backgroundPosition: 'top',
           backgroundRepeat: 'no-repeat',
         }}
       >
         <h2 className='mx-auto max-w-11/12 text-center text-2xl leading-tight font-bold text-white sm:max-w-10/12 md:max-w-1/2 xl:max-w-1/3'>
-          FAOS products are certified and licensed for safety by the relevant
-          authorities, ensuring their{' '}
+          FAOS products are officially certified and approved by relevant
+          authorities, giving you confidence in their{' '}
           <Link href='/about'>
-            <span className='underline'>quality and reliability.</span>
+            <span className='underline'>safety, quality, and reliability.</span>
           </Link>
         </h2>
 

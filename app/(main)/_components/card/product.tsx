@@ -14,6 +14,8 @@ import { useState } from 'react'
 import type { GetProductResult } from '@/app/(main)/actions/product'
 import type { FC } from 'react'
 
+import { ProductRating } from '../product-rating'
+
 import { ProductPrice } from '@/app/(main)/_components/product-price'
 import { checkOutOfStock, createSlug, getProductUnit } from '@/utils/helper'
 import { cn } from '@/utils/style'
@@ -100,6 +102,8 @@ const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
           priceMin={product?.priceMin!}
           unit={getProductUnit(product?.unit)}
         />
+
+        <ProductRating />
       </CardBody>
 
       {!hideIcon && (
