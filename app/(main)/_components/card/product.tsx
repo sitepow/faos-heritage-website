@@ -2,12 +2,10 @@
 'use client'
 
 import { Alert } from '@heroui/alert'
-import { Button } from '@heroui/button'
-import { Card, CardBody, CardFooter, CardHeader } from '@heroui/card'
+import { Card, CardBody, CardHeader } from '@heroui/card'
 import { Chip } from '@heroui/chip'
 import { Image } from '@heroui/react'
 import { Skeleton } from '@heroui/skeleton'
-import { HeartIcon, ShoppingCartIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
 
@@ -22,12 +20,12 @@ import { cn } from '@/utils/style'
 
 interface Props {
   className?: string
-  hideIcon?: boolean
   product: GetProductResult
 }
 
-const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
+const ProductCard: FC<Props> = ({ className, product }) => {
   const [isHovered, setIsHovered] = useState(false)
+
   const imageSrc =
     product?.images?.length > 1
       ? isHovered
@@ -48,21 +46,21 @@ const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <CardHeader className='relative overflow-hidden p-0'>
-        {isOutOfStock && (
-          <Alert
-            className='absolute top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2'
-            color='danger'
-            description='Out of stock. Please check similar items'
-            radius='none'
-            variant='faded'
-          />
-        )}
+      <Link
+        className='block'
+        href={`/product/${createSlug(product?.name, product?.id)}`}
+      >
+        <CardHeader className='relative overflow-hidden p-0'>
+          {isOutOfStock && (
+            <Alert
+              className='absolute top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2'
+              color='danger'
+              description='Out of stock. Please check similar items'
+              radius='none'
+              variant='faded'
+            />
+          )}
 
-        <Link
-          className='size-full'
-          href={`/product/${createSlug(product?.name, product?.id)}`}
-        >
           <Image
             alt={product?.name}
             className='aspect-square size-full object-cover'
@@ -72,52 +70,41 @@ const ProductCard: FC<Props> = ({ className, product, hideIcon = 'true' }) => {
             src={imageSrc}
             width='100%'
           />
-        </Link>
-      </CardHeader>
+        </CardHeader>
 
-      <CardBody>
-        <div className='flex flex-wrap gap-1'>
-          {product?.isDemoProduct && (
+        <CardBody>
+          <div className='flex flex-wrap gap-1'>
+            {product?.isDemoProduct && (
+              <Chip className='text-white' color='primary'>
+                Demo product
+              </Chip>
+            )}
+
+            {product?.isDigitalProduct && (
+              <Chip className='text-white' color='primary'>
+                Digital product
+              </Chip>
+            )}
+
             <Chip className='text-white' color='primary'>
-              Demo product
+              {product?.category?.name ?? 'No category'}
             </Chip>
-          )}
+          </div>
 
-          {product?.isDigitalProduct && (
-            <Chip className='text-white' color='primary'>
-              Digital product
-            </Chip>
-          )}
+          <h4 className='line-clamp-1 text-lg font-bold hover:underline'>
+            {product?.name}
+          </h4>
 
-          <Chip className='text-white' color='primary'>
-            {product?.category?.name ?? 'No category'}
-          </Chip>
-        </div>
-
-        <h4 className='line-clamp-1 text-lg font-bold'>{product?.name}</h4>
-
-        <ProductPrice
-          price={product?.price}
-          priceMax={product?.priceMax!}
-          priceMin={product?.priceMin!}
-          unit={getProductUnit(product?.unit)}
-        />
-
-        <ProductRating />
-      </CardBody>
-
-      {!hideIcon && (
-        <CardFooter className='justify-center border-t border-divider'>
-          <Button
-            startContent={<ShoppingCartIcon className='text-default-500' />}
-            variant='light'
+          <ProductPrice
+            price={product?.price}
+            priceMax={product?.priceMax!}
+            priceMin={product?.priceMin!}
+            unit={getProductUnit(product?.unit)}
           />
-          <Button
-            startContent={<HeartIcon className='text-default-500' />}
-            variant='light'
-          />
-        </CardFooter>
-      )}
+
+          <ProductRating />
+        </CardBody>
+      </Link>
     </Card>
   )
 }

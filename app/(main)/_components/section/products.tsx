@@ -16,7 +16,6 @@ interface Props {
 
 const ProductsSection: FC<Props> = ({
   items = [],
-  hideIcon,
   isLoading,
   itemPerPage = ITEM_PER_PAGE,
   isFetchingNextPage,
@@ -27,12 +26,7 @@ const ProductsSection: FC<Props> = ({
     <div className='grid w-full gap-2 sm:grid-cols-2 md:gap-4 lg:grid-cols-3 xl:grid-cols-4'>
       {!isLoading &&
         items?.map((product) => (
-          <ProductCard
-            key={product.id}
-            className='w-full'
-            hideIcon={hideIcon}
-            product={product}
-          />
+          <ProductCard key={product.id} className='w-full' product={product} />
         ))}
 
       {isFetching &&
