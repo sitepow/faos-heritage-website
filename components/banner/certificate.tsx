@@ -16,7 +16,7 @@ const BannerCertificate = () => {
         style={{
           backgroundImage: `
           linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,1)),
-          url(/banner/faos-moutain-green.jpg)
+          url(/banner/faos-moutain-green.webp)
           `,
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',

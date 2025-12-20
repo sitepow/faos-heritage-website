@@ -29,7 +29,7 @@ const BannerAdvertise = () => {
       style={{
         backgroundImage: `
         linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,1)),
-        url(/banner/faos-waterfall-green.jpg)
+        url(/banner/faos-waterfall-green.webp)
         `,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
