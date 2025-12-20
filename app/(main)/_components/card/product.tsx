@@ -64,7 +64,7 @@ const ProductCard: FC<Props> = ({ className, product }) => {
 
           <Image
             alt={product?.name}
-            className='aspect-square size-full object-cover'
+            className='aspect-square size-full object-contain'
             classNames={{ wrapper: 'w-full' }}
             height={250}
             radius='none'
