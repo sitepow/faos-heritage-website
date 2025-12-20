@@ -39,7 +39,8 @@ const ProductCard: FC<Props> = ({ className, product }) => {
   return (
     <Card
       className={cn(
-        'flex size-full min-h-[420px] w-72 flex-none flex-col border border-divider md:min-w-80',
+        'flex min-h-[420px] w-full flex-col border border-divider',
+        'shrink-0 basis-[300px] md:basis-[350px]',
         className,
       )}
       shadow='none'
