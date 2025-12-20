@@ -6,7 +6,6 @@ import {
   Breadcrumbs,
   Card,
   CardBody,
-  Alert,
   Select,
   SelectItem,
   Tab,
@@ -36,7 +35,7 @@ import { createFavorite } from '@/app/(main)/actions/favorite'
 import { BannerAdvertise } from '@/components/banner/advertise'
 import { BannerCertificate } from '@/components/banner/certificate'
 import { ACCOUNT_TAB } from '@/utils/const'
-import { createSlug, getProductUnit } from '@/utils/helper'
+import { createSlug } from '@/utils/helper'
 
 interface Props {
   initialProduct: GetProductResult
@@ -128,8 +127,6 @@ const ProductClient: FC<Props> = ({ initialProduct, productId }) => {
     return <PageNotFound>Product not found</PageNotFound>
   }
 
-  const productUnit = getProductUnit(product.unit!)
-
   return (
     <section className='flex flex-col gap-4'>
       {isLoading ? (
@@ -160,20 +157,18 @@ const ProductClient: FC<Props> = ({ initialProduct, productId }) => {
             <h1 className='text-2xl font-bold'>{product.name}</h1>
             <ProductRating />
 
-            <Alert
-              hideIcon
-              color={isOutOfStock ? 'danger' : 'default'}
-              variant='bordered'
-            >
-              <div className='flex flex-col gap-1 text-sm text-default-600'>
-                <span>{product.shortDescription || 'Description: -'}</span>
-                <span className='font-medium'>
-                  {isOutOfStock
-                    ? 'Out of stock'
-                    : `In stock: ${stock} ${productUnit}`}
-                </span>
-              </div>
-            </Alert>
+            {product?.shortDescription && (
+              <Card
+                className='bg-default-50 dark:bg-default-100/10'
+                shadow='none'
+              >
+                <CardBody className='text-sm text-default-600'>
+                  <span className='line-clamp-2'>
+                    {product.shortDescription}
+                  </span>
+                </CardBody>
+              </Card>
+            )}
 
             {hasVariants && (
               <Select

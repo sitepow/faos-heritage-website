@@ -12,6 +12,40 @@ const config = {
       fontFamily: {
         sans: ['var(--font-sukhumvit)'],
       },
+      typography: ({ theme }) => ({
+        DEFAULT: {
+          css: {
+            color: theme('colors.default.700'),
+            a: {
+              color: theme('colors.primary.DEFAULT'),
+              '&:hover': {
+                opacity: 0.8,
+              },
+            },
+            h1: { color: theme('colors.default.900') },
+            h2: { color: theme('colors.default.900') },
+            h3: { color: theme('colors.default.900') },
+            strong: { color: theme('colors.default.900') },
+            code: {
+              backgroundColor: theme('colors.default.100'),
+              padding: '0.2em 0.4em',
+              borderRadius: '0.25rem',
+            },
+          },
+        },
+        invert: {
+          css: {
+            color: theme('colors.default.200'),
+            h1: { color: theme('colors.default.50') },
+            h2: { color: theme('colors.default.50') },
+            h3: { color: theme('colors.default.50') },
+            strong: { color: theme('colors.default.50') },
+            code: {
+              backgroundColor: theme('colors.default.800'),
+            },
+          },
+        },
+      }),
     },
   },
   darkMode: 'class',
@@ -30,6 +64,7 @@ const config = {
         },
       },
     }),
+    require('@tailwindcss/typography'),
   ],
 }
 

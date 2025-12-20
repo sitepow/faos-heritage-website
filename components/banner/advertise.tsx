@@ -44,6 +44,11 @@ const BannerAdvertise = () => {
           <AdvertiseItem key={advertise} message={advertise} />
         ))}
       </div>
+
+      <p className='mx-auto mb-4 text-sm opacity-90'>
+        Start taking care of your health today by choosing better, natural
+        ingredients.
+      </p>
     </div>
   )
 }
