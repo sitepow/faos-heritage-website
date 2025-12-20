@@ -6,7 +6,13 @@ import {
 } from '@heroui/dropdown'
 import { User } from '@heroui/user'
 import { Role } from '@prisma/client'
-import { HeartIcon, LogOutIcon, SettingsIcon, UserIcon } from 'lucide-react'
+import {
+  HeartIcon,
+  LogOutIcon,
+  PackageSearchIcon,
+  SettingsIcon,
+  UserIcon,
+} from 'lucide-react'
 import { usePathname, useRouter } from 'next/navigation'
 import { signOut, useSession } from 'next-auth/react'
 
@@ -34,9 +40,9 @@ const Panel: FC<Props> = ({ setIsMenuOpen }) => {
       action: () => router.push(`/account?tab=${ACCOUNT_TAB?.ACCOUNT}`),
     },
     {
-      key: 'account',
+      key: 'order',
       label: 'My orders',
-      icon: <UserIcon className='text-default-500' />,
+      icon: <PackageSearchIcon className='text-default-500' />,
       action: () => router.push(`/account?tab=${ACCOUNT_TAB?.ORDER}`),
     },
     {
