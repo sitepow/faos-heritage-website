@@ -59,6 +59,7 @@ export const ProductClient = ({
       ) : (
         <Breadcrumbs className='font-bold'>
           <BreadcrumbItem>Homepage</BreadcrumbItem>
+          <BreadcrumbItem>Product</BreadcrumbItem>
           <BreadcrumbItem>{product.category?.name}</BreadcrumbItem>
         </Breadcrumbs>
       )}
