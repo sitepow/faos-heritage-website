@@ -4,6 +4,11 @@ import { createClient } from '@supabase/supabase-js'
 import { promises as fs } from 'fs'
 import path from 'path'
 
+import type { ActionResult } from '@/lib/errors/types'
+
+import { ERROR_CODES } from '@/lib/errors/codes'
+import { done, fail } from '@/lib/errors/server'
+import { getPathFromPublicUrl } from '@/utils/app/helpers/supabase'
 import { optimizeImage } from '@/utils/image'
 
 const supabase = createClient(
@@ -11,11 +16,13 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY!,
 )
 
-export const uploadFilesSupabase = async (formData: FormData) => {
+export const uploadFilesSupabase = async (
+  formData: FormData,
+): Promise<ActionResult<{ urls: string[] }>> => {
   const files = formData.getAll('files') as File[]
 
   if (!files?.length) {
-    throw new Error('No files provided')
+    return fail(ERROR_CODES.DATA_FIELD_REQUIRED)
   }
 
   const urls: string[] = []
@@ -31,39 +38,51 @@ export const uploadFilesSupabase = async (formData: FormData) => {
         contentType: 'image/webp',
       })
 
-    if (error) throw error
+    if (error) {
+      return fail(ERROR_CODES.SYSTEM_ERROR)
+    }
 
     const { data } = supabase.storage.from('uploads').getPublicUrl(fileName)
+
+    if (!data?.publicUrl) {
+      return fail(ERROR_CODES.SYSTEM_ERROR)
+    }
 
     urls.push(data.publicUrl)
   }
 
-  return urls
+  return done({ urls })
 }
 
-const getPathFromPublicUrl = (url: string) => {
-  const marker = '/object/public/uploads/'
-
-  return url.split(marker)[1]
-}
-
-export const deleteFileSupabase = async (publicUrl?: string | null) => {
-  if (!publicUrl) return
+export const deleteFileSupabase = async (
+  publicUrl?: string | null,
+): Promise<ActionResult<void>> => {
+  if (!publicUrl) {
+    return done()
+  }
 
   const filePath = getPathFromPublicUrl(publicUrl)
 
-  if (!filePath) return
+  if (!filePath) {
+    return done()
+  }
 
   const { error } = await supabase.storage.from('uploads').remove([filePath])
 
-  if (error) throw error
+  if (error) {
+    return fail(ERROR_CODES.SYSTEM_ERROR)
+  }
+
+  return done()
 }
 
-export const uploadFiles = async (formData: FormData) => {
+export const uploadFiles = async (
+  formData: FormData,
+): Promise<ActionResult<{ urls: string[] }>> => {
   const files = formData.getAll('files') as File[]
 
   if (!files || files.length === 0) {
-    throw new Error('The file to be uploaded has not been specified.')
+    return fail(ERROR_CODES.DATA_FIELD_REQUIRED)
   }
 
   const uploadDir = path.join(process.cwd(), 'public', 'uploads')
@@ -85,23 +104,23 @@ export const uploadFiles = async (formData: FormData) => {
     filePaths.push(relativePath)
   }
 
-  return filePaths
+  return done({ urls: filePaths })
 }
 
-export const deleteFile = async (relativePath: string) => {
+export const deleteFile = async (
+  relativePath: string,
+): Promise<ActionResult<void>> => {
   if (!relativePath) {
-    throw new Error(
-      'The relative path of the file to be deleted was not specified.',
-    )
+    return fail(ERROR_CODES.DATA_FIELD_REQUIRED)
   }
 
-  const fullPathToDelete = path.join(process.cwd(), 'public', relativePath)
+  const filePath = path.join(process.cwd(), 'public', relativePath)
 
   try {
-    await fs.access(fullPathToDelete)
-
-    await fs.unlink(fullPathToDelete)
+    await fs.access(filePath)
+    await fs.unlink(filePath)
+    return done()
   } catch {
-    return
+    return fail(ERROR_CODES.DATA_NOT_FOUND)
   }
 }

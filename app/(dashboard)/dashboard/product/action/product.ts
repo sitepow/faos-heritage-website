@@ -75,10 +75,6 @@ export const deleteProduct = async (productIds: string | string[]) => {
 }
 
 export const getProduct = async (productId: string, userId?: string) => {
-  // if (!productId) {
-  //   return fail(ERROR_CODES.DATA_FIELD_REQUIRED)
-  // }
-
   const product = await prisma.product.findUnique({
     where: { id: productId },
     select: {

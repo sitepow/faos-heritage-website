@@ -20,14 +20,19 @@ export const useImageUpload = ({
       return imagePath
     }
 
+    setIsUploading(true)
+
     try {
       const formData = new FormData()
-
       previewFiles.forEach((file) => formData.append('files', file))
 
       const uploaded = await uploadFilesSupabase(formData)
 
-      imagePath = uploaded[0]
+      if (!uploaded.success) {
+        return imagePath
+      }
+
+      imagePath = uploaded.data.urls[0]
 
       if (oldImage && imagePath !== oldImage) {
         await deleteFileSupabase(oldImage)
