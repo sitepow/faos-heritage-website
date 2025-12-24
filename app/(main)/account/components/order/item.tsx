@@ -74,8 +74,7 @@ export const OrderItem = ({ order, hideButton }: OrderItemProps) => {
                   href={order.trackingWebsite ?? ''}
                   target='_blank'
                 >
-                  Tracking number{' '}
-                  <span className='text-primary'>{order.trackingNumber}</span>
+                  Tracking number <span>{order.trackingNumber}</span>
                 </Link>
               )}
             </span>
@@ -85,7 +84,7 @@ export const OrderItem = ({ order, hideButton }: OrderItemProps) => {
         {!hideButton && (
           <div className='flex flex-wrap items-center gap-2 sm:justify-end'>
             <Button
-              className='text-white'
+              className='text-secondary'
               color='primary'
               startContent={<EyeIcon />}
               onClick={() => {
@@ -97,7 +96,7 @@ export const OrderItem = ({ order, hideButton }: OrderItemProps) => {
             </Button>
             {order?.status === OrderStatus.PENDING && (
               <Button
-                className='text-white'
+                className='text-secondary'
                 color='primary'
                 startContent={<XIcon />}
                 onClick={() => {
@@ -110,7 +109,7 @@ export const OrderItem = ({ order, hideButton }: OrderItemProps) => {
             )}
             {order?.status === OrderStatus.PENDING && (
               <Button
-                className='text-white'
+                className='text-secondary'
                 color='primary'
                 isDisabled={isPendingCheckout}
                 isLoading={isPendingCheckout}
@@ -124,7 +123,7 @@ export const OrderItem = ({ order, hideButton }: OrderItemProps) => {
             )}
             {order?.status !== OrderStatus.PENDING && (
               <Button
-                className='text-white'
+                className='text-secondary'
                 color='primary'
                 isDisabled={isDisableReceipt}
                 startContent={<DownloadIcon />}

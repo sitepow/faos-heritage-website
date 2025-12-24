@@ -85,7 +85,7 @@ export default function Cart() {
         {carts?.length !== 0 && (
           <div className='flex w-full flex-wrap justify-end gap-2'>
             <Button
-              className='text-white'
+              className='text-secondary'
               color='primary'
               startContent={<XIcon />}
               onClick={() => onOpenClearChange()}

@@ -87,18 +87,18 @@ export const ProductCard = ({ className, product }: ProductCardProps) => {
         <CardBody>
           <div className='mb-2.5 flex flex-wrap gap-1'>
             {product?.isDemoProduct && (
-              <Chip className='text-white' color='primary'>
+              <Chip className='text-secondary' color='primary'>
                 Demo product
               </Chip>
             )}
 
             {product?.isDigitalProduct && (
-              <Chip className='text-white' color='primary'>
+              <Chip className='text-secondary' color='primary'>
                 Digital product
               </Chip>
             )}
 
-            <Chip className='text-white' color='primary'>
+            <Chip className='text-secondary' color='primary'>
               {product?.category?.name ?? 'No category'}
             </Chip>
           </div>

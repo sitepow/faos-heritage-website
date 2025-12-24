@@ -24,7 +24,7 @@ export const NavbarCart = () => {
     <Link className='relative inline-block' href={siteConfig.link.cart}>
       <ShoppingCartIcon className='text-default-400' />
       {hasItems && (
-        <div className='bg-primary absolute -top-2 -right-2 flex size-5 items-center justify-center rounded-full text-xs font-bold text-white'>
+        <div className='bg-primary text-secondary absolute -top-2 -right-2 flex size-5 items-center justify-center rounded-full text-xs font-bold'>
           {displayCount}
         </div>
       )}

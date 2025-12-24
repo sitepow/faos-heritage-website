@@ -159,7 +159,7 @@ export default function Order() {
 
       <Pagination
         showControls
-        className='text-white'
+        className='text-secondary'
         page={page}
         total={orders?.totalPages || 1}
         onChange={(page) => setPage(page)}

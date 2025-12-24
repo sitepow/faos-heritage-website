@@ -99,7 +99,7 @@ export default function User() {
 
       <div className='flex w-full flex-wrap gap-3 *:shrink-0 md:justify-end'>
         <Button
-          className='text-white'
+          className='text-secondary'
           color='primary'
           startContent={<PlusIcon />}
           onPress={() => {
@@ -109,7 +109,7 @@ export default function User() {
           Add new users
         </Button>
         <Button
-          className='text-white'
+          className='text-secondary'
           color='primary'
           isDisabled={selectedUserIds.length === 0}
           startContent={<XIcon />}
@@ -210,7 +210,7 @@ export default function User() {
 
       <Pagination
         showControls
-        className='text-white'
+        className='text-secondary'
         page={page}
         total={users?.totalPages || 1}
         onChange={(page) => setPage(page)}

@@ -63,7 +63,7 @@ export const OverviewCard = ({ onclick }: OverviewCardProps) => {
               </div>
 
               <Button
-                className='mt-5 text-white'
+                className='text-secondary mt-5'
                 color='primary'
                 onPress={onclick}
               >

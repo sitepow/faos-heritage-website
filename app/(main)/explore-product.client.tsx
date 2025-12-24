@@ -46,7 +46,7 @@ export const ExploreProductsClient = ({
       />
       <Link href='/products'>
         <Button
-          className='text-white'
+          className='text-secondary'
           color='primary'
           endContent={<ArrowRight />}
         >

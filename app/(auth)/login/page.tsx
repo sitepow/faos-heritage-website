@@ -135,7 +135,7 @@ export default function Login() {
             <Button
               fullWidth
               color='primary'
-              className='text-white'
+              className='text-secondary'
               isDisabled={isPending}
               isLoading={isPending}
               type='submit'
@@ -185,7 +185,7 @@ export default function Login() {
             <Button
               fullWidth
               color='primary'
-              className='text-white'
+              className='text-secondary'
               isDisabled={isPending}
               isLoading={isPending}
               type='submit'

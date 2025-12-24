@@ -46,7 +46,7 @@ export const ConfirmModal = ({
                 Cancel
               </Button>
               <Button
-                className='text-white'
+                className='text-secondary'
                 color='primary'
                 disabled={isPending}
                 isLoading={isPending}

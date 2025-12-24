@@ -122,7 +122,7 @@ export const FavoriteItem = ({
 
             <div className='flex flex-wrap items-center gap-2'>
               <Button
-                className='text-white'
+                className='text-secondary'
                 color='primary'
                 isDisabled={isPendingDeleteFavorite}
                 isLoading={isPendingDeleteFavorite}

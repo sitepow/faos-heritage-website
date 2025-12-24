@@ -74,7 +74,7 @@ export const AddressCard = () => {
               </div>
 
               <Button
-                className='w-fit text-white'
+                className='text-secondary w-fit'
                 color='primary'
                 onClick={() => {
                   setState({ addressId: address?.id })

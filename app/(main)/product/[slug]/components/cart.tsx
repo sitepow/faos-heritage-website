@@ -146,7 +146,7 @@ export const ProductCart = () => {
 
           <Button
             fullWidth
-            className='text-white'
+            className='text-secondary'
             color='primary'
             isDisabled={
               isOutOfStock ||

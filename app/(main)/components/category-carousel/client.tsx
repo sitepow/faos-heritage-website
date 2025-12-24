@@ -104,7 +104,7 @@ export const CategoryCarouselClient = ({
         <CardHeader className='flex flex-wrap items-center justify-between'>
           <span className='font-bold'>{activeCategory?.name}</span>
           <Button
-            className='text-white'
+            className='text-secondary'
             color='primary'
             endContent={<ArrowRight className='size-4' />}
             onPress={() =>

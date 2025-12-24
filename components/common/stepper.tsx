@@ -1,5 +1,11 @@
 import { OrderStatus } from '@prisma/client'
-import { CheckIcon, XIcon } from 'lucide-react'
+import {
+  CreditCardIcon,
+  XIcon,
+  PackageOpenIcon,
+  PackageIcon,
+  PackageCheckIcon,
+} from 'lucide-react'
 import React from 'react'
 
 import type { ComponentProps } from 'react'
@@ -27,6 +33,15 @@ export const Stepper = ({
 }: StepperProps) => {
   const isCancelled = status === 'CANCELLED' || status === 'REFUNDED'
   const currentIndex = ORDER_STEPS.findIndex(([key]) => key === status)
+
+  const STEP_ICONS: Record<OrderStatus, React.ElementType> = {
+    PENDING: PackageOpenIcon,
+    PAID: CreditCardIcon,
+    PROCESSING: PackageIcon,
+    DELIVERED: PackageCheckIcon,
+    CANCELLED: XIcon,
+    REFUNDED: XIcon,
+  }
 
   const statusDates: Record<string, Date | null> = {
     [OrderStatus.PENDING]: createdAt,
@@ -59,19 +74,22 @@ export const Stepper = ({
           const isCurrent = index === currentIndex
           const date = statusDates[statusKey]
 
+          const Icon = STEP_ICONS[statusKey as OrderStatus]
+
           return (
             <React.Fragment key={statusKey}>
               <div className='flex flex-col items-center'>
                 <div
                   className={cn(
                     'flex size-10 items-center justify-center rounded-full',
-                    isCompleted && 'bg-primary text-white',
-                    isCurrent && 'bg-primary ring-primary/50 text-white ring-4',
+                    isCompleted && 'bg-primary text-secondary',
+                    isCurrent &&
+                      'bg-primary ring-primary/50 text-secondary ring-4',
                     !isCompleted && !isCurrent && 'bg-divider text-default-500',
                   )}
                 >
-                  {isCompleted ? (
-                    <CheckIcon className='size-7' strokeWidth={3} />
+                  {isCompleted || isCurrent ? (
+                    <Icon />
                   ) : (
                     <span className='text-lg font-semibold'>{index + 1}</span>
                   )}

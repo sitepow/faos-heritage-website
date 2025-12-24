@@ -181,7 +181,7 @@ export const CategoryManager = () => {
               Cancel
             </Button>
             <Button
-              className='text-white'
+              className='text-secondary'
               color='primary'
               startContent={<PlusIcon />}
               onPress={() => {

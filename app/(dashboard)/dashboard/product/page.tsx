@@ -135,7 +135,7 @@ export default function Product() {
       </div>
       <div className='flex w-full flex-wrap gap-3 *:shrink-0 md:justify-end'>
         <Button
-          className='text-white'
+          className='text-secondary'
           color='primary'
           startContent={<PlusIcon />}
           onPress={() => {
@@ -145,7 +145,7 @@ export default function Product() {
           Add new products
         </Button>
         <Button
-          className='text-white'
+          className='text-secondary'
           color='primary'
           startContent={<SettingsIcon />}
           onPress={() => {
@@ -155,7 +155,7 @@ export default function Product() {
           Manage product categories
         </Button>
         <Button
-          className='text-white'
+          className='text-secondary'
           color='primary'
           isDisabled={selectedProductIds.length === 0}
           startContent={<XIcon />}
@@ -322,7 +322,7 @@ export default function Product() {
 
       <Pagination
         showControls
-        className='text-white'
+        className='text-secondary'
         page={page}
         total={products?.totalPages || 1}
         onChange={(page) => setPage(page)}

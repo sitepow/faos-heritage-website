@@ -287,7 +287,7 @@ export const UserForm = () => {
             Cancel
           </Button>
           <Button
-            className='text-white'
+            className='text-secondary'
             color='primary'
             isDisabled={isPending || !isDirty}
             onClick={handleSubmit(onSubmit)}

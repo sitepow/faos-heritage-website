@@ -72,7 +72,7 @@ export const OrderCard = () => {
         {!isLoadingOrders && ordersLength !== 0 && (
           <Pagination
             showControls
-            className='mx-auto my-2.5 text-white'
+            className='text-secondary mx-auto my-2.5'
             page={page}
             total={orders?.totalPages || 1}
             onChange={(page) => setPage(page)}

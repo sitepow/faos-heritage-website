@@ -166,7 +166,7 @@ export const OrderViewModal = () => {
         )}
 
         <ModalFooter>
-          <Button className='text-white' color='primary' onClick={onClose}>
+          <Button className='text-secondary' color='primary' onClick={onClose}>
             Close
           </Button>
         </ModalFooter>

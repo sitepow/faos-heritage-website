@@ -189,7 +189,7 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
 
           {!isLoadingAddress && address && (
             <Button
-              className='text-white'
+              className='text-secondary'
               color='primary'
               endContent={<ArrowRight />}
               isDisabled={!address || carts?.length === 0}
