@@ -4,18 +4,27 @@ import { Tab, Tabs } from '@heroui/react'
 import Head from 'next/head'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
+import { useMediaQuery } from 'react-responsive'
 
 import type { Key } from 'react'
 
-import { AddressCard } from '@/app/(main)/account/components/address/card'
-import { FavoriteCard } from '@/app/(main)/account/components/favorite/card'
-import { OrderCard } from '@/app/(main)/account/components/order/card'
-import { OverviewCard } from '@/app/(main)/account/components/overview-card'
-import { ProfileCard } from '@/app/(main)/account/components/profile-card'
+import {
+  OverviewCard,
+  OrderCard,
+  FavoriteCard,
+  ProfileCard,
+  AddressCard,
+} from './components'
+
 import { ACCOUNT_TAB } from '@/features'
 import { useQueryParams } from '@/hooks/useQueryParams'
+import { IS_TABLET_OR_MOBILE } from '@/utils/constants'
 
 export const AccountClient = () => {
+  const isTabletOrMobile = useMediaQuery({
+    query: `(max-width: ${IS_TABLET_OR_MOBILE})`,
+  })
+
   const { data: session } = useSession()
   const user = session?.user
   const { setQueryParam, getQueryParam } = useQueryParams()
@@ -65,7 +74,7 @@ export const AccountClient = () => {
                 tabList: 'flex overflow-x-auto lg:flex-col lg:w-fit gap-1 p-2',
                 panel: `w-full`,
               }}
-              isVertical
+              isVertical={!isTabletOrMobile}
               selectedKey={selectedTabKey}
               variant='bordered'
               onSelectionChange={handleTabChange}
