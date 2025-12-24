@@ -1,15 +1,16 @@
 import type { Metadata } from 'next'
 
-import { getCategories } from '../(dashboard)/actions/category'
-import { CategoryClient } from './_components/client/category'
+import { CategoryCarouselClient } from './components/category-carousel/client'
+import { ExploreProductsClient } from './explore-product.client'
+import { getProducts } from './products'
+import { getCategories } from '../(dashboard)/dashboard/product'
 
-import { ExploreProducts } from '@/app/(main)/_components/client/explore-products'
-import { getProducts } from '@/app/(main)/actions/product'
-import { BannerAdvertise } from '@/components/banner/advertise'
-import { BannerCertificate } from '@/components/banner/certificate'
+import {
+  AdvertiseBanner,
+  CertificateBanner,
+} from '@/components/features/banner'
 import { siteConfig } from '@/config/site'
-import { ITEM_PER_PAGE } from '@/utils/const'
-import { OG_IMAGE } from '@/utils/helper'
+import { ITEM_PER_PAGE, OG_IMAGE } from '@/utils/constants'
 
 export const metadata: Metadata = {
   title: `${siteConfig.name} - ${siteConfig.title}`,
@@ -50,7 +51,7 @@ export const metadata: Metadata = {
   },
 }
 
-const Index = async () => {
+export default async function Homepage() {
   const categories = await getCategories()
   const exploreProducts = await getProducts({ limit: ITEM_PER_PAGE })
 
@@ -61,24 +62,17 @@ const Index = async () => {
 
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
-      <CategoryClient
+      <CategoryCarouselClient
         initialCategories={categories}
         initialProducts={products}
         itemPerPage={ITEM_PER_PAGE}
       />
-
-      <BannerCertificate />
-
-      {products?.items?.length !== 0 && (
-        <ExploreProducts
-          initialProducts={exploreProducts}
-          itemPerPage={ITEM_PER_PAGE}
-        />
-      )}
-
-      <BannerAdvertise />
+      <CertificateBanner />
+      <ExploreProductsClient
+        initialProducts={exploreProducts}
+        itemPerPage={ITEM_PER_PAGE}
+      />
+      <AdvertiseBanner />
     </section>
   )
 }
-
-export default Index

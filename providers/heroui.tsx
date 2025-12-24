@@ -5,36 +5,24 @@ import { useRouter } from 'next/navigation'
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
 
 import type { ThemeProviderProps } from 'next-themes'
-import type { FC, ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
-export interface Props {
+interface HeroUIProvidersProps {
   children: ReactNode
   themeProps?: ThemeProviderProps
 }
 
-declare module '@react-types/shared' {
-  interface RouterConfig {
-    routerOptions: NonNullable<
-      Parameters<ReturnType<typeof useRouter>['push']>[1]
-    >
-  }
-}
-
-const HeroUIProviders: FC<Props> = ({ children, themeProps }) => {
+export const HeroUIProviders = ({
+  children,
+  themeProps,
+}: HeroUIProvidersProps) => {
   const router = useRouter()
 
   return (
-    <HeroUIProvider
-      disableAnimation
-      disableRipple
-      skipFramerMotionAnimations
-      navigate={router.push}
-    >
+    <HeroUIProvider navigate={router.push}>
       <NextThemesProvider {...themeProps} defaultTheme='light'>
         {children}
       </NextThemesProvider>
     </HeroUIProvider>
   )
 }
-
-export { HeroUIProviders }

@@ -1,9 +1,10 @@
 import { Suspense } from 'react'
 
-import { AccountClient } from '@/app/(main)/account/_components/client/account'
-import { requireSession } from '@/lib/auth/require-session'
+import { AccountClient } from './client'
 
-const Account = async () => {
+import { requireSession } from '@/lib/auth'
+
+export default async function Account() {
   await requireSession()
 
   return (
@@ -12,5 +13,3 @@ const Account = async () => {
     </Suspense>
   )
 }
-
-export default Account

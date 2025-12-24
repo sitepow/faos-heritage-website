@@ -1,185 +1,93 @@
-import { fixupConfigRules, fixupPluginRules } from '@eslint/compat'
-import { FlatCompat } from '@eslint/eslintrc'
-import js from '@eslint/js'
-import typescriptEslint from '@typescript-eslint/eslint-plugin'
-import tsParser from '@typescript-eslint/parser'
-import _import from 'eslint-plugin-import'
-import jsxA11Y from 'eslint-plugin-jsx-a11y'
-import prettier from 'eslint-plugin-prettier'
-import react from 'eslint-plugin-react'
-import unusedImports from 'eslint-plugin-unused-imports'
 import { defineConfig, globalIgnores } from 'eslint/config'
+import js from '@eslint/js'
+import tsParser from '@typescript-eslint/parser'
+import tseslint from '@typescript-eslint/eslint-plugin'
+import react from 'eslint-plugin-react'
+import reactHooks from 'eslint-plugin-react-hooks'
+import next from '@next/eslint-plugin-next'
+import importPlugin from 'eslint-plugin-import'
+import unusedImports from 'eslint-plugin-unused-imports'
+import jsxA11y from 'eslint-plugin-jsx-a11y'
 import globals from 'globals'
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: js.configs.recommended,
-  allConfig: js.configs.all,
-})
 
 export default defineConfig([
   globalIgnores([
-    '.now/*',
+    '.next',
+    'node_modules',
+    'dist',
+    'build',
+    'coverage',
+    'public',
     '**/*.css',
-    '**/.changeset',
-    '**/dist',
-    'esm/*',
-    'public/*',
-    'tests/*',
-    'scripts/*',
-    '**/*.config.js',
-    '**/.DS_Store',
-    '**/node_modules',
-    '**/coverage',
-    '**/.next',
-    '**/build',
-    '!**/.commitlintrc.cjs',
-    '!**/.lintstagedrc.cjs',
-    '!**/jest.config.js',
-    '!**/plopfile.js',
-    '!**/react-shim.js',
-    '!**/tsup.config.ts',
   ]),
-  {
-    extends: fixupConfigRules(
-      compat.extends(
-        'plugin:react/recommended',
-        'plugin:prettier/recommended',
-        'plugin:react-hooks/recommended',
-        'plugin:jsx-a11y/recommended',
-        'plugin:@next/next/recommended',
-      ),
-    ),
 
-    plugins: {
-      react: fixupPluginRules(react),
-      'unused-imports': unusedImports,
-      import: fixupPluginRules(_import),
-      '@typescript-eslint': typescriptEslint,
-      'jsx-a11y': fixupPluginRules(jsxA11Y),
-      prettier: fixupPluginRules(prettier),
-    },
+  {
+    files: ['**/*.{ts,tsx}'],
 
     languageOptions: {
+      parser: tsParser,
+      ecmaVersion: 'latest',
+      sourceType: 'module',
       globals: {
-        ...Object.fromEntries(
-          Object.entries(globals.browser).map(([key]) => [key, 'off']),
-        ),
+        ...globals.browser,
         ...globals.node,
       },
+    },
 
-      parser: tsParser,
-      ecmaVersion: 12,
-      sourceType: 'module',
-
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
-      },
+    plugins: {
+      '@typescript-eslint': tseslint,
+      react,
+      'react-hooks': reactHooks,
+      '@next/next': next,
+      import: importPlugin,
+      'unused-imports': unusedImports,
+      'jsx-a11y': jsxA11y,
     },
 
     settings: {
-      react: {
-        version: 'detect',
-      },
+      react: { version: 'detect' },
     },
 
-    files: ['**/*.ts', '**/*.tsx'],
-
     rules: {
-      'no-console': 'warn',
-      'no-nested-ternary': 'error',
-      '@typescript-eslint/no-unused-vars': [
-        'warn',
-        {
-          args: 'after-used',
-          ignoreRestSiblings: false,
-          argsIgnorePattern: '^_.*?$',
-        },
+      ...js.configs.recommended.rules,
+
+      '@typescript-eslint/no-unused-vars': 'off',
+      '@typescript-eslint/consistent-type-imports': [
+        'error',
+        { prefer: 'type-imports' },
       ],
-      '@typescript-eslint/consistent-type-imports': 'error',
-      '@typescript-eslint/no-explicit-any': 'error',
-      '@typescript-eslint/no-empty-object-type': 'warn',
-      '@typescript-eslint/consistent-type-definitions': 'warn',
+      '@typescript-eslint/no-explicit-any': 'warn',
+
       'react/prop-types': 'off',
-      'react/jsx-uses-react': 'off',
       'react/react-in-jsx-scope': 'off',
       'react/self-closing-comp': 'error',
-      'react/display-name': 'off',
-      'react/function-component-definition': [
-        'error',
-        {
-          namedComponents: ['arrow-function'],
-          unnamedComponents: ['function-expression'],
-        },
-      ],
-      'react/jsx-curly-brace-presence': [
-        'warn',
-        { props: 'never', children: 'never' },
-      ],
-      'react/no-unstable-nested-components': ['warn'],
-      'react/jsx-no-useless-fragment': ['error'],
-      'react/no-array-index-key': ['warn'],
-      'react/jsx-boolean-value': ['error'],
-      'react/jsx-sort-props': [
-        'warn',
-        {
-          callbacksLast: true,
-          shorthandFirst: true,
-          noSortAlphabetically: false,
-          reservedFirst: true,
-        },
-      ],
-      'react-hooks/exhaustive-deps': 'off',
-      'jsx-a11y/click-events-have-key-events': 'warn',
-      'jsx-a11y/interactive-supports-focus': 'warn',
-      'prettier/prettier': 'warn',
-      'no-unused-vars': 'off',
-      'unused-imports/no-unused-vars': 'off',
-      'unused-imports/no-unused-imports': 'warn',
+      'react/no-array-index-key': 'warn',
+      'react/no-unstable-nested-components': 'warn',
+
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
+
+      '@next/next/no-img-element': 'warn',
+      '@next/next/no-html-link-for-pages': 'off',
+
+      'unused-imports/no-unused-imports': 'error',
+
       'import/order': [
         'error',
         {
-          'newlines-between': 'always',
           groups: [
             ['builtin', 'external'],
             'type',
             'internal',
             ['parent', 'sibling', 'index'],
           ],
-          pathGroups: [
-            {
-              pattern: '~/**',
-              group: 'external',
-              position: 'after',
-            },
-          ],
           alphabetize: { order: 'asc' },
+          'newlines-between': 'always',
         },
       ],
-      'padding-line-between-statements': [
-        'warn',
-        {
-          blankLine: 'always',
-          prev: '*',
-          next: 'return',
-        },
-        {
-          blankLine: 'always',
-          prev: ['const', 'let', 'var'],
-          next: '*',
-        },
-        {
-          blankLine: 'any',
-          prev: ['const', 'let', 'var'],
-          next: ['const', 'let', 'var'],
-        },
-      ],
+
+      'no-nested-ternary': 'error',
+      'no-console': 'warn',
     },
   },
 ])

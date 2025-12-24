@@ -2,9 +2,9 @@ import { NextResponse } from 'next/server'
 
 import type { NextRequest } from 'next/server'
 
-import { AUTH_PATHS, PROTECTED_PATHS } from './utils/const'
+import { AUTH_PATHS, PROTECTED_PATHS } from './utils/constants'
 
-const middleware = (request: NextRequest) => {
+export const middleware = (request: NextRequest) => {
   const { pathname } = request.nextUrl
 
   const isLoggedIn = Boolean(
@@ -43,5 +43,3 @@ export const config = {
     '/((?!api|_next/static|_next/image|favicon.ico|.*\\..*|_next).*)',
   ],
 }
-
-export { middleware }

@@ -2,21 +2,17 @@
 
 import { useQueries } from '@tanstack/react-query'
 
-import { getOrderStat, getOrderStatCash } from '../actions/order'
-import { getProductStat } from '../actions/product'
-import { getUserStat } from '../actions/user'
-
-import {
-  StatCard,
-  StatCardSkeleton,
-} from '@/app/(dashboard)/_components/card/stat'
+import { StatCard, StatCardSkeleton } from '../components'
+import { getOrderStat, getOrderStatCash } from './order/action'
+import { getProductStat } from './product/action/product'
+import { getUserStat } from './user/action'
 
 interface StatItem {
   name: string
   value: number
 }
 
-const Index = () => {
+export default function Dashboard() {
   const statsConfig = [
     {
       queryKey: ['dashboard', 'orders', 'stat', 'cash'],
@@ -50,5 +46,3 @@ const Index = () => {
     </section>
   )
 }
-
-export default Index

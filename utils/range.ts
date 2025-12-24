@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 type NullableNumber = number | null | undefined
 
 interface RangeInput {
@@ -6,7 +8,7 @@ interface RangeInput {
   fallback?: NullableNumber
 }
 
-const getRangeDisplayValue = <T>(
+export const getRangeDisplayValue = <T>(
   { min, max, fallback }: RangeInput,
   options: {
     formatSingle: (value: number) => T
@@ -25,5 +27,3 @@ const getRangeDisplayValue = <T>(
 
   return null
 }
-
-export { getRangeDisplayValue }

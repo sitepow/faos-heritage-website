@@ -1,10 +1,15 @@
 'use client'
 
-import { Button } from '@heroui/button'
-import { Card, CardBody, CardHeader } from '@heroui/card'
-import { Form } from '@heroui/form'
-import { Input } from '@heroui/input'
-import { Tab, Tabs } from '@heroui/tabs'
+import {
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  Input,
+  Tab,
+  Tabs,
+  Form,
+} from '@heroui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
 import Image from 'next/image'
@@ -12,17 +17,20 @@ import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
 
-import { createUser } from '@/app/(main)/actions/user'
+import type { ErrorCode } from '@/lib/errors/codes'
+import type { ActionResult } from '@/lib/errors/types'
+
+import { createUser } from '@/app/(auth)/login/action'
 import {
   userLoginSchema,
   userRegisterSchema,
   type UserLoginInput,
   type UserRegisterInput,
-} from '@/app/(main)/schema/user'
+} from '@/app/(auth)/login/schema'
 import { siteConfig } from '@/config/site'
 import { useQueryParams } from '@/hooks/useQueryParams'
 
-const Index = () => {
+export default function Login() {
   const router = useRouter()
   const { getQueryParam } = useQueryParams()
   const callbackUrl = getQueryParam('callbackUrl') || '/'
@@ -46,7 +54,11 @@ const Index = () => {
   const { mutate: mutationRegister, isPending: isPendingRegister } =
     useMutation({
       mutationFn: createUser,
-      onSuccess: async (_, form) => {
+      onSuccess: async (result, form) => {
+        if (!result.success) {
+          return
+        }
+
         await signIn('credentials', {
           email: form.email,
           password: form.password,
@@ -58,20 +70,26 @@ const Index = () => {
     })
 
   const { mutate: mutationLogin, isPending: isPendingLogin } = useMutation({
-    mutationFn: async (form: UserLoginInput) => {
+    mutationFn: async (form: UserLoginInput): Promise<ActionResult<void>> => {
       const res = await signIn('credentials', {
         ...form,
         redirect: false,
       })
 
       if (res?.error) {
-        throw new Error(res?.error)
+        return {
+          success: false,
+          code: res.error as ErrorCode,
+        }
       }
 
-      return
+      return { success: true, data: undefined }
     },
-    onSuccess: () => {
-      router.push(callbackUrl)
+
+    onSuccess: (result) => {
+      if (result.success) {
+        router.push(callbackUrl)
+      }
     },
   })
 
@@ -116,10 +134,11 @@ const Index = () => {
             />
             <Button
               fullWidth
+              color='primary'
+              className='text-white'
               isDisabled={isPending}
               isLoading={isPending}
               type='submit'
-              variant='faded'
             >
               Log in
             </Button>
@@ -165,10 +184,11 @@ const Index = () => {
 
             <Button
               fullWidth
+              color='primary'
+              className='text-white'
               isDisabled={isPending}
               isLoading={isPending}
               type='submit'
-              variant='faded'
             >
               Register
             </Button>
@@ -178,9 +198,9 @@ const Index = () => {
 
       <CardBody className='items-center justify-center gap-4'>
         <div className='relative flex w-full items-center'>
-          <div className='flex-grow border-t border-divider' />
+          <div className='border-divider flex-grow border-t' />
           <span className='px-4 text-gray-500'>Or proceed as follows</span>
-          <div className='flex-grow border-t border-divider' />
+          <div className='border-divider flex-grow border-t' />
         </div>
 
         <div className='flex w-full flex-wrap justify-center gap-2'>
@@ -193,7 +213,7 @@ const Index = () => {
                 alt='google'
                 className='shrink-0 rounded-full'
                 height={30}
-                src='/google.png'
+                src='/images/social/google.png'
                 width={30}
               />
               <span>Google</span>
@@ -209,7 +229,7 @@ const Index = () => {
                 alt='facebook'
                 className='shrink-0 rounded-full'
                 height={30}
-                src='/facebook.png'
+                src='/images/social/facebook.png'
                 width={30}
               />
               <span>Facebook</span>
@@ -220,5 +240,3 @@ const Index = () => {
     </Card>
   )
 }
-
-export default Index

@@ -1,16 +1,14 @@
 import '@/styles/globals.css'
 
-import { SpeedInsights } from '@vercel/speed-insights/next'
-
 import type { Metadata, Viewport } from 'next'
-import type { FC, PropsWithChildren } from 'react'
+import type { PropsWithChildren } from 'react'
 
 import { HeroUIProviders } from '../providers/heroui'
 
 import { fontSukhumvit } from '@/config/fonts'
 import { siteConfig } from '@/config/site'
 import { NextAuthProviders } from '@/providers/nextauth'
-import QueryProviders from '@/providers/query'
+import { QueryProviders } from '@/providers/query'
 import { cn } from '@/utils/style'
 
 export const metadata: Metadata = {
@@ -31,13 +29,13 @@ export const viewport: Viewport = {
   ],
 }
 
-const RootLayout: FC<PropsWithChildren> = ({ children }) => {
+export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html suppressHydrationWarning lang='en'>
       <head />
       <body
         className={cn(
-          'min-h-screen bg-background font-sans text-foreground antialiased',
+          'bg-background text-foreground min-h-screen font-sans antialiased',
           fontSukhumvit.variable,
         )}
       >
@@ -46,7 +44,6 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
             <HeroUIProviders
               themeProps={{ attribute: 'class', defaultTheme: 'dark' }}
             >
-              <SpeedInsights />
               {children}
             </HeroUIProviders>
           </NextAuthProviders>
@@ -55,5 +52,3 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
     </html>
   )
 }
-
-export default RootLayout

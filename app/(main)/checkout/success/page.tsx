@@ -2,14 +2,12 @@
 
 import { Suspense } from 'react'
 
-import { SuccessClient } from '@/app/(main)/checkout/_components/client/success'
+import { SuccessClient } from '@/app/(main)/checkout/success/client'
 
-const Success = () => {
+export default function Success() {
   return (
     <Suspense>
       <SuccessClient />
     </Suspense>
   )
 }
-
-export default Success

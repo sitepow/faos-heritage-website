@@ -3,17 +3,19 @@
 import { OrderStatus } from '@prisma/client'
 import Stripe from 'stripe'
 
-import { prisma } from '@/utils/prisma'
+import { prisma } from '@/lib/prisma'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2025-11-17.clover',
 })
 
-interface Params {
+interface createStripeCheckoutParams {
   orderId: string
 }
 
-const createStripeCheckout = async ({ orderId }: Params) => {
+export const createStripeCheckout = async ({
+  orderId,
+}: createStripeCheckoutParams) => {
   if (!orderId) throw new Error('ไม่พบ orderId')
 
   const order = await prisma.order.findUnique({
@@ -64,5 +66,3 @@ const createStripeCheckout = async ({ orderId }: Params) => {
     checkoutUrl: session.url,
   }
 }
-
-export { createStripeCheckout }

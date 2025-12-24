@@ -3,7 +3,7 @@ import Stripe from 'stripe'
 
 import type { NextRequest } from 'next/server'
 
-import { prisma } from '@/utils/prisma'
+import { prisma } from '@/lib/prisma'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 

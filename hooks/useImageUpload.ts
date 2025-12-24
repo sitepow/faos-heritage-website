@@ -2,12 +2,15 @@ import { useState } from 'react'
 
 import { deleteFileSupabase, uploadFilesSupabase } from '@/actions/file'
 
-interface Params {
+interface useImageUploadParams {
   oldImage?: string | null
   previewFiles: File[]
 }
 
-const useImageUpload = ({ oldImage, previewFiles }: Params) => {
+export const useImageUpload = ({
+  oldImage,
+  previewFiles,
+}: useImageUploadParams) => {
   const [isUploading, setIsUploading] = useState(false)
 
   const resolveImagePath = async (): Promise<string | null | undefined> => {
@@ -41,5 +44,3 @@ const useImageUpload = ({ oldImage, previewFiles }: Params) => {
     isUploading,
   }
 }
-
-export { useImageUpload }

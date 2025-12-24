@@ -1,20 +1,19 @@
 import type { Metadata } from 'next'
-import type { FC } from 'react'
 
-import { PageNotFound } from '@/app/(main)/_components/page-not-found'
-import { getProducts } from '@/app/(main)/actions/product'
-import { CategoryClient } from '@/app/(main)/category/_components/client/category'
+import { CategoryClient } from '@/app/(main)/category/[slug]/client'
+import { getProducts } from '@/app/(main)/products/action'
+import { PageNotFound } from '@/components/common/page-not-found'
 import { siteConfig } from '@/config/site'
-import { ITEM_PER_PAGE } from '@/utils/const'
-import { getIdFromSlug, getNameFromSlug, OG_IMAGE } from '@/utils/helper'
+import { ITEM_PER_PAGE, OG_IMAGE } from '@/utils/constants'
+import { getIdFromSlug, getNameFromSlug } from '@/utils/slug'
 
-interface Props {
+interface CategoryProps {
   params: { slug: string }
 }
 
 export const generateMetadata = async ({
   params,
-}: Props): Promise<Metadata> => {
+}: CategoryProps): Promise<Metadata> => {
   const { slug } = await params
   const slugStr = Array.isArray(slug) ? slug[0] : slug
   const categoryName = getNameFromSlug(slugStr)
@@ -52,7 +51,7 @@ export const generateMetadata = async ({
   }
 }
 
-const Categories: FC<Props> = async ({ params }) => {
+export default async function Category({ params }: CategoryProps) {
   const { slug } = await params
   const slugStr = Array.isArray(slug) ? slug[0] : slug
   const categoryId = getIdFromSlug(slugStr)
@@ -66,11 +65,8 @@ const Categories: FC<Props> = async ({ params }) => {
   if (!products || products.items.length === 0) {
     return (
       <PageNotFound>
-        Sorry! Product category{' '}
-        <span className='text-primary'>&quot;{categoryName}&quot;</span>{' '}
-        doesn&apos;t match anything at all.
-        <br />
-        Please try searching for new products on the homepage.
+        Sorry! Product category Nothing matches. Please try searching for new
+        products on the homepage.
       </PageNotFound>
     )
   }
@@ -78,7 +74,6 @@ const Categories: FC<Props> = async ({ params }) => {
   return (
     <>
       <h1 className='sr-only'>{categoryName} Products</h1>
-
       <CategoryClient
         categoryId={categoryId}
         initialProducts={products}
@@ -87,5 +82,3 @@ const Categories: FC<Props> = async ({ params }) => {
     </>
   )
 }
-
-export default Categories

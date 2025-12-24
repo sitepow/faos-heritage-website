@@ -1,18 +1,18 @@
 import sharp from 'sharp'
 
-interface Params {
+interface optimizeImageParams {
   width?: number
   height?: number
   quality?: number
 }
 
-const toBuffer = (input: Buffer | ArrayBuffer): Buffer => {
+export const toBuffer = (input: Buffer | ArrayBuffer): Buffer => {
   return Buffer.isBuffer(input) ? input : Buffer.from(input)
 }
 
-const optimizeImage = async (
+export const optimizeImage = async (
   input: Buffer | ArrayBuffer,
-  options: Params = {},
+  options: optimizeImageParams = {},
 ) => {
   const { width = 800, height, quality = 88 } = options
 
@@ -31,5 +31,3 @@ const optimizeImage = async (
     })
     .toBuffer()
 }
-
-export { optimizeImage }

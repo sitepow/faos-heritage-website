@@ -1,18 +1,21 @@
+import { getSession } from 'next-auth/react'
+
 import type { Metadata } from 'next'
-import type { FC } from 'react'
 
-import { getProduct } from '@/app/(dashboard)/actions/product'
-import { PageNotFound } from '@/app/(main)/_components/page-not-found'
-import { ProductClient } from '@/app/(main)/product/[slug]/_components/client/product'
+import { getProduct } from '@/app/(dashboard)/dashboard/product/action/product'
+import { ProductClient } from '@/app/(main)/product/[slug]/client'
+import { PageNotFound } from '@/components/common/page-not-found'
 import { siteConfig } from '@/config/site'
-import { getSession } from '@/lib/auth/require-session'
-import { getIdFromSlug, OG_IMAGE } from '@/utils/helper'
+import { OG_IMAGE } from '@/utils/constants'
+import { getIdFromSlug } from '@/utils/slug'
 
-interface Props {
+interface ProductProps {
   params: { slug: string }
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: ProductProps): Promise<Metadata> {
   const { slug } = await params
 
   const slugStr = Array.isArray(slug) ? slug[0] : slug
@@ -74,7 +77,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-const Product: FC<Props> = async ({ params }) => {
+export default async function Product({ params }: ProductProps) {
   const { slug } = await params
 
   const session = await getSession()
@@ -88,9 +91,8 @@ const Product: FC<Props> = async ({ params }) => {
   if (!product) {
     return (
       <PageNotFound>
-        Sorry! Product ID...{' '}
-        <span className='text-primary'>&quot;{productId}&quot;</span> Nothing
-        matches. Please try searching for new products on the homepage.
+        Sorry! Product Nothing matches. Please try searching for new products on
+        the homepage.
       </PageNotFound>
     )
   }
@@ -103,5 +105,3 @@ const Product: FC<Props> = async ({ params }) => {
     />
   )
 }
-
-export default Product

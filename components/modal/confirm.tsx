@@ -1,15 +1,15 @@
-import { Button } from '@heroui/button'
+'use client'
+
 import {
   Modal,
-  ModalBody,
   ModalContent,
-  ModalFooter,
   ModalHeader,
-} from '@heroui/modal'
+  ModalBody,
+  ModalFooter,
+  Button,
+} from '@heroui/react'
 
-import type { FC } from 'react'
-
-interface Props {
+interface ConfirmModalProps {
   isOpen: boolean
   onOpenChange: () => void
   onConfirm: () => void
@@ -18,14 +18,14 @@ interface Props {
   description?: string
 }
 
-const ModalConfirm: FC<Props> = ({
+export const ConfirmModal = ({
   isOpen,
   onOpenChange,
   onConfirm,
   isPending,
   title = 'Are you about to delete this information?',
   description = 'Are you sure you want to delete this data? This deletion is permanent and irrecoverable.',
-}) => {
+}: ConfirmModalProps) => {
   return (
     <Modal
       hideCloseButton
@@ -61,5 +61,3 @@ const ModalConfirm: FC<Props> = ({
     </Modal>
   )
 }
-
-export { ModalConfirm }

@@ -1,11 +1,11 @@
-type SiteConfig = typeof siteConfig
+export type SiteConfig = typeof siteConfig
 
-interface NavItem {
+export interface NavItem {
   label: string
   href: string
 }
 
-const disableSeoConfig = {
+export const disableSeoConfig = {
   robots: {
     index: false,
     follow: false,
@@ -15,7 +15,7 @@ const disableSeoConfig = {
   },
 }
 
-const siteConfig = {
+export const siteConfig = {
   name: 'FAOS',
   title: 'Premium Organic Olive Oil & Honey — 100% Pure Natural Collection',
   description: '',
@@ -31,11 +31,8 @@ const siteConfig = {
   ] satisfies NavItem[],
   adminNavbarItems: [
     { label: 'Dashboard', href: '/dashboard' },
-    { label: 'Users', href: '/dashboard/manager/user' },
-    { label: 'Products', href: '/dashboard/manager/product' },
-    { label: 'Orders', href: '/dashboard/manager/order' },
+    { label: 'Users', href: '/dashboard/user' },
+    { label: 'Products', href: '/dashboard/product' },
+    { label: 'Orders', href: '/dashboard/order' },
   ] satisfies NavItem[],
 }
-
-export type { SiteConfig, NavItem }
-export { siteConfig, disableSeoConfig }

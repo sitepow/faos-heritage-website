@@ -1,7 +1,7 @@
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useCallback } from 'react'
 
-const useQueryParams = () => {
+export const useQueryParams = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -51,5 +51,3 @@ const useQueryParams = () => {
     getQueryParam,
   }
 }
-
-export { useQueryParams }

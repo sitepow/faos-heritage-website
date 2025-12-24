@@ -1,11 +1,10 @@
 import type { Metadata } from 'next'
 
-import { PageNotFound } from '@/app/(main)/_components/page-not-found'
-import { getProducts } from '@/app/(main)/actions/product'
-import { ProductsClient } from '@/app/(main)/products/_components/client/products'
+import { getProducts } from '@/app/(main)/products/action'
+import { ProductsClient } from '@/app/(main)/products/client'
+import { PageNotFound } from '@/components/common/page-not-found'
 import { siteConfig } from '@/config/site'
-import { ITEM_PER_PAGE } from '@/utils/const'
-import { OG_IMAGE } from '@/utils/helper'
+import { ITEM_PER_PAGE, OG_IMAGE } from '@/utils/constants'
 
 export const metadata: Metadata = {
   title: `All Products | ${siteConfig.name} - ${siteConfig.title}`,
@@ -48,7 +47,7 @@ export const metadata: Metadata = {
   },
 }
 
-const ProductsPage = async () => {
+export default async function Products() {
   const products = await getProducts({ limit: ITEM_PER_PAGE })
 
   if (!products || products.items.length === 0) {
@@ -63,10 +62,7 @@ const ProductsPage = async () => {
   return (
     <>
       <h1 className='sr-only'>All FAOS Products</h1>
-
       <ProductsClient initialProducts={products} itemPerPage={ITEM_PER_PAGE} />
     </>
   )
 }
-
-export default ProductsPage

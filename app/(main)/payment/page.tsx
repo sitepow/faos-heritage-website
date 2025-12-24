@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 
-import PaymentClient from './payment.client'
+import { PaymentClient } from './client'
 
 import { siteConfig } from '@/config/site'
-import { OG_IMAGE } from '@/utils/helper'
+import { OG_IMAGE } from '@/utils/constants'
 
 export const metadata: Metadata = {
   title: `Payments FAOS | ${siteConfig.title}`,
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   },
 }
 
-const PaymentPage = () => {
+export default function Payment() {
   return (
     <>
       <h1 className='sr-only'>Payment Methods at FAOS</h1>
@@ -54,5 +54,3 @@ const PaymentPage = () => {
     </>
   )
 }
-
-export default PaymentPage

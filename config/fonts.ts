@@ -1,6 +1,6 @@
 import localFont from 'next/font/local'
 
-const fontSukhumvit = localFont({
+export const fontSukhumvit = localFont({
   src: [
     {
       path: './fonts/SukhumvitSet-Thin.ttf',
@@ -36,5 +36,3 @@ const fontSukhumvit = localFont({
   variable: '--font-sukhumvit',
   display: 'swap',
 })
-
-export { fontSukhumvit }

@@ -1,20 +1,19 @@
 'use client'
 
-import { Button } from '@heroui/button'
-import { useDisclosure } from '@heroui/modal'
+import { Button, useDisclosure } from '@heroui/react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { XIcon } from 'lucide-react'
 import Head from 'next/head'
 import { useSession } from 'next-auth/react'
 
-import { CartSection } from '../_components/section/cart/cart'
-import { OrderSection } from '../_components/section/cart/order'
-import { clearCart, deleteCart } from '../actions/cart'
-import { useCartStore } from '../store/cart'
+import { clearCart, deleteCart } from './action'
+import { CartCheckout } from './components/checkout'
+import { CartLists } from './components/lists'
+import { useCartStore } from './store'
 
-import { ModalConfirm } from '@/components/modal/confirm'
+import { ConfirmModal } from '@/components/modal/confirm'
 
-const Cart = () => {
+export default function Cart() {
   const queryClient = useQueryClient()
   const { carts, setState, cartId, onOpenDeleteChange, isDeleteOpen } =
     useCartStore()
@@ -59,7 +58,7 @@ const Cart = () => {
       </Head>
 
       <section className='flex flex-col items-center justify-center gap-4 text-center'>
-        <ModalConfirm
+        <ConfirmModal
           isOpen={isDeleteOpen}
           isPending={isPending}
           onConfirm={() => {
@@ -68,7 +67,7 @@ const Cart = () => {
           onOpenChange={onOpenDeleteChange}
         />
 
-        <ModalConfirm
+        <ConfirmModal
           isOpen={isClearOpen}
           isPending={isPending}
           onConfirm={() => {
@@ -97,12 +96,10 @@ const Cart = () => {
         )}
 
         <div className='grid w-full gap-5 lg:grid-cols-3'>
-          <CartSection className='lg:col-span-2' />
-          <OrderSection />
+          <CartLists className='lg:col-span-2' />
+          <CartCheckout />
         </div>
       </section>
     </>
   )
 }
-
-export default Cart

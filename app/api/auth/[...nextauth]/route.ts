@@ -5,9 +5,10 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import FacebookProvider from 'next-auth/providers/facebook'
 import GoogleProvider from 'next-auth/providers/google'
 
-import { prisma } from '@/utils/prisma'
+import { ERROR_CODES } from '@/lib/errors/codes'
+import { prisma } from '@/lib/prisma'
 
-const NEXT_AUTH_OPTIONS: NextAuthOptions = {
+export const NEXT_AUTH_OPTIONS: NextAuthOptions = {
   session: { strategy: 'jwt' },
 
   providers: [
@@ -33,31 +34,27 @@ const NEXT_AUTH_OPTIONS: NextAuthOptions = {
         const password = credentials?.password
 
         if (!email || !password) {
-          throw new Error('Please enter your email and password.')
+          throw new Error(ERROR_CODES.INVALID_CREDENTIALS)
         }
 
         if (password.length < 6) {
-          throw new Error('The password must be at least 6 characters long.')
+          throw new Error(ERROR_CODES.PASSWORD_TOO_SHORT)
         }
 
         const user = await prisma.user.findUnique({ where: { email } })
 
         if (!user || !user.password) {
-          throw new Error(
-            'This account was not found, or this account was registered with Google / Facebook. Please log in using the same method you used before.',
-          )
+          throw new Error(ERROR_CODES.SOCIAL_ACCOUNT_EXISTS)
         }
 
-        if (!user?.isActive) {
-          throw new Error(
-            'This account has been suspended. Please contact your administrator to request access again.',
-          )
+        if (!user.isActive) {
+          throw new Error(ERROR_CODES.ACCOUNT_SUSPENDED)
         }
 
         const valid = await compare(password, user.password)
 
         if (!valid) {
-          throw new Error('The password is incorrect. Please try again.')
+          throw new Error(ERROR_CODES.INVALID_CREDENTIALS)
         }
 
         return user
@@ -129,5 +126,4 @@ const NEXT_AUTH_OPTIONS: NextAuthOptions = {
 
 const handler = NextAuth(NEXT_AUTH_OPTIONS)
 
-export { NEXT_AUTH_OPTIONS }
 export { handler as GET, handler as POST }

@@ -1,4 +1,4 @@
-const formatDate = (
+export const formatDate = (
   value: Date | string | number,
   locale = 'en-EN',
   options?: Intl.DateTimeFormatOptions,
@@ -18,5 +18,3 @@ const formatDate = (
     },
   ).format(date)
 }
-
-export { formatDate }

@@ -11,7 +11,7 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY!,
 )
 
-const uploadFilesSupabase = async (formData: FormData) => {
+export const uploadFilesSupabase = async (formData: FormData) => {
   const files = formData.getAll('files') as File[]
 
   if (!files?.length) {
@@ -47,7 +47,7 @@ const getPathFromPublicUrl = (url: string) => {
   return url.split(marker)[1]
 }
 
-const deleteFileSupabase = async (publicUrl?: string | null) => {
+export const deleteFileSupabase = async (publicUrl?: string | null) => {
   if (!publicUrl) return
 
   const filePath = getPathFromPublicUrl(publicUrl)
@@ -59,7 +59,7 @@ const deleteFileSupabase = async (publicUrl?: string | null) => {
   if (error) throw error
 }
 
-const uploadFiles = async (formData: FormData) => {
+export const uploadFiles = async (formData: FormData) => {
   const files = formData.getAll('files') as File[]
 
   if (!files || files.length === 0) {
@@ -88,7 +88,7 @@ const uploadFiles = async (formData: FormData) => {
   return filePaths
 }
 
-const deleteFile = async (relativePath: string) => {
+export const deleteFile = async (relativePath: string) => {
   if (!relativePath) {
     throw new Error(
       'The relative path of the file to be deleted was not specified.',
@@ -105,5 +105,3 @@ const deleteFile = async (relativePath: string) => {
     return
   }
 }
-
-export { deleteFile, uploadFiles, uploadFilesSupabase, deleteFileSupabase }

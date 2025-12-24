@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 
-import LazyPdfViewer from '@/components/pdf/viewer/lazy-pdf-viewer'
+import { PdfViewer } from '@/components/pdf-viewer'
 import { siteConfig } from '@/config/site'
-import { OG_IMAGE } from '@/utils/helper'
+import { OG_IMAGE } from '@/utils/constants'
 
 export const metadata: Metadata = {
   title: `About FAOS | ${siteConfig.title}`,
@@ -43,11 +43,11 @@ export const metadata: Metadata = {
   },
 }
 
-const About = () => {
+export default function About() {
   return (
     <>
       <section className='flex justify-center'>
-        <LazyPdfViewer fileUrl='/faos-organic-olive-oil-brochure.pdf' />
+        <PdfViewer fileUrl='/documents/faos-organic-olive-oil-brochure.pdf' />
       </section>
 
       <section className='sr-only'>
@@ -61,5 +61,3 @@ const About = () => {
     </>
   )
 }
-
-export default About
