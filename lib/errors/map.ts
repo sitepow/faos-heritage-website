@@ -28,4 +28,6 @@ export const ERROR_MESSAGE_MAP: Record<ErrorCode, string> = {
   [ERROR_CODES.DATA_FIELD_REQUIRED]: 'Required field is missing.',
 
   [ERROR_CODES.DATA_INSUFFICIENT]: 'Insufficient data',
+
+  [ERROR_CODES.DATA_CANNOT_PROCEED]: 'Cannot proceed with the current data',
 }

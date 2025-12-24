@@ -3,6 +3,10 @@
 import { OrderStatus } from '@prisma/client'
 import Stripe from 'stripe'
 
+import type { ActionResult } from '@/lib/errors/types'
+
+import { ERROR_CODES } from '@/lib/errors/codes'
+import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -15,8 +19,12 @@ interface createStripeCheckoutParams {
 
 export const createStripeCheckout = async ({
   orderId,
-}: createStripeCheckoutParams) => {
-  if (!orderId) throw new Error('ไม่พบ orderId')
+}: createStripeCheckoutParams): Promise<
+  ActionResult<{ checkoutUrl: string }>
+> => {
+  if (!orderId) {
+    return fail(ERROR_CODES.DATA_FIELD_REQUIRED)
+  }
 
   const order = await prisma.order.findUnique({
     where: { id: orderId },
@@ -26,10 +34,13 @@ export const createStripeCheckout = async ({
     },
   })
 
-  if (!order) throw new Error('No order found.')
+  if (!order) {
+    return fail(ERROR_CODES.DATA_NOT_FOUND)
+  }
 
-  if (order.status !== OrderStatus.PENDING)
-    throw new Error('This order could not be paid for.')
+  if (order.status !== OrderStatus.PENDING) {
+    return fail(ERROR_CODES.DATA_CANNOT_PROCEED)
+  }
 
   const session = await stripe.checkout.sessions.create({
     mode: 'payment',
@@ -62,7 +73,9 @@ export const createStripeCheckout = async ({
     },
   })
 
-  return {
-    checkoutUrl: session.url,
+  if (!session.url) {
+    return fail(ERROR_CODES.SYSTEM_ERROR)
   }
+
+  return done({ checkoutUrl: session.url })
 }

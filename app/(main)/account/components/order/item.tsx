@@ -36,9 +36,9 @@ export const OrderItem = ({ order, hideButton }: OrderItemProps) => {
 
   const { mutate: mutateCheckout, isPending: isPendingCheckout } = useMutation({
     mutationFn: () => createStripeCheckout({ orderId: order?.id! }),
-    onSuccess: ({ checkoutUrl }) => {
-      if (checkoutUrl) {
-        router.push(checkoutUrl)
+    onSuccess: (result) => {
+      if (result.success) {
+        router.push(result.data.checkoutUrl)
       }
     },
   })
