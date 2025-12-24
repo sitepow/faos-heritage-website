@@ -175,7 +175,6 @@ export default function Product() {
         }}
       >
         <TableHeader>
-          <TableColumn>Actions</TableColumn>
           <TableColumn>Product ID</TableColumn>
           <TableColumn>Digital Product</TableColumn>
           <TableColumn>Image</TableColumn>
@@ -183,6 +182,7 @@ export default function Product() {
           <TableColumn>Main Price</TableColumn>
           <TableColumn>Main Stock</TableColumn>
           <TableColumn>Category</TableColumn>
+          <TableColumn>Actions</TableColumn>
         </TableHeader>
 
         <TableBody
@@ -217,6 +217,63 @@ export default function Product() {
 
             return (
               <TableRow key={product.id}>
+                <TableCell>{product.id}</TableCell>
+                <TableCell>
+                  {product?.isDigitalProduct ? (
+                    <Chip
+                      color='primary'
+                      startContent={
+                        <FileIcon className='text-primary size-4' />
+                      }
+                      variant='bordered'
+                    >
+                      Digital product
+                    </Chip>
+                  ) : (
+                    '-'
+                  )}
+                </TableCell>
+                <TableCell>
+                  {product?.images?.length === 0 && <span>-</span>}
+
+                  {product?.images?.length !== 0 && (
+                    <AvatarGroup max={3}>
+                      {product?.images?.map((image) => (
+                        <Avatar key={image?.url} src={image?.url} />
+                      ))}
+                    </AvatarGroup>
+                  )}
+                </TableCell>
+                <TableCell className='max-w-72 min-w-72'>
+                  {product?.name ?? '-'}
+                </TableCell>
+                <TableCell className='min-w-32'>
+                  {price ? (
+                    <Chip color='primary' variant='bordered'>
+                      {price}
+                    </Chip>
+                  ) : (
+                    '-'
+                  )}
+                </TableCell>
+                <TableCell className='min-w-32'>
+                  {stock ? (
+                    <Chip color='primary' variant='bordered'>
+                      {stock}
+                    </Chip>
+                  ) : (
+                    '-'
+                  )}
+                </TableCell>
+                <TableCell className='max-w-52 min-w-52'>
+                  {product?.category?.name ? (
+                    <Chip color='primary' variant='bordered'>
+                      {product?.category?.name}
+                    </Chip>
+                  ) : (
+                    '-'
+                  )}
+                </TableCell>
                 <TableCell className='flex gap-2.5'>
                   <Dropdown placement='bottom-end'>
                     <DropdownTrigger>
@@ -272,47 +329,6 @@ export default function Product() {
                       </DropdownItem>
                     </DropdownMenu>
                   </Dropdown>
-                </TableCell>
-                <TableCell>{product.id}</TableCell>
-                <TableCell>
-                  {product?.isDigitalProduct ? (
-                    <Chip
-                      color='primary'
-                      startContent={
-                        <FileIcon className='text-primary size-4' />
-                      }
-                      variant='bordered'
-                    >
-                      Digital product
-                    </Chip>
-                  ) : (
-                    '-'
-                  )}
-                </TableCell>
-                <TableCell>
-                  {product?.images?.length === 0 && <span>-</span>}
-
-                  {product?.images?.length !== 0 && (
-                    <AvatarGroup max={3}>
-                      {product?.images?.map((image) => (
-                        <Avatar key={image?.url} src={image?.url} />
-                      ))}
-                    </AvatarGroup>
-                  )}
-                </TableCell>
-                <TableCell className='max-w-72 min-w-72'>
-                  {product?.name ?? '-'}
-                </TableCell>
-                <TableCell className='max-w-32 min-w-32'>{price}</TableCell>
-                <TableCell className='max-w-32 min-w-32'>{stock}</TableCell>
-                <TableCell className='max-w-52 min-w-52'>
-                  {product?.category?.name ? (
-                    <Chip color='primary' variant='bordered'>
-                      {product?.category?.name}
-                    </Chip>
-                  ) : (
-                    '-'
-                  )}
                 </TableCell>
               </TableRow>
             )
