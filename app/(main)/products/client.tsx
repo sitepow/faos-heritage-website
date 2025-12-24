@@ -108,7 +108,11 @@ export const ProductsClient = ({
 
         <Dropdown>
           <DropdownTrigger>
-            <Button startContent={<ArrowUpDownIcon />} variant='faded'>
+            <Button
+              startContent={<ArrowUpDownIcon />}
+              variant='bordered'
+              color='primary'
+            >
               Sorting {sortBy?.label}
             </Button>
           </DropdownTrigger>

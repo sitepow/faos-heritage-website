@@ -110,6 +110,8 @@ export const CategoryClient = ({
         {!isLoadingCategory && (
           <Breadcrumbs className='font-bold'>
             <BreadcrumbItem>Homepage</BreadcrumbItem>
+            <BreadcrumbItem>Products</BreadcrumbItem>
+            <BreadcrumbItem>Category</BreadcrumbItem>
             <BreadcrumbItem>{category?.name}</BreadcrumbItem>
           </Breadcrumbs>
         )}
@@ -128,7 +130,11 @@ export const CategoryClient = ({
 
         <Dropdown>
           <DropdownTrigger>
-            <Button startContent={<ArrowUpDownIcon />} variant='faded'>
+            <Button
+              startContent={<ArrowUpDownIcon />}
+              variant='bordered'
+              color='primary'
+            >
               Sorting {sortBy?.label}
             </Button>
           </DropdownTrigger>

@@ -61,6 +61,7 @@ export const ProductClient = ({
           <BreadcrumbItem>Homepage</BreadcrumbItem>
           <BreadcrumbItem>Product</BreadcrumbItem>
           <BreadcrumbItem>{product.category?.name}</BreadcrumbItem>
+          <BreadcrumbItem>{product?.name}</BreadcrumbItem>
         </Breadcrumbs>
       )}
 
