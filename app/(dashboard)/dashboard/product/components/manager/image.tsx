@@ -179,6 +179,7 @@ export const ImageManager = () => {
                           onClick={() => {
                             setState({ imageId: image.id })
                             onOpenDeleteChange()
+                            onOpenImageManagerChange()
                           }}
                         >
                           Remove image
