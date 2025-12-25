@@ -22,16 +22,16 @@ export const PaymentClient = () => {
             <div className='space-y-3 text-left'>
               <p>
                 1. Select the product you want and click{' '}
-                <strong className='text-primary underline'>
+                <span className='decoration-primary underline decoration-dotted underline-offset-4'>
                   “Add to Cart”
-                </strong>
+                </span>
               </p>
               <p>2. Open your cart to review the selected items</p>
               <p>
                 3. When you are ready to pay, click{' '}
-                <strong className='text-primary underline'>
+                <span className='decoration-primary underline decoration-dotted underline-offset-4'>
                   “Place Order”
-                </strong>
+                </span>
               </p>
               <p>4. You will be redirected to Stripe’s secure checkout page</p>
             </div>
@@ -45,10 +45,10 @@ export const PaymentClient = () => {
             <div className='space-y-3 text-left'>
               <p>
                 We accept debit and credit cards from all banks with the
-                <strong className='text-primary underline'>
+                <span className='decoration-primary underline decoration-dotted underline-offset-4'>
                   {' '}
                   Visa, Mastercard, or JCB
-                </strong>{' '}
+                </span>{' '}
                 logo, including virtual cards issued by banks.
               </p>
             </div>
@@ -62,9 +62,9 @@ export const PaymentClient = () => {
             <div className='space-y-3 text-left'>
               <p>
                 Pay via{' '}
-                <strong className='text-primary underline'>
+                <span className='decoration-primary underline decoration-dotted underline-offset-4'>
                   PromptPay QR Code
-                </strong>{' '}
+                </span>{' '}
                 supported by all Thai banks.
               </p>
             </div>

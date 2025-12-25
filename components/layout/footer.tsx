@@ -23,8 +23,8 @@ export const Footer = ({ className, ...props }: FooterProps) => {
 
       <div className='flex flex-wrap gap-2'>
         <Link
-          className={cn(linkStyles({ color: 'foreground' }), 'underline')}
-          href='/'
+          className={cn(linkStyles({ color: 'foreground' }))}
+          href='/privacy'
         >
           Privacy Information
         </Link>
