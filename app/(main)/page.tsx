@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 import { CategoryCarouselClient } from './components/category-carousel/client'
-import { ExploreProductsClient } from './explore-product.client'
+import { ExploreProductsClient } from './components/explore-product.client'
 import { getProducts } from './products'
 import { getCategories } from '../(dashboard)/dashboard/product'
 
