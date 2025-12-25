@@ -52,10 +52,6 @@ export const createOmiseCheckout = async ({
     amount,
     currency: 'THB',
 
-    // source: {
-    //     type: 'promptpay',
-    // },
-
     return_uri: `${process.env.NEXT_PUBLIC_APP_URL}/checkout/success?orderId=${order.id}`,
     metadata: {
       orderId: order.id,
