@@ -55,14 +55,14 @@ const config = {
       themes: {
         light: {
           colors: {
-            primary: '#F0C808',
-            secondary: '#1B4332',
+            primary: '#ba8c25',
+            secondary: '#ffffff',
           },
         },
         dark: {
           colors: {
-            primary: '#F0C808',
-            secondary: '#1B4332',
+            primary: '#ba8c25',
+            secondary: '#ffffff',
           },
         },
       },
