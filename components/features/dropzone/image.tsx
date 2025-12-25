@@ -8,9 +8,8 @@ import prettyBytes from 'pretty-bytes'
 import { useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 
+import { ACCEPT_IMAGE_TYPES } from '@/utils/constants'
 import { cn } from '@/utils/style'
-
-const ACCEPT_TYPES = ['.png', '.jpg', '.jpeg', '.gif', '.webp']
 
 export interface ImageWithPreview extends File {
   preview: string
@@ -60,7 +59,7 @@ export const ImageDropzone = ({
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: {
-      'image/*': ACCEPT_TYPES,
+      'image/*': ACCEPT_IMAGE_TYPES,
     },
     multiple,
   })
@@ -141,7 +140,7 @@ export const ImageDropzone = ({
               <p>Drag and drop the image here.</p>
 
               <div className='text-default-500 mx-auto flex gap-1 text-sm'>
-                {ACCEPT_TYPES.map((type) => (
+                {ACCEPT_IMAGE_TYPES.map((type) => (
                   <p key={type}>{type}</p>
                 ))}
               </div>
@@ -149,6 +148,10 @@ export const ImageDropzone = ({
               <p className='text-default-500 text-sm'>
                 Or click to select a file (the system will automatically resize
                 the file for better performance).
+              </p>
+
+              <p className='text-primary text-sm'>
+                Supports file uploads up to 20 MB
               </p>
             </div>
           )}
