@@ -143,6 +143,7 @@ export const ImageManager = () => {
                         src={image.url}
                         width={200}
                       />
+                      <p>{image?.id}</p>
                     </div>
 
                     <Dropdown placement='bottom-end'>

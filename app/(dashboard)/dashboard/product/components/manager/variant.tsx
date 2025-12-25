@@ -15,6 +15,7 @@ import {
   DropdownMenu,
   DropdownItem,
   ModalFooter,
+  Chip,
 } from '@heroui/react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import {
@@ -79,7 +80,6 @@ export const VariantManager = () => {
     })
 
   const onClose = async () => {
-    await onRefetch()
     setState({ productId: null, variantId: null })
     onOpenVariantManagerChange()
   }
@@ -132,35 +132,43 @@ export const VariantManager = () => {
                   >
                     <CardBody className='flex-row items-center justify-between'>
                       <div className='line-clamp-1 flex flex-col'>
-                        <span className='line-clamp-1'>{variant.name}</span>
-                        <div className='flex gap-2 text-sm'>
+                        <span className='line-clamp-2'>
+                          {variant.name} (Option ID: {variant.id})
+                        </span>
+                        <div className='mt-2.5 flex gap-2 text-sm'>
                           {!!variant.sku && (
-                            <span className='text-default-500'>
-                              sku: {variant.sku}
-                            </span>
+                            <Chip>
+                              <span className='text-default-500'>
+                                sku: {variant.sku}
+                              </span>
+                            </Chip>
                           )}
 
-                          <span
-                            className={cn(
-                              'text-default-500',
-                              !variant.price && 'text-red-500',
-                            )}
-                          >
-                            {variant.price
-                              ? `Price: ${formatCurrency(variant.price)}`
-                              : `(Please specify the price)`}
-                          </span>
+                          <Chip>
+                            <span
+                              className={cn(
+                                'text-default-500',
+                                !variant.price && 'text-red-500',
+                              )}
+                            >
+                              {variant.price
+                                ? `Price: ${formatCurrency(variant.price)}`
+                                : `(Please specify the price)`}
+                            </span>
+                          </Chip>
 
-                          <span
-                            className={cn(
-                              'text-default-500',
-                              !variant.stockQuantity && 'text-red-500',
-                            )}
-                          >
-                            {variant.stockQuantity
-                              ? `Stock: ${formatNumber(variant.stockQuantity)}`
-                              : '(Please specify stock availability)'}
-                          </span>
+                          <Chip>
+                            <span
+                              className={cn(
+                                'text-default-500',
+                                !variant.stockQuantity && 'text-red-500',
+                              )}
+                            >
+                              {variant.stockQuantity
+                                ? `Stock: ${formatNumber(variant.stockQuantity)}`
+                                : '(Please specify stock availability)'}
+                            </span>
+                          </Chip>
                         </div>
                       </div>
 
