@@ -3,10 +3,11 @@
 
 import { Card, CardBody } from '@heroui/react'
 import Image from 'next/image'
-import { useState, type ComponentPropsWithoutRef } from 'react'
+import { useEffect, useState, type ComponentPropsWithoutRef } from 'react'
+import { useMediaQuery } from 'react-responsive'
 
 import { Carousel } from '@/components/features/carousel/carousel'
-import { NO_IMAGE } from '@/utils/constants'
+import { IS_TABLET_OR_MOBILE, NO_IMAGE } from '@/utils/constants'
 import { cn } from '@/utils/style'
 
 type ProductImagePreviewProps = ComponentPropsWithoutRef<'div'> & {
@@ -20,7 +21,17 @@ export const ProductImagePreview = ({
   className,
   ...props
 }: ProductImagePreviewProps) => {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   const [selectedIndex, setSelectedIndex] = useState(0)
+
+  const isTabletOrMobile = useMediaQuery({
+    query: `(max-width: ${IS_TABLET_OR_MOBILE})`,
+  })
 
   const displayImages = images.length > 0 ? images : [NO_IMAGE]
   const mainImage = displayImages[selectedIndex]
@@ -28,54 +39,63 @@ export const ProductImagePreview = ({
   return (
     <Card>
       <CardBody>
-        <div
-          className={cn('flex size-full w-full flex-col gap-3', className)}
-          {...props}
-        >
-          <div className='relative aspect-square h-[250px] w-full overflow-hidden rounded-xl'>
-            <Image
-              fill
-              priority
-              alt={alt}
-              className='aspect-square object-contain transition-opacity duration-300'
-              src={mainImage}
-            />
-          </div>
+        {mounted && (
+          <div
+            className={cn(
+              'flex h-[350px] w-full flex-col gap-3 overflow-hidden md:flex-row',
+              className,
+            )}
+            {...props}
+          >
+            {displayImages.length > 1 && (
+              <Carousel
+                slidesToScroll
+                className='gap-2 lg:h-[350px]'
+                orientation={isTabletOrMobile ? 'horizontal' : 'vertical'}
+              >
+                {displayImages.map((image, index) => {
+                  const isActive = index === selectedIndex
 
-          {displayImages.length > 1 && (
-            <Carousel slidesToScroll className='gap-2'>
-              {displayImages.map((image, index) => {
-                const isActive = index === selectedIndex
-
-                return (
-                  <button
-                    key={`${image}-${index}`}
-                    className={cn(
-                      'relative aspect-square size-20 shrink-0 overflow-hidden rounded-lg border-2 transition-all',
-                      isActive
-                        ? 'border-primary ring-primary/10 ring-2'
-                        : 'border-divider hover:border-default-300',
-                    )}
-                    type='button'
-                    onClick={() => setSelectedIndex(index)}
-                  >
-                    <Image
-                      fill
-                      alt={`${alt}-thumb-${index}`}
+                  return (
+                    <button
+                      key={`${image}-${index}`}
                       className={cn(
-                        'object-cover transition-opacity',
+                        'relative aspect-square size-20 shrink-0 overflow-hidden rounded-lg border-2 transition-all',
                         isActive
-                          ? 'opacity-100'
-                          : 'opacity-60 hover:opacity-100',
+                          ? 'border-primary ring-primary/10 ring-2'
+                          : 'border-divider hover:border-default-300',
                       )}
-                      src={image}
-                    />
-                  </button>
-                )
-              })}
-            </Carousel>
-          )}
-        </div>
+                      type='button'
+                      onClick={() => setSelectedIndex(index)}
+                    >
+                      <Image
+                        fill
+                        alt={`${alt}-thumb-${index}`}
+                        className={cn(
+                          'object-cover transition-opacity',
+                          isActive
+                            ? 'opacity-100'
+                            : 'opacity-60 hover:opacity-100',
+                        )}
+                        src={image}
+                      />
+                    </button>
+                  )
+                })}
+              </Carousel>
+            )}
+
+            <div className='relative order-1 aspect-square size-full overflow-hidden'>
+              <Image
+                fill
+                priority
+                alt={alt}
+                className='aspect-square object-contain transition-opacity duration-300'
+                src={mainImage}
+              />
+            </div>
+          </div>
+        )}
       </CardBody>
     </Card>
   )

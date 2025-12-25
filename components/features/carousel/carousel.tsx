@@ -13,14 +13,19 @@ interface CarouselProps {
   className?: string
   children: ReactNode
   slidesToScroll?: boolean
+  orientation?: 'horizontal' | 'vertical'
 }
 
 export const Carousel = ({
   className,
   children,
   slidesToScroll,
+  orientation = 'horizontal',
 }: CarouselProps) => {
+  const isVertical = orientation === 'vertical'
+
   const [emblaRef, emblaApi] = useEmblaCarousel({
+    axis: isVertical ? 'y' : 'x',
     dragFree: true,
     align: 'start',
     containScroll: 'trimSnaps',
@@ -31,16 +36,27 @@ export const Carousel = ({
     useCarouselNavigation(emblaApi)
 
   return (
-    <div className='relative w-full max-w-full'>
+    <div className='relative'>
       <div ref={emblaRef} className='overflow-hidden'>
-        <div className={cn('flex gap-2 px-1 md:gap-4', className)}>
+        <div
+          className={cn(
+            isVertical ? 'flex flex-col gap-2' : 'flex gap-2',
+            'px-1 md:gap-4',
+            className,
+          )}
+        >
           {children}
         </div>
       </div>
 
       {!prevDisabled && (
         <CarouselNavigateButton
-          className='absolute top-1/2 left-4 flex -translate-y-1/2 bg-black/20 hover:bg-black/30'
+          className={cn(
+            'absolute flex bg-black/20 hover:bg-black/30',
+            isVertical
+              ? 'top-4 left-1/2 -translate-x-1/2'
+              : 'top-1/2 left-4 -translate-y-1/2',
+          )}
           direction='prev'
           onClick={onPrev}
         />
@@ -48,7 +64,12 @@ export const Carousel = ({
 
       {!nextDisabled && (
         <CarouselNavigateButton
-          className='absolute top-1/2 right-4 flex -translate-y-1/2 bg-black/20 hover:bg-black/30'
+          className={cn(
+            'absolute flex bg-black/20 hover:bg-black/30',
+            isVertical
+              ? 'bottom-4 left-1/2 -translate-x-1/2'
+              : 'top-1/2 right-4 -translate-y-1/2',
+          )}
           direction='next'
           onClick={onNext}
         />

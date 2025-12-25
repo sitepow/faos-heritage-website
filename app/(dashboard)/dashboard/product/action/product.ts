@@ -126,6 +126,7 @@ export const getProduct = async (productId: string, userId?: string) => {
       images: {
         select: {
           url: true,
+          alt: true,
         },
       },
       description: true,

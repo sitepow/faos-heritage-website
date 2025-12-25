@@ -118,7 +118,7 @@ export const CategoryCarouselClient = ({
         </CardHeader>
 
         <CardBody>
-          <Carousel slidesToScroll className='items-stretch'>
+          <Carousel slidesToScroll className='items-stretch p-1'>
             {isLoadingProducts ? (
               Array.from({ length: 8 }).map((_, i) => (
                 <ProductCardSkeleton key={i} />
