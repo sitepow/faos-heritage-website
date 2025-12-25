@@ -173,6 +173,12 @@ export default function Product() {
         onSelectionChange={(keys) => {
           setSelectedKeys(keys as Set<string>)
         }}
+        checkboxesProps={{
+          classNames: {
+            base: 'data-[selected=true]:border-primary',
+            icon: 'text-secondary',
+          },
+        }}
       >
         <TableHeader>
           <TableColumn>Product ID</TableColumn>

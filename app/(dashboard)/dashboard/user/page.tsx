@@ -128,6 +128,12 @@ export default function User() {
         onSelectionChange={(keys) => {
           setSelectedKeys(keys as Set<string>)
         }}
+        checkboxesProps={{
+          classNames: {
+            base: 'data-[selected=true]:border-primary',
+            icon: 'text-secondary',
+          },
+        }}
       >
         <TableHeader>
           <TableColumn>Customer ID</TableColumn>

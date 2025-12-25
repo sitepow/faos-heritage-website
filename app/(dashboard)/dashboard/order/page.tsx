@@ -68,7 +68,16 @@ export default function Order() {
           dashboard?.map((data) => <StatCard key={data.name} {...data} />)}
       </div>
 
-      <Table aria-label='Order data table' selectionMode='multiple'>
+      <Table
+        aria-label='Order data table'
+        selectionMode='multiple'
+        checkboxesProps={{
+          classNames: {
+            base: 'data-[selected=true]:border-primary',
+            icon: 'text-secondary',
+          },
+        }}
+      >
         <TableHeader>
           <TableColumn>Order ID</TableColumn>
           <TableColumn>Image</TableColumn>
