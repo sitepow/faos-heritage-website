@@ -248,7 +248,7 @@ export default function Product() {
                   {product?.name ?? '-'}
                 </TableCell>
                 <TableCell className='min-w-32'>
-                  {price ? (
+                  {price !== formatCurrency(0) ? (
                     <Chip color='primary' variant='bordered'>
                       {price}
                     </Chip>
@@ -257,7 +257,7 @@ export default function Product() {
                   )}
                 </TableCell>
                 <TableCell className='min-w-32'>
-                  {stock ? (
+                  {stock !== formatNumber(0) ? (
                     <Chip color='primary' variant='bordered'>
                       {stock}
                     </Chip>
