@@ -55,7 +55,7 @@ export const ProductImagePreview = ({
                     <button
                       key={`${image}-${index}`}
                       className={cn(
-                        'order relative aspect-square size-20 shrink-0 overflow-hidden border-2 transition-all',
+                        'order relative aspect-square size-20 shrink-0 overflow-hidden rounded-xl border-2 transition-all',
                         isActive
                           ? 'border-primary ring-primary/10 ring-2'
                           : 'border-divider hover:border-default-300',
