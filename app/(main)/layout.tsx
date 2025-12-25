@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify'
 
 import type { PropsWithChildren } from 'react'
 
+import { PurchaseAlert } from '@/components/features/alert/purchase'
 import { Footer } from '@/components/layout/footer'
 import { Navbar } from '@/components/layout/navbar/navbar'
 
@@ -15,6 +16,7 @@ export default function MainLayout({ children }: PropsWithChildren) {
     <div className='light:bg-[#f1f1f1] relative flex h-screen flex-col overflow-x-hidden'>
       <Navbar />
       <main className='container mx-auto flex-grow p-6'>
+        <PurchaseAlert />
         <ToastContainer
           closeOnClick
           hideProgressBar
