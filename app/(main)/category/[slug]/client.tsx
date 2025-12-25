@@ -109,9 +109,8 @@ export const CategoryClient = ({
 
         {!isLoadingCategory && (
           <Breadcrumbs className='font-bold'>
-            <BreadcrumbItem>Homepage</BreadcrumbItem>
-            <BreadcrumbItem>Products</BreadcrumbItem>
-            <BreadcrumbItem>Category</BreadcrumbItem>
+            <BreadcrumbItem href='/'>Home</BreadcrumbItem>
+            <BreadcrumbItem href='/products'>Products</BreadcrumbItem>
             <BreadcrumbItem>{category?.name}</BreadcrumbItem>
           </Breadcrumbs>
         )}

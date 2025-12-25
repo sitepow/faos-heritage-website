@@ -10,20 +10,20 @@ import { useCarouselNavigation } from '@/hooks/useCarouselMethod'
 import { cn } from '@/utils/style'
 
 interface CarouselProps {
-  className?: string
+  wrapperClassName?: string
+  trackClassName?: string
   children: ReactNode
   slidesToScroll?: boolean
-  orientation?: 'horizontal' | 'vertical'
+  isVertical?: boolean
 }
 
 export const Carousel = ({
-  className,
+  wrapperClassName,
+  trackClassName,
   children,
   slidesToScroll,
-  orientation = 'horizontal',
+  isVertical,
 }: CarouselProps) => {
-  const isVertical = orientation === 'vertical'
-
   const [emblaRef, emblaApi] = useEmblaCarousel({
     axis: isVertical ? 'y' : 'x',
     dragFree: true,
@@ -36,13 +36,13 @@ export const Carousel = ({
     useCarouselNavigation(emblaApi)
 
   return (
-    <div className='relative'>
+    <div className={cn('relative', wrapperClassName)}>
       <div ref={emblaRef} className='overflow-hidden'>
         <div
           className={cn(
             isVertical ? 'flex flex-col gap-2' : 'flex gap-2',
             'px-1 md:gap-4',
-            className,
+            trackClassName,
           )}
         >
           {children}
@@ -51,6 +51,7 @@ export const Carousel = ({
 
       {!prevDisabled && (
         <CarouselNavigateButton
+          isVertical={isVertical}
           className={cn(
             'absolute flex bg-black/20 hover:bg-black/30',
             isVertical
@@ -64,6 +65,7 @@ export const Carousel = ({
 
       {!nextDisabled && (
         <CarouselNavigateButton
+          isVertical={isVertical}
           className={cn(
             'absolute flex bg-black/20 hover:bg-black/30',
             isVertical

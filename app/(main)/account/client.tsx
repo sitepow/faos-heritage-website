@@ -4,7 +4,6 @@ import { Tab, Tabs } from '@heroui/react'
 import Head from 'next/head'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
-import { useMediaQuery } from 'react-responsive'
 
 import type { Key } from 'react'
 
@@ -17,13 +16,14 @@ import {
 } from './components'
 
 import { ACCOUNT_TAB } from '@/features'
+import { useIsBelowBreakpoint } from '@/hooks/useIsBelowBreakpoint'
+import { useMounted } from '@/hooks/useMounted'
 import { useQueryParams } from '@/hooks/useQueryParams'
 import { IS_TABLET_OR_MOBILE } from '@/utils/constants'
 
 export const AccountClient = () => {
-  const isTabletOrMobile = useMediaQuery({
-    query: `(max-width: ${IS_TABLET_OR_MOBILE})`,
-  })
+  const isTabletOrMobile = useIsBelowBreakpoint(IS_TABLET_OR_MOBILE)
+  const mounted = useMounted()
 
   const { data: session } = useSession()
   const user = session?.user
@@ -33,12 +33,6 @@ export const AccountClient = () => {
   const [selectedTabKey, setSelectedTabKey] = useState<ACCOUNT_TAB>(
     tabParam ?? ACCOUNT_TAB.ACCOUNT,
   )
-
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
 
   useEffect(() => {
     if (tabParam && tabParam !== selectedTabKey) {
@@ -74,7 +68,7 @@ export const AccountClient = () => {
                 tabList: 'flex overflow-x-auto lg:flex-col lg:w-fit gap-1 p-2',
                 panel: `w-full`,
               }}
-              isVertical={!isTabletOrMobile}
+              isVertical={isTabletOrMobile ? true : false}
               selectedKey={selectedTabKey}
               variant='bordered'
               onSelectionChange={handleTabChange}

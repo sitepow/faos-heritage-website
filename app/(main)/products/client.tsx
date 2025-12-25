@@ -94,7 +94,7 @@ export const ProductsClient = ({
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
       <div className='flex w-full justify-start'>
         <Breadcrumbs className='font-bold'>
-          <BreadcrumbItem>Homepage</BreadcrumbItem>
+          <BreadcrumbItem href='/'>Home</BreadcrumbItem>
           <BreadcrumbItem>Products</BreadcrumbItem>
         </Breadcrumbs>
       </div>

@@ -120,6 +120,7 @@ export const getProduct = async (productId: string, userId?: string) => {
       },
       category: {
         select: {
+          id: true,
           name: true,
         },
       },

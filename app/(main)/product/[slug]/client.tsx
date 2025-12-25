@@ -20,6 +20,7 @@ import { getProduct } from '@/app/(dashboard)/dashboard/product/action/product'
 import { PageNotFound } from '@/components/common/page-not-found'
 import { AdvertiseBanner } from '@/components/features/banner/advertise'
 import { CertificateBanner } from '@/components/features/banner/certificate'
+import { createSlug } from '@/utils/slug'
 
 interface ProductClientProps {
   initialProduct: GetProductResult
@@ -58,10 +59,14 @@ export const ProductClient = ({
         <Skeleton className='h-5 max-w-72' />
       ) : (
         <Breadcrumbs className='font-bold'>
-          <BreadcrumbItem>Homepage</BreadcrumbItem>
-          <BreadcrumbItem>Product</BreadcrumbItem>
-          <BreadcrumbItem>{product.category?.name}</BreadcrumbItem>
-          <BreadcrumbItem>{product?.name}</BreadcrumbItem>
+          <BreadcrumbItem href='/'>Home</BreadcrumbItem>
+          <BreadcrumbItem href='/products'>Products</BreadcrumbItem>
+          <BreadcrumbItem
+            href={`/category/${createSlug(product?.category?.name!, product?.category?.id!)}`}
+          >
+            {product.category?.name}
+          </BreadcrumbItem>
+          <BreadcrumbItem>{product.name}</BreadcrumbItem>
         </Breadcrumbs>
       )}
 

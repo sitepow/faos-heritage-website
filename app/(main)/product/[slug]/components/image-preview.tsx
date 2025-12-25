@@ -1,12 +1,14 @@
 /* eslint-disable react/no-array-index-key */
+
 'use client'
 
 import { Card, CardBody } from '@heroui/react'
 import Image from 'next/image'
-import { useEffect, useState, type ComponentPropsWithoutRef } from 'react'
-import { useMediaQuery } from 'react-responsive'
+import { useState, type ComponentPropsWithoutRef } from 'react'
 
 import { Carousel } from '@/components/features/carousel/carousel'
+import { useIsBelowBreakpoint } from '@/hooks/useIsBelowBreakpoint'
+import { useMounted } from '@/hooks/useMounted'
 import { IS_TABLET_OR_MOBILE, NO_IMAGE } from '@/utils/constants'
 import { cn } from '@/utils/style'
 
@@ -21,17 +23,9 @@ export const ProductImagePreview = ({
   className,
   ...props
 }: ProductImagePreviewProps) => {
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
   const [selectedIndex, setSelectedIndex] = useState(0)
-
-  const isTabletOrMobile = useMediaQuery({
-    query: `(max-width: ${IS_TABLET_OR_MOBILE})`,
-  })
+  const isTabletOrMobile = useIsBelowBreakpoint(IS_TABLET_OR_MOBILE)
+  const mounted = useMounted()
 
   const displayImages = images.length > 0 ? images : [NO_IMAGE]
   const mainImage = displayImages[selectedIndex]
@@ -42,7 +36,7 @@ export const ProductImagePreview = ({
         {mounted && (
           <div
             className={cn(
-              'flex h-[350px] w-full flex-col gap-3 overflow-hidden md:flex-row',
+              'flex h-[350px] w-full flex-col gap-3 overflow-hidden lg:flex-row',
               className,
             )}
             {...props}
@@ -50,8 +44,9 @@ export const ProductImagePreview = ({
             {displayImages.length > 1 && (
               <Carousel
                 slidesToScroll
-                className='gap-2 lg:h-[350px]'
-                orientation={isTabletOrMobile ? 'horizontal' : 'vertical'}
+                wrapperClassName='order-2 lg:order-1'
+                trackClassName='gap-2 lg:h-[350px]'
+                isVertical={isTabletOrMobile ? true : false}
               >
                 {displayImages.map((image, index) => {
                   const isActive = index === selectedIndex
@@ -60,7 +55,7 @@ export const ProductImagePreview = ({
                     <button
                       key={`${image}-${index}`}
                       className={cn(
-                        'relative aspect-square size-20 shrink-0 overflow-hidden rounded-lg border-2 transition-all',
+                        'order relative aspect-square size-20 shrink-0 overflow-hidden border-2 transition-all',
                         isActive
                           ? 'border-primary ring-primary/10 ring-2'
                           : 'border-divider hover:border-default-300',
