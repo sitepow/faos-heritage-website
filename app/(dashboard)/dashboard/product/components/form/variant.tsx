@@ -122,6 +122,7 @@ export const VariantForm = () => {
       hideCloseButton
       isDismissable={false}
       isOpen={isVariantOpen}
+      size='xl'
       scrollBehavior='inside'
       onOpenChange={onOpenVariantChange}
     >

@@ -173,6 +173,7 @@ export const UserForm = () => {
       hideCloseButton
       isDismissable={false}
       isOpen={isUserOpen}
+      size='xl'
       scrollBehavior='inside'
       onOpenChange={onOpenUserChange}
     >

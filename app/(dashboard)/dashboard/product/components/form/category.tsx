@@ -160,6 +160,7 @@ export const CategoryForm = () => {
       isOpen={isCategoryOpen}
       scrollBehavior='inside'
       onOpenChange={onOpenCategoryChange}
+      size='xl'
     >
       <ModalContent>
         <ModalHeader className='flex flex-col gap-1'>{headerLable}</ModalHeader>

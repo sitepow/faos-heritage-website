@@ -100,7 +100,7 @@ export const VariantManager = () => {
         hideCloseButton
         isDismissable={false}
         isOpen={isVariantManagerOpen}
-        size='2xl'
+        size='xl'
         onOpenChange={onOpenVariantManagerChange}
       >
         <ModalContent>

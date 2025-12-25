@@ -170,6 +170,7 @@ export const ImageForm = () => {
       hideCloseButton
       isDismissable={false}
       isOpen={isImageOpen}
+      size='xl'
       scrollBehavior='inside'
       onOpenChange={onOpenImageChange}
     >

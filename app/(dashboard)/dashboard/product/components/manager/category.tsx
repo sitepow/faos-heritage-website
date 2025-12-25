@@ -93,6 +93,7 @@ export const CategoryManager = () => {
         isDismissable={false}
         isOpen={isCategoryManagerOpen}
         scrollBehavior='inside'
+        size='xl'
         onOpenChange={onOpenCategoryManagerChange}
       >
         <ModalContent>
