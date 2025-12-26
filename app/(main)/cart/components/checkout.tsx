@@ -6,10 +6,10 @@ import {
   CardBody,
   CardFooter,
   Alert,
-  Button,
+  // Button,
 } from '@heroui/react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { ArrowRight } from 'lucide-react'
+// import { ArrowRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import { useMemo } from 'react'
@@ -36,6 +36,9 @@ const SummaryRow = ({ label, value }: { label: string; value: number }) => (
 )
 
 export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
+  // const tomorrow = new Date()
+  // tomorrow.setDate(tomorrow.getDate() + 1)
+
   const router = useRouter()
   const queryClient = useQueryClient()
 
@@ -187,7 +190,14 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
             />
           )}
 
-          {!isLoadingAddress && address && (
+          <Alert
+            className='text-start'
+            color='warning'
+            description={`We are updating our payment system. Sorry for the inconvenience. Orders will be available again on Sat Dec 27 2025 15:06:40 GMT+0700 (Indochina Time).`}
+            variant='bordered'
+          />
+
+          {/* {!isLoadingAddress && address && (
             <Button
               className='text-secondary'
               color='primary'
@@ -197,7 +207,7 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
             >
               Proceed to checkout
             </Button>
-          )}
+          )} */}
         </CardFooter>
       </Card>
     </div>
