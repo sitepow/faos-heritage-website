@@ -11,7 +11,7 @@ export const SuccessClient = () => {
   return (
     <section className='flex flex-col items-center justify-center gap-3 text-center'>
       <div className='flex flex-col items-center gap-4'>
-        <CheckCircle2Icon className='size-10 text-teal-600' />
+        <CheckCircle2Icon className='text-default-500 size-10' />
         <h1 className='text-2xl'>Payment successful</h1>
       </div>
 

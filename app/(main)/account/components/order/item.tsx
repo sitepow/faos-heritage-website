@@ -12,6 +12,7 @@ import type { GetOrderResult } from '@/app/(dashboard)/dashboard/order/action'
 import { createStripeCheckout } from '@/actions/stripe'
 import { useOrderStore } from '@/app/(dashboard)/dashboard/order/store'
 import { Stepper } from '@/components/common/stepper'
+// import { OmisePaymentButton } from '@/components/features/omise/payment-button'
 import { getOrderStatus } from '@/features'
 import { NO_IMAGE } from '@/utils/constants'
 import { formatDate } from '@/utils/date'
@@ -120,6 +121,13 @@ export const OrderItem = ({ order, hideButton }: OrderItemProps) => {
               >
                 Pay now
               </Button>
+
+              // <OmisePaymentButton
+              //   orderId={order.id}
+              //   amount={order.total}
+              //   currency='THB'
+              //   buttonText='Pay now'
+              // />
             )}
             {order?.status !== OrderStatus.PENDING && (
               <Button

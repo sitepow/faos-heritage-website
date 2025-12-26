@@ -11,7 +11,7 @@ export const CancelClient = () => {
   return (
     <section className='flex flex-col items-center justify-center gap-3 text-center'>
       <div className='flex flex-col items-center gap-4'>
-        <XCircleIcon className='text-danger size-10' />
+        <XCircleIcon className='text-default-500 size-10' />
         <h1 className='text-2xl'>Cancel payment</h1>
       </div>
 

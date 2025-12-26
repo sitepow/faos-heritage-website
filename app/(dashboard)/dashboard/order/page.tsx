@@ -112,7 +112,11 @@ export default function Order() {
               <TableCell className='max-w-52 min-w-52'>
                 {formatDate(order?.createdAt)}
               </TableCell>
-              <TableCell>{formatCurrency(order.total)}</TableCell>
+              <TableCell>
+                <Chip color='primary' variant='bordered'>
+                  {formatCurrency(order.total)}
+                </Chip>
+              </TableCell>
               <TableCell>
                 <Chip color='primary' variant='bordered'>
                   {getOrderStatus(order.status)}

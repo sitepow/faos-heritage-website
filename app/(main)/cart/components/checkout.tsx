@@ -6,10 +6,10 @@ import {
   CardBody,
   CardFooter,
   Alert,
-  // Button,
+  Button,
 } from '@heroui/react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-// import { ArrowRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import { useMemo } from 'react'
@@ -77,7 +77,7 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
     ADDRESS: ['account', 'address', userId],
     CART: ['carts', userId],
     CART_COUNT: ['carts', 'count', userId],
-    ORDER: ['account', 'orders', userId],
+    ORDER: ['account', 'orders', 'pagination', userId],
   }
 
   const { data: address, isLoading: isLoadingAddress } = useQuery({
@@ -190,14 +190,14 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
             />
           )}
 
-          <Alert
+          {/* <Alert
             className='text-start'
             color='warning'
             description={`We are updating our payment system. Sorry for the inconvenience. Orders will be available again on Sat Dec 27 2025 15:06:40 GMT+0700 (Indochina Time).`}
             variant='bordered'
-          />
+          /> */}
 
-          {/* {!isLoadingAddress && address && (
+          {!isLoadingAddress && address && (
             <Button
               className='text-secondary'
               color='primary'
@@ -207,7 +207,7 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
             >
               Proceed to checkout
             </Button>
-          )} */}
+          )}
         </CardFooter>
       </Card>
     </div>
