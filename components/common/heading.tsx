@@ -7,6 +7,10 @@ type SectionHeaderProps = ComponentPropsWithoutRef<'div'> & {
   description?: string
 }
 
+type SubHeadingProps = ComponentPropsWithoutRef<'span'> & {
+  title: string
+}
+
 export const SectionHeader = ({
   title,
   description,
@@ -19,10 +23,6 @@ export const SectionHeader = ({
       {description && <p className='text-default-500 text-sm'>{description}</p>}
     </div>
   )
-}
-
-interface SubHeadingProps extends ComponentPropsWithoutRef<'span'> {
-  title: string
 }
 
 export const SubHeading = ({ title, className, ...props }: SubHeadingProps) => {
