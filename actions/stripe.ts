@@ -13,13 +13,13 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2025-11-17.clover',
 })
 
-interface createStripeCheckoutParams {
+interface CreateStripeCheckoutParams {
   orderId: string
 }
 
 export const createStripeCheckout = async ({
   orderId,
-}: createStripeCheckoutParams): Promise<
+}: CreateStripeCheckoutParams): Promise<
   ActionResult<{ checkoutUrl: string }>
 > => {
   if (!orderId) {
