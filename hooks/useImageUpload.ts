@@ -1,11 +1,18 @@
+import { createClient } from '@supabase/supabase-js'
 import { useState } from 'react'
 
-import { deleteFileSupabase, uploadFilesSupabase } from '@/actions/file'
+import { deleteFileSupabase } from '@/actions/file'
+import { optimizeImageClient } from '@/utils/optimize/image/client'
 
 interface useImageUploadParams {
   oldImage?: string | null
   previewFiles: File[]
 }
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+)
 
 export const useImageUpload = ({
   oldImage,
@@ -23,16 +30,29 @@ export const useImageUpload = ({
     setIsUploading(true)
 
     try {
-      const formData = new FormData()
-      previewFiles.forEach((file) => formData.append('files', file))
+      const originalFile = previewFiles[0]
 
-      const uploaded = await uploadFilesSupabase(formData)
+      const optimizedFile = await optimizeImageClient(originalFile, {
+        maxWidth: 800,
+        quality: 0.85,
+      })
 
-      if (!uploaded.success) {
+      const fileName = `${crypto.randomUUID()}.webp`
+
+      const { error } = await supabase.storage
+        .from('uploads')
+        .upload(fileName, optimizedFile, {
+          contentType: 'image/webp',
+          upsert: true,
+        })
+
+      if (error) {
         return imagePath
       }
 
-      imagePath = uploaded.data.urls[0]
+      const { data } = supabase.storage.from('uploads').getPublicUrl(fileName)
+
+      imagePath = data.publicUrl
 
       if (oldImage && imagePath !== oldImage) {
         await deleteFileSupabase(oldImage)

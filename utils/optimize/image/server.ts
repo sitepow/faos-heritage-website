@@ -10,7 +10,7 @@ export const toBuffer = (input: Buffer | ArrayBuffer): Buffer => {
   return Buffer.isBuffer(input) ? input : Buffer.from(input)
 }
 
-export const optimizeImage = async (
+export const optimizeImageServer = async (
   input: Buffer | ArrayBuffer,
   options: optimizeImageParams = {},
 ) => {

@@ -9,7 +9,7 @@ import type { ActionResult } from '@/lib/errors/types'
 import { ERROR_CODES } from '@/lib/errors/codes'
 import { done, fail } from '@/lib/errors/server'
 import { getPathFromPublicUrl } from '@/utils/app/helpers/supabase'
-import { optimizeImage } from '@/utils/image'
+import { optimizeImageServer } from '@/utils/optimize/image/server'
 
 const supabase = createClient(
   process.env.SUPABASE_URL!,
@@ -28,7 +28,7 @@ export const uploadFilesSupabase = async (
   const urls: string[] = []
 
   for (const file of files) {
-    const buffer = await optimizeImage(await file.arrayBuffer())
+    const buffer = await optimizeImageServer(await file.arrayBuffer())
 
     const fileName = `${crypto.randomUUID()}.webp`
 
@@ -98,7 +98,7 @@ export const uploadFiles = async (
     const relativePath = `/uploads/${filename}`
     const filePath = path.join(uploadDir, filename)
 
-    const buffer = await optimizeImage(await file.arrayBuffer())
+    const buffer = await optimizeImageServer(await file.arrayBuffer())
 
     await fs.writeFile(filePath, new Uint8Array(buffer))
     filePaths.push(relativePath)
