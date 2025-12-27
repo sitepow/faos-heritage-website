@@ -108,3 +108,17 @@ export const SHIPPING_PROVIDERS = [
     placeholder: 'KRT123456789',
   },
 ]
+
+export const COUNTRY_CURRENCY_MAP = {
+  US: 'USD',
+  GR: 'EUR',
+  IT: 'EUR',
+  NL: 'EUR',
+  IS: 'ISK',
+  MY: 'MYR',
+  SG: 'SGD',
+  JP: 'JPY',
+  CN: 'CNY',
+  VN: 'VND',
+  ID: 'IDR',
+} as const
