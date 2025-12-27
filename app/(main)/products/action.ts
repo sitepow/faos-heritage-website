@@ -4,8 +4,8 @@ import { unstable_noStore as noStore } from 'next/cache'
 
 import type { Product } from '@prisma/client'
 
-import { getVariantPriceStockMinMax } from '@/features'
 import { prisma } from '@/lib/prisma'
+import { getVariantPriceStockMinMax } from '@/utils/features'
 
 export type GetProductsResult = Awaited<ReturnType<typeof getProducts>>
 export type GetProductResult = GetProductsResult['items'][number]

@@ -2,8 +2,8 @@
 
 import { OrderStatus } from '@prisma/client'
 
-import { getOrderStatus } from '@/features/order/helpers'
 import { prisma } from '@/lib/prisma'
+import { getOrderStatus } from '@/utils/features/order/helpers'
 
 export type GetOrdersResult = Awaited<ReturnType<typeof getOrders>>
 export type GetOrderResult = GetOrdersResult['items'][number]

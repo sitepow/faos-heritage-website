@@ -20,8 +20,8 @@ import { useOrderStore } from '../store'
 import { getOrder } from '@/app/(main)/account/components/order/action'
 import { SubHeading } from '@/components/common/heading'
 import { Stepper } from '@/components/common/stepper'
-import { getProductUnit } from '@/features/product/helpers'
 import { NO_IMAGE } from '@/utils/constants'
+import { getProductUnit } from '@/utils/features/product/helpers'
 import { formatCurrency, formatNumber } from '@/utils/number'
 
 export const OrderViewModal = () => {

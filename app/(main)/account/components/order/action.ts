@@ -4,11 +4,11 @@ import { OrderStatus, PaymentStatus, StockMovementType } from '@prisma/client'
 
 import type { Prisma } from '@prisma/client'
 
-import { getFullAddress } from '@/features/account/helpers'
-import { checkOrderStatus } from '@/features/order/helpers'
 import { ERROR_CODES } from '@/lib/errors/codes'
 import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
+import { getFullAddress } from '@/utils/features/account/helpers'
+import { checkOrderStatus } from '@/utils/features/order/helpers'
 
 export interface UpdateOrderInput {
   orderId: string

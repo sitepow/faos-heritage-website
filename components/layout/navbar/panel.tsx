@@ -19,8 +19,8 @@ import {
 import { usePathname, useRouter } from 'next/navigation'
 import { signOut, useSession } from 'next-auth/react'
 
-import { ACCOUNT_TAB } from '@/features'
 import { NO_IMAGE } from '@/utils/constants'
+import { ACCOUNT_TAB } from '@/utils/features'
 
 interface NavbarPanelProps {
   setIsMenuOpen: (state: boolean) => void

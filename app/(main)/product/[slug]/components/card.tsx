@@ -18,8 +18,8 @@ import type { GetProductResult } from '@/app/(main)/products/action'
 import { ProductPrice } from './price'
 import { ProductRating } from './rating'
 
-import { checkOutOfStock, getProductUnit } from '@/features'
 import { NO_IMAGE } from '@/utils/constants'
+import { checkOutOfStock, getProductUnit } from '@/utils/features'
 import { createSlug } from '@/utils/slug'
 import { cn } from '@/utils/style'
 

@@ -13,9 +13,9 @@ import { createStripeCheckout } from '@/actions/stripe'
 import { useOrderStore } from '@/app/(dashboard)/dashboard/order/store'
 import { Stepper } from '@/components/common/stepper'
 // import { OmisePaymentButton } from '@/components/features/omise/payment-button'
-import { getOrderStatus } from '@/features'
 import { NO_IMAGE } from '@/utils/constants'
 import { formatDate } from '@/utils/date'
+import { getOrderStatus } from '@/utils/features'
 import { formatCurrency, formatNumber } from '@/utils/number'
 
 interface OrderItemProps {

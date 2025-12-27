@@ -6,10 +6,10 @@ import type { Prisma } from '@prisma/client'
 import { productSchema } from '../schema/product'
 
 import { deleteFileSupabase } from '@/actions/file'
-import { getVariantPriceStockMinMax } from '@/features/product/helpers'
 import { ERROR_CODES } from '@/lib/errors/codes'
 import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
+import { getVariantPriceStockMinMax } from '@/utils/features/product/helpers'
 import { removeEmptyField } from '@/utils/object'
 
 export type GetProductResult = Awaited<ReturnType<typeof getProduct>>

@@ -15,11 +15,11 @@ import {
   AddressCard,
 } from './components'
 
-import { ACCOUNT_TAB } from '@/features'
 import { useIsBelowBreakpoint } from '@/hooks/useIsBelowBreakpoint'
 import { useMounted } from '@/hooks/useMounted'
 import { useQueryParams } from '@/hooks/useQueryParams'
 import { IS_TABLET_OR_MOBILE } from '@/utils/constants'
+import { ACCOUNT_TAB } from '@/utils/features'
 
 export const AccountClient = () => {
   const isTabletOrMobile = useIsBelowBreakpoint(IS_TABLET_OR_MOBILE)

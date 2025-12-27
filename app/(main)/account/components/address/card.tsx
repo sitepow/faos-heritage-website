@@ -16,7 +16,7 @@ import { AddressForm } from './form'
 import { useAddressStore } from './store'
 import { getAddress } from '../../store'
 
-import { getFullAddress } from '@/features'
+import { getFullAddress } from '@/utils/features'
 
 export const AddressCard = () => {
   const { onOpenAddressChange, setState } = useAddressStore()

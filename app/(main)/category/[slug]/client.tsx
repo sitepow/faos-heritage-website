@@ -24,8 +24,8 @@ import { getCategory } from '@/app/(dashboard)/dashboard/product'
 import { getProducts } from '@/app/(main)/products'
 import { AdvertiseBanner, CertificateBanner } from '@/components'
 import { PageNotFound } from '@/components/common/page-not-found'
-import { SORT_ITEMS } from '@/features'
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
+import { SORT_ITEMS } from '@/utils/features'
 
 interface CategoryClientProps {
   initialProducts: GetProductsResult

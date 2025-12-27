@@ -10,8 +10,8 @@ import React from 'react'
 
 import type { ComponentProps } from 'react'
 
-import { ORDER_STEPS, getOrderStatus } from '@/features'
 import { formatDate } from '@/utils/date'
+import { ORDER_STEPS, getOrderStatus } from '@/utils/features'
 import { cn } from '@/utils/style'
 
 interface StepperProps extends ComponentProps<'div'> {

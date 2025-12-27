@@ -23,8 +23,8 @@ import {
 } from '@/app/(main)/products/action'
 import { AdvertiseBanner, CertificateBanner } from '@/components'
 import { PageNotFound } from '@/components/common/page-not-found'
-import { SORT_ITEMS } from '@/features'
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
+import { SORT_ITEMS } from '@/utils/features'
 
 interface ProductsClientProps {
   initialProducts: GetProductsResult

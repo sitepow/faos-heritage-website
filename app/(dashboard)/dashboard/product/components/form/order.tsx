@@ -25,12 +25,12 @@ import type { UpdateOrderInput } from '@/app/(main)/account'
 import { orderSchema, useOrderStore } from '../../../order'
 
 import { getOrder, updateOrder } from '@/app/(main)/account'
+import { NO_IMAGE } from '@/utils/constants'
 import {
   SHIPPING_PROVIDERS,
   ORDER_STEPS_ALL,
   checkOrderStatus,
-} from '@/features'
-import { NO_IMAGE } from '@/utils/constants'
+} from '@/utils/features'
 
 const DEFAULT_VALUES: OrderInput = {
   status: OrderStatus.PENDING,

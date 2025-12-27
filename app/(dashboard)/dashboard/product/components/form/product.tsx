@@ -31,7 +31,7 @@ import { productSchema, type ProductInput } from '../../schema'
 import { useProductStore } from '../../store'
 
 import { SubHeading } from '@/components/common/heading'
-import { PRODUCT_UNITS } from '@/features'
+import { PRODUCT_UNITS } from '@/utils/features'
 
 const DEFAULT_VALUES: ProductInput = {
   isActive: true,

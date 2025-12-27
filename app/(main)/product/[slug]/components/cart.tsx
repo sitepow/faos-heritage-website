@@ -15,7 +15,7 @@ import { useProductDetailStore } from '../store'
 
 import { createFavorite } from '@/app/(main)/account'
 import { createCart } from '@/app/(main)/cart'
-import { ACCOUNT_TAB } from '@/features'
+import { ACCOUNT_TAB } from '@/utils/features'
 import { createSlug } from '@/utils/slug'
 
 export const ProductCart = () => {

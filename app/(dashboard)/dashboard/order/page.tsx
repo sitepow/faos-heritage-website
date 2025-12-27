@@ -31,9 +31,9 @@ import {
   StatCard,
   StatCardSkeleton,
 } from '@/app/(dashboard)/components/stat-card'
-import { getOrderStatus } from '@/features'
 import { ITEM_PER_PAGE, NO_IMAGE } from '@/utils/constants'
 import { formatDate } from '@/utils/date'
+import { getOrderStatus } from '@/utils/features'
 import { formatCurrency } from '@/utils/number'
 
 export default function Order() {

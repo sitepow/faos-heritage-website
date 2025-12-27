@@ -13,8 +13,8 @@ import { deleteFavorite, type GetFavoriteResult } from './action'
 
 import { ProductPrice } from '@/app/(main)/product'
 import { ConfirmModal } from '@/components/modal/confirm'
-import { getProductUnit } from '@/features'
 import { NO_IMAGE } from '@/utils/constants'
+import { getProductUnit } from '@/utils/features'
 import { createSlug } from '@/utils/slug'
 import { cn } from '@/utils/style'
 
