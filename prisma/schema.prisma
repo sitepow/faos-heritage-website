@@ -304,6 +304,37 @@ model Order {
   @@index([userId, createdAt])
 }
 
+model ShippingCountry {
+  id String @id @default(cuid())
+
+  countryCode String
+  countryName String
+
+  baseRate    Float
+  pricePerKg  Float
+  currency    String @default("USD")
+
+  isActive Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([countryCode])
+  @@index([isActive])
+}
+
+model ShippingWeightTier {
+  id String @id @default(cuid())
+
+  countryCode String
+
+  minWeight Float 
+  maxWeight Float 
+  pricePerKg Float
+
+  @@index([countryCode])
+}
+
 model OrderItem {
   id String @id @default(cuid())
 
