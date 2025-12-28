@@ -144,7 +144,9 @@ export const createOrder = async (data: CreateOrderInput) => {
       if (currentStock < item.quantity)
         return fail(ERROR_CODES.DATA_INSUFFICIENT)
 
-      const currentPrice = variant ? variant.price : product.price
+      const currentPrice = variant
+        ? variant?.price?.toNumber()
+        : product?.price?.toNumber()
 
       productItems.push({
         productId: item.productId,

@@ -201,7 +201,7 @@ export default function Product() {
               {
                 min: product?.priceMin,
                 max: product?.priceMax,
-                fallback: product?.price,
+                fallback: product?.price?.toNumber(),
               },
               {
                 formatSingle: formatCurrency,

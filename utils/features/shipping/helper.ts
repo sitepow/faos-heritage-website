@@ -33,9 +33,10 @@ export const calculateShippingCost = async ({
     },
   })
 
-  const pricePerKg = tier?.pricePerKg ?? country.pricePerKg
+  const pricePerKg =
+    tier?.pricePerKg?.toNumber() ?? country.pricePerKg?.toNumber()
 
-  const shippingCost = country.baseRate + totalWeightKg * pricePerKg
+  const shippingCost = country.baseRate?.toNumber() + totalWeightKg * pricePerKg
 
   return Math.ceil(shippingCost)
 }

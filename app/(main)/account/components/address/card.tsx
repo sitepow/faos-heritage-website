@@ -14,7 +14,7 @@ import { useSession } from 'next-auth/react'
 
 import { AddressForm } from './form'
 import { useAddressStore } from './store'
-import { getAddress } from '../../store'
+import { getAddress } from '../../action'
 
 import { getFullAddress } from '@/utils/features'
 

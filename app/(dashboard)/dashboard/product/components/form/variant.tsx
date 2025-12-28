@@ -66,7 +66,10 @@ export const VariantForm = () => {
   useEffect(() => {
     if (isVariantOpen) {
       if (variantId && !isLoadingVariant && variant) {
-        reset(variant)
+        reset({
+          ...variant,
+          price: variant?.price?.toNumber() ?? 0,
+        })
       } else if (!variantId) {
         reset(DEFAULT_VALUES)
       }

@@ -1,11 +1,11 @@
-import type { ProductUnit } from '@prisma/client'
+import type { Prisma, ProductUnit } from '@prisma/client'
 
 import { PRODUCT_UNIT } from './constants'
 
 export const getProductUnit = (key: ProductUnit) => PRODUCT_UNIT[key] ?? key
 
 interface Variant {
-  price?: number
+  price?: Prisma.Decimal | number
   stockQuantity?: number
 }
 
@@ -27,9 +27,13 @@ export const getVariantPriceStockMinMax = (
   let stockMax: number | null = null
 
   variants.forEach(({ price, stockQuantity }) => {
-    if (price != null) {
-      priceMin = priceMin == null ? price : Math.min(priceMin, price)
-      priceMax = priceMax == null ? price : Math.max(priceMax, price)
+    const priceNumber = typeof price === 'number' ? price : price?.toNumber()
+
+    if (priceNumber != null) {
+      priceMin =
+        priceMin == null ? priceNumber : Math.min(priceMin, priceNumber)
+      priceMax =
+        priceMax == null ? priceNumber : Math.max(priceMax, priceNumber)
     }
 
     if (stockQuantity != null) {

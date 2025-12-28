@@ -1,4 +1,4 @@
-import type { GetAddressResult } from '@/app/(main)/account/store'
+import type { GetAddressResult } from '@/app/(main)/account/action'
 
 export const getFullAddress = (address: GetAddressResult) => {
   if (!address) return 'The shipping address is unknown.'

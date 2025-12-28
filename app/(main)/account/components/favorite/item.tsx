@@ -112,7 +112,7 @@ export const FavoriteItem = ({
                   Product ID : {favorite?.product?.id}
                 </span>
                 <ProductPrice
-                  price={favorite?.product?.price}
+                  price={favorite?.product?.price?.toNumber()}
                   priceMax={favorite?.priceMax!}
                   priceMin={favorite?.priceMin!}
                   unit={getProductUnit(favorite?.product?.unit)}

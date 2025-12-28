@@ -51,7 +51,7 @@ export const createStripeCheckout = async ({
       quantity: item.quantity,
       price_data: {
         currency: 'thb',
-        unit_amount: Math.round(item.price * 100),
+        unit_amount: item.price.mul(100).toNumber(),
         product_data: {
           name: item.productName,
         },

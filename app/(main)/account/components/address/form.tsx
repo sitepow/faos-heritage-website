@@ -19,7 +19,7 @@ import { Controller, useForm } from 'react-hook-form'
 
 import { addressSchema, type AddressInput } from './schema'
 import { useAddressStore } from './store'
-import { createAddress, getAddress, updateAddress } from '../../store'
+import { createAddress, getAddress, updateAddress } from '../../action'
 
 const DEFAULT_VALUES: AddressInput = {
   name: '',

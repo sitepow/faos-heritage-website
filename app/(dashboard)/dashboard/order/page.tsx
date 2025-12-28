@@ -114,7 +114,7 @@ export default function Order() {
               </TableCell>
               <TableCell>
                 <Chip color='primary' variant='bordered'>
-                  {formatCurrency(order.total)}
+                  {formatCurrency(order?.total?.toNumber())}
                 </Chip>
               </TableCell>
               <TableCell>
