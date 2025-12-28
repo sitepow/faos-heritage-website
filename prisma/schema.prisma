@@ -185,6 +185,7 @@ model Product {
   cart         Cart[]
   wishlist     Wishlist[]
   stockHistory StockHistory[]
+  prices ProductPrice[]
 
   metaTitle       String?
   metaDescription String? @db.Text
@@ -246,6 +247,7 @@ model ProductVariant {
 
   product      Product        @relation(fields: [productId], references: [id], onDelete: Cascade)
   stockHistory StockHistory[]
+  prices ProductPrice[]
 
   @@index([productId])
   @@index([productId, isActive])
