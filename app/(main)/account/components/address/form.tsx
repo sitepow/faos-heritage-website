@@ -238,20 +238,6 @@ export const AddressForm = () => {
               )}
             />
 
-            {/* <Controller
-              control={control}
-              name='country'
-              render={({ field }) => (
-                <Input
-                  {...field}
-                  errorMessage={errors.country?.message}
-                  isInvalid={!!errors.country}
-                  label='Country'
-                  variant='bordered'
-                />
-              )}
-            /> */}
-
             <Controller
               control={control}
               name='countryCode'
