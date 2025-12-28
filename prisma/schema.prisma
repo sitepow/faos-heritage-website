@@ -78,6 +78,12 @@ enum Currency {
   IDR
 }
 
+model Banner {
+  id String @id @default(cuid())
+  url String
+  alt String?
+}
+
 model User {
   id String @id @default(cuid())
 
