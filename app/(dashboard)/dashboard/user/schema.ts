@@ -7,7 +7,7 @@ export type UserUpdateInput = z.infer<typeof userUpdateSchema>
 export const baseUserSchema = z.object({
   id: z.string().nullish(),
   email: z.email('The email format is incorrect.'),
-  name: z.string().min(1, 'Please specify the username.'),
+  name: z.string().min(1, 'Please specify the name.'),
   image: z.string().nullish(),
   isActive: z.boolean(),
   role: z.enum(Role),
