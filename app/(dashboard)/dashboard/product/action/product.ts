@@ -149,7 +149,17 @@ export const getProduct = async (productId: string, userId?: string) => {
     product.variants,
   )
 
-  return { ...product, priceMin, priceMax, stockMin, stockMax }
+  return {
+    ...product,
+    priceMin,
+    priceMax,
+    stockMin,
+    stockMax,
+    price: product.price?.toNumber() ?? 0,
+    compareAtPrice: product.compareAtPrice?.toNumber() ?? 0,
+    costPrice: product.costPrice?.toNumber() ?? 0,
+    weight: product.weight?.toNumber() ?? 0,
+  }
 }
 
 export const getProducts = async (page: number = 1, limit: number = 10) => {
@@ -199,6 +209,7 @@ export const getProducts = async (page: number = 1, limit: number = 10) => {
       priceMax,
       stockMin,
       stockMax,
+      price: product.price?.toNumber() ?? 0,
     }
   })
 

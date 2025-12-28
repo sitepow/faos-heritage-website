@@ -82,6 +82,7 @@ export const getProducts = async ({
 
       return {
         ...product,
+        price: product?.price?.toNumber(),
         priceMin,
         priceMax,
         stockMin,

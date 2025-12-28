@@ -106,7 +106,7 @@ export const ProductCard = ({ className, product }: ProductCardProps) => {
           <h4 className='line-clamp-2 text-lg font-bold'>{product?.name}</h4>
 
           <ProductPrice
-            price={product?.price?.toNumber()}
+            price={product?.price}
             priceMax={product?.priceMax!}
             priceMin={product?.priceMin!}
             unit={getProductUnit(product?.unit)}

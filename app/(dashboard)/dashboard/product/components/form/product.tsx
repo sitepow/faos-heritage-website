@@ -98,13 +98,7 @@ export const ProductForm = () => {
     if (!isProductOpen) return
 
     if (productId && !isLoadingProduct && product) {
-      reset({
-        ...product,
-        price: product.price?.toNumber() ?? 0,
-        compareAtPrice: product.compareAtPrice?.toNumber() ?? 0,
-        costPrice: product.costPrice?.toNumber() ?? 0,
-        weight: product.weight?.toNumber() ?? 0,
-      })
+      reset(product)
     } else if (!productId) {
       reset(DEFAULT_VALUES)
     }
