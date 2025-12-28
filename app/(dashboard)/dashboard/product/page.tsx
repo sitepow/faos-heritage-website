@@ -250,10 +250,10 @@ export default function Product() {
                     </AvatarGroup>
                   )}
                 </TableCell>
-                <TableCell className='max-w-72 min-w-72'>
+                <TableCell className='max-w-72'>
                   {product?.name ?? '-'}
                 </TableCell>
-                <TableCell className='min-w-32'>
+                <TableCell className='max-w-32'>
                   {price !== formatCurrency(0) ? (
                     <Chip color='primary' variant='bordered'>
                       {price}
@@ -262,7 +262,7 @@ export default function Product() {
                     '-'
                   )}
                 </TableCell>
-                <TableCell className='min-w-32'>
+                <TableCell className='max-w-32'>
                   {stock !== formatNumber(0) ? (
                     <Chip color='primary' variant='bordered'>
                       {stock}
@@ -271,7 +271,7 @@ export default function Product() {
                     '-'
                   )}
                 </TableCell>
-                <TableCell className='max-w-52 min-w-52'>
+                <TableCell className='max-w-52'>
                   {product?.category?.name ? (
                     <Chip color='primary' variant='bordered'>
                       {product?.category?.name}
