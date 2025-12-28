@@ -19,7 +19,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
-import type { UserCreateInput, UserUpdateInput } from '../../../user'
+import type { UserCreateInput, UserUpdateInput } from '.'
 import type { ImageWithPreview } from '@/components'
 
 import {
@@ -29,7 +29,7 @@ import {
   userCreateSchema,
   userUpdateSchema,
   useUserStore,
-} from '../../../user'
+} from '.'
 
 import { ImageDropzone } from '@/components'
 import { SubHeading } from '@/components/common/heading'

@@ -30,8 +30,8 @@ import {
 import { useState } from 'react'
 
 import { deleteUser, getUsers, getUserStat } from './action'
+import { UserForm } from './form'
 import { useUserStore } from './store'
-import { UserForm } from '../product/components/form/user'
 
 import {
   StatCard,

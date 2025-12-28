@@ -24,8 +24,8 @@ import { useState } from 'react'
 
 import { getOrders, getOrderStat } from './action'
 import { OrderViewModal } from './components/view-modal'
+import { OrderForm } from './form'
 import { useOrderStore } from './store'
-import { OrderForm } from '../product/components/form/order'
 
 import {
   StatCard,

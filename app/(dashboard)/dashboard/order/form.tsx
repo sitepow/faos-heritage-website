@@ -19,10 +19,10 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
-import type { OrderInput } from '../../../order'
 import type { UpdateOrderInput } from '@/app/(main)/account'
 
-import { orderSchema, useOrderStore } from '../../../order'
+import { orderSchema, type OrderInput } from './schema'
+import { useOrderStore } from './store'
 
 import { getOrder, updateOrder } from '@/app/(main)/account'
 import { NO_IMAGE } from '@/utils/constants'
