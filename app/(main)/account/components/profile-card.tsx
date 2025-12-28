@@ -186,7 +186,7 @@ export const ProfileCard = () => {
             )}
           />
 
-          <Controller
+          {/* <Controller
             control={control}
             name='password'
             render={({ field: { value, ...field } }) => (
@@ -200,7 +200,7 @@ export const ProfileCard = () => {
                 variant='bordered'
               />
             )}
-          />
+          /> */}
         </div>
       </CardBody>
       <CardFooter className='gap-2'>
