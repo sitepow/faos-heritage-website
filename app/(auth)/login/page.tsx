@@ -13,6 +13,7 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
@@ -109,7 +110,11 @@ export default function Login() {
         <span className='text-lg font-bold'>Log in or register</span>
         <span className='text-default-500'>
           To access the website{' '}
-          <span className='text-primary'>{siteConfig?.name}</span>
+          <Link href={'/'}>
+            <span className='text-primary cursor-pointer underline'>
+              {siteConfig?.name}
+            </span>
+          </Link>
         </span>
       </CardHeader>
 
@@ -204,7 +209,7 @@ export default function Login() {
         </div>
 
         <div className='flex w-full flex-wrap justify-center gap-2'>
-          <Card className='w-fit cursor-pointer'>
+          <Card className='cursor-pointer' fullWidth>
             <CardBody
               className='flex-row items-center gap-2 p-2'
               onClick={() => signIn('google')}
@@ -220,7 +225,7 @@ export default function Login() {
             </CardBody>
           </Card>
 
-          <Card className='w-fit cursor-pointer'>
+          <Card className='cursor-pointer' fullWidth>
             <CardBody
               className='flex-row items-center gap-2 p-2'
               onClick={() => signIn('facebook')}
