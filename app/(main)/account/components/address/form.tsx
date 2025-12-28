@@ -12,6 +12,7 @@ import {
   Button,
   Select,
   SelectItem,
+  Avatar,
 } from '@heroui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
@@ -262,7 +263,16 @@ export const AddressForm = () => {
                   }}
                 >
                   {COUNTRIES.map((country) => (
-                    <SelectItem key={country.code}>{country.name}</SelectItem>
+                    <SelectItem
+                      key={country.code}
+                      startContent={
+                        <Avatar
+                          src={`https://purecatamphetamine.github.io/country-flag-icons/3x2/${country.code}.svg`}
+                        />
+                      }
+                    >
+                      {country.name}
+                    </SelectItem>
                   ))}
                 </Select>
               )}
