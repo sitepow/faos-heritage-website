@@ -11,6 +11,7 @@ export const addressSchema = z.object({
   district: z.string().min(1, 'Please enter the district/county'),
   subDistrict: z.string().nullish(),
   province: z.string().min(1, 'Please enter the province'),
-  country: z.string().min(1, 'Please enter your country'),
   postalCode: z.string().min(5, 'The postal code is incorrect').max(5),
+  country: z.string().min(2),
+  countryCode: z.string().length(2, 'Please select the county'),
 })

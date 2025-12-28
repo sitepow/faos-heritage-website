@@ -43,8 +43,9 @@ export const getAddress = async (userId: string) => {
       district: true,
       subDistrict: true,
       province: true,
-      country: true,
       postalCode: true,
+      country: true,
+      countryCode: true,
     },
   })
 }

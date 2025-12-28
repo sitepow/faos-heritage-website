@@ -10,6 +10,8 @@ import {
   Input,
   ModalFooter,
   Button,
+  Select,
+  SelectItem,
 } from '@heroui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
@@ -21,6 +23,8 @@ import { addressSchema, type AddressInput } from './schema'
 import { useAddressStore } from './store'
 import { createAddress, getAddress, updateAddress } from '../../action'
 
+import { COUNTRIES } from '@/utils/constants/countries'
+
 const DEFAULT_VALUES: AddressInput = {
   name: '',
   phone: '',
@@ -31,6 +35,7 @@ const DEFAULT_VALUES: AddressInput = {
   province: '',
   postalCode: '',
   country: '',
+  countryCode: '',
 }
 
 export const AddressForm = () => {
@@ -93,8 +98,8 @@ export const AddressForm = () => {
   const isPending =
     isPendingCreateAddress || isLoadingAddress || isPendingUpdateAddress
   const headerLable = addressId
-    ? 'Edit the shipping address.'
-    : 'Add a shipping address.'
+    ? 'Edit Shipping Address'
+    : 'Add Shipping Address'
 
   const onSubmit = async (data: AddressInput) => {
     const isUpdate = !!addressId
@@ -142,7 +147,7 @@ export const AddressForm = () => {
                   {...field}
                   errorMessage={errors.name?.message}
                   isInvalid={!!errors.name}
-                  label='Shipping name'
+                  label='Full Name'
                   variant='bordered'
                 />
               )}
@@ -156,7 +161,7 @@ export const AddressForm = () => {
                   {...field}
                   errorMessage={errors.phone?.message}
                   isInvalid={!!errors.phone}
-                  label='telephone number'
+                  label='Phone Number'
                   variant='bordered'
                 />
               )}
@@ -170,7 +175,7 @@ export const AddressForm = () => {
                   {...field}
                   errorMessage={errors.address?.message}
                   isInvalid={!!errors.address}
-                  label='Address (house number / street / village)'
+                  label='Street Address'
                   variant='bordered'
                 />
               )}
@@ -184,7 +189,7 @@ export const AddressForm = () => {
                   {...field}
                   errorMessage={errors.subDistrict?.message}
                   isInvalid={!!errors.subDistrict}
-                  label='Subdistrict/District'
+                  label='Subdistrict'
                   value={value!}
                   variant='bordered'
                 />
@@ -199,7 +204,7 @@ export const AddressForm = () => {
                   {...field}
                   errorMessage={errors.district?.message}
                   isInvalid={!!errors.district}
-                  label='District/Area'
+                  label='District'
                   variant='bordered'
                 />
               )}
@@ -213,7 +218,7 @@ export const AddressForm = () => {
                   {...field}
                   errorMessage={errors.province?.message}
                   isInvalid={!!errors.province}
-                  label='province'
+                  label='Province / State'
                   variant='bordered'
                 />
               )}
@@ -227,13 +232,13 @@ export const AddressForm = () => {
                   {...field}
                   errorMessage={errors.postalCode?.message}
                   isInvalid={!!errors.postalCode}
-                  label='zip code'
+                  label='Postal Code'
                   variant='bordered'
                 />
               )}
             />
 
-            <Controller
+            {/* <Controller
               control={control}
               name='country'
               render={({ field }) => (
@@ -241,9 +246,39 @@ export const AddressForm = () => {
                   {...field}
                   errorMessage={errors.country?.message}
                   isInvalid={!!errors.country}
-                  label='country'
+                  label='Country'
                   variant='bordered'
                 />
+              )}
+            /> */}
+
+            <Controller
+              control={control}
+              name='countryCode'
+              render={({ field: { value, onChange } }) => (
+                <Select
+                  label='Country'
+                  selectedKeys={value ? [value] : []}
+                  variant='bordered'
+                  errorMessage={errors.countryCode?.message}
+                  isInvalid={!!errors.countryCode}
+                  onSelectionChange={(keys) => {
+                    const code = Array.from(keys)[0] as string
+                    const country = COUNTRIES.find((c) => c.code === code)
+
+                    onChange(code)
+
+                    reset((prev) => ({
+                      ...prev,
+                      country: country?.name ?? '',
+                      countryCode: code,
+                    }))
+                  }}
+                >
+                  {COUNTRIES.map((country) => (
+                    <SelectItem key={country.code}>{country.name}</SelectItem>
+                  ))}
+                </Select>
               )}
             />
           </ModalBody>

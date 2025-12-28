@@ -5,7 +5,7 @@ export const getFullAddress = (address: GetAddressResult) => {
 
   const {
     name,
-    address: addr,
+    address: streetAddress,
     subDistrict,
     district,
     province,
@@ -14,16 +14,22 @@ export const getFullAddress = (address: GetAddressResult) => {
     phone,
   } = address
 
-  return [
-    name && `Shipping name. ${name}`,
-    addr && `House number ${addr}`,
-    subDistrict && `district ${subDistrict}`,
-    district && `district ${district}`,
-    province && `province ${province}`,
-    country && `country ${country}`,
-    postalCode && `zip code ${postalCode}`,
-    phone && `phone ${phone}`,
-  ]
-    .filter(Boolean)
-    .join(' ')
+  const lines = []
+
+  if (name) lines.push(name)
+  if (streetAddress) lines.push(streetAddress)
+
+  if (subDistrict) lines.push(subDistrict)
+  if (district) lines.push(district)
+  if (province) lines.push(province)
+
+  if (postalCode) lines.push(postalCode)
+
+  if (country) lines.push(country)
+
+  let result = lines.join(', ')
+
+  if (phone) result += `. Phone: ${phone}`
+
+  return result
 }
