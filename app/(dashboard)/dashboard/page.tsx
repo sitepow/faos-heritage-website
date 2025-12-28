@@ -1,6 +1,8 @@
 'use client'
 
+import { Button } from '@heroui/react'
 import { useQueries } from '@tanstack/react-query'
+import { SettingsIcon } from 'lucide-react'
 
 import { StatCard, StatCardSkeleton } from '../components'
 import { getOrderStat, getOrderStatCash } from './order/action'
@@ -32,6 +34,23 @@ export default function Dashboard() {
 
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
+      <div className='flex w-full justify-end gap-2'>
+        <Button
+          className='text-secondary'
+          color='primary'
+          startContent={<SettingsIcon />}
+        >
+          Manage Banners
+        </Button>
+        <Button
+          className='text-secondary'
+          color='primary'
+          startContent={<SettingsIcon />}
+        >
+          Website Settings
+        </Button>
+      </div>
+
       <div className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
         {results.map((result, index) => {
           if (result.isLoading) {
