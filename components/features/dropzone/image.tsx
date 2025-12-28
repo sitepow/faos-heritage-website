@@ -151,7 +151,7 @@ export const ImageDropzone = ({
               </p>
 
               <p className='text-primary text-sm'>
-                Supports file uploads up to 20 MB
+                Supports file uploads up to 50 MB
               </p>
             </div>
           )}
