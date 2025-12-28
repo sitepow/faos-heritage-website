@@ -31,6 +31,7 @@ import { productSchema, type ProductInput } from '../../schema'
 import { useProductStore } from '../../store'
 
 import { SubHeading } from '@/components/common/heading'
+import { DEFAULT_CURRENCY } from '@/utils/constants/currency'
 import { PRODUCT_UNITS } from '@/utils/features'
 
 const DEFAULT_VALUES: ProductInput = {
@@ -359,7 +360,7 @@ export const ProductForm = () => {
                     {...field}
                     errorMessage={errors.price?.message}
                     isInvalid={!!errors.price}
-                    label='Price (Baht)'
+                    label={`Price (${DEFAULT_CURRENCY})`}
                     minValue={0}
                     variant='bordered'
                     onValueChange={(val) => onChange(val || 0)}
