@@ -49,6 +49,9 @@ export const AddressCard = () => {
     enabled: !!userId,
   })
 
+  const isHasDefaultAddress =
+    addresses?.some((address) => address?.isDefault === true) ?? false
+
   const { mutate: mutateDeteleAddress, isPending: isPendingDeteleAddress } =
     useMutation({
       mutationFn: deleteAddress,
@@ -82,7 +85,7 @@ export const AddressCard = () => {
             Add shipping address
           </Button>
         </CardHeader>
-        <CardBody>
+        <CardBody className='gap-5'>
           <AddressForm />
 
           {isLoadingAddresses && (
@@ -93,6 +96,14 @@ export const AddressCard = () => {
             <Alert
               color='warning'
               description='You do not yet have a shipping address. Please add your address before proceeding with your order.'
+              variant='bordered'
+            />
+          )}
+
+          {addresses?.length !== 0 && !isHasDefaultAddress && (
+            <Alert
+              color='warning'
+              description='Please select a default shipping address before proceeding with your order.'
               variant='bordered'
             />
           )}
