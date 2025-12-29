@@ -21,7 +21,6 @@ import type { NavItem } from '@/config/site'
 import { NavbarCart } from './cart'
 import { NavbarHeader } from './header'
 import { NavbarPanel } from './panel'
-import { NavbarSearch } from './search'
 import { ThemeSwitch } from '../../common/theme-switch'
 
 import { siteConfig } from '@/config/site'
@@ -84,12 +83,6 @@ export const Navbar = () => {
           className='hidden basis-1/5 sm:flex sm:basis-full'
           justify='end'
         >
-          {!isDashboard && (
-            <NavbarItem className='hidden xl:flex'>
-              <NavbarSearch />
-            </NavbarItem>
-          )}
-
           {isAuthenticated && (
             <NavbarItem className='hidden items-center gap-4 lg:flex'>
               <NavbarPanel setIsMenuOpen={setIsMenuOpen} />
