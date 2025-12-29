@@ -43,13 +43,13 @@ export const OverviewCard = ({ onclick }: OverviewCardProps) => {
               <div>
                 <span>Name - Surname</span>
                 <span>:</span>
-                <span>{user?.name}</span>
+                <span>{user?.name ?? '-'}</span>
               </div>
 
               <div>
                 <span>Email</span>
                 <span>:</span>
-                <span>{user?.email}</span>
+                <span>{user?.email ?? '-'}</span>
               </div>
 
               <div>
