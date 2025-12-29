@@ -32,14 +32,22 @@ export const OrderForm = () => {
   const userId = session?.user?.id
 
   const QUERY = {
+    ORDER: ['dashboard', 'order', orderId],
     ORDERS: ['account', 'orders', 'pagination', userId],
+  }
+
+  const onRefetch = async () => {
+    await Promise.all([
+      queryClient.invalidateQueries({ queryKey: QUERY.ORDER }),
+      queryClient.invalidateQueries({ queryKey: QUERY.ORDERS }),
+    ])
   }
 
   const { mutate: mutateUpdateOrder, isPending: isPendingUpdateOrder } =
     useMutation({
       mutationFn: (payload: UpdateOrderInput) => updateOrder(payload),
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: QUERY.ORDERS })
+        onRefetch()
         onClose()
       },
     })
