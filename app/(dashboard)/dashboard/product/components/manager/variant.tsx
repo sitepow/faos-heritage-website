@@ -152,7 +152,7 @@ export const VariantManager = () => {
                               )}
                             >
                               {variant.price
-                                ? `Price: ${formatCurrency(variant?.price?.toNumber() ?? 0)}`
+                                ? `Price: ${formatCurrency(variant?.price ?? 0)}`
                                 : `(Please specify the price)`}
                             </span>
                           </Chip>

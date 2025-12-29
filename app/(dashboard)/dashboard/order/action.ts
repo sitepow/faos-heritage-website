@@ -4,6 +4,7 @@ import { OrderStatus } from '@prisma/client'
 
 import { prisma } from '@/lib/prisma'
 import { getOrderStatus } from '@/utils/features/order/helpers'
+import { decimalToNumber } from '@/utils/number'
 
 export type GetOrdersResult = Awaited<ReturnType<typeof getOrders>>
 export type GetOrderResult = GetOrdersResult['items'][number]
@@ -59,7 +60,7 @@ export const getOrders = async (
   ])
 
   return {
-    items,
+    items: decimalToNumber(items),
     total,
     page,
     limit,

@@ -7,6 +7,7 @@ import { variantSchema, type VariantInput } from '../schema/variant'
 import { ERROR_CODES } from '@/lib/errors/codes'
 import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
+import { decimalToNumber } from '@/utils/number'
 import { removeEmptyField } from '@/utils/object'
 
 export const createVariant = async (data: VariantInput) => {
@@ -30,44 +31,36 @@ export const createVariant = async (data: VariantInput) => {
 }
 
 export const getVariants = async (productId: string) => {
-  const variants = await prisma.productVariant.findMany({
-    where: { productId },
-    select: {
-      id: true,
-      name: true,
-      sku: true,
-      price: true,
-      stockQuantity: true,
-      isActive: true,
-    },
-    orderBy: { name: 'desc' },
-  })
-
-  if (!variants) {
-    return
-  }
-
-  return variants
+  return decimalToNumber(
+    await prisma.productVariant.findMany({
+      where: { productId },
+      select: {
+        id: true,
+        name: true,
+        sku: true,
+        price: true,
+        stockQuantity: true,
+        isActive: true,
+      },
+      orderBy: { name: 'desc' },
+    }),
+  )
 }
 
 export const getVariant = async (variantId: string) => {
-  const variant = await prisma.productVariant.findUnique({
-    where: { id: variantId },
-    select: {
-      id: true,
-      name: true,
-      sku: true,
-      price: true,
-      stockQuantity: true,
-      isActive: true,
-    },
-  })
-
-  if (!variant) {
-    return
-  }
-
-  return variant
+  return decimalToNumber(
+    await prisma.productVariant.findUnique({
+      where: { id: variantId },
+      select: {
+        id: true,
+        name: true,
+        sku: true,
+        price: true,
+        stockQuantity: true,
+        isActive: true,
+      },
+    }),
+  )
 }
 
 export const updateVariant = async (data: VariantInput) => {

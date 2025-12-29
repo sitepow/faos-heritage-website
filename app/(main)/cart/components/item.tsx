@@ -78,8 +78,7 @@ export const CartItem = ({ className, cart, ...props }: CartItemProps) => {
     return cart?.product?.variants?.find((variant) => variant?.id === variantId)
   }, [cart?.product?.variants, variantId])
 
-  const currentPrice =
-    currentVariant?.price?.toNumber() ?? cart?.product?.price?.toNumber()
+  const currentPrice = currentVariant?.price ?? cart?.product?.price
   const currentStockQuantity =
     currentVariant?.stockQuantity ?? cart?.product?.stockQuantity
 

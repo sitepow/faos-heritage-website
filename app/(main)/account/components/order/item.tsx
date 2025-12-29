@@ -63,7 +63,7 @@ export const OrderItem = ({ order, hideButton }: OrderItemProps) => {
           <div className='flex flex-col'>
             <span>
               Item number {order?.id} ({formatNumber(order?.items?.length)}{' '}
-              list) {formatCurrency(order?.total?.toNumber())}
+              list) {formatCurrency(order?.total)}
             </span>
 
             <span className='text-default-500'>

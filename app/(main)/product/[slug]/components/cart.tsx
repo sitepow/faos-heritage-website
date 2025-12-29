@@ -46,7 +46,7 @@ export const ProductCart = () => {
     [product?.variants, variantId],
   )
 
-  const price = currentVariant?.price?.toNumber() ?? product?.price?.toNumber()
+  const price = currentVariant?.price ?? product?.price
   const stock = currentVariant?.stockQuantity ?? product?.stockQuantity ?? 0
   const isOutOfStock = stock <= 0
 

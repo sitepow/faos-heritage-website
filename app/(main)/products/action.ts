@@ -6,6 +6,7 @@ import type { Product } from '@prisma/client'
 
 import { prisma } from '@/lib/prisma'
 import { getVariantPriceStockMinMax } from '@/utils/features'
+import { decimalToNumber } from '@/utils/number'
 
 export type GetProductsResult = Awaited<ReturnType<typeof getProducts>>
 export type GetProductResult = GetProductsResult['items'][number]
@@ -75,21 +76,21 @@ export const getProducts = async ({
 
   const hasNextPage = items.length > limit
 
-  const resultItems = (hasNextPage ? items.slice(0, limit) : items).map(
-    (product) => {
-      const { priceMin, priceMax, stockMin, stockMax } =
-        getVariantPriceStockMinMax(product?.variants)
+  const transformed = decimalToNumber(items)
+  const resultItems = (
+    hasNextPage ? transformed.slice(0, limit) : transformed
+  ).map((product) => {
+    const { priceMin, priceMax, stockMin, stockMax } =
+      getVariantPriceStockMinMax(product?.variants)
 
-      return {
-        ...product,
-        price: product?.price?.toNumber(),
-        priceMin,
-        priceMax,
-        stockMin,
-        stockMax,
-      }
-    },
-  )
+    return decimalToNumber({
+      ...product,
+      priceMin,
+      priceMax,
+      stockMin,
+      stockMax,
+    })
+  })
 
   let nextCursor: string | null = null
 

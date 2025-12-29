@@ -1,8 +1,20 @@
+import { Prisma } from '@prisma/client'
+
 import {
   DEFAULT_CURRENCY,
   CURRENCY_LOCALE_MAP,
   DEFAULT_LOCALE,
 } from './constants/currency'
+
+export type DecimalToNumber<T> = T extends Prisma.Decimal
+  ? number
+  : T extends Date
+    ? Date
+    : T extends Array<infer U>
+      ? Array<DecimalToNumber<U>>
+      : T extends object
+        ? { [K in keyof T]: DecimalToNumber<T[K]> }
+        : T
 
 interface FormatCurrencyOptions {
   currency?: string
@@ -44,4 +56,26 @@ export const formatNumber = (value: number) => {
 
 export const formatNumberRange = (min: number, max: number) => {
   return new Intl.NumberFormat().formatRange(min, max)
+}
+
+export const decimalToNumber = <T>(data: T): DecimalToNumber<T> => {
+  if (data instanceof Prisma.Decimal) {
+    return data.toNumber() as DecimalToNumber<T>
+  }
+
+  if (data instanceof Date) {
+    return data as DecimalToNumber<T>
+  }
+
+  if (Array.isArray(data)) {
+    return data.map(decimalToNumber) as DecimalToNumber<T>
+  }
+
+  if (data !== null && typeof data === 'object') {
+    return Object.fromEntries(
+      Object.entries(data).map(([key, value]) => [key, decimalToNumber(value)]),
+    ) as DecimalToNumber<T>
+  }
+
+  return data as DecimalToNumber<T>
 }

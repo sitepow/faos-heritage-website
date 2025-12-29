@@ -54,8 +54,7 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
           (variant) => variant.id === cart?.variantId,
         )
 
-        const price =
-          variant?.price?.toNumber() ?? cart?.product?.price?.toNumber() ?? 0
+        const price = variant?.price ?? cart?.product?.price ?? 0
 
         return sum + price * cart.quantity
       }, 0) ?? 0

@@ -106,7 +106,7 @@ export const OrderViewModal = () => {
               <span>
                 Net total price:{' '}
                 <span className='text-default-500'>
-                  {formatCurrency(order?.total?.toNumber() ?? 0)}
+                  {formatCurrency(order?.total ?? 0)}
                 </span>
               </span>
             </div>
@@ -136,7 +136,7 @@ export const OrderViewModal = () => {
                         <span className='text-default-500'>
                           (Price per
                           {getProductUnit(item?.product?.unit!)}{' '}
-                          {formatCurrency(item?.price?.toNumber() ?? 0)})
+                          {formatCurrency(item?.price ?? 0)})
                         </span>
                         <span className='text-default-500'>
                           (Quantity {formatNumber(item?.quantity)}{' '}
@@ -144,10 +144,7 @@ export const OrderViewModal = () => {
                         </span>
                         <span className='text-default-500'>
                           (Total price{' '}
-                          {formatCurrency(
-                            item?.price?.toNumber() * item?.quantity,
-                          )}
-                          )
+                          {formatCurrency(item?.price * item?.quantity)})
                         </span>
                         {item?.productId && !item?.variantId && (
                           <span className='text-default-500'>

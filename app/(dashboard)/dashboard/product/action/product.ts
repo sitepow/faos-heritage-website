@@ -10,6 +10,7 @@ import { ERROR_CODES } from '@/lib/errors/codes'
 import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
 import { getVariantPriceStockMinMax } from '@/utils/features/product/helpers'
+import { decimalToNumber } from '@/utils/number'
 import { removeEmptyField } from '@/utils/object'
 
 export type GetProductResult = Awaited<ReturnType<typeof getProduct>>
@@ -75,71 +76,73 @@ export const deleteProduct = async (productIds: string | string[]) => {
 }
 
 export const getProduct = async (productId: string, userId?: string) => {
-  const product = await prisma.product.findUnique({
-    where: { id: productId },
-    select: {
-      id: true,
-      name: true,
-      slug: true,
-      sku: true,
-      barcode: true,
-      price: true,
-      compareAtPrice: true,
-      costPrice: true,
-      stockQuantity: true,
-      lowStockAlert: true,
-      weight: true,
-      categoryId: true,
-      shortDescription: true,
-      isDigitalProduct: true,
-      isDemoProduct: true,
-      unit: true,
-      cart: userId
-        ? {
-            where: { userId },
-            select: { variantId: true },
-          }
-        : false,
-      wishlist: userId
-        ? {
-            where: {
-              userId: userId,
-            },
-            select: {
-              id: true,
-            },
-          }
-        : false,
-      variants: {
-        select: {
-          id: true,
-          name: true,
-          price: true,
-          stockQuantity: true,
+  const product = decimalToNumber(
+    await prisma.product.findUnique({
+      where: { id: productId },
+      select: {
+        id: true,
+        name: true,
+        slug: true,
+        sku: true,
+        barcode: true,
+        price: true,
+        compareAtPrice: true,
+        costPrice: true,
+        stockQuantity: true,
+        lowStockAlert: true,
+        weight: true,
+        categoryId: true,
+        shortDescription: true,
+        isDigitalProduct: true,
+        isDemoProduct: true,
+        unit: true,
+        cart: userId
+          ? {
+              where: { userId },
+              select: { variantId: true },
+            }
+          : false,
+        wishlist: userId
+          ? {
+              where: {
+                userId: userId,
+              },
+              select: {
+                id: true,
+              },
+            }
+          : false,
+        variants: {
+          select: {
+            id: true,
+            name: true,
+            price: true,
+            stockQuantity: true,
+          },
         },
-      },
-      category: {
-        select: {
-          id: true,
-          name: true,
+        category: {
+          select: {
+            id: true,
+            name: true,
+          },
         },
-      },
-      images: {
-        select: {
-          url: true,
-          alt: true,
+        images: {
+          select: {
+            url: true,
+            alt: true,
+          },
         },
+        description: true,
+        metaTitle: true,
+        metaDescription: true,
+        isActive: true,
+        useSeoFromBasicData: true,
+        isFeatured: true,
+        createdAt: true,
+        updatedAt: true,
       },
-      description: true,
-      metaTitle: true,
-      metaDescription: true,
-      isActive: true,
-      useSeoFromBasicData: true,
-      isFeatured: true,
-      createdAt: true,
-      updatedAt: true,
-    },
-  })
+    }),
+  )
 
   if (!product) {
     return
@@ -155,10 +158,6 @@ export const getProduct = async (productId: string, userId?: string) => {
     priceMax,
     stockMin,
     stockMax,
-    price: product.price?.toNumber() ?? 0,
-    compareAtPrice: product.compareAtPrice?.toNumber() ?? 0,
-    costPrice: product.costPrice?.toNumber() ?? 0,
-    weight: product.weight?.toNumber() ?? 0,
   }
 }
 
@@ -199,7 +198,9 @@ export const getProducts = async (page: number = 1, limit: number = 10) => {
     prisma.product.count(),
   ])
 
-  const productItems = items?.map((product) => {
+  const transformed = decimalToNumber(items)
+
+  const productItems = transformed?.map((product) => {
     const { priceMin, priceMax, stockMin, stockMax } =
       getVariantPriceStockMinMax(product?.variants)
 
@@ -209,7 +210,6 @@ export const getProducts = async (page: number = 1, limit: number = 10) => {
       priceMax,
       stockMin,
       stockMax,
-      price: product.price?.toNumber() ?? 0,
     }
   })
 

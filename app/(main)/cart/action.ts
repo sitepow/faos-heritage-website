@@ -3,6 +3,7 @@
 import { ERROR_CODES } from '@/lib/errors/codes'
 import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
+import { decimalToNumber } from '@/utils/number'
 
 export type GetCartsResult = Awaited<ReturnType<typeof getCarts>>
 export type GetCartResult = GetCartsResult[number]
@@ -20,34 +21,36 @@ type updateCartParams = {
 }
 
 export const getCarts = async (userId: string) => {
-  return await prisma.cart.findMany({
-    where: { userId },
-    include: {
-      product: {
-        select: {
-          id: true,
-          name: true,
-          price: true,
-          unit: true,
-          stockQuantity: true,
-          variants: {
-            select: {
-              id: true,
-              name: true,
-              price: true,
-              stockQuantity: true,
+  return decimalToNumber(
+    await prisma.cart.findMany({
+      where: { userId },
+      include: {
+        product: {
+          select: {
+            id: true,
+            name: true,
+            price: true,
+            unit: true,
+            stockQuantity: true,
+            variants: {
+              select: {
+                id: true,
+                name: true,
+                price: true,
+                stockQuantity: true,
+              },
             },
-          },
-          images: {
-            select: {
-              url: true,
+            images: {
+              select: {
+                url: true,
+              },
             },
           },
         },
       },
-    },
-    orderBy: { createdAt: 'desc' },
-  })
+      orderBy: { createdAt: 'desc' },
+    }),
+  )
 }
 
 export const createCart = async ({

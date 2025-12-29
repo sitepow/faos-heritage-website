@@ -6,6 +6,7 @@ import { ERROR_CODES } from '@/lib/errors/codes'
 import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
 import { getVariantPriceStockMinMax } from '@/utils/features'
+import { decimalToNumber } from '@/utils/number'
 
 export type GetFavoritesResult = Awaited<ReturnType<typeof getFavorites>>
 export type GetFavoriteResult = GetFavoritesResult['items'][number]
@@ -71,20 +72,21 @@ export const getFavorites = async ({
 
   const hasNextPage = items.length > limit
 
-  const favoriteItems = (hasNextPage ? items.slice(0, limit) : items).map(
-    (product) => {
-      const { priceMin, priceMax, stockMin, stockMax } =
-        getVariantPriceStockMinMax(product?.product?.variants)
+  const transformed = decimalToNumber(items)
+  const favoriteItems = (
+    hasNextPage ? transformed.slice(0, limit) : transformed
+  ).map((product) => {
+    const { priceMin, priceMax, stockMin, stockMax } =
+      getVariantPriceStockMinMax(product?.product?.variants)
 
-      return {
-        ...product,
-        priceMin,
-        priceMax,
-        stockMin,
-        stockMax,
-      }
-    },
-  )
+    return {
+      ...product,
+      priceMin,
+      priceMax,
+      stockMin,
+      stockMax,
+    }
+  })
 
   let nextCursor: string | null = null
 

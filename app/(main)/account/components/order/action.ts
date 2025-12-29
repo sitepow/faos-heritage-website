@@ -9,6 +9,7 @@ import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
 import { getFullAddress } from '@/utils/features/account/helpers'
 import { checkOrderStatus } from '@/utils/features/order/helpers'
+import { decimalToNumber } from '@/utils/number'
 
 export interface UpdateOrderInput {
   orderId: string
@@ -34,49 +35,45 @@ const CANCEL_OR_REFUND: OrderStatus[] = [
 ]
 
 export const getOrder = async (orderId: string) => {
-  const order = await prisma.order.findUnique({
-    where: { id: orderId },
-    select: {
-      id: true,
-      status: true,
-      shippingAddressText: true,
-      trackingNumber: true,
-      trackingWebsite: true,
-      cancelReason: true,
-      createdAt: true,
-      paidAt: true,
-      shippedAt: true,
-      deliveredAt: true,
-      total: true,
-      subtotal: true,
-      items: {
-        select: {
-          id: true,
-          productId: true,
-          variantId: true,
-          productName: true,
-          price: true,
-          quantity: true,
-          product: {
-            select: {
-              images: {
-                select: {
-                  url: true,
+  return decimalToNumber(
+    await prisma.order.findUnique({
+      where: { id: orderId },
+      select: {
+        id: true,
+        status: true,
+        shippingAddressText: true,
+        trackingNumber: true,
+        trackingWebsite: true,
+        cancelReason: true,
+        createdAt: true,
+        paidAt: true,
+        shippedAt: true,
+        deliveredAt: true,
+        total: true,
+        subtotal: true,
+        items: {
+          select: {
+            id: true,
+            productId: true,
+            variantId: true,
+            productName: true,
+            price: true,
+            quantity: true,
+            product: {
+              select: {
+                images: {
+                  select: {
+                    url: true,
+                  },
                 },
+                unit: true,
               },
-              unit: true,
             },
           },
         },
       },
-    },
-  })
-
-  if (!order) {
-    return
-  }
-
-  return order
+    }),
+  )
 }
 
 export const createOrder = async (data: CreateOrderInput) => {
@@ -95,23 +92,25 @@ export const createOrder = async (data: CreateOrderInput) => {
       return fail(ERROR_CODES.DATA_FIELD_REQUIRED)
     }
 
-    const products = await tx.product.findMany({
-      where: { id: { in: items.map((item) => item.productId) } },
-      select: {
-        id: true,
-        name: true,
-        price: true,
-        stockQuantity: true,
-        variants: {
-          select: {
-            id: true,
-            name: true,
-            price: true,
-            stockQuantity: true,
+    const products = decimalToNumber(
+      await tx.product.findMany({
+        where: { id: { in: items.map((item) => item.productId) } },
+        select: {
+          id: true,
+          name: true,
+          price: true,
+          stockQuantity: true,
+          variants: {
+            select: {
+              id: true,
+              name: true,
+              price: true,
+              stockQuantity: true,
+            },
           },
         },
-      },
-    })
+      }),
+    )
 
     const productsMap = new Map(
       products.map((product) => [product.id, product]),
@@ -144,9 +143,7 @@ export const createOrder = async (data: CreateOrderInput) => {
       if (currentStock < item.quantity)
         return fail(ERROR_CODES.DATA_INSUFFICIENT)
 
-      const currentPrice = variant
-        ? variant?.price?.toNumber()
-        : product?.price?.toNumber()
+      const currentPrice = variant ? variant?.price : product?.price
 
       productItems.push({
         productId: item.productId,
