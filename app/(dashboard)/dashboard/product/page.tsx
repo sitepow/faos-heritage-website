@@ -344,7 +344,9 @@ export default function Product() {
 
       <Pagination
         showControls
-        className='text-secondary'
+        classNames={{
+          item: 'text-secondary',
+        }}
         page={page}
         total={products?.totalPages || 1}
         onChange={(page) => setPage(page)}
