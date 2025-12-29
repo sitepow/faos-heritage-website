@@ -40,7 +40,7 @@ const DEFAULT_VALUES: AddressInput = {
   postalCode: '',
   country: '',
   countryCode: '',
-  isDefault: true,
+  isDefault: false,
 }
 
 export const AddressForm = () => {
