@@ -67,6 +67,7 @@ enum DiscountType {
 }
 
 enum Currency {
+  THB
   USD
   EUR
   ISK

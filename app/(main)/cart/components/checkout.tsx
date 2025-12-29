@@ -19,6 +19,7 @@ import type { ComponentProps } from 'react'
 
 import { getAddressCheckout } from '../../account'
 
+import { calculateShippingCost } from '@/app/(dashboard)'
 import { createOrder } from '@/app/(main)/account/components/order/action'
 import { useCartStore } from '@/app/(main)/cart/store'
 import { ConfirmModal } from '@/components/modal/confirm'
@@ -47,8 +48,8 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
   const { isOpen: isOpenConfirmOrder, onOpenChange: onOpenConfirmOrderChange } =
     useDisclosure()
 
-  const { tempSubTotal, tempShippingCost, tempTotal } = useMemo(() => {
-    const tempSubTotal =
+  const subTotal = useMemo(() => {
+    return (
       carts?.reduce((sum, cart) => {
         const variants = cart?.product?.variants ?? []
         const variant = variants.find(
@@ -59,11 +60,7 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
 
         return sum + price * cart.quantity
       }, 0) ?? 0
-
-    const tempShippingCost = 0
-    const tempTotal = tempSubTotal + tempShippingCost
-
-    return { tempSubTotal, tempShippingCost, tempTotal }
+    )
   }, [carts])
 
   const { data: session } = useSession()
@@ -76,6 +73,7 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
 
   const QUERY_KEY = {
     ADDRESS_CHECKOUT: ['account', 'address', 'checkout', userId],
+    SHIPPING_COST: ['shipping', carts, userId],
     CART: ['carts', userId],
     CART_COUNT: ['carts', 'count', userId],
     ORDER: ['account', 'orders', 'pagination', userId],
@@ -86,6 +84,26 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
     queryFn: () => getAddressCheckout(userId!),
     enabled: !!userId,
   })
+
+  const { data: shippingCost = 0, isLoading: isLoadingShippingCost } = useQuery(
+    {
+      queryKey: QUERY_KEY.SHIPPING_COST,
+      queryFn: () =>
+        calculateShippingCost({
+          countryCode: address!.countryCode,
+          items: carts.map((cart) => ({
+            quantity: cart.quantity,
+            weight:
+              cart.product?.variants?.find(
+                (variant) => variant.id === cart.variantId,
+              )?.weight ??
+              cart.product?.weight ??
+              0,
+          })),
+        }),
+      enabled: !!address && !!carts?.length,
+    },
+  )
 
   const { mutate: mutateCreateOrder, isPending: isPendingCreateOrder } =
     useMutation({
@@ -159,14 +177,14 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
             Payment details
           </span>
 
-          <SummaryRow label='Total price' value={tempSubTotal} />
-          <SummaryRow label='Shipping cost' value={tempShippingCost} />
-          <SummaryRow label='discount' value={tempShippingCost} />
+          <SummaryRow label='Total price' value={subTotal} />
+          <SummaryRow label='Shipping cost' value={shippingCost} />
+          <SummaryRow label='discount' value={0} />
 
           <div className='flex items-center justify-between pt-1'>
             <span className='font-bold'>Net total price :</span>
             <span className='text-primary text-2xl font-bold'>
-              {formatCurrency(tempTotal)}
+              {formatCurrency(subTotal + shippingCost)}
             </span>
           </div>
         </CardBody>
@@ -203,7 +221,9 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
               className='text-secondary'
               color='primary'
               endContent={<ArrowRight />}
-              isDisabled={!address || carts?.length === 0}
+              isDisabled={
+                !address || carts?.length === 0 || isLoadingShippingCost
+              }
               onClick={onOpenConfirmOrderChange}
             >
               Proceed to checkout

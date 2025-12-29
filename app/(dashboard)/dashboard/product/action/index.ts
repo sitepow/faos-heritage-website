@@ -32,3 +32,21 @@ export {
   getVariants,
   updateVariant,
 } from './variant'
+
+export type {
+  GetShippingCountriesResult,
+  GetShippingCountryResult,
+} from './shipping/contry'
+export {
+  createShippingCountry,
+  getShippingCountries,
+  getShippingCountry,
+  updateShippingCountry,
+} from './shipping/contry'
+
+export { calculateShippingCost } from './shipping/cost'
+
+export {
+  createShippingWeightTier,
+  getShippingWeightTiers,
+} from './shipping/weight-tier'

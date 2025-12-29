@@ -31,6 +31,7 @@ export const getCarts = async (userId: string) => {
             name: true,
             price: true,
             unit: true,
+            weight: true,
             stockQuantity: true,
             variants: {
               select: {
@@ -38,6 +39,7 @@ export const getCarts = async (userId: string) => {
                 name: true,
                 price: true,
                 stockQuantity: true,
+                weight: true,
               },
             },
             images: {
