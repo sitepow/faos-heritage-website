@@ -40,6 +40,7 @@ export const AddressCard = () => {
   const userId = session?.user?.id
 
   const QUERY_KEY = {
+    ADDRESS_CHECKOUT: ['account', 'address', 'checkout', userId],
     ADDRESS_LIST: ['account', 'addresses', userId],
   }
 
@@ -55,8 +56,13 @@ export const AddressCard = () => {
   const { mutate: mutateDeteleAddress, isPending: isPendingDeteleAddress } =
     useMutation({
       mutationFn: deleteAddress,
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: QUERY_KEY.ADDRESS_LIST })
+      onSuccess: async () => {
+        await Promise.all([
+          queryClient.invalidateQueries({ queryKey: QUERY_KEY.ADDRESS_LIST }),
+          queryClient.invalidateQueries({
+            queryKey: QUERY_KEY.ADDRESS_CHECKOUT,
+          }),
+        ])
         onOpenDeleteChange()
         setState({ addressId: null })
       },

@@ -63,6 +63,7 @@ export const AddressForm = () => {
 
   const QUERY_KEY = {
     ADDRESS: ['account', 'address', addressId],
+    ADDRESS_CHECKOUT: ['account', 'address', 'checkout', userId],
     ADDRESS_LIST: ['account', 'addresses', userId],
   }
 
@@ -70,6 +71,9 @@ export const AddressForm = () => {
     await Promise.all([
       queryClient.invalidateQueries({
         queryKey: QUERY_KEY.ADDRESS,
+      }),
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEY.ADDRESS_CHECKOUT,
       }),
       queryClient.invalidateQueries({
         queryKey: QUERY_KEY.ADDRESS_LIST,

@@ -17,7 +17,8 @@ import { toast } from 'react-toastify'
 
 import type { ComponentProps } from 'react'
 
-import { getAddress } from '@/app/(main)/account/components/address/action'
+import { getAddressCheckout } from '../../account'
+
 import { createOrder } from '@/app/(main)/account/components/order/action'
 import { useCartStore } from '@/app/(main)/cart/store'
 import { ConfirmModal } from '@/components/modal/confirm'
@@ -74,15 +75,15 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
   }
 
   const QUERY = {
-    ADDRESS: ['account', 'address', userId],
+    ADDRESS_CHECKOUT: ['account', 'address', 'checkout', userId],
     CART: ['carts', userId],
     CART_COUNT: ['carts', 'count', userId],
     ORDER: ['account', 'orders', 'pagination', userId],
   }
 
   const { data: address, isLoading: isLoadingAddress } = useQuery({
-    queryKey: QUERY.ADDRESS,
-    queryFn: () => getAddress(userId!),
+    queryKey: QUERY.ADDRESS_CHECKOUT,
+    queryFn: () => getAddressCheckout(userId!),
     enabled: !!userId,
   })
 
@@ -142,7 +143,7 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
                 Shipping address
               </span>
 
-              <span>
+              <span className='text-default-500'>
                 {getFullAddress(address)}{' '}
                 <button
                   className='text-primary cursor-pointer underline'
@@ -174,7 +175,7 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
           {!isLoadingAddress && !address && (
             <Alert
               className='text-start'
-              color='danger'
+              color='warning'
               description={
                 <span>
                   Please add your shipping address before placing your order{' '}
