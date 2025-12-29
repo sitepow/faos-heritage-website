@@ -8,6 +8,7 @@ import { shippingCountrySchema } from '../../schema'
 import { ERROR_CODES } from '@/lib/errors/codes'
 import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
+import { decimalToNumber } from '@/utils/number'
 
 export type GetShippingCountriesResult = Awaited<
   ReturnType<typeof getShippingCountries>
@@ -47,26 +48,28 @@ export const createShippingCountry = async (data: ShippingCountryInput) => {
 }
 
 export const getShippingCountries = async () => {
-  return prisma.shippingCountry.findMany({
-    where: { isActive: true },
-    orderBy: { countryName: 'asc' },
-  })
+  return decimalToNumber(
+    await prisma.shippingCountry.findMany({
+      select: {
+        id: true,
+        countryCode: true,
+        countryName: true,
+        baseRate: true,
+        pricePerKg: true,
+        isActive: true,
+      },
+      where: { isActive: true },
+      orderBy: { countryName: 'asc' },
+    }),
+  )
 }
 
-export const getShippingCountry = async (countryCode: string) => {
-  if (!countryCode) {
-    return fail(ERROR_CODES.DATA_FIELD_REQUIRED)
-  }
-
-  const country = await prisma.shippingCountry.findUnique({
-    where: { countryCode },
-  })
-
-  if (!country) {
-    return fail(ERROR_CODES.DATA_NOT_FOUND)
-  }
-
-  return country
+export const getShippingCountry = async (shippingCountryId: string) => {
+  return decimalToNumber(
+    await prisma.shippingCountry.findUnique({
+      where: { id: shippingCountryId },
+    }),
+  )
 }
 
 export const updateShippingCountry = async (data: ShippingCountryInput) => {
@@ -86,6 +89,22 @@ export const updateShippingCountry = async (data: ShippingCountryInput) => {
     await prisma.shippingCountry.update({
       where: { id },
       data: payload,
+    })
+  } catch {
+    return fail(ERROR_CODES.SYSTEM_ERROR)
+  }
+
+  return done()
+}
+
+export const deleteShippingCountry = async (shippingCountryId: string) => {
+  if (!shippingCountryId) {
+    return fail(ERROR_CODES.DATA_FIELD_REQUIRED)
+  }
+
+  try {
+    await prisma.shippingCountry.delete({
+      where: { id: shippingCountryId },
     })
   } catch {
     return fail(ERROR_CODES.SYSTEM_ERROR)

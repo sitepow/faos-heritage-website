@@ -240,7 +240,7 @@ export const OrderForm = () => {
             isDisabled={isPending || !isDirty || isFinalStatus}
             onClick={handleSubmit(onSubmit)}
           >
-            {isPending ? 'In progress' : 'Save'}
+            {isPending ? 'Saving...' : 'Save'}
           </Button>
         </ModalFooter>
       </ModalContent>

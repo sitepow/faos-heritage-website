@@ -39,6 +39,7 @@ import {
   ImageManager,
   VariantManager,
 } from './components/manager'
+import { ShippingCountryManager } from './components/manager/shipping'
 import { useProductStore } from './store'
 
 import {
@@ -69,6 +70,7 @@ export default function Product() {
     onOpenProductChange,
     onOpenImageManagerChange,
     onOpenVariantManagerChange,
+    onOpenShippingCountryManagerChange,
   } = useProductStore()
 
   const [selectedKeys, setSelectedKeys] = useState<Set<string>>(new Set([]))
@@ -125,6 +127,7 @@ export default function Product() {
       <ImageManager />
       <VariantManager />
       <CategoryManager />
+      <ShippingCountryManager />
 
       <div className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
         {isLoadingDashboard &&
@@ -153,6 +156,16 @@ export default function Product() {
           }}
         >
           Manage product categories
+        </Button>
+        <Button
+          className='text-secondary'
+          color='primary'
+          startContent={<SettingsIcon />}
+          onPress={() => {
+            onOpenShippingCountryManagerChange()
+          }}
+        >
+          Manage shipping costs
         </Button>
         <Button
           className='text-secondary'

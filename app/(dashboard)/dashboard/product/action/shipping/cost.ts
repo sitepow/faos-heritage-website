@@ -19,12 +19,14 @@ export const calculateShippingCost = async ({
       return 0
     }
 
-    const totalWeightKg =
+    const rawWeightKg =
       items.reduce((sum, item) => sum + item.quantity * item.weight, 0) / 1000
 
-    if (totalWeightKg <= 0) {
+    if (rawWeightKg <= 0) {
       return 0
     }
+
+    const billableWeight = Math.ceil(rawWeightKg)
 
     const country = await prisma.shippingCountry.findUnique({
       where: { countryCode },
@@ -37,8 +39,8 @@ export const calculateShippingCost = async ({
     const tier = await prisma.shippingWeightTier.findFirst({
       where: {
         countryCode,
-        minWeight: { lte: totalWeightKg },
-        maxWeight: { gte: totalWeightKg },
+        minWeight: { lte: billableWeight },
+        maxWeight: { gte: billableWeight },
       },
       orderBy: {
         minWeight: 'desc',
@@ -46,18 +48,18 @@ export const calculateShippingCost = async ({
     })
 
     const baseRate = Number(country.baseRate)
-    const countryPricePerKg = Number(country.pricePerKg)
+    const defaultPricePerKg = Number(country.pricePerKg)
 
-    if (Number.isNaN(baseRate) || Number.isNaN(countryPricePerKg)) {
+    if (Number.isNaN(baseRate) || Number.isNaN(defaultPricePerKg)) {
       return 0
     }
 
-    const tierPricePerKg =
+    const pricePerKg =
       tier && !Number.isNaN(Number(tier.pricePerKg))
         ? Number(tier.pricePerKg)
-        : countryPricePerKg
+        : defaultPricePerKg
 
-    const shippingCost = baseRate + totalWeightKg * tierPricePerKg
+    const shippingCost = baseRate + billableWeight * pricePerKg
 
     return Math.ceil(shippingCost)
   } catch {

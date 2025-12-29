@@ -73,7 +73,7 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
 
   const QUERY_KEY = {
     ADDRESS_CHECKOUT: ['account', 'address', 'checkout', userId],
-    SHIPPING_COST: ['shipping', carts, userId],
+    SHIPPING_COST: ['shipping', 'carts', userId],
     CART: ['carts', userId],
     CART_COUNT: ['carts', 'count', userId],
     ORDER: ['account', 'orders', 'pagination', userId],

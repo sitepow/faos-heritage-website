@@ -1,0 +1,241 @@
+'use client'
+
+import {
+  useDisclosure,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  Spinner,
+  Card,
+  CardBody,
+  Dropdown,
+  DropdownTrigger,
+  Button,
+  DropdownMenu,
+  DropdownItem,
+  ModalFooter,
+  Chip,
+  Avatar,
+} from '@heroui/react'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import {
+  EditIcon,
+  EllipsisVerticalIcon,
+  PlusIcon,
+  TrashIcon,
+} from 'lucide-react'
+
+import { getShippingCountries } from '../../action'
+import { deleteShippingCountry } from '../../action/shipping/contry'
+import { useProductStore } from '../../store'
+import { ShippingForm } from '../form/shipping'
+
+import { ConfirmModal } from '@/components/modal/confirm'
+import { formatCurrency } from '@/utils/number'
+import { cn } from '@/utils/style'
+
+export const ShippingCountryManager = () => {
+  const queryClient = useQueryClient()
+  const {
+    shippingCountryId,
+    isShippingCountryManagerOpen,
+    onOpenShippingCountryChange,
+    onOpenShippingCountryManagerChange,
+    setState,
+  } = useProductStore()
+
+  const QUERY_KEY = {
+    SHIPPING_COUNTRIES: ['dashboard', 'shipping-country', 'modal'],
+  }
+
+  const { isOpen: isDeleteOpen, onOpenChange: onOpenDeleteChange } =
+    useDisclosure()
+
+  const { data: shippingCountries, isLoading: isLoadingShippingCountries } =
+    useQuery({
+      queryKey: QUERY_KEY.SHIPPING_COUNTRIES,
+      queryFn: () => getShippingCountries(),
+      enabled: isShippingCountryManagerOpen,
+    })
+
+  const onRefetch = async () => {
+    await Promise.all([
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEY.SHIPPING_COUNTRIES,
+      }),
+    ])
+  }
+
+  const {
+    mutate: mutateDeteleShippingCountry,
+    isPending: isPendingDeteleShippingCountry,
+  } = useMutation({
+    mutationFn: deleteShippingCountry,
+    onSuccess: () => {
+      onRefetch()
+      onOpenDeleteChange()
+      setState({ shippingCountryId: null })
+    },
+  })
+
+  const onClose = async () => {
+    onOpenShippingCountryManagerChange()
+  }
+
+  return (
+    <>
+      <ConfirmModal
+        isOpen={isDeleteOpen}
+        isPending={isPendingDeteleShippingCountry}
+        onConfirm={() => {
+          mutateDeteleShippingCountry(shippingCountryId!)
+        }}
+        onOpenChange={onOpenDeleteChange}
+      />
+
+      <ShippingForm />
+
+      <Modal
+        hideCloseButton
+        isDismissable={false}
+        isOpen={isShippingCountryManagerOpen}
+        size='xl'
+        scrollBehavior='inside'
+        onOpenChange={onOpenShippingCountryManagerChange}
+      >
+        <ModalContent>
+          <ModalHeader>Manage shipping costs</ModalHeader>
+          {isLoadingShippingCountries && (
+            <ModalBody>
+              <Spinner label='Loading...' />
+            </ModalBody>
+          )}
+
+          {shippingCountries?.length === 0 && (
+            <ModalBody>
+              <p className='text-default-500 text-center'>
+                There are no product options yet.
+              </p>
+            </ModalBody>
+          )}
+
+          {shippingCountries?.length !== 0 && (
+            <ModalBody>
+              <div className='grid grid-cols-1 gap-3'>
+                {shippingCountries?.map((shippingCountry) => (
+                  <Card
+                    key={shippingCountry.id}
+                    className={cn(
+                      'border-l-4',
+                      shippingCountry.isActive && 'border-primary',
+                    )}
+                  >
+                    <CardBody className='flex-row items-center justify-between'>
+                      <div className='line-clamp-1 flex flex-col'>
+                        <div className='flex items-center gap-2'>
+                          <Avatar
+                            src={`https://purecatamphetamine.github.io/country-flag-icons/3x2/${shippingCountry.countryCode}.svg`}
+                          />
+                          <span className='line-clamp-2'>
+                            {shippingCountry.countryName} (Shipping ID:{' '}
+                            {shippingCountry.id})
+                          </span>
+                        </div>
+
+                        <div className='mt-2.5 flex gap-2 text-sm'>
+                          <Chip>
+                            <span
+                              className={cn(
+                                'text-default-500',
+                                !shippingCountry.baseRate && 'text-red-500',
+                              )}
+                            >
+                              {shippingCountry.baseRate
+                                ? `Base Rate: ${formatCurrency(shippingCountry?.baseRate ?? 0)}`
+                                : `-`}
+                            </span>
+                          </Chip>
+
+                          <Chip>
+                            <span
+                              className={cn(
+                                'text-default-500',
+                                !shippingCountry.pricePerKg && 'text-red-500',
+                              )}
+                            >
+                              {shippingCountry.baseRate
+                                ? `Price / kg: ${formatCurrency(shippingCountry?.pricePerKg ?? 0)}`
+                                : `-`}
+                            </span>
+                          </Chip>
+                        </div>
+                      </div>
+
+                      <Dropdown placement='bottom-end'>
+                        <DropdownTrigger>
+                          <Button isIconOnly size='sm' variant='light'>
+                            <EllipsisVerticalIcon className='text-default-500 size-5' />
+                          </Button>
+                        </DropdownTrigger>
+                        <DropdownMenu
+                          aria-label='Manage products'
+                          className='min-w-[180px]'
+                        >
+                          <DropdownItem
+                            key='edit'
+                            startContent={<EditIcon className='size-4' />}
+                            onClick={() => {
+                              setState({
+                                shippingCountryId: shippingCountry.id,
+                              })
+                              onOpenShippingCountryManagerChange()
+                              onOpenShippingCountryChange()
+                            }}
+                          >
+                            Edit information
+                          </DropdownItem>
+                          <DropdownItem
+                            key='delete'
+                            className='text-danger'
+                            color='danger'
+                            startContent={<TrashIcon className='size-4' />}
+                            onClick={() => {
+                              setState({
+                                shippingCountryId: shippingCountry.id,
+                              })
+                              onOpenDeleteChange()
+                            }}
+                          >
+                            Remove shipping
+                          </DropdownItem>
+                        </DropdownMenu>
+                      </Dropdown>
+                    </CardBody>
+                  </Card>
+                ))}
+              </div>
+            </ModalBody>
+          )}
+
+          <ModalFooter>
+            <Button variant='faded' onPress={onClose}>
+              Cancel
+            </Button>
+            <Button
+              className='text-secondary'
+              color='primary'
+              startContent={<PlusIcon />}
+              onPress={() => {
+                onOpenShippingCountryChange()
+                onOpenShippingCountryManagerChange()
+              }}
+            >
+              Add shiping country
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  )
+}

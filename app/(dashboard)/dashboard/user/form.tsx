@@ -293,7 +293,7 @@ export const UserForm = () => {
             isDisabled={isPending || !isDirty}
             onClick={handleSubmit(onSubmit)}
           >
-            {isPending ? 'In progress' : 'Save'}
+            {isPending ? 'Saving...' : 'Save'}
           </Button>
         </ModalFooter>
       </ModalContent>
