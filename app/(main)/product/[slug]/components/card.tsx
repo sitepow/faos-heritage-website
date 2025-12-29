@@ -50,11 +50,11 @@ export const ProductCard = ({ className, product }: ProductCardProps) => {
   return (
     <Card
       className={cn(
-        'flex min-h-[420px] w-full flex-col',
+        'border-divider flex min-h-[420px] w-full flex-col border',
         'shrink-0 basis-[300px] md:basis-[350px]',
         className,
       )}
-      shadow='sm'
+      shadow='none'
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
