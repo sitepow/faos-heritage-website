@@ -19,7 +19,12 @@ export const HeroUIProviders = ({
   const router = useRouter()
 
   return (
-    <HeroUIProvider navigate={router.push}>
+    <HeroUIProvider
+      disableAnimation
+      disableRipple
+      skipFramerMotionAnimations
+      navigate={router.push}
+    >
       <NextThemesProvider {...themeProps} defaultTheme='light'>
         {children}
       </NextThemesProvider>
