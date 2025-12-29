@@ -10,7 +10,7 @@ export const DashboardClient = ({ children }: PropsWithChildren) => {
   const { theme } = useTheme()
 
   return (
-    <div className='light:bg-[#f1f1f1] relative flex h-screen flex-col overflow-x-hidden'>
+    <div className='relative flex h-screen flex-col overflow-x-hidden'>
       <Navbar />
       <main className='container mx-auto flex-grow p-6'>
         <ToastContainer

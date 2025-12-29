@@ -9,7 +9,7 @@ export const AuthClient = ({ children }: PropsWithChildren) => {
 
   return (
     <Suspense>
-      <div className='light:bg-[#f1f1f1] flex justify-center p-5 sm:p-10'>
+      <div className='flex justify-center p-5 sm:p-10'>
         <ToastContainer
           closeOnClick
           hideProgressBar
