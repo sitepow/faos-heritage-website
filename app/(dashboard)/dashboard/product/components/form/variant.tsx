@@ -29,6 +29,7 @@ const DEFAULT_VALUES: VariantInput = {
   sku: '',
   price: 0,
   stockQuantity: 0,
+  weight: 0,
   isActive: true,
 }
 
@@ -202,6 +203,23 @@ export const VariantForm = () => {
                   isInvalid={!!errors.stockQuantity}
                   label='Quantity in stock'
                   minValue={0}
+                  variant='bordered'
+                  onValueChange={(val) => onChange(val || 0)}
+                />
+              )}
+            />
+
+            <Controller
+              control={control}
+              name='weight'
+              render={({ field: { value, onChange, ...field } }) => (
+                <NumberInput
+                  {...field}
+                  errorMessage={errors.weight?.message}
+                  isInvalid={!!errors.weight}
+                  label='Weight (grams)'
+                  minValue={0}
+                  value={value ?? 0}
                   variant='bordered'
                   onValueChange={(val) => onChange(val || 0)}
                 />

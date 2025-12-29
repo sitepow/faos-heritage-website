@@ -12,6 +12,9 @@ export const variantSchema = z.object({
   price: z
     .number('The price must be the correct figure.')
     .min(0, 'The price must be 0 or higher.'),
+  weight: z
+    .number('The weight must be the correct figure.')
+    .min(0, 'The weight must be 0 or higher.'),
   stockQuantity: z.number('The inventory quantity must be accurate.'),
   isActive: z.boolean(),
 })

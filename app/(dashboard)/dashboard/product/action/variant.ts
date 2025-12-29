@@ -56,6 +56,7 @@ export const getVariant = async (variantId: string) => {
         name: true,
         sku: true,
         price: true,
+        weight: true,
         stockQuantity: true,
         isActive: true,
       },
