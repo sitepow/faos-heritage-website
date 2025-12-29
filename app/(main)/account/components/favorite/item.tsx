@@ -38,7 +38,7 @@ export const FavoriteItem = ({
   const userId = session?.user?.id
   const productId = favorite?.product?.id
 
-  const QUERY = {
+  const QUERY_KEY = {
     FAVORITES: ['account', 'favorites', userId],
     CART: ['carts', userId],
     CART_COUNT: ['carts', 'count', userId],
@@ -47,13 +47,13 @@ export const FavoriteItem = ({
   const onRefetch = async () => {
     await Promise.all([
       queryClient.invalidateQueries({
-        queryKey: QUERY.CART,
+        queryKey: QUERY_KEY.CART,
       }),
       queryClient.invalidateQueries({
-        queryKey: QUERY.CART_COUNT,
+        queryKey: QUERY_KEY.CART_COUNT,
       }),
       queryClient.invalidateQueries({
-        queryKey: QUERY.FAVORITES,
+        queryKey: QUERY_KEY.FAVORITES,
       }),
     ])
   }

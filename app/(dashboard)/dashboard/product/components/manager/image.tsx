@@ -40,7 +40,7 @@ export const ImageManager = () => {
     imageId,
   } = useProductStore()
 
-  const QUERY = {
+  const QUERY_KEY = {
     PRODUCT: ['dashboard', 'products', 'pagination'],
     IMAGES: ['dashboard', 'images', 'modal', productId],
     HOMEPAGE: ['products', 'homepage'],
@@ -51,7 +51,7 @@ export const ImageManager = () => {
     useDisclosure()
 
   const { data: images, isLoading: isLoadingImages } = useQuery({
-    queryKey: QUERY.IMAGES,
+    queryKey: QUERY_KEY.IMAGES,
     queryFn: () => getImages(productId!),
     enabled: !!productId && isImageManagerOpen,
   })
@@ -59,19 +59,19 @@ export const ImageManager = () => {
   const onRefetchAfterDelete = async () => {
     await Promise.all([
       queryClient.invalidateQueries({
-        queryKey: QUERY.IMAGES,
+        queryKey: QUERY_KEY.IMAGES,
       }),
 
       queryClient.invalidateQueries({
-        queryKey: QUERY.HOMEPAGE,
+        queryKey: QUERY_KEY.HOMEPAGE,
       }),
 
       queryClient.invalidateQueries({
-        queryKey: QUERY.CAROUSEL,
+        queryKey: QUERY_KEY.CAROUSEL,
       }),
 
       queryClient.invalidateQueries({
-        queryKey: QUERY.PRODUCT,
+        queryKey: QUERY_KEY.PRODUCT,
       }),
     ])
   }

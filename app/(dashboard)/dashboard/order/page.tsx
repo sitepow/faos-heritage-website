@@ -40,18 +40,18 @@ export default function Order() {
   const [page, setPage] = useState(1)
   const { onOpenOrderChange, onOpenViewChange, setState } = useOrderStore()
 
-  const QUERY = {
+  const QUERY_KEY = {
     DASHBOARD: ['dashboard', 'orders', 'card'],
     ORDERS: ['dashboard', 'orders', 'pagination', page],
   }
 
   const { data: orders, isLoading: isLoadingOrders } = useQuery({
-    queryKey: QUERY.ORDERS,
+    queryKey: QUERY_KEY.ORDERS,
     queryFn: () => getOrders(page, ITEM_PER_PAGE),
   })
 
   const { data: dashboard, isLoading: isLoadingDashboard } = useQuery({
-    queryKey: QUERY.DASHBOARD,
+    queryKey: QUERY_KEY.DASHBOARD,
     queryFn: () => getOrderStat(),
   })
 

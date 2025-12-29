@@ -44,7 +44,7 @@ export const VariantForm = () => {
   } = useProductStore()
   const queryClient = useQueryClient()
 
-  const QUERY = {
+  const QUERY_KEY = {
     VARIANT: ['dashboard', 'variant', 'modal', variantId],
     VARIANTS: ['dashboard', 'variants', 'modal'],
   }
@@ -60,7 +60,7 @@ export const VariantForm = () => {
   })
 
   const { data: variant, isLoading: isLoadingVariant } = useQuery({
-    queryKey: QUERY.VARIANT,
+    queryKey: QUERY_KEY.VARIANT,
     queryFn: () => getVariant(variantId!),
     enabled: !!variantId && isVariantOpen,
   })
@@ -80,7 +80,7 @@ export const VariantForm = () => {
       mutationFn: createVariant,
       onSuccess: () => {
         queryClient.invalidateQueries({
-          queryKey: QUERY.VARIANTS,
+          queryKey: QUERY_KEY.VARIANTS,
         })
         onClose()
       },
@@ -91,7 +91,7 @@ export const VariantForm = () => {
       mutationFn: updateVariant,
       onSuccess: () => {
         queryClient.invalidateQueries({
-          queryKey: QUERY.VARIANTS,
+          queryKey: QUERY_KEY.VARIANTS,
         })
         onClose()
       },
@@ -111,7 +111,7 @@ export const VariantForm = () => {
 
   const onClose = () => {
     queryClient.removeQueries({
-      queryKey: QUERY.VARIANT,
+      queryKey: QUERY_KEY.VARIANT,
     })
     reset(DEFAULT_VALUES)
     setState({ variantId: null })

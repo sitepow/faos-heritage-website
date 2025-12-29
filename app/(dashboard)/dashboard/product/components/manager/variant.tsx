@@ -44,7 +44,7 @@ export const VariantManager = () => {
     setState,
   } = useProductStore()
 
-  const QUERY = {
+  const QUERY_KEY = {
     PRODUCT: ['dashboard', 'products', 'pagination'],
     VARIANTS: ['dashboard', 'variants', 'modal', productId],
   }
@@ -53,7 +53,7 @@ export const VariantManager = () => {
     useDisclosure()
 
   const { data: variants, isLoading: isLoadingVariants } = useQuery({
-    queryKey: QUERY.VARIANTS,
+    queryKey: QUERY_KEY.VARIANTS,
     queryFn: () => getVariants(productId!),
     enabled: !!productId && isVariantManagerOpen,
   })
@@ -61,10 +61,10 @@ export const VariantManager = () => {
   const onRefetch = async () => {
     await Promise.all([
       queryClient.invalidateQueries({
-        queryKey: QUERY.VARIANTS,
+        queryKey: QUERY_KEY.VARIANTS,
       }),
       queryClient.invalidateQueries({
-        queryKey: QUERY.PRODUCT,
+        queryKey: QUERY_KEY.PRODUCT,
       }),
     ])
   }

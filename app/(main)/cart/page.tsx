@@ -23,7 +23,7 @@ export default function Cart() {
   const { data: session } = useSession()
   const userId = session?.user?.id
 
-  const QUERY = {
+  const QUERY_KEY = {
     CART: ['carts', userId],
     CART_COUNT: ['carts', 'count', userId],
   }
@@ -32,8 +32,8 @@ export default function Cart() {
     useMutation({
       mutationFn: deleteCart,
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: QUERY.CART })
-        queryClient.invalidateQueries({ queryKey: QUERY.CART_COUNT })
+        queryClient.invalidateQueries({ queryKey: QUERY_KEY.CART })
+        queryClient.invalidateQueries({ queryKey: QUERY_KEY.CART_COUNT })
         setState({ cartId: null })
         onOpenDeleteChange()
       },
@@ -43,8 +43,8 @@ export default function Cart() {
     useMutation({
       mutationFn: clearCart,
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: QUERY.CART })
-        queryClient.invalidateQueries({ queryKey: QUERY.CART_COUNT })
+        queryClient.invalidateQueries({ queryKey: QUERY_KEY.CART })
+        queryClient.invalidateQueries({ queryKey: QUERY_KEY.CART_COUNT })
         onOpenClearChange()
       },
     })

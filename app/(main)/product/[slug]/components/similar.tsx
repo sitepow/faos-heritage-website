@@ -12,12 +12,12 @@ export const ProductSimilar = () => {
   const { product } = useProductDetailStore()
   const categoryId = product?.categoryId
 
-  const QUERY = {
+  const QUERY_KEY = {
     SIMILAR: ['similarProducts', categoryId],
   }
 
   const { data, isLoading } = useQuery({
-    queryKey: QUERY.SIMILAR,
+    queryKey: QUERY_KEY.SIMILAR,
     queryFn: () => getProducts({ limit: ITEM_PER_PAGE, categoryId }),
     enabled: !!categoryId,
   })

@@ -51,7 +51,7 @@ export const ImageForm = () => {
     previewFiles,
   })
 
-  const QUERY = {
+  const QUERY_KEY = {
     IMAGE: ['dashboard', 'image', 'modal', imageId],
     IMAGES: ['dashboard', 'images', 'modal', productId],
     HOMEPAGE: ['products', 'homepage'],
@@ -70,7 +70,7 @@ export const ImageForm = () => {
   })
 
   const { data: image, isLoading: isLoadingImage } = useQuery({
-    queryKey: QUERY.IMAGE,
+    queryKey: QUERY_KEY.IMAGE,
     queryFn: () => getImage(imageId!),
     enabled: !!imageId && isImageOpen,
   })
@@ -87,16 +87,16 @@ export const ImageForm = () => {
 
   const onRefetch = () => {
     queryClient.invalidateQueries({
-      queryKey: QUERY.IMAGE,
+      queryKey: QUERY_KEY.IMAGE,
     })
     queryClient.invalidateQueries({
-      queryKey: QUERY.IMAGES,
+      queryKey: QUERY_KEY.IMAGES,
     })
     queryClient.invalidateQueries({
-      queryKey: QUERY.HOMEPAGE,
+      queryKey: QUERY_KEY.HOMEPAGE,
     })
     queryClient.invalidateQueries({
-      queryKey: QUERY.CAROUSEL,
+      queryKey: QUERY_KEY.CAROUSEL,
     })
 
     onClose()
@@ -157,7 +157,7 @@ export const ImageForm = () => {
     setOldImage(null)
 
     queryClient.removeQueries({
-      queryKey: QUERY.IMAGE,
+      queryKey: QUERY_KEY.IMAGE,
     })
     reset(DEFAULT_VALUES)
     setState({ imageId: null })

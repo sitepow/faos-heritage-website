@@ -31,15 +31,15 @@ export const OrderForm = () => {
   const { data: session } = useSession()
   const userId = session?.user?.id
 
-  const QUERY = {
+  const QUERY_KEY = {
     ORDER: ['dashboard', 'order', orderId],
     ORDERS: ['account', 'orders', 'pagination', userId],
   }
 
   const onRefetch = async () => {
     await Promise.all([
-      queryClient.invalidateQueries({ queryKey: QUERY.ORDER }),
-      queryClient.invalidateQueries({ queryKey: QUERY.ORDERS }),
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.ORDER }),
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.ORDERS }),
     ])
   }
 

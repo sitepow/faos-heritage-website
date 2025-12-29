@@ -51,7 +51,7 @@ export const CategoryForm = () => {
     previewFiles,
   })
 
-  const QUERY = {
+  const QUERY_KEY = {
     CATEGORY: ['dashboard', 'categories', 'modal', categoryId],
     CATEGORIES: ['dashboard', 'categories', 'modal'],
   }
@@ -68,7 +68,7 @@ export const CategoryForm = () => {
   })
 
   const { data: category, isLoading: isLoadingCategory } = useQuery({
-    queryKey: QUERY.CATEGORY,
+    queryKey: QUERY_KEY.CATEGORY,
     queryFn: () => getCategory(categoryId!),
     enabled: !!categoryId && isCategoryOpen,
   })
@@ -85,7 +85,7 @@ export const CategoryForm = () => {
 
   const onRefetch = async () => {
     queryClient.invalidateQueries({
-      queryKey: QUERY.CATEGORIES,
+      queryKey: QUERY_KEY.CATEGORIES,
     })
 
     onClose()
@@ -145,7 +145,7 @@ export const CategoryForm = () => {
     setOldImage(null)
 
     queryClient.removeQueries({
-      queryKey: QUERY.CATEGORY,
+      queryKey: QUERY_KEY.CATEGORY,
     })
     reset(DEFAULT_VALUES)
     setState({ categoryId: null })

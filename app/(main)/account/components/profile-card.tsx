@@ -40,7 +40,7 @@ export const ProfileCard = () => {
   const { data: session } = useSession()
   const userId = session?.user?.id
 
-  const QUERY = {
+  const QUERY_KEY = {
     USER: ['account', 'user', userId],
   }
 
@@ -63,7 +63,7 @@ export const ProfileCard = () => {
   })
 
   const { data: user, isLoading: isLoadingUser } = useQuery({
-    queryKey: QUERY.USER,
+    queryKey: QUERY_KEY.USER,
     queryFn: () => getUser(userId!),
     enabled: !!userId,
   })
@@ -85,7 +85,7 @@ export const ProfileCard = () => {
     useMutation({
       mutationFn: updateUser,
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: QUERY.USER })
+        queryClient.invalidateQueries({ queryKey: QUERY_KEY.USER })
       },
     })
 

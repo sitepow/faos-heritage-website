@@ -51,18 +51,18 @@ export default function User() {
   const selectedUserIds = Array.from(selectedKeys)
   const [page, setPage] = useState(1)
 
-  const QUERY = {
+  const QUERY_KEY = {
     DASHBOARD: ['dashboard', 'users', 'card'],
     USERS: ['dashboard', 'users', 'pagination', page],
   }
 
   const { data: users, isLoading: isLoadingUsers } = useQuery({
-    queryKey: QUERY.USERS,
+    queryKey: QUERY_KEY.USERS,
     queryFn: () => getUsers(page, ITEM_PER_PAGE),
   })
 
   const { data: dashboard, isLoading: isLoadingDashboard } = useQuery({
-    queryKey: QUERY.DASHBOARD,
+    queryKey: QUERY_KEY.DASHBOARD,
     queryFn: () => getUserStat(),
   })
 
@@ -70,7 +70,7 @@ export default function User() {
     useMutation({
       mutationFn: deleteUser,
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: QUERY.DASHBOARD })
+        queryClient.invalidateQueries({ queryKey: QUERY_KEY.DASHBOARD })
         onOpenDeleteChange()
         setState({ userId: null })
         setSelectedKeys(new Set([]))

@@ -63,7 +63,7 @@ export const ProductForm = () => {
     useProductStore()
   const queryClient = useQueryClient()
 
-  const QUERY = {
+  const QUERY_KEY = {
     CATEGORIES: ['dashboard', 'categories', 'modal'],
     PRODUCT: ['dashboard', 'product', productId],
     PRODUCTS: ['dashboard', 'products'],
@@ -72,13 +72,13 @@ export const ProductForm = () => {
   }
 
   const { data: categories, isLoading: isLoadingCategories } = useQuery({
-    queryKey: QUERY.CATEGORIES,
+    queryKey: QUERY_KEY.CATEGORIES,
     queryFn: () => getCategories(),
     enabled: isProductOpen,
   })
 
   const { data: product, isLoading: isLoadingProduct } = useQuery({
-    queryKey: QUERY.PRODUCT,
+    queryKey: QUERY_KEY.PRODUCT,
     queryFn: () => getProduct(productId!),
     enabled: !!productId && isProductOpen,
   })
@@ -106,9 +106,9 @@ export const ProductForm = () => {
 
   const onRefetch = async () => {
     await Promise.all([
-      queryClient.invalidateQueries({ queryKey: QUERY.PRODUCTS }),
-      queryClient.invalidateQueries({ queryKey: QUERY.HOMEPAGE }),
-      queryClient.invalidateQueries({ queryKey: QUERY.CAROUSEL }),
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.PRODUCTS }),
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.HOMEPAGE }),
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.CAROUSEL }),
     ])
 
     onClose()
@@ -142,7 +142,7 @@ export const ProductForm = () => {
   }
 
   const onClose = () => {
-    queryClient.removeQueries({ queryKey: QUERY.PRODUCT })
+    queryClient.removeQueries({ queryKey: QUERY_KEY.PRODUCT })
     setState({ productId: null })
     reset(DEFAULT_VALUES)
     onOpenProductChange()

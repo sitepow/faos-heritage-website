@@ -78,25 +78,25 @@ export default function Product() {
   const { isOpen: isDeleteOpen, onOpenChange: onOpenDeleteChange } =
     useDisclosure()
 
-  const QUERY = {
+  const QUERY_KEY = {
     DASHBOARD: ['dashboard', 'products', 'card'],
     PRODUCTS: ['dashboard', 'products', 'pagination', page],
   }
 
   const { data: products, isLoading: isLoadingProducts } = useQuery({
-    queryKey: QUERY.PRODUCTS,
+    queryKey: QUERY_KEY.PRODUCTS,
     queryFn: () => getProducts(page, ITEM_PER_PAGE),
   })
 
   const { data: dashboard, isLoading: isLoadingDashboard } = useQuery({
-    queryKey: QUERY.DASHBOARD,
+    queryKey: QUERY_KEY.DASHBOARD,
     queryFn: () => getProductStat(),
   })
 
   const onRefetch = async () => {
     await Promise.all([
-      queryClient.invalidateQueries({ queryKey: QUERY.DASHBOARD }),
-      queryClient.invalidateQueries({ queryKey: QUERY.PRODUCTS }),
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.DASHBOARD }),
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.PRODUCTS }),
     ])
   }
 

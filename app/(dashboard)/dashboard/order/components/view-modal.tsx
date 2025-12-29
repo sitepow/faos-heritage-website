@@ -28,19 +28,19 @@ export const OrderViewModal = () => {
   const queryClient = useQueryClient()
   const { isViewOpen, onOpenViewChange, orderId, setState } = useOrderStore()
 
-  const QUERY = {
+  const QUERY_KEY = {
     order: ['dashboard', 'order', orderId],
   }
 
   const { data: order, isLoading: isLoadingOrder } = useQuery({
-    queryKey: QUERY.order,
+    queryKey: QUERY_KEY.order,
     queryFn: () => getOrder(orderId!),
     enabled: !!orderId,
   })
 
   const onClose = () => {
     queryClient.invalidateQueries({
-      queryKey: QUERY.order,
+      queryKey: QUERY_KEY.order,
     })
 
     setState({ orderId: null })

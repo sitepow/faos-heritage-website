@@ -19,12 +19,12 @@ export const CartLists = ({ className, ...props }: CartListsProp) => {
   const { data: session } = useSession()
   const userId = session?.user?.id
 
-  const QUERY = {
+  const QUERY_KEY = {
     CART: ['carts', userId],
   }
 
   const { data: carts, isLoading: isLoadingCarts } = useQuery({
-    queryKey: QUERY.CART,
+    queryKey: QUERY_KEY.CART,
     queryFn: async () => getCarts(userId!),
     enabled: !!userId,
   })

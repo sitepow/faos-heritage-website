@@ -57,13 +57,13 @@ export const OrderForm = () => {
 
   const { status, tempStatus, trackingWebsite } = watch()
 
-  const QUERY = {
+  const QUERY_KEY = {
     ORDER: ['dashboard', 'order', orderId],
     ORDERS: ['dashboard', 'orders'],
   }
 
   const { data: order, isLoading: isLoadingOrder } = useQuery({
-    queryKey: QUERY.ORDER,
+    queryKey: QUERY_KEY.ORDER,
     queryFn: () => getOrder(orderId!),
     enabled: !!orderId,
   })
@@ -84,13 +84,13 @@ export const OrderForm = () => {
     useMutation({
       mutationFn: (payload: UpdateOrderInput) => updateOrder(payload),
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: QUERY.ORDERS })
+        queryClient.invalidateQueries({ queryKey: QUERY_KEY.ORDERS })
         onClose()
       },
     })
 
   const onClose = () => {
-    queryClient.invalidateQueries({ queryKey: QUERY.ORDER })
+    queryClient.invalidateQueries({ queryKey: QUERY_KEY.ORDER })
     setState({ orderId: null })
     reset(DEFAULT_VALUES)
     onOpenOrderChange()

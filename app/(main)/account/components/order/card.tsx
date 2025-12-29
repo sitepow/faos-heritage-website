@@ -20,12 +20,12 @@ export const OrderCard = () => {
   const { data: session } = useSession()
   const userId = session?.user?.id
 
-  const QUERY = {
+  const QUERY_KEY = {
     ORDERS: ['account', 'orders', 'pagination', userId, page],
   }
 
   const { data: orders, isLoading: isLoadingOrders } = useQuery({
-    queryKey: QUERY.ORDERS,
+    queryKey: QUERY_KEY.ORDERS,
     queryFn: () => getOrders(page, ITEM_PER_PAGE, userId),
   })
 

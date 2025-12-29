@@ -56,7 +56,7 @@ export const CartItem = ({ className, cart, ...props }: CartItemProps) => {
     }
   }, [cart?.variantId])
 
-  const QUERY = {
+  const QUERY_KEY = {
     PRODUCT: ['product', cart?.product?.id],
     CART: ['carts', userId],
     CART_COUNT: ['carts', 'count', userId],
@@ -67,9 +67,9 @@ export const CartItem = ({ className, cart, ...props }: CartItemProps) => {
       mutationFn: updateCart,
       onSuccess: () => {
         Promise.all([
-          queryClient.invalidateQueries({ queryKey: QUERY.PRODUCT }),
-          queryClient.invalidateQueries({ queryKey: QUERY.CART }),
-          queryClient.invalidateQueries({ queryKey: QUERY.CART_COUNT }),
+          queryClient.invalidateQueries({ queryKey: QUERY_KEY.PRODUCT }),
+          queryClient.invalidateQueries({ queryKey: QUERY_KEY.CART }),
+          queryClient.invalidateQueries({ queryKey: QUERY_KEY.CART_COUNT }),
         ])
       },
     })

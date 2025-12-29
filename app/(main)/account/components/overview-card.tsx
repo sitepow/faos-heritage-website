@@ -15,12 +15,12 @@ export const OverviewCard = ({ onclick }: OverviewCardProps) => {
   const { data: session } = useSession()
   const userId = session?.user?.id
 
-  const QUERY = {
+  const QUERY_KEY = {
     ACCOUNT: ['account', 'user', userId],
   }
 
   const { data: user, isLoading: isLoadingUser } = useQuery({
-    queryKey: QUERY.ACCOUNT,
+    queryKey: QUERY_KEY.ACCOUNT,
     queryFn: () => getUser(userId!),
     enabled: !!userId,
   })

@@ -74,7 +74,7 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
     ORDER: () => router.push(`/account?tab=${ACCOUNT_TAB?.ORDER}`),
   }
 
-  const QUERY = {
+  const QUERY_KEY = {
     ADDRESS_CHECKOUT: ['account', 'address', 'checkout', userId],
     CART: ['carts', userId],
     CART_COUNT: ['carts', 'count', userId],
@@ -82,7 +82,7 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
   }
 
   const { data: address, isLoading: isLoadingAddress } = useQuery({
-    queryKey: QUERY.ADDRESS_CHECKOUT,
+    queryKey: QUERY_KEY.ADDRESS_CHECKOUT,
     queryFn: () => getAddressCheckout(userId!),
     enabled: !!userId,
   })
@@ -96,9 +96,9 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
         )
 
         await Promise.all([
-          queryClient.invalidateQueries({ queryKey: QUERY.CART }),
-          queryClient.invalidateQueries({ queryKey: QUERY.CART_COUNT }),
-          queryClient.invalidateQueries({ queryKey: QUERY.ORDER }),
+          queryClient.invalidateQueries({ queryKey: QUERY_KEY.CART }),
+          queryClient.invalidateQueries({ queryKey: QUERY_KEY.CART_COUNT }),
+          queryClient.invalidateQueries({ queryKey: QUERY_KEY.ORDER }),
         ])
 
         onOpenConfirmOrderChange()

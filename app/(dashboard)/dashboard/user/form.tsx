@@ -55,7 +55,7 @@ export const UserForm = () => {
     previewFiles,
   })
 
-  const QUERY = {
+  const QUERY_KEY = {
     DASHBOARD: ['dashboard', 'users', 'card'],
     USER: ['dashboard', 'user', userId],
     USERS: ['dashboard', 'users', 'pagination'],
@@ -76,7 +76,7 @@ export const UserForm = () => {
   })
 
   const { data: user, isLoading: isLoadingUser } = useQuery({
-    queryKey: QUERY.USER,
+    queryKey: QUERY_KEY.USER,
     queryFn: () => getUser(userId!),
     enabled: !!userId && isUserOpen,
   })
@@ -97,13 +97,13 @@ export const UserForm = () => {
   const onRefetch = async () => {
     Promise.all([
       queryClient.invalidateQueries({
-        queryKey: QUERY.DASHBOARD,
+        queryKey: QUERY_KEY.DASHBOARD,
       }),
       queryClient.invalidateQueries({
-        queryKey: QUERY.USER,
+        queryKey: QUERY_KEY.USER,
       }),
       queryClient.invalidateQueries({
-        queryKey: QUERY.USERS,
+        queryKey: QUERY_KEY.USERS,
       }),
     ])
 
@@ -161,7 +161,7 @@ export const UserForm = () => {
     setOldImage(null)
 
     queryClient.removeQueries({
-      queryKey: QUERY.USER,
+      queryKey: QUERY_KEY.USER,
     })
     reset(DEFAULT_VALUES)
     setState({ userId: null })

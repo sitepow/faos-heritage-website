@@ -45,20 +45,20 @@ export const CategoryClient = ({
     return SORT_ITEMS[key]
   }, [selectedKeys])
 
-  const QUERY = {
+  const QUERY_KEY = {
     CATEGORY: ['category', categoryId],
     PRODUCTS: ['products', categoryId, sortBy?.label, sortBy?.order],
   }
 
   const { data: category, isLoading: isLoadingCategory } = useQuery({
-    queryKey: QUERY.CATEGORY,
+    queryKey: QUERY_KEY.CATEGORY,
     queryFn: () => getCategory(categoryId),
     enabled: !!categoryId,
   })
 
   const { data, isLoading, fetchNextPage, isFetchingNextPage, hasNextPage } =
     useInfiniteQuery<GetProductsResult>({
-      queryKey: QUERY.PRODUCTS,
+      queryKey: QUERY_KEY.PRODUCTS,
       initialPageParam: null,
       queryFn: ({ pageParam }) =>
         getProducts({

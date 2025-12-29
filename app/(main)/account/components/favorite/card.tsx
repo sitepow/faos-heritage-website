@@ -13,12 +13,12 @@ export const FavoriteCard = () => {
   const { data: session } = useSession()
   const userId = session?.user?.id
 
-  const QUERY = {
+  const QUERY_KEY = {
     FAVORITES: ['account', 'favorites', userId],
   }
 
   const { data: favorites, isLoading: isLoadingFaorites } = useQuery({
-    queryKey: QUERY.FAVORITES,
+    queryKey: QUERY_KEY.FAVORITES,
     queryFn: () => getFavorites({ userId }),
   })
 

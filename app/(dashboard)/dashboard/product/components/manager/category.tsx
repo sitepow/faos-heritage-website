@@ -43,7 +43,7 @@ export const CategoryManager = () => {
     setState,
   } = useProductStore()
 
-  const QUERY = {
+  const QUERY_KEY = {
     CATEGORIES: ['dashboard', 'categories', 'modal'],
   }
 
@@ -51,7 +51,7 @@ export const CategoryManager = () => {
     useDisclosure()
 
   const { data: categories, isLoading: isLoadingCategories } = useQuery({
-    queryKey: QUERY.CATEGORIES,
+    queryKey: QUERY_KEY.CATEGORIES,
     queryFn: () => getCategories(),
     enabled: isCategoryManagerOpen,
   })
@@ -61,7 +61,7 @@ export const CategoryManager = () => {
       mutationFn: deleteCategory,
       onSuccess: () => {
         queryClient.invalidateQueries({
-          queryKey: QUERY.CATEGORIES,
+          queryKey: QUERY_KEY.CATEGORIES,
         })
         onOpenDeleteChange()
         setState({ categoryId: null })
@@ -70,7 +70,7 @@ export const CategoryManager = () => {
 
   const onClose = () => {
     queryClient.invalidateQueries({
-      queryKey: QUERY.CATEGORIES,
+      queryKey: QUERY_KEY.CATEGORIES,
     })
     setState({ productId: null, variantId: null })
     onOpenCategoryManagerChange()
