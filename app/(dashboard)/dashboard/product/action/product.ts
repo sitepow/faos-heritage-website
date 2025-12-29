@@ -118,6 +118,7 @@ export const getProduct = async (productId: string, userId?: string) => {
             name: true,
             price: true,
             stockQuantity: true,
+            image: true,
           },
         },
         category: {

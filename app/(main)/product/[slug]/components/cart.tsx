@@ -1,6 +1,13 @@
 'use client'
 
-import { Card, CardBody, Select, SelectItem, Button } from '@heroui/react'
+import {
+  Card,
+  CardBody,
+  Select,
+  SelectItem,
+  Button,
+  Avatar,
+} from '@heroui/react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { HeartIcon, ShoppingCartIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
@@ -104,9 +111,7 @@ export const ProductCart = () => {
             priceMin={!variantId ? product?.priceMin! : null}
             unit={product?.unit}
           />
-
           <h1 className='text-2xl font-bold'>{product?.name}</h1>
-
           <ProductRating />
         </div>
         {product?.shortDescription && (
@@ -122,10 +127,19 @@ export const ProductCart = () => {
             label='Product options'
             selectedKeys={variantId ? [variantId] : []}
             variant='bordered'
-            onSelectionChange={(k) => setVariantId(Array.from(k)[0] as string)}
+            onSelectionChange={(option) =>
+              setVariantId(Array.from(option)[0] as string)
+            }
           >
-            {(product?.variants ?? []).map((v) => (
-              <SelectItem key={v.id}>{v.name}</SelectItem>
+            {(product?.variants ?? []).map((variant) => (
+              <SelectItem
+                key={variant.id}
+                startContent={
+                  <Avatar src={variant?.image ?? '/images/no-image.png'} />
+                }
+              >
+                {variant.name}
+              </SelectItem>
             ))}
           </Select>
         )}
