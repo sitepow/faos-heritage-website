@@ -100,13 +100,15 @@ export const AddressCard = () => {
             />
           )}
 
-          {addresses?.length !== 0 && !isHasDefaultAddress && (
-            <Alert
-              color='warning'
-              description='Please select a default shipping address before proceeding with your order.'
-              variant='bordered'
-            />
-          )}
+          {!isLoadingAddresses &&
+            addresses?.length !== 0 &&
+            !isHasDefaultAddress && (
+              <Alert
+                color='warning'
+                description='Please select a default shipping address before proceeding with your order.'
+                variant='bordered'
+              />
+            )}
 
           <div className='grid gap-2 sm:grid-cols-2'>
             {!isLoadingAddresses &&
