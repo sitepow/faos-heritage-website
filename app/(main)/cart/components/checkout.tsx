@@ -17,7 +17,7 @@ import { toast } from 'react-toastify'
 
 import type { ComponentProps } from 'react'
 
-import { getAddress } from '@/app/(main)/account/action'
+import { getAddress } from '@/app/(main)/account/components/address/action'
 import { createOrder } from '@/app/(main)/account/components/order/action'
 import { useCartStore } from '@/app/(main)/cart/store'
 import { ConfirmModal } from '@/components/modal/confirm'

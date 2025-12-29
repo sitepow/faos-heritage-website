@@ -22,6 +22,7 @@ import { variantSchema, type VariantInput } from '../../schema'
 import { useProductStore } from '../../store'
 
 import { SubHeading } from '@/components/common/heading'
+import { DEFAULT_CURRENCY } from '@/utils/constants'
 
 const DEFAULT_VALUES: VariantInput = {
   name: '',
@@ -146,6 +147,7 @@ export const VariantForm = () => {
                 </Switch>
               )}
             />
+
             <SubHeading title='Basic information' />
             <Controller
               control={control}
@@ -160,6 +162,7 @@ export const VariantForm = () => {
                 />
               )}
             />
+
             <Controller
               control={control}
               name='sku'
@@ -174,6 +177,7 @@ export const VariantForm = () => {
                 />
               )}
             />
+
             <SubHeading title='Prices and stock availability' />
             <Controller
               control={control}
@@ -183,13 +187,14 @@ export const VariantForm = () => {
                   {...field}
                   errorMessage={errors.price?.message}
                   isInvalid={!!errors.price}
-                  label='Price (Baht)'
+                  label={`Price (${DEFAULT_CURRENCY})`}
                   minValue={0}
                   variant='bordered'
                   onValueChange={(val) => onChange(val || 0)}
                 />
               )}
             />
+
             <Controller
               control={control}
               name='stockQuantity'

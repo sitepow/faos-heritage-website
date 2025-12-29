@@ -14,4 +14,5 @@ export const addressSchema = z.object({
   postalCode: z.string().min(5, 'The postal code is incorrect').max(5),
   country: z.string().min(2),
   countryCode: z.string().length(2, 'Please select the county'),
+  isDefault: z.boolean(),
 })

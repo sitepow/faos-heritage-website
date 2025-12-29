@@ -13,6 +13,7 @@ import {
   Select,
   SelectItem,
   Avatar,
+  Switch,
 } from '@heroui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
@@ -20,13 +21,15 @@ import { useSession } from 'next-auth/react'
 import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
+import { createAddress, getAddress, updateAddress } from './action'
 import { addressSchema, type AddressInput } from './schema'
 import { useAddressStore } from './store'
-import { createAddress, getAddress, updateAddress } from '../../action'
 
+import { SubHeading } from '@/components'
 import { COUNTRIES } from '@/utils/constants/countries'
 
 const DEFAULT_VALUES: AddressInput = {
+  id: undefined,
   name: '',
   phone: '',
   userId: '',
@@ -37,6 +40,7 @@ const DEFAULT_VALUES: AddressInput = {
   postalCode: '',
   country: '',
   countryCode: '',
+  isDefault: true,
 }
 
 export const AddressForm = () => {
@@ -50,37 +54,55 @@ export const AddressForm = () => {
     control,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors, isDirty },
   } = useForm<AddressInput>({
     resolver: zodResolver(addressSchema),
     defaultValues: DEFAULT_VALUES,
   })
 
-  const ADDRESS_QUERY_KEY = ['account', 'address', userId]
+  const QUERY_KEY = {
+    ADDRESS: ['account', 'address', addressId],
+    ADDRESS_LIST: ['account', 'addresses', userId],
+  }
+
+  const onRefetch = async () => {
+    await Promise.all([
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEY.ADDRESS,
+      }),
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEY.ADDRESS_LIST,
+      }),
+    ])
+  }
 
   const { data: address, isLoading: isLoadingAddress } = useQuery({
-    queryKey: ADDRESS_QUERY_KEY,
+    queryKey: QUERY_KEY.ADDRESS,
     queryFn: () => getAddress(addressId!),
     enabled: !!addressId && isAddressOpen,
   })
 
   useEffect(() => {
-    if (isAddressOpen) {
-      if (addressId && !isLoadingAddress && address) {
-        reset(address)
-      } else if (!addressId) {
-        reset(DEFAULT_VALUES)
-      }
+    if (!isAddressOpen) {
+      return
     }
-  }, [isLoadingAddress, addressId, address, reset, isAddressOpen])
+
+    if (!addressId) {
+      reset(DEFAULT_VALUES)
+      return
+    }
+
+    if (address) {
+      reset(address)
+    }
+  }, [isAddressOpen, addressId, address, reset])
 
   const { mutate: mutateCreateAddress, isPending: isPendingCreateAddress } =
     useMutation({
       mutationFn: createAddress,
       onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: ADDRESS_QUERY_KEY,
-        })
+        onRefetch()
         onClose()
       },
     })
@@ -89,9 +111,7 @@ export const AddressForm = () => {
     useMutation({
       mutationFn: updateAddress,
       onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: ADDRESS_QUERY_KEY,
-        })
+        onRefetch()
         onClose()
       },
     })
@@ -113,8 +133,8 @@ export const AddressForm = () => {
   }
 
   const onClose = async () => {
-    queryClient.removeQueries({
-      queryKey: ADDRESS_QUERY_KEY,
+    await queryClient.invalidateQueries({
+      queryKey: QUERY_KEY.ADDRESS,
     })
     reset(DEFAULT_VALUES)
     setState({ addressId: null })
@@ -127,6 +147,7 @@ export const AddressForm = () => {
       isDismissable={false}
       isOpen={isAddressOpen}
       scrollBehavior='inside'
+      size='xl'
       onOpenChange={onOpenAddressChange}
     >
       <ModalContent>
@@ -136,10 +157,23 @@ export const AddressForm = () => {
         {!isPending && (
           <ModalBody>
             <Alert
+              color='warning'
               description='Please ensure your address is correct to avoid potential delivery issues.'
               variant='bordered'
             />
 
+            <SubHeading title='Address status' />
+            <Controller
+              control={control}
+              name='isDefault'
+              render={({ field: { value, onChange, ...field } }) => (
+                <Switch {...field} isSelected={value} onValueChange={onChange}>
+                  Enable this address
+                </Switch>
+              )}
+            />
+
+            <SubHeading title='Basic information' />
             <Controller
               control={control}
               name='name'
@@ -255,11 +289,12 @@ export const AddressForm = () => {
 
                     onChange(code)
 
-                    reset((prev) => ({
-                      ...prev,
-                      country: country?.name ?? '',
-                      countryCode: code,
-                    }))
+                    setValue('country', country?.name ?? '', {
+                      shouldDirty: true,
+                    })
+                    setValue('countryCode', code, {
+                      shouldDirty: true,
+                    })
                   }}
                 >
                   {COUNTRIES.map((country) => (

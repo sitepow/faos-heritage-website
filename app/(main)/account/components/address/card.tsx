@@ -7,86 +7,156 @@ import {
   CardBody,
   Skeleton,
   Alert,
+  Chip,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+  useDisclosure,
 } from '@heroui/react'
-import { useQuery } from '@tanstack/react-query'
-import { PlusIcon } from 'lucide-react'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import {
+  EditIcon,
+  EllipsisVerticalIcon,
+  PlusIcon,
+  TrashIcon,
+} from 'lucide-react'
 import { useSession } from 'next-auth/react'
 
+import { deleteAddress, getAddresses } from './action'
 import { AddressForm } from './form'
 import { useAddressStore } from './store'
-import { getAddress } from '../../action'
 
+import { ConfirmModal } from '@/components'
 import { getFullAddress } from '@/utils/features'
 
 export const AddressCard = () => {
-  const { onOpenAddressChange, setState } = useAddressStore()
+  const queryClient = useQueryClient()
+
+  const { onOpenAddressChange, setState, addressId } = useAddressStore()
+  const { isOpen: isDeleteOpen, onOpenChange: onOpenDeleteChange } =
+    useDisclosure()
   const { data: session } = useSession()
   const userId = session?.user?.id
 
-  const QUERY = {
-    ADDRESS: ['account', 'address', userId],
+  const QUERY_KEY = {
+    ADDRESS_LIST: ['account', 'addresses', userId],
   }
 
-  const { data: address, isLoading: isLoadingAddress } = useQuery({
-    queryKey: QUERY.ADDRESS,
-    queryFn: () => getAddress(userId!),
+  const { data: addresses, isLoading: isLoadingAddresses } = useQuery({
+    queryKey: QUERY_KEY.ADDRESS_LIST,
+    queryFn: () => getAddresses(userId!),
     enabled: !!userId,
   })
 
-  return (
-    <Card fullWidth>
-      <CardHeader className='flex-wrap items-center justify-between gap-2'>
-        <span>Manage my address</span>
+  const { mutate: mutateDeteleAddress, isPending: isPendingDeteleAddress } =
+    useMutation({
+      mutationFn: deleteAddress,
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: QUERY_KEY.ADDRESS_LIST })
+        onOpenDeleteChange()
+        setState({ addressId: null })
+      },
+    })
 
-        {!isLoadingAddress && !address && (
+  return (
+    <>
+      <ConfirmModal
+        isOpen={isDeleteOpen}
+        isPending={isPendingDeteleAddress}
+        onConfirm={() => {
+          mutateDeteleAddress(addressId)
+        }}
+        onOpenChange={onOpenDeleteChange}
+      />
+      <Card fullWidth>
+        <CardHeader className='flex-wrap items-center justify-between gap-2'>
+          <span>Manage my address</span>
+
           <Button
             startContent={<PlusIcon />}
-            variant='faded'
+            color='primary'
+            variant='bordered'
             onClick={() => onOpenAddressChange()}
           >
             Add shipping address
           </Button>
-        )}
-      </CardHeader>
-      <CardBody>
-        <AddressForm />
+        </CardHeader>
+        <CardBody>
+          <AddressForm />
 
-        {isLoadingAddress && (
-          <Skeleton className='h-40 rounded-lg sm:max-w-1/2' />
-        )}
+          {isLoadingAddresses && (
+            <Skeleton className='h-40 rounded-lg sm:max-w-1/2' />
+          )}
 
-        {!isLoadingAddress && !address && (
-          <Alert
-            description='You do not yet have a shipping address. Please add your address before proceeding with your order.'
-            variant='bordered'
-          />
-        )}
+          {!isLoadingAddresses && addresses?.length === 0 && (
+            <Alert
+              color='warning'
+              description='You do not yet have a shipping address. Please add your address before proceeding with your order.'
+              variant='bordered'
+            />
+          )}
 
-        {!isLoadingAddress && address && (
-          <div className='flex flex-col sm:max-w-1/2'>
-            <div className='border-divider rounded-t-lg border p-2.5'>
-              <span>Delivery address</span>
-            </div>
+          <div className='grid gap-2 sm:grid-cols-2'>
+            {!isLoadingAddresses &&
+              addresses?.map((address) => (
+                <div className='flex w-full flex-col'>
+                  <div className='border-divider flex items-center justify-between gap-2 rounded-t-lg border p-2.5'>
+                    <div className='flex items-center gap-2'>
+                      <span className='line-clamp-1'>{address?.name}</span>
+                      {address?.isDefault && (
+                        <Chip variant='bordered' color='primary'>
+                          Default
+                        </Chip>
+                      )}
+                    </div>
 
-            <div className='border-divider flex flex-col gap-5 border-r border-b border-l p-2.5'>
-              <div className='flex flex-wrap items-center gap-4'>
-                <span>{getFullAddress(address)}</span>
-              </div>
+                    <Dropdown placement='bottom-end'>
+                      <DropdownTrigger>
+                        <Button isIconOnly size='sm' variant='light'>
+                          <EllipsisVerticalIcon className='text-default-500 size-5' />
+                        </Button>
+                      </DropdownTrigger>
+                      <DropdownMenu
+                        aria-label='Manage orders'
+                        className='min-w-[180px]'
+                      >
+                        <DropdownItem
+                          key='edit'
+                          startContent={<EditIcon className='size-4' />}
+                          onClick={() => {
+                            setState({ addressId: address?.id })
+                            onOpenAddressChange()
+                          }}
+                        >
+                          Edit Address
+                        </DropdownItem>
+                        <DropdownItem
+                          key='delete'
+                          className='text-danger'
+                          color='danger'
+                          startContent={<TrashIcon className='size-4' />}
+                          onClick={() => {
+                            setState({ addressId: address?.id })
+                            onOpenDeleteChange()
+                          }}
+                        >
+                          Remove Address
+                        </DropdownItem>
+                      </DropdownMenu>
+                    </Dropdown>
+                  </div>
 
-              <Button
-                className='text-secondary w-fit'
-                color='primary'
-                onClick={() => {
-                  setState({ addressId: address?.id })
-                  onOpenAddressChange()
-                }}
-              >
-                Edit address
-              </Button>
-            </div>
+                  <div className='border-divider flex flex-col gap-5 rounded-b-lg border-r border-b border-l p-2.5'>
+                    <div className='text-default-500 flex flex-wrap items-center gap-4'>
+                      <span>{getFullAddress(address)}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
           </div>
-        )}
-      </CardBody>
-    </Card>
+        </CardBody>
+      </Card>
+    </>
   )
 }
