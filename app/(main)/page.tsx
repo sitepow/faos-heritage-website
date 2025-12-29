@@ -9,6 +9,7 @@ import {
   AdvertiseBanner,
   CertificateBanner,
 } from '@/components/features/banner'
+import { CustomerBanner } from '@/components/features/banner/customer'
 import { siteConfig } from '@/config/site'
 import { ITEM_PER_PAGE, OG_IMAGE } from '@/utils/constants'
 
@@ -67,6 +68,7 @@ export default async function Homepage() {
         initialProducts={products}
         itemPerPage={ITEM_PER_PAGE}
       />
+      <CustomerBanner />
       <CertificateBanner />
       <ExploreProductsClient
         initialProducts={exploreProducts}
