@@ -1,2 +1,2 @@
-export * from './components'
-export * from './components/address/action'
+export * from './_components'
+export * from './_components/address/action'

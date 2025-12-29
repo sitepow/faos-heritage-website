@@ -16,7 +16,7 @@ import { CategoryCarouselItem } from './item'
 import {
   ProductCard,
   ProductCardSkeleton,
-} from '../../product/[slug]/components/card'
+} from '../../product/[slug]/_components/card'
 
 import { getCategories } from '@/app/(dashboard)/dashboard/product/action/category'
 import { getProducts } from '@/app/(main)/products/action'

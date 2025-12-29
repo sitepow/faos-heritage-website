@@ -1,1 +1,1 @@
-export * from './[slug]/components'
+export * from './[slug]/_components'

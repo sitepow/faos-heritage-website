@@ -1,5 +1,5 @@
 export * from './store'
-export * from './components'
+export * from './_components'
 
 export type { GetCartResult, GetCartsResult } from './action'
 export {

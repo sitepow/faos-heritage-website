@@ -13,7 +13,7 @@ import {
   FavoriteCard,
   ProfileCard,
   AddressCard,
-} from './components'
+} from './_components'
 
 import { useIsBelowBreakpoint } from '@/hooks/useIsBelowBreakpoint'
 import { useMounted } from '@/hooks/useMounted'

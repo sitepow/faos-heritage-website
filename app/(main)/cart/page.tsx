@@ -6,9 +6,9 @@ import { XIcon } from 'lucide-react'
 import Head from 'next/head'
 import { useSession } from 'next-auth/react'
 
+import { CartCheckout } from './_components/checkout'
+import { CartLists } from './_components/lists'
 import { clearCart, deleteCart } from './action'
-import { CartCheckout } from './components/checkout'
-import { CartLists } from './components/lists'
 import { useCartStore } from './store'
 
 import { ConfirmModal } from '@/components/modal/confirm'

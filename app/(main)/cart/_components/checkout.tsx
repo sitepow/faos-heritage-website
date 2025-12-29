@@ -20,7 +20,7 @@ import type { ComponentProps } from 'react'
 import { getAddressCheckout } from '../../account'
 
 import { calculateShippingCost } from '@/app/(dashboard)'
-import { createOrder } from '@/app/(main)/account/components/order/action'
+import { createOrder } from '@/app/(main)/account/_components/order/action'
 import { useCartStore } from '@/app/(main)/cart/store'
 import { ConfirmModal } from '@/components/modal/confirm'
 import { ACCOUNT_TAB } from '@/utils/features'

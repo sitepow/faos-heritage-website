@@ -6,8 +6,8 @@ import { AlertCircleIcon } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import { useEffect, type ComponentProps } from 'react'
 
+import { CartItem, CartItemSkeleton } from '@/app/(main)/cart/_components/item'
 import { getCarts } from '@/app/(main)/cart/action'
-import { CartItem, CartItemSkeleton } from '@/app/(main)/cart/components/item'
 import { useCartStore } from '@/app/(main)/cart/store'
 import { cn } from '@/utils/style'
 

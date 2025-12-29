@@ -36,7 +36,7 @@ import { useUserStore } from './store'
 import {
   StatCard,
   StatCardSkeleton,
-} from '@/app/(dashboard)/components/stat-card'
+} from '@/app/(dashboard)/_components/stat-card'
 import { ConfirmModal } from '@/components/modal/confirm'
 import { ITEM_PER_PAGE, NO_IMAGE } from '@/utils/constants'
 

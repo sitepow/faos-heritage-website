@@ -1,5 +1,5 @@
-export * from './components/form'
-export * from './components/manager'
+export * from './_components/form'
+export * from './_components/manager'
 export * from './action'
 export * from './schema'
 export * from './store'

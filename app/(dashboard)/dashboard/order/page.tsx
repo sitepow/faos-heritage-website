@@ -22,15 +22,15 @@ import { useQuery } from '@tanstack/react-query'
 import { ArchiveRestoreIcon, EllipsisVerticalIcon, EyeIcon } from 'lucide-react'
 import { useState } from 'react'
 
+import { OrderViewModal } from './_components/view-modal'
 import { getOrders, getOrderStat } from './action'
-import { OrderViewModal } from './components/view-modal'
 import { OrderForm } from './form'
 import { useOrderStore } from './store'
 
 import {
   StatCard,
   StatCardSkeleton,
-} from '@/app/(dashboard)/components/stat-card'
+} from '@/app/(dashboard)/_components/stat-card'
 import { ITEM_PER_PAGE, NO_IMAGE } from '@/utils/constants'
 import { formatDate } from '@/utils/date'
 import { getOrderStatus } from '@/utils/features'

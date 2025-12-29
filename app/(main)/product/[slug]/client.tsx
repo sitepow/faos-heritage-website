@@ -13,7 +13,7 @@ import {
   ProductImagePreview,
   ProductReview,
   ProductSimilar,
-} from './components'
+} from './_components'
 import { useProductDetailStore } from './store'
 
 import { getProduct } from '@/app/(dashboard)/dashboard/product/action/product'

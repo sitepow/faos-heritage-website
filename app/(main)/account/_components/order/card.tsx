@@ -10,8 +10,8 @@ import { useState } from 'react'
 import { OrderItem } from './item'
 
 import { getOrders } from '@/app/(dashboard)/dashboard/order'
-import { OrderViewModal } from '@/app/(dashboard)/dashboard/order/components/view-modal'
-import { OrderForm } from '@/app/(main)/account/components/order/form'
+import { OrderViewModal } from '@/app/(dashboard)/dashboard/order/_components/view-modal'
+import { OrderForm } from '@/app/(main)/account/_components/order/form'
 import { ITEM_PER_PAGE } from '@/utils/constants'
 
 export const OrderCard = () => {

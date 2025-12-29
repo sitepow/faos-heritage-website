@@ -1,2 +1,2 @@
-export * from './components'
+export * from './_components'
 export * from './dashboard'

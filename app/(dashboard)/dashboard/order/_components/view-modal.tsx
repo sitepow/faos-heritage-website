@@ -17,7 +17,7 @@ import Link from 'next/link'
 
 import { useOrderStore } from '../store'
 
-import { getOrder } from '@/app/(main)/account/components/order/action'
+import { getOrder } from '@/app/(main)/account/_components/order/action'
 import { SubHeading } from '@/components/common/heading'
 import { Stepper } from '@/components/common/stepper'
 import { NO_IMAGE } from '@/utils/constants'

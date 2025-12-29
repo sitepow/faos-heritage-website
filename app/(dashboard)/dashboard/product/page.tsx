@@ -33,19 +33,19 @@ import {
 } from 'lucide-react'
 import { useState } from 'react'
 
-import { ProductForm } from './components/form/product'
+import { ProductForm } from './_components/form/product'
 import {
   CategoryManager,
   ImageManager,
   VariantManager,
-} from './components/manager'
-import { ShippingCountryManager } from './components/manager/shipping'
+} from './_components/manager'
+import { ShippingCountryManager } from './_components/manager/shipping'
 import { useProductStore } from './store'
 
 import {
   StatCard,
   StatCardSkeleton,
-} from '@/app/(dashboard)/components/stat-card'
+} from '@/app/(dashboard)/_components/stat-card'
 import {
   deleteProduct,
   getProductStat,

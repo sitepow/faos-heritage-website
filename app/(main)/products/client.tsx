@@ -15,7 +15,7 @@ import { useInfiniteQuery } from '@tanstack/react-query'
 import { ArrowUpDownIcon } from 'lucide-react'
 import { useMemo, useState } from 'react'
 
-import { ProductSection } from '../product/[slug]/components'
+import { ProductSection } from '../product/[slug]/_components'
 
 import {
   getProducts,
