@@ -65,6 +65,20 @@ export const ProductCard = ({ className, product }: ProductCardProps) => {
         href={`/product/${createSlug(product?.name, product?.id)}`}
       >
         <CardHeader className='relative overflow-hidden p-0'>
+          <AvatarGroup
+            max={3}
+            isBordered
+            className='absolute bottom-2 left-2 z-50'
+          >
+            {product?.variants?.map((variant) => (
+              <Avatar
+                size='lg'
+                key={variant?.image}
+                src={variant?.image ?? '/images/no-image.png'}
+              />
+            ))}
+          </AvatarGroup>
+
           {isOutOfStock && (
             <Alert
               className='absolute top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2'
@@ -115,16 +129,6 @@ export const ProductCard = ({ className, product }: ProductCardProps) => {
           />
 
           <ProductRating />
-
-          <AvatarGroup className='mt-2.5' max={3}>
-            {product?.variants?.map((variant) => (
-              <Avatar
-                size='lg'
-                key={variant?.image}
-                src={variant?.image ?? '/images/no-image.png'}
-              />
-            ))}
-          </AvatarGroup>
         </CardBody>
       </Link>
     </Card>
