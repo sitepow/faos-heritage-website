@@ -116,7 +116,7 @@ export const ProductCard = ({ className, product }: ProductCardProps) => {
 
           <ProductRating />
 
-          <AvatarGroup className='mt-2.5' isBordered max={3}>
+          <AvatarGroup className='mt-2.5' max={3}>
             {product?.variants?.map((variant) => (
               <Avatar
                 size='lg'
