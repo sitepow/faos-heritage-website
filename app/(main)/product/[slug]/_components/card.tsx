@@ -3,6 +3,8 @@
 
 import {
   Alert,
+  Avatar,
+  AvatarGroup,
   Card,
   CardBody,
   CardHeader,
@@ -113,6 +115,16 @@ export const ProductCard = ({ className, product }: ProductCardProps) => {
           />
 
           <ProductRating />
+
+          <AvatarGroup className='mt-2.5' isBordered max={3}>
+            {product?.variants?.map((variant) => (
+              <Avatar
+                size='lg'
+                key={variant?.image}
+                src={variant?.image ?? '/images/no-image.png'}
+              />
+            ))}
+          </AvatarGroup>
         </CardBody>
       </Link>
     </Card>
