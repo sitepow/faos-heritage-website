@@ -165,7 +165,7 @@ export const createOrder = async (data: CreateOrderInput) => {
 
       shippingItems.push({
         quantity: item.quantity,
-        weight,
+        weight: weight ?? 0,
       })
     }
 
