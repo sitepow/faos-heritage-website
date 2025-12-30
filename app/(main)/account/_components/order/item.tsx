@@ -1,6 +1,6 @@
 'use client'
 
-import { AvatarGroup, Avatar, Button } from '@heroui/react'
+import { AvatarGroup, Avatar, Button, Alert } from '@heroui/react'
 import { OrderStatus } from '@prisma/client'
 import { useMutation } from '@tanstack/react-query'
 import {
@@ -62,6 +62,15 @@ export const OrderItem = ({ order, hideButton }: OrderItemProps) => {
 
   return (
     <div className='flex flex-col gap-4'>
+      {order?.status === OrderStatus.PENDING && (
+        <Alert
+          description='Please complete your payment within 20 minutes. Otherwise, your order will be automatically canceled.
+'
+          color='warning'
+          variant='bordered'
+        />
+      )}
+
       <div className='border-divider flex flex-wrap items-center justify-between gap-3 border-b p-2.5'>
         <div className='flex flex-wrap gap-3 sm:col-span-2'>
           <AvatarGroup max={4}>
