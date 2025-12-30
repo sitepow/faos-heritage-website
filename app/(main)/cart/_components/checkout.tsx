@@ -87,7 +87,7 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
 
   const { data: shippingCost = 0, isLoading: isLoadingShippingCost } = useQuery(
     {
-      queryKey: QUERY_KEY.SHIPPING_COST,
+      queryKey: ['shipping', 'carts', userId, address?.countryCode],
       queryFn: () =>
         calculateShippingCost({
           countryCode: address!.countryCode,

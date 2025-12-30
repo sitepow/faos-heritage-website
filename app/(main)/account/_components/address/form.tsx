@@ -65,14 +65,10 @@ export const AddressForm = () => {
     ADDRESS: ['account', 'address', addressId],
     ADDRESS_CHECKOUT: ['account', 'address', 'checkout', userId],
     ADDRESS_LIST: ['account', 'addresses', userId],
-    SHIPPING_COST: ['shipping', 'carts', userId],
   }
 
   const onRefetch = async () => {
     await Promise.all([
-      queryClient.invalidateQueries({
-        queryKey: QUERY_KEY.SHIPPING_COST,
-      }),
       queryClient.invalidateQueries({
         queryKey: QUERY_KEY.ADDRESS,
       }),
