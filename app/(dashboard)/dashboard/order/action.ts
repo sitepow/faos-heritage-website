@@ -35,6 +35,9 @@ export const getOrders = async (
         shippedAt: true,
         paidAt: true,
         total: true,
+        currency: true,
+        exchangeLocale: true,
+        exchangeRateSource: true,
         user: {
           select: {
             name: true,

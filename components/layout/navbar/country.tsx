@@ -39,11 +39,37 @@ export const Country = () => {
 
   return (
     <Select
-      label='Country'
-      variant='bordered'
+      variant='faded'
+      size='lg'
       disallowEmptySelection
-      className='min-w-72'
+      className='min-w-64'
       selectedKeys={country ? [country.locale] : []}
+      renderValue={(items) =>
+        items.map((item) => {
+          const selected = CURRENCY_LOCALE_MAP.find(
+            (currency) => currency.locale === item.key,
+          )
+
+          if (!selected) {
+            return null
+          }
+
+          return (
+            <div key={item.key} className='flex items-center gap-2'>
+              <Avatar
+                size='sm'
+                src={`https://purecatamphetamine.github.io/country-flag-icons/3x2/${selected.country}.svg`}
+              />
+              <span>
+                {selected.name}{' '}
+                <span className='text-default-400 text-xs'>
+                  ({selected.currency})
+                </span>
+              </span>
+            </div>
+          )
+        })
+      }
       onSelectionChange={(keys) => {
         const locale = Array.from(keys)[0] as string
         const selected = CURRENCY_LOCALE_MAP.find(
@@ -61,6 +87,7 @@ export const Country = () => {
             <Avatar
               alt={item.country}
               className='shrink-0'
+              size='sm'
               src={`https://purecatamphetamine.github.io/country-flag-icons/3x2/${item.country}.svg`}
             />
             <span>{item.name}</span>

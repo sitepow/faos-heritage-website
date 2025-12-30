@@ -1,6 +1,8 @@
 export const DEFAULT_CURRENCY = 'USD'
 export const DEFAULT_LOCALE = 'en-US'
 
+export const EXCHANGE_RATE_API = 'https://open.er-api.com/v6/latest/USD'
+
 export const CURRENCY_LOCALE_MAP = [
   {
     country: 'TH',

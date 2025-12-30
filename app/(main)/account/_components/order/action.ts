@@ -62,6 +62,8 @@ export const getOrder = async (orderId: string) => {
         total: true,
         subtotal: true,
         shippingCost: true,
+        currency: true,
+        exchangeLocale: true,
         items: {
           select: {
             id: true,

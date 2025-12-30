@@ -25,6 +25,7 @@ import { createOrder } from '@/app/(main)/account/_components/order/action'
 import { useCartStore } from '@/app/(main)/cart/store'
 import { useAppStore } from '@/app/store'
 import { ConfirmModal } from '@/components/modal/confirm'
+import { EXCHANGE_RATE_API } from '@/utils/constants'
 import { ACCOUNT_TAB } from '@/utils/features'
 import { getFullAddress } from '@/utils/features/account/helpers'
 import { formatCurrency } from '@/utils/number'
@@ -156,8 +157,9 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
     mutateCreateOrder({
       addressId: address.id,
       userId: userId!,
-      currency: currency,
-      exchangeRate: exchangeRate,
+      currency,
+      exchangeRate,
+      exchangeRateSource: EXCHANGE_RATE_API,
       exchangeLocale: country?.locale!,
       items: (carts ?? []).map((cart) => ({
         productId: cart.productId,

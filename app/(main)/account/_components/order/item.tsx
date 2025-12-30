@@ -16,7 +16,6 @@ import type { GetOrderResult } from '@/app/(dashboard)/dashboard/order/action'
 
 import { createStripeCheckout } from '@/actions/stripe'
 import { useOrderStore } from '@/app/(dashboard)/dashboard/order/store'
-import { useAppStore } from '@/app/store'
 import { Stepper } from '@/components/common/stepper'
 // import { OmisePaymentButton } from '@/components/features/omise/payment-button'
 import { NO_IMAGE } from '@/utils/constants'
@@ -37,11 +36,9 @@ const DISABLE_RECEIPT_STATUSES: OrderStatus[] = [
 ]
 
 export const OrderItem = ({ order, hideButton }: OrderItemProps) => {
-  const { country, exchangeRates } = useAppStore()
   const CURRENCY_OPTIONS = {
-    currency: country?.currency,
-    locale: country?.locale,
-    rates: exchangeRates,
+    currency: order?.currency,
+    locale: order?.exchangeLocale!,
   }
 
   const router = useRouter()
@@ -64,8 +61,8 @@ export const OrderItem = ({ order, hideButton }: OrderItemProps) => {
   const isDisableReceipt = DISABLE_RECEIPT_STATUSES.includes(order.status)
 
   return (
-    <div className='dark:bg-divider flex flex-col gap-4 bg-gray-100'>
-      <div className='dark:bg-divider flex flex-wrap items-center justify-between gap-3 bg-gray-200 p-2.5'>
+    <div className='flex flex-col gap-4'>
+      <div className='border-divider flex flex-wrap items-center justify-between gap-3 border-b p-2.5'>
         <div className='flex flex-wrap gap-3 sm:col-span-2'>
           <AvatarGroup max={4}>
             <Avatar

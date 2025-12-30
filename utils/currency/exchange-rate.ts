@@ -1,3 +1,5 @@
+import { EXCHANGE_RATE_API } from '../constants'
+
 type ExchangeRateResponse = {
   result: 'success'
   base_code: string
@@ -15,7 +17,7 @@ export const getUsdExchangeRates = async () => {
     return rateCache
   }
 
-  const res = await fetch('https://open.er-api.com/v6/latest/USD')
+  const res = await fetch(EXCHANGE_RATE_API)
   const data: ExchangeRateResponse = await res.json()
 
   if (data.result !== 'success') {
