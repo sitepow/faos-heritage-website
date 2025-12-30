@@ -53,7 +53,7 @@ export const OrderViewModal = () => {
       isDismissable={false}
       isOpen={isViewOpen}
       scrollBehavior='inside'
-      size='3xl'
+      size='2xl'
       onOpenChange={onOpenViewChange}
     >
       <ModalContent>
@@ -97,7 +97,9 @@ export const OrderViewModal = () => {
               )}
               <span>
                 Shipping cost:{' '}
-                <span className='text-default-500'>{formatCurrency(0)}</span>
+                <span className='text-default-500'>
+                  {formatCurrency(order?.shippingCost ?? 0)}
+                </span>
               </span>
               <span>
                 Additional discount:{' '}
