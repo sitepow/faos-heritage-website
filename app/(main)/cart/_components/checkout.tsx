@@ -8,6 +8,7 @@ import {
   Alert,
   Button,
 } from '@heroui/react'
+import { Currency } from '@prisma/client'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { ArrowRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
@@ -60,6 +61,8 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
     locale: country?.locale,
     rates: exchangeRates,
   }
+  const currency: Currency = (country?.currency as Currency) ?? Currency.USD
+  const exchangeRate = exchangeRates?.[currency] ?? 1
 
   // const tomorrow = new Date()
   // tomorrow.setDate(tomorrow.getDate() + 1)
@@ -153,15 +156,13 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
     mutateCreateOrder({
       addressId: address.id,
       userId: userId!,
-      items: (carts ?? []).map((cart) => {
-        const { productId, variantId, quantity } = cart
-
-        return {
-          productId,
-          variantId: variantId!,
-          quantity,
-        }
-      }),
+      currency: currency,
+      exchangeRate: exchangeRate,
+      items: (carts ?? []).map((cart) => ({
+        productId: cart.productId,
+        variantId: cart.variantId ?? null,
+        quantity: cart.quantity,
+      })),
     })
   }
 

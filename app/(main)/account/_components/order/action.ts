@@ -2,7 +2,7 @@
 
 import { OrderStatus, PaymentStatus, StockMovementType } from '@prisma/client'
 
-import type { Prisma } from '@prisma/client'
+import type { Currency, Prisma } from '@prisma/client'
 
 import { calculateShippingCost } from '@/app/(dashboard)'
 import { ERROR_CODES } from '@/lib/errors/codes'
@@ -20,6 +20,11 @@ export interface UpdateOrderInput {
   trackingNumber?: string
 }
 
+type NestedOrderItemCreate = Omit<
+  Prisma.OrderItemUncheckedCreateInput,
+  'orderId'
+>
+
 export interface CreateOrderInput {
   items: {
     productId: string
@@ -28,6 +33,9 @@ export interface CreateOrderInput {
   }[]
   addressId: string
   userId: string
+  currency: Currency
+  exchangeRate: number
+  exchangeRateSource?: string
 }
 
 const CANCEL_OR_REFUND: OrderStatus[] = [
@@ -79,7 +87,14 @@ export const getOrder = async (orderId: string) => {
 }
 
 export const createOrder = async (data: CreateOrderInput) => {
-  const { items, addressId, userId } = data
+  const {
+    items,
+    addressId,
+    userId,
+    currency,
+    exchangeRate,
+    exchangeRateSource,
+  } = data
 
   return await prisma.$transaction(async (tx) => {
     const address = await tx.address.findUnique({
@@ -87,7 +102,7 @@ export const createOrder = async (data: CreateOrderInput) => {
     })
 
     if (!address) {
-      return fail(ERROR_CODES.DATA_FIELD_REQUIRED)
+      return fail(ERROR_CODES.DATA_NOT_FOUND)
     }
 
     if (!items || items.length === 0) {
@@ -116,26 +131,14 @@ export const createOrder = async (data: CreateOrderInput) => {
       }),
     )
 
-    const productsMap = new Map(
-      products.map((product) => [product.id, product]),
-    )
+    const productMap = new Map(products.map((product) => [product.id, product]))
 
-    const productItems: {
-      productId: string
-      variantId?: string | null
-      quantity: number
-      productName: string
-      price: number
-      subtotal: number
-    }[] = []
-
-    const shippingItems: {
-      quantity: number
-      weight: number
-    }[] = []
+    const orderItems: NestedOrderItemCreate[] = []
+    const shippingItems: { quantity: number; weight: number }[] = []
 
     for (const item of items) {
-      const product = productsMap.get(item.productId)
+      const product = productMap.get(item.productId)
+
       if (!product) {
         return fail(ERROR_CODES.DATA_NOT_FOUND)
       }
@@ -144,59 +147,78 @@ export const createOrder = async (data: CreateOrderInput) => {
         product.variants.find((variant) => variant.id === item.variantId) ??
         null
 
-      if (product.variants.length > 0 && !variant) {
-        return fail(ERROR_CODES.DATA_FIELD_REQUIRED)
+      const stock = variant ? variant.stockQuantity : product.stockQuantity
+      if (stock < item.quantity) {
+        return fail(ERROR_CODES.DATA_INSUFFICIENT)
       }
 
-      const stock = variant ? variant.stockQuantity : product.stockQuantity
-      if (stock < item.quantity) return fail(ERROR_CODES.DATA_INSUFFICIENT)
+      const priceUsd = variant ? variant.price : product.price
+      const price = Number((priceUsd * exchangeRate).toFixed(2))
 
-      const price = variant ? variant.price : product.price
-      const weight = variant?.weight ?? product.weight
-
-      productItems.push({
+      orderItems.push({
         productId: product.id,
         variantId: item.variantId ?? null,
-        quantity: item.quantity,
+        currency,
         productName: product.name,
+        variantName: variant?.name,
+        quantity: item.quantity,
         price,
         subtotal: price * item.quantity,
+        priceUsd,
+        subtotalUsd: priceUsd * item.quantity,
       })
 
       shippingItems.push({
         quantity: item.quantity,
-        weight: weight ?? 0,
+        weight: variant?.weight ?? product.weight ?? 0,
       })
     }
 
-    const subtotal = productItems.reduce((sum, item) => sum + item.subtotal, 0)
+    const subtotalUsd = orderItems.reduce(
+      (sum, item) => sum + Number(item.subtotalUsd),
+      0,
+    )
 
-    const shippingCost = await calculateShippingCost({
+    const shippingUsd = await calculateShippingCost({
       items: shippingItems,
       countryCode: address.countryCode,
     })
 
+    const subtotal = subtotalUsd * exchangeRate
+    const shippingCost = shippingUsd * exchangeRate
+    const totalUsd = subtotalUsd + shippingUsd
     const total = subtotal + shippingCost
 
     const order = await tx.order.create({
       data: {
         userId,
+        currency,
+        shippingCurrency: currency,
+        exchangeRate,
+        exchangeRateSource,
+        subtotalUsd,
+        shippingUsd,
+        discountUsd: 0,
+        taxUsd: 0,
+        totalUsd,
         subtotal,
+        shippingCost,
         discount: 0,
         tax: 0,
-        shippingCost,
         total,
+
         shippingAddressId: addressId,
         shippingName: address.name,
         shippingPhone: address.phone,
         shippingAddressText: getFullAddress(address),
+
         items: {
-          createMany: { data: productItems },
+          createMany: { data: orderItems },
         },
-      } as Prisma.OrderUncheckedCreateInput,
+      },
     })
 
-    for (const item of productItems) {
+    for (const item of orderItems) {
       if (item.variantId) {
         const updated = await tx.productVariant.updateMany({
           where: {
@@ -221,7 +243,7 @@ export const createOrder = async (data: CreateOrderInput) => {
       } else {
         const updated = await tx.product.updateMany({
           where: {
-            id: item.productId,
+            id: item?.productId!,
             stockQuantity: { gte: item.quantity },
           },
           data: { stockQuantity: { decrement: item.quantity } },
