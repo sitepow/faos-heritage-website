@@ -3,7 +3,12 @@
 import { AvatarGroup, Avatar, Button } from '@heroui/react'
 import { OrderStatus } from '@prisma/client'
 import { useMutation } from '@tanstack/react-query'
-import { CreditCardIcon, DownloadIcon, EyeIcon, XIcon } from 'lucide-react'
+import {
+  ArrowUpRightIcon,
+  CreditCardIcon,
+  DownloadIcon,
+  XIcon,
+} from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
@@ -51,10 +56,13 @@ export const OrderItem = ({ order, hideButton }: OrderItemProps) => {
   const isDisableReceipt = DISABLE_RECEIPT_STATUSES.includes(order.status)
 
   return (
-    <div className='flex flex-col gap-4'>
-      <div className='bg-divider grid items-center gap-3 p-2.5 sm:grid-cols-3'>
+    <div className='dark:bg-divider flex flex-col gap-4 bg-gray-100'>
+      <div className='dark:bg-divider flex flex-wrap items-center justify-between gap-3 bg-gray-200 p-2.5'>
         <div className='flex flex-wrap gap-3 sm:col-span-2'>
-          <AvatarGroup max={3}>
+          <AvatarGroup max={4}>
+            <Avatar
+              src={`https://purecatamphetamine.github.io/country-flag-icons/3x2/${order?.address?.countryCode}.svg`}
+            />
             {productImages.map((src) => (
               <Avatar key={src} src={src} />
             ))}
@@ -85,9 +93,9 @@ export const OrderItem = ({ order, hideButton }: OrderItemProps) => {
         {!hideButton && (
           <div className='flex flex-wrap items-center gap-2 sm:justify-end'>
             <Button
-              className='text-secondary'
               color='primary'
-              startContent={<EyeIcon />}
+              variant='bordered'
+              startContent={<ArrowUpRightIcon className='shrink-0' />}
               onClick={() => {
                 setState({ orderId: order?.id })
                 onOpenViewChange()
@@ -97,9 +105,9 @@ export const OrderItem = ({ order, hideButton }: OrderItemProps) => {
             </Button>
             {order?.status === OrderStatus.PENDING && (
               <Button
-                className='text-secondary'
                 color='primary'
-                startContent={<XIcon />}
+                variant='bordered'
+                startContent={<XIcon className='shrink-0' />}
                 onClick={() => {
                   setState({ orderId: order?.id })
                   onOpenOrderCancelChange()
@@ -110,11 +118,13 @@ export const OrderItem = ({ order, hideButton }: OrderItemProps) => {
             )}
             {order?.status === OrderStatus.PENDING && (
               <Button
-                className='text-secondary'
                 color='primary'
+                variant='bordered'
                 isDisabled={isPendingCheckout}
                 isLoading={isPendingCheckout}
-                startContent={!isPendingCheckout && <CreditCardIcon />}
+                startContent={
+                  !isPendingCheckout && <CreditCardIcon className='shrink-0' />
+                }
                 onClick={() => {
                   mutateCheckout()
                 }}
@@ -131,10 +141,10 @@ export const OrderItem = ({ order, hideButton }: OrderItemProps) => {
             )}
             {order?.status !== OrderStatus.PENDING && (
               <Button
-                className='text-secondary'
                 color='primary'
+                variant='bordered'
                 isDisabled={isDisableReceipt}
-                startContent={<DownloadIcon />}
+                startContent={<DownloadIcon className='shrink-0' />}
               >
                 Download receipt
               </Button>
@@ -144,6 +154,7 @@ export const OrderItem = ({ order, hideButton }: OrderItemProps) => {
       </div>
 
       <Stepper
+        className='p-5'
         createdAt={order?.createdAt!}
         deliveredAt={order?.deliveredAt!}
         paidAt={order?.paidAt!}

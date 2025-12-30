@@ -40,6 +40,11 @@ export const getOrders = async (
             name: true,
           },
         },
+        address: {
+          select: {
+            countryCode: true,
+          },
+        },
         items: {
           select: {
             quantity: true,
