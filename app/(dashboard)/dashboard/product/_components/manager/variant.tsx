@@ -29,11 +29,19 @@ import { deleteVariant, getVariants } from '../../action/variant'
 import { useProductStore } from '../../store'
 import { VariantForm } from '../form/variant'
 
+import { useAppStore } from '@/app/store'
 import { ConfirmModal } from '@/components/modal/confirm'
 import { formatCurrency, formatNumber } from '@/utils/number'
 import { cn } from '@/utils/style'
 
 export const VariantManager = () => {
+  const { country, exchangeRates } = useAppStore()
+  const CURRENCY_OPTIONS = {
+    currency: country?.currency,
+    locale: country?.locale,
+    rates: exchangeRates,
+  }
+
   const queryClient = useQueryClient()
   const {
     productId,
@@ -152,7 +160,7 @@ export const VariantManager = () => {
                               )}
                             >
                               {variant.price
-                                ? `Price: ${formatCurrency(variant?.price ?? 0)}`
+                                ? `Price: ${formatCurrency(variant?.price ?? 0, CURRENCY_OPTIONS)}`
                                 : `(Please specify the price)`}
                             </span>
                           </Chip>

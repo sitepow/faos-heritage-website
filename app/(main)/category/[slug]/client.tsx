@@ -118,9 +118,7 @@ export const CategoryClient = ({
 
       {isLoadingCategory && <Skeleton className='h-10 w-64 rounded-lg' />}
 
-      {!isLoadingCategory && (
-        <span className='text-2xl font-bold'>{category?.name}</span>
-      )}
+      {!isLoadingCategory && <span className='text-2xl'>{category?.name}</span>}
 
       <div className='flex w-full flex-wrap items-center justify-center gap-3 sm:justify-between'>
         <span className='text-primary'>

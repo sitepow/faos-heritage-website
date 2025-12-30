@@ -20,6 +20,7 @@ import { useEffect, useMemo, useState, type ComponentProps } from 'react'
 import { updateCart, type GetCartResult } from '../action'
 import { useCartStore } from '../store'
 
+import { useAppStore } from '@/app/store'
 import { ConfirmModal } from '@/components/modal/confirm'
 import { NO_IMAGE } from '@/utils/constants'
 import { getProductUnit } from '@/utils/features/product/helpers'
@@ -36,6 +37,13 @@ export const CartItemSkeleton = () => {
 }
 
 export const CartItem = ({ className, cart, ...props }: CartItemProps) => {
+  const { country, exchangeRates } = useAppStore()
+  const CURRENCY_OPTIONS = {
+    currency: country?.currency,
+    locale: country?.locale,
+    rates: exchangeRates,
+  }
+
   const queryClient = useQueryClient()
 
   const { data: session } = useSession()
@@ -242,7 +250,7 @@ export const CartItem = ({ className, cart, ...props }: CartItemProps) => {
                 />
 
                 <span className='text-primary text-lg font-bold sm:text-2xl'>
-                  {formatCurrency(currentPrice! * quantity!)}
+                  {formatCurrency(currentPrice! * quantity!, CURRENCY_OPTIONS)}
                 </span>
               </div>
             </div>

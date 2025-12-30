@@ -31,12 +31,20 @@ import {
   StatCard,
   StatCardSkeleton,
 } from '@/app/(dashboard)/_components/stat-card'
+import { useAppStore } from '@/app/store'
 import { ITEM_PER_PAGE, NO_IMAGE } from '@/utils/constants'
 import { formatDate } from '@/utils/date'
 import { getOrderStatus } from '@/utils/features'
 import { formatCurrency } from '@/utils/number'
 
 export default function Order() {
+  const { country, exchangeRates } = useAppStore()
+  const CURRENCY_OPTIONS = {
+    currency: country?.currency,
+    locale: country?.locale,
+    rates: exchangeRates,
+  }
+
   const [page, setPage] = useState(1)
   const { onOpenOrderChange, onOpenViewChange, setState } = useOrderStore()
 
@@ -80,6 +88,7 @@ export default function Order() {
       >
         <TableHeader>
           <TableColumn>Order ID</TableColumn>
+          <TableColumn>Country</TableColumn>
           <TableColumn>Image</TableColumn>
           <TableColumn>Customer Name</TableColumn>
           <TableColumn>Order Date</TableColumn>
@@ -96,6 +105,11 @@ export default function Order() {
           {(orders?.items ?? []).map((order) => (
             <TableRow key={order.id}>
               <TableCell>{order.id}</TableCell>
+              <TableCell>
+                <Avatar
+                  src={`https://purecatamphetamine.github.io/country-flag-icons/3x2/${order?.address?.countryCode}.svg`}
+                />
+              </TableCell>
               <TableCell>
                 <AvatarGroup max={3}>
                   {order?.items?.map((item) => (
@@ -114,7 +128,7 @@ export default function Order() {
               </TableCell>
               <TableCell>
                 <Chip color='primary' variant='bordered'>
-                  {formatCurrency(order?.total)}
+                  {formatCurrency(order?.total, CURRENCY_OPTIONS)}
                 </Chip>
               </TableCell>
               <TableCell>

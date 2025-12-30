@@ -51,6 +51,7 @@ import {
   getProductStat,
   getProducts,
 } from '@/app/(dashboard)/dashboard/product/action/product'
+import { useAppStore } from '@/app/store'
 import { ConfirmModal } from '@/components/modal/confirm'
 import { ITEM_PER_PAGE } from '@/utils/constants'
 import {
@@ -62,6 +63,13 @@ import {
 import { getRangeDisplayValue } from '@/utils/range'
 
 export default function Product() {
+  const { country, exchangeRates } = useAppStore()
+  const CURRENCY_OPTIONS = {
+    currency: country?.currency,
+    locale: country?.locale,
+    rates: exchangeRates,
+  }
+
   const queryClient = useQueryClient()
   const {
     productId,
@@ -217,8 +225,10 @@ export default function Product() {
                 fallback: product?.price ?? 0,
               },
               {
-                formatSingle: formatCurrency,
-                formatRange: formatCurrencyRange,
+                formatSingle: (value) =>
+                  formatCurrency(value, CURRENCY_OPTIONS),
+                formatRange: (min, max) =>
+                  formatCurrencyRange(min, max, CURRENCY_OPTIONS),
               },
             )
 

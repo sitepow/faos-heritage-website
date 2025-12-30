@@ -22,6 +22,7 @@ import { getAddressCheckout } from '../../account'
 import { calculateShippingCost } from '@/app/(dashboard)'
 import { createOrder } from '@/app/(main)/account/_components/order/action'
 import { useCartStore } from '@/app/(main)/cart/store'
+import { useAppStore } from '@/app/store'
 import { ConfirmModal } from '@/components/modal/confirm'
 import { ACCOUNT_TAB } from '@/utils/features'
 import { getFullAddress } from '@/utils/features/account/helpers'
@@ -29,15 +30,37 @@ import { formatCurrency } from '@/utils/number'
 import { cn } from '@/utils/style'
 
 type CartCheckoutProps = ComponentProps<typeof Card>
+type SummaryRowProps = {
+  label: string
+  value: number
+  options?: {
+    currency?: string
+    locale?: string
+    rates?: Record<string, number> | null
+  }
+}
 
-const SummaryRow = ({ label, value }: { label: string; value: number }) => (
+const SummaryRow = ({ label, value, options }: SummaryRowProps) => (
   <div className='text-default-500 flex justify-between'>
     <span>{label}</span>
-    <span>{formatCurrency(value)}</span>
+    <span>
+      {formatCurrency(value, {
+        currency: options?.currency,
+        locale: options?.locale,
+        rates: options?.rates,
+      })}
+    </span>
   </div>
 )
 
 export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
+  const { country, exchangeRates } = useAppStore()
+  const CURRENCY_OPTIONS = {
+    currency: country?.currency,
+    locale: country?.locale,
+    rates: exchangeRates,
+  }
+
   // const tomorrow = new Date()
   // tomorrow.setDate(tomorrow.getDate() + 1)
 
@@ -177,14 +200,22 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
             Payment details
           </span>
 
-          <SummaryRow label='Total price' value={subTotal} />
-          <SummaryRow label='Shipping cost' value={shippingCost} />
-          <SummaryRow label='discount' value={0} />
+          <SummaryRow
+            label='Total price'
+            value={subTotal}
+            options={CURRENCY_OPTIONS}
+          />
+          <SummaryRow
+            label='Shipping cost'
+            value={shippingCost}
+            options={CURRENCY_OPTIONS}
+          />
+          <SummaryRow label='discount' value={0} options={CURRENCY_OPTIONS} />
 
           <div className='flex items-center justify-between pt-1'>
             <span className='font-bold'>Net total price :</span>
             <span className='text-primary text-2xl font-bold'>
-              {formatCurrency(subTotal + shippingCost)}
+              {formatCurrency(subTotal + shippingCost, CURRENCY_OPTIONS)}
             </span>
           </div>
         </CardBody>

@@ -18,6 +18,7 @@ import Link from 'next/link'
 import { useOrderStore } from '../store'
 
 import { getOrder } from '@/app/(main)/account/_components/order/action'
+import { useAppStore } from '@/app/store'
 import { SubHeading } from '@/components/common/heading'
 import { Stepper } from '@/components/common/stepper'
 import { NO_IMAGE } from '@/utils/constants'
@@ -25,6 +26,13 @@ import { getProductUnit } from '@/utils/features/product/helpers'
 import { formatCurrency, formatNumber } from '@/utils/number'
 
 export const OrderViewModal = () => {
+  const { country, exchangeRates } = useAppStore()
+  const CURRENCY_OPTIONS = {
+    currency: country?.currency,
+    locale: country?.locale,
+    rates: exchangeRates,
+  }
+
   const queryClient = useQueryClient()
   const { isViewOpen, onOpenViewChange, orderId, setState } = useOrderStore()
 
@@ -98,17 +106,19 @@ export const OrderViewModal = () => {
               <span>
                 Shipping cost:{' '}
                 <span className='text-default-500'>
-                  {formatCurrency(order?.shippingCost ?? 0)}
+                  {formatCurrency(order?.shippingCost ?? 0, CURRENCY_OPTIONS)}
                 </span>
               </span>
               <span>
                 Additional discount:{' '}
-                <span className='text-default-500'>{formatCurrency(0)}</span>
+                <span className='text-default-500'>
+                  {formatCurrency(0, CURRENCY_OPTIONS)}
+                </span>
               </span>
               <span>
                 Net total price:{' '}
                 <span className='text-default-500'>
-                  {formatCurrency(order?.total ?? 0)}
+                  {formatCurrency(order?.total ?? 0, CURRENCY_OPTIONS)}
                 </span>
               </span>
             </div>
@@ -138,7 +148,7 @@ export const OrderViewModal = () => {
                         <span className='text-default-500'>
                           (Price per
                           {getProductUnit(item?.product?.unit!)}{' '}
-                          {formatCurrency(item?.price ?? 0)})
+                          {formatCurrency(item?.price ?? 0, CURRENCY_OPTIONS)})
                         </span>
                         <span className='text-default-500'>
                           (Quantity {formatNumber(item?.quantity)}{' '}
@@ -146,7 +156,11 @@ export const OrderViewModal = () => {
                         </span>
                         <span className='text-default-500'>
                           (Total price{' '}
-                          {formatCurrency(item?.price * item?.quantity)})
+                          {formatCurrency(
+                            item?.price * item?.quantity,
+                            CURRENCY_OPTIONS,
+                          )}
+                          )
                         </span>
                         {item?.productId && !item?.variantId && (
                           <span className='text-default-500'>

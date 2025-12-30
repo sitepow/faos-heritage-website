@@ -16,6 +16,7 @@ import type { GetOrderResult } from '@/app/(dashboard)/dashboard/order/action'
 
 import { createStripeCheckout } from '@/actions/stripe'
 import { useOrderStore } from '@/app/(dashboard)/dashboard/order/store'
+import { useAppStore } from '@/app/store'
 import { Stepper } from '@/components/common/stepper'
 // import { OmisePaymentButton } from '@/components/features/omise/payment-button'
 import { NO_IMAGE } from '@/utils/constants'
@@ -36,6 +37,13 @@ const DISABLE_RECEIPT_STATUSES: OrderStatus[] = [
 ]
 
 export const OrderItem = ({ order, hideButton }: OrderItemProps) => {
+  const { country, exchangeRates } = useAppStore()
+  const CURRENCY_OPTIONS = {
+    currency: country?.currency,
+    locale: country?.locale,
+    rates: exchangeRates,
+  }
+
   const router = useRouter()
   const { onOpenViewChange, onOpenOrderCancelChange, setState } =
     useOrderStore()
@@ -71,7 +79,7 @@ export const OrderItem = ({ order, hideButton }: OrderItemProps) => {
           <div className='flex flex-col'>
             <span>
               Item number {order?.id} ({formatNumber(order?.items?.length)}{' '}
-              list) {formatCurrency(order?.total)}
+              list) {formatCurrency(order?.total, CURRENCY_OPTIONS)}
             </span>
 
             <span className='text-default-500'>

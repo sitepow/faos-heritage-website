@@ -20,7 +20,13 @@ export const ProductPrice = ({
   className,
   ...props
 }: ProductPriceProps) => {
-  const { country } = useAppStore()
+  const { country, exchangeRates } = useAppStore()
+  const CURRENCY_OPTIONS = {
+    currency: country?.currency,
+    locale: country?.locale,
+    rates: exchangeRates,
+  }
+
   const displayPrice = getRangeDisplayValue(
     {
       min: priceMin,
@@ -28,16 +34,9 @@ export const ProductPrice = ({
       fallback: price,
     },
     {
-      formatSingle: (value) =>
-        formatCurrency(value, {
-          currency: country?.currency,
-          locale: country?.locale,
-        }),
+      formatSingle: (value) => formatCurrency(value, CURRENCY_OPTIONS),
       formatRange: (min, max) =>
-        formatCurrencyRange(min, max, {
-          currency: country?.currency,
-          locale: country?.locale,
-        }),
+        formatCurrencyRange(min, max, CURRENCY_OPTIONS),
     },
   )
 

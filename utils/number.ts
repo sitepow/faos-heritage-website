@@ -18,11 +18,20 @@ interface FormatCurrencyOptions {
 }
 
 export const formatCurrency = (
-  value: number,
-  options?: FormatCurrencyOptions,
+  usdValue: number,
+  options?: FormatCurrencyOptions & {
+    rates?: Record<string, number> | null
+  },
 ) => {
   const currency = options?.currency ?? DEFAULT_CURRENCY
   const locale = options?.locale ?? DEFAULT_LOCALE
+  const rates = options?.rates
+
+  let value = usdValue
+
+  if (currency !== 'USD' && rates?.[currency]) {
+    value = usdValue * rates[currency]
+  }
 
   return new Intl.NumberFormat(locale, {
     style: 'currency',
@@ -31,12 +40,24 @@ export const formatCurrency = (
 }
 
 export const formatCurrencyRange = (
-  min: number,
-  max: number,
-  options?: FormatCurrencyOptions,
+  minUsd: number,
+  maxUsd: number,
+  options?: FormatCurrencyOptions & {
+    rates?: Record<string, number> | null
+  },
 ) => {
   const currency = options?.currency ?? DEFAULT_CURRENCY
   const locale = options?.locale ?? DEFAULT_LOCALE
+  const rates = options?.rates
+
+  let min = minUsd
+  let max = maxUsd
+
+  if (currency !== 'USD' && rates?.[currency]) {
+    const rate = rates[currency]
+    min = minUsd * rate
+    max = maxUsd * rate
+  }
 
   return new Intl.NumberFormat(locale, {
     style: 'currency',

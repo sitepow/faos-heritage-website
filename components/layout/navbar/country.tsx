@@ -5,14 +5,14 @@ import { useEffect } from 'react'
 
 import { useAppStore } from '@/app/store'
 import { CURRENCY_LOCALE_MAP } from '@/utils/constants'
+import { getUsdExchangeRates } from '@/utils/currency/exchange-rate'
 
 export const Country = () => {
-  const { country, hasHydrated, setState } = useAppStore()
+  const { country, hasHydrated, exchangeRates, setState, setExchangeRates } =
+    useAppStore()
 
   useEffect(() => {
-    if (!hasHydrated) {
-      return
-    }
+    if (!hasHydrated) return
 
     if (!country) {
       const defaultCountry = CURRENCY_LOCALE_MAP.find(
@@ -24,6 +24,14 @@ export const Country = () => {
       }
     }
   }, [hasHydrated, country, setState])
+
+  useEffect(() => {
+    if (!hasHydrated || exchangeRates) {
+      return
+    }
+
+    getUsdExchangeRates().then(setExchangeRates)
+  }, [hasHydrated, exchangeRates, setExchangeRates])
 
   if (!hasHydrated) {
     return null
@@ -38,7 +46,6 @@ export const Country = () => {
       selectedKeys={country ? [country.locale] : []}
       onSelectionChange={(keys) => {
         const locale = Array.from(keys)[0] as string
-
         const selected = CURRENCY_LOCALE_MAP.find(
           (item) => item.locale === locale,
         )

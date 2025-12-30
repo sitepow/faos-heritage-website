@@ -99,7 +99,7 @@ export const ProductsClient = ({
         </Breadcrumbs>
       </div>
 
-      <span className='text-2xl font-bold'>Products</span>
+      <span className='text-2xl'>Products</span>
 
       <div className='flex w-full flex-wrap items-center justify-center gap-3 sm:justify-between'>
         <span className='text-primary'>

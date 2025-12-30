@@ -16,7 +16,12 @@ export const StatCardSkeleton = () => {
 }
 
 export const StatCard = ({ name, value, isCurrency }: StatCardProps) => {
-  const { country } = useAppStore()
+  const { country, exchangeRates } = useAppStore()
+  const CURRENCY_OPTIONS = {
+    currency: country?.currency,
+    locale: country?.locale,
+    rates: exchangeRates,
+  }
 
   return (
     <Card>
@@ -25,10 +30,7 @@ export const StatCard = ({ name, value, isCurrency }: StatCardProps) => {
           <dt className='text-small text-default-500 font-medium'>{name}</dt>
           <dd className='text-default-700 text-2xl font-semibold'>
             {isCurrency
-              ? formatCurrency(value, {
-                  currency: country?.currency,
-                  locale: country?.locale,
-                })
+              ? formatCurrency(value, CURRENCY_OPTIONS)
               : formatNumber(value)}
           </dd>
         </div>

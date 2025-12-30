@@ -11,21 +11,28 @@ export interface SelectedCountry {
 
 interface AppStore {
   country: SelectedCountry | null
+  exchangeRates: Record<string, number> | null
   hasHydrated: boolean
+
   setState: (state: Partial<AppStore>) => void
+  setExchangeRates: (rates: Record<string, number>) => void
 }
 
 export const useAppStore = create<AppStore>()(
   persist(
     (set) => ({
       country: null,
+      exchangeRates: null,
       hasHydrated: false,
+
       setState: (state) => set(state),
+      setExchangeRates: (rates) => set({ exchangeRates: rates }),
     }),
     {
       name: 'app-store',
       partialize: (state) => ({
         country: state.country,
+        exchangeRates: state.exchangeRates,
       }),
       onRehydrateStorage: () => (state) => {
         state?.setState({ hasHydrated: true })
