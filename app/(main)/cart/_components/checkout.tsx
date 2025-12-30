@@ -158,6 +158,7 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
       userId: userId!,
       currency: currency,
       exchangeRate: exchangeRate,
+      exchangeLocale: country?.locale!,
       items: (carts ?? []).map((cart) => ({
         productId: cart.productId,
         variantId: cart.variantId ?? null,

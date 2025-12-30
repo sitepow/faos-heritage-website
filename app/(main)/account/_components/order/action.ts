@@ -36,6 +36,7 @@ export interface CreateOrderInput {
   currency: Currency
   exchangeRate: number
   exchangeRateSource?: string
+  exchangeLocale: string
 }
 
 const CANCEL_OR_REFUND: OrderStatus[] = [
@@ -94,6 +95,7 @@ export const createOrder = async (data: CreateOrderInput) => {
     currency,
     exchangeRate,
     exchangeRateSource,
+    exchangeLocale,
   } = data
 
   return await prisma.$transaction(async (tx) => {
@@ -206,7 +208,7 @@ export const createOrder = async (data: CreateOrderInput) => {
         discount: 0,
         tax: 0,
         total,
-
+        exchangeLocale: exchangeLocale ?? '',
         shippingAddressId: addressId,
         shippingName: address.name,
         shippingPhone: address.phone,

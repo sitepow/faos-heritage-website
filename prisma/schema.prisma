@@ -292,6 +292,7 @@ model Order {
   shippingCurrency Currency @default(USD)
   exchangeRate Decimal @default(1) @db.Decimal(18, 8)
   exchangeRateSource String?
+  exchangeLocale String?
 
   subtotalUsd     Decimal @db.Decimal(14, 2)
   discountUsd     Decimal @db.Decimal(14, 2)
