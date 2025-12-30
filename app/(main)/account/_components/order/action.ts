@@ -4,6 +4,7 @@ import { OrderStatus, PaymentStatus, StockMovementType } from '@prisma/client'
 
 import type { Prisma } from '@prisma/client'
 
+import { calculateShippingCost } from '@/app/(dashboard)'
 import { ERROR_CODES } from '@/lib/errors/codes'
 import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
@@ -99,12 +100,14 @@ export const createOrder = async (data: CreateOrderInput) => {
           id: true,
           name: true,
           price: true,
+          weight: true,
           stockQuantity: true,
           variants: {
             select: {
               id: true,
               name: true,
               price: true,
+              weight: true,
               stockQuantity: true,
             },
           },
@@ -125,9 +128,16 @@ export const createOrder = async (data: CreateOrderInput) => {
       subtotal: number
     }[] = []
 
+    const shippingItems: {
+      quantity: number
+      weight: number
+    }[] = []
+
     for (const item of items) {
       const product = productsMap.get(item.productId)
-      if (!product) return fail(ERROR_CODES.DATA_NOT_FOUND)
+      if (!product) {
+        return fail(ERROR_CODES.DATA_NOT_FOUND)
+      }
 
       const variant =
         product.variants.find((variant) => variant.id === item.variantId) ??
@@ -137,28 +147,35 @@ export const createOrder = async (data: CreateOrderInput) => {
         return fail(ERROR_CODES.DATA_FIELD_REQUIRED)
       }
 
-      const currentStock = variant
-        ? variant.stockQuantity
-        : product.stockQuantity
-      if (currentStock < item.quantity)
-        return fail(ERROR_CODES.DATA_INSUFFICIENT)
+      const stock = variant ? variant.stockQuantity : product.stockQuantity
+      if (stock < item.quantity) return fail(ERROR_CODES.DATA_INSUFFICIENT)
 
-      const currentPrice = variant ? variant?.price : product?.price
+      const price = variant ? variant.price : product.price
+      const weight = variant?.weight ?? product.weight
 
       productItems.push({
-        productId: item.productId,
+        productId: product.id,
         variantId: item.variantId ?? null,
         quantity: item.quantity,
         productName: product.name,
-        price: currentPrice,
-        subtotal: currentPrice * item.quantity,
+        price,
+        subtotal: price * item.quantity,
+      })
+
+      shippingItems.push({
+        quantity: item.quantity,
+        weight,
       })
     }
 
-    const subtotal = productItems.reduce(
-      (sum, product) => sum + product.subtotal,
-      0,
-    )
+    const subtotal = productItems.reduce((sum, item) => sum + item.subtotal, 0)
+
+    const shippingCost = await calculateShippingCost({
+      items: shippingItems,
+      countryCode: address.countryCode,
+    })
+
+    const total = subtotal + shippingCost
 
     const order = await tx.order.create({
       data: {
@@ -166,8 +183,8 @@ export const createOrder = async (data: CreateOrderInput) => {
         subtotal,
         discount: 0,
         tax: 0,
-        shippingCost: 0,
-        total: subtotal,
+        shippingCost,
+        total,
         shippingAddressId: addressId,
         shippingName: address.name,
         shippingPhone: address.phone,
