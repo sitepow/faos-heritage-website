@@ -8,7 +8,6 @@ import type { ActionResult } from '@/lib/errors/types'
 import { ERROR_CODES } from '@/lib/errors/codes'
 import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
-import { DEFAULT_CURRENCY } from '@/utils/constants'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2025-12-15.clover',
@@ -51,8 +50,8 @@ export const createStripeCheckout = async ({
     line_items: order.items.map((item) => ({
       quantity: item.quantity,
       price_data: {
-        currency: DEFAULT_CURRENCY,
-        unit_amount: item.price.mul(100).toNumber(),
+        currency: order.currency,
+        unit_amount: order.total.mul(100).toNumber(),
         product_data: {
           name: item.productName,
         },
