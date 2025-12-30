@@ -1,5 +1,6 @@
 import type { ComponentProps } from 'react'
 
+import { useAppStore } from '@/app/store'
 import { formatCurrency, formatCurrencyRange } from '@/utils/number'
 import { getRangeDisplayValue } from '@/utils/range'
 import { cn } from '@/utils/style'
@@ -19,6 +20,7 @@ export const ProductPrice = ({
   className,
   ...props
 }: ProductPriceProps) => {
+  const { country } = useAppStore()
   const displayPrice = getRangeDisplayValue(
     {
       min: priceMin,
@@ -26,8 +28,16 @@ export const ProductPrice = ({
       fallback: price,
     },
     {
-      formatSingle: formatCurrency,
-      formatRange: formatCurrencyRange,
+      formatSingle: (value) =>
+        formatCurrency(value, {
+          currency: country?.currency,
+          locale: country?.locale,
+        }),
+      formatRange: (min, max) =>
+        formatCurrencyRange(min, max, {
+          currency: country?.currency,
+          locale: country?.locale,
+        }),
     },
   )
 

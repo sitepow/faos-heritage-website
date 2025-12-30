@@ -1,10 +1,6 @@
 import { Prisma } from '@prisma/client'
 
-import {
-  DEFAULT_CURRENCY,
-  CURRENCY_LOCALE_MAP,
-  DEFAULT_LOCALE,
-} from './constants/currency'
+import { DEFAULT_CURRENCY, DEFAULT_LOCALE } from './constants/currency'
 
 export type DecimalToNumber<T> = T extends Prisma.Decimal
   ? number
@@ -26,8 +22,7 @@ export const formatCurrency = (
   options?: FormatCurrencyOptions,
 ) => {
   const currency = options?.currency ?? DEFAULT_CURRENCY
-  const locale =
-    options?.locale ?? CURRENCY_LOCALE_MAP[currency] ?? DEFAULT_LOCALE
+  const locale = options?.locale ?? DEFAULT_LOCALE
 
   return new Intl.NumberFormat(locale, {
     style: 'currency',
@@ -41,8 +36,7 @@ export const formatCurrencyRange = (
   options?: FormatCurrencyOptions,
 ) => {
   const currency = options?.currency ?? DEFAULT_CURRENCY
-  const locale =
-    options?.locale ?? CURRENCY_LOCALE_MAP[currency] ?? DEFAULT_LOCALE
+  const locale = options?.locale ?? DEFAULT_LOCALE
 
   return new Intl.NumberFormat(locale, {
     style: 'currency',

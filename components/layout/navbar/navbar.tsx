@@ -19,6 +19,7 @@ import { useState } from 'react'
 import type { NavItem } from '@/config/site'
 
 import { NavbarCart } from './cart'
+import { Country } from './country'
 import { NavbarHeader } from './header'
 import { NavbarPanel } from './panel'
 import { ThemeSwitch } from '../../common/theme-switch'
@@ -83,6 +84,10 @@ export const Navbar = () => {
           className='hidden basis-1/5 sm:flex sm:basis-full'
           justify='end'
         >
+          <NavbarItem className='hidden lg:block'>
+            <Country />
+          </NavbarItem>
+
           {isAuthenticated && (
             <NavbarItem className='hidden items-center gap-4 lg:flex'>
               <NavbarPanel setIsMenuOpen={setIsMenuOpen} />
@@ -104,6 +109,10 @@ export const Navbar = () => {
         </NavbarContent>
 
         <NavbarMenu className='border-divider border-t bg-white dark:bg-inherit'>
+          <NavbarItem>
+            <Country />
+          </NavbarItem>
+
           {menuItems.map((item) => (
             <NavbarMenuItem
               key={item.href}
