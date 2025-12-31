@@ -1,7 +1,5 @@
 import { Prisma } from '@prisma/client'
 
-import type { Currency } from '@prisma/client'
-
 import { DEFAULT_CURRENCY, DEFAULT_LOCALE } from './constants/currency'
 
 export type DecimalToNumber<T> = T extends Prisma.Decimal
@@ -15,7 +13,7 @@ export type DecimalToNumber<T> = T extends Prisma.Decimal
         : T
 
 interface FormatCurrencyOptions {
-  currency?: Currency
+  currency?: string
   locale?: string
 }
 

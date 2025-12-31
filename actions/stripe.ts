@@ -8,6 +8,8 @@ import type { ActionResult } from '@/lib/errors/types'
 import { ERROR_CODES } from '@/lib/errors/codes'
 import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
+import { decimalToNumber } from '@/utils/number'
+import { toStripeAmount } from '@/utils/stripe'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2025-12-15.clover',
@@ -26,13 +28,29 @@ export const createStripeCheckout = async ({
     return fail(ERROR_CODES.DATA_FIELD_REQUIRED)
   }
 
-  const order = await prisma.order.findUnique({
-    where: { id: orderId },
-    include: {
-      items: true,
-      user: true,
-    },
-  })
+  const order = decimalToNumber(
+    await prisma.order.findUnique({
+      where: { id: orderId },
+      select: {
+        id: true,
+        status: true,
+        currency: true,
+        shippingCost: true,
+        items: {
+          select: {
+            price: true,
+            quantity: true,
+            productName: true,
+          },
+        },
+        user: {
+          select: {
+            email: true,
+          },
+        },
+      },
+    }),
+  )
 
   if (!order) {
     return fail(ERROR_CODES.DATA_NOT_FOUND)
@@ -47,11 +65,27 @@ export const createStripeCheckout = async ({
     payment_method_types: ['card', 'promptpay'],
     customer_email: order.user?.email ?? undefined,
 
+    shipping_options:
+      order.shippingCost > 0
+        ? [
+            {
+              shipping_rate_data: {
+                type: 'fixed_amount',
+                fixed_amount: {
+                  amount: toStripeAmount(order.shippingCost, order.currency),
+                  currency: order.currency,
+                },
+                display_name: 'Shipping fee',
+              },
+            },
+          ]
+        : undefined,
+
     line_items: order.items.map((item) => ({
       quantity: item.quantity,
       price_data: {
         currency: order.currency,
-        unit_amount: order.total.mul(100).toNumber(),
+        unit_amount: toStripeAmount(item?.price ?? 0, order.currency),
         product_data: {
           name: item.productName,
         },

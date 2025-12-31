@@ -188,6 +188,13 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
                 Shipping address
               </span>
 
+              <Alert
+                className='text-start'
+                color='warning'
+                variant='bordered'
+                description='You are about to place an order using the selected currency. Please review the price and currency carefully before proceeding with your purchase.'
+              />
+
               <span className='text-default-500'>
                 {getFullAddress(address)}{' '}
                 <button
@@ -243,13 +250,6 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
               variant='bordered'
             />
           )}
-
-          {/* <Alert
-            className='text-start'
-            color='warning'
-            description={`We are updating our payment system. Sorry for the inconvenience. Orders will be available again on Sat Dec 27 2025 15:06:40 GMT+0700 (Indochina Time).`}
-            variant='bordered'
-          /> */}
 
           {!isLoadingAddress && address && (
             <Button

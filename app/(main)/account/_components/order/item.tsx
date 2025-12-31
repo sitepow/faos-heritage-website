@@ -67,7 +67,7 @@ export const OrderItem = ({ order, hideButton }: OrderItemProps) => {
           description='Please complete your payment within 20 minutes. Otherwise, your order will be automatically canceled.
 '
           color='warning'
-          variant='bordered'
+          variant='faded'
         />
       )}
 
