@@ -32,6 +32,7 @@ import {
   StatCardSkeleton,
 } from '@/app/(dashboard)/_components/stat-card'
 import { useAppStore } from '@/app/store'
+import { CountryFlag } from '@/components/common/country-flag'
 import { ITEM_PER_PAGE, NO_IMAGE } from '@/utils/constants'
 import { formatDate } from '@/utils/date'
 import { getOrderStatus } from '@/utils/features'
@@ -106,9 +107,7 @@ export default function Order() {
             <TableRow key={order.id}>
               <TableCell>{order.id}</TableCell>
               <TableCell>
-                <Avatar
-                  src={`https://purecatamphetamine.github.io/country-flag-icons/3x2/${order?.address?.countryCode}.svg`}
-                />
+                <CountryFlag countryCode={order?.address?.countryCode!} />
               </TableCell>
               <TableCell>
                 <AvatarGroup max={3}>

@@ -16,6 +16,7 @@ import type { GetOrderResult } from '@/app/(dashboard)/dashboard/order/action'
 
 import { createStripeCheckout } from '@/actions/stripe'
 import { useOrderStore } from '@/app/(dashboard)/dashboard/order/store'
+import { CountryFlag } from '@/components/common/country-flag'
 import { Stepper } from '@/components/common/stepper'
 // import { OmisePaymentButton } from '@/components/features/omise/payment-button'
 import { NO_IMAGE } from '@/utils/constants'
@@ -74,9 +75,7 @@ export const OrderItem = ({ order, hideButton }: OrderItemProps) => {
       <div className='border-divider flex flex-wrap items-center justify-between gap-3 border-b p-2.5'>
         <div className='flex flex-wrap gap-3 sm:col-span-2'>
           <AvatarGroup max={4}>
-            <Avatar
-              src={`https://purecatamphetamine.github.io/country-flag-icons/3x2/${order?.address?.countryCode}.svg`}
-            />
+            <CountryFlag countryCode={order?.address?.countryCode!} />
             {productImages.map((src) => (
               <Avatar key={src} src={src} />
             ))}

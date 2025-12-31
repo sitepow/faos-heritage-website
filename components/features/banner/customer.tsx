@@ -1,8 +1,9 @@
 'use client'
 
-import { Avatar, Card, CardBody } from '@heroui/react'
+import { Card, CardBody } from '@heroui/react'
 import Link from 'next/link'
 
+import { CountryFlag } from '@/components/common/country-flag'
 import { COUNTRIES } from '@/utils/constants'
 
 export const CustomerBanner = () => {
@@ -36,9 +37,9 @@ export const CustomerBanner = () => {
               key={country.code}
               className='flex flex-col items-center gap-1 text-xs text-white/80'
             >
-              <Avatar
+              <CountryFlag
                 className='size-12 sm:size-14'
-                src={`https://purecatamphetamine.github.io/country-flag-icons/3x2/${country.code}.svg`}
+                countryCode={country.code}
               />
               <span>{country.name}</span>
             </div>

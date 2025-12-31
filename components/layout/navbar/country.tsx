@@ -1,9 +1,10 @@
 'use client'
 
-import { Select, SelectItem, Avatar } from '@heroui/react'
+import { Select, SelectItem } from '@heroui/react'
 import { useEffect } from 'react'
 
 import { useAppStore } from '@/app/store'
+import { CountryFlag } from '@/components/common/country-flag'
 import { CURRENCY_LOCALE_MAP } from '@/utils/constants'
 import { getUsdExchangeRates } from '@/utils/currency/exchange-rate'
 
@@ -56,10 +57,7 @@ export const Country = () => {
 
           return (
             <div key={item.key} className='flex items-center gap-2'>
-              <Avatar
-                size='sm'
-                src={`https://purecatamphetamine.github.io/country-flag-icons/3x2/${selected.country}.svg`}
-              />
+              <CountryFlag countryCode={selected.country} />
               <span>
                 {selected.name}{' '}
                 <span className='text-default-400 text-xs'>
@@ -84,12 +82,7 @@ export const Country = () => {
       {CURRENCY_LOCALE_MAP.map((item) => (
         <SelectItem key={item.locale} textValue={item.name}>
           <div className='flex items-center gap-2'>
-            <Avatar
-              alt={item.country}
-              className='shrink-0'
-              size='sm'
-              src={`https://purecatamphetamine.github.io/country-flag-icons/3x2/${item.country}.svg`}
-            />
+            <CountryFlag countryCode={item.country} />
             <span>{item.name}</span>
             <span className='text-default-400 text-xs'>({item.currency})</span>
           </div>

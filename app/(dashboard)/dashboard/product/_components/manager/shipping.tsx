@@ -16,7 +16,6 @@ import {
   DropdownItem,
   ModalFooter,
   Chip,
-  Avatar,
 } from '@heroui/react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import {
@@ -31,6 +30,7 @@ import { deleteShippingCountry } from '../../action/shipping/contry'
 import { useProductStore } from '../../store'
 import { ShippingForm } from '../form/shipping'
 
+import { CountryFlag } from '@/components/common/country-flag'
 import { ConfirmModal } from '@/components/modal/confirm'
 import { formatCurrency } from '@/utils/number'
 import { cn } from '@/utils/style'
@@ -134,8 +134,8 @@ export const ShippingCountryManager = () => {
                     <CardBody className='flex-row items-center justify-between'>
                       <div className='line-clamp-1 flex flex-col'>
                         <div className='flex items-center gap-2'>
-                          <Avatar
-                            src={`https://purecatamphetamine.github.io/country-flag-icons/3x2/${shippingCountry.countryCode}.svg`}
+                          <CountryFlag
+                            countryCode={shippingCountry.countryCode}
                           />
                           <span className='line-clamp-2'>
                             {shippingCountry.countryName} (Shipping ID:{' '}

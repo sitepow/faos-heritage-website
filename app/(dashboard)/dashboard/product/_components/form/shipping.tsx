@@ -1,7 +1,6 @@
 'use client'
 
 import {
-  Avatar,
   Button,
   Modal,
   ModalBody,
@@ -28,6 +27,7 @@ import {
 import { shippingCountrySchema, type ShippingCountryInput } from '../../schema'
 import { useProductStore } from '../../store'
 
+import { CountryFlag } from '@/components/common/country-flag'
 import { SubHeading } from '@/components/common/heading'
 import { COUNTRIES, DEFAULT_CURRENCY } from '@/utils/constants'
 
@@ -207,11 +207,7 @@ export const ShippingForm = () => {
                   {COUNTRIES.map((country) => (
                     <SelectItem
                       key={country.code}
-                      startContent={
-                        <Avatar
-                          src={`https://purecatamphetamine.github.io/country-flag-icons/3x2/${country.code}.svg`}
-                        />
-                      }
+                      startContent={<CountryFlag countryCode={country.code} />}
                     >
                       {country.name}
                     </SelectItem>

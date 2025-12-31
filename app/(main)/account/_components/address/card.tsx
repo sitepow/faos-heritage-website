@@ -13,7 +13,6 @@ import {
   DropdownMenu,
   DropdownTrigger,
   useDisclosure,
-  Avatar,
 } from '@heroui/react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import {
@@ -29,6 +28,7 @@ import { AddressForm } from './form'
 import { useAddressStore } from './store'
 
 import { ConfirmModal } from '@/components'
+import { CountryFlag } from '@/components/common/country-flag'
 import { getFullAddress } from '@/utils/features'
 
 export const AddressCard = () => {
@@ -123,9 +123,7 @@ export const AddressCard = () => {
                 <div className='flex w-full flex-col'>
                   <div className='border-divider flex items-center justify-between gap-2 rounded-t-lg border p-2.5'>
                     <div className='flex flex-wrap items-center gap-2'>
-                      <Avatar
-                        src={`https://purecatamphetamine.github.io/country-flag-icons/3x2/${address.countryCode}.svg`}
-                      />
+                      <CountryFlag countryCode={address.countryCode} />
                       <span className='line-clamp-1'>{address?.name}</span>
                       {address?.isDefault && (
                         <Chip variant='bordered' color='primary'>

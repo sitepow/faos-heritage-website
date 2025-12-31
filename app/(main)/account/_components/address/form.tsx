@@ -12,7 +12,6 @@ import {
   Button,
   Select,
   SelectItem,
-  Avatar,
   Switch,
 } from '@heroui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -26,6 +25,7 @@ import { addressSchema, type AddressInput } from './schema'
 import { useAddressStore } from './store'
 
 import { SubHeading } from '@/components'
+import { CountryFlag } from '@/components/common/country-flag'
 import { COUNTRIES } from '@/utils/constants/countries'
 
 const DEFAULT_VALUES: AddressInput = {
@@ -304,11 +304,7 @@ export const AddressForm = () => {
                   {COUNTRIES.map((country) => (
                     <SelectItem
                       key={country.code}
-                      startContent={
-                        <Avatar
-                          src={`https://purecatamphetamine.github.io/country-flag-icons/3x2/${country.code}.svg`}
-                        />
-                      }
+                      startContent={<CountryFlag countryCode={country.code} />}
                     >
                       {country.name}
                     </SelectItem>
