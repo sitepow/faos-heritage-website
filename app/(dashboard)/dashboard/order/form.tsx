@@ -199,7 +199,10 @@ export const OrderForm = () => {
                         <SelectItem
                           key={provider.value}
                           startContent={
-                            <Avatar src={provider.image || NO_IMAGE} />
+                            <Avatar
+                              src={provider.image || NO_IMAGE}
+                              size='sm'
+                            />
                           }
                         >
                           {provider.label}
