@@ -43,11 +43,6 @@ export const ProductCart = () => {
     if (cartVariantId) setVariantId(cartVariantId)
   }, [product?.cart])
 
-  useEffect(() => {
-    if (!hasVariants || variantId) return
-    setVariantId(product?.variants?.[0]?.id ?? null)
-  }, [hasVariants, product?.variants, variantId])
-
   const currentVariant = useMemo(
     () => product?.variants?.find((v) => v.id === variantId),
     [product?.variants, variantId],
