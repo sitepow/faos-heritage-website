@@ -122,8 +122,8 @@ export const FavoriteItem = ({
 
             <div className='flex flex-wrap items-center gap-2'>
               <Button
-                className='text-secondary'
                 color='primary'
+                variant='bordered'
                 isDisabled={isPendingDeleteFavorite}
                 isLoading={isPendingDeleteFavorite}
                 startContent={!isPendingDeleteFavorite && <XIcon />}
