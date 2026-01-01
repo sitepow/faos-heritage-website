@@ -266,7 +266,7 @@ export default function Product() {
                   {product?.images?.length === 0 && <span>-</span>}
 
                   {product?.images?.length !== 0 && (
-                    <AvatarGroup max={3}>
+                    <AvatarGroup max={3} isBordered>
                       {product?.images?.map((image) => (
                         <Avatar key={image?.url} src={image?.url} />
                       ))}

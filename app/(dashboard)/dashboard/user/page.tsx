@@ -156,7 +156,11 @@ export default function User() {
                 {user?.image?.length === 0 && <span>-</span>}
 
                 {user?.image?.length !== 0 && (
-                  <Avatar key={user?.image} src={user?.image ?? NO_IMAGE} />
+                  <Avatar
+                    isBordered
+                    key={user?.image}
+                    src={user?.image ?? NO_IMAGE}
+                  />
                 )}
               </TableCell>
               <TableCell className='max-w-40 min-w-40'>{user.name}</TableCell>

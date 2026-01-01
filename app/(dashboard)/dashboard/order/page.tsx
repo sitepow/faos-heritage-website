@@ -19,7 +19,7 @@ import {
   Table,
 } from '@heroui/react'
 import { useQuery } from '@tanstack/react-query'
-import { ArchiveRestoreIcon, EllipsisVerticalIcon, EyeIcon } from 'lucide-react'
+import { BoltIcon, EllipsisVerticalIcon, EyeIcon } from 'lucide-react'
 import { useState } from 'react'
 
 import { OrderViewModal } from './_components/view-modal'
@@ -89,7 +89,6 @@ export default function Order() {
       >
         <TableHeader>
           <TableColumn>Order ID</TableColumn>
-          <TableColumn>Country</TableColumn>
           <TableColumn>Image</TableColumn>
           <TableColumn>Customer Name</TableColumn>
           <TableColumn>Order Date</TableColumn>
@@ -107,10 +106,12 @@ export default function Order() {
             <TableRow key={order.id}>
               <TableCell>{order.id}</TableCell>
               <TableCell>
-                <CountryFlag countryCode={order?.address?.countryCode!} />
-              </TableCell>
-              <TableCell>
-                <AvatarGroup max={3}>
+                <AvatarGroup max={3} isBordered>
+                  <CountryFlag
+                    countryCode={order?.address?.countryCode!}
+                    size='md'
+                  />
+
                   {order?.items?.map((item) => (
                     <Avatar
                       key={item?.product?.images?.[0]?.url}
@@ -125,7 +126,7 @@ export default function Order() {
               <TableCell className='max-w-52 min-w-52'>
                 {formatDate(order?.createdAt)}
               </TableCell>
-              <TableCell>
+              <TableCell className='min-w-32'>
                 <Chip color='primary' variant='bordered'>
                   {formatCurrency(order?.total, CURRENCY_OPTIONS)}
                 </Chip>
@@ -157,7 +158,7 @@ export default function Order() {
                   >
                     <DropdownItem
                       key='edit'
-                      startContent={<ArchiveRestoreIcon className='size-4' />}
+                      startContent={<BoltIcon className='size-4' />}
                       onClick={() => {
                         setState({ orderId: order?.id })
                         onOpenOrderChange()

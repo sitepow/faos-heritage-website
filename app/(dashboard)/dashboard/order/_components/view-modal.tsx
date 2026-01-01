@@ -136,7 +136,7 @@ export const OrderViewModal = () => {
                     <div className='flex flex-wrap items-center gap-4 sm:flex-nowrap'>
                       <Avatar
                         className='shrink-0'
-                        size='lg'
+                        isBordered
                         src={item?.product?.images?.[0]?.url ?? NO_IMAGE}
                       />
 

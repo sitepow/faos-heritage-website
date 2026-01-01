@@ -72,7 +72,6 @@ export const ProductCard = ({ className, product }: ProductCardProps) => {
           >
             {product?.variants?.map((variant) => (
               <Avatar
-                size='lg'
                 key={variant?.image}
                 src={variant?.image ?? '/images/no-image.png'}
               />

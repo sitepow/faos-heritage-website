@@ -74,10 +74,10 @@ export const OrderItem = ({ order, hideButton }: OrderItemProps) => {
 
       <div className='border-divider flex flex-wrap items-center justify-between gap-3 border-b p-2.5'>
         <div className='flex flex-wrap gap-3 sm:col-span-2'>
-          <AvatarGroup max={4}>
+          <AvatarGroup max={4} isBordered>
             <CountryFlag countryCode={order?.address?.countryCode!} />
             {productImages.map((src) => (
-              <Avatar key={src} src={src} />
+              <Avatar size='sm' key={src} src={src} />
             ))}
           </AvatarGroup>
 
