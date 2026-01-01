@@ -18,6 +18,7 @@ interface CarouselProps {
   slidesToScroll?: boolean
   isVertical?: boolean
   autoPlay?: boolean
+  loop?: boolean
 }
 
 export const Carousel = ({
@@ -26,6 +27,7 @@ export const Carousel = ({
   children,
   slidesToScroll,
   isVertical,
+  loop = false,
   autoPlay = true,
 }: CarouselProps) => {
   const autoplayRef = useRef(
@@ -42,7 +44,7 @@ export const Carousel = ({
       dragFree: true,
       align: 'start',
       slidesToScroll: slidesToScroll ? 'auto' : 1,
-      loop: true,
+      loop: loop,
     },
     autoPlay ? [autoplayRef.current] : [],
   )
