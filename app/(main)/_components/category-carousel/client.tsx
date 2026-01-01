@@ -22,7 +22,6 @@ import { getCategories } from '@/app/(dashboard)/dashboard/product/action/catego
 import { getProducts } from '@/app/(main)/products/action'
 import { Carousel } from '@/components/features/carousel/carousel'
 import { createSlug } from '@/utils/slug'
-
 interface CategoryCarouselClientProps {
   initialCategories: GetCategoriesResult
   initialProducts: GetProductsResult
@@ -77,11 +76,13 @@ export const CategoryCarouselClient = ({
         : undefined,
   })
 
-  if (!categories?.length) return null
+  if (!categories?.length) {
+    return null
+  }
 
   return (
     <div className='flex w-full flex-col gap-5 md:min-h-[525px] md:flex-row'>
-      <Card className='h-[350px] md:h-[525px] md:w-[400px]'>
+      <Card className='h-[350px] md:h-[550px] md:w-[400px]'>
         <CardHeader className='font-bold'>Products by category</CardHeader>
         <CardBody>
           <ScrollShadow className='p-1'>
@@ -100,7 +101,7 @@ export const CategoryCarouselClient = ({
         </CardBody>
       </Card>
 
-      <Card fullWidth className='h-[525px]'>
+      <Card fullWidth className='min-h-[525px]'>
         <CardHeader className='flex flex-wrap items-center justify-between'>
           <span className='font-bold'>{activeCategory?.name}</span>
           <Button
