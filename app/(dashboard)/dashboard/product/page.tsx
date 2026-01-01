@@ -276,7 +276,7 @@ export default function Product() {
                 <TableCell className='max-w-72'>
                   {product?.name ?? '-'}
                 </TableCell>
-                <TableCell className='max-w-32'>
+                <TableCell className='min-w-32'>
                   {price !== formatCurrency(0) ? (
                     <Chip color='primary' variant='bordered'>
                       {price}
@@ -285,7 +285,7 @@ export default function Product() {
                     '-'
                   )}
                 </TableCell>
-                <TableCell className='max-w-32'>
+                <TableCell className='min-w-32'>
                   {stock !== formatNumber(0) ? (
                     <Chip color='primary' variant='bordered'>
                       {stock}
