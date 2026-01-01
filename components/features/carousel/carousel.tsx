@@ -1,6 +1,8 @@
 'use client'
 
+import Autoplay from 'embla-carousel-autoplay'
 import useEmblaCarousel from 'embla-carousel-react'
+import { useEffect, useRef } from 'react'
 
 import type { ReactNode } from 'react'
 
@@ -15,6 +17,7 @@ interface CarouselProps {
   children: ReactNode
   slidesToScroll?: boolean
   isVertical?: boolean
+  autoPlay?: boolean
 }
 
 export const Carousel = ({
@@ -23,17 +26,34 @@ export const Carousel = ({
   children,
   slidesToScroll,
   isVertical,
+  autoPlay = true,
 }: CarouselProps) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    axis: isVertical ? 'y' : 'x',
-    dragFree: true,
-    align: 'start',
-    containScroll: 'trimSnaps',
-    slidesToScroll: slidesToScroll ? 'auto' : 1,
-  })
+  const autoplayRef = useRef(
+    Autoplay({
+      delay: 3000,
+      stopOnInteraction: false,
+      stopOnMouseEnter: true,
+    }),
+  )
+
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      axis: isVertical ? 'y' : 'x',
+      dragFree: true,
+      align: 'start',
+      slidesToScroll: slidesToScroll ? 'auto' : 1,
+      loop: true,
+    },
+    autoPlay ? [autoplayRef.current] : [],
+  )
 
   const { prevDisabled, nextDisabled, onPrev, onNext } =
     useCarouselNavigation(emblaApi)
+
+  useEffect(() => {
+    if (!emblaApi || !autoPlay) return
+    autoplayRef.current.reset()
+  }, [emblaApi, autoPlay])
 
   return (
     <div className={cn('relative', wrapperClassName)}>
