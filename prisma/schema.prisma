@@ -180,6 +180,8 @@ model Product {
   categoryId String?
   category   Category? @relation(fields: [categoryId], references: [id])
 
+  isAuthentic          Boolean @default(true) 
+  isPremiumProduct     Boolean @default(true)
   isActive             Boolean @default(true)
   isDigitalProduct     Boolean @default(false)
   isDemoProduct        Boolean @default(false)

@@ -8,7 +8,6 @@ import {
   Card,
   CardBody,
   CardHeader,
-  Chip,
   Image,
   Skeleton,
 } from '@heroui/react'
@@ -17,6 +16,7 @@ import { useState } from 'react'
 
 import type { GetProductResult } from '@/app/(main)/products/action'
 
+import { ProductChip } from './chip'
 import { ProductPrice } from './price'
 import { ProductRating } from './rating'
 
@@ -100,33 +100,20 @@ export const ProductCard = ({ className, product }: ProductCardProps) => {
         </CardHeader>
 
         <CardBody>
-          <div className='mb-2.5 flex flex-wrap gap-1'>
-            {product?.isDemoProduct && (
-              <Chip className='text-secondary' color='primary'>
-                Demo product
-              </Chip>
-            )}
-
-            {product?.isDigitalProduct && (
-              <Chip className='text-secondary' color='primary'>
-                Digital product
-              </Chip>
-            )}
-
-            <Chip className='text-secondary' color='primary'>
-              {product?.category?.name ?? 'No category'}
-            </Chip>
-          </div>
-
+          <ProductChip
+            isAuthentic={product?.isAuthentic}
+            isPremiumProduct={product?.isPremiumProduct}
+            isDemoProduct={product?.isDemoProduct}
+            isDigitalProduct={product?.isDigitalProduct}
+            categoryName={product?.category?.name}
+          />
           <h4 className='line-clamp-2 text-lg font-bold'>{product?.name}</h4>
-
           <ProductPrice
             price={product?.price}
             priceMax={product?.priceMax!}
             priceMin={product?.priceMin!}
             unit={getProductUnit(product?.unit)}
           />
-
           <ProductRating />
         </CardBody>
       </Link>

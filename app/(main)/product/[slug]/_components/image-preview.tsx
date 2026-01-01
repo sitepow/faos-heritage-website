@@ -22,7 +22,6 @@ export const ProductImagePreview = ({
   ...props
 }: ProductImagePreviewProps) => {
   const [selectedIndex, setSelectedIndex] = useState(0)
-
   const displayImages = images.length > 0 ? images : [NO_IMAGE]
   const mainImage = displayImages[selectedIndex]
 

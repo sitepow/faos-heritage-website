@@ -93,6 +93,8 @@ export const getProduct = async (productId: string, userId?: string) => {
         weight: true,
         categoryId: true,
         shortDescription: true,
+        isAuthentic: true,
+        isPremiumProduct: true,
         isDigitalProduct: true,
         isDemoProduct: true,
         unit: true,

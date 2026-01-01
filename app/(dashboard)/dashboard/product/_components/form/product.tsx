@@ -35,6 +35,8 @@ import { DEFAULT_CURRENCY } from '@/utils/constants/currency'
 import { PRODUCT_UNITS } from '@/utils/features'
 
 const DEFAULT_VALUES: ProductInput = {
+  isAuthentic: true,
+  isPremiumProduct: true,
   isActive: true,
   isDigitalProduct: false,
   isDemoProduct: false,
@@ -201,6 +203,32 @@ export const ProductForm = () => {
               />
               <Controller
                 control={control}
+                name='isPremiumProduct'
+                render={({ field: { value, onChange, ...field } }) => (
+                  <Switch
+                    {...field}
+                    isSelected={value}
+                    onValueChange={onChange}
+                  >
+                    Premium Product
+                  </Switch>
+                )}
+              />
+              <Controller
+                control={control}
+                name='isAuthentic'
+                render={({ field: { value, onChange, ...field } }) => (
+                  <Switch
+                    {...field}
+                    isSelected={value}
+                    onValueChange={onChange}
+                  >
+                    Authentic 100%
+                  </Switch>
+                )}
+              />
+              <Controller
+                control={control}
                 name='isDigitalProduct'
                 render={({ field: { value, onChange, ...field } }) => (
                   <Switch
@@ -208,7 +236,7 @@ export const ProductForm = () => {
                     isSelected={value}
                     onValueChange={onChange}
                   >
-                    Digital product
+                    Digital Product
                   </Switch>
                 )}
               />
@@ -221,7 +249,7 @@ export const ProductForm = () => {
                     isSelected={value}
                     onValueChange={onChange}
                   >
-                    Demo product
+                    Demo Version
                   </Switch>
                 )}
               />

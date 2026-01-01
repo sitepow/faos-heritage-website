@@ -15,6 +15,7 @@ import { useSession } from 'next-auth/react'
 import { useEffect, useMemo, useState } from 'react'
 import { toast } from 'react-toastify'
 
+import { ProductChip } from './chip'
 import { ProductPrice } from './price'
 import { ProductRating } from './rating'
 import { ProductShare } from './share'
@@ -109,6 +110,15 @@ export const ProductCart = () => {
           <h1 className='text-2xl font-bold'>{product?.name}</h1>
           <ProductRating />
         </div>
+
+        <ProductChip
+          isAuthentic={product?.isAuthentic}
+          isPremiumProduct={product?.isPremiumProduct}
+          isDemoProduct={product?.isDemoProduct}
+          isDigitalProduct={product?.isDigitalProduct}
+          categoryName={product?.category?.name}
+        />
+
         {product?.shortDescription && (
           <Card className='bg-default-50 dark:bg-default-100' shadow='none'>
             <CardBody className='text-default-600 text-sm'>

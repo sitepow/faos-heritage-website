@@ -37,5 +37,7 @@ export const productSchema = z.object({
   isFeatured: z.boolean(),
   isDigitalProduct: z.boolean(),
   isDemoProduct: z.boolean(),
+  isPremiumProduct: z.boolean(),
+  isAuthentic: z.boolean(),
   unit: z.enum(ProductUnit),
 })

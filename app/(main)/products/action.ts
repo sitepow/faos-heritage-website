@@ -54,6 +54,8 @@ export const getProducts = async ({
       price: true,
       stockQuantity: true,
       isDigitalProduct: true,
+      isAuthentic: true,
+      isPremiumProduct: true,
       isDemoProduct: true,
       unit: true,
       images: { select: { url: true } },
