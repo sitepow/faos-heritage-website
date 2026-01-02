@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 'use client'
 
 import {
@@ -39,12 +38,15 @@ export const ProductCardSkeleton = () => {
 export const ProductCard = ({ className, product }: ProductCardProps) => {
   const [isHovered, setIsHovered] = useState(false)
 
-  const imageSrc =
-    product?.images?.length > 1
-      ? isHovered
-        ? product?.images[1]?.url
-        : product?.images[0]?.url
-      : product?.images?.[0]?.url || NO_IMAGE
+  const primaryImage =
+    product?.images?.find((img) => img.isPrimary) ?? product?.images?.[0]
+
+  const hoverImage =
+    product?.images?.find((img) => !img.isPrimary) ?? primaryImage
+
+  const imageSrc = isHovered
+    ? (hoverImage?.url ?? NO_IMAGE)
+    : (primaryImage?.url ?? NO_IMAGE)
 
   const { stockMin, stockMax, stockQuantity } = product
   const isOutOfStock = checkOutOfStock({ stockMin, stockMax, stockQuantity })

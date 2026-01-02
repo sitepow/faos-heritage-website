@@ -28,6 +28,7 @@ import { useProductStore } from '../../store'
 import { ImageForm } from '../form/image'
 
 import { ConfirmModal } from '@/components/modal/confirm'
+import { cn } from '@/utils/style'
 
 export const ImageManager = () => {
   const queryClient = useQueryClient()
@@ -138,7 +139,11 @@ export const ImageManager = () => {
                     <div className='flex w-full flex-col gap-1'>
                       <Image
                         alt={image?.alt ?? ''}
-                        className='border-divider h-40 w-full border object-cover'
+                        className={cn(
+                          'border-divider h-40 w-full border object-cover',
+                          image?.isPrimary &&
+                            'border-primary border-r-divider border-y-divider border-l-4',
+                        )}
                         height={200}
                         src={image.url}
                         width={200}

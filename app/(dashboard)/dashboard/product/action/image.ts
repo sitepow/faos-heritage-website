@@ -17,9 +17,26 @@ export const createImage = async (data: ImageInput) => {
     return fail(ERROR_CODES.VALIDATION_ERROR)
   }
 
+  const payload = removeEmptyField(
+    validated.data,
+  ) as Prisma.ProductImageCreateInput
+
   try {
-    await prisma.productImage.create({
-      data: removeEmptyField(validated.data) as Prisma.ProductImageCreateInput,
+    await prisma.$transaction(async (tx) => {
+      if (payload.isPrimary && data.productId) {
+        await tx.productImage.updateMany({
+          where: {
+            productId: data.productId,
+          },
+          data: {
+            isPrimary: false,
+          },
+        })
+      }
+
+      await tx.productImage.create({
+        data: payload,
+      })
     })
   } catch {
     return fail(ERROR_CODES.SYSTEM_ERROR)
@@ -79,9 +96,32 @@ export const updateImage = async (data: ImageInput) => {
   }
 
   try {
-    await prisma.productImage.update({
-      data: payload as Prisma.ProductImageCreateInput,
-      where: { id },
+    await prisma.$transaction(async (tx) => {
+      if (payload.isPrimary) {
+        const image = await tx.productImage.findUnique({
+          where: { id },
+          select: { productId: true },
+        })
+
+        if (!image) {
+          throw new Error('Image not found')
+        }
+
+        await tx.productImage.updateMany({
+          where: {
+            productId: image.productId,
+            NOT: { id },
+          },
+          data: {
+            isPrimary: false,
+          },
+        })
+      }
+
+      await tx.productImage.update({
+        where: { id },
+        data: payload as Prisma.ProductImageUpdateInput,
+      })
     })
   } catch {
     return fail(ERROR_CODES.SYSTEM_ERROR)
