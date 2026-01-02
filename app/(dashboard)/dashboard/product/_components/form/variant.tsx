@@ -14,14 +14,18 @@ import {
 } from '@heroui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
+
+import type { ImageWithPreview } from '@/components'
 
 import { createVariant, getVariant, updateVariant } from '../../action'
 import { variantSchema, type VariantInput } from '../../schema'
 import { useProductStore } from '../../store'
 
+import { ImageDropzone } from '@/components'
 import { SubHeading } from '@/components/common/heading'
+import { useImageUpload } from '@/hooks/useImageUpload'
 import { DEFAULT_CURRENCY } from '@/utils/constants'
 
 const DEFAULT_VALUES: VariantInput = {
@@ -31,9 +35,17 @@ const DEFAULT_VALUES: VariantInput = {
   stockQuantity: 0,
   weight: 0,
   isActive: true,
+  image: '',
 }
 
 export const VariantForm = () => {
+  const [previewFiles, setPreviewFiles] = useState<ImageWithPreview[]>([])
+  const [oldImage, setOldImage] = useState<string | null>(null)
+  const { resolveImagePath, isUploading } = useImageUpload({
+    oldImage,
+    previewFiles,
+  })
+
   const {
     isVariantOpen,
     onOpenVariantChange,
@@ -52,6 +64,7 @@ export const VariantForm = () => {
   const {
     control,
     handleSubmit,
+    setValue,
     reset,
     formState: { errors, isDirty },
   } = useForm<VariantInput>({
@@ -98,18 +111,47 @@ export const VariantForm = () => {
     })
 
   const isPending =
-    isPendingCreateVariant || isLoadingVariant || isPendingUpdateVariant
-  const headerLable = variantId ? 'Edit product options' : 'Add product options'
+    isPendingCreateVariant ||
+    isLoadingVariant ||
+    isPendingUpdateVariant ||
+    isUploading
+  const headerLable = variantId ? 'Edit Variant' : 'Add Variant'
 
-  const onSubmit = (data: VariantInput) => {
+  const onFilesChange = (files: ImageWithPreview[]) => {
+    setPreviewFiles(files)
+
+    setValue(
+      'image',
+      files.length
+        ? 'There have been changes to the image files.'
+        : (oldImage ?? ''),
+      {
+        shouldDirty: true,
+        shouldTouch: true,
+      },
+    )
+  }
+
+  const onSubmit = async (data: VariantInput) => {
+    const imagePath = await resolveImagePath()
+
+    const payload = {
+      ...data,
+      image: imagePath,
+      productId,
+    }
+
     if (!variantId) {
-      mutateCreateVariant({ ...data, productId })
+      mutateCreateVariant(payload)
     } else {
-      mutateUpdateVariant({ ...data, productId })
+      mutateUpdateVariant(payload)
     }
   }
 
   const onClose = () => {
+    setPreviewFiles([])
+    setOldImage(null)
+
     queryClient.removeQueries({
       queryKey: QUERY_KEY.VARIANT,
     })
@@ -135,6 +177,8 @@ export const VariantForm = () => {
 
         {!isPending && (
           <ModalBody>
+            <ImageDropzone onFilesChange={onFilesChange} />
+
             <SubHeading title='Option status' />
             <Controller
               control={control}

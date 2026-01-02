@@ -189,7 +189,7 @@ export const ImageForm = () => {
               name='isPrimary'
               render={({ field: { value, onChange, ...field } }) => (
                 <Switch {...field} isSelected={value} onValueChange={onChange}>
-                  Set as main profile picture
+                  Make primary photo
                 </Switch>
               )}
             />

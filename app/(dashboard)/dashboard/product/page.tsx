@@ -273,7 +273,7 @@ export default function Product() {
                     </AvatarGroup>
                   )}
                 </TableCell>
-                <TableCell className='max-w-72'>
+                <TableCell className='max-w-72 min-w-72'>
                   {product?.name ?? '-'}
                 </TableCell>
                 <TableCell className='min-w-32'>

@@ -108,7 +108,7 @@ export const CategoryForm = () => {
     isLoadingCategory ||
     isPendingUpdateCategory ||
     isUploading
-  const headerLable = categoryId ? 'Edit Category' : 'Add a category'
+  const headerLable = categoryId ? 'Edit Category' : 'Add Category'
 
   const onFilesChange = (files: ImageWithPreview[]) => {
     setPreviewFiles(files)

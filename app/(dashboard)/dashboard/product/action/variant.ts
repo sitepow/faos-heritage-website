@@ -41,6 +41,7 @@ export const getVariants = async (productId: string) => {
         price: true,
         stockQuantity: true,
         isActive: true,
+        image: true,
       },
       orderBy: { name: 'desc' },
     }),

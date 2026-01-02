@@ -16,6 +16,7 @@ import {
   DropdownItem,
   ModalFooter,
   Chip,
+  Avatar,
 } from '@heroui/react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import {
@@ -31,6 +32,7 @@ import { VariantForm } from '../form/variant'
 
 import { useAppStore } from '@/app/store'
 import { ConfirmModal } from '@/components/modal/confirm'
+import { NO_IMAGE } from '@/utils/constants'
 import { formatCurrency, formatNumber } from '@/utils/number'
 import { cn } from '@/utils/style'
 
@@ -140,9 +142,13 @@ export const VariantManager = () => {
                   >
                     <CardBody className='flex-row items-center justify-between'>
                       <div className='line-clamp-1 flex flex-col'>
-                        <span className='line-clamp-2'>
-                          {variant.name} (Option ID: {variant.id})
-                        </span>
+                        <div className='flex flex-wrap items-center gap-2'>
+                          <Avatar src={variant?.image ?? NO_IMAGE} />
+                          <span className='line-clamp-2'>
+                            {variant.name} (Option ID: {variant.id})
+                          </span>
+                        </div>
+
                         <div className='mt-2.5 flex gap-2 text-sm'>
                           {!!variant.sku && (
                             <Chip>

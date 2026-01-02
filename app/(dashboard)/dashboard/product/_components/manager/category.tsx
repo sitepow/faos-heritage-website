@@ -15,6 +15,7 @@ import {
   DropdownMenu,
   DropdownItem,
   ModalFooter,
+  Avatar,
 } from '@heroui/react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import {
@@ -23,7 +24,6 @@ import {
   PlusIcon,
   TrashIcon,
 } from 'lucide-react'
-import Image from 'next/image'
 
 import { deleteCategory, getCategories } from '../../action'
 import { useProductStore } from '../../store'
@@ -125,13 +125,7 @@ export const CategoryManager = () => {
                   >
                     <CardBody className='flex-row items-center justify-between'>
                       <div className='flex items-center gap-2'>
-                        <Image
-                          alt={category.name}
-                          className='aspect-square rounded-full object-cover'
-                          height={38}
-                          src={category?.image ?? NO_IMAGE}
-                          width={38}
-                        />
+                        <Avatar src={category?.image ?? NO_IMAGE} />
                         <span className='line-clamp-1'>{category.name}</span>
                       </div>
 

@@ -5,6 +5,7 @@ export type VariantInput = z.infer<typeof variantSchema>
 export const variantSchema = z.object({
   id: z.string().nullish(),
   productId: z.string().nullish(),
+  image: z.string().nullish(),
   name: z
     .string('The product name must be a text.')
     .min(1, 'Please specify the product name (do not leave it blank).'),
