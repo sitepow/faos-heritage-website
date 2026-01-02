@@ -9,6 +9,7 @@ import {
   AdvertiseBanner,
   CertificateBanner,
 } from '@/components/features/banner'
+import { CarouselImageBanner } from '@/components/features/banner/carousel-image'
 import { CustomerBanner } from '@/components/features/banner/customer'
 import { siteConfig } from '@/config/site'
 import { ITEM_PER_PAGE, OG_IMAGE } from '@/utils/constants'
@@ -63,6 +64,7 @@ export default async function Homepage() {
 
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
+      <CarouselImageBanner />
       <CategoryCarouselClient
         initialCategories={categories}
         initialProducts={products}

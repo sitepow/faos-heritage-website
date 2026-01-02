@@ -97,16 +97,23 @@ export const updateImage = async (data: ImageInput) => {
 
   try {
     await prisma.$transaction(async (tx) => {
+      const image = await tx.productImage.findUnique({
+        where: { id },
+        select: {
+          productId: true,
+          url: true,
+        },
+      })
+
+      if (!image) {
+        throw new Error(ERROR_CODES.DATA_NOT_FOUND)
+      }
+
+      if (payload.url && image.url && payload.url !== image.url) {
+        await deleteFileSupabase(image.url)
+      }
+
       if (payload.isPrimary) {
-        const image = await tx.productImage.findUnique({
-          where: { id },
-          select: { productId: true },
-        })
-
-        if (!image) {
-          throw new Error('Image not found')
-        }
-
         await tx.productImage.updateMany({
           where: {
             productId: image.productId,

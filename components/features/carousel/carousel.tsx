@@ -63,7 +63,6 @@ export const Carousel = ({
         <div
           className={cn(
             isVertical ? 'flex flex-col gap-2' : 'flex gap-2',
-            'px-1 md:gap-4',
             trackClassName,
           )}
         >
