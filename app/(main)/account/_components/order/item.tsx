@@ -18,7 +18,7 @@ import { createStripeCheckout } from '@/actions/stripe'
 import { useOrderStore } from '@/app/(dashboard)/dashboard/order/store'
 import { CountryFlag } from '@/components/common/country-flag'
 import { Stepper } from '@/components/common/stepper'
-// import { OmisePaymentButton } from '@/components/features/omise/payment-button'
+// import { OmisePayment } from '@/components/features/omise/payment'
 import { NO_IMAGE } from '@/utils/constants'
 import { formatDate } from '@/utils/date'
 import { getOrderStatus } from '@/utils/features'
@@ -145,7 +145,7 @@ export const OrderItem = ({ order, hideButton }: OrderItemProps) => {
                 Pay now
               </Button>
 
-              // <OmisePaymentButton
+              // <OmisePayment
               //   orderId={order.id}
               //   amount={order.total}
               //   currency='THB'

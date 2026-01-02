@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation'
 
 import { useOmise } from '@/hooks/useOmise'
 
-interface OmisePaymentButtonProps {
+interface OmisePaymentProps {
   orderId: string
   amount: number
   currency?: string
@@ -19,14 +19,14 @@ interface OmisePaymentButtonProps {
   onPaymentError?: (err: any) => void
 }
 
-export const OmisePaymentButton = ({
+export const OmisePayment = ({
   orderId,
   amount,
   currency = 'THB',
   buttonText = 'Pay now',
   onPaymentSuccess,
   onPaymentError,
-}: OmisePaymentButtonProps) => {
+}: OmisePaymentProps) => {
   const router = useRouter()
   const { isLoaded, openPaymentForm } = useOmise()
 
