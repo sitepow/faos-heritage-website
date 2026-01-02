@@ -13,7 +13,6 @@ import { deleteFavorite, type GetFavoriteResult } from './action'
 
 import { ProductPrice } from '@/app/(main)/product'
 import { ConfirmModal } from '@/components/modal/confirm'
-import { NO_IMAGE } from '@/utils/constants'
 import { getProductUnit } from '@/utils/features'
 import { createSlug } from '@/utils/slug'
 import { cn } from '@/utils/style'
@@ -66,6 +65,10 @@ export const FavoriteItem = ({
       },
     })
 
+  const primaryImage =
+    favorite?.product?.images?.find((img) => img.isPrimary) ??
+    favorite?.product?.images?.[0]
+
   return (
     <>
       <ConfirmModal
@@ -98,7 +101,7 @@ export const FavoriteItem = ({
                   alt='product-image'
                   className='aspect-square size-full object-cover'
                   height={100}
-                  src={favorite?.product?.images?.[0]?.url ?? NO_IMAGE}
+                  src={primaryImage?.url ?? '/images/no-image.png'}
                   width={100}
                 />
               </Link>

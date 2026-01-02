@@ -60,6 +60,7 @@ export const getFavorites = async ({
           images: {
             select: {
               url: true,
+              isPrimary: true,
             },
           },
         },
