@@ -31,17 +31,17 @@ export const CustomerBanner = () => {
           </Link>
         </h2>
 
-        <div className='flex max-w-4xl flex-wrap justify-center gap-4'>
+        <div className='flex max-w-4xl flex-wrap justify-center gap-2'>
           {COUNTRIES.map((country) => (
             <div
               key={country.code}
               className='flex flex-col items-center gap-1 text-xs text-white/80'
             >
               <CountryFlag
-                className='size-12 sm:size-14'
+                className='sm:size-10 lg:size-12'
                 countryCode={country.code}
               />
-              <span>{country.name}</span>
+              <span className='hidden sm:block'>{country.name}</span>
             </div>
           ))}
         </div>
