@@ -14,7 +14,7 @@ export const CarouselImageBanner = () => {
 
   const activeBanners = banners?.filter((banner) => banner.isActive) ?? []
 
-  if (!activeBanners) {
+  if (activeBanners?.length === 0) {
     return
   }
 
