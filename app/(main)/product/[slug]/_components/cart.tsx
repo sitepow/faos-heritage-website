@@ -188,7 +188,7 @@ export const ProductCart = () => {
             color='primary'
             isDisabled={
               isOutOfStock ||
-              (hasVariants && !variantId) ||
+              (!!hasVariants && !variantId) ||
               createCartMutation.isPending
             }
             isLoading={createCartMutation.isPending}
