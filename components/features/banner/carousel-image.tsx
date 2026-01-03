@@ -14,6 +14,10 @@ export const CarouselImageBanner = () => {
 
   const activeBanners = banners?.filter((banner) => banner.isActive) ?? []
 
+  if (!activeBanners) {
+    return
+  }
+
   return (
     <Carousel
       slidesToScroll
