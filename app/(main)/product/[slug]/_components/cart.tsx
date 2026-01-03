@@ -7,6 +7,7 @@ import {
   SelectItem,
   Button,
   Avatar,
+  NumberInput,
 } from '@heroui/react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { HeartIcon, ShoppingCartIcon } from 'lucide-react'
@@ -30,6 +31,7 @@ export const ProductCart = () => {
   const { product } = useProductDetailStore()
   const router = useRouter()
   const queryClient = useQueryClient()
+  const [quantity, setQuantity] = useState(1)
 
   const { data: session } = useSession()
   const userId = session?.user?.id
@@ -70,6 +72,7 @@ export const ProductCart = () => {
         userId: userId!,
         productId: product!.id,
         variantId: variantId!,
+        quantity,
       }),
     onSuccess: async () => {
       await Promise.all([
@@ -128,25 +131,41 @@ export const ProductCart = () => {
         )}
 
         {hasVariants && (
-          <Select
-            label='Product options'
-            selectedKeys={variantId ? [variantId] : []}
-            variant='bordered'
-            onSelectionChange={(option) =>
-              setVariantId(Array.from(option)[0] as string)
-            }
-          >
-            {(product?.variants ?? []).map((variant) => (
-              <SelectItem
-                key={variant.id}
-                startContent={
-                  <Avatar src={variant?.image ?? '/images/no-image.png'} />
+          <div className='flex flex-col gap-2 sm:flex-row'>
+            <NumberInput
+              label='Quantity'
+              variant='bordered'
+              minValue={1}
+              maxValue={stock}
+              value={quantity}
+              isDisabled={isOutOfStock}
+              onValueChange={(value) => {
+                if (typeof value === 'number') {
+                  setQuantity(value)
                 }
-              >
-                {variant.name}
-              </SelectItem>
-            ))}
-          </Select>
+              }}
+            />
+
+            <Select
+              label='Product options'
+              selectedKeys={variantId ? [variantId] : []}
+              variant='bordered'
+              onSelectionChange={(option) =>
+                setVariantId(Array.from(option)[0] as string)
+              }
+            >
+              {(product?.variants ?? []).map((variant) => (
+                <SelectItem
+                  key={variant.id}
+                  startContent={
+                    <Avatar src={variant?.image ?? '/images/no-image.png'} />
+                  }
+                >
+                  {variant.name}
+                </SelectItem>
+              ))}
+            </Select>
+          </div>
         )}
 
         <div className='flex gap-2'>
@@ -177,6 +196,8 @@ export const ProductCart = () => {
             onClick={() => {
               if (!requireAuth('add to cart')) return
               if (isOutOfStock) return toast.error('Out of stock')
+              if (quantity > stock) return toast.error('Quantity exceeds stock')
+
               createCartMutation.mutate()
             }}
           >

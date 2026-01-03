@@ -11,7 +11,8 @@ export type GetCartResult = GetCartsResult[number]
 type createCartParams = {
   userId: string
   productId: string
-  variantId?: string
+  variantId?: string | null
+  quantity: number
 }
 
 type updateCartParams = {
@@ -40,6 +41,7 @@ export const getCarts = async (userId: string) => {
                 price: true,
                 stockQuantity: true,
                 weight: true,
+                image: true,
               },
             },
             images: {
@@ -59,8 +61,13 @@ export const createCart = async ({
   userId,
   productId,
   variantId,
+  quantity,
 }: createCartParams) => {
   try {
+    if (quantity < 1) {
+      return fail(ERROR_CODES.DATA_INSUFFICIENT)
+    }
+
     const product = await prisma.product.findUnique({
       where: { id: productId },
       include: {
@@ -88,12 +95,15 @@ export const createCart = async ({
       availableStock = product.stockQuantity
     }
 
-    if (availableStock < 1) {
+    if (availableStock < quantity) {
       return fail(ERROR_CODES.DATA_INSUFFICIENT)
     }
 
     const existing = await prisma.cart.findFirst({
-      where: { userId, productId },
+      where: {
+        userId,
+        productId,
+      },
     })
 
     if (existing) {
@@ -110,22 +120,24 @@ export const createCart = async ({
               userId,
               productId,
               variantId: variantId || null,
-              quantity: 1,
+              quantity,
             },
           })
         })
-      } else {
-        const newQty = existing.quantity + 1
-
-        if (newQty > availableStock) {
-          return fail(ERROR_CODES.DATA_INSUFFICIENT)
-        }
-
-        return await prisma.cart.update({
-          where: { id: existing.id },
-          data: { quantity: newQty },
-        })
       }
+
+      const newQty = existing.quantity + quantity
+
+      if (newQty > availableStock) {
+        return fail(ERROR_CODES.DATA_INSUFFICIENT)
+      }
+
+      return await prisma.cart.update({
+        where: { id: existing.id },
+        data: {
+          quantity: newQty,
+        },
+      })
     }
 
     await prisma.cart.create({
@@ -133,14 +145,14 @@ export const createCart = async ({
         userId,
         productId,
         variantId: variantId || null,
-        quantity: 1,
+        quantity,
       },
     })
+
+    return done()
   } catch {
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
-
-  return done()
 }
 
 export const updateCart = async ({

@@ -1,6 +1,7 @@
 'use client'
 
 import {
+  Avatar,
   Button,
   Card,
   CardBody,
@@ -234,7 +235,14 @@ export const CartItem = ({ className, cart, ...props }: CartItemProps) => {
                       onSelectionChange={onVariantChange}
                     >
                       {(variant) => (
-                        <SelectItem key={variant?.id}>
+                        <SelectItem
+                          key={variant?.id}
+                          startContent={
+                            <Avatar
+                              src={variant?.image ?? '/images/no-image.png'}
+                            />
+                          }
+                        >
                           {variant?.name}
                         </SelectItem>
                       )}
