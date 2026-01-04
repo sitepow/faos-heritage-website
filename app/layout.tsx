@@ -31,7 +31,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
-    <html suppressHydrationWarning lang='en'>
+    <html suppressHydrationWarning>
       <head />
       <body
         className={cn(

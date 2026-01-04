@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+import createNextIntlPlugin from 'next-intl/plugin'
 
 const nextConfig = {
   experimental: {
@@ -23,4 +24,5 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+const withNextIntl = createNextIntlPlugin()
+export default withNextIntl(nextConfig)

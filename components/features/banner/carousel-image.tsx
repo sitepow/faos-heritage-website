@@ -3,7 +3,7 @@
 import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 
-import { getImageBanners } from '../../../app/(dashboard)/_components/manager/banner/action'
+import { getImageBanners } from '../../../app/[locale]/(dashboard)/_components/manager/banner/action'
 import { Carousel } from '../carousel'
 
 export const CarouselImageBanner = () => {
