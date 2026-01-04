@@ -4,7 +4,7 @@ import { getRequestConfig } from 'next-intl/server'
 import { routing } from './routing'
 
 const messages = {
-  en: () => import('@/messages/en.json'),
+  us: () => import('@/messages/us.json'),
   th: () => import('@/messages/th.json'),
 }
 

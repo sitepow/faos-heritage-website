@@ -77,3 +77,7 @@ export const CURRENCY_LOCALE_MAP = [
     locale: 'id-ID',
   },
 ] as const
+
+export const LOCALES = Array.from(
+  new Set(CURRENCY_LOCALE_MAP.map((item) => item.country.toLowerCase())),
+) as readonly string[]
