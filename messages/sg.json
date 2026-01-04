@@ -1,0 +1,22 @@
+{
+  "Navbar": {
+    "Header": "Premium Organic Olive Oil & Honey — 100% Pure Natural Collection for Wellness"
+  },
+  "Banner": {
+    "customer": "Trusted by customers across <highlight>multiple countries worldwide</highlight>. <link>Reliable quality, wherever you do business.</link>"
+  },
+  "Country": {
+    "TH": "Thailand",
+    "US": "United States",
+    "GR": "Greece",
+    "IT": "Italy",
+    "NL": "Netherlands",
+    "MY": "Malaysia",
+    "SG": "Singapore",
+    "JP": "Japan",
+    "CN": "China",
+    "IS": "Iceland",
+    "VN": "Vietnam",
+    "ID": "Indonesia"
+  }
+}

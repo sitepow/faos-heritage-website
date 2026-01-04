@@ -1,0 +1,22 @@
+{
+  "Navbar": {
+    "Header": "Hágæða Lífræn Ólífuolía & Hunang — 100% Hrein Náttúruleg Safn fyrir Heilsu"
+  },
+  "Banner": {
+    "customer": "Nýtur trausts viðskiptavina í <highlight>mörgum löndum um allan heim</highlight>. <link>Gæðavörur sem þú getur treyst, hvar sem þú ert.</link>"
+  },
+  "Country": {
+    "TH": "Taíland",
+    "US": "Bandaríkin",
+    "GR": "Grikkland",
+    "IT": "Ítalía",
+    "NL": "Holland",
+    "MY": "Malasía",
+    "SG": "Singapúr",
+    "JP": "Japan",
+    "CN": "Kína",
+    "IS": "Ísland",
+    "VN": "Víetnam",
+    "ID": "Indónesía"
+  }
+}

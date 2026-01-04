@@ -1,7 +1,7 @@
 'use client'
 
 import { Select, SelectItem } from '@heroui/react'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useEffect } from 'react'
 
 import { useAppStore } from '@/app/store'
@@ -11,6 +11,7 @@ import { CURRENCY_LOCALE_MAP } from '@/utils/constants'
 import { getUsdExchangeRates } from '@/utils/currency/exchange-rate'
 
 export const Country = () => {
+  const tCountry = useTranslations('Country')
   const locale = useLocale()
   const router = useRouter()
   const pathname = usePathname()
@@ -36,7 +37,7 @@ export const Country = () => {
   if (!hasHydrated) return null
 
   return (
-    <div className='flex gap-2'>
+    <div className='flex flex-col gap-2 sm:flex-row'>
       <Select
         variant='faded'
         size='lg'
@@ -47,7 +48,7 @@ export const Country = () => {
           selectedCountry ? (
             <div className='flex items-center gap-2'>
               <CountryFlag countryCode={selectedCountry.country} />
-              <span>{selectedCountry.name}</span>
+              <span>{tCountry(selectedCountry.country)}</span>
             </div>
           ) : null
         }
@@ -60,7 +61,7 @@ export const Country = () => {
           <SelectItem key={item.country} textValue={item.name}>
             <div className='flex items-center gap-2'>
               <CountryFlag countryCode={item.country} />
-              <span>{item.name}</span>
+              <span>{tCountry(item.country)}</span>
             </div>
           </SelectItem>
         ))}
@@ -99,7 +100,7 @@ export const Country = () => {
         {CURRENCY_LOCALE_MAP.map((item) => (
           <SelectItem key={item.locale} textValue={item.name}>
             <div className='flex gap-1'>
-              <span>{item?.name}</span>
+              <span>{tCountry(item.country)}</span>
               <span className='text-primary text-sm'>({item.currency})</span>
             </div>
           </SelectItem>

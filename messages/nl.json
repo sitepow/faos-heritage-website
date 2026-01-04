@@ -1,0 +1,22 @@
+{
+  "Navbar": {
+    "Header": "Premium Biologische Olijfolie & Honing — 100% Pure Natuurlijke Collectie voor Welzijn"
+  },
+  "Banner": {
+    "customer": "Vertrouwd door klanten uit <highlight>meerdere landen wereldwijd</highlight>. <link>Kwaliteitsproducten waar je overal op kunt rekenen.</link>"
+  },
+  "Country": {
+    "TH": "Thailand",
+    "US": "Verenigde Staten",
+    "GR": "Griekenland",
+    "IT": "Italië",
+    "NL": "Nederland",
+    "MY": "Maleisië",
+    "SG": "Singapore",
+    "JP": "Japan",
+    "CN": "China",
+    "IS": "IJsland",
+    "VN": "Vietnam",
+    "ID": "Indonesië"
+  }
+}

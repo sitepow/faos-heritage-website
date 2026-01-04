@@ -1,0 +1,22 @@
+{
+  "Navbar": {
+    "Header": "Dầu Ô Liu Hữu Cơ & Mật Ong Cao Cấp — Bộ Sưu Tập Tự Nhiên 100% Vì Sức Khỏe"
+  },
+  "Banner": {
+    "customer": "Được khách hàng từ <highlight>nhiều quốc gia trên toàn thế giới</highlight> tin tưởng. <link>Sản phẩm chất lượng, đáng tin cậy ở mọi nơi.</link>"
+  },
+  "Country": {
+    "TH": "Thái Lan",
+    "US": "Hoa Kỳ",
+    "GR": "Hy Lạp",
+    "IT": "Ý",
+    "NL": "Hà Lan",
+    "MY": "Malaysia",
+    "SG": "Singapore",
+    "JP": "Nhật Bản",
+    "CN": "Trung Quốc",
+    "IS": "Iceland",
+    "VN": "Việt Nam",
+    "ID": "Indonesia"
+  }
+}

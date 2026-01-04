@@ -1,12 +1,22 @@
 'use client'
 
 import { Card, CardBody } from '@heroui/react'
-import Link from 'next/link'
+
+import type { ReactNode } from 'react'
 
 import { CountryFlag } from '@/components/common/country-flag'
-import { COUNTRIES } from '@/utils/constants'
 
-export const CustomerBanner = () => {
+type Country = {
+  code: string
+  name: string
+}
+
+type Props = {
+  title: ReactNode
+  countries: Country[]
+}
+
+export const CustomerBannerClient = ({ title, countries }: Props) => {
   return (
     <Card fullWidth>
       <CardBody
@@ -22,17 +32,11 @@ export const CustomerBanner = () => {
         }}
       >
         <h2 className='mx-auto max-w-11/12 text-center text-2xl leading-tight font-bold text-white sm:max-w-10/12 md:max-w-1/2 xl:max-w-1/3'>
-          Trusted by customers from{' '}
-          <span className='text-primary'>multiple countries worldwide</span>.{' '}
-          <Link href='/about'>
-            <span className='underline'>
-              Quality products with global confidence.
-            </span>
-          </Link>
+          {title}
         </h2>
 
         <div className='flex max-w-4xl flex-wrap justify-center gap-2'>
-          {COUNTRIES.map((country) => (
+          {countries.map((country) => (
             <div
               key={country.code}
               className='flex flex-col items-center gap-1 text-xs text-white/80'

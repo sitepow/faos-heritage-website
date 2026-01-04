@@ -1,0 +1,22 @@
+{
+  "Navbar": {
+    "Header": "Minyak Zaitun Organik & Madu Premium — Koleksi Alami 100% Murni untuk Kesehatan"
+  },
+  "Banner": {
+    "customer": "Dipercaya oleh pelanggan dari <highlight>berbagai negara di seluruh dunia</highlight>. <link>Produk berkualitas yang dapat diandalkan, di mana pun Anda berada.</link>"
+  },
+  "Country": {
+    "TH": "Thailand",
+    "US": "Amerika Serikat",
+    "GR": "Yunani",
+    "IT": "Italia",
+    "NL": "Belanda",
+    "MY": "Malaysia",
+    "SG": "Singapura",
+    "JP": "Jepang",
+    "CN": "Tiongkok",
+    "IS": "Islandia",
+    "VN": "Vietnam",
+    "ID": "Indonesia"
+  }
+}
