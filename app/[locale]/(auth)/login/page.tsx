@@ -16,6 +16,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
 
 import type { ErrorCode } from '@/lib/errors/codes'
@@ -28,10 +29,10 @@ import {
   type UserLoginInput,
   type UserRegisterInput,
 } from '@/app/[locale]/(auth)/login/schema'
-import { siteConfig } from '@/config/site'
 import { useQueryParams } from '@/hooks/useQueryParams'
 
 export default function Login() {
+  const t = useTranslations('Site')
   const router = useRouter()
   const { getQueryParam } = useQueryParams()
   const callbackUrl = getQueryParam('callbackUrl') || '/'
@@ -112,7 +113,7 @@ export default function Login() {
           To access the website{' '}
           <Link href={'/'}>
             <span className='text-primary cursor-pointer underline'>
-              {siteConfig?.name}
+              {t('name')}
             </span>
           </Link>
         </span>
