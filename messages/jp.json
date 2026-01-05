@@ -48,6 +48,12 @@
   "Banner": {
     "customer": "<highlight>世界中のさまざまな国</highlight>のお客様に選ばれています。<link>どこにいても信頼できる品質をお届けします。</link>"
   },
+  "Footer": {
+    "copyright": "著作権 {year} {name} - {title}",
+    "Menu": {
+      "privacy": "プライバシーポリシー"
+    }
+  },
   "Country": {
     "TH": "タイ",
     "US": "アメリカ合衆国",

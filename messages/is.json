@@ -48,6 +48,12 @@
   "Banner": {
     "customer": "Nýtur trausts viðskiptavina í <highlight>mörgum löndum um allan heim</highlight>. <link>Gæðavörur sem þú getur treyst, hvar sem þú ert.</link>"
   },
+  "Footer": {
+    "copyright": "Höfundarréttur {year} {name} - {title}",
+    "Menu": {
+      "privacy": "Persónuverndarstefna"
+    }
+  },
   "Country": {
     "TH": "Taíland",
     "US": "Bandaríkin",

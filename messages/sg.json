@@ -49,6 +49,12 @@
   "Banner": {
     "customer": "Trusted by customers across <highlight>multiple countries worldwide</highlight>. <link>Reliable quality, wherever you do business.</link>"
   },
+  "Footer": {
+    "copyright": "Copyright {year} {name} - {title}",
+    "Menu": {
+      "privacy": "Privacy Policy"
+    }
+  },
   "Country": {
     "TH": "Thailand",
     "US": "United States",

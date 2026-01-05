@@ -48,6 +48,12 @@
   "Banner": {
     "customer": "Scelto da clienti in <highlight>molti paesi in tutto il mondo</highlight>. <link>Prodotti di qualità su cui puoi contare, ovunque tu sia.</link>"
   },
+  "Footer": {
+    "copyright": "Copyright {year} {name} - {title}",
+    "Menu": {
+      "privacy": "Informativa sulla privacy"
+    }
+  },
   "Country": {
     "TH": "Thailandia",
     "US": "Stati Uniti",

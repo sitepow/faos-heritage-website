@@ -43,6 +43,12 @@
   "Banner": {
     "customer": "深受来自 <highlight>全球多个国家</highlight> 客户的信赖。<link>无论身在何处，都能放心使用的优质产品。</link>"
   },
+  "Footer": {
+    "copyright": "版权所有 {year} {name} - {title}",
+    "Menu": {
+      "privacy": "隐私政策"
+    }
+  },
   "Country": {
     "TH": "泰国",
     "US": "美国",

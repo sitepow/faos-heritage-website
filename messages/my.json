@@ -48,6 +48,12 @@
   "Banner": {
     "customer": "Dipercayai oleh pelanggan dari <highlight>pelbagai negara di seluruh dunia</highlight>. <link>Produk berkualiti yang boleh anda harapkan, di mana sahaja.</link>"
   },
+  "Footer": {
+    "copyright": "Hak Cipta {year} {name} - {title}",
+    "Menu": {
+      "privacy": "Dasar Privasi"
+    }
+  },
   "Country": {
     "TH": "Thailand",
     "US": "Amerika Syarikat",

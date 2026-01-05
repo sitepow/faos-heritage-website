@@ -48,6 +48,12 @@
   "Banner": {
     "customer": "Vertrouwd door klanten uit <highlight>meerdere landen wereldwijd</highlight>. <link>Kwaliteitsproducten waar je overal op kunt rekenen.</link>"
   },
+  "Footer": {
+    "copyright": "Copyright {year} {name} - {title}",
+    "Menu": {
+      "privacy": "Privacybeleid"
+    }
+  },
   "Country": {
     "TH": "Thailand",
     "US": "Verenigde Staten",

@@ -48,6 +48,12 @@
   "Banner": {
     "customer": "Được khách hàng từ <highlight>nhiều quốc gia trên toàn thế giới</highlight> tin tưởng. <link>Sản phẩm chất lượng, đáng tin cậy ở mọi nơi.</link>"
   },
+  "Footer": {
+    "copyright": "Bản quyền {year} {name} - {title}",
+    "Menu": {
+      "privacy": "Chính sách bảo mật"
+    }
+  },
   "Country": {
     "TH": "Thái Lan",
     "US": "Hoa Kỳ",

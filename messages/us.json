@@ -48,6 +48,12 @@
       "description": "Try selecting a different category or check back later."
     }
   },
+  "Footer": {
+    "copyright": "Copyright {year} {name} - {title}",
+    "Menu": {
+      "privacy": "Privacy Policy"
+    }
+  },
   "Country": {
     "TH": "Thailand",
     "US": "United States",
