@@ -7,6 +7,7 @@ import { Card, CardHeader, CardBody, ScrollShadow, Button } from '@heroui/react'
 import { useQuery } from '@tanstack/react-query'
 import { AlertCircleIcon, ArrowRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { useState, useMemo } from 'react'
 
 import type { GetCategoriesResult } from '@/app/[locale]/(dashboard)/dashboard/product/action/category'
@@ -28,13 +29,19 @@ interface CategoryCarouselClientProps {
   itemPerPage: number
 }
 
-const EmptyState = () => (
+const EmptyState = ({
+  title,
+  description,
+}: {
+  title: string
+  description: string
+}) => (
   <div className='text-default-500 flex w-full flex-col items-center justify-center gap-2 py-10 text-center'>
     <AlertCircleIcon className='size-8' />
     <p>
-      No products found in this category.
+      {title}
       <br />
-      Please select another category.
+      {description}
     </p>
   </div>
 )
@@ -45,6 +52,7 @@ export const CategoryCarouselClient = ({
   itemPerPage,
 }: CategoryCarouselClientProps) => {
   const router = useRouter()
+  const t = useTranslations('CategoryCarousel')
 
   const [selectedId, setSelectedId] = useState<string | undefined>(
     initialCategories?.[0]?.id,
@@ -83,7 +91,7 @@ export const CategoryCarouselClient = ({
   return (
     <div className='flex w-full flex-col gap-5 md:min-h-[525px] md:flex-row'>
       <Card className='h-[350px] md:h-[550px] md:w-[400px]'>
-        <CardHeader className='font-bold'>Products by category</CardHeader>
+        <CardHeader className='font-bold'>{t('title')}</CardHeader>
         <CardBody>
           <ScrollShadow className='p-1'>
             <div className='space-y-1'>
@@ -114,7 +122,7 @@ export const CategoryCarouselClient = ({
               )
             }
           >
-            Explore Products
+            {t('explore')}
           </Button>
         </CardHeader>
 
@@ -125,7 +133,10 @@ export const CategoryCarouselClient = ({
                 <ProductCardSkeleton key={i} />
               ))
             ) : products?.items?.length === 0 ? (
-              <EmptyState />
+              <EmptyState
+                title={t('empty.title')}
+                description={t('empty.description')}
+              />
             ) : (
               products?.items?.map((product) => (
                 <ProductCard key={product.id} product={product} />

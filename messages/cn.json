@@ -32,6 +32,14 @@
       "ogDescription": "100%纯天然产品，打造健康生活方式"
     }
   },
+  "CategoryCarousel": {
+    "title": "按分类选购",
+    "explore": "查看全部商品",
+    "empty": {
+      "title": "该分类暂无商品",
+      "description": "请尝试选择其他分类。"
+    }
+  },
   "Banner": {
     "customer": "深受来自 <highlight>全球多个国家</highlight> 客户的信赖。<link>无论身在何处，都能放心使用的优质产品。</link>"
   },

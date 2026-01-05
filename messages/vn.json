@@ -37,6 +37,14 @@
       "ogDescription": "Sản phẩm tự nhiên 100% cho lối sống lành mạnh"
     }
   },
+  "CategoryCarousel": {
+    "title": "Mua sắm theo danh mục",
+    "explore": "Xem tất cả sản phẩm",
+    "empty": {
+      "title": "Không có sản phẩm trong danh mục này",
+      "description": "Vui lòng chọn một danh mục khác."
+    }
+  },
   "Banner": {
     "customer": "Được khách hàng từ <highlight>nhiều quốc gia trên toàn thế giới</highlight> tin tưởng. <link>Sản phẩm chất lượng, đáng tin cậy ở mọi nơi.</link>"
   },

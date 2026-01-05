@@ -37,6 +37,14 @@
       "ogDescription": "100% náttúrulegar vörur fyrir heilbrigðan lífsstíl"
     }
   },
+  "CategoryCarousel": {
+    "title": "Versla eftir flokkum",
+    "explore": "Skoða allar vörur",
+    "empty": {
+      "title": "Engar vörur í boði",
+      "description": "Prófaðu að velja annan flokk."
+    }
+  },
   "Banner": {
     "customer": "Nýtur trausts viðskiptavina í <highlight>mörgum löndum um allan heim</highlight>. <link>Gæðavörur sem þú getur treyst, hvar sem þú ert.</link>"
   },

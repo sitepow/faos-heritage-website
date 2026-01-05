@@ -37,6 +37,14 @@
       "ogDescription": "100% natuurlijke producten voor een gezonde levensstijl"
     }
   },
+  "CategoryCarousel": {
+    "title": "Winkel per categorie",
+    "explore": "Bekijk alle producten",
+    "empty": {
+      "title": "Geen producten beschikbaar",
+      "description": "Probeer een andere categorie te selecteren."
+    }
+  },
   "Banner": {
     "customer": "Vertrouwd door klanten uit <highlight>meerdere landen wereldwijd</highlight>. <link>Kwaliteitsproducten waar je overal op kunt rekenen.</link>"
   },

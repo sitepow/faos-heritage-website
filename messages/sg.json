@@ -38,6 +38,14 @@
       "ogDescription": "100% pure natural products for a healthier lifestyle"
     }
   },
+  "CategoryCarousel": {
+    "title": "Shop by Category",
+    "explore": "View All Products",
+    "empty": {
+      "title": "No products available",
+      "description": "Try selecting a different category or check back later."
+    }
+  },
   "Banner": {
     "customer": "Trusted by customers across <highlight>multiple countries worldwide</highlight>. <link>Reliable quality, wherever you do business.</link>"
   },

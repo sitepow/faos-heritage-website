@@ -37,6 +37,14 @@
       "ogDescription": "健康的なライフスタイルのための100%天然製品"
     }
   },
+  "CategoryCarousel": {
+    "title": "カテゴリーから探す",
+    "explore": "すべての商品を見る",
+    "empty": {
+      "title": "このカテゴリーには商品がありません",
+      "description": "別のカテゴリーを選択してください。"
+    }
+  },
   "Banner": {
     "customer": "<highlight>世界中のさまざまな国</highlight>のお客様に選ばれています。<link>どこにいても信頼できる品質をお届けします。</link>"
   },

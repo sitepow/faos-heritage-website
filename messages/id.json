@@ -37,6 +37,14 @@
       "ogDescription": "Produk alami 100% untuk gaya hidup sehat"
     }
   },
+  "CategoryCarousel": {
+    "title": "Belanja berdasarkan kategori",
+    "explore": "Lihat semua produk",
+    "empty": {
+      "title": "Tidak ada produk tersedia",
+      "description": "Silakan pilih kategori lainnya."
+    }
+  },
   "Banner": {
     "customer": "Dipercaya oleh pelanggan dari <highlight>berbagai negara di seluruh dunia</highlight>. <link>Produk berkualitas yang dapat diandalkan, di mana pun Anda berada.</link>"
   },
