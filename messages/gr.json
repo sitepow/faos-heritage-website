@@ -11,6 +11,16 @@
     "digital": "Ψηφιακό Προϊόν",
     "uncategorized": "Μη Κατηγοριοποιημένο"
   },
+  "ProductCart": {
+    "quantity": "Ποσότητα",
+    "productOptions": "Επιλογές προϊόντος",
+    "addToFavorites": "Προσθήκη στα αγαπημένα",
+    "addToCart": "Προσθήκη στο καλάθι",
+    "pleaseLoginFirst": "Συνδεθείτε για να {action}",
+    "outOfStock": "Μη διαθέσιμο",
+    "quantityExceedsStock": "Υπερβαίνει το διαθέσιμο απόθεμα",
+    "share": "Κοινοποίηση"
+  },
   "ProductTab": {
     "description": "Περιγραφή",
     "review": "Αξιολόγηση"

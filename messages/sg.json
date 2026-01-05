@@ -11,6 +11,16 @@
     "digital": "Digital Product",
     "uncategorized": "Uncategorized"
   },
+  "ProductCart": {
+    "quantity": "Quantity",
+    "productOptions": "Product options",
+    "addToFavorites": "Add to favourites",
+    "addToCart": "Add to cart",
+    "pleaseLoginFirst": "Sign in to {action}",
+    "outOfStock": "Out of stock",
+    "quantityExceedsStock": "Exceeds available stock",
+    "share": "Share"
+  },
   "ProductTab": {
     "description": "Description",
     "review": "Review"

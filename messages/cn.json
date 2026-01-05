@@ -11,6 +11,16 @@
     "digital": "数字产品",
     "uncategorized": "未分类"
   },
+  "ProductCart": {
+    "quantity": "数量",
+    "productOptions": "产品选项",
+    "addToFavorites": "添加到收藏",
+    "addToCart": "添加到购物车",
+    "pleaseLoginFirst": "请登录以{action}",
+    "outOfStock": "缺货",
+    "quantityExceedsStock": "超出可用库存",
+    "share": "分享"
+  },
   "ProductTab": {
     "description": "描述",
     "review": "评价"

@@ -15,6 +15,16 @@
     "description": "Description",
     "review": "Review"
   },
+  "ProductCart": {
+    "quantity": "Quantity",
+    "productOptions": "Product options",
+    "addToFavorites": "Add to favorites",
+    "addToCart": "Add to cart",
+    "pleaseLoginFirst": "Sign in to {action}",
+    "outOfStock": "Out of stock",
+    "quantityExceedsStock": "Exceeds available stock",
+    "share": "Share"
+  },
   "Navbar": {
     "Header": "Premium Organic Olive Oil & Honey — 100% Pure Natural Collection (Wellness Food)",
     "Menu": {

@@ -11,6 +11,16 @@
     "digital": "Sản phẩm số",
     "uncategorized": "Chưa phân loại"
   },
+  "ProductCart": {
+    "quantity": "Số lượng",
+    "productOptions": "Tùy chọn sản phẩm",
+    "addToFavorites": "Thêm vào yêu thích",
+    "addToCart": "Thêm vào giỏ hàng",
+    "pleaseLoginFirst": "Đăng nhập để {action}",
+    "outOfStock": "Hết hàng",
+    "quantityExceedsStock": "Vượt quá số lượng có sẵn",
+    "share": "Chia sẻ"
+  },
   "ProductTab": {
     "description": "Mô tả",
     "review": "Đánh giá"

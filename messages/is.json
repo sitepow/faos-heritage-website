@@ -11,6 +11,16 @@
     "digital": "Stafrænt Vara",
     "uncategorized": "Ekki Flokkað"
   },
+  "ProductCart": {
+    "quantity": "Magn",
+    "productOptions": "Valkostir vöru",
+    "addToFavorites": "Bæta við uppáhald",
+    "addToCart": "Bæta í körfu",
+    "pleaseLoginFirst": "Skráðu þig inn til að {action}",
+    "outOfStock": "Uppselt",
+    "quantityExceedsStock": "Fer yfir tiltækar birgðir",
+    "share": "Deila"
+  },
   "ProductTab": {
     "description": "Lýsing",
     "review": "Umsögn"

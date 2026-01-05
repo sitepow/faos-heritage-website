@@ -11,6 +11,16 @@
     "digital": "Produk Digital",
     "uncategorized": "Belum Dikategorikan"
   },
+  "ProductCart": {
+    "quantity": "Jumlah",
+    "productOptions": "Opsi produk",
+    "addToFavorites": "Tambah ke favorit",
+    "addToCart": "Tambah ke keranjang",
+    "pleaseLoginFirst": "Masuk untuk {action}",
+    "outOfStock": "Stok habis",
+    "quantityExceedsStock": "Melebihi stok yang tersedia",
+    "share": "Bagikan"
+  },
   "ProductTab": {
     "description": "Deskripsi",
     "review": "Ulasan"

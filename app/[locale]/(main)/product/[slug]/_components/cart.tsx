@@ -13,6 +13,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { HeartIcon, ShoppingCartIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 import { useEffect, useMemo, useState } from 'react'
 import { toast } from 'react-toastify'
 
@@ -28,6 +29,7 @@ import { ACCOUNT_TAB } from '@/utils/features'
 import { createSlug } from '@/utils/slug'
 
 export const ProductCart = () => {
+  const t = useTranslations('ProductCart')
   const { product } = useProductDetailStore()
   const router = useRouter()
   const queryClient = useQueryClient()
@@ -133,7 +135,7 @@ export const ProductCart = () => {
         {hasVariants && (
           <div className='flex flex-col gap-2 sm:flex-row'>
             <NumberInput
-              label='Quantity'
+              label={t('quantity')}
               variant='bordered'
               minValue={1}
               maxValue={stock}
@@ -147,7 +149,7 @@ export const ProductCart = () => {
             />
 
             <Select
-              label='Product options'
+              label={t('productOptions')}
               selectedKeys={variantId ? [variantId] : []}
               variant='bordered'
               onSelectionChange={(option) =>
@@ -179,7 +181,7 @@ export const ProductCart = () => {
               requireAuth('add favorite') && createFavoriteMutation.mutate()
             }
           >
-            <span className='hidden md:block'>Add to favorites</span>
+            <span className='hidden md:block'>{t('addToFavorites')}</span>
           </Button>
 
           <Button
@@ -201,12 +203,13 @@ export const ProductCart = () => {
               createCartMutation.mutate()
             }}
           >
-            <span className='hidden md:block'>Add to cart</span>
+            <span className='hidden md:block'>{t('addToCart')}</span>
           </Button>
         </div>
 
         <ProductShare
           title={product?.name}
+          label={t('share')}
           url={`${process.env.NEXT_PUBLIC_APP_URL}/product/${createSlug(
             product?.name!,
             product?.id!,

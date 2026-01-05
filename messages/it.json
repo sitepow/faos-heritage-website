@@ -11,6 +11,16 @@
     "digital": "Prodotto Digitale",
     "uncategorized": "Non Categorizzato"
   },
+  "ProductCart": {
+    "quantity": "Quantità",
+    "productOptions": "Opzioni prodotto",
+    "addToFavorites": "Aggiungi ai preferiti",
+    "addToCart": "Aggiungi al carrello",
+    "pleaseLoginFirst": "Accedi per {action}",
+    "outOfStock": "Esaurito",
+    "quantityExceedsStock": "Supera la disponibilità",
+    "share": "Condividi"
+  },
   "ProductTab": {
     "description": "Descrizione",
     "review": "Recensione"

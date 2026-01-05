@@ -11,6 +11,16 @@
     "digital": "デジタル製品",
     "uncategorized": "未分類"
   },
+  "ProductCart": {
+    "quantity": "数量",
+    "productOptions": "商品オプション",
+    "addToFavorites": "お気に入りに追加",
+    "addToCart": "カートに追加",
+    "pleaseLoginFirst": "{action}するにはサインインしてください",
+    "outOfStock": "在庫切れ",
+    "quantityExceedsStock": "在庫数を超えています",
+    "share": "共有"
+  },
   "ProductTab": {
     "description": "説明",
     "review": "レビュー"

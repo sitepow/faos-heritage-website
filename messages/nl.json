@@ -11,6 +11,16 @@
     "digital": "Digitaal Product",
     "uncategorized": "Niet gecategoriseerd"
   },
+  "ProductCart": {
+    "quantity": "Aantal",
+    "productOptions": "Productopties",
+    "addToFavorites": "Toevoegen aan favorieten",
+    "addToCart": "Toevoegen aan winkelwagen",
+    "pleaseLoginFirst": "Log in om te {action}",
+    "outOfStock": "Niet op voorraad",
+    "quantityExceedsStock": "Overschrijdt beschikbare voorraad",
+    "share": "Delen"
+  },
   "ProductTab": {
     "description": "Beschrijving",
     "review": "Beoordeling"
