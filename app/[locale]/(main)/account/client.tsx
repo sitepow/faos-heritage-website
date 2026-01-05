@@ -3,6 +3,7 @@
 import { Tab, Tabs } from '@heroui/react'
 import Head from 'next/head'
 import { useSession } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 
 import type { Key } from 'react'
@@ -22,6 +23,7 @@ import { IS_TABLET_OR_MOBILE } from '@/utils/constants'
 import { ACCOUNT_TAB } from '@/utils/features'
 
 export const AccountClient = () => {
+  const t = useTranslations('Account')
   const isTabletOrMobile = useIsBelowBreakpoint(IS_TABLET_OR_MOBILE)
   const mounted = useMounted()
 
@@ -55,7 +57,9 @@ export const AccountClient = () => {
 
       <section className='flex flex-col items-center justify-center gap-4 text-center'>
         <div className='w-full text-start'>
-          <span className='text-xl font-bold'>Your account {user?.name}</span>
+          <span className='text-xl font-bold'>
+            {t('welcome', { name: user?.name! })}
+          </span>
         </div>
 
         <div className='w-full'>
@@ -73,21 +77,21 @@ export const AccountClient = () => {
               variant='bordered'
               onSelectionChange={handleTabChange}
             >
-              <Tab key={ACCOUNT_TAB.ACCOUNT} title='Manage my account'>
+              <Tab key={ACCOUNT_TAB.ACCOUNT} title={t('tabs.manage')}>
                 <OverviewCard
                   onclick={() => handleTabChange(ACCOUNT_TAB.PROFILE)}
                 />
               </Tab>
-              <Tab key={ACCOUNT_TAB.ORDER} title='My Orders'>
+              <Tab key={ACCOUNT_TAB.ORDER} title={t('tabs.orders')}>
                 <OrderCard />
               </Tab>
-              <Tab key={ACCOUNT_TAB.FAVORITE} title='Favorites'>
+              <Tab key={ACCOUNT_TAB.FAVORITE} title={t('tabs.favorites')}>
                 <FavoriteCard />
               </Tab>
-              <Tab key={ACCOUNT_TAB.PROFILE} title='Edit personal information'>
+              <Tab key={ACCOUNT_TAB.PROFILE} title={t('tabs.editProfile')}>
                 <ProfileCard />
               </Tab>
-              <Tab key={ACCOUNT_TAB.ADDRESS} title='Manage my address'>
+              <Tab key={ACCOUNT_TAB.ADDRESS} title={t('tabs.address')}>
                 <AddressCard />
               </Tab>
             </Tabs>

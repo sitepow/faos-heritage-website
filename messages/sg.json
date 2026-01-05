@@ -4,6 +4,16 @@
     "title": "Premium Organic Olive Oil & Honey — 100% Pure & Natural",
     "description": "Your premier destination for high-quality organic olive oil and honey, curated for your healthy lifestyle."
   },
+  "Account": {
+    "welcome": "Your account {name}",
+    "tabs": {
+      "manage": "Manage my account",
+      "orders": "My Orders",
+      "favorites": "Favorites",
+      "editProfile": "Edit personal information",
+      "address": "Manage my address"
+    }
+  },
   "Products": {
     "categoryTitle": "Category {name}",
     "title": "All Products",
