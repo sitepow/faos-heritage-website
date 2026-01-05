@@ -4,6 +4,19 @@
     "title": "Olio d'Oliva e Miele Biologici — 100% Puri e Naturali",
     "description": "La tua destinazione per l'olio d'oliva e il miele biologici di alta qualità, selezionati per il tuo stile di vita sano."
   },
+  "Auth": {
+    "headerTitle": "Accedi o registrati",
+    "headerDesc": "Per accedere al sito web <link>{siteName}</link>",
+    "loginTab": "Login",
+    "registerTab": "Registrati",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "confirmPasswordLabel": "Conferma password",
+    "nameLabel": "Nome",
+    "loginBtn": "Accedi",
+    "registerBtn": "Registrati",
+    "socialDivider": "O procedi come segue"
+  },
   "Cart": {
     "Checkout": {
       "title": "Indirizzo di Spedizione",

@@ -4,6 +4,19 @@
     "title": "Premium Βιολογικό Ελαιόλαδο & Μέλι — 100% Φυσικό & Αγνό",
     "description": "Ο κορυφαίος προορισμός σας για βιολογικό ελαιόλαδο και μέλι υψηλής ποιότητας, επιλεγμένα για έναν υγιεινό τρόπο ζωής."
   },
+  "Auth": {
+    "headerTitle": "Σύνδεση ή εγγραφή",
+    "headerDesc": "Για πρόσβαση στον ιστότοπο <link>{siteName}</link>",
+    "loginTab": "Σύνδεση",
+    "registerTab": "Εγγραφή",
+    "emailLabel": "Email",
+    "passwordLabel": "Κωδικός πρόσβασης",
+    "confirmPasswordLabel": "Επιβεβαίωση κωδικού",
+    "nameLabel": "Όνομα",
+    "loginBtn": "Σύνδεση",
+    "registerBtn": "Εγγραφή",
+    "socialDivider": "Ή προχωρήστε ως εξής"
+  },
   "Cart": {
     "Checkout": {
       "title": "Διεύθυνση Αποστολής",

@@ -4,6 +4,19 @@
     "title": "น้ำมันมะกอกและน้ำผึ้งออร์แกนิกพรีเมียม — ธรรมชาติแท้ 100%",
     "description": "แหล่งรวมน้ำมันมะกอกและน้ำผึ้งแท้คุณภาพสูง เพื่อสุขภาพที่ดีของคุณ"
   },
+  "Auth": {
+    "headerTitle": "เข้าสู่ระบบหรือลงทะเบียน",
+    "headerDesc": "เพื่อเข้าใช้งานเว็บไซต์ <link>{siteName}</link>",
+    "loginTab": "เข้าสู่ระบบ",
+    "registerTab": "ลงทะเบียน",
+    "emailLabel": "อีเมล",
+    "passwordLabel": "รหัสผ่าน",
+    "confirmPasswordLabel": "ยืนยันรหัสผ่าน",
+    "nameLabel": "ชื่อ",
+    "loginBtn": "เข้าสู่ระบบ",
+    "registerBtn": "ลงทะเบียน",
+    "socialDivider": "หรือดำเนินการด้วยช่องทางอื่น"
+  },
   "Cart": {
     "Checkout": {
       "title": "ที่อยู่จัดส่ง",

@@ -4,6 +4,19 @@
     "title": "Hágæða Lífræn Ólífuolía og Hunang — 100% Hreint og Náttúrulegt",
     "description": "Þinn áfangastaður fyrir hágæða lífræna ólífuolíu og hunang, sérstaklega valið fyrir heilbrigðan lífsstíl."
   },
+  "Auth": {
+    "headerTitle": "Skrá inn eða nýskrá",
+    "headerDesc": "Til að fá aðgang að vefnum <link>{siteName}</link>",
+    "loginTab": "Innskráning",
+    "registerTab": "Nýskráning",
+    "emailLabel": "Netfang",
+    "passwordLabel": "Lykilorð",
+    "confirmPasswordLabel": "Staðfesta lykilorð",
+    "nameLabel": "Nafn",
+    "loginBtn": "Skrá inn",
+    "registerBtn": "Nýskrá",
+    "socialDivider": "Eða halda áfram svona"
+  },
   "Cart": {
     "Checkout": {
       "title": "Verndarfang",

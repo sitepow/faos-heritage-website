@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 'use client'
 
 import {
@@ -32,7 +33,8 @@ import {
 import { useQueryParams } from '@/hooks/useQueryParams'
 
 export default function Login() {
-  const t = useTranslations('Site')
+  const t = useTranslations('Auth')
+  const tSite = useTranslations('Site')
   const router = useRouter()
   const { getQueryParam } = useQueryParams()
   const callbackUrl = getQueryParam('callbackUrl') || '/'
@@ -108,22 +110,26 @@ export default function Login() {
   return (
     <Card className='size-full p-5 sm:w-[400px]'>
       <CardHeader className='flex w-full flex-col items-center gap-1'>
-        <span className='text-lg font-bold'>Log in or register</span>
+        <span className='text-lg font-bold'>{t('headerTitle')}</span>
         <span className='text-default-500'>
-          To access the website{' '}
-          <Link href={'/'}>
-            <span className='text-primary cursor-pointer underline'>
-              {t('name')}
-            </span>
-          </Link>
+          {t.rich('headerDesc', {
+            siteName: tSite('name'),
+            link: (chunks) => (
+              <Link href={'/'}>
+                <span className='text-primary cursor-pointer underline'>
+                  {chunks}
+                </span>
+              </Link>
+            ),
+          })}
         </span>
       </CardHeader>
 
       <Tabs fullWidth defaultSelectedKey='login' variant='bordered'>
-        <Tab key='login' title='Login'>
+        <Tab key='login' title={t('loginTab')}>
           <Form onSubmit={handleSubmitLogin(submitLogin)}>
             <Input
-              label='Email'
+              label={t('emailLabel')}
               type='email'
               variant='bordered'
               {...registerLogin('email')}
@@ -131,7 +137,7 @@ export default function Login() {
               isInvalid={!!errorsLogin.email}
             />
             <Input
-              label='Password'
+              label={t('passwordLabel')}
               type='password'
               variant='bordered'
               {...registerLogin('password')}
@@ -146,15 +152,15 @@ export default function Login() {
               isLoading={isPending}
               type='submit'
             >
-              Log in
+              {t('loginBtn')}
             </Button>
           </Form>
         </Tab>
 
-        <Tab key='register' title='Register'>
+        <Tab key='register' title={t('registerTab')}>
           <Form onSubmit={handleSubmitRegister(submitRegister)}>
             <Input
-              label='Name'
+              label={t('nameLabel')}
               variant='bordered'
               {...register('name')}
               errorMessage={errorsRegister.name?.message}
@@ -162,7 +168,7 @@ export default function Login() {
             />
 
             <Input
-              label='Email'
+              label={t('emailLabel')}
               {...register('email')}
               errorMessage={errorsRegister.email?.message}
               isInvalid={!!errorsRegister.email}
@@ -171,7 +177,7 @@ export default function Login() {
             />
 
             <Input
-              label='Password'
+              label={t('passwordLabel')}
               variant='bordered'
               {...register('password')}
               errorMessage={errorsRegister.password?.message}
@@ -180,7 +186,7 @@ export default function Login() {
             />
 
             <Input
-              label='Confirm password'
+              label={t('confirmPasswordLabel')}
               variant='bordered'
               {...register('confirmPassword')}
               errorMessage={errorsRegister.confirmPassword?.message}
@@ -196,7 +202,7 @@ export default function Login() {
               isLoading={isPending}
               type='submit'
             >
-              Register
+              {t('registerBtn')}
             </Button>
           </Form>
         </Tab>
@@ -205,7 +211,9 @@ export default function Login() {
       <CardBody className='items-center justify-center gap-4'>
         <div className='relative flex w-full items-center'>
           <div className='border-divider flex-grow border-t' />
-          <span className='px-4 text-gray-500'>Or proceed as follows</span>
+          <span className='px-4 whitespace-nowrap text-gray-500'>
+            {t('socialDivider')}
+          </span>
           <div className='border-divider flex-grow border-t' />
         </div>
 

@@ -4,6 +4,19 @@
     "title": "Minyak Zaitun & Madu Organik Premium — 100% Tulen & Semulajadi",
     "description": "Destinasi utama anda untuk minyak zaitun dan madu organik berkualiti tinggi, dipilih khas untuk gaya hidup sihat anda."
   },
+  "Auth": {
+    "headerTitle": "Log masuk atau daftar",
+    "headerDesc": "Untuk mengakses laman web <link>{siteName}</link>",
+    "loginTab": "Log masuk",
+    "registerTab": "Daftar",
+    "emailLabel": "E-mel",
+    "passwordLabel": "Kata laluan",
+    "confirmPasswordLabel": "Sahkan kata laluan",
+    "nameLabel": "Nama",
+    "loginBtn": "Log masuk",
+    "registerBtn": "Daftar",
+    "socialDivider": "Atau teruskan seperti berikut"
+  },
   "Cart": {
     "Checkout": {
       "title": "Alamat Penghantaran",

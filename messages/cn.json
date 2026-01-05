@@ -4,6 +4,19 @@
     "title": "顶级有机橄榄油与蜂蜜 — 100% 纯天然系列",
     "description": "高品质有机橄榄油与蜂蜜的甄选之家，为您打造健康生活方式。"
   },
+  "Auth": {
+    "headerTitle": "登录 o 注册",
+    "headerDesc": "访问网站 <link>{siteName}</link>",
+    "loginTab": "登录",
+    "registerTab": "注册",
+    "emailLabel": "电子邮件",
+    "passwordLabel": "密码",
+    "confirmPasswordLabel": "确认密码",
+    "nameLabel": "姓名",
+    "loginBtn": "登录",
+    "registerBtn": "注册",
+    "socialDivider": "或通过以下方式继续"
+  },
   "Cart": {
     "Checkout": {
       "title": "收货地址",
