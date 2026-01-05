@@ -17,7 +17,17 @@
     "fields": {
       "name": "Nama - Nama Keluarga",
       "email": "E-mel",
-      "role": "Lesen"
+      "role": "Lesen",
+      "productId": "ID Produk"
+    },
+    "buttons": {
+      "removeFavorite": "Alih Keluar Kegemaran"
+    },
+    "modals": {
+      "removeFavorite": {
+        "title": "Sahkan Pembuangan",
+        "description": "Adakah anda pasti ingin membuang item ini daripada kegemaran anda?"
+      }
     },
     "roles": {
       "admin": "Administrator sistem",

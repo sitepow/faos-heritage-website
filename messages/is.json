@@ -17,7 +17,17 @@
     "fields": {
       "name": "Nafn - Eftirnafn",
       "email": "Netfang",
-      "role": "Réttindi"
+      "role": "Réttindi",
+      "productId": "Vöruauðkenni"
+    },
+    "buttons": {
+      "removeFavorite": "Fjarlægja úr uppáhaldi"
+    },
+    "modals": {
+      "removeFavorite": {
+        "title": "Staðfesta eyðingu",
+        "description": "Ertu viss um að þú viljir fjarlægja þessa vöru úr uppáhaldslistanum þínum?"
+      }
     },
     "roles": {
       "admin": "Kerfisstjóri",

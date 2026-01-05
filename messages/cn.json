@@ -17,7 +17,17 @@
     "fields": {
       "name": "姓名",
       "email": "电子邮件",
-      "role": "账号权限"
+      "role": "账号权限",
+      "productId": "商品ID"
+    },
+    "buttons": {
+      "removeFavorite": "お気に入り解除"
+    },
+    "modals": {
+      "removeFavorite": {
+        "title": "削除の確認",
+        "description": "この商品をお気に入りから削除してもよろしいですか？"
+      }
     },
     "roles": {
       "admin": "系统管理员",

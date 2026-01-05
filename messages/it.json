@@ -17,7 +17,17 @@
     "fields": {
       "name": "Nome e Cognome",
       "email": "Email",
-      "role": "Licenza"
+      "role": "Licenza",
+      "productId": "ID Prodotto"
+    },
+    "buttons": {
+      "removeFavorite": "Rimuovi dai preferiti"
+    },
+    "modals": {
+      "removeFavorite": {
+        "title": "Conferma rimozione",
+        "description": "Sei sicuro di voler rimuovere questo articolo dai tuoi preferiti?"
+      }
     },
     "roles": {
       "admin": "Amministratore di sistema",

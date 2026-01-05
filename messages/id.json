@@ -17,7 +17,17 @@
     "fields": {
       "name": "Nama Lengkap",
       "email": "Email",
-      "role": "Lisensi"
+      "role": "Lisensi",
+      "productId": "ID Produk"
+    },
+    "buttons": {
+      "removeFavorite": "Hapus Favorit"
+    },
+    "modals": {
+      "removeFavorite": {
+        "title": "Konfirmasi Penghapusan",
+        "description": "Apakah Anda yakin ingin menghapus item ini dari favorit Anda?"
+      }
     },
     "roles": {
       "admin": "Administrator sistem",

@@ -17,7 +17,17 @@
     "fields": {
       "name": "Name - Surname",
       "email": "Email",
-      "role": "License"
+      "role": "License",
+      "productId": "Product ID"
+    },
+    "buttons": {
+      "removeFavorite": "Remove Favorite"
+    },
+    "modals": {
+      "removeFavorite": {
+        "title": "Confirm Removal",
+        "description": "Are you sure you want to remove this item from your favorites?"
+      }
     },
     "roles": {
       "admin": "System administrator",

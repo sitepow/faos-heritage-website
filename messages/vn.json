@@ -17,7 +17,17 @@
     "fields": {
       "name": "Họ và tên",
       "email": "Email",
-      "role": "Quyền hạn"
+      "role": "Quyền hạn",
+      "productId": "Mã sản phẩm"
+    },
+    "buttons": {
+      "removeFavorite": "Xóa khỏi yêu thích"
+    },
+    "modals": {
+      "removeFavorite": {
+        "title": "Xác nhận xóa",
+        "description": "Bạn có chắc chắn muốn xóa sản phẩm này khỏi danh sách yêu thích không?"
+      }
     },
     "roles": {
       "admin": "Quản trị viên",

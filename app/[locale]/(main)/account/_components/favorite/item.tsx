@@ -6,6 +6,7 @@ import { XIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 
 import type { ComponentProps } from 'react'
 
@@ -26,6 +27,7 @@ export const FavoriteItem = ({
   favorite,
   ...props
 }: FavoriteItemProps) => {
+  const t = useTranslations('Account')
   const queryClient = useQueryClient()
 
   const {
@@ -72,6 +74,8 @@ export const FavoriteItem = ({
   return (
     <>
       <ConfirmModal
+        title={t('modals.removeFavorite.title')}
+        description={t('modals.removeFavorite.description')}
         isOpen={isOpenDeleteFavorite}
         isPending={isPendingDeleteFavorite}
         onConfirm={() => {
@@ -100,19 +104,19 @@ export const FavoriteItem = ({
                 <Image
                   alt='product-image'
                   className='aspect-square size-full object-cover'
-                  height={100}
+                  height={150}
                   src={primaryImage?.url ?? '/images/no-image.png'}
-                  width={100}
+                  width={150}
                 />
               </Link>
 
-              <div className='flex flex-col'>
-                <span>{favorite?.product?.name}</span>
+              <div className='flex flex-col gap-1'>
+                <span className='font-bold'>{favorite?.product?.name}</span>
                 <span className='text-default-500 line-clamp-2 text-sm'>
                   {favorite?.product?.shortDescription}
                 </span>
                 <span className='text-default-500 text-sm'>
-                  Product ID : {favorite?.product?.id}
+                  {t('fields.productId')} : {favorite?.product?.id}
                 </span>
                 <ProductPrice
                   price={favorite?.product?.price}
@@ -129,10 +133,10 @@ export const FavoriteItem = ({
                 variant='bordered'
                 isDisabled={isPendingDeleteFavorite}
                 isLoading={isPendingDeleteFavorite}
-                startContent={!isPendingDeleteFavorite && <XIcon />}
+                startContent={!isPendingDeleteFavorite && <XIcon size={18} />}
                 onClick={onOpenDeleteFavoriteChange}
               >
-                Remove Favorite
+                {t('buttons.removeFavorite')}
               </Button>
             </div>
           </div>
