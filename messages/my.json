@@ -4,6 +4,13 @@
     "title": "Minyak Zaitun & Madu Organik Premium — Koleksi Semula Jadi 100%",
     "description": ""
   },
+  "ProductChip": {
+    "authentic": "Asli 100%",
+    "premium": "Produk Premium",
+    "demo": "Versi Demo",
+    "digital": "Produk Digital",
+    "uncategorized": "Tidak Dikategorikan"
+  },
   "Navbar": {
     "Header": "Minyak Zaitun & Madu Organik Premium (Makanan Kesihatan)",
     "Menu": {

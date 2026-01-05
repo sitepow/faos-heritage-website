@@ -4,6 +4,13 @@
     "title": "高端有机橄榄油与蜂蜜 — 100% 天然臻选系列",
     "description": ""
   },
+  "ProductChip": {
+    "authentic": "正品 100%",
+    "premium": "高端产品",
+    "demo": "演示版本",
+    "digital": "数字产品",
+    "uncategorized": "未分类"
+  },
   "Navbar": {
     "Header": "高端有机橄榄油与蜂蜜（健康食品）",
     "Menu": {

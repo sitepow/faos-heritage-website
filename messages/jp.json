@@ -4,6 +4,13 @@
     "title": "プレミアム オーガニック オリーブオイル＆ハチミツ — 100% ナチュラルコレクション",
     "description": ""
   },
+  "ProductChip": {
+    "authentic": "本物 100%",
+    "premium": "プレミアム製品",
+    "demo": "デモ版",
+    "digital": "デジタル製品",
+    "uncategorized": "未分類"
+  },
   "Navbar": {
     "Header": "プレミアム オーガニック オリーブオイル＆ハチミツ（ウェルネスフード）",
     "Menu": {

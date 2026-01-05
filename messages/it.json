@@ -4,6 +4,13 @@
     "title": "Olio d’Oliva & Miele Biologici Premium — Collezione Naturale al 100%",
     "description": ""
   },
+  "ProductChip": {
+    "authentic": "Autentico 100%",
+    "premium": "Prodotto Premium",
+    "demo": "Versione Demo",
+    "digital": "Prodotto Digitale",
+    "uncategorized": "Non Categorizzato"
+  },
   "Navbar": {
     "Header": "Olio d’Oliva & Miele Biologici Premium (Alimenti per il Benessere)",
     "Menu": {

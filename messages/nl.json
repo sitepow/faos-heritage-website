@@ -4,6 +4,13 @@
     "title": "Premium Biologische Olijfolie & Honing — 100% Natuurlijke Collectie",
     "description": ""
   },
+  "ProductChip": {
+    "authentic": "Authentiek 100%",
+    "premium": "Premium Product",
+    "demo": "Demoversie",
+    "digital": "Digitaal Product",
+    "uncategorized": "Niet gecategoriseerd"
+  },
   "Navbar": {
     "Header": "Premium Biologische Olijfolie & Honing (Gezonde Voeding)",
     "Menu": {

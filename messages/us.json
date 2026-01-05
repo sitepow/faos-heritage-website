@@ -4,6 +4,13 @@
     "title": "Premium Organic Olive Oil & Honey — 100% Pure Natural Collection",
     "description": ""
   },
+  "ProductChip": {
+    "authentic": "Authentic 100%",
+    "premium": "Premium Product",
+    "demo": "Demo Version",
+    "digital": "Digital Product",
+    "uncategorized": "Uncategorized"
+  },
   "Navbar": {
     "Header": "Premium Organic Olive Oil & Honey — 100% Pure Natural Collection (Wellness Food)",
     "Menu": {

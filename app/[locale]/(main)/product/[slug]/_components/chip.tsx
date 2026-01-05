@@ -1,4 +1,5 @@
 import { Chip } from '@heroui/react'
+import { useTranslations } from 'next-intl'
 
 type ProductChipProps = {
   isAuthentic?: boolean
@@ -15,13 +16,15 @@ export const ProductChip = ({
   isDigitalProduct = false,
   categoryName,
 }: ProductChipProps) => {
+  const t = useTranslations('ProductChip')
+
   return (
     <div className='mb-2.5 flex flex-wrap gap-1'>
-      {isAuthentic && <Chip variant='bordered'>Authentic 100%</Chip>}
-      {isPremiumProduct && <Chip variant='bordered'>Premium Product</Chip>}
-      {isDemoProduct && <Chip variant='bordered'>Demo Version</Chip>}
-      {isDigitalProduct && <Chip variant='bordered'>Digital Product</Chip>}
-      <Chip variant='bordered'>{categoryName ?? 'Uncategorized'}</Chip>
+      {isAuthentic && <Chip variant='bordered'>{t('authentic')}</Chip>}
+      {isPremiumProduct && <Chip variant='bordered'>{t('premium')}</Chip>}
+      {isDemoProduct && <Chip variant='bordered'>{t('demo')}</Chip>}
+      {isDigitalProduct && <Chip variant='bordered'>{t('digital')}</Chip>}
+      <Chip variant='bordered'>{categoryName ?? t('uncategorized')}</Chip>
     </div>
   )
 }

@@ -4,6 +4,13 @@
     "title": "Hágæða Lífræn Ólífuolía & Hunang — 100% Náttúrulegt Úrval",
     "description": ""
   },
+  "ProductChip": {
+    "authentic": "Ekt 100%",
+    "premium": "Premium Vara",
+    "demo": "Prófunarútgáfa",
+    "digital": "Stafrænt Vara",
+    "uncategorized": "Ekki Flokkað"
+  },
   "Navbar": {
     "Header": "Hágæða Lífræn Ólífuolía & Hunang (Heilsuvörur)",
     "Menu": {
