@@ -4,6 +4,34 @@
     "title": "Premium Organic Olive Oil & Honey — 100% Pure & Natural",
     "description": "Your premier destination for high-quality organic olive oil and honey, curated for your healthy lifestyle."
   },
+  "Payment": {
+    "Header": {
+      "title": "Payment Methods & Security",
+      "description": "We provide a range of secure and seamless payment options to ensure a fuss-free shopping experience for all our customers."
+    },
+    "HowToShop": {
+      "title": "How to Place an Order",
+      "ariaLabel": "Step-by-step guide on how to purchase products",
+      "step1": "1. Browse our curated collection, select your preferred items, and click <important>“Add to Cart”</important> to save them to your shopping bag.",
+      "step2": "2. Access your cart via the icon at the top right to review your items. You may adjust quantities or remove items before proceeding.",
+      "step3": "3. Once you have confirmed your selection, click <important>“Place Order”</important> to enter our secure checkout environment.",
+      "step4": "4. You will be redirected to Stripe, our secure payment gateway, to enter your details and complete your transaction safely."
+    },
+    "CardPayment": {
+      "title": "Debit / Credit Card Payment",
+      "ariaLabel": "Instructions for payment via debit or credit card",
+      "description": "We support all major global payment networks. Secure payments can be made using debit or credit cards from any established bank worldwide.",
+      "acceptedCards": "We accept cards with the <important>Visa, Mastercard, or JCB</important> logo, including virtual cards and international credit cards for your convenience.",
+      "securityNote": "Your transaction is fully encrypted and protected by Stripe’s world-class security infrastructure."
+    },
+    "QRCodePayment": {
+      "title": "QR Code Payment (Mobile Banking)",
+      "ariaLabel": "Instructions for payment via QR Code",
+      "description": "For a more efficient checkout, you may pay instantly via QR Code. This method is highly recommended for regional convenience.",
+      "method": "Simply scan the <important>PromptPay QR Code</important> using your mobile banking app. This service is compatible with major banks and incurs no additional transaction fees.",
+      "expiryNote": "* Please ensure your payment is finalised within the time limit shown on the checkout page to avoid order cancellation."
+    }
+  },
   "ProductChip": {
     "authentic": "100% Authentic",
     "premium": "Premium",

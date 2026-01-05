@@ -4,6 +4,34 @@
     "title": "Premium Biologische Olijfolie & Honing — 100% Puur & Natuurlijk",
     "description": "Uw adres voor hoogwaardige biologische olijfolie en honing, speciaal geselecteerd voor een gezonde levensstijl."
   },
+  "Payment": {
+    "Header": {
+      "title": "Betaalmethoden & Beveiliging",
+      "description": "Wij bieden verschillende veiligeและhandige betaalopties aan om een soepele winkelervaring voor al onze klanten te garanderen."
+    },
+    "HowToShop": {
+      "title": "Hoe u kunt bestellen",
+      "ariaLabel": "Gids over hoe u producten kunt kopen",
+      "step1": "1. Bekijk onze premium collectie, selecteer de gewenste artikelen en klik op <important>“In Winkelwagen”</important> om ze op te slaan.",
+      "step2": "2. Open uw winkelwagen rechtsboven om uw geselecteerde artikelen te controleren, aantallen aan te passen of producten te verwijderen indien nodig.",
+      "step3": "3. Wanneer u klaar bent met uw selectie, klikt u op <important>“Bestelling Plaatsen”</important> om door te gaan naar het beveiligde afrekensysteem.",
+      "step4": "4. U wordt veilig doorgeleid naar onze betaalpartner Stripe, waar u uw betaalgegevens veilig kunt invoeren en uw aankoop kunt voltooien."
+    },
+    "CardPayment": {
+      "title": "Betalen via Betaalpas / Creditcard",
+      "ariaLabel": "Instructies voor betaling met betaalpas of creditcard",
+      "description": "Wij ondersteunen een breed scala aan wereldwijde betaalnetwerken. U kunt veilig betalen met betaalpassen of creditcards van alle grote banken wereldwijd.",
+      "acceptedCards": "Wij accepteren kaarten met het <important>Visa, Mastercard of JCB</important> logo, inclusief virtuele kaarten en internationale creditcards voor uw gemak.",
+      "securityNote": "Uw transactie is versleuteld en beveiligd door de toonaangevende technologie van Stripe."
+    },
+    "QRCodePayment": {
+      "title": "Betalen via QR-code (Mobiel Bankieren)",
+      "ariaLabel": "Instructies voor betaling via QR-code",
+      "description": "Voor een snellere afhandeling kunt u direct betalen via een QR-code. Deze methode wordt ten zeerste aanbevolen voor uw gemak.",
+      "method": "Scan eenvoudig de <important>PromptPay QR-code</important> via uw mobiel bankieren app. Deze service wordt ondersteund door alle grote banken zonder extra transactiekosten.",
+      "expiryNote": "* Zorg ervoor dat de betaling is voltooid binnen de aangegeven tijd op de betaalpagina."
+    }
+  },
   "ProductChip": {
     "authentic": "100% Authentiek",
     "premium": "Premium",

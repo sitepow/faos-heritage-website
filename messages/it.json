@@ -4,6 +4,34 @@
     "title": "Olio d'Oliva e Miele Biologici — 100% Puri e Naturali",
     "description": "La tua destinazione per l'olio d'oliva e il miele biologici di alta qualità, selezionati per il tuo stile di vita sano."
   },
+  "Payment": {
+    "Header": {
+      "title": "Metodi di Pagamento e Sicurezza",
+      "description": "Offriamo diverse opzioni di pagamento sicure e convenienti per garantire un'esperienza di acquisto fluida a tutti i nostri clienti."
+    },
+    "HowToShop": {
+      "title": "Come Effettuare un Ordine",
+      "ariaLabel": "Guida su come iniziare ad acquistare i prodotti",
+      "step1": "1. Esplora la nostra collezione premium, seleziona gli articoli che desideri e clicca su <important>“Aggiungi al Carrello”</important> per salvarli nella tua borsa della spesa.",
+      "step2": "2. Apri il carrello nell'angolo in alto a destra per rivedere gli articoli selezionati, regolare le quantità o rimuovere i prodotti se necessario.",
+      "step3": "3. Una volta soddisfatto della tua selezione, clicca su <important>“Effettua Ordine”</important> per procedere al sistema di pagamento sicuro.",
+      "step4": "4. Verrai reindirizzato in modo sicuro al nostro partner di pagamento, Stripe, dove potrai inserire i tuoi dati e finalizzare l'acquisto in totale sicurezza."
+    },
+    "CardPayment": {
+      "title": "Pagamento con Carta di Debito / Credito",
+      "ariaLabel": "Istruzioni per il pagamento con carta di debito o credito",
+      "description": "Supportiamo un'ampia gamma di circuiti di pagamento globali. Puoi pagare in sicurezza con carte di debito o credito di tutte le principali banche del mondo.",
+      "acceptedCards": "Accettiamo carte con logo <important>Visa, Mastercard o JCB</important>, incluse carte virtuali e carte di credito internazionali per la tua comodità.",
+      "securityNote": "Ogni transazione è crittografata e protetta dalla tecnologia di Stripe, leader mondiale nel settore della sicurezza."
+    },
+    "QRCodePayment": {
+      "title": "Pagamento tramite QR Code (Mobile Banking)",
+      "ariaLabel": "Istruzioni per il pagamento tramite QR Code",
+      "description": "Per un checkout più rapido, puoi pagare istantaneamente tramite QR Code. Questo metodo è altamente raccomandato per la sua praticità.",
+      "method": "Scansiona semplicemente il <important>QR Code PromptPay</important> tramite la tua app di mobile banking. Il servizio è supportato dalle principali banche e non prevede commissioni aggiuntive.",
+      "expiryNote": "* Assicurati che il pagamento venga completato entro il tempo limite indicato nella pagina di checkout."
+    }
+  },
   "ProductChip": {
     "authentic": "Autentico al 100%",
     "premium": "Premium",

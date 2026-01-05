@@ -4,6 +4,34 @@
     "title": "Hágæða Lífræn Ólífuolía og Hunang — 100% Hreint og Náttúrulegt",
     "description": "Þinn áfangastaður fyrir hágæða lífræna ólífuolíu og hunang, sérstaklega valið fyrir heilbrigðan lífsstíl."
   },
+  "Payment": {
+    "Header": {
+      "title": "Greiðslumátar og Öryggi",
+      "description": "Við bjóðum upp á ýmsa örugga og þægilega greiðslumöguleika til að tryggja að kaupferlið sé eins hnökralaust og hugsast getur fyrir viðskiptavini okkar."
+    },
+    "HowToShop": {
+      "title": "Hvernig á að versla",
+      "ariaLabel": "Leiðbeiningar um hvernig á að kaupa vörur",
+      "step1": "1. Skoðaðu úrvalið okkar, veldu þær vörur sem þig langar í og smelltu á <important>„Bæta í körfu“</important> til að vista þær í innkaupapokanum þínum.",
+      "step2": "2. Opnaðu körfuna þína efst í hægra horninu til að yfirfara valdar vörur, breyta magni eða fjarlægja vörur ef þörf krefur.",
+      "step3": "3. Þegar þú ert ánægð(ur) með valið, smelltu þá á <important>„Ganga frá pöntun“</important> til að halda áfram í örugga greiðslukerfið okkar.",
+      "step4": "4. Þér verður beint á örugga greiðslusíðu Stripe, samstarfsaðila okkar, þar sem þú getur fyllt út greiðsluupplýsingar og staðfest kaupin á öruggan hátt."
+    },
+    "CardPayment": {
+      "title": "Greiða með debet- eða kreditkorti",
+      "ariaLabel": "Leiðbeiningar fyrir greiðslu með korti",
+      "description": "Við styðjum fjölbreytt úrval alþjóðlegra greiðsluneta. Þú getur greitt á öruggan hátt með kortum frá öllum helstu bönkum heims.",
+      "acceptedCards": "Við tökum á móti kortum með <important>Visa, Mastercard eða JCB</important> merkinu, þar með talið sýndarkortum og alþjóðlegum kreditkortum þér til hægðarauka.",
+      "securityNote": "Greiðslan þín er dulkóðuð og tryggð með leiðandi öryggistækni frá Stripe."
+    },
+    "QRCodePayment": {
+      "title": "Greiða með QR-kóða (Netbanki)",
+      "ariaLabel": "Leiðbeiningar fyrir greiðslu með QR-kóða",
+      "description": "Fyrir fljótlegri afgreiðslu geturðu greitt samstundis með QR-kóða. Þessi leið er sérstaklega þægileg fyrir þá sem vilja hraðvirka afgreiðslu.",
+      "method": "Skannaðu einfaldlega <important>PromptPay QR-kóðann</important> í gegnum netbankaappið þitt. Þessi þjónusta er í samstarfi við alla helstu banka og engin aukagjöld bætast við.",
+      "expiryNote": "* Vinsamlegast tryggðu að greiðslunni sé lokið innan þess tíma sem gefinn er upp á greiðslusíðunni."
+    }
+  },
   "ProductChip": {
     "authentic": "100% Ósvikið",
     "premium": "Hágæða",

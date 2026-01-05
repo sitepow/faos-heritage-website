@@ -4,6 +4,34 @@
     "title": "Premium Organic Olive Oil & Honey — 100% Pure & Natural",
     "description": "Your premier destination for high-quality organic olive oil and honey, curated for your healthy lifestyle."
   },
+  "Payment": {
+    "Header": {
+      "title": "Payment Methods & Security",
+      "description": "We offer a variety of secure and convenient payment options to ensure a smooth shopping experience for our customers."
+    },
+    "HowToShop": {
+      "title": "How to Start Shopping",
+      "ariaLabel": "Guide on how to start purchasing products",
+      "step1": "1. Browse our premium collection, select the items you desire, and click <important>“Add to Cart”</important> to save them to your shopping bag.",
+      "step2": "2. Open your shopping cart at the top right corner to review your selected items, adjust quantities, or remove products as needed.",
+      "step3": "3. Once you are satisfied with your selection, click <important>“Place Order”</important> to proceed to the secure checkout system.",
+      "step4": "4. You will be securely redirected to our payment partner, Stripe, where you can safely enter your payment details and finalize your purchase."
+    },
+    "CardPayment": {
+      "title": "Pay via Debit / Credit Card",
+      "ariaLabel": "Instruction for payment using debit or credit card",
+      "description": "We support a wide range of global payment networks. You can securely pay with debit or credit cards from all major banks worldwide.",
+      "acceptedCards": "We accept cards with the <important>Visa, Mastercard, or JCB</important> logo, including virtual cards and international credit cards for your convenience.",
+      "securityNote": "Your transaction is encrypted and secured by Stripe's industry-leading technology."
+    },
+    "QRCodePayment": {
+      "title": "Pay with QR Code (Mobile Banking)",
+      "ariaLabel": "Instruction for payment using QR Code",
+      "description": "For a faster checkout experience, you can pay instantly via QR Code. This method is highly recommended for users in Thailand.",
+      "method": "Simply scan the <important>PromptPay QR Code</important> through your mobile banking application. This service is supported by all major Thai banks with no additional transaction fees.",
+      "expiryNote": "* Please ensure the payment is completed within the specified time displayed on the QR page."
+    }
+  },
   "ProductChip": {
     "authentic": "100% Authentic",
     "premium": "Premium",

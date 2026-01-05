@@ -4,6 +4,34 @@
     "title": "Dầu Ô Liu & Mật Ong Hữu Cơ Cao Cấp — 100% Thuần Khiết & Tự Nhiên",
     "description": "Điểm đến hàng đầu cho dầu ô liu và mật ong hữu cơ chất lượng cao, được tuyển chọn cho lối sống lành mạnh của bạn."
   },
+  "Payment": {
+    "Header": {
+      "title": "Phương Thức Thanh Toán & Bảo Mật",
+      "description": "Chúng tôi cung cấp nhiều tùy chọn thanh toán an toàn và tiện lợi để đảm bảo trải nghiệm mua sắm suôn sẻ nhất cho quý khách."
+    },
+    "HowToShop": {
+      "title": "Hướng Dẫn Mua Hàng",
+      "ariaLabel": "Hướng dẫn các bước để bắt đầu mua sản phẩm",
+      "step1": "1. Khám phá bộ sưu tập cao cấp của chúng tôi, chọn sản phẩm bạn yêu thích và nhấn <important>“Thêm vào giỏ hàng”</important> để lưu vào túi mua sắm.",
+      "step2": "2. Mở giỏ hàng ở góc trên bên phải để kiểm tra lại các mặt hàng đã chọn, điều chỉnh số lượng hoặc xóa sản phẩm nếu cần thiết.",
+      "step3": "3. Khi đã hài lòng với lựa chọn của mình, nhấn <important>“Đặt hàng”</important> để chuyển sang hệ thống thanh toán an toàn.",
+      "step4": "4. Quý khách sẽ được chuyển hướng an toàn đến Stripe - đối tác thanh toán của chúng tôi, nơi quý khách có thể nhập thông tin và hoàn tất giao dịch một cách bảo mật."
+    },
+    "CardPayment": {
+      "title": "Thanh Toán Qua Thẻ Ghi Nợ / Thẻ Tín Dụng",
+      "ariaLabel": "Hướng dẫn thanh toán bằng thẻ ghi nợ hoặc thẻ tín dụng",
+      "description": "Chúng tôi hỗ trợ mạng lưới thanh toán toàn cầu. Quý khách có thể thanh toán an toàn bằng thẻ ghi nợ hoặc thẻ tín dụng từ tất cả các ngân hàng lớn trên thế giới.",
+      "acceptedCards": "Chúng tôi chấp nhận các loại thẻ có biểu tượng <important>Visa, Mastercard hoặc JCB</important>, bao gồm cả thẻ ảo và thẻ tín dụng quốc tế để thuận tiện cho quý khách.",
+      "securityNote": "Mọi giao dịch của quý khách đều được mã hóa và bảo vệ bởi công nghệ bảo mật hàng đầu thế giới từ Stripe."
+    },
+    "QRCodePayment": {
+      "title": "Thanh Toán Qua Mã QR (Mobile Banking)",
+      "ariaLabel": "Hướng dẫn thanh toán bằng mã QR",
+      "description": "Để thanh toán nhanh chóng hơn, quý khách có thể chọn thanh toán tức thì qua mã QR. Đây là phương thức được khuyến khích để tăng tính tiện lợi.",
+      "method": "Chỉ cần quét <important>Mã QR PromptPay</important> thông qua ứng dụng ngân hàng di động của quý khách. Dịch vụ này được hỗ trợ bởi các ngân hàng lớn và không mất thêm phí giao dịch.",
+      "expiryNote": "* Vui lòng đảm bảo giao dịch thanh toán được hoàn tất trong khoảng thời gian quy định hiển thị trên trang thanh toán."
+    }
+  },
   "ProductChip": {
     "authentic": "Chính Hãng 100%",
     "premium": "Cao Cấp",

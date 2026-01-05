@@ -1,71 +1,69 @@
+/* eslint-disable react/no-unstable-nested-components */
 'use client'
 
 import { Accordion, AccordionItem } from '@heroui/react'
+import { useTranslations } from 'next-intl'
 
 import { SectionHeader } from '@/components/common/heading'
 
 export const PaymentClient = () => {
+  const t = useTranslations('Payment')
+
+  const renderRichText = (key: string) =>
+    t.rich(key, {
+      important: (chunks) => (
+        <span className='decoration-primary font-medium underline decoration-dotted underline-offset-4'>
+          {chunks}
+        </span>
+      ),
+    })
+
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
       <SectionHeader
-        description='Details of supported payment methods and channels'
-        title='Payments'
+        description={t('Header.description')}
+        title={t('Header.title')}
       />
 
       <div className='mx-auto lg:w-1/2'>
         <Accordion variant='splitted'>
           <AccordionItem
             key='1'
-            aria-label='How to start purchasing products'
-            title='How to Start Shopping'
+            aria-label={t('HowToShop.ariaLabel')}
+            title={t('HowToShop.title')}
           >
-            <div className='space-y-3 text-left'>
-              <p>
-                1. Select the product you want and click{' '}
-                <span className='decoration-primary underline decoration-dotted underline-offset-4'>
-                  “Add to Cart”
-                </span>
-              </p>
-              <p>2. Open your cart to review the selected items</p>
-              <p>
-                3. When you are ready to pay, click{' '}
-                <span className='decoration-primary underline decoration-dotted underline-offset-4'>
-                  “Place Order”
-                </span>
-              </p>
-              <p>4. You will be redirected to Stripe’s secure checkout page</p>
+            <div className='space-y-4 pb-4 text-left'>
+              <p>{renderRichText('HowToShop.step1')}</p>
+              <p>{renderRichText('HowToShop.step2')}</p>
+              <p>{renderRichText('HowToShop.step3')}</p>
+              <p>{renderRichText('HowToShop.step4')}</p>
             </div>
           </AccordionItem>
 
           <AccordionItem
             key='2'
-            aria-label='How to pay with debit or credit card'
-            title='Pay with Debit / Credit Card'
+            aria-label={t('CardPayment.ariaLabel')}
+            title={t('CardPayment.title')}
           >
-            <div className='space-y-3 text-left'>
-              <p>
-                We accept debit and credit cards from all banks with the
-                <span className='decoration-primary underline decoration-dotted underline-offset-4'>
-                  {' '}
-                  Visa, Mastercard, or JCB
-                </span>{' '}
-                logo, including virtual cards issued by banks.
+            <div className='space-y-3 pb-4 text-left'>
+              <p>{t('CardPayment.description')}</p>
+              <p>{renderRichText('CardPayment.acceptedCards')}</p>
+              <p className='text-default-500 text-sm italic'>
+                {t('CardPayment.securityNote')}
               </p>
             </div>
           </AccordionItem>
 
           <AccordionItem
             key='3'
-            aria-label='How to pay using QR Code'
-            title='Pay with QR Code'
+            aria-label={t('QRCodePayment.ariaLabel')}
+            title={t('QRCodePayment.title')}
           >
-            <div className='space-y-3 text-left'>
-              <p>
-                Pay via{' '}
-                <span className='decoration-primary underline decoration-dotted underline-offset-4'>
-                  PromptPay QR Code
-                </span>{' '}
-                supported by all Thai banks.
+            <div className='space-y-3 pb-4 text-left'>
+              <p>{t('QRCodePayment.description')}</p>
+              <p>{renderRichText('QRCodePayment.method')}</p>
+              <p className='text-warning text-sm font-medium'>
+                {t('QRCodePayment.expiryNote')}
               </p>
             </div>
           </AccordionItem>

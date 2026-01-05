@@ -4,6 +4,34 @@
     "title": "Minyak Zaitun & Madu Organik Premium — 100% Murni & Alami",
     "description": "Destinasi utama Anda untuk minyak zaitun dan madu organik berkualitas tinggi, dikurasi khusus untuk gaya hidup sehat Anda."
   },
+  "Payment": {
+    "Header": {
+      "title": "Metode Pembayaran & Keamanan",
+      "description": "Kami menyediakan berbagai pilihan pembayaran yang aman dan praktis untuk memastikan pengalaman belanja yang lancar bagi semua pelanggan kami."
+    },
+    "HowToShop": {
+      "title": "Cara Berbelanja",
+      "ariaLabel": "Panduan langkah demi langkah tentang cara membeli produk",
+      "step1": "1. Jelajahi koleksi premium kami, pilih produk yang Anda inginkan, dan klik <important>“Masukkan Keranjang”</important> untuk menyimpannya ke dalam tas belanja Anda.",
+      "step2": "2. Buka keranjang belanja Anda di sudut kanan atas untuk memeriksa produk pilihan, menyesuaikan jumlah, atau menghapus produk jika diperlukan.",
+      "step3": "3. Setelah Anda yakin dengan pilihan tersebut, klik <important>“Buat Pesanan”</important> untuk melanjutkan ke sistem pembayaran yang aman.",
+      "step4": "4. Anda akan diarahkan secara aman ke mitra pembayaran kami, Stripe, di mana Anda dapat memasukkan detail pembayaran dan menyelesaikan transaksi dengan aman."
+    },
+    "CardPayment": {
+      "title": "Bayar dengan Kartu Debit / Kredit",
+      "ariaLabel": "Instruksi untuk pembayaran menggunakan kartu debit atau kredit",
+      "description": "Kami mendukung berbagai jaringan pembayaran global. Anda dapat membayar dengan aman menggunakan kartu debit atau kredit dari semua bank utama di seluruh dunia.",
+      "acceptedCards": "Kami menerima kartu dengan logo <important>Visa, Mastercard, atau JCB</important>, termasuk kartu virtual dan kartu kredit internasional untuk kenyamanan Anda.",
+      "securityNote": "Setiap transaksi Anda dienkripsi dan dilindungi oleh teknologi terdepan dari Stripe."
+    },
+    "QRCodePayment": {
+      "title": "Bayar dengan QR Code (Mobile Banking)",
+      "ariaLabel": "Instruksi untuk pembayaran menggunakan QR Code",
+      "description": "Untuk proses checkout yang lebih cepat, Anda dapat membayar instan melalui QR Code. Metode ini sangat direkomendasikan untuk kemudahan Anda.",
+      "method": "Cukup pindai <important>Kode QR PromptPay</important> melalui aplikasi mobile banking Anda. Layanan ini didukung oleh bank-bank utama tanpa biaya transaksi tambahan.",
+      "expiryNote": "* Pastikan pembayaran diselesaikan dalam batas waktu yang ditentukan pada halaman pembayaran."
+    }
+  },
   "ProductChip": {
     "authentic": "100% Original",
     "premium": "Premium",

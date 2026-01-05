@@ -4,6 +4,34 @@
     "title": "顶级有机橄榄油与蜂蜜 — 100% 纯天然系列",
     "description": "高品质有机橄榄油与蜂蜜的甄选之家，为您打造健康生活方式。"
   },
+  "Payment": {
+    "Header": {
+      "title": "支付方式与安全保障",
+      "description": "我们为您提供多种安全便捷的支付选项，确保为您带来流畅无忧的购物体验。"
+    },
+    "HowToShop": {
+      "title": "购物流程指南",
+      "ariaLabel": "关于如何开始购买产品的指南",
+      "step1": "1. 浏览我们的精品系列，选择您心仪的商品，然后点击 <important>“加入购物车”</important> 将其保存至您的购物袋中。",
+      "step2": "2. 点击右上角的购物车图标查看已选商品，您可以根据需要调整购买数量或删除商品。",
+      "step3": "3. 确认商品信息无误后，点击 <important>“提交订单”</important> 进入安全结算系统。",
+      "step4": "4. 您将被安全地重定向到我们的支付合作伙伴 Stripe，在此您可以安全地输入支付详情并最终完成购买。"
+    },
+    "CardPayment": {
+      "title": "借记卡 / 信用卡支付",
+      "ariaLabel": "使用借记卡或信用卡支付的说明",
+      "description": "我们支持全球主流支付网络。您可以使用全球各大银行发行的借记卡或信用卡进行安全支付。",
+      "acceptedCards": "我们接受带有 <important>Visa、Mastercard 或 JCB</important> 标志的卡片，为了您的方便，同时也支持虚拟卡和国际信用卡。",
+      "securityNote": "您的每一笔交易均经过加密处理，并受到 Stripe 行业领先的安全技术保护。"
+    },
+    "QRCodePayment": {
+      "title": "QR 码支付（移动银行）",
+      "ariaLabel": "使用二维码支付的说明",
+      "description": "为了更快捷地完成结算，您可以选择 QR 码即时支付。这是我们在区域内极力推荐的便捷方式。",
+      "method": "只需通过您的手机银行应用程序扫描 <important>PromptPay 二维码</important> 即可。该服务支持各大主流银行，且无需支付额外交易费用。",
+      "expiryNote": "* 请确保在支付页面显示的规定时间内完成支付，以避免订单失效。"
+    }
+  },
   "ProductChip": {
     "authentic": "正品保障 100%",
     "premium": "高端品质",

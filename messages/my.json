@@ -4,6 +4,34 @@
     "title": "Minyak Zaitun & Madu Organik Premium — 100% Tulen & Semulajadi",
     "description": "Destinasi utama anda untuk minyak zaitun dan madu organik berkualiti tinggi, dipilih khas untuk gaya hidup sihat anda."
   },
+  "Payment": {
+    "Header": {
+      "title": "Kaedah Pembayaran & Keselamatan",
+      "description": "Kami menawarkan pelbagai pilihan pembayaran yang selamat และ mudah untuk memastikan pengalaman membeli-belah yang lancar bagi semua pelanggan kami."
+    },
+    "HowToShop": {
+      "title": "Cara Memulakan Pembelian",
+      "ariaLabel": "Panduan langkah demi langkah tentang cara membeli produk",
+      "step1": "1. Lihat koleksi premium kami, pilih item yang anda inginkan, dan klik <important>“Tambah ke Troli”</important> untuk menyimpannya ke dalam beg beli-belah anda.",
+      "step2": "2. Akses troli anda melalui ikon di sudut kanan atas untuk menyemak barangan terpilih, melaraskan kuantiti, atau mengeluarkan produk jika perlu.",
+      "step3": "3. Setelah anda berpuas hati dengan pilihan tersebut, klik <important>“Buat Pesanan”</important> untuk meneruskan ke sistem pembayaran yang selamat.",
+      "step4": "4. Anda akan dibawa secara selamat ke rakan pembayaran kami, Stripe, di mana anda boleh memasukkan butiran pembayaran และ menyelesaikan pembelian anda dengan selamat."
+    },
+    "CardPayment": {
+      "title": "Bayar melalui Kad Debit / Kredit",
+      "ariaLabel": "Arahan untuk pembayaran menggunakan kad debit atau kredit",
+      "description": "Kami menyokong pelbagai rangkaian pembayaran global. Anda boleh membayar dengan selamat menggunakan kad debit atau kredit daripada semua bank utama di seluruh dunia.",
+      "acceptedCards": "Kami menerima kad dengan logo <important>Visa, Mastercard, atau JCB</important>, termasuk kad maya (virtual card) dan kad kredit antarabangsa untuk kemudahan anda.",
+      "securityNote": "Setiap transaksi anda disulitkan (encrypted) และ dilindungi oleh teknologi terkemuka industri daripada Stripe."
+    },
+    "QRCodePayment": {
+      "title": "Bayar dengan Kod QR (Perbankan Mudah Alih)",
+      "ariaLabel": "Arahan untuk pembayaran menggunakan Kod QR",
+      "description": "Untuk proses pembayaran yang lebih pantas, anda boleh membayar serta-merta melalui Kod QR. Kaedah ini amat disyorkan untuk kemudahan anda.",
+      "method": "Hanya imbas <important>Kod QR PromptPay</important> melalui aplikasi perbankan mudah alih anda. Perkhidmatan ini disokong oleh semua bank utama tanpa sebarang yuran transaksi tambahan.",
+      "expiryNote": "* Sila pastikan pembayaran diselesaikan dalam tempoh masa yang ditetapkan pada halaman pembayaran."
+    }
+  },
   "ProductChip": {
     "authentic": "100% Tulen",
     "premium": "Premium",
