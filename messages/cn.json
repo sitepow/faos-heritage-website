@@ -22,7 +22,8 @@
     "roles": {
       "admin": "系统管理员",
       "customer": "普通客户"
-    }
+    },
+    "favoritesEmpty": "您的收藏夹中还没有任何商品。 <br/> <link>浏览所有产品</link>"
   },
   "Products": {
     "categoryTitle": "类别 {name}",

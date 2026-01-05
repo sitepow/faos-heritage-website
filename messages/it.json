@@ -22,7 +22,8 @@
     "roles": {
       "admin": "Amministratore di sistema",
       "customer": "Cliente"
-    }
+    },
+    "favoritesEmpty": "Non hai ancora articoli nei tuoi preferiti. <br/> <link>Esplora tutti i prodotti</link>"
   },
   "Products": {
     "categoryTitle": "Categoria {name}",

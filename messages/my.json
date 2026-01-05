@@ -22,7 +22,8 @@
     "roles": {
       "admin": "Administrator sistem",
       "customer": "Pelanggan"
-    }
+    },
+    "favoritesEmpty": "Anda belum mempunyai sebarang barangan dalam senarai kegemaran. <br/> <link>Lihat semua produk</link>"
   },
   "Products": {
     "categoryTitle": "Kategori {name}",

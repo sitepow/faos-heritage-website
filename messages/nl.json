@@ -22,7 +22,8 @@
     "roles": {
       "admin": "Systeembeheerder",
       "customer": "Klant"
-    }
+    },
+    "favoritesEmpty": "Je hebt nog geen items in je favorietenlijst staan. <br/> <link>Bekijk alle producten</link>"
   },
   "Products": {
     "categoryTitle": "Categorie {name}",

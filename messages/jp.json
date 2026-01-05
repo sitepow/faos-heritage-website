@@ -22,7 +22,8 @@
     "roles": {
       "admin": "システム管理者",
       "customer": "一般のお客様"
-    }
+    },
+    "favoritesEmpty": "お気に入りリストに商品がありません。 <br/> <link>すべての商品を見る</link>"
   },
   "Products": {
     "categoryTitle": "カテゴリー {name}",

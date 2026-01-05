@@ -22,7 +22,8 @@
     "roles": {
       "admin": "Kerfisstjóri",
       "customer": "Viðskiptavinur"
-    }
+    },
+    "favoritesEmpty": "Þú ert ekki með neinar vörur á óskalistanum þínum ennþá. <br/> <link>Skoða allar vörur</link>"
   },
   "Products": {
     "categoryTitle": "Flokkur {name}",

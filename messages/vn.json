@@ -22,7 +22,8 @@
     "roles": {
       "admin": "Quản trị viên",
       "customer": "Khách hàng"
-    }
+    },
+    "favoritesEmpty": "Bạn chưa có sản phẩm yêu thích nào. <br/> <link>Khám phá tất cả sản phẩm</link>"
   },
   "Products": {
     "categoryTitle": "Danh mục {name}",

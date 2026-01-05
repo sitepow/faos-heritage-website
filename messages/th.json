@@ -22,7 +22,8 @@
     "roles": {
       "admin": "ผู้ดูแลระบบ",
       "customer": "ลูกค้าทั่วไป"
-    }
+    },
+    "favoritesEmpty": "คุณยังไม่มีรายการสินค้าที่ถูกใจในขณะนี้ <br/> <link>เลือกชมสินค้าทั้งหมด</link>"
   },
   "Products": {
     "categoryTitle": "หมวดหมู่ {name}",
