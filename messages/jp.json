@@ -4,6 +4,26 @@
     "title": "プレミアム有機オリーブオイル＆ハチミツ — 100%純粋・天然コレクション",
     "description": "健康的なライフスタイルのための、厳選された高品質なオーガニックオリーブオイルとハチミツをお届けします。"
   },
+  "Products": {
+    "categoryTitle": "カテゴリー {name}",
+    "title": "すべての商品",
+    "loading": "読み込み中...",
+    "notFound": "申し訳ありません。商品が見つかりませんでした。トップページから再度検索してください。",
+    "breadcrumbs": {
+      "home": "ホーム",
+      "products": "すべての商品"
+    },
+    "pagination": "{total} 件中 1–{count} 件を表示",
+    "sortLabel": "並べ替え順",
+    "sortItems": {
+      "newest": "新着順",
+      "oldest": "古い順",
+      "price_low": "価格 安い順",
+      "price_high": "価格 高い順",
+      "stock_low": "在庫 少ない順",
+      "stock_high": "在庫 多い順"
+    }
+  },
   "Auth": {
     "headerTitle": "ログインまたは新規登録",
     "headerDesc": "ウェブサイト <link>{siteName}</link> にアクセスする",

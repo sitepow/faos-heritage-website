@@ -13,6 +13,7 @@ import {
 } from '@heroui/react'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { ArrowUpDownIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useMemo, useState } from 'react'
 
 import { ProductSection } from '../product/[slug]/_components'
@@ -35,10 +36,11 @@ export const ProductsClient = ({
   initialProducts,
   itemPerPage,
 }: ProductsClientProps) => {
+  const t = useTranslations('Products')
   const [selectedKeys, setSelectedKeys] = useState(new Set(['newest']))
+
   const sortBy = useMemo(() => {
     const key = Array.from(selectedKeys)[0] as keyof typeof SORT_ITEMS
-
     return SORT_ITEMS[key]
   }, [selectedKeys])
 
@@ -77,43 +79,37 @@ export const ProductsClient = ({
 
   if (isLoading)
     return (
-      <div className='flex items-center justify-center'>
-        <Spinner label='Loading...' />
+      <div className='flex items-center justify-center py-20'>
+        <Spinner label={t('loading')} />
       </div>
     )
 
-  if (totalItems === 0)
-    return (
-      <PageNotFound>
-        We apologize, the product was not found in our system. Please try
-        searching for the product again on the homepage.
-      </PageNotFound>
-    )
+  if (totalItems === 0) return <PageNotFound>{t('notFound')}</PageNotFound>
 
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
       <div className='flex w-full justify-start'>
         <Breadcrumbs className='font-bold'>
-          <BreadcrumbItem href='/'>Home</BreadcrumbItem>
-          <BreadcrumbItem>Products</BreadcrumbItem>
+          <BreadcrumbItem href='/'>{t('breadcrumbs.home')}</BreadcrumbItem>
+          <BreadcrumbItem>{t('breadcrumbs.products')}</BreadcrumbItem>
         </Breadcrumbs>
       </div>
 
-      <span className='text-2xl'>Products</span>
+      <span className='text-2xl font-bold'>{t('title')}</span>
 
       <div className='flex w-full flex-wrap items-center justify-center gap-3 sm:justify-between'>
         <span className='text-primary'>
-          Showing 1–{itemCount} of {totalItems} items
+          {t('pagination', { count: itemCount, total: totalItems })}
         </span>
 
         <Dropdown>
           <DropdownTrigger>
             <Button
-              startContent={<ArrowUpDownIcon />}
+              startContent={<ArrowUpDownIcon size={18} />}
               variant='bordered'
               color='primary'
             >
-              Sorting {sortBy?.label}
+              {t('sortLabel')} {t(`sortItems.${Array.from(selectedKeys)[0]}`)}
             </Button>
           </DropdownTrigger>
           <DropdownMenu
@@ -124,12 +120,11 @@ export const ProductsClient = ({
             variant='flat'
             onSelectionChange={(keys) => {
               if (keys === 'all') return
-
               setSelectedKeys(new Set(keys as Set<string>))
             }}
           >
-            {Object.entries(SORT_ITEMS).map(([key, value]) => (
-              <DropdownItem key={key}>{value.label}</DropdownItem>
+            {Object.entries(SORT_ITEMS).map(([key]) => (
+              <DropdownItem key={key}>{t(`sortItems.${key}`)}</DropdownItem>
             ))}
           </DropdownMenu>
         </Dropdown>

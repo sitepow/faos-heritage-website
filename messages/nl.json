@@ -4,6 +4,26 @@
     "title": "Premium Biologische Olijfolie & Honing — 100% Puur & Natuurlijk",
     "description": "Uw adres voor hoogwaardige biologische olijfolie en honing, speciaal geselecteerd voor een gezonde levensstijl."
   },
+  "Products": {
+    "categoryTitle": "Categorie {name}",
+    "title": "Alle producten",
+    "loading": "Laden...",
+    "notFound": "Excuses, het product is niet gevonden. Zoek opnieuw via de homepagina.",
+    "breadcrumbs": {
+      "home": "Home",
+      "products": "Alle producten"
+    },
+    "pagination": "Toont 1–{count} van {total} resultaten",
+    "sortLabel": "Sorteren op",
+    "sortItems": {
+      "newest": "Nieuwste eerst",
+      "oldest": "Oudste eerst",
+      "price_low": "Prijs Laag naar Hoog",
+      "price_high": "Prijs Hoog naar Laag",
+      "stock_low": "Voorraad Laag naar Hoog",
+      "stock_high": "Voorraad Hoog naar Laag"
+    }
+  },
   "Auth": {
     "headerTitle": "Inloggen of registreren",
     "headerDesc": "Om toegang te krijgen tot de website <link>{siteName}</link>",

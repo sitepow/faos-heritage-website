@@ -4,6 +4,26 @@
     "title": "Dầu Ô Liu & Mật Ong Hữu Cơ Cao Cấp — 100% Thuần Khiết & Tự Nhiên",
     "description": "Điểm đến hàng đầu cho dầu ô liu và mật ong hữu cơ chất lượng cao, được tuyển chọn cho lối sống lành mạnh của bạn."
   },
+  "Products": {
+    "categoryTitle": "Danh mục {name}",
+    "title": "Tất cả sản phẩm",
+    "loading": "Đang tải...",
+    "notFound": "Xin lỗi, không tìm thấy sản phẩm. Vui lòng thử tìm kiếm lại tại trang chủ.",
+    "breadcrumbs": {
+      "home": "Trang chủ",
+      "products": "Tất cả sản phẩm"
+    },
+    "pagination": "Hiển thị 1–{count} trên tổng số {total} sản phẩm",
+    "sortLabel": "Sắp xếp theo",
+    "sortItems": {
+      "newest": "Mới nhất",
+      "oldest": "Cũ nhất",
+      "price_low": "Giá Thấp đến Cao",
+      "price_high": "Giá Cao đến Thấp",
+      "stock_low": "Kho Thấp đến Cao",
+      "stock_high": "Kho Cao đến Thấp"
+    }
+  },
   "Auth": {
     "headerTitle": "Đăng nhập hoặc đăng ký",
     "headerDesc": "Để truy cập trang web <link>{siteName}</link>",
