@@ -1,5 +1,7 @@
 // import type { Metadata } from 'next'
 
+import { useTranslations } from 'next-intl'
+
 import { PdfViewer } from '@/components/pdf-viewer'
 // import { siteConfig } from '@/config/site'
 // import { OG_IMAGE } from '@/utils/constants'
@@ -44,6 +46,8 @@ import { PdfViewer } from '@/components/pdf-viewer'
 // }
 
 export default function About() {
+  const t = useTranslations('About')
+
   return (
     <>
       <section className='flex justify-center'>
@@ -51,12 +55,13 @@ export default function About() {
       </section>
 
       <section className='sr-only'>
-        <h1>About FAOS</h1>
-        <p>
-          FAOS offers premium organic olive oil and honey made from 100% natural
-          ingredients. This brochure presents our product range, quality
-          standards, and brand philosophy.
-        </p>
+        <h1>{t('title')}</h1>
+        <p>{t('description')}</p>
+        <ul>
+          <li>{t('philosophy')}</li>
+          <li>{t('quality')}</li>
+          <li>{t('origin')}</li>
+        </ul>
       </section>
     </>
   )
