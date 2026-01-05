@@ -62,6 +62,7 @@ export const Navbar = () => {
         isMenuOpen={isMenuOpen}
         maxWidth='full'
         position='sticky'
+        isBlurred={false}
         onMenuOpenChange={setIsMenuOpen}
       >
         <NavbarContent className='basis-1/5 sm:basis-full' justify='start'>

@@ -1,102 +1,103 @@
 {
   "Site": {
     "name": "FAOS",
-    "title": "Olio d’Oliva & Miele Biologici Premium — Collezione Naturale al 100%",
-    "description": ""
+    "title": "Olio d'Oliva e Miele Biologici — 100% Puri e Naturali",
+    "description": "La tua destinazione per l'olio d'oliva e il miele biologici di alta qualità, selezionati per il tuo stile di vita sano."
   },
   "ProductChip": {
-    "authentic": "Autentico 100%",
-    "premium": "Prodotto Premium",
+    "authentic": "Autentico al 100%",
+    "premium": "Premium",
     "demo": "Versione Demo",
     "digital": "Prodotto Digitale",
     "uncategorized": "Non Categorizzato"
   },
+  "ProductTab": {
+    "description": "Descrizione Prodotto",
+    "review": "Recensioni Clienti"
+  },
   "ProductCart": {
     "quantity": "Quantità",
-    "productOptions": "Opzioni prodotto",
-    "addToFavorites": "Aggiungi ai preferiti",
-    "addToCart": "Aggiungi al carrello",
+    "productOptions": "Seleziona Opzioni",
+    "addToFavorites": "Aggiungi ai Preferiti",
+    "addToCart": "Aggiungi al Carrello",
     "pleaseLoginFirst": "Accedi per {action}",
     "outOfStock": "Esaurito",
-    "quantityExceedsStock": "Supera la disponibilità",
-    "share": "Condividi"
-  },
-  "ProductTab": {
-    "description": "Descrizione",
-    "review": "Recensione"
+    "quantityExceedsStock": "La quantità supera la disponibilità in magazzino",
+    "share": "Condividi Prodotto"
   },
   "Navbar": {
-    "Header": "Olio d’Oliva & Miele Biologici Premium (Alimenti per il Benessere)",
+    "Header": "Olio d'Oliva e Miele Biologici Premium (Per il tuo benessere)",
     "Menu": {
       "home": "Home",
-      "products": "Prodotti",
-      "payments": "Pagamenti",
-      "about": "Chi siamo",
+      "products": "Tutti i Prodotti",
+      "payments": "Metodi di Pagamento",
+      "about": "Chi Siamo",
       "dashboard": "Dashboard",
-      "users": "Utenti",
-      "orders": "Ordini"
+      "users": "Gestione Utenti",
+      "orders": "Gestione Ordini"
     },
     "Panel": {
-      "account": "Il mio account",
-      "orders": "I miei ordini",
-      "favorites": "Preferiti",
-      "adminDashboard": "Dashboard amministratore",
+      "account": "Il mio Account",
+      "orders": "I miei Acquisti",
+      "favorites": "I miei Preferiti",
+      "adminDashboard": "Pannello Admin",
       "logout": "Esci"
     }
   },
   "Meta": {
     "Home": {
       "title": "Home",
-      "description": "Olio d'oliva e miele biologici premium realizzati con ingredienti naturali al 100%.",
+      "description": "Olio d'oliva e miele biologici premium 100% naturali, selezionati con cura per il tuo benessere.",
       "keywords": [
         "FAOS",
         "olio d'oliva biologico",
+        "miele puro",
         "miele biologico",
-        "cibo naturale"
+        "alimenti salutari"
       ],
-      "ogTitle": "Olio d'Oliva & Miele Biologici Premium",
-      "ogDescription": "Prodotti 100% naturali per uno stile di vita sano"
-    }
-  },
-  "CategoryCarousel": {
-    "title": "Acquista per categoria",
-    "explore": "Visualizza tutti i prodotti",
-    "empty": {
-      "title": "Nessun prodotto disponibile",
-      "description": "Prova a selezionare un'altra categoria."
+      "ogTitle": "FAOS - Olio d'Oliva e Miele Biologici Premium",
+      "ogDescription": "Prodotti naturali al 100% selezionati per la tua salute e il tuo benessere."
     }
   },
   "Banner": {
-    "customer": "Scelto da clienti in <highlight>molti paesi in tutto il mondo</highlight>. <link>Prodotti di qualità su cui puoi contare, ovunque tu sia.</link>",
-    "certificate": "I prodotti FAOS sono ufficialmente certificati e approvati dalle autorità competenti, così puoi fidarti della loro <link>sicurezza, qualità e affidabilità</link> ogni volta.",
+    "customer": "Scelto da clienti <highlight>in tutto il mondo</highlight>. <link>Qualità su cui puoi contare, ovunque tu sia.</link>",
+    "certificate": "I prodotti FAOS sono certificati ufficialmente. <link>Garantiamo sicurezza e qualità superiore</link> in ogni ordine.",
     "advertise": {
-      "title": "Perché il miele e l'olio d'oliva sono scelte affidabili per una vita sana quotidiana",
+      "title": "Perché il Miele e l'Olio d'Oliva sono le scelte migliori per chi ama la salute?",
       "messages": [
-        "Il miele puro fornisce energia naturale, aiutandoti a sentirti rinfrescato senza la dolcezza intensa dello zucchero raffinato.",
-        "Molti scelgono il miele perché contiene antiossidanti che supportano il corpo e aumentano l'immunità quotidiana.",
-        "L'olio d'oliva è una ricca fonte di grassi sani ed è ampiamente utilizzato da chi è attento alla salute del cuore.",
-        "Sostituire gli oli da cucina normali con l'olio d'oliva può aiutare a ridurre il colesterolo cattivo e supportare la salute a lungo termine.",
-        "Il miele può aiutare a lenire l'irritazione della gola e sostenere un sistema digestivo sano.",
-        "L'olio d'oliva contiene polifenoli che aiutano a rallentare l'invecchiamento cellulare e a mantenere la pelle sana.",
-        "Sia il miele che l'olio d'oliva sono ingredienti naturali, senza grassi trans.",
-        "Ideale per chi è attento alla salute, gli anziani e chi gestisce la propria dieta.",
-        "Facile da usare in molti modi, dalla cucina alle bevande fino al consumo quotidiano.",
-        "Inizia a prenderti cura della tua salute oggi scegliendo ingredienti migliori e naturali."
+        "Il miele puro al 100% è una fonte di energia naturale e pulita che rivitalizza istantaneamente il corpo senza l'eccessiva dolcezza degli zuccheri raffinati.",
+        "Ricco di alti livelli di antiossidanti naturali, agisce come uno scudo vitale per rafforzare il sistema immunitario ogni giorno.",
+        "Il nostro olio d'oliva premium è ricco di grassi buoni (HDL), un nutriente essenziale che supporta attivamente la salute del cuore.",
+        "Sostituire i comuni oli con l'olio d'oliva in cucina aiuta a ridurre il colesterolo cattivo e contribuisce al benessere fisico a lungo termine.",
+        "Le proprietà naturali del miele offrono un ottimo sollievo per la gola e contengono enzimi che favoriscono l'equilibrio del sistema digerente.",
+        "Ricco di polifenoli, aiuta a rallentare l'invecchiamento cellulare nutrendo la pelle per farla apparire radiosa, sana e giovane.",
+        "Selezionato con cura per garantire l'origine naturale al 100%, senza additivi e con zero grassi trans, per la tua totale tranquillità.",
+        "La scelta ideale per gli appassionati di salute, gli anziani e chiunque presti attenzione alla qualità degli ingredienti che consuma.",
+        "Incredibilmente versatile per ogni pasto: perfetto per cucinare, da aggiungere a bevande salutari o da gustare al naturale per massimi benefici.",
+        "Non aspettare domani; inizia oggi a dare priorità alla tua salute scegliendo ingredienti naturali premium che fanno davvero la differenza."
       ],
-      "description": "Inizia a prenderti cura della tua salute oggi scegliendo ingredienti migliori e naturali."
+      "description": "Una vita più sana è a portata di mano: tutto inizia scegliendo ingredienti naturali di alta qualità per i tuoi pasti quotidiani."
     }
   },
   "Section": {
     "Header": {
-      "title": "Trova i prodotti che si adattano al tuo stile",
-      "description": "Scopri gli articoli perfetti per soddisfare le tue esigenze e il tuo stile di vita"
+      "title": "Trova il Prodotto Perfetto per Te",
+      "description": "Esplora prodotti di qualità su misura per il tuo stile di vita unico."
     },
-    "similar": "Prodotti simili"
+    "similar": "Prodotti Simili"
+  },
+  "CategoryCarousel": {
+    "title": "Acquista per Categoria",
+    "explore": "Vedi Tutti i Prodotti",
+    "empty": {
+      "title": "Nessun prodotto disponibile in questa categoria",
+      "description": "Prova a selezionare un'altra categoria o torna a trovarci più tardi."
+    }
   },
   "Footer": {
-    "copyright": "Copyright {year} {name} - {title}",
+    "copyright": "© {year} {name} - {title}",
     "Menu": {
-      "privacy": "Informativa sulla privacy"
+      "privacy": "Informativa sulla Privacy"
     }
   },
   "Country": {

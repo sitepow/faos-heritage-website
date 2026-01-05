@@ -1,102 +1,103 @@
 {
   "Site": {
     "name": "FAOS",
-    "title": "Dầu Ô Liu & Mật Ong Hữu Cơ Cao Cấp — Bộ Sưu Tập Tự Nhiên 100%",
-    "description": ""
+    "title": "Dầu Ô Liu & Mật Ong Hữu Cơ Cao Cấp — 100% Thuần Khiết & Tự Nhiên",
+    "description": "Điểm đến hàng đầu cho dầu ô liu và mật ong hữu cơ chất lượng cao, được tuyển chọn cho lối sống lành mạnh của bạn."
   },
   "ProductChip": {
-    "authentic": "Chính hãng 100%",
-    "premium": "Sản phẩm cao cấp",
-    "demo": "Phiên bản thử nghiệm",
-    "digital": "Sản phẩm số",
-    "uncategorized": "Chưa phân loại"
-  },
-  "ProductCart": {
-    "quantity": "Số lượng",
-    "productOptions": "Tùy chọn sản phẩm",
-    "addToFavorites": "Thêm vào yêu thích",
-    "addToCart": "Thêm vào giỏ hàng",
-    "pleaseLoginFirst": "Đăng nhập để {action}",
-    "outOfStock": "Hết hàng",
-    "quantityExceedsStock": "Vượt quá số lượng có sẵn",
-    "share": "Chia sẻ"
+    "authentic": "Chính Hãng 100%",
+    "premium": "Cao Cấp",
+    "demo": "Bản Demo",
+    "digital": "Sản Phẩm Số",
+    "uncategorized": "Chưa Phân Loại"
   },
   "ProductTab": {
-    "description": "Mô tả",
-    "review": "Đánh giá"
+    "description": "Mô Tả Sản Phẩm",
+    "review": "Đánh Giá Khách Hàng"
+  },
+  "ProductCart": {
+    "quantity": "Số Lượng",
+    "productOptions": "Chọn Phân Loại",
+    "addToFavorites": "Thêm Vào Yêu Thích",
+    "addToCart": "Thêm Vào Giỏ Hàng",
+    "pleaseLoginFirst": "Vui lòng đăng nhập để {action}",
+    "outOfStock": "Hết Hàng",
+    "quantityExceedsStock": "Số lượng vượt quá kho hàng có sẵn",
+    "share": "Chia Sẻ Sản Phẩm"
   },
   "Navbar": {
-    "Header": "Dầu Ô Liu & Mật Ong Hữu Cơ Cao Cấp (Thực Phẩm Sức Khỏe)",
+    "Header": "Dầu Ô Liu & Mật Ong Hữu Cơ Cao Cấp (Vì Sức Khỏe Của Bạn)",
     "Menu": {
-      "home": "Trang chủ",
-      "products": "Sản phẩm",
-      "payments": "Thanh toán",
-      "about": "Giới thiệu",
-      "dashboard": "Bảng điều khiển",
-      "users": "Người dùng",
-      "orders": "Đơn hàng"
+      "home": "Trang Chủ",
+      "products": "Tất Cả Sản Phẩm",
+      "payments": "Phương Thức Thanh Toán",
+      "about": "Về Chúng Tôi",
+      "dashboard": "Bảng Điều Khiển",
+      "users": "Quản Lý Người Dùng",
+      "orders": "Quản Lý Đơn Hàng"
     },
     "Panel": {
-      "account": "Tài khoản của tôi",
-      "orders": "Đơn hàng của tôi",
-      "favorites": "Yêu thích",
-      "adminDashboard": "Bảng điều khiển quản trị",
-      "logout": "Đăng xuất"
+      "account": "Tài Khoản Của Tôi",
+      "orders": "Đơn Mua Của Tôi",
+      "favorites": "Danh Sách Yêu Thích",
+      "adminDashboard": "Trang Quản Trị",
+      "logout": "Đăng Xuất"
     }
   },
   "Meta": {
     "Home": {
-      "title": "Trang chủ",
-      "description": "Dầu ô liu và mật ong hữu cơ cao cấp được làm từ 100% nguyên liệu tự nhiên.",
+      "title": "Trang Chủ",
+      "description": "Cung cấp dầu ô liu và mật ong hữu cơ 100% tự nhiên, được lựa chọn kỹ lưỡng cho sức khỏe của bạn.",
       "keywords": [
         "FAOS",
         "dầu ô liu hữu cơ",
+        "mật ong nguyên chất",
         "mật ong hữu cơ",
-        "thực phẩm tự nhiên"
+        "thực phẩm sức khỏe"
       ],
-      "ogTitle": "Dầu Ô Liu & Mật Ong Hữu Cơ Cao Cấp",
-      "ogDescription": "Sản phẩm tự nhiên 100% cho lối sống lành mạnh"
-    }
-  },
-  "CategoryCarousel": {
-    "title": "Mua sắm theo danh mục",
-    "explore": "Xem tất cả sản phẩm",
-    "empty": {
-      "title": "Không có sản phẩm trong danh mục này",
-      "description": "Vui lòng chọn một danh mục khác."
+      "ogTitle": "FAOS - Dầu Ô Liu & Mật Ong Hữu Cơ Cao Cấp",
+      "ogDescription": "Sản phẩm tự nhiên nguyên chất 100% được tuyển chọn cho sức khỏe và lối sống của bạn."
     }
   },
   "Banner": {
-    "customer": "Được khách hàng từ <highlight>nhiều quốc gia trên toàn thế giới</highlight> tin tưởng. <link>Sản phẩm chất lượng, đáng tin cậy ở mọi nơi.</link>",
-    "certificate": "Sản phẩm FAOS được chứng nhận chính thức và phê duyệt bởi các cơ quan có thẩm quyền, vì vậy bạn có thể tin tưởng vào <link>an toàn, chất lượng và độ tin cậy</link> mỗi lần sử dụng.",
+    "customer": "Được tin dùng bởi khách hàng <highlight>trên toàn thế giới</highlight>. <link>Chất lượng bạn có thể tin tưởng, dù bạn ở bất cứ đâu.</link>",
+    "certificate": "Sản phẩm FAOS đã được chứng nhận chính thức. <link>Chúng tôi đảm bảo an toàn và chất lượng cao cấp</link> trong mỗi đơn hàng.",
     "advertise": {
-      "title": "Tại sao mật ong và dầu ô liu là lựa chọn tin cậy cho cuộc sống lành mạnh hàng ngày",
+      "title": "Tại Sao Mật Ong Và Dầu Ô Liu Là Lựa Chọn Hàng Đầu Của Người Yêu Sức Khỏe?",
       "messages": [
-        "Mật ong nguyên chất cung cấp năng lượng tự nhiên, giúp bạn cảm thấy tỉnh táo mà không bị ngọt gắt như đường tinh luyện.",
-        "Nhiều người chọn mật ong vì nó chứa chất chống oxy hóa hỗ trợ cơ thể và tăng cường miễn dịch hàng ngày.",
-        "Dầu ô liu là nguồn chất béo lành mạnh phong phú, được những người quan tâm đến sức khỏe sử dụng để hỗ trợ tim mạch.",
-        "Chuyển sang dùng dầu ô liu thay vì dầu nấu ăn thông thường có thể giúp giảm cholesterol xấu và hỗ trợ sức khỏe lâu dài.",
-        "Mật ong giúp làm dịu cổ họng và hỗ trợ hệ tiêu hóa khỏe mạnh.",
-        "Dầu ô liu chứa polyphenol giúp làm chậm quá trình lão hóa tế bào và hỗ trợ làn da khỏe mạnh.",
-        "Cả mật ong và dầu ô liu đều là nguyên liệu tự nhiên, không có chất béo chuyển hóa.",
-        "Lý tưởng cho những người quan tâm đến sức khỏe, người cao tuổi và những người quản lý chế độ ăn.",
-        "Dễ sử dụng theo nhiều cách, từ nấu ăn, đồ uống đến tiêu thụ hàng ngày.",
-        "Hãy bắt đầu chăm sóc sức khỏe của bạn ngay hôm nay bằng cách chọn nguyên liệu tự nhiên tốt hơn."
+        "Mật ong nguyên chất 100% là nguồn năng lượng tự nhiên sạch, giúp cơ thể tỉnh táo ngay lập tức mà không có cảm giác ngọt gắt của đường tinh luyện.",
+        "Giàu chất chống oxy hóa tự nhiên, đóng vai trò như một lá chắn thiết yếu để tăng cường hệ miễn dịch của bạn mỗi ngày.",
+        "Dầu ô liu cao cấp của chúng tôi giàu chất béo tốt (HDL), một dưỡng chất quan trọng hỗ trợ tích cực cho sức khỏe tim mạch.",
+        "Thay đổi sang dầu ô liu trong nấu ăn hàng ngày giúp giảm cholesterol xấu và góp phần cải thiện sức khỏe thể chất lâu dài.",
+        "Đặc tính tự nhiên của mật ong giúp làm dịu cổ họng hiệu quả và chứa các enzyme giúp cân bằng hệ tiêu hóa của bạn.",
+        "Giàu polyphenol, giúp làm chậm quá trình lão hóa tế bào đồng thời nuôi dưỡng làn da rạng rỡ, khỏe mạnh và trẻ trung.",
+        "Được tuyển chọn kỹ lưỡng để đảm bảo nguồn gốc 100% tự nhiên, không chất phụ gia và không chất béo chuyển hóa để bạn hoàn toàn yên tâm.",
+        "Sự lựa chọn hoàn hảo cho những người yêu sức khỏe, người cao tuổi và bất kỳ ai chú trọng đến chất lượng nguyên liệu trong thực phẩm.",
+        "Cực kỳ linh hoạt cho mọi bữa ăn—dù là nấu nướng, pha chế thức uống sức khỏe hay thưởng thức trực tiếp để đạt hiệu quả tốt nhất.",
+        "Đừng chờ đợi đến ngày mai; hãy bắt đầu ưu tiên sức khỏe của bạn ngay hôm nay bằng cách chọn những nguyên liệu tự nhiên cao cấp."
       ],
-      "description": "Hãy bắt đầu chăm sóc sức khỏe của bạn ngay hôm nay bằng cách chọn nguyên liệu tự nhiên tốt hơn."
+      "description": "Sống khỏe mạnh hơn trong tầm tay — tất cả bắt đầu từ việc chọn những nguyên liệu tự nhiên tốt hơn cho bữa ăn hàng ngày."
     }
   },
   "Section": {
     "Header": {
-      "title": "Tìm các sản phẩm phù hợp với phong cách của bạn",
-      "description": "Khám phá các món đồ hoàn hảo để đáp ứng nhu cầu và phong cách sống của bạn"
+      "title": "Tìm Sản Phẩm Phù Hợp Với Bạn",
+      "description": "Khám phá các sản phẩm chất lượng được thiết kế riêng cho lối sống độc đáo của bạn."
     },
-    "similar": "Sản phẩm tương tự"
+    "similar": "Sản Phẩm Tương Tự"
+  },
+  "CategoryCarousel": {
+    "title": "Mua Theo Danh Mục",
+    "explore": "Xem Tất Cả Sản Phẩm",
+    "empty": {
+      "title": "Không có sản phẩm nào trong danh mục này",
+      "description": "Vui lòng thử chọn danh mục khác hoặc quay lại sau."
+    }
   },
   "Footer": {
-    "copyright": "Bản quyền {year} {name} - {title}",
+    "copyright": "© {year} {name} - {title}",
     "Menu": {
-      "privacy": "Chính sách bảo mật"
+      "privacy": "Chính Sách Bảo Mật"
     }
   },
   "Country": {

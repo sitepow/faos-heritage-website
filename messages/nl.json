@@ -1,100 +1,101 @@
 {
   "Site": {
     "name": "FAOS",
-    "title": "Premium Biologische Olijfolie & Honing — 100% Natuurlijke Collectie",
-    "description": ""
+    "title": "Premium Biologische Olijfolie & Honing — 100% Puur & Natuurlijk",
+    "description": "Uw adres voor hoogwaardige biologische olijfolie en honing, speciaal geselecteerd voor een gezonde levensstijl."
   },
   "ProductChip": {
-    "authentic": "Authentiek 100%",
-    "premium": "Premium Product",
+    "authentic": "100% Authentiek",
+    "premium": "Premium",
     "demo": "Demoversie",
     "digital": "Digitaal Product",
-    "uncategorized": "Niet gecategoriseerd"
+    "uncategorized": "Niet Gecategoriseerd"
+  },
+  "ProductTab": {
+    "description": "Productomschrijving",
+    "review": "Klantbeoordelingen"
   },
   "ProductCart": {
     "quantity": "Aantal",
-    "productOptions": "Productopties",
-    "addToFavorites": "Toevoegen aan favorieten",
-    "addToCart": "Toevoegen aan winkelwagen",
+    "productOptions": "Selecteer Opties",
+    "addToFavorites": "Toevoegen aan Favorieten",
+    "addToCart": "In Winkelwagen",
     "pleaseLoginFirst": "Log in om te {action}",
-    "outOfStock": "Niet op voorraad",
-    "quantityExceedsStock": "Overschrijdt beschikbare voorraad",
-    "share": "Delen"
-  },
-  "ProductTab": {
-    "description": "Beschrijving",
-    "review": "Beoordeling"
+    "outOfStock": "Niet op Voorraad",
+    "quantityExceedsStock": "Aantal overschrijdt de beschikbare voorraad",
+    "share": "Deel Product"
   },
   "Navbar": {
-    "Header": "Premium Biologische Olijfolie & Honing (Gezonde Voeding)",
+    "Header": "Premium Biologische Olijfolie & Honing (Voor uw gezondheid)",
     "Menu": {
       "home": "Home",
-      "products": "Producten",
-      "payments": "Betalingen",
-      "about": "Over ons",
+      "products": "Alle Producten",
+      "payments": "Betaalmethoden",
+      "about": "Over Ons",
       "dashboard": "Dashboard",
-      "users": "Gebruikers",
-      "orders": "Bestellingen"
+      "users": "Gebruikersbeheer",
+      "orders": "Bestelbeheer"
     },
     "Panel": {
-      "account": "Mijn account",
-      "orders": "Mijn bestellingen",
-      "favorites": "Favorieten",
-      "adminDashboard": "Beheerdersdashboard",
+      "account": "Mijn Account",
+      "orders": "Mijn Bestellingen",
+      "favorites": "Mijn Favorieten",
+      "adminDashboard": "Beheerderspaneel",
       "logout": "Uitloggen"
     }
   },
   "Meta": {
     "Home": {
       "title": "Home",
-      "description": "Premium biologische olijfolie en honing, gemaakt van 100% natuurlijke ingrediënten.",
+      "description": "Premium 100% natuurlijke biologische olijfolie en honing, zorgvuldig geselecteerd voor uw welzijn.",
       "keywords": [
         "FAOS",
         "biologische olijfolie",
+        "pure honing",
         "biologische honing",
-        "natuurlijk voedsel"
+        "gezonde voeding"
       ],
-      "ogTitle": "Premium Biologische Olijfolie & Honing",
-      "ogDescription": "100% natuurlijke producten voor een gezonde levensstijl"
-    }
-  },
-  "CategoryCarousel": {
-    "title": "Winkel per categorie",
-    "explore": "Bekijk alle producten",
-    "empty": {
-      "title": "Geen producten beschikbaar",
-      "description": "Probeer een andere categorie te selecteren."
+      "ogTitle": "FAOS - Premium Biologische Olijfolie & Honing",
+      "ogDescription": "100% pure natuurlijke producten geselecteerd voor uw gezondheid en welzijn."
     }
   },
   "Banner": {
-    "customer": "Vertrouwd door klanten uit <highlight>meerdere landen wereldwijd</highlight>. <link>Kwaliteitsproducten waar je overal op kunt rekenen.</link>",
-    "certificate": "FAOS-producten zijn officieel gecertificeerd en goedgekeurd door de bevoegde autoriteiten, zodat u kunt vertrouwen op hun <link>veiligheid, kwaliteit en betrouwbaarheid</link> elke keer.",
+    "customer": "Vertrouwd door klanten <highlight>over de hele wereld</highlight>. <link>Kwaliteit waar u op kunt rekenen, waar u ook bent.</link>",
+    "certificate": "FAOS-producten zijn officieel gecertificeerd. <link>Wij garanderen veiligheid en premium kwaliteit</link> bij elke bestelling.",
     "advertise": {
-      "title": "Waarom honing en olijfolie vertrouwde keuzes zijn voor een gezonde dagelijkse levensstijl",
+      "title": "Waarom Honing en Olijfolie de beste keuze zijn voor gezondheidsliefhebbers?",
       "messages": [
-        "Pure honing levert natuurlijke energie en helpt je verfrist te voelen zonder de scherpe zoetheid van geraffineerde suiker.",
-        "Veel mensen kiezen honing omdat het antioxidanten bevat die het lichaam ondersteunen en de dagelijkse immuniteit verhogen.",
-        "Olijfolie is een rijke bron van gezonde vetten en wordt veel gebruikt door gezondheidsbewuste mensen om de hartgezondheid te ondersteunen.",
-        "Overschakelen naar olijfolie in plaats van gewone bakoliën kan helpen slechte cholesterol te verminderen en de lange termijn gezondheid te ondersteunen.",
-        "Honing kan helpen bij het verzachten van keelpijn en het ondersteunen van een gezond spijsverteringssysteem.",
-        "Olijfolie bevat polyfenolen die helpen de veroudering van cellen te vertragen en een gezonde huid te ondersteunen.",
-        "Zowel honing als olijfolie zijn natuurlijke ingrediënten zonder transvetten.",
-        "Ideaal voor gezondheidsbewuste individuen, senioren en mensen die hun dieet beheren.",
-        "Gemakkelijk te gebruiken op veel manieren, van koken en drinken tot dagelijkse consumptie.",
-        "Begin vandaag met het verzorgen van je gezondheid door betere, natuurlijke ingrediënten te kiezen."
+        "100% pure honing is een schone, natuurlijke energiebron die uw lichaam direct verfrist zonder de zware zoetheid van bewerkte suikers.",
+        "Rijk aan natuurlijke antioxidanten; het fungeert als een vitaal schild om uw immuunsysteem dagelijks te versterken.",
+        "Onze premium olijfolie zit vol gezonde vetten (HDL), een essentiële voedingsstof die de gezondheid van het hart actief ondersteunt.",
+        "Olijfolie gebruiken bij het dagelijks koken helpt het slechte cholesterol te verlagen en draagt bij aan uw welzijn op de lange termijn.",
+        "De natuurlijke eigenschappen van honing verzachten de keel en bevatten enzymen die uw spijsvertering in balans houden.",
+        "Rijk aan polyfenolen, wat celveroudering helpt vertragen en uw huid voedt voor een stralende en jeugdige uitstraling.",
+        "Zorgvuldig geselecteerd voor een 100% natuurlijke oorsprong, zonder toevoegingen en transvetten, voor uw volledige gemoedsrust.",
+        "De ideale keuze voor gezondheidsbewuste mensen, senioren en iedereen die let op de kwaliteit van hun ingrediënten.",
+        "Ongelooflijk veelzijdig: perfect voor het bereiden van gerechten, in gezonde drankjes of gewoon puur voor de maximale voordelen.",
+        "Wacht niet tot morgen; geef vandaag nog prioriteit aan uw gezondheid door te kiezen voor natuurlijke ingrediënten die het verschil maken."
       ],
-      "description": "Begin vandaag met het verzorgen van je gezondheid door betere, natuurlijke ingrediënten te kiezen."
+      "description": "Een gezonder leven is binnen handbereik — het begint bij het kiezen van betere natuurlijke ingrediënten voor uw dagelijkse maaltijden."
     }
   },
   "Section": {
     "Header": {
-      "title": "Vind de producten die bij jouw stijl passen",
-      "description": "Ontdek de perfecte items die aansluiten bij jouw behoeften en levensstijl"
+      "title": "Vind het Product dat bij u Past",
+      "description": "Ontdek kwaliteitsproducten die aansluiten bij uw unieke levensstijl."
     },
-    "similar": "Vergelijkbare producten"
+    "similar": "Vergelijkbare Producten"
+  },
+  "CategoryCarousel": {
+    "title": "Shop per Categorie",
+    "explore": "Bekijk alle Producten",
+    "empty": {
+      "title": "Geen producten beschikbaar in deze categorie",
+      "description": "Probeer een andere categorie of kom later terug."
+    }
   },
   "Footer": {
-    "copyright": "Copyright {year} {name} - {title}",
+    "copyright": "© {year} {name} - {title}",
     "Menu": {
       "privacy": "Privacybeleid"
     }

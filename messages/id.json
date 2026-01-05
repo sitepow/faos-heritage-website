@@ -1,100 +1,101 @@
 {
   "Site": {
     "name": "FAOS",
-    "title": "Minyak Zaitun & Madu Organik Premium — Koleksi Alami 100%",
-    "description": ""
+    "title": "Minyak Zaitun & Madu Organik Premium — 100% Murni & Alami",
+    "description": "Destinasi utama Anda untuk minyak zaitun dan madu organik berkualitas tinggi, dikurasi khusus untuk gaya hidup sehat Anda."
   },
   "ProductChip": {
-    "authentic": "Asli 100%",
-    "premium": "Produk Premium",
+    "authentic": "100% Original",
+    "premium": "Premium",
     "demo": "Versi Demo",
     "digital": "Produk Digital",
-    "uncategorized": "Belum Dikategorikan"
+    "uncategorized": "Lainnya"
+  },
+  "ProductTab": {
+    "description": "Deskripsi Produk",
+    "review": "Ulasan Pembeli"
   },
   "ProductCart": {
     "quantity": "Jumlah",
-    "productOptions": "Opsi produk",
-    "addToFavorites": "Tambah ke favorit",
-    "addToCart": "Tambah ke keranjang",
-    "pleaseLoginFirst": "Masuk untuk {action}",
-    "outOfStock": "Stok habis",
-    "quantityExceedsStock": "Melebihi stok yang tersedia",
-    "share": "Bagikan"
-  },
-  "ProductTab": {
-    "description": "Deskripsi",
-    "review": "Ulasan"
+    "productOptions": "Pilih Varian",
+    "addToFavorites": "Tambah ke Favorit",
+    "addToCart": "Masukkan Keranjang",
+    "pleaseLoginFirst": "Silakan masuk untuk {action}",
+    "outOfStock": "Stok Habis",
+    "quantityExceedsStock": "Jumlah melebihi stok tersedia",
+    "share": "Bagikan Produk"
   },
   "Navbar": {
-    "Header": "Minyak Zaitun & Madu Organik Premium (Makanan Kesehatan)",
+    "Header": "Minyak Zaitun & Madu Organik Premium (Untuk Kesehatan Anda)",
     "Menu": {
       "home": "Beranda",
-      "products": "Produk",
-      "payments": "Pembayaran",
+      "products": "Semua Produk",
+      "payments": "Metode Pembayaran",
       "about": "Tentang Kami",
-      "dashboard": "Dasbor",
-      "users": "Pengguna",
-      "orders": "Pesanan"
+      "dashboard": "Dashboard",
+      "users": "Kelola Pengguna",
+      "orders": "Kelola Pesanan"
     },
     "Panel": {
-      "account": "Akun saya",
-      "orders": "Pesanan saya",
-      "favorites": "Favorit",
-      "adminDashboard": "Dasbor admin",
+      "account": "Akun Saya",
+      "orders": "Pesanan Saya",
+      "favorites": "Favorit Saya",
+      "adminDashboard": "Panel Admin",
       "logout": "Keluar"
     }
   },
   "Meta": {
     "Home": {
       "title": "Beranda",
-      "description": "Minyak zaitun dan madu organik premium yang dibuat dari 100% bahan alami.",
+      "description": "Menyediakan 100% minyak zaitun dan madu organik alami, dipilih dengan cermat untuk kesehatan Anda.",
       "keywords": [
         "FAOS",
         "minyak zaitun organik",
+        "madu murni",
         "madu organik",
-        "makanan alami"
+        "makanan sehat"
       ],
-      "ogTitle": "Minyak Zaitun & Madu Organik Premium",
-      "ogDescription": "Produk alami 100% untuk gaya hidup sehat"
-    }
-  },
-  "CategoryCarousel": {
-    "title": "Belanja berdasarkan kategori",
-    "explore": "Lihat semua produk",
-    "empty": {
-      "title": "Tidak ada produk tersedia",
-      "description": "Silakan pilih kategori lainnya."
+      "ogTitle": "FAOS - Minyak Zaitun & Madu Organik Premium",
+      "ogDescription": "Produk alami 100% murni yang dipilih untuk kesehatan dan gaya hidup Anda."
     }
   },
   "Banner": {
-    "customer": "Dipercaya oleh pelanggan dari <highlight>berbagai negara di seluruh dunia</highlight>. <link>Produk berkualitas yang dapat diandalkan, di mana pun Anda berada.</link>",
-    "certificate": "Produk FAOS secara resmi bersertifikat dan disetujui oleh otoritas terkait, sehingga Anda dapat mempercayai <link>keamanan, kualitas, dan keandalannya</link> setiap saat.",
+    "customer": "Dipercaya oleh pelanggan <highlight>dari seluruh dunia</highlight>. <link>Kualitas yang dapat Anda andalkan, di mana pun Anda berada.</link>",
+    "certificate": "Produk FAOS telah bersertifikat resmi. <link>Kami menjamin keamanan dan kualitas premium</link> dalam setiap pesanan.",
     "advertise": {
-      "title": "Mengapa Madu dan Minyak Zaitun adalah pilihan terpercaya untuk hidup sehat setiap hari",
+      "title": "Mengapa Madu dan Minyak Zaitun Menjadi Pilihan Utama Pecinta Kesehatan?",
       "messages": [
-        "Madu murni memberikan energi alami, membantu Anda merasa segar tanpa manis tajam dari gula rafinasi.",
-        "Banyak orang memilih madu karena mengandung antioksidan yang membantu mendukung tubuh dan meningkatkan kekebalan setiap hari.",
-        "Minyak zaitun adalah sumber lemak sehat yang kaya dan banyak digunakan oleh orang yang sadar kesehatan untuk mendukung kesehatan jantung.",
-        "Beralih ke minyak zaitun daripada minyak masak biasa dapat membantu mengurangi kolesterol jahat dan mendukung kesehatan jangka panjang.",
-        "Madu dapat membantu meredakan iritasi tenggorokan dan mendukung sistem pencernaan yang sehat.",
-        "Minyak zaitun mengandung polifenol yang membantu memperlambat penuaan sel dan mendukung kulit yang sehat.",
-        "Baik madu maupun minyak zaitun adalah bahan alami tanpa lemak trans.",
-        "Ideal untuk individu yang sadar kesehatan, lansia, dan mereka yang mengatur dietnya.",
-        "Mudah digunakan dengan berbagai cara, dari memasak, minuman, hingga konsumsi harian.",
-        "Mulailah merawat kesehatan Anda hari ini dengan memilih bahan alami yang lebih baik."
+        "100% madu murni adalah sumber energi alami yang bersih, menyegarkan tubuh Anda seketika tanpa rasa manis berlebih dari gula proses.",
+        "Kaya akan antioksidan alami tinggi, bertindak sebagai perisai vital untuk meningkatkan sistem imun Anda setiap hari.",
+        "Minyak zaitun premium kami kaya akan lemak baik (HDL), nutrisi esensial yang secara aktif mendukung kesehatan jantung.",
+        "Beralih ke minyak zaitun untuk memasak membantu menurunkan kolesterol jahat dan berkontribusi pada kesehatan jangka panjang.",
+        "Sifat alami madu memberikan kelegaan luar biasa untuk tenggorokan dan mengandung enzim yang menyeimbangkan sistem pencernaan.",
+        "Kaya akan polifenol, membantu memperlambat penuaan sel sekaligus menutrisi kulit agar tampak cerah, sehat, dan awet muda.",
+        "Dipilih dengan teliti untuk memastikan 100% asal alami, tanpa bahan tambahan dan nol lemak trans untuk ketenangan pikiran Anda.",
+        "Pilihan sempurna bagi pegiat hidup sehat, lansia, dan siapa saja yang memprioritaskan kualitas bahan makanan.",
+        "Sangat serbaguna untuk berbagai hidangan—baik untuk memasak, campuran minuman sehat, atau dikonsumsi langsung.",
+        "Jangan tunggu besok; mulailah prioritaskan kesehatan Anda hari ini dengan memilih bahan alami premium yang membawa perubahan."
       ],
-      "description": "Mulailah merawat kesehatan Anda hari ini dengan memilih bahan alami yang lebih baik."
+      "description": "Hidup sehat dimulai dari dapur Anda — pilih bahan alami berkualitas tinggi untuk hidangan harian yang lebih baik."
     }
   },
   "Section": {
     "Header": {
-      "title": "Temukan produk yang sesuai dengan gaya Anda",
-      "description": "Temukan item yang sempurna untuk memenuhi kebutuhan dan gaya hidup Anda"
+      "title": "Temukan Produk yang Tepat Untuk Anda",
+      "description": "Jelajahi produk berkualitas yang disesuaikan dengan gaya hidup unik Anda."
     },
-    "similar": "Produk Serupa"
+    "similar": "Produk Terkait"
+  },
+  "CategoryCarousel": {
+    "title": "Belanja berdasarkan Kategori",
+    "explore": "Lihat Semua Produk",
+    "empty": {
+      "title": "Tidak ada produk di kategori ini",
+      "description": "Silakan pilih kategori lain atau cek kembali nanti."
+    }
   },
   "Footer": {
-    "copyright": "Hak Cipta {year} {name} - {title}",
+    "copyright": "© {year} {name} - {title}",
     "Menu": {
       "privacy": "Kebijakan Privasi"
     }

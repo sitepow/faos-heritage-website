@@ -1,95 +1,95 @@
 {
   "Site": {
     "name": "FAOS",
-    "title": "高端有机橄榄油与蜂蜜 — 100% 天然臻选系列",
-    "description": ""
+    "title": "顶级有机橄榄油与蜂蜜 — 100% 纯天然系列",
+    "description": "高品质有机橄榄油与蜂蜜的甄选之家，为您打造健康生活方式。"
   },
   "ProductChip": {
-    "authentic": "正品 100%",
-    "premium": "高端产品",
-    "demo": "演示版本",
+    "authentic": "正品保障 100%",
+    "premium": "高端品质",
+    "demo": "演示版",
     "digital": "数字产品",
     "uncategorized": "未分类"
   },
+  "ProductTab": {
+    "description": "商品详情",
+    "review": "累计评价"
+  },
   "ProductCart": {
     "quantity": "数量",
-    "productOptions": "产品选项",
-    "addToFavorites": "添加到收藏",
-    "addToCart": "添加到购物车",
-    "pleaseLoginFirst": "请登录以{action}",
-    "outOfStock": "缺货",
-    "quantityExceedsStock": "超出可用库存",
-    "share": "分享"
-  },
-  "ProductTab": {
-    "description": "描述",
-    "review": "评价"
+    "productOptions": "选择规格",
+    "addToFavorites": "加入收藏夹",
+    "addToCart": "加入购物车",
+    "pleaseLoginFirst": "请先登录以进行 {action}",
+    "outOfStock": "暂时缺货",
+    "quantityExceedsStock": "超过当前库存数量",
+    "share": "分享商品"
   },
   "Navbar": {
-    "Header": "高端有机橄榄油与蜂蜜（健康食品）",
+    "Header": "顶级有机橄榄油与蜂蜜（守护您的健康）",
     "Menu": {
       "home": "首页",
-      "products": "产品",
-      "payments": "支付",
+      "products": "全部商品",
+      "payments": "支付方式",
       "about": "关于我们",
       "dashboard": "控制面板",
-      "users": "用户",
-      "orders": "订单"
+      "users": "用户管理",
+      "orders": "订单管理"
     },
     "Panel": {
-      "account": "我的账户",
+      "account": "个人中心",
       "orders": "我的订单",
-      "favorites": "收藏",
-      "adminDashboard": "管理员控制台",
+      "favorites": "我的收藏",
+      "adminDashboard": "后台管理",
       "logout": "退出登录"
     }
   },
   "Meta": {
     "Home": {
       "title": "首页",
-      "description": "采用100%天然原料制成的优质有机橄榄油和蜂蜜。",
-      "keywords": ["FAOS", "有机橄榄油", "有机蜂蜜", "天然食品"],
-      "ogTitle": "优质有机橄榄油与蜂蜜",
-      "ogDescription": "100%纯天然产品，打造健康生活方式"
-    }
-  },
-  "CategoryCarousel": {
-    "title": "按分类选购",
-    "explore": "查看全部商品",
-    "empty": {
-      "title": "该分类暂无商品",
-      "description": "请尝试选择其他分类。"
+      "description": "专营 100% 纯天然有机橄榄油与蜂蜜，为您的健康保驾护航。",
+      "keywords": ["FAOS", "有机橄榄油", "纯蜂蜜", "有机蜂蜜", "健康食品"],
+      "ogTitle": "FAOS - 顶级有机橄榄油与蜂蜜",
+      "ogDescription": "甄选 100% 纯天然产品，助力您的健康生活。"
     }
   },
   "Banner": {
-    "customer": "深受来自 <highlight>全球多个国家</highlight> 客户的信赖。<link>无论身在何处，都能放心使用的优质产品。</link>",
-    "certificate": "FAOS 产品已获得相关机构的官方认证和批准，因此您可以信赖其 <link>安全性、质量和可靠性</link> 每一次使用。",
+    "customer": "深受<highlight>全球客户</highlight>信赖。<link>无论您身在何处，都能享受值得信赖的卓越品质。</link>",
+    "certificate": "FAOS 产品已通过官方权威认证。<link>确保每一份订单都拥有安全与顶级的品质承诺。</link>",
     "advertise": {
-      "title": "蜂蜜和橄榄油为何是日常健康生活的可靠选择",
+      "title": "为何蜂蜜与橄榄油是养生达人的首选？",
       "messages": [
-        "纯蜂蜜提供天然能量，让您在不摄入精制糖的刺甜的情况下感到精神焕发。",
-        "许多人选择蜂蜜，因为它含有抗氧化剂，可支持身体并增强每日免疫力。",
-        "橄榄油是健康脂肪的丰富来源，被注重健康的人广泛使用以支持心脏健康。",
-        "用橄榄油代替普通食用油可以帮助降低坏胆固醇并支持长期健康。",
-        "蜂蜜有助于缓解喉咙不适并支持健康的消化系统。",
-        "橄榄油含有多酚，可减缓细胞衰老并支持健康皮肤。",
-        "蜂蜜和橄榄油都是天然成分，无需担心反式脂肪。",
-        "适合注重健康的人、老年人以及控制饮食的人群。",
-        "多种方式轻松使用，从烹饪和饮品到日常食用。",
-        "今天就开始关爱您的健康，选择更好、更天然的原料。"
+        "100% 纯蜂蜜是天然的清洁能源，能瞬间为身体补充活力，且没有加工糖那种甜腻感。",
+        "富含高水平的天然抗氧化剂，是您每日增强免疫力、保持身体强健的天然屏障。",
+        "我们的特级橄榄油富含优质脂肪 (HDL)，这是维护心血管健康的重要营养素。",
+        "在日常烹饪中改用橄榄油替代普通食用油，有助于降低坏胆固醇，促进长期健康。",
+        "蜂蜜的天然特性不仅能舒缓咽喉不适，其含有的酶类更有助于维持消化系统的平衡。",
+        "富含多酚类物质，在对抗细胞衰老的同时，由内而外滋养肌肤，令您焕发青春光彩。",
+        "经过严苛筛选，确保 100% 纯天然来源，无添加、零反式脂肪，让您每一口都吃得安心。",
+        "健康追求者、长辈及每一位对食材品质有极致要求人士的理想之选。",
+        "无论是烹饪佳肴、调制健康饮品，还是直接食用，都能完美融入您的多样化生活。",
+        "别等明天，从今天开始通过选择优质的天然食材，开启您的健康管理之旅。"
       ],
-      "description": "今天就开始关爱您的健康，选择更好、更天然的原料。"
+      "description": "健康生活近在咫尺 — 这一切都源于为您的一餐一饭选择更优质的天然食材。"
     }
   },
   "Section": {
     "Header": {
-      "title": "找到符合您风格的产品",
-      "description": "发现完美的商品，满足您的需求和生活方式"
+      "title": "寻找您的专属甄选",
+      "description": "探索为您独特生活方式量身定制的品质佳品。"
     },
-    "similar": "类似商品"
+    "similar": "相似商品推荐"
+  },
+  "CategoryCarousel": {
+    "title": "品类选购",
+    "explore": "查看全部商品",
+    "empty": {
+      "title": "当前品类下暂无商品",
+      "description": "请尝试选择其他类别，或稍后再次访问。"
+    }
   },
   "Footer": {
-    "copyright": "版权所有 {year} {name} - {title}",
+    "copyright": "© {year} {name} - {title}",
     "Menu": {
       "privacy": "隐私政策"
     }

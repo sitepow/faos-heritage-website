@@ -1,100 +1,101 @@
 {
   "Site": {
     "name": "FAOS",
-    "title": "Hágæða Lífræn Ólífuolía & Hunang — 100% Náttúrulegt Úrval",
-    "description": ""
+    "title": "Hágæða Lífræn Ólífuolía og Hunang — 100% Hreint og Náttúrulegt",
+    "description": "Þinn áfangastaður fyrir hágæða lífræna ólífuolíu og hunang, sérstaklega valið fyrir heilbrigðan lífsstíl."
   },
   "ProductChip": {
-    "authentic": "Ekt 100%",
-    "premium": "Premium Vara",
-    "demo": "Prófunarútgáfa",
-    "digital": "Stafrænt Vara",
-    "uncategorized": "Ekki Flokkað"
+    "authentic": "100% Ósvikið",
+    "premium": "Hágæða",
+    "demo": "Prufueintak",
+    "digital": "Stafræn Vara",
+    "uncategorized": "Óflokkað"
+  },
+  "ProductTab": {
+    "description": "Vörulýsing",
+    "review": "Umsagnir Viðskiptavina"
   },
   "ProductCart": {
     "quantity": "Magn",
-    "productOptions": "Valkostir vöru",
-    "addToFavorites": "Bæta við uppáhald",
-    "addToCart": "Bæta í körfu",
-    "pleaseLoginFirst": "Skráðu þig inn til að {action}",
+    "productOptions": "Veldu Valkosti",
+    "addToFavorites": "Bæta í Uppáhald",
+    "addToCart": "Setja í Körfu",
+    "pleaseLoginFirst": "Vinsamlegast skráðu þig inn til að {action}",
     "outOfStock": "Uppselt",
-    "quantityExceedsStock": "Fer yfir tiltækar birgðir",
-    "share": "Deila"
-  },
-  "ProductTab": {
-    "description": "Lýsing",
-    "review": "Umsögn"
+    "quantityExceedsStock": "Magn fer yfir tiltæka lagerstöðu",
+    "share": "Deila Vöru"
   },
   "Navbar": {
-    "Header": "Hágæða Lífræn Ólífuolía & Hunang (Heilsuvörur)",
+    "Header": "Hágæða Lífræn Ólífuolía og Hunang (Fyrir betri heilsu)",
     "Menu": {
       "home": "Heim",
-      "products": "Vörur",
-      "payments": "Greiðslur",
-      "about": "Um okkur",
+      "products": "Allar Vörur",
+      "payments": "Greiðslumátar",
+      "about": "Um Okkur",
       "dashboard": "Stjórnborð",
-      "users": "Notendur",
+      "users": "Notendastýring",
       "orders": "Pantanir"
     },
     "Panel": {
-      "account": "Aðgangurinn minn",
-      "orders": "Pantanir mínar",
-      "favorites": "Í uppáhaldi",
-      "adminDashboard": "Stjórnborð",
-      "logout": "Skrá út"
+      "account": "Reikningurinn Minn",
+      "orders": "Mín Kaup",
+      "favorites": "Mín Uppáhald",
+      "adminDashboard": "Stjórnkerfi",
+      "logout": "Skrá Út"
     }
   },
   "Meta": {
     "Home": {
       "title": "Heim",
-      "description": "Hágæða lífræn ólífuolía og hunang unnin úr 100% náttúrulegum hráefnum.",
+      "description": "Hágæða 100% náttúruleg lífræn ólífuolía og hunang, vandlega valið fyrir vellíðan þína.",
       "keywords": [
         "FAOS",
         "lífræn ólífuolía",
+        "hreint hunang",
         "lífrænt hunang",
-        "náttúruleg matvæli"
+        "heilsufæði"
       ],
-      "ogTitle": "Hágæða Lífræn Ólífuolía & Hunang",
-      "ogDescription": "100% náttúrulegar vörur fyrir heilbrigðan lífsstíl"
-    }
-  },
-  "CategoryCarousel": {
-    "title": "Versla eftir flokkum",
-    "explore": "Skoða allar vörur",
-    "empty": {
-      "title": "Engar vörur í boði",
-      "description": "Prófaðu að velja annan flokk."
+      "ogTitle": "FAOS - Hágæða Lífræn Ólífuolía og Hunang",
+      "ogDescription": "100% hreinar náttúruafurðir valdar fyrir heilsu þína og lífsstíl."
     }
   },
   "Banner": {
-    "customer": "Nýtur trausts viðskiptavina í <highlight>mörgum löndum um allan heim</highlight>. <link>Gæðavörur sem þú getur treyst, hvar sem þú ert.</link>",
-    "certificate": "FAOS vörur eru formlega vottaðar og samþykktar af viðeigandi yfirvöldum, svo þú getur treyst á þeirra <link>öryggi, gæði og áreiðanleika</link> í hvert skipti.",
+    "customer": "Viðskiptavinir <highlight>um allan heim</highlight> treysta okkur. <link>Gæði sem þú getur treyst á, hvar sem þú ert.</link>",
+    "certificate": "Vörur FAOS eru opinberlega vottaðar. <link>Við tryggjum öryggi og hágæða</link> í hverri pöntun.",
     "advertise": {
-      "title": "Af hverju hunang og ólífuolía eru traustar vörur fyrir daglega heilsu",
+      "title": "Af hverju eru hunang og ólífuolía bestu valkostirnir fyrir heilsuunnendur?",
       "messages": [
-        "Hreint hunang veitir náttúrulega orku og hjálpar þér að líða ferskur án sterkrar sætu úr hreinsuðum sykri.",
-        "Margir velja hunang því það inniheldur andoxunarefni sem styðja líkamann og auka daglega ónæmi.",
-        "Ólífuolía er rík uppspretta heilbrigðra fitu og er mikið notuð af heilsuvitundum til að styðja hjartaheilsu.",
-        "Að skipta yfir í ólífuolíu í stað venjulegra matolía getur hjálpað til við að lækka slæma kólesteról og styðja langtímaheilsu.",
-        "Hunang getur hjálpað til við að róa hálsirritation og styðja heilbrigða meltingu.",
-        "Ólífuolía inniheldur fjölfenól sem hjálpa til við að hægja á öldrun frumna og styðja heilbrigða húð.",
-        "Bæði hunang og ólífuolía eru náttúruleg hráefni án transfitu.",
-        "Fullkomið fyrir heilsuvitund einstaklinga, eldri borgara og þá sem stjórna mataræði sínu.",
-        "Auðvelt í notkun á margvíslegan hátt, frá matreiðslu og drykkjum til daglegrar neyslu.",
-        "Byrjaðu að hugsa um heilsu þína í dag með því að velja betri, náttúruleg hráefni."
+        "100% hreint hunang er hreinn og náttúrulegur orkugjafi sem hressir líkamann samstundis án þess að valda sykurfalli eins og unninn sykur.",
+        "Ríkt af náttúrulegum andoxunarefnum sem virka sem mikilvæg vörn til að styrkja ónæmiskerfið á hverjum degi.",
+        "Hágæða ólífuolían okkar er rík af hollri fitu (HDL), nauðsynlegu næringarefni sem styður virkan við heilsu hjartans.",
+        "Með því að nota ólífuolíu í daglega matseld hjálpar þú til við að lækka slæmt kólesteról og stuðlar að langvarandi vellíðan.",
+        "Náttúrulegir eiginleikar hunangs veita frábæra líkn fyrir sáran háls og innihalda ensím sem hjálpa til við að jafna meltingarkerfið.",
+        "Ríkt af pólýfenólum sem hjálpa til við að hægja á öldrun frumna á sama tíma og það nærir húðina svo hún verði geislandi og heilbrigð.",
+        "Vandlega valið til að tryggja 100% náttúrulegan uppruna, án íefna og transfitu, svo þú getir notið þess með fullri hugarró.",
+        "Fullkomið val fyrir heilsurækta fólk, eldri borgara og alla þá sem láta sig gæði hráefna miklu skipta.",
+        "Ótrúlega fjölhæft í alla matseld—hvort sem þú ert að elda uppáhaldsréttinn þinn, blanda í heilsudrykk eða njóta þess hreins.",
+        "Ekki bíða til morguns; byrjaðu að forgangsraða heilsunni þinni í dag með því að velja hágæða náttúruleg hráefni."
       ],
-      "description": "Byrjaðu að hugsa um heilsu þína í dag með því að velja betri, náttúruleg hráefni."
+      "description": "Heilbrigðara líf er innan seilingar — allt byrjar þetta á því að velja betra hráefni í daglega matinn."
     }
   },
   "Section": {
     "Header": {
-      "title": "Finndu vörurnar sem passa við þinn stíl",
-      "description": "Uppgötvaðu fullkomnar vörur sem henta þínum þörfum og lífsstíl"
+      "title": "Finndu það sem hentar þér",
+      "description": "Skoðaðu gæðavörur sem eru sérsniðnar að þínum lífsstíl."
     },
-    "similar": "Svipuð vörur"
+    "similar": "Tengdar Vörur"
+  },
+  "CategoryCarousel": {
+    "title": "Versla eftir Flokkum",
+    "explore": "Skoða Allar Vörur",
+    "empty": {
+      "title": "Engar vörur fundust í þessum flokki",
+      "description": "Vinsamlegast reyndu annan flokk eða kíktu aftur síðar."
+    }
   },
   "Footer": {
-    "copyright": "Höfundarréttur {year} {name} - {title}",
+    "copyright": "© {year} {name} - {title}",
     "Menu": {
       "privacy": "Persónuverndarstefna"
     }

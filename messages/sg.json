@@ -1,101 +1,101 @@
 {
   "Site": {
     "name": "FAOS",
-    "title": "Premium Organic Olive Oil & Honey — 100% Natural Collection",
-    "description": ""
+    "title": "Premium Organic Olive Oil & Honey — 100% Pure & Natural",
+    "description": "Your premier destination for high-quality organic olive oil and honey, curated for your healthy lifestyle."
   },
   "ProductChip": {
-    "authentic": "Authentic 100%",
-    "premium": "Premium Product",
+    "authentic": "100% Authentic",
+    "premium": "Premium",
     "demo": "Demo Version",
     "digital": "Digital Product",
     "uncategorized": "Uncategorized"
   },
+  "ProductTab": {
+    "description": "Product Description",
+    "review": "Customer Reviews"
+  },
   "ProductCart": {
     "quantity": "Quantity",
-    "productOptions": "Product options",
-    "addToFavorites": "Add to favourites",
-    "addToCart": "Add to cart",
-    "pleaseLoginFirst": "Sign in to {action}",
-    "outOfStock": "Out of stock",
-    "quantityExceedsStock": "Exceeds available stock",
-    "share": "Share"
-  },
-  "ProductTab": {
-    "description": "Description",
-    "review": "Review"
+    "productOptions": "Select Options",
+    "addToFavorites": "Add to Favorites",
+    "addToCart": "Add to Cart",
+    "pleaseLoginFirst": "Please sign in to {action}",
+    "outOfStock": "Out of Stock",
+    "quantityExceedsStock": "Quantity exceeds available stock",
+    "share": "Share Product"
   },
   "Navbar": {
-    "Header": "Premium Organic Olive Oil & Honey (Wellness Food)",
+    "Header": "Premium Organic Olive Oil & Honey (For Your Better Health)",
     "Menu": {
       "home": "Home",
-      "products": "Products",
-      "payments": "Payments",
+      "products": "Shop All",
+      "payments": "Payment Methods",
       "about": "About Us",
       "dashboard": "Dashboard",
-      "users": "Users",
-      "orders": "Orders"
+      "users": "User Management",
+      "orders": "Order Management"
     },
     "Panel": {
-      "account": "My account",
-      "orders": "My orders",
-      "favorites": "Favourites",
-      "adminDashboard": "Admin dashboard",
-      "logout": "Log out"
+      "account": "My Account",
+      "orders": "My Purchases",
+      "favorites": "My Favorites",
+      "adminDashboard": "Admin Panel",
+      "logout": "Log Out"
     }
   },
   "Meta": {
     "Home": {
       "title": "Home",
-      "description": "Premium organic olive oil and honey crafted from 100% natural ingredients.",
+      "description": "Premium 100% natural organic olive oil and honey, carefully selected for your wellness.",
       "keywords": [
         "FAOS",
         "organic olive oil",
+        "pure honey",
         "organic honey",
-        "natural food",
-        "healthy lifestyle"
+        "wellness food"
       ],
-      "ogTitle": "Premium Organic Olive Oil & Honey",
-      "ogDescription": "100% pure natural products for a healthier lifestyle"
+      "ogTitle": "FAOS - Premium Organic Olive Oil & Honey",
+      "ogDescription": "100% pure natural products selected for your health and lifestyle."
     }
+  },
+  "Banner": {
+    "customer": "Trusted by customers <highlight>worldwide</highlight>. <link>Quality you can rely on, wherever you are.</link>",
+    "certificate": "FAOS products are officially certified. <link>Ensuring safety and premium quality</link> in every order.",
+    "advertise": {
+      "title": "Why Honey & Olive Oil are the Top Choices for Health Enthusiasts?",
+      "messages": [
+        "100% pure honey is a clean, natural energy source that instantly revitalizes your body without the heavy, cloying sweetness of processed sugars.",
+        "Packed with high levels of natural antioxidants, it acts as a vital shield to boost your immune system and keep you feeling strong every single day.",
+        "Our premium olive oil is rich in healthy fats (HDL), an essential nutrient that actively supports heart health and promotes efficient blood circulation.",
+        "Switching to olive oil for your daily cooking helps lower bad cholesterol and significantly contributes to your long-term physical well-being and vitality.",
+        "The natural properties of honey provide excellent relief for sore throats while containing enzymes that help balance your digestive and excretory systems.",
+        "Rich in polyphenols, it helps slow down cellular aging while nourishing your skin to look radiant, healthy, and youthful from the inside out.",
+        "Carefully selected to ensure 100% natural origin, free from additives and zero trans fats, giving you complete peace of mind with every single serving.",
+        "The perfect choice for health enthusiasts, seniors, and anyone who pays close attention to the quality and origin of the ingredients they consume.",
+        "Incredibly versatile for any meal—whether you’re cooking your favorite dish, mixing it into a healthy drink, or enjoying it fresh for maximum benefits.",
+        "Don't wait for tomorrow; start prioritizing your health today by choosing premium, natural ingredients that truly make a difference in your life."
+      ],
+      "description": "A healthier life is within reach—it all starts with choosing better, high-quality natural ingredients for your daily meals."
+    }
+  },
+  "Section": {
+    "Header": {
+      "title": "Find the Perfect Match for You",
+      "description": "Explore quality products tailored to your unique lifestyle and needs."
+    },
+    "similar": "Similar Products"
   },
   "CategoryCarousel": {
     "title": "Shop by Category",
     "explore": "View All Products",
     "empty": {
-      "title": "No products available",
-      "description": "Try selecting a different category or check back later."
+      "title": "No products available in this category",
+      "description": "Please try selecting a different category or check back later."
     }
-  },
-  "Banner": {
-    "customer": "Trusted by customers across <highlight>multiple countries worldwide</highlight>. <link>Reliable quality, wherever you do business.</link>",
-    "certificate": "FAOS products are officially certified and approved by relevant authorities, so you can trust their <link>safety, quality, and reliability</link> every time.",
-    "advertise": {
-      "title": "Why Honey and Olive Oil are trusted choices for everyday healthy living",
-      "messages": [
-        "Pure honey provides natural energy, helping you feel refreshed without the sharp sweetness of refined sugar.",
-        "Many people choose honey because it contains antioxidants that help support the body and boost everyday immunity.",
-        "Olive oil is a rich source of healthy fats and is widely used by health-conscious people to support heart health.",
-        "Switching to olive oil instead of regular cooking oils can help reduce bad cholesterol and support long-term health.",
-        "Honey can help soothe throat irritation and support a healthy digestive system.",
-        "Olive oil contains polyphenols that help slow down cell aging and support healthy skin.",
-        "Both honey and olive oil are natural ingredients, with no trans fats to worry about.",
-        "Ideal for health-conscious individuals, seniors, and those managing their diet.",
-        "Easy to use in many ways, from cooking and drinks to daily consumption.",
-        "Start taking care of your health today by choosing better, natural ingredients."
-      ],
-      "description": "Start taking care of your health today by choosing better, natural ingredients."
-    }
-  },
-  "Section": {
-    "Header": {
-      "title": "Find the products that match your style",
-      "description": "Discover the perfect items to suit your needs and lifestyle"
-    },
-    "similar": "Similar Products"
   },
   "Footer": {
-    "copyright": "Copyright {year} {name} - {title}",
+    "copyright": "© {year} {name} - {title}",
     "Menu": {
       "privacy": "Privacy Policy"
     }
