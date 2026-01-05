@@ -1,6 +1,36 @@
 {
+  "Site": {
+    "name": "FAOS",
+    "title": "高端有机橄榄油与蜂蜜 — 100% 天然臻选系列",
+    "description": ""
+  },
   "Navbar": {
-    "Header": "高端有机橄榄油与蜂蜜 — 100% 纯天然健康系列"
+    "Header": "高端有机橄榄油与蜂蜜（健康食品）",
+    "Menu": {
+      "home": "首页",
+      "products": "产品",
+      "payments": "支付",
+      "about": "关于我们",
+      "dashboard": "控制面板",
+      "users": "用户",
+      "orders": "订单"
+    },
+    "Panel": {
+      "account": "我的账户",
+      "orders": "我的订单",
+      "favorites": "收藏",
+      "adminDashboard": "管理员控制台",
+      "logout": "退出登录"
+    }
+  },
+  "Meta": {
+    "Home": {
+      "title": "首页",
+      "description": "采用100%天然原料制成的优质有机橄榄油和蜂蜜。",
+      "keywords": ["FAOS", "有机橄榄油", "有机蜂蜜", "天然食品"],
+      "ogTitle": "优质有机橄榄油与蜂蜜",
+      "ogDescription": "100%纯天然产品，打造健康生活方式"
+    }
   },
   "Banner": {
     "customer": "深受来自 <highlight>全球多个国家</highlight> 客户的信赖。<link>无论身在何处，都能放心使用的优质产品。</link>"

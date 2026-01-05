@@ -16,23 +16,21 @@ export const disableSeoConfig = {
 }
 
 export const siteConfig = {
-  name: 'FAOS',
-  title: 'Premium Organic Olive Oil & Honey — 100% Pure Natural Collection',
-  description: '',
   link: {
     login: '/login',
     cart: '/cart',
   },
   mainNavItems: [
-    { label: 'Home', href: '/' },
-    { label: 'Products', href: '/products' },
-    { label: 'Payments', href: '/payment' },
-    { label: 'About', href: '/about' },
+    { label: 'home', href: '/' },
+    { label: 'products', href: '/products' },
+    { label: 'payments', href: '/payment' },
+    { label: 'about', href: '/about' },
   ] satisfies NavItem[],
+
   adminNavbarItems: [
-    { label: 'Dashboard', href: '/dashboard' },
-    { label: 'Users', href: '/dashboard/user' },
-    { label: 'Products', href: '/dashboard/product' },
-    { label: 'Orders', href: '/dashboard/order' },
+    { label: 'dashboard', href: '/dashboard' },
+    { label: 'users', href: '/dashboard/user' },
+    { label: 'products', href: '/dashboard/product' },
+    { label: 'orders', href: '/dashboard/order' },
   ] satisfies NavItem[],
 }

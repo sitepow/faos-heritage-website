@@ -1,6 +1,41 @@
 {
+  "Site": {
+    "name": "FAOS",
+    "title": "Minyak Zaitun & Madu Organik Premium — Koleksi Alami 100%",
+    "description": ""
+  },
   "Navbar": {
-    "Header": "Minyak Zaitun Organik & Madu Premium — Koleksi Alami 100% Murni untuk Kesehatan"
+    "Header": "Minyak Zaitun & Madu Organik Premium (Makanan Kesehatan)",
+    "Menu": {
+      "home": "Beranda",
+      "products": "Produk",
+      "payments": "Pembayaran",
+      "about": "Tentang Kami",
+      "dashboard": "Dasbor",
+      "users": "Pengguna",
+      "orders": "Pesanan"
+    },
+    "Panel": {
+      "account": "Akun saya",
+      "orders": "Pesanan saya",
+      "favorites": "Favorit",
+      "adminDashboard": "Dasbor admin",
+      "logout": "Keluar"
+    }
+  },
+  "Meta": {
+    "Home": {
+      "title": "Beranda",
+      "description": "Minyak zaitun dan madu organik premium yang dibuat dari 100% bahan alami.",
+      "keywords": [
+        "FAOS",
+        "minyak zaitun organik",
+        "madu organik",
+        "makanan alami"
+      ],
+      "ogTitle": "Minyak Zaitun & Madu Organik Premium",
+      "ogDescription": "Produk alami 100% untuk gaya hidup sehat"
+    }
   },
   "Banner": {
     "customer": "Dipercaya oleh pelanggan dari <highlight>berbagai negara di seluruh dunia</highlight>. <link>Produk berkualitas yang dapat diandalkan, di mana pun Anda berada.</link>"

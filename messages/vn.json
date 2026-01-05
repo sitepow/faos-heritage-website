@@ -1,6 +1,41 @@
 {
+  "Site": {
+    "name": "FAOS",
+    "title": "Dầu Ô Liu & Mật Ong Hữu Cơ Cao Cấp — Bộ Sưu Tập Tự Nhiên 100%",
+    "description": ""
+  },
   "Navbar": {
-    "Header": "Dầu Ô Liu Hữu Cơ & Mật Ong Cao Cấp — Bộ Sưu Tập Tự Nhiên 100% Vì Sức Khỏe"
+    "Header": "Dầu Ô Liu & Mật Ong Hữu Cơ Cao Cấp (Thực Phẩm Sức Khỏe)",
+    "Menu": {
+      "home": "Trang chủ",
+      "products": "Sản phẩm",
+      "payments": "Thanh toán",
+      "about": "Giới thiệu",
+      "dashboard": "Bảng điều khiển",
+      "users": "Người dùng",
+      "orders": "Đơn hàng"
+    },
+    "Panel": {
+      "account": "Tài khoản của tôi",
+      "orders": "Đơn hàng của tôi",
+      "favorites": "Yêu thích",
+      "adminDashboard": "Bảng điều khiển quản trị",
+      "logout": "Đăng xuất"
+    }
+  },
+  "Meta": {
+    "Home": {
+      "title": "Trang chủ",
+      "description": "Dầu ô liu và mật ong hữu cơ cao cấp được làm từ 100% nguyên liệu tự nhiên.",
+      "keywords": [
+        "FAOS",
+        "dầu ô liu hữu cơ",
+        "mật ong hữu cơ",
+        "thực phẩm tự nhiên"
+      ],
+      "ogTitle": "Dầu Ô Liu & Mật Ong Hữu Cơ Cao Cấp",
+      "ogDescription": "Sản phẩm tự nhiên 100% cho lối sống lành mạnh"
+    }
   },
   "Banner": {
     "customer": "Được khách hàng từ <highlight>nhiều quốc gia trên toàn thế giới</highlight> tin tưởng. <link>Sản phẩm chất lượng, đáng tin cậy ở mọi nơi.</link>"

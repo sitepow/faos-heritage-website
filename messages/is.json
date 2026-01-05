@@ -1,6 +1,41 @@
 {
+  "Site": {
+    "name": "FAOS",
+    "title": "Hágæða Lífræn Ólífuolía & Hunang — 100% Náttúrulegt Úrval",
+    "description": ""
+  },
   "Navbar": {
-    "Header": "Hágæða Lífræn Ólífuolía & Hunang — 100% Hrein Náttúruleg Safn fyrir Heilsu"
+    "Header": "Hágæða Lífræn Ólífuolía & Hunang (Heilsuvörur)",
+    "Menu": {
+      "home": "Heim",
+      "products": "Vörur",
+      "payments": "Greiðslur",
+      "about": "Um okkur",
+      "dashboard": "Stjórnborð",
+      "users": "Notendur",
+      "orders": "Pantanir"
+    },
+    "Panel": {
+      "account": "Aðgangurinn minn",
+      "orders": "Pantanir mínar",
+      "favorites": "Í uppáhaldi",
+      "adminDashboard": "Stjórnborð",
+      "logout": "Skrá út"
+    }
+  },
+  "Meta": {
+    "Home": {
+      "title": "Heim",
+      "description": "Hágæða lífræn ólífuolía og hunang unnin úr 100% náttúrulegum hráefnum.",
+      "keywords": [
+        "FAOS",
+        "lífræn ólífuolía",
+        "lífrænt hunang",
+        "náttúruleg matvæli"
+      ],
+      "ogTitle": "Hágæða Lífræn Ólífuolía & Hunang",
+      "ogDescription": "100% náttúrulegar vörur fyrir heilbrigðan lífsstíl"
+    }
   },
   "Banner": {
     "customer": "Nýtur trausts viðskiptavina í <highlight>mörgum löndum um allan heim</highlight>. <link>Gæðavörur sem þú getur treyst, hvar sem þú ert.</link>"

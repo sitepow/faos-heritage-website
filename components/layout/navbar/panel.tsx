@@ -18,6 +18,7 @@ import {
 } from 'lucide-react'
 import { usePathname, useRouter } from 'next/navigation'
 import { signOut, useSession } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 
 import { NO_IMAGE } from '@/utils/constants'
 import { ACCOUNT_TAB } from '@/utils/features'
@@ -27,6 +28,7 @@ interface NavbarPanelProps {
 }
 
 export const NavbarPanel = ({ setIsMenuOpen }: NavbarPanelProps) => {
+  const t = useTranslations('Navbar.Panel')
   const router = useRouter()
   const { data: session } = useSession()
   const user = session?.user
@@ -37,27 +39,27 @@ export const NavbarPanel = ({ setIsMenuOpen }: NavbarPanelProps) => {
   const menuItems = [
     {
       key: 'account',
-      label: 'My account',
+      label: 'account',
       icon: <UserIcon className='text-default-500' />,
-      action: () => router.push(`/account?tab=${ACCOUNT_TAB?.ACCOUNT}`),
+      action: () => router.push(`/account?tab=${ACCOUNT_TAB.ACCOUNT}`),
     },
     {
       key: 'order',
-      label: 'My orders',
+      label: 'orders',
       icon: <PackageIcon className='text-default-500' />,
-      action: () => router.push(`/account?tab=${ACCOUNT_TAB?.ORDER}`),
+      action: () => router.push(`/account?tab=${ACCOUNT_TAB.ORDER}`),
     },
     {
       key: 'favorite',
-      label: 'Favorites',
+      label: 'favorites',
       icon: <HeartIcon className='text-default-500' />,
-      action: () => router.push(`/account?tab=${ACCOUNT_TAB?.FAVORITE}`),
+      action: () => router.push(`/account?tab=${ACCOUNT_TAB.FAVORITE}`),
     },
     ...(isAdmin && !isDashboard
       ? [
           {
-            key: 'admin-dashboard',
-            label: 'Admin dashboard',
+            key: 'dashboard',
+            label: 'adminDashboard',
             icon: <SettingsIcon className='text-default-500' />,
             action: () => router.push('/dashboard'),
           },
@@ -65,7 +67,7 @@ export const NavbarPanel = ({ setIsMenuOpen }: NavbarPanelProps) => {
       : []),
     {
       key: 'logout',
-      label: 'Log out',
+      label: 'logout',
       icon: <LogOutIcon />,
       color: 'danger',
       className: 'text-danger',
@@ -78,18 +80,16 @@ export const NavbarPanel = ({ setIsMenuOpen }: NavbarPanelProps) => {
       <DropdownTrigger>
         <div>
           <User
-            avatarProps={{
-              src: `${user?.image ?? NO_IMAGE}`,
-            }}
+            avatarProps={{ src: user?.image ?? NO_IMAGE }}
             className='hidden cursor-pointer sm:flex'
             description={user?.email}
             name={user?.name}
           />
-
           <UserIcon className='text-default-400 sm:hidden' />
         </div>
       </DropdownTrigger>
-      <DropdownMenu aria-label='Static Actions'>
+
+      <DropdownMenu aria-label='User menu'>
         {menuItems.map((item) => (
           <DropdownItem
             key={item.key}
@@ -100,7 +100,7 @@ export const NavbarPanel = ({ setIsMenuOpen }: NavbarPanelProps) => {
               setIsMenuOpen(false)
             }}
           >
-            {item.label}
+            {t(item.label)}
           </DropdownItem>
         ))}
       </DropdownMenu>

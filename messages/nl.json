@@ -1,6 +1,41 @@
 {
+  "Site": {
+    "name": "FAOS",
+    "title": "Premium Biologische Olijfolie & Honing — 100% Natuurlijke Collectie",
+    "description": ""
+  },
   "Navbar": {
-    "Header": "Premium Biologische Olijfolie & Honing — 100% Pure Natuurlijke Collectie voor Welzijn"
+    "Header": "Premium Biologische Olijfolie & Honing (Gezonde Voeding)",
+    "Menu": {
+      "home": "Home",
+      "products": "Producten",
+      "payments": "Betalingen",
+      "about": "Over ons",
+      "dashboard": "Dashboard",
+      "users": "Gebruikers",
+      "orders": "Bestellingen"
+    },
+    "Panel": {
+      "account": "Mijn account",
+      "orders": "Mijn bestellingen",
+      "favorites": "Favorieten",
+      "adminDashboard": "Beheerdersdashboard",
+      "logout": "Uitloggen"
+    }
+  },
+  "Meta": {
+    "Home": {
+      "title": "Home",
+      "description": "Premium biologische olijfolie en honing, gemaakt van 100% natuurlijke ingrediënten.",
+      "keywords": [
+        "FAOS",
+        "biologische olijfolie",
+        "biologische honing",
+        "natuurlijk voedsel"
+      ],
+      "ogTitle": "Premium Biologische Olijfolie & Honing",
+      "ogDescription": "100% natuurlijke producten voor een gezonde levensstijl"
+    }
   },
   "Banner": {
     "customer": "Vertrouwd door klanten uit <highlight>meerdere landen wereldwijd</highlight>. <link>Kwaliteitsproducten waar je overal op kunt rekenen.</link>"

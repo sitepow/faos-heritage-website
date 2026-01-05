@@ -1,6 +1,42 @@
 {
+  "Site": {
+    "name": "FAOS",
+    "title": "Premium Organic Olive Oil & Honey — 100% Natural Collection",
+    "description": ""
+  },
   "Navbar": {
-    "Header": "Premium Organic Olive Oil & Honey — 100% Pure Natural Collection for Wellness"
+    "Header": "Premium Organic Olive Oil & Honey (Wellness Food)",
+    "Menu": {
+      "home": "Home",
+      "products": "Products",
+      "payments": "Payments",
+      "about": "About Us",
+      "dashboard": "Dashboard",
+      "users": "Users",
+      "orders": "Orders"
+    },
+    "Panel": {
+      "account": "My account",
+      "orders": "My orders",
+      "favorites": "Favourites",
+      "adminDashboard": "Admin dashboard",
+      "logout": "Log out"
+    }
+  },
+  "Meta": {
+    "Home": {
+      "title": "Home",
+      "description": "Premium organic olive oil and honey crafted from 100% natural ingredients.",
+      "keywords": [
+        "FAOS",
+        "organic olive oil",
+        "organic honey",
+        "natural food",
+        "healthy lifestyle"
+      ],
+      "ogTitle": "Premium Organic Olive Oil & Honey",
+      "ogDescription": "100% pure natural products for a healthier lifestyle"
+    }
   },
   "Banner": {
     "customer": "Trusted by customers across <highlight>multiple countries worldwide</highlight>. <link>Reliable quality, wherever you do business.</link>"

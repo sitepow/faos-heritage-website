@@ -1,3 +1,5 @@
+import { getTranslations } from 'next-intl/server'
+
 import type { Metadata } from 'next'
 
 import { CategoryCarouselClient } from './_components/category-carousel/client'
@@ -11,46 +13,49 @@ import {
 } from '@/components/features/banner'
 import { CarouselImageBanner } from '@/components/features/banner/carousel-image'
 import { CustomerBanner } from '@/components/features/banner/customer/customer'
-import { siteConfig } from '@/config/site'
 import { ITEM_PER_PAGE, OG_IMAGE } from '@/utils/constants'
 
-export const metadata: Metadata = {
-  title: `${siteConfig.name} - ${siteConfig.title}`,
-  description:
-    'FAOS offers premium organic olive oil and honey made from 100% natural ingredients. Shop authentic, healthy, and high-quality products.',
-  keywords: [
-    'FAOS',
-    'organic olive oil',
-    'organic honey',
-    'premium olive oil',
-    'natural food',
-  ],
-  alternates: {
-    canonical: 'https://faos.asia',
-  },
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: string }
+}): Promise<Metadata> {
+  const { locale } = await params
 
-  openGraph: {
-    title: siteConfig.title,
-    description: `${siteConfig.name} - ${siteConfig.title}`,
-    url: 'https://faos.asia',
-    siteName: siteConfig.name,
-    type: 'website',
-    images: [
-      {
-        url: OG_IMAGE,
-        width: 1200,
-        height: 630,
-        alt: `${siteConfig.title}`,
-      },
-    ],
-  },
+  const t = await getTranslations({
+    locale,
+    namespace: 'Meta.Home',
+  })
 
-  twitter: {
-    card: 'summary_large_image',
-    title: siteConfig.title,
-    description: `${siteConfig.title}`,
-    images: [OG_IMAGE],
-  },
+  return {
+    title: t('title'),
+    description: t('description'),
+    keywords: t.raw('keywords'),
+    alternates: {
+      canonical: process.env.APP_URL,
+    },
+    openGraph: {
+      title: t('ogTitle'),
+      description: t('ogDescription'),
+      url: process.env.APP_URL,
+      siteName: 'FAOS',
+      type: 'website',
+      images: [
+        {
+          url: OG_IMAGE,
+          width: 1200,
+          height: 630,
+          alt: t('ogTitle'),
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('ogTitle'),
+      description: t('ogDescription'),
+      images: OG_IMAGE,
+    },
+  }
 }
 
 export default async function Homepage() {

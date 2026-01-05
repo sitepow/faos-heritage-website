@@ -14,6 +14,7 @@ import { LogInIcon } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useSession } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
 import type { NavItem } from '@/config/site'
@@ -28,6 +29,7 @@ import { siteConfig } from '@/config/site'
 import { cn } from '@/utils/style'
 
 export const Navbar = () => {
+  const t = useTranslations('Navbar.Menu')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { status } = useSession()
   const pathname = usePathname()
@@ -45,7 +47,7 @@ export const Navbar = () => {
         className={cn(linkStyles({ color: 'foreground' }))}
         href={item.href}
       >
-        {item.label}
+        {t(item.label)}
       </Link>
     )
   }
@@ -57,7 +59,6 @@ export const Navbar = () => {
       <HeroNavbar
         isBordered
         className='shadow-md'
-        // isBlurred={false}
         isMenuOpen={isMenuOpen}
         maxWidth='full'
         position='sticky'

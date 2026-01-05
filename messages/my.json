@@ -1,6 +1,41 @@
 {
+  "Site": {
+    "name": "FAOS",
+    "title": "Minyak Zaitun & Madu Organik Premium — Koleksi Semula Jadi 100%",
+    "description": ""
+  },
   "Navbar": {
-    "Header": "Minyak Zaitun Organik & Madu Premium — Koleksi Semula Jadi 100% Tulen untuk Kesihatan"
+    "Header": "Minyak Zaitun & Madu Organik Premium (Makanan Kesihatan)",
+    "Menu": {
+      "home": "Laman Utama",
+      "products": "Produk",
+      "payments": "Pembayaran",
+      "about": "Tentang Kami",
+      "dashboard": "Papan Pemuka",
+      "users": "Pengguna",
+      "orders": "Pesanan"
+    },
+    "Panel": {
+      "account": "Akaun saya",
+      "orders": "Pesanan saya",
+      "favorites": "Kegemaran",
+      "adminDashboard": "Papan pemuka pentadbir",
+      "logout": "Log keluar"
+    }
+  },
+  "Meta": {
+    "Home": {
+      "title": "Laman Utama",
+      "description": "Minyak zaitun dan madu organik premium diperbuat daripada 100% bahan semula jadi.",
+      "keywords": [
+        "FAOS",
+        "minyak zaitun organik",
+        "madu organik",
+        "makanan semula jadi"
+      ],
+      "ogTitle": "Minyak Zaitun & Madu Organik Premium",
+      "ogDescription": "Produk semula jadi 100% untuk gaya hidup sihat"
+    }
   },
   "Banner": {
     "customer": "Dipercayai oleh pelanggan dari <highlight>pelbagai negara di seluruh dunia</highlight>. <link>Produk berkualiti yang boleh anda harapkan, di mana sahaja.</link>"

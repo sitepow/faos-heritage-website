@@ -1,26 +1,14 @@
 import '@/styles/globals.css'
 
-import type { Metadata, Viewport } from 'next'
+import type { Viewport } from 'next'
 import type { PropsWithChildren } from 'react'
 
 import { HeroUIProviders } from '../providers/heroui'
 
 import { fontSukhumvit } from '@/config/fonts'
-import { siteConfig } from '@/config/site'
 import { NextAuthProviders } from '@/providers/nextauth'
 import { QueryProviders } from '@/providers/query'
 import { cn } from '@/utils/style'
-
-export const metadata: Metadata = {
-  title: {
-    default: `${siteConfig.name} - ${siteConfig.title}`,
-    template: `%s - ${siteConfig.name} - ${siteConfig.title}`,
-  },
-  description: siteConfig.description,
-  icons: {
-    icon: '/favicon.ico',
-  },
-}
 
 export const viewport: Viewport = {
   themeColor: [
