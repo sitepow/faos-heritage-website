@@ -195,6 +195,67 @@
     }
   },
   "Meta": {
+    "ProductDetail": {
+      "title": "{name}",
+      "defaultDescription": "Mua {name} từ FAOS. Dầu oliu và mật ong hữu cơ cao cấp cho sức khỏe của bạn.",
+      "notFound": "Không tìm thấy sản phẩm"
+    },
+    "Privacy": {
+      "title": "Chính sách bảo mật",
+      "description": "Đọc Chính sách bảo mật của FAOS để hiểu cách chúng tôi thu thập, sử dụng và bảo vệ thông tin cá nhân của bạn một cách an toàn.",
+      "keywords": [
+        "chính sách bảo mật",
+        "bảo vệ dữ liệu",
+        "dữ liệu cá nhân",
+        "FAOS privacy",
+        "quyền riêng tư"
+      ],
+      "ogTitle": "Chính sách bảo mật của FAOS",
+      "ogDescription": "Tìm hiểu cách FAOS thu thập, sử dụng và bảo vệ dữ liệu cá nhân của bạn."
+    },
+    "About": {
+      "title": "Câu chuyện & Sản phẩm của chúng tôi",
+      "description": "Tìm hiểu thêm về dầu oliu và mật ong hữu cơ cao cấp của FAOS. Xem tài liệu sản phẩm chính thức và câu chuyện thương hiệu.",
+      "keywords": [
+        "FAOS",
+        "dầu oliu hữu cơ",
+        "mật ong hữu cơ",
+        "brochure sản phẩm",
+        "câu chuyện thương hiệu"
+      ],
+      "ogTitle": "Về FAOS - Sản phẩm hữu cơ cao cấp",
+      "ogDescription": "Dầu oliu và mật ong hữu cơ nguyên chất. Xem thông tin thương hiệu tại đây."
+    },
+    "Payment": {
+      "title": "Phương thức thanh toán",
+      "description": "Tìm hiểu về các phương thức thanh toán tại FAOS bao gồm thẻ tín dụng và PromptPay QR. Thanh toán an toàn qua Stripe.",
+      "keywords": [
+        "thanh toán FAOS",
+        "thẻ tín dụng",
+        "PromptPay",
+        "thanh toán an toàn",
+        "Stripe"
+      ],
+      "ogTitle": "Phương thức thanh toán an toàn tại FAOS",
+      "ogDescription": "Hỗ trợ thanh toán qua thẻ tín dụng và mã QR PromptPay an toàn."
+    },
+    "Category": {
+      "title": "{categoryName} | Tuyển chọn cao cấp FAOS",
+      "description": "Duyệt tất cả sản phẩm {categoryName} từ FAOS. Chất lượng cao cấp, tự nhiên và được chọn lọc kỹ lưỡng."
+    },
+    "Products": {
+      "title": "Tất cả sản phẩm",
+      "description": "Duyệt qua các sản phẩm hữu cơ cao cấp của FAOS. Khám phá dầu oliu nguyên chất và mật ong tự nhiên 100% cho sức khỏe của bạn.",
+      "keywords": [
+        "dầu oliu hữu cơ",
+        "mật ong tự nhiên",
+        "sản phẩm sức khỏe",
+        "sản phẩm FAOS",
+        "thực phẩm cao cấp"
+      ],
+      "ogTitle": "Xem tất cả sản phẩm cao cấp từ FAOS",
+      "ogDescription": "Khám phá bộ sưu tập dầu oliu hữu cơ và mật ong tự nhiên chất lượng cao."
+    },
     "Home": {
       "title": "Trang Chủ",
       "description": "Cung cấp dầu ô liu và mật ong hữu cơ 100% tự nhiên, được lựa chọn kỹ lưỡng cho sức khỏe của bạn.",

@@ -1,50 +1,55 @@
-// import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
+
+import type { Metadata } from 'next'
 
 import { PaymentClient } from './client'
 
-// import { siteConfig } from '@/config/site'
-// import { OG_IMAGE } from '@/utils/constants'
+import { OG_IMAGE } from '@/utils/constants'
 
-// export const metadata: Metadata = {
-//   title: `Payments FAOS | ${siteConfig.title}`,
-//   description:
-//     'Learn about FAOS payment methods including credit card and PromptPay QR code. Secure payments powered by Stripe.',
-//   keywords: [
-//     'FAOS payment',
-//     'credit card payment',
-//     'PromptPay',
-//     'Stripe checkout',
-//     'secure payment',
-//   ],
-//   alternates: {
-//     canonical: 'https://faos.asia/payment',
-//   },
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
 
-//   openGraph: {
-//     title: `Payments FAOS | ${siteConfig.title}`,
-//     description:
-//       'Secure payment methods including credit card and PromptPay QR code.',
-//     url: 'https://faos.asia/payment',
-//     siteName: siteConfig.name,
-//     type: 'article',
-//     images: [
-//       {
-//         url: OG_IMAGE,
-//         width: 1200,
-//         height: 630,
-//         alt: 'FAOS secure payment methods',
-//       },
-//     ],
-//   },
+  const t = await getTranslations({
+    locale,
+    namespace: 'Meta.Payment',
+  })
 
-//   twitter: {
-//     card: 'summary_large_image',
-//     title: `Payments | ${siteConfig.title}`,
-//     description:
-//       'Secure payment methods including credit card and PromptPay QR code.',
-//     images: [OG_IMAGE],
-//   },
-// }
+  const canonicalUrl = `${process.env.APP_URL}/payment`
+
+  return {
+    title: t('title'),
+    description: t('description'),
+    keywords: t.raw('keywords'),
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title: t('ogTitle'),
+      description: t('ogDescription'),
+      url: canonicalUrl,
+      siteName: 'FAOS',
+      type: 'article',
+      images: [
+        {
+          url: OG_IMAGE,
+          width: 1200,
+          height: 630,
+          alt: t('ogTitle'),
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('ogTitle'),
+      description: t('ogDescription'),
+      images: [OG_IMAGE],
+    },
+  }
+}
 
 export default function Payment() {
   return (

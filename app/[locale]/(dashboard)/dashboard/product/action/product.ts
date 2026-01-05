@@ -133,6 +133,7 @@ export const getProduct = async (productId: string, userId?: string) => {
           select: {
             url: true,
             alt: true,
+            isPrimary: true,
           },
         },
         description: true,

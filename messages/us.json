@@ -195,6 +195,68 @@
     }
   },
   "Meta": {
+    "ProductDetail": {
+      "title": "{name}",
+      "defaultDescription": "Buy {name} from FAOS. Premium organic olive oil & honey delivered to your door.",
+      "notFound": "Product Not Found | FAOS"
+    },
+    "Privacy": {
+      "title": "Privacy Policy",
+      "description": "Read FAOS Privacy Policy to understand how we collect, use, and protect your personal information securely.",
+      "keywords": [
+        "privacy policy",
+        "data protection",
+        "personal data",
+        "FAOS privacy",
+        "user privacy"
+      ],
+      "ogTitle": "FAOS Privacy Policy",
+      "ogDescription": "Learn how FAOS collects, uses, and protects your personal data."
+    },
+    "About": {
+      "title": "Our Story & Products",
+      "description": "Learn more about FAOS premium organic olive oil & honey. View our official product brochure and brand story.",
+      "keywords": [
+        "FAOS",
+        "organic olive oil",
+        "organic honey",
+        "premium olive oil",
+        "brochure"
+      ],
+      "ogTitle": "About FAOS - Premium Organic Products",
+      "ogDescription": "Pure organic olive oil & honey. View our official brochure and brand information."
+    },
+    "Payment": {
+      "title": "Payment Methods",
+      "description": "Learn about FAOS payment methods including credit card and PromptPay QR code. Secure payments powered by Stripe.",
+      "keywords": [
+        "FAOS payment",
+        "credit card payment",
+        "PromptPay",
+        "Stripe checkout",
+        "secure payment"
+      ],
+      "ogTitle": "Secure Payment Methods at FAOS",
+      "ogDescription": "Secure payment methods including credit card and PromptPay QR code."
+    },
+    "Category": {
+      "title": "{categoryName} | FAOS Premium Selection",
+      "description": "Browse all {categoryName} products from FAOS. Premium quality, natural, and carefully selected items.",
+      "ogAlt": "{categoryName} products from FAOS"
+    },
+    "Products": {
+      "title": "All Products",
+      "description": "Browse our premium selection of FAOS organic products. Discover pure olive oil and 100% natural honey curated for your health.",
+      "keywords": [
+        "organic olive oil",
+        "natural honey",
+        "healthy products",
+        "FAOS products",
+        "premium food"
+      ],
+      "ogTitle": "Browse All FAOS Premium Products",
+      "ogDescription": "Discover our collection of high-quality organic olive oil and natural honey."
+    },
     "Home": {
       "title": "Home",
       "description": "Premium 100% natural organic olive oil and honey, carefully selected for your wellness.",

@@ -195,6 +195,67 @@
     }
   },
   "Meta": {
+    "ProductDetail": {
+      "title": "{name}",
+      "defaultDescription": "Kaupa {name} hjá FAOS. Hágæða lífræn ólífuolía og hunang.",
+      "notFound": "Vara fannst ekki"
+    },
+    "Privacy": {
+      "title": "Persónuverndarstefna",
+      "description": "Lestu persónuverndarstefnu FAOS til að skilja hvernig við söfnum, notum og verndum persónuupplýsingar þínar á öruggan hátt.",
+      "keywords": [
+        "persónuverndarstefna",
+        "gagnavernd",
+        "persónuupplýsingar",
+        "FAOS privacy",
+        "friðhelgi einkalífs"
+      ],
+      "ogTitle": "Persónuverndarstefna FAOS",
+      "ogDescription": "Lærðu hvernig FAOS safnar, notar og verndar persónuupplýsingar þínar."
+    },
+    "About": {
+      "title": "Okkar saga og vörur",
+      "description": "Lærðu meira um FAOS úrvals lífræna ólífuolíu og hunang. Skoðaðu opinbera bæklinginn okkar og sögu vörumerkisins.",
+      "keywords": [
+        "FAOS",
+        "lífræn ólífuolía",
+        "lífrænt hunang",
+        "vörubæklingur",
+        "vörumerkjasaga"
+      ],
+      "ogTitle": "Um FAOS - Úrvals lífrænar vörur",
+      "ogDescription": "Hrein lífræn ólífuolía og hunang. Skoðaðu opinbera bæklinginn okkar hér."
+    },
+    "Payment": {
+      "title": "Greiðsluleiðir",
+      "description": "Lærðu um greiðsluleiðir FAOS, þar á meðal kreditkort og PromptPay QR kóða. Öruggar greiðslur í gegnum Stripe.",
+      "keywords": [
+        "FAOS greiðsla",
+        "kreditkortagreiðsla",
+        "PromptPay",
+        "örugg greiðsla",
+        "Stripe"
+      ],
+      "ogTitle": "Öruggar greiðsluleiðir hjá FAOS",
+      "ogDescription": "Öruggar greiðsluleiðir þar á meðal kreditkort og PromptPay QR kóði."
+    },
+    "Category": {
+      "title": "{categoryName} | FAOS Úrvalsúrval",
+      "description": "Skoðaðu allar {categoryName} vörur frá FAOS. Úrvals gæði, náttúrulegar og vandlega valdar vörur."
+    },
+    "Products": {
+      "title": "Allar vörur",
+      "description": "Skoðaðu úrval okkar af lífrænum vörum frá FAOS. Uppgötvaðu hreina ólífuolíu og 100% náttúrulegt hunang fyrir heilsuna þína.",
+      "keywords": [
+        "lífræn ólífuolía",
+        "náttúrulegt hunang",
+        "heilsuvörur",
+        "FAOS vörur",
+        "hágæða matvæli"
+      ],
+      "ogTitle": "Skoðaðu allar hágæðavörur FAOS",
+      "ogDescription": "Uppgötvaðu úrval okkar af hágæða lífrænni ólífuolíu og náttúrulegu hunangi."
+    },
     "Home": {
       "title": "Heim",
       "description": "Hágæða 100% náttúruleg lífræn ólífuolía og hunang, vandlega valið fyrir vellíðan þína.",

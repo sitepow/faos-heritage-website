@@ -195,6 +195,67 @@
     }
   },
   "Meta": {
+    "ProductDetail": {
+      "title": "{name}",
+      "defaultDescription": "Koop {name} bij FAOS. Hoogwaardige biologische olijfolie en honing.",
+      "notFound": "Product niet gevonden"
+    },
+    "Privacy": {
+      "title": "Privacybeleid",
+      "description": "Lees het Privacybeleid van FAOS om te begrijpen hoe wij uw persoonlijke informatie veilig verzamelen, gebruiken en beschermen.",
+      "keywords": [
+        "privacybeleid",
+        "gegevensbescherming",
+        "persoonsgegevens",
+        "FAOS privacy",
+        "gebruikersprivacy"
+      ],
+      "ogTitle": "Privacybeleid van FAOS",
+      "ogDescription": "Leer hoe FAOS uw persoonlijke gegevens verzamelt, gebruikt en beschermt."
+    },
+    "About": {
+      "title": "Ons Verhaal & Onze Producten",
+      "description": "Lees meer over de premium biologische olijfolie en honing van FAOS. Bekijk onze officiële brochure en het verhaal achter ons merk.",
+      "keywords": [
+        "FAOS",
+        "biologische olijfolie",
+        "biologische honing",
+        "productbrochure",
+        "merkverhaal"
+      ],
+      "ogTitle": "Over FAOS - Premium Biologische Producten",
+      "ogDescription": "Pure biologische olijfolie en honing. Bekijk onze officiële merkoverzicht."
+    },
+    "Payment": {
+      "title": "Betaalmethoden",
+      "description": "Lees meer over de betaalmethoden van FAOS, waaronder creditcard en PromptPay QR. Veilige betalingen via Stripe.",
+      "keywords": [
+        "FAOS betaling",
+        "creditcard betaling",
+        "PromptPay",
+        "veilig betalen",
+        "Stripe"
+      ],
+      "ogTitle": "Veilige Betaalmethoden bij FAOS",
+      "ogDescription": "Veilige betaalmethoden waaronder creditcard en PromptPay QR-code."
+    },
+    "Category": {
+      "title": "{categoryName} | FAOS Premium Selectie",
+      "description": "Bekijk alle {categoryName} producten van FAOS. Premium kwaliteit, natuurlijk en zorgvuldig geselecteerde artikelen."
+    },
+    "Products": {
+      "title": "Όλα τα Προϊόντα",
+      "description": "Περιηγηθείτε στην premium επιλογή βιολογικών προϊόντων FAOS. Ανακαλύψτε αγνό ελαιόλαδο και 100% φυσικό μέλι για την υγεία σας.",
+      "keywords": [
+        "βιολογικό ελαιόλαδο",
+        "φυσικό μέλι",
+        "υγιεινά προϊόντα",
+        "προϊόντα FAOS",
+        "premium τρόφιμα"
+      ],
+      "ogTitle": "Δείτε όλα τα Premium προϊόντα της FAOS",
+      "ogDescription": "Ανακαλύψτε τη συλλογή μας από εξαιρετικής ποιότητας βιολογικό ελαιόλαδο και φυσικό μέλι."
+    },
     "Home": {
       "title": "Home",
       "description": "Premium 100% natuurlijke biologische olijfolie en honing, zorgvuldig geselecteerd voor uw welzijn.",

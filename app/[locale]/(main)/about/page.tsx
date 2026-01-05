@@ -1,49 +1,55 @@
-// import type { Metadata } from 'next'
-
 import { useTranslations } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
+
+import type { Metadata } from 'next'
 
 import { PdfViewer } from '@/components/pdf-viewer'
-// import { siteConfig } from '@/config/site'
-// import { OG_IMAGE } from '@/utils/constants'
+import { OG_IMAGE } from '@/utils/constants'
 
-// export const metadata: Metadata = {
-//   title: `About FAOS | ${siteConfig.title}`,
-//   description:
-//     'Learn more about FAOS premium organic olive oil & honey. View our official product brochure and brand story.',
-//   keywords: [
-//     'FAOS',
-//     'organic olive oil',
-//     'organic honey',
-//     'premium olive oil',
-//     'brochure',
-//   ],
-//   alternates: {
-//     canonical: 'https://faos.asia/about',
-//   },
-//   openGraph: {
-//     title: 'About FAOS',
-//     description:
-//       'Premium organic olive oil & honey. View our official brochure and brand information.',
-//     url: 'https://faos.asia/about',
-//     siteName: siteConfig.name,
-//     type: 'article',
-//     images: [
-//       {
-//         url: OG_IMAGE,
-//         width: 1200,
-//         height: 630,
-//         alt: `${siteConfig.title}`,
-//       },
-//     ],
-//   },
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
 
-//   twitter: {
-//     card: 'summary_large_image',
-//     title: siteConfig.title,
-//     description: `${siteConfig.title}`,
-//     images: [OG_IMAGE],
-//   },
-// }
+  const t = await getTranslations({
+    locale,
+    namespace: 'Meta.About',
+  })
+
+  const canonicalUrl = `${process.env.APP_URL}/about`
+
+  return {
+    title: t('title'),
+    description: t('description'),
+    keywords: t.raw('keywords'),
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title: t('ogTitle'),
+      description: t('ogDescription'),
+      url: canonicalUrl,
+      siteName: 'FAOS',
+      type: 'article',
+      images: [
+        {
+          url: OG_IMAGE,
+          width: 1200,
+          height: 630,
+          alt: t('ogTitle'),
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('ogTitle'),
+      description: t('ogDescription'),
+      images: [OG_IMAGE],
+    },
+  }
+}
 
 export default function About() {
   const t = useTranslations('About')

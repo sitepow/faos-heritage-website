@@ -195,6 +195,67 @@
     }
   },
   "Meta": {
+    "ProductDetail": {
+      "title": "{name}",
+      "defaultDescription": "Acquista {name} su FAOS. Olio d'oliva e miele biologico di alta qualità.",
+      "notFound": "Prodotto non trovato"
+    },
+    "Privacy": {
+      "title": "Informativa sulla Privacy",
+      "description": "Leggi l'Informativa sulla Privacy di FAOS per capire come raccogliamo, utilizziamo e proteggiamo le tue informazioni personali in modo sicuro.",
+      "keywords": [
+        "informativa sulla privacy",
+        "protezione dati",
+        "dati personali",
+        "FAOS privacy",
+        "privacy utente"
+      ],
+      "ogTitle": "Informativa sulla Privacy FAOS",
+      "ogDescription": "Scopri come FAOS raccoglie, utilizza e protegge i tuoi dati personali."
+    },
+    "About": {
+      "title": "La Nostra Storia e i Nostri Prodotti",
+      "description": "Scopri di più sull'olio d'oliva e il miele biologico premium di FAOS. Visualizza la nostra brochure ufficiale e la storia del marchio.",
+      "keywords": [
+        "FAOS",
+        "olio d'oliva biologico",
+        "miele biologico",
+        "brochure prodotti",
+        "storia del marchio"
+      ],
+      "ogTitle": "Chi Siamo FAOS - Prodotti Biologici Premium",
+      "ogDescription": "Olio d'oliva e miele biologico puro. Visualizza la nostra brochure ufficiale."
+    },
+    "Payment": {
+      "title": "Metodi di Pagamento",
+      "description": "Scopri i metodi di pagamento FAOS inclusi carta di credito e PromptPay QR. Pagamenti sicuri gestiti da Stripe.",
+      "keywords": [
+        "pagamento FAOS",
+        "carta di credito",
+        "PromptPay",
+        "pagamento sicuro",
+        "Stripe"
+      ],
+      "ogTitle": "Metodi di Pagamento Sicuri su FAOS",
+      "ogDescription": "Metodi di pagamento sicuri inclusi carta di credito e codice QR PromptPay."
+    },
+    "Category": {
+      "title": "{categoryName} | Selezione Premium FAOS",
+      "description": "Sfoglia tutti i prodotti {categoryName} di FAOS. Qualità premium, naturale e articoli accuratamente selezionati."
+    },
+    "Products": {
+      "title": "Tutti i prodotti",
+      "description": "Sfoglia la selezione premium di prodotti biologici FAOS. Scopri l'olio d'oliva puro e il miele naturale al 100% per la tua salute.",
+      "keywords": [
+        "olio d'oliva biologico",
+        "miele naturale",
+        "prodotti salutari",
+        "prodotti FAOS",
+        "cibo premium"
+      ],
+      "ogTitle": "Sfoglia tutti i prodotti premium FAOS",
+      "ogDescription": "Scopri la nostra collezione di olio d'oliva biologico e miele naturale di alta qualità."
+    },
     "Home": {
       "title": "Home",
       "description": "Olio d'oliva e miele biologici premium 100% naturali, selezionati con cura per il tuo benessere.",

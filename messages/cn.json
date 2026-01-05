@@ -195,6 +195,56 @@
     }
   },
   "Meta": {
+    "ProductDetail": {
+      "title": "{name}",
+      "defaultDescription": "在 FAOS 购买 {name}。高品质有机橄榄油和蜂蜜直接送达。",
+      "notFound": "未找到产品 | FAOS"
+    },
+    "Privacy": {
+      "title": "隐私政策",
+      "description": "阅读 FAOS 隐私政策，了解我们如何安全地收集、使用和保护您的个人信息。",
+      "keywords": ["隐私政策", "数据保护", "个人资料", "FAOS 隐私", "用户隐私"],
+      "ogTitle": "FAOS 隐私政策",
+      "ogDescription": "了解 FAOS 如何收集、使用和保护您的个人数据。"
+    },
+    "About": {
+      "title": "我们的故事与产品",
+      "description": "了解更多关于 FAOS 优质有机橄榄油和蜂蜜的信息。查看我们的官方产品手册和品牌故事。",
+      "keywords": ["FAOS", "有机橄榄油", "有机蜂蜜", "产品手册", "品牌故事"],
+      "ogTitle": "关于 FAOS - 优质有机产品",
+      "ogDescription": "纯净有机橄榄油和蜂蜜。查看我们的官方手册和品牌信息。"
+    },
+    "Payment": {
+      "title": "付款方式",
+      "description": "了解 FAOS 的付款方式，包括信用卡和 PromptPay 二维码。由 Stripe 提供支持的安全支付。",
+      "keywords": [
+        "FAOS 付款",
+        "信用卡支付",
+        "PromptPay",
+        "Stripe 结账",
+        "安全支付"
+      ],
+      "ogTitle": "FAOS 安全支付方式",
+      "ogDescription": "支持信用卡和 PromptPay 二维码等安全付款方式。"
+    },
+    "Category": {
+      "title": "{categoryName} | FAOS 优质精选",
+      "description": "浏览 FAOS 的所有 {categoryName} 产品。优质、天然且经过精心挑选的物品。",
+      "ogAlt": "FAOS 的 {categoryName} 产品"
+    },
+    "Products": {
+      "title": "所有产品",
+      "description": "浏览 FAOS 的优质有机产品系列。发现为您的健康精心挑选的纯橄榄油和 100% 天然蜂蜜。",
+      "keywords": [
+        "有机橄榄油",
+        "天然蜂蜜",
+        "健康产品",
+        "FAOS 产品",
+        "优质食品"
+      ],
+      "ogTitle": "浏览 FAOS 所有优质产品",
+      "ogDescription": "发现我们的高品质有机橄榄油和天然蜂蜜系列。"
+    },
     "Home": {
       "title": "首页",
       "description": "专营 100% 纯天然有机橄榄油与蜂蜜，为您的健康保驾护航。",

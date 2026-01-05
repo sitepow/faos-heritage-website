@@ -1,50 +1,55 @@
-// import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
+
+import type { Metadata } from 'next'
 
 import { PrivacyClient } from './client'
 
-// import { siteConfig } from '@/config/site'
-// import { OG_IMAGE } from '@/utils/constants'
+import { OG_IMAGE } from '@/utils/constants'
 
-// export const metadata: Metadata = {
-//   title: `Privacy Policy | ${siteConfig.title}`,
-//   description:
-//     'Read FAOS Privacy Policy to understand how we collect, use, and protect your personal information securely.',
-//   keywords: [
-//     'FAOS privacy policy',
-//     'privacy policy',
-//     'data protection',
-//     'personal data',
-//     'user privacy',
-//   ],
-//   alternates: {
-//     canonical: 'https://faos.asia/privacy',
-//   },
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
 
-//   openGraph: {
-//     title: `Privacy Policy | ${siteConfig.title}`,
-//     description:
-//       'Learn how FAOS collects, uses, and protects your personal data.',
-//     url: 'https://faos.asia/privacy',
-//     siteName: siteConfig.name,
-//     type: 'article',
-//     images: [
-//       {
-//         url: OG_IMAGE,
-//         width: 1200,
-//         height: 630,
-//         alt: 'FAOS Privacy Policy',
-//       },
-//     ],
-//   },
+  const t = await getTranslations({
+    locale,
+    namespace: 'Meta.Privacy',
+  })
 
-//   twitter: {
-//     card: 'summary_large_image',
-//     title: `Privacy Policy | ${siteConfig.title}`,
-//     description:
-//       'Learn how FAOS collects, uses, and protects your personal data.',
-//     images: [OG_IMAGE],
-//   },
-// }
+  const canonicalUrl = `${process.env.APP_URL}/privacy`
+
+  return {
+    title: t('title'),
+    description: t('description'),
+    keywords: t.raw('keywords'),
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title: t('ogTitle'),
+      description: t('ogDescription'),
+      url: canonicalUrl,
+      siteName: 'FAOS',
+      type: 'article',
+      images: [
+        {
+          url: OG_IMAGE,
+          width: 1200,
+          height: 630,
+          alt: t('ogTitle'),
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('ogTitle'),
+      description: t('ogDescription'),
+      images: [OG_IMAGE],
+    },
+  }
+}
 
 export default function Privacy() {
   return (

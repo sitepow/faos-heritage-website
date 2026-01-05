@@ -195,6 +195,67 @@
     }
   },
   "Meta": {
+    "ProductDetail": {
+      "title": "{name}",
+      "defaultDescription": "Beli {name} daripada FAOS. Minyak zaitun dan madu organik berkualiti tinggi.",
+      "notFound": "Produk Tidak Ditemui"
+    },
+    "Privacy": {
+      "title": "Dasar Privasi",
+      "description": "Baca Dasar Privasi FAOS untuk memahami cara kami mengumpul, menggunakan và melindungi maklumat peribadi anda dengan selamat.",
+      "keywords": [
+        "dasar privasi",
+        "perlindungan data",
+        "maklumat peribadi",
+        "FAOS privacy",
+        "privasi pengguna"
+      ],
+      "ogTitle": "Dasar Privasi FAOS",
+      "ogDescription": "Ketahui cara FAOS mengumpul, menggunakan và melindungi data peribadi anda."
+    },
+    "About": {
+      "title": "Kisah & Produk Kami",
+      "description": "Ketahui lebih lanjut tentang minyak zaitun & madu organik premium FAOS. Lihat brosur produk rasmi dan kisah jenama kami.",
+      "keywords": [
+        "FAOS",
+        "minyak zaitun organik",
+        "madu organik",
+        "brosur produk",
+        "kisah jenama"
+      ],
+      "ogTitle": "Mengenai FAOS - Produk Organik Premium",
+      "ogDescription": "Minyak zaitun & madu organik tulen. Lihat maklumat jenama kami di sini."
+    },
+    "Payment": {
+      "title": "Kaedah Pembayaran",
+      "description": "Ketahui kaedah pembayaran FAOS termasuk kad kredit dan kod QR PromptPay. Pembayaran selamat dikuasakan oleh Stripe.",
+      "keywords": [
+        "pembayaran FAOS",
+        "bayaran kad kredit",
+        "PromptPay",
+        "pembayaran selamat",
+        "Stripe"
+      ],
+      "ogTitle": "Kaedah Pembayaran Selamat di FAOS",
+      "ogDescription": "Kaedah pembayaran selamat termasuk kad kredit dan kod QR PromptPay."
+    },
+    "Category": {
+      "title": "{categoryName} | Pilihan Premium FAOS",
+      "description": "Lihat semua produk {categoryName} daripada FAOS. Kualiti premium, semula jadi, dan barangan yang dipilih dengan teliti."
+    },
+    "Products": {
+      "title": "Semua Produk",
+      "description": "Lihat pilihan produk organik premium FAOS. Temui minyak zaitun tulen dan madu asli 100% yang dipilih khas untuk kesihatan anda.",
+      "keywords": [
+        "minyak zaitun organik",
+        "madu asli",
+        "produk kesihatan",
+        "produk FAOS",
+        "makanan premium"
+      ],
+      "ogTitle": "Lihat Semua Produk Premium FAOS",
+      "ogDescription": "Terokai koleksi minyak zaitun organik dan madu asli berkualiti tinggi kami."
+    },
     "Home": {
       "title": "Laman Utama",
       "description": "Minyak zaitun dan madu organik premium 100% semulajadi, dipilih dengan teliti untuk kesejahteraan anda.",

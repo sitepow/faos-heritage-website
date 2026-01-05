@@ -1,54 +1,56 @@
-// import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
+
+import type { Metadata } from 'next'
 
 import { getProducts } from '@/app/[locale]/(main)/products/action'
 import { ProductsClient } from '@/app/[locale]/(main)/products/client'
 import { PageNotFound } from '@/components/common/page-not-found'
-// import { siteConfig } from '@/config/site'
-import {
-  ITEM_PER_PAGE,
-  //  OG_IMAGE
-} from '@/utils/constants'
+import { ITEM_PER_PAGE, OG_IMAGE } from '@/utils/constants'
 
-// export const metadata: Metadata = {
-//   title: `All Products | ${siteConfig.name} - ${siteConfig.title}`,
-//   description:
-//     'Browse all FAOS premium organic olive oil and honey products. Discover healthy, natural, and high-quality selections.',
-//   keywords: [
-//     'FAOS products',
-//     'organic olive oil',
-//     'organic honey',
-//     'premium food',
-//     'natural products',
-//   ],
-//   alternates: {
-//     canonical: 'https://faos.asia/products',
-//   },
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: string }
+}): Promise<Metadata> {
+  const { locale } = await params
 
-//   openGraph: {
-//     title: `All Products | ${siteConfig.name} - ${siteConfig.title}`,
-//     description:
-//       'Browse all FAOS premium organic olive oil and honey products.',
-//     url: 'https://faos.asia/products',
-//     siteName: siteConfig.name,
-//     type: 'website',
-//     images: [
-//       {
-//         url: OG_IMAGE,
-//         width: 1200,
-//         height: 630,
-//         alt: 'FAOS premium organic olive oil and honey products',
-//       },
-//     ],
-//   },
+  const t = await getTranslations({
+    locale,
+    namespace: 'Meta.Products',
+  })
 
-//   twitter: {
-//     card: 'summary_large_image',
-//     title: `All Products | ${siteConfig.name} - ${siteConfig.title}`,
-//     description:
-//       'Browse all FAOS premium organic olive oil and honey products.',
-//     images: [OG_IMAGE],
-//   },
-// }
+  const canonicalUrl = `${process.env.APP_URL}/products`
+
+  return {
+    title: t('title'),
+    description: t('description'),
+    keywords: t.raw('keywords'),
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title: t('ogTitle'),
+      description: t('ogDescription'),
+      url: canonicalUrl,
+      siteName: 'FAOS',
+      type: 'website',
+      images: [
+        {
+          url: OG_IMAGE,
+          width: 1200,
+          height: 630,
+          alt: t('ogTitle'),
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('ogTitle'),
+      description: t('ogDescription'),
+      images: [OG_IMAGE],
+    },
+  }
+}
 
 export default async function Products() {
   const products = await getProducts({ limit: ITEM_PER_PAGE })

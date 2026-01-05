@@ -1,58 +1,62 @@
-// import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
+
+import type { Metadata } from 'next'
 
 import { CategoryClient } from '@/app/[locale]/(main)/category/[slug]/client'
 import { getProducts } from '@/app/[locale]/(main)/products/action'
 import { PageNotFound } from '@/components/common/page-not-found'
-// import { siteConfig } from '@/config/site'
-import {
-  ITEM_PER_PAGE,
-  // OG_IMAGE
-} from '@/utils/constants'
+import { ITEM_PER_PAGE, OG_IMAGE } from '@/utils/constants'
 import { getIdFromSlug, getNameFromSlug } from '@/utils/slug'
 
 interface CategoryProps {
-  params: { slug: string }
+  params: Promise<{ slug: string; locale: string }>
 }
 
-// export const generateMetadata = async ({
-//   params,
-// }: CategoryProps): Promise<Metadata> => {
-//   const { slug } = await params
-//   const slugStr = Array.isArray(slug) ? slug[0] : slug
-//   const categoryName = getNameFromSlug(slugStr)
-//   const url = `https://faos.asia/category/${slugStr}`
+export async function generateMetadata({
+  params,
+}: CategoryProps): Promise<Metadata> {
+  const { slug, locale } = await params
+  const slugStr = Array.isArray(slug) ? slug[0] : slug
+  const categoryName = getNameFromSlug(slugStr)
 
-//   return {
-//     title: `${categoryName} | ${siteConfig.name} - ${siteConfig.title}`,
-//     description: `Browse all ${categoryName} products from ${siteConfig.name}. Premium quality, natural, and carefully selected items.`,
-//     alternates: {
-//       canonical: url,
-//     },
+  const t = await getTranslations({
+    locale,
+    namespace: 'Meta.Category',
+  })
 
-//     openGraph: {
-//       title: `${categoryName} | ${siteConfig.name} - ${siteConfig.title}`,
-//       description: `Browse all ${categoryName} products from ${siteConfig.name}.`,
-//       url,
-//       siteName: siteConfig.name,
-//       type: 'website',
-//       images: [
-//         {
-//           url: OG_IMAGE,
-//           width: 1200,
-//           height: 630,
-//           alt: `${categoryName} products from FAOS`,
-//         },
-//       ],
-//     },
+  const title = t('title', { categoryName })
+  const description = t('description', { categoryName })
+  const url = `${process.env.APP_URL}/category/${slugStr}`
 
-//     twitter: {
-//       card: 'summary_large_image',
-//       title: `${categoryName} | ${siteConfig.name} - ${siteConfig.title}`,
-//       description: `Browse all ${categoryName} products from ${siteConfig.name}.`,
-//       images: [OG_IMAGE],
-//     },
-//   }
-// }
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: 'FAOS',
+      type: 'website',
+      images: [
+        {
+          url: OG_IMAGE,
+          width: 1200,
+          height: 630,
+          alt: t('ogAlt', { categoryName }),
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [OG_IMAGE],
+    },
+  }
+}
 
 export default async function Category({ params }: CategoryProps) {
   const { slug } = await params
