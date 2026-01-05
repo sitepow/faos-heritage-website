@@ -1,47 +1,47 @@
-import type { Metadata } from 'next'
+// import type { Metadata } from 'next'
 
 import { PdfViewer } from '@/components/pdf-viewer'
-import { siteConfig } from '@/config/site'
-import { OG_IMAGE } from '@/utils/constants'
+// import { siteConfig } from '@/config/site'
+// import { OG_IMAGE } from '@/utils/constants'
 
-export const metadata: Metadata = {
-  title: `About FAOS | ${siteConfig.title}`,
-  description:
-    'Learn more about FAOS premium organic olive oil & honey. View our official product brochure and brand story.',
-  keywords: [
-    'FAOS',
-    'organic olive oil',
-    'organic honey',
-    'premium olive oil',
-    'brochure',
-  ],
-  alternates: {
-    canonical: 'https://faos.asia/about',
-  },
-  openGraph: {
-    title: 'About FAOS',
-    description:
-      'Premium organic olive oil & honey. View our official brochure and brand information.',
-    url: 'https://faos.asia/about',
-    siteName: siteConfig.name,
-    type: 'article',
-    images: [
-      {
-        url: OG_IMAGE,
-        width: 1200,
-        height: 630,
-        alt: `${siteConfig.title}`,
-      },
-    ],
-  },
+// export const metadata: Metadata = {
+//   title: `About FAOS | ${siteConfig.title}`,
+//   description:
+//     'Learn more about FAOS premium organic olive oil & honey. View our official product brochure and brand story.',
+//   keywords: [
+//     'FAOS',
+//     'organic olive oil',
+//     'organic honey',
+//     'premium olive oil',
+//     'brochure',
+//   ],
+//   alternates: {
+//     canonical: 'https://faos.asia/about',
+//   },
+//   openGraph: {
+//     title: 'About FAOS',
+//     description:
+//       'Premium organic olive oil & honey. View our official brochure and brand information.',
+//     url: 'https://faos.asia/about',
+//     siteName: siteConfig.name,
+//     type: 'article',
+//     images: [
+//       {
+//         url: OG_IMAGE,
+//         width: 1200,
+//         height: 630,
+//         alt: `${siteConfig.title}`,
+//       },
+//     ],
+//   },
 
-  twitter: {
-    card: 'summary_large_image',
-    title: siteConfig.title,
-    description: `${siteConfig.title}`,
-    images: [OG_IMAGE],
-  },
-}
+//   twitter: {
+//     card: 'summary_large_image',
+//     title: siteConfig.title,
+//     description: `${siteConfig.title}`,
+//     images: [OG_IMAGE],
+//   },
+// }
 
 export default function About() {
   return (
