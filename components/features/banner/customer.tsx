@@ -1,22 +1,22 @@
+/* eslint-disable react/no-unstable-nested-components */
 'use client'
 
 import { Card, CardBody } from '@heroui/react'
-
-import type { ReactNode } from 'react'
+import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 
 import { CountryFlag } from '@/components/common/country-flag'
+import { COUNTRIES } from '@/utils/constants'
 
-type Country = {
-  code: string
-  name: string
-}
+export const CustomerBanner = () => {
+  const tBanner = useTranslations('Banner')
+  const tCountry = useTranslations('Country')
 
-type Props = {
-  title: ReactNode
-  countries: Country[]
-}
+  const countries = COUNTRIES.map((c) => ({
+    code: c.code,
+    name: tCountry(c.code),
+  }))
 
-export const CustomerBannerClient = ({ title, countries }: Props) => {
   return (
     <Card fullWidth>
       <CardBody
@@ -32,7 +32,16 @@ export const CustomerBannerClient = ({ title, countries }: Props) => {
         }}
       >
         <h2 className='mx-auto max-w-11/12 text-center text-2xl leading-tight font-bold text-white sm:max-w-10/12 md:max-w-1/2 xl:max-w-1/3'>
-          {title}
+          {tBanner.rich('customer', {
+            highlight: (chunks) => (
+              <span className='text-primary'>{chunks}</span>
+            ),
+            link: (chunks) => (
+              <Link href='/about' className='underline'>
+                {chunks}
+              </Link>
+            ),
+          })}
         </h2>
 
         <div className='flex max-w-4xl flex-wrap justify-center gap-2'>

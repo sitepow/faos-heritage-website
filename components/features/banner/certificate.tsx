@@ -1,9 +1,10 @@
+/* eslint-disable react/no-unstable-nested-components */
 'use client'
 
 import { Card, CardBody } from '@heroui/react'
 import Image from 'next/image'
-
-import type { ReactNode } from 'react'
+import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 
 const CERTIFICATE_IMAGES = [
   '/images/certificate/gmo-free.png',
@@ -11,11 +12,9 @@ const CERTIFICATE_IMAGES = [
   '/images/certificate/bio.png',
 ]
 
-type Props = {
-  title: ReactNode
-}
+export const CertificateBanner = () => {
+  const tBanner = useTranslations('Banner')
 
-export const CertificateBannerClient = ({ title }: Props) => {
   return (
     <Card fullWidth>
       <CardBody
@@ -30,7 +29,13 @@ export const CertificateBannerClient = ({ title }: Props) => {
         }}
       >
         <h2 className='mx-auto max-w-11/12 text-center text-2xl leading-tight font-bold text-white sm:max-w-10/12 md:max-w-1/2 xl:max-w-1/3'>
-          {title}
+          {tBanner.rich('certificate', {
+            link: (chunks) => (
+              <Link href='/about' className='underline'>
+                {chunks}
+              </Link>
+            ),
+          })}
         </h2>
 
         <div className='flex flex-wrap gap-2'>

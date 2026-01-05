@@ -19,7 +19,7 @@ import { useProductDetailStore } from './store'
 import { getProduct } from '@/app/[locale]/(dashboard)/dashboard/product/action/product'
 import { PageNotFound } from '@/components/common/page-not-found'
 import { AdvertiseBanner } from '@/components/features/banner/advertise'
-import { CertificateBanner } from '@/components/features/banner/certificate/certificate'
+import { CertificateBanner } from '@/components/features/banner/certificate'
 import { createSlug } from '@/utils/slug'
 interface ProductClientProps {
   initialProduct: GetProductResult
