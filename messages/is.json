@@ -11,6 +11,10 @@
     "digital": "Stafrænt Vara",
     "uncategorized": "Ekki Flokkað"
   },
+  "ProductTab": {
+    "description": "Lýsing",
+    "review": "Umsögn"
+  },
   "Navbar": {
     "Header": "Hágæða Lífræn Ólífuolía & Hunang (Heilsuvörur)",
     "Menu": {

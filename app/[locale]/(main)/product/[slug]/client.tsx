@@ -3,6 +3,7 @@
 import { BreadcrumbItem, Breadcrumbs, Skeleton, Tab, Tabs } from '@heroui/react'
 import { useQuery } from '@tanstack/react-query'
 import { useSession } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 import { useEffect } from 'react'
 
 import type { GetProductResult } from '@/app/[locale]/(dashboard)/dashboard/product/action/product'
@@ -31,6 +32,7 @@ export const ProductClient = ({
   initialProduct,
   productId,
 }: ProductClientProps) => {
+  const t = useTranslations('ProductTab')
   const { setProductDetailState } = useProductDetailStore()
   const { data: session } = useSession()
   const userId = session?.user?.id
@@ -77,10 +79,10 @@ export const ProductClient = ({
       </div>
 
       <Tabs className='mx-auto' variant='bordered'>
-        <Tab title='Description'>
+        <Tab title={t('description')}>
           <ProductDescription />
         </Tab>
-        <Tab title='Review'>
+        <Tab title={t('review')}>
           <ProductReview />
         </Tab>
       </Tabs>

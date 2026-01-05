@@ -11,6 +11,10 @@
     "digital": "Digitaal Product",
     "uncategorized": "Niet gecategoriseerd"
   },
+  "ProductTab": {
+    "description": "Beschrijving",
+    "review": "Beoordeling"
+  },
   "Navbar": {
     "Header": "Premium Biologische Olijfolie & Honing (Gezonde Voeding)",
     "Menu": {

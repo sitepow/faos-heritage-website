@@ -11,6 +11,10 @@
     "digital": "数字产品",
     "uncategorized": "未分类"
   },
+  "ProductTab": {
+    "description": "描述",
+    "review": "评价"
+  },
   "Navbar": {
     "Header": "高端有机橄榄油与蜂蜜（健康食品）",
     "Menu": {

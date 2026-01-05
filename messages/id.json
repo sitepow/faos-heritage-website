@@ -11,6 +11,10 @@
     "digital": "Produk Digital",
     "uncategorized": "Belum Dikategorikan"
   },
+  "ProductTab": {
+    "description": "Deskripsi",
+    "review": "Ulasan"
+  },
   "Navbar": {
     "Header": "Minyak Zaitun & Madu Organik Premium (Makanan Kesehatan)",
     "Menu": {

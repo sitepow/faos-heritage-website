@@ -11,6 +11,10 @@
     "digital": "Digital Product",
     "uncategorized": "Uncategorized"
   },
+  "ProductTab": {
+    "description": "Description",
+    "review": "Review"
+  },
   "Navbar": {
     "Header": "Premium Organic Olive Oil & Honey — 100% Pure Natural Collection (Wellness Food)",
     "Menu": {

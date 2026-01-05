@@ -11,6 +11,10 @@
     "digital": "Sản phẩm số",
     "uncategorized": "Chưa phân loại"
   },
+  "ProductTab": {
+    "description": "Mô tả",
+    "review": "Đánh giá"
+  },
   "Navbar": {
     "Header": "Dầu Ô Liu & Mật Ong Hữu Cơ Cao Cấp (Thực Phẩm Sức Khỏe)",
     "Menu": {

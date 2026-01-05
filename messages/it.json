@@ -11,6 +11,10 @@
     "digital": "Prodotto Digitale",
     "uncategorized": "Non Categorizzato"
   },
+  "ProductTab": {
+    "description": "Descrizione",
+    "review": "Recensione"
+  },
   "Navbar": {
     "Header": "Olio d’Oliva & Miele Biologici Premium (Alimenti per il Benessere)",
     "Menu": {

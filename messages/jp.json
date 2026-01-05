@@ -11,6 +11,10 @@
     "digital": "デジタル製品",
     "uncategorized": "未分類"
   },
+  "ProductTab": {
+    "description": "説明",
+    "review": "レビュー"
+  },
   "Navbar": {
     "Header": "プレミアム オーガニック オリーブオイル＆ハチミツ（ウェルネスフード）",
     "Menu": {
