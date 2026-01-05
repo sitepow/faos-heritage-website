@@ -4,6 +4,47 @@
     "title": "Premium Biologische Olijfolie & Honing — 100% Puur & Natuurlijk",
     "description": "Uw adres voor hoogwaardige biologische olijfolie en honing, speciaal geselecteerd voor een gezonde levensstijl."
   },
+  "Cart": {
+    "Checkout": {
+      "title": "Verzendadres",
+      "currencyAlert": "U staat op het punt een bestelling te plaatsen in de gekozen valuta. Controleer de prijs zorgvuldig.",
+      "editAddress": "Bewerk",
+      "paymentDetails": "Betalingsgegevens",
+      "totalPrice": "Totaalprijs",
+      "shippingCost": "Verzendkosten",
+      "discount": "Korting",
+      "netTotal": "Netto totaal",
+      "noAddressAlert": "Voeg een verzendadres toe voordat u bestelt",
+      "addAddress": "Adres toevoegen",
+      "proceedBtn": "Afrekenen"
+    },
+    "Item": {
+      "productId": "Product ID",
+      "price": "Prijs",
+      "remaining": "Resterend",
+      "qtyLabel": "Aantal",
+      "optionsLabel": "Productopties",
+      "optionsPlaceholder": "Kies een optie"
+    },
+    "List": {
+      "header": "Productlijst",
+      "emptyCart": "Je winkelwagen is leeg. Bekijk onze producten op de homepagina om items toe te voegen."
+    },
+    "Page": {
+      "title": "Je winkelwagen {count, plural, =0 {} other {(# artikelen)}}",
+      "cartId": "Winkelwagen-ID",
+      "clearBtn": "Winkelwagen leegmaken"
+    },
+    "Messages": {
+      "confirmDeleteTitle": "Artikel verwijderen?",
+      "confirmDeleteDesc": "Weet je zeker dat je dit artikel uit je winkelwagen wilt verwijderen?",
+      "confirmClearTitle": "Hele winkelwagen leegmaken?",
+      "confirmClearDesc": "Hiermee worden alle artikelen uit je winkelwagen verwijderd. Deze actie kan niet ongedaan worden gemaakt.",
+      "orderCreated": "Je bestelling is aangemaakt. Controleer de gegevens en ga verder met de betaling.",
+      "confirmOrderTitle": "Wil je de bestelling plaatsen?",
+      "confirmOrderDesc": "Controleer of de productlijst en het verzendadres correct zijn. Als alles klopt, kun je direct je bestelling afronden."
+    }
+  },
   "About": {
     "title": "Over FAOS - Ons Erfgoed van Zuiverheid",
     "description": "FAOS biedt hoogwaardige biologische olijfolie en honing, gemaakt van 100% natuurlijke ingrediënten. Deze brochure presenteert ons productassortiment en onze kwaliteitsnormen.",

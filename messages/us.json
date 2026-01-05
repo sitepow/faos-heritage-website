@@ -4,6 +4,47 @@
     "title": "Premium Organic Olive Oil & Honey — 100% Pure & Natural",
     "description": "Your premier destination for high-quality organic olive oil and honey, curated for your healthy lifestyle."
   },
+  "Cart": {
+    "Checkout": {
+      "title": "Shipping address",
+      "currencyAlert": "You are about to place an order using the selected currency. Please review the price and currency carefully before proceeding with your purchase.",
+      "editAddress": "Edit address",
+      "paymentDetails": "Payment details",
+      "totalPrice": "Total price",
+      "shippingCost": "Shipping cost",
+      "discount": "Discount",
+      "netTotal": "Net total price",
+      "noAddressAlert": "Please add your shipping address before placing your order",
+      "addAddress": "Add your address",
+      "proceedBtn": "Proceed to checkout"
+    },
+    "Item": {
+      "productId": "Product ID",
+      "price": "Price",
+      "remaining": "Remaining quantity",
+      "qtyLabel": "Quantity",
+      "optionsLabel": "Product options",
+      "optionsPlaceholder": "Select product options"
+    },
+    "List": {
+      "header": "Product list",
+      "emptyCart": "There are no items in your cart. You can browse products on the homepage, then add the items to your cart to proceed."
+    },
+    "Page": {
+      "title": "Your cart {count, plural, =0 {} other {(# items)}}",
+      "cartId": "Cart ID",
+      "clearBtn": "Clear cart"
+    },
+    "Messages": {
+      "confirmDeleteTitle": "Remove item?",
+      "confirmDeleteDesc": "Are you sure you want to remove this item from your cart?",
+      "confirmClearTitle": "Clear entire cart?",
+      "confirmClearDesc": "This will remove all items from your cart. This action cannot be undone.",
+      "orderCreated": "Your order has been created. Please review and proceed with payment.",
+      "confirmOrderTitle": "Are you about to place an order?",
+      "confirmOrderDesc": "Please confirm the accuracy of your product list and shipping address. If everything is correct, you can proceed with your order immediately."
+    }
+  },
   "About": {
     "title": "About FAOS - Our Heritage of Purity",
     "description": "FAOS is a premier purveyor of organic olive oil and honey, meticulously crafted from 100% natural ingredients. Our digital brochure provides an in-depth look at our curated product range and our unwavering commitment to quality.",

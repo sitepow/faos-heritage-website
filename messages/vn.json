@@ -4,6 +4,47 @@
     "title": "Dầu Ô Liu & Mật Ong Hữu Cơ Cao Cấp — 100% Thuần Khiết & Tự Nhiên",
     "description": "Điểm đến hàng đầu cho dầu ô liu và mật ong hữu cơ chất lượng cao, được tuyển chọn cho lối sống lành mạnh của bạn."
   },
+  "Cart": {
+    "Checkout": {
+      "title": "Địa chỉ giao hàng",
+      "currencyAlert": "Quý khách đang chuẩn bị đặt hàng bằng đơn vị tiền tệ đã chọn. Vui lòng kiểm tra kỹ giá trước khi tiếp tục.",
+      "editAddress": "Sửa địa chỉ",
+      "paymentDetails": "Chi tiết thanh toán",
+      "totalPrice": "Tổng tiền hàng",
+      "shippingCost": "Phí vận chuyển",
+      "discount": "Giảm giá",
+      "netTotal": "Tổng thanh toán",
+      "noAddressAlert": "Vui lòng thêm địa chỉ giao hàng trước khi đặt hàng",
+      "addAddress": "Thêm địa chỉ",
+      "proceedBtn": "Tiến hành thanh toán"
+    },
+    "Item": {
+      "productId": "Mã SP",
+      "price": "Giá",
+      "remaining": "Còn lại",
+      "qtyLabel": "Số lượng",
+      "optionsLabel": "Tùy chọn",
+      "optionsPlaceholder": "Chọn tùy chọn"
+    },
+    "List": {
+      "header": "Danh sách sản phẩm",
+      "emptyCart": "Giỏ hàng của bạn đang trống. Hãy quay lại trang chủ để tìm kiếm và thêm sản phẩm vào giỏ."
+    },
+    "Page": {
+      "title": "Giỏ hàng của bạn {count, plural, =0 {} other {(# sản phẩm)}}",
+      "cartId": "Mã giỏ hàng",
+      "clearBtn": "Xóa toàn bộ giỏ hàng"
+    },
+    "Messages": {
+      "confirmDeleteTitle": "Xóa sản phẩm?",
+      "confirmDeleteDesc": "Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng không?",
+      "confirmClearTitle": "Xóa tất cả sản phẩm?",
+      "confirmClearDesc": "Tất cả sản phẩm sẽ bị xóa khỏi giỏ hàng của bạn. Hành động này không thể hoàn tác.",
+      "orderCreated": "Đơn hàng của bạn đã được tạo thành công. Vui lòng kiểm tra và tiến hành thanh toán.",
+      "confirmOrderTitle": "Xác nhận đặt hàng?",
+      "confirmOrderDesc": "Vui lòng xác nhận tính chính xác của danh sách sản phẩm và địa chỉ giao hàng. Nếu mọi thứ đều chính xác, bạn có thể tiến hành đặt hàng ngay lập tức."
+    }
+  },
   "About": {
     "title": "Về FAOS - Di Sản Của Sự Thuần Khiết",
     "description": "FAOS cung cấp dầu ô liu và mật ong hữu cơ cao cấp được làm từ 100% thành phần tự nhiên. Tài liệu này giới thiệu danh mục sản phẩm và tiêu chuẩn chất lượng của chúng tôi.",

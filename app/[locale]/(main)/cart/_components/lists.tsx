@@ -1,9 +1,11 @@
+/* eslint-disable react/no-unstable-nested-components */
 'use client'
 
 import { Card, CardBody, CardHeader } from '@heroui/react'
 import { useQuery } from '@tanstack/react-query'
 import { AlertCircleIcon } from 'lucide-react'
 import { useSession } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 import { useEffect, type ComponentProps } from 'react'
 
 import {
@@ -17,6 +19,7 @@ import { cn } from '@/utils/style'
 type CartListsProp = ComponentProps<typeof Card>
 
 export const CartLists = ({ className, ...props }: CartListsProp) => {
+  const t = useTranslations('Cart')
   const { setState } = useCartStore()
 
   const { data: session } = useSession()
@@ -41,20 +44,19 @@ export const CartLists = ({ className, ...props }: CartListsProp) => {
   return (
     <Card fullWidth className={cn(className)} {...props}>
       <CardHeader>
-        <b>Product list</b>
+        <b>{t('List.header')}</b>
       </CardHeader>
       <CardBody className='flex-col gap-4'>
         {isLoadingCarts &&
-          [...Array(1)].map((_) => <CartItemSkeleton key={_} />)}
+          [...Array(1)].map((_, index) => <CartItemSkeleton key={index} />)}
 
         {!isLoadingCarts && carts?.length === 0 && (
           <div className='text-default-500 flex size-full flex-col items-center justify-center gap-2'>
             <AlertCircleIcon />
             <span className='text-center'>
-              There are no items in your cart You can browse products on the
-              homepage
-              <br />
-              Then add the items to your cart to proceed
+              {t.rich('List.emptyCart', {
+                br: () => <br />,
+              })}
             </span>
           </div>
         )}

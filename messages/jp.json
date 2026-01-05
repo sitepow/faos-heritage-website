@@ -4,6 +4,47 @@
     "title": "プレミアム有機オリーブオイル＆ハチミツ — 100%純粋・天然コレクション",
     "description": "健康的なライフスタイルのための、厳選された高品質なオーガニックオリーブオイルとハチミツをお届けします。"
   },
+  "Cart": {
+    "Checkout": {
+      "title": "お届け先住所",
+      "currencyAlert": "選択された通貨で注文を確定しようとしています。お支払い前に価格と通貨を再度ご確認ください。",
+      "editAddress": "住所を編集",
+      "paymentDetails": "お支払い詳細",
+      "totalPrice": "小計",
+      "shippingCost": "配送料",
+      "discount": "割引",
+      "netTotal": "合計金額",
+      "noAddressAlert": "注文前に配送先住所を追加してください",
+      "addAddress": "住所を追加する",
+      "proceedBtn": "レジに進む"
+    },
+    "Item": {
+      "productId": "商品ID",
+      "price": "価格",
+      "remaining": "残り在庫",
+      "qtyLabel": "数量",
+      "optionsLabel": "オプション",
+      "optionsPlaceholder": "オプションを選択"
+    },
+    "List": {
+      "header": "商品リスト",
+      "emptyCart": "カートに商品が入っていません。ホーム画面から商品を探してカートに追加してください。"
+    },
+    "Page": {
+      "title": "ショッピングカート {count, plural, =0 {} other {(#点)}}",
+      "cartId": "カートID",
+      "clearBtn": "カートを空にする"
+    },
+    "Messages": {
+      "confirmDeleteTitle": "商品を削除しますか？",
+      "confirmDeleteDesc": "この商品をカートから削除してもよろしいですか？",
+      "confirmClearTitle": "カートをすべて空にしますか？",
+      "confirmClearDesc": "カート内のすべての商品が削除されます。この操作は取り消すことができません。",
+      "orderCreated": "注文が作成されました。内容を確認し、お支払いにお進みください。",
+      "confirmOrderTitle": "注文を確定しますか？",
+      "confirmOrderDesc": "商品のリストと配送先住所が正しいかご確認ください。内容に間違いがなければ、すぐに注文を確定できます。"
+    }
+  },
   "About": {
     "title": "FAOSについて - 純粋さの継承",
     "description": "FAOSは、100％天然成分で作られたプレミアムオーガニックオリーブオイルと蜂蜜を提供しています。このパンフレットでは、製品ラインナップと品質基準をご紹介します。",

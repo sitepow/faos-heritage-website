@@ -4,6 +4,47 @@
     "title": "顶级有机橄榄油与蜂蜜 — 100% 纯天然系列",
     "description": "高品质有机橄榄油与蜂蜜的甄选之家，为您打造健康生活方式。"
   },
+  "Cart": {
+    "Checkout": {
+      "title": "收货地址",
+      "currencyAlert": "您正准备使用选定货币下单。请在继续购买前仔细核对价格和货币。",
+      "editAddress": "修改地址",
+      "paymentDetails": "支付详情",
+      "totalPrice": "商品总价",
+      "shippingCost": "运费",
+      "discount": "折扣",
+      "netTotal": "实付款",
+      "noAddressAlert": "下单前请先添加收货地址",
+      "addAddress": "添加地址",
+      "proceedBtn": "去结算"
+    },
+    "Item": {
+      "productId": "商品编号",
+      "price": "价格",
+      "remaining": "库存剩余",
+      "qtyLabel": "数量",
+      "optionsLabel": "产品选项",
+      "optionsPlaceholder": "请选择选项"
+    },
+    "List": {
+      "header": "商品清单",
+      "emptyCart": "您的购物车空空如也。您可以去首页挑选商品并加入购物车。"
+    },
+    "Page": {
+      "title": "您的购物车 {count, plural, =0 {} other {(# 件商品)}}",
+      "cartId": "购物车 ID",
+      "clearBtn": "清空购物车"
+    },
+    "Messages": {
+      "confirmDeleteTitle": "移除商品？",
+      "confirmDeleteDesc": "您确定要从购物车中移除此商品吗？",
+      "confirmClearTitle": "清空整个购物车？",
+      "confirmClearDesc": "这将从购物车中移除所有商品。此操作无法撤销。",
+      "orderCreated": "您的订单已成功创建。请检查并继续完成付款。",
+      "confirmOrderTitle": "确认提交订单？",
+      "confirmOrderDesc": "请确认商品清单和收货地址的准确性。如果一切无误，您可以立即进行下单。"
+    }
+  },
   "About": {
     "title": "关于 FAOS - 纯净的传承",
     "description": "FAOS 提供由 100% 天然成分制成的优质有机橄榄油和蜂蜜。本手册介绍了我们的产品系列、质量标准和品牌哲学。",

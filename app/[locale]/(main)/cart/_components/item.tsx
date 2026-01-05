@@ -16,6 +16,7 @@ import { TrashIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 import { useEffect, useMemo, useState, type ComponentProps } from 'react'
 
 import { updateCart, type GetCartResult } from '../action'
@@ -38,6 +39,7 @@ export const CartItemSkeleton = () => {
 }
 
 export const CartItem = ({ className, cart, ...props }: CartItemProps) => {
+  const t = useTranslations('Cart')
   const { country, exchangeRates } = useAppStore()
   const CURRENCY_OPTIONS = {
     currency: country?.currency,
@@ -166,6 +168,8 @@ export const CartItem = ({ className, cart, ...props }: CartItemProps) => {
         isPending={isPendingUpdateCart}
         onConfirm={() => mutateUpdateCart({ cartId: cart?.id!, quantity: 0 })}
         onOpenChange={onOpenDeleteQtyChange}
+        title={t('Messages.confirmDeleteTitle')}
+        description={t('Messages.confirmDeleteDesc')}
       />
 
       <Card
@@ -199,15 +203,16 @@ export const CartItem = ({ className, cart, ...props }: CartItemProps) => {
               <div className='flex flex-col'>
                 <span className='line-clamp-1'>{cart?.product?.name}</span>
                 <span className='text-default-500'>
-                  Product ID: {cart?.product?.id}
+                  {t('Item.productId')}: {cart?.product?.id}
                 </span>
                 <div className='flex flex-wrap gap-2'>
                   <span className='text-default-500'>
-                    Price: {formatCurrency(currentPrice!)}/{productUnit}
+                    {t('Item.price')}: {formatCurrency(currentPrice!)}/
+                    {productUnit}
                   </span>
                   <span className='text-default-500'>
-                    Remaining quantity: {formatNumber(currentStockQuantity!)}/
-                    {productUnit}
+                    {t('Item.remaining')}: {formatNumber(currentStockQuantity!)}
+                    /{productUnit}
                   </span>
                 </div>
               </div>
@@ -217,7 +222,7 @@ export const CartItem = ({ className, cart, ...props }: CartItemProps) => {
                   <NumberInput
                     disabled
                     isDisabled={isPendingUpdateCart}
-                    label='Quantity'
+                    label={t('Item.qtyLabel')}
                     maxValue={currentStockQuantity}
                     value={quantity}
                     variant='bordered'
@@ -228,8 +233,8 @@ export const CartItem = ({ className, cart, ...props }: CartItemProps) => {
                     <Select
                       disallowEmptySelection
                       items={cart?.product?.variants || []}
-                      label='Product options'
-                      placeholder='Select product options'
+                      label={t('Item.optionsLabel')}
+                      placeholder={t('Item.optionsPlaceholder')}
                       selectedKeys={variantId ? [variantId] : []}
                       variant='bordered'
                       onSelectionChange={onVariantChange}

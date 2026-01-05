@@ -4,6 +4,47 @@
     "title": "Olio d'Oliva e Miele Biologici — 100% Puri e Naturali",
     "description": "La tua destinazione per l'olio d'oliva e il miele biologici di alta qualità, selezionati per il tuo stile di vita sano."
   },
+  "Cart": {
+    "Checkout": {
+      "title": "Indirizzo di Spedizione",
+      "currencyAlert": "Stai per effettuare un ordine nella valuta selezionata. Controlla attentamente il prezzo prima di procedere.",
+      "editAddress": "Modifica",
+      "paymentDetails": "Dettagli di Pagamento",
+      "totalPrice": "Prezzo totale",
+      "shippingCost": "Spedizione",
+      "discount": "Sconto",
+      "netTotal": "Totale netto",
+      "noAddressAlert": "Aggiungi un indirizzo prima di ordinare",
+      "addAddress": "Aggiungi indirizzo",
+      "proceedBtn": "Vai al pagamento"
+    },
+    "Item": {
+      "productId": "ID Prodotto",
+      "price": "Prezzo",
+      "remaining": "Disponibili",
+      "qtyLabel": "Quantità",
+      "optionsLabel": "Opzioni",
+      "optionsPlaceholder": "Seleziona opzione"
+    },
+    "List": {
+      "header": "Elenco Prodotti",
+      "emptyCart": "Il tuo carrello è vuoto. Esplora il nostro catalogo per aggiungere prodotti."
+    },
+    "Page": {
+      "title": "Il tuo carrello {count, plural, =0 {} other {(# articoli)}}",
+      "cartId": "ID carrello",
+      "clearBtn": "Svuota carrello"
+    },
+    "Messages": {
+      "confirmDeleteTitle": "Rimuovere l'articolo?",
+      "confirmDeleteDesc": "Sei sicuro di voler rimuovere questo articolo dal carrello?",
+      "confirmClearTitle": "Svuotare tutto il carrello?",
+      "confirmClearDesc": "Tutti gli articoli saranno rimossi dal carrello. Questa operazione non può essere annullata.",
+      "orderCreated": "Il tuo ordine è stato creato. Controlla i dettagli e procedi con il pagamento.",
+      "confirmOrderTitle": "Stai per confermare l'ordine?",
+      "confirmOrderDesc": "Verifica l'esattezza dell'elenco dei prodotti e dell'indirizzo di spedizione. Se tutto è corretto, puoi procedere immediatamente con l'ordine."
+    }
+  },
   "About": {
     "title": "Chi Siamo FAOS - Un'Eredità di Purezza",
     "description": "FAOS offre olio d'oliva e miele biologici di prima qualità, realizzati con ingredienti naturali al 100%. Questa brochure presenta la nostra gamma di prodotti e la nostra filosofia.",

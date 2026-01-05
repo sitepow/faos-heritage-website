@@ -5,6 +5,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { XIcon } from 'lucide-react'
 import Head from 'next/head'
 import { useSession } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 
 import { CartCheckout } from './_components/checkout'
 import { CartLists } from './_components/lists'
@@ -14,6 +15,7 @@ import { useCartStore } from './store'
 import { ConfirmModal } from '@/components/modal/confirm'
 
 export default function Cart() {
+  const t = useTranslations('Cart')
   const queryClient = useQueryClient()
   const { carts, setState, cartId, onOpenDeleteChange, isDeleteOpen } =
     useCartStore()
@@ -61,6 +63,8 @@ export default function Cart() {
         <ConfirmModal
           isOpen={isDeleteOpen}
           isPending={isPending}
+          title={t('Messages.confirmDeleteTitle')}
+          description={t('Messages.confirmDeleteDesc')}
           onConfirm={() => {
             mutateDeteleCart(cartId!)
           }}
@@ -70,19 +74,26 @@ export default function Cart() {
         <ConfirmModal
           isOpen={isClearOpen}
           isPending={isPending}
+          title={t('Messages.confirmClearTitle')}
+          description={t('Messages.confirmClearDesc')}
           onConfirm={() => {
             mutateClearCarts(userId!)
           }}
           onOpenChange={onOpenClearChange}
         />
+
         <div className='flex w-full flex-wrap justify-between gap-2 text-start'>
           <span className='text-xl font-bold'>
-            Your cart {carts?.length !== 0 && `(${carts?.length} items)`}
+            {t('Page.title', {
+              count: carts?.length,
+            })}
           </span>
-          <span className='text-default-500'>Cart ID: {userId}</span>
+          <span className='text-default-500'>
+            {t('Page.cartId')}: {userId}
+          </span>
         </div>
 
-        {carts?.length !== 0 && (
+        {carts && carts.length !== 0 && (
           <div className='flex w-full flex-wrap justify-end gap-2'>
             <Button
               className='text-secondary'
@@ -90,7 +101,7 @@ export default function Cart() {
               startContent={<XIcon />}
               onClick={() => onOpenClearChange()}
             >
-              Clear cart
+              {t('Page.clearBtn')}
             </Button>
           </div>
         )}

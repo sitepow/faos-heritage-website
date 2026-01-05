@@ -4,6 +4,47 @@
     "title": "Hágæða Lífræn Ólífuolía og Hunang — 100% Hreint og Náttúrulegt",
     "description": "Þinn áfangastaður fyrir hágæða lífræna ólífuolíu og hunang, sérstaklega valið fyrir heilbrigðan lífsstíl."
   },
+  "Cart": {
+    "Checkout": {
+      "title": "Verndarfang",
+      "currencyAlert": "Þú ert að fara að panta í völdum gjaldmiðli. Vinsamlegast athugaðu verðið vel áður en haldið er áfram.",
+      "editAddress": "Breyta heimilisfangi",
+      "paymentDetails": "Greiðsluupplýsingar",
+      "totalPrice": "Heildarverð",
+      "shippingCost": "Sendingarkostnaður",
+      "discount": "Afsláttur",
+      "netTotal": "Samtals",
+      "noAddressAlert": "Vinsamlegast bættu við heimilisfangi áður en þú pantar",
+      "addAddress": "Bæta við heimilisfangi",
+      "proceedBtn": "Ganga frá kaupum"
+    },
+    "Item": {
+      "productId": "Vöru ID",
+      "price": "Verð",
+      "remaining": "Eftir",
+      "qtyLabel": "Magn",
+      "optionsLabel": "Vöruvalmöguleikar",
+      "optionsPlaceholder": "Veldu valmöguleika"
+    },
+    "List": {
+      "header": "Vörulisti",
+      "emptyCart": "Karfan þín er tóm. Þú getur skoðað vörur á forsíðunni og bætt þeim í körfuna."
+    },
+    "Page": {
+      "title": "Karfan þín {count, plural, =0 {} other {(# vörur)}}",
+      "cartId": "Auðkenni körfu",
+      "clearBtn": "Tæma körfu"
+    },
+    "Messages": {
+      "confirmDeleteTitle": "Fjarlægja vöru?",
+      "confirmDeleteDesc": "Ertu viss um að þú viljir fjarlægja þessa vöru úr körfunni þinni?",
+      "confirmClearTitle": "Tæma alla körfuna?",
+      "confirmClearDesc": "Þetta mun fjarlægja allar vörur úr körfunni þinni. Ekki er hægt að afturkalla þessa aðgerð.",
+      "orderCreated": "Pöntunin þín hefur verið búin til. Vinsamlegast yfirfarið og haldið áfram í greiðslu.",
+      "confirmOrderTitle": "Ertu að fara að leggja fram pöntun?",
+      "confirmOrderDesc": "Vinsamlegast staðfestu að vörulistinn og sendingarheimilið séu rétt. Ef allt er í lagi geturðu haldið áfram með pöntunina strax."
+    }
+  },
   "About": {
     "title": "Um FAOS - Arfleifð Hreinleikans",
     "description": "FAOS býður upp á hágæða lífræna ólífuolíu og hunang úr 100% náttúrulegum hráefnum. Í þessum bæklingi má finna vöruúrval okkar og gæðastaðla.",

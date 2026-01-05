@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 'use client'
 
 import {
@@ -13,6 +14,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { ArrowRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
+import { useTranslations } from 'next-intl' // นำเข้า useTranslations
 import { useMemo } from 'react'
 import { toast } from 'react-toastify'
 
@@ -56,6 +58,8 @@ const SummaryRow = ({ label, value, options }: SummaryRowProps) => (
 )
 
 export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
+  const t = useTranslations('Cart')
+
   const { country, exchangeRates } = useAppStore()
   const CURRENCY_OPTIONS = {
     currency: country?.currency,
@@ -64,9 +68,6 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
   }
   const currency: Currency = (country?.currency as Currency) ?? Currency.USD
   const exchangeRate = exchangeRates?.[currency] ?? 1
-
-  // const tomorrow = new Date()
-  // tomorrow.setDate(tomorrow.getDate() + 1)
 
   const router = useRouter()
   const queryClient = useQueryClient()
@@ -136,9 +137,7 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
     useMutation({
       mutationFn: createOrder,
       onSuccess: async () => {
-        toast.success(
-          'Your order has been created. Please review and proceed with payment.',
-        )
+        toast.success(t('Messages.orderCreated'))
 
         await Promise.all([
           queryClient.invalidateQueries({ queryKey: QUERY_KEY.CART }),
@@ -172,10 +171,10 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
   return (
     <div>
       <ConfirmModal
-        description='Please confirm the accuracy of your product list and shipping address. If everything is correct, you can proceed with your order immediately.'
+        description={t('Messages.confirmOrderDesc')}
         isOpen={isOpenConfirmOrder}
         isPending={isPendingCreateOrder}
-        title='Are you about to place an order?'
+        title={t('Messages.confirmOrderTitle')}
         onConfirm={onCreateOrder}
         onOpenChange={onOpenConfirmOrderChange}
       />
@@ -185,14 +184,14 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
           {!isLoadingAddress && address && (
             <>
               <span className='border-primary w-fit border-b pb-1 font-bold'>
-                Shipping address
+                {t('Checkout.title')}
               </span>
 
               <Alert
                 className='text-start'
                 color='warning'
                 variant='bordered'
-                description='You are about to place an order using the selected currency. Please review the price and currency carefully before proceeding with your purchase.'
+                description={t('Checkout.currencyAlert')}
               />
 
               <span className='text-default-500'>
@@ -201,30 +200,34 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
                   className='text-primary cursor-pointer underline'
                   onClick={GOTO.ADDRESS}
                 >
-                  Edit address
+                  {t('Checkout.editAddress')}
                 </button>
               </span>
             </>
           )}
 
           <span className='border-primary w-fit border-b pb-1 font-bold'>
-            Payment details
+            {t('Checkout.paymentDetails')}
           </span>
 
           <SummaryRow
-            label='Total price'
+            label={t('Checkout.totalPrice')}
             value={subTotal}
             options={CURRENCY_OPTIONS}
           />
           <SummaryRow
-            label='Shipping cost'
+            label={t('Checkout.shippingCost')}
             value={shippingCost}
             options={CURRENCY_OPTIONS}
           />
-          <SummaryRow label='discount' value={0} options={CURRENCY_OPTIONS} />
+          <SummaryRow
+            label={t('Checkout.discount')}
+            value={0}
+            options={CURRENCY_OPTIONS}
+          />
 
           <div className='flex items-center justify-between pt-1'>
-            <span className='font-bold'>Net total price :</span>
+            <span className='font-bold'>{t('Checkout.netTotal')} :</span>
             <span className='text-primary text-2xl font-bold'>
               {formatCurrency(subTotal + shippingCost, CURRENCY_OPTIONS)}
             </span>
@@ -238,13 +241,16 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
               color='warning'
               description={
                 <span>
-                  Please add your shipping address before placing your order{' '}
-                  <button
-                    className='cursor-pointer underline'
-                    onClick={GOTO.ADDRESS}
-                  >
-                    Add your address
-                  </button>
+                  {t.rich('Checkout.noAddressAlert', {
+                    button: (chunks) => (
+                      <button
+                        className='cursor-pointer underline'
+                        onClick={GOTO.ADDRESS}
+                      >
+                        {chunks}
+                      </button>
+                    ),
+                  })}
                 </span>
               }
               variant='bordered'
@@ -261,7 +267,7 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
               }
               onClick={onOpenConfirmOrderChange}
             >
-              Proceed to checkout
+              {t('Checkout.proceedBtn')}
             </Button>
           )}
         </CardFooter>

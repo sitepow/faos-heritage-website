@@ -4,6 +4,47 @@
     "title": "Minyak Zaitun & Madu Organik Premium — 100% Murni & Alami",
     "description": "Destinasi utama Anda untuk minyak zaitun dan madu organik berkualitas tinggi, dikurasi khusus untuk gaya hidup sehat Anda."
   },
+  "Cart": {
+    "Checkout": {
+      "title": "Alamat Pengiriman",
+      "currencyAlert": "Anda akan membuat pesanan dalam mata uang yang dipilih. Harap periksa harga dengan teliti sebelum melanjutkan.",
+      "editAddress": "Ubah alamat",
+      "paymentDetails": "Rincian Pembayaran",
+      "totalPrice": "Total harga",
+      "shippingCost": "Biaya kirim",
+      "discount": "Diskon",
+      "netTotal": "Total bayar",
+      "noAddressAlert": "Mohon tambahkan alamat pengiriman sebelum memesan",
+      "addAddress": "Tambah alamat",
+      "proceedBtn": "Lanjut ke pembayaran"
+    },
+    "Item": {
+      "productId": "ID Produk",
+      "price": "Harga",
+      "remaining": "Sisa stok",
+      "qtyLabel": "Jumlah",
+      "optionsLabel": "Opsi produk",
+      "optionsPlaceholder": "Pilih opsi"
+    },
+    "List": {
+      "header": "Daftar Produk",
+      "emptyCart": "Keranjang Anda kosong. Silakan lihat produk di halaman utama untuk mulai berbelanja."
+    },
+    "Page": {
+      "title": "Keranjang Anda {count, plural, =0 {} other {(# barang)}}",
+      "cartId": "ID Keranjang",
+      "clearBtn": "Kosongkan keranjang"
+    },
+    "Messages": {
+      "confirmDeleteTitle": "Hapus barang?",
+      "confirmDeleteDesc": "Apakah Anda yakin ingin menghapus barang ini dari keranjang?",
+      "confirmClearTitle": "Kosongkan seluruh keranjang?",
+      "confirmClearDesc": "Ini akan menghapus semua barang dari keranjang Anda. Tindakan ini tidak dapat dibatalkan.",
+      "orderCreated": "Pesanan Anda telah berhasil dibuat. Silakan periksa dan lanjutkan ke pembayaran.",
+      "confirmOrderTitle": "Konfirmasi pemesanan?",
+      "confirmOrderDesc": "Silakan konfirmasi keakuratan daftar produk dan alamat pengiriman Anda. Jika semuanya sudah benar, Anda dapat segera melanjutkan pemesanan."
+    }
+  },
   "About": {
     "title": "Tentang FAOS - Warisan Kemurnian Kami",
     "description": "FAOS menawarkan minyak zaitun dan madu organik premium yang terbuat dari 100% bahan alami. Brosur ini menyajikan rangkaian produk dan standar kualitas kami.",
