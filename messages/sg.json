@@ -14,14 +14,20 @@
       "address": "Manage my address"
     },
     "personalInfo": "Personal Information",
+    "basicInfo": "Basic information",
+    "imageChanged": "There have been changes to the image files.",
     "fields": {
+      "imageUrl": "Image URL",
       "name": "Name - Surname",
       "email": "Email",
       "role": "License",
       "productId": "Product ID"
     },
     "buttons": {
-      "removeFavorite": "Remove Favorite"
+      "removeFavorite": "Remove Favorite",
+      "save": "Save",
+      "saving": "Saving...",
+      "cancel": "Cancel"
     },
     "modals": {
       "removeFavorite": {

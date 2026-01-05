@@ -14,14 +14,20 @@
       "address": "Quản lý địa chỉ"
     },
     "personalInfo": "Thông tin cá nhân",
+    "basicInfo": "Thông tin cơ bản",
+    "imageChanged": "Đã có thay đổi đối với các tệp hình ảnh.",
     "fields": {
+      "imageUrl": "URL hình ảnh",
       "name": "Họ và tên",
       "email": "Email",
       "role": "Quyền hạn",
       "productId": "Mã sản phẩm"
     },
     "buttons": {
-      "removeFavorite": "Xóa khỏi yêu thích"
+      "removeFavorite": "Xóa khỏi yêu thích",
+      "save": "Lưu",
+      "saving": "Đang lưu...",
+      "cancel": "Hủy"
     },
     "modals": {
       "removeFavorite": {

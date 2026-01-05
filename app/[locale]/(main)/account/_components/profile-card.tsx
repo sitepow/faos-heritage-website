@@ -12,6 +12,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Role } from '@prisma/client'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useSession } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
@@ -38,6 +39,7 @@ const DEFAULT_VALUES: UserUpdateInput = {
 }
 
 export const ProfileCard = () => {
+  const t = useTranslations('Account')
   const queryClient = useQueryClient()
 
   const { data: session } = useSession()
@@ -104,16 +106,10 @@ export const ProfileCard = () => {
   const onFilesChange = (files: ImageWithPreview[]) => {
     setPreviewFiles(files)
 
-    setValue(
-      'image',
-      files.length
-        ? 'There have been changes to the image files.'
-        : (oldImage ?? ''),
-      {
-        shouldDirty: true,
-        shouldTouch: true,
-      },
-    )
+    setValue('image', files.length ? t('imageChanged') : (oldImage ?? ''), {
+      shouldDirty: true,
+      shouldTouch: true,
+    })
   }
 
   const onClose = () => {
@@ -132,14 +128,14 @@ export const ProfileCard = () => {
   return (
     <Card fullWidth>
       <CardHeader>
-        <span>Edit personal information</span>
+        <span>{t('tabs.editProfile')}</span>
       </CardHeader>
       <CardBody className='gap-4'>
         <div className='mx-auto max-w-2xl'>
           <ImageDropzone onFilesChange={onFilesChange} />
         </div>
 
-        <SubHeading title='Basic information' />
+        <SubHeading title={t('basicInfo')} />
         <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
           <Controller
             control={control}
@@ -150,7 +146,7 @@ export const ProfileCard = () => {
                 isDisabled
                 errorMessage={errors.image?.message}
                 isInvalid={!!errors.image}
-                label='Image URL'
+                label={t('fields.imageUrl')}
                 value={value ?? ''}
                 variant='bordered'
               />
@@ -165,7 +161,7 @@ export const ProfileCard = () => {
                 {...field}
                 errorMessage={errors.name?.message}
                 isInvalid={!!errors.name}
-                label='Name'
+                label={t('fields.name')}
                 value={value ?? ''}
                 variant='bordered'
               />
@@ -181,34 +177,18 @@ export const ProfileCard = () => {
                 isDisabled
                 errorMessage={errors.email?.message}
                 isInvalid={!!errors.email}
-                label='Email'
+                label={t('fields.email')}
                 type='email'
                 value={value ?? ''}
                 variant='bordered'
               />
             )}
           />
-
-          {/* <Controller
-            control={control}
-            name='password'
-            render={({ field: { value, ...field } }) => (
-              <Input
-                {...field}
-                errorMessage={errors.password?.message}
-                isInvalid={!!errors.password}
-                label='Password'
-                type='password'
-                value={value ?? ''}
-                variant='bordered'
-              />
-            )}
-          /> */}
         </div>
       </CardBody>
       <CardFooter className='gap-2'>
         <Button isDisabled={isPending} variant='faded' onPress={onClose}>
-          Cancel
+          {t('buttons.cancel')}
         </Button>
         <Button
           className='text-secondary'
@@ -216,7 +196,7 @@ export const ProfileCard = () => {
           isDisabled={isPending || !isDirty}
           onClick={handleSubmit(onSubmit)}
         >
-          {isPending ? 'Saving...' : 'Save'}
+          {isPending ? t('buttons.saving') : t('buttons.save')}
         </Button>
       </CardFooter>
     </Card>

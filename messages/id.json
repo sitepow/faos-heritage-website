@@ -14,14 +14,20 @@
       "address": "Kelola alamat saya"
     },
     "personalInfo": "Informasi Pribadi",
+    "basicInfo": "Informasi dasar",
+    "imageChanged": "Ada perubahan pada file gambar.",
     "fields": {
+      "imageUrl": "URL Gambar",
       "name": "Nama Lengkap",
       "email": "Email",
       "role": "Lisensi",
       "productId": "ID Produk"
     },
     "buttons": {
-      "removeFavorite": "Hapus Favorit"
+      "removeFavorite": "Hapus Favorit",
+      "save": "Simpan",
+      "saving": "Menyimpan...",
+      "cancel": "Batal"
     },
     "modals": {
       "removeFavorite": {

@@ -14,14 +14,20 @@
       "address": "住所の管理"
     },
     "personalInfo": "個人情報",
+    "basicInfo": "基本情報",
+    "imageChanged": "画像ファイルに変更がありました。",
     "fields": {
+      "imageUrl": "画像URL",
       "name": "氏名",
       "email": "メールアドレス",
       "role": "権限",
       "productId": "商品ID"
     },
     "buttons": {
-      "removeFavorite": "お気に入り解除"
+      "removeFavorite": "お気に入り解除",
+      "save": "保存",
+      "saving": "保存中...",
+      "cancel": "キャンセル"
     },
     "modals": {
       "removeFavorite": {

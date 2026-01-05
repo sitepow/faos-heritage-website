@@ -14,14 +14,20 @@
       "address": "Gestisci indirizzi"
     },
     "personalInfo": "Informazioni personali",
+    "basicInfo": "Informazioni di base",
+    "imageChanged": "Ci sono state modifiche ai file immagine.",
     "fields": {
+      "imageUrl": "URL immagine",
       "name": "Nome e Cognome",
       "email": "Email",
       "role": "Licenza",
       "productId": "ID Prodotto"
     },
     "buttons": {
-      "removeFavorite": "Rimuovi dai preferiti"
+      "removeFavorite": "Rimuovi dai preferiti",
+      "save": "Salva",
+      "saving": "Salvataggio...",
+      "cancel": "Annulla"
     },
     "modals": {
       "removeFavorite": {

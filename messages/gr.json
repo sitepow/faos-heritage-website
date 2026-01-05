@@ -14,14 +14,20 @@
       "address": "Διαχείριση διευθύνσεων"
     },
     "personalInfo": "Προσωπικές Πληροφορίες",
+    "basicInfo": "Βασικές πληροφορίες",
+    "imageChanged": "Υπήρξαν αλλαγές στα αρχεία εικόνας.",
     "fields": {
+      "imageUrl": "URL εικόνας",
       "name": "Ονοματεπώνυμο",
       "email": "Email",
       "role": "Άδεια",
       "productId": "ID Προϊόντος"
     },
     "buttons": {
-      "removeFavorite": "Αφαίρεση από τα αγαπημένα"
+      "removeFavorite": "Αφαίρεση από τα αγαπημένα",
+      "save": "Αποθήκευση",
+      "saving": "Αποθήκευση...",
+      "cancel": "Ακύρωση"
     },
     "modals": {
       "removeFavorite": {

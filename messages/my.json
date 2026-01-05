@@ -14,14 +14,20 @@
       "address": "Urus alamat saya"
     },
     "personalInfo": "Maklumat Peribadi",
+    "basicInfo": "Maklumat asas",
+    "imageChanged": "Terdapat perubahan pada fail imej.",
     "fields": {
+      "imageUrl": "URL Imej",
       "name": "Nama - Nama Keluarga",
       "email": "E-mel",
       "role": "Lesen",
       "productId": "ID Produk"
     },
     "buttons": {
-      "removeFavorite": "Alih Keluar Kegemaran"
+      "removeFavorite": "Alih Keluar Kegemaran",
+      "save": "Simpan",
+      "saving": "Menyimpan...",
+      "cancel": "Batal"
     },
     "modals": {
       "removeFavorite": {

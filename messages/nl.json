@@ -14,14 +14,20 @@
       "address": "Adressen beheren"
     },
     "personalInfo": "Persoonlijke gegevens",
+    "basicInfo": "Basisinformatie",
+    "imageChanged": "Er zijn wijzigingen aangebracht in de afbeeldingsbestanden.",
     "fields": {
+      "imageUrl": "Afbeelding URL",
       "name": "Naam - Achternaam",
       "email": "E-mail",
       "role": "Licentie",
       "productId": "Product-ID"
     },
     "buttons": {
-      "removeFavorite": "Verwijder uit favorieten"
+      "removeFavorite": "Verwijder uit favorieten",
+      "save": "Opslaan",
+      "saving": "Opslaan...",
+      "cancel": "Annuleren"
     },
     "modals": {
       "removeFavorite": {

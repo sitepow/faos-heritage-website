@@ -14,14 +14,20 @@
       "address": "Sýsla með heimilisföng"
     },
     "personalInfo": "Persónuupplýsingar",
+    "basicInfo": "Grunnupplýsingar",
+    "imageChanged": "Breytingar hafa verið gerðar á myndskrám.",
     "fields": {
+      "imageUrl": "Slóð myndar",
       "name": "Nafn - Eftirnafn",
       "email": "Netfang",
       "role": "Réttindi",
       "productId": "Vöruauðkenni"
     },
     "buttons": {
-      "removeFavorite": "Fjarlægja úr uppáhaldi"
+      "removeFavorite": "Fjarlægja úr uppáhaldi",
+      "save": "Vista",
+      "saving": "Vistar...",
+      "cancel": "Hætta við"
     },
     "modals": {
       "removeFavorite": {
