@@ -12,6 +12,16 @@
       "favorites": "Uppáhalds",
       "editProfile": "Breyta persónuupplýsingum",
       "address": "Sýsla með heimilisföng"
+    },
+    "personalInfo": "Persónuupplýsingar",
+    "fields": {
+      "name": "Nafn - Eftirnafn",
+      "email": "Netfang",
+      "role": "Réttindi"
+    },
+    "roles": {
+      "admin": "Kerfisstjóri",
+      "customer": "Viðskiptavinur"
     }
   },
   "Products": {

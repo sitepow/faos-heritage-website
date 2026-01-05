@@ -12,6 +12,16 @@
       "favorites": "Danh sách yêu thích",
       "editProfile": "Chỉnh sửa thông tin cá nhân",
       "address": "Quản lý địa chỉ"
+    },
+    "personalInfo": "Thông tin cá nhân",
+    "fields": {
+      "name": "Họ và tên",
+      "email": "Email",
+      "role": "Quyền hạn"
+    },
+    "roles": {
+      "admin": "Quản trị viên",
+      "customer": "Khách hàng"
     }
   },
   "Products": {

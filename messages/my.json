@@ -12,6 +12,16 @@
       "favorites": "Kegemaran",
       "editProfile": "Edit maklumat peribadi",
       "address": "Urus alamat saya"
+    },
+    "personalInfo": "Maklumat Peribadi",
+    "fields": {
+      "name": "Nama - Nama Keluarga",
+      "email": "E-mel",
+      "role": "Lesen"
+    },
+    "roles": {
+      "admin": "Administrator sistem",
+      "customer": "Pelanggan"
     }
   },
   "Products": {

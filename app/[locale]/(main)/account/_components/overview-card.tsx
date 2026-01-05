@@ -4,6 +4,7 @@ import { Card, CardHeader, CardBody, Skeleton, Button } from '@heroui/react'
 import { Role } from '@prisma/client'
 import { useQuery } from '@tanstack/react-query'
 import { useSession } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 
 import { getUser } from '@/app/[locale]/(dashboard)/dashboard/user'
 
@@ -12,6 +13,7 @@ interface OverviewCardProps {
 }
 
 export const OverviewCard = ({ onclick }: OverviewCardProps) => {
+  const t = useTranslations('Account')
   const { data: session } = useSession()
   const userId = session?.user?.id
 
@@ -28,37 +30,45 @@ export const OverviewCard = ({ onclick }: OverviewCardProps) => {
   return (
     <Card fullWidth>
       <CardHeader>
-        <span>Manage my account</span>
+        <span className='font-bold'>{t('tabs.manage')}</span>
       </CardHeader>
       <CardBody>
         {isLoadingUser && <Skeleton className='h-40 rounded-lg sm:max-w-1/2' />}
 
         {!isLoadingUser && (
           <div className='flex flex-col sm:max-w-1/2'>
-            <div className='border-divider rounded-t-lg border p-2.5'>
-              <span>personal information</span>
+            <div className='border-divider bg-default-50 rounded-t-lg border p-2.5'>
+              <span className='font-semibold'>{t('personalInfo')}</span>
             </div>
 
             <div className='border-divider rounded-b-lg border-x border-b p-2.5 *:flex *:gap-3'>
               <div>
-                <span>Name - Surname</span>
+                <span className='text-default-500 min-w-[100px]'>
+                  {t('fields.name')}
+                </span>
                 <span>:</span>
-                <span>{user?.name ?? '-'}</span>
+                <span className='font-medium'>{user?.name ?? '-'}</span>
               </div>
 
               <div>
-                <span>Email</span>
+                <span className='text-default-500 min-w-[100px]'>
+                  {t('fields.email')}
+                </span>
                 <span>:</span>
-                <span>{user?.email ?? '-'}</span>
+                <span className='font-medium text-wrap break-all'>
+                  {user?.email ?? '-'}
+                </span>
               </div>
 
               <div>
-                <span>License</span>
+                <span className='text-default-500 min-w-[100px]'>
+                  {t('fields.role')}
+                </span>
                 <span>:</span>
-                <span>
+                <span className='font-medium'>
                   {user?.role === Role.ADMIN
-                    ? 'System administrator'
-                    : 'Customer'}
+                    ? t('roles.admin')
+                    : t('roles.customer')}
                 </span>
               </div>
 
@@ -67,7 +77,7 @@ export const OverviewCard = ({ onclick }: OverviewCardProps) => {
                 color='primary'
                 onPress={onclick}
               >
-                Edit personal information
+                {t('tabs.editProfile')}
               </Button>
             </div>
           </div>

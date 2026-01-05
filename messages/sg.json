@@ -12,6 +12,16 @@
       "favorites": "Favorites",
       "editProfile": "Edit personal information",
       "address": "Manage my address"
+    },
+    "personalInfo": "Personal Information",
+    "fields": {
+      "name": "Name - Surname",
+      "email": "Email",
+      "role": "License"
+    },
+    "roles": {
+      "admin": "System administrator",
+      "customer": "Customer"
     }
   },
   "Products": {

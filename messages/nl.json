@@ -12,6 +12,16 @@
       "favorites": "Favorieten",
       "editProfile": "Persoonlijke gegevens bewerken",
       "address": "Adressen beheren"
+    },
+    "personalInfo": "Persoonlijke gegevens",
+    "fields": {
+      "name": "Naam - Achternaam",
+      "email": "E-mail",
+      "role": "Licentie"
+    },
+    "roles": {
+      "admin": "Systeembeheerder",
+      "customer": "Klant"
     }
   },
   "Products": {

@@ -12,6 +12,16 @@
       "favorites": "Favorit",
       "editProfile": "Ubah informasi pribadi",
       "address": "Kelola alamat saya"
+    },
+    "personalInfo": "Informasi Pribadi",
+    "fields": {
+      "name": "Nama Lengkap",
+      "email": "Email",
+      "role": "Lisensi"
+    },
+    "roles": {
+      "admin": "Administrator sistem",
+      "customer": "Pelanggan"
     }
   },
   "Products": {

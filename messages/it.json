@@ -12,6 +12,16 @@
       "favorites": "Preferiti",
       "editProfile": "Modifica informazioni personali",
       "address": "Gestisci indirizzi"
+    },
+    "personalInfo": "Informazioni personali",
+    "fields": {
+      "name": "Nome e Cognome",
+      "email": "Email",
+      "role": "Licenza"
+    },
+    "roles": {
+      "admin": "Amministratore di sistema",
+      "customer": "Cliente"
     }
   },
   "Products": {

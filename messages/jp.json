@@ -12,6 +12,16 @@
       "favorites": "お気に入り",
       "editProfile": "個人情報の編集",
       "address": "住所の管理"
+    },
+    "personalInfo": "個人情報",
+    "fields": {
+      "name": "氏名",
+      "email": "メールアドレス",
+      "role": "権限"
+    },
+    "roles": {
+      "admin": "システム管理者",
+      "customer": "一般のお客様"
     }
   },
   "Products": {
