@@ -49,6 +49,12 @@
     "customer": "Được khách hàng từ <highlight>nhiều quốc gia trên toàn thế giới</highlight> tin tưởng. <link>Sản phẩm chất lượng, đáng tin cậy ở mọi nơi.</link>",
     "certificate": "Sản phẩm FAOS được chứng nhận chính thức và phê duyệt bởi các cơ quan có thẩm quyền, vì vậy bạn có thể tin tưởng vào <link>an toàn, chất lượng và độ tin cậy</link> mỗi lần sử dụng."
   },
+  "Section": {
+    "Header": {
+      "title": "Tìm các sản phẩm phù hợp với phong cách của bạn",
+      "description": "Khám phá các món đồ hoàn hảo để đáp ứng nhu cầu và phong cách sống của bạn"
+    }
+  },
   "Footer": {
     "copyright": "Bản quyền {year} {name} - {title}",
     "Menu": {

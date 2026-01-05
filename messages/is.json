@@ -49,6 +49,12 @@
     "customer": "Nýtur trausts viðskiptavina í <highlight>mörgum löndum um allan heim</highlight>. <link>Gæðavörur sem þú getur treyst, hvar sem þú ert.</link>",
     "certificate": "FAOS vörur eru formlega vottaðar og samþykktar af viðeigandi yfirvöldum, svo þú getur treyst á þeirra <link>öryggi, gæði og áreiðanleika</link> í hvert skipti."
   },
+  "Section": {
+    "Header": {
+      "title": "Finndu vörurnar sem passa við þinn stíl",
+      "description": "Uppgötvaðu fullkomnar vörur sem henta þínum þörfum og lífsstíl"
+    }
+  },
   "Footer": {
     "copyright": "Höfundarréttur {year} {name} - {title}",
     "Menu": {

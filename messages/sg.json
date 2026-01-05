@@ -50,6 +50,12 @@
     "customer": "Trusted by customers across <highlight>multiple countries worldwide</highlight>. <link>Reliable quality, wherever you do business.</link>",
     "certificate": "FAOS products are officially certified and approved by relevant authorities, so you can trust their <link>safety, quality, and reliability</link> every time."
   },
+  "Section": {
+    "Header": {
+      "title": "Find the products that match your style",
+      "description": "Discover the perfect items to suit your needs and lifestyle"
+    }
+  },
   "Footer": {
     "copyright": "Copyright {year} {name} - {title}",
     "Menu": {

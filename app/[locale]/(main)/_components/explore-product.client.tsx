@@ -4,6 +4,7 @@ import { Button } from '@heroui/react'
 import { useQuery } from '@tanstack/react-query'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 
 import { ProductSection } from '../product'
 
@@ -22,6 +23,8 @@ export const ExploreProductsClient = ({
   initialProducts,
   itemPerPage,
 }: ExploreProductsClientProps) => {
+  const tCategory = useTranslations('CategoryCarousel')
+  const tSection = useTranslations('Section')
   const { data: products, isLoading: isLoadingProducts } = useQuery({
     queryKey: ['products', 'homepage', { limit: itemPerPage }],
     queryFn: () => getProducts({ limit: itemPerPage }),
@@ -36,8 +39,8 @@ export const ExploreProductsClient = ({
   return (
     <>
       <SectionHeader
-        description='Find the perfect product to meet your needs'
-        title='Choose products according to your style'
+        description={tSection('Header.description')}
+        title={tSection('Header.title')}
       />
       <ProductSection
         isLoading={isLoadingProducts}
@@ -50,7 +53,7 @@ export const ExploreProductsClient = ({
           color='primary'
           endContent={<ArrowRight />}
         >
-          Explore Products
+          {tCategory('explore')}
         </Button>
       </Link>
     </>

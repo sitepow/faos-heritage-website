@@ -44,6 +44,12 @@
     "customer": "深受来自 <highlight>全球多个国家</highlight> 客户的信赖。<link>无论身在何处，都能放心使用的优质产品。</link>",
     "certificate": "FAOS 产品已获得相关机构的官方认证和批准，因此您可以信赖其 <link>安全性、质量和可靠性</link> 每一次使用。"
   },
+  "Section": {
+    "Header": {
+      "title": "找到符合您风格的产品",
+      "description": "发现完美的商品，满足您的需求和生活方式"
+    }
+  },
   "Footer": {
     "copyright": "版权所有 {year} {name} - {title}",
     "Menu": {

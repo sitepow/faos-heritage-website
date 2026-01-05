@@ -49,6 +49,12 @@
     "customer": "Vertrouwd door klanten uit <highlight>meerdere landen wereldwijd</highlight>. <link>Kwaliteitsproducten waar je overal op kunt rekenen.</link>",
     "certificate": "FAOS-producten zijn officieel gecertificeerd en goedgekeurd door de bevoegde autoriteiten, zodat u kunt vertrouwen op hun <link>veiligheid, kwaliteit en betrouwbaarheid</link> elke keer."
   },
+  "Section": {
+    "Header": {
+      "title": "Vind de producten die bij jouw stijl passen",
+      "description": "Ontdek de perfecte items die aansluiten bij jouw behoeften en levensstijl"
+    }
+  },
   "Footer": {
     "copyright": "Copyright {year} {name} - {title}",
     "Menu": {
