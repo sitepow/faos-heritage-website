@@ -38,7 +38,8 @@
     }
   },
   "Banner": {
-    "customer": "Trusted by customers from <highlight>many countries around the world</highlight>. <link>Quality products you can rely on, wherever you are.</link>"
+    "customer": "Trusted by customers from <highlight>many countries around the world</highlight>. <link>Quality products you can rely on, wherever you are.</link>",
+    "certificate": "FAOS products are officially certified and approved by relevant authorities, so you can trust their <link>safety, quality, and reliability</link> every time."
   },
   "CategoryCarousel": {
     "title": "Shop by Category",

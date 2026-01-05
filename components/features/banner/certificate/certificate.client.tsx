@@ -2,7 +2,8 @@
 
 import { Card, CardBody } from '@heroui/react'
 import Image from 'next/image'
-import Link from 'next/link'
+
+import type { ReactNode } from 'react'
 
 const CERTIFICATE_IMAGES = [
   '/images/certificate/gmo-free.png',
@@ -10,7 +11,11 @@ const CERTIFICATE_IMAGES = [
   '/images/certificate/bio.png',
 ]
 
-export const CertificateBanner = () => {
+type Props = {
+  title: ReactNode
+}
+
+export const CertificateBannerClient = ({ title }: Props) => {
   return (
     <Card fullWidth>
       <CardBody
@@ -25,11 +30,7 @@ export const CertificateBanner = () => {
         }}
       >
         <h2 className='mx-auto max-w-11/12 text-center text-2xl leading-tight font-bold text-white sm:max-w-10/12 md:max-w-1/2 xl:max-w-1/3'>
-          FAOS products are officially certified and approved by relevant
-          authorities, giving you confidence in their{' '}
-          <Link href='/about'>
-            <span className='underline'>safety, quality, and reliability.</span>
-          </Link>
+          {title}
         </h2>
 
         <div className='flex flex-wrap gap-2'>

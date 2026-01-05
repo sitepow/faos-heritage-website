@@ -46,7 +46,8 @@
     }
   },
   "Banner": {
-    "customer": "<highlight>世界中のさまざまな国</highlight>のお客様に選ばれています。<link>どこにいても信頼できる品質をお届けします。</link>"
+    "customer": "<highlight>世界中のさまざまな国</highlight>のお客様に選ばれています。<link>どこにいても信頼できる品質をお届けします。</link>",
+    "certificate": "FAOS製品は、関連当局によって公式に認証および承認されており、<link>安全性、品質、信頼性</link>をいつでも安心してご利用いただけます。"
   },
   "Footer": {
     "copyright": "著作権 {year} {name} - {title}",

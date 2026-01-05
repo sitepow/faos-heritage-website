@@ -46,7 +46,8 @@
     }
   },
   "Banner": {
-    "customer": "Dipercaya oleh pelanggan dari <highlight>berbagai negara di seluruh dunia</highlight>. <link>Produk berkualitas yang dapat diandalkan, di mana pun Anda berada.</link>"
+    "customer": "Dipercaya oleh pelanggan dari <highlight>berbagai negara di seluruh dunia</highlight>. <link>Produk berkualitas yang dapat diandalkan, di mana pun Anda berada.</link>",
+    "certificate": "Produk FAOS secara resmi bersertifikat dan disetujui oleh otoritas terkait, sehingga Anda dapat mempercayai <link>keamanan, kualitas, dan keandalannya</link> setiap saat."
   },
   "Footer": {
     "copyright": "Hak Cipta {year} {name} - {title}",
