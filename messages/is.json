@@ -4,6 +4,10 @@
     "title": "Hágæða Lífræn Ólífuolía og Hunang — 100% Hreint og Náttúrulegt",
     "description": "Þinn áfangastaður fyrir hágæða lífræna ólífuolíu og hunang, sérstaklega valið fyrir heilbrigðan lífsstíl."
   },
+  "Privacy": {
+    "title": "Persónuverndarstefna",
+    "content": "FAOS leggur mikla áherslu á að vernda <important>friðhelgi</important> og <important>persónuupplýsingar</important> allra notenda. Farið er með allar upplýsingar sem tengjast einstaklingum sem <important>trúnaðarmál</important> og þær varðveittar á <important>öruggan hátt</important>. Þetta á við um nöfn, samskiptaupplýsingar og <important>færslugögn</important>. FAOS innleiðir viðeigandi <important>tæknilegar og skipulagslegar öryggisráðstafanir</important> til að koma í veg fyrir <important>óheimilan aðgang, birtingu, breytingar eða eyðileggingu</important> gagna. Persónuupplýsingum er einungis safnað í <important>lögmætum viðskiptatilgangi</important> og í samræmi við <important>viðeigandi persónuverndarlög</important>. Gögn verða ekki afhent <important>þriðja aðila</important> án <important>fyrirfara samþykkis</important>, nema lög krefjist þess."
+  },
   "Payment": {
     "Header": {
       "title": "Greiðslumátar og Öryggi",

@@ -4,6 +4,10 @@
     "title": "プレミアム有機オリーブオイル＆ハチミツ — 100%純粋・天然コレクション",
     "description": "健康的なライフスタイルのための、厳選された高品質なオーガニックオリーブオイルとハチミツをお届けします。"
   },
+  "Privacy": {
+    "title": "プライバシーポリシー",
+    "content": "FAOSは、すべてのユーザーの<important>プライバシー</important>および<important>個人データ</important>の保護に全力で取り組んでいます。個人を特定できるすべての情報は厳重な<important>機密保持</important>のもと、<important>安全な方法</important>で管理されます。これには、氏名、連絡先、<important>取引データ</important>が含まれますが、これらに限定されません。FAOSは、データの<important>不正アクセス、漏洩、改ざん、または破壊</important>を防止するため、適切な<important>技術的・組織的安全管理措置</important>を講じています。個人情報は、<important>正当な事業目的</important>のため、かつ<important>適用されるデータ保護法</important>に従ってのみ収集・処理されます。法令に基づく場合を除き、お客様の<important>事前の同意</important>なく、個人データを<important>第三者</important>に開示することはありません。"
+  },
   "Payment": {
     "Header": {
       "title": "お支払い方法とセキュリティ",

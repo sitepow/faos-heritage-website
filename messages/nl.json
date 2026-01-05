@@ -4,6 +4,10 @@
     "title": "Premium Biologische Olijfolie & Honing — 100% Puur & Natuurlijk",
     "description": "Uw adres voor hoogwaardige biologische olijfolie en honing, speciaal geselecteerd voor een gezonde levensstijl."
   },
+  "Privacy": {
+    "title": "Privacybeleid",
+    "content": "FAOS zet zich volledig in voor het beschermen van de <important>privacy</important> en <important>persoonsgegevens</important> van alle gebruikers. Alle informatie die herleidbaar is tot een individu wordt als strikt <important>vertrouwelijk</important> behandeld en op een <important>veilige manier</important> bewaard. Dit omvat namen, contactgegevens en <important>transactiegegevens</important>. FAOS hanteert passende <important>technische en organisatorische beveiligingsmaatregelen</important> om <important>onbevoegde toegang, openbaarmaking, wijziging of vernietiging</important> van gegevens te voorkomen. Persoonsgegevens worden uitsluitend verzameld voor <important>legitieme zakelijke doeleinden</important> en in overeenstemming met de <important>toepasselijke wetgeving inzake gegevensbescherming</important>. Gegevens worden niet gedeeld met <important>derden</important> zonder <important>voorafgaande toestemming</important>, tenzij wettelijk verplicht."
+  },
   "Payment": {
     "Header": {
       "title": "Betaalmethoden & Beveiliging",

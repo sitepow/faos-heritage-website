@@ -4,6 +4,10 @@
     "title": "Minyak Zaitun & Madu Organik Premium — 100% Tulen & Semulajadi",
     "description": "Destinasi utama anda untuk minyak zaitun dan madu organik berkualiti tinggi, dipilih khas untuk gaya hidup sihat anda."
   },
+  "Privacy": {
+    "title": "Dasar Privasi",
+    "content": "FAOS komited sepenuhnya dalam melindungi <important>privasi</important> dan <important>data peribadi</important> semua pengguna. Segala maklumat berkaitan individu akan dikendalikan sebagai maklumat <important>sulit</important> dan disimpan dengan <important>cara yang selamat</important>. Ini termasuk nama, maklumat hubungan, dan <important>data transaksi</important>. FAOS melaksanakan <important>langkah keselamatan teknikal dan organisasi</important> yang sewajarnya untuk menghalang <important>akses tanpa kebenaran, pendedahan, pengubahan, atau pemusnahan</important> data. Maklumat peribadi dikumpul dan diproses hanya untuk <important>tujuan perniagaan yang sah</important> serta selaras dengan <important>undang-undang perlindungan data</important> yang berkuat kuasa. Data peribadi tidak akan didedahkan kepada <important>pihak ketiga</important> tanpa <important>keizinan terlebih dahulu</important>, kecuali dikehendaki oleh undang-undang."
+  },
   "Payment": {
     "Header": {
       "title": "Kaedah Pembayaran & Keselamatan",
