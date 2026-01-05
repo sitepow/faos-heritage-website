@@ -14,7 +14,7 @@ import { LogInIcon } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useSession } from 'next-auth/react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useState } from 'react'
 
 import type { NavItem } from '@/config/site'
@@ -33,9 +33,13 @@ export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { status } = useSession()
   const pathname = usePathname()
+  const locale = useLocale()
+
+  const pathnameWithoutLocale =
+    pathname === `/${locale}` ? '/' : pathname.replace(`/${locale}`, '')
 
   const isAuthenticated = status === 'authenticated'
-  const isDashboard = pathname.startsWith('/dashboard')
+  const isDashboard = pathnameWithoutLocale.startsWith('/dashboard')
 
   const menuItems = isDashboard
     ? siteConfig.adminNavbarItems
