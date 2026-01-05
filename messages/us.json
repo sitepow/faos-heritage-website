@@ -68,7 +68,8 @@
     "Header": {
       "title": "Find the products that match your style",
       "description": "Discover the perfect items to suit your needs and lifestyle"
-    }
+    },
+    "similar": "Similar Products"
   },
   "CategoryCarousel": {
     "title": "Shop by Category",

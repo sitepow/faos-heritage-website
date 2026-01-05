@@ -76,7 +76,8 @@
     "Header": {
       "title": "Tìm các sản phẩm phù hợp với phong cách của bạn",
       "description": "Khám phá các món đồ hoàn hảo để đáp ứng nhu cầu và phong cách sống của bạn"
-    }
+    },
+    "similar": "Sản phẩm tương tự"
   },
   "Footer": {
     "copyright": "Bản quyền {year} {name} - {title}",

@@ -76,7 +76,8 @@
     "Header": {
       "title": "Temukan produk yang sesuai dengan gaya Anda",
       "description": "Temukan item yang sempurna untuk memenuhi kebutuhan dan gaya hidup Anda"
-    }
+    },
+    "similar": "Produk Serupa"
   },
   "Footer": {
     "copyright": "Hak Cipta {year} {name} - {title}",

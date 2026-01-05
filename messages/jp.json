@@ -76,7 +76,8 @@
     "Header": {
       "title": "あなたのスタイルに合った商品を見つけよう",
       "description": "あなたのニーズとライフスタイルにぴったりのアイテムを見つけてください"
-    }
+    },
+    "similar": "類似商品"
   },
   "Footer": {
     "copyright": "著作権 {year} {name} - {title}",

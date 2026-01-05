@@ -1,6 +1,7 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
+import { useTranslations } from 'next-intl'
 
 import { ProductSection } from './section'
 import { useProductDetailStore } from '../store'
@@ -9,6 +10,7 @@ import { getProducts } from '@/app/[locale]/(main)/products/action'
 import { ITEM_PER_PAGE } from '@/utils/constants'
 
 export const ProductSimilar = () => {
+  const t = useTranslations('Section')
   const { product } = useProductDetailStore()
   const categoryId = product?.categoryId
 
@@ -29,7 +31,7 @@ export const ProductSimilar = () => {
     <div className='flex flex-col gap-4'>
       {similars?.length !== 0 && (
         <span className='border-primary mx-auto w-fit border-b pb-1 text-xl font-bold'>
-          Similar/Replacement Products
+          {t('similar')}
         </span>
       )}
 

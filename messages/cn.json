@@ -71,7 +71,8 @@
     "Header": {
       "title": "找到符合您风格的产品",
       "description": "发现完美的商品，满足您的需求和生活方式"
-    }
+    },
+    "similar": "类似商品"
   },
   "Footer": {
     "copyright": "版权所有 {year} {name} - {title}",

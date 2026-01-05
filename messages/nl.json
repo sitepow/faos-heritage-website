@@ -76,7 +76,8 @@
     "Header": {
       "title": "Vind de producten die bij jouw stijl passen",
       "description": "Ontdek de perfecte items die aansluiten bij jouw behoeften en levensstijl"
-    }
+    },
+    "similar": "Vergelijkbare producten"
   },
   "Footer": {
     "copyright": "Copyright {year} {name} - {title}",

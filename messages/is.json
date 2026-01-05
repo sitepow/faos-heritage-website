@@ -76,7 +76,8 @@
     "Header": {
       "title": "Finndu vörurnar sem passa við þinn stíl",
       "description": "Uppgötvaðu fullkomnar vörur sem henta þínum þörfum og lífsstíl"
-    }
+    },
+    "similar": "Svipuð vörur"
   },
   "Footer": {
     "copyright": "Höfundarréttur {year} {name} - {title}",

@@ -77,7 +77,8 @@
     "Header": {
       "title": "Find the products that match your style",
       "description": "Discover the perfect items to suit your needs and lifestyle"
-    }
+    },
+    "similar": "Similar Products"
   },
   "Footer": {
     "copyright": "Copyright {year} {name} - {title}",
