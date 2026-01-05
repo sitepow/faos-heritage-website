@@ -47,7 +47,23 @@
   },
   "Banner": {
     "customer": "Scelto da clienti in <highlight>molti paesi in tutto il mondo</highlight>. <link>Prodotti di qualità su cui puoi contare, ovunque tu sia.</link>",
-    "certificate": "I prodotti FAOS sono ufficialmente certificati e approvati dalle autorità competenti, così puoi fidarti della loro <link>sicurezza, qualità e affidabilità</link> ogni volta."
+    "certificate": "I prodotti FAOS sono ufficialmente certificati e approvati dalle autorità competenti, così puoi fidarti della loro <link>sicurezza, qualità e affidabilità</link> ogni volta.",
+    "advertise": {
+      "title": "Perché il miele e l'olio d'oliva sono scelte affidabili per una vita sana quotidiana",
+      "messages": [
+        "Il miele puro fornisce energia naturale, aiutandoti a sentirti rinfrescato senza la dolcezza intensa dello zucchero raffinato.",
+        "Molti scelgono il miele perché contiene antiossidanti che supportano il corpo e aumentano l'immunità quotidiana.",
+        "L'olio d'oliva è una ricca fonte di grassi sani ed è ampiamente utilizzato da chi è attento alla salute del cuore.",
+        "Sostituire gli oli da cucina normali con l'olio d'oliva può aiutare a ridurre il colesterolo cattivo e supportare la salute a lungo termine.",
+        "Il miele può aiutare a lenire l'irritazione della gola e sostenere un sistema digestivo sano.",
+        "L'olio d'oliva contiene polifenoli che aiutano a rallentare l'invecchiamento cellulare e a mantenere la pelle sana.",
+        "Sia il miele che l'olio d'oliva sono ingredienti naturali, senza grassi trans.",
+        "Ideale per chi è attento alla salute, gli anziani e chi gestisce la propria dieta.",
+        "Facile da usare in molti modi, dalla cucina alle bevande fino al consumo quotidiano.",
+        "Inizia a prenderti cura della tua salute oggi scegliendo ingredienti migliori e naturali."
+      ],
+      "description": "Inizia a prenderti cura della tua salute oggi scegliendo ingredienti migliori e naturali."
+    }
   },
   "Section": {
     "Header": {

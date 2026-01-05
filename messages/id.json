@@ -47,7 +47,23 @@
   },
   "Banner": {
     "customer": "Dipercaya oleh pelanggan dari <highlight>berbagai negara di seluruh dunia</highlight>. <link>Produk berkualitas yang dapat diandalkan, di mana pun Anda berada.</link>",
-    "certificate": "Produk FAOS secara resmi bersertifikat dan disetujui oleh otoritas terkait, sehingga Anda dapat mempercayai <link>keamanan, kualitas, dan keandalannya</link> setiap saat."
+    "certificate": "Produk FAOS secara resmi bersertifikat dan disetujui oleh otoritas terkait, sehingga Anda dapat mempercayai <link>keamanan, kualitas, dan keandalannya</link> setiap saat.",
+    "advertise": {
+      "title": "Mengapa Madu dan Minyak Zaitun adalah pilihan terpercaya untuk hidup sehat setiap hari",
+      "messages": [
+        "Madu murni memberikan energi alami, membantu Anda merasa segar tanpa manis tajam dari gula rafinasi.",
+        "Banyak orang memilih madu karena mengandung antioksidan yang membantu mendukung tubuh dan meningkatkan kekebalan setiap hari.",
+        "Minyak zaitun adalah sumber lemak sehat yang kaya dan banyak digunakan oleh orang yang sadar kesehatan untuk mendukung kesehatan jantung.",
+        "Beralih ke minyak zaitun daripada minyak masak biasa dapat membantu mengurangi kolesterol jahat dan mendukung kesehatan jangka panjang.",
+        "Madu dapat membantu meredakan iritasi tenggorokan dan mendukung sistem pencernaan yang sehat.",
+        "Minyak zaitun mengandung polifenol yang membantu memperlambat penuaan sel dan mendukung kulit yang sehat.",
+        "Baik madu maupun minyak zaitun adalah bahan alami tanpa lemak trans.",
+        "Ideal untuk individu yang sadar kesehatan, lansia, dan mereka yang mengatur dietnya.",
+        "Mudah digunakan dengan berbagai cara, dari memasak, minuman, hingga konsumsi harian.",
+        "Mulailah merawat kesehatan Anda hari ini dengan memilih bahan alami yang lebih baik."
+      ],
+      "description": "Mulailah merawat kesehatan Anda hari ini dengan memilih bahan alami yang lebih baik."
+    }
   },
   "Section": {
     "Header": {

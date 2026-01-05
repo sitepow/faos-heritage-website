@@ -47,7 +47,23 @@
   },
   "Banner": {
     "customer": "Được khách hàng từ <highlight>nhiều quốc gia trên toàn thế giới</highlight> tin tưởng. <link>Sản phẩm chất lượng, đáng tin cậy ở mọi nơi.</link>",
-    "certificate": "Sản phẩm FAOS được chứng nhận chính thức và phê duyệt bởi các cơ quan có thẩm quyền, vì vậy bạn có thể tin tưởng vào <link>an toàn, chất lượng và độ tin cậy</link> mỗi lần sử dụng."
+    "certificate": "Sản phẩm FAOS được chứng nhận chính thức và phê duyệt bởi các cơ quan có thẩm quyền, vì vậy bạn có thể tin tưởng vào <link>an toàn, chất lượng và độ tin cậy</link> mỗi lần sử dụng.",
+    "advertise": {
+      "title": "Tại sao mật ong và dầu ô liu là lựa chọn tin cậy cho cuộc sống lành mạnh hàng ngày",
+      "messages": [
+        "Mật ong nguyên chất cung cấp năng lượng tự nhiên, giúp bạn cảm thấy tỉnh táo mà không bị ngọt gắt như đường tinh luyện.",
+        "Nhiều người chọn mật ong vì nó chứa chất chống oxy hóa hỗ trợ cơ thể và tăng cường miễn dịch hàng ngày.",
+        "Dầu ô liu là nguồn chất béo lành mạnh phong phú, được những người quan tâm đến sức khỏe sử dụng để hỗ trợ tim mạch.",
+        "Chuyển sang dùng dầu ô liu thay vì dầu nấu ăn thông thường có thể giúp giảm cholesterol xấu và hỗ trợ sức khỏe lâu dài.",
+        "Mật ong giúp làm dịu cổ họng và hỗ trợ hệ tiêu hóa khỏe mạnh.",
+        "Dầu ô liu chứa polyphenol giúp làm chậm quá trình lão hóa tế bào và hỗ trợ làn da khỏe mạnh.",
+        "Cả mật ong và dầu ô liu đều là nguyên liệu tự nhiên, không có chất béo chuyển hóa.",
+        "Lý tưởng cho những người quan tâm đến sức khỏe, người cao tuổi và những người quản lý chế độ ăn.",
+        "Dễ sử dụng theo nhiều cách, từ nấu ăn, đồ uống đến tiêu thụ hàng ngày.",
+        "Hãy bắt đầu chăm sóc sức khỏe của bạn ngay hôm nay bằng cách chọn nguyên liệu tự nhiên tốt hơn."
+      ],
+      "description": "Hãy bắt đầu chăm sóc sức khỏe của bạn ngay hôm nay bằng cách chọn nguyên liệu tự nhiên tốt hơn."
+    }
   },
   "Section": {
     "Header": {

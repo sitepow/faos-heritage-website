@@ -47,7 +47,23 @@
   },
   "Banner": {
     "customer": "Vertrouwd door klanten uit <highlight>meerdere landen wereldwijd</highlight>. <link>Kwaliteitsproducten waar je overal op kunt rekenen.</link>",
-    "certificate": "FAOS-producten zijn officieel gecertificeerd en goedgekeurd door de bevoegde autoriteiten, zodat u kunt vertrouwen op hun <link>veiligheid, kwaliteit en betrouwbaarheid</link> elke keer."
+    "certificate": "FAOS-producten zijn officieel gecertificeerd en goedgekeurd door de bevoegde autoriteiten, zodat u kunt vertrouwen op hun <link>veiligheid, kwaliteit en betrouwbaarheid</link> elke keer.",
+    "advertise": {
+      "title": "Waarom honing en olijfolie vertrouwde keuzes zijn voor een gezonde dagelijkse levensstijl",
+      "messages": [
+        "Pure honing levert natuurlijke energie en helpt je verfrist te voelen zonder de scherpe zoetheid van geraffineerde suiker.",
+        "Veel mensen kiezen honing omdat het antioxidanten bevat die het lichaam ondersteunen en de dagelijkse immuniteit verhogen.",
+        "Olijfolie is een rijke bron van gezonde vetten en wordt veel gebruikt door gezondheidsbewuste mensen om de hartgezondheid te ondersteunen.",
+        "Overschakelen naar olijfolie in plaats van gewone bakoliën kan helpen slechte cholesterol te verminderen en de lange termijn gezondheid te ondersteunen.",
+        "Honing kan helpen bij het verzachten van keelpijn en het ondersteunen van een gezond spijsverteringssysteem.",
+        "Olijfolie bevat polyfenolen die helpen de veroudering van cellen te vertragen en een gezonde huid te ondersteunen.",
+        "Zowel honing als olijfolie zijn natuurlijke ingrediënten zonder transvetten.",
+        "Ideaal voor gezondheidsbewuste individuen, senioren en mensen die hun dieet beheren.",
+        "Gemakkelijk te gebruiken op veel manieren, van koken en drinken tot dagelijkse consumptie.",
+        "Begin vandaag met het verzorgen van je gezondheid door betere, natuurlijke ingrediënten te kiezen."
+      ],
+      "description": "Begin vandaag met het verzorgen van je gezondheid door betere, natuurlijke ingrediënten te kiezen."
+    }
   },
   "Section": {
     "Header": {

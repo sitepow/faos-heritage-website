@@ -47,7 +47,23 @@
   },
   "Banner": {
     "customer": "Dipercayai oleh pelanggan dari <highlight>pelbagai negara di seluruh dunia</highlight>. <link>Produk berkualiti yang boleh anda harapkan, di mana sahaja.</link>",
-    "certificate": "Produk FAOS telah disahkan secara rasmi dan diluluskan oleh pihak berkuasa yang berkenaan, jadi anda boleh mempercayai <link>keselamatan, kualiti, dan kebolehpercayaan</link> setiap masa."
+    "certificate": "Produk FAOS telah disahkan secara rasmi dan diluluskan oleh pihak berkuasa yang berkenaan, jadi anda boleh mempercayai <link>keselamatan, kualiti, dan kebolehpercayaan</link> setiap masa.",
+    "advertise": {
+      "title": "Mengapa Madu dan Minyak Zaitun menjadi pilihan dipercayai untuk kehidupan sihat setiap hari",
+      "messages": [
+        "Madu asli memberikan tenaga semula jadi, membantu anda berasa segar tanpa kemanisan tajam gula putih.",
+        "Ramai orang memilih madu kerana ia mengandungi antioksidan yang menyokong badan dan meningkatkan imuniti harian.",
+        "Minyak zaitun adalah sumber lemak sihat yang kaya dan banyak digunakan oleh mereka yang mementingkan kesihatan jantung.",
+        "Beralih kepada minyak zaitun daripada minyak memasak biasa boleh membantu mengurangkan kolesterol jahat dan menyokong kesihatan jangka panjang.",
+        "Madu boleh membantu melegakan kerengsaan tekak dan menyokong sistem pencernaan yang sihat.",
+        "Minyak zaitun mengandungi polifenol yang membantu memperlahankan penuaan sel dan menyokong kulit yang sihat.",
+        "Kedua-dua madu dan minyak zaitun adalah bahan semula jadi tanpa lemak trans.",
+        "Sesuai untuk individu yang mementingkan kesihatan, warga emas dan mereka yang mengurus diet mereka.",
+        "Mudah digunakan dalam pelbagai cara, dari memasak dan minuman hingga pengambilan harian.",
+        "Mulakan penjagaan kesihatan anda hari ini dengan memilih bahan semula jadi yang lebih baik."
+      ],
+      "description": "Mulakan penjagaan kesihatan anda hari ini dengan memilih bahan semula jadi yang lebih baik."
+    }
   },
   "Section": {
     "Header": {

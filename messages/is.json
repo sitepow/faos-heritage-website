@@ -47,7 +47,23 @@
   },
   "Banner": {
     "customer": "Nýtur trausts viðskiptavina í <highlight>mörgum löndum um allan heim</highlight>. <link>Gæðavörur sem þú getur treyst, hvar sem þú ert.</link>",
-    "certificate": "FAOS vörur eru formlega vottaðar og samþykktar af viðeigandi yfirvöldum, svo þú getur treyst á þeirra <link>öryggi, gæði og áreiðanleika</link> í hvert skipti."
+    "certificate": "FAOS vörur eru formlega vottaðar og samþykktar af viðeigandi yfirvöldum, svo þú getur treyst á þeirra <link>öryggi, gæði og áreiðanleika</link> í hvert skipti.",
+    "advertise": {
+      "title": "Af hverju hunang og ólífuolía eru traustar vörur fyrir daglega heilsu",
+      "messages": [
+        "Hreint hunang veitir náttúrulega orku og hjálpar þér að líða ferskur án sterkrar sætu úr hreinsuðum sykri.",
+        "Margir velja hunang því það inniheldur andoxunarefni sem styðja líkamann og auka daglega ónæmi.",
+        "Ólífuolía er rík uppspretta heilbrigðra fitu og er mikið notuð af heilsuvitundum til að styðja hjartaheilsu.",
+        "Að skipta yfir í ólífuolíu í stað venjulegra matolía getur hjálpað til við að lækka slæma kólesteról og styðja langtímaheilsu.",
+        "Hunang getur hjálpað til við að róa hálsirritation og styðja heilbrigða meltingu.",
+        "Ólífuolía inniheldur fjölfenól sem hjálpa til við að hægja á öldrun frumna og styðja heilbrigða húð.",
+        "Bæði hunang og ólífuolía eru náttúruleg hráefni án transfitu.",
+        "Fullkomið fyrir heilsuvitund einstaklinga, eldri borgara og þá sem stjórna mataræði sínu.",
+        "Auðvelt í notkun á margvíslegan hátt, frá matreiðslu og drykkjum til daglegrar neyslu.",
+        "Byrjaðu að hugsa um heilsu þína í dag með því að velja betri, náttúruleg hráefni."
+      ],
+      "description": "Byrjaðu að hugsa um heilsu þína í dag með því að velja betri, náttúruleg hráefni."
+    }
   },
   "Section": {
     "Header": {
