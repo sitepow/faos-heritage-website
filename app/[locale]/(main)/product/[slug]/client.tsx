@@ -21,6 +21,7 @@ import { getProduct } from '@/app/[locale]/(dashboard)/dashboard/product/action/
 import { PageNotFound } from '@/components/common/page-not-found'
 import { AdvertiseBanner } from '@/components/features/banner/advertise'
 import { CertificateBanner } from '@/components/features/banner/certificate'
+import { CustomerBanner } from '@/components/features/banner/customer'
 import { createSlug } from '@/utils/slug'
 interface ProductClientProps {
   initialProduct: GetProductResult
@@ -95,6 +96,7 @@ export const ProductClient = ({
       <CertificateBanner />
       <AdvertiseBanner />
       <ProductSimilar />
+      <CustomerBanner />
     </section>
   )
 }

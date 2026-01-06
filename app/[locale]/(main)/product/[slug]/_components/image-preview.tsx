@@ -57,7 +57,7 @@ export const ProductImagePreview = ({
                       'order relative aspect-square size-20 shrink-0 overflow-hidden rounded-xl border-2 transition-all',
                       isActive
                         ? 'border-primary ring-primary/10 ring-2'
-                        : 'border-divider hover:border-default-300',
+                        : 'hover:border-default-300 border-transparent',
                     )}
                     type='button'
                     onClick={() => setSelectedIndex(index)}

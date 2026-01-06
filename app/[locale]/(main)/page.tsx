@@ -75,13 +75,13 @@ export default async function Homepage() {
         initialProducts={products}
         itemPerPage={ITEM_PER_PAGE}
       />
-      <CustomerBanner />
       <CertificateBanner />
       <ExploreProductsClient
         initialProducts={exploreProducts}
         itemPerPage={ITEM_PER_PAGE}
       />
       <AdvertiseBanner />
+      <CustomerBanner />
     </section>
   )
 }

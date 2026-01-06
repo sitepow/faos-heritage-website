@@ -24,6 +24,7 @@ import {
 } from '@/app/[locale]/(main)/products/action'
 import { AdvertiseBanner, CertificateBanner } from '@/components'
 import { PageNotFound } from '@/components/common/page-not-found'
+import { CustomerBanner } from '@/components/features/banner/customer'
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
 import { SORT_ITEMS } from '@/utils/features'
 
@@ -141,6 +142,7 @@ export const ProductsClient = ({
 
       <CertificateBanner />
       <AdvertiseBanner />
+      <CustomerBanner />
     </section>
   )
 }
