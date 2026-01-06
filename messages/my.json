@@ -4,6 +4,18 @@
     "title": "Minyak Zaitun & Madu Organik Premium — 100% Tulen & Semulajadi",
     "description": "Destinasi utama anda untuk minyak zaitun dan madu organik berkualiti tinggi, dipilih khas untuk gaya hidup sihat anda."
   },
+  "CancelPage": {
+    "title": "Pembayaran Dibatalkan",
+    "description": "Pembayaran anda belum selesai atau telah dibatalkan sebelum tamat. Anda belum dikenakan bayaran.",
+    "referenceText": "Pesanan ini mempunyai nombor rujukan berikut:",
+    "contactText": "Untuk membuat pesanan baharu, anda boleh kembali dan mulakan semula proses, atau gunakan nombor ini untuk menghubungi khidmat pelanggan."
+  },
+  "SuccessPage": {
+    "title": "Pembayaran Berjaya",
+    "description": "Terima kasih atas pesanan anda. Pembayaran anda telah disahkan.",
+    "referenceText": "Pesanan ini mempunyai nombor rujukan berikut",
+    "contactText": "Sila simpan nombor pesanan ini untuk semakan status kemudian atau untuk menghubungi khidmat pelanggan."
+  },
   "Common": {
     "Breadcrumb": { "home": "Laman Utama", "products": "Semua Produk" }
   },

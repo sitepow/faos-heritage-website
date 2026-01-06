@@ -4,6 +4,18 @@
     "title": "Premium Organic Olive Oil & Honey — 100% Pure & Natural",
     "description": "Your premier destination for high-quality organic olive oil and honey, curated for your healthy lifestyle."
   },
+  "CancelPage": {
+    "title": "Payment Canceled",
+    "description": "Your payment has not been completed or has been canceled before completion. You have not been charged.",
+    "referenceText": "This order has the following reference number:",
+    "contactText": "To place a new order, you can go back and start the process again, or use this number to contact customer service."
+  },
+  "SuccessPage": {
+    "title": "Payment successful",
+    "description": "Thank you for your order. Your payment has been verified and confirmed.",
+    "referenceText": "This order has the following reference number",
+    "contactText": "Please keep this order number for later status checks or to contact customer service."
+  },
   "Common": {
     "Breadcrumb": {
       "home": "Home",

@@ -4,6 +4,18 @@
     "title": "Hágæða Lífræn Ólífuolía og Hunang — 100% Hreint og Náttúrulegt",
     "description": "Þinn áfangastaður fyrir hágæða lífræna ólífuolíu og hunang, sérstaklega valið fyrir heilbrigðan lífsstíl."
   },
+  "CancelPage": {
+    "title": "Greiðsla hætt við",
+    "description": "Greiðslan þín hefur ekki verið kláruð eða henni var hætt við áður en hún lauk. Kerfið hefur ekki rukkað þig.",
+    "referenceText": "Þessi pöntun er með eftirfarandi tilvísunarnúmer:",
+    "contactText": "Til að gera nýja pöntun geturðu farið til baka og byrjað aftur, eða notað þetta númer til að hafa samband við þjónustuver."
+  },
+  "SuccessPage": {
+    "title": "Greiðsla tókst",
+    "description": "Takk fyrir pöntunina. Greiðsla þín hefur verið staðfest.",
+    "referenceText": "Þessi pöntun er með eftirfarandi tilvísunarnúmer",
+    "contactText": "Vinsamlegast geymdu þetta pöntunarnúmer til að athuga stöðu síðar eða til að hafa samband við þjónustuver."
+  },
   "Common": { "Breadcrumb": { "home": "Heim", "products": "Allar vörur" } },
   "Account": {
     "welcome": "Reikningurinn þinn {name}",

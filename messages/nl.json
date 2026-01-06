@@ -4,6 +4,18 @@
     "title": "Premium Biologische Olijfolie & Honing — 100% Puur & Natuurlijk",
     "description": "Uw adres voor hoogwaardige biologische olijfolie en honing, speciaal geselecteerd voor een gezonde levensstijl."
   },
+  "CancelPage": {
+    "title": "Betaling Geannuleerd",
+    "description": "Uw betaling is niet voltooid of is geannuleerd voor voltooiing. Er zijn geen kosten in rekening gebracht.",
+    "referenceText": "Deze bestelling heeft het volgende referentienummer:",
+    "contactText": "Om een nieuwe bestelling te plaatsen, kunt u teruggaan en het proces opnieuw starten, of dit nummer gebruiken voor de klantenservice."
+  },
+  "SuccessPage": {
+    "title": "Betaling geslaagd",
+    "description": "Bedankt voor uw bestelling. Uw betaling is geverifieerd en bevestigd.",
+    "referenceText": "Deze bestelling heeft het volgende referentienummer",
+    "contactText": "Bewaar dit ordernummer voor latere statuscontroles of om contact op te nemen met de klantenservice."
+  },
   "Common": { "Breadcrumb": { "home": "Home", "products": "Alle Producten" } },
   "Account": {
     "welcome": "Jouw account {name}",

@@ -1,10 +1,12 @@
 'use client'
 
 import { CheckCircle2Icon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 import { useQueryParams } from '@/hooks/useQueryParams'
 
 export const SuccessClient = () => {
+  const t = useTranslations('SuccessPage')
   const { getQueryParam } = useQueryParams()
   const orderId = getQueryParam('orderId')
 
@@ -12,18 +14,17 @@ export const SuccessClient = () => {
     <section className='flex flex-col items-center justify-center gap-3 text-center'>
       <div className='flex flex-col items-center gap-4'>
         <CheckCircle2Icon className='text-default-500 size-10' />
-        <h1 className='text-2xl'>Payment successful</h1>
+        <h1 className='text-2xl'>{t('title')}</h1>
       </div>
 
       <span className='text-default-500 sm:w-4/5 lg:w-1/2'>
-        Thank you for your order. Your payment has been verified and confirmed.
+        {t('description')}
         {orderId && (
           <>
             {' '}
-            This order has the following reference number{' '}
-            <span className='text-primary underline'>{orderId}</span> Please
-            keep this order number for later status checks or to contact
-            customer service.
+            {t('referenceText')}{' '}
+            <span className='text-primary underline'>{orderId}</span>{' '}
+            {t('contactText')}
           </>
         )}
       </span>

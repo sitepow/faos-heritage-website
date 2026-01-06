@@ -4,6 +4,18 @@
     "title": "Dầu Ô Liu & Mật Ong Hữu Cơ Cao Cấp — 100% Thuần Khiết & Tự Nhiên",
     "description": "Điểm đến hàng đầu cho dầu ô liu và mật ong hữu cơ chất lượng cao, được tuyển chọn cho lối sống lành mạnh của bạn."
   },
+  "CancelPage": {
+    "title": "Hủy thanh toán",
+    "description": "Thanh toán của bạn chưa hoàn tất hoặc đã bị hủy trước khi hoàn thành. Hệ thống chưa thu phí của bạn.",
+    "referenceText": "Đơn hàng này có mã số tham chiếu là:",
+    "contactText": "Để đặt đơn hàng mới, bạn có thể quay lại và bắt đầu lại quy trình, hoặc sử dụng mã này để liên hệ bộ phận hỗ trợ."
+  },
+  "SuccessPage": {
+    "title": "Thanh toán thành công",
+    "description": "Cảm ơn bạn đã đặt hàng. Thanh toán của bạn đã được xác minh và xác nhận.",
+    "referenceText": "Đơn hàng này có mã số tham chiếu là",
+    "contactText": "Vui lòng giữ mã đơn hàng này để kiểm tra trạng thái sau này hoặc liên hệ bộ phận hỗ trợ."
+  },
   "Common": {
     "Breadcrumb": { "home": "Trang chủ", "products": "Tất cả sản phẩm" }
   },

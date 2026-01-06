@@ -4,6 +4,18 @@
     "title": "顶级有机橄榄油与蜂蜜 — 100% 纯天然系列",
     "description": "高品质有机橄榄油与蜂蜜的甄选之家，为您打造健康生活方式。"
   },
+  "CancelPage": {
+    "title": "支付已取消",
+    "description": "您的支付未完成或在完成前已取消。系统尚未向您收费。",
+    "referenceText": "该订单的参考编号为：",
+    "contactText": "如需重新下单，您可以返回并立即开始流程，或使用此编号联系客服。"
+  },
+  "SuccessPage": {
+    "title": "支付成功",
+    "description": "感谢您的订单。您的付款已通过验证并确认。",
+    "referenceText": "该订单的参考编号为",
+    "contactText": "请保留此订单号，以便日后查询状态或联系客服。"
+  },
   "Common": { "Breadcrumb": { "home": "首页", "products": "所有产品" } },
   "Account": {
     "welcome": "您的账户 {name}",
