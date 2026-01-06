@@ -27,6 +27,15 @@
     "REFUNDED": "已退款"
   },
   "Account": {
+    "OrderCancel": {
+      "title": "取消订单",
+      "loading": "加载中...",
+      "reasonLabel": "原因",
+      "placeholder": "请输入取消或退款的原因。",
+      "back": "返回",
+      "confirm": "确认取消",
+      "submitting": "正在处理..."
+    },
     "OrderView": {
       "title": "订单详情",
       "orderId": "订单号",

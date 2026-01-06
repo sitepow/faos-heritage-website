@@ -29,6 +29,15 @@
     "REFUNDED": "Dibayar Balik"
   },
   "Account": {
+    "OrderCancel": {
+      "title": "Batal Pesanan",
+      "loading": "Memuatkan...",
+      "reasonLabel": "Sebab",
+      "placeholder": "Sila masukkan sebab pembatalan atau pemulangan wang.",
+      "back": "Kembali",
+      "confirm": "Sahkan Pembatalan",
+      "submitting": "Sedang diproses..."
+    },
     "OrderView": {
       "title": "Butiran Pesanan",
       "orderId": "ID Pesanan",

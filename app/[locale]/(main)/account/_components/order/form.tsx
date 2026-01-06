@@ -13,6 +13,7 @@ import {
 import { OrderStatus } from '@prisma/client'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useSession } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
 import type { UpdateOrderInput } from './action'
@@ -22,6 +23,7 @@ import { updateOrder } from './action'
 import { useOrderStore } from '@/app/[locale]/(dashboard)/dashboard/order'
 
 export const OrderForm = () => {
+  const t = useTranslations('Account.OrderCancel')
   const queryClient = useQueryClient()
   const { isOrderCancelOpen, onOpenOrderCancelChange, orderId } =
     useOrderStore()
@@ -77,15 +79,15 @@ export const OrderForm = () => {
       onOpenChange={onOpenOrderCancelChange}
     >
       <ModalContent>
-        <ModalHeader>Cancel order</ModalHeader>
+        <ModalHeader>{t('title')}</ModalHeader>
 
-        {isPendingUpdateOrder && <Spinner label='Loading...' />}
+        {isPendingUpdateOrder && <Spinner label={t('loading')} />}
 
         {!isPendingUpdateOrder && (
           <ModalBody>
             <Textarea
-              label='Reason'
-              placeholder='Please enter the reason for cancellation/refund.'
+              label={t('reasonLabel')}
+              placeholder={t('placeholder')}
               variant='bordered'
               onValueChange={setReason}
             />
@@ -98,7 +100,7 @@ export const OrderForm = () => {
             variant='faded'
             onClick={onClose}
           >
-            Cancel
+            {t('back')}
           </Button>
           <Button
             className='text-secondary'
@@ -106,7 +108,7 @@ export const OrderForm = () => {
             isDisabled={isPendingUpdateOrder || !reason}
             onClick={onSubmit}
           >
-            {isPendingUpdateOrder ? 'In progress' : 'Save'}
+            {isPendingUpdateOrder ? t('submitting') : t('confirm')}
           </Button>
         </ModalFooter>
       </ModalContent>

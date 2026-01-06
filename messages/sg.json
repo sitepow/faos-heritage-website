@@ -32,6 +32,15 @@
     "REFUNDED": "Refunded"
   },
   "Account": {
+    "OrderCancel": {
+      "title": "Request Cancellation",
+      "loading": "Loading...",
+      "reasonLabel": "Cancellation Reason",
+      "placeholder": "Please provide a reason for your cancellation request.",
+      "back": "Cancel",
+      "confirm": "Submit Request",
+      "submitting": "Submitting..."
+    },
     "OrderView": {
       "title": "Order Details",
       "orderId": "Order ID",

@@ -27,6 +27,15 @@
     "REFUNDED": "Terugbetaald"
   },
   "Account": {
+    "OrderCancel": {
+      "title": "Bestelling Annuleren",
+      "loading": "Laden...",
+      "reasonLabel": "Reden",
+      "placeholder": "Voer de reden voor annulering of terugbetaling in.",
+      "back": "Terug",
+      "confirm": "Annulering Bevestigen",
+      "submitting": "In uitvoering..."
+    },
     "OrderView": {
       "title": "Bestelgegevens",
       "orderId": "Bestel-ID",

@@ -29,6 +29,15 @@
     "REFUNDED": "Đã hoàn tiền"
   },
   "Account": {
+    "OrderCancel": {
+      "title": "Hủy đơn hàng",
+      "loading": "Đang tải...",
+      "reasonLabel": "Lý do",
+      "placeholder": "Vui lòng nhập lý do hủy đơn hàng hoặc hoàn tiền.",
+      "back": "Quay lại",
+      "confirm": "Xác nhận hủy",
+      "submitting": "Đang xử lý..."
+    },
     "OrderView": {
       "title": "Chi tiết đơn hàng",
       "orderId": "Mã đơn hàng",

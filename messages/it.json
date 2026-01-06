@@ -29,6 +29,15 @@
     "REFUNDED": "Rimborsato"
   },
   "Account": {
+    "OrderCancel": {
+      "title": "Annulla Ordine",
+      "loading": "Caricamento...",
+      "reasonLabel": "Motivo",
+      "placeholder": "Inserisci il motivo dell'annullamento o del rimborso.",
+      "back": "Indietro",
+      "confirm": "Conferma Annullamento",
+      "submitting": "In corso..."
+    },
     "OrderView": {
       "title": "Dettagli Ordine",
       "orderId": "ID Ordine",

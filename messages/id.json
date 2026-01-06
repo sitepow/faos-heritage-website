@@ -27,6 +27,15 @@
     "REFUNDED": "Dikembalikan"
   },
   "Account": {
+    "OrderCancel": {
+      "title": "Batalkan Pesanan",
+      "loading": "Memuat...",
+      "reasonLabel": "Alasan",
+      "placeholder": "Silakan masukkan alasan pembatalan atau pengembalian dana.",
+      "back": "Kembali",
+      "confirm": "Konfirmasi Pembatalan",
+      "submitting": "Sedang diproses..."
+    },
     "OrderView": {
       "title": "Detail Pesanan",
       "orderId": "ID Pesanan",

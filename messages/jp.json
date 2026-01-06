@@ -32,6 +32,15 @@
     "REFUNDED": "返金済み"
   },
   "Account": {
+    "OrderCancel": {
+      "title": "注文のキャンセル",
+      "loading": "読み込み中...",
+      "reasonLabel": "理由",
+      "placeholder": "キャンセルまたは返金の理由を入力してください。",
+      "back": "戻る",
+      "confirm": "キャンセルを確定する",
+      "submitting": "処理中..."
+    },
     "OrderView": {
       "title": "注文の詳細",
       "orderId": "注文番号",

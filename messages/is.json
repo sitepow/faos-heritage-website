@@ -27,6 +27,15 @@
     "REFUNDED": "Endurgreitt"
   },
   "Account": {
+    "OrderCancel": {
+      "title": "Hætta við pöntun",
+      "loading": "Hleður...",
+      "reasonLabel": "Ástæða",
+      "placeholder": "Vinsamlegast sláðu inn ástæðu fyrir afbókun eða endurgreiðslu.",
+      "back": "Til baka",
+      "confirm": "Staðfesta afbókun",
+      "submitting": "Í vinnslu..."
+    },
     "OrderView": {
       "title": "Pöntunarupplýsingar",
       "orderId": "Pöntunarnúmer",
