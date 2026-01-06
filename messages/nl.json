@@ -27,6 +27,21 @@
     "REFUNDED": "Terugbetaald"
   },
   "Account": {
+    "OrderView": {
+      "title": "Bestelgegevens",
+      "orderId": "Bestel-ID",
+      "loading": "Laden...",
+      "shippingAddress": "Verzendadres",
+      "logistics": "Logistieke Informatie",
+      "trackingNo": "Trackingnummer",
+      "preparing": "Voorbereiden voor verzending",
+      "productList": "Productoverzicht",
+      "subtotal": "Subtotaal Producten",
+      "shippingFee": "Verzendkosten",
+      "totalAmount": "Totaalbedrag",
+      "cancelNote": "Reden van annulering",
+      "close": "Sluiten"
+    },
     "Orders": {
       "title": "Mijn bestellingen",
       "emptyState": "Je hebt nog geen bestellingen.",

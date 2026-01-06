@@ -32,6 +32,21 @@
     "REFUNDED": "返金済み"
   },
   "Account": {
+    "OrderView": {
+      "title": "注文の詳細",
+      "orderId": "注文番号",
+      "loading": "読み込み中...",
+      "shippingAddress": "配送先住所",
+      "logistics": "配送情報",
+      "trackingNo": "追跡番号",
+      "preparing": "発送準備中",
+      "productList": "商品リスト",
+      "subtotal": "商品の小計",
+      "shippingFee": "送料",
+      "totalAmount": "合計金額",
+      "cancelNote": "キャンセルの理由",
+      "close": "閉じる"
+    },
     "Orders": {
       "title": "注文履歴",
       "emptyState": "まだ注文履歴がありません。",

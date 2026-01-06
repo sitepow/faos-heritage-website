@@ -27,6 +27,21 @@
     "REFUNDED": "Dikembalikan"
   },
   "Account": {
+    "OrderView": {
+      "title": "Detail Pesanan",
+      "orderId": "ID Pesanan",
+      "loading": "Memuat...",
+      "shippingAddress": "Alamat Pengiriman",
+      "logistics": "Informasi Logistik",
+      "trackingNo": "No. Resi",
+      "preparing": "Sedang disiapkan",
+      "productList": "Daftar Produk",
+      "subtotal": "Subtotal Produk",
+      "shippingFee": "Biaya Pengiriman",
+      "totalAmount": "Total Pesanan",
+      "cancelNote": "Alasan Pembatalan",
+      "close": "Tutup"
+    },
     "Orders": {
       "title": "Pesanan Saya",
       "emptyState": "Anda belum memiliki pesanan.",

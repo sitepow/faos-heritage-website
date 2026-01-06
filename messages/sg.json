@@ -32,6 +32,21 @@
     "REFUNDED": "Refunded"
   },
   "Account": {
+    "OrderView": {
+      "title": "Order Details",
+      "orderId": "Order ID",
+      "loading": "Loading...",
+      "shippingAddress": "Delivery Address",
+      "logistics": "Logistics Update",
+      "trackingNo": "Tracking ID",
+      "preparing": "Packing in progress",
+      "productList": "Order Summary",
+      "subtotal": "Item Subtotal",
+      "shippingFee": "Shipping Fee",
+      "totalAmount": "Total Amount",
+      "cancelNote": "Cancellation Reason",
+      "close": "Close"
+    },
     "Orders": {
       "title": "My Orders",
       "emptyState": "You have no current orders.",

@@ -27,6 +27,21 @@
     "REFUNDED": "Endurgreitt"
   },
   "Account": {
+    "OrderView": {
+      "title": "Pöntunarupplýsingar",
+      "orderId": "Pöntunarnúmer",
+      "loading": "Hleður...",
+      "shippingAddress": "Heimilisfang",
+      "logistics": "Flutningsupplýsingar",
+      "trackingNo": "Rakningarnúmer",
+      "preparing": "Í undirbúningi",
+      "productList": "Vörulisti",
+      "subtotal": "Samtals vörur",
+      "shippingFee": "Sendingarkostnaður",
+      "totalAmount": "Heildarupphæð",
+      "cancelNote": "Ástæða afbókunar",
+      "close": "Loka"
+    },
     "Orders": {
       "title": "Mínar pantanir",
       "emptyState": "Þú ert ekki með neinar pantanir ennþá.",

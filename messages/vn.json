@@ -29,6 +29,21 @@
     "REFUNDED": "Đã hoàn tiền"
   },
   "Account": {
+    "OrderView": {
+      "title": "Chi tiết đơn hàng",
+      "orderId": "Mã đơn hàng",
+      "loading": "Đang tải...",
+      "shippingAddress": "Địa chỉ nhận hàng",
+      "logistics": "Thông tin vận chuyển",
+      "trackingNo": "Mã vận đơn",
+      "preparing": "Đang chuẩn bị hàng",
+      "productList": "Danh sách sản phẩm",
+      "subtotal": "Tổng tiền hàng",
+      "shippingFee": "Phí vận chuyển",
+      "totalAmount": "Tổng thanh toán",
+      "cancelNote": "Lý do hủy",
+      "close": "Đóng"
+    },
     "Orders": {
       "title": "Đơn hàng của tôi",
       "emptyState": "Bạn chưa có đơn hàng nào.",

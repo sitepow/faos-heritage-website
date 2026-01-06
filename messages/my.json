@@ -29,6 +29,21 @@
     "REFUNDED": "Dibayar Balik"
   },
   "Account": {
+    "OrderView": {
+      "title": "Butiran Pesanan",
+      "orderId": "ID Pesanan",
+      "loading": "Memuatkan...",
+      "shippingAddress": "Alamat Penghantaran",
+      "logistics": "Maklumat Logistik",
+      "trackingNo": "No. Penjejakan",
+      "preparing": "Sedang disediakan",
+      "productList": "Ringkasan Produk",
+      "subtotal": "Jumlah Kecil Produk",
+      "shippingFee": "Kos Penghantaran",
+      "totalAmount": "Jumlah Pesanan",
+      "cancelNote": "Sebab Pembatalan",
+      "close": "Tutup"
+    },
     "Orders": {
       "title": "Pesanan Saya",
       "emptyState": "Anda chưa mempunyai sebarang pesanan.",

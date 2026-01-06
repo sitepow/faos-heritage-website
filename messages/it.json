@@ -29,6 +29,21 @@
     "REFUNDED": "Rimborsato"
   },
   "Account": {
+    "OrderView": {
+      "title": "Dettagli Ordine",
+      "orderId": "ID Ordine",
+      "loading": "Caricamento...",
+      "shippingAddress": "Indirizzo di Spedizione",
+      "logistics": "Informazioni Logistiche",
+      "trackingNo": "Codice Tracking",
+      "preparing": "In preparazione",
+      "productList": "Riepilogo Prodotti",
+      "subtotal": "Totale Prodotti",
+      "shippingFee": "Spese di Spedizione",
+      "totalAmount": "Totale Ordine",
+      "cancelNote": "Motivo dell'annullamento",
+      "close": "Chiudi"
+    },
     "Orders": {
       "title": "I miei ordini",
       "emptyState": "Non hai ancora effettuato ordini.",

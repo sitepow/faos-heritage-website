@@ -27,6 +27,21 @@
     "REFUNDED": "已退款"
   },
   "Account": {
+    "OrderView": {
+      "title": "订单详情",
+      "orderId": "订单号",
+      "loading": "加载中...",
+      "shippingAddress": "收货地址",
+      "logistics": "物流信息",
+      "trackingNo": "快递单号",
+      "preparing": "准备发货中",
+      "productList": "商品清单",
+      "subtotal": "商品总额",
+      "shippingFee": "运费",
+      "totalAmount": "订单总计",
+      "cancelNote": "取消原因",
+      "close": "关闭"
+    },
     "Orders": {
       "title": "我的订单",
       "emptyState": "您目前还没有订单。",
