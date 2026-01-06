@@ -17,7 +17,13 @@
     "contactText": "Vui lòng giữ mã đơn hàng này để kiểm tra trạng thái sau này hoặc liên hệ bộ phận hỗ trợ."
   },
   "Common": {
-    "Breadcrumb": { "home": "Trang chủ", "products": "Tất cả sản phẩm" }
+    "Breadcrumb": { "home": "Trang chủ", "products": "Tất cả sản phẩm" },
+    "ImageDropzone": {
+      "active": "Thả ảnh vào đây...",
+      "idle": "Kéo và thả ảnh vào đây",
+      "hint": "Hoặc nhấp để chọn tệp (hệ thống sẽ tự động thay đổi kích thước để tối ưu hiệu suất)",
+      "limit": "Hỗ trợ tải lên tệp tối đa {size}"
+    }
   },
   "OrderStatus": {
     "PENDING": "Chờ thanh toán",

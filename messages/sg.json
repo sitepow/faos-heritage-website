@@ -20,6 +20,12 @@
     "Breadcrumb": {
       "home": "Home",
       "products": "All Products"
+    },
+    "ImageDropzone": {
+      "active": "Drop your image here...",
+      "idle": "Drag and drop images here",
+      "hint": "Or click to browse files (images will be optimised for faster loading)",
+      "limit": "Maximum file size: {size}"
     }
   },
   "OrderStatus": {

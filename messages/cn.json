@@ -16,7 +16,15 @@
     "referenceText": "该订单的参考编号为",
     "contactText": "请保留此订单号，以便日后查询状态或联系客服。"
   },
-  "Common": { "Breadcrumb": { "home": "首页", "products": "所有产品" } },
+  "Common": {
+    "Breadcrumb": { "home": "首页", "products": "所有产品" },
+    "ImageDropzone": {
+      "active": "将图片拖到此处...",
+      "idle": "将图片拖放到此处",
+      "hint": "或点击选择文件（系统将自动调整大小以优化性能）",
+      "limit": "支持最大 {size} 的文件上传"
+    }
+  },
   "OrderStatus": {
     "PENDING": "等待付款",
     "PAID": "已付款",

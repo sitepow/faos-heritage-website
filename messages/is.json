@@ -16,7 +16,15 @@
     "referenceText": "Þessi pöntun er með eftirfarandi tilvísunarnúmer",
     "contactText": "Vinsamlegast geymdu þetta pöntunarnúmer til að athuga stöðu síðar eða til að hafa samband við þjónustuver."
   },
-  "Common": { "Breadcrumb": { "home": "Heim", "products": "Allar vörur" } },
+  "Common": {
+    "Breadcrumb": { "home": "Heim", "products": "Allar vörur" },
+    "ImageDropzone": {
+      "active": "Slepptu myndinni hér...",
+      "idle": "Dragðu og slepptu myndinni hér",
+      "hint": "Eða smelltu til að velja skrá (kerfið mun sjálfkrafa minnka skrána fyrir betri afköst)",
+      "limit": "Styður hleðslu á skrám allt að {size}"
+    }
+  },
   "OrderStatus": {
     "PENDING": "Bíður greiðslu",
     "PAID": "Greitt",

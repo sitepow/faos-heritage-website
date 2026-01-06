@@ -4,6 +4,7 @@
 
 import { Button } from '@heroui/react'
 import { ImageIcon, XIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import prettyBytes from 'pretty-bytes'
 import { useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
@@ -31,6 +32,7 @@ export const ImageDropzone = ({
   multiple = false,
   onFilesChange,
 }: ImageDropzoneProps) => {
+  const t = useTranslations('Common.ImageDropzone')
   const [files, setFiles] = useState<ImageWithPreview[]>([])
 
   const notifyChange = useCallback(
@@ -47,7 +49,6 @@ export const ImageDropzone = ({
 
       if (multiple) {
         const merged = [...files, ...newFiles]
-
         notifyChange(merged)
       } else {
         notifyChange(newFiles)
@@ -67,7 +68,6 @@ export const ImageDropzone = ({
   const removeFile = (fileToRemove: ImageWithPreview) => {
     URL.revokeObjectURL(fileToRemove.preview)
     const updated = files.filter((file) => file !== fileToRemove)
-
     notifyChange(updated)
   }
 
@@ -134,24 +134,23 @@ export const ImageDropzone = ({
           </div>
 
           {isDragActive ? (
-            <p className='text-primary'>Place the image here....</p>
+            <p className='text-primary'>{t('active')}</p>
           ) : (
-            <div className='flex flex-col'>
-              <p>Drag and drop the image here.</p>
+            <div className='flex flex-col gap-1'>
+              <p className='font-medium'>{t('idle')}</p>
 
-              <div className='text-default-500 mx-auto flex gap-1 text-sm'>
+              <div className='text-default-500 mx-auto flex flex-wrap justify-center gap-1 text-sm'>
                 {ACCEPT_IMAGE_TYPES.map((type) => (
-                  <p key={type}>{type}</p>
+                  <span key={type} className='uppercase'>
+                    {type.replace('.', '')}
+                  </span>
                 ))}
               </div>
 
-              <p className='text-default-500 text-sm'>
-                Or click to select a file (the system will automatically resize
-                the file for better performance).
-              </p>
+              <p className='text-default-500 text-sm'>{t('hint')}</p>
 
-              <p className='text-primary text-sm'>
-                Supports file uploads up to 50 MB
+              <p className='text-primary text-sm font-semibold'>
+                {t('limit', { size: '50 MB' })}
               </p>
             </div>
           )}

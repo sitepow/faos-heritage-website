@@ -17,7 +17,13 @@
     "contactText": "Ti preghiamo di conservare questo numero d'ordine per controlli futuri o per contattare l'assistenza."
   },
   "Common": {
-    "Breadcrumb": { "home": "Home", "products": "Tutti i prodotti" }
+    "Breadcrumb": { "home": "Home", "products": "Tutti i prodotti" },
+    "ImageDropzone": {
+      "active": "Rilascia l'immagine qui...",
+      "idle": "Trascina e rilascia l'immagine qui",
+      "hint": "O clicca per selezionare un file (il sistema lo ridimensionerà per prestazioni migliori)",
+      "limit": "Supporta il caricamento di file fino a {size}"
+    }
   },
   "OrderStatus": {
     "PENDING": "In attesa di pagamento",

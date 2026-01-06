@@ -17,7 +17,13 @@
     "contactText": "Sila simpan nombor pesanan ini untuk semakan status kemudian atau untuk menghubungi khidmat pelanggan."
   },
   "Common": {
-    "Breadcrumb": { "home": "Laman Utama", "products": "Semua Produk" }
+    "Breadcrumb": { "home": "Laman Utama", "products": "Semua Produk" },
+    "ImageDropzone": {
+      "active": "Letakkan imej di sini...",
+      "idle": "Seret dan lepas imej di sini",
+      "hint": "Atau klik untuk pilih fail (sistem akan saiz semula secara automatik untuk prestasi lebih baik)",
+      "limit": "Menyokong muat naik fail sehingga {size}"
+    }
   },
   "OrderStatus": {
     "PENDING": "Menunggu Pembayaran",

@@ -16,7 +16,15 @@
     "referenceText": "Pesanan ini memiliki nomor referensi berikut",
     "contactText": "Harap simpan nomor pesanan ini untuk pengecekan status nanti atau untuk menghubungi layanan pelanggan."
   },
-  "Common": { "Breadcrumb": { "home": "Beranda", "products": "Semua Produk" } },
+  "Common": {
+    "Breadcrumb": { "home": "Beranda", "products": "Semua Produk" },
+    "ImageDropzone": {
+      "active": "Letakkan gambar di sini...",
+      "idle": "Tarik dan lepas gambar di sini",
+      "hint": "Atau klik untuk memilih file (sistem akan mengubah ukuran secara otomatis untuk performa lebih baik)",
+      "limit": "Mendukung unggahan file hingga {size}"
+    }
+  },
   "OrderStatus": {
     "PENDING": "Menunggu Pembayaran",
     "PAID": "Sudah Dibayar",

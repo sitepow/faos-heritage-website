@@ -16,7 +16,15 @@
     "referenceText": "Deze bestelling heeft het volgende referentienummer",
     "contactText": "Bewaar dit ordernummer voor latere statuscontroles of om contact op te nemen met de klantenservice."
   },
-  "Common": { "Breadcrumb": { "home": "Home", "products": "Alle Producten" } },
+  "Common": {
+    "Breadcrumb": { "home": "Home", "products": "Alle Producten" },
+    "ImageDropzone": {
+      "active": "Plaats de afbeelding hier...",
+      "idle": "Sleep afbeeldingen hiernaartoe",
+      "hint": "Of klik om een bestand te selecteren (systeem past grootte aan voor betere prestaties)",
+      "limit": "Ondersteunt uploads tot {size}"
+    }
+  },
   "OrderStatus": {
     "PENDING": "Wacht op betaling",
     "PAID": "Betaald",
