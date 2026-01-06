@@ -18,12 +18,51 @@
   },
   "Common": { "Breadcrumb": { "home": "首页", "products": "所有产品" } },
   "Account": {
+    "Address": {
+      "manageTitle": "管理我的地址",
+      "addButton": "添加收货地址",
+      "noAddressAlert": "您还没有收货地址。请在继续下单前添加您的地址。",
+      "noDefaultAlert": "请在继续下单前选择默认收货地址。",
+      "defaultTag": "默认",
+      "editAddress": "编辑地址",
+      "removeAddress": "删除地址"
+    },
+    "AddressForm": {
+      "addTitle": "添加收货地址",
+      "editTitle": "编辑收货地址",
+      "loading": "加载中...",
+      "alertDescription": "请确保您的地址正确，以避免潜在的配送问题。",
+      "sections": { "status": "地址状态", "basic": "基本信息" },
+      "fields": {
+        "enableAddress": "启用此地址",
+        "fullName": "姓名",
+        "phone": "电话号码",
+        "street": "详细地址（街道、门牌号）",
+        "subDistrict": "街道/乡镇",
+        "district": "区/县",
+        "province": "省/市",
+        "postalCode": "邮政编码",
+        "country": "国家"
+      },
+      "buttons": { "cancel": "取消", "save": "保存", "saving": "保存中..." },
+      "errors": {
+        "name": "请输入姓名",
+        "phone": "请输入电话号码",
+        "address": "请输入详细地址",
+        "subDistrict": "请输入街道",
+        "district": "请输入区县",
+        "province": "请输入省市",
+        "postalCode": "请输入邮政编码",
+        "country": "请选择国家"
+      }
+    },
     "welcome": "您的账户 {name}",
     "tabs": {
       "manage": "管理我的账户",
       "orders": "我的订单",
       "favorites": "我的收藏",
       "editProfile": "编辑个人信息",
+      "editAddress": "编辑收货地址",
       "address": "管理我的地址"
     },
     "personalInfo": "个人信息",

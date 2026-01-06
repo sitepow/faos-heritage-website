@@ -17,6 +17,7 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useSession } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
@@ -44,6 +45,9 @@ const DEFAULT_VALUES: AddressInput = {
 }
 
 export const AddressForm = () => {
+  const t = useTranslations('Account.AddressForm')
+  const ct = useTranslations('Country')
+
   const { addressId, isAddressOpen, onOpenAddressChange, setState } =
     useAddressStore()
   const queryClient = useQueryClient()
@@ -122,9 +126,7 @@ export const AddressForm = () => {
 
   const isPending =
     isPendingCreateAddress || isLoadingAddress || isPendingUpdateAddress
-  const headerLable = addressId
-    ? 'Edit Shipping Address'
-    : 'Add Shipping Address'
+  const headerLabel = addressId ? t('editTitle') : t('addTitle')
 
   const onSubmit = async (data: AddressInput) => {
     const isUpdate = !!addressId
@@ -155,38 +157,40 @@ export const AddressForm = () => {
       onOpenChange={onOpenAddressChange}
     >
       <ModalContent>
-        <ModalHeader>{headerLable}</ModalHeader>
-        {isPending && <Spinner label='Loading...' />}
+        <ModalHeader>{headerLabel}</ModalHeader>
+        {isPending && <Spinner label={t('loading')} />}
 
         {!isPending && (
           <ModalBody>
             <Alert
               color='warning'
-              description='Please ensure your address is correct to avoid potential delivery issues.'
+              description={t('alertDescription')}
               variant='bordered'
             />
 
-            <SubHeading title='Address status' />
+            <SubHeading title={t('sections.status')} />
             <Controller
               control={control}
               name='isDefault'
               render={({ field: { value, onChange, ...field } }) => (
                 <Switch {...field} isSelected={value} onValueChange={onChange}>
-                  Enable this address
+                  {t('fields.enableAddress')}
                 </Switch>
               )}
             />
 
-            <SubHeading title='Basic information' />
+            <SubHeading title={t('sections.basic')} />
             <Controller
               control={control}
               name='name'
               render={({ field }) => (
                 <Input
                   {...field}
-                  errorMessage={errors.name?.message}
+                  errorMessage={
+                    errors.name?.message ? t('errors.name') : undefined
+                  }
                   isInvalid={!!errors.name}
-                  label='Full Name'
+                  label={t('fields.fullName')}
                   variant='bordered'
                 />
               )}
@@ -198,9 +202,11 @@ export const AddressForm = () => {
               render={({ field }) => (
                 <Input
                   {...field}
-                  errorMessage={errors.phone?.message}
+                  errorMessage={
+                    errors.phone?.message ? t('errors.phone') : undefined
+                  }
                   isInvalid={!!errors.phone}
-                  label='Phone Number'
+                  label={t('fields.phone')}
                   variant='bordered'
                 />
               )}
@@ -212,9 +218,11 @@ export const AddressForm = () => {
               render={({ field }) => (
                 <Input
                   {...field}
-                  errorMessage={errors.address?.message}
+                  errorMessage={
+                    errors.address?.message ? t('errors.address') : undefined
+                  }
                   isInvalid={!!errors.address}
-                  label='Street Address'
+                  label={t('fields.street')}
                   variant='bordered'
                 />
               )}
@@ -226,9 +234,13 @@ export const AddressForm = () => {
               render={({ field: { value, ...field } }) => (
                 <Input
                   {...field}
-                  errorMessage={errors.subDistrict?.message}
+                  errorMessage={
+                    errors.subDistrict?.message
+                      ? t('errors.subDistrict')
+                      : undefined
+                  }
                   isInvalid={!!errors.subDistrict}
-                  label='Subdistrict'
+                  label={t('fields.subDistrict')}
                   value={value!}
                   variant='bordered'
                 />
@@ -241,9 +253,11 @@ export const AddressForm = () => {
               render={({ field }) => (
                 <Input
                   {...field}
-                  errorMessage={errors.district?.message}
+                  errorMessage={
+                    errors.district?.message ? t('errors.district') : undefined
+                  }
                   isInvalid={!!errors.district}
-                  label='District'
+                  label={t('fields.district')}
                   variant='bordered'
                 />
               )}
@@ -255,9 +269,11 @@ export const AddressForm = () => {
               render={({ field }) => (
                 <Input
                   {...field}
-                  errorMessage={errors.province?.message}
+                  errorMessage={
+                    errors.province?.message ? t('errors.province') : undefined
+                  }
                   isInvalid={!!errors.province}
-                  label='Province / State'
+                  label={t('fields.province')}
                   variant='bordered'
                 />
               )}
@@ -269,9 +285,13 @@ export const AddressForm = () => {
               render={({ field }) => (
                 <Input
                   {...field}
-                  errorMessage={errors.postalCode?.message}
+                  errorMessage={
+                    errors.postalCode?.message
+                      ? t('errors.postalCode')
+                      : undefined
+                  }
                   isInvalid={!!errors.postalCode}
-                  label='Postal Code'
+                  label={t('fields.postalCode')}
                   variant='bordered'
                 />
               )}
@@ -282,23 +302,24 @@ export const AddressForm = () => {
               name='countryCode'
               render={({ field: { value, onChange } }) => (
                 <Select
-                  label='Country'
+                  label={t('fields.country')}
                   selectedKeys={value ? [value] : []}
                   variant='bordered'
-                  errorMessage={errors.countryCode?.message}
+                  errorMessage={
+                    errors.countryCode?.message
+                      ? t('errors.country')
+                      : undefined
+                  }
                   isInvalid={!!errors.countryCode}
                   onSelectionChange={(keys) => {
                     const code = Array.from(keys)[0] as string
                     const country = COUNTRIES.find((c) => c.code === code)
 
                     onChange(code)
-
                     setValue('country', country?.name ?? '', {
                       shouldDirty: true,
                     })
-                    setValue('countryCode', code, {
-                      shouldDirty: true,
-                    })
+                    setValue('countryCode', code, { shouldDirty: true })
                   }}
                 >
                   {COUNTRIES.map((country) => (
@@ -306,7 +327,7 @@ export const AddressForm = () => {
                       key={country.code}
                       startContent={<CountryFlag countryCode={country.code} />}
                     >
-                      {country.name}
+                      {ct(country.code)}
                     </SelectItem>
                   ))}
                 </Select>
@@ -317,7 +338,7 @@ export const AddressForm = () => {
 
         <ModalFooter>
           <Button isDisabled={isPending} variant='faded' onPress={onClose}>
-            Cancel
+            {t('buttons.cancel')}
           </Button>
           <Button
             className='text-secondary'
@@ -325,7 +346,7 @@ export const AddressForm = () => {
             isDisabled={isPending || !isDirty}
             onClick={handleSubmit(onSubmit)}
           >
-            {isPending ? 'Saving...' : 'Save'}
+            {isPending ? t('buttons.saving') : t('buttons.save')}
           </Button>
         </ModalFooter>
       </ModalContent>

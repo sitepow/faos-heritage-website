@@ -23,12 +23,55 @@
     }
   },
   "Account": {
+    "Address": {
+      "manageTitle": "住所の管理",
+      "addButton": "配送先住所を追加",
+      "noAddressAlert": "配送先住所が登録されていません。注文を続ける前に住所を追加してください。",
+      "noDefaultAlert": "注文を続ける前に、デフォルトの配送先住所を選択してください。",
+      "defaultTag": "デフォルト",
+      "editAddress": "住所を編集",
+      "removeAddress": "住所を削除"
+    },
+    "AddressForm": {
+      "addTitle": "配送先住所を追加",
+      "editTitle": "配送先住所を編集",
+      "loading": "読み込み中...",
+      "alertDescription": "配送トラブルを避けるため、住所が正しいことを確認してください。",
+      "sections": { "status": "住所のステータス", "basic": "基本情報" },
+      "fields": {
+        "enableAddress": "この住所を有効にする",
+        "fullName": "氏名",
+        "phone": "電話番号",
+        "street": "住所（番地・マンション名）",
+        "subDistrict": "市区町村（町村）",
+        "district": "市区町村（区・市）",
+        "province": "都道府県",
+        "postalCode": "郵便番号",
+        "country": "国"
+      },
+      "buttons": {
+        "cancel": "キャンセル",
+        "save": "保存",
+        "saving": "保存中..."
+      },
+      "errors": {
+        "name": "名前を入力してください",
+        "phone": "電話番号を入力してください",
+        "address": "住所を入力してください",
+        "subDistrict": "町村を入力してください",
+        "district": "区市を入力してください",
+        "province": "都道府県を入力してください",
+        "postalCode": "郵便番号を入力してください",
+        "country": "国を選択してください"
+      }
+    },
     "welcome": "{name} 様のアカウント",
     "tabs": {
       "manage": "アカウント管理",
       "orders": "注文履歴",
       "favorites": "お気に入り",
       "editProfile": "個人情報の編集",
+      "editAddress": "配送先住所を編集",
       "address": "住所の管理"
     },
     "personalInfo": "個人情報",

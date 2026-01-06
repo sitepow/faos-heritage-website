@@ -23,12 +23,51 @@
     }
   },
   "Account": {
+    "Address": {
+      "manageTitle": "Manage my address",
+      "addButton": "Add shipping address",
+      "noAddressAlert": "You do not yet have a shipping address. Please add your address before proceeding with your order.",
+      "noDefaultAlert": "Please select a default shipping address before proceeding with your order.",
+      "defaultTag": "Default",
+      "editAddress": "Edit Address",
+      "removeAddress": "Remove Address"
+    },
+    "AddressForm": {
+      "addTitle": "Add Shipping Address",
+      "editTitle": "Edit Shipping Address",
+      "loading": "Loading...",
+      "alertDescription": "Please ensure your address is correct to avoid potential delivery issues.",
+      "sections": { "status": "Address Status", "basic": "Basic Information" },
+      "fields": {
+        "enableAddress": "Set as active address",
+        "fullName": "Full Name",
+        "phone": "Mobile Number",
+        "street": "Street Address (Blk/Unit No.)",
+        "subDistrict": "Area / Estate",
+        "district": "Town",
+        "province": "Region",
+        "postalCode": "Postal Code",
+        "country": "Country"
+      },
+      "buttons": { "cancel": "Cancel", "save": "Save", "saving": "Saving..." },
+      "errors": {
+        "name": "Name is required",
+        "phone": "Phone number is required",
+        "address": "Street address is required",
+        "subDistrict": "Area is required",
+        "district": "Town is required",
+        "province": "Region is required",
+        "postalCode": "Postal code is required",
+        "country": "Country is required"
+      }
+    },
     "welcome": "Your account {name}",
     "tabs": {
       "manage": "Manage my account",
       "orders": "My Orders",
       "favorites": "Favorites",
       "editProfile": "Edit personal information",
+      "editAddress": "Edit shipping address",
       "address": "Manage my address"
     },
     "personalInfo": "Personal Information",

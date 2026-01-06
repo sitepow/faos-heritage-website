@@ -18,12 +18,58 @@
   },
   "Common": { "Breadcrumb": { "home": "Heim", "products": "Allar vörur" } },
   "Account": {
+    "Address": {
+      "manageTitle": "Sýsla með heimilisföng",
+      "addButton": "Bæta við heimilisfangi",
+      "noAddressAlert": "Þú ert ekki með neitt heimilisfang skráð. Vinsamlegast bættu við heimilisfangi áður en þú pantaðir.",
+      "noDefaultAlert": "Vinsamlegast veldu sjálfgefið heimilisfang áður en þú heldur áfram með pöntunina.",
+      "defaultTag": "Sjálfgefið",
+      "editAddress": "Breyta heimilisfangi",
+      "removeAddress": "Eyða heimilisfangi"
+    },
+    "AddressForm": {
+      "addTitle": "Bæta við heimilisfangi",
+      "editTitle": "Breyta heimilisfangi",
+      "loading": "Hleður...",
+      "alertDescription": "Vinsamlegast tryggðu að heimilisfangið sé rétt til að forðast afhendingarvanda.",
+      "sections": {
+        "status": "Staða heimilisfangs",
+        "basic": "Grunnupplýsingar"
+      },
+      "fields": {
+        "enableAddress": "Virkja þetta heimilisfang",
+        "fullName": "Fullt nafn",
+        "phone": "Símanúmer",
+        "street": "Heimilisfang (Gata og númer)",
+        "subDistrict": "Hverfi",
+        "district": "Sveitarfélag",
+        "province": "Fylki / Hérað",
+        "postalCode": "Póstnúmer",
+        "country": "Land"
+      },
+      "buttons": {
+        "cancel": "Hætta við",
+        "save": "Vista",
+        "saving": "Vistar..."
+      },
+      "errors": {
+        "name": "Nafn er nauðsynlegt",
+        "phone": "Símanúmer er nauðsynlegt",
+        "address": "Heimilisfang er nauðsynlegt",
+        "subDistrict": "Hverfi er nauðsynlegt",
+        "district": "Sveitarfélag er nauðsynlegt",
+        "province": "Fylki er nauðsynlegt",
+        "postalCode": "Póstnúmer er nauðsynlegt",
+        "country": "Land er nauðsynlegt"
+      }
+    },
     "welcome": "Reikningurinn þinn {name}",
     "tabs": {
       "manage": "Sýsla með reikning",
       "orders": "Pantanir mínar",
       "favorites": "Uppáhalds",
       "editProfile": "Breyta persónuupplýsingum",
+      "editAddress": "Breyta heimilisfangi fyrir sendingu",
       "address": "Sýsla með heimilisföng"
     },
     "personalInfo": "Persónuupplýsingar",

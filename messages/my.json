@@ -20,12 +20,55 @@
     "Breadcrumb": { "home": "Laman Utama", "products": "Semua Produk" }
   },
   "Account": {
+    "Address": {
+      "manageTitle": "Urus alamat saya",
+      "addButton": "Tambah alamat penghantaran",
+      "noAddressAlert": "Anda belum mempunyai alamat penghantaran. Sila tambah alamat anda sebelum meneruskan pesanan.",
+      "noDefaultAlert": "Sila pilih alamat penghantaran lalai sebelum meneruskan pesanan.",
+      "defaultTag": "Lalai",
+      "editAddress": "Sunting Alamat",
+      "removeAddress": "Buang Alamat"
+    },
+    "AddressForm": {
+      "addTitle": "Tambah Alamat Penghantaran",
+      "editTitle": "Sunting Alamat Penghantaran",
+      "loading": "Memuatkan...",
+      "alertDescription": "Sila pastikan alamat anda betul untuk mengelakkan masalah penghantaran.",
+      "sections": { "status": "Status Alamat", "basic": "Maklumat Asas" },
+      "fields": {
+        "enableAddress": "Aktifkan alamat ini",
+        "fullName": "Nama Penuh",
+        "phone": "Nombor Telefon",
+        "street": "Alamat Jalan",
+        "subDistrict": "Sub-daerah / Mukim",
+        "district": "Daerah",
+        "province": "Negeri",
+        "postalCode": "Poskod",
+        "country": "Negara"
+      },
+      "buttons": {
+        "cancel": "Batal",
+        "save": "Simpan",
+        "saving": "Menyimpan..."
+      },
+      "errors": {
+        "name": "Sila masukkan nama",
+        "phone": "Sila masukkan no. telefon",
+        "address": "Sila masukkan alamat",
+        "subDistrict": "Sila masukkan mukim",
+        "district": "Sila masukkan daerah",
+        "province": "Sila masukkan negeri",
+        "postalCode": "Sila masukkan poskod",
+        "country": "Sila pilih negara"
+      }
+    },
     "welcome": "Akaun anda {name}",
     "tabs": {
       "manage": "Urus akaun saya",
       "orders": "Pesanan saya",
       "favorites": "Kegemaran",
       "editProfile": "Edit maklumat peribadi",
+      "editAddress": "Sunting alamat penghantaran",
       "address": "Urus alamat saya"
     },
     "personalInfo": "Maklumat Peribadi",

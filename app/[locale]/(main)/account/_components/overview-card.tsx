@@ -9,10 +9,14 @@ import { useTranslations } from 'next-intl'
 import { getUser } from '@/app/[locale]/(dashboard)/dashboard/user'
 
 interface OverviewCardProps {
-  onclick?: () => void
+  onclickProfile?: () => void
+  onclickAddress?: () => void
 }
 
-export const OverviewCard = ({ onclick }: OverviewCardProps) => {
+export const OverviewCard = ({
+  onclickProfile,
+  onclickAddress,
+}: OverviewCardProps) => {
   const t = useTranslations('Account')
   const { data: session } = useSession()
   const userId = session?.user?.id
@@ -72,13 +76,22 @@ export const OverviewCard = ({ onclick }: OverviewCardProps) => {
                 </span>
               </div>
 
-              <Button
-                className='text-secondary mt-5'
-                color='primary'
-                onPress={onclick}
-              >
-                {t('tabs.editProfile')}
-              </Button>
+              <div className='mt-5 flex flex-wrap'>
+                <Button
+                  color='primary'
+                  variant='bordered'
+                  onPress={onclickProfile}
+                >
+                  {t('tabs.editProfile')}
+                </Button>
+                <Button
+                  color='primary'
+                  variant='bordered'
+                  onPress={onclickAddress}
+                >
+                  {t('tabs.editAddress')}
+                </Button>
+              </div>
             </div>
           </div>
         )}

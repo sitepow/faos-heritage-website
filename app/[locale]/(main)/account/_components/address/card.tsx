@@ -22,6 +22,7 @@ import {
   TrashIcon,
 } from 'lucide-react'
 import { useSession } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 
 import { deleteAddress, getAddresses } from './action'
 import { AddressForm } from './form'
@@ -33,7 +34,7 @@ import { getFullAddress } from '@/utils/features'
 
 export const AddressCard = () => {
   const queryClient = useQueryClient()
-
+  const t = useTranslations('Account.Address')
   const { onOpenAddressChange, setState, addressId } = useAddressStore()
   const { isOpen: isDeleteOpen, onOpenChange: onOpenDeleteChange } =
     useDisclosure()
@@ -81,7 +82,7 @@ export const AddressCard = () => {
       />
       <Card fullWidth>
         <CardHeader className='flex-wrap items-center justify-between gap-2'>
-          <span>Manage my address</span>
+          <span>{t('manageTitle')}</span>
 
           <Button
             startContent={<PlusIcon />}
@@ -89,7 +90,7 @@ export const AddressCard = () => {
             variant='bordered'
             onClick={() => onOpenAddressChange()}
           >
-            Add shipping address
+            {t('addButton')}
           </Button>
         </CardHeader>
         <CardBody className='gap-5'>
@@ -102,7 +103,7 @@ export const AddressCard = () => {
           {!isLoadingAddresses && addresses?.length === 0 && (
             <Alert
               color='warning'
-              description='You do not yet have a shipping address. Please add your address before proceeding with your order.'
+              description={t('noAddressAlert')}
               variant='bordered'
             />
           )}
@@ -112,7 +113,7 @@ export const AddressCard = () => {
             !isHasDefaultAddress && (
               <Alert
                 color='warning'
-                description='Please select a default shipping address before proceeding with your order.'
+                description={t('noDefaultAlert')}
                 variant='bordered'
               />
             )}
@@ -120,14 +121,14 @@ export const AddressCard = () => {
           <div className='grid gap-2 sm:grid-cols-2'>
             {!isLoadingAddresses &&
               addresses?.map((address) => (
-                <div className='flex w-full flex-col'>
+                <div key={address.id} className='flex w-full flex-col'>
                   <div className='border-divider flex items-center justify-between gap-2 rounded-t-lg border p-2.5'>
                     <div className='flex flex-wrap items-center gap-2'>
                       <CountryFlag countryCode={address.countryCode} />
                       <span className='line-clamp-1'>{address?.name}</span>
                       {address?.isDefault && (
                         <Chip variant='bordered' color='primary'>
-                          Default
+                          {t('defaultTag')}
                         </Chip>
                       )}
                     </div>
@@ -139,7 +140,7 @@ export const AddressCard = () => {
                         </Button>
                       </DropdownTrigger>
                       <DropdownMenu
-                        aria-label='Manage orders'
+                        aria-label='Manage address'
                         className='min-w-[180px]'
                       >
                         <DropdownItem
@@ -150,7 +151,7 @@ export const AddressCard = () => {
                             onOpenAddressChange()
                           }}
                         >
-                          Edit Address
+                          {t('editAddress')}
                         </DropdownItem>
                         <DropdownItem
                           key='delete'
@@ -162,7 +163,7 @@ export const AddressCard = () => {
                             onOpenDeleteChange()
                           }}
                         >
-                          Remove Address
+                          {t('removeAddress')}
                         </DropdownItem>
                       </DropdownMenu>
                     </Dropdown>

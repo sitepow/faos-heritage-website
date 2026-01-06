@@ -18,12 +18,55 @@
   },
   "Common": { "Breadcrumb": { "home": "Beranda", "products": "Semua Produk" } },
   "Account": {
+    "Address": {
+      "manageTitle": "Kelola alamat saya",
+      "addButton": "Tambah alamat pengiriman",
+      "noAddressAlert": "Anda belum memiliki alamat pengiriman. Silakan tambahkan alamat Anda sebelum melanjutkan pesanan.",
+      "noDefaultAlert": "Silakan pilih alamat pengiriman default sebelum melanjutkan pesanan.",
+      "defaultTag": "Default",
+      "editAddress": "Ubah Alamat",
+      "removeAddress": "Hapus Alamat"
+    },
+    "AddressForm": {
+      "addTitle": "Tambah Alamat Pengiriman",
+      "editTitle": "Ubah Alamat Pengiriman",
+      "loading": "Memuat...",
+      "alertDescription": "Pastikan alamat Anda benar untuk menghindari masalah pengiriman.",
+      "sections": { "status": "Status Alamat", "basic": "Informasi Dasar" },
+      "fields": {
+        "enableAddress": "Aktifkan alamat ini",
+        "fullName": "Nama Lengkap",
+        "phone": "Nomor Telepon",
+        "street": "Alamat Jalan",
+        "subDistrict": "Kelurahan / Desa",
+        "district": "Kecamatan / Kota",
+        "province": "Provinsi",
+        "postalCode": "Kode Pos",
+        "country": "Negara"
+      },
+      "buttons": {
+        "cancel": "Batal",
+        "save": "Simpan",
+        "saving": "Menyimpan..."
+      },
+      "errors": {
+        "name": "Nama wajib diisi",
+        "phone": "Nomor telepon wajib diisi",
+        "address": "Alamat wajib diisi",
+        "subDistrict": "Kelurahan wajib diisi",
+        "district": "Kecamatan wajib diisi",
+        "province": "Provinsi wajib diisi",
+        "postalCode": "Kode pos wajib diisi",
+        "country": "Negara wajib dipilih"
+      }
+    },
     "welcome": "Akun Anda {name}",
     "tabs": {
       "manage": "Kelola akun saya",
       "orders": "Pesanan saya",
       "favorites": "Favorit",
       "editProfile": "Ubah informasi pribadi",
+      "editAddress": "Ubah alamat pengiriman",
       "address": "Kelola alamat saya"
     },
     "personalInfo": "Informasi Pribadi",

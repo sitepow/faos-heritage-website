@@ -20,12 +20,54 @@
     "Breadcrumb": { "home": "Trang chủ", "products": "Tất cả sản phẩm" }
   },
   "Account": {
+    "Address": {
+      "manageTitle": "Quản lý địa chỉ của tôi",
+      "addButton": "Thêm địa chỉ giao hàng",
+      "noAddressAlert": "Bạn chưa có địa chỉ giao hàng. Vui lòng thêm địa chỉ trước khi tiếp tục đặt hàng.",
+      "noDefaultAlert": "Vui lòng chọn địa chỉ giao hàng mặc định trước khi tiếp tục đặt hàng.",
+      "defaultTag": "Mặc định",
+      "editAddress": "Chỉnh sửa địa chỉ",
+      "removeAddress": "Xóa địa chỉ"
+    },
+    "AddressForm": {
+      "addTitle": "Thêm địa chỉ giao hàng",
+      "editTitle": "Chỉnh sửa địa chỉ giao hàng",
+      "loading": "Đang tải...",
+      "alertDescription": "Vui lòng đảm bảo địa chỉ của bạn chính xác để tránh các vấn đề giao hàng.",
+      "sections": {
+        "status": "Trạng thái địa chỉ",
+        "basic": "Thông tin cơ bản"
+      },
+      "fields": {
+        "enableAddress": "Sử dụng địa chỉ này",
+        "fullName": "Họ và tên",
+        "phone": "Số điện thoại",
+        "street": "Địa chỉ (Số nhà, Đường)",
+        "subDistrict": "Phường / Xã",
+        "district": "Quận / Huyện",
+        "province": "Tỉnh / Thành phố",
+        "postalCode": "Mã bưu điện",
+        "country": "Quốc gia"
+      },
+      "buttons": { "cancel": "Hủy", "save": "Lưu", "saving": "Đang lưu..." },
+      "errors": {
+        "name": "Vui lòng nhập tên",
+        "phone": "Vui lòng nhập số điện thoại",
+        "address": "Vui lòng nhập địa chỉ",
+        "subDistrict": "Vui lòng nhập phường/xã",
+        "district": "Vui lòng nhập quận/huyện",
+        "province": "Vui lòng nhập tỉnh/thành",
+        "postalCode": "Vui lòng nhập mã bưu điện",
+        "country": "Vui lòng chọn quốc gia"
+      }
+    },
     "welcome": "Tài khoản của {name}",
     "tabs": {
       "manage": "Quản lý tài khoản",
       "orders": "Đơn hàng của tôi",
       "favorites": "Danh sách yêu thích",
       "editProfile": "Chỉnh sửa thông tin cá nhân",
+      "editAddress": "Chỉnh sửa địa chỉ giao hàng",
       "address": "Quản lý địa chỉ"
     },
     "personalInfo": "Thông tin cá nhân",

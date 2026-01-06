@@ -79,7 +79,8 @@ export const AccountClient = () => {
             >
               <Tab key={ACCOUNT_TAB.ACCOUNT} title={t('tabs.manage')}>
                 <OverviewCard
-                  onclick={() => handleTabChange(ACCOUNT_TAB.PROFILE)}
+                  onclickProfile={() => handleTabChange(ACCOUNT_TAB.PROFILE)}
+                  onclickAddress={() => handleTabChange(ACCOUNT_TAB.ADDRESS)}
                 />
               </Tab>
               <Tab key={ACCOUNT_TAB.ORDER} title={t('tabs.orders')}>

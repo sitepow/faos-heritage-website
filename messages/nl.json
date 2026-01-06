@@ -18,12 +18,55 @@
   },
   "Common": { "Breadcrumb": { "home": "Home", "products": "Alle Producten" } },
   "Account": {
+    "Address": {
+      "manageTitle": "Mijn adressen beheren",
+      "addButton": "Verzendadres toevoegen",
+      "noAddressAlert": "U heeft nog geen verzendadres. Voeg een adres toe voordat u doorgaat met uw bestelling.",
+      "noDefaultAlert": "Selecteer een standaard verzendadres voordat u doorgaat met uw bestelling.",
+      "defaultTag": "Standaard",
+      "editAddress": "Adres bewerken",
+      "removeAddress": "Adres verwijderen"
+    },
+    "AddressForm": {
+      "addTitle": "Verzendadres toevoegen",
+      "editTitle": "Verzendadres bewerken",
+      "loading": "Laden...",
+      "alertDescription": "Zorg ervoor dat uw adres correct is om leveringsproblemen te voorkomen.",
+      "sections": { "status": "Adresstatus", "basic": "Basisinformatie" },
+      "fields": {
+        "enableAddress": "Schakel dit adres in",
+        "fullName": "Volledige naam",
+        "phone": "Telefoonnummer",
+        "street": "Adres (Straat en Huisnummer)",
+        "subDistrict": "Wijk / Buurt",
+        "district": "Gemeente",
+        "province": "Provincie",
+        "postalCode": "Postcode",
+        "country": "Land"
+      },
+      "buttons": {
+        "cancel": "Annuleren",
+        "save": "Opslaan",
+        "saving": "Opslaan..."
+      },
+      "errors": {
+        "name": "Naam is verplicht",
+        "phone": "Telefoonnummer is verplicht",
+        "address": "Adres is verplicht",
+        "subDistrict": "Wijk is verplicht",
+        "district": "Gemeente is verplicht",
+        "province": "Provincie is verplicht",
+        "postalCode": "Postcode is verplicht",
+        "country": "Land is verplicht"
+      }
+    },
     "welcome": "Jouw account {name}",
     "tabs": {
       "manage": "Mijn account beheren",
       "orders": "Mijn bestellingen",
       "favorites": "Favorieten",
       "editProfile": "Persoonlijke gegevens bewerken",
+      "editAddress": "Verzendadres bewerken",
       "address": "Adressen beheren"
     },
     "personalInfo": "Persoonlijke gegevens",

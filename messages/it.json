@@ -20,12 +20,58 @@
     "Breadcrumb": { "home": "Home", "products": "Tutti i prodotti" }
   },
   "Account": {
+    "Address": {
+      "manageTitle": "Gestisci i miei indirizzi",
+      "addButton": "Aggiungi indirizzo di spedizione",
+      "noAddressAlert": "Non hai ancora un indirizzo di spedizione. Aggiungi un indirizzo prima di procedere con l'ordine.",
+      "noDefaultAlert": "Seleziona un indirizzo di spedizione predefinito prima di procedere con l'ordine.",
+      "defaultTag": "Predefinito",
+      "editAddress": "Modifica indirizzo",
+      "removeAddress": "Rimuovi indirizzo"
+    },
+    "AddressForm": {
+      "addTitle": "Aggiungi Indirizzo",
+      "editTitle": "Modifica Indirizzo",
+      "loading": "Caricamento...",
+      "alertDescription": "Assicurati che l'indirizzo sia corretto per evitare problemi di consegna.",
+      "sections": {
+        "status": "Stato Indirizzo",
+        "basic": "Informazioni di Base"
+      },
+      "fields": {
+        "enableAddress": "Abilita questo indirizzo",
+        "fullName": "Nome Completo",
+        "phone": "Numero di Telefono",
+        "street": "Indirizzo (Via e Civico)",
+        "subDistrict": "Frazione / Località",
+        "district": "Comune",
+        "province": "Provincia / Stato",
+        "postalCode": "CAP",
+        "country": "Paese"
+      },
+      "buttons": {
+        "cancel": "Annulla",
+        "save": "Salva",
+        "saving": "Salvataggio..."
+      },
+      "errors": {
+        "name": "Nome richiesto",
+        "phone": "Telefono richiesto",
+        "address": "Indirizzo richiesto",
+        "subDistrict": "Località richiesta",
+        "district": "Comune richiesto",
+        "province": "Provincia richiesta",
+        "postalCode": "CAP richiesto",
+        "country": "Paese richiesto"
+      }
+    },
     "welcome": "Il tuo account {name}",
     "tabs": {
       "manage": "Gestisci il mio account",
       "orders": "I miei ordini",
       "favorites": "Preferiti",
       "editProfile": "Modifica informazioni personali",
+      "editAddress": "Modifica l'indirizzo di spedizione",
       "address": "Gestisci indirizzi"
     },
     "personalInfo": "Informazioni personali",
