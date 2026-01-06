@@ -17,11 +17,31 @@
     "contactText": "Vinsamlegast geymdu þetta pöntunarnúmer til að athuga stöðu síðar eða til að hafa samband við þjónustuver."
   },
   "Common": { "Breadcrumb": { "home": "Heim", "products": "Allar vörur" } },
+  "OrderStatus": {
+    "PENDING": "Bíður greiðslu",
+    "PAID": "Greitt",
+    "PROCESSING": "Í vinnslu",
+    "SHIPPED": "Sent",
+    "DELIVERED": "Afhent",
+    "CANCELLED": "Hætt við",
+    "REFUNDED": "Endurgreitt"
+  },
   "Account": {
     "Orders": {
       "title": "Mínar pantanir",
       "emptyState": "Þú ert ekki með neinar pantanir ennþá.",
-      "exploreLink": "Skoða allar vörur"
+      "exploreLink": "Skoða allar vörur.",
+      "paymentAlert": "Vinsamlegast ljúktu greiðslu innan 20 mínútna. Annars verður pöntunin þín afturkölluð sjálfvirkt.",
+      "orderNumber": "Pöntun númer",
+      "items": "hlutir",
+      "orderDate": "Dagsetning pöntunar",
+      "trackingNumber": "Rakningarnúmer",
+      "buttons": {
+        "details": "Pöntunarupplýsingar",
+        "cancel": "Hætta við pöntun",
+        "payNow": "Greiða núna",
+        "downloadReceipt": "Sækja kvittun"
+      }
     },
     "Address": {
       "manageTitle": "Sýsla með heimilisföng",

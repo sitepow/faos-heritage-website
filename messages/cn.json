@@ -17,11 +17,31 @@
     "contactText": "请保留此订单号，以便日后查询状态或联系客服。"
   },
   "Common": { "Breadcrumb": { "home": "首页", "products": "所有产品" } },
+  "OrderStatus": {
+    "PENDING": "等待付款",
+    "PAID": "已付款",
+    "PROCESSING": "处理中",
+    "SHIPPED": "已发货",
+    "DELIVERED": "已送达",
+    "CANCELLED": "已取消",
+    "REFUNDED": "已退款"
+  },
   "Account": {
     "Orders": {
       "title": "我的订单",
       "emptyState": "您目前还没有订单。",
-      "exploreLink": "浏览所有产品"
+      "exploreLink": "浏览所有产品",
+      "paymentAlert": "请在20分钟内完成付款，否则您的订单将被自动取消。",
+      "orderNumber": "订单号",
+      "items": "项",
+      "orderDate": "下单日期",
+      "trackingNumber": "运单号",
+      "buttons": {
+        "details": "订单详情",
+        "cancel": "取消订单",
+        "payNow": "立即付款",
+        "downloadReceipt": "下载收据"
+      }
     },
     "Address": {
       "manageTitle": "管理我的地址",

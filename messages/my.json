@@ -19,11 +19,31 @@
   "Common": {
     "Breadcrumb": { "home": "Laman Utama", "products": "Semua Produk" }
   },
+  "OrderStatus": {
+    "PENDING": "Menunggu Pembayaran",
+    "PAID": "Telah Dibayar",
+    "PROCESSING": "Sedang Diproses",
+    "SHIPPED": "Telah Dihantar",
+    "DELIVERED": "Telah Diterima",
+    "CANCELLED": "Dibatalkan",
+    "REFUNDED": "Dibayar Balik"
+  },
   "Account": {
     "Orders": {
       "title": "Pesanan Saya",
-      "emptyState": "Anda belum mempunyai sebarang pesanan.",
-      "exploreLink": "Teroka semua produk"
+      "emptyState": "Anda chưa mempunyai sebarang pesanan.",
+      "exploreLink": "Teroka semua produk.",
+      "paymentAlert": "Sila lengkapkan pembayaran dalam masa 20 minit. Jika tidak, pesanan anda akan dibatalkan secara automatik.",
+      "orderNumber": "No. Pesanan",
+      "items": "item",
+      "orderDate": "Tarikh pesanan",
+      "trackingNumber": "No. penjejakan",
+      "buttons": {
+        "details": "Butiran pesanan",
+        "cancel": "Batal pesanan",
+        "payNow": "Bayar sekarang",
+        "downloadReceipt": "Muat turun resit"
+      }
     },
     "Address": {
       "manageTitle": "Urus alamat saya",

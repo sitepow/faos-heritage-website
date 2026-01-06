@@ -19,11 +19,31 @@
   "Common": {
     "Breadcrumb": { "home": "Home", "products": "Tutti i prodotti" }
   },
+  "OrderStatus": {
+    "PENDING": "In attesa di pagamento",
+    "PAID": "Pagato",
+    "PROCESSING": "In lavorazione",
+    "SHIPPED": "Spedito",
+    "DELIVERED": "Consegnato",
+    "CANCELLED": "Annullato",
+    "REFUNDED": "Rimborsato"
+  },
   "Account": {
     "Orders": {
       "title": "I miei ordini",
       "emptyState": "Non hai ancora effettuato ordini.",
-      "exploreLink": "Esplora tutti i prodotti"
+      "exploreLink": "Esplora tutti i prodotti.",
+      "paymentAlert": "Si prega di completare il pagamento entro 20 minuti. In caso contrario, l'ordine verrà annullato automaticamente.",
+      "orderNumber": "Ordine n.",
+      "items": "articoli",
+      "orderDate": "Data ordine",
+      "trackingNumber": "Numero di tracciamento",
+      "buttons": {
+        "details": "Dettagli ordine",
+        "cancel": "Annulla ordine",
+        "payNow": "Paga ora",
+        "downloadReceipt": "Scarica ricevuta"
+      }
     },
     "Address": {
       "manageTitle": "Gestisci i miei indirizzi",

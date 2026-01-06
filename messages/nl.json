@@ -17,11 +17,31 @@
     "contactText": "Bewaar dit ordernummer voor latere statuscontroles of om contact op te nemen met de klantenservice."
   },
   "Common": { "Breadcrumb": { "home": "Home", "products": "Alle Producten" } },
+  "OrderStatus": {
+    "PENDING": "Wacht op betaling",
+    "PAID": "Betaald",
+    "PROCESSING": "In verwerking",
+    "SHIPPED": "Verzonden",
+    "DELIVERED": "Geleverd",
+    "CANCELLED": "Geannuleerd",
+    "REFUNDED": "Terugbetaald"
+  },
   "Account": {
     "Orders": {
       "title": "Mijn bestellingen",
       "emptyState": "Je hebt nog geen bestellingen.",
-      "exploreLink": "Bekijk alle producten"
+      "exploreLink": "Bekijk alle producten.",
+      "paymentAlert": "Voltooi de betaling binnen 20 minuten. Anders wordt uw bestelling automatisch geannuleerd.",
+      "orderNumber": "Bestelnummer",
+      "items": "items",
+      "orderDate": "Besteldatum",
+      "trackingNumber": "Trackingnummer",
+      "buttons": {
+        "details": "Bestelgegevens",
+        "cancel": "Bestelling annuleren",
+        "payNow": "Nu betalen",
+        "downloadReceipt": "Download bon"
+      }
     },
     "Address": {
       "manageTitle": "Mijn adressen beheren",

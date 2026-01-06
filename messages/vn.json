@@ -19,11 +19,31 @@
   "Common": {
     "Breadcrumb": { "home": "Trang chủ", "products": "Tất cả sản phẩm" }
   },
+  "OrderStatus": {
+    "PENDING": "Chờ thanh toán",
+    "PAID": "Đã thanh toán",
+    "PROCESSING": "Đang xử lý",
+    "SHIPPED": "Đã giao hàng",
+    "DELIVERED": "Đã nhận hàng",
+    "CANCELLED": "Đã hủy",
+    "REFUNDED": "Đã hoàn tiền"
+  },
   "Account": {
     "Orders": {
       "title": "Đơn hàng của tôi",
       "emptyState": "Bạn chưa có đơn hàng nào.",
-      "exploreLink": "Khám phá tất cả sản phẩm"
+      "exploreLink": "Khám phá tất cả sản phẩm.",
+      "paymentAlert": "Vui lòng hoàn tất thanh toán trong vòng 20 phút. Nếu không, đơn hàng sẽ bị hủy tự động.",
+      "orderNumber": "Mã đơn hàng",
+      "items": "mục",
+      "orderDate": "Ngày đặt hàng",
+      "trackingNumber": "Mã vận đơn",
+      "buttons": {
+        "details": "Chi tiết đơn hàng",
+        "cancel": "Hủy đơn hàng",
+        "payNow": "Thanh toán ngay",
+        "downloadReceipt": "Tải hóa đơn"
+      }
     },
     "Address": {
       "manageTitle": "Quản lý địa chỉ của tôi",

@@ -11,6 +11,7 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 
 import type { GetOrderResult } from '@/app/[locale]/(dashboard)/dashboard/order/action'
 
@@ -21,7 +22,6 @@ import { Stepper } from '@/components/common/stepper'
 // import { OmisePayment } from '@/components/features/omise/payment'
 import { NO_IMAGE } from '@/utils/constants'
 import { formatDate } from '@/utils/date'
-import { getOrderStatus } from '@/utils/features'
 import { formatCurrency, formatNumber } from '@/utils/number'
 
 interface OrderItemProps {
@@ -37,6 +37,9 @@ const DISABLE_RECEIPT_STATUSES: OrderStatus[] = [
 ]
 
 export const OrderItem = ({ order, hideButton }: OrderItemProps) => {
+  const t = useTranslations('Account.Orders')
+  const st = useTranslations('OrderStatus')
+
   const CURRENCY_OPTIONS = {
     currency: order?.currency,
     locale: order?.exchangeLocale!,
@@ -65,8 +68,7 @@ export const OrderItem = ({ order, hideButton }: OrderItemProps) => {
     <div className='flex flex-col gap-4'>
       {order?.status === OrderStatus.PENDING && (
         <Alert
-          description='Please complete your payment within 20 minutes. Otherwise, your order will be automatically canceled.
-'
+          description={t('paymentAlert')}
           color='warning'
           variant='faded'
         />
@@ -83,20 +85,21 @@ export const OrderItem = ({ order, hideButton }: OrderItemProps) => {
 
           <div className='flex flex-col'>
             <span>
-              Item number {order?.id} ({formatNumber(order?.items?.length)}{' '}
-              list) {formatCurrency(order?.total, CURRENCY_OPTIONS)}
+              {t('orderNumber')} {order?.id} (
+              {formatNumber(order?.items?.length)} {t('items')}){' '}
+              {formatCurrency(order?.total, CURRENCY_OPTIONS)}
             </span>
 
             <span className='text-default-500'>
-              Order date {formatDate(order.createdAt)} (
-              {getOrderStatus(order.status)}){' '}
+              {t('orderDate')} {formatDate(order.createdAt)} ({st(order.status)}
+              ){' '}
               {order.trackingNumber && (
                 <Link
                   className='underline'
                   href={order.trackingWebsite ?? ''}
                   target='_blank'
                 >
-                  Tracking number <span>{order.trackingNumber}</span>
+                  {t('trackingNumber')} <span>{order.trackingNumber}</span>
                 </Link>
               )}
             </span>
@@ -114,7 +117,7 @@ export const OrderItem = ({ order, hideButton }: OrderItemProps) => {
                 onOpenViewChange()
               }}
             >
-              Order details
+              {t('buttons.details')}
             </Button>
             {order?.status === OrderStatus.PENDING && (
               <Button
@@ -126,7 +129,7 @@ export const OrderItem = ({ order, hideButton }: OrderItemProps) => {
                   onOpenOrderCancelChange()
                 }}
               >
-                Cancel order
+                {t('buttons.cancel')}
               </Button>
             )}
             {order?.status === OrderStatus.PENDING && (
@@ -142,15 +145,8 @@ export const OrderItem = ({ order, hideButton }: OrderItemProps) => {
                   mutateCheckout()
                 }}
               >
-                Pay now
+                {t('buttons.payNow')}
               </Button>
-
-              // <OmisePayment
-              //   orderId={order.id}
-              //   amount={order.total}
-              //   currency='THB'
-              //   buttonText='Pay now'
-              // />
             )}
             {order?.status !== OrderStatus.PENDING && (
               <Button
@@ -159,7 +155,7 @@ export const OrderItem = ({ order, hideButton }: OrderItemProps) => {
                 isDisabled={isDisableReceipt}
                 startContent={<DownloadIcon className='shrink-0' />}
               >
-                Download receipt
+                {t('buttons.downloadReceipt')}
               </Button>
             )}
           </div>

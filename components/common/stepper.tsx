@@ -1,3 +1,5 @@
+'use client'
+
 import { OrderStatus } from '@prisma/client'
 import {
   CreditCardIcon,
@@ -6,12 +8,14 @@ import {
   PackageIcon,
   PackageCheckIcon,
 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import React from 'react'
 
 import type { ComponentProps } from 'react'
 
+import { useAppStore } from '@/app/store'
 import { formatDate } from '@/utils/date'
-import { ORDER_STEPS, getOrderStatus } from '@/utils/features'
+import { ORDER_STEPS } from '@/utils/features'
 import { cn } from '@/utils/style'
 
 interface StepperProps extends ComponentProps<'div'> {
@@ -31,10 +35,13 @@ export const Stepper = ({
   deliveredAt,
   ...props
 }: StepperProps) => {
+  const st = useTranslations('OrderStatus')
+  const { country } = useAppStore()
+
   const isCancelled = status === 'CANCELLED' || status === 'REFUNDED'
   const currentIndex = ORDER_STEPS.findIndex(([key]) => key === status)
 
-  const STEP_ICONS: Record<OrderStatus, React.ElementType> = {
+  const STEP_ICONS: Record<string, React.ElementType> = {
     PENDING: PackageOpenIcon,
     PAID: CreditCardIcon,
     PROCESSING: PackageIcon,
@@ -59,7 +66,7 @@ export const Stepper = ({
           </div>
 
           <p className='text-default-500 mt-3 text-center text-sm font-medium'>
-            {getOrderStatus(status)}
+            {st(status)}
           </p>
         </div>
       </div>
@@ -69,12 +76,12 @@ export const Stepper = ({
   return (
     <div className={cn('mx-auto w-full max-w-3xl', className)} {...props}>
       <div className='flex flex-col items-center justify-between md:flex-row'>
-        {ORDER_STEPS.map(([statusKey, label], index) => {
+        {ORDER_STEPS.map(([statusKey], index) => {
           const isCompleted = index < currentIndex
           const isCurrent = index === currentIndex
           const date = statusDates[statusKey]
 
-          const Icon = STEP_ICONS[statusKey as OrderStatus]
+          const Icon = STEP_ICONS[statusKey]
 
           return (
             <React.Fragment key={statusKey}>
@@ -95,14 +102,15 @@ export const Stepper = ({
                   )}
                 </div>
 
-                <p
+                <div
                   className={cn(
                     'mt-3 max-w-[120px] text-center text-sm font-medium',
                     !isCompleted && !isCurrent && 'text-default-500',
                   )}
                 >
-                  {label} {formatDate(date!)}
-                </p>
+                  <div>{st(statusKey)}</div>
+                  {date && <div>{formatDate(date, country?.locale)}</div>}
+                </div>
               </div>
 
               {index < ORDER_STEPS.length - 1 && (

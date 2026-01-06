@@ -22,11 +22,31 @@
       "products": "All Products"
     }
   },
+  "OrderStatus": {
+    "PENDING": "Awaiting Payment",
+    "PAID": "Payment Received",
+    "PROCESSING": "Processing",
+    "SHIPPED": "Dispatched",
+    "DELIVERED": "Delivered",
+    "CANCELLED": "Cancelled",
+    "REFUNDED": "Refunded"
+  },
   "Account": {
     "Orders": {
       "title": "My Orders",
-      "emptyState": "You do not have any orders yet.",
-      "exploreLink": "Explore all products."
+      "emptyState": "You have no current orders.",
+      "exploreLink": "Browse all products.",
+      "paymentAlert": "Please complete your payment within 20 minutes to avoid automatic cancellation of your order.",
+      "orderNumber": "Order No.",
+      "items": "items",
+      "orderDate": "Date of order",
+      "trackingNumber": "Tracking ID",
+      "buttons": {
+        "details": "View details",
+        "cancel": "Cancel order",
+        "payNow": "Pay now",
+        "downloadReceipt": "Download receipt"
+      }
     },
     "Address": {
       "manageTitle": "Manage my address",

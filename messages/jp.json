@@ -22,11 +22,31 @@
       "products": "全商品"
     }
   },
+  "OrderStatus": {
+    "PENDING": "支払い待ち",
+    "PAID": "支払い済み",
+    "PROCESSING": "処理中",
+    "SHIPPED": "発送済み",
+    "DELIVERED": "配達完了",
+    "CANCELLED": "キャンセル済み",
+    "REFUNDED": "返金済み"
+  },
   "Account": {
     "Orders": {
       "title": "注文履歴",
       "emptyState": "まだ注文履歴がありません。",
-      "exploreLink": "すべての商品を見る"
+      "exploreLink": "すべての商品を見る",
+      "paymentAlert": "20分以内にお支払いを完了してください。そうしないと、注文は自動的にキャンセルされます。",
+      "orderNumber": "注文番号",
+      "items": "アイテム",
+      "orderDate": "注文日",
+      "trackingNumber": "追跡番号",
+      "buttons": {
+        "details": "注文詳細",
+        "cancel": "注文キャンセル",
+        "payNow": "今すぐ支払う",
+        "downloadReceipt": "領収書"
+      }
     },
     "Address": {
       "manageTitle": "住所の管理",
