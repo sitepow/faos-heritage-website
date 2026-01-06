@@ -20,6 +20,11 @@
     "Breadcrumb": { "home": "Trang chủ", "products": "Tất cả sản phẩm" }
   },
   "Account": {
+    "Orders": {
+      "title": "Đơn hàng của tôi",
+      "emptyState": "Bạn chưa có đơn hàng nào.",
+      "exploreLink": "Khám phá tất cả sản phẩm"
+    },
     "Address": {
       "manageTitle": "Quản lý địa chỉ của tôi",
       "addButton": "Thêm địa chỉ giao hàng",

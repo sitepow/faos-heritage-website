@@ -18,6 +18,11 @@
   },
   "Common": { "Breadcrumb": { "home": "Home", "products": "Alle Producten" } },
   "Account": {
+    "Orders": {
+      "title": "Mijn bestellingen",
+      "emptyState": "Je hebt nog geen bestellingen.",
+      "exploreLink": "Bekijk alle producten"
+    },
     "Address": {
       "manageTitle": "Mijn adressen beheren",
       "addButton": "Verzendadres toevoegen",

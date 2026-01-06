@@ -20,6 +20,11 @@
     "Breadcrumb": { "home": "Laman Utama", "products": "Semua Produk" }
   },
   "Account": {
+    "Orders": {
+      "title": "Pesanan Saya",
+      "emptyState": "Anda belum mempunyai sebarang pesanan.",
+      "exploreLink": "Teroka semua produk"
+    },
     "Address": {
       "manageTitle": "Urus alamat saya",
       "addButton": "Tambah alamat penghantaran",

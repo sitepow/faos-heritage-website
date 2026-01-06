@@ -18,6 +18,11 @@
   },
   "Common": { "Breadcrumb": { "home": "Heim", "products": "Allar vörur" } },
   "Account": {
+    "Orders": {
+      "title": "Mínar pantanir",
+      "emptyState": "Þú ert ekki með neinar pantanir ennþá.",
+      "exploreLink": "Skoða allar vörur"
+    },
     "Address": {
       "manageTitle": "Sýsla með heimilisföng",
       "addButton": "Bæta við heimilisfangi",

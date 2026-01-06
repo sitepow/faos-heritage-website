@@ -23,6 +23,11 @@
     }
   },
   "Account": {
+    "Orders": {
+      "title": "My Orders",
+      "emptyState": "You do not have any orders yet.",
+      "exploreLink": "Explore all products."
+    },
     "Address": {
       "manageTitle": "Manage my address",
       "addButton": "Add shipping address",

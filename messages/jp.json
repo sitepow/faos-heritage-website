@@ -23,6 +23,11 @@
     }
   },
   "Account": {
+    "Orders": {
+      "title": "注文履歴",
+      "emptyState": "まだ注文履歴がありません。",
+      "exploreLink": "すべての商品を見る"
+    },
     "Address": {
       "manageTitle": "住所の管理",
       "addButton": "配送先住所を追加",

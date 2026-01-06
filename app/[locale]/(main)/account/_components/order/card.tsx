@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query'
 import { AlertCircleIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
 import { OrderItem } from './item'
@@ -15,6 +16,7 @@ import { OrderForm } from '@/app/[locale]/(main)/account/_components/order/form'
 import { ITEM_PER_PAGE } from '@/utils/constants'
 
 export const OrderCard = () => {
+  const t = useTranslations('Account.Orders')
   const [page, setPage] = useState(1)
 
   const { data: session } = useSession()
@@ -38,7 +40,7 @@ export const OrderCard = () => {
 
       <Card fullWidth>
         <CardHeader>
-          <span>My Orders</span>
+          <span>{t('title')}</span>
         </CardHeader>
         {isLoadingOrders && (
           <CardBody>
@@ -51,10 +53,10 @@ export const OrderCard = () => {
             <div className='text-default-500 flex flex-col items-center gap-2'>
               <AlertCircleIcon />
               <span className='text-center'>
-                You do not have any orders yet.
+                {t('emptyState')}
                 <br />
                 <Link className='underline' href='/products'>
-                  Explore all products.
+                  {t('exploreLink')}
                 </Link>
               </span>
             </div>

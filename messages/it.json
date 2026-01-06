@@ -20,6 +20,11 @@
     "Breadcrumb": { "home": "Home", "products": "Tutti i prodotti" }
   },
   "Account": {
+    "Orders": {
+      "title": "I miei ordini",
+      "emptyState": "Non hai ancora effettuato ordini.",
+      "exploreLink": "Esplora tutti i prodotti"
+    },
     "Address": {
       "manageTitle": "Gestisci i miei indirizzi",
       "addButton": "Aggiungi indirizzo di spedizione",

@@ -18,6 +18,11 @@
   },
   "Common": { "Breadcrumb": { "home": "首页", "products": "所有产品" } },
   "Account": {
+    "Orders": {
+      "title": "我的订单",
+      "emptyState": "您目前还没有订单。",
+      "exploreLink": "浏览所有产品"
+    },
     "Address": {
       "manageTitle": "管理我的地址",
       "addButton": "添加收货地址",

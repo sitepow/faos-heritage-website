@@ -18,6 +18,11 @@
   },
   "Common": { "Breadcrumb": { "home": "Beranda", "products": "Semua Produk" } },
   "Account": {
+    "Orders": {
+      "title": "Pesanan Saya",
+      "emptyState": "Anda belum memiliki pesanan.",
+      "exploreLink": "Jelajahi semua produk"
+    },
     "Address": {
       "manageTitle": "Kelola alamat saya",
       "addButton": "Tambah alamat pengiriman",
