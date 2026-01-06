@@ -90,7 +90,7 @@ export const Navbar = () => {
           className='hidden basis-1/5 sm:flex sm:basis-full'
           justify='end'
         >
-          <NavbarItem className='hidden lg:block'>
+          <NavbarItem className='hidden xl:block'>
             <Country />
           </NavbarItem>
 
@@ -147,7 +147,7 @@ export const Navbar = () => {
           </NavbarItem>
         )}
 
-        <NavbarMenuToggle className='cursor-pointer lg:hidden' />
+        <NavbarMenuToggle className='cursor-pointer xl:hidden' />
       </HeroNavbar>
     </>
   )
