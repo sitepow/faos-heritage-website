@@ -32,7 +32,10 @@ export const ProductClient = ({
   initialProduct,
   productId,
 }: ProductClientProps) => {
-  const t = useTranslations('ProductTab')
+  const tTab = useTranslations('ProductTab')
+  const tProduct = useTranslations('Products')
+  const tBreadcrumb = useTranslations('Common.Breadcrumb')
+
   const { setProductDetailState } = useProductDetailStore()
   const { data: session } = useSession()
   const userId = session?.user?.id
@@ -60,12 +63,14 @@ export const ProductClient = ({
         <Skeleton className='h-5 max-w-72' />
       ) : (
         <Breadcrumbs className='font-bold'>
-          <BreadcrumbItem href='/'>Home</BreadcrumbItem>
-          <BreadcrumbItem href='/products'>Products</BreadcrumbItem>
+          <BreadcrumbItem href='/'>{tBreadcrumb('home')}</BreadcrumbItem>
+          <BreadcrumbItem href='/products'>
+            {tBreadcrumb('products')}
+          </BreadcrumbItem>
           <BreadcrumbItem
             href={`/category/${createSlug(product?.category?.name!, product?.category?.id!)}`}
           >
-            {product.category?.name}
+            {tProduct('categoryTitle', { name: product?.category?.name! })}
           </BreadcrumbItem>
           <BreadcrumbItem>{product.name}</BreadcrumbItem>
         </Breadcrumbs>
@@ -79,10 +84,10 @@ export const ProductClient = ({
       </div>
 
       <Tabs className='mx-auto' variant='bordered'>
-        <Tab title={t('description')}>
+        <Tab title={tTab('description')}>
           <ProductDescription />
         </Tab>
-        <Tab title={t('review')}>
+        <Tab title={tTab('review')}>
           <ProductReview />
         </Tab>
       </Tabs>

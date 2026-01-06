@@ -4,6 +4,7 @@
     "title": "Hágæða Lífræn Ólífuolía og Hunang — 100% Hreint og Náttúrulegt",
     "description": "Þinn áfangastaður fyrir hágæða lífræna ólífuolíu og hunang, sérstaklega valið fyrir heilbrigðan lífsstíl."
   },
+  "Common": { "Breadcrumb": { "home": "Heim", "products": "Allar vörur" } },
   "Account": {
     "welcome": "Reikningurinn þinn {name}",
     "tabs": {
