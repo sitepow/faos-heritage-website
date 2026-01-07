@@ -18,6 +18,7 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ProductUnit } from '@prisma/client'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useTranslations } from 'next-intl'
 import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
@@ -30,8 +31,8 @@ import {
 import { productSchema, type ProductInput } from '../../schema'
 import { useProductStore } from '../../store'
 
+import { useAppStore } from '@/app/store'
 import { SubHeading } from '@/components/common/heading'
-import { DEFAULT_CURRENCY } from '@/utils/constants/currency'
 import { PRODUCT_UNITS } from '@/utils/features'
 
 const DEFAULT_VALUES: ProductInput = {
@@ -61,6 +62,10 @@ const DEFAULT_VALUES: ProductInput = {
 }
 
 export const ProductForm = () => {
+  const t = useTranslations('Dashboard.ProductForm')
+  const tc = useTranslations('Common')
+  const { country } = useAppStore()
+
   const { productId, setState, isProductOpen, onOpenProductChange } =
     useProductStore()
   const queryClient = useQueryClient()
@@ -112,7 +117,6 @@ export const ProductForm = () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.HOMEPAGE }),
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.CAROUSEL }),
     ])
-
     onClose()
   }
 
@@ -133,7 +137,8 @@ export const ProductForm = () => {
     isPendingCreateProduct ||
     isPendingUpdateProduct ||
     isLoadingCategories
-  const headerLable = productId ? 'Edit product' : 'Add product'
+
+  const headerLabel = productId ? t('editTitle') : t('addTitle')
 
   const onSubmit = (data: ProductInput) => {
     if (!productId) {
@@ -158,22 +163,20 @@ export const ProductForm = () => {
       scrollBehavior='inside'
       size='xl'
       onOpenChange={(open) => {
-        if (!open) {
-          onClose()
-        }
+        if (!open) onClose()
       }}
     >
       <ModalContent>
-        <ModalHeader className='flex flex-col gap-1'>{headerLable}</ModalHeader>
+        <ModalHeader className='flex flex-col gap-1'>{headerLabel}</ModalHeader>
         {isPending && (
           <ModalBody>
-            <Spinner label='Loading...' />
+            <Spinner label={tc('loading')} />
           </ModalBody>
         )}
 
         {!isPending && (
           <ModalBody>
-            <SubHeading title='Product status' />
+            <SubHeading title={t('statusSection')} />
             <div className='flex flex-wrap gap-6'>
               <Controller
                 control={control}
@@ -184,7 +187,7 @@ export const ProductForm = () => {
                     isSelected={value}
                     onValueChange={onChange}
                   >
-                    Available for sale
+                    {t('fields.isActive')}
                   </Switch>
                 )}
               />
@@ -197,7 +200,7 @@ export const ProductForm = () => {
                     isSelected={value}
                     onValueChange={onChange}
                   >
-                    Featured product
+                    {t('fields.isFeatured')}
                   </Switch>
                 )}
               />
@@ -210,7 +213,7 @@ export const ProductForm = () => {
                     isSelected={value}
                     onValueChange={onChange}
                   >
-                    Premium Product
+                    {t('fields.isPremium')}
                   </Switch>
                 )}
               />
@@ -223,7 +226,7 @@ export const ProductForm = () => {
                     isSelected={value}
                     onValueChange={onChange}
                   >
-                    Authentic 100%
+                    {t('fields.isAuthentic')}
                   </Switch>
                 )}
               />
@@ -236,7 +239,7 @@ export const ProductForm = () => {
                     isSelected={value}
                     onValueChange={onChange}
                   >
-                    Digital Product
+                    {t('fields.isDigital')}
                   </Switch>
                 )}
               />
@@ -249,13 +252,13 @@ export const ProductForm = () => {
                     isSelected={value}
                     onValueChange={onChange}
                   >
-                    Demo Version
+                    {t('fields.isDemo')}
                   </Switch>
                 )}
               />
             </div>
 
-            <SubHeading title='Basic information' />
+            <SubHeading title={t('basicSection')} />
             <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
               <Controller
                 control={control}
@@ -265,7 +268,7 @@ export const ProductForm = () => {
                     {...field}
                     errorMessage={errors.name?.message}
                     isInvalid={!!errors.name}
-                    label='Product Name'
+                    label={t('fields.name')}
                     variant='bordered'
                   />
                 )}
@@ -278,14 +281,10 @@ export const ProductForm = () => {
                     {...field}
                     errorMessage={errors.categoryId?.message}
                     isInvalid={!!errors.categoryId}
-                    label='Product Categories'
+                    label={t('fields.category')}
                     selectedKeys={value ? [value] : []}
                     variant='bordered'
-                    onSelectionChange={(keys) => {
-                      const selected = Array.from(keys)[0]
-
-                      onChange(selected)
-                    }}
+                    onSelectionChange={(keys) => onChange(Array.from(keys)[0])}
                   >
                     {(categories ?? []).map((category) => (
                       <SelectItem key={category.id}>{category.name}</SelectItem>
@@ -302,14 +301,10 @@ export const ProductForm = () => {
                     disallowEmptySelection
                     errorMessage={errors.unit?.message}
                     isInvalid={!!errors.unit}
-                    label='Unit of measurement'
+                    label={t('fields.unit')}
                     selectedKeys={value ? [value] : []}
                     variant='bordered'
-                    onSelectionChange={(keys) => {
-                      const selected = Array.from(keys)[0]
-
-                      onChange(selected)
-                    }}
+                    onSelectionChange={(keys) => onChange(Array.from(keys)[0])}
                   >
                     {(PRODUCT_UNITS ?? []).map(([key, label]) => (
                       <SelectItem key={key}>{label}</SelectItem>
@@ -324,7 +319,7 @@ export const ProductForm = () => {
                   <Input
                     variant='bordered'
                     {...field}
-                    label='SKU'
+                    label={t('fields.sku')}
                     value={value ?? ''}
                   />
                 )}
@@ -336,7 +331,7 @@ export const ProductForm = () => {
                   <Input
                     {...field}
                     className='sm:col-span-2'
-                    label='Barcode'
+                    label={t('fields.barcode')}
                     value={value ?? ''}
                     variant='bordered'
                   />
@@ -349,8 +344,8 @@ export const ProductForm = () => {
                   <Textarea
                     {...field}
                     className='sm:col-span-2'
-                    label='Product details (short version)'
-                    minRows={10}
+                    label={t('fields.shortDesc')}
+                    minRows={3}
                     value={value ?? ''}
                     variant='bordered'
                   />
@@ -363,8 +358,8 @@ export const ProductForm = () => {
                   <Textarea
                     {...field}
                     className='sm:col-span-2'
-                    label='Product details (full version)'
-                    minRows={10}
+                    label={t('fields.fullDesc')}
+                    minRows={6}
                     value={value ?? ''}
                     variant='bordered'
                   />
@@ -372,7 +367,7 @@ export const ProductForm = () => {
               />
             </div>
 
-            <SubHeading title='Product price' />
+            <SubHeading title={t('priceSection')} />
             <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
               <Controller
                 control={control}
@@ -382,7 +377,7 @@ export const ProductForm = () => {
                     {...field}
                     errorMessage={errors.price?.message}
                     isInvalid={!!errors.price}
-                    label={`Price (${DEFAULT_CURRENCY})`}
+                    label={`${t('fields.price')} (${country?.currency || 'USD'})`}
                     minValue={0}
                     variant='bordered'
                     onValueChange={(val) => onChange(val || 0)}
@@ -397,7 +392,7 @@ export const ProductForm = () => {
                     {...field}
                     errorMessage={errors.compareAtPrice?.message}
                     isInvalid={!!errors.compareAtPrice}
-                    label='Price before discount'
+                    label={t('fields.comparePrice')}
                     minValue={0}
                     value={value ?? 0}
                     variant='bordered'
@@ -413,7 +408,7 @@ export const ProductForm = () => {
                     {...field}
                     errorMessage={errors.costPrice?.message}
                     isInvalid={!!errors.costPrice}
-                    label='Cost price (internal)'
+                    label={t('fields.costPrice')}
                     minValue={0}
                     value={value ?? 0}
                     variant='bordered'
@@ -423,7 +418,7 @@ export const ProductForm = () => {
               />
             </div>
 
-            <SubHeading title='Stock' />
+            <SubHeading title={t('stockSection')} />
             <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
               <Controller
                 control={control}
@@ -433,7 +428,7 @@ export const ProductForm = () => {
                     {...field}
                     errorMessage={errors.stockQuantity?.message}
                     isInvalid={!!errors.stockQuantity}
-                    label='Quantity in stock'
+                    label={t('fields.stock')}
                     minValue={0}
                     value={value ?? 0}
                     variant='bordered'
@@ -449,7 +444,7 @@ export const ProductForm = () => {
                     {...field}
                     errorMessage={errors.lowStockAlert?.message}
                     isInvalid={!!errors.lowStockAlert}
-                    label='Receive alerts when stock is low'
+                    label={t('fields.lowStock')}
                     minValue={0}
                     value={value ?? 0}
                     variant='bordered'
@@ -465,7 +460,7 @@ export const ProductForm = () => {
                     {...field}
                     errorMessage={errors.weight?.message}
                     isInvalid={!!errors.weight}
-                    label='Weight (grams)'
+                    label={t('fields.weight')}
                     minValue={0}
                     value={value ?? 0}
                     variant='bordered'
@@ -476,7 +471,7 @@ export const ProductForm = () => {
             </div>
 
             <div className='flex flex-wrap gap-4'>
-              <SubHeading title='Settings for SEO' />
+              <SubHeading title={t('seoSection')} />
               <Controller
                 control={control}
                 name='useSeoFromBasicData'
@@ -486,7 +481,7 @@ export const ProductForm = () => {
                     isSelected={value}
                     onValueChange={onChange}
                   >
-                    Auto-generate SEO from basic data
+                    {t('fields.autoSeo')}
                   </Switch>
                 )}
               />
@@ -501,7 +496,7 @@ export const ProductForm = () => {
                       {...field}
                       errorMessage={errors.slug?.message}
                       isInvalid={!!errors.slug}
-                      label='Slug'
+                      label={t('fields.slug')}
                       value={value ?? ''}
                       variant='bordered'
                     />
@@ -515,7 +510,7 @@ export const ProductForm = () => {
                       {...field}
                       errorMessage={errors.metaTitle?.message}
                       isInvalid={!!errors.metaTitle}
-                      label='Meta Title'
+                      label={t('fields.metaTitle')}
                       value={value ?? ''}
                       variant='bordered'
                     />
@@ -527,9 +522,10 @@ export const ProductForm = () => {
                   render={({ field: { value, ...field } }) => (
                     <Textarea
                       {...field}
+                      className='sm:col-span-2'
                       errorMessage={errors.metaDescription?.message}
                       isInvalid={!!errors.metaDescription}
-                      label='Meta Description'
+                      label={t('fields.metaDesc')}
                       minRows={3}
                       value={value ?? ''}
                       variant='bordered'
@@ -543,7 +539,7 @@ export const ProductForm = () => {
 
         <ModalFooter>
           <Button isDisabled={isPending} variant='faded' onPress={onClose}>
-            Cancel
+            {tc('cancel')}
           </Button>
           <Button
             className='text-secondary'
@@ -551,7 +547,7 @@ export const ProductForm = () => {
             isDisabled={isPending || !isDirty}
             onClick={handleSubmit(onSubmit)}
           >
-            {isPending ? 'Saving...' : 'Save'}
+            {isPending ? tc('saving') : tc('save')}
           </Button>
         </ModalFooter>
       </ModalContent>
