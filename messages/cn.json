@@ -473,6 +473,15 @@
       "removeBanner": "删除横幅",
       "addBanner": "添加横幅"
     },
+    "CategoryManager": {
+      "title": "管理产品类别",
+      "loading": "加载中...",
+      "noData": "暂无产品类别",
+      "editInfo": "编辑信息",
+      "removeCategory": "删除类别",
+      "cancel": "取消",
+      "addCategory": "添加类别"
+    },
     "ProductForm": {
       "editTitle": "编辑产品",
       "addTitle": "添加新产品",

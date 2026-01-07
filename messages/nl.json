@@ -494,6 +494,15 @@
       "removeBanner": "Banner verwijderen",
       "addBanner": "Banner toevoegen"
     },
+    "CategoryManager": {
+      "title": "Productcategorieën Beheren",
+      "loading": "Laden...",
+      "noData": "Er zijn nog geen productcategorieën",
+      "editInfo": "Informatie bewerken",
+      "removeCategory": "Categorie verwijderen",
+      "cancel": "Annuleren",
+      "addCategory": "Categorie toevoegen"
+    },
     "ProductForm": {
       "editTitle": "Product Bewerken",
       "addTitle": "Nieuw Product Toevoegen",

@@ -494,6 +494,15 @@
       "removeBanner": "Padam sepanduk",
       "addBanner": "Tambah sepanduk"
     },
+    "CategoryManager": {
+      "title": "Urus Kategori Produk",
+      "loading": "Memuatkan...",
+      "noData": "Belum ada kategori produk",
+      "editInfo": "Edit maklumat",
+      "removeCategory": "Padam kategori",
+      "cancel": "Batal",
+      "addCategory": "Tambah kategori"
+    },
     "ProductForm": {
       "editTitle": "Edit Produk",
       "addTitle": "Tambah Produk Baru",

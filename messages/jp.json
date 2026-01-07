@@ -498,6 +498,15 @@
       "removeBanner": "バナーを削除",
       "addBanner": "バナーを追加"
     },
+    "CategoryManager": {
+      "title": "製品カテゴリーの管理",
+      "loading": "読み込み中...",
+      "noData": "製品カテゴリーがまだありません",
+      "editInfo": "情報を編集",
+      "removeCategory": "カテゴリーを削除",
+      "cancel": "キャンセル",
+      "addCategory": "カテゴリーを追加"
+    },
     "ProductForm": {
       "editTitle": "製品を編集",
       "addTitle": "新しい製品を追加",

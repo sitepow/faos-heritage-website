@@ -493,6 +493,15 @@
       "removeBanner": "Xóa banner",
       "addBanner": "Thêm banner"
     },
+    "CategoryManager": {
+      "title": "Quản lý danh mục sản phẩm",
+      "loading": "Đang tải...",
+      "noData": "Chưa có danh mục sản phẩm nào",
+      "editInfo": "Chỉnh sửa thông tin",
+      "removeCategory": "Xóa danh mục",
+      "cancel": "Hủy",
+      "addCategory": "Thêm danh mục"
+    },
     "ProductForm": {
       "editTitle": "Chỉnh sửa sản phẩm",
       "addTitle": "Thêm sản phẩm mới",

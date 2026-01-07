@@ -501,6 +501,15 @@
       "removeBanner": "ลบแบนเนอร์",
       "addBanner": "เพิ่มแบนเนอร์"
     },
+    "CategoryManager": {
+      "title": "จัดการหมวดหมู่สินค้า",
+      "loading": "กำลังโหลด...",
+      "noData": "ยังไม่มีหมวดหมู่สินค้า",
+      "editInfo": "แก้ไขข้อมูล",
+      "removeCategory": "ลบหมวดหมู่",
+      "cancel": "ยกเลิก",
+      "addCategory": "เพิ่มหมวดหมู่สินค้า"
+    },
     "ProductForm": {
       "editTitle": "แก้ไขสินค้า",
       "addTitle": "เพิ่มสินค้าใหม่",

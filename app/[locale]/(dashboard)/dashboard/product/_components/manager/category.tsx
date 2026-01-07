@@ -24,6 +24,7 @@ import {
   PlusIcon,
   TrashIcon,
 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 import { deleteCategory, getCategories } from '../../action'
 import { useProductStore } from '../../store'
@@ -34,7 +35,9 @@ import { NO_IMAGE } from '@/utils/constants'
 import { cn } from '@/utils/style'
 
 export const CategoryManager = () => {
+  const t = useTranslations('Dashboard.CategoryManager')
   const queryClient = useQueryClient()
+
   const {
     categoryId,
     isCategoryManagerOpen,
@@ -97,18 +100,17 @@ export const CategoryManager = () => {
         onOpenChange={onOpenCategoryManagerChange}
       >
         <ModalContent>
-          <ModalHeader>Manage product categories</ModalHeader>
+          <ModalHeader>{t('title')}</ModalHeader>
+
           {isLoadingCategories && (
             <ModalBody>
-              <Spinner label='Loading...' />
+              <Spinner label={t('loading')} />
             </ModalBody>
           )}
 
-          {categories?.length === 0 && (
+          {!isLoadingCategories && categories?.length === 0 && (
             <ModalBody>
-              <p className='text-default-500 text-center'>
-                There are no product categories yet
-              </p>
+              <p className='text-default-500 text-center'>{t('noData')}</p>
             </ModalBody>
           )}
 
@@ -148,7 +150,7 @@ export const CategoryManager = () => {
                               onOpenCategoryChange()
                             }}
                           >
-                            Edit information
+                            {t('editInfo')}
                           </DropdownItem>
                           <DropdownItem
                             key='delete'
@@ -160,7 +162,7 @@ export const CategoryManager = () => {
                               onOpenDeleteChange()
                             }}
                           >
-                            Remove category
+                            {t('removeCategory')}
                           </DropdownItem>
                         </DropdownMenu>
                       </Dropdown>
@@ -173,7 +175,7 @@ export const CategoryManager = () => {
 
           <ModalFooter>
             <Button variant='faded' onPress={onClose}>
-              Cancel
+              {t('cancel')}
             </Button>
             <Button
               className='text-secondary'
@@ -184,7 +186,7 @@ export const CategoryManager = () => {
                 onOpenCategoryManagerChange()
               }}
             >
-              Add a category
+              {t('addCategory')}
             </Button>
           </ModalFooter>
         </ModalContent>

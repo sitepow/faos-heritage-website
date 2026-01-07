@@ -494,6 +494,15 @@
       "removeBanner": "Hapus banner",
       "addBanner": "Tambah banner"
     },
+    "CategoryManager": {
+      "title": "Kelola Kategori Produk",
+      "loading": "Memuat...",
+      "noData": "Belum ada kategori produk",
+      "editInfo": "Ubah informasi",
+      "removeCategory": "Hapus kategori",
+      "cancel": "Batal",
+      "addCategory": "Tambah kategori"
+    },
     "ProductForm": {
       "editTitle": "Ubah Produk",
       "addTitle": "Tambah Produk Baru",

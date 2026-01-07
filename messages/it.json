@@ -497,6 +497,15 @@
       "removeBanner": "Rimuovi banner",
       "addBanner": "Aggiungi banner"
     },
+    "CategoryManager": {
+      "title": "Gestisci Categorie Prodotti",
+      "loading": "Caricamento...",
+      "noData": "Non ci sono ancora categorie di prodotti",
+      "editInfo": "Modifica informazioni",
+      "removeCategory": "Rimuovi categoria",
+      "cancel": "Annulla",
+      "addCategory": "Aggiungi una categoria"
+    },
     "ProductForm": {
       "editTitle": "Modifica Prodotto",
       "addTitle": "Aggiungi Nuovo Prodotto",

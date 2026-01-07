@@ -497,6 +497,15 @@
       "removeBanner": "Διαγραφή banner",
       "addBanner": "Προσθήκη banner"
     },
+    "CategoryManager": {
+      "title": "Διαχείριση Κατηγοριών Προϊόντων",
+      "loading": "Φόρτωση...",
+      "noData": "Δεν υπάρχουν ακόμα κατηγορίες προϊόντων",
+      "editInfo": "Επεξεργασία πληροφοριών",
+      "removeCategory": "Αφαίρεση κατηγορίας",
+      "cancel": "Ακύρωση",
+      "addCategory": "Προσθήκη κατηγορίας"
+    },
     "ProductForm": {
       "editTitle": "Επεξεργασία Προϊόντος",
       "addTitle": "Προσθήκη Νέου Προϊόντος",

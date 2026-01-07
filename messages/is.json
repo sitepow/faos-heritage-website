@@ -513,6 +513,15 @@
       "passwordLabel": "Lykilorð",
       "passwordChangeLabel": "Breyta lykilorði"
     },
+    "CategoryManager": {
+      "title": "Sýsla með vöruflokka",
+      "loading": "Hleður...",
+      "noData": "Engir vöruflokkar til staðar ennþá",
+      "editInfo": "Breyta upplýsingum",
+      "removeCategory": "Eyða flokki",
+      "cancel": "Hætta við",
+      "addCategory": "Bæta við flokki"
+    },
     "ProductForm": {
       "editTitle": "Breyta vöru",
       "addTitle": "Bæta við nýrri vöru",

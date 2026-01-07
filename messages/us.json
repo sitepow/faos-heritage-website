@@ -494,6 +494,15 @@
       "removeBanner": "Remove banner",
       "addBanner": "Add banner"
     },
+    "CategoryManager": {
+      "title": "Manage Product Categories",
+      "loading": "Loading...",
+      "noData": "There are no product categories yet",
+      "editInfo": "Edit Information",
+      "removeCategory": "Remove Category",
+      "cancel": "Cancel",
+      "addCategory": "Add a Category"
+    },
     "ProductForm": {
       "editTitle": "Edit Product",
       "addTitle": "Add New Product",
