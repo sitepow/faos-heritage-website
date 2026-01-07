@@ -25,6 +25,7 @@ import {
   PlusIcon,
   TrashIcon,
 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 import { deleteVariant, getVariants } from '../../action/variant'
 import { useProductStore } from '../../store'
@@ -37,6 +38,7 @@ import { formatCurrency, formatNumber } from '@/utils/number'
 import { cn } from '@/utils/style'
 
 export const VariantManager = () => {
+  const t = useTranslations('Dashboard.VariantManager')
   const { country, exchangeRates } = useAppStore()
   const CURRENCY_OPTIONS = {
     currency: country?.currency,
@@ -114,18 +116,17 @@ export const VariantManager = () => {
         onOpenChange={onOpenVariantManagerChange}
       >
         <ModalContent>
-          <ModalHeader>Manage product options</ModalHeader>
+          <ModalHeader>{t('title')}</ModalHeader>
+
           {isLoadingVariants && (
             <ModalBody>
-              <Spinner label='Loading...' />
+              <Spinner label={t('loading')} />
             </ModalBody>
           )}
 
-          {variants?.length === 0 && (
+          {!isLoadingVariants && variants?.length === 0 && (
             <ModalBody>
-              <p className='text-default-500 text-center'>
-                There are no product options yet.
-              </p>
+              <p className='text-default-500 text-center'>{t('noData')}</p>
             </ModalBody>
           )}
 
@@ -153,7 +154,7 @@ export const VariantManager = () => {
                           {!!variant.sku && (
                             <Chip>
                               <span className='text-default-500'>
-                                sku: {variant.sku}
+                                {t('sku')}: {variant.sku}
                               </span>
                             </Chip>
                           )}
@@ -166,8 +167,8 @@ export const VariantManager = () => {
                               )}
                             >
                               {variant.price
-                                ? `Price: ${formatCurrency(variant?.price ?? 0, CURRENCY_OPTIONS)}`
-                                : `(Please specify the price)`}
+                                ? `${t('price')}: ${formatCurrency(variant?.price ?? 0, CURRENCY_OPTIONS)}`
+                                : t('priceNotSpecified')}
                             </span>
                           </Chip>
 
@@ -179,8 +180,8 @@ export const VariantManager = () => {
                               )}
                             >
                               {variant.stockQuantity
-                                ? `Stock: ${formatNumber(variant.stockQuantity)}`
-                                : '(Please specify stock availability)'}
+                                ? `${t('stock')}: ${formatNumber(variant.stockQuantity)}`
+                                : t('stockNotSpecified')}
                             </span>
                           </Chip>
                         </div>
@@ -193,7 +194,7 @@ export const VariantManager = () => {
                           </Button>
                         </DropdownTrigger>
                         <DropdownMenu
-                          aria-label='Manage products'
+                          aria-label='Manage variants'
                           className='min-w-[180px]'
                         >
                           <DropdownItem
@@ -205,7 +206,7 @@ export const VariantManager = () => {
                               onOpenVariantChange()
                             }}
                           >
-                            Edit information
+                            {t('editInfo')}
                           </DropdownItem>
                           <DropdownItem
                             key='delete'
@@ -217,7 +218,7 @@ export const VariantManager = () => {
                               onOpenDeleteChange()
                             }}
                           >
-                            Remove option
+                            {t('removeOption')}
                           </DropdownItem>
                         </DropdownMenu>
                       </Dropdown>
@@ -230,7 +231,7 @@ export const VariantManager = () => {
 
           <ModalFooter>
             <Button variant='faded' onPress={onClose}>
-              Cancel
+              {t('cancel')}
             </Button>
             <Button
               className='text-secondary'
@@ -241,7 +242,7 @@ export const VariantManager = () => {
                 onOpenVariantManagerChange()
               }}
             >
-              Add options
+              {t('addOption')}
             </Button>
           </ModalFooter>
         </ModalContent>

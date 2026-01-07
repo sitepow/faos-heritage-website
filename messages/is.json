@@ -522,6 +522,58 @@
       "cancel": "Hætta við",
       "addCategory": "Bæta við flokki"
     },
+    "ImageManager": {
+      "title": "Sýsla með vörumyndir",
+      "loading": "Hleður...",
+      "noData": "Engar vörumyndir til staðar ennþá",
+      "editInfo": "Breyta upplýsingum",
+      "removeImage": "Eyða mynd",
+      "cancel": "Hætta við",
+      "addImage": "Bæta við mynd"
+    },
+    "ShippingCountryManager": {
+      "title": "Sýsla með sendingarkostnað",
+      "loading": "Hleður...",
+      "noData": "Engin sendingarlönd fundust.",
+      "baseRate": "Grunngjald",
+      "pricePerKg": "Verð á kg",
+      "editInfo": "Breyta upplýsingum",
+      "removeShipping": "Fjarlægja sendingu",
+      "cancel": "Hætta við",
+      "addShipping": "Bæta við sendingarlandi"
+    },
+    "VariantManager": {
+      "title": "Sýsla með vöruvalmöguleika",
+      "loading": "Hleður...",
+      "noData": "Engir vöruvalmöguleikar fundust.",
+      "sku": "SKU",
+      "price": "Verð",
+      "priceNotSpecified": "(Vinsamlegast tilgreinið verð)",
+      "stock": "Lager",
+      "stockNotSpecified": "(Vinsamlegast tilgreinið lagerstöðu)",
+      "editInfo": "Breyta upplýsingum",
+      "removeOption": "Fjarlægja valmöguleika",
+      "cancel": "Hætta við",
+      "addOption": "Bæta við valmöguleikum"
+    },
+    "Order": {
+      "table": {
+        "orderId": "Pöntunarnúmer",
+        "image": "Mynd",
+        "customerName": "Nafn viðskiptavinar",
+        "orderDate": "Dagsetning",
+        "totalAmount": "Heildarupphæð",
+        "status": "Staða",
+        "trackingNumber": "Rakningarnúmer",
+        "actions": "Aðgerðir",
+        "empty": "Engar upplýsingar til að birta",
+        "loading": "Hleður..."
+      },
+      "action": {
+        "status": "Staða pöntunar",
+        "details": "Skoða nánar"
+      }
+    },
     "ProductForm": {
       "editTitle": "Breyta vöru",
       "addTitle": "Bæta við nýrri vöru",

@@ -482,6 +482,58 @@
       "cancel": "取消",
       "addCategory": "添加类别"
     },
+    "ImageManager": {
+      "title": "管理产品图片",
+      "loading": "加载中...",
+      "noData": "暂无产品图片",
+      "editInfo": "编辑信息",
+      "removeImage": "删除图片",
+      "cancel": "取消",
+      "addImage": "添加图片"
+    },
+    "ShippingCountryManager": {
+      "title": "管理运费",
+      "loading": "加载中...",
+      "noData": "暂无配送国家。",
+      "baseRate": "基础运费",
+      "pricePerKg": "每公斤价格",
+      "editInfo": "编辑信息",
+      "removeShipping": "删除配送设置",
+      "cancel": "取消",
+      "addShipping": "添加配送国家"
+    },
+    "VariantManager": {
+      "title": "管理产品规格",
+      "loading": "加载中...",
+      "noData": "暂无产品规格。",
+      "sku": "货号 (SKU)",
+      "price": "价格",
+      "priceNotSpecified": "(请指定价格)",
+      "stock": "库存",
+      "stockNotSpecified": "(请指定库存数量)",
+      "editInfo": "编辑信息",
+      "removeOption": "删除规格",
+      "cancel": "取消",
+      "addOption": "添加规格"
+    },
+    "Order": {
+      "table": {
+        "orderId": "订单编号",
+        "image": "图片",
+        "customerName": "客户姓名",
+        "orderDate": "下单日期",
+        "totalAmount": "总金额",
+        "status": "状态",
+        "trackingNumber": "物流单号",
+        "actions": "操作",
+        "empty": "暂无数据显示",
+        "loading": "加载中..."
+      },
+      "action": {
+        "status": "订单状态",
+        "details": "查看详情"
+      }
+    },
     "ProductForm": {
       "editTitle": "编辑产品",
       "addTitle": "添加新产品",

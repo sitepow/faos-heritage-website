@@ -503,6 +503,58 @@
       "cancel": "Batal",
       "addCategory": "Tambah kategori"
     },
+    "ImageManager": {
+      "title": "Urus Imej Produk",
+      "loading": "Memuatkan...",
+      "noData": "Belum ada imej produk",
+      "editInfo": "Edit maklumat",
+      "removeImage": "Padam imej",
+      "cancel": "Batal",
+      "addImage": "Tambah imej"
+    },
+    "ShippingCountryManager": {
+      "title": "Urus kos penghantaran",
+      "loading": "Memuatkan...",
+      "noData": "Belum ada negara penghantaran.",
+      "baseRate": "Kadar Asas",
+      "pricePerKg": "Harga / kg",
+      "editInfo": "Edit maklumat",
+      "removeShipping": "Padam penghantaran",
+      "cancel": "Batal",
+      "addShipping": "Tambah negara penghantaran"
+    },
+    "VariantManager": {
+      "title": "Urus pilihan produk",
+      "loading": "Memuatkan...",
+      "noData": "Belum ada pilihan produk.",
+      "sku": "SKU",
+      "price": "Harga",
+      "priceNotSpecified": "(Sila nyatakan harga)",
+      "stock": "Stok",
+      "stockNotSpecified": "(Sila nyatakan ketersediaan stok)",
+      "editInfo": "Edit maklumat",
+      "removeOption": "Padam pilihan",
+      "cancel": "Batal",
+      "addOption": "Tambah pilihan"
+    },
+    "Order": {
+      "table": {
+        "orderId": "ID Pesanan",
+        "image": "Imej",
+        "customerName": "Nama Pelanggan",
+        "orderDate": "Tarikh Pesanan",
+        "totalAmount": "Jumlah Keseluruhan",
+        "status": "Status",
+        "trackingNumber": "Nombor Tracking",
+        "actions": "Tindakan",
+        "empty": "Tiada maklumat untuk dipaparkan",
+        "loading": "Memuatkan..."
+      },
+      "action": {
+        "status": "Status pesanan",
+        "details": "Lihat butiran"
+      }
+    },
     "ProductForm": {
       "editTitle": "Edit Produk",
       "addTitle": "Tambah Produk Baru",

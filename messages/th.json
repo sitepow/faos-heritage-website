@@ -510,6 +510,58 @@
       "cancel": "ยกเลิก",
       "addCategory": "เพิ่มหมวดหมู่สินค้า"
     },
+    "ImageManager": {
+      "title": "จัดการรูปภาพสินค้า",
+      "loading": "กำลังโหลด...",
+      "noData": "ยังไม่มีรูปภาพสินค้า",
+      "editInfo": "แก้ไขข้อมูล",
+      "removeImage": "ลบรูปภาพ",
+      "cancel": "ยกเลิก",
+      "addImage": "เพิ่มรูปภาพ"
+    },
+    "ShippingCountryManager": {
+      "title": "จัดการค่าขนส่ง",
+      "loading": "กำลังโหลด...",
+      "noData": "ยังไม่มีข้อมูลประเทศที่จัดส่ง",
+      "baseRate": "อัตราพื้นฐาน",
+      "pricePerKg": "ราคาต่อกิโลกรัม",
+      "editInfo": "แก้ไขข้อมูล",
+      "removeShipping": "ลบการตั้งค่าขนส่ง",
+      "cancel": "ยกเลิก",
+      "addShipping": "เพิ่มประเทศที่จัดส่ง"
+    },
+    "VariantManager": {
+      "title": "จัดการตัวเลือกสินค้า",
+      "loading": "กำลังโหลด...",
+      "noData": "ยังไม่มีตัวเลือกสินค้า",
+      "sku": "รหัสสินค้า (SKU)",
+      "price": "ราคา",
+      "priceNotSpecified": "(กรุณาระบุราคา)",
+      "stock": "สต็อก",
+      "stockNotSpecified": "(กรุณาระบุจำนวนสินค้า)",
+      "editInfo": "แก้ไขข้อมูล",
+      "removeOption": "ลบตัวเลือก",
+      "cancel": "ยกเลิก",
+      "addOption": "เพิ่มตัวเลือก"
+    },
+    "Order": {
+      "table": {
+        "orderId": "เลขที่คำสั่งซื้อ",
+        "image": "รูปภาพ",
+        "customerName": "ชื่อลูกค้า",
+        "orderDate": "วันที่สั่งซื้อ",
+        "totalAmount": "ยอดรวม",
+        "status": "สถานะ",
+        "trackingNumber": "เลขพัสดุ",
+        "actions": "จัดการ",
+        "empty": "ไม่พบข้อมูลที่จะแสดง",
+        "loading": "กำลังโหลด..."
+      },
+      "action": {
+        "status": "สถานะคำสั่งซื้อ",
+        "details": "ดูรายละเอียด"
+      }
+    },
     "ProductForm": {
       "editTitle": "แก้ไขสินค้า",
       "addTitle": "เพิ่มสินค้าใหม่",

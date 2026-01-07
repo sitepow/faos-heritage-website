@@ -503,6 +503,58 @@
       "cancel": "Cancel",
       "addCategory": "Add a Category"
     },
+    "ImageManager": {
+      "title": "Manage Product Images",
+      "loading": "Loading...",
+      "noData": "No product images found",
+      "editInfo": "Edit Information",
+      "removeImage": "Remove Image",
+      "cancel": "Cancel",
+      "addImage": "Add Image"
+    },
+    "ShippingCountryManager": {
+      "title": "Manage shipping costs",
+      "loading": "Loading...",
+      "noData": "No shipping countries found.",
+      "baseRate": "Base Rate",
+      "pricePerKg": "Price / kg",
+      "editInfo": "Edit Information",
+      "removeShipping": "Remove Shipping",
+      "cancel": "Cancel",
+      "addShipping": "Add Shipping Country"
+    },
+    "VariantManager": {
+      "title": "Manage Product Options",
+      "loading": "Loading...",
+      "noData": "No product options yet.",
+      "sku": "SKU",
+      "price": "Price",
+      "priceNotSpecified": "(Please specify price)",
+      "stock": "Stock",
+      "stockNotSpecified": "(Please specify stock)",
+      "editInfo": "Edit Information",
+      "removeOption": "Remove Option",
+      "cancel": "Cancel",
+      "addOption": "Add Options"
+    },
+    "Order": {
+      "table": {
+        "orderId": "Order ID",
+        "image": "Image",
+        "customerName": "Customer Name",
+        "orderDate": "Order Date",
+        "totalAmount": "Total Amount",
+        "status": "Status",
+        "trackingNumber": "Tracking Number",
+        "actions": "Actions",
+        "empty": "No information to display",
+        "loading": "Loading..."
+      },
+      "action": {
+        "status": "Order status",
+        "details": "View details"
+      }
+    },
     "ProductForm": {
       "editTitle": "Edit Product",
       "addTitle": "Add New Product",

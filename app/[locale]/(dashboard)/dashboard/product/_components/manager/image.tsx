@@ -22,6 +22,7 @@ import {
   TrashIcon,
 } from 'lucide-react'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 
 import { deleteImage, getImages } from '../../action/image'
 import { useProductStore } from '../../store'
@@ -31,7 +32,9 @@ import { ConfirmModal } from '@/components/modal/confirm'
 import { cn } from '@/utils/style'
 
 export const ImageManager = () => {
+  const t = useTranslations('Dashboard.ImageManager')
   const queryClient = useQueryClient()
+
   const {
     isImageManagerOpen,
     onOpenImageManagerChange,
@@ -62,15 +65,12 @@ export const ImageManager = () => {
       queryClient.invalidateQueries({
         queryKey: QUERY_KEY.IMAGES,
       }),
-
       queryClient.invalidateQueries({
         queryKey: QUERY_KEY.HOMEPAGE,
       }),
-
       queryClient.invalidateQueries({
         queryKey: QUERY_KEY.CAROUSEL,
       }),
-
       queryClient.invalidateQueries({
         queryKey: QUERY_KEY.PRODUCT,
       }),
@@ -113,18 +113,17 @@ export const ImageManager = () => {
         onOpenChange={onOpenImageManagerChange}
       >
         <ModalContent>
-          <ModalHeader>Manage product images</ModalHeader>
+          <ModalHeader>{t('title')}</ModalHeader>
+
           {isLoadingImages && (
             <ModalBody>
-              <Spinner label='Loading...' />
+              <Spinner label={t('loading')} />
             </ModalBody>
           )}
 
-          {images?.length === 0 && (
+          {!isLoadingImages && images?.length === 0 && (
             <ModalBody>
-              <p className='text-default-500 text-center'>
-                There are no product images yet
-              </p>
+              <p className='text-default-500 text-center'>{t('noData')}</p>
             </ModalBody>
           )}
 
@@ -148,7 +147,7 @@ export const ImageManager = () => {
                         src={image.url}
                         width={200}
                       />
-                      <p>{image?.id}</p>
+                      <p className='text-tiny text-default-400'>{image?.id}</p>
                     </div>
 
                     <Dropdown placement='bottom-end'>
@@ -163,7 +162,7 @@ export const ImageManager = () => {
                         </Button>
                       </DropdownTrigger>
                       <DropdownMenu
-                        aria-label='Manage products'
+                        aria-label='Manage images'
                         className='min-w-[180px]'
                       >
                         <DropdownItem
@@ -175,7 +174,7 @@ export const ImageManager = () => {
                             onOpenImageChange()
                           }}
                         >
-                          Edit information
+                          {t('editInfo')}
                         </DropdownItem>
                         <DropdownItem
                           key='delete'
@@ -188,7 +187,7 @@ export const ImageManager = () => {
                             onOpenImageManagerChange()
                           }}
                         >
-                          Remove image
+                          {t('removeImage')}
                         </DropdownItem>
                       </DropdownMenu>
                     </Dropdown>
@@ -199,7 +198,7 @@ export const ImageManager = () => {
           )}
           <ModalFooter>
             <Button variant='faded' onPress={onClose}>
-              Cancel
+              {t('cancel')}
             </Button>
             <Button
               className='text-secondary'
@@ -210,7 +209,7 @@ export const ImageManager = () => {
                 onOpenImageChange()
               }}
             >
-              Add image
+              {t('addImage')}
             </Button>
           </ModalFooter>
         </ModalContent>

@@ -503,6 +503,58 @@
       "cancel": "Batal",
       "addCategory": "Tambah kategori"
     },
+    "ImageManager": {
+      "title": "Kelola Gambar Produk",
+      "loading": "Memuat...",
+      "noData": "Belum ada gambar produk",
+      "editInfo": "Ubah informasi",
+      "removeImage": "Hapus gambar",
+      "cancel": "Batal",
+      "addImage": "Tambah gambar"
+    },
+    "Order": {
+      "table": {
+        "orderId": "ID Pesanan",
+        "image": "Gambar",
+        "customerName": "Nama Pelanggan",
+        "orderDate": "Tanggal Pesanan",
+        "totalAmount": "Total Harga",
+        "status": "Status",
+        "trackingNumber": "Nomor Resi",
+        "actions": "Aksi",
+        "empty": "Tidak ada informasi untuk ditampilkan",
+        "loading": "Memuat..."
+      },
+      "action": {
+        "status": "Status pesanan",
+        "details": "Lihat detail"
+      }
+    },
+    "ShippingCountryManager": {
+      "title": "Kelola biaya pengiriman",
+      "loading": "Memuat...",
+      "noData": "Belum ada negara pengiriman.",
+      "baseRate": "Tarif Dasar",
+      "pricePerKg": "Harga / kg",
+      "editInfo": "Ubah informasi",
+      "removeShipping": "Hapus pengiriman",
+      "cancel": "Batal",
+      "addShipping": "Tambah negara pengiriman"
+    },
+    "VariantManager": {
+      "title": "Kelola varian produk",
+      "loading": "Memuat...",
+      "noData": "Belum ada varian produk.",
+      "sku": "SKU",
+      "price": "Harga",
+      "priceNotSpecified": "(Silakan tentukan harga)",
+      "stock": "Stok",
+      "stockNotSpecified": "(Silakan tentukan ketersediaan stok)",
+      "editInfo": "Ubah informasi",
+      "removeOption": "Hapus varian",
+      "cancel": "Batal",
+      "addOption": "Tambah varian"
+    },
     "ProductForm": {
       "editTitle": "Ubah Produk",
       "addTitle": "Tambah Produk Baru",

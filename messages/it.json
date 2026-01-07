@@ -506,6 +506,58 @@
       "cancel": "Annulla",
       "addCategory": "Aggiungi una categoria"
     },
+    "ImageManager": {
+      "title": "Gestisci Immagini Prodotto",
+      "loading": "Caricamento...",
+      "noData": "Non ci sono ancora immagini del prodotto",
+      "editInfo": "Modifica informazioni",
+      "removeImage": "Rimuovi immagine",
+      "cancel": "Annulla",
+      "addImage": "Aggiungi immagine"
+    },
+    "ShippingCountryManager": {
+      "title": "Gestisci i costi di spedizione",
+      "loading": "Caricamento...",
+      "noData": "Non ci sono ancora paesi di spedizione.",
+      "baseRate": "Tariffa base",
+      "pricePerKg": "Prezzo al kg",
+      "editInfo": "Modifica informazioni",
+      "removeShipping": "Rimuovi spedizione",
+      "cancel": "Annulla",
+      "addShipping": "Aggiungi paese di spedizione"
+    },
+    "VariantManager": {
+      "title": "Gestisci varianti prodotto",
+      "loading": "Caricamento...",
+      "noData": "Non ci sono ancora varianti prodotto.",
+      "sku": "SKU",
+      "price": "Prezzo",
+      "priceNotSpecified": "(Specificare il prezzo)",
+      "stock": "Magazzino",
+      "stockNotSpecified": "(Specificare la disponibilità)",
+      "editInfo": "Modifica informazioni",
+      "removeOption": "Rimuovi variante",
+      "cancel": "Annulla",
+      "addOption": "Aggiungi varianti"
+    },
+    "Order": {
+      "table": {
+        "orderId": "ID Ordine",
+        "image": "Immagine",
+        "customerName": "Nome Cliente",
+        "orderDate": "Data Ordine",
+        "totalAmount": "Importo Totale",
+        "status": "Stato",
+        "trackingNumber": "Numero Tracking",
+        "actions": "Azioni",
+        "empty": "Non ci sono informazioni da visualizzare",
+        "loading": "Caricamento..."
+      },
+      "action": {
+        "status": "Stato ordine",
+        "details": "Vedi dettagli"
+      }
+    },
     "ProductForm": {
       "editTitle": "Modifica Prodotto",
       "addTitle": "Aggiungi Nuovo Prodotto",

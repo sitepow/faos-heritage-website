@@ -503,6 +503,58 @@
       "cancel": "Annuleren",
       "addCategory": "Categorie toevoegen"
     },
+    "ImageManager": {
+      "title": "Productafbeeldingen Beheren",
+      "loading": "Laden...",
+      "noData": "Er zijn nog geen productafbeeldingen",
+      "editInfo": "Informatie bewerken",
+      "removeImage": "Afbeelding verwijderen",
+      "cancel": "Annuleren",
+      "addImage": "Afbeelding toevoegen"
+    },
+    "ShippingCountryManager": {
+      "title": "Verzendkosten beheren",
+      "loading": "Laden...",
+      "noData": "Er zijn nog geen verzendlanden.",
+      "baseRate": "Basistarief",
+      "pricePerKg": "Prijs per kg",
+      "editInfo": "Informatie bewerken",
+      "removeShipping": "Verzending verwijderen",
+      "cancel": "Annuleren",
+      "addShipping": "Verzendland toevoegen"
+    },
+    "VariantManager": {
+      "title": "Productopties beheren",
+      "loading": "Laden...",
+      "noData": "Er zijn nog geen productopties.",
+      "sku": "SKU",
+      "price": "Prijs",
+      "priceNotSpecified": "(Voer een prijs in)",
+      "stock": "Voorraad",
+      "stockNotSpecified": "(Voer voorraad in)",
+      "editInfo": "Informatie bewerken",
+      "removeOption": "Optie verwijderen",
+      "cancel": "Annuleren",
+      "addOption": "Opties toevoegen"
+    },
+    "Order": {
+      "table": {
+        "orderId": "Bestel ID",
+        "image": "Afbeelding",
+        "customerName": "Klantnaam",
+        "orderDate": "Besteldatum",
+        "totalAmount": "Totaalbedrag",
+        "status": "Status",
+        "trackingNumber": "Trackingnummer",
+        "actions": "Acties",
+        "empty": "Geen gegevens om weer te geven",
+        "loading": "Laden..."
+      },
+      "action": {
+        "status": "Bestelstatus",
+        "details": "Bekijk details"
+      }
+    },
     "ProductForm": {
       "editTitle": "Product Bewerken",
       "addTitle": "Nieuw Product Toevoegen",

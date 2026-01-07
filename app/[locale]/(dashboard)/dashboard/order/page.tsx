@@ -41,6 +41,8 @@ import { formatCurrency } from '@/utils/number'
 
 export default function Order() {
   const t = useTranslations('Dashboard')
+  const tOrder = useTranslations('Dashboard.Order')
+
   const { country, exchangeRates } = useAppStore()
   const CURRENCY_OPTIONS = {
     currency: country?.currency,
@@ -73,7 +75,7 @@ export default function Order() {
 
       <div className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
         {isLoadingDashboard &&
-          [...Array(4)].map((_) => <StatCardSkeleton key={_} />)}
+          [...Array(4)].map((_, i) => <StatCardSkeleton key={i} />)}
 
         {!isLoadingDashboard &&
           dashboard?.map((data) => (
@@ -96,19 +98,19 @@ export default function Order() {
         }}
       >
         <TableHeader>
-          <TableColumn>Order ID</TableColumn>
-          <TableColumn>Image</TableColumn>
-          <TableColumn>Customer Name</TableColumn>
-          <TableColumn>Order Date</TableColumn>
-          <TableColumn>Total Amount</TableColumn>
-          <TableColumn>Status</TableColumn>
-          <TableColumn>Tracking Number</TableColumn>
-          <TableColumn>Actions</TableColumn>
+          <TableColumn>{tOrder('table.orderId')}</TableColumn>
+          <TableColumn>{tOrder('table.image')}</TableColumn>
+          <TableColumn>{tOrder('table.customerName')}</TableColumn>
+          <TableColumn>{tOrder('table.orderDate')}</TableColumn>
+          <TableColumn>{tOrder('table.totalAmount')}</TableColumn>
+          <TableColumn>{tOrder('table.status')}</TableColumn>
+          <TableColumn>{tOrder('table.trackingNumber')}</TableColumn>
+          <TableColumn>{tOrder('table.actions')}</TableColumn>
         </TableHeader>
         <TableBody
-          emptyContent='There is no information to display'
+          emptyContent={tOrder('table.empty')}
           isLoading={isLoadingOrders}
-          loadingContent={<Spinner label='Loading...' />}
+          loadingContent={<Spinner label={tOrder('table.loading')} />}
         >
           {(orders?.items ?? []).map((order) => (
             <TableRow key={order.id}>
@@ -172,7 +174,7 @@ export default function Order() {
                         onOpenOrderChange()
                       }}
                     >
-                      Order status
+                      {tOrder('action.status')}
                     </DropdownItem>
                     <DropdownItem
                       key='view'
@@ -182,7 +184,7 @@ export default function Order() {
                         onOpenViewChange()
                       }}
                     >
-                      See details
+                      {tOrder('action.details')}
                     </DropdownItem>
                   </DropdownMenu>
                 </Dropdown>

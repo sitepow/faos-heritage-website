@@ -502,6 +502,58 @@
       "cancel": "Hủy",
       "addCategory": "Thêm danh mục"
     },
+    "ImageManager": {
+      "title": "Quản lý hình ảnh sản phẩm",
+      "loading": "Đang tải...",
+      "noData": "Chưa có hình ảnh sản phẩm nào",
+      "editInfo": "Chỉnh sửa thông tin",
+      "removeImage": "Xóa hình ảnh",
+      "cancel": "Hủy",
+      "addImage": "Thêm hình ảnh"
+    },
+    "ShippingCountryManager": {
+      "title": "Quản lý chi phí vận chuyển",
+      "loading": "Đang tải...",
+      "noData": "Chưa có quốc gia vận chuyển nào.",
+      "baseRate": "Cước phí cơ bản",
+      "pricePerKg": "Giá mỗi kg",
+      "editInfo": "Chỉnh sửa thông tin",
+      "removeShipping": "Xóa vận chuyển",
+      "cancel": "Hủy",
+      "addShipping": "Thêm quốc gia vận chuyển"
+    },
+    "VariantManager": {
+      "title": "Quản lý tùy chọn sản phẩm",
+      "loading": "Đang tải...",
+      "noData": "Chưa có tùy chọn sản phẩm nào.",
+      "sku": "Mã SKU",
+      "price": "Giá",
+      "priceNotSpecified": "(Vui lòng chỉ định giá)",
+      "stock": "Kho hàng",
+      "stockNotSpecified": "(Vui lòng chỉ định số lượng kho)",
+      "editInfo": "Chỉnh sửa thông tin",
+      "removeOption": "Xóa tùy chọn",
+      "cancel": "Hủy",
+      "addOption": "Thêm tùy chọn"
+    },
+    "Order": {
+      "table": {
+        "orderId": "Mã đơn hàng",
+        "image": "Hình ảnh",
+        "customerName": "Tên khách hàng",
+        "orderDate": "Ngày đặt hàng",
+        "totalAmount": "Tổng tiền",
+        "status": "Trạng thái",
+        "trackingNumber": "Mã vận đơn",
+        "actions": "Thao tác",
+        "empty": "Không có thông tin để hiển thị",
+        "loading": "Đang tải..."
+      },
+      "action": {
+        "status": "Trạng thái đơn hàng",
+        "details": "Xem chi tiết"
+      }
+    },
     "ProductForm": {
       "editTitle": "Chỉnh sửa sản phẩm",
       "addTitle": "Thêm sản phẩm mới",

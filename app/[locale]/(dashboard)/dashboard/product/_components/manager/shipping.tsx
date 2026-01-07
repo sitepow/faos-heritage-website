@@ -24,6 +24,7 @@ import {
   PlusIcon,
   TrashIcon,
 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 import { getShippingCountries } from '../../action'
 import { deleteShippingCountry } from '../../action/shipping/contry'
@@ -36,7 +37,9 @@ import { formatCurrency } from '@/utils/number'
 import { cn } from '@/utils/style'
 
 export const ShippingCountryManager = () => {
+  const t = useTranslations('Dashboard.ShippingCountryManager')
   const queryClient = useQueryClient()
+
   const {
     shippingCountryId,
     isShippingCountryManagerOpen,
@@ -105,18 +108,17 @@ export const ShippingCountryManager = () => {
         onOpenChange={onOpenShippingCountryManagerChange}
       >
         <ModalContent>
-          <ModalHeader>Manage shipping costs</ModalHeader>
+          <ModalHeader>{t('title')}</ModalHeader>
+
           {isLoadingShippingCountries && (
             <ModalBody>
-              <Spinner label='Loading...' />
+              <Spinner label={t('loading')} />
             </ModalBody>
           )}
 
-          {shippingCountries?.length === 0 && (
+          {!isLoadingShippingCountries && shippingCountries?.length === 0 && (
             <ModalBody>
-              <p className='text-default-500 text-center'>
-                There are no product options yet.
-              </p>
+              <p className='text-default-500 text-center'>{t('noData')}</p>
             </ModalBody>
           )}
 
@@ -152,7 +154,7 @@ export const ShippingCountryManager = () => {
                               )}
                             >
                               {shippingCountry.baseRate
-                                ? `Base Rate: ${formatCurrency(shippingCountry?.baseRate ?? 0)}`
+                                ? `${t('baseRate')}: ${formatCurrency(shippingCountry?.baseRate ?? 0)}`
                                 : `-`}
                             </span>
                           </Chip>
@@ -165,7 +167,7 @@ export const ShippingCountryManager = () => {
                               )}
                             >
                               {shippingCountry.baseRate
-                                ? `Price / kg: ${formatCurrency(shippingCountry?.pricePerKg ?? 0)}`
+                                ? `${t('pricePerKg')}: ${formatCurrency(shippingCountry?.pricePerKg ?? 0)}`
                                 : `-`}
                             </span>
                           </Chip>
@@ -179,7 +181,7 @@ export const ShippingCountryManager = () => {
                           </Button>
                         </DropdownTrigger>
                         <DropdownMenu
-                          aria-label='Manage products'
+                          aria-label='Manage shipping'
                           className='min-w-[180px]'
                         >
                           <DropdownItem
@@ -193,7 +195,7 @@ export const ShippingCountryManager = () => {
                               onOpenShippingCountryChange()
                             }}
                           >
-                            Edit information
+                            {t('editInfo')}
                           </DropdownItem>
                           <DropdownItem
                             key='delete'
@@ -207,7 +209,7 @@ export const ShippingCountryManager = () => {
                               onOpenDeleteChange()
                             }}
                           >
-                            Remove shipping
+                            {t('removeShipping')}
                           </DropdownItem>
                         </DropdownMenu>
                       </Dropdown>
@@ -220,7 +222,7 @@ export const ShippingCountryManager = () => {
 
           <ModalFooter>
             <Button variant='faded' onPress={onClose}>
-              Cancel
+              {t('cancel')}
             </Button>
             <Button
               className='text-secondary'
@@ -231,7 +233,7 @@ export const ShippingCountryManager = () => {
                 onOpenShippingCountryManagerChange()
               }}
             >
-              Add shiping country
+              {t('addShipping')}
             </Button>
           </ModalFooter>
         </ModalContent>

@@ -444,6 +444,24 @@
     "ID": "Indonesia"
   },
   "Dashboard": {
+    "Order": {
+      "table": {
+        "orderId": "Order ID",
+        "image": "Image",
+        "customerName": "Customer Name",
+        "orderDate": "Order Date",
+        "totalAmount": "Total Amount",
+        "status": "Status",
+        "trackingNumber": "Tracking Number",
+        "actions": "Actions",
+        "empty": "There is no information to display",
+        "loading": "Loading..."
+      },
+      "action": {
+        "status": "Order status",
+        "details": "See details"
+      }
+    },
     "ProductManager": {
       "addNew": "Add new products",
       "manageCategories": "Manage product categories",
@@ -502,6 +520,40 @@
       "removeCategory": "Remove Category",
       "cancel": "Cancel",
       "addCategory": "Add a Category"
+    },
+    "ImageManager": {
+      "title": "Manage Product Images",
+      "loading": "Loading...",
+      "noData": "There are no product images yet",
+      "editInfo": "Edit Information",
+      "removeImage": "Remove Image",
+      "cancel": "Cancel",
+      "addImage": "Add Image"
+    },
+    "ShippingCountryManager": {
+      "title": "Manage shipping costs",
+      "loading": "Loading...",
+      "noData": "There are no shipping countries yet.",
+      "baseRate": "Base Rate",
+      "pricePerKg": "Price / kg",
+      "editInfo": "Edit information",
+      "removeShipping": "Remove shipping",
+      "cancel": "Cancel",
+      "addShipping": "Add shipping country"
+    },
+    "VariantManager": {
+      "title": "Manage product options",
+      "loading": "Loading...",
+      "noData": "There are no product options yet.",
+      "sku": "SKU",
+      "price": "Price",
+      "priceNotSpecified": "(Please specify the price)",
+      "stock": "Stock",
+      "stockNotSpecified": "(Please specify stock availability)",
+      "editInfo": "Edit information",
+      "removeOption": "Remove option",
+      "cancel": "Cancel",
+      "addOption": "Add options"
     },
     "ProductForm": {
       "editTitle": "Edit Product",

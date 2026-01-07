@@ -507,6 +507,58 @@
       "cancel": "キャンセル",
       "addCategory": "カテゴリーを追加"
     },
+    "ImageManager": {
+      "title": "製品画像の管理",
+      "loading": "読み込み中...",
+      "noData": "製品画像がまだありません",
+      "editInfo": "情報を編集",
+      "removeImage": "画像を削除",
+      "cancel": "キャンセル",
+      "addImage": "画像を追加"
+    },
+    "ShippingCountryManager": {
+      "title": "配送料の管理",
+      "loading": "読み込み中...",
+      "noData": "配送国がまだ設定されていません。",
+      "baseRate": "基本料金",
+      "pricePerKg": "重量単価 (kg)",
+      "editInfo": "情報を編集",
+      "removeShipping": "配送設定を削除",
+      "cancel": "キャンセル",
+      "addShipping": "配送国を追加"
+    },
+    "VariantManager": {
+      "title": "商品のバリエーション管理",
+      "loading": "読み込み中...",
+      "noData": "バリエーションが登録されていません。",
+      "sku": "SKU",
+      "price": "価格",
+      "priceNotSpecified": "(価格を指定してください)",
+      "stock": "在庫",
+      "stockNotSpecified": "(在庫数を指定してください)",
+      "editInfo": "情報を編集",
+      "removeOption": "オプションを削除",
+      "cancel": "キャンセル",
+      "addOption": "オプションを追加"
+    },
+    "Order": {
+      "table": {
+        "orderId": "注文ID",
+        "image": "画像",
+        "customerName": "お客様名",
+        "orderDate": "注文日",
+        "totalAmount": "合計金額",
+        "status": "ステータス",
+        "trackingNumber": "追跡番号",
+        "actions": "操作",
+        "empty": "表示する情報がありません",
+        "loading": "読み込み中..."
+      },
+      "action": {
+        "status": "注文ステータス",
+        "details": "詳細を見る"
+      }
+    },
     "ProductForm": {
       "editTitle": "製品を編集",
       "addTitle": "新しい製品を追加",
