@@ -51,7 +51,7 @@ export const CartLists = ({ className, ...props }: CartListsProp) => {
           [...Array(1)].map((_, index) => <CartItemSkeleton key={index} />)}
 
         {!isLoadingCarts && carts?.length === 0 && (
-          <div className='text-default-500 flex size-full flex-col items-center justify-center gap-2'>
+          <div className='text-default-500 mx-auto flex size-full flex-col items-center justify-center gap-2 sm:w-1/2'>
             <AlertCircleIcon />
             <span className='text-center'>
               {t.rich('List.emptyCart', {
