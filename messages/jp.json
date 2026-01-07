@@ -448,6 +448,28 @@
     "ID": "インドネシア"
   },
   "Dashboard": {
+    "ProductManager": {
+      "addNew": "新規商品追加",
+      "manageCategories": "カテゴリー管理",
+      "manageShipping": "配送料管理",
+      "deleteSelected": "選択した項目を削除 ({count})",
+      "tableAria": "商品データテーブル",
+      "empty": "表示する商品がありません",
+      "colId": "商品ID",
+      "colDigital": "デジタル商品",
+      "colImage": "画像",
+      "colName": "商品名",
+      "colPrice": "基本価格",
+      "colStock": "在庫数",
+      "colCategory": "カテゴリー",
+      "colActions": "操作",
+      "digitalProduct": "デジタルコンテンツ",
+      "dropdownAria": "商品管理メニュー",
+      "editInfo": "情報を編集",
+      "manageImages": "画像を管理",
+      "manageOptions": "オプション管理",
+      "removeProduct": "商品を削除"
+    },
     "UserManager": {
       "addNew": "新規ユーザー追加",
       "deleteSelected": "選択した項目を削除 ({count})",

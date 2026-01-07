@@ -444,6 +444,28 @@
     "ID": "Indonesia"
   },
   "Dashboard": {
+    "ProductManager": {
+      "addNew": "Add New Stock",
+      "manageCategories": "Product Categories",
+      "manageShipping": "Shipping Settings",
+      "deleteSelected": "Remove selected ({count})",
+      "tableAria": "Inventory table",
+      "empty": "No products found",
+      "colId": "SKU / ID",
+      "colDigital": "Type",
+      "colImage": "Preview",
+      "colName": "Product Title",
+      "colPrice": "Base Price",
+      "colStock": "Current Stock",
+      "colCategory": "Department",
+      "colActions": "Manage",
+      "digitalProduct": "E-Product",
+      "dropdownAria": "Product options",
+      "editInfo": "Update details",
+      "manageImages": "Gallery setup",
+      "manageOptions": "Variant setup",
+      "removeProduct": "Delete from shop"
+    },
     "UserManager": {
       "addNew": "Invite New User",
       "deleteSelected": "Remove selected ({count})",

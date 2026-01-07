@@ -444,6 +444,28 @@
     "ID": "Indonesië"
   },
   "Dashboard": {
+    "ProductManager": {
+      "addNew": "Nieuwe producten toevoegen",
+      "manageCategories": "Productcategorieën beheren",
+      "manageShipping": "Verzendkosten beheren",
+      "deleteSelected": "Geselecteerde items verwijderen ({count})",
+      "tableAria": "Productgegevenstabel",
+      "empty": "Geen informatie om weer te geven",
+      "colId": "Product-ID",
+      "colDigital": "Digitaal Product",
+      "colImage": "Afbeelding",
+      "colName": "Productnaam",
+      "colPrice": "Hoofdprijs",
+      "colStock": "Voorraad",
+      "colCategory": "Categorie",
+      "colActions": "Acties",
+      "digitalProduct": "Digitaal product",
+      "dropdownAria": "Productbeheer menu",
+      "editInfo": "Informatie bewerken",
+      "manageImages": "Afbeeldingen beheren",
+      "manageOptions": "Opties beheren",
+      "removeProduct": "Product verwijderen"
+    },
     "UserManager": {
       "addNew": "Nieuwe Gebruikers Toevoegen",
       "deleteSelected": "Geselecteerde items verwijderen ({count})",

@@ -451,6 +451,28 @@
     "ID": "อินโดนีเซีย"
   },
   "Dashboard": {
+    "ProductManager": {
+      "addNew": "เพิ่มสินค้าใหม่",
+      "manageCategories": "จัดการหมวดหมู่",
+      "manageShipping": "จัดการค่าจัดส่ง",
+      "deleteSelected": "ลบรายการที่เลือก ({count})",
+      "tableAria": "ตารางข้อมูลสินค้า",
+      "empty": "ไม่พบข้อมูลสินค้า",
+      "colId": "รหัสสินค้า",
+      "colDigital": "ประเภทสินค้า",
+      "colImage": "รูปภาพ",
+      "colName": "ชื่อสินค้า",
+      "colPrice": "ราคากลาง",
+      "colStock": "สต็อกกลาง",
+      "colCategory": "หมวดหมู่",
+      "colActions": "จัดการ",
+      "digitalProduct": "สินค้าดิจิทัล",
+      "dropdownAria": "เมนูจัดการสินค้า",
+      "editInfo": "แก้ไขข้อมูล",
+      "manageImages": "จัดการรูปภาพ",
+      "manageOptions": "จัดการตัวเลือกสินค้า",
+      "removeProduct": "ลบสินค้า"
+    },
     "UserManager": {
       "addNew": "เพิ่มผู้ใช้งานใหม่",
       "deleteSelected": "ลบรายการที่เลือก ({count})",

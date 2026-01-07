@@ -64,7 +64,10 @@ import {
 import { getRangeDisplayValue } from '@/utils/range'
 
 export default function Product() {
-  const t = useTranslations('Dashboard')
+  const tDash = useTranslations('Dashboard')
+  const t = useTranslations('Dashboard.ProductManager')
+  const tc = useTranslations('Common')
+
   const { country, exchangeRates } = useAppStore()
   const CURRENCY_OPTIONS = {
     currency: country?.currency,
@@ -141,47 +144,42 @@ export default function Product() {
 
       <div className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
         {isLoadingDashboard &&
-          [...Array(4)].map((_) => <StatCardSkeleton key={_} />)}
+          [...Array(4)].map((_, i) => <StatCardSkeleton key={i} />)}
 
         {!isLoadingDashboard &&
           dashboard?.map((data) => (
             <StatCard
               key={data.name}
               {...data}
-              name={t(`Stats.${data.name}`)}
+              name={tDash(`Stats.${data.name}`)}
             />
           ))}
       </div>
+
       <div className='flex w-full flex-wrap gap-3 *:shrink-0 md:justify-end'>
         <Button
           className='text-secondary'
           color='primary'
           startContent={<PlusIcon />}
-          onPress={() => {
-            onOpenProductChange()
-          }}
+          onPress={() => onOpenProductChange()}
         >
-          Add new products
+          {t('addNew')}
         </Button>
         <Button
           className='text-secondary'
           color='primary'
           startContent={<SettingsIcon />}
-          onPress={() => {
-            onOpenCategoryManagerChange()
-          }}
+          onPress={() => onOpenCategoryManagerChange()}
         >
-          Manage product categories
+          {t('manageCategories')}
         </Button>
         <Button
           className='text-secondary'
           color='primary'
           startContent={<SettingsIcon />}
-          onPress={() => {
-            onOpenShippingCountryManagerChange()
-          }}
+          onPress={() => onOpenShippingCountryManagerChange()}
         >
-          Manage shipping costs
+          {t('manageShipping')}
         </Button>
         <Button
           className='text-secondary'
@@ -193,15 +191,14 @@ export default function Product() {
             onOpenDeleteChange()
           }}
         >
-          Delete selected items ({selectedProductIds.length})
+          {t('deleteSelected', { count: selectedProductIds.length })}
         </Button>
       </div>
+
       <Table
-        aria-label='ตารางข้อมูลสินค้า'
+        aria-label={t('tableAria')}
         selectionMode='multiple'
-        onSelectionChange={(keys) => {
-          setSelectedKeys(keys as Set<string>)
-        }}
+        onSelectionChange={(keys) => setSelectedKeys(keys as Set<string>)}
         checkboxesProps={{
           classNames: {
             base: 'data-[selected=true]:border-primary',
@@ -210,20 +207,20 @@ export default function Product() {
         }}
       >
         <TableHeader>
-          <TableColumn>Product ID</TableColumn>
-          <TableColumn>Digital Product</TableColumn>
-          <TableColumn>Image</TableColumn>
-          <TableColumn>Product Name</TableColumn>
-          <TableColumn>Main Price</TableColumn>
-          <TableColumn>Main Stock</TableColumn>
-          <TableColumn>Category</TableColumn>
-          <TableColumn>Actions</TableColumn>
+          <TableColumn>{t('colId')}</TableColumn>
+          <TableColumn>{t('colDigital')}</TableColumn>
+          <TableColumn>{t('colImage')}</TableColumn>
+          <TableColumn>{t('colName')}</TableColumn>
+          <TableColumn>{t('colPrice')}</TableColumn>
+          <TableColumn>{t('colStock')}</TableColumn>
+          <TableColumn>{t('colCategory')}</TableColumn>
+          <TableColumn>{t('colActions')}</TableColumn>
         </TableHeader>
 
         <TableBody
-          emptyContent='There is no information to display'
+          emptyContent={t('empty')}
           isLoading={isLoadingProducts}
-          loadingContent={<Spinner label='Loading...' />}
+          loadingContent={<Spinner label={tc('loading')} />}
         >
           {(products?.items ?? []).map((product) => {
             const price = getRangeDisplayValue(
@@ -264,16 +261,16 @@ export default function Product() {
                       }
                       variant='bordered'
                     >
-                      Digital product
+                      {t('digitalProduct')}
                     </Chip>
                   ) : (
                     '-'
                   )}
                 </TableCell>
                 <TableCell>
-                  {product?.images?.length === 0 && <span>-</span>}
-
-                  {product?.images?.length !== 0 && (
+                  {product?.images?.length === 0 ? (
+                    '-'
+                  ) : (
                     <AvatarGroup max={3} isBordered>
                       {product?.images?.map((image) => (
                         <Avatar key={image?.url} src={image?.url} />
@@ -285,7 +282,7 @@ export default function Product() {
                   {product?.name ?? '-'}
                 </TableCell>
                 <TableCell className='min-w-32'>
-                  {price !== formatCurrency(0) ? (
+                  {price !== formatCurrency(0, CURRENCY_OPTIONS) ? (
                     <Chip color='primary' variant='bordered'>
                       {price}
                     </Chip>
@@ -319,7 +316,7 @@ export default function Product() {
                       </Button>
                     </DropdownTrigger>
                     <DropdownMenu
-                      aria-label='Manage products'
+                      aria-label={t('dropdownAria')}
                       className='min-w-[180px]'
                     >
                       <DropdownItem
@@ -330,7 +327,7 @@ export default function Product() {
                           onOpenProductChange()
                         }}
                       >
-                        Edit information
+                        {t('editInfo')}
                       </DropdownItem>
                       <DropdownItem
                         key='image'
@@ -340,7 +337,7 @@ export default function Product() {
                           onOpenImageManagerChange()
                         }}
                       >
-                        Manage images
+                        {t('manageImages')}
                       </DropdownItem>
                       <DropdownItem
                         key='variant'
@@ -350,7 +347,7 @@ export default function Product() {
                           onOpenVariantManagerChange()
                         }}
                       >
-                        Manage options
+                        {t('manageOptions')}
                       </DropdownItem>
                       <DropdownItem
                         key='delete'
@@ -362,7 +359,7 @@ export default function Product() {
                           onOpenDeleteChange()
                         }}
                       >
-                        Remove product
+                        {t('removeProduct')}
                       </DropdownItem>
                     </DropdownMenu>
                   </Dropdown>

@@ -443,6 +443,28 @@
     "ID": "Indonesia"
   },
   "Dashboard": {
+    "ProductManager": {
+      "addNew": "Thêm sản phẩm mới",
+      "manageCategories": "Quản lý danh mục",
+      "manageShipping": "Quản lý phí vận chuyển",
+      "deleteSelected": "Xóa các mục đã chọn ({count})",
+      "tableAria": "Bảng dữ liệu sản phẩm",
+      "empty": "Không có thông tin để hiển thị",
+      "colId": "Mã sản phẩm",
+      "colDigital": "Sản phẩm số",
+      "colImage": "Hình ảnh",
+      "colName": "Tên sản phẩm",
+      "colPrice": "Giá chính",
+      "colStock": "Kho hàng",
+      "colCategory": "Danh mục",
+      "colActions": "Hành động",
+      "digitalProduct": "Sản phẩm kỹ thuật số",
+      "dropdownAria": "Menu quản lý sản phẩm",
+      "editInfo": "Chỉnh sửa thông tin",
+      "manageImages": "Quản lý hình ảnh",
+      "manageOptions": "Quản lý tùy chọn",
+      "removeProduct": "Xóa sản phẩm"
+    },
     "UserManager": {
       "addNew": "Thêm người dùng mới",
       "deleteSelected": "Xóa mục đã chọn ({count})",

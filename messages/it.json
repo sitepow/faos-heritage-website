@@ -447,6 +447,28 @@
     "ID": "Indonesia"
   },
   "Dashboard": {
+    "ProductManager": {
+      "addNew": "Aggiungi nuovi prodotti",
+      "manageCategories": "Gestisci categorie",
+      "manageShipping": "Gestisci costi spedizione",
+      "deleteSelected": "Elimina selezionati ({count})",
+      "tableAria": "Tabella dati prodotti",
+      "empty": "Nessuna informazione da visualizzare",
+      "colId": "ID Prodotto",
+      "colDigital": "Prodotto Digitale",
+      "colImage": "Immagine",
+      "colName": "Nome Prodotto",
+      "colPrice": "Prezzo Base",
+      "colStock": "Giacenza",
+      "colCategory": "Categoria",
+      "colActions": "Azioni",
+      "digitalProduct": "Prodotto digitale",
+      "dropdownAria": "Menu gestione prodotti",
+      "editInfo": "Modifica informazioni",
+      "manageImages": "Gestisci immagini",
+      "manageOptions": "Gestisci varianti",
+      "removeProduct": "Rimuovi prodotto"
+    },
     "UserManager": {
       "addNew": "Aggiungi Nuovi Utenti",
       "deleteSelected": "Elimina elementi selezionati ({count})",

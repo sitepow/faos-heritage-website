@@ -444,6 +444,28 @@
     "ID": "Indonesia"
   },
   "Dashboard": {
+    "ProductManager": {
+      "addNew": "Tambah produk baru",
+      "manageCategories": "Urus kategori produk",
+      "manageShipping": "Urus kos penghantaran",
+      "deleteSelected": "Padam item terpilih ({count})",
+      "tableAria": "Jadual data produk",
+      "empty": "Tiada maklumat untuk dipaparkan",
+      "colId": "ID Produk",
+      "colDigital": "Produk Digital",
+      "colImage": "Imej",
+      "colName": "Nama Produk",
+      "colPrice": "Harga Utama",
+      "colStock": "Stok Utama",
+      "colCategory": "Kategori",
+      "colActions": "Tindakan",
+      "digitalProduct": "Produk digital",
+      "dropdownAria": "Menu urus produk",
+      "editInfo": "Edit maklumat",
+      "manageImages": "Urus imej",
+      "manageOptions": "Urus pilihan",
+      "removeProduct": "Padam produk"
+    },
     "UserManager": {
       "addNew": "Tambah Pengguna Baru",
       "deleteSelected": "Padam item terpilih ({count})",

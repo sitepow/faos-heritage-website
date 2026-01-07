@@ -447,6 +447,28 @@
     "ID": "Indónesía"
   },
   "Dashboard": {
+    "ProductManager": {
+      "addNew": "Bæta við nýjum vörum",
+      "manageCategories": "Sýsla með vöruflokka",
+      "manageShipping": "Sýsla með sendingarkostnað",
+      "deleteSelected": "Eyða völdum atriðum ({count})",
+      "tableAria": "Vörutöflu",
+      "empty": "Engar upplýsingar til að sýna",
+      "colId": "Vöru ID",
+      "colDigital": "Stafræn vara",
+      "colImage": "Mynd",
+      "colName": "Vöruheiti",
+      "colPrice": "Aðalverð",
+      "colStock": "Lagerstaða",
+      "colCategory": "Flokkur",
+      "colActions": "Aðgerðir",
+      "digitalProduct": "Stafræn vara",
+      "dropdownAria": "Vöruumsýsluvalmynd",
+      "editInfo": "Breyta upplýsingum",
+      "manageImages": "Sýsla með myndir",
+      "manageOptions": "Sýsla með valmöguleika",
+      "removeProduct": "Eyða vöru"
+    },
     "UserManager": {
       "addNew": "Bæta við nýjum notendum",
       "deleteSelected": "Eyða völdum atriðum ({count})",

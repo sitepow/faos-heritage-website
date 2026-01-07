@@ -447,6 +447,28 @@
     "ID": "Ινδονησία"
   },
   "Dashboard": {
+    "ProductManager": {
+      "addNew": "Προσθήκη νέων προϊόντων",
+      "manageCategories": "Διαχείριση κατηγοριών",
+      "manageShipping": "Διαχείριση εξόδων αποστολής",
+      "deleteSelected": "Διαγραφή επιλεγμένων ({count})",
+      "tableAria": "Πίνακας δεδομένων προϊόντων",
+      "empty": "Δεν υπάρχουν πληροφορίες για εμφάνιση",
+      "colId": "ID Προϊόντος",
+      "colDigital": "Ψηφιακό Προϊόν",
+      "colImage": "Εικόνα",
+      "colName": "Όνομα Προϊόντος",
+      "colPrice": "Βασική Τιμή",
+      "colStock": "Απόθεμα",
+      "colCategory": "Κατηγορία",
+      "colActions": "Ενέργειες",
+      "digitalProduct": "Ψηφιακό προϊόν",
+      "dropdownAria": "Μενού διαχείρισης προϊόντων",
+      "editInfo": "Επεξεργασία πληροφοριών",
+      "manageImages": "Διαχείριση εικόνων",
+      "manageOptions": "Διαχείριση επιλογών",
+      "removeProduct": "Αφαίρεση προϊόντος"
+    },
     "UserManager": {
       "addNew": "Προσθήκη Νέων Χρηστών",
       "deleteSelected": "Διαγραφή επιλεγμένων ({count})",

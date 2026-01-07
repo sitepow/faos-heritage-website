@@ -423,6 +423,28 @@
     "ID": "印度尼西亚"
   },
   "Dashboard": {
+    "ProductManager": {
+      "addNew": "添加新产品",
+      "manageCategories": "管理产品分类",
+      "manageShipping": "管理运费",
+      "deleteSelected": "删除选中项 ({count})",
+      "tableAria": "产品数据表",
+      "empty": "暂无产品信息",
+      "colId": "产品ID",
+      "colDigital": "数字产品",
+      "colImage": "图片",
+      "colName": "产品名称",
+      "colPrice": "主价格",
+      "colStock": "库存量",
+      "colCategory": "分类",
+      "colActions": "操作",
+      "digitalProduct": "虚拟商品",
+      "dropdownAria": "产品管理菜单",
+      "editInfo": "编辑信息",
+      "manageImages": "管理图片",
+      "manageOptions": "管理选项",
+      "removeProduct": "删除产品"
+    },
     "UserManager": {
       "addNew": "添加新用户",
       "deleteSelected": "删除选中项 ({count})",
