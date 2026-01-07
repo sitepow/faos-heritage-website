@@ -40,7 +40,7 @@ export const ProductImagePreview = ({
               fill
               priority
               alt={alt}
-              className='aspect-square object-cover transition-opacity duration-300'
+              className='aspect-square object-contain transition-opacity duration-300'
               src={mainImage}
             />
           </div>
@@ -54,10 +54,10 @@ export const ProductImagePreview = ({
                   <button
                     key={`${image}-${index}`}
                     className={cn(
-                      'order relative aspect-square size-20 shrink-0 overflow-hidden rounded-xl border-2 transition-all',
+                      'order relative aspect-square size-24 shrink-0 overflow-hidden rounded-xl border-2 transition-all',
                       isActive
                         ? 'border-primary ring-primary/10 ring-2'
-                        : 'hover:border-default-300 border-transparent',
+                        : 'hover:border-default-300 border-divider',
                     )}
                     type='button'
                     onClick={() => setSelectedIndex(index)}
@@ -66,7 +66,7 @@ export const ProductImagePreview = ({
                       fill
                       alt={`${alt}-thumb-${index}`}
                       className={cn(
-                        'object-cover transition-opacity',
+                        'object-contain transition-opacity',
                         isActive
                           ? 'opacity-100'
                           : 'opacity-60 hover:opacity-100',
