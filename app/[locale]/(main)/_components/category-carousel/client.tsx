@@ -90,7 +90,7 @@ export const CategoryCarouselClient = ({
 
   return (
     <div className='flex w-full flex-col gap-5 md:min-h-[525px] md:flex-row'>
-      <Card className='h-[350px] md:h-[550px] md:w-[400px]'>
+      <Card className='h-[350px] md:w-[400px]'>
         <CardHeader className='font-bold'>{t('title')}</CardHeader>
         <CardBody>
           <ScrollShadow className='p-1'>

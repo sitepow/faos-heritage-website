@@ -115,7 +115,7 @@ export const Navbar = () => {
         </NavbarContent>
 
         <NavbarMenu className='border-divider border-t bg-white dark:bg-inherit'>
-          <NavbarItem>
+          <NavbarItem className='hidden xl:block'>
             <Country />
           </NavbarItem>
 

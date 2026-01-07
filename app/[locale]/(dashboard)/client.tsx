@@ -10,9 +10,9 @@ export const DashboardClient = ({ children }: PropsWithChildren) => {
   const { theme } = useTheme()
 
   return (
-    <div className='relative flex h-screen flex-col overflow-x-hidden'>
+    <div className='bg-background relative flex h-screen flex-col overflow-x-hidden'>
       <Navbar />
-      <main className='container mx-auto flex-grow p-6'>
+      <main className='w-full flex-grow px-4 py-6 md:px-8 lg:px-12'>
         <ToastContainer
           closeOnClick
           hideProgressBar
@@ -22,7 +22,7 @@ export const DashboardClient = ({ children }: PropsWithChildren) => {
           theme={theme === 'dark' ? 'dark' : 'light'}
         />
 
-        {children}
+        <div className='mx-auto max-w-[1920px]'>{children}</div>
       </main>
       <Footer />
     </div>

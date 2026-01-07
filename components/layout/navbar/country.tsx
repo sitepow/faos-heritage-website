@@ -37,12 +37,12 @@ export const Country = () => {
   if (!hasHydrated) return null
 
   return (
-    <div className='flex flex-col gap-2 sm:flex-row'>
+    <div className='flex gap-2'>
       <Select
         variant='faded'
         size='lg'
         disallowEmptySelection
-        className='min-w-52'
+        className='min-w-40 sm:min-w-52'
         selectedKeys={selectedCountry ? [selectedCountry.country] : []}
         renderValue={() =>
           selectedCountry ? (
@@ -71,7 +71,7 @@ export const Country = () => {
         variant='faded'
         size='lg'
         disallowEmptySelection
-        className='min-w-52'
+        className='min-w-40 sm:min-w-52'
         selectedKeys={country ? [country.locale] : []}
         renderValue={(items) =>
           items.map((item) => {

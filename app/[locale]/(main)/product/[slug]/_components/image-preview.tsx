@@ -30,7 +30,7 @@ export const ProductImagePreview = ({
       <CardBody>
         <div
           className={cn(
-            'flex h-[350px] w-full flex-col gap-3 overflow-hidden',
+            'flex h-[650px] w-full flex-col gap-3 overflow-hidden',
             className,
           )}
           {...props}
@@ -40,7 +40,7 @@ export const ProductImagePreview = ({
               fill
               priority
               alt={alt}
-              className='aspect-square object-contain transition-opacity duration-300'
+              className='aspect-square object-cover transition-opacity duration-300'
               src={mainImage}
             />
           </div>
