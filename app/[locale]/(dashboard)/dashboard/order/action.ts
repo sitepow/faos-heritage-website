@@ -3,7 +3,6 @@
 import { OrderStatus } from '@prisma/client'
 
 import { prisma } from '@/lib/prisma'
-import { getOrderStatus } from '@/utils/features/order/helpers'
 import { decimalToNumber } from '@/utils/number'
 
 export type GetOrdersResult = Awaited<ReturnType<typeof getOrders>>
@@ -88,9 +87,9 @@ export const getOrderStat = async () => {
   ])
 
   return [
-    { name: 'All orders', value: totalOrders },
-    { name: `Order (${getOrderStatus('PENDING')})`, value: pending },
-    { name: `Order (${getOrderStatus('DELIVERED')})`, value: success },
+    { name: 'allOrders', value: totalOrders },
+    { name: 'pendingOrders', value: pending },
+    { name: 'deliveredOrders', value: success },
   ]
 }
 
@@ -112,17 +111,17 @@ export const getOrderStatCash = async () => {
 
   return [
     {
-      name: `Total payment (${getOrderStatus('DELIVERED')})`,
+      name: 'paymentDelivered',
       value: orderDelivered._sum.total ?? 0,
       isCurrency: true,
     },
     {
-      name: `Total payment (${getOrderStatus('CANCELLED')})`,
+      name: 'paymentCancelled',
       value: orderCancelled._sum.total ?? 0,
       isCurrency: true,
     },
     {
-      name: `Total payment (${getOrderStatus('PENDING')})`,
+      name: 'paymentPending',
       value: orderPending._sum.total ?? 0,
       isCurrency: true,
     },

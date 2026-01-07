@@ -13,6 +13,7 @@ import {
 } from '@heroui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
@@ -34,6 +35,8 @@ const DEFAULT_VALUES: ImageBannerInput = {
 }
 
 export const ImageBannerForm = () => {
+  const t = useTranslations('Dashboard.BannerForm')
+  const tc = useTranslations('Common')
   const queryClient = useQueryClient()
 
   const {
@@ -97,7 +100,7 @@ export const ImageBannerForm = () => {
   })
 
   const isPending = creating || updating || isLoading || isUploading
-  const headerLabel = imageBannerId ? 'Edit banner' : 'Add banner'
+  const headerLabel = imageBannerId ? t('editTitle') : t('addTitle') // ใช้ตัวแปลสำหรับหัวข้อ
 
   const onFilesChange = (files: ImageWithPreview[]) => {
     setPreviewFiles(files)
@@ -145,24 +148,24 @@ export const ImageBannerForm = () => {
       <ModalContent>
         <ModalHeader>{headerLabel}</ModalHeader>
 
-        {isPending && <Spinner label='Loading...' />}
+        {isPending && <Spinner label={tc('loading')} />}
 
         {!isPending && (
           <ModalBody>
             <ImageDropzone onFilesChange={onFilesChange} />
 
-            <SubHeading title='Banner status' />
+            <SubHeading title={t('statusHeading')} />
             <Controller
               control={control}
               name='isActive'
               render={({ field }) => (
                 <Switch isSelected={field.value} onValueChange={field.onChange}>
-                  Active banner
+                  {t('activeLabel')}
                 </Switch>
               )}
             />
 
-            <SubHeading title='Basic information' />
+            <SubHeading title={t('infoHeading')} />
             <Controller
               control={control}
               name='url'
@@ -170,7 +173,7 @@ export const ImageBannerForm = () => {
                 <Input
                   {...field}
                   isDisabled
-                  label='Image URL'
+                  label={t('urlLabel')}
                   value={value ?? ''}
                   isInvalid={!!errors.url}
                   errorMessage={errors.url?.message}
@@ -186,7 +189,7 @@ export const ImageBannerForm = () => {
                 <Input
                   {...field}
                   value={value ?? ''}
-                  label='Alt text'
+                  label={t('altLabel')}
                   isInvalid={!!errors.alt}
                   errorMessage={errors.alt?.message}
                   variant='bordered'
@@ -198,7 +201,7 @@ export const ImageBannerForm = () => {
 
         <ModalFooter>
           <Button variant='faded' onPress={onClose}>
-            Cancel
+            {tc('cancel')}
           </Button>
           <Button
             color='primary'
@@ -206,7 +209,7 @@ export const ImageBannerForm = () => {
             isDisabled={isPending || !isDirty}
             onClick={handleSubmit(onSubmit)}
           >
-            Save
+            {tc('save')}
           </Button>
         </ModalFooter>
       </ModalContent>

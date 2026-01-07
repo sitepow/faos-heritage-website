@@ -169,8 +169,8 @@ export const getUserStat = async () => {
   ])
 
   return [
-    { name: 'All users', value: totalUsers },
-    { name: 'All users (Enable)', value: isActive },
-    { name: 'All users (Disable)', value: unActive },
+    { name: 'allUsers', value: totalUsers },
+    { name: 'activeUsers', value: isActive },
+    { name: 'inactiveUsers', value: unActive },
   ]
 }

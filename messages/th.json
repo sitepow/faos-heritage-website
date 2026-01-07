@@ -17,6 +17,10 @@
     "contactText": "โปรดเก็บหมายเลขคำสั่งซื้อนี้ไว้เพื่อตรวจสอบสถานะในภายหลังหรือเพื่อติดต่อฝ่ายบริการลูกค้า"
   },
   "Common": {
+    "save": "บันทึก",
+    "cancel": "ยกเลิก",
+    "loading": "กำลังโหลด...",
+    "close": "ปิด",
     "Breadcrumb": {
       "home": "หน้าแรก",
       "products": "สินค้าทั้งหมด"
@@ -444,5 +448,40 @@
     "IS": "ไอซ์แลนด์",
     "VN": "เวียดนาม",
     "ID": "อินโดนีเซีย"
+  },
+  "Dashboard": {
+    "BannerManager": {
+      "title": "จัดการแบนเนอร์",
+      "noBanners": "ยังไม่มีแบนเนอร์ในระบบ",
+      "dropdownLabel": "เมนูจัดการแบนเนอร์",
+      "editBanner": "แก้ไขแบนเนอร์",
+      "removeBanner": "ลบแบนเนอร์",
+      "addBanner": "เพิ่มแบนเนอร์"
+    },
+    "BannerForm": {
+      "addTitle": "เพิ่มแบนเนอร์",
+      "editTitle": "แก้ไขแบนเนอร์",
+      "statusHeading": "สถานะแบนเนอร์",
+      "activeLabel": "เปิดใช้งานแบนเนอร์นี้",
+      "infoHeading": "ข้อมูลพื้นฐาน",
+      "urlLabel": "ที่อยู่รูปภาพ (URL)",
+      "altLabel": "คำอธิบายรูปภาพ (Alt Text)"
+    },
+    "manageBanners": "จัดการแบนเนอร์",
+    "siteSettings": "ตั้งค่าเว็บไซต์",
+    "Stats": {
+      "allOrders": "คำสั่งซื้อทั้งหมด",
+      "pendingOrders": "คำสั่งซื้อที่รอจัดการ",
+      "deliveredOrders": "คำสั่งซื้อที่สำเร็จ",
+      "paymentDelivered": "ยอดชำระเงินสำเร็จ",
+      "paymentCancelled": "ยอดเงินจากรายการที่ยกเลิก",
+      "paymentPending": "ยอดเงินที่รอการชำระ",
+      "allProducts": "สินค้าทั้งหมด",
+      "inStockProducts": "สินค้าพร้อมจำหน่าย",
+      "outOfStockProducts": "สินค้าที่หมดสต็อก",
+      "allUsers": "สมาชิกทั้งหมด",
+      "activeUsers": "สมาชิกที่ใช้งานอยู่",
+      "inactiveUsers": "สมาชิกที่ระงับใช้งาน"
+    }
   }
 }

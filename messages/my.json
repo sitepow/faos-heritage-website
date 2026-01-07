@@ -17,6 +17,10 @@
     "contactText": "Sila simpan nombor pesanan ini untuk semakan status kemudian atau untuk menghubungi khidmat pelanggan."
   },
   "Common": {
+    "save": "Simpan",
+    "cancel": "Batal",
+    "loading": "Memuatkan...",
+    "close": "Tutup",
     "Breadcrumb": { "home": "Laman Utama", "products": "Semua Produk" },
     "ImageDropzone": {
       "active": "Letakkan imej di sini...",
@@ -437,5 +441,40 @@
     "IS": "Iceland",
     "VN": "Vietnam",
     "ID": "Indonesia"
+  },
+  "Dashboard": {
+    "BannerManager": {
+      "title": "Pengurusan Sepanduk",
+      "noBanners": "Tiada sepanduk setakat ini",
+      "dropdownLabel": "Menu pengurusan sepanduk",
+      "editBanner": "Edit sepanduk",
+      "removeBanner": "Padam sepanduk",
+      "addBanner": "Tambah sepanduk"
+    },
+    "BannerForm": {
+      "addTitle": "Tambah Sepanduk",
+      "editTitle": "Edit Sepanduk",
+      "statusHeading": "Status Sepanduk",
+      "activeLabel": "Aktifkan Sepanduk",
+      "infoHeading": "Maklumat Asas",
+      "urlLabel": "URL Imej",
+      "altLabel": "Teks Alt"
+    },
+    "manageBanners": "Urus Sepanduk",
+    "siteSettings": "Tetapan Laman Web",
+    "Stats": {
+      "allOrders": "Jumlah Pesanan",
+      "pendingOrders": "Pesanan Belum Selesai",
+      "deliveredOrders": "Pesanan Dihantar",
+      "paymentDelivered": "Jumlah Bayaran Sah",
+      "paymentCancelled": "Jumlah Dibatalkan",
+      "paymentPending": "Menunggu Bayaran",
+      "allProducts": "Jumlah Produk",
+      "inStockProducts": "Produk Dalam Stok",
+      "outOfStockProducts": "Stok Habis",
+      "allUsers": "Jumlah Pengguna",
+      "activeUsers": "Pengguna Aktif",
+      "inactiveUsers": "Pengguna Tidak Aktif"
+    }
   }
 }

@@ -20,6 +20,7 @@ import {
 } from '@heroui/react'
 import { useQuery } from '@tanstack/react-query'
 import { BoltIcon, EllipsisVerticalIcon, EyeIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
 import { OrderViewModal } from './_components/view-modal'
@@ -39,6 +40,7 @@ import { getOrderStatus } from '@/utils/features'
 import { formatCurrency } from '@/utils/number'
 
 export default function Order() {
+  const t = useTranslations('Dashboard')
   const { country, exchangeRates } = useAppStore()
   const CURRENCY_OPTIONS = {
     currency: country?.currency,
@@ -74,7 +76,13 @@ export default function Order() {
           [...Array(4)].map((_) => <StatCardSkeleton key={_} />)}
 
         {!isLoadingDashboard &&
-          dashboard?.map((data) => <StatCard key={data.name} {...data} />)}
+          dashboard?.map((data) => (
+            <StatCard
+              key={data.name}
+              {...data}
+              name={t(`Stats.${data.name}`)}
+            />
+          ))}
       </div>
 
       <Table

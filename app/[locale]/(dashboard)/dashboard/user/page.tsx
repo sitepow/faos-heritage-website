@@ -27,6 +27,7 @@ import {
   TrashIcon,
   XIcon,
 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
 import { deleteUser, getUsers, getUserStat } from './action'
@@ -41,6 +42,7 @@ import { ConfirmModal } from '@/components/modal/confirm'
 import { ITEM_PER_PAGE, NO_IMAGE } from '@/utils/constants'
 
 export default function User() {
+  const t = useTranslations('Dashboard')
   const queryClient = useQueryClient()
   const { userId, setState, onOpenUserChange } = useUserStore()
 
@@ -94,7 +96,13 @@ export default function User() {
           [...Array(4)].map((_) => <StatCardSkeleton key={_} />)}
 
         {!isLoadingDashboard &&
-          dashboard?.map((data) => <StatCard key={data.name} {...data} />)}
+          dashboard?.map((data) => (
+            <StatCard
+              key={data.name}
+              {...data}
+              name={t(`Stats.${data.name}`)}
+            />
+          ))}
       </div>
 
       <div className='flex w-full flex-wrap gap-3 *:shrink-0 md:justify-end'>

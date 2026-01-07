@@ -17,6 +17,10 @@
     "contactText": "请保留此订单号，以便日后查询状态或联系客服。"
   },
   "Common": {
+    "save": "保存",
+    "cancel": "取消",
+    "loading": "加载中...",
+    "close": "关闭",
     "Breadcrumb": { "home": "首页", "products": "所有产品" },
     "ImageDropzone": {
       "active": "将图片拖到此处...",
@@ -416,5 +420,40 @@
     "IS": "冰岛",
     "VN": "越南",
     "ID": "印度尼西亚"
+  },
+  "Dashboard": {
+    "BannerManager": {
+      "title": "横幅管理",
+      "noBanners": "暂无横幅",
+      "dropdownLabel": "横幅管理菜单",
+      "editBanner": "编辑横幅",
+      "removeBanner": "删除横幅",
+      "addBanner": "添加横幅"
+    },
+    "BannerForm": {
+      "addTitle": "添加横幅",
+      "editTitle": "编辑横幅",
+      "statusHeading": "横幅状态",
+      "activeLabel": "启用横幅",
+      "infoHeading": "基本信息",
+      "urlLabel": "图片链接",
+      "altLabel": "替换文本"
+    },
+    "manageBanners": "横幅管理",
+    "siteSettings": "网站设置",
+    "Stats": {
+      "allOrders": "订单总数",
+      "pendingOrders": "待处理订单",
+      "deliveredOrders": "已完成订单",
+      "paymentDelivered": "已付总额",
+      "paymentCancelled": "已取消金额",
+      "paymentPending": "待付款金额",
+      "allProducts": "产品总数",
+      "inStockProducts": "有现货",
+      "outOfStockProducts": "缺货",
+      "allUsers": "用户总数",
+      "activeUsers": "已启用用户",
+      "inactiveUsers": "已禁用用户"
+    }
   }
 }

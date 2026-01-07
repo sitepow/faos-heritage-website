@@ -17,6 +17,10 @@
     "contactText": "Please keep this order number for later status checks or to contact customer service."
   },
   "Common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "loading": "Loading...",
+    "close": "Close",
     "Breadcrumb": {
       "home": "Home",
       "products": "All Products"
@@ -437,5 +441,40 @@
     "IS": "Iceland",
     "VN": "Vietnam",
     "ID": "Indonesia"
+  },
+  "Dashboard": {
+    "BannerManager": {
+      "title": "Manage Banners",
+      "noBanners": "There are no banners yet",
+      "dropdownLabel": "Banner management menu",
+      "editBanner": "Edit banner",
+      "removeBanner": "Remove banner",
+      "addBanner": "Add banner"
+    },
+    "BannerForm": {
+      "addTitle": "Add Banner",
+      "editTitle": "Edit Banner",
+      "statusHeading": "Banner Status",
+      "activeLabel": "Active Banner",
+      "infoHeading": "Basic Information",
+      "urlLabel": "Image URL",
+      "altLabel": "Alt Text"
+    },
+    "manageBanners": "Manage Banners",
+    "siteSettings": "Website Settings",
+    "Stats": {
+      "allOrders": "All Orders",
+      "pendingOrders": "Pending Orders",
+      "deliveredOrders": "Delivered Orders",
+      "paymentDelivered": "Total Paid Amount",
+      "paymentCancelled": "Cancelled Amount",
+      "paymentPending": "Waiting for Payment",
+      "allProducts": "Total Products",
+      "inStockProducts": "Products in Stock",
+      "outOfStockProducts": "Out of Stock",
+      "allUsers": "Total Users",
+      "activeUsers": "Active Users",
+      "inactiveUsers": "Inactive Users"
+    }
   }
 }

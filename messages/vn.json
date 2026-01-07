@@ -17,6 +17,10 @@
     "contactText": "Vui lòng giữ mã đơn hàng này để kiểm tra trạng thái sau này hoặc liên hệ bộ phận hỗ trợ."
   },
   "Common": {
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "loading": "Đang tải...",
+    "close": "Đóng",
     "Breadcrumb": { "home": "Trang chủ", "products": "Tất cả sản phẩm" },
     "ImageDropzone": {
       "active": "Thả ảnh vào đây...",
@@ -436,5 +440,40 @@
     "IS": "Iceland",
     "VN": "Việt Nam",
     "ID": "Indonesia"
+  },
+  "Dashboard": {
+    "BannerManager": {
+      "title": "Quản lý Banner",
+      "noBanners": "Chưa có banner nào",
+      "dropdownLabel": "Menu quản lý banner",
+      "editBanner": "Chỉnh sửa banner",
+      "removeBanner": "Xóa banner",
+      "addBanner": "Thêm banner"
+    },
+    "BannerForm": {
+      "addTitle": "Thêm Banner",
+      "editTitle": "Chỉnh sửa Banner",
+      "statusHeading": "Trạng thái Banner",
+      "activeLabel": "Kích hoạt Banner này",
+      "infoHeading": "Thông tin cơ bản",
+      "urlLabel": "Đường dẫn hình ảnh",
+      "altLabel": "Văn bản thay thế (Alt)"
+    },
+    "manageBanners": "Quản lý Banner",
+    "siteSettings": "Cài đặt trang web",
+    "Stats": {
+      "allOrders": "Tổng đơn hàng",
+      "pendingOrders": "Đơn hàng chờ xử lý",
+      "deliveredOrders": "Đơn hàng thành công",
+      "paymentDelivered": "Doanh thu thực tế",
+      "paymentCancelled": "Tiền đơn đã hủy",
+      "paymentPending": "Tiền chờ thanh toán",
+      "allProducts": "Tổng sản phẩm",
+      "inStockProducts": "Sản phẩm còn hàng",
+      "outOfStockProducts": "Sản phẩm hết hàng",
+      "allUsers": "Tổng người dùng",
+      "activeUsers": "Người dùng đang hoạt động",
+      "inactiveUsers": "Người dùng bị khóa"
+    }
   }
 }

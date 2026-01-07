@@ -17,6 +17,10 @@
     "contactText": "Harap simpan nomor pesanan ini untuk pengecekan status nanti atau untuk menghubungi layanan pelanggan."
   },
   "Common": {
+    "save": "Simpan",
+    "cancel": "Batal",
+    "loading": "Memuat...",
+    "close": "Tutup",
     "Breadcrumb": { "home": "Beranda", "products": "Semua Produk" },
     "ImageDropzone": {
       "active": "Letakkan gambar di sini...",
@@ -437,5 +441,40 @@
     "IS": "Islandia",
     "VN": "Vietnam",
     "ID": "Indonesia"
+  },
+  "Dashboard": {
+    "BannerManager": {
+      "title": "Manajemen Banner",
+      "noBanners": "Belum ada banner",
+      "dropdownLabel": "Menu kelola banner",
+      "editBanner": "Edit banner",
+      "removeBanner": "Hapus banner",
+      "addBanner": "Tambah banner"
+    },
+    "BannerForm": {
+      "addTitle": "Tambah Banner",
+      "editTitle": "Edit Banner",
+      "statusHeading": "Status Banner",
+      "activeLabel": "Aktifkan Banner",
+      "infoHeading": "Informasi Dasar",
+      "urlLabel": "URL Gambar",
+      "altLabel": "Teks Alt"
+    },
+    "manageBanners": "Kelola Banner",
+    "siteSettings": "Pengaturan Situs",
+    "Stats": {
+      "allOrders": "Total Pesanan",
+      "pendingOrders": "Pesanan Tertunda",
+      "deliveredOrders": "Pesanan Terkirim",
+      "paymentDelivered": "Total Pembayaran Sah",
+      "paymentCancelled": "Total Pembatalan",
+      "paymentPending": "Menunggu Pembayaran",
+      "allProducts": "Total Produk",
+      "inStockProducts": "Produk Tersedia",
+      "outOfStockProducts": "Stok Habis",
+      "allUsers": "Total Pengguna",
+      "activeUsers": "Pengguna Aktif",
+      "inactiveUsers": "Pengguna Nonaktif"
+    }
   }
 }

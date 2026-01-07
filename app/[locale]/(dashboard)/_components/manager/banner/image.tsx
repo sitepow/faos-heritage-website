@@ -22,6 +22,7 @@ import {
   TrashIcon,
 } from 'lucide-react'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 
 import { deleteImageBanner, getImageBanners } from './action'
 import { ImageBannerForm } from './form'
@@ -31,6 +32,8 @@ import { ConfirmModal } from '@/components/modal/confirm'
 import { cn } from '@/utils/style'
 
 export const ImageBannerManager = () => {
+  const t = useTranslations('Dashboard.BannerManager')
+  const tc = useTranslations('Common')
   const queryClient = useQueryClient()
 
   const {
@@ -91,19 +94,17 @@ export const ImageBannerManager = () => {
         onOpenChange={onOpenImageBannertManagerChange}
       >
         <ModalContent>
-          <ModalHeader>Manage banners</ModalHeader>
+          <ModalHeader>{t('title')}</ModalHeader>
 
           {isLoading && (
             <ModalBody>
-              <Spinner label='Loading...' />
+              <Spinner label={tc('loading')} />
             </ModalBody>
           )}
 
           {!isLoading && banners?.length === 0 && (
             <ModalBody>
-              <p className='text-default-500 text-center'>
-                There are no banners yet
-              </p>
+              <p className='text-default-500 text-center'>{t('noBanners')}</p>
             </ModalBody>
           )}
 
@@ -127,7 +128,7 @@ export const ImageBannerManager = () => {
                         src={banner.url}
                         width={200}
                       />
-                      <p>{banner?.id}</p>
+                      <p className='text-tiny text-default-400'>{banner?.id}</p>
                     </div>
 
                     <Dropdown placement='bottom-end'>
@@ -142,7 +143,7 @@ export const ImageBannerManager = () => {
                         </Button>
                       </DropdownTrigger>
                       <DropdownMenu
-                        aria-label='Manage products'
+                        aria-label={t('dropdownLabel')}
                         className='min-w-[180px]'
                       >
                         <DropdownItem
@@ -154,7 +155,7 @@ export const ImageBannerManager = () => {
                             onOpenImageBannertChange()
                           }}
                         >
-                          Edit banner
+                          {t('editBanner')}
                         </DropdownItem>
                         <DropdownItem
                           key='delete'
@@ -167,7 +168,7 @@ export const ImageBannerManager = () => {
                             onOpenImageBannertManagerChange()
                           }}
                         >
-                          Remove banner
+                          {t('removeBanner')}
                         </DropdownItem>
                       </DropdownMenu>
                     </Dropdown>
@@ -179,7 +180,7 @@ export const ImageBannerManager = () => {
 
           <ModalFooter>
             <Button variant='faded' onPress={onClose}>
-              Close
+              {tc('close')}
             </Button>
             <Button
               color='primary'
@@ -190,7 +191,7 @@ export const ImageBannerManager = () => {
                 onOpenImageBannertChange(true)
               }}
             >
-              Add banner
+              {t('addBanner')}
             </Button>
           </ModalFooter>
         </ModalContent>

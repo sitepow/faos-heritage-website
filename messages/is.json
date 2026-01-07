@@ -17,6 +17,10 @@
     "contactText": "Vinsamlegast geymdu þetta pöntunarnúmer til að athuga stöðu síðar eða til að hafa samband við þjónustuver."
   },
   "Common": {
+    "save": "Vista",
+    "cancel": "Hætta við",
+    "loading": "Hleður...",
+    "close": "Loka",
     "Breadcrumb": { "home": "Heim", "products": "Allar vörur" },
     "ImageDropzone": {
       "active": "Slepptu myndinni hér...",
@@ -440,5 +444,40 @@
     "IS": "Ísland",
     "VN": "Víetnam",
     "ID": "Indónesía"
+  },
+  "Dashboard": {
+    "BannerManager": {
+      "title": "Umsjón með borðum",
+      "noBanners": "Engir borðar fundust",
+      "dropdownLabel": "Valmynd fyrir borða",
+      "editBanner": "Breyta borða",
+      "removeBanner": "Eyða borða",
+      "addBanner": "Bæta við borða"
+    },
+    "BannerForm": {
+      "addTitle": "Bæta við borða",
+      "editTitle": "Breyta borða",
+      "statusHeading": "Staða borða",
+      "activeLabel": "Virkur borði",
+      "infoHeading": "Grunnupplýsingar",
+      "urlLabel": "Slóð myndar",
+      "altLabel": "Alt texti"
+    },
+    "manageBanners": "Stýra borðum",
+    "siteSettings": "Vefstillingar",
+    "Stats": {
+      "allOrders": "Heildarpantanir",
+      "pendingOrders": "Bíðandi pantanir",
+      "deliveredOrders": "Afhentar pantanir",
+      "paymentDelivered": "Greidd upphæð",
+      "paymentCancelled": "Afbókuð upphæð",
+      "paymentPending": "Bíður greiðslu",
+      "allProducts": "Allar vörur",
+      "inStockProducts": "Vörur á lager",
+      "outOfStockProducts": "Uppselt",
+      "allUsers": "Heildarnotendur",
+      "activeUsers": "Virkir notendur",
+      "inactiveUsers": "Óvirkir notendur"
+    }
   }
 }

@@ -17,6 +17,10 @@
     "contactText": "Ti preghiamo di conservare questo numero d'ordine per controlli futuri o per contattare l'assistenza."
   },
   "Common": {
+    "save": "Salva",
+    "cancel": "Annulla",
+    "loading": "Caricamento...",
+    "close": "Chiudi",
     "Breadcrumb": { "home": "Home", "products": "Tutti i prodotti" },
     "ImageDropzone": {
       "active": "Rilascia l'immagine qui...",
@@ -440,5 +444,40 @@
     "IS": "Islanda",
     "VN": "Vietnam",
     "ID": "Indonesia"
+  },
+  "Dashboard": {
+    "BannerManager": {
+      "title": "Gestione Banner",
+      "noBanners": "Non ci sono ancora banner",
+      "dropdownLabel": "Menu gestione banner",
+      "editBanner": "Modifica banner",
+      "removeBanner": "Rimuovi banner",
+      "addBanner": "Aggiungi banner"
+    },
+    "BannerForm": {
+      "addTitle": "Aggiungi Banner",
+      "editTitle": "Modifica Banner",
+      "statusHeading": "Stato del Banner",
+      "activeLabel": "Banner Attivo",
+      "infoHeading": "Informazioni di Base",
+      "urlLabel": "URL Immagine",
+      "altLabel": "Testo Alt"
+    },
+    "manageBanners": "Gestisci Banner",
+    "siteSettings": "Impostazioni Sito",
+    "Stats": {
+      "allOrders": "Totale Ordini",
+      "pendingOrders": "Ordini in Attesa",
+      "deliveredOrders": "Ordini Consegnati",
+      "paymentDelivered": "Pagamenti Ricevuti",
+      "paymentCancelled": "Importi Annullati",
+      "paymentPending": "In Attesa di Pagamento",
+      "allProducts": "Prodotti Totali",
+      "inStockProducts": "Prodotti in Stock",
+      "outOfStockProducts": "Esaurito",
+      "allUsers": "Utenti Totali",
+      "activeUsers": "Utenti Attivi",
+      "inactiveUsers": "Utenti Disattivati"
+    }
   }
 }

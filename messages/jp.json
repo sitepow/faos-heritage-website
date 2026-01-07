@@ -17,6 +17,10 @@
     "contactText": "この注文番号は、後のステータス確認やカスタマーサービスへのお問い合わせのために保管してください。"
   },
   "Common": {
+    "save": "保存",
+    "cancel": "キャンセル",
+    "loading": "読み込み中...",
+    "close": "閉じる",
     "Breadcrumb": {
       "home": "ホーム",
       "products": "全商品"
@@ -441,5 +445,40 @@
     "IS": "アイスランド",
     "VN": "ベトナム",
     "ID": "インドネシア"
+  },
+  "Dashboard": {
+    "BannerManager": {
+      "title": "バナー管理",
+      "noBanners": "バナーがまだありません",
+      "dropdownLabel": "バナー操作メニュー",
+      "editBanner": "バナーを編集",
+      "removeBanner": "バナーを削除",
+      "addBanner": "バナーを追加"
+    },
+    "BannerForm": {
+      "addTitle": "バナーを追加",
+      "editTitle": "バナーを編集",
+      "statusHeading": "バナーの状態",
+      "activeLabel": "バナーを有効にする",
+      "infoHeading": "基本情報",
+      "urlLabel": "画像URL",
+      "altLabel": "代替テキスト"
+    },
+    "manageBanners": "バナー管理",
+    "siteSettings": "サイト設定",
+    "Stats": {
+      "allOrders": "全注文数",
+      "pendingOrders": "保留中の注文",
+      "deliveredOrders": "配達完了",
+      "paymentDelivered": "決済完了額",
+      "paymentCancelled": "キャンセル額",
+      "paymentPending": "支払い待ち",
+      "allProducts": "全商品数",
+      "inStockProducts": "在庫あり",
+      "outOfStockProducts": "在庫切れ",
+      "allUsers": "全ユーザー数",
+      "activeUsers": "有効なユーザー",
+      "inactiveUsers": "無効なユーザー"
+    }
   }
 }

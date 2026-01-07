@@ -31,6 +31,7 @@ import {
   TrashIcon,
   XIcon,
 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
 import { ProductForm } from './_components/form/product'
@@ -63,6 +64,7 @@ import {
 import { getRangeDisplayValue } from '@/utils/range'
 
 export default function Product() {
+  const t = useTranslations('Dashboard')
   const { country, exchangeRates } = useAppStore()
   const CURRENCY_OPTIONS = {
     currency: country?.currency,
@@ -142,7 +144,13 @@ export default function Product() {
           [...Array(4)].map((_) => <StatCardSkeleton key={_} />)}
 
         {!isLoadingDashboard &&
-          dashboard?.map((data) => <StatCard key={data.name} {...data} />)}
+          dashboard?.map((data) => (
+            <StatCard
+              key={data.name}
+              {...data}
+              name={t(`Stats.${data.name}`)}
+            />
+          ))}
       </div>
       <div className='flex w-full flex-wrap gap-3 *:shrink-0 md:justify-end'>
         <Button

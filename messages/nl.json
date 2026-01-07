@@ -17,6 +17,10 @@
     "contactText": "Bewaar dit ordernummer voor latere statuscontroles of om contact op te nemen met de klantenservice."
   },
   "Common": {
+    "save": "Opslaan",
+    "cancel": "Annuleren",
+    "loading": "Laden...",
+    "close": "Sluiten",
     "Breadcrumb": { "home": "Home", "products": "Alle Producten" },
     "ImageDropzone": {
       "active": "Plaats de afbeelding hier...",
@@ -437,5 +441,40 @@
     "IS": "IJsland",
     "VN": "Vietnam",
     "ID": "Indonesië"
+  },
+  "Dashboard": {
+    "BannerManager": {
+      "title": "Bannerbeheer",
+      "noBanners": "Er zijn nog geen banners",
+      "dropdownLabel": "Bannerbeheer menu",
+      "editBanner": "Banner bewerken",
+      "removeBanner": "Banner verwijderen",
+      "addBanner": "Banner toevoegen"
+    },
+    "BannerForm": {
+      "addTitle": "Banner Toevoegen",
+      "editTitle": "Banner Bewerken",
+      "statusHeading": "Banner Status",
+      "activeLabel": "Actieve Banner",
+      "infoHeading": "Basisinformatie",
+      "urlLabel": "Afbeelding URL",
+      "altLabel": "Alt-tekst"
+    },
+    "manageBanners": "Banners Beheren",
+    "siteSettings": "Website Instellingen",
+    "Stats": {
+      "allOrders": "Totaal Bestellingen",
+      "pendingOrders": "Bestellingen in Wacht",
+      "deliveredOrders": "Geleverde Bestellingen",
+      "paymentDelivered": "Ontvangen Betalingen",
+      "paymentCancelled": "Geannuleerde Bedragen",
+      "paymentPending": "Wachten op Betaling",
+      "allProducts": "Totaal Producten",
+      "inStockProducts": "Op Voorraad",
+      "outOfStockProducts": "Niet op Voorraad",
+      "allUsers": "Totaal Gebruikers",
+      "activeUsers": "Actieve Gebruikers",
+      "inactiveUsers": "Inactieve Gebruikers"
+    }
   }
 }

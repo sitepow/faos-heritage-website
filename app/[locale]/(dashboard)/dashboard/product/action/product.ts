@@ -263,8 +263,8 @@ export const getProductStat = async () => {
   ])
 
   return [
-    { name: 'All products', value: totalProducts },
-    { name: 'All products (Ready for sale)', value: inStock },
-    { name: 'All products (Not available for sale)', value: outOfStock },
+    { name: 'allProducts', value: totalProducts },
+    { name: 'inStockProducts', value: inStock },
+    { name: 'outOfStockProducts', value: outOfStock },
   ]
 }

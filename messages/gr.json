@@ -17,6 +17,10 @@
     "contactText": "Παρακαλούμε κρατήστε αυτόν τον αριθμό παραγγελίας για μελλοντικό έλεγχο της κατάστασης ή για επικοινωνία με την εξυπηρέτηση πελατών."
   },
   "Common": {
+    "save": "Αποθήκευση",
+    "cancel": "Ακύρωση",
+    "loading": "Φόρτωση...",
+    "close": "Κλείσιμο",
     "Breadcrumb": { "home": "Αρχική", "products": "Όλα τα Προϊόντα" },
     "ImageDropzone": {
       "active": "Τοποθετήστε την εικόνα εδώ...",
@@ -440,5 +444,40 @@
     "IS": "Ισλανδία",
     "VN": "Βιετνάμ",
     "ID": "Ινδονησία"
+  },
+  "Dashboard": {
+    "BannerManager": {
+      "title": "Διαχείριση Banner",
+      "noBanners": "Δεν υπάρχουν banner ακόμα",
+      "dropdownLabel": "Μενού διαχείρισης banner",
+      "editBanner": "Επεξεργασία banner",
+      "removeBanner": "Διαγραφή banner",
+      "addBanner": "Προσθήκη banner"
+    },
+    "BannerForm": {
+      "addTitle": "Προσθήκη Banner",
+      "editTitle": "Επεξεργασία Banner",
+      "statusHeading": "Κατάσταση Banner",
+      "activeLabel": "Ενεργό Banner",
+      "infoHeading": "Βασικές Πληροφορίες",
+      "urlLabel": "URL Εικόνας",
+      "altLabel": "Κείμενο Alt"
+    },
+    "manageBanners": "Διαχείριση Banners",
+    "siteSettings": "Ρυθμίσεις Ιστότοπου",
+    "Stats": {
+      "allOrders": "Συνολικές Παραγγελίες",
+      "pendingOrders": "Εκκρεμείς Παραγγελίες",
+      "deliveredOrders": "Ολοκληρωμένες Παραγγελίες",
+      "paymentDelivered": "Συνολικές Πληρωμές",
+      "paymentCancelled": "Ακυρωθέντα Ποσά",
+      "paymentPending": "Αναμονή Πληρωμής",
+      "allProducts": "Συνολικά Προϊόντα",
+      "inStockProducts": "Διαθέσιμα Προϊόντα",
+      "outOfStockProducts": "Εξαντλημένα",
+      "allUsers": "Συνολικοί Χρήστες",
+      "activeUsers": "Ενεργοί Χρήστες",
+      "inactiveUsers": "Ανενεργοί Χρήστες"
+    }
   }
 }
