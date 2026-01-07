@@ -20,6 +20,7 @@
     "save": "Lưu",
     "cancel": "Hủy",
     "loading": "Đang tải...",
+    "saving": "Đang lưu...",
     "close": "Đóng",
     "Breadcrumb": { "home": "Trang chủ", "products": "Tất cả sản phẩm" },
     "ImageDropzone": {
@@ -442,6 +443,26 @@
     "ID": "Indonesia"
   },
   "Dashboard": {
+    "UserManager": {
+      "addNew": "Thêm người dùng mới",
+      "deleteSelected": "Xóa mục đã chọn ({count})",
+      "tableAria": "Bảng dữ liệu người dùng",
+      "empty": "Không có thông tin để hiển thị",
+      "colId": "Mã khách hàng",
+      "colImage": "Ảnh",
+      "colName": "Tên khách hàng",
+      "colEmail": "Email",
+      "colRole": "Vai trò",
+      "colStatus": "Trạng thái tài khoản",
+      "colActions": "Hành động",
+      "roleAdmin": "Quản trị viên hệ thống",
+      "roleUser": "Khách hàng",
+      "statusEnable": "Đang hoạt động",
+      "statusDisable": "Tài khoản bị tạm ngưng",
+      "dropdownAria": "Menu quản lý người dùng",
+      "editInfo": "Chỉnh sửa thông tin",
+      "deleteUser": "Đóng tài khoản"
+    },
     "BannerManager": {
       "title": "Quản lý Banner",
       "noBanners": "Chưa có banner nào",
@@ -449,6 +470,22 @@
       "editBanner": "Chỉnh sửa banner",
       "removeBanner": "Xóa banner",
       "addBanner": "Thêm banner"
+    },
+    "UserForm": {
+      "editTitle": "Chỉnh sửa người dùng",
+      "addTitle": "Thêm người dùng",
+      "imageChangedStatus": "Đã có thay đổi đối với tệp hình ảnh.",
+      "licenseHeading": "Giấy phép & Quyền",
+      "activeLabel": "Kích hoạt tài khoản",
+      "roleLabel": "Trạng thái tài khoản",
+      "roleAdmin": "Quản trị viên hệ thống",
+      "roleUser": "Khách hàng",
+      "infoHeading": "Thông tin cơ bản",
+      "urlLabel": "URL hình ảnh",
+      "nameLabel": "Họ và tên",
+      "emailLabel": "Email",
+      "passwordLabel": "Mật khẩu",
+      "passwordChangeLabel": "Thay đổi mật khẩu"
     },
     "BannerForm": {
       "addTitle": "Thêm Banner",

@@ -20,6 +20,7 @@
     "save": "Salva",
     "cancel": "Annulla",
     "loading": "Caricamento...",
+    "saving": "Salvataggio...",
     "close": "Chiudi",
     "Breadcrumb": { "home": "Home", "products": "Tutti i prodotti" },
     "ImageDropzone": {
@@ -446,6 +447,26 @@
     "ID": "Indonesia"
   },
   "Dashboard": {
+    "UserManager": {
+      "addNew": "Aggiungi Nuovi Utenti",
+      "deleteSelected": "Elimina elementi selezionati ({count})",
+      "tableAria": "Tabella dati utente",
+      "empty": "Nessuna informazione da visualizzare",
+      "colId": "ID Cliente",
+      "colImage": "Immagine",
+      "colName": "Nome Cliente",
+      "colEmail": "Email",
+      "colRole": "Ruolo",
+      "colStatus": "Stato Account",
+      "colActions": "Azioni",
+      "roleAdmin": "Amministratore di sistema",
+      "roleUser": "Cliente",
+      "statusEnable": "Abilitato",
+      "statusDisable": "Account sospeso",
+      "dropdownAria": "Menu gestione utenti",
+      "editInfo": "Modifica informazioni",
+      "deleteUser": "Chiudi account"
+    },
     "BannerManager": {
       "title": "Gestione Banner",
       "noBanners": "Non ci sono ancora banner",
@@ -453,6 +474,22 @@
       "editBanner": "Modifica banner",
       "removeBanner": "Rimuovi banner",
       "addBanner": "Aggiungi banner"
+    },
+    "UserForm": {
+      "editTitle": "Modifica Utente",
+      "addTitle": "Aggiungi Utenti",
+      "imageChangedStatus": "Sono state apportate modifiche ai file immagine.",
+      "licenseHeading": "Licenza",
+      "activeLabel": "Attiva account",
+      "roleLabel": "Stato account",
+      "roleAdmin": "Amministratore di sistema",
+      "roleUser": "Cliente",
+      "infoHeading": "Informazioni di base",
+      "urlLabel": "URL Immagine",
+      "nameLabel": "Nome",
+      "emailLabel": "Email",
+      "passwordLabel": "Password",
+      "passwordChangeLabel": "Cambia password"
     },
     "BannerForm": {
       "addTitle": "Aggiungi Banner",

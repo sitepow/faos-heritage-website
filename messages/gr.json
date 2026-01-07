@@ -20,6 +20,7 @@
     "save": "Αποθήκευση",
     "cancel": "Ακύρωση",
     "loading": "Φόρτωση...",
+    "saving": "Αποθήκευση...",
     "close": "Κλείσιμο",
     "Breadcrumb": { "home": "Αρχική", "products": "Όλα τα Προϊόντα" },
     "ImageDropzone": {
@@ -446,6 +447,26 @@
     "ID": "Ινδονησία"
   },
   "Dashboard": {
+    "UserManager": {
+      "addNew": "Προσθήκη Νέων Χρηστών",
+      "deleteSelected": "Διαγραφή επιλεγμένων ({count})",
+      "tableAria": "Πίνακας δεδομένων χρηστών",
+      "empty": "Δεν υπάρχουν πληροφορίες για εμφάνιση",
+      "colId": "ID Πελάτη",
+      "colImage": "Εικόνα",
+      "colName": "Όνομα Πελάτη",
+      "colEmail": "Email",
+      "colRole": "Ρόλος",
+      "colStatus": "Κατάσταση Λογαριασμού",
+      "colActions": "Ενέργειες",
+      "roleAdmin": "Διαχειριστής συστήματος",
+      "roleUser": "Πελάτης",
+      "statusEnable": "Ενεργό",
+      "statusDisable": "Ο λογαριασμός ανεστάλη",
+      "dropdownAria": "Μενού διαχείρισης χρηστών",
+      "editInfo": "Επεξεργασία πληροφοριών",
+      "deleteUser": "Κλείσιμο λογαριασμού"
+    },
     "BannerManager": {
       "title": "Διαχείριση Banner",
       "noBanners": "Δεν υπάρχουν banner ακόμα",
@@ -453,6 +474,22 @@
       "editBanner": "Επεξεργασία banner",
       "removeBanner": "Διαγραφή banner",
       "addBanner": "Προσθήκη banner"
+    },
+    "UserForm": {
+      "editTitle": "Επεξεργασία Χρήστη",
+      "addTitle": "Προσθήκη Χρηστών",
+      "imageChangedStatus": "Υπήρξαν αλλαγές στα αρχεία εικόνας.",
+      "licenseHeading": "Άδεια",
+      "activeLabel": "Ενεργοποίηση λογαριασμού",
+      "roleLabel": "Κατάσταση λογαριασμού",
+      "roleAdmin": "Διαχειριστής συστήματος",
+      "roleUser": "Πελάτης",
+      "infoHeading": "Βασικές πληροφορίες",
+      "urlLabel": "URL εικόνας",
+      "nameLabel": "Όνομα",
+      "emailLabel": "Email",
+      "passwordLabel": "Κωδικός πρόσβασης",
+      "passwordChangeLabel": "Αλλαγή κωδικού πρόσβασης"
     },
     "BannerForm": {
       "addTitle": "Προσθήκη Banner",

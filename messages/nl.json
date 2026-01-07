@@ -20,6 +20,7 @@
     "save": "Opslaan",
     "cancel": "Annuleren",
     "loading": "Laden...",
+    "saving": "Opslaan...",
     "close": "Sluiten",
     "Breadcrumb": { "home": "Home", "products": "Alle Producten" },
     "ImageDropzone": {
@@ -443,6 +444,26 @@
     "ID": "Indonesië"
   },
   "Dashboard": {
+    "UserManager": {
+      "addNew": "Nieuwe Gebruikers Toevoegen",
+      "deleteSelected": "Geselecteerde items verwijderen ({count})",
+      "tableAria": "Gebruikersgegevenstabel",
+      "empty": "Geen informatie om weer te geven",
+      "colId": "Klant-ID",
+      "colImage": "Afbeelding",
+      "colName": "Klantnaam",
+      "colEmail": "E-mail",
+      "colRole": "Rol",
+      "colStatus": "Accountstatus",
+      "colActions": "Acties",
+      "roleAdmin": "Systeembeheerder",
+      "roleUser": "Klant",
+      "statusEnable": "Ingeschakeld",
+      "statusDisable": "Account geschorst",
+      "dropdownAria": "Gebruikersbeheer menu",
+      "editInfo": "Informatie bewerken",
+      "deleteUser": "Account sluiten"
+    },
     "BannerManager": {
       "title": "Bannerbeheer",
       "noBanners": "Er zijn nog geen banners",
@@ -450,6 +471,22 @@
       "editBanner": "Banner bewerken",
       "removeBanner": "Banner verwijderen",
       "addBanner": "Banner toevoegen"
+    },
+    "UserForm": {
+      "editTitle": "Gebruiker Bewerken",
+      "addTitle": "Gebruikers Toevoegen",
+      "imageChangedStatus": "Er zijn wijzigingen aangebracht in de afbeeldingsbestanden.",
+      "licenseHeading": "Licentie",
+      "activeLabel": "Account activeren",
+      "roleLabel": "Accountstatus",
+      "roleAdmin": "Systeembeheerder",
+      "roleUser": "Klant",
+      "infoHeading": "Basis informatie",
+      "urlLabel": "Afbeeldings-URL",
+      "nameLabel": "Naam",
+      "emailLabel": "E-mail",
+      "passwordLabel": "Wachtwoord",
+      "passwordChangeLabel": "Wachtwoord wijzigen"
     },
     "BannerForm": {
       "addTitle": "Banner Toevoegen",

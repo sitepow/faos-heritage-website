@@ -20,6 +20,7 @@
     "save": "บันทึก",
     "cancel": "ยกเลิก",
     "loading": "กำลังโหลด...",
+    "saving": "กำลังบันทึก...",
     "close": "ปิด",
     "Breadcrumb": {
       "home": "หน้าแรก",
@@ -450,6 +451,26 @@
     "ID": "อินโดนีเซีย"
   },
   "Dashboard": {
+    "UserManager": {
+      "addNew": "เพิ่มผู้ใช้งานใหม่",
+      "deleteSelected": "ลบรายการที่เลือก ({count})",
+      "tableAria": "ตารางข้อมูลผู้ใช้งาน",
+      "empty": "ไม่พบข้อมูลสมาชิก",
+      "colId": "รหัสลูกค้า",
+      "colImage": "รูปภาพ",
+      "colName": "ชื่อลูกค้า",
+      "colEmail": "อีเมล",
+      "colRole": "สิทธิ์การใช้งาน",
+      "colStatus": "สถานะบัญชี",
+      "colActions": "จัดการ",
+      "roleAdmin": "ผู้ดูแลระบบ",
+      "roleUser": "ลูกค้าทั่วไป",
+      "statusEnable": "ใช้งานปกติ",
+      "statusDisable": "ระงับการใช้งาน",
+      "dropdownAria": "เมนูจัดการผู้ใช้งาน",
+      "editInfo": "แก้ไขข้อมูล",
+      "deleteUser": "ปิดบัญชี (Soft Delete)"
+    },
     "BannerManager": {
       "title": "จัดการแบนเนอร์",
       "noBanners": "ยังไม่มีแบนเนอร์ในระบบ",
@@ -457,6 +478,22 @@
       "editBanner": "แก้ไขแบนเนอร์",
       "removeBanner": "ลบแบนเนอร์",
       "addBanner": "เพิ่มแบนเนอร์"
+    },
+    "UserForm": {
+      "editTitle": "แก้ไขข้อมูลผู้ใช้งาน",
+      "addTitle": "เพิ่มผู้ใช้งาน",
+      "imageChangedStatus": "ไฟล์รูปภาพมีการเปลี่ยนแปลง",
+      "licenseHeading": "สิทธิ์การใช้งาน",
+      "activeLabel": "เปิดใช้งานบัญชี",
+      "roleLabel": "สถานะบัญชี (บทบาท)",
+      "roleAdmin": "ผู้ดูแลระบบ",
+      "roleUser": "ลูกค้าทั่วไป",
+      "infoHeading": "ข้อมูลทั่วไป",
+      "urlLabel": "URL รูปภาพ",
+      "nameLabel": "ชื่อ-นามสกุล",
+      "emailLabel": "อีเมล",
+      "passwordLabel": "รหัสผ่าน",
+      "passwordChangeLabel": "เปลี่ยนรหัสผ่าน"
     },
     "BannerForm": {
       "addTitle": "เพิ่มแบนเนอร์",

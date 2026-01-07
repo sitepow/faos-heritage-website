@@ -20,6 +20,7 @@
     "save": "Save",
     "cancel": "Cancel",
     "loading": "Loading...",
+    "saving": "Saving...",
     "close": "Close",
     "Breadcrumb": {
       "home": "Home",
@@ -443,6 +444,26 @@
     "ID": "Indonesia"
   },
   "Dashboard": {
+    "UserManager": {
+      "addNew": "Invite New User",
+      "deleteSelected": "Remove selected ({count})",
+      "tableAria": "Member directory table",
+      "empty": "No member records found",
+      "colId": "Member ID",
+      "colImage": "Photo",
+      "colName": "Full Name",
+      "colEmail": "Email Address",
+      "colRole": "Access Level",
+      "colStatus": "Status",
+      "colActions": "Manage",
+      "roleAdmin": "Admin",
+      "roleUser": "Member",
+      "statusEnable": "Active",
+      "statusDisable": "Deactivated",
+      "dropdownAria": "Member options",
+      "editInfo": "Update details",
+      "deleteUser": "Archive account"
+    },
     "BannerManager": {
       "title": "Banner Management",
       "noBanners": "No banners found",
@@ -450,6 +471,22 @@
       "editBanner": "Edit Banner",
       "removeBanner": "Delete Banner",
       "addBanner": "Add New Banner"
+    },
+    "UserForm": {
+      "editTitle": "Update User Profile",
+      "addTitle": "Register New User",
+      "imageChangedStatus": "Profile photo updated.",
+      "licenseHeading": "Permissions",
+      "activeLabel": "Enable account access",
+      "roleLabel": "Access level",
+      "roleAdmin": "Administrator",
+      "roleUser": "Member",
+      "infoHeading": "Profile details",
+      "urlLabel": "Photo URL",
+      "nameLabel": "Full Name",
+      "emailLabel": "Email Address",
+      "passwordLabel": "Password",
+      "passwordChangeLabel": "Reset password"
     },
     "BannerForm": {
       "addTitle": "Create New Banner",

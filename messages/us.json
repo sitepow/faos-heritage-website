@@ -20,6 +20,7 @@
     "save": "Save",
     "cancel": "Cancel",
     "loading": "Loading...",
+    "saving": "Saving...",
     "close": "Close",
     "Breadcrumb": {
       "home": "Home",
@@ -443,6 +444,26 @@
     "ID": "Indonesia"
   },
   "Dashboard": {
+    "UserManager": {
+      "addNew": "Add New Users",
+      "deleteSelected": "Delete selected items ({count})",
+      "tableAria": "User data table",
+      "empty": "There is no information to display",
+      "colId": "Customer ID",
+      "colImage": "Image",
+      "colName": "Customer Name",
+      "colEmail": "Email",
+      "colRole": "Role",
+      "colStatus": "Account Status",
+      "colActions": "Actions",
+      "roleAdmin": "System administrator",
+      "roleUser": "Customer",
+      "statusEnable": "Enable",
+      "statusDisable": "Account suspended",
+      "dropdownAria": "Manage users menu",
+      "editInfo": "Edit information",
+      "deleteUser": "Close account (Soft Delete)"
+    },
     "BannerManager": {
       "title": "Manage Banners",
       "noBanners": "There are no banners yet",
@@ -450,6 +471,22 @@
       "editBanner": "Edit banner",
       "removeBanner": "Remove banner",
       "addBanner": "Add banner"
+    },
+    "UserForm": {
+      "editTitle": "Edit User",
+      "addTitle": "Add Users",
+      "imageChangedStatus": "There have been changes to the image files.",
+      "licenseHeading": "License",
+      "activeLabel": "Activate account",
+      "roleLabel": "Account status",
+      "roleAdmin": "System administrator",
+      "roleUser": "Customer",
+      "infoHeading": "Basic information",
+      "urlLabel": "Image URL",
+      "nameLabel": "Name",
+      "emailLabel": "Email",
+      "passwordLabel": "Password",
+      "passwordChangeLabel": "Change password"
     },
     "BannerForm": {
       "addTitle": "Add Banner",

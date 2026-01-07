@@ -20,6 +20,7 @@
     "save": "Simpan",
     "cancel": "Batal",
     "loading": "Memuatkan...",
+    "saving": "Menyimpan...",
     "close": "Tutup",
     "Breadcrumb": { "home": "Laman Utama", "products": "Semua Produk" },
     "ImageDropzone": {
@@ -443,6 +444,26 @@
     "ID": "Indonesia"
   },
   "Dashboard": {
+    "UserManager": {
+      "addNew": "Tambah Pengguna Baru",
+      "deleteSelected": "Padam item terpilih ({count})",
+      "tableAria": "Jadual data pengguna",
+      "empty": "Tiada maklumat untuk dipaparkan",
+      "colId": "ID Pelanggan",
+      "colImage": "Imej",
+      "colName": "Nama Pelanggan",
+      "colEmail": "Emel",
+      "colRole": "Peranan",
+      "colStatus": "Status Akaun",
+      "colActions": "Tindakan",
+      "roleAdmin": "Administrator Sistem",
+      "roleUser": "Pelanggan",
+      "statusEnable": "Aktif",
+      "statusDisable": "Akaun digantung",
+      "dropdownAria": "Menu urus pengguna",
+      "editInfo": "Edit maklumat",
+      "deleteUser": "Tutup akaun"
+    },
     "BannerManager": {
       "title": "Pengurusan Sepanduk",
       "noBanners": "Tiada sepanduk setakat ini",
@@ -450,6 +471,22 @@
       "editBanner": "Edit sepanduk",
       "removeBanner": "Padam sepanduk",
       "addBanner": "Tambah sepanduk"
+    },
+    "UserForm": {
+      "editTitle": "Edit Pengguna",
+      "addTitle": "Tambah Pengguna",
+      "imageChangedStatus": "Terdapat perubahan pada fail imej.",
+      "licenseHeading": "Lesen",
+      "activeLabel": "Aktifkan akaun",
+      "roleLabel": "Status akaun",
+      "roleAdmin": "Administrator sistem",
+      "roleUser": "Pelanggan",
+      "infoHeading": "Maklumat asas",
+      "urlLabel": "URL Imej",
+      "nameLabel": "Nama",
+      "emailLabel": "Emel",
+      "passwordLabel": "Kata laluan",
+      "passwordChangeLabel": "Tukar kata laluan"
     },
     "BannerForm": {
       "addTitle": "Tambah Sepanduk",

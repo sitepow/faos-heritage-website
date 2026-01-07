@@ -42,7 +42,10 @@ import { ConfirmModal } from '@/components/modal/confirm'
 import { ITEM_PER_PAGE, NO_IMAGE } from '@/utils/constants'
 
 export default function User() {
-  const t = useTranslations('Dashboard')
+  const tDash = useTranslations('Dashboard')
+  const t = useTranslations('Dashboard.UserManager')
+  const tc = useTranslations('Common')
+
   const queryClient = useQueryClient()
   const { userId, setState, onOpenUserChange } = useUserStore()
 
@@ -93,14 +96,14 @@ export default function User() {
 
       <div className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
         {isLoadingDashboard &&
-          [...Array(4)].map((_) => <StatCardSkeleton key={_} />)}
+          [...Array(4)].map((_, i) => <StatCardSkeleton key={i} />)}
 
         {!isLoadingDashboard &&
           dashboard?.map((data) => (
             <StatCard
               key={data.name}
               {...data}
-              name={t(`Stats.${data.name}`)}
+              name={tDash(`Stats.${data.name}`)}
             />
           ))}
       </div>
@@ -114,7 +117,7 @@ export default function User() {
             onOpenUserChange()
           }}
         >
-          Add new users
+          {t('addNew')}
         </Button>
         <Button
           className='text-secondary'
@@ -126,12 +129,12 @@ export default function User() {
             onOpenDeleteChange()
           }}
         >
-          Delete selected items ({selectedUserIds.length})
+          {t('deleteSelected', { count: selectedUserIds.length })}
         </Button>
       </div>
 
       <Table
-        aria-label='ตารางข้อมูลผู้ใช้งาน'
+        aria-label={t('tableAria')}
         selectionMode='multiple'
         onSelectionChange={(keys) => {
           setSelectedKeys(keys as Set<string>)
@@ -144,26 +147,25 @@ export default function User() {
         }}
       >
         <TableHeader>
-          <TableColumn>Customer ID</TableColumn>
-          <TableColumn>Image</TableColumn>
-          <TableColumn>Customer Name</TableColumn>
-          <TableColumn>Email</TableColumn>
-          <TableColumn>Role</TableColumn>
-          <TableColumn>Account Status</TableColumn>
-          <TableColumn>Actions</TableColumn>
+          <TableColumn>{t('colId')}</TableColumn>
+          <TableColumn>{t('colImage')}</TableColumn>
+          <TableColumn>{t('colName')}</TableColumn>
+          <TableColumn>{t('colEmail')}</TableColumn>
+          <TableColumn>{t('colRole')}</TableColumn>
+          <TableColumn>{t('colStatus')}</TableColumn>
+          <TableColumn>{t('colActions')}</TableColumn>
         </TableHeader>
         <TableBody
-          emptyContent='There is no information to display'
+          emptyContent={t('empty')}
           isLoading={isLoadingUsers}
-          loadingContent={<Spinner label='Loading...' />}
+          loadingContent={<Spinner label={tc('loading')} />}
         >
           {(users?.items ?? []).map((user) => (
             <TableRow key={user.id}>
               <TableCell>{user.id}</TableCell>
               <TableCell>
-                {user?.image?.length === 0 && <span>-</span>}
-
-                {user?.image?.length !== 0 && (
+                {!user?.image && <span>-</span>}
+                {user?.image && (
                   <Avatar
                     isBordered
                     key={user?.image}
@@ -175,14 +177,12 @@ export default function User() {
               <TableCell>{user.email}</TableCell>
               <TableCell>
                 <Chip color='primary' variant='bordered'>
-                  {user.role === Role.ADMIN
-                    ? 'System administrator'
-                    : 'Customer'}
+                  {user.role === Role.ADMIN ? t('roleAdmin') : t('roleUser')}
                 </Chip>
               </TableCell>
               <TableCell>
                 <Chip color='primary' variant='bordered'>
-                  {user.isActive ? 'Enable' : 'Account suspended'}
+                  {user.isActive ? t('statusEnable') : t('statusDisable')}
                 </Chip>
               </TableCell>
               <TableCell className='flex gap-2.5'>
@@ -193,7 +193,7 @@ export default function User() {
                     </Button>
                   </DropdownTrigger>
                   <DropdownMenu
-                    aria-label='Manage users'
+                    aria-label={t('dropdownAria')}
                     className='min-w-[180px]'
                   >
                     <DropdownItem
@@ -204,7 +204,7 @@ export default function User() {
                         onOpenUserChange()
                       }}
                     >
-                      Edit information
+                      {t('editInfo')}
                     </DropdownItem>
                     <DropdownItem
                       key='delete'
@@ -216,7 +216,7 @@ export default function User() {
                         onOpenDeleteChange()
                       }}
                     >
-                      Close account (Soft Delete)
+                      {t('deleteUser')}
                     </DropdownItem>
                   </DropdownMenu>
                 </Dropdown>

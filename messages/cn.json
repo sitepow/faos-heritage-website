@@ -20,6 +20,7 @@
     "save": "保存",
     "cancel": "取消",
     "loading": "加载中...",
+    "saving": "保存中...",
     "close": "关闭",
     "Breadcrumb": { "home": "首页", "products": "所有产品" },
     "ImageDropzone": {
@@ -422,6 +423,26 @@
     "ID": "印度尼西亚"
   },
   "Dashboard": {
+    "UserManager": {
+      "addNew": "添加新用户",
+      "deleteSelected": "删除选中项 ({count})",
+      "tableAria": "用户数据表",
+      "empty": "暂无显示内容",
+      "colId": "客户ID",
+      "colImage": "头像",
+      "colName": "客户名称",
+      "colEmail": "电子邮件",
+      "colRole": "角色",
+      "colStatus": "账号状态",
+      "colActions": "操作",
+      "roleAdmin": "系统管理员",
+      "roleUser": "普通客户",
+      "statusEnable": "已启用",
+      "statusDisable": "账号已停用",
+      "dropdownAria": "用户管理菜单",
+      "editInfo": "编辑信息",
+      "deleteUser": "注销账号"
+    },
     "BannerManager": {
       "title": "横幅管理",
       "noBanners": "暂无横幅",
@@ -429,6 +450,22 @@
       "editBanner": "编辑横幅",
       "removeBanner": "删除横幅",
       "addBanner": "添加横幅"
+    },
+    "UserForm": {
+      "editTitle": "编辑用户",
+      "addTitle": "添加用户",
+      "imageChangedStatus": "图片文件已更改。",
+      "licenseHeading": "许可与权限",
+      "activeLabel": "激活账号",
+      "roleLabel": "账号状态",
+      "roleAdmin": "系统管理员",
+      "roleUser": "客户",
+      "infoHeading": "基本信息",
+      "urlLabel": "图片链接",
+      "nameLabel": "姓名",
+      "emailLabel": "电子邮件",
+      "passwordLabel": "密码",
+      "passwordChangeLabel": "修改密码"
     },
     "BannerForm": {
       "addTitle": "添加横幅",

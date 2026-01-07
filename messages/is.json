@@ -20,6 +20,7 @@
     "save": "Vista",
     "cancel": "Hætta við",
     "loading": "Hleður...",
+    "saving": "Vistar...",
     "close": "Loka",
     "Breadcrumb": { "home": "Heim", "products": "Allar vörur" },
     "ImageDropzone": {
@@ -446,6 +447,26 @@
     "ID": "Indónesía"
   },
   "Dashboard": {
+    "UserManager": {
+      "addNew": "Bæta við nýjum notendum",
+      "deleteSelected": "Eyða völdum atriðum ({count})",
+      "tableAria": "Notendatöflu",
+      "empty": "Engar upplýsingar til að sýna",
+      "colId": "Viðskiptavina ID",
+      "colImage": "Mynd",
+      "colName": "Nafn viðskiptavinar",
+      "colEmail": "Netfang",
+      "colRole": "Hlutverk",
+      "colStatus": "Staða reiknings",
+      "colActions": "Aðgerðir",
+      "roleAdmin": "Kerfisstjóri",
+      "roleUser": "Viðskiptavinur",
+      "statusEnable": "Virkja",
+      "statusDisable": "Reikningur í bið",
+      "dropdownAria": "Valmynd fyrir notendur",
+      "editInfo": "Breyta upplýsingum",
+      "deleteUser": "Loka reikningi"
+    },
     "BannerManager": {
       "title": "Umsjón með borðum",
       "noBanners": "Engir borðar fundust",
@@ -453,6 +474,22 @@
       "editBanner": "Breyta borða",
       "removeBanner": "Eyða borða",
       "addBanner": "Bæta við borða"
+    },
+    "UserForm": {
+      "editTitle": "Breyta notanda",
+      "addTitle": "Bæta við notendum",
+      "imageChangedStatus": "Breytingar hafa verið gerðar á myndskrám.",
+      "licenseHeading": "Leyfi",
+      "activeLabel": "Virkja reikning",
+      "roleLabel": "Staða reiknings",
+      "roleAdmin": "Kerfisstjóri",
+      "roleUser": "Viðskiptavinur",
+      "infoHeading": "Grunnupplýsingar",
+      "urlLabel": "Slóð myndar",
+      "nameLabel": "Nafn",
+      "emailLabel": "Netfang",
+      "passwordLabel": "Lykilorð",
+      "passwordChangeLabel": "Breyta lykilorði"
     },
     "BannerForm": {
       "addTitle": "Bæta við borða",

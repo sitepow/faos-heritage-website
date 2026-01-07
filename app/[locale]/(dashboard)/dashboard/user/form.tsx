@@ -16,6 +16,7 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Role } from '@prisma/client'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
@@ -45,6 +46,8 @@ const DEFAULT_VALUES = {
 }
 
 export const UserForm = () => {
+  const t = useTranslations('Dashboard.UserForm')
+  const tc = useTranslations('Common')
   const queryClient = useQueryClient()
   const { isUserOpen, onOpenUserChange, userId, setState } = useUserStore()
 
@@ -124,16 +127,14 @@ export const UserForm = () => {
 
   const isPending =
     isPendingCreateUser || isLoadingUser || isPendingUpdateUser || isUploading
-  const headerLable = userId ? 'Edit User' : 'Add users'
+  const headerLable = userId ? t('editTitle') : t('addTitle')
 
   const onFilesChange = (files: ImageWithPreview[]) => {
     setPreviewFiles(files)
 
     setValue(
       'image',
-      files.length
-        ? 'There have been changes to the image files.'
-        : (oldImage ?? ''),
+      files.length ? t('imageChangedStatus') : (oldImage ?? ''),
       {
         shouldDirty: true,
         shouldTouch: true,
@@ -180,19 +181,19 @@ export const UserForm = () => {
       <ModalContent>
         <ModalHeader className='flex flex-col gap-1'>{headerLable}</ModalHeader>
 
-        {isPending && <Spinner label='Loading...' />}
+        {isPending && <Spinner label={tc('loading')} />}
 
         {!isPending && (
           <ModalBody>
             <ImageDropzone onFilesChange={onFilesChange} />
 
-            <SubHeading title='License' />
+            <SubHeading title={t('licenseHeading')} />
             <Controller
               control={control}
               name='isActive'
               render={({ field: { value, onChange, ...field } }) => (
                 <Switch {...field} isSelected={value} onValueChange={onChange}>
-                  Activate account
+                  {t('activeLabel')}
                 </Switch>
               )}
             />
@@ -204,7 +205,7 @@ export const UserForm = () => {
                   {...field}
                   errorMessage={errors.role?.message}
                   isInvalid={!!errors.role}
-                  label='Account status'
+                  label={t('roleLabel')}
                   selectedKeys={value ? [value] : []}
                   variant='bordered'
                   onSelectionChange={(keys) => {
@@ -215,14 +216,14 @@ export const UserForm = () => {
                 >
                   {Object.values(Role).map((role) => (
                     <SelectItem key={role}>
-                      {role === 'ADMIN' ? 'System administrator' : 'Customer'}
+                      {role === 'ADMIN' ? t('roleAdmin') : t('roleUser')}
                     </SelectItem>
                   ))}
                 </Select>
               )}
             />
 
-            <SubHeading title='Basic information' />
+            <SubHeading title={t('infoHeading')} />
             <Controller
               control={control}
               name='image'
@@ -232,7 +233,7 @@ export const UserForm = () => {
                   isDisabled
                   errorMessage={errors.image?.message}
                   isInvalid={!!errors.image}
-                  label='Image URL'
+                  label={t('urlLabel')}
                   value={value ?? ''}
                   variant='bordered'
                 />
@@ -246,7 +247,7 @@ export const UserForm = () => {
                   {...field}
                   errorMessage={errors.name?.message}
                   isInvalid={!!errors.name}
-                  label='Name'
+                  label={t('nameLabel')}
                   value={value ?? ''}
                   variant='bordered'
                 />
@@ -260,7 +261,7 @@ export const UserForm = () => {
                   {...field}
                   errorMessage={errors.email?.message}
                   isInvalid={!!errors.email}
-                  label='Email'
+                  label={t('emailLabel')}
                   value={value ?? ''}
                   variant='bordered'
                 />
@@ -274,7 +275,7 @@ export const UserForm = () => {
                   {...field}
                   errorMessage={errors.password?.message}
                   isInvalid={!!errors.password}
-                  label={userId ? 'Change password' : 'Password'}
+                  label={userId ? t('passwordChangeLabel') : t('passwordLabel')}
                   type='password'
                   value={value ?? ''}
                   variant='bordered'
@@ -285,7 +286,7 @@ export const UserForm = () => {
         )}
         <ModalFooter>
           <Button isDisabled={isPending} variant='faded' onPress={onClose}>
-            Cancel
+            {tc('cancel')}
           </Button>
           <Button
             className='text-secondary'
@@ -293,7 +294,7 @@ export const UserForm = () => {
             isDisabled={isPending || !isDirty}
             onClick={handleSubmit(onSubmit)}
           >
-            {isPending ? 'Saving...' : 'Save'}
+            {isPending ? tc('saving') : tc('save')}
           </Button>
         </ModalFooter>
       </ModalContent>

@@ -20,6 +20,7 @@
     "save": "Simpan",
     "cancel": "Batal",
     "loading": "Memuat...",
+    "saving": "Menyimpan...",
     "close": "Tutup",
     "Breadcrumb": { "home": "Beranda", "products": "Semua Produk" },
     "ImageDropzone": {
@@ -443,6 +444,26 @@
     "ID": "Indonesia"
   },
   "Dashboard": {
+    "UserManager": {
+      "addNew": "Tambah Pengguna Baru",
+      "deleteSelected": "Hapus item terpilih ({count})",
+      "tableAria": "Tabel data pengguna",
+      "empty": "Tidak ada informasi untuk ditampilkan",
+      "colId": "ID Pelanggan",
+      "colImage": "Gambar",
+      "colName": "Nama Pelanggan",
+      "colEmail": "Email",
+      "colRole": "Peran",
+      "colStatus": "Status Akun",
+      "colActions": "Aksi",
+      "roleAdmin": "Administrator Sistem",
+      "roleUser": "Pelanggan",
+      "statusEnable": "Aktif",
+      "statusDisable": "Akun ditangguhkan",
+      "dropdownAria": "Menu kelola pengguna",
+      "editInfo": "Edit informasi",
+      "deleteUser": "Tutup akun"
+    },
     "BannerManager": {
       "title": "Manajemen Banner",
       "noBanners": "Belum ada banner",
@@ -450,6 +471,22 @@
       "editBanner": "Edit banner",
       "removeBanner": "Hapus banner",
       "addBanner": "Tambah banner"
+    },
+    "UserForm": {
+      "editTitle": "Edit Pengguna",
+      "addTitle": "Tambah Pengguna",
+      "imageChangedStatus": "Ada perubahan pada file gambar.",
+      "licenseHeading": "Lisensi",
+      "activeLabel": "Aktifkan akun",
+      "roleLabel": "Status akun",
+      "roleAdmin": "Administrator sistem",
+      "roleUser": "Pelanggan",
+      "infoHeading": "Informasi dasar",
+      "urlLabel": "URL Gambar",
+      "nameLabel": "Nama",
+      "emailLabel": "Email",
+      "passwordLabel": "Kata sandi",
+      "passwordChangeLabel": "Ubah kata sandi"
     },
     "BannerForm": {
       "addTitle": "Tambah Banner",
