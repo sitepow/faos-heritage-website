@@ -33,7 +33,7 @@ export const createCategory = async (data: CategoryInput) => {
     await prisma.category.create({
       data: removeEmptyField(
         validated.data,
-      ) as Prisma.ProductVariantCreateInput,
+      ) as Prisma.CategoryUncheckedCreateInput,
     })
   } catch {
     return fail(ERROR_CODES.SYSTEM_ERROR)
@@ -92,7 +92,7 @@ export const updateCategory = async (data: CategoryInput) => {
   try {
     await prisma.category.update({
       where: { id },
-      data: removeEmptyField(payload) as Prisma.ProductVariantCreateInput,
+      data: removeEmptyField(payload) as Prisma.CategoryUncheckedCreateInput,
     })
   } catch {
     return fail(ERROR_CODES.SYSTEM_ERROR)
