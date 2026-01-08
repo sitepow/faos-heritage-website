@@ -27,7 +27,7 @@ export const ExploreProductsClient = ({
   const tCategory = useTranslations('CategoryCarousel')
   const tSection = useTranslations('Section')
   const { data: products, isLoading: isLoadingProducts } = useQuery({
-    queryKey: ['products', 'homepage', { limit: itemPerPage, locale }],
+    queryKey: ['products', 'homepage', { limit: itemPerPage }, locale],
     queryFn: () => getProducts({ limit: itemPerPage, locale }),
     initialData: initialProducts,
     refetchOnMount: true,

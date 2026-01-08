@@ -1,4 +1,4 @@
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
 
 import type { Metadata } from 'next'
 
@@ -56,12 +56,13 @@ export async function generateMetadata({
 }
 
 export default async function Homepage() {
+  const locale = await getLocale()
   const categories = await getCategories()
-  const exploreProducts = await getProducts({ limit: ITEM_PER_PAGE })
+  const exploreProducts = await getProducts({ limit: ITEM_PER_PAGE, locale })
 
   const categoryId = categories?.[0]?.id
   const products = categoryId
-    ? await getProducts({ limit: ITEM_PER_PAGE, categoryId })
+    ? await getProducts({ limit: ITEM_PER_PAGE, categoryId, locale })
     : { items: [], nextCursor: null, totalCount: 0 }
 
   return (
