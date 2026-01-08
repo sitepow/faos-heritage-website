@@ -28,7 +28,6 @@ export async function generateMetadata({
   })
 
   return {
-    title: t('title'),
     description: t('description'),
     keywords: t.raw('keywords'),
     alternates: {
@@ -45,13 +44,11 @@ export async function generateMetadata({
           url: OG_IMAGE,
           width: 1200,
           height: 630,
-          alt: t('ogTitle'),
         },
       ],
     },
     twitter: {
       card: 'summary_large_image',
-      title: t('ogTitle'),
       description: t('ogDescription'),
       images: OG_IMAGE,
     },
