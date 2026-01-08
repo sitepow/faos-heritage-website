@@ -23,6 +23,7 @@ interface Props {
   limit?: number
   categoryId?: string | null
   sortBy?: SortByItem
+  locale?: string
 }
 
 export const getProducts = async ({
@@ -30,6 +31,7 @@ export const getProducts = async ({
   limit = 8,
   categoryId,
   sortBy = { field: 'createdAt', order: 'desc' },
+  locale,
 }: Props) => {
   noStore()
 
@@ -71,6 +73,13 @@ export const getProducts = async ({
           name: true,
         },
       },
+      localizations: {
+        where: { languageCode: locale?.toLocaleUpperCase() },
+        take: 1,
+        select: {
+          name: true,
+        },
+      },
     },
     orderBy: {
       [sortBy.field]: sortBy.order,
@@ -92,6 +101,7 @@ export const getProducts = async ({
       priceMax,
       stockMin,
       stockMax,
+      name: product?.localizations?.[0]?.name ?? product.name,
     })
   })
 

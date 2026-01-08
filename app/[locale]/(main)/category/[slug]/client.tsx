@@ -14,7 +14,7 @@ import {
 } from '@heroui/react'
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 import { ArrowUpDownIcon } from 'lucide-react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useMemo, useState } from 'react'
 
 import type { GetProductsResult } from '@/app/[locale]/(main)/products'
@@ -40,6 +40,7 @@ export const CategoryClient = ({
   categoryId,
   itemPerPage,
 }: CategoryClientProps) => {
+  const locale = useLocale()
   const t = useTranslations('Products')
   const [selectedKeys, setSelectedKeys] = useState(new Set(['newest']))
 
@@ -50,7 +51,7 @@ export const CategoryClient = ({
 
   const QUERY_KEY = {
     CATEGORY: ['category', categoryId],
-    PRODUCTS: ['products', categoryId, sortBy?.label, sortBy?.order],
+    PRODUCTS: ['products', categoryId, sortBy?.label, sortBy?.order, locale],
   }
 
   const { data: category, isLoading: isLoadingCategory } = useQuery({
@@ -69,6 +70,7 @@ export const CategoryClient = ({
           limit: itemPerPage,
           categoryId,
           sortBy,
+          locale,
         }),
       getNextPageParam: (lastPage) => lastPage?.nextCursor,
       enabled: !!categoryId,

@@ -3,7 +3,7 @@
 import { BreadcrumbItem, Breadcrumbs, Skeleton, Tab, Tabs } from '@heroui/react'
 import { useQuery } from '@tanstack/react-query'
 import { useSession } from 'next-auth/react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useEffect } from 'react'
 
 import type { GetProductResult } from '@/app/[locale]/(dashboard)/dashboard/product/action/product'
@@ -33,6 +33,7 @@ export const ProductClient = ({
   initialProduct,
   productId,
 }: ProductClientProps) => {
+  const locale = useLocale()
   const tTab = useTranslations('ProductTab')
   const tProduct = useTranslations('Products')
   const tBreadcrumb = useTranslations('Common.Breadcrumb')
@@ -42,8 +43,8 @@ export const ProductClient = ({
   const userId = session?.user?.id
 
   const { data: product, isLoading } = useQuery({
-    queryKey: ['product', productId],
-    queryFn: async () => getProduct(productId, userId),
+    queryKey: ['product', productId, locale],
+    queryFn: async () => getProduct(productId, userId, locale),
     placeholderData: initialProduct,
     enabled: !!productId,
   })

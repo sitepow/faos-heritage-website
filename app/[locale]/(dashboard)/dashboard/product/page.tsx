@@ -25,13 +25,14 @@ import {
   EllipsisVerticalIcon,
   FileIcon,
   ImageIcon,
+  LanguagesIcon,
   LayoutIcon,
   PlusIcon,
   SettingsIcon,
   TrashIcon,
   XIcon,
 } from 'lucide-react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useState } from 'react'
 
 import { ProductForm } from './_components/form/product'
@@ -40,6 +41,7 @@ import {
   ImageManager,
   VariantManager,
 } from './_components/manager'
+import { ProductLocalizationManager } from './_components/manager/product-localization'
 import { ShippingCountryManager } from './_components/manager/shipping'
 import { useProductStore } from './store'
 
@@ -64,6 +66,7 @@ import {
 import { getRangeDisplayValue } from '@/utils/range'
 
 export default function Product() {
+  const locale = useLocale()
   const tDash = useTranslations('Dashboard')
   const t = useTranslations('Dashboard.ProductManager')
   const tc = useTranslations('Common')
@@ -84,6 +87,7 @@ export default function Product() {
     onOpenImageManagerChange,
     onOpenVariantManagerChange,
     onOpenShippingCountryManagerChange,
+    onOpenProductLocalizationManagerChange,
   } = useProductStore()
 
   const [selectedKeys, setSelectedKeys] = useState<Set<string>>(new Set([]))
@@ -95,12 +99,12 @@ export default function Product() {
 
   const QUERY_KEY = {
     DASHBOARD: ['dashboard', 'products', 'card'],
-    PRODUCTS: ['dashboard', 'products', 'pagination', page],
+    PRODUCTS: ['dashboard', 'products', 'pagination', page, locale],
   }
 
   const { data: products, isLoading: isLoadingProducts } = useQuery({
     queryKey: QUERY_KEY.PRODUCTS,
-    queryFn: () => getProducts(page, ITEM_PER_PAGE),
+    queryFn: () => getProducts(page, ITEM_PER_PAGE, locale),
   })
 
   const { data: dashboard, isLoading: isLoadingDashboard } = useQuery({
@@ -141,6 +145,7 @@ export default function Product() {
       <VariantManager />
       <CategoryManager />
       <ShippingCountryManager />
+      <ProductLocalizationManager />
 
       <div className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
         {isLoadingDashboard &&
@@ -348,6 +353,16 @@ export default function Product() {
                         }}
                       >
                         {t('manageOptions')}
+                      </DropdownItem>
+                      <DropdownItem
+                        key='product-localization'
+                        startContent={<LanguagesIcon className='size-4' />}
+                        onClick={() => {
+                          setState({ productId: product?.id })
+                          onOpenProductLocalizationManagerChange()
+                        }}
+                      >
+                        {t('manageNameLocalization')}
                       </DropdownItem>
                       <DropdownItem
                         key='delete'

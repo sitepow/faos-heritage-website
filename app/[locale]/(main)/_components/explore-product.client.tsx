@@ -4,7 +4,7 @@ import { Button } from '@heroui/react'
 import { useQuery } from '@tanstack/react-query'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 
 import { ProductSection } from '../product'
 
@@ -23,11 +23,12 @@ export const ExploreProductsClient = ({
   initialProducts,
   itemPerPage,
 }: ExploreProductsClientProps) => {
+  const locale = useLocale()
   const tCategory = useTranslations('CategoryCarousel')
   const tSection = useTranslations('Section')
   const { data: products, isLoading: isLoadingProducts } = useQuery({
-    queryKey: ['products', 'homepage', { limit: itemPerPage }],
-    queryFn: () => getProducts({ limit: itemPerPage }),
+    queryKey: ['products', 'homepage', { limit: itemPerPage, locale }],
+    queryFn: () => getProducts({ limit: itemPerPage, locale }),
     initialData: initialProducts,
     refetchOnMount: true,
   })

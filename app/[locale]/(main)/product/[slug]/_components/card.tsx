@@ -92,7 +92,7 @@ export const ProductCard = ({ className, product }: ProductCardProps) => {
 
           <Image
             alt={product?.name}
-            className='aspect-square size-full object-cover'
+            className='aspect-square size-full bg-white object-contain'
             classNames={{ wrapper: 'w-full' }}
             height={400}
             radius='none'

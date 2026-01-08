@@ -1,4 +1,4 @@
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
 
 import type { Metadata } from 'next'
 
@@ -59,6 +59,7 @@ export async function generateMetadata({
 }
 
 export default async function Category({ params }: CategoryProps) {
+  const locale = await getLocale()
   const { slug } = await params
   const slugStr = Array.isArray(slug) ? slug[0] : slug
   const categoryId = getIdFromSlug(slugStr)
@@ -67,6 +68,7 @@ export default async function Category({ params }: CategoryProps) {
   const products = await getProducts({
     limit: ITEM_PER_PAGE,
     categoryId,
+    locale,
   })
 
   if (!products || products.items.length === 0) {

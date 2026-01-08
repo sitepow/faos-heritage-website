@@ -26,7 +26,7 @@ export async function generateMetadata({
   })
 
   try {
-    const product = await getProduct(productId)
+    const product = await getProduct(productId, locale)
 
     if (!product) throw new Error('Product not found')
 

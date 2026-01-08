@@ -13,7 +13,7 @@ import {
 } from '@heroui/react'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { ArrowUpDownIcon } from 'lucide-react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useMemo, useState } from 'react'
 
 import { ProductSection } from '../product/[slug]/_components'
@@ -37,6 +37,7 @@ export const ProductsClient = ({
   initialProducts,
   itemPerPage,
 }: ProductsClientProps) => {
+  const locale = useLocale()
   const t = useTranslations('Products')
   const [selectedKeys, setSelectedKeys] = useState(new Set(['newest']))
 
@@ -46,7 +47,7 @@ export const ProductsClient = ({
   }, [selectedKeys])
 
   const QUERY_KEY = {
-    PRODUCTS: ['products', sortBy?.label, sortBy?.order],
+    PRODUCTS: ['products', sortBy?.label, sortBy?.order, locale],
   }
 
   const { data, isLoading, fetchNextPage, isFetchingNextPage, hasNextPage } =
@@ -58,6 +59,7 @@ export const ProductsClient = ({
           cursor: pageParam as string | null,
           limit: itemPerPage,
           sortBy,
+          locale,
         }),
       getNextPageParam: (lastPage) => lastPage?.nextCursor,
       placeholderData: (prev) =>

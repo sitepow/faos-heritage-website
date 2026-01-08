@@ -75,7 +75,11 @@ export const deleteProduct = async (productIds: string | string[]) => {
   return done()
 }
 
-export const getProduct = async (productId: string, userId?: string) => {
+export const getProduct = async (
+  productId: string,
+  userId?: string,
+  locale?: string,
+) => {
   const product = decimalToNumber(
     await prisma.product.findUnique({
       where: { id: productId },
@@ -136,6 +140,17 @@ export const getProduct = async (productId: string, userId?: string) => {
             isPrimary: true,
           },
         },
+        localizations: {
+          where: { languageCode: locale?.toLocaleUpperCase() },
+          take: 1,
+          select: {
+            name: true,
+            shortDescription: true,
+            description: true,
+            metaTitle: true,
+            metaDescription: true,
+          },
+        },
         description: true,
         metaTitle: true,
         metaDescription: true,
@@ -162,10 +177,22 @@ export const getProduct = async (productId: string, userId?: string) => {
     priceMax,
     stockMin,
     stockMax,
+    name: product?.localizations?.[0]?.name ?? product.name,
+    shortDescription:
+      product?.localizations?.[0]?.shortDescription ?? product.shortDescription,
+    description:
+      product?.localizations?.[0]?.description ?? product.description,
+    metaTitle: product?.localizations?.[0]?.metaTitle ?? product.metaTitle,
+    metaDescription:
+      product?.localizations?.[0]?.metaDescription ?? product.metaDescription,
   }
 }
 
-export const getProducts = async (page: number = 1, limit: number = 10) => {
+export const getProducts = async (
+  page: number = 1,
+  limit: number = 10,
+  locale?: string,
+) => {
   const skip = (page - 1) * limit
 
   const [items, total] = await Promise.all([
@@ -191,6 +218,13 @@ export const getProducts = async (page: number = 1, limit: number = 10) => {
             stockQuantity: true,
           },
         },
+        localizations: {
+          where: { languageCode: locale?.toLocaleUpperCase() },
+          take: 1,
+          select: {
+            name: true,
+          },
+        },
         category: {
           select: {
             name: true,
@@ -214,6 +248,7 @@ export const getProducts = async (page: number = 1, limit: number = 10) => {
       priceMax,
       stockMin,
       stockMax,
+      name: product?.localizations?.[0]?.name ?? product.name,
     }
   })
 

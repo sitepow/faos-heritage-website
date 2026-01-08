@@ -35,7 +35,7 @@ export const ProductImagePreview = ({
           )}
           {...props}
         >
-          <div className='relative aspect-square size-full overflow-hidden'>
+          <div className='relative aspect-square size-full overflow-hidden bg-white'>
             <Image
               fill
               priority
@@ -54,7 +54,7 @@ export const ProductImagePreview = ({
                   <button
                     key={`${image}-${index}`}
                     className={cn(
-                      'order relative aspect-square size-24 shrink-0 overflow-hidden rounded-xl border-2 transition-all',
+                      'order relative aspect-square size-24 shrink-0 overflow-hidden rounded-xl border-2 bg-white transition-all',
                       isActive
                         ? 'border-primary ring-primary/10 ring-2'
                         : 'hover:border-default-300 border-divider',

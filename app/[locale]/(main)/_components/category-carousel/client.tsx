@@ -7,7 +7,7 @@ import { Card, CardHeader, CardBody, ScrollShadow, Button } from '@heroui/react'
 import { useQuery } from '@tanstack/react-query'
 import { AlertCircleIcon, ArrowRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useState, useMemo } from 'react'
 
 import type { GetCategoriesResult } from '@/app/[locale]/(dashboard)/dashboard/product/action/category'
@@ -51,6 +51,7 @@ export const CategoryCarouselClient = ({
   initialProducts,
   itemPerPage,
 }: CategoryCarouselClientProps) => {
+  const locale = useLocale()
   const router = useRouter()
   const t = useTranslations('CategoryCarousel')
 
@@ -74,9 +75,14 @@ export const CategoryCarouselClient = ({
       'carousel',
       'products',
       { categoryId: activeCategory?.id, limit: itemPerPage },
+      locale,
     ],
     queryFn: () =>
-      getProducts({ limit: itemPerPage, categoryId: activeCategory?.id }),
+      getProducts({
+        limit: itemPerPage,
+        categoryId: activeCategory?.id,
+        locale,
+      }),
     enabled: !!activeCategory?.id,
     initialData:
       activeCategory?.id === initialCategories?.[0]?.id

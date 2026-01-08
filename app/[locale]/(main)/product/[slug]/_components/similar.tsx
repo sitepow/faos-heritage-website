@@ -1,7 +1,7 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 
 import { ProductSection } from './section'
 import { useProductDetailStore } from '../store'
@@ -10,17 +10,18 @@ import { getProducts } from '@/app/[locale]/(main)/products/action'
 import { ITEM_PER_PAGE } from '@/utils/constants'
 
 export const ProductSimilar = () => {
+  const locale = useLocale()
   const t = useTranslations('Section')
   const { product } = useProductDetailStore()
   const categoryId = product?.categoryId
 
   const QUERY_KEY = {
-    SIMILAR: ['similarProducts', categoryId],
+    SIMILAR: ['similarProducts', categoryId, locale],
   }
 
   const { data, isLoading } = useQuery({
     queryKey: QUERY_KEY.SIMILAR,
-    queryFn: () => getProducts({ limit: ITEM_PER_PAGE, categoryId }),
+    queryFn: () => getProducts({ limit: ITEM_PER_PAGE, categoryId, locale }),
     enabled: !!categoryId,
   })
 

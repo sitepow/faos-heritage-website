@@ -3,6 +3,7 @@
 import { create } from 'zustand'
 
 interface ProductStore {
+  productLocalizationId: string | null
   productId: string | null
   variantId: string | null
   imageId: string | null
@@ -17,6 +18,14 @@ interface ProductStore {
   isVariantOpen: boolean
   isCategoryOpen: boolean
   isShippingCountryOpen: boolean
+  isProductLocalizationOpen: boolean
+  isProductLocalizationManagerOpen: boolean
+  isProductVariantLocalizationOpen: boolean
+  onOpenProductLocalizationChange: (open?: boolean) => void
+  onOpenProductLocalizationManagerChange: (open?: boolean) => void
+  isCategoryLocalizationOpen: boolean
+  onOpenCategoryLocalizationChange: (open?: boolean) => void
+  onOpenProductVariantLocalizationChange: (open?: boolean) => void
   onOpenVariantManagerChange: (open?: boolean) => void
   onOpenImageManagerChange: (open?: boolean) => void
   onOpenCategoryManagerChange: (open?: boolean) => void
@@ -30,6 +39,7 @@ interface ProductStore {
 }
 
 export const useProductStore = create<ProductStore>()((set) => ({
+  productLocalizationId: null,
   productId: null,
   variantId: null,
   imageId: null,
@@ -44,6 +54,28 @@ export const useProductStore = create<ProductStore>()((set) => ({
   isVariantManagerOpen: false,
   isCategoryManagerOpen: false,
   isShippingCountryManagerOpen: false,
+  isProductLocalizationOpen: false,
+  isProductLocalizationManagerOpen: false,
+  onOpenProductLocalizationManagerChange: (open) =>
+    set((state) => ({
+      isProductLocalizationManagerOpen:
+        open ?? !state.isProductLocalizationManagerOpen,
+    })),
+  onOpenProductLocalizationChange: (open) =>
+    set((state) => ({
+      isProductLocalizationOpen: open ?? !state.isProductLocalizationOpen,
+    })),
+  isCategoryLocalizationOpen: false,
+  onOpenCategoryLocalizationChange: (open) =>
+    set((state) => ({
+      isCategoryLocalizationOpen: open ?? !state.isCategoryLocalizationOpen,
+    })),
+  isProductVariantLocalizationOpen: false,
+  onOpenProductVariantLocalizationChange: (open) =>
+    set((state) => ({
+      isProductVariantLocalizationOpen:
+        open ?? !state.isProductVariantLocalizationOpen,
+    })),
   onOpenProductChange: (open) =>
     set((state) => ({
       isProductOpen: open ?? !state.isProductOpen,
