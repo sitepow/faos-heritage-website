@@ -2,7 +2,7 @@ import { createClient } from '@supabase/supabase-js'
 import { useState } from 'react'
 
 import { deleteFileSupabase } from '@/actions/file'
-import { optimizeImageClient } from '@/utils/optimize/image/client'
+// import { optimizeImageClient } from '@/utils/optimize/image/client'
 
 interface useImageUploadParams {
   oldImage?: string | null
@@ -32,16 +32,16 @@ export const useImageUpload = ({
     try {
       const originalFile = previewFiles[0]
 
-      const optimizedFile = await optimizeImageClient(originalFile, {
-        maxWidth: 800,
-        quality: 0.85,
-      })
+      // const optimizedFile = await optimizeImageClient(originalFile, {
+      //   maxWidth: 800,
+      //   quality: 0.85,
+      // })
 
       const fileName = `${crypto.randomUUID()}.webp`
 
       const { error } = await supabase.storage
         .from('uploads')
-        .upload(fileName, optimizedFile, {
+        .upload(fileName, originalFile, {
           contentType: 'image/webp',
           upsert: true,
         })
