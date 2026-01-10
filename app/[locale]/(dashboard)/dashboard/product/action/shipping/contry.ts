@@ -1,14 +1,14 @@
 'use server'
 
-import type { ShippingCountryInput } from '../../schema'
+import type { ShippingCountryInput } from '../../schema/shipping/contry'
 import type { Prisma } from '@prisma/client'
 
-import { shippingCountrySchema } from '../../schema'
+import { shippingCountrySchema } from '../../schema/shipping/contry'
 
 import { ERROR_CODES } from '@/lib/errors/codes'
 import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
-import { decimalToNumber } from '@/utils/number'
+import { decimalToNumber } from '@/utils/helpers/number'
 
 export type GetShippingCountriesResult = Awaited<
   ReturnType<typeof getShippingCountries>

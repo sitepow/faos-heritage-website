@@ -1,8 +1,8 @@
 import type { ComponentProps } from 'react'
 
 import { useAppStore } from '@/app/store'
-import { formatCurrency, formatCurrencyRange } from '@/utils/number'
-import { getRangeDisplayValue } from '@/utils/range'
+import { formatCurrency, formatCurrencyRange } from '@/utils/helpers/number'
+import { getRangeDisplayValue } from '@/utils/helpers/range'
 import { cn } from '@/utils/style'
 
 type ProductPriceProps = ComponentProps<'div'> & {
@@ -46,7 +46,9 @@ export const ProductPrice = ({
       {...props}
     >
       <div>
-        <span className='text-primary text-2xl font-bold'>{displayPrice}</span>
+        <span className='text-primary text-xl font-bold sm:text-2xl'>
+          {displayPrice}
+        </span>
         <span className='text-default-600 text-xs'> /{unit}</span>
       </div>
     </div>

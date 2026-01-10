@@ -1,6 +1,5 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/no-array-index-key */
-
 'use client'
 
 import { Card, CardHeader, CardBody, ScrollShadow, Button } from '@heroui/react'
@@ -21,9 +20,9 @@ import {
 
 import { getCategories } from '@/app/[locale]/(dashboard)/dashboard/product/action/category'
 import { getProducts } from '@/app/[locale]/(main)/products/action'
-import { Carousel } from '@/components/features/carousel/carousel'
-import { createSlug } from '@/utils/slug'
-interface CategoryCarouselClientProps {
+import { Carousel } from '@/components/carousel/carousel'
+import { createSlug } from '@/utils/helpers/slug'
+interface Props {
   initialCategories: GetCategoriesResult
   initialProducts: GetProductsResult
   itemPerPage: number
@@ -50,7 +49,7 @@ export const CategoryCarouselClient = ({
   initialCategories,
   initialProducts,
   itemPerPage,
-}: CategoryCarouselClientProps) => {
+}: Props) => {
   const locale = useLocale()
   const router = useRouter()
   const t = useTranslations('CategoryCarousel')
@@ -95,8 +94,8 @@ export const CategoryCarouselClient = ({
   }
 
   return (
-    <div className='flex w-full flex-col gap-5 md:min-h-[525px] md:flex-row'>
-      <Card className='h-[350px] md:w-[400px]'>
+    <div className='flex w-full flex-col gap-5 sm:h-[710px] md:flex-row'>
+      <Card className='h-[350px] sm:h-full md:h-full md:w-[400px]'>
         <CardHeader className='font-bold'>{t('title')}</CardHeader>
         <CardBody>
           <ScrollShadow className='p-1'>
@@ -119,7 +118,7 @@ export const CategoryCarouselClient = ({
         <CardHeader className='flex flex-wrap items-center justify-between'>
           <span className='font-bold'>{activeCategory?.name}</span>
           <Button
-            className='text-secondary'
+            variant='bordered'
             color='primary'
             endContent={<ArrowRight className='size-4' />}
             onPress={() =>
@@ -133,7 +132,7 @@ export const CategoryCarouselClient = ({
         </CardHeader>
 
         <CardBody>
-          <Carousel slidesToScroll trackClassName='items-stretch p-1'>
+          <Carousel slidesToScroll trackClassName='items-stretch'>
             {isLoadingProducts ? (
               Array.from({ length: 8 }).map((_, i) => (
                 <ProductCardSkeleton key={i} />

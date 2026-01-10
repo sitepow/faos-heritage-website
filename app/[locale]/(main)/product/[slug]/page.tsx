@@ -5,9 +5,9 @@ import type { Metadata } from 'next'
 
 import { getProduct } from '@/app/[locale]/(dashboard)/dashboard/product/action/product'
 import { ProductClient } from '@/app/[locale]/(main)/product/[slug]/client'
-import { PageNotFound } from '@/components/common/page-not-found'
-import { OG_IMAGE } from '@/utils/constants'
-import { getIdFromSlug } from '@/utils/slug'
+import { PageNotFound } from '@/components/page-not-found'
+import { OG_IMAGE } from '@/utils/constants/seo'
+import { getIdFromSlug } from '@/utils/helpers/slug'
 
 interface ProductProps {
   params: Promise<{ slug: string; locale: string }>

@@ -6,7 +6,7 @@ import Image from 'next/image'
 import type { GetCategoryResult } from '@/app/[locale]/(dashboard)/dashboard/product/action/category'
 import type { ComponentProps } from 'react'
 
-import { NO_IMAGE } from '@/utils/constants'
+import { NO_IMAGE } from '@/utils/constants/seo'
 import { cn } from '@/utils/style'
 
 type CategoryCarouselItemProps = ComponentProps<typeof CardBody> & {
@@ -34,9 +34,9 @@ export const CategoryCarouselItem = ({
           <Image
             alt=''
             className='aspect-square rounded-full object-cover'
-            height={38}
+            height={60}
             src={item?.image ?? NO_IMAGE}
-            width={38}
+            width={60}
           />
           <span className='truncate'>{item?.name}</span>
         </div>

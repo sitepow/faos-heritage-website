@@ -25,7 +25,7 @@ export const HeroUIProviders = ({
       skipFramerMotionAnimations
       navigate={router.push}
     >
-      <NextThemesProvider {...themeProps} defaultTheme='light'>
+      <NextThemesProvider {...themeProps} defaultTheme='dark'>
         {children}
       </NextThemesProvider>
     </HeroUIProvider>

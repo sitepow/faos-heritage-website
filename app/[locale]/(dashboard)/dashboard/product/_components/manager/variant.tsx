@@ -32,9 +32,9 @@ import { useProductStore } from '../../store'
 import { VariantForm } from '../form/variant'
 
 import { useAppStore } from '@/app/store'
-import { ConfirmModal } from '@/components/modal/confirm'
-import { NO_IMAGE } from '@/utils/constants'
-import { formatCurrency, formatNumber } from '@/utils/number'
+import { ConfirmModal } from '@/components/confirm-modal'
+import { NO_IMAGE } from '@/utils/constants/seo'
+import { formatCurrency, formatNumber } from '@/utils/helpers/number'
 import { cn } from '@/utils/style'
 
 export const VariantManager = () => {

@@ -5,12 +5,12 @@ import { useQueries } from '@tanstack/react-query'
 import { ImageIcon, SettingsIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
-import { StatCard, StatCardSkeleton } from '../_components'
 import { getOrderStat, getOrderStatCash } from './order/action'
 import { getProductStat } from './product/action/product'
 import { getUserStat } from './user/action'
 import { ImageBannerManager } from '../_components/manager/banner/image'
 import { useImageBannerStore } from '../_components/manager/banner/store'
+import { StatCardSkeleton, StatCard } from '../_components/stat-card'
 
 interface StatItem {
   name: string

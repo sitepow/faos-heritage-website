@@ -16,14 +16,19 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
-import type { ImageWithPreview } from '@/components'
+import type { CategoryInput } from '../../schema/category'
+import type { ImageWithPreview } from '@/components/dropzone/image'
 
-import { createCategory, getCategory, updateCategory } from '../../action'
-import { categorySchema, type CategoryInput } from '../../schema'
+import {
+  getCategory,
+  createCategory,
+  updateCategory,
+} from '../../action/category'
+import { categorySchema } from '../../schema/category'
 import { useProductStore } from '../../store'
 
-import { SubHeading } from '@/components/common/heading'
-import { ImageDropzone } from '@/components/features/dropzone/image'
+import { ImageDropzone } from '@/components/dropzone/image'
+import { SubHeading } from '@/components/heading'
 import { useImageUpload } from '@/hooks/useImageUpload'
 
 const DEFAULT_VALUES: CategoryInput = {

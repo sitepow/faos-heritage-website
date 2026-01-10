@@ -1,6 +1,5 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable @next/next/no-img-element */
-
 'use client'
 
 import { Card, CardBody } from '@heroui/react'
@@ -20,7 +19,7 @@ export const ProductDescription = () => {
   return (
     <Card className='bg-default-50' shadow='none'>
       <CardBody className='px-6 py-8'>
-        <article className='prose prose-neutral dark:prose-invert prose-p:leading-relaxed mx-auto max-w-5xl'>
+        <article className='prose prose-neutral dark:prose-invert prose-p:leading-relaxed mx-auto max-w-full sm:text-lg'>
           <ReactMarkdown
             components={{
               img: ({ alt, ...props }) => (

@@ -8,7 +8,7 @@ import type { ActionResult } from '@/lib/errors/types'
 
 import { ERROR_CODES } from '@/lib/errors/codes'
 import { done, fail } from '@/lib/errors/server'
-import { getPathFromPublicUrl } from '@/utils/app/helpers/supabase'
+import { getPathFromPublicUrl } from '@/utils/helpers/supabase'
 // import { optimizeImageServer } from '@/utils/optimize/image/server'
 
 const supabase = createClient(

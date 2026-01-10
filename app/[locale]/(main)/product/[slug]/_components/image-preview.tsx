@@ -1,16 +1,19 @@
 /* eslint-disable react/no-array-index-key */
-
 'use client'
 
-import { Card, CardBody } from '@heroui/react'
 import Image from 'next/image'
-import { useState, type ComponentPropsWithoutRef } from 'react'
+// import { useState } from 'react'
 
-import { Carousel } from '@/components/features/carousel/carousel'
-import { NO_IMAGE } from '@/utils/constants'
+import { Carousel } from '@/components/carousel/carousel'
+import { NO_IMAGE } from '@/utils/constants/seo'
 import { cn } from '@/utils/style'
 
-type ProductImagePreviewProps = ComponentPropsWithoutRef<'div'> & {
+// type Props = ComponentPropsWithoutRef<'div'> & {
+//   images: string[]
+//   alt?: string
+// }
+
+type Props = {
   images: string[]
   alt?: string
 }
@@ -18,68 +21,92 @@ type ProductImagePreviewProps = ComponentPropsWithoutRef<'div'> & {
 export const ProductImagePreview = ({
   images = [],
   alt = 'product-image',
-  className,
-  ...props
-}: ProductImagePreviewProps) => {
-  const [selectedIndex, setSelectedIndex] = useState(0)
+  // className,
+  // ...props
+}: Props) => {
+  // const [selectedIndex, setSelectedIndex] = useState(0)
   const displayImages = images.length > 0 ? images : [NO_IMAGE]
-  const mainImage = displayImages[selectedIndex]
+  // const mainImage = displayImages[selectedIndex]
 
   return (
-    <Card>
-      <CardBody>
-        <div
-          className={cn(
-            'flex h-[650px] w-full flex-col gap-3 overflow-hidden',
-            className,
-          )}
-          {...props}
-        >
-          <div className='relative aspect-square size-full overflow-hidden bg-white'>
+    <Carousel slidesToScroll autoPlay={false}>
+      {displayImages.map((image, index) => {
+        // const isActive = index === selectedIndex
+
+        return (
+          <button
+            key={`${image}-${index}`}
+            className={cn(
+              'border-divider relative aspect-square size-full shrink-0 overflow-hidden rounded-xl border bg-white transition-all',
+            )}
+            type='button'
+            // onClick={() => setSelectedIndex(index)}
+          >
             <Image
               fill
-              priority
-              alt={alt}
-              className='aspect-square object-contain transition-opacity duration-300'
-              src={mainImage}
+              alt={`${alt}-thumb-${index}`}
+              className='object-contain transition-opacity'
+              src={image}
             />
-          </div>
+          </button>
+        )
+      })}
+    </Carousel>
 
-          {displayImages.length > 1 && (
-            <Carousel slidesToScroll autoPlay={false}>
-              {displayImages.map((image, index) => {
-                const isActive = index === selectedIndex
+    // <Card>
+    //   <CardBody>
+    //     <div
+    //       className={cn(
+    //         'flex h-fit w-full flex-col gap-3 overflow-hidden sm:h-[500px]',
+    //         className,
+    //       )}
+    //       {...props}
+    //     >
+    //       <div className='relative aspect-square size-full overflow-hidden'>
+    //         <Image
+    //           fill
+    //           priority
+    //           alt={alt}
+    //           className='aspect-square object-contain transition-opacity duration-300'
+    //           src={mainImage}
+    //         />
+    //       </div>
 
-                return (
-                  <button
-                    key={`${image}-${index}`}
-                    className={cn(
-                      'order relative aspect-square size-24 shrink-0 overflow-hidden rounded-xl border-2 bg-white transition-all',
-                      isActive
-                        ? 'border-primary ring-primary/10 ring-2'
-                        : 'hover:border-default-300 border-divider',
-                    )}
-                    type='button'
-                    onClick={() => setSelectedIndex(index)}
-                  >
-                    <Image
-                      fill
-                      alt={`${alt}-thumb-${index}`}
-                      className={cn(
-                        'object-contain transition-opacity',
-                        isActive
-                          ? 'opacity-100'
-                          : 'opacity-60 hover:opacity-100',
-                      )}
-                      src={image}
-                    />
-                  </button>
-                )
-              })}
-            </Carousel>
-          )}
-        </div>
-      </CardBody>
-    </Card>
+    //       {displayImages.length > 1 && (
+    //         <Carousel slidesToScroll autoPlay={false}>
+    //           {displayImages.map((image, index) => {
+    //             const isActive = index === selectedIndex
+
+    //             return (
+    //               <button
+    //                 key={`${image}-${index}`}
+    //                 className={cn(
+    //                   'order relative aspect-square size-24 shrink-0 overflow-hidden rounded-xl border-2 bg-white transition-all',
+    //                   isActive
+    //                     ? 'border-primary ring-primary/10 ring-2'
+    //                     : 'hover:border-default-300 border-divider',
+    //                 )}
+    //                 type='button'
+    //                 onClick={() => setSelectedIndex(index)}
+    //               >
+    //                 <Image
+    //                   fill
+    //                   alt={`${alt}-thumb-${index}`}
+    //                   className={cn(
+    //                     'object-contain transition-opacity',
+    //                     isActive
+    //                       ? 'opacity-100'
+    //                       : 'opacity-60 hover:opacity-100',
+    //                   )}
+    //                   src={image}
+    //                 />
+    //               </button>
+    //             )
+    //           })}
+    //         </Carousel>
+    //       )}
+    //     </div>
+    //   </CardBody>
+    // </Card>
   )
 }

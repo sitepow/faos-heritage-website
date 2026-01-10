@@ -3,22 +3,18 @@
 
 import { useTranslations } from 'next-intl'
 
-import { SectionHeader } from '@/components/common/heading'
+import { SectionHeader } from '@/components/heading'
 
 export const PrivacyClient = () => {
   const t = useTranslations('Privacy')
 
   return (
-    <section className='flex flex-col items-center justify-center gap-4 text-center'>
+    <section className='flex flex-col items-center justify-center gap-4'>
       <SectionHeader title={t('title')} />
 
-      <p className='text-default-500 text-left leading-relaxed sm:w-4/5 sm:text-center lg:w-1/2'>
+      <p className='text-default-500 leading-relaxed'>
         {t.rich('content', {
-          important: (chunks) => (
-            <span className='decoration-primary text-default-700 font-medium underline decoration-dotted underline-offset-4'>
-              {chunks}
-            </span>
-          ),
+          important: (chunks) => <span>{chunks}</span>,
         })}
       </p>
     </section>

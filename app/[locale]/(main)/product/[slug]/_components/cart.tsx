@@ -21,12 +21,12 @@ import { ProductChip } from './chip'
 import { ProductPrice } from './price'
 import { ProductRating } from './rating'
 import { ProductShare } from './share'
+import { createFavorite } from '../../../account/_components/favorite/action'
+import { createCart } from '../../../cart/action'
 import { useProductDetailStore } from '../store'
 
-import { createFavorite } from '@/app/[locale]/(main)/account'
-import { createCart } from '@/app/[locale]/(main)/cart'
-import { ACCOUNT_TAB } from '@/utils/features'
-import { createSlug } from '@/utils/slug'
+import { ACCOUNT_TAB } from '@/utils/constants/account'
+import { createSlug } from '@/utils/helpers/slug'
 
 export const ProductCart = () => {
   const t = useTranslations('ProductCart')
@@ -105,14 +105,13 @@ export const ProductCart = () => {
     <Card>
       <CardBody className='flex flex-col gap-3'>
         <div className='flex flex-col'>
+          <h1 className='text-xl font-bold sm:text-2xl'>{product?.name}</h1>
           <ProductPrice
-            className='mb-2.5'
             price={price!}
             priceMax={!variantId ? product?.priceMax! : null}
             priceMin={!variantId ? product?.priceMin! : null}
             unit={product?.unit}
           />
-          <h1 className='text-2xl font-bold'>{product?.name}</h1>
           <ProductRating />
         </div>
 
@@ -127,7 +126,9 @@ export const ProductCart = () => {
         {product?.shortDescription && (
           <Card className='bg-default-50 dark:bg-default-100' shadow='none'>
             <CardBody className='text-default-600 text-sm'>
-              <span className='line-clamp-2'>{product.shortDescription}</span>
+              <span className='line-clamp-6 sm:text-lg'>
+                {product.shortDescription}
+              </span>
             </CardBody>
           </Card>
         )}

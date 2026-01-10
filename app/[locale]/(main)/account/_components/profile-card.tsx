@@ -16,7 +16,7 @@ import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
-import type { ImageWithPreview } from '@/components'
+import type { ImageWithPreview } from '@/components/dropzone/image'
 
 import {
   getUser,
@@ -26,8 +26,8 @@ import {
   userUpdateSchema,
   type UserUpdateInput,
 } from '@/app/[locale]/(dashboard)/dashboard/user/schema'
-import { SubHeading } from '@/components/common/heading'
-import { ImageDropzone } from '@/components/features/dropzone/image'
+import { ImageDropzone } from '@/components/dropzone/image'
+import { SubHeading } from '@/components/heading'
 import { useImageUpload } from '@/hooks/useImageUpload'
 
 const DEFAULT_VALUES: UserUpdateInput = {

@@ -25,9 +25,9 @@ import { createAddress, getAddress, updateAddress } from './action'
 import { addressSchema, type AddressInput } from './schema'
 import { useAddressStore } from './store'
 
-import { SubHeading } from '@/components'
-import { CountryFlag } from '@/components/common/country-flag'
-import { COUNTRIES } from '@/utils/constants/countries'
+import { CountryFlag } from '@/components/country-flag'
+import { SubHeading } from '@/components/heading'
+import { COUNTRY } from '@/utils/constants/country'
 
 const DEFAULT_VALUES: AddressInput = {
   id: undefined,
@@ -313,7 +313,7 @@ export const AddressForm = () => {
                   isInvalid={!!errors.countryCode}
                   onSelectionChange={(keys) => {
                     const code = Array.from(keys)[0] as string
-                    const country = COUNTRIES.find((c) => c.code === code)
+                    const country = COUNTRY.find((c) => c.code === code)
 
                     onChange(code)
                     setValue('country', country?.name ?? '', {
@@ -322,7 +322,7 @@ export const AddressForm = () => {
                     setValue('countryCode', code, { shouldDirty: true })
                   }}
                 >
-                  {COUNTRIES.map((country) => (
+                  {COUNTRY.map((country) => (
                     <SelectItem
                       key={country.code}
                       startContent={<CountryFlag countryCode={country.code} />}

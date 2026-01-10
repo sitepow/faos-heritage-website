@@ -23,11 +23,11 @@ import { updateCart, type GetCartResult } from '../action'
 import { useCartStore } from '../store'
 
 import { useAppStore } from '@/app/store'
-import { ConfirmModal } from '@/components/modal/confirm'
-import { NO_IMAGE } from '@/utils/constants'
-import { getProductUnit } from '@/utils/features/product/helpers'
-import { formatCurrency, formatNumber } from '@/utils/number'
-import { createSlug } from '@/utils/slug'
+import { ConfirmModal } from '@/components/confirm-modal'
+import { NO_IMAGE } from '@/utils/constants/seo'
+import { formatCurrency, formatNumber } from '@/utils/helpers/number'
+import { getProductUnit } from '@/utils/helpers/product'
+import { createSlug } from '@/utils/helpers/slug'
 import { cn } from '@/utils/style'
 
 type CartItemProps = ComponentProps<typeof Card> & {
@@ -186,12 +186,12 @@ export const CartItem = ({ className, cart, ...props }: CartItemProps) => {
           <div className='grid gap-4 sm:grid-cols-3'>
             <div className='flex size-full sm:items-center sm:justify-center'>
               <Link
-                className='border-divider size-[150px] shrink-0 border'
+                className='size-[150px] shrink-0'
                 href={`/product/${createSlug(cart?.product?.name, cart?.product?.id)}`}
               >
                 <Image
                   alt='product-image'
-                  className='aspect-square size-full object-cover'
+                  className='border-divider aspect-square size-full rounded-xl border bg-white object-contain'
                   height={100}
                   src={cart?.product?.images?.[0]?.url ?? NO_IMAGE}
                   width={100}

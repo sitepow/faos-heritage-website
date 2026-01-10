@@ -6,13 +6,13 @@ import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { useLocale, useTranslations } from 'next-intl'
 
-import { ProductSection } from '../product'
+import { ProductSection } from '../product/[slug]/_components/section'
 
 import {
   getProducts,
   type GetProductsResult,
 } from '@/app/[locale]/(main)/products/action'
-import { SectionHeader } from '@/components/common/heading'
+import { SectionHeader } from '@/components/heading'
 
 interface ExploreProductsClientProps {
   initialProducts: GetProductsResult
@@ -49,11 +49,7 @@ export const ExploreProductsClient = ({
         items={products?.items ?? []}
       />
       <Link href='/products'>
-        <Button
-          className='text-secondary'
-          color='primary'
-          endContent={<ArrowRight />}
-        >
+        <Button variant='bordered' color='primary' endContent={<ArrowRight />}>
           {tCategory('explore')}
         </Button>
       </Link>

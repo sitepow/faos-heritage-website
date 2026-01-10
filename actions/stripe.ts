@@ -8,8 +8,8 @@ import type { ActionResult } from '@/lib/errors/types'
 import { ERROR_CODES } from '@/lib/errors/codes'
 import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
-import { decimalToNumber } from '@/utils/number'
-import { toStripeAmount } from '@/utils/stripe'
+import { decimalToNumber } from '@/utils/helpers/number'
+import { toStripeAmount } from '@/utils/helpers/supabase'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2025-12-15.clover',

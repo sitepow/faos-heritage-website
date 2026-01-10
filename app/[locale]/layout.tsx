@@ -27,14 +27,14 @@ export async function generateMetadata({
     notFound()
   }
 
-  const t = await getTranslations({
+  const translate = await getTranslations({
     locale,
     namespace: 'Site',
   })
 
-  const name = t('name')
-  const title = t('title')
-  const description = t('description')
+  const name = translate('name')
+  const title = translate('title')
+  const description = translate('description')
 
   return {
     title: {

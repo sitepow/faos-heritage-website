@@ -17,16 +17,17 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
-import type { ImageWithPreview } from '@/components'
+import type { VariantInput } from '../../schema/variant'
+import type { ImageWithPreview } from '@/components/dropzone/image'
 
-import { createVariant, getVariant, updateVariant } from '../../action'
-import { variantSchema, type VariantInput } from '../../schema'
+import { getVariant, createVariant, updateVariant } from '../../action/variant'
+import { variantSchema } from '../../schema/variant'
 import { useProductStore } from '../../store'
 
-import { ImageDropzone } from '@/components'
-import { SubHeading } from '@/components/common/heading'
+import { ImageDropzone } from '@/components/dropzone/image'
+import { SubHeading } from '@/components/heading'
 import { useImageUpload } from '@/hooks/useImageUpload'
-import { DEFAULT_CURRENCY } from '@/utils/constants'
+import { DEFAULT_CURRENCY } from '@/utils/constants/currency'
 
 const DEFAULT_VALUES: VariantInput = {
   name: '',

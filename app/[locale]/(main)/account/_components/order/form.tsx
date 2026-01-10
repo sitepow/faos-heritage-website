@@ -20,7 +20,7 @@ import type { UpdateOrderInput } from './action'
 
 import { updateOrder } from './action'
 
-import { useOrderStore } from '@/app/[locale]/(dashboard)/dashboard/order'
+import { useOrderStore } from '@/app/[locale]/(dashboard)/dashboard/order/store'
 
 export const OrderForm = () => {
   const t = useTranslations('Account.OrderCancel')

@@ -3,7 +3,7 @@
 import { Card, Skeleton } from '@heroui/react'
 
 import { useAppStore } from '@/app/store'
-import { formatCurrency, formatNumber } from '@/utils/number'
+import { formatCurrency, formatNumber } from '@/utils/helpers/number'
 
 interface StatCardProps {
   name: string

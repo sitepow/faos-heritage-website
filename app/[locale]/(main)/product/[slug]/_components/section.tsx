@@ -3,7 +3,7 @@ import type { GetProductResult } from '@/app/[locale]/(main)/products/action'
 
 import { ProductCard, ProductCardSkeleton } from './card'
 
-import { ITEM_PER_PAGE } from '@/utils/constants'
+import { ITEM_PER_PAGE } from '@/utils/constants/app'
 
 interface ProductSectionProps {
   items: GetProductResult[]
@@ -22,7 +22,7 @@ export const ProductSection = ({
   const isFetching = isLoading || isFetchingNextPage
 
   return (
-    <div className='grid w-full gap-2 sm:grid-cols-2 md:gap-4 lg:grid-cols-3 xl:grid-cols-4'>
+    <div className='grid w-full gap-2 sm:grid-cols-2 md:gap-4 xl:grid-cols-3'>
       {!isLoading &&
         items?.map((product) => (
           <ProductCard

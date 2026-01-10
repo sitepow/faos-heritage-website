@@ -8,19 +8,18 @@ import { useEffect, useState } from 'react'
 
 import type { Key } from 'react'
 
-import {
-  OverviewCard,
-  OrderCard,
-  FavoriteCard,
-  ProfileCard,
-  AddressCard,
-} from './_components'
+import { AddressCard } from './_components/address/card'
+import { FavoriteCard } from './_components/favorite/card'
+import { OrderCard } from './_components/order/card'
+import { OverviewCard } from './_components/overview-card'
+import { ProfileCard } from './_components/profile-card'
 
+import { Country } from '@/components/navbar/country'
 import { useIsBelowBreakpoint } from '@/hooks/useIsBelowBreakpoint'
 import { useMounted } from '@/hooks/useMounted'
 import { useQueryParams } from '@/hooks/useQueryParams'
-import { IS_TABLET_OR_MOBILE } from '@/utils/constants'
-import { ACCOUNT_TAB } from '@/utils/features'
+import { ACCOUNT_TAB } from '@/utils/constants/account'
+import { IS_TABLET_OR_MOBILE } from '@/utils/constants/responsive'
 
 export const AccountClient = () => {
   const t = useTranslations('Account')
@@ -56,6 +55,10 @@ export const AccountClient = () => {
       </Head>
 
       <section className='flex flex-col items-center justify-center gap-4 text-center'>
+        <div className='flex w-full justify-start'>
+          <Country />
+        </div>
+
         <div className='w-full text-start'>
           <span className='text-xl font-bold'>
             {t('welcome', { name: user?.name! })}

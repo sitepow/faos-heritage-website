@@ -7,7 +7,7 @@ import { ProductSection } from './section'
 import { useProductDetailStore } from '../store'
 
 import { getProducts } from '@/app/[locale]/(main)/products/action'
-import { ITEM_PER_PAGE } from '@/utils/constants'
+import { ITEM_PER_PAGE } from '@/utils/constants/app'
 
 export const ProductSimilar = () => {
   const locale = useLocale()
@@ -31,7 +31,7 @@ export const ProductSimilar = () => {
   return (
     <div className='flex flex-col gap-4'>
       {similars?.length !== 0 && (
-        <span className='border-primary mx-auto w-fit border-b pb-1 text-xl font-bold'>
+        <span className='mx-auto w-fit pb-1 text-xl font-bold'>
           {t('similar')}
         </span>
       )}

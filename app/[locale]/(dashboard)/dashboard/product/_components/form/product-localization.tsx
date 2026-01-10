@@ -29,7 +29,7 @@ import {
 } from '../../schema/product-localization'
 import { useProductStore } from '../../store'
 
-import { COUNTRIES } from '@/utils/constants'
+import { COUNTRY } from '@/utils/constants/country'
 
 const DEFAULT_VALUES: ProductLocalizationInput = {
   productId: '',
@@ -160,7 +160,7 @@ export const ProductLocalizationForm = () => {
                     field.onChange(Array.from(keys)[0])
                   }
                 >
-                  {COUNTRIES.map((c) => (
+                  {COUNTRY.map((c) => (
                     <SelectItem key={c.code}>{c.name}</SelectItem>
                   ))}
                 </Select>

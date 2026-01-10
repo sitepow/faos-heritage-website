@@ -33,11 +33,12 @@ import {
   StatCardSkeleton,
 } from '@/app/[locale]/(dashboard)/_components/stat-card'
 import { useAppStore } from '@/app/store'
-import { CountryFlag } from '@/components/common/country-flag'
-import { ITEM_PER_PAGE, NO_IMAGE } from '@/utils/constants'
-import { formatDate } from '@/utils/date'
-import { getOrderStatus } from '@/utils/features'
-import { formatCurrency } from '@/utils/number'
+import { CountryFlag } from '@/components/country-flag'
+import { ITEM_PER_PAGE } from '@/utils/constants/app'
+import { NO_IMAGE } from '@/utils/constants/seo'
+import { formatDate } from '@/utils/helpers/date'
+import { formatCurrency } from '@/utils/helpers/number'
+import { getOrderStatus } from '@/utils/helpers/order'
 
 export default function Order() {
   const t = useTranslations('Dashboard')

@@ -3,7 +3,7 @@
 import { OrderStatus } from '@prisma/client'
 
 import { prisma } from '@/lib/prisma'
-import { decimalToNumber } from '@/utils/number'
+import { decimalToNumber } from '@/utils/helpers/number'
 
 export type GetOrdersResult = Awaited<ReturnType<typeof getOrders>>
 export type GetOrderResult = GetOrdersResult['items'][number]

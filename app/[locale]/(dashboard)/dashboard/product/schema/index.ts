@@ -1,6 +1,0 @@
-export * from './category'
-export * from './image'
-export * from './product'
-export * from './variant'
-export * from './shipping/contry'
-export * from './shipping/weight-tier'

@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-
 import { create } from 'zustand'
 
 import type { GetCartsResult } from './action'

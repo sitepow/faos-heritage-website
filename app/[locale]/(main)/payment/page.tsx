@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 
 import { PaymentClient } from './client'
 
-import { OG_IMAGE } from '@/utils/constants'
+import { OG_IMAGE } from '@/utils/constants/seo'
 
 export async function generateMetadata({
   params,

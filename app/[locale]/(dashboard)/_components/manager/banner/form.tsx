@@ -18,14 +18,14 @@ import { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
 import type { ImageBannerInput } from './schema'
-import type { ImageWithPreview } from '@/components'
+import type { ImageWithPreview } from '@/components/dropzone/image'
 
 import { createImageBanner, getImageBanner, updateImageBanner } from './action'
 import { imageBannerSchema } from './schema'
 import { useImageBannerStore } from './store'
 
-import { SubHeading } from '@/components/common/heading'
-import { ImageDropzone } from '@/components/features/dropzone/image'
+import { ImageDropzone } from '@/components/dropzone/image'
+import { SubHeading } from '@/components/heading'
 import { useImageUpload } from '@/hooks/useImageUpload'
 
 const DEFAULT_VALUES: ImageBannerInput = {
@@ -35,8 +35,8 @@ const DEFAULT_VALUES: ImageBannerInput = {
 }
 
 export const ImageBannerForm = () => {
-  const t = useTranslations('Dashboard.BannerForm')
-  const tc = useTranslations('Common')
+  const translateBanner = useTranslations('Dashboard.BannerForm')
+  const translateCommon = useTranslations('Common')
   const queryClient = useQueryClient()
 
   const {
@@ -100,7 +100,9 @@ export const ImageBannerForm = () => {
   })
 
   const isPending = creating || updating || isLoading || isUploading
-  const headerLabel = imageBannerId ? t('editTitle') : t('addTitle') // ใช้ตัวแปลสำหรับหัวข้อ
+  const headerLabel = imageBannerId
+    ? translateBanner('editTitle')
+    : translateBanner('addTitle')
 
   const onFilesChange = (files: ImageWithPreview[]) => {
     setPreviewFiles(files)
@@ -148,24 +150,24 @@ export const ImageBannerForm = () => {
       <ModalContent>
         <ModalHeader>{headerLabel}</ModalHeader>
 
-        {isPending && <Spinner label={tc('loading')} />}
+        {isPending && <Spinner label={translateCommon('loading')} />}
 
         {!isPending && (
           <ModalBody>
             <ImageDropzone onFilesChange={onFilesChange} />
 
-            <SubHeading title={t('statusHeading')} />
+            <SubHeading title={translateBanner('statusHeading')} />
             <Controller
               control={control}
               name='isActive'
               render={({ field }) => (
                 <Switch isSelected={field.value} onValueChange={field.onChange}>
-                  {t('activeLabel')}
+                  {translateBanner('activeLabel')}
                 </Switch>
               )}
             />
 
-            <SubHeading title={t('infoHeading')} />
+            <SubHeading title={translateBanner('infoHeading')} />
             <Controller
               control={control}
               name='url'
@@ -173,7 +175,7 @@ export const ImageBannerForm = () => {
                 <Input
                   {...field}
                   isDisabled
-                  label={t('urlLabel')}
+                  label={translateBanner('urlLabel')}
                   value={value ?? ''}
                   isInvalid={!!errors.url}
                   errorMessage={errors.url?.message}
@@ -189,7 +191,7 @@ export const ImageBannerForm = () => {
                 <Input
                   {...field}
                   value={value ?? ''}
-                  label={t('altLabel')}
+                  label={translateBanner('altLabel')}
                   isInvalid={!!errors.alt}
                   errorMessage={errors.alt?.message}
                   variant='bordered'
@@ -201,7 +203,7 @@ export const ImageBannerForm = () => {
 
         <ModalFooter>
           <Button variant='faded' onPress={onClose}>
-            {tc('cancel')}
+            {translateCommon('cancel')}
           </Button>
           <Button
             color='primary'
@@ -209,7 +211,7 @@ export const ImageBannerForm = () => {
             isDisabled={isPending || !isDirty}
             onClick={handleSubmit(onSubmit)}
           >
-            {tc('save')}
+            {translateCommon('save')}
           </Button>
         </ModalFooter>
       </ModalContent>

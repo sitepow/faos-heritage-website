@@ -4,16 +4,16 @@ import type { Metadata } from 'next'
 
 import { CategoryCarouselClient } from './_components/category-carousel/client'
 import { ExploreProductsClient } from './_components/explore-product.client'
-import { getProducts } from './products'
-import { getCategories } from '../(dashboard)/dashboard/product'
+import { getProducts } from './products/action'
+import { getCategories } from '../(dashboard)/dashboard/product/action/category'
 
-import {
-  AdvertiseBanner,
-  CertificateBanner,
-} from '@/components/features/banner'
-import { CarouselImageBanner } from '@/components/features/banner/carousel-image'
-import { CustomerBanner } from '@/components/features/banner/customer'
-import { ITEM_PER_PAGE, OG_IMAGE } from '@/utils/constants'
+import { AdvertiseBanner } from '@/components/banner/advertise'
+import { CarouselImageBanner } from '@/components/banner/carousel-image'
+import { CertificateBanner } from '@/components/banner/certificate'
+import { CustomerBanner } from '@/components/banner/customer'
+import { Country } from '@/components/navbar/country'
+import { ITEM_PER_PAGE } from '@/utils/constants/app'
+import { OG_IMAGE } from '@/utils/constants/seo'
 
 export async function generateMetadata({
   params,
@@ -67,6 +67,9 @@ export default async function Homepage() {
 
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
+      <div className='flex w-full justify-start'>
+        <Country />
+      </div>
       <CarouselImageBanner />
       <CategoryCarouselClient
         initialCategories={categories}

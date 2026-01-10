@@ -19,9 +19,9 @@ import { ProductChip } from './chip'
 import { ProductPrice } from './price'
 import { ProductRating } from './rating'
 
-import { NO_IMAGE } from '@/utils/constants'
-import { checkOutOfStock, getProductUnit } from '@/utils/features'
-import { createSlug } from '@/utils/slug'
+import { NO_IMAGE } from '@/utils/constants/seo'
+import { checkOutOfStock, getProductUnit } from '@/utils/helpers/product'
+import { createSlug } from '@/utils/helpers/slug'
 import { cn } from '@/utils/style'
 
 interface ProductCardProps {
@@ -55,7 +55,7 @@ export const ProductCard = ({ className, product }: ProductCardProps) => {
     <Card
       className={cn(
         'flex min-h-[420px] w-full flex-col',
-        'shrink-0 basis-[300px] md:basis-[350px]',
+        'shrink-0 basis-[300px] sm:basis-[420px] lg:basis-[500px]',
         className,
       )}
       shadow='none'
@@ -74,6 +74,7 @@ export const ProductCard = ({ className, product }: ProductCardProps) => {
           >
             {product?.variants?.map((variant) => (
               <Avatar
+                size='lg'
                 key={variant?.image}
                 src={variant?.image ?? '/images/no-image.png'}
               />
@@ -82,11 +83,11 @@ export const ProductCard = ({ className, product }: ProductCardProps) => {
 
           {isOutOfStock && (
             <Alert
-              className='absolute top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2'
-              color='danger'
+              className='absolute top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2 backdrop-blur-md'
+              // color='danger'
               description='Out of stock. Please check similar items'
               radius='none'
-              variant='faded'
+              // variant='faded'
             />
           )}
 
@@ -109,7 +110,9 @@ export const ProductCard = ({ className, product }: ProductCardProps) => {
             isDigitalProduct={product?.isDigitalProduct}
             categoryName={product?.category?.name}
           />
-          <h4 className='line-clamp-2 text-lg font-bold'>{product?.name}</h4>
+          <h4 className='line-clamp-2 font-bold sm:text-2xl'>
+            {product?.name}
+          </h4>
           <ProductPrice
             price={product?.price}
             priceMax={product?.priceMax!}

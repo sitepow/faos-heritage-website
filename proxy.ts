@@ -3,8 +3,9 @@ import createMiddleware from 'next-intl/middleware'
 
 import type { NextRequest } from 'next/server'
 
+import { PROTECTED_PATHS, AUTH_PATHS } from './utils/constants/auth'
+
 import { routing } from '@/i18n/routing'
-import { AUTH_PATHS, PROTECTED_PATHS } from '@/utils/constants'
 
 const intlMiddleware = createMiddleware(routing)
 

@@ -3,7 +3,7 @@
 import { ERROR_CODES } from '@/lib/errors/codes'
 import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
-import { decimalToNumber } from '@/utils/number'
+import { decimalToNumber } from '@/utils/helpers/number'
 
 export type GetCartsResult = Awaited<ReturnType<typeof getCarts>>
 export type GetCartResult = GetCartsResult[number]

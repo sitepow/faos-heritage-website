@@ -16,17 +16,19 @@ import { ArrowUpDownIcon } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 import { useMemo, useState } from 'react'
 
-import { ProductSection } from '../product/[slug]/_components'
+import { ProductSection } from '../product/[slug]/_components/section'
 
 import {
   getProducts,
   type GetProductsResult,
 } from '@/app/[locale]/(main)/products/action'
-import { AdvertiseBanner, CertificateBanner } from '@/components'
-import { PageNotFound } from '@/components/common/page-not-found'
-import { CustomerBanner } from '@/components/features/banner/customer'
+import { AdvertiseBanner } from '@/components/banner/advertise'
+import { CertificateBanner } from '@/components/banner/certificate'
+import { CustomerBanner } from '@/components/banner/customer'
+import { Country } from '@/components/navbar/country'
+import { PageNotFound } from '@/components/page-not-found'
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
-import { SORT_ITEMS } from '@/utils/features'
+import { SORT_ITEMS } from '@/utils/constants/product'
 
 interface ProductsClientProps {
   initialProducts: GetProductsResult
@@ -91,6 +93,10 @@ export const ProductsClient = ({
 
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
+      <div className='flex w-full justify-start'>
+        <Country />
+      </div>
+
       <div className='flex w-full justify-start'>
         <Breadcrumbs className='font-bold'>
           <BreadcrumbItem href='/'>{t('breadcrumbs.home')}</BreadcrumbItem>

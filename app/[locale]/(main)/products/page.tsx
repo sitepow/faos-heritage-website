@@ -4,8 +4,9 @@ import type { Metadata } from 'next'
 
 import { getProducts } from '@/app/[locale]/(main)/products/action'
 import { ProductsClient } from '@/app/[locale]/(main)/products/client'
-import { PageNotFound } from '@/components/common/page-not-found'
-import { ITEM_PER_PAGE, OG_IMAGE } from '@/utils/constants'
+import { PageNotFound } from '@/components/page-not-found'
+import { ITEM_PER_PAGE } from '@/utils/constants/app'
+import { OG_IMAGE } from '@/utils/constants/seo'
 
 export async function generateMetadata({
   params,

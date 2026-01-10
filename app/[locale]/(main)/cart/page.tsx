@@ -12,7 +12,8 @@ import { CartLists } from './_components/lists'
 import { clearCart, deleteCart } from './action'
 import { useCartStore } from './store'
 
-import { ConfirmModal } from '@/components/modal/confirm'
+import { ConfirmModal } from '@/components/confirm-modal'
+import { Country } from '@/components/navbar/country'
 
 export default function Cart() {
   const t = useTranslations('Cart')
@@ -60,6 +61,10 @@ export default function Cart() {
       </Head>
 
       <section className='flex flex-col items-center justify-center gap-4 text-center'>
+        <div className='flex w-full justify-start'>
+          <Country />
+        </div>
+
         <ConfirmModal
           isOpen={isDeleteOpen}
           isPending={isPending}
@@ -96,7 +101,7 @@ export default function Cart() {
         {carts && carts.length !== 0 && (
           <div className='flex w-full flex-wrap justify-end gap-2'>
             <Button
-              className='text-secondary'
+              variant='bordered'
               color='primary'
               startContent={<XIcon />}
               onClick={() => onOpenClearChange()}
@@ -106,9 +111,11 @@ export default function Cart() {
           </div>
         )}
 
-        <div className='grid w-full gap-5 lg:grid-cols-3'>
+        <div className='grid w-full items-start gap-5 lg:grid-cols-3'>
           <CartLists className='lg:col-span-2' />
-          <CartCheckout />
+          <div className='lg:sticky lg:top-20'>
+            <CartCheckout />
+          </div>
         </div>
       </section>
     </>

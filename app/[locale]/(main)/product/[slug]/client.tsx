@@ -8,21 +8,20 @@ import { useEffect } from 'react'
 
 import type { GetProductResult } from '@/app/[locale]/(dashboard)/dashboard/product/action/product'
 
-import {
-  ProductCart,
-  ProductDescription,
-  ProductImagePreview,
-  ProductReview,
-  ProductSimilar,
-} from './_components'
+import { ProductCart } from './_components/cart'
+import { ProductDescription } from './_components/description'
+import { ProductImagePreview } from './_components/image-preview'
+import { ProductReview } from './_components/review'
+import { ProductSimilar } from './_components/similar'
 import { useProductDetailStore } from './store'
 
 import { getProduct } from '@/app/[locale]/(dashboard)/dashboard/product/action/product'
-import { PageNotFound } from '@/components/common/page-not-found'
-import { AdvertiseBanner } from '@/components/features/banner/advertise'
-import { CertificateBanner } from '@/components/features/banner/certificate'
-import { CustomerBanner } from '@/components/features/banner/customer'
-import { createSlug } from '@/utils/slug'
+import { AdvertiseBanner } from '@/components/banner/advertise'
+import { CertificateBanner } from '@/components/banner/certificate'
+import { CustomerBanner } from '@/components/banner/customer'
+import { Country } from '@/components/navbar/country'
+import { PageNotFound } from '@/components/page-not-found'
+import { createSlug } from '@/utils/helpers/slug'
 interface ProductClientProps {
   initialProduct: GetProductResult
   productId: string
@@ -61,6 +60,10 @@ export const ProductClient = ({
 
   return (
     <section className='flex flex-col gap-4'>
+      <div className='flex w-full justify-start'>
+        <Country />
+      </div>
+
       {isLoading ? (
         <Skeleton className='h-5 max-w-72' />
       ) : (
@@ -79,10 +82,14 @@ export const ProductClient = ({
       )}
 
       <div className='grid items-start gap-2 lg:grid-cols-2'>
-        <ProductImagePreview
-          images={product.images.map((image) => image.url)}
-        />
-        <ProductCart />
+        <div className='lg:sticky lg:top-20'>
+          <ProductImagePreview
+            images={product.images.map((image) => image.url)}
+          />
+        </div>
+        <div className='lg:sticky lg:top-20'>
+          <ProductCart />
+        </div>
       </div>
 
       <Tabs className='mx-auto' variant='bordered'>

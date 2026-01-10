@@ -16,14 +16,15 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
-import type { ImageWithPreview } from '@/components'
+import type { ImageInput } from '../../schema/image'
+import type { ImageWithPreview } from '@/components/dropzone/image'
 
-import { createImage, getImage, updateImage } from '../../action'
-import { imageSchema, type ImageInput } from '../../schema'
+import { getImage, createImage, updateImage } from '../../action/image'
+import { imageSchema } from '../../schema/image'
 import { useProductStore } from '../../store'
 
-import { SubHeading } from '@/components/common/heading'
-import { ImageDropzone } from '@/components/features/dropzone/image'
+import { ImageDropzone } from '@/components/dropzone/image'
+import { SubHeading } from '@/components/heading'
 import { useImageUpload } from '@/hooks/useImageUpload'
 
 const DEFAULT_VALUES: ImageInput = {

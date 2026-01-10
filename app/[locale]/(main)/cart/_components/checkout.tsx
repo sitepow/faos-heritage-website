@@ -20,17 +20,17 @@ import { toast } from 'react-toastify'
 
 import type { ComponentProps } from 'react'
 
-import { getAddressCheckout } from '../../account'
+import { getAddressCheckout } from '../../account/_components/address/action'
 
-import { calculateShippingCost } from '@/app/[locale]/(dashboard)'
+import { calculateShippingCost } from '@/app/[locale]/(dashboard)/dashboard/product/action/shipping/cost'
 import { createOrder } from '@/app/[locale]/(main)/account/_components/order/action'
 import { useCartStore } from '@/app/[locale]/(main)/cart/store'
 import { useAppStore } from '@/app/store'
-import { ConfirmModal } from '@/components/modal/confirm'
-import { EXCHANGE_RATE_API } from '@/utils/constants'
-import { ACCOUNT_TAB } from '@/utils/features'
-import { getFullAddress } from '@/utils/features/account/helpers'
-import { formatCurrency } from '@/utils/number'
+import { ConfirmModal } from '@/components/confirm-modal'
+import { ACCOUNT_TAB } from '@/utils/constants/account'
+import { EXCHANGE_RATE_API } from '@/utils/constants/currency'
+import { getFullAddress } from '@/utils/helpers/account'
+import { formatCurrency } from '@/utils/helpers/number'
 import { cn } from '@/utils/style'
 
 type CartCheckoutProps = ComponentProps<typeof Card>
@@ -259,7 +259,7 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
 
           {!isLoadingAddress && address && (
             <Button
-              className='text-secondary'
+              variant='bordered'
               color='primary'
               endContent={<ArrowRight />}
               isDisabled={

@@ -10,10 +10,10 @@ import { useState } from 'react'
 
 import { OrderItem } from './item'
 
-import { getOrders } from '@/app/[locale]/(dashboard)/dashboard/order'
 import { OrderViewModal } from '@/app/[locale]/(dashboard)/dashboard/order/_components/view-modal'
+import { getOrders } from '@/app/[locale]/(dashboard)/dashboard/order/action'
 import { OrderForm } from '@/app/[locale]/(main)/account/_components/order/form'
-import { ITEM_PER_PAGE } from '@/utils/constants'
+import { ITEM_PER_PAGE } from '@/utils/constants/app'
 
 export const OrderCard = () => {
   const t = useTranslations('Account.Orders')

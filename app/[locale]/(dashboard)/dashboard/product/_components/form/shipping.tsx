@@ -19,17 +19,20 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
+import type { ShippingCountryInput } from '../../schema/shipping/contry'
+
 import {
-  createShippingCountry,
   getShippingCountry,
+  createShippingCountry,
   updateShippingCountry,
-} from '../../action'
-import { shippingCountrySchema, type ShippingCountryInput } from '../../schema'
+} from '../../action/shipping/contry'
+import { shippingCountrySchema } from '../../schema/shipping/contry'
 import { useProductStore } from '../../store'
 
-import { CountryFlag } from '@/components/common/country-flag'
-import { SubHeading } from '@/components/common/heading'
-import { COUNTRIES, DEFAULT_CURRENCY } from '@/utils/constants'
+import { CountryFlag } from '@/components/country-flag'
+import { SubHeading } from '@/components/heading'
+import { COUNTRY } from '@/utils/constants/country'
+import { DEFAULT_CURRENCY } from '@/utils/constants/currency'
 
 const DEFAULT_VALUES: ShippingCountryInput = {
   countryCode: '',
@@ -190,7 +193,7 @@ export const ShippingForm = () => {
                   isInvalid={!!errors.countryCode}
                   onSelectionChange={(keys) => {
                     const code = Array.from(keys)[0] as string
-                    const country = COUNTRIES.find(
+                    const country = COUNTRY.find(
                       (country) => country.code === code,
                     )
 
@@ -204,7 +207,7 @@ export const ShippingForm = () => {
                     })
                   }}
                 >
-                  {COUNTRIES.map((country) => (
+                  {COUNTRY.map((country) => (
                     <SelectItem
                       key={country.code}
                       startContent={<CountryFlag countryCode={country.code} />}

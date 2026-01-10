@@ -38,8 +38,9 @@ import {
   StatCard,
   StatCardSkeleton,
 } from '@/app/[locale]/(dashboard)/_components/stat-card'
-import { ConfirmModal } from '@/components/modal/confirm'
-import { ITEM_PER_PAGE, NO_IMAGE } from '@/utils/constants'
+import { ConfirmModal } from '@/components/confirm-modal'
+import { ITEM_PER_PAGE } from '@/utils/constants/app'
+import { NO_IMAGE } from '@/utils/constants/seo'
 
 export default function User() {
   const tDash = useTranslations('Dashboard')

@@ -28,9 +28,9 @@ import { deleteAddress, getAddresses } from './action'
 import { AddressForm } from './form'
 import { useAddressStore } from './store'
 
-import { ConfirmModal } from '@/components'
-import { CountryFlag } from '@/components/common/country-flag'
-import { getFullAddress } from '@/utils/features'
+import { ConfirmModal } from '@/components/confirm-modal'
+import { CountryFlag } from '@/components/country-flag'
+import { getFullAddress } from '@/utils/helpers/account'
 
 export const AddressCard = () => {
   const queryClient = useQueryClient()

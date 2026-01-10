@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useSession } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
 
-import { getUser } from '@/app/[locale]/(dashboard)/dashboard/user'
+import { getUser } from '@/app/[locale]/(dashboard)/dashboard/user/action'
 
 interface OverviewCardProps {
   onclickProfile?: () => void

@@ -36,13 +36,11 @@ import { useLocale, useTranslations } from 'next-intl'
 import { useState } from 'react'
 
 import { ProductForm } from './_components/form/product'
-import {
-  CategoryManager,
-  ImageManager,
-  VariantManager,
-} from './_components/manager'
+import { CategoryManager } from './_components/manager/category'
+import { ImageManager } from './_components/manager/image'
 import { ProductLocalizationManager } from './_components/manager/product-localization'
 import { ShippingCountryManager } from './_components/manager/shipping'
+import { VariantManager } from './_components/manager/variant'
 import { useProductStore } from './store'
 
 import {
@@ -55,15 +53,15 @@ import {
   getProducts,
 } from '@/app/[locale]/(dashboard)/dashboard/product/action/product'
 import { useAppStore } from '@/app/store'
-import { ConfirmModal } from '@/components/modal/confirm'
-import { ITEM_PER_PAGE } from '@/utils/constants'
+import { ConfirmModal } from '@/components/confirm-modal'
+import { ITEM_PER_PAGE } from '@/utils/constants/app'
 import {
   formatCurrency,
   formatCurrencyRange,
   formatNumber,
   formatNumberRange,
-} from '@/utils/number'
-import { getRangeDisplayValue } from '@/utils/range'
+} from '@/utils/helpers/number'
+import { getRangeDisplayValue } from '@/utils/helpers/range'
 
 export default function Product() {
   const locale = useLocale()

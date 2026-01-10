@@ -9,9 +9,9 @@ import { deleteFileSupabase } from '@/actions/file'
 import { ERROR_CODES } from '@/lib/errors/codes'
 import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
-import { getVariantPriceStockMinMax } from '@/utils/features/product/helpers'
-import { decimalToNumber } from '@/utils/number'
-import { removeEmptyField } from '@/utils/object'
+import { decimalToNumber } from '@/utils/helpers/number'
+import { removeEmptyField } from '@/utils/helpers/object'
+import { getVariantPriceStockMinMax } from '@/utils/helpers/product'
 
 export type GetProductResult = Awaited<ReturnType<typeof getProduct>>
 

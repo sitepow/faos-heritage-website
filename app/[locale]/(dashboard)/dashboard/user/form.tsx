@@ -20,20 +20,15 @@ import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
-import type { UserCreateInput, UserUpdateInput } from '.'
-import type { ImageWithPreview } from '@/components'
+import type { UserCreateInput, UserUpdateInput } from './schema'
+import type { ImageWithPreview } from '@/components/dropzone/image'
 
-import {
-  createUser,
-  getUser,
-  updateUser,
-  userCreateSchema,
-  userUpdateSchema,
-  useUserStore,
-} from '.'
+import { getUser, createUser, updateUser } from './action'
+import { userUpdateSchema, userCreateSchema } from './schema'
+import { useUserStore } from './store'
 
-import { ImageDropzone } from '@/components'
-import { SubHeading } from '@/components/common/heading'
+import { ImageDropzone } from '@/components/dropzone/image'
+import { SubHeading } from '@/components/heading'
 import { useImageUpload } from '@/hooks/useImageUpload'
 
 const DEFAULT_VALUES = {

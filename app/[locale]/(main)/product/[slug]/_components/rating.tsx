@@ -2,7 +2,7 @@ import { Star } from 'lucide-react'
 
 import type { ComponentProps } from 'react'
 
-import { formatNumber } from '@/utils/number'
+import { formatNumber } from '@/utils/helpers/number'
 
 type ProductRatingProps = ComponentProps<'div'> & {
   rate?: number
@@ -14,12 +14,14 @@ export const ProductRating = ({ rate = 0, ...props }: ProductRatingProps) => {
       {[...Array(5)].map((_, index) => (
         <Star
           key={index}
-          className={index < Math.floor(rate) ? 'text-primary' : 'text-primary'}
+          className={
+            index < Math.floor(rate) ? 'text-default-500' : 'text-default-500'
+          }
           fill={index < Math.floor(rate) ? 'currentColor' : 'none'}
           size={15}
         />
       ))}
-      <span className='text-default-400 flex-wrap'>({formatNumber(0)})</span>
+      <span className='text-default-500 flex-wrap'>({formatNumber(0)})</span>
     </div>
   )
 }

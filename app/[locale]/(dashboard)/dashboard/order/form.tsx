@@ -19,18 +19,19 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
-import type { UpdateOrderInput } from '@/app/[locale]/(main)/account'
+import type { UpdateOrderInput } from '@/app/[locale]/(main)/account/_components/order/action'
 
 import { orderSchema, type OrderInput } from './schema'
 import { useOrderStore } from './store'
 
-import { getOrder, updateOrder } from '@/app/[locale]/(main)/account'
-import { NO_IMAGE } from '@/utils/constants'
 import {
-  SHIPPING_PROVIDERS,
-  ORDER_STEPS_ALL,
-  checkOrderStatus,
-} from '@/utils/features'
+  getOrder,
+  updateOrder,
+} from '@/app/[locale]/(main)/account/_components/order/action'
+import { ORDER_STEPS_ALL } from '@/utils/constants/order'
+import { NO_IMAGE } from '@/utils/constants/seo'
+import { SHIPPING_PROVIDERS } from '@/utils/constants/shipping'
+import { checkOrderStatus } from '@/utils/helpers/order'
 
 const DEFAULT_VALUES: OrderInput = {
   status: OrderStatus.PENDING,

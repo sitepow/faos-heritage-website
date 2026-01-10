@@ -22,18 +22,16 @@ import { useTranslations } from 'next-intl'
 import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
-import {
-  createProduct,
-  getCategories,
-  getProduct,
-  updateProduct,
-} from '../../action'
-import { productSchema, type ProductInput } from '../../schema'
+import type { ProductInput } from '../../schema/product'
+
+import { getCategories } from '../../action/category'
+import { getProduct, createProduct, updateProduct } from '../../action/product'
+import { productSchema } from '../../schema/product'
 import { useProductStore } from '../../store'
 
 import { useAppStore } from '@/app/store'
-import { SubHeading } from '@/components/common/heading'
-import { PRODUCT_UNITS } from '@/utils/features'
+import { SubHeading } from '@/components/heading'
+import { PRODUCT_UNITS } from '@/utils/constants/product'
 
 const DEFAULT_VALUES: ProductInput = {
   isAuthentic: true,

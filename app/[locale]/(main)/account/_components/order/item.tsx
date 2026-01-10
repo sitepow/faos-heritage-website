@@ -17,12 +17,12 @@ import type { GetOrderResult } from '@/app/[locale]/(dashboard)/dashboard/order/
 
 import { createStripeCheckout } from '@/actions/stripe'
 import { useOrderStore } from '@/app/[locale]/(dashboard)/dashboard/order/store'
-import { CountryFlag } from '@/components/common/country-flag'
-import { Stepper } from '@/components/common/stepper'
+import { CountryFlag } from '@/components/country-flag'
+import { Stepper } from '@/components/stepper'
 // import { OmisePayment } from '@/components/features/omise/payment'
-import { NO_IMAGE } from '@/utils/constants'
-import { formatDate } from '@/utils/date'
-import { formatCurrency, formatNumber } from '@/utils/number'
+import { NO_IMAGE } from '@/utils/constants/seo'
+import { formatDate } from '@/utils/helpers/date'
+import { formatCurrency, formatNumber } from '@/utils/helpers/number'
 
 interface OrderItemProps {
   order: GetOrderResult

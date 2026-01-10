@@ -33,8 +33,8 @@ import {
 import { useQueryParams } from '@/hooks/useQueryParams'
 
 export default function Login() {
-  const t = useTranslations('Auth')
-  const tSite = useTranslations('Site')
+  const translateAuth = useTranslations('Auth')
+  const translateSite = useTranslations('Site')
   const router = useRouter()
   const { getQueryParam } = useQueryParams()
   const callbackUrl = getQueryParam('callbackUrl') || '/'
@@ -108,12 +108,14 @@ export default function Login() {
   }
 
   return (
-    <Card className='size-full p-5 sm:w-[400px]'>
+    <Card className='p-5 sm:w-[400px]'>
       <CardHeader className='flex w-full flex-col items-center gap-1'>
-        <span className='text-lg font-bold'>{t('headerTitle')}</span>
+        <span className='text-lg font-bold'>
+          {translateAuth('headerTitle')}
+        </span>
         <span className='text-default-500'>
-          {t.rich('headerDesc', {
-            siteName: tSite('name'),
+          {translateAuth.rich('headerDesc', {
+            siteName: translateSite('name'),
             link: (chunks) => (
               <Link href={'/'}>
                 <span className='text-primary cursor-pointer underline'>
@@ -126,10 +128,10 @@ export default function Login() {
       </CardHeader>
 
       <Tabs fullWidth defaultSelectedKey='login' variant='bordered'>
-        <Tab key='login' title={t('loginTab')}>
+        <Tab key='login' title={translateAuth('loginTab')}>
           <Form onSubmit={handleSubmitLogin(submitLogin)}>
             <Input
-              label={t('emailLabel')}
+              label={translateAuth('emailLabel')}
               type='email'
               variant='bordered'
               {...registerLogin('email')}
@@ -137,7 +139,7 @@ export default function Login() {
               isInvalid={!!errorsLogin.email}
             />
             <Input
-              label={t('passwordLabel')}
+              label={translateAuth('passwordLabel')}
               type='password'
               variant='bordered'
               {...registerLogin('password')}
@@ -152,15 +154,15 @@ export default function Login() {
               isLoading={isPending}
               type='submit'
             >
-              {t('loginBtn')}
+              {translateAuth('loginBtn')}
             </Button>
           </Form>
         </Tab>
 
-        <Tab key='register' title={t('registerTab')}>
+        <Tab key='register' title={translateAuth('registerTab')}>
           <Form onSubmit={handleSubmitRegister(submitRegister)}>
             <Input
-              label={t('nameLabel')}
+              label={translateAuth('nameLabel')}
               variant='bordered'
               {...register('name')}
               errorMessage={errorsRegister.name?.message}
@@ -168,7 +170,7 @@ export default function Login() {
             />
 
             <Input
-              label={t('emailLabel')}
+              label={translateAuth('emailLabel')}
               {...register('email')}
               errorMessage={errorsRegister.email?.message}
               isInvalid={!!errorsRegister.email}
@@ -177,7 +179,7 @@ export default function Login() {
             />
 
             <Input
-              label={t('passwordLabel')}
+              label={translateAuth('passwordLabel')}
               variant='bordered'
               {...register('password')}
               errorMessage={errorsRegister.password?.message}
@@ -186,7 +188,7 @@ export default function Login() {
             />
 
             <Input
-              label={t('confirmPasswordLabel')}
+              label={translateAuth('confirmPasswordLabel')}
               variant='bordered'
               {...register('confirmPassword')}
               errorMessage={errorsRegister.confirmPassword?.message}
@@ -202,7 +204,7 @@ export default function Login() {
               isLoading={isPending}
               type='submit'
             >
-              {t('registerBtn')}
+              {translateAuth('registerBtn')}
             </Button>
           </Form>
         </Tab>
@@ -212,7 +214,7 @@ export default function Login() {
         <div className='relative flex w-full items-center'>
           <div className='border-divider flex-grow border-t' />
           <span className='px-4 whitespace-nowrap text-gray-500'>
-            {t('socialDivider')}
+            {translateAuth('socialDivider')}
           </span>
           <div className='border-divider flex-grow border-t' />
         </div>

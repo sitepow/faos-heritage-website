@@ -4,25 +4,30 @@ import { useTheme } from 'next-themes'
 import { type PropsWithChildren } from 'react'
 import { ToastContainer } from 'react-toastify'
 
-import { Footer, Navbar } from '@/components/layout'
+import { Footer } from '@/components/footer'
+import { Country } from '@/components/navbar/country'
+import { Navbar } from '@/components/navbar/navbar'
 
 export const DashboardClient = ({ children }: PropsWithChildren) => {
   const { theme } = useTheme()
 
   return (
-    <div className='bg-background relative flex h-screen flex-col overflow-x-hidden'>
+    <div className='relative flex h-screen flex-col overflow-x-hidden'>
+      <ToastContainer
+        closeOnClick
+        hideProgressBar
+        stacked
+        autoClose={3000}
+        closeButton={false}
+        theme={theme === 'dark' ? 'dark' : 'light'}
+      />
       <Navbar />
-      <main className='w-full flex-grow px-4 py-6 md:px-8 lg:px-12'>
-        <ToastContainer
-          closeOnClick
-          hideProgressBar
-          stacked
-          autoClose={3000}
-          closeButton={false}
-          theme={theme === 'dark' ? 'dark' : 'light'}
-        />
+      <main className='container mx-auto flex flex-grow flex-col gap-5 p-6'>
+        <div className='flex w-full justify-start'>
+          <Country />
+        </div>
 
-        <div className='mx-auto max-w-[1920px]'>{children}</div>
+        {children}
       </main>
       <Footer />
     </div>

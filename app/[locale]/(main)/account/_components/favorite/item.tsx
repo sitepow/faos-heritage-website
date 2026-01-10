@@ -11,11 +11,11 @@ import { useTranslations } from 'next-intl'
 import type { ComponentProps } from 'react'
 
 import { deleteFavorite, type GetFavoriteResult } from './action'
+import { ProductPrice } from '../../../product/[slug]/_components/price'
 
-import { ProductPrice } from '@/app/[locale]/(main)/product'
-import { ConfirmModal } from '@/components/modal/confirm'
-import { getProductUnit } from '@/utils/features'
-import { createSlug } from '@/utils/slug'
+import { ConfirmModal } from '@/components/confirm-modal'
+import { getProductUnit } from '@/utils/helpers/product'
+import { createSlug } from '@/utils/helpers/slug'
 import { cn } from '@/utils/style'
 
 type FavoriteItemProps = ComponentProps<typeof Card> & {
@@ -98,12 +98,12 @@ export const FavoriteItem = ({
           <div className='flex flex-wrap justify-between gap-4'>
             <div className='flex flex-wrap gap-4 lg:max-w-1/2 lg:flex-nowrap'>
               <Link
-                className='border-divider size-[150px] shrink-0 border'
+                className='border-divider size-[150px] shrink-0 rounded-xl border'
                 href={`/product/${createSlug(favorite?.product?.name, favorite?.product?.id)}`}
               >
                 <Image
                   alt='product-image'
-                  className='aspect-square size-full object-cover'
+                  className='aspect-square size-full rounded-xl bg-white object-contain'
                   height={150}
                   src={primaryImage?.url ?? '/images/no-image.png'}
                   width={150}

@@ -26,12 +26,12 @@ import {
 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
-import { deleteCategory, getCategories } from '../../action'
+import { deleteCategory, getCategories } from '../../action/category'
 import { useProductStore } from '../../store'
-import { CategoryForm } from '../form'
+import { CategoryForm } from '../form/category'
 
-import { ConfirmModal } from '@/components/modal/confirm'
-import { NO_IMAGE } from '@/utils/constants'
+import { ConfirmModal } from '@/components/confirm-modal'
+import { NO_IMAGE } from '@/utils/constants/seo'
 import { cn } from '@/utils/style'
 
 export const CategoryManager = () => {

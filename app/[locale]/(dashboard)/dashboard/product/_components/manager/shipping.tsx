@@ -26,14 +26,16 @@ import {
 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
-import { getShippingCountries } from '../../action'
-import { deleteShippingCountry } from '../../action/shipping/contry'
+import {
+  deleteShippingCountry,
+  getShippingCountries,
+} from '../../action/shipping/contry'
 import { useProductStore } from '../../store'
 import { ShippingForm } from '../form/shipping'
 
-import { CountryFlag } from '@/components/common/country-flag'
-import { ConfirmModal } from '@/components/modal/confirm'
-import { formatCurrency } from '@/utils/number'
+import { ConfirmModal } from '@/components/confirm-modal'
+import { CountryFlag } from '@/components/country-flag'
+import { formatCurrency } from '@/utils/helpers/number'
 import { cn } from '@/utils/style'
 
 export const ShippingCountryManager = () => {

@@ -4,7 +4,7 @@ import { getTranslations } from 'next-intl/server'
 import type { Metadata } from 'next'
 
 import { PdfViewer } from '@/components/pdf-viewer'
-import { OG_IMAGE } from '@/utils/constants'
+import { OG_IMAGE } from '@/utils/constants/seo'
 
 export async function generateMetadata({
   params,
