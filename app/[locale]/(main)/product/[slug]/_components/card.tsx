@@ -2,8 +2,8 @@
 
 import {
   Alert,
-  Avatar,
-  AvatarGroup,
+  // Avatar,
+  // AvatarGroup,
   Card,
   CardBody,
   CardHeader,
@@ -67,7 +67,7 @@ export const ProductCard = ({ className, product }: ProductCardProps) => {
         href={`/product/${createSlug(product?.name, product?.id)}`}
       >
         <CardHeader className='relative overflow-hidden p-0'>
-          <AvatarGroup
+          {/* <AvatarGroup
             max={3}
             isBordered
             className='absolute bottom-2 left-2 z-50'
@@ -79,7 +79,7 @@ export const ProductCard = ({ className, product }: ProductCardProps) => {
                 src={variant?.image ?? '/images/no-image.png'}
               />
             ))}
-          </AvatarGroup>
+          </AvatarGroup> */}
 
           {isOutOfStock && (
             <Alert
