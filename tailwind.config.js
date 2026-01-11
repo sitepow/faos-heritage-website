@@ -13,36 +13,45 @@ const config = {
       fontFamily: {
         sans: ['var(--font-sukhumvit)'],
       },
-      typography: ({ theme }) => ({
+      typography: () => ({
         DEFAULT: {
           css: {
-            color: theme('colors.default.700'),
-            a: {
-              color: theme('colors.primary.DEFAULT'),
-              '&:hover': {
-                opacity: 0.8,
-              },
+            color: 'hsl(var(--heroui-default-700))',
+
+            table: {
+              width: '100%',
+              tableLayout: 'fixed',
+              borderCollapse: 'separate',
+              borderSpacing: 0,
+              border: '1px solid hsl(var(--heroui-default-300))',
+              borderRadius: '12px',
+              overflow: 'hidden',
             },
-            h1: { color: theme('colors.default.900') },
-            h2: { color: theme('colors.default.900') },
-            h3: { color: theme('colors.default.900') },
-            strong: { color: theme('colors.default.900') },
-            code: {
-              backgroundColor: theme('colors.default.100'),
-              padding: '0.2em 0.4em',
-              borderRadius: '0.25rem',
+
+            thead: {
+              backgroundColor: 'hsl(var(--heroui-default-100))',
             },
-          },
-        },
-        invert: {
-          css: {
-            color: theme('colors.default.200'),
-            h1: { color: theme('colors.default.50') },
-            h2: { color: theme('colors.default.50') },
-            h3: { color: theme('colors.default.50') },
-            strong: { color: theme('colors.default.50') },
-            code: {
-              backgroundColor: theme('colors.default.800'),
+
+            th: {
+              padding: '0.75rem 1rem',
+              fontWeight: '600',
+              textAlign: 'left',
+              color: 'hsl(var(--heroui-default-900))',
+              borderRight: '1px solid hsl(var(--heroui-default-300))',
+              borderBottom: '1px solid hsl(var(--heroui-default-300))',
+            },
+
+            td: {
+              padding: '0.75rem 1rem',
+              borderRight: '1px solid hsl(var(--heroui-default-300))',
+              borderBottom: '1px solid hsl(var(--heroui-default-300))',
+            },
+
+            'th:last-child, td:last-child': {
+              borderRight: '0',
+            },
+            'tbody tr:last-child td': {
+              borderBottom: '0',
             },
           },
         },

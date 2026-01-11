@@ -5,3 +5,15 @@
 .Toastify__toast {
   font-family: var(--font-sukhumvit), sans-serif !important;
 }
+
+.mdxeditor {
+  background-color: white !important;
+  font-family: var(--font-sukhumvit), sans-serif !important;
+}
+
+.mdxeditor .cm-editor,
+.mdxeditor .cm-content {
+  font-family: var(--font-sukhumvit), sans-serif !important;
+  font-size: 15px;
+  line-height: 1.7;
+}

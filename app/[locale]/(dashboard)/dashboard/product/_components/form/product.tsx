@@ -31,6 +31,7 @@ import { useProductStore } from '../../store'
 
 import { useAppStore } from '@/app/store'
 import { SubHeading } from '@/components/heading'
+import { MdEditorCustomize } from '@/components/mdx-editor'
 import { PRODUCT_UNITS } from '@/utils/constants/product'
 
 const DEFAULT_VALUES: ProductInput = {
@@ -349,7 +350,7 @@ export const ProductForm = () => {
                   />
                 )}
               />
-              <Controller
+              {/* <Controller
                 control={control}
                 name='description'
                 render={({ field: { value, ...field } }) => (
@@ -360,6 +361,18 @@ export const ProductForm = () => {
                     minRows={6}
                     value={value ?? ''}
                     variant='bordered'
+                  />
+                )}
+              /> */}
+              <Controller
+                control={control}
+                name='description'
+                render={({ field: { value, ...field } }) => (
+                  <MdEditorCustomize
+                    placeholder={t('fields.fullDesc')}
+                    className='col-span-2'
+                    {...field}
+                    value={value ?? ''}
                   />
                 )}
               />

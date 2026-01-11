@@ -15,6 +15,7 @@ import {
 } from '@heroui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useTranslations } from 'next-intl'
 import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
@@ -29,6 +30,7 @@ import {
 } from '../../schema/product-localization'
 import { useProductStore } from '../../store'
 
+import { MdEditorCustomize } from '@/components/mdx-editor'
 import { COUNTRY } from '@/utils/constants/country'
 
 const DEFAULT_VALUES: ProductLocalizationInput = {
@@ -42,6 +44,8 @@ const DEFAULT_VALUES: ProductLocalizationInput = {
 }
 
 export const ProductLocalizationForm = () => {
+  const t = useTranslations('Dashboard.ProductForm')
+
   const {
     productId,
     productLocalizationId,
@@ -192,6 +196,19 @@ export const ProductLocalizationForm = () => {
               control={control}
               name='description'
               render={({ field: { value, ...field } }) => (
+                <MdEditorCustomize
+                  placeholder={t('fields.fullDesc')}
+                  className='col-span-2'
+                  {...field}
+                  value={value ?? ''}
+                />
+              )}
+            />
+
+            {/* <Controller
+              control={control}
+              name='description'
+              render={({ field: { value, ...field } }) => (
                 <Textarea
                   {...field}
                   value={value ?? ''}
@@ -199,7 +216,7 @@ export const ProductLocalizationForm = () => {
                   label='รายละเอียดสินค้า (ฉบับเต็ม)'
                 />
               )}
-            />
+            /> */}
 
             {/* <Controller
               control={control}
