@@ -8,15 +8,14 @@ import {
   ModalFooter,
   ModalHeader,
   Select,
-  SelectItem,
   Spinner,
   Input,
-  Textarea,
+  SelectItem,
 } from '@heroui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useTranslations } from 'next-intl'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
 import {
@@ -30,6 +29,7 @@ import {
 } from '../../schema/product-localization'
 import { useProductStore } from '../../store'
 
+import { CountryFlag } from '@/components/country-flag'
 import { MdEditorCustomize } from '@/components/mdx-editor'
 import { COUNTRY } from '@/utils/constants/country'
 
@@ -45,6 +45,10 @@ const DEFAULT_VALUES: ProductLocalizationInput = {
 
 export const ProductLocalizationForm = () => {
   const t = useTranslations('Dashboard.ProductForm')
+  const tCountry = useTranslations('Country')
+
+  const [editorShortDescKey, setEditorShortDescKey] = useState(0)
+  const [editorFullDescKey, setEditorFullDescKey] = useState(0)
 
   const {
     productId,
@@ -89,6 +93,9 @@ export const ProductLocalizationForm = () => {
         productId: productId!,
       })
     }
+
+    setEditorShortDescKey((k) => k + 1)
+    setEditorFullDescKey((k) => k + 1)
   }, [data, productLocalizationId, productId, isProductLocalizationOpen, reset])
 
   const onRefetch = async () => {
@@ -137,7 +144,7 @@ export const ProductLocalizationForm = () => {
     <Modal
       isOpen={isProductLocalizationOpen}
       onOpenChange={onOpenProductLocalizationChange}
-      size='xl'
+      size='2xl'
       scrollBehavior='inside'
       isDismissable={false}
     >
@@ -158,14 +165,35 @@ export const ProductLocalizationForm = () => {
               render={({ field }) => (
                 <Select
                   label='ประเทศ'
+                  disallowEmptySelection
                   variant='bordered'
                   selectedKeys={field.value ? [field.value] : []}
                   onSelectionChange={(keys) =>
                     field.onChange(Array.from(keys)[0])
                   }
+                  renderValue={(items) =>
+                    items.map((item) => {
+                      const selected = COUNTRY.find(
+                        (currency) => currency.code === item.key,
+                      )
+
+                      if (!selected) {
+                        return null
+                      }
+
+                      return (
+                        <span key={item.key}>{tCountry(selected.code)}</span>
+                      )
+                    })
+                  }
                 >
                   {COUNTRY.map((c) => (
-                    <SelectItem key={c.code}>{c.name}</SelectItem>
+                    <SelectItem key={c.code} textValue={c.name}>
+                      <div className='flex items-center gap-2'>
+                        <CountryFlag countryCode={c.code} />
+                        <span>{tCountry(c.code)}</span>
+                      </div>
+                    </SelectItem>
                   ))}
                 </Select>
               )}
@@ -183,11 +211,12 @@ export const ProductLocalizationForm = () => {
               control={control}
               name='shortDescription'
               render={({ field: { value, ...field } }) => (
-                <Textarea
+                <MdEditorCustomize
+                  key={editorShortDescKey}
+                  placeholder={t('fields.shortDesc')}
+                  className='col-span-2'
                   {...field}
-                  variant='bordered'
                   value={value ?? ''}
-                  label='รายละเอียดสินค้า (สั้นๆ)'
                 />
               )}
             />
@@ -197,6 +226,7 @@ export const ProductLocalizationForm = () => {
               name='description'
               render={({ field: { value, ...field } }) => (
                 <MdEditorCustomize
+                  key={editorFullDescKey}
                   placeholder={t('fields.fullDesc')}
                   className='col-span-2'
                   {...field}

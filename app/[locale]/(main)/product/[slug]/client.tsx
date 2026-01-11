@@ -87,8 +87,10 @@ export const ProductClient = ({
             images={product.images.map((image) => image.url)}
           />
         </div>
-        <div className='lg:sticky lg:top-20'>
-          <ProductCart />
+        <div className='min-w-0'>
+          <div className='lg:sticky lg:top-20'>
+            <ProductCart />
+          </div>
         </div>
       </div>
 

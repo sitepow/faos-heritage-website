@@ -4,28 +4,16 @@
 
 import {
   BoldItalicUnderlineToggles,
-  CreateLink,
-  InsertImage,
   InsertTable,
   InsertThematicBreak,
-  ListsToggle,
   MDXEditor,
   toolbarPlugin,
 } from '@mdxeditor/editor'
 import '@mdxeditor/editor/style.css'
-import {
-  headingsPlugin,
-  listsPlugin,
-  quotePlugin,
-  thematicBreakPlugin,
-  markdownShortcutPlugin,
-  linkPlugin,
-  tablePlugin,
-  imagePlugin,
-} from '@mdxeditor/editor'
+import { markdownShortcutPlugin, tablePlugin } from '@mdxeditor/editor'
+import { useEffect, useState, type ComponentProps } from 'react'
 
-import type { ComponentProps } from 'react'
-
+import { useDebouncedChange } from '@/hooks/useDebouncedChange'
 import { cn } from '@/utils/style'
 
 type Props = Omit<ComponentProps<typeof MDXEditor>, 'markdown' | 'onChange'> & {
@@ -39,36 +27,43 @@ export function MdEditorCustomize({
   className,
   ...props
 }: Props) {
+  const [localValue, setLocalValue] = useState(value)
+
+  const debouncedChange = useDebouncedChange(onChange, 500)
+
+  useEffect(() => {
+    setLocalValue(value)
+  }, [value])
   return (
     <MDXEditor
       {...props}
-      className={cn(
-        'border-divider col-span-2 min-h-[250px] rounded-xl border',
-        className,
-      )}
-      markdown={value}
-      onChange={onChange}
+      className={cn('border-divider col-span-2 rounded-xl border', className)}
+      markdown={localValue}
+      onChange={(val) => {
+        setLocalValue(val)
+        debouncedChange(val)
+      }}
       plugins={[
         toolbarPlugin({
           toolbarContents: () => (
             <>
               {/* <BlockTypeSelect /> */}
               <BoldItalicUnderlineToggles />
-              <ListsToggle />
-              <CreateLink />
-              <InsertImage />
+              {/* <ListsToggle /> */}
+              {/* <CreateLink /> */}
+              {/* <InsertImage /> */}
               <InsertTable />
               <InsertThematicBreak />
             </>
           ),
         }),
-        headingsPlugin(),
-        listsPlugin(),
-        quotePlugin(),
-        thematicBreakPlugin(),
-        linkPlugin(),
+        // headingsPlugin(),
+        // listsPlugin(),
+        // quotePlugin(),
+        // thematicBreakPlugin(),
+        // linkPlugin(),
         tablePlugin(),
-        imagePlugin(),
+        // imagePlugin(),
         markdownShortcutPlugin(),
       ]}
     />

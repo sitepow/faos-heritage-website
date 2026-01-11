@@ -22,6 +22,11 @@ export const ProductDescription = () => {
         <article className='prose prose-neutral dark:prose-invert prose-p:leading-relaxed mx-auto max-w-full sm:text-lg'>
           <ReactMarkdown
             components={{
+              table: ({ children }) => (
+                <div className='w-full overflow-x-auto'>
+                  <table className='min-w-[800px]'>{children}</table>
+                </div>
+              ),
               img: ({ alt, ...props }) => (
                 <img
                   {...props}

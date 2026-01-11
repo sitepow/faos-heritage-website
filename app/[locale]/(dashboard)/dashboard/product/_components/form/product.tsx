@@ -19,7 +19,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { ProductUnit } from '@prisma/client'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useTranslations } from 'next-intl'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
 import type { ProductInput } from '../../schema/product'
@@ -65,6 +65,9 @@ export const ProductForm = () => {
   const tc = useTranslations('Common')
   const { country } = useAppStore()
 
+  const [editorShortDescKey, setEditorShortDescKey] = useState(0)
+  const [editorFullDescKey, setEditorFullDescKey] = useState(0)
+
   const { productId, setState, isProductOpen, onOpenProductChange } =
     useProductStore()
   const queryClient = useQueryClient()
@@ -108,6 +111,9 @@ export const ProductForm = () => {
     } else if (!productId) {
       reset(DEFAULT_VALUES)
     }
+
+    setEditorShortDescKey((k) => k + 1)
+    setEditorFullDescKey((k) => k + 1)
   }, [isProductOpen, productId, product, isLoadingProduct, reset])
 
   const onRefetch = async () => {
@@ -160,7 +166,7 @@ export const ProductForm = () => {
       isDismissable={false}
       isOpen={isProductOpen}
       scrollBehavior='inside'
-      size='xl'
+      size='2xl'
       onOpenChange={(open) => {
         if (!open) onClose()
       }}
@@ -336,7 +342,7 @@ export const ProductForm = () => {
                   />
                 )}
               />
-              <Controller
+              {/* <Controller
                 control={control}
                 name='shortDescription'
                 render={({ field: { value, ...field } }) => (
@@ -349,7 +355,21 @@ export const ProductForm = () => {
                     variant='bordered'
                   />
                 )}
+              /> */}
+              <Controller
+                control={control}
+                name='shortDescription'
+                render={({ field: { value, ...field } }) => (
+                  <MdEditorCustomize
+                    key={editorShortDescKey}
+                    placeholder={t('fields.shortDesc')}
+                    className='col-span-2'
+                    {...field}
+                    value={value ?? ''}
+                  />
+                )}
               />
+
               {/* <Controller
                 control={control}
                 name='description'
@@ -369,6 +389,7 @@ export const ProductForm = () => {
                 name='description'
                 render={({ field: { value, ...field } }) => (
                   <MdEditorCustomize
+                    key={editorFullDescKey}
                     placeholder={t('fields.fullDesc')}
                     className='col-span-2'
                     {...field}
