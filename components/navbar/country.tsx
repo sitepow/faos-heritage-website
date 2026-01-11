@@ -11,6 +11,7 @@ import { CURRENCY_LOCALE_MAP } from '@/utils/constants/currency'
 import { getUsdExchangeRates } from '@/utils/helpers/currency/exchange'
 
 export const Country = () => {
+  const t = useTranslations('Localization')
   const tCountry = useTranslations('Country')
   const locale = useLocale()
   const router = useRouter()
@@ -41,8 +42,7 @@ export const Country = () => {
       <Select
         variant='faded'
         disallowEmptySelection
-        label='ประเทศ'
-        size='lg'
+        label={t('country')}
         className='w-full sm:w-52'
         selectedKeys={selectedCountry ? [selectedCountry.country] : []}
         renderValue={() =>
@@ -68,8 +68,7 @@ export const Country = () => {
       <Select
         variant='faded'
         disallowEmptySelection
-        label='สกุลเงิน'
-        size='lg'
+        label={t('currency')}
         className='w-full sm:w-52'
         selectedKeys={country ? [country.locale] : []}
         renderValue={(items) =>

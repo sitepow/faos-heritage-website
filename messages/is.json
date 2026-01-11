@@ -1,4 +1,28 @@
 {
+  "Localization": {
+    "country": "Land",
+    "currency": "Gjaldmiðill"
+  },
+  "ProductUnit": {
+    "PIECE": "Stykki",
+    "ITEM": "Hlutur",
+    "SET": "Sett",
+    "BOX": "Kassi",
+    "PACK": "Pakki",
+    "BAG": "Poki",
+    "BOTTLE": "Flaska",
+    "CAN": "Dós",
+    "KG": "Kíló",
+    "G": "Gramm",
+    "L": "Lítri",
+    "ML": "Millilítri",
+    "PAIR": "Par",
+    "ROLL": "Rúlla",
+    "SHEET": "Blað",
+    "UNIT": "Eining",
+    "CAR": "Bíll",
+    "HOUSE": "Hús"
+  },
   "Site": {
     "name": "FAOS",
     "title": "Hágæða Lífræn Ólífuolía og Hunang — 100% Hreint og Náttúrulegt",

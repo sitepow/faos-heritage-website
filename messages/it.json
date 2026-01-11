@@ -1,4 +1,28 @@
 {
+  "Localization": {
+    "country": "Paese",
+    "currency": "Valuta"
+  },
+  "ProductUnit": {
+    "PIECE": "Pezzo",
+    "ITEM": "Articolo",
+    "SET": "Set",
+    "BOX": "Scatola",
+    "PACK": "Confezione",
+    "BAG": "Sacchetto",
+    "BOTTLE": "Bottiglia",
+    "CAN": "Lattina",
+    "KG": "Chilogrammo",
+    "G": "Gramma",
+    "L": "Litro",
+    "ML": "Millilitro",
+    "PAIR": "Coppia",
+    "ROLL": "Rotolo",
+    "SHEET": "Foglio",
+    "UNIT": "Unità",
+    "CAR": "Auto",
+    "HOUSE": "Casa"
+  },
   "Site": {
     "name": "FAOS",
     "title": "Olio d'Oliva e Miele Biologici — 100% Puri e Naturali",

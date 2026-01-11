@@ -53,6 +53,7 @@ export const CategoryCarouselClient = ({
   const locale = useLocale()
   const router = useRouter()
   const t = useTranslations('CategoryCarousel')
+  const tProduct = useTranslations('Products')
 
   const [selectedId, setSelectedId] = useState<string | undefined>(
     initialCategories?.[0]?.id,
@@ -116,7 +117,9 @@ export const CategoryCarouselClient = ({
 
       <Card fullWidth className='min-h-[525px]'>
         <CardHeader className='flex flex-wrap items-center justify-between'>
-          <span className='font-bold'>{activeCategory?.name}</span>
+          <span className='font-bold'>
+            {tProduct('categoryTitle', { name: activeCategory?.name! })}
+          </span>
           <Button
             variant='bordered'
             color='primary'

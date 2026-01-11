@@ -1,4 +1,28 @@
 {
+  "Localization": {
+    "country": "国家",
+    "currency": "货币"
+  },
+  "ProductUnit": {
+    "PIECE": "件",
+    "ITEM": "项目",
+    "SET": "套",
+    "BOX": "盒",
+    "PACK": "包",
+    "BAG": "袋",
+    "BOTTLE": "瓶",
+    "CAN": "罐",
+    "KG": "千克",
+    "G": "克",
+    "L": "升",
+    "ML": "毫升",
+    "PAIR": "双",
+    "ROLL": "卷",
+    "SHEET": "张",
+    "UNIT": "单位",
+    "CAR": "辆",
+    "HOUSE": "栋"
+  },
   "Site": {
     "name": "FAOS",
     "title": "顶级有机橄榄油与蜂蜜 — 100% 纯天然系列",

@@ -1,4 +1,28 @@
 {
+  "Localization": {
+    "country": "Quốc gia",
+    "currency": "Tiền tệ"
+  },
+  "ProductUnit": {
+    "PIECE": "Cái",
+    "ITEM": "Mặt hàng",
+    "SET": "Bộ",
+    "BOX": "Hộp",
+    "PACK": "Gói",
+    "BAG": "Túi",
+    "BOTTLE": "Chai",
+    "CAN": "Lon",
+    "KG": "Kilogram",
+    "G": "Gram",
+    "L": "Lít",
+    "ML": "Mililit",
+    "PAIR": "Cặp",
+    "ROLL": "Cuộn",
+    "SHEET": "Tờ",
+    "UNIT": "Đơn vị",
+    "CAR": "Xe",
+    "HOUSE": "Nhà"
+  },
   "Site": {
     "name": "FAOS",
     "title": "Dầu Ô Liu & Mật Ong Hữu Cơ Cao Cấp — 100% Thuần Khiết & Tự Nhiên",

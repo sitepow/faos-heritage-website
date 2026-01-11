@@ -48,6 +48,16 @@ export const ProductCart = () => {
     if (cartVariantId) setVariantId(cartVariantId)
   }, [product?.cart])
 
+  useEffect(() => {
+    if (!hasVariants) return
+    if (variantId) return
+
+    const firstVariant = product?.variants?.[0]
+    if (firstVariant) {
+      setVariantId(firstVariant.id)
+    }
+  }, [product?.variants, hasVariants, variantId])
+
   const currentVariant = useMemo(
     () => product?.variants?.find((v) => v.id === variantId),
     [product?.variants, variantId],
@@ -125,7 +135,7 @@ export const ProductCart = () => {
 
         {product?.shortDescription && (
           <Card className='bg-default-50 dark:bg-default-100' shadow='none'>
-            <CardBody className='text-default-600 text-sm'>
+            <CardBody className='text-default-600'>
               <span className='line-clamp-6 sm:text-lg'>
                 {product.shortDescription}
               </span>
@@ -161,7 +171,7 @@ export const ProductCart = () => {
                 <SelectItem
                   key={variant.id}
                   startContent={
-                    <Avatar src={variant?.image ?? '/images/no-image.png'} />
+                    <Avatar src={variant?.image ?? '/images/no-image.jpg'} />
                   }
                 >
                   {variant.name}

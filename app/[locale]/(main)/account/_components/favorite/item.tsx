@@ -105,7 +105,7 @@ export const FavoriteItem = ({
                   alt='product-image'
                   className='aspect-square size-full rounded-xl bg-white object-contain'
                   height={150}
-                  src={primaryImage?.url ?? '/images/no-image.png'}
+                  src={primaryImage?.url ?? '/images/no-image.jpg'}
                   width={150}
                 />
               </Link>

@@ -134,6 +134,7 @@ export const getProduct = async (
           },
         },
         images: {
+          orderBy: { isPrimary: 'desc' },
           select: {
             url: true,
             alt: true,

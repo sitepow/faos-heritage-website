@@ -1,4 +1,28 @@
 {
+  "Localization": {
+    "country": "Land",
+    "currency": "Valuta"
+  },
+  "ProductUnit": {
+    "PIECE": "Stuk",
+    "ITEM": "Item",
+    "SET": "Set",
+    "BOX": "Doos",
+    "PACK": "Pakket",
+    "BAG": "Zak",
+    "BOTTLE": "Fles",
+    "CAN": "Blik",
+    "KG": "Kilogram",
+    "G": "Gram",
+    "L": "Liter",
+    "ML": "Milliliter",
+    "PAIR": "Paar",
+    "ROLL": "Rol",
+    "SHEET": "Vel",
+    "UNIT": "Eenheid",
+    "CAR": "Auto",
+    "HOUSE": "Huis"
+  },
   "Site": {
     "name": "FAOS",
     "title": "Premium Biologische Olijfolie & Honing — 100% Puur & Natuurlijk",

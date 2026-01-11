@@ -1,4 +1,28 @@
 {
+  "Localization": {
+    "country": "Negara",
+    "currency": "Mata Uang"
+  },
+  "ProductUnit": {
+    "PIECE": "Buah",
+    "ITEM": "Item",
+    "SET": "Set",
+    "BOX": "Kotak",
+    "PACK": "Paket",
+    "BAG": "Tas",
+    "BOTTLE": "Botol",
+    "CAN": "Kaleng",
+    "KG": "Kilogram",
+    "G": "Gram",
+    "L": "Liter",
+    "ML": "Mililiter",
+    "PAIR": "Pasang",
+    "ROLL": "Gulungan",
+    "SHEET": "Lembar",
+    "UNIT": "Unit",
+    "CAR": "Mobil",
+    "HOUSE": "Rumah"
+  },
   "Site": {
     "name": "FAOS",
     "title": "Minyak Zaitun & Madu Organik Premium — 100% Murni & Alami",

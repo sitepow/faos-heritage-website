@@ -1,3 +1,5 @@
+import { useTranslations } from 'next-intl'
+
 import type { ComponentProps } from 'react'
 
 import { useAppStore } from '@/app/store'
@@ -20,6 +22,7 @@ export const ProductPrice = ({
   className,
   ...props
 }: ProductPriceProps) => {
+  const t = useTranslations('ProductUnit')
   const { country, exchangeRates } = useAppStore()
   const CURRENCY_OPTIONS = {
     currency: country?.currency,
@@ -49,7 +52,10 @@ export const ProductPrice = ({
         <span className='text-primary text-xl font-bold sm:text-2xl'>
           {displayPrice}
         </span>
-        <span className='text-default-600 text-xs'> /{unit}</span>
+        <span className='text-default-600 text-xs'>
+          {' '}
+          /{t(unit?.toUpperCase())}
+        </span>
       </div>
     </div>
   )

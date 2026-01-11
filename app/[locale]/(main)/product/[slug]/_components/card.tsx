@@ -76,7 +76,7 @@ export const ProductCard = ({ className, product }: ProductCardProps) => {
               <Avatar
                 size='lg'
                 key={variant?.image}
-                src={variant?.image ?? '/images/no-image.png'}
+                src={variant?.image ?? '/images/no-image.jpg'}
               />
             ))}
           </AvatarGroup> */}
@@ -93,7 +93,7 @@ export const ProductCard = ({ className, product }: ProductCardProps) => {
 
           <Image
             alt={product?.name}
-            className='aspect-square size-full bg-white object-contain'
+            className='aspect-square size-full rounded-2xl bg-white object-contain'
             classNames={{ wrapper: 'w-full' }}
             height={400}
             radius='none'

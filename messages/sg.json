@@ -1,4 +1,28 @@
 {
+  "Localization": {
+    "country": "Country",
+    "currency": "Currency"
+  },
+  "ProductUnit": {
+    "PIECE": "Piece",
+    "ITEM": "Item",
+    "SET": "Set",
+    "BOX": "Box",
+    "PACK": "Pack",
+    "BAG": "Bag",
+    "BOTTLE": "Bottle",
+    "CAN": "Can",
+    "KG": "Kilogram",
+    "G": "Gram",
+    "L": "Liter",
+    "ML": "Milliliter",
+    "PAIR": "Pair",
+    "ROLL": "Roll",
+    "SHEET": "Sheet",
+    "UNIT": "Unit",
+    "CAR": "Car",
+    "HOUSE": "House"
+  },
   "Site": {
     "name": "FAOS",
     "title": "Premium Organic Olive Oil & Honey — 100% Pure & Natural",

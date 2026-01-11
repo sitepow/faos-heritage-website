@@ -1,4 +1,28 @@
 {
+  "Localization": {
+    "country": "Negara",
+    "currency": "Mata Wang"
+  },
+  "ProductUnit": {
+    "PIECE": "Unit",
+    "ITEM": "Item",
+    "SET": "Set",
+    "BOX": "Kotak",
+    "PACK": "Pek",
+    "BAG": "Beg",
+    "BOTTLE": "Botol",
+    "CAN": "Tin",
+    "KG": "Kilogram",
+    "G": "Gram",
+    "L": "Liter",
+    "ML": "Mililiter",
+    "PAIR": "Pasang",
+    "ROLL": "Gulungan",
+    "SHEET": "Helaian",
+    "UNIT": "Unit",
+    "CAR": "Kereta",
+    "HOUSE": "Rumah"
+  },
   "Site": {
     "name": "FAOS",
     "title": "Minyak Zaitun & Madu Organik Premium — 100% Tulen & Semulajadi",

@@ -40,6 +40,7 @@ export const CartItemSkeleton = () => {
 
 export const CartItem = ({ className, cart, ...props }: CartItemProps) => {
   const t = useTranslations('Cart')
+  const tUnit = useTranslations('ProductUnit')
   const { country, exchangeRates } = useAppStore()
   const CURRENCY_OPTIONS = {
     currency: country?.currency,
@@ -208,11 +209,11 @@ export const CartItem = ({ className, cart, ...props }: CartItemProps) => {
                 <div className='flex flex-wrap gap-2'>
                   <span className='text-default-500'>
                     {t('Item.price')}: {formatCurrency(currentPrice!)}/
-                    {productUnit}
+                    {tUnit(productUnit?.toUpperCase())}
                   </span>
                   <span className='text-default-500'>
                     {t('Item.remaining')}: {formatNumber(currentStockQuantity!)}
-                    /{productUnit}
+                    /{tUnit(productUnit?.toUpperCase())}
                   </span>
                 </div>
               </div>
@@ -244,7 +245,7 @@ export const CartItem = ({ className, cart, ...props }: CartItemProps) => {
                           key={variant?.id}
                           startContent={
                             <Avatar
-                              src={variant?.image ?? '/images/no-image.png'}
+                              src={variant?.image ?? '/images/no-image.jpg'}
                             />
                           }
                         >

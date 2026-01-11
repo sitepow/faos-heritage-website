@@ -1,4 +1,28 @@
 {
+  "Localization": {
+    "country": "国",
+    "currency": "通貨"
+  },
+  "ProductUnit": {
+    "PIECE": "個",
+    "ITEM": "商品",
+    "SET": "セット",
+    "BOX": "箱",
+    "PACK": "パック",
+    "BAG": "袋",
+    "BOTTLE": "ボトル",
+    "CAN": "缶",
+    "KG": "キログラム",
+    "G": "グラム",
+    "L": "リットル",
+    "ML": "ミリリットル",
+    "PAIR": "組",
+    "ROLL": "ロール",
+    "SHEET": "枚",
+    "UNIT": "単位",
+    "CAR": "台",
+    "HOUSE": "軒"
+  },
   "Site": {
     "name": "FAOS",
     "title": "プレミアム有機オリーブオイル＆ハチミツ — 100%純粋・天然コレクション",
