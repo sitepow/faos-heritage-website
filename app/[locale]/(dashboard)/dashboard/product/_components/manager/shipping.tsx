@@ -40,6 +40,7 @@ import { cn } from '@/utils/style'
 
 export const ShippingCountryManager = () => {
   const t = useTranslations('Dashboard.ShippingCountryManager')
+  const tCountry = useTranslations('Country')
   const queryClient = useQueryClient()
 
   const {
@@ -142,8 +143,7 @@ export const ShippingCountryManager = () => {
                             countryCode={shippingCountry.countryCode}
                           />
                           <span className='line-clamp-2'>
-                            {shippingCountry.countryName} (Shipping ID:{' '}
-                            {shippingCountry.id})
+                            {tCountry(shippingCountry.countryCode)}
                           </span>
                         </div>
 

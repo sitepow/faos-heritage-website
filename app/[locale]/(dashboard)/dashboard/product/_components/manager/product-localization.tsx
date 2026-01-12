@@ -22,6 +22,7 @@ import {
   TrashIcon,
   EllipsisVerticalIcon,
 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 import {
   getProductLocalizations,
@@ -30,7 +31,10 @@ import {
 import { useProductStore } from '../../store'
 import { ProductLocalizationForm } from '../form/product-localization'
 
+import { CountryFlag } from '@/components/country-flag'
+
 export const ProductLocalizationManager = () => {
+  const t = useTranslations('Country')
   const queryClient = useQueryClient()
 
   const {
@@ -83,9 +87,17 @@ export const ProductLocalizationManager = () => {
                 <Card key={item.id}>
                   <CardBody>
                     <div className='flex items-center justify-between'>
-                      <p className='line-clamp-1 font-medium'>
-                        {item.languageCode.toUpperCase()} – {item.name}
-                      </p>
+                      <div className='flex items-center gap-2'>
+                        <CountryFlag countryCode={item?.languageCode} />
+                        <div className='flex flex-col'>
+                          <p className='line-clamp-1 font-medium'>
+                            {t(item.languageCode.toUpperCase())}
+                          </p>
+                          <span className='text-default-500 text-sm'>
+                            ({item?.name})
+                          </span>
+                        </div>
+                      </div>
 
                       <Dropdown>
                         <DropdownTrigger>
@@ -96,7 +108,7 @@ export const ProductLocalizationManager = () => {
                         <DropdownMenu>
                           <DropdownItem
                             key='edit'
-                            startContent={<EditIcon />}
+                            startContent={<EditIcon className='size-4' />}
                             onClick={() => {
                               setState({
                                 productLocalizationId: item.id,
@@ -111,7 +123,7 @@ export const ProductLocalizationManager = () => {
                             key='delete'
                             color='danger'
                             className='text-danger'
-                            startContent={<TrashIcon />}
+                            startContent={<TrashIcon className='size-4' />}
                             onClick={() => mutate(item.id)}
                             isDisabled={isPending}
                           >

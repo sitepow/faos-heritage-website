@@ -24,11 +24,11 @@ type Props = Omit<ComponentProps<typeof MDXEditor>, 'markdown' | 'onChange'> & {
 export function MdEditorCustomize({
   value,
   onChange,
+  placeholder,
   className,
   ...props
 }: Props) {
   const [localValue, setLocalValue] = useState(value)
-
   const debouncedChange = useDebouncedChange(onChange, 500)
 
   useEffect(() => {
@@ -37,7 +37,11 @@ export function MdEditorCustomize({
   return (
     <MDXEditor
       {...props}
-      className={cn('border-divider col-span-2 rounded-xl border', className)}
+      placeholder={`(${placeholder})`}
+      className={cn(
+        'border-divider col-span-2 rounded-xl border bg-white',
+        className,
+      )}
       markdown={localValue}
       onChange={(val) => {
         setLocalValue(val)

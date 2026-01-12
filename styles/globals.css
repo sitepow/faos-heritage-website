@@ -6,20 +6,18 @@
   font-family: var(--font-sukhumvit), sans-serif !important;
 }
 
-.mdxeditor-toolbar {
-  background-color: #222222 !important;
-}
-
-._toolbarRoot_1e2ox_162 svg {
-  color: white !important;
-}
-
 ._contentEditable_1e2ox_380 {
   font-size: 0.875rem !important;
-  color: white !important;
 }
 
 .mdxeditor {
-  /* background-color: white !important; */
   font-family: var(--font-sukhumvit), sans-serif !important;
+}
+
+.mdxeditor-root-contenteditable {
+  min-height: 250px;
+}
+
+.mdxeditor-popup-container {
+  z-index: 50 !important;
 }
