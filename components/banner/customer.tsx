@@ -48,7 +48,7 @@ export const CustomerBanner = () => {
                 className='sm:size-10 lg:size-12'
                 countryCode={country.code}
               />
-              <span className='hidden sm:block'>{country.name}</span>
+              <span className='hidden text-sm sm:block'>{country.name}</span>
             </div>
           ))}
         </div>

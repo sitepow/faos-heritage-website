@@ -144,7 +144,7 @@ export const ProductLocalizationForm = () => {
     <Modal
       isOpen={isProductLocalizationOpen}
       onOpenChange={onOpenProductLocalizationChange}
-      size='2xl'
+      size='4xl'
       scrollBehavior='inside'
       isDismissable={false}
     >

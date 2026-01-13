@@ -12,26 +12,26 @@ import { useProductDetailStore } from '../store'
 export const ProductDescription = () => {
   const { product } = useProductDetailStore()
 
-  if (!product?.description) {
-    return
-  }
+  if (!product?.description) return null
 
   return (
     <Card className='bg-default-50' shadow='none'>
-      <CardBody className='px-6 py-8'>
-        <article className='prose prose-neutral dark:prose-invert prose-p:leading-relaxed mx-auto max-w-full sm:text-lg'>
+      <CardBody className='p-6'>
+        <article className='prose prose-neutral dark:prose-invert /* typography base */ /* paragraph – Amazon/Shopee style */ prose-p:my-1.5 prose-p:leading-relaxed /* lists */ prose-ul:my-2 prose-ol:my-2 prose-li:my-0.5 prose-li:leading-relaxed /* headings (ไม่ให้ดูเป็น blog) */ prose-h1:text-lg prose-h1:my-3 prose-h2:text-base prose-h2:my-2 prose-h3:text-sm prose-h3:my-2 /* */ prose-table:my-3 prose-th:px-3 prose-th:py-2 prose-td:px-3 prose-td:py-2 /* misc */ prose-br:leading-none mx-auto table w-full max-w-[920px] text-sm leading-relaxed sm:text-base'>
           <ReactMarkdown
             components={{
               table: ({ children }) => (
-                <div className='w-full overflow-x-auto'>
-                  <table className='min-w-[800px]'>{children}</table>
+                <div className='my-3 w-full overflow-x-auto'>
+                  <table className='min-w-[700px] border-collapse'>
+                    {children}
+                  </table>
                 </div>
               ),
               img: ({ alt, ...props }) => (
                 <img
                   {...props}
                   alt={alt || product?.name!}
-                  className='my-6 w-full rounded-xl shadow-md'
+                  className='my-4 w-full rounded-lg'
                   loading='lazy'
                 />
               ),
@@ -39,7 +39,7 @@ export const ProductDescription = () => {
             rehypePlugins={[rehypeSanitize]}
             remarkPlugins={[remarkGfm]}
           >
-            {product?.description!}
+            {product.description}
           </ReactMarkdown>
         </article>
       </CardBody>

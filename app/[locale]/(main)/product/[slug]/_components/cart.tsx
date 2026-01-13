@@ -138,8 +138,8 @@ export const ProductCart = () => {
 
         {product?.shortDescription && (
           <Card className='bg-default-50 dark:bg-default-100' shadow='none'>
-            <CardBody className='text-default-600'>
-              <article className='prose prose-neutral dark:prose-invert prose-p:leading-relaxed mx-auto max-w-full sm:text-lg'>
+            <CardBody>
+              <article className='prose prose-neutral dark:prose-invert /* typography base */ /* paragraph – Amazon/Shopee style */ prose-p:my-1.5 prose-p:leading-relaxed /* lists */ prose-ul:my-2 prose-ol:my-2 prose-li:my-0.5 prose-li:leading-relaxed /* headings (ไม่ให้ดูเป็น blog) */ prose-h1:text-lg prose-h1:my-3 prose-h2:text-base prose-h2:my-2 prose-h3:text-sm prose-h3:my-2 /* */ prose-table:my-3 prose-th:px-3 prose-th:py-2 prose-td:px-3 prose-td:py-2 /* misc */ prose-br:leading-none mx-auto table w-full text-sm leading-relaxed sm:text-base'>
                 <ReactMarkdown
                   components={{
                     table: ({ children }) => (

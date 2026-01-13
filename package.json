@@ -21,6 +21,7 @@
     "@mdxeditor/editor": "^3.52.3",
     "@prisma/client": "^6.7.0",
     "@prisma/extension-accelerate": "^3.0.1",
+    "@radix-ui/colors": "^3.0.0",
     "@react-pdf-viewer/core": "^3.12.0",
     "@react-pdf-viewer/default-layout": "^3.12.0",
     "@supabase/supabase-js": "^2.87.1",

@@ -5,8 +5,8 @@ import { useTranslations } from 'next-intl'
 
 const AdvertiseItem = ({ message }: { message: string }) => {
   return (
-    <div className='flex items-center gap-2 text-start sm:text-lg'>
-      <CheckCircleIcon className='mt-0.5 size-6 shrink-0 sm:size-8' />
+    <div className='flex items-center gap-2 text-start text-sm sm:text-base'>
+      <CheckCircleIcon className='mt-0.5 size-6 shrink-0' />
       <span className='leading-relaxed'>{message}</span>
     </div>
   )

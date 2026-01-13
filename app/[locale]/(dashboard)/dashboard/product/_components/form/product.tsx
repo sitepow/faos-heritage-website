@@ -166,7 +166,7 @@ export const ProductForm = () => {
       isDismissable={false}
       isOpen={isProductOpen}
       scrollBehavior='inside'
-      size='2xl'
+      size='4xl'
       onOpenChange={(open) => {
         if (!open) onClose()
       }}

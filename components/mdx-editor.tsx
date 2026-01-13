@@ -39,7 +39,7 @@ export function MdEditorCustomize({
       {...props}
       placeholder={`(${placeholder})`}
       className={cn(
-        'border-divider col-span-2 rounded-xl border bg-white',
+        'border-divider dark-theme dark-editor col-span-2 rounded-xl border',
         className,
       )}
       markdown={localValue}

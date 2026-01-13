@@ -11,7 +11,10 @@ export const NavbarHeader = ({ className, ...props }: NavbarHeaderProps) => {
 
   return (
     <div
-      className={cn('bg-primary text-secondary px-6 py-2.5', className)}
+      className={cn(
+        'bg-primary text-secondary px-6 py-2.5 text-sm sm:text-base',
+        className,
+      )}
       {...props}
     >
       {tHeader('Header')}
