@@ -33,7 +33,7 @@ export const CategoryCarouselItem = ({
         <div className='flex items-center gap-2.5'>
           <Image
             alt=''
-            className='aspect-square size-12 rounded-full object-cover'
+            className='aspect-square size-10 rounded-full object-cover sm:size-12'
             height={60}
             src={item?.image ?? NO_IMAGE}
             width={60}
