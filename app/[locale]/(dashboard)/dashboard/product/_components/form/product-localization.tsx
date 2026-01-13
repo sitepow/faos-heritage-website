@@ -214,7 +214,7 @@ export const ProductLocalizationForm = () => {
                 <MdEditorCustomize
                   key={editorShortDescKey}
                   placeholder={t('fields.shortDesc')}
-                  className='col-span-2'
+                  className='col-span-1 sm:col-span-2'
                   {...field}
                   value={value ?? ''}
                 />
@@ -228,7 +228,7 @@ export const ProductLocalizationForm = () => {
                 <MdEditorCustomize
                   key={editorFullDescKey}
                   placeholder={t('fields.fullDesc')}
-                  className='col-span-2'
+                  className='col-span-1 sm:col-span-2'
                   {...field}
                   value={value ?? ''}
                 />
