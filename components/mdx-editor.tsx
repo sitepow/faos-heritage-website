@@ -3,10 +3,20 @@
 'use client'
 
 import {
+  BlockTypeSelect,
   BoldItalicUnderlineToggles,
+  CreateLink,
+  headingsPlugin,
+  imagePlugin,
+  InsertImage,
   InsertTable,
   InsertThematicBreak,
+  linkPlugin,
+  listsPlugin,
+  ListsToggle,
   MDXEditor,
+  quotePlugin,
+  thematicBreakPlugin,
   toolbarPlugin,
 } from '@mdxeditor/editor'
 import '@mdxeditor/editor/style.css'
@@ -51,23 +61,23 @@ export function MdEditorCustomize({
         toolbarPlugin({
           toolbarContents: () => (
             <>
-              {/* <BlockTypeSelect /> */}
+              <BlockTypeSelect />
               <BoldItalicUnderlineToggles />
-              {/* <ListsToggle /> */}
-              {/* <CreateLink /> */}
-              {/* <InsertImage /> */}
+              <ListsToggle />
+              <CreateLink />
+              <InsertImage />
               <InsertTable />
               <InsertThematicBreak />
             </>
           ),
         }),
-        // headingsPlugin(),
-        // listsPlugin(),
-        // quotePlugin(),
-        // thematicBreakPlugin(),
-        // linkPlugin(),
+        headingsPlugin(),
+        listsPlugin(),
+        quotePlugin(),
+        thematicBreakPlugin(),
+        linkPlugin(),
         tablePlugin(),
-        // imagePlugin(),
+        imagePlugin(),
         markdownShortcutPlugin(),
       ]}
     />
