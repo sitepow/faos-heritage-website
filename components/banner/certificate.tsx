@@ -22,8 +22,7 @@ export const CertificateBanner = () => {
         style={{
           backgroundImage: `
           linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.7), rgba(0,0,0,1)),
-          url(https://images.unsplash.com/photo-1758522964667-a3271801a5a8?q=80&w=2064&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
-          `,
+          url(/images/banner/faos-1_wQCzRlmMs-unsplash.jpg)`,
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
         }}
