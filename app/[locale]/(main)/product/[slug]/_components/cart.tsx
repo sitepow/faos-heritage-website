@@ -143,15 +143,17 @@ export const ProductCart = () => {
                 <ReactMarkdown
                   components={{
                     table: ({ children }) => (
-                      <div className='w-full overflow-x-auto'>
-                        <table className='min-w-[800px]'>{children}</table>
+                      <div className='my-3 w-full overflow-x-auto'>
+                        <table className='min-w-[700px] rounded-none'>
+                          {children}
+                        </table>
                       </div>
                     ),
                     img: ({ alt, ...props }) => (
                       <img
                         {...props}
                         alt={alt || product?.name!}
-                        className='my-6 w-full rounded-xl shadow-md'
+                        className='my-4 w-full rounded-lg'
                         loading='lazy'
                       />
                     ),

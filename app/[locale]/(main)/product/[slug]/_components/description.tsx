@@ -22,7 +22,7 @@ export const ProductDescription = () => {
             components={{
               table: ({ children }) => (
                 <div className='my-3 w-full overflow-x-auto'>
-                  <table className='min-w-[700px] border-collapse'>
+                  <table className='min-w-[700px] rounded-none'>
                     {children}
                   </table>
                 </div>
