@@ -317,7 +317,7 @@
     "share": "Chia Sẻ Sản Phẩm"
   },
   "Navbar": {
-    "Header": "Dầu Ô Liu & Mật Ong Hữu Cơ Cao Cấp (Vì Sức Khỏe Của Bạn)",
+    "Header": "Tinh hoa dầu ô liu và mật ong hữu cơ, cho lối sống khỏe mạnh trường tồn",
     "Menu": {
       "home": "Trang Chủ",
       "products": "Tất Cả Sản Phẩm",
@@ -412,23 +412,22 @@
     }
   },
   "Banner": {
-    "customer": "Được sự tin tưởng từ khách hàng <highlight>trên toàn thế giới</highlight>. <link>Tự tin mua sắm sản phẩm chất lượng cao, giao hàng đến tận tay bạn mọi lúc mọi nơi.</link>",
-    "certificate": "Nâng tầm tin cậy với chứng nhận tiêu chuẩn quốc tế. <link>Chất lượng và an toàn được kiểm duyệt nghiêm ngặt</link> để đảm bảo bạn luôn nhận được những gì tốt nhất.",
+    "customer": "Trang web của chúng tôi được thiết kế để hỗ trợ khách hàng tại các thị trường mục tiêu ở Châu Á, Châu Âu và Châu Mỹ <link>nhằm mang đến cho bạn trải nghiệm mua sắm nhanh chóng và dễ dàng</link>",
+    "certificate": "Tự tin về chất lượng với các tiêu chuẩn quốc tế được chúng tôi kiểm tra nghiêm ngặt <link>vì sự an toàn của bạn là ưu tiên hàng đầu</link> trong mọi quy trình sản xuất",
     "advertise": {
-      "title": "Tại Sao Mật Ong Và Dầu Ô Liu Là Lựa Chọn Hàng Đầu Của Người Yêu Sức Khỏe?",
+      "title": "Khám phá thế giới dầu Ô liu Extra Virgin: Lợi ích tự nhiên và những điều cần biết cho sức khỏe của bạn",
       "messages": [
-        "Mật ong nguyên chất 100% là nguồn năng lượng tự nhiên sạch, giúp cơ thể tỉnh táo ngay lập tức mà không có cảm giác ngọt gắt của đường tinh luyện.",
-        "Giàu chất chống oxy hóa tự nhiên, đóng vai trò như một lá chắn thiết yếu để tăng cường hệ miễn dịch của bạn mỗi ngày.",
-        "Dầu ô liu cao cấp của chúng tôi giàu chất béo tốt (HDL), một dưỡng chất quan trọng hỗ trợ tích cực cho sức khỏe tim mạch.",
-        "Thay đổi sang dầu ô liu trong nấu ăn hàng ngày giúp giảm cholesterol xấu và góp phần cải thiện sức khỏe thể chất lâu dài.",
-        "Đặc tính tự nhiên của mật ong giúp làm dịu cổ họng hiệu quả và chứa các enzyme giúp cân bằng hệ tiêu hóa của bạn.",
-        "Giàu polyphenol, giúp làm chậm quá trình lão hóa tế bào đồng thời nuôi dưỡng làn da rạng rỡ, khỏe mạnh và trẻ trung.",
-        "Được tuyển chọn kỹ lưỡng để đảm bảo nguồn gốc 100% tự nhiên, không chất phụ gia và không chất béo chuyển hóa để bạn hoàn toàn yên tâm.",
-        "Sự lựa chọn hoàn hảo cho những người yêu sức khỏe, người cao tuổi và bất kỳ ai chú trọng đến chất lượng nguyên liệu trong thực phẩm.",
-        "Cực kỳ linh hoạt cho mọi bữa ăn—dù là nấu nướng, pha chế thức uống sức khỏe hay thưởng thức trực tiếp để đạt hiệu quả tốt nhất.",
-        "Đừng chờ đợi đến ngày mai; hãy bắt đầu ưu tiên sức khỏe của bạn ngay hôm nay bằng cách chọn những nguyên liệu tự nhiên cao cấp."
-      ],
-      "description": "Sống khỏe mạnh hơn trong tầm tay — tất cả bắt đầu từ việc chọn những nguyên liệu tự nhiên tốt hơn cho bữa ăn hàng ngày."
+        "Dầu Ô liu Extra Virgin (EVOO) là loại dầu chất lượng cao nhất, được sản xuất thông qua quy trình tỉ mỉ, ưu tiên chất lượng hơn số lượng.",
+        "Giàu polyphenol với đặc tính chống oxy hóa và chống viêm, bảo vệ dầu khỏi bị oxy hóa và giữ nguyên hương vị cũng như giá trị dinh dưỡng.",
+        "Chứa Oleocanthal hoạt động tương tự như ibuprofen, giúp điều chỉnh hoạt động của tế bào trong các tế bào bị viêm và giảm sưng tấy khắp cơ thể.",
+        "Giúp cân bằng mức cholesterol và chất béo trung tính, đồng thời giảm quá trình oxy hóa LDL để có sức khỏe tim mạch và mạch máu tốt hơn.",
+        "Các hợp chất polyphenol giúp cải thiện sức khỏe tinh thần và ngăn ngừa các bệnh thoái hóa thần kinh như Alzheimer và sa sút trí tuệ.",
+        "Tăng cường hiệu quả của insulin trong việc duy trì mức đường huyết cân bằng và đóng vai trò quan trọng trong việc làm giảm các triệu chứng của hội chứng chuyển hóa (MS).",
+        "Chứa 'sitosterol' giúp điều chỉnh sự hấp thụ cholesterol, giúp hệ tiêu hóa khỏe mạnh hơn và giảm táo bón một cách hiệu quả.",
+        "Được sản xuất từ các giống ô liu cổ thụ độc đáo như Athenolia và Koroneiki, có hàm lượng polyphenol và chất chống oxy hóa cực cao.",
+        "Sử dụng kỹ thuật ép lạnh truyền thống chỉ bằng phương pháp cơ học; không tinh chế, không tẩy trắng và không hóa chất để duy trì độ tinh khiết tối đa.",
+        "Polyphenol hoạt động bằng cách giảm tổn thương do gốc tự do, tăng cường sức khỏe tim mạch và mức năng lượng, là lựa chọn hoàn hảo để nâng cao hiệu suất thể thao một cách tự nhiên."
+      ]
     }
   },
   "Section": {

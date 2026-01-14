@@ -321,7 +321,7 @@
     "share": "Deila Vöru"
   },
   "Navbar": {
-    "Header": "Hágæða Lífræn Ólífuolía og Hunang (Fyrir betri heilsu)",
+    "Header": "Besta lífræna ólífuolían og hunangið, fyrir þinn heilbrigða lífsstíl",
     "Menu": {
       "home": "Heim",
       "products": "Allar Vörur",
@@ -416,23 +416,22 @@
     }
   },
   "Banner": {
-    "customer": "Dipercaya oleh pelanggan <highlight>di seluruh dunia</highlight>. <link>Belanja dengan percaya diri untuk produk kualitas premium yang diantar kapan saja dan di mana saja.</link>",
-    "certificate": "Tingkatkan kepercayaan Anda dengan sertifikasi internasional. <link>Kualitas dan keamanan yang diseleksi secara ketat</link> untuk memastikan Anda selalu mendapatkan yang terbaik.",
+    "customer": "Veffurinn okkar er hannaður til að þjóna viðskiptavinum á markaðssvæðum í Asíu, Evrópu og Ameríku <link>til að tryggja þér einfalda og hraðvirka verslunarupplifun</link>",
+    "certificate": "Gæði tryggð með alþjóðlegum stöðlum sem við skoðum ítarlega <link>því öryggi þitt er kjarninn</link> í öllum okkar framleiðsluskrefum",
     "advertise": {
-      "title": "Af hverju eru hunang og ólífuolía bestu valkostirnir fyrir heilsuunnendur?",
+      "title": "Kynntu þér heim jómfrúarolíu (Extra Virgin): Náttúrulegir kostir og staðreyndir fyrir heilsuna þína",
       "messages": [
-        "100% hreint hunang er hreinn og náttúrulegur orkugjafi sem hressir líkamann samstundis án þess að valda sykurfalli eins og unninn sykur.",
-        "Ríkt af náttúrulegum andoxunarefnum sem virka sem mikilvæg vörn til að styrkja ónæmiskerfið á hverjum degi.",
-        "Hágæða ólífuolían okkar er rík af hollri fitu (HDL), nauðsynlegu næringarefni sem styður virkan við heilsu hjartans.",
-        "Með því að nota ólífuolíu í daglega matseld hjálpar þú til við að lækka slæmt kólesteról og stuðlar að langvarandi vellíðan.",
-        "Náttúrulegir eiginleikar hunangs veita frábæra líkn fyrir sáran háls og innihalda ensím sem hjálpa til við að jafna meltingarkerfið.",
-        "Ríkt af pólýfenólum sem hjálpa til við að hægja á öldrun frumna á sama tíma og það nærir húðina svo hún verði geislandi og heilbrigð.",
-        "Vandlega valið til að tryggja 100% náttúrulegan uppruna, án íefna og transfitu, svo þú getir notið þess með fullri hugarró.",
-        "Fullkomið val fyrir heilsurækta fólk, eldri borgara og alla þá sem láta sig gæði hráefna miklu skipta.",
-        "Ótrúlega fjölhæft í alla matseld—hvort sem þú ert að elda uppáhaldsréttinn þinn, blanda í heilsudrykk eða njóta þess hreins.",
-        "Ekki bíða til morguns; byrjaðu að forgangsraða heilsunni þinni í dag með því að velja hágæða náttúruleg hráefni."
-      ],
-      "description": "Heilbrigðara líf er innan seilingar — allt byrjar þetta á því að velja betra hráefni í daglega matinn."
+        "Extra Virgin ólífuolía (EVOO) er hágæða olía, framleidd með nákvæmu ferli þar sem gæði eru sett fram yfir magn.",
+        "Rík af pólýfenólum með andoxunar- og bólgueyðandi eiginleika, sem verja olíuna gegn oxun og varðveita bragð og næringargildi.",
+        "Inniheldur Oleocanthal, sem virkar svipað og íbúprófen, hjálpar til við að stjórna frumuvirkni í bólgufrumum og dregur úr bólgu í líkamanum.",
+        "Hjálpar til við að stilla kólesteról- og þríglýseríðstig og dregur úr oxun LDL fyrir betri hjarta- og æðaheilsu.",
+        "Pólýfenólsambönd bæta andlega heilsu og koma í veg fyrir taugasjúkdóma eins og Alzheimer og demens.",
+        "Eykur virkni insúlíns við að halda jafnvægi á blóðsykri og gegnir mikilvægu hlutverki við að draga úr einkennum efnaskiptavillu (MS).",
+        "Inniheldur 'sitósteról' sem hjálpar til við að stjórna upptöku kólesteróls, styrkir meltingarkerfið og veitir áreiðanlega léttir á hægðatregðu.",
+        "Framleidd úr einstökum fornum ólífutegundum eins og Athenolia og Koroneiki, sem hafa mjög hátt innihald pólýfenóla og andoxunarefna.",
+        "Notast við hefðbundna kaldpressun með vélrænum aðferðum eingöngu; óunnin, óbleikt og án efna til að viðhalda hámarkshreinleika.",
+        "Pólýfenól vinna gegn skemmdum af völdum sindurefna, styrkja hjartað og auka orkustig, sem gerir þau að fullkomnum valkosti til að bæta íþróttaárangur á náttúrulegan hátt."
+      ]
     }
   },
   "Section": {

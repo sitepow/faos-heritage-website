@@ -413,23 +413,22 @@
     }
   },
   "Banner": {
-    "customer": "Viðskiptavinir <highlight>um allan heim</highlight> treysta okkur. <link>Verslaðu gæðavörur með öryggi sem eru afhentar hvenær og hvar sem er.</link>",
-    "certificate": "Aukið öryggi með alþjóðlegum vottunum. <link>Strangt valið með tilliti til gæða og öryggis</link> svo þú fáir alltaf það besta.",
+    "customer": "Situs web kami dirancang untuk mendukung pelanggan di pasar target di Asia, Eropa, dan Amerika <link>untuk memberikan Anda pengalaman belanja yang mudah dan cepat</link>",
+    "certificate": "Percaya pada kualitas dengan standar internasional yang kami periksa secara teliti <link>karena keamanan Anda adalah prioritas kami</link> dalam setiap langkah produksi kami",
     "advertise": {
-      "title": "Mengapa Madu dan Minyak Zaitun Menjadi Pilihan Utama Pecinta Kesehatan?",
+      "title": "Mengenal dunia Minyak Zaitun Extra Virgin: Manfaat alami dan fakta untuk kesehatan Anda",
       "messages": [
-        "100% madu murni adalah sumber energi alami yang bersih, menyegarkan tubuh Anda seketika tanpa rasa manis berlebih dari gula proses.",
-        "Kaya akan antioksidan alami tinggi, bertindak sebagai perisai vital untuk meningkatkan sistem imun Anda setiap hari.",
-        "Minyak zaitun premium kami kaya akan lemak baik (HDL), nutrisi esensial yang secara aktif mendukung kesehatan jantung.",
-        "Beralih ke minyak zaitun untuk memasak membantu menurunkan kolesterol jahat dan berkontribusi pada kesehatan jangka panjang.",
-        "Sifat alami madu memberikan kelegaan luar biasa untuk tenggorokan dan mengandung enzim yang menyeimbangkan sistem pencernaan.",
-        "Kaya akan polifenol, membantu memperlambat penuaan sel sekaligus menutrisi kulit agar tampak cerah, sehat, dan awet muda.",
-        "Dipilih dengan teliti untuk memastikan 100% asal alami, tanpa bahan tambahan dan nol lemak trans untuk ketenangan pikiran Anda.",
-        "Pilihan sempurna bagi pegiat hidup sehat, lansia, dan siapa saja yang memprioritaskan kualitas bahan makanan.",
-        "Sangat serbaguna untuk berbagai hidangan—baik untuk memasak, campuran minuman sehat, atau dikonsumsi langsung.",
-        "Jangan tunggu besok; mulailah prioritaskan kesehatan Anda hari ini dengan memilih bahan alami premium yang membawa perubahan."
-      ],
-      "description": "Hidup sehat dimulai dari dapur Anda — pilih bahan alami berkualitas tinggi untuk hidangan harian yang lebih baik."
+        "Minyak Zaitun Extra Virgin (EVOO) adalah minyak kualitas tertinggi, diproduksi melalui proses teliti yang mengutamakan kualitas daripada kuantitas.",
+        "Kaya akan polifenol dengan sifat antioksidan dan anti-inflamasi, melindungi minyak dari oksidasi serta menjaga rasa dan nilai gizinya.",
+        "Mengandung Oleocanthal yang bekerja mirip dengan ibuprofen, membantu mengatur aktivitas sel dalam sel yang meradang dan mengurangi pembengkakan di seluruh tubuh.",
+        "Membantu menyeimbangkan kadar kolesterol dan trigliserida serta mengurangi oksidasi LDL untuk kesehatan jantung dan kardiovaskular yang lebih baik.",
+        "Senyawa polifenol membantu meningkatkan kesehatan mental dan mencegah penyakit neurodegeneratif seperti Alzheimer dan demensia.",
+        "Meningkatkan efisiensi insulin dalam menjaga kadar gula darah yang seimbang dan berperan penting dalam meredakan gejala sindrom metabolik (MS).",
+        "Mengandung 'sitosterol' yang membantu mengatur penyerapan kolesterol, memperkuat sistem pencernaan dan memberikan bantuan yang andal untuk sembelit.",
+        "Diproduksi dari varietas zaitun kuno yang unik seperti Athenolia dan Koroneiki, yang memiliki kadar polifenol dan antioksidan yang sangat tinggi.",
+        "Menggunakan teknik pemerasan dingin tradisional dengan hanya metode mekanis; tanpa pemurnian, tanpa pemutihan, dan tanpa bahan kimia untuk menjaga kemurnian tertinggi.",
+        "Polifenol bekerja dengan mengurangi kerusakan akibat radikal bebas, memperkuat jantung, dan meningkatkan tingkat energi, menjadikannya pilihan sempurna untuk meningkatkan performa olahraga secara alami."
+      ]
     }
   },
   "Section": {

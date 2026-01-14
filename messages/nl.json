@@ -318,7 +318,7 @@
     "share": "Deel Product"
   },
   "Navbar": {
-    "Header": "Premium Biologische Olijfolie & Honing (Voor uw gezondheid)",
+    "Header": "De beste biologische olijfolie en honing, voor uw gezonde levensstijl",
     "Menu": {
       "home": "Home",
       "products": "Alle Producten",
@@ -413,23 +413,22 @@
     }
   },
   "Banner": {
-    "customer": "Vertrouwd door klanten <highlight>over de hele wereld</highlight>. <link>Shop met vertrouwen voor producten van topkwaliteit, altijd en overal geleverd.</link>",
-    "certificate": "Verhoog uw vertrouwen met internationale certificeringen. <link>Streng geselecteerd op kwaliteit en veiligheid</link> zodat u altijd het beste ontvangt.",
+    "customer": "Onze website is ontworpen voor klanten in Azië, Europa en Amerika <link>voor een gemakkelijke en snelle bestelervaring</link>",
+    "certificate": "Vertrouw op kwaliteit met internationale normen die we grondig controleren <link>omdat uw veiligheid centraal staat</link> in elke stap van onze productie",
     "advertise": {
-      "title": "Waarom Honing en Olijfolie de beste keuze zijn voor gezondheidsliefhebbers?",
+      "title": "Maak kennis met de wereld van Extra Vierge Olijfolie: natuurlijke voordelen en feiten voor uw gezondheid",
       "messages": [
-        "100% pure honing is een schone, natuurlijke energiebron die uw lichaam direct verfrist zonder de zware zoetheid van bewerkte suikers.",
-        "Rijk aan natuurlijke antioxidanten; het fungeert als een vitaal schild om uw immuunsysteem dagelijks te versterken.",
-        "Onze premium olijfolie zit vol gezonde vetten (HDL), een essentiële voedingsstof die de gezondheid van het hart actief ondersteunt.",
-        "Olijfolie gebruiken bij het dagelijks koken helpt het slechte cholesterol te verlagen en draagt bij aan uw welzijn op de lange termijn.",
-        "De natuurlijke eigenschappen van honing verzachten de keel en bevatten enzymen die uw spijsvertering in balans houden.",
-        "Rijk aan polyfenolen, wat celveroudering helpt vertragen en uw huid voedt voor een stralende en jeugdige uitstraling.",
-        "Zorgvuldig geselecteerd voor een 100% natuurlijke oorsprong, zonder toevoegingen en transvetten, voor uw volledige gemoedsrust.",
-        "De ideale keuze voor gezondheidsbewuste mensen, senioren en iedereen die let op de kwaliteit van hun ingrediënten.",
-        "Ongelooflijk veelzijdig: perfect voor het bereiden van gerechten, in gezonde drankjes of gewoon puur voor de maximale voordelen.",
-        "Wacht niet tot morgen; geef vandaag nog prioriteit aan uw gezondheid door te kiezen voor natuurlijke ingrediënten die het verschil maken."
-      ],
-      "description": "Een gezonder leven is binnen handbereik — het begint bij het kiezen van betere natuurlijke ingrediënten voor uw dagelijkse maaltijden."
+        "Extra Vierge Olijfolie (EVOO) is de hoogste kwaliteit olie, geproduceerd via een zorgvuldig proces waarbij kwaliteit boven kwantiteit gaat.",
+        "Rijk aan polyfenolen met antioxiderende en ontstekingsremmende eigenschappen, die de olie beschermen tegen oxidatie en de smaak en voedingswaarde behouden.",
+        "Bevat Oleocanthal, wat op dezelfde manier werkt als ibuprofen, helpt bij het reguleren van celactiviteit in ontstoken cellen en vermindert zwellingen in het lichaam.",
+        "Helpt bij het optimaliseren van cholesterol- en triglyceridenspiegels en vermindert de oxidatie van LDL voor een gezond hart en bloedvaten.",
+        "Polyfenolverbindingen helpen de mentale gezondheid te verbeteren en voorkomen neurodegeneratieve ziekten zoals Alzheimer en dementie.",
+        "Verbetert de efficiëntie van insuline om de bloedsuikerspiegel in balans te houden en speelt een belangrijke rol bij het verlichten van symptomen van het metabool syndroom (MS).",
+        "Bevat 'sitosterol' dat helpt bij het reguleren van de cholesterolabsorptie, wat het spijsverteringsstelsel versterkt en betrouwbare verlichting biedt bij constipatie.",
+        "Geproduceerd van unieke oude olijfvariëteiten zoals Athenolia en Koroneiki, die extreem hoge concentraties polyfenolen en antioxidanten bevatten.",
+        "Maakt gebruik van traditionele koude persingstechnieken met alleen mechanische methoden; ongeraffineerd, ongebleekt en vrij van chemicaliën voor maximale zuiverheid.",
+        "Polyfenolen werken door schade door vrije radicalen te verminderen, het hart te versterken en het energieniveau te verhogen, wat het perfect maakt voor natuurlijke sportprestaties."
+      ]
     }
   },
   "Section": {

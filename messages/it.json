@@ -321,7 +321,7 @@
     "share": "Condividi Prodotto"
   },
   "Navbar": {
-    "Header": "Olio d'Oliva e Miele Biologici Premium (Per il tuo benessere)",
+    "Header": "Il meglio dell'olio d'oliva e del miele biologico, per il tuo stile di vita sano",
     "Menu": {
       "home": "Home",
       "products": "Tutti i Prodotti",
@@ -416,23 +416,22 @@
     }
   },
   "Banner": {
-    "customer": "Scelto da clienti <highlight>in ogni regione del mondo</highlight>. <link>Acquista in sicurezza prodotti di alta qualità consegnati ovunque e in qualsiasi momento.</link>",
-    "certificate": "Massima fiducia grazie alle certificazioni internazionali. <link>Qualità e sicurezza rigorosamente selezionate</link> per offrirti sempre il meglio.",
+    "customer": "Il nostro sito è progettato per supportare i clienti nei mercati target in Asia, Europa e America <link>per offrirti un'esperienza di acquisto facile e veloce</link>",
+    "certificate": "Qualità garantita da standard internazionali rigorosi <link>perché la tua sicurezza è la nostra priorità</link> in ogni fase della produzione",
     "advertise": {
-      "title": "Perché il Miele e l'Olio d'Oliva sono le scelte migliori per chi ama la salute?",
+      "title": "Scopri il mondo dell'olio extra vergine di oliva: benefici naturali e consigli per la tua salute",
       "messages": [
-        "Il miele puro al 100% è una fonte di energia naturale e pulita che rivitalizza istantaneamente il corpo senza l'eccessiva dolcezza degli zuccheri raffinati.",
-        "Ricco di alti livelli di antiossidanti naturali, agisce come uno scudo vitale per rafforzare il sistema immunitario ogni giorno.",
-        "Il nostro olio d'oliva premium è ricco di grassi buoni (HDL), un nutriente essenziale che supporta attivamente la salute del cuore.",
-        "Sostituire i comuni oli con l'olio d'oliva in cucina aiuta a ridurre il colesterolo cattivo e contribuisce al benessere fisico a lungo termine.",
-        "Le proprietà naturali del miele offrono un ottimo sollievo per la gola e contengono enzimi che favoriscono l'equilibrio del sistema digerente.",
-        "Ricco di polifenoli, aiuta a rallentare l'invecchiamento cellulare nutrendo la pelle per farla apparire radiosa, sana e giovane.",
-        "Selezionato con cura per garantire l'origine naturale al 100%, senza additivi e con zero grassi trans, per la tua totale tranquillità.",
-        "La scelta ideale per gli appassionati di salute, gli anziani e chiunque presti attenzione alla qualità degli ingredienti che consuma.",
-        "Incredibilmente versatile per ogni pasto: perfetto per cucinare, da aggiungere a bevande salutari o da gustare al naturale per massimi benefici.",
-        "Non aspettare domani; inizia oggi a dare priorità alla tua salute scegliendo ingredienti naturali premium che fanno davvero la differenza."
-      ],
-      "description": "Una vita più sana è a portata di mano: tutto inizia scegliendo ingredienti naturali di alta qualità per i tuoi pasti quotidiani."
+        "L'olio extra vergine di oliva (EVOO) è la massima espressione di qualità, prodotto con processi meticolosi che privilegiano l'eccellenza rispetto alla quantità.",
+        "Ricco di polifenoli con proprietà antiossidanti e antinfiammatorie, protegge l'olio dall'ossidazione preservandone sapore e valori nutrizionali.",
+        "Contiene oleocantale, che agisce in modo simile all'ibuprofene, aiutando a regolare l'attività cellulare nei processi infiammatori e a ridurre i gonfiori.",
+        "Aiuta a regolare i livelli di colesterolo e trigliceridi, riducendo l'ossidazione del colesterolo LDL per la salute del cuore e dei vasi sanguigni.",
+        "I composti polifenolici supportano la salute mentale e aiutano a prevenire malattie neurodegenerative come l'Alzheimer e la demenza.",
+        "Migliora l'efficacia dell'insulina nel bilanciare i livelli di zucchero nel sangue e gioca un ruolo chiave nel mitigare i sintomi della sindrome metabolica (MS).",
+        "Contiene sitosterolo, che regola l'assorbimento del colesterolo, migliorando la digestione e offrendo un sollievo affidabile contro la stitichezza.",
+        "Prodotto da varietà antiche e uniche come Athenolia e Koroneiki, caratterizzate da un contenuto altissimo di polifenoli e antiossidanti.",
+        "Estratto a freddo con metodi meccanici tradizionali, senza raffinazione, sbiancamento o sostanze chimiche, per preservare la massima purezza.",
+        "I polifenoli riducono i danni da radicali liberi, rinforzano il cuore e aumentano l'energia: la scelta perfetta per migliorare le prestazioni sportive in modo naturale."
+      ]
     }
   },
   "Section": {
