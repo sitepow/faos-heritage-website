@@ -46,35 +46,20 @@ export const OverviewCard = ({
             </div>
 
             <div className='border-divider rounded-b-lg border-x border-b p-2.5 *:flex *:gap-3'>
-              <div>
-                <span className='text-default-500 min-w-[100px]'>
-                  {t('fields.name')}
-                </span>
-                <span>:</span>
-                <span className='font-medium'>{user?.name ?? '-'}</span>
-              </div>
+              <span>
+                {t('fields.name')} : {user?.name ?? '-'}
+              </span>
 
-              <div>
-                <span className='text-default-500 min-w-[100px]'>
-                  {t('fields.email')}
-                </span>
-                <span>:</span>
-                <span className='font-medium text-wrap break-all'>
-                  {user?.email ?? '-'}
-                </span>
-              </div>
+              <span>
+                {t('fields.email')} : {user?.email ?? '-'}
+              </span>
 
-              <div>
-                <span className='text-default-500 min-w-[100px]'>
-                  {t('fields.role')}
-                </span>
-                <span>:</span>
-                <span className='font-medium'>
-                  {user?.role === Role.ADMIN
-                    ? t('roles.admin')
-                    : t('roles.customer')}
-                </span>
-              </div>
+              <span>
+                {t('fields.role')} :{' '}
+                {user?.role === Role.ADMIN
+                  ? t('roles.admin')
+                  : t('roles.customer')}
+              </span>
 
               <div className='mt-5 flex flex-wrap'>
                 <Button
