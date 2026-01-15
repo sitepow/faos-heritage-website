@@ -68,19 +68,22 @@ export default async function Homepage() {
 
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
-      <div className='container mx-auto flex w-fit'>
-        <Country />
+      <div className='flex w-full flex-col gap-5 p-5'>
+        <div className='container mx-auto flex w-full sm:w-fit'>
+          <Country />
+        </div>
+        <CarouselImageBanner />
+        <CategoryCarouselClient
+          initialCategories={categories}
+          initialProducts={products}
+          itemPerPage={ITEM_PER_PAGE}
+        />
+        <ExploreProductsClient
+          initialProducts={exploreProducts}
+          itemPerPage={ITEM_PER_PAGE}
+        />
       </div>
-      <CarouselImageBanner />
-      <CategoryCarouselClient
-        initialCategories={categories}
-        initialProducts={products}
-        itemPerPage={ITEM_PER_PAGE}
-      />
-      <ExploreProductsClient
-        initialProducts={exploreProducts}
-        itemPerPage={ITEM_PER_PAGE}
-      />
+
       <div className='flex w-full flex-col'>
         <AdvertiseBanner />
         <CertificateBanner />

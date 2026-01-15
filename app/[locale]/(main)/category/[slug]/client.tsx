@@ -106,73 +106,75 @@ export const CategoryClient = ({
 
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
-      <div className='container mx-auto flex w-full justify-start'>
-        <Country />
-      </div>
+      <div className='flex w-full flex-col gap-5 p-5'>
+        <div className='container mx-auto flex w-full justify-start'>
+          <Country />
+        </div>
 
-      <div className='container mx-auto flex w-full items-center justify-start'>
+        <div className='container mx-auto flex w-full items-center justify-start'>
+          {isLoadingCategory && <Skeleton className='h-10 w-64 rounded-lg' />}
+
+          {!isLoadingCategory && (
+            <Breadcrumbs className='font-semibold'>
+              <BreadcrumbItem href='/'>{t('breadcrumbs.home')}</BreadcrumbItem>
+              <BreadcrumbItem href='/products'>
+                {t('breadcrumbs.products')}
+              </BreadcrumbItem>
+              <BreadcrumbItem>{category?.name}</BreadcrumbItem>
+            </Breadcrumbs>
+          )}
+        </div>
+
         {isLoadingCategory && <Skeleton className='h-10 w-64 rounded-lg' />}
 
         {!isLoadingCategory && (
-          <Breadcrumbs className='font-semibold'>
-            <BreadcrumbItem href='/'>{t('breadcrumbs.home')}</BreadcrumbItem>
-            <BreadcrumbItem href='/products'>
-              {t('breadcrumbs.products')}
-            </BreadcrumbItem>
-            <BreadcrumbItem>{category?.name}</BreadcrumbItem>
-          </Breadcrumbs>
+          <span className='container mx-auto text-2xl font-semibold'>
+            {t('categoryTitle', { name: category?.name! })}
+          </span>
         )}
-      </div>
 
-      {isLoadingCategory && <Skeleton className='h-10 w-64 rounded-lg' />}
+        <div className='container mx-auto flex w-full flex-wrap items-center justify-center gap-3 sm:justify-between'>
+          <span className='text-primary'>
+            {t('pagination', { count: itemCount, total: totalItems })}
+          </span>
 
-      {!isLoadingCategory && (
-        <span className='container mx-auto text-2xl font-semibold'>
-          {t('categoryTitle', { name: category?.name! })}
-        </span>
-      )}
-
-      <div className='container mx-auto flex w-full flex-wrap items-center justify-center gap-3 sm:justify-between'>
-        <span className='text-primary'>
-          {t('pagination', { count: itemCount, total: totalItems })}
-        </span>
-
-        <Dropdown>
-          <DropdownTrigger>
-            <Button
-              startContent={<ArrowUpDownIcon size={18} />}
-              variant='bordered'
-              color='primary'
+          <Dropdown>
+            <DropdownTrigger>
+              <Button
+                startContent={<ArrowUpDownIcon size={18} />}
+                variant='bordered'
+                color='primary'
+              >
+                {t('sortLabel')} {t(`sortItems.${Array.from(selectedKeys)[0]}`)}
+              </Button>
+            </DropdownTrigger>
+            <DropdownMenu
+              disallowEmptySelection
+              aria-label='Product Sort'
+              selectedKeys={selectedKeys}
+              selectionMode='single'
+              variant='flat'
+              onSelectionChange={(keys) => {
+                if (keys === 'all') return
+                setSelectedKeys(new Set(keys as Set<string>))
+              }}
             >
-              {t('sortLabel')} {t(`sortItems.${Array.from(selectedKeys)[0]}`)}
-            </Button>
-          </DropdownTrigger>
-          <DropdownMenu
-            disallowEmptySelection
-            aria-label='Product Sort'
-            selectedKeys={selectedKeys}
-            selectionMode='single'
-            variant='flat'
-            onSelectionChange={(keys) => {
-              if (keys === 'all') return
-              setSelectedKeys(new Set(keys as Set<string>))
-            }}
-          >
-            {Object.entries(SORT_ITEMS).map(([key]) => (
-              <DropdownItem key={key}>{t(`sortItems.${key}`)}</DropdownItem>
-            ))}
-          </DropdownMenu>
-        </Dropdown>
+              {Object.entries(SORT_ITEMS).map(([key]) => (
+                <DropdownItem key={key}>{t(`sortItems.${key}`)}</DropdownItem>
+              ))}
+            </DropdownMenu>
+          </Dropdown>
+        </div>
+
+        <Divider />
+
+        <ProductSection
+          isFetchingNextPage={isFetchingNextPage}
+          isLoading={isLoading}
+          itemPerPage={itemPerPage}
+          items={items}
+        />
       </div>
-
-      <Divider />
-
-      <ProductSection
-        isFetchingNextPage={isFetchingNextPage}
-        isLoading={isLoading}
-        itemPerPage={itemPerPage}
-        items={items}
-      />
 
       <div className='flex w-full flex-col'>
         <AdvertiseBanner />

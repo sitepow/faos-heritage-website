@@ -94,62 +94,64 @@ export const ProductsClient = ({
 
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
-      <div className='container mx-auto flex w-full justify-start'>
-        <Country />
-      </div>
+      <div className='flex w-full flex-col gap-5 p-5'>
+        <div className='container mx-auto flex w-full justify-start'>
+          <Country />
+        </div>
 
-      <div className='container mx-auto flex w-full justify-start'>
-        <Breadcrumbs className='font-semibold'>
-          <BreadcrumbItem href='/'>{t('breadcrumbs.home')}</BreadcrumbItem>
-          <BreadcrumbItem>{t('breadcrumbs.products')}</BreadcrumbItem>
-        </Breadcrumbs>
-      </div>
+        <div className='container mx-auto flex w-full justify-start'>
+          <Breadcrumbs className='font-semibold'>
+            <BreadcrumbItem href='/'>{t('breadcrumbs.home')}</BreadcrumbItem>
+            <BreadcrumbItem>{t('breadcrumbs.products')}</BreadcrumbItem>
+          </Breadcrumbs>
+        </div>
 
-      <span className='container mx-auto text-2xl font-semibold'>
-        {t('title')}
-      </span>
-
-      <div className='container mx-auto flex w-full flex-wrap items-center justify-center gap-3 sm:justify-between'>
-        <span className='text-primary'>
-          {t('pagination', { count: itemCount, total: totalItems })}
+        <span className='container mx-auto text-2xl font-semibold'>
+          {t('title')}
         </span>
 
-        <Dropdown>
-          <DropdownTrigger>
-            <Button
-              startContent={<ArrowUpDownIcon size={18} />}
-              variant='bordered'
-              color='primary'
+        <div className='container mx-auto flex w-full flex-wrap items-center justify-center gap-3 sm:justify-between'>
+          <span className='text-primary'>
+            {t('pagination', { count: itemCount, total: totalItems })}
+          </span>
+
+          <Dropdown>
+            <DropdownTrigger>
+              <Button
+                startContent={<ArrowUpDownIcon size={18} />}
+                variant='bordered'
+                color='primary'
+              >
+                {t('sortLabel')} {t(`sortItems.${Array.from(selectedKeys)[0]}`)}
+              </Button>
+            </DropdownTrigger>
+            <DropdownMenu
+              disallowEmptySelection
+              aria-label='Product Sort'
+              selectedKeys={selectedKeys}
+              selectionMode='single'
+              variant='flat'
+              onSelectionChange={(keys) => {
+                if (keys === 'all') return
+                setSelectedKeys(new Set(keys as Set<string>))
+              }}
             >
-              {t('sortLabel')} {t(`sortItems.${Array.from(selectedKeys)[0]}`)}
-            </Button>
-          </DropdownTrigger>
-          <DropdownMenu
-            disallowEmptySelection
-            aria-label='Product Sort'
-            selectedKeys={selectedKeys}
-            selectionMode='single'
-            variant='flat'
-            onSelectionChange={(keys) => {
-              if (keys === 'all') return
-              setSelectedKeys(new Set(keys as Set<string>))
-            }}
-          >
-            {Object.entries(SORT_ITEMS).map(([key]) => (
-              <DropdownItem key={key}>{t(`sortItems.${key}`)}</DropdownItem>
-            ))}
-          </DropdownMenu>
-        </Dropdown>
+              {Object.entries(SORT_ITEMS).map(([key]) => (
+                <DropdownItem key={key}>{t(`sortItems.${key}`)}</DropdownItem>
+              ))}
+            </DropdownMenu>
+          </Dropdown>
+        </div>
+
+        <Divider />
+
+        <ProductSection
+          isFetchingNextPage={isFetchingNextPage}
+          isLoading={isLoading}
+          itemPerPage={itemPerPage}
+          items={items}
+        />
       </div>
-
-      <Divider />
-
-      <ProductSection
-        isFetchingNextPage={isFetchingNextPage}
-        isLoading={isLoading}
-        itemPerPage={itemPerPage}
-        items={items}
-      />
 
       <div className='flex w-full flex-col'>
         <AdvertiseBanner />

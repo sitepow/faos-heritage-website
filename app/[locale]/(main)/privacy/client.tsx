@@ -9,7 +9,7 @@ export const PrivacyClient = () => {
   const t = useTranslations('Privacy')
 
   return (
-    <section className='container mx-auto flex flex-col items-center justify-center gap-4'>
+    <section className='container mx-auto flex flex-col items-center justify-center gap-4 p-5'>
       <SectionHeader title={t('title')} />
 
       <p className='text-default-500 leading-relaxed'>

@@ -61,51 +61,53 @@ export const ProductClient = ({
 
   return (
     <section className='flex flex-col gap-4'>
-      <div className='container mx-auto flex w-full justify-start'>
-        <Country />
-      </div>
-
-      {isLoading ? (
-        <Skeleton className='container mx-auto h-5 max-w-72' />
-      ) : (
-        <Breadcrumbs className='container mx-auto font-semibold'>
-          <BreadcrumbItem href='/'>{tBreadcrumb('home')}</BreadcrumbItem>
-          <BreadcrumbItem href='/products'>
-            {tBreadcrumb('products')}
-          </BreadcrumbItem>
-          <BreadcrumbItem
-            href={`/category/${createSlug(product?.category?.name!, product?.category?.id!)}`}
-          >
-            {tProduct('categoryTitle', { name: product?.category?.name! })}
-          </BreadcrumbItem>
-          {/* <BreadcrumbItem>{product.name}</BreadcrumbItem> */}
-        </Breadcrumbs>
-      )}
-
-      <div className='container mx-auto grid items-start gap-2 lg:grid-cols-2'>
-        <div className='lg:sticky lg:top-20'>
-          <ProductImagePreview
-            images={product.images.map((image) => image.url)}
-          />
+      <div className='flex w-full flex-col gap-5 p-5'>
+        <div className='container mx-auto flex w-full justify-start'>
+          <Country />
         </div>
-        <div className='min-w-0 lg:sticky lg:top-20'>
-          <ProductCart />
+
+        {isLoading ? (
+          <Skeleton className='container mx-auto h-5 max-w-72' />
+        ) : (
+          <Breadcrumbs className='container mx-auto font-semibold'>
+            <BreadcrumbItem href='/'>{tBreadcrumb('home')}</BreadcrumbItem>
+            <BreadcrumbItem href='/products'>
+              {tBreadcrumb('products')}
+            </BreadcrumbItem>
+            <BreadcrumbItem
+              href={`/category/${createSlug(product?.category?.name!, product?.category?.id!)}`}
+            >
+              {tProduct('categoryTitle', { name: product?.category?.name! })}
+            </BreadcrumbItem>
+            {/* <BreadcrumbItem>{product.name}</BreadcrumbItem> */}
+          </Breadcrumbs>
+        )}
+
+        <div className='container mx-auto grid items-start gap-2 lg:grid-cols-2'>
+          <div className='lg:sticky lg:top-20'>
+            <ProductImagePreview
+              images={product.images.map((image) => image.url)}
+            />
+          </div>
+          <div className='min-w-0 lg:sticky lg:top-20'>
+            <ProductCart />
+          </div>
         </div>
+
+        <Tabs className='mx-auto' variant='bordered'>
+          <Tab title={tTab('description')}>
+            <ProductDescription />
+          </Tab>
+          <Tab title={tTab('review')}>
+            <ProductReview />
+          </Tab>
+        </Tabs>
+
+        {/* <CertificateBanner /> */}
+        {/* <AdvertiseBanner /> */}
+        <ProductSimilar />
+        {/* <CustomerBanner /> */}
       </div>
-
-      <Tabs className='mx-auto' variant='bordered'>
-        <Tab title={tTab('description')}>
-          <ProductDescription />
-        </Tab>
-        <Tab title={tTab('review')}>
-          <ProductReview />
-        </Tab>
-      </Tabs>
-
-      {/* <CertificateBanner /> */}
-      {/* <AdvertiseBanner /> */}
-      <ProductSimilar />
-      {/* <CustomerBanner /> */}
 
       <div className='flex w-full flex-col'>
         <AdvertiseBanner />
