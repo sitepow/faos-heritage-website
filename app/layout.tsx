@@ -43,7 +43,11 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <QueryProviders>
           <NextAuthProviders>
             <HeroUIProviders
-              themeProps={{ attribute: 'class', defaultTheme: 'dark' }}
+              themeProps={{
+                attribute: 'class',
+                defaultTheme: 'system',
+                enableSystem: true,
+              }}
             >
               {children}
             </HeroUIProviders>
