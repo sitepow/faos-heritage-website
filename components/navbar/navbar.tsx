@@ -62,6 +62,7 @@ export const Navbar = () => {
       <HeroNavbar
         // isBordered
         // className='shadow-md'
+        isBlurred={false}
         isMenuOpen={isMenuOpen}
         maxWidth='full'
         position='sticky'
