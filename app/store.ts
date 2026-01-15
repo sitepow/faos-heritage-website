@@ -21,7 +21,12 @@ interface AppStore {
 export const useAppStore = create<AppStore>()(
   persist(
     (set) => ({
-      country: null,
+      country: {
+        country: 'US',
+        currency: 'USD',
+        name: 'United States',
+        locale: 'en-US',
+      },
       exchangeRates: null,
       hasHydrated: false,
 
