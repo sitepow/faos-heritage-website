@@ -18,20 +18,19 @@ export const CustomerBanner = () => {
   }))
 
   return (
-    <Card fullWidth>
+    <Card fullWidth radius='none' className='min-h-[350px]'>
       <CardBody
-        className='flex w-full flex-col items-center justify-center gap-10 rounded-xl px-5 py-12'
+        className='flex w-full flex-col items-center justify-center gap-10 px-5 py-12 text-white'
         style={{
           backgroundImage: `
             linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.7), rgba(0,0,0,1)),
             url(/images/banner/faos-shipping-wold-wide.jpg)
           `,
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
+          backgroundPosition: 'center',
         }}
       >
-        <h2 className='mx-auto max-w-11/12 text-center text-xl leading-tight font-bold text-white sm:max-w-10/12 sm:text-2xl md:max-w-1/2 xl:max-w-1/3'>
+        <h2 className='mx-auto max-w-11/12 text-center text-xl leading-tight font-semibold sm:max-w-10/12 sm:text-2xl md:max-w-1/2 xl:max-w-1/3'>
           {tBanner.rich('customer', {
             highlight: (chunks) => <span>{chunks}</span>,
             link: (chunks) => <Link href='/about'>{chunks}</Link>,

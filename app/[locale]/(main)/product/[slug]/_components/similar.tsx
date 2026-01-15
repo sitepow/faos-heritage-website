@@ -31,7 +31,7 @@ export const ProductSimilar = () => {
   return (
     <div className='flex flex-col gap-4'>
       {similars?.length !== 0 && (
-        <span className='mx-auto w-fit pb-1 text-xl font-bold'>
+        <span className='mx-auto w-fit pb-1 text-xl font-semibold'>
           {t('similar')}
         </span>
       )}

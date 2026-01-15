@@ -12,7 +12,7 @@ export default function MainLayout({ children }: PropsWithChildren) {
   const { theme } = useTheme()
 
   return (
-    <div className='relative flex h-screen flex-col overflow-x-hidden'>
+    <div className='dark:bg-default-50 relative flex h-screen flex-col overflow-x-hidden'>
       <ToastContainer
         closeOnClick
         hideProgressBar
@@ -22,7 +22,7 @@ export default function MainLayout({ children }: PropsWithChildren) {
         theme={theme === 'dark' ? 'dark' : 'light'}
       />
       <Navbar />
-      <main className='container mx-auto flex flex-grow flex-col gap-5 p-6'>
+      <main className='mx-auto flex w-full flex-grow flex-col gap-5 py-6'>
         {children}
       </main>
       <Footer />

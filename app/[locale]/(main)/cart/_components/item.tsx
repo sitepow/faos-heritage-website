@@ -263,7 +263,7 @@ export const CartItem = ({ className, cart, ...props }: CartItemProps) => {
                   onClick={onDeleteCart}
                 />
 
-                <span className='text-primary text-lg font-bold sm:text-2xl'>
+                <span className='text-primary text-lg font-semibold sm:text-2xl'>
                   {formatCurrency(currentPrice! * quantity!, CURRENCY_OPTIONS)}
                 </span>
               </div>

@@ -22,7 +22,7 @@ export const ProductSection = ({
   const isFetching = isLoading || isFetchingNextPage
 
   return (
-    <div className='grid w-full gap-2 sm:grid-cols-2 md:gap-4 xl:grid-cols-3'>
+    <div className='container mx-auto grid w-full gap-2 sm:grid-cols-2 md:gap-4 xl:grid-cols-3'>
       {!isLoading &&
         items?.map((product) => (
           <ProductCard

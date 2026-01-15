@@ -19,6 +19,7 @@ import { getProduct } from '@/app/[locale]/(dashboard)/dashboard/product/action/
 import { AdvertiseBanner } from '@/components/banner/advertise'
 import { CertificateBanner } from '@/components/banner/certificate'
 import { CustomerBanner } from '@/components/banner/customer'
+import { MarketplaceBanner } from '@/components/banner/marketplace'
 import { Country } from '@/components/navbar/country'
 import { PageNotFound } from '@/components/page-not-found'
 import { createSlug } from '@/utils/helpers/slug'
@@ -60,14 +61,14 @@ export const ProductClient = ({
 
   return (
     <section className='flex flex-col gap-4'>
-      <div className='flex w-full justify-start'>
+      <div className='container mx-auto flex w-full justify-start'>
         <Country />
       </div>
 
       {isLoading ? (
-        <Skeleton className='h-5 max-w-72' />
+        <Skeleton className='container mx-auto h-5 max-w-72' />
       ) : (
-        <Breadcrumbs className='font-bold'>
+        <Breadcrumbs className='container mx-auto font-semibold'>
           <BreadcrumbItem href='/'>{tBreadcrumb('home')}</BreadcrumbItem>
           <BreadcrumbItem href='/products'>
             {tBreadcrumb('products')}
@@ -77,11 +78,11 @@ export const ProductClient = ({
           >
             {tProduct('categoryTitle', { name: product?.category?.name! })}
           </BreadcrumbItem>
-          <BreadcrumbItem>{product.name}</BreadcrumbItem>
+          {/* <BreadcrumbItem>{product.name}</BreadcrumbItem> */}
         </Breadcrumbs>
       )}
 
-      <div className='grid items-start gap-2 lg:grid-cols-2'>
+      <div className='container mx-auto grid items-start gap-2 lg:grid-cols-2'>
         <div className='lg:sticky lg:top-20'>
           <ProductImagePreview
             images={product.images.map((image) => image.url)}
@@ -101,10 +102,17 @@ export const ProductClient = ({
         </Tab>
       </Tabs>
 
-      <CertificateBanner />
-      <AdvertiseBanner />
+      {/* <CertificateBanner /> */}
+      {/* <AdvertiseBanner /> */}
       <ProductSimilar />
-      <CustomerBanner />
+      {/* <CustomerBanner /> */}
+
+      <div className='flex w-full flex-col'>
+        <AdvertiseBanner />
+        <CertificateBanner />
+        <MarketplaceBanner />
+        <CustomerBanner />
+      </div>
     </section>
   )
 }

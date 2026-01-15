@@ -28,8 +28,8 @@ export const FavoriteCard = () => {
   const favoritesLength = favorites?.items?.length
 
   return (
-    <Card fullWidth>
-      <CardHeader className='font-bold'>{t('tabs.favorites')}</CardHeader>
+    <Card fullWidth className='border-default-200 border'>
+      <CardHeader className='font-semibold'>{t('tabs.favorites')}</CardHeader>
       <CardBody className='gap-4'>
         {isLoadingFaorites && <Skeleton className='h-40 w-full rounded-xl' />}
 

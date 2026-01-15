@@ -54,7 +54,7 @@ export const ProductCard = ({ className, product }: ProductCardProps) => {
   return (
     <Card
       className={cn(
-        'flex min-h-[420px] w-full flex-col',
+        'border-default-200 flex min-h-[420px] w-full flex-col border',
         'shrink-0 basis-[300px] sm:basis-[420px] lg:basis-[500px]',
         className,
       )}
@@ -110,7 +110,7 @@ export const ProductCard = ({ className, product }: ProductCardProps) => {
             isDigitalProduct={product?.isDigitalProduct}
             categoryName={product?.category?.name}
           />
-          <h4 className='line-clamp-2 font-bold sm:text-2xl'>
+          <h4 className='line-clamp-2 font-semibold sm:text-lg'>
             {product?.name}
           </h4>
           <ProductPrice

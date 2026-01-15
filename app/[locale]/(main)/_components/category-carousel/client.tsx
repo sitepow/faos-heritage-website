@@ -2,7 +2,7 @@
 /* eslint-disable react/no-array-index-key */
 'use client'
 
-import { Card, CardHeader, CardBody, ScrollShadow, Button } from '@heroui/react'
+import { Card, CardHeader, CardBody, Button } from '@heroui/react'
 import { useQuery } from '@tanstack/react-query'
 import { AlertCircleIcon, ArrowRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
@@ -95,29 +95,44 @@ export const CategoryCarouselClient = ({
   }
 
   return (
-    <div className='flex w-full flex-col gap-5 sm:h-[710px] md:flex-row'>
-      <Card className='h-[350px] sm:h-full md:h-full md:w-[400px]'>
-        <CardHeader className='font-bold'>{t('title')}</CardHeader>
-        <CardBody>
-          <ScrollShadow className='p-1'>
-            <div className='space-y-1'>
-              {categories.map((category) => (
-                <CategoryCarouselItem
-                  key={category.id}
-                  isActive={activeCategory?.id === category.id}
-                  item={category}
-                  onClick={() => setSelectedId(category.id)}
-                  onMouseEnter={() => setSelectedId(category.id)}
-                />
-              ))}
-            </div>
-          </ScrollShadow>
-        </CardBody>
-      </Card>
+    // <div className='container mx-auto flex w-full flex-col gap-5 sm:h-[710px] md:flex-row'>
+    //   <div>
+    //     <div className='space-y-1'>
+    //       {categories.map((category) => (
+    //         <CategoryCarouselItem
+    //           key={category.id}
+    //           isActive={activeCategory?.id === category.id}
+    //           item={category}
+    //           onClick={() => setSelectedId(category.id)}
+    //           onMouseEnter={() => setSelectedId(category.id)}
+    //         />
+    //       ))}
+    //     </div>
+    //   </div>
 
-      <Card fullWidth className='min-h-[525px]'>
+    //   <
+    // </div>
+
+    <div className='container mx-auto flex flex-col'>
+      <div className='flex flex-wrap justify-center gap-5'>
+        {categories.map((category) => (
+          <CategoryCarouselItem
+            key={category.id}
+            isActive={activeCategory?.id === category.id}
+            item={category}
+            onClick={() => setSelectedId(category.id)}
+            onMouseEnter={() => setSelectedId(category.id)}
+          />
+        ))}
+      </div>
+
+      <Card
+        fullWidth
+        shadow='none'
+        className='container mx-auto min-h-[525px] w-full'
+      >
         <CardHeader className='flex flex-wrap items-center justify-between'>
-          <span className='font-bold'>
+          <span className='text-xl font-semibold sm:text-2xl'>
             {tProduct('categoryTitle', { name: activeCategory?.name! })}
           </span>
           <Button

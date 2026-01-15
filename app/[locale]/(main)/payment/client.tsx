@@ -17,7 +17,7 @@ export const PaymentClient = () => {
     })
 
   return (
-    <section className='flex flex-col items-center justify-center gap-4 text-center'>
+    <section className='container mx-auto flex flex-col items-center justify-center gap-4 text-center'>
       <SectionHeader
         description={t('Header.description')}
         title={t('Header.title')}

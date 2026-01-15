@@ -54,13 +54,13 @@ export const AccountClient = () => {
         <meta content='noindex, nofollow' name='robots' />
       </Head>
 
-      <section className='flex flex-col items-center justify-center gap-4 text-center'>
+      <section className='container mx-auto flex flex-col items-center justify-center gap-4 text-center'>
         <div className='flex w-full justify-start'>
           <Country />
         </div>
 
         <div className='w-full text-start'>
-          <span className='text-xl font-bold'>
+          <span className='text-xl font-semibold'>
             {t('welcome', { name: user?.name! })}
           </span>
         </div>

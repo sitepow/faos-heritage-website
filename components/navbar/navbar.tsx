@@ -60,8 +60,8 @@ export const Navbar = () => {
       {!isMenuOpen && <NavbarHeader />}
 
       <HeroNavbar
-        isBordered
-        className='shadow-md'
+        // isBordered
+        // className='shadow-md'
         isMenuOpen={isMenuOpen}
         maxWidth='full'
         position='sticky'
@@ -107,7 +107,7 @@ export const Navbar = () => {
           )}
         </NavbarContent>
 
-        <NavbarMenu className='border-divider border-t bg-white dark:bg-inherit'>
+        <NavbarMenu>
           {menuItems.map((item) => (
             <NavbarMenuItem
               key={item.href}

@@ -32,9 +32,9 @@ export const OverviewCard = ({
   })
 
   return (
-    <Card fullWidth>
+    <Card fullWidth className='border-default-200 border'>
       <CardHeader>
-        <span className='font-bold'>{t('tabs.manage')}</span>
+        <span className='font-semibold'>{t('tabs.manage')}</span>
       </CardHeader>
       <CardBody>
         {isLoadingUser && <Skeleton className='h-40 rounded-lg sm:max-w-1/2' />}

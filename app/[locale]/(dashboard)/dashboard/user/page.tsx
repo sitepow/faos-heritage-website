@@ -135,6 +135,7 @@ export default function User() {
       </div>
 
       <Table
+        className='border-default-200 border'
         aria-label={t('tableAria')}
         selectionMode='multiple'
         onSelectionChange={(keys) => {

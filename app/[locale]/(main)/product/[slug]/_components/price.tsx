@@ -49,7 +49,7 @@ export const ProductPrice = ({
       {...props}
     >
       <div>
-        <span className='text-primary text-xl font-bold sm:text-2xl'>
+        <span className='text-primary text-xl font-semibold sm:text-2xl'>
           {displayPrice}
         </span>
         <span className='text-default-600 text-xs'>

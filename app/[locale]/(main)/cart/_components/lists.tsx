@@ -42,7 +42,11 @@ export const CartLists = ({ className, ...props }: CartListsProp) => {
   }, [carts, setState])
 
   return (
-    <Card fullWidth className={cn(className)} {...props}>
+    <Card
+      fullWidth
+      className={cn(className, 'border-default-200 border')}
+      {...props}
+    >
       <CardHeader>
         <b>{t('List.header')}</b>
       </CardHeader>

@@ -115,10 +115,12 @@ export const ProductCart = () => {
   })
 
   return (
-    <Card>
+    <Card className='border-default-200 border'>
       <CardBody className='flex flex-col gap-3'>
         <div className='flex flex-col'>
-          <h1 className='text-xl font-bold sm:text-2xl'>{product?.name}</h1>
+          <h1 className='py-3.5 text-xl font-semibold sm:text-2xl lg:text-4xl'>
+            {product?.name}
+          </h1>
           <ProductPrice
             price={price!}
             priceMax={!variantId ? product?.priceMax! : null}

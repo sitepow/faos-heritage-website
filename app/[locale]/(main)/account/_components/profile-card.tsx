@@ -126,7 +126,7 @@ export const ProfileCard = () => {
   }
 
   return (
-    <Card fullWidth>
+    <Card fullWidth className='border-default-200 border'>
       <CardHeader>
         <span>{t('tabs.editProfile')}</span>
       </CardHeader>

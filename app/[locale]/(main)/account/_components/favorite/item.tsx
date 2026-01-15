@@ -111,7 +111,7 @@ export const FavoriteItem = ({
               </Link>
 
               <div className='flex flex-col gap-1'>
-                <span className='font-bold'>{favorite?.product?.name}</span>
+                <span className='font-semibold'>{favorite?.product?.name}</span>
                 <span className='text-default-500 line-clamp-2 text-sm'>
                   {favorite?.product?.shortDescription}
                 </span>

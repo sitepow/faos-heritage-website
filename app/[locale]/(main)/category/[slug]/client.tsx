@@ -26,6 +26,7 @@ import { getCategory } from '@/app/[locale]/(dashboard)/dashboard/product/action
 import { AdvertiseBanner } from '@/components/banner/advertise'
 import { CertificateBanner } from '@/components/banner/certificate'
 import { CustomerBanner } from '@/components/banner/customer'
+import { MarketplaceBanner } from '@/components/banner/marketplace'
 import { Country } from '@/components/navbar/country'
 import { PageNotFound } from '@/components/page-not-found'
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
@@ -105,15 +106,15 @@ export const CategoryClient = ({
 
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
-      <div className='flex w-full justify-start'>
+      <div className='container mx-auto flex w-full justify-start'>
         <Country />
       </div>
 
-      <div className='flex w-full items-center justify-start'>
+      <div className='container mx-auto flex w-full items-center justify-start'>
         {isLoadingCategory && <Skeleton className='h-10 w-64 rounded-lg' />}
 
         {!isLoadingCategory && (
-          <Breadcrumbs className='font-bold'>
+          <Breadcrumbs className='font-semibold'>
             <BreadcrumbItem href='/'>{t('breadcrumbs.home')}</BreadcrumbItem>
             <BreadcrumbItem href='/products'>
               {t('breadcrumbs.products')}
@@ -126,12 +127,12 @@ export const CategoryClient = ({
       {isLoadingCategory && <Skeleton className='h-10 w-64 rounded-lg' />}
 
       {!isLoadingCategory && (
-        <span className='text-2xl font-bold'>
+        <span className='container mx-auto text-2xl font-semibold'>
           {t('categoryTitle', { name: category?.name! })}
         </span>
       )}
 
-      <div className='flex w-full flex-wrap items-center justify-center gap-3 sm:justify-between'>
+      <div className='container mx-auto flex w-full flex-wrap items-center justify-center gap-3 sm:justify-between'>
         <span className='text-primary'>
           {t('pagination', { count: itemCount, total: totalItems })}
         </span>
@@ -173,9 +174,12 @@ export const CategoryClient = ({
         items={items}
       />
 
-      <CertificateBanner />
-      <AdvertiseBanner />
-      <CustomerBanner />
+      <div className='flex w-full flex-col'>
+        <AdvertiseBanner />
+        <CertificateBanner />
+        <MarketplaceBanner />
+        <CustomerBanner />
+      </div>
     </section>
   )
 }

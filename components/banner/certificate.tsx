@@ -16,18 +16,18 @@ export const CertificateBanner = () => {
   const tBanner = useTranslations('Banner')
 
   return (
-    <Card fullWidth>
+    <Card fullWidth radius='none' className='min-h-[350px]'>
       <CardBody
-        className='flex w-full flex-col items-center justify-center gap-10 rounded-xl px-5 py-10'
+        className='flex w-full flex-col items-center justify-center gap-10 px-5 py-10'
         style={{
           backgroundImage: `
           linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.7), rgba(0,0,0,1)),
           url(/images/banner/faos-1_wQCzRlmMs-unsplash.jpg)`,
+          backgroundSize: 'cover',
           backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
         }}
       >
-        <h2 className='mx-auto max-w-11/12 text-center text-xl leading-tight font-bold text-white sm:max-w-10/12 sm:text-2xl md:max-w-1/2 xl:max-w-1/3'>
+        <h2 className='mx-auto max-w-11/12 text-center text-xl leading-tight font-semibold text-white sm:max-w-10/12 sm:text-2xl md:max-w-1/2 xl:max-w-1/3'>
           {tBanner.rich('certificate', {
             link: (chunks) => <Link href='/about'>{chunks}</Link>,
           })}

@@ -86,13 +86,13 @@ export const OrderViewModal = () => {
 
             <section className='grid grid-cols-1 gap-4 md:grid-cols-2'>
               <div className='flex flex-col gap-1'>
-                <h4 className='text-default-500 text-sm font-bold uppercase'>
+                <h4 className='text-default-500 text-sm font-semibold uppercase'>
                   {t('shippingAddress')}
                 </h4>
                 <p className='text-sm'>{order?.shippingAddressText}</p>
               </div>
               <div className='flex flex-col gap-1'>
-                <h4 className='text-default-500 text-sm font-bold uppercase'>
+                <h4 className='text-default-500 text-sm font-semibold uppercase'>
                   {t('logistics')}
                 </h4>
                 {order?.trackingNumber ? (
@@ -113,7 +113,7 @@ export const OrderViewModal = () => {
             </section>
 
             <section className='flex flex-col gap-3'>
-              <h4 className='text-default-500 text-sm font-bold uppercase'>
+              <h4 className='text-default-500 text-sm font-semibold uppercase'>
                 {t('productList')}
               </h4>
               {order?.items?.map((item) => (
@@ -171,8 +171,8 @@ export const OrderViewModal = () => {
               </div>
               <Divider />
               <div className='flex items-center justify-between'>
-                <span className='font-bold'>{t('totalAmount')}</span>
-                <span className='text-primary text-xl font-bold'>
+                <span className='font-semibold'>{t('totalAmount')}</span>
+                <span className='text-primary text-xl font-semibold'>
                   {formatCurrency(order?.total ?? 0, CURRENCY_OPTIONS)}
                 </span>
               </div>

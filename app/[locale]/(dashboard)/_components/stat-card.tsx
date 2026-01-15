@@ -24,7 +24,7 @@ export const StatCard = ({ name, value, isCurrency }: StatCardProps) => {
   }
 
   return (
-    <Card>
+    <Card className='border-default-200 border'>
       <div className='flex p-4'>
         <div className='flex flex-col items-start gap-y-2 text-start'>
           <dt className='text-small text-default-500 font-medium'>{name}</dt>

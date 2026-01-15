@@ -60,7 +60,7 @@ export default function Cart() {
         <meta content='noindex, nofollow' name='robots' />
       </Head>
 
-      <section className='flex flex-col items-center justify-center gap-4 text-center'>
+      <section className='container mx-auto flex flex-col items-center justify-center gap-4 text-center'>
         <div className='flex w-full justify-start'>
           <Country />
         </div>
@@ -88,7 +88,7 @@ export default function Cart() {
         />
 
         <div className='flex w-full flex-wrap justify-between gap-2 text-start'>
-          <span className='text-xl font-bold'>
+          <span className='text-xl font-semibold'>
             {t('Page.title', {
               count: carts?.length,
             })}

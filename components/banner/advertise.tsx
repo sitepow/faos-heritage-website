@@ -19,7 +19,7 @@ export const AdvertiseBanner = () => {
 
   return (
     <div
-      className='flex w-full flex-col gap-6 rounded-xl p-6 text-white shadow-xl'
+      className='flex min-h-[500px] w-full flex-col gap-6 px-6 py-14 text-white shadow-xl'
       style={{
         backgroundImage: `
         linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.7), rgba(0,0,0,1)),
@@ -29,7 +29,7 @@ export const AdvertiseBanner = () => {
         backgroundPosition: 'center',
       }}
     >
-      <h2 className='mx-auto max-w-11/12 text-center text-xl leading-tight font-bold sm:max-w-10/12 sm:text-2xl md:max-w-1/2 xl:max-w-1/3'>
+      <h2 className='mx-auto max-w-11/12 text-center text-xl leading-tight font-semibold sm:max-w-10/12 sm:text-2xl md:max-w-1/2 xl:max-w-1/3'>
         {t('advertise.title')}
       </h2>
 

@@ -179,11 +179,15 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
         onOpenChange={onOpenConfirmOrderChange}
       />
 
-      <Card fullWidth className={cn(className, 'h-fit')} {...props}>
+      <Card
+        fullWidth
+        className={cn(className, 'border-default-200 h-fit border')}
+        {...props}
+      >
         <CardBody className='gap-3'>
           {!isLoadingAddress && address && (
             <>
-              <span className='border-primary w-fit border-b pb-1 font-bold'>
+              <span className='border-primary w-fit border-b pb-1 font-semibold'>
                 {t('Checkout.title')}
               </span>
 
@@ -206,7 +210,7 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
             </>
           )}
 
-          <span className='border-primary w-fit border-b pb-1 font-bold'>
+          <span className='border-primary w-fit border-b pb-1 font-semibold'>
             {t('Checkout.paymentDetails')}
           </span>
 
@@ -227,8 +231,8 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
           />
 
           <div className='flex items-center justify-between pt-1'>
-            <span className='font-bold'>{t('Checkout.netTotal')} :</span>
-            <span className='text-primary text-2xl font-bold'>
+            <span className='font-semibold'>{t('Checkout.netTotal')} :</span>
+            <span className='text-primary text-2xl font-semibold'>
               {formatCurrency(subTotal + shippingCost, CURRENCY_OPTIONS)}
             </span>
           </div>

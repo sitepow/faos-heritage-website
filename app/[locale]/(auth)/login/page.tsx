@@ -108,9 +108,9 @@ export default function Login() {
   }
 
   return (
-    <Card className='p-5 sm:w-[400px]'>
+    <Card className='border-default-200 border p-5 sm:w-[400px]'>
       <CardHeader className='flex w-full flex-col items-center gap-1'>
-        <span className='text-lg font-bold'>
+        <span className='text-lg font-semibold'>
           {translateAuth('headerTitle')}
         </span>
         <span className='text-default-500'>
@@ -127,7 +127,7 @@ export default function Login() {
         </span>
       </CardHeader>
 
-      <Tabs fullWidth defaultSelectedKey='login' variant='bordered'>
+      <Tabs fullWidth defaultSelectedKey='login' variant='underlined'>
         <Tab key='login' title={translateAuth('loginTab')}>
           <Form onSubmit={handleSubmitLogin(submitLogin)}>
             <Input
@@ -219,8 +219,12 @@ export default function Login() {
           <div className='border-divider flex-grow border-t' />
         </div>
 
-        <div className='flex w-full flex-wrap justify-center gap-2'>
-          <Card className='cursor-pointer' fullWidth>
+        <div className='grid w-full gap-2 sm:grid-cols-2'>
+          <Card
+            className='border-default-200 cursor-pointer border'
+            shadow='none'
+            fullWidth
+          >
             <CardBody
               className='flex-row items-center gap-2 p-2'
               onClick={() => signIn('google')}
@@ -236,7 +240,11 @@ export default function Login() {
             </CardBody>
           </Card>
 
-          <Card className='cursor-pointer' fullWidth>
+          <Card
+            className='border-default-200 cursor-pointer border'
+            shadow='none'
+            fullWidth
+          >
             <CardBody
               className='flex-row items-center gap-2 p-2'
               onClick={() => signIn('facebook')}

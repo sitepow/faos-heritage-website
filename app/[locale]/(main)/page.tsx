@@ -11,6 +11,7 @@ import { AdvertiseBanner } from '@/components/banner/advertise'
 import { CarouselImageBanner } from '@/components/banner/carousel-image'
 import { CertificateBanner } from '@/components/banner/certificate'
 import { CustomerBanner } from '@/components/banner/customer'
+import { MarketplaceBanner } from '@/components/banner/marketplace'
 import { Country } from '@/components/navbar/country'
 import { ITEM_PER_PAGE } from '@/utils/constants/app'
 import { OG_IMAGE } from '@/utils/constants/seo'
@@ -67,7 +68,7 @@ export default async function Homepage() {
 
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
-      <div className='flex w-full justify-start'>
+      <div className='container mx-auto flex w-fit'>
         <Country />
       </div>
       <CarouselImageBanner />
@@ -76,13 +77,16 @@ export default async function Homepage() {
         initialProducts={products}
         itemPerPage={ITEM_PER_PAGE}
       />
-      <CertificateBanner />
       <ExploreProductsClient
         initialProducts={exploreProducts}
         itemPerPage={ITEM_PER_PAGE}
       />
-      <AdvertiseBanner />
-      <CustomerBanner />
+      <div className='flex w-full flex-col'>
+        <AdvertiseBanner />
+        <CertificateBanner />
+        <MarketplaceBanner />
+        <CustomerBanner />
+      </div>
     </section>
   )
 }

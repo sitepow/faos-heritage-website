@@ -38,7 +38,7 @@ export const ExploreProductsClient = ({
   }
 
   return (
-    <>
+    <div className='container mx-auto flex flex-col gap-5'>
       <SectionHeader
         description={tSection('Header.description')}
         title={tSection('Header.title')}
@@ -53,6 +53,6 @@ export const ExploreProductsClient = ({
           {tCategory('explore')}
         </Button>
       </Link>
-    </>
+    </div>
   )
 }

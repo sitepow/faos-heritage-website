@@ -20,11 +20,11 @@ export const ProductChip = ({
 
   return (
     <div className='mb-2.5 flex flex-wrap gap-1'>
-      {isAuthentic && <Chip variant='bordered'>{t('authentic')}</Chip>}
-      {isPremiumProduct && <Chip variant='bordered'>{t('premium')}</Chip>}
-      {isDemoProduct && <Chip variant='bordered'>{t('demo')}</Chip>}
-      {isDigitalProduct && <Chip variant='bordered'>{t('digital')}</Chip>}
-      <Chip variant='bordered'>{categoryName ?? t('uncategorized')}</Chip>
+      {isAuthentic && <Chip variant='faded'>{t('authentic')}</Chip>}
+      {isPremiumProduct && <Chip variant='faded'>{t('premium')}</Chip>}
+      {isDemoProduct && <Chip variant='faded'>{t('demo')}</Chip>}
+      {isDigitalProduct && <Chip variant='faded'>{t('digital')}</Chip>}
+      <Chip variant='faded'>{categoryName ?? t('uncategorized')}</Chip>
     </div>
   )
 }
