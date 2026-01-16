@@ -41,6 +41,11 @@
     "contactText": "Vinsamlegast geymdu þetta pöntunarnúmer til að athuga stöðu síðar eða til að hafa samband við þjónustuver."
   },
   "Common": {
+    "theme": {
+      "light": "Ljóst",
+      "dark": "Dökkt",
+      "system": "Kerfi"
+    },
     "save": "Vista",
     "cancel": "Hætta við",
     "loading": "Hleður...",
@@ -416,6 +421,10 @@
     }
   },
   "Banner": {
+    "marketplace": {
+      "title": "Nýr áfangi... Við erum nú fáanleg í helstu stórverslunum og á netinu.",
+      "description": "(Skoðaðu vörurnar okkar í verslunum nálægt þér í dag! Enn meiri þægindi fyrir þig.)"
+    },
     "customer": "Veffurinn okkar er hannaður til að þjóna viðskiptavinum á markaðssvæðum í Asíu, Evrópu og Ameríku <link>til að tryggja þér einfalda og hraðvirka verslunarupplifun</link>",
     "certificate": "Gæði tryggð með alþjóðlegum stöðlum sem við skoðum ítarlega <link>því öryggi þitt er kjarninn</link> í öllum okkar framleiðsluskrefum",
     "advertise": {

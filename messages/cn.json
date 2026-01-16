@@ -41,6 +41,11 @@
     "contactText": "请保留此订单号，以便日后查询状态或联系客服。"
   },
   "Common": {
+    "theme": {
+      "light": "浅色",
+      "dark": "深色",
+      "system": "跟随系统"
+    },
     "save": "保存",
     "cancel": "取消",
     "loading": "加载中...",
@@ -392,6 +397,10 @@
     }
   },
   "Banner": {
+    "marketplace": {
+      "title": "迈向新高峰… 现已进驻各大百货商场及领先电商平台。",
+      "description": "(亲临附近门店体验产品！为您提供更便捷的购物选择。)"
+    },
     "customer": "我们的网站旨在为亚洲、欧洲和美洲的客户提供支持，<link>为您带来便捷快速的购物体验</link>",
     "certificate": "严谨遵守国际质量标准，<link>因为您的安全是我们生产每一个环节的核心</link>",
     "advertise": {

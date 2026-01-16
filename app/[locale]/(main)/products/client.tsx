@@ -26,7 +26,6 @@ import { AdvertiseBanner } from '@/components/banner/advertise'
 import { CertificateBanner } from '@/components/banner/certificate'
 import { CustomerBanner } from '@/components/banner/customer'
 import { MarketplaceBanner } from '@/components/banner/marketplace'
-import { Country } from '@/components/navbar/country'
 import { PageNotFound } from '@/components/page-not-found'
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
 import { SORT_ITEMS } from '@/utils/constants/product'
@@ -95,10 +94,6 @@ export const ProductsClient = ({
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
       <div className='flex w-full flex-col gap-5 p-5'>
-        <div className='container mx-auto flex w-full justify-start'>
-          <Country />
-        </div>
-
         <div className='container mx-auto flex w-full justify-start'>
           <Breadcrumbs className='font-semibold'>
             <BreadcrumbItem href='/'>{t('breadcrumbs.home')}</BreadcrumbItem>

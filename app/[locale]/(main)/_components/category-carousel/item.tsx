@@ -25,10 +25,9 @@ export const CategoryCarouselItem = ({
 }: CategoryCarouselItemProps) => {
   return (
     <Card
-      isHoverable
       className={cn(
-        'border-default-200 w-52 cursor-pointer border',
-        isActive && 'bg-default-100',
+        'border-default-200 w-32 cursor-pointer border font-semibold sm:w-52',
+        isActive && 'border-primary text-primary',
       )}
       shadow='none'
     >
@@ -36,12 +35,12 @@ export const CategoryCarouselItem = ({
         <div className='flex flex-col items-center gap-2.5 text-center'>
           <Image
             alt=''
-            className='aspect-square size-10 rounded-full object-cover sm:size-12'
+            className='aspect-square size-12 rounded-full object-cover'
             height={60}
             src={item?.image ?? NO_IMAGE}
             width={60}
           />
-          <span className='line-clamp-2'>{item?.name}</span>
+          <span className='line-clamp-1'>{item?.name}</span>
         </div>
       </CardBody>
     </Card>

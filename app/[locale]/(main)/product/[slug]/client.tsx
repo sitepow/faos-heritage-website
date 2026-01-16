@@ -20,7 +20,6 @@ import { AdvertiseBanner } from '@/components/banner/advertise'
 import { CertificateBanner } from '@/components/banner/certificate'
 import { CustomerBanner } from '@/components/banner/customer'
 import { MarketplaceBanner } from '@/components/banner/marketplace'
-import { Country } from '@/components/navbar/country'
 import { PageNotFound } from '@/components/page-not-found'
 import { createSlug } from '@/utils/helpers/slug'
 interface ProductClientProps {
@@ -62,10 +61,6 @@ export const ProductClient = ({
   return (
     <section className='flex flex-col gap-4'>
       <div className='flex w-full flex-col gap-5 p-5'>
-        <div className='container mx-auto flex w-full justify-start'>
-          <Country />
-        </div>
-
         {isLoading ? (
           <Skeleton className='container mx-auto h-5 max-w-72' />
         ) : (

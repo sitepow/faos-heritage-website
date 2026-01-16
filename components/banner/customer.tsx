@@ -18,7 +18,7 @@ export const CustomerBanner = () => {
   }))
 
   return (
-    <Card fullWidth radius='none'>
+    <Card fullWidth radius='none' className='min-h-[350px]'>
       <CardBody
         className='flex w-full flex-col items-center justify-center gap-10 px-5 py-12 text-white'
         style={{

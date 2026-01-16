@@ -41,6 +41,11 @@
     "contactText": "Harap simpan nomor pesanan ini untuk pengecekan status nanti atau untuk menghubungi layanan pelanggan."
   },
   "Common": {
+    "theme": {
+      "light": "Terang",
+      "dark": "Gelap",
+      "system": "Sistem"
+    },
     "save": "Simpan",
     "cancel": "Batal",
     "loading": "Memuat...",
@@ -413,6 +418,10 @@
     }
   },
   "Banner": {
+    "marketplace": {
+      "title": "Langkah baru menuju sukses... Kini kami hadir di pusat perbelanjaan dan platform online terkemuka.",
+      "description": "(Rasakan produk kami hari ini di gerai terdekat! Satu lagi kemudahan untuk pengalaman belanja Anda.)"
+    },
     "customer": "Situs web kami dirancang untuk mendukung pelanggan di pasar target di Asia, Eropa, dan Amerika <link>untuk memberikan Anda pengalaman belanja yang mudah dan cepat</link>",
     "certificate": "Percaya pada kualitas dengan standar internasional yang kami periksa secara teliti <link>karena keamanan Anda adalah prioritas kami</link> dalam setiap langkah produksi kami",
     "advertise": {

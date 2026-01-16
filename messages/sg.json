@@ -41,6 +41,11 @@
     "contactText": "Please keep this order number for later status checks or to contact customer service."
   },
   "Common": {
+    "theme": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    },
     "save": "Save",
     "cancel": "Cancel",
     "loading": "Loading...",
@@ -413,6 +418,10 @@
     }
   },
   "Banner": {
+    "marketplace": {
+      "title": "A New Milestone... We are now available at leading department stores and top online platforms.",
+      "description": "(Experience our products today at major supermarkets and online stores near you! More convenience for you.)"
+    },
     "customer": "Our website is designed to support customers in target markets across Asia, Europe, and America <link>to provide you with a fast and easy shopping experience</link>",
     "certificate": "Confidence in quality with international standards that we inspect thoroughly <link>because your safety is at the heart</link> of every step of our production",
     "advertise": {

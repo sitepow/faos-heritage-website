@@ -1,10 +1,8 @@
-/* eslint-disable no-nested-ternary */
-/* eslint-disable react/no-array-index-key */
 'use client'
 
-import { Card, CardHeader, CardBody, Button } from '@heroui/react'
+import { Button } from '@heroui/react'
 import { useQuery } from '@tanstack/react-query'
-import { AlertCircleIcon, ArrowRight } from 'lucide-react'
+import { ArrowRightIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
 import { useState, useMemo } from 'react'
@@ -13,37 +11,18 @@ import type { GetCategoriesResult } from '@/app/[locale]/(dashboard)/dashboard/p
 import type { GetProductsResult } from '@/app/[locale]/(main)/products/action'
 
 import { CategoryCarouselItem } from './item'
-import {
-  ProductCard,
-  ProductCardSkeleton,
-} from '../../product/[slug]/_components/card'
+import { ProductCard } from '../../product/[slug]/_components/card'
 
 import { getCategories } from '@/app/[locale]/(dashboard)/dashboard/product/action/category'
 import { getProducts } from '@/app/[locale]/(main)/products/action'
 import { Carousel } from '@/components/carousel/carousel'
+import { SectionHeader } from '@/components/heading'
 import { createSlug } from '@/utils/helpers/slug'
 interface Props {
   initialCategories: GetCategoriesResult
   initialProducts: GetProductsResult
   itemPerPage: number
 }
-
-const EmptyState = ({
-  title,
-  description,
-}: {
-  title: string
-  description: string
-}) => (
-  <div className='text-default-500 flex w-full flex-col items-center justify-center gap-2 py-10 text-center'>
-    <AlertCircleIcon className='size-8' />
-    <p>
-      {title}
-      <br />
-      {description}
-    </p>
-  </div>
-)
 
 export const CategoryCarouselClient = ({
   initialCategories,
@@ -70,7 +49,7 @@ export const CategoryCarouselClient = ({
     [categories, selectedId],
   )
 
-  const { data: products, isLoading: isLoadingProducts } = useQuery({
+  const { data: products } = useQuery({
     queryKey: [
       'carousel',
       'products',
@@ -95,25 +74,7 @@ export const CategoryCarouselClient = ({
   }
 
   return (
-    // <div className='container mx-auto flex w-full flex-col gap-5 sm:h-[710px] md:flex-row'>
-    //   <div>
-    //     <div className='space-y-1'>
-    //       {categories.map((category) => (
-    //         <CategoryCarouselItem
-    //           key={category.id}
-    //           isActive={activeCategory?.id === category.id}
-    //           item={category}
-    //           onClick={() => setSelectedId(category.id)}
-    //           onMouseEnter={() => setSelectedId(category.id)}
-    //         />
-    //       ))}
-    //     </div>
-    //   </div>
-
-    //   <
-    // </div>
-
-    <div className='container mx-auto flex flex-col'>
+    <div className='container mx-auto flex flex-col gap-5'>
       <div className='flex flex-wrap justify-center gap-5'>
         {categories.map((category) => (
           <CategoryCarouselItem
@@ -126,48 +87,36 @@ export const CategoryCarouselClient = ({
         ))}
       </div>
 
-      <Card
-        fullWidth
-        shadow='none'
-        className='container mx-auto min-h-[525px] w-full'
-      >
-        <CardHeader className='flex flex-wrap items-center justify-between'>
-          <span className='text-xl font-semibold sm:text-2xl'>
-            {tProduct('categoryTitle', { name: activeCategory?.name! })}
-          </span>
-          <Button
-            variant='bordered'
-            color='primary'
-            endContent={<ArrowRight className='size-4' />}
-            onPress={() =>
-              router.push(
-                `/category/${createSlug(activeCategory?.name!, activeCategory?.id!)}`,
-              )
-            }
-          >
-            {t('explore')}
-          </Button>
-        </CardHeader>
+      {products?.items?.length !== 0 && (
+        <div className='container mx-auto flex w-full flex-col gap-5'>
+          <div className='flex flex-wrap items-center justify-center gap-5 sm:justify-between'>
+            <SectionHeader
+              title={tProduct('categoryTitle', { name: activeCategory?.name! })}
+            />
 
-        <CardBody>
-          <Carousel slidesToScroll trackClassName='items-stretch'>
-            {isLoadingProducts ? (
-              Array.from({ length: 8 }).map((_, i) => (
-                <ProductCardSkeleton key={i} />
-              ))
-            ) : products?.items?.length === 0 ? (
-              <EmptyState
-                title={t('empty.title')}
-                description={t('empty.description')}
-              />
-            ) : (
-              products?.items?.map((product) => (
+            <Button
+              variant='bordered'
+              color='primary'
+              endContent={<ArrowRightIcon className='size-4' />}
+              onPress={() =>
+                router.push(
+                  `/category/${createSlug(activeCategory?.name!, activeCategory?.id!)}`,
+                )
+              }
+            >
+              {t('explore')}
+            </Button>
+          </div>
+
+          <div>
+            <Carousel slidesToScroll trackClassName='items-stretch'>
+              {products?.items?.map((product) => (
                 <ProductCard key={product.id} product={product} />
-              ))
-            )}
-          </Carousel>
-        </CardBody>
-      </Card>
+              ))}
+            </Carousel>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

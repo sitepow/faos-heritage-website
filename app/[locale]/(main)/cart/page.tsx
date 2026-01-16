@@ -13,7 +13,6 @@ import { clearCart, deleteCart } from './action'
 import { useCartStore } from './store'
 
 import { ConfirmModal } from '@/components/confirm-modal'
-import { Country } from '@/components/navbar/country'
 
 export default function Cart() {
   const t = useTranslations('Cart')
@@ -61,10 +60,6 @@ export default function Cart() {
       </Head>
 
       <section className='container mx-auto flex flex-col items-center justify-center gap-4 p-5 text-center'>
-        <div className='flex w-full justify-start'>
-          <Country />
-        </div>
-
         <ConfirmModal
           isOpen={isDeleteOpen}
           isPending={isPending}

@@ -10,13 +10,14 @@ const CERTIFICATE_IMAGES = [
   '/images/certificate/gmo-free.png',
   '/images/certificate/iso.png',
   '/images/certificate/bio.png',
+  '/images/certificate/Chema_logo_medium.png',
 ]
 
 export const CertificateBanner = () => {
   const tBanner = useTranslations('Banner')
 
   return (
-    <Card fullWidth radius='none'>
+    <Card fullWidth radius='none' className='min-h-[350px]'>
       <CardBody
         className='flex w-full flex-col items-center justify-center gap-10 px-5 py-10'
         style={{

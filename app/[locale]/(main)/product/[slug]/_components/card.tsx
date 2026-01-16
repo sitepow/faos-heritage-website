@@ -55,7 +55,7 @@ export const ProductCard = ({ className, product }: ProductCardProps) => {
     <Card
       className={cn(
         'border-default-200 flex min-h-[420px] w-full flex-col border',
-        'shrink-0 basis-[300px] sm:basis-[420px] lg:basis-[500px]',
+        'shrink-0 basis-full sm:basis-[420px] lg:basis-[500px]',
         className,
       )}
       shadow='none'

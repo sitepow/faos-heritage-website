@@ -12,7 +12,6 @@ import { CarouselImageBanner } from '@/components/banner/carousel-image'
 import { CertificateBanner } from '@/components/banner/certificate'
 import { CustomerBanner } from '@/components/banner/customer'
 import { MarketplaceBanner } from '@/components/banner/marketplace'
-import { Country } from '@/components/navbar/country'
 import { ITEM_PER_PAGE } from '@/utils/constants/app'
 import { OG_IMAGE } from '@/utils/constants/seo'
 
@@ -69,9 +68,6 @@ export default async function Homepage() {
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
       <div className='flex w-full flex-col gap-5 p-5'>
-        <div className='container mx-auto flex w-full sm:w-fit'>
-          <Country />
-        </div>
         <CarouselImageBanner />
         <CategoryCarouselClient
           initialCategories={categories}

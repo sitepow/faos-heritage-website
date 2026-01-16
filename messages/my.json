@@ -41,6 +41,11 @@
     "contactText": "Sila simpan nombor pesanan ini untuk semakan status kemudian atau untuk menghubungi khidmat pelanggan."
   },
   "Common": {
+    "theme": {
+      "light": "Terang",
+      "dark": "Gelap",
+      "system": "Sistem"
+    },
     "save": "Simpan",
     "cancel": "Batal",
     "loading": "Memuatkan...",
@@ -413,6 +418,10 @@
     }
   },
   "Banner": {
+    "marketplace": {
+      "title": "Satu lagi pencapaian... Kami kini boleh didapati di gedung membeli-belah terkemuka dan platform dalam talian.",
+      "description": "(Alami produk kami hari ini di cawangan berhampiran anda! Satu lagi kemudahan untuk anda.)"
+    },
     "customer": "Laman web kami direka untuk menyokong pelanggan di pasaran sasaran di Asia, Eropah dan Amerika <link>bagi memberikan anda pengalaman pembelian yang mudah dan pantas</link>",
     "certificate": "Yakin dengan kualiti melalui piawaian antarabangsa yang kami periksa dengan teliti <link>kerana keselamatan anda adalah keutamaan kami</link> dalam setiap langkah pengeluaran",
     "advertise": {

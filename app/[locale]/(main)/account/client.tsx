@@ -14,7 +14,6 @@ import { OrderCard } from './_components/order/card'
 import { OverviewCard } from './_components/overview-card'
 import { ProfileCard } from './_components/profile-card'
 
-import { Country } from '@/components/navbar/country'
 import { useIsBelowBreakpoint } from '@/hooks/useIsBelowBreakpoint'
 import { useMounted } from '@/hooks/useMounted'
 import { useQueryParams } from '@/hooks/useQueryParams'
@@ -55,10 +54,6 @@ export const AccountClient = () => {
       </Head>
 
       <section className='container mx-auto flex flex-col items-center justify-center gap-4 p-5 text-center'>
-        <div className='flex w-full justify-start'>
-          <Country />
-        </div>
-
         <div className='w-full text-start'>
           <span className='text-xl font-semibold'>
             {t('welcome', { name: user?.name! })}

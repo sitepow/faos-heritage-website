@@ -1,6 +1,13 @@
 'use client'
 
-import { Select, SelectItem } from '@heroui/react'
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  Button,
+} from '@heroui/react'
+import { ChevronDownIcon, GlobeIcon } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 import { useEffect } from 'react'
 
@@ -38,72 +45,90 @@ export const Country = () => {
   if (!hasHydrated) return null
 
   return (
-    <div className='flex w-full flex-wrap gap-2'>
-      <Select
-        variant='faded'
-        disallowEmptySelection
-        label={t('country')}
-        className='w-full sm:w-52'
-        selectedKeys={selectedCountry ? [selectedCountry.country] : []}
-        renderValue={() =>
-          selectedCountry ? (
-            <span>{tCountry(selectedCountry.country)}</span>
-          ) : null
-        }
-        onSelectionChange={(keys) => {
-          const countryCode = Array.from(keys)[0] as string
-          changeLocale(countryCode)
-        }}
-      >
-        {CURRENCY_LOCALE_MAP.map((item) => (
-          <SelectItem key={item.country} textValue={item.name}>
+    <div className='flex items-center gap-1 sm:gap-3'>
+      <Dropdown placement='bottom-end'>
+        <DropdownTrigger>
+          <Button
+            variant='light'
+            className='min-w-0 px-2 sm:px-4'
+            isIconOnly={false}
+          >
             <div className='flex items-center gap-2'>
-              <CountryFlag countryCode={item.country} />
-              <span>{tCountry(item.country)}</span>
+              {selectedCountry ? (
+                <CountryFlag countryCode={selectedCountry.country} />
+              ) : (
+                <GlobeIcon size={18} />
+              )}
+              <span className='hidden sm:inline'>
+                {selectedCountry
+                  ? tCountry(selectedCountry.country)
+                  : t('country')}
+              </span>
+              <ChevronDownIcon
+                size={14}
+                className='text-default-400 hidden sm:block'
+              />
             </div>
-          </SelectItem>
-        ))}
-      </Select>
+          </Button>
+        </DropdownTrigger>
+        <DropdownMenu
+          aria-label='Country selection'
+          disallowEmptySelection
+          selectionMode='single'
+          selectedKeys={selectedCountry ? [selectedCountry.country] : []}
+          onSelectionChange={(keys) => {
+            const countryCode = Array.from(keys)[0] as string
+            changeLocale(countryCode)
+          }}
+        >
+          {CURRENCY_LOCALE_MAP.map((item) => (
+            <DropdownItem
+              key={item.country}
+              startContent={<CountryFlag countryCode={item.country} />}
+            >
+              {tCountry(item.country)}
+            </DropdownItem>
+          ))}
+        </DropdownMenu>
+      </Dropdown>
 
-      <Select
-        variant='faded'
-        disallowEmptySelection
-        label={t('currency')}
-        className='w-full sm:w-52'
-        selectedKeys={country ? [country.locale] : []}
-        renderValue={(items) =>
-          items.map((item) => {
+      <Dropdown placement='bottom-end'>
+        <DropdownTrigger>
+          <Button variant='light' className='min-w-0 px-2 sm:px-4'>
+            <div className='flex items-center gap-1 sm:gap-2'>
+              <span className='text-xs font-semibold uppercase sm:text-sm'>
+                {country ? country.currency : t('currency')}
+              </span>
+              <ChevronDownIcon
+                size={14}
+                className='text-default-400 hidden sm:block'
+              />
+            </div>
+          </Button>
+        </DropdownTrigger>
+        <DropdownMenu
+          aria-label='Currency selection'
+          disallowEmptySelection
+          selectionMode='single'
+          selectedKeys={country ? [country.locale] : []}
+          onSelectionChange={(keys) => {
+            const localeKey = Array.from(keys)[0] as string
             const selected = CURRENCY_LOCALE_MAP.find(
-              (currency) => currency.locale === item.key,
+              (item) => item.locale === localeKey,
             )
-
-            if (!selected) {
-              return null
-            }
-
-            return <span key={item.key}>{selected.currency}</span>
-          })
-        }
-        onSelectionChange={(keys) => {
-          const locale = Array.from(keys)[0] as string
-          const selected = CURRENCY_LOCALE_MAP.find(
-            (item) => item.locale === locale,
-          )
-
-          if (selected) {
-            setState({ country: selected })
-          }
-        }}
-      >
-        {CURRENCY_LOCALE_MAP.map((item) => (
-          <SelectItem key={item.locale} textValue={item.name}>
-            <div className='flex gap-1'>
-              <span>{tCountry(item.country)}</span>
-              <span className='text-primary text-sm'>({item.currency})</span>
-            </div>
-          </SelectItem>
-        ))}
-      </Select>
+            if (selected) setState({ country: selected })
+          }}
+        >
+          {CURRENCY_LOCALE_MAP.map((item) => (
+            <DropdownItem
+              key={item.locale}
+              description={tCountry(item.country)}
+            >
+              {item.currency}
+            </DropdownItem>
+          ))}
+        </DropdownMenu>
+      </Dropdown>
     </div>
   )
 }

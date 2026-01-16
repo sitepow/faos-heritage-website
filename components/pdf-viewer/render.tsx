@@ -1,26 +1,13 @@
 'use client'
 
 import { Viewer, Worker, SpecialZoomLevel } from '@react-pdf-viewer/core'
-import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout'
-
 import '@react-pdf-viewer/core/lib/styles/index.css'
-import '@react-pdf-viewer/default-layout/lib/styles/index.css'
 
-interface PdfViewerRenderProps {
-  fileUrl: string
-}
-
-export default function PdfViewerRender({ fileUrl }: PdfViewerRenderProps) {
-  const defaultLayoutPluginInstance = defaultLayoutPlugin()
-
+export default function PdfViewerRender({ fileUrl }: { fileUrl: string }) {
   return (
-    <div className='h-[80vh] w-full max-w-7xl overflow-hidden rounded-lg border'>
+    <div className='h-[80vh] w-full max-w-7xl overflow-hidden rounded-lg border border-slate-300'>
       <Worker workerUrl='/javascript/pdf.worker.min.js'>
-        <Viewer
-          defaultScale={SpecialZoomLevel.PageWidth}
-          fileUrl={fileUrl}
-          plugins={[defaultLayoutPluginInstance]}
-        />
+        <Viewer fileUrl={fileUrl} defaultScale={SpecialZoomLevel.PageWidth} />
       </Worker>
     </div>
   )

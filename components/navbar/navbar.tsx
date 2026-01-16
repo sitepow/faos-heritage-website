@@ -20,9 +20,10 @@ import { useState } from 'react'
 import type { NavItem } from '@/config/site'
 
 import { NavbarCart } from './cart'
+import { Country } from './country'
 import { NavbarHeader } from './header'
 import { NavbarPanel } from './panel'
-// import { ThemeSwitch } from '../theme-switch'
+import { ThemeSwitch } from '../theme-switch'
 
 import { siteConfig } from '@/config/site'
 import { cn } from '@/utils/style'
@@ -44,24 +45,21 @@ export const Navbar = () => {
     ? siteConfig.adminNavbarItems
     : siteConfig.mainNavItems
 
-  const renderLink = (item: NavItem) => {
-    return (
-      <Link
-        className={cn(linkStyles({ color: 'foreground' }))}
-        href={item.href}
-      >
-        {t(item.label)}
-      </Link>
-    )
-  }
+  const renderLink = (item: NavItem) => (
+    <Link
+      className={cn(linkStyles({ color: 'foreground' }), 'font-medium')}
+      href={item.href}
+    >
+      {t(item.label)}
+    </Link>
+  )
 
   return (
     <>
       {!isMenuOpen && <NavbarHeader />}
 
       <HeroNavbar
-        // isBordered
-        // className='shadow-md'
+        className='light:bg-white dark:bg-inherit'
         isBlurred={false}
         isMenuOpen={isMenuOpen}
         maxWidth='full'
@@ -72,72 +70,63 @@ export const Navbar = () => {
           <Link className='shrink-0' href='/'>
             <img
               alt='faos-logo'
-              height={55}
+              height={45}
               src='/images/logo.png'
-              width={55}
+              width={45}
             />
           </Link>
 
-          <ul className='ml-2 hidden gap-4 sm:flex'>
+          <ul className='ml-4 hidden gap-4 lg:flex'>
             {menuItems?.map((item) => (
               <NavbarItem key={item.href}>{renderLink(item)}</NavbarItem>
             ))}
           </ul>
         </NavbarContent>
 
-        <NavbarContent
-          className='hidden basis-1/5 sm:flex sm:basis-full'
-          justify='end'
-        >
-          {isAuthenticated && (
-            <NavbarItem className='hidden items-center gap-4 lg:flex'>
-              {!isDashboard && <NavbarCart />}
+        <NavbarContent justify='end' className='gap-2 sm:gap-4'>
+          <NavbarItem>
+            <Country />
+          </NavbarItem>
 
-              {/* <ThemeSwitch /> */}
-              <NavbarPanel setIsMenuOpen={setIsMenuOpen} />
-            </NavbarItem>
-          )}
+          <NavbarItem className='flex items-center'>
+            <ThemeSwitch />
+          </NavbarItem>
 
-          {!isAuthenticated && (
-            <NavbarItem className='hidden items-center gap-4 lg:flex'>
-              <Link href={siteConfig.link.login}>
-                <LogInIcon />
+          {isAuthenticated ? (
+            <>
+              {!isDashboard && (
+                <NavbarItem className='flex items-center'>
+                  <NavbarCart />
+                </NavbarItem>
+              )}
+              <NavbarItem className='flex items-center'>
+                <NavbarPanel setIsMenuOpen={setIsMenuOpen} />
+              </NavbarItem>
+            </>
+          ) : (
+            <NavbarItem className='flex items-center'>
+              <Link href={siteConfig.link.login} className='p-2'>
+                <LogInIcon size={22} />
               </Link>
-              {/* <ThemeSwitch /> */}
             </NavbarItem>
           )}
+
+          <NavbarMenuToggle className='ml-2 cursor-pointer lg:hidden' />
         </NavbarContent>
 
         <NavbarMenu>
-          {menuItems.map((item) => (
-            <NavbarMenuItem
-              key={item.href}
-              className='text-base'
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {renderLink(item)}
-            </NavbarMenuItem>
-          ))}
+          <div className='mt-4 flex flex-col gap-4'>
+            {menuItems.map((item) => (
+              <NavbarMenuItem
+                key={item.href}
+                className='text-lg'
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {renderLink(item)}
+              </NavbarMenuItem>
+            ))}
+          </div>
         </NavbarMenu>
-
-        {isAuthenticated && (
-          <NavbarItem className='flex items-center gap-3 lg:hidden'>
-            <NavbarPanel setIsMenuOpen={setIsMenuOpen} />
-            {!isDashboard && <NavbarCart />}
-            {/* <ThemeSwitch /> */}
-          </NavbarItem>
-        )}
-
-        {!isAuthenticated && !isDashboard && (
-          <NavbarItem className='flex items-center gap-3 lg:hidden'>
-            <Link href={siteConfig.link.login}>
-              <LogInIcon />
-            </Link>
-            {/* <ThemeSwitch /> */}
-          </NavbarItem>
-        )}
-
-        <NavbarMenuToggle className='cursor-pointer sm:hidden' />
       </HeroNavbar>
     </>
   )

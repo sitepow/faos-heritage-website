@@ -41,6 +41,11 @@
     "contactText": "Vui lòng giữ mã đơn hàng này để kiểm tra trạng thái sau này hoặc liên hệ bộ phận hỗ trợ."
   },
   "Common": {
+    "theme": {
+      "light": "Sáng",
+      "dark": "Tối",
+      "system": "Hệ thống"
+    },
     "save": "Lưu",
     "cancel": "Hủy",
     "loading": "Đang tải...",
@@ -412,6 +417,10 @@
     }
   },
   "Banner": {
+    "marketplace": {
+      "title": "Một bước tiến mới... Hiện chúng tôi đã có mặt tại các trung tâm thương mại và nền tảng trực tuyến hàng đầu.",
+      "description": "(Trải nghiệm sản phẩm ngay hôm nay tại các cửa hàng gần nhất! Thêm một lựa chọn tiện lợi cho bạn.)"
+    },
     "customer": "Trang web của chúng tôi được thiết kế để hỗ trợ khách hàng tại các thị trường mục tiêu ở Châu Á, Châu Âu và Châu Mỹ <link>nhằm mang đến cho bạn trải nghiệm mua sắm nhanh chóng và dễ dàng</link>",
     "certificate": "Tự tin về chất lượng với các tiêu chuẩn quốc tế được chúng tôi kiểm tra nghiêm ngặt <link>vì sự an toàn của bạn là ưu tiên hàng đầu</link> trong mọi quy trình sản xuất",
     "advertise": {

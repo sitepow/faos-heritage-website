@@ -41,6 +41,11 @@
     "contactText": "Ti preghiamo di conservare questo numero d'ordine per controlli futuri o per contattare l'assistenza."
   },
   "Common": {
+    "theme": {
+      "light": "Chiaro",
+      "dark": "Scuro",
+      "system": "Sistema"
+    },
     "save": "Salva",
     "cancel": "Annulla",
     "loading": "Caricamento...",
@@ -416,6 +421,10 @@
     }
   },
   "Banner": {
+    "marketplace": {
+      "title": "Un nuovo traguardo... Ora siamo disponibili nei principali grandi magazzini e piattaforme online.",
+      "description": "(Scopri i nostri prodotti oggi stesso nei migliori punti vendita vicino a te! Un altro modo per la tua comodità.)"
+    },
     "customer": "Il nostro sito è progettato per supportare i clienti nei mercati target in Asia, Europa e America <link>per offrirti un'esperienza di acquisto facile e veloce</link>",
     "certificate": "Qualità garantita da standard internazionali rigorosi <link>perché la tua sicurezza è la nostra priorità</link> in ogni fase della produzione",
     "advertise": {

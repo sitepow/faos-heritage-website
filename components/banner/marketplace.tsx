@@ -2,10 +2,12 @@
 
 import { Card, CardBody } from '@heroui/react'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 
 export const MarketplaceBanner = () => {
+  const t = useTranslations('Banner.marketplace')
   return (
-    <Card fullWidth radius='none'>
+    <Card fullWidth radius='none' className='min-h-[350px]'>
       <CardBody
         className='flex w-full flex-col items-center justify-center gap-10 px-5 py-12 text-white'
         style={{
@@ -18,40 +20,8 @@ export const MarketplaceBanner = () => {
         }}
       >
         <h2 className='mx-auto max-w-11/12 text-center text-xl leading-tight font-semibold sm:max-w-10/12 sm:text-2xl md:max-w-1/2 xl:max-w-1/3'>
-          อีกขั้นของความสำเร็จ... วันนี้เราพร้อมวางจำหน่ายแล้วที่ห้างสรรพสินค้า
-          และแพลตฟอร์มออนไลน์ชั้นนำ
+          {t('title')}
         </h2>
-
-        <div className='grid max-w-4xl items-center justify-center gap-4 sm:grid-cols-4'>
-          <Image
-            src={'/images/market/food-land.jpg'}
-            width={150}
-            height={150}
-            alt=''
-            className='object-contain'
-          />
-          <Image
-            src={'/images/market/villa-market.jpg'}
-            width={150}
-            height={150}
-            alt=''
-            className='object-contain'
-          />
-          <Image
-            src={'/images/market/lazada.png'}
-            width={150}
-            height={150}
-            alt=''
-            className='object-contain'
-          />
-          <Image
-            src={'/images/market/shopee.png'}
-            width={150}
-            height={150}
-            alt=''
-            className='object-contain'
-          />
-        </div>
 
         <div className='flex flex-col justify-center gap-4 text-center'>
           <iframe
@@ -63,12 +33,39 @@ export const MarketplaceBanner = () => {
             referrerPolicy='no-referrer-when-downgrade'
           />
           <div className='mx-auto flex flex-col sm:max-w-3/4'>
-            <span className='text-lg'>
-              (สัมผัสสินค้าจริงได้แล้ววันนี้ที่ Foodland และ Villa Market
-              ใกล้ที่ไหน แวะไปช้อปที่นั่นได้เลย!
-              อีกหนึ่งช่องทางเพื่อความสะดวกของคุณ)
-            </span>
+            <span className='text-lg'>{t('description')}</span>
           </div>
+        </div>
+
+        <div className='grid max-w-4xl grid-cols-2 items-center justify-center gap-4 sm:grid-cols-4'>
+          <Image
+            src={'/images/market/food-land.png'}
+            width={150}
+            height={150}
+            alt=''
+            className='h-fit w-32 object-contain'
+          />
+          <Image
+            src={'/images/market/villa-market.png'}
+            width={150}
+            height={150}
+            alt=''
+            className='h-fit w-32 object-contain'
+          />
+          <Image
+            src={'/images/market/lazada.svg'}
+            width={150}
+            height={150}
+            alt=''
+            className='h-fit w-32 object-contain'
+          />
+          <Image
+            src={'/images/market/shopee.png'}
+            width={150}
+            height={150}
+            alt=''
+            className='h-fit w-32 object-contain'
+          />
         </div>
       </CardBody>
     </Card>

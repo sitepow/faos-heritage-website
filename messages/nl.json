@@ -41,6 +41,11 @@
     "contactText": "Bewaar dit ordernummer voor latere statuscontroles of om contact op te nemen met de klantenservice."
   },
   "Common": {
+    "theme": {
+      "light": "Licht",
+      "dark": "Donker",
+      "system": "Systeem"
+    },
     "save": "Opslaan",
     "cancel": "Annuleren",
     "loading": "Laden...",
@@ -413,6 +418,10 @@
     }
   },
   "Banner": {
+    "marketplace": {
+      "title": "Een nieuwe mijlpaal... We zijn nu beschikbaar bij toonaangevende warenhuizen en online platforms.",
+      "description": "(Ervaar onze producten vandaag nog bij de bekende winkels bij u in de buurt! Extra gemak voor u.)"
+    },
     "customer": "Onze website is ontworpen voor klanten in Azië, Europa en Amerika <link>voor een gemakkelijke en snelle bestelervaring</link>",
     "certificate": "Vertrouw op kwaliteit met internationale normen die we grondig controleren <link>omdat uw veiligheid centraal staat</link> in elke stap van onze productie",
     "advertise": {
