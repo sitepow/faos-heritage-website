@@ -1,0 +1,645 @@
+{
+  "Localization": {
+    "country": "国家",
+    "currency": "货币"
+  },
+  "ProductUnit": {
+    "PIECE": "件",
+    "ITEM": "项目",
+    "SET": "套",
+    "BOX": "盒",
+    "PACK": "包",
+    "BAG": "袋",
+    "BOTTLE": "瓶",
+    "CAN": "罐",
+    "KG": "千克",
+    "G": "克",
+    "L": "升",
+    "ML": "毫升",
+    "PAIR": "双",
+    "ROLL": "卷",
+    "SHEET": "张",
+    "UNIT": "单位",
+    "CAR": "辆",
+    "HOUSE": "栋"
+  },
+  "Site": {
+    "name": "FAOS",
+    "title": "顶级有机橄榄油与蜂蜜 — 100% 纯天然系列",
+    "description": "高品质有机橄榄油与蜂蜜的甄选之家，为您打造健康生活方式。"
+  },
+  "CancelPage": {
+    "title": "支付已取消",
+    "description": "您的支付未完成或在完成前已取消。系统尚未向您收费。",
+    "referenceText": "该订单的参考编号为：",
+    "contactText": "如需重新下单，您可以返回并立即开始流程，或使用此编号联系客服。"
+  },
+  "SuccessPage": {
+    "title": "支付成功",
+    "description": "感谢您的订单。您的付款已通过验证并确认。",
+    "referenceText": "该订单的参考编号为",
+    "contactText": "请保留此订单号，以便日后查询状态或联系客服。"
+  },
+  "Common": {
+    "theme": {
+      "light": "浅色",
+      "dark": "深色",
+      "system": "跟随系统"
+    },
+    "save": "保存",
+    "cancel": "取消",
+    "loading": "加载中...",
+    "saving": "保存中...",
+    "close": "关闭",
+    "Breadcrumb": { "home": "首页", "products": "所有产品" },
+    "ImageDropzone": {
+      "active": "将图片拖到此处...",
+      "idle": "将图片拖放到此处",
+      "hint": "或点击选择文件（系统将自动调整大小以优化性能）",
+      "limit": "支持最大 {size} 的文件上传"
+    }
+  },
+  "OrderStatus": {
+    "PENDING": "等待付款",
+    "PAID": "已付款",
+    "PROCESSING": "处理中",
+    "SHIPPED": "已发货",
+    "DELIVERED": "已送达",
+    "CANCELLED": "已取消",
+    "REFUNDED": "已退款"
+  },
+  "Account": {
+    "OrderCancel": {
+      "title": "取消订单",
+      "loading": "加载中...",
+      "reasonLabel": "原因",
+      "placeholder": "请输入取消或退款的原因。",
+      "back": "返回",
+      "confirm": "确认取消",
+      "submitting": "正在处理..."
+    },
+    "OrderView": {
+      "title": "订单详情",
+      "orderId": "订单号",
+      "loading": "加载中...",
+      "shippingAddress": "收货地址",
+      "logistics": "物流信息",
+      "trackingNo": "快递单号",
+      "preparing": "准备发货中",
+      "productList": "商品清单",
+      "subtotal": "商品总额",
+      "shippingFee": "运费",
+      "totalAmount": "订单总计",
+      "cancelNote": "取消原因",
+      "close": "关闭"
+    },
+    "Orders": {
+      "title": "我的订单",
+      "emptyState": "您目前还没有订单。",
+      "exploreLink": "浏览所有产品",
+      "paymentAlert": "请在20分钟内完成付款，否则您的订单将被自动取消。",
+      "orderNumber": "订单号",
+      "items": "项",
+      "orderDate": "下单日期",
+      "trackingNumber": "运单号",
+      "buttons": {
+        "details": "订单详情",
+        "cancel": "取消订单",
+        "payNow": "立即付款",
+        "downloadReceipt": "下载收据"
+      }
+    },
+    "Address": {
+      "manageTitle": "管理我的地址",
+      "addButton": "添加收货地址",
+      "noAddressAlert": "您还没有收货地址。请在继续下单前添加您的地址。",
+      "noDefaultAlert": "请在继续下单前选择默认收货地址。",
+      "defaultTag": "默认",
+      "editAddress": "编辑地址",
+      "removeAddress": "删除地址"
+    },
+    "AddressForm": {
+      "addTitle": "添加收货地址",
+      "editTitle": "编辑收货地址",
+      "loading": "加载中...",
+      "alertDescription": "请确保您的地址正确，以避免潜在的配送问题。",
+      "sections": { "status": "地址状态", "basic": "基本信息" },
+      "fields": {
+        "enableAddress": "启用此地址",
+        "fullName": "姓名",
+        "phone": "电话号码",
+        "street": "详细地址（街道、门牌号）",
+        "subDistrict": "街道/乡镇",
+        "district": "区/县",
+        "province": "省/市",
+        "postalCode": "邮政编码",
+        "country": "国家"
+      },
+      "buttons": { "cancel": "取消", "save": "保存", "saving": "保存中..." },
+      "errors": {
+        "name": "请输入姓名",
+        "phone": "请输入电话号码",
+        "address": "请输入详细地址",
+        "subDistrict": "请输入街道",
+        "district": "请输入区县",
+        "province": "请输入省市",
+        "postalCode": "请输入邮政编码",
+        "country": "请选择国家"
+      }
+    },
+    "welcome": "您的账户 {name}",
+    "tabs": {
+      "manage": "管理我的账户",
+      "orders": "我的订单",
+      "favorites": "我的收藏",
+      "editProfile": "编辑个人信息",
+      "editAddress": "编辑收货地址",
+      "address": "管理我的地址"
+    },
+    "personalInfo": "个人信息",
+    "basicInfo": "基本情報",
+    "imageChanged": "画像ファイルに変更がありました。",
+    "fields": {
+      "imageUrl": "画像URL",
+      "name": "姓名",
+      "email": "电子邮件",
+      "role": "账号权限",
+      "productId": "商品ID"
+    },
+    "buttons": {
+      "removeFavorite": "お気に入り解除",
+      "save": "保存",
+      "saving": "保存中...",
+      "cancel": "キャンセル"
+    },
+    "modals": {
+      "removeFavorite": {
+        "title": "削除の確認",
+        "description": "この商品をお気に入りから削除してもよろしいですか？"
+      }
+    },
+    "roles": {
+      "admin": "系统管理员",
+      "customer": "普通客户"
+    },
+    "favoritesEmpty": "您的收藏夹中还没有任何商品。 <br/> <link>浏览所有产品</link>"
+  },
+  "Products": {
+    "categoryTitle": "类别 {name}",
+    "title": "所有产品",
+    "loading": "加载中...",
+    "notFound": "抱歉，系统中未找到该产品。请在首页重新搜索。",
+    "breadcrumbs": {
+      "home": "首页",
+      "products": "所有产品"
+    },
+    "pagination": "显示第 1–{count} 个，共 {total} 个项目",
+    "sortLabel": "排序方式",
+    "sortItems": {
+      "newest": "最新上架",
+      "oldest": "最早发布",
+      "price_low": "价格 从低到高",
+      "price_high": "价格 从高到低",
+      "stock_low": "库存 从低到高",
+      "stock_high": "库存 从高到低"
+    }
+  },
+  "Auth": {
+    "headerTitle": "登录 o 注册",
+    "headerDesc": "访问网站 <link>{siteName}</link>",
+    "loginTab": "登录",
+    "registerTab": "注册",
+    "emailLabel": "电子邮件",
+    "passwordLabel": "密码",
+    "confirmPasswordLabel": "确认密码",
+    "nameLabel": "姓名",
+    "loginBtn": "登录",
+    "registerBtn": "注册",
+    "socialDivider": "或通过以下方式继续"
+  },
+  "Cart": {
+    "Checkout": {
+      "title": "收货地址",
+      "currencyAlert": "您正准备使用选定货币下单。请在继续购买前仔细核对价格和货币。",
+      "editAddress": "修改地址",
+      "paymentDetails": "支付详情",
+      "totalPrice": "商品总价",
+      "shippingCost": "运费",
+      "discount": "折扣",
+      "netTotal": "实付款",
+      "noAddressAlert": "下单前请先添加收货地址",
+      "addAddress": "添加地址",
+      "proceedBtn": "去结算"
+    },
+    "Item": {
+      "productId": "商品编号",
+      "price": "价格",
+      "remaining": "库存剩余",
+      "qtyLabel": "数量",
+      "optionsLabel": "产品选项",
+      "optionsPlaceholder": "请选择选项"
+    },
+    "List": {
+      "header": "商品清单",
+      "emptyCart": "您的购物车空空如也。您可以去首页挑选商品并加入购物车。"
+    },
+    "Page": {
+      "title": "您的购物车 {count, plural, =0 {} other {(# 件商品)}}",
+      "cartId": "购物车 ID",
+      "clearBtn": "清空购物车"
+    },
+    "Messages": {
+      "confirmDeleteTitle": "移除商品？",
+      "confirmDeleteDesc": "您确定要从购物车中移除此商品吗？",
+      "confirmClearTitle": "清空整个购物车？",
+      "confirmClearDesc": "这将从购物车中移除所有商品。此操作无法撤销。",
+      "orderCreated": "您的订单已成功创建。请检查并继续完成付款。",
+      "confirmOrderTitle": "确认提交订单？",
+      "confirmOrderDesc": "请确认商品清单和收货地址的准确性。如果一切无误，您可以立即进行下单。"
+    }
+  },
+  "About": {
+    "title": "关于 FAOS - 纯净的传承",
+    "description": "FAOS 提供由 100% 天然成分制成的优质有机橄榄油和蜂蜜。本手册介绍了我们的产品系列、质量标准和品牌哲学。",
+    "philosophy": "我们的哲学根植于自然与健康的和谐共生。",
+    "quality": "我们遵循最高的国际有机标准，为您提供高品质产品。",
+    "origin": "源自肥沃土地的心脏，我们的产品体现了有机耕作的丰厚遗产。"
+  },
+  "Privacy": {
+    "title": "隐私政策",
+    "content": "FAOS 致力于保护所有用户的 <important>隐私</important> 和 <important>个人数据</important>。所有可识别个人身份的信息均被视为 <important>严格保密</important>，并以 <important>安全的方式</important> 予以维护。这包括但不限于姓名、联系方式和 <important>交易数据</important>。FAOS 实施了适当的 <important>技术和组织安全措施</important>，以防止数据的 <important>未经授权访问、披露、篡改或破坏</important>。个人信息的收集和处理仅用于 <important>合法的业务目的</important>，并符合 <important>适用的数据保护法律</important>。除非法律要求，否则未经 <important>事先同意</important>，个人数据不会披露给 <important>第三方</important>。"
+  },
+  "Payment": {
+    "Header": {
+      "title": "支付方式与安全保障",
+      "description": "我们为您提供多种安全便捷的支付选项，确保为您带来流畅无忧的购物体验。"
+    },
+    "HowToShop": {
+      "title": "购物流程指南",
+      "ariaLabel": "关于如何开始购买产品的指南",
+      "step1": "1. 浏览我们的精品系列，选择您心仪的商品，然后点击 <important>“加入购物车”</important> 将其保存至您的购物袋中。",
+      "step2": "2. 点击右上角的购物车图标查看已选商品，您可以根据需要调整购买数量或删除商品。",
+      "step3": "3. 确认商品信息无误后，点击 <important>“提交订单”</important> 进入安全结算系统。",
+      "step4": "4. 您将被安全地重定向到我们的支付合作伙伴 Stripe，在此您可以安全地输入支付详情并最终完成购买。"
+    },
+    "CardPayment": {
+      "title": "借记卡 / 信用卡支付",
+      "ariaLabel": "使用借记卡或信用卡支付的说明",
+      "description": "我们支持全球主流支付网络。您可以使用全球各大银行发行的借记卡或信用卡进行安全支付。",
+      "acceptedCards": "我们接受带有 <important>Visa、Mastercard 或 JCB</important> 标志的卡片，为了您的方便，同时也支持虚拟卡和国际信用卡。",
+      "securityNote": "您的每一笔交易均经过加密处理，并受到 Stripe 行业领先的安全技术保护。"
+    },
+    "QRCodePayment": {
+      "title": "QR 码支付（移动银行）",
+      "ariaLabel": "使用二维码支付的说明",
+      "description": "为了更快捷地完成结算，您可以选择 QR 码即时支付。这是我们在区域内极力推荐的便捷方式。",
+      "method": "只需通过您的手机银行应用程序扫描 <important>PromptPay 二维码</important> 即可。该服务支持各大主流银行，且无需支付额外交易费用。",
+      "expiryNote": "* 请确保在支付页面显示的规定时间内完成支付，以避免订单失效。"
+    }
+  },
+  "ProductChip": {
+    "authentic": "正品保障 100%",
+    "premium": "高端品质",
+    "demo": "演示版",
+    "digital": "数字产品",
+    "uncategorized": "未分类"
+  },
+  "ProductTab": {
+    "description": "商品详情",
+    "review": "累计评价"
+  },
+  "ProductCart": {
+    "quantity": "数量",
+    "productOptions": "选择规格",
+    "addToFavorites": "加入收藏夹",
+    "addToCart": "加入购物车",
+    "pleaseLoginFirst": "请先登录以进行 {action}",
+    "outOfStock": "暂时缺货",
+    "quantityExceedsStock": "超过当前库存数量",
+    "share": "分享商品"
+  },
+  "Navbar": {
+    "Header": "顶级有机橄榄油与蜂蜜，成就健康生活之道",
+    "Menu": {
+      "home": "首页",
+      "products": "全部商品",
+      "payments": "支付方式",
+      "about": "关于我们",
+      "dashboard": "控制面板",
+      "users": "用户管理",
+      "orders": "订单管理"
+    },
+    "Panel": {
+      "account": "个人中心",
+      "orders": "我的订单",
+      "favorites": "我的收藏",
+      "adminDashboard": "后台管理",
+      "logout": "退出登录"
+    }
+  },
+  "Meta": {
+    "ProductDetail": {
+      "title": "{name}",
+      "defaultDescription": "在 FAOS 购买 {name}。高品质有机橄榄油和蜂蜜直接送达。",
+      "notFound": "未找到产品 | FAOS"
+    },
+    "Privacy": {
+      "title": "隐私政策",
+      "description": "阅读 FAOS 隐私政策，了解我们如何安全地收集、使用和保护您的个人信息。",
+      "keywords": ["隐私政策", "数据保护", "个人资料", "FAOS 隐私", "用户隐私"],
+      "ogTitle": "FAOS 隐私政策",
+      "ogDescription": "了解 FAOS 如何收集、使用和保护您的个人数据。"
+    },
+    "About": {
+      "title": "我们的故事与产品",
+      "description": "了解更多关于 FAOS 优质有机橄榄油和蜂蜜的信息。查看我们的官方产品手册和品牌故事。",
+      "keywords": ["FAOS", "有机橄榄油", "有机蜂蜜", "产品手册", "品牌故事"],
+      "ogTitle": "关于 FAOS - 优质有机产品",
+      "ogDescription": "纯净有机橄榄油和蜂蜜。查看我们的官方手册和品牌信息。"
+    },
+    "Payment": {
+      "title": "付款方式",
+      "description": "了解 FAOS 的付款方式，包括信用卡和 PromptPay 二维码。由 Stripe 提供支持的安全支付。",
+      "keywords": [
+        "FAOS 付款",
+        "信用卡支付",
+        "PromptPay",
+        "Stripe 结账",
+        "安全支付"
+      ],
+      "ogTitle": "FAOS 安全支付方式",
+      "ogDescription": "支持信用卡和 PromptPay 二维码等安全付款方式。"
+    },
+    "Category": {
+      "title": "{categoryName} | FAOS 优质精选",
+      "description": "浏览 FAOS 的所有 {categoryName} 产品。优质、天然且经过精心挑选的物品。",
+      "ogAlt": "FAOS 的 {categoryName} 产品"
+    },
+    "Products": {
+      "title": "所有产品",
+      "description": "浏览 FAOS 的优质有机产品系列。发现为您的健康精心挑选的纯橄榄油和 100% 天然蜂蜜。",
+      "keywords": [
+        "有机橄榄油",
+        "天然蜂蜜",
+        "健康产品",
+        "FAOS 产品",
+        "优质食品"
+      ],
+      "ogTitle": "浏览 FAOS 所有优质产品",
+      "ogDescription": "发现我们的高品质有机橄榄油和天然蜂蜜系列。"
+    },
+    "Home": {
+      "title": "首页",
+      "description": "专营 100% 纯天然有机橄榄油与蜂蜜，为您的健康保驾护航。",
+      "keywords": ["FAOS", "有机橄榄油", "纯蜂蜜", "有机蜂蜜", "健康食品"],
+      "ogTitle": "FAOS - 顶级有机橄榄油与蜂蜜",
+      "ogDescription": "甄选 100% 纯天然产品，助力您的健康生活。"
+    }
+  },
+  "Banner": {
+    "marketplace": {
+      "title": "迈向新高峰… 现已进驻各大百货商场及领先电商平台。",
+      "description": "(亲临附近门店体验产品！为您提供更便捷的购物选择。)"
+    },
+    "customer": "我们的网站旨在为亚洲、欧洲和美洲的客户提供支持，<link>为您带来便捷快速的购物体验</link>",
+    "certificate": "严谨遵守国际质量标准，<link>因为您的安全是我们生产每一个环节的核心</link>",
+    "advertise": {
+      "title": "走进特级初榨橄榄油的世界：自然益处与健康常识",
+      "messages": [
+        "特级初榨橄榄油 (EVOO) 是最高等级的油，通过精益求精的工艺生产，重质不重量。",
+        "富含具有抗氧化和抗炎特性的多酚，保护油脂免受氧化，并保留其风味和营养价值。",
+        "含有橄榄油刺激醛 (Oleocanthal)，其作用类似于布洛芬，有助于调节炎症细胞活动，减轻全身肿胀。",
+        "有助于调节胆固醇和甘油三酯水平，同时减少低密度脂蛋白 (LDL) 氧化，维护心血管健康。",
+        "多酚化合物有助于改善心理健康，预防阿尔茨海默症等神经退行性疾病。",
+        "提高胰岛素效率以平衡血糖水平，并在缓解代谢综合征 (MS) 症状方面发挥重要作用。",
+        "含有“谷甾醇”，有助于调节胆固醇吸收，增强消化系统健康，有效缓解便秘。",
+        "产自独特的古老橄榄品种，如雅典娜 (Athenolia) 和科隆内基 (Koroneiki)，含有极高水平的多酚。",
+        "采用传统的物理冷榨技术，不经过精炼、漂白或化学处理，以保持最高纯度。",
+        "多酚通过减少自由基损伤来强化心脏并提高能量水平，是自然提升运动表现的完美选择。"
+      ]
+    }
+  },
+  "Section": {
+    "Header": {
+      "title": "寻找您的专属甄选",
+      "description": "探索为您独特生活方式量身定制的品质佳品。"
+    },
+    "similar": "相似商品推荐"
+  },
+  "CategoryCarousel": {
+    "title": "品类选购",
+    "explore": "查看全部商品",
+    "empty": {
+      "title": "当前品类下暂无商品",
+      "description": "请尝试选择其他类别，或稍后再次访问。"
+    }
+  },
+  "Footer": {
+    "copyright": "© {year} {name} - {title}",
+    "Menu": {
+      "privacy": "隐私政策"
+    }
+  },
+  "Country": {
+    "TH": "泰国",
+    "US": "美国",
+    "GR": "希腊",
+    "IT": "意大利",
+    "NL": "荷兰",
+    "MY": "马来西亚",
+    "SG": "新加坡",
+    "JP": "日本",
+    "CN": "中国",
+    "IS": "冰岛",
+    "VN": "越南",
+    "ID": "印度尼西亚"
+  },
+  "Dashboard": {
+    "ProductManager": {
+      "addNew": "添加新产品",
+      "manageCategories": "管理产品分类",
+      "manageShipping": "管理运费",
+      "deleteSelected": "删除选中项 ({count})",
+      "tableAria": "产品数据表",
+      "empty": "暂无产品信息",
+      "colId": "产品ID",
+      "colDigital": "数字产品",
+      "colImage": "图片",
+      "colName": "产品名称",
+      "colPrice": "主价格",
+      "colStock": "库存量",
+      "colCategory": "分类",
+      "colActions": "操作",
+      "digitalProduct": "虚拟商品",
+      "dropdownAria": "产品管理菜单",
+      "editInfo": "编辑信息",
+      "manageImages": "管理图片",
+      "manageOptions": "管理选项",
+      "removeProduct": "删除产品"
+    },
+    "UserManager": {
+      "addNew": "添加新用户",
+      "deleteSelected": "删除选中项 ({count})",
+      "tableAria": "用户数据表",
+      "empty": "暂无显示内容",
+      "colId": "客户ID",
+      "colImage": "头像",
+      "colName": "客户名称",
+      "colEmail": "电子邮件",
+      "colRole": "角色",
+      "colStatus": "账号状态",
+      "colActions": "操作",
+      "roleAdmin": "系统管理员",
+      "roleUser": "普通客户",
+      "statusEnable": "已启用",
+      "statusDisable": "账号已停用",
+      "dropdownAria": "用户管理菜单",
+      "editInfo": "编辑信息",
+      "deleteUser": "注销账号"
+    },
+    "BannerManager": {
+      "title": "横幅管理",
+      "noBanners": "暂无横幅",
+      "dropdownLabel": "横幅管理菜单",
+      "editBanner": "编辑横幅",
+      "removeBanner": "删除横幅",
+      "addBanner": "添加横幅"
+    },
+    "CategoryManager": {
+      "title": "管理产品类别",
+      "loading": "加载中...",
+      "noData": "暂无产品类别",
+      "editInfo": "编辑信息",
+      "removeCategory": "删除类别",
+      "cancel": "取消",
+      "addCategory": "添加类别"
+    },
+    "ImageManager": {
+      "title": "管理产品图片",
+      "loading": "加载中...",
+      "noData": "暂无产品图片",
+      "editInfo": "编辑信息",
+      "removeImage": "删除图片",
+      "cancel": "取消",
+      "addImage": "添加图片"
+    },
+    "ShippingCountryManager": {
+      "title": "管理运费",
+      "loading": "加载中...",
+      "noData": "暂无配送国家。",
+      "baseRate": "基础运费",
+      "pricePerKg": "每公斤价格",
+      "editInfo": "编辑信息",
+      "removeShipping": "删除配送设置",
+      "cancel": "取消",
+      "addShipping": "添加配送国家"
+    },
+    "VariantManager": {
+      "title": "管理产品规格",
+      "loading": "加载中...",
+      "noData": "暂无产品规格。",
+      "sku": "货号 (SKU)",
+      "price": "价格",
+      "priceNotSpecified": "(请指定价格)",
+      "stock": "库存",
+      "stockNotSpecified": "(请指定库存数量)",
+      "editInfo": "编辑信息",
+      "removeOption": "删除规格",
+      "cancel": "取消",
+      "addOption": "添加规格"
+    },
+    "Order": {
+      "table": {
+        "orderId": "订单编号",
+        "image": "图片",
+        "customerName": "客户姓名",
+        "orderDate": "下单日期",
+        "totalAmount": "总金额",
+        "status": "状态",
+        "trackingNumber": "物流单号",
+        "actions": "操作",
+        "empty": "暂无数据显示",
+        "loading": "加载中..."
+      },
+      "action": {
+        "status": "订单状态",
+        "details": "查看详情"
+      }
+    },
+    "ProductForm": {
+      "editTitle": "编辑产品",
+      "addTitle": "添加新产品",
+      "statusSection": "产品状态",
+      "basicSection": "基本信息",
+      "priceSection": "产品价格",
+      "stockSection": "库存管理",
+      "seoSection": "SEO 设置",
+      "fields": {
+        "isActive": "上架销售",
+        "isFeatured": "精选产品",
+        "isPremium": "高级产品",
+        "isAuthentic": "100% 正品",
+        "isDigital": "数字产品",
+        "isDemo": "演示版本",
+        "name": "产品名称",
+        "category": "产品类别",
+        "unit": "计量单位",
+        "sku": "SKU (产品代码)",
+        "barcode": "条形码",
+        "shortDesc": "简短描述",
+        "fullDesc": "详细产品描述",
+        "price": "销售价格",
+        "comparePrice": "折前价格",
+        "costPrice": "成本价 (内部)",
+        "stock": "库存数量",
+        "lowStock": "低库存警报",
+        "weight": "重量 (克)",
+        "autoSeo": "自动生成 SEO",
+        "slug": "别名 (Slug)",
+        "metaTitle": "元标题 (Meta Title)",
+        "metaDesc": "元描述 (Meta Description)"
+      }
+    },
+    "UserForm": {
+      "editTitle": "编辑用户",
+      "addTitle": "添加用户",
+      "imageChangedStatus": "图片文件已更改。",
+      "licenseHeading": "许可与权限",
+      "activeLabel": "激活账号",
+      "roleLabel": "账号状态",
+      "roleAdmin": "系统管理员",
+      "roleUser": "客户",
+      "infoHeading": "基本信息",
+      "urlLabel": "图片链接",
+      "nameLabel": "姓名",
+      "emailLabel": "电子邮件",
+      "passwordLabel": "密码",
+      "passwordChangeLabel": "修改密码"
+    },
+    "BannerForm": {
+      "addTitle": "添加横幅",
+      "editTitle": "编辑横幅",
+      "statusHeading": "横幅状态",
+      "activeLabel": "启用横幅",
+      "infoHeading": "基本信息",
+      "urlLabel": "图片链接",
+      "altLabel": "替换文本"
+    },
+    "manageBanners": "横幅管理",
+    "siteSettings": "网站设置",
+    "Stats": {
+      "allOrders": "订单总数",
+      "pendingOrders": "待处理订单",
+      "deliveredOrders": "已完成订单",
+      "paymentDelivered": "已付总额",
+      "paymentCancelled": "已取消金额",
+      "paymentPending": "待付款金额",
+      "allProducts": "产品总数",
+      "inStockProducts": "有现货",
+      "outOfStockProducts": "缺货",
+      "allUsers": "用户总数",
+      "activeUsers": "已启用用户",
+      "inactiveUsers": "已禁用用户"
+    }
+  }
+}

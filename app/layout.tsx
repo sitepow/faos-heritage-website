@@ -1,28 +1,16 @@
 import '@/styles/globals.css'
 
-import { SpeedInsights } from '@vercel/speed-insights/next'
+// import { Sarabun } from 'next/font/google'
+import { Anuphan } from 'next/font/google'
 
-import type { Metadata, Viewport } from 'next'
-import type { FC, PropsWithChildren } from 'react'
+import type { Viewport } from 'next'
+import type { PropsWithChildren } from 'react'
 
 import { HeroUIProviders } from '../providers/heroui'
 
-import { fontSukhumvit } from '@/config/fonts'
-import { siteConfig } from '@/config/site'
+// import { fontSukhumvit } from '@/config/fonts'
 import { NextAuthProviders } from '@/providers/nextauth'
-import QueryProviders from '@/providers/query'
-import { cn } from '@/utils/style'
-
-export const metadata: Metadata = {
-  title: {
-    default: `${siteConfig.name} - ${siteConfig.title}`,
-    template: `%s - ${siteConfig.name} - ${siteConfig.title}`,
-  },
-  description: siteConfig.description,
-  icons: {
-    icon: '/favicon.ico',
-  },
-}
+import { QueryProviders } from '@/providers/query'
 
 export const viewport: Viewport = {
   themeColor: [
@@ -31,22 +19,36 @@ export const viewport: Viewport = {
   ],
 }
 
-const RootLayout: FC<PropsWithChildren> = ({ children }) => {
+// const sarabun = Sarabun({
+//   subsets: ['latin'],
+//   weight: ['400', '700'],
+// })
+
+const anuphan = Anuphan({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+})
+
+export default function RootLayout({ children }: PropsWithChildren) {
   return (
-    <html suppressHydrationWarning lang='en'>
+    <html suppressHydrationWarning>
       <head />
       <body
-        className={cn(
-          'min-h-screen bg-background font-sans text-foreground antialiased',
-          fontSukhumvit.variable,
-        )}
+        // className={cn(
+        //   'bg-background text-foreground min-h-screen font-sans antialiased',
+        //   fontSukhumvit.variable,
+        // )}
+        className={`bg-background text-foreground min-h-screen font-sans antialiased ${anuphan.className}`}
       >
         <QueryProviders>
           <NextAuthProviders>
             <HeroUIProviders
-              themeProps={{ attribute: 'class', defaultTheme: 'dark' }}
+              themeProps={{
+                attribute: 'class',
+                defaultTheme: 'system',
+                enableSystem: true,
+              }}
             >
-              <SpeedInsights />
               {children}
             </HeroUIProviders>
           </NextAuthProviders>
@@ -55,5 +57,3 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
     </html>
   )
 }
-
-export default RootLayout

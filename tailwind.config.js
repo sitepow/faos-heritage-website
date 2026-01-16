@@ -1,6 +1,7 @@
-import { heroui } from '@heroui/theme'
+import { heroui } from '@heroui/react'
 
 /** @type {import('tailwindcss').Config} */
+
 const config = {
   content: [
     './components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -12,10 +13,71 @@ const config = {
       fontFamily: {
         sans: ['var(--font-sukhumvit)'],
       },
+      typography: () => ({
+        DEFAULT: {
+          css: {
+            color: 'hsl(var(--heroui-default-700))',
+
+            table: {
+              width: '100%',
+              tableLayout: 'fixed',
+              borderCollapse: 'separate',
+              borderSpacing: 0,
+              border: '1px solid hsl(var(--heroui-default-300))',
+              borderRadius: '12px',
+              overflow: 'hidden',
+            },
+
+            thead: {
+              backgroundColor: 'hsl(var(--heroui-default-100))',
+            },
+
+            th: {
+              padding: '0.75rem 1rem',
+              fontWeight: '600',
+              textAlign: 'left',
+              color: 'hsl(var(--heroui-default-900))',
+              borderRight: '1px solid hsl(var(--heroui-default-300))',
+              borderBottom: '1px solid hsl(var(--heroui-default-300))',
+            },
+
+            td: {
+              padding: '0.75rem 1rem',
+              borderRight: '1px solid hsl(var(--heroui-default-300))',
+              borderBottom: '1px solid hsl(var(--heroui-default-300))',
+            },
+
+            'th:last-child, td:last-child': {
+              borderRight: '0',
+            },
+            'tbody tr:last-child td': {
+              borderBottom: '0',
+            },
+          },
+        },
+      }),
     },
   },
   darkMode: 'class',
-  plugins: [heroui()],
+  plugins: [
+    heroui({
+      themes: {
+        light: {
+          colors: {
+            primary: '#ba8c25',
+            secondary: '#ffffff',
+          },
+        },
+        dark: {
+          colors: {
+            primary: '#ba8c25',
+            secondary: '#ffffff',
+          },
+        },
+      },
+    }),
+    require('@tailwindcss/typography'),
+  ],
 }
 
 module.exports = config

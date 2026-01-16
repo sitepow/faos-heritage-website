@@ -1,0 +1,666 @@
+{
+  "Localization": {
+    "country": "Negara",
+    "currency": "Mata Wang"
+  },
+  "ProductUnit": {
+    "PIECE": "Unit",
+    "ITEM": "Item",
+    "SET": "Set",
+    "BOX": "Kotak",
+    "PACK": "Pek",
+    "BAG": "Beg",
+    "BOTTLE": "Botol",
+    "CAN": "Tin",
+    "KG": "Kilogram",
+    "G": "Gram",
+    "L": "Liter",
+    "ML": "Mililiter",
+    "PAIR": "Pasang",
+    "ROLL": "Gulungan",
+    "SHEET": "Helaian",
+    "UNIT": "Unit",
+    "CAR": "Kereta",
+    "HOUSE": "Rumah"
+  },
+  "Site": {
+    "name": "FAOS",
+    "title": "Minyak Zaitun & Madu Organik Premium — 100% Tulen & Semulajadi",
+    "description": "Destinasi utama anda untuk minyak zaitun dan madu organik berkualiti tinggi, dipilih khas untuk gaya hidup sihat anda."
+  },
+  "CancelPage": {
+    "title": "Pembayaran Dibatalkan",
+    "description": "Pembayaran anda belum selesai atau telah dibatalkan sebelum tamat. Anda belum dikenakan bayaran.",
+    "referenceText": "Pesanan ini mempunyai nombor rujukan berikut:",
+    "contactText": "Untuk membuat pesanan baharu, anda boleh kembali dan mulakan semula proses, atau gunakan nombor ini untuk menghubungi khidmat pelanggan."
+  },
+  "SuccessPage": {
+    "title": "Pembayaran Berjaya",
+    "description": "Terima kasih atas pesanan anda. Pembayaran anda telah disahkan.",
+    "referenceText": "Pesanan ini mempunyai nombor rujukan berikut",
+    "contactText": "Sila simpan nombor pesanan ini untuk semakan status kemudian atau untuk menghubungi khidmat pelanggan."
+  },
+  "Common": {
+    "theme": {
+      "light": "Terang",
+      "dark": "Gelap",
+      "system": "Sistem"
+    },
+    "save": "Simpan",
+    "cancel": "Batal",
+    "loading": "Memuatkan...",
+    "saving": "Menyimpan...",
+    "close": "Tutup",
+    "Breadcrumb": { "home": "Laman Utama", "products": "Semua Produk" },
+    "ImageDropzone": {
+      "active": "Letakkan imej di sini...",
+      "idle": "Seret dan lepas imej di sini",
+      "hint": "Atau klik untuk pilih fail (sistem akan saiz semula secara automatik untuk prestasi lebih baik)",
+      "limit": "Menyokong muat naik fail sehingga {size}"
+    }
+  },
+  "OrderStatus": {
+    "PENDING": "Menunggu Pembayaran",
+    "PAID": "Telah Dibayar",
+    "PROCESSING": "Sedang Diproses",
+    "SHIPPED": "Telah Dihantar",
+    "DELIVERED": "Telah Diterima",
+    "CANCELLED": "Dibatalkan",
+    "REFUNDED": "Dibayar Balik"
+  },
+  "Account": {
+    "OrderCancel": {
+      "title": "Batal Pesanan",
+      "loading": "Memuatkan...",
+      "reasonLabel": "Sebab",
+      "placeholder": "Sila masukkan sebab pembatalan atau pemulangan wang.",
+      "back": "Kembali",
+      "confirm": "Sahkan Pembatalan",
+      "submitting": "Sedang diproses..."
+    },
+    "OrderView": {
+      "title": "Butiran Pesanan",
+      "orderId": "ID Pesanan",
+      "loading": "Memuatkan...",
+      "shippingAddress": "Alamat Penghantaran",
+      "logistics": "Maklumat Logistik",
+      "trackingNo": "No. Penjejakan",
+      "preparing": "Sedang disediakan",
+      "productList": "Ringkasan Produk",
+      "subtotal": "Jumlah Kecil Produk",
+      "shippingFee": "Kos Penghantaran",
+      "totalAmount": "Jumlah Pesanan",
+      "cancelNote": "Sebab Pembatalan",
+      "close": "Tutup"
+    },
+    "Orders": {
+      "title": "Pesanan Saya",
+      "emptyState": "Anda chưa mempunyai sebarang pesanan.",
+      "exploreLink": "Teroka semua produk.",
+      "paymentAlert": "Sila lengkapkan pembayaran dalam masa 20 minit. Jika tidak, pesanan anda akan dibatalkan secara automatik.",
+      "orderNumber": "No. Pesanan",
+      "items": "item",
+      "orderDate": "Tarikh pesanan",
+      "trackingNumber": "No. penjejakan",
+      "buttons": {
+        "details": "Butiran pesanan",
+        "cancel": "Batal pesanan",
+        "payNow": "Bayar sekarang",
+        "downloadReceipt": "Muat turun resit"
+      }
+    },
+    "Address": {
+      "manageTitle": "Urus alamat saya",
+      "addButton": "Tambah alamat penghantaran",
+      "noAddressAlert": "Anda belum mempunyai alamat penghantaran. Sila tambah alamat anda sebelum meneruskan pesanan.",
+      "noDefaultAlert": "Sila pilih alamat penghantaran lalai sebelum meneruskan pesanan.",
+      "defaultTag": "Lalai",
+      "editAddress": "Sunting Alamat",
+      "removeAddress": "Buang Alamat"
+    },
+    "AddressForm": {
+      "addTitle": "Tambah Alamat Penghantaran",
+      "editTitle": "Sunting Alamat Penghantaran",
+      "loading": "Memuatkan...",
+      "alertDescription": "Sila pastikan alamat anda betul untuk mengelakkan masalah penghantaran.",
+      "sections": { "status": "Status Alamat", "basic": "Maklumat Asas" },
+      "fields": {
+        "enableAddress": "Aktifkan alamat ini",
+        "fullName": "Nama Penuh",
+        "phone": "Nombor Telefon",
+        "street": "Alamat Jalan",
+        "subDistrict": "Sub-daerah / Mukim",
+        "district": "Daerah",
+        "province": "Negeri",
+        "postalCode": "Poskod",
+        "country": "Negara"
+      },
+      "buttons": {
+        "cancel": "Batal",
+        "save": "Simpan",
+        "saving": "Menyimpan..."
+      },
+      "errors": {
+        "name": "Sila masukkan nama",
+        "phone": "Sila masukkan no. telefon",
+        "address": "Sila masukkan alamat",
+        "subDistrict": "Sila masukkan mukim",
+        "district": "Sila masukkan daerah",
+        "province": "Sila masukkan negeri",
+        "postalCode": "Sila masukkan poskod",
+        "country": "Sila pilih negara"
+      }
+    },
+    "welcome": "Akaun anda {name}",
+    "tabs": {
+      "manage": "Urus akaun saya",
+      "orders": "Pesanan saya",
+      "favorites": "Kegemaran",
+      "editProfile": "Edit maklumat peribadi",
+      "editAddress": "Sunting alamat penghantaran",
+      "address": "Urus alamat saya"
+    },
+    "personalInfo": "Maklumat Peribadi",
+    "basicInfo": "Maklumat asas",
+    "imageChanged": "Terdapat perubahan pada fail imej.",
+    "fields": {
+      "imageUrl": "URL Imej",
+      "name": "Nama - Nama Keluarga",
+      "email": "E-mel",
+      "role": "Lesen",
+      "productId": "ID Produk"
+    },
+    "buttons": {
+      "removeFavorite": "Alih Keluar Kegemaran",
+      "save": "Simpan",
+      "saving": "Menyimpan...",
+      "cancel": "Batal"
+    },
+    "modals": {
+      "removeFavorite": {
+        "title": "Sahkan Pembuangan",
+        "description": "Adakah anda pasti ingin membuang item ini daripada kegemaran anda?"
+      }
+    },
+    "roles": {
+      "admin": "Administrator sistem",
+      "customer": "Pelanggan"
+    },
+    "favoritesEmpty": "Anda belum mempunyai sebarang barangan dalam senarai kegemaran. <br/> <link>Lihat semua produk</link>"
+  },
+  "Products": {
+    "categoryTitle": "Kategori {name}",
+    "title": "Semua Produk",
+    "loading": "Memuatkan...",
+    "notFound": "Maaf, produk tidak ditemui. Sila cuba cari semula di halaman utama.",
+    "breadcrumbs": {
+      "home": "Laman Utama",
+      "products": "Semua Produk"
+    },
+    "pagination": "Menunjukkan 1–{count} daripada {total} barangan",
+    "sortLabel": "Susun mengikut",
+    "sortItems": {
+      "newest": "Terbaharu",
+      "oldest": "Terlama",
+      "price_low": "Harga Rendah ke Tinggi",
+      "price_high": "Harga Tinggi ke Rendah",
+      "stock_low": "Stok Rendah ke Tinggi",
+      "stock_high": "Stok Tinggi ke Rendah"
+    }
+  },
+  "Auth": {
+    "headerTitle": "Log masuk atau daftar",
+    "headerDesc": "Untuk mengakses laman web <link>{siteName}</link>",
+    "loginTab": "Log masuk",
+    "registerTab": "Daftar",
+    "emailLabel": "E-mel",
+    "passwordLabel": "Kata laluan",
+    "confirmPasswordLabel": "Sahkan kata laluan",
+    "nameLabel": "Nama",
+    "loginBtn": "Log masuk",
+    "registerBtn": "Daftar",
+    "socialDivider": "Atau teruskan seperti berikut"
+  },
+  "Cart": {
+    "Checkout": {
+      "title": "Alamat Penghantaran",
+      "currencyAlert": "Anda akan membuat pesanan dalam mata wang pilihan. Sila semak harga dengan teliti sebelum meneruskan.",
+      "editAddress": "Kemas kini alamat",
+      "paymentDetails": "Butiran Pembayaran",
+      "totalPrice": "Jumlah harga",
+      "shippingCost": "Kos penghantaran",
+      "discount": "Diskaun",
+      "netTotal": "Jumlah bersih",
+      "noAddressAlert": "Sila tambah alamat sebelum membuat pesanan",
+      "addAddress": "Tambah alamat",
+      "proceedBtn": "Teruskan ke pembayaran"
+    },
+    "Item": {
+      "productId": "ID Produk",
+      "price": "Harga",
+      "remaining": "Baki",
+      "qtyLabel": "Kuantiti",
+      "optionsLabel": "Pilihan produk",
+      "optionsPlaceholder": "Pilih pilihan"
+    },
+    "List": {
+      "header": "Senarai Produk",
+      "emptyCart": "Troli anda kosong. Sila layari laman utama untuk menambah produk ke dalam troli."
+    },
+    "Page": {
+      "title": "Troli anda {count, plural, =0 {} other {(# barangan)}}",
+      "cartId": "ID Troli",
+      "clearBtn": "Kosongkan troli"
+    },
+    "Messages": {
+      "confirmDeleteTitle": "Buang barangan?",
+      "confirmDeleteDesc": "Adakah anda pasti ingin membuang barangan ini daripada troli anda?",
+      "confirmClearTitle": "Kosongkan seluruh troli?",
+      "confirmClearDesc": "Ini akan membuang semua barangan daripada troli anda. Tindakan ini tidak boleh dibatalkan.",
+      "orderCreated": "Pesanan anda telah berjaya dibuat. Sila semak dan teruskan dengan pembayaran.",
+      "confirmOrderTitle": "Adakah anda ingin membuat pesanan?",
+      "confirmOrderDesc": "Sila sahkan ketepatan senarai produk dan alamat penghantaran anda. Jika semuanya betul, anda boleh teruskan dengan pesanan anda dengan segera."
+    }
+  },
+  "About": {
+    "title": "Mengenai FAOS - Warisan Ketulenan Kami",
+    "description": "FAOS menawarkan minyak zaitun dan madu organik premium yang dihasilkan daripada 100% bahan semula jadi. Brosur ini membentangkan rangkaian produk dan standard kualiti kami.",
+    "philosophy": "Falsafah kami berakar umbi dalam keharmonian antara alam semula jadi dan kesihatan.",
+    "quality": "Kami mematuhi standard organik antarabangsa yang tertinggi.",
+    "origin": "Diambil dari tanah yang subur, produk kami melambangkan warisan pertanian organik yang kaya."
+  },
+  "Privacy": {
+    "title": "Dasar Privasi",
+    "content": "FAOS komited sepenuhnya dalam melindungi <important>privasi</important> dan <important>data peribadi</important> semua pengguna. Segala maklumat berkaitan individu akan dikendalikan sebagai maklumat <important>sulit</important> dan disimpan dengan <important>cara yang selamat</important>. Ini termasuk nama, maklumat hubungan, dan <important>data transaksi</important>. FAOS melaksanakan <important>langkah keselamatan teknikal dan organisasi</important> yang sewajarnya untuk menghalang <important>akses tanpa kebenaran, pendedahan, pengubahan, atau pemusnahan</important> data. Maklumat peribadi dikumpul dan diproses hanya untuk <important>tujuan perniagaan yang sah</important> serta selaras dengan <important>undang-undang perlindungan data</important> yang berkuat kuasa. Data peribadi tidak akan didedahkan kepada <important>pihak ketiga</important> tanpa <important>keizinan terlebih dahulu</important>, kecuali dikehendaki oleh undang-undang."
+  },
+  "Payment": {
+    "Header": {
+      "title": "Kaedah Pembayaran & Keselamatan",
+      "description": "Kami menawarkan pelbagai pilihan pembayaran yang selamat และ mudah untuk memastikan pengalaman membeli-belah yang lancar bagi semua pelanggan kami."
+    },
+    "HowToShop": {
+      "title": "Cara Memulakan Pembelian",
+      "ariaLabel": "Panduan langkah demi langkah tentang cara membeli produk",
+      "step1": "1. Lihat koleksi premium kami, pilih item yang anda inginkan, dan klik <important>“Tambah ke Troli”</important> untuk menyimpannya ke dalam beg beli-belah anda.",
+      "step2": "2. Akses troli anda melalui ikon di sudut kanan atas untuk menyemak barangan terpilih, melaraskan kuantiti, atau mengeluarkan produk jika perlu.",
+      "step3": "3. Setelah anda berpuas hati dengan pilihan tersebut, klik <important>“Buat Pesanan”</important> untuk meneruskan ke sistem pembayaran yang selamat.",
+      "step4": "4. Anda akan dibawa secara selamat ke rakan pembayaran kami, Stripe, di mana anda boleh memasukkan butiran pembayaran และ menyelesaikan pembelian anda dengan selamat."
+    },
+    "CardPayment": {
+      "title": "Bayar melalui Kad Debit / Kredit",
+      "ariaLabel": "Arahan untuk pembayaran menggunakan kad debit atau kredit",
+      "description": "Kami menyokong pelbagai rangkaian pembayaran global. Anda boleh membayar dengan selamat menggunakan kad debit atau kredit daripada semua bank utama di seluruh dunia.",
+      "acceptedCards": "Kami menerima kad dengan logo <important>Visa, Mastercard, atau JCB</important>, termasuk kad maya (virtual card) dan kad kredit antarabangsa untuk kemudahan anda.",
+      "securityNote": "Setiap transaksi anda disulitkan (encrypted) และ dilindungi oleh teknologi terkemuka industri daripada Stripe."
+    },
+    "QRCodePayment": {
+      "title": "Bayar dengan Kod QR (Perbankan Mudah Alih)",
+      "ariaLabel": "Arahan untuk pembayaran menggunakan Kod QR",
+      "description": "Untuk proses pembayaran yang lebih pantas, anda boleh membayar serta-merta melalui Kod QR. Kaedah ini amat disyorkan untuk kemudahan anda.",
+      "method": "Hanya imbas <important>Kod QR PromptPay</important> melalui aplikasi perbankan mudah alih anda. Perkhidmatan ini disokong oleh semua bank utama tanpa sebarang yuran transaksi tambahan.",
+      "expiryNote": "* Sila pastikan pembayaran diselesaikan dalam tempoh masa yang ditetapkan pada halaman pembayaran."
+    }
+  },
+  "ProductChip": {
+    "authentic": "100% Tulen",
+    "premium": "Premium",
+    "demo": "Versi Demo",
+    "digital": "Produk Digital",
+    "uncategorized": "Lain-lain"
+  },
+  "ProductTab": {
+    "description": "Butiran Produk",
+    "review": "Ulasan Pelanggan"
+  },
+  "ProductCart": {
+    "quantity": "Kuantiti",
+    "productOptions": "Pilihan Produk",
+    "addToFavorites": "Tambah ke Kegemaran",
+    "addToCart": "Tambah ke Troli",
+    "pleaseLoginFirst": "Sila log masuk untuk {action}",
+    "outOfStock": "Stok Habis",
+    "quantityExceedsStock": "Kuantiti melebihi stok sedia ada",
+    "share": "Kongsi Produk"
+  },
+  "Navbar": {
+    "Header": "Minyak zaitun dan madu organik terbaik, demi gaya hidup sihat yang abadi",
+    "Menu": {
+      "home": "Laman Utama",
+      "products": "Semua Produk",
+      "payments": "Cara Pembayaran",
+      "about": "Tentang Kami",
+      "dashboard": "Papan Pemuka",
+      "users": "Pengurusan Pengguna",
+      "orders": "Pengurusan Pesanan"
+    },
+    "Panel": {
+      "account": "Akaun Saya",
+      "orders": "Pembelian Saya",
+      "favorites": "Kegemaran Saya",
+      "adminDashboard": "Panel Admin",
+      "logout": "Log Keluar"
+    }
+  },
+  "Meta": {
+    "ProductDetail": {
+      "title": "{name}",
+      "defaultDescription": "Beli {name} daripada FAOS. Minyak zaitun dan madu organik berkualiti tinggi.",
+      "notFound": "Produk Tidak Ditemui"
+    },
+    "Privacy": {
+      "title": "Dasar Privasi",
+      "description": "Baca Dasar Privasi FAOS untuk memahami cara kami mengumpul, menggunakan và melindungi maklumat peribadi anda dengan selamat.",
+      "keywords": [
+        "dasar privasi",
+        "perlindungan data",
+        "maklumat peribadi",
+        "FAOS privacy",
+        "privasi pengguna"
+      ],
+      "ogTitle": "Dasar Privasi FAOS",
+      "ogDescription": "Ketahui cara FAOS mengumpul, menggunakan và melindungi data peribadi anda."
+    },
+    "About": {
+      "title": "Kisah & Produk Kami",
+      "description": "Ketahui lebih lanjut tentang minyak zaitun & madu organik premium FAOS. Lihat brosur produk rasmi dan kisah jenama kami.",
+      "keywords": [
+        "FAOS",
+        "minyak zaitun organik",
+        "madu organik",
+        "brosur produk",
+        "kisah jenama"
+      ],
+      "ogTitle": "Mengenai FAOS - Produk Organik Premium",
+      "ogDescription": "Minyak zaitun & madu organik tulen. Lihat maklumat jenama kami di sini."
+    },
+    "Payment": {
+      "title": "Kaedah Pembayaran",
+      "description": "Ketahui kaedah pembayaran FAOS termasuk kad kredit dan kod QR PromptPay. Pembayaran selamat dikuasakan oleh Stripe.",
+      "keywords": [
+        "pembayaran FAOS",
+        "bayaran kad kredit",
+        "PromptPay",
+        "pembayaran selamat",
+        "Stripe"
+      ],
+      "ogTitle": "Kaedah Pembayaran Selamat di FAOS",
+      "ogDescription": "Kaedah pembayaran selamat termasuk kad kredit dan kod QR PromptPay."
+    },
+    "Category": {
+      "title": "{categoryName} | Pilihan Premium FAOS",
+      "description": "Lihat semua produk {categoryName} daripada FAOS. Kualiti premium, semula jadi, dan barangan yang dipilih dengan teliti."
+    },
+    "Products": {
+      "title": "Semua Produk",
+      "description": "Lihat pilihan produk organik premium FAOS. Temui minyak zaitun tulen dan madu asli 100% yang dipilih khas untuk kesihatan anda.",
+      "keywords": [
+        "minyak zaitun organik",
+        "madu asli",
+        "produk kesihatan",
+        "produk FAOS",
+        "makanan premium"
+      ],
+      "ogTitle": "Lihat Semua Produk Premium FAOS",
+      "ogDescription": "Terokai koleksi minyak zaitun organik dan madu asli berkualiti tinggi kami."
+    },
+    "Home": {
+      "title": "Laman Utama",
+      "description": "Minyak zaitun dan madu organik premium 100% semulajadi, dipilih dengan teliti untuk kesejahteraan anda.",
+      "keywords": [
+        "FAOS",
+        "minyak zaitun organik",
+        "madu tulen",
+        "madu organik",
+        "makanan sihat"
+      ],
+      "ogTitle": "FAOS - Minyak Zaitun & Madu Organik Premium",
+      "ogDescription": "Produk semulajadi 100% tulen dipilih untuk kesihatan และ gaya hidup anda."
+    }
+  },
+  "Banner": {
+    "marketplace": {
+      "title": "Satu lagi pencapaian... Kami kini boleh didapati di gedung membeli-belah terkemuka dan platform dalam talian.",
+      "description": "(Alami produk kami hari ini di cawangan berhampiran anda! Satu lagi kemudahan untuk anda.)"
+    },
+    "customer": "Laman web kami direka untuk menyokong pelanggan di pasaran sasaran di Asia, Eropah dan Amerika <link>bagi memberikan anda pengalaman pembelian yang mudah dan pantas</link>",
+    "certificate": "Yakin dengan kualiti melalui piawaian antarabangsa yang kami periksa dengan teliti <link>kerana keselamatan anda adalah keutamaan kami</link> dalam setiap langkah pengeluaran",
+    "advertise": {
+      "title": "Kenali dunia Minyak Zaitun Extra Virgin: Manfaat semula jadi dan fakta untuk kesihatan anda",
+      "messages": [
+        "Minyak Zaitun Extra Virgin (EVOO) adalah minyak kualiti tertinggi, dihasilkan melalui proses teliti yang mengutamakan kualiti berbanding kuantiti.",
+        "Kaya dengan polifenol yang mempunyai sifat antioksidan dan anti-radang, melindungi minyak daripada pengoksidaan serta mengekalkan rasa dan nilai pemakanan.",
+        "Mengandungi Oleocanthal yang berfungsi sama seperti ibuprofen, membantu mengawal aktiviti sel dalam sel yang radang dan mengurangkan bengkak di seluruh badan.",
+        "Membantu mengimbangi tahap kolesterol dan trigliserida serta mengurangkan pengoksidaan LDL untuk kesihatan jantung dan kardiovaskular yang lebih baik.",
+        "Sebatian polifenol membantu meningkatkan kesihatan mental dan mencegah penyakit neurodegeneratif seperti Alzheimer dan demensia.",
+        "Meningkatkan kecekapan insulin dalam mengekalkan tahap gula darah yang seimbang dan memainkan peranan penting dalam melegakan simptom sindrom metabolik (MS).",
+        "Mengandungi 'sitosterol' yang membantu mengawal penyerapan kolesterol, menguatkan sistem pencernaan dan memberikan kelegaan yang dipercayai untuk sembelit.",
+        "Dihasilkan daripada varieti zaitun purba yang unik seperti Athenolia dan Koroneiki, yang mempunyai tahap polifenol dan antioksidan yang sangat tinggi.",
+        "Menggunakan teknik perahan sejuk tradisional dengan kaedah mekanikal sahaja; tanpa penapisan, tanpa pelunturan, dan tanpa bahan kimia untuk mengekalkan ketulenan tertinggi.",
+        "Polifenol berfungsi dengan mengurangkan kerosakan radikal bebas, menguatkan jantung, dan meningkatkan tahap tenaga, menjadikannya pilihan sempurna untuk meningkatkan prestasi sukan secara semula jadi."
+      ]
+    }
+  },
+  "Section": {
+    "Header": {
+      "title": "Cari Produk yang Sesuai Untuk Anda",
+      "description": "Terokai produk berkualiti yang disesuaikan dengan gaya hidup unik anda."
+    },
+    "similar": "Produk Serupa"
+  },
+  "CategoryCarousel": {
+    "title": "Beli mengikut Kategori",
+    "explore": "Lihat Semua Produk",
+    "empty": {
+      "title": "Tiada produk tersedia dalam kategori ini",
+      "description": "Sila cuba pilih kategori lain atau semak semula kemudian."
+    }
+  },
+  "Footer": {
+    "copyright": "© {year} {name} - {title}",
+    "Menu": {
+      "privacy": "Dasar Privasi"
+    }
+  },
+  "Country": {
+    "TH": "Thailand",
+    "US": "Amerika Syarikat",
+    "GR": "Greece",
+    "IT": "Itali",
+    "NL": "Belanda",
+    "MY": "Malaysia",
+    "SG": "Singapura",
+    "JP": "Jepun",
+    "CN": "China",
+    "IS": "Iceland",
+    "VN": "Vietnam",
+    "ID": "Indonesia"
+  },
+  "Dashboard": {
+    "ProductManager": {
+      "addNew": "Tambah produk baru",
+      "manageCategories": "Urus kategori produk",
+      "manageShipping": "Urus kos penghantaran",
+      "deleteSelected": "Padam item terpilih ({count})",
+      "tableAria": "Jadual data produk",
+      "empty": "Tiada maklumat untuk dipaparkan",
+      "colId": "ID Produk",
+      "colDigital": "Produk Digital",
+      "colImage": "Imej",
+      "colName": "Nama Produk",
+      "colPrice": "Harga Utama",
+      "colStock": "Stok Utama",
+      "colCategory": "Kategori",
+      "colActions": "Tindakan",
+      "digitalProduct": "Produk digital",
+      "dropdownAria": "Menu urus produk",
+      "editInfo": "Edit maklumat",
+      "manageImages": "Urus imej",
+      "manageOptions": "Urus pilihan",
+      "removeProduct": "Padam produk"
+    },
+    "UserManager": {
+      "addNew": "Tambah Pengguna Baru",
+      "deleteSelected": "Padam item terpilih ({count})",
+      "tableAria": "Jadual data pengguna",
+      "empty": "Tiada maklumat untuk dipaparkan",
+      "colId": "ID Pelanggan",
+      "colImage": "Imej",
+      "colName": "Nama Pelanggan",
+      "colEmail": "Emel",
+      "colRole": "Peranan",
+      "colStatus": "Status Akaun",
+      "colActions": "Tindakan",
+      "roleAdmin": "Administrator Sistem",
+      "roleUser": "Pelanggan",
+      "statusEnable": "Aktif",
+      "statusDisable": "Akaun digantung",
+      "dropdownAria": "Menu urus pengguna",
+      "editInfo": "Edit maklumat",
+      "deleteUser": "Tutup akaun"
+    },
+    "BannerManager": {
+      "title": "Pengurusan Sepanduk",
+      "noBanners": "Tiada sepanduk setakat ini",
+      "dropdownLabel": "Menu pengurusan sepanduk",
+      "editBanner": "Edit sepanduk",
+      "removeBanner": "Padam sepanduk",
+      "addBanner": "Tambah sepanduk"
+    },
+    "CategoryManager": {
+      "title": "Urus Kategori Produk",
+      "loading": "Memuatkan...",
+      "noData": "Belum ada kategori produk",
+      "editInfo": "Edit maklumat",
+      "removeCategory": "Padam kategori",
+      "cancel": "Batal",
+      "addCategory": "Tambah kategori"
+    },
+    "ImageManager": {
+      "title": "Urus Imej Produk",
+      "loading": "Memuatkan...",
+      "noData": "Belum ada imej produk",
+      "editInfo": "Edit maklumat",
+      "removeImage": "Padam imej",
+      "cancel": "Batal",
+      "addImage": "Tambah imej"
+    },
+    "ShippingCountryManager": {
+      "title": "Urus kos penghantaran",
+      "loading": "Memuatkan...",
+      "noData": "Belum ada negara penghantaran.",
+      "baseRate": "Kadar Asas",
+      "pricePerKg": "Harga / kg",
+      "editInfo": "Edit maklumat",
+      "removeShipping": "Padam penghantaran",
+      "cancel": "Batal",
+      "addShipping": "Tambah negara penghantaran"
+    },
+    "VariantManager": {
+      "title": "Urus pilihan produk",
+      "loading": "Memuatkan...",
+      "noData": "Belum ada pilihan produk.",
+      "sku": "SKU",
+      "price": "Harga",
+      "priceNotSpecified": "(Sila nyatakan harga)",
+      "stock": "Stok",
+      "stockNotSpecified": "(Sila nyatakan ketersediaan stok)",
+      "editInfo": "Edit maklumat",
+      "removeOption": "Padam pilihan",
+      "cancel": "Batal",
+      "addOption": "Tambah pilihan"
+    },
+    "Order": {
+      "table": {
+        "orderId": "ID Pesanan",
+        "image": "Imej",
+        "customerName": "Nama Pelanggan",
+        "orderDate": "Tarikh Pesanan",
+        "totalAmount": "Jumlah Keseluruhan",
+        "status": "Status",
+        "trackingNumber": "Nombor Tracking",
+        "actions": "Tindakan",
+        "empty": "Tiada maklumat untuk dipaparkan",
+        "loading": "Memuatkan..."
+      },
+      "action": {
+        "status": "Status pesanan",
+        "details": "Lihat butiran"
+      }
+    },
+    "ProductForm": {
+      "editTitle": "Edit Produk",
+      "addTitle": "Tambah Produk Baru",
+      "statusSection": "Status Produk",
+      "basicSection": "Maklumat Asas",
+      "priceSection": "Harga Produk",
+      "stockSection": "Stok & Inventori",
+      "seoSection": "Tetapan SEO",
+      "fields": {
+        "isActive": "Tersedia untuk jualan",
+        "isFeatured": "Produk pilihan",
+        "isPremium": "Produk Premium",
+        "isAuthentic": "100% Tulen",
+        "isDigital": "Produk Digital",
+        "isDemo": "Versi Demo",
+        "name": "Nama Produk",
+        "category": "Kategori Produk",
+        "unit": "Unit ukuran",
+        "sku": "SKU (Kod Produk)",
+        "barcode": "Kod Bar",
+        "shortDesc": "Penerangan Ringkas",
+        "fullDesc": "Penerangan Penuh Produk",
+        "price": "Harga Jualan",
+        "comparePrice": "Harga sebelum diskaun",
+        "costPrice": "Harga kos (dalaman)",
+        "stock": "Kuantiti dalam stok",
+        "lowStock": "Amaran stok rendah",
+        "weight": "Berat (gram)",
+        "autoSeo": "Janakan SEO secara automatik",
+        "slug": "Slug",
+        "metaTitle": "Tajuk Meta",
+        "metaDesc": "Penerangan Meta"
+      }
+    },
+    "UserForm": {
+      "editTitle": "Edit Pengguna",
+      "addTitle": "Tambah Pengguna",
+      "imageChangedStatus": "Terdapat perubahan pada fail imej.",
+      "licenseHeading": "Lesen",
+      "activeLabel": "Aktifkan akaun",
+      "roleLabel": "Status akaun",
+      "roleAdmin": "Administrator sistem",
+      "roleUser": "Pelanggan",
+      "infoHeading": "Maklumat asas",
+      "urlLabel": "URL Imej",
+      "nameLabel": "Nama",
+      "emailLabel": "Emel",
+      "passwordLabel": "Kata laluan",
+      "passwordChangeLabel": "Tukar kata laluan"
+    },
+    "BannerForm": {
+      "addTitle": "Tambah Sepanduk",
+      "editTitle": "Edit Sepanduk",
+      "statusHeading": "Status Sepanduk",
+      "activeLabel": "Aktifkan Sepanduk",
+      "infoHeading": "Maklumat Asas",
+      "urlLabel": "URL Imej",
+      "altLabel": "Teks Alt"
+    },
+    "manageBanners": "Urus Sepanduk",
+    "siteSettings": "Tetapan Laman Web",
+    "Stats": {
+      "allOrders": "Jumlah Pesanan",
+      "pendingOrders": "Pesanan Belum Selesai",
+      "deliveredOrders": "Pesanan Dihantar",
+      "paymentDelivered": "Jumlah Bayaran Sah",
+      "paymentCancelled": "Jumlah Dibatalkan",
+      "paymentPending": "Menunggu Bayaran",
+      "allProducts": "Jumlah Produk",
+      "inStockProducts": "Produk Dalam Stok",
+      "outOfStockProducts": "Stok Habis",
+      "allUsers": "Jumlah Pengguna",
+      "activeUsers": "Pengguna Aktif",
+      "inactiveUsers": "Pengguna Tidak Aktif"
+    }
+  }
+}

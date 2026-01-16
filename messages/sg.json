@@ -1,0 +1,666 @@
+{
+  "Localization": {
+    "country": "Country",
+    "currency": "Currency"
+  },
+  "ProductUnit": {
+    "PIECE": "Piece",
+    "ITEM": "Item",
+    "SET": "Set",
+    "BOX": "Box",
+    "PACK": "Pack",
+    "BAG": "Bag",
+    "BOTTLE": "Bottle",
+    "CAN": "Can",
+    "KG": "Kilogram",
+    "G": "Gram",
+    "L": "Liter",
+    "ML": "Milliliter",
+    "PAIR": "Pair",
+    "ROLL": "Roll",
+    "SHEET": "Sheet",
+    "UNIT": "Unit",
+    "CAR": "Car",
+    "HOUSE": "House"
+  },
+  "Site": {
+    "name": "FAOS",
+    "title": "Premium Organic Olive Oil & Honey — 100% Pure & Natural",
+    "description": "Your premier destination for high-quality organic olive oil and honey, curated for your healthy lifestyle."
+  },
+  "CancelPage": {
+    "title": "Payment Canceled",
+    "description": "Your payment has not been completed or has been canceled before completion. You have not been charged.",
+    "referenceText": "This order has the following reference number:",
+    "contactText": "To place a new order, you can go back and start the process again, or use this number to contact customer service."
+  },
+  "SuccessPage": {
+    "title": "Payment successful",
+    "description": "Thank you for your order. Your payment has been verified and confirmed.",
+    "referenceText": "This order has the following reference number",
+    "contactText": "Please keep this order number for later status checks or to contact customer service."
+  },
+  "Common": {
+    "theme": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    },
+    "save": "Save",
+    "cancel": "Cancel",
+    "loading": "Loading...",
+    "saving": "Saving...",
+    "close": "Close",
+    "Breadcrumb": {
+      "home": "Home",
+      "products": "All Products"
+    },
+    "ImageDropzone": {
+      "active": "Drop your image here...",
+      "idle": "Drag and drop images here",
+      "hint": "Or click to browse files (images will be optimised for faster loading)",
+      "limit": "Maximum file size: {size}"
+    }
+  },
+  "OrderStatus": {
+    "PENDING": "Awaiting Payment",
+    "PAID": "Payment Received",
+    "PROCESSING": "Processing",
+    "SHIPPED": "Dispatched",
+    "DELIVERED": "Delivered",
+    "CANCELLED": "Cancelled",
+    "REFUNDED": "Refunded"
+  },
+  "Account": {
+    "OrderCancel": {
+      "title": "Request Cancellation",
+      "loading": "Loading...",
+      "reasonLabel": "Cancellation Reason",
+      "placeholder": "Please provide a reason for your cancellation request.",
+      "back": "Cancel",
+      "confirm": "Submit Request",
+      "submitting": "Submitting..."
+    },
+    "OrderView": {
+      "title": "Order Details",
+      "orderId": "Order ID",
+      "loading": "Loading...",
+      "shippingAddress": "Delivery Address",
+      "logistics": "Logistics Update",
+      "trackingNo": "Tracking ID",
+      "preparing": "Packing in progress",
+      "productList": "Order Summary",
+      "subtotal": "Item Subtotal",
+      "shippingFee": "Shipping Fee",
+      "totalAmount": "Total Amount",
+      "cancelNote": "Cancellation Reason",
+      "close": "Close"
+    },
+    "Orders": {
+      "title": "My Orders",
+      "emptyState": "You have no current orders.",
+      "exploreLink": "Browse all products.",
+      "paymentAlert": "Please complete your payment within 20 minutes to avoid automatic cancellation of your order.",
+      "orderNumber": "Order No.",
+      "items": "items",
+      "orderDate": "Date of order",
+      "trackingNumber": "Tracking ID",
+      "buttons": {
+        "details": "View details",
+        "cancel": "Cancel order",
+        "payNow": "Pay now",
+        "downloadReceipt": "Download receipt"
+      }
+    },
+    "Address": {
+      "manageTitle": "Manage my address",
+      "addButton": "Add shipping address",
+      "noAddressAlert": "You do not yet have a shipping address. Please add your address before proceeding with your order.",
+      "noDefaultAlert": "Please select a default shipping address before proceeding with your order.",
+      "defaultTag": "Default",
+      "editAddress": "Edit Address",
+      "removeAddress": "Remove Address"
+    },
+    "AddressForm": {
+      "addTitle": "Add Shipping Address",
+      "editTitle": "Edit Shipping Address",
+      "loading": "Loading...",
+      "alertDescription": "Please ensure your address is correct to avoid potential delivery issues.",
+      "sections": { "status": "Address Status", "basic": "Basic Information" },
+      "fields": {
+        "enableAddress": "Set as active address",
+        "fullName": "Full Name",
+        "phone": "Mobile Number",
+        "street": "Street Address (Blk/Unit No.)",
+        "subDistrict": "Area / Estate",
+        "district": "Town",
+        "province": "Region",
+        "postalCode": "Postal Code",
+        "country": "Country"
+      },
+      "buttons": { "cancel": "Cancel", "save": "Save", "saving": "Saving..." },
+      "errors": {
+        "name": "Name is required",
+        "phone": "Phone number is required",
+        "address": "Street address is required",
+        "subDistrict": "Area is required",
+        "district": "Town is required",
+        "province": "Region is required",
+        "postalCode": "Postal code is required",
+        "country": "Country is required"
+      }
+    },
+    "welcome": "Your account {name}",
+    "tabs": {
+      "manage": "Manage my account",
+      "orders": "My Orders",
+      "favorites": "Favorites",
+      "editProfile": "Edit personal information",
+      "editAddress": "Edit shipping address",
+      "address": "Manage my address"
+    },
+    "personalInfo": "Personal Information",
+    "basicInfo": "Basic information",
+    "imageChanged": "There have been changes to the image files.",
+    "fields": {
+      "imageUrl": "Image URL",
+      "name": "Name - Surname",
+      "email": "Email",
+      "role": "License",
+      "productId": "Product ID"
+    },
+    "buttons": {
+      "removeFavorite": "Remove Favorite",
+      "save": "Save",
+      "saving": "Saving...",
+      "cancel": "Cancel"
+    },
+    "modals": {
+      "removeFavorite": {
+        "title": "Confirm Removal",
+        "description": "Are you sure you want to remove this item from your favorites?"
+      }
+    },
+    "roles": {
+      "admin": "System administrator",
+      "customer": "Customer"
+    },
+    "favoritesEmpty": "You don't have any items in your favorites list yet. <br/> <link>Explore all products</link>"
+  },
+  "Products": {
+    "categoryTitle": "Category {name}",
+    "title": "All Products",
+    "loading": "Loading...",
+    "notFound": "We apologize, the product was not found in our system. Please try searching for the product again on the homepage.",
+    "breadcrumbs": {
+      "home": "Home",
+      "products": "All Products"
+    },
+    "pagination": "Showing 1–{count} of {total} items",
+    "sortLabel": "Sort by",
+    "sortItems": {
+      "newest": "Newest first",
+      "oldest": "Oldest first",
+      "price_low": "Price Low to High",
+      "price_high": "Price High to Low",
+      "stock_low": "Stock Low to High",
+      "stock_high": "Stock High to Low"
+    }
+  },
+  "Auth": {
+    "headerTitle": "Log in or register",
+    "headerDesc": "To access the website <link>{siteName}</link>",
+    "loginTab": "Login",
+    "registerTab": "Register",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "confirmPasswordLabel": "Confirm password",
+    "nameLabel": "Name",
+    "loginBtn": "Log in",
+    "registerBtn": "Register",
+    "socialDivider": "Or proceed as follows"
+  },
+  "Cart": {
+    "Checkout": {
+      "title": "Shipping Address",
+      "currencyAlert": "Review your selected currency and total amount carefully before finalizing the transaction.",
+      "editAddress": "Change address",
+      "paymentDetails": "Order Summary",
+      "totalPrice": "Subtotal",
+      "shippingCost": "Shipping",
+      "discount": "Discount",
+      "netTotal": "Grand Total",
+      "noAddressAlert": "Shipping address required before checkout",
+      "addAddress": "Add address",
+      "proceedBtn": "Secure Checkout"
+    },
+    "Item": {
+      "productId": "SKU",
+      "price": "Price",
+      "remaining": "In stock",
+      "qtyLabel": "Qty",
+      "optionsLabel": "Options",
+      "optionsPlaceholder": "Select variant"
+    },
+    "List": {
+      "header": "Your Basket",
+      "emptyCart": "Your basket is empty. Browse our shop and add items to begin your purchase."
+    },
+    "Page": {
+      "title": "Your cart {count, plural, =0 {} other {(# items)}}",
+      "cartId": "Cart ID",
+      "clearBtn": "Clear cart"
+    },
+    "Messages": {
+      "confirmDeleteTitle": "Remove item?",
+      "confirmDeleteDesc": "Are you sure you want to remove this item from your cart?",
+      "confirmClearTitle": "Clear entire cart?",
+      "confirmClearDesc": "This will remove all items from your cart. This action cannot be undone.",
+      "orderCreated": "Your order has been created. Please review and proceed with payment.",
+      "confirmOrderTitle": "Are you about to place an order?",
+      "confirmOrderDesc": "Please confirm the accuracy of your product list and shipping address. If everything is correct, you can proceed with your order immediately."
+    }
+  },
+  "About": {
+    "title": "About FAOS - Our Heritage of Purity",
+    "description": "FAOS is a premier purveyor of organic olive oil and honey, meticulously crafted from 100% natural ingredients. Our digital brochure provides an in-depth look at our curated product range and our unwavering commitment to quality.",
+    "philosophy": "Our philosophy is rooted in the harmony between nature and health, ensuring every drop is as pure as nature intended.",
+    "quality": "We adhere to the highest international organic standards, bringing only the finest, chemical-free products to your table.",
+    "origin": "Sourced from the heart of fertile lands, our products embody the rich heritage and traditional wisdom of organic farming."
+  },
+  "Privacy": {
+    "title": "Privacy Policy",
+    "content": "FAOS is strictly committed to safeguarding the <important>privacy</important> and <important>personal data</important> of all users. All identifiable information is treated as highly <important>confidential</important> and managed within a <important>secure infrastructure</important>. This pertains to all personal details including names, contact info, and <important>transaction history</important>. FAOS employs robust <important>technical and organisational security protocols</important> to mitigate risks of <important>unauthorised access, leakage, alteration, or loss</important> of data. Personal information is collected and processed solely for <important>legitimate business operations</important> in full compliance with <important>applicable data protection laws</important>. We ensure that personal data is not shared with <important>third parties</important> without <important>explicit prior consent</important>, unless mandated by statutory requirements."
+  },
+  "Payment": {
+    "Header": {
+      "title": "Payment Methods & Security",
+      "description": "We provide a range of secure and seamless payment options to ensure a fuss-free shopping experience for all our customers."
+    },
+    "HowToShop": {
+      "title": "How to Place an Order",
+      "ariaLabel": "Step-by-step guide on how to purchase products",
+      "step1": "1. Browse our curated collection, select your preferred items, and click <important>“Add to Cart”</important> to save them to your shopping bag.",
+      "step2": "2. Access your cart via the icon at the top right to review your items. You may adjust quantities or remove items before proceeding.",
+      "step3": "3. Once you have confirmed your selection, click <important>“Place Order”</important> to enter our secure checkout environment.",
+      "step4": "4. You will be redirected to Stripe, our secure payment gateway, to enter your details and complete your transaction safely."
+    },
+    "CardPayment": {
+      "title": "Debit / Credit Card Payment",
+      "ariaLabel": "Instructions for payment via debit or credit card",
+      "description": "We support all major global payment networks. Secure payments can be made using debit or credit cards from any established bank worldwide.",
+      "acceptedCards": "We accept cards with the <important>Visa, Mastercard, or JCB</important> logo, including virtual cards and international credit cards for your convenience.",
+      "securityNote": "Your transaction is fully encrypted and protected by Stripe’s world-class security infrastructure."
+    },
+    "QRCodePayment": {
+      "title": "QR Code Payment (Mobile Banking)",
+      "ariaLabel": "Instructions for payment via QR Code",
+      "description": "For a more efficient checkout, you may pay instantly via QR Code. This method is highly recommended for regional convenience.",
+      "method": "Simply scan the <important>PromptPay QR Code</important> using your mobile banking app. This service is compatible with major banks and incurs no additional transaction fees.",
+      "expiryNote": "* Please ensure your payment is finalised within the time limit shown on the checkout page to avoid order cancellation."
+    }
+  },
+  "ProductChip": {
+    "authentic": "100% Authentic",
+    "premium": "Premium",
+    "demo": "Demo Version",
+    "digital": "Digital Product",
+    "uncategorized": "Uncategorized"
+  },
+  "ProductTab": {
+    "description": "Product Description",
+    "review": "Customer Reviews"
+  },
+  "ProductCart": {
+    "quantity": "Quantity",
+    "productOptions": "Select Options",
+    "addToFavorites": "Add to Favorites",
+    "addToCart": "Add to Cart",
+    "pleaseLoginFirst": "Please sign in to {action}",
+    "outOfStock": "Out of Stock",
+    "quantityExceedsStock": "Quantity exceeds available stock",
+    "share": "Share Product"
+  },
+  "Navbar": {
+    "Header": "The finest organic olive oil and honey, crafted for your ultimate healthy lifestyle",
+    "Menu": {
+      "home": "Home",
+      "products": "Shop All",
+      "payments": "Payment Methods",
+      "about": "About Us",
+      "dashboard": "Dashboard",
+      "users": "User Management",
+      "orders": "Order Management"
+    },
+    "Panel": {
+      "account": "My Account",
+      "orders": "My Purchases",
+      "favorites": "My Favorites",
+      "adminDashboard": "Admin Panel",
+      "logout": "Log Out"
+    }
+  },
+  "Meta": {
+    "ProductDetail": {
+      "title": "{name}",
+      "defaultDescription": "Buy {name} from FAOS. Premium organic olive oil & honey delivered to your door.",
+      "notFound": "Product Not Found | FAOS"
+    },
+    "Privacy": {
+      "title": "Privacy Policy",
+      "description": "Read FAOS Privacy Policy to understand how we collect, use, and protect your personal information securely.",
+      "keywords": [
+        "privacy policy",
+        "data protection",
+        "personal data",
+        "FAOS privacy",
+        "user privacy"
+      ],
+      "ogTitle": "FAOS Privacy Policy",
+      "ogDescription": "Learn how FAOS collects, uses, and protects your personal data."
+    },
+    "About": {
+      "title": "Our Story & Products",
+      "description": "Learn more about FAOS premium organic olive oil & honey. View our official product brochure and brand story.",
+      "keywords": [
+        "FAOS",
+        "organic olive oil",
+        "organic honey",
+        "premium olive oil",
+        "brochure"
+      ],
+      "ogTitle": "About FAOS - Premium Organic Products",
+      "ogDescription": "Pure organic olive oil & honey. View our official brochure and brand information."
+    },
+    "Payment": {
+      "title": "Payment Methods",
+      "description": "Learn about FAOS payment methods including credit card and PromptPay QR code. Secure payments powered by Stripe.",
+      "keywords": [
+        "FAOS payment",
+        "credit card payment",
+        "PromptPay",
+        "Stripe checkout",
+        "secure payment"
+      ],
+      "ogTitle": "Secure Payment Methods at FAOS",
+      "ogDescription": "Secure payment methods including credit card and PromptPay QR code."
+    },
+    "Category": {
+      "title": "{categoryName} | FAOS Premium Selection",
+      "description": "Browse all {categoryName} products from FAOS. Premium quality, natural, and carefully selected items.",
+      "ogAlt": "{categoryName} products from FAOS"
+    },
+    "Products": {
+      "title": "All Products",
+      "description": "Browse our premium selection of FAOS organic products. Discover pure olive oil and 100% natural honey curated for your health.",
+      "keywords": [
+        "organic olive oil",
+        "natural honey",
+        "healthy products",
+        "FAOS products",
+        "premium food"
+      ],
+      "ogTitle": "Browse All FAOS Premium Products",
+      "ogDescription": "Discover our collection of high-quality organic olive oil and natural honey."
+    },
+    "Home": {
+      "title": "Home",
+      "description": "Premium 100% natural organic olive oil and honey, carefully selected for your wellness.",
+      "keywords": [
+        "FAOS",
+        "organic olive oil",
+        "pure honey",
+        "organic honey",
+        "wellness food"
+      ],
+      "ogTitle": "FAOS - Premium Organic Olive Oil & Honey",
+      "ogDescription": "100% pure natural products selected for your health and lifestyle."
+    }
+  },
+  "Banner": {
+    "marketplace": {
+      "title": "A New Milestone... We are now available at leading department stores and top online platforms.",
+      "description": "(Experience our products today at major supermarkets and online stores near you! More convenience for you.)"
+    },
+    "customer": "Our website is designed to support customers in target markets across Asia, Europe, and America <link>to provide you with a fast and easy shopping experience</link>",
+    "certificate": "Confidence in quality with international standards that we inspect thoroughly <link>because your safety is at the heart</link> of every step of our production",
+    "advertise": {
+      "title": "Discover the world of Extra Virgin Olive Oil: Natural benefits and essential facts for your well-being",
+      "messages": [
+        "Extra Virgin Olive Oil (EVOO) is the highest grade of oil, produced through a meticulous process that prioritizes quality over quantity.",
+        "Rich in polyphenols with antioxidant and anti-inflammatory properties, protecting the oil from oxidation and preserving its flavour and nutritional value.",
+        "Contains Oleocanthal, which functions similarly to ibuprofen, helping to regulate cellular activity within inflamed cells and reduce swelling throughout the body.",
+        "Helps balance cholesterol and triglyceride levels while reducing LDL oxidation for better cardiovascular and heart health.",
+        "Polyphenolic compounds help improve mental health and prevent neurodegenerative diseases such as Alzheimer's and dementia.",
+        "Enhances insulin efficiency in maintaining balanced blood sugar levels and plays a vital role in alleviating symptoms of Metabolic Syndrome (MS).",
+        "Contains 'Sitosterol' which helps regulate cholesterol absorption, strengthening the digestive system and providing reliable relief from constipation.",
+        "Produced from unique ancient olive varieties like Athenolia and Koroneiki, which contain exceptionally high levels of polyphenols and antioxidants.",
+        "Uses traditional cold-pressing techniques using only mechanical methods; unrefined, unbleached, and chemical-free to maintain maximum purity.",
+        "Polyphenols work by reducing free radical damage, strengthening the heart, and boosting energy levels, making it a perfect choice for naturally enhancing athletic performance."
+      ]
+    }
+  },
+  "Section": {
+    "Header": {
+      "title": "Find the Perfect Match for You",
+      "description": "Explore quality products tailored to your unique lifestyle and needs."
+    },
+    "similar": "Similar Products"
+  },
+  "CategoryCarousel": {
+    "title": "Shop by Category",
+    "explore": "View All Products",
+    "empty": {
+      "title": "No products available in this category",
+      "description": "Please try selecting a different category or check back later."
+    }
+  },
+  "Footer": {
+    "copyright": "© {year} {name} - {title}",
+    "Menu": {
+      "privacy": "Privacy Policy"
+    }
+  },
+  "Country": {
+    "TH": "Thailand",
+    "US": "United States",
+    "GR": "Greece",
+    "IT": "Italy",
+    "NL": "Netherlands",
+    "MY": "Malaysia",
+    "SG": "Singapore",
+    "JP": "Japan",
+    "CN": "China",
+    "IS": "Iceland",
+    "VN": "Vietnam",
+    "ID": "Indonesia"
+  },
+  "Dashboard": {
+    "ProductManager": {
+      "addNew": "Add New Stock",
+      "manageCategories": "Product Categories",
+      "manageShipping": "Shipping Settings",
+      "deleteSelected": "Remove selected ({count})",
+      "tableAria": "Inventory table",
+      "empty": "No products found",
+      "colId": "SKU / ID",
+      "colDigital": "Type",
+      "colImage": "Preview",
+      "colName": "Product Title",
+      "colPrice": "Base Price",
+      "colStock": "Current Stock",
+      "colCategory": "Department",
+      "colActions": "Manage",
+      "digitalProduct": "E-Product",
+      "dropdownAria": "Product options",
+      "editInfo": "Update details",
+      "manageImages": "Gallery setup",
+      "manageOptions": "Variant setup",
+      "removeProduct": "Delete from shop"
+    },
+    "UserManager": {
+      "addNew": "Invite New User",
+      "deleteSelected": "Remove selected ({count})",
+      "tableAria": "Member directory table",
+      "empty": "No member records found",
+      "colId": "Member ID",
+      "colImage": "Photo",
+      "colName": "Full Name",
+      "colEmail": "Email Address",
+      "colRole": "Access Level",
+      "colStatus": "Status",
+      "colActions": "Manage",
+      "roleAdmin": "Admin",
+      "roleUser": "Member",
+      "statusEnable": "Active",
+      "statusDisable": "Deactivated",
+      "dropdownAria": "Member options",
+      "editInfo": "Update details",
+      "deleteUser": "Archive account"
+    },
+    "BannerManager": {
+      "title": "Banner Management",
+      "noBanners": "No banners found",
+      "dropdownLabel": "Banner Options",
+      "editBanner": "Edit Banner",
+      "removeBanner": "Delete Banner",
+      "addBanner": "Add New Banner"
+    },
+    "CategoryManager": {
+      "title": "Manage Product Categories",
+      "loading": "Loading...",
+      "noData": "No product categories found",
+      "editInfo": "Edit Information",
+      "removeCategory": "Remove Category",
+      "cancel": "Cancel",
+      "addCategory": "Add a Category"
+    },
+    "ImageManager": {
+      "title": "Manage Product Images",
+      "loading": "Loading...",
+      "noData": "No product images found",
+      "editInfo": "Edit Information",
+      "removeImage": "Remove Image",
+      "cancel": "Cancel",
+      "addImage": "Add Image"
+    },
+    "ShippingCountryManager": {
+      "title": "Manage shipping costs",
+      "loading": "Loading...",
+      "noData": "No shipping countries found.",
+      "baseRate": "Base Rate",
+      "pricePerKg": "Price / kg",
+      "editInfo": "Edit Information",
+      "removeShipping": "Remove Shipping",
+      "cancel": "Cancel",
+      "addShipping": "Add Shipping Country"
+    },
+    "VariantManager": {
+      "title": "Manage Product Options",
+      "loading": "Loading...",
+      "noData": "No product options yet.",
+      "sku": "SKU",
+      "price": "Price",
+      "priceNotSpecified": "(Please specify price)",
+      "stock": "Stock",
+      "stockNotSpecified": "(Please specify stock)",
+      "editInfo": "Edit Information",
+      "removeOption": "Remove Option",
+      "cancel": "Cancel",
+      "addOption": "Add Options"
+    },
+    "Order": {
+      "table": {
+        "orderId": "Order ID",
+        "image": "Image",
+        "customerName": "Customer Name",
+        "orderDate": "Order Date",
+        "totalAmount": "Total Amount",
+        "status": "Status",
+        "trackingNumber": "Tracking Number",
+        "actions": "Actions",
+        "empty": "No information to display",
+        "loading": "Loading..."
+      },
+      "action": {
+        "status": "Order status",
+        "details": "View details"
+      }
+    },
+    "ProductForm": {
+      "editTitle": "Edit Product",
+      "addTitle": "Add New Product",
+      "statusSection": "Product Status",
+      "basicSection": "Basic Information",
+      "priceSection": "Product Price",
+      "stockSection": "Stock & Inventory",
+      "seoSection": "SEO Settings",
+      "fields": {
+        "isActive": "Available for sale",
+        "isFeatured": "Featured product",
+        "isPremium": "Premium Product",
+        "isAuthentic": "Authentic 100%",
+        "isDigital": "Digital Product",
+        "isDemo": "Demo Version",
+        "name": "Product Name",
+        "category": "Product Categories",
+        "unit": "Unit of measurement",
+        "sku": "SKU",
+        "barcode": "Barcode",
+        "shortDesc": "Short Description",
+        "fullDesc": "Full Product Description",
+        "price": "Selling Price",
+        "comparePrice": "Price before discount",
+        "costPrice": "Cost price (internal)",
+        "stock": "Quantity in stock",
+        "lowStock": "Low stock alert",
+        "weight": "Weight (grams)",
+        "autoSeo": "Auto-generate SEO",
+        "slug": "Slug",
+        "metaTitle": "Meta Title",
+        "metaDesc": "Meta Description"
+      }
+    },
+    "UserForm": {
+      "editTitle": "Update User Profile",
+      "addTitle": "Register New User",
+      "imageChangedStatus": "Profile photo updated.",
+      "licenseHeading": "Permissions",
+      "activeLabel": "Enable account access",
+      "roleLabel": "Access level",
+      "roleAdmin": "Administrator",
+      "roleUser": "Member",
+      "infoHeading": "Profile details",
+      "urlLabel": "Photo URL",
+      "nameLabel": "Full Name",
+      "emailLabel": "Email Address",
+      "passwordLabel": "Password",
+      "passwordChangeLabel": "Reset password"
+    },
+    "BannerForm": {
+      "addTitle": "Create New Banner",
+      "editTitle": "Update Banner Info",
+      "statusHeading": "Display Status",
+      "activeLabel": "Enable this Banner",
+      "infoHeading": "Banner Details",
+      "urlLabel": "Source URL",
+      "altLabel": "Alternative Text"
+    },
+    "manageBanners": "Banner Manager",
+    "siteSettings": "Web Settings",
+    "Stats": {
+      "allOrders": "Total Orders",
+      "pendingOrders": "Orders to Process",
+      "deliveredOrders": "Completed Deliveries",
+      "paymentDelivered": "Gross Revenue",
+      "paymentCancelled": "Refunded Amount",
+      "paymentPending": "Unpaid Balance",
+      "allProducts": "Active Products",
+      "inStockProducts": "Available for Sale",
+      "outOfStockProducts": "Out of Stock",
+      "allUsers": "Total Members",
+      "activeUsers": "Enabled Accounts",
+      "inactiveUsers": "Disabled Accounts"
+    }
+  }
+}

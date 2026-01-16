@@ -1,16 +1,23 @@
+import { createClient } from '@supabase/supabase-js'
 import { useState } from 'react'
 
-import {
-  deleteFile,
-  uploadFiles,
-} from '@/app/(dashboard)/dashboard/product/actions/file'
+import { deleteFileSupabase } from '@/actions/file'
+// import { optimizeImageClient } from '@/utils/optimize/image/client'
 
-interface Params {
+interface useImageUploadParams {
   oldImage?: string | null
   previewFiles: File[]
 }
 
-const useImageUpload = ({ oldImage, previewFiles }: Params) => {
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+)
+
+export const useImageUpload = ({
+  oldImage,
+  previewFiles,
+}: useImageUploadParams) => {
   const [isUploading, setIsUploading] = useState(false)
 
   const resolveImagePath = async (): Promise<string | null | undefined> => {
@@ -20,17 +27,35 @@ const useImageUpload = ({ oldImage, previewFiles }: Params) => {
       return imagePath
     }
 
+    setIsUploading(true)
+
     try {
-      const formData = new FormData()
+      const originalFile = previewFiles[0]
 
-      previewFiles.forEach((file) => formData.append('files', file))
+      // const optimizedFile = await optimizeImageClient(originalFile, {
+      //   maxWidth: 800,
+      //   quality: 0.85,
+      // })
 
-      const uploaded = await uploadFiles(formData)
+      const fileName = `${crypto.randomUUID()}.webp`
 
-      imagePath = uploaded[0]
+      const { error } = await supabase.storage
+        .from('uploads')
+        .upload(fileName, originalFile, {
+          contentType: 'image/webp',
+          upsert: true,
+        })
+
+      if (error) {
+        return imagePath
+      }
+
+      const { data } = supabase.storage.from('uploads').getPublicUrl(fileName)
+
+      imagePath = data.publicUrl
 
       if (oldImage && imagePath !== oldImage) {
-        await deleteFile(oldImage)
+        await deleteFileSupabase(oldImage)
       }
 
       return imagePath
@@ -44,5 +69,3 @@ const useImageUpload = ({ oldImage, previewFiles }: Params) => {
     isUploading,
   }
 }
-
-export { useImageUpload }

@@ -1,18 +1,18 @@
 import { useEffect } from 'react'
 
-interface UseInfiniteScrollOptions {
+interface Params {
   hasNextPage?: boolean
   isFetchingNextPage: boolean
   fetchNextPage: () => void
   threshold?: number
 }
 
-const useInfiniteScroll = ({
+export const useInfiniteScroll = ({
   hasNextPage,
   isFetchingNextPage,
   fetchNextPage,
   threshold = 300,
-}: UseInfiniteScrollOptions) => {
+}: Params) => {
   useEffect(() => {
     const onScroll = () => {
       const isAtBottom =
@@ -44,5 +44,3 @@ const useInfiniteScroll = ({
     }
   }, [hasNextPage, isFetchingNextPage, fetchNextPage, threshold])
 }
-
-export { useInfiniteScroll }

@@ -1,33 +1,38 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable @next/next/no-img-element */
-import { Button } from '@heroui/button'
+'use client'
+
+import { Button } from '@heroui/react'
 import { ImageIcon, XIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import prettyBytes from 'pretty-bytes'
 import { useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 
-import type { FC } from 'react'
-
+import { ACCEPT_IMAGE_TYPES } from '@/utils/constants/app'
 import { cn } from '@/utils/style'
-
-const ACCEPT_TYPES = ['.png', '.jpg', '.jpeg', '.gif', '.webp']
 
 export interface ImageWithPreview extends File {
   preview: string
 }
 
-interface Props {
+interface ImageDropzoneProps {
   multiple?: boolean
   onFilesChange?: (files: ImageWithPreview[]) => void
 }
 
-const createPreviewFiles = (files: File[]): ImageWithPreview[] =>
+export const createPreviewFiles = (files: File[]): ImageWithPreview[] =>
   files.map((file) =>
     Object.assign(file, {
       preview: URL.createObjectURL(file),
     }),
   )
 
-const ImageDropzone: FC<Props> = ({ multiple = false, onFilesChange }) => {
+export const ImageDropzone = ({
+  multiple = false,
+  onFilesChange,
+}: ImageDropzoneProps) => {
+  const t = useTranslations('Common.ImageDropzone')
   const [files, setFiles] = useState<ImageWithPreview[]>([])
 
   const notifyChange = useCallback(
@@ -44,7 +49,6 @@ const ImageDropzone: FC<Props> = ({ multiple = false, onFilesChange }) => {
 
       if (multiple) {
         const merged = [...files, ...newFiles]
-
         notifyChange(merged)
       } else {
         notifyChange(newFiles)
@@ -56,7 +60,7 @@ const ImageDropzone: FC<Props> = ({ multiple = false, onFilesChange }) => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: {
-      'image/*': ACCEPT_TYPES,
+      'image/*': ACCEPT_IMAGE_TYPES,
     },
     multiple,
   })
@@ -64,7 +68,6 @@ const ImageDropzone: FC<Props> = ({ multiple = false, onFilesChange }) => {
   const removeFile = (fileToRemove: ImageWithPreview) => {
     URL.revokeObjectURL(fileToRemove.preview)
     const updated = files.filter((file) => file !== fileToRemove)
-
     notifyChange(updated)
   }
 
@@ -91,12 +94,12 @@ const ImageDropzone: FC<Props> = ({ multiple = false, onFilesChange }) => {
 
               <Button
                 className='absolute top-2 right-2'
-                startContent={<XIcon className='size-4 text-default-500' />}
+                startContent={<XIcon className='text-default-500 size-4' />}
                 variant='faded'
                 onPress={() => removeFile(file)}
               />
 
-              <p className='line-clamp-1 text-xs text-default-500'>
+              <p className='text-default-500 line-clamp-1 text-xs'>
                 {file.name} ({prettyBytes(file.size)})
               </p>
             </div>
@@ -109,7 +112,7 @@ const ImageDropzone: FC<Props> = ({ multiple = false, onFilesChange }) => {
         className={cn(
           'relative flex min-h-64 cursor-pointer items-center justify-center rounded-xl border-2 border-dashed transition',
           isDragActive
-            ? 'border-primary-website bg-primary-website/10'
+            ? 'border-primary bg-primary/10'
             : 'border-gray-300 hover:border-gray-400',
         )}
       >
@@ -119,32 +122,35 @@ const ImageDropzone: FC<Props> = ({ multiple = false, onFilesChange }) => {
           <div
             className={cn(
               'rounded-full p-4 transition-colors',
-              isDragActive && 'bg-primary-website/25',
+              isDragActive && 'bg-primary/25',
             )}
           >
             <ImageIcon
               className={cn(
-                'size-12 text-default-500',
-                isDragActive && 'text-primary-website',
+                'text-default-500 size-12',
+                isDragActive && 'text-primary',
               )}
             />
           </div>
 
           {isDragActive ? (
-            <p className='text-primary-website'>วางรูปภาพที่นี่...</p>
+            <p className='text-primary'>{t('active')}</p>
           ) : (
-            <div className='flex flex-col'>
-              <p>ลากและวางรูปภาพที่นี่</p>
+            <div className='flex flex-col gap-1'>
+              <p className='font-medium'>{t('idle')}</p>
 
-              <div className='mx-auto flex gap-1 text-sm text-default-500'>
-                {ACCEPT_TYPES.map((type) => (
-                  <p key={type}>{type}</p>
+              <div className='text-default-500 mx-auto flex flex-wrap justify-center gap-1 text-sm'>
+                {ACCEPT_IMAGE_TYPES.map((type) => (
+                  <span key={type} className='uppercase'>
+                    {type.replace('.', '')}
+                  </span>
                 ))}
               </div>
 
-              <p className='text-sm text-default-500'>
-                หรือคลิกเพื่อเลือกไฟล์ (ระบบจะปรับขนาดไฟล์ให้อัตโนมัติ
-                เพื่อประสิทธิภาพที่ดีขึ้น)
+              <p className='text-default-500 text-sm'>{t('hint')}</p>
+
+              <p className='text-primary text-sm font-semibold'>
+                {t('limit', { size: '50 MB' })}
               </p>
             </div>
           )}
@@ -153,5 +159,3 @@ const ImageDropzone: FC<Props> = ({ multiple = false, onFilesChange }) => {
     </div>
   )
 }
-
-export { ImageDropzone }

@@ -1,0 +1,669 @@
+{
+  "Localization": {
+    "country": "Paese",
+    "currency": "Valuta"
+  },
+  "ProductUnit": {
+    "PIECE": "Pezzo",
+    "ITEM": "Articolo",
+    "SET": "Set",
+    "BOX": "Scatola",
+    "PACK": "Confezione",
+    "BAG": "Sacchetto",
+    "BOTTLE": "Bottiglia",
+    "CAN": "Lattina",
+    "KG": "Chilogrammo",
+    "G": "Gramma",
+    "L": "Litro",
+    "ML": "Millilitro",
+    "PAIR": "Coppia",
+    "ROLL": "Rotolo",
+    "SHEET": "Foglio",
+    "UNIT": "Unità",
+    "CAR": "Auto",
+    "HOUSE": "Casa"
+  },
+  "Site": {
+    "name": "FAOS",
+    "title": "Olio d'Oliva e Miele Biologici — 100% Puri e Naturali",
+    "description": "La tua destinazione per l'olio d'oliva e il miele biologici di alta qualità, selezionati per il tuo stile di vita sano."
+  },
+  "CancelPage": {
+    "title": "Pagamento Annullato",
+    "description": "Il tuo pagamento non è stato completato o è stato annullato. Non ti è stato addebitato alcun importo.",
+    "referenceText": "Questo ordine ha il seguente numero di riferimento:",
+    "contactText": "Per effettuare un nuovo ordine, puoi tornare indietro e ricominciare, oppure usare questo numero per contattare l'assistenza."
+  },
+  "SuccessPage": {
+    "title": "Pagamento riuscito",
+    "description": "Grazie per il tuo ordine. Il tuo pagamento è stato verificato e confermato.",
+    "referenceText": "Questo ordine ha il seguente numero di riferimento",
+    "contactText": "Ti preghiamo di conservare questo numero d'ordine per controlli futuri o per contattare l'assistenza."
+  },
+  "Common": {
+    "theme": {
+      "light": "Chiaro",
+      "dark": "Scuro",
+      "system": "Sistema"
+    },
+    "save": "Salva",
+    "cancel": "Annulla",
+    "loading": "Caricamento...",
+    "saving": "Salvataggio...",
+    "close": "Chiudi",
+    "Breadcrumb": { "home": "Home", "products": "Tutti i prodotti" },
+    "ImageDropzone": {
+      "active": "Rilascia l'immagine qui...",
+      "idle": "Trascina e rilascia l'immagine qui",
+      "hint": "O clicca per selezionare un file (il sistema lo ridimensionerà per prestazioni migliori)",
+      "limit": "Supporta il caricamento di file fino a {size}"
+    }
+  },
+  "OrderStatus": {
+    "PENDING": "In attesa di pagamento",
+    "PAID": "Pagato",
+    "PROCESSING": "In lavorazione",
+    "SHIPPED": "Spedito",
+    "DELIVERED": "Consegnato",
+    "CANCELLED": "Annullato",
+    "REFUNDED": "Rimborsato"
+  },
+  "Account": {
+    "OrderCancel": {
+      "title": "Annulla Ordine",
+      "loading": "Caricamento...",
+      "reasonLabel": "Motivo",
+      "placeholder": "Inserisci il motivo dell'annullamento o del rimborso.",
+      "back": "Indietro",
+      "confirm": "Conferma Annullamento",
+      "submitting": "In corso..."
+    },
+    "OrderView": {
+      "title": "Dettagli Ordine",
+      "orderId": "ID Ordine",
+      "loading": "Caricamento...",
+      "shippingAddress": "Indirizzo di Spedizione",
+      "logistics": "Informazioni Logistiche",
+      "trackingNo": "Codice Tracking",
+      "preparing": "In preparazione",
+      "productList": "Riepilogo Prodotti",
+      "subtotal": "Totale Prodotti",
+      "shippingFee": "Spese di Spedizione",
+      "totalAmount": "Totale Ordine",
+      "cancelNote": "Motivo dell'annullamento",
+      "close": "Chiudi"
+    },
+    "Orders": {
+      "title": "I miei ordini",
+      "emptyState": "Non hai ancora effettuato ordini.",
+      "exploreLink": "Esplora tutti i prodotti.",
+      "paymentAlert": "Si prega di completare il pagamento entro 20 minuti. In caso contrario, l'ordine verrà annullato automaticamente.",
+      "orderNumber": "Ordine n.",
+      "items": "articoli",
+      "orderDate": "Data ordine",
+      "trackingNumber": "Numero di tracciamento",
+      "buttons": {
+        "details": "Dettagli ordine",
+        "cancel": "Annulla ordine",
+        "payNow": "Paga ora",
+        "downloadReceipt": "Scarica ricevuta"
+      }
+    },
+    "Address": {
+      "manageTitle": "Gestisci i miei indirizzi",
+      "addButton": "Aggiungi indirizzo di spedizione",
+      "noAddressAlert": "Non hai ancora un indirizzo di spedizione. Aggiungi un indirizzo prima di procedere con l'ordine.",
+      "noDefaultAlert": "Seleziona un indirizzo di spedizione predefinito prima di procedere con l'ordine.",
+      "defaultTag": "Predefinito",
+      "editAddress": "Modifica indirizzo",
+      "removeAddress": "Rimuovi indirizzo"
+    },
+    "AddressForm": {
+      "addTitle": "Aggiungi Indirizzo",
+      "editTitle": "Modifica Indirizzo",
+      "loading": "Caricamento...",
+      "alertDescription": "Assicurati che l'indirizzo sia corretto per evitare problemi di consegna.",
+      "sections": {
+        "status": "Stato Indirizzo",
+        "basic": "Informazioni di Base"
+      },
+      "fields": {
+        "enableAddress": "Abilita questo indirizzo",
+        "fullName": "Nome Completo",
+        "phone": "Numero di Telefono",
+        "street": "Indirizzo (Via e Civico)",
+        "subDistrict": "Frazione / Località",
+        "district": "Comune",
+        "province": "Provincia / Stato",
+        "postalCode": "CAP",
+        "country": "Paese"
+      },
+      "buttons": {
+        "cancel": "Annulla",
+        "save": "Salva",
+        "saving": "Salvataggio..."
+      },
+      "errors": {
+        "name": "Nome richiesto",
+        "phone": "Telefono richiesto",
+        "address": "Indirizzo richiesto",
+        "subDistrict": "Località richiesta",
+        "district": "Comune richiesto",
+        "province": "Provincia richiesta",
+        "postalCode": "CAP richiesto",
+        "country": "Paese richiesto"
+      }
+    },
+    "welcome": "Il tuo account {name}",
+    "tabs": {
+      "manage": "Gestisci il mio account",
+      "orders": "I miei ordini",
+      "favorites": "Preferiti",
+      "editProfile": "Modifica informazioni personali",
+      "editAddress": "Modifica l'indirizzo di spedizione",
+      "address": "Gestisci indirizzi"
+    },
+    "personalInfo": "Informazioni personali",
+    "basicInfo": "Informazioni di base",
+    "imageChanged": "Ci sono state modifiche ai file immagine.",
+    "fields": {
+      "imageUrl": "URL immagine",
+      "name": "Nome e Cognome",
+      "email": "Email",
+      "role": "Licenza",
+      "productId": "ID Prodotto"
+    },
+    "buttons": {
+      "removeFavorite": "Rimuovi dai preferiti",
+      "save": "Salva",
+      "saving": "Salvataggio...",
+      "cancel": "Annulla"
+    },
+    "modals": {
+      "removeFavorite": {
+        "title": "Conferma rimozione",
+        "description": "Sei sicuro di voler rimuovere questo articolo dai tuoi preferiti?"
+      }
+    },
+    "roles": {
+      "admin": "Amministratore di sistema",
+      "customer": "Cliente"
+    },
+    "favoritesEmpty": "Non hai ancora articoli nei tuoi preferiti. <br/> <link>Esplora tutti i prodotti</link>"
+  },
+  "Products": {
+    "categoryTitle": "Categoria {name}",
+    "title": "Tutti i prodotti",
+    "loading": "Caricamento...",
+    "notFound": "Spiacenti, prodotto non trovato. Riprova a cercare dalla home page.",
+    "breadcrumbs": {
+      "home": "Home",
+      "products": "Tutti i prodotti"
+    },
+    "pagination": "Visualizzati 1–{count} di {total} articoli",
+    "sortLabel": "Ordina per",
+    "sortItems": {
+      "newest": "Più recenti",
+      "oldest": "Meno recenti",
+      "price_low": "Prezzo dal più basso",
+      "price_high": "Prezzo dal più alto",
+      "stock_low": "Disponibilità crescente",
+      "stock_high": "Disponibilità decrescente"
+    }
+  },
+  "Auth": {
+    "headerTitle": "Accedi o registrati",
+    "headerDesc": "Per accedere al sito web <link>{siteName}</link>",
+    "loginTab": "Login",
+    "registerTab": "Registrati",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "confirmPasswordLabel": "Conferma password",
+    "nameLabel": "Nome",
+    "loginBtn": "Accedi",
+    "registerBtn": "Registrati",
+    "socialDivider": "O procedi come segue"
+  },
+  "Cart": {
+    "Checkout": {
+      "title": "Indirizzo di Spedizione",
+      "currencyAlert": "Stai per effettuare un ordine nella valuta selezionata. Controlla attentamente il prezzo prima di procedere.",
+      "editAddress": "Modifica",
+      "paymentDetails": "Dettagli di Pagamento",
+      "totalPrice": "Prezzo totale",
+      "shippingCost": "Spedizione",
+      "discount": "Sconto",
+      "netTotal": "Totale netto",
+      "noAddressAlert": "Aggiungi un indirizzo prima di ordinare",
+      "addAddress": "Aggiungi indirizzo",
+      "proceedBtn": "Vai al pagamento"
+    },
+    "Item": {
+      "productId": "ID Prodotto",
+      "price": "Prezzo",
+      "remaining": "Disponibili",
+      "qtyLabel": "Quantità",
+      "optionsLabel": "Opzioni",
+      "optionsPlaceholder": "Seleziona opzione"
+    },
+    "List": {
+      "header": "Elenco Prodotti",
+      "emptyCart": "Il tuo carrello è vuoto. Esplora il nostro catalogo per aggiungere prodotti."
+    },
+    "Page": {
+      "title": "Il tuo carrello {count, plural, =0 {} other {(# articoli)}}",
+      "cartId": "ID carrello",
+      "clearBtn": "Svuota carrello"
+    },
+    "Messages": {
+      "confirmDeleteTitle": "Rimuovere l'articolo?",
+      "confirmDeleteDesc": "Sei sicuro di voler rimuovere questo articolo dal carrello?",
+      "confirmClearTitle": "Svuotare tutto il carrello?",
+      "confirmClearDesc": "Tutti gli articoli saranno rimossi dal carrello. Questa operazione non può essere annullata.",
+      "orderCreated": "Il tuo ordine è stato creato. Controlla i dettagli e procedi con il pagamento.",
+      "confirmOrderTitle": "Stai per confermare l'ordine?",
+      "confirmOrderDesc": "Verifica l'esattezza dell'elenco dei prodotti e dell'indirizzo di spedizione. Se tutto è corretto, puoi procedere immediatamente con l'ordine."
+    }
+  },
+  "About": {
+    "title": "Chi Siamo FAOS - Un'Eredità di Purezza",
+    "description": "FAOS offre olio d'oliva e miele biologici di prima qualità, realizzati con ingredienti naturali al 100%. Questa brochure presenta la nostra gamma di prodotti e la nostra filosofia.",
+    "philosophy": "La nostra filosofia è radicata nell'armonia tra natura e salute.",
+    "quality": "Rispettiamo i più elevati standard biologici internazionali.",
+    "origin": "Provenienti dal cuore di terre fertili, i nostri prodotti incarnano la ricca eredità agricola."
+  },
+  "Privacy": {
+    "title": "Informativa sulla Privacy",
+    "content": "FAOS si impegna solennemente a proteggere la <important>privacy</important> e i <important>dati personali</important> di tutti gli utenti. Ogni informazione relativa a un individuo identificabile è trattata come strettamente <important>riservata</important> e conservata in <important>modo sicuro</important>. Ciò include nomi, dati di contatto e <important>dati di transazione</important>. FAOS implementa rigorose <important>misure di sicurezza tecniche e organizzative</important> per prevenire <important>l'accesso non autorizzato, la divulgazione, l'alterazione o la distruzione</important> dei dati. Le informazioni personali verranno raccolte e trattate esclusivamente per <important>scopi commerciali legittimi</important> e in conformità con le <important>leggi vigenti sulla protezione dei dati</important>. I dati non saranno comunicati a <important>terze parti</important> senza <important>previo consenso</important>, salvo quando diversamente richiesto dalla legge."
+  },
+  "Payment": {
+    "Header": {
+      "title": "Metodi di Pagamento e Sicurezza",
+      "description": "Offriamo diverse opzioni di pagamento sicure e convenienti per garantire un'esperienza di acquisto fluida a tutti i nostri clienti."
+    },
+    "HowToShop": {
+      "title": "Come Effettuare un Ordine",
+      "ariaLabel": "Guida su come iniziare ad acquistare i prodotti",
+      "step1": "1. Esplora la nostra collezione premium, seleziona gli articoli che desideri e clicca su <important>“Aggiungi al Carrello”</important> per salvarli nella tua borsa della spesa.",
+      "step2": "2. Apri il carrello nell'angolo in alto a destra per rivedere gli articoli selezionati, regolare le quantità o rimuovere i prodotti se necessario.",
+      "step3": "3. Una volta soddisfatto della tua selezione, clicca su <important>“Effettua Ordine”</important> per procedere al sistema di pagamento sicuro.",
+      "step4": "4. Verrai reindirizzato in modo sicuro al nostro partner di pagamento, Stripe, dove potrai inserire i tuoi dati e finalizzare l'acquisto in totale sicurezza."
+    },
+    "CardPayment": {
+      "title": "Pagamento con Carta di Debito / Credito",
+      "ariaLabel": "Istruzioni per il pagamento con carta di debito o credito",
+      "description": "Supportiamo un'ampia gamma di circuiti di pagamento globali. Puoi pagare in sicurezza con carte di debito o credito di tutte le principali banche del mondo.",
+      "acceptedCards": "Accettiamo carte con logo <important>Visa, Mastercard o JCB</important>, incluse carte virtuali e carte di credito internazionali per la tua comodità.",
+      "securityNote": "Ogni transazione è crittografata e protetta dalla tecnologia di Stripe, leader mondiale nel settore della sicurezza."
+    },
+    "QRCodePayment": {
+      "title": "Pagamento tramite QR Code (Mobile Banking)",
+      "ariaLabel": "Istruzioni per il pagamento tramite QR Code",
+      "description": "Per un checkout più rapido, puoi pagare istantaneamente tramite QR Code. Questo metodo è altamente raccomandato per la sua praticità.",
+      "method": "Scansiona semplicemente il <important>QR Code PromptPay</important> tramite la tua app di mobile banking. Il servizio è supportato dalle principali banche e non prevede commissioni aggiuntive.",
+      "expiryNote": "* Assicurati che il pagamento venga completato entro il tempo limite indicato nella pagina di checkout."
+    }
+  },
+  "ProductChip": {
+    "authentic": "Autentico al 100%",
+    "premium": "Premium",
+    "demo": "Versione Demo",
+    "digital": "Prodotto Digitale",
+    "uncategorized": "Non Categorizzato"
+  },
+  "ProductTab": {
+    "description": "Descrizione Prodotto",
+    "review": "Recensioni Clienti"
+  },
+  "ProductCart": {
+    "quantity": "Quantità",
+    "productOptions": "Seleziona Opzioni",
+    "addToFavorites": "Aggiungi ai Preferiti",
+    "addToCart": "Aggiungi al Carrello",
+    "pleaseLoginFirst": "Accedi per {action}",
+    "outOfStock": "Esaurito",
+    "quantityExceedsStock": "La quantità supera la disponibilità in magazzino",
+    "share": "Condividi Prodotto"
+  },
+  "Navbar": {
+    "Header": "Il meglio dell'olio d'oliva e del miele biologico, per il tuo stile di vita sano",
+    "Menu": {
+      "home": "Home",
+      "products": "Tutti i Prodotti",
+      "payments": "Metodi di Pagamento",
+      "about": "Chi Siamo",
+      "dashboard": "Dashboard",
+      "users": "Gestione Utenti",
+      "orders": "Gestione Ordini"
+    },
+    "Panel": {
+      "account": "Il mio Account",
+      "orders": "I miei Acquisti",
+      "favorites": "I miei Preferiti",
+      "adminDashboard": "Pannello Admin",
+      "logout": "Esci"
+    }
+  },
+  "Meta": {
+    "ProductDetail": {
+      "title": "{name}",
+      "defaultDescription": "Acquista {name} su FAOS. Olio d'oliva e miele biologico di alta qualità.",
+      "notFound": "Prodotto non trovato"
+    },
+    "Privacy": {
+      "title": "Informativa sulla Privacy",
+      "description": "Leggi l'Informativa sulla Privacy di FAOS per capire come raccogliamo, utilizziamo e proteggiamo le tue informazioni personali in modo sicuro.",
+      "keywords": [
+        "informativa sulla privacy",
+        "protezione dati",
+        "dati personali",
+        "FAOS privacy",
+        "privacy utente"
+      ],
+      "ogTitle": "Informativa sulla Privacy FAOS",
+      "ogDescription": "Scopri come FAOS raccoglie, utilizza e protegge i tuoi dati personali."
+    },
+    "About": {
+      "title": "La Nostra Storia e i Nostri Prodotti",
+      "description": "Scopri di più sull'olio d'oliva e il miele biologico premium di FAOS. Visualizza la nostra brochure ufficiale e la storia del marchio.",
+      "keywords": [
+        "FAOS",
+        "olio d'oliva biologico",
+        "miele biologico",
+        "brochure prodotti",
+        "storia del marchio"
+      ],
+      "ogTitle": "Chi Siamo FAOS - Prodotti Biologici Premium",
+      "ogDescription": "Olio d'oliva e miele biologico puro. Visualizza la nostra brochure ufficiale."
+    },
+    "Payment": {
+      "title": "Metodi di Pagamento",
+      "description": "Scopri i metodi di pagamento FAOS inclusi carta di credito e PromptPay QR. Pagamenti sicuri gestiti da Stripe.",
+      "keywords": [
+        "pagamento FAOS",
+        "carta di credito",
+        "PromptPay",
+        "pagamento sicuro",
+        "Stripe"
+      ],
+      "ogTitle": "Metodi di Pagamento Sicuri su FAOS",
+      "ogDescription": "Metodi di pagamento sicuri inclusi carta di credito e codice QR PromptPay."
+    },
+    "Category": {
+      "title": "{categoryName} | Selezione Premium FAOS",
+      "description": "Sfoglia tutti i prodotti {categoryName} di FAOS. Qualità premium, naturale e articoli accuratamente selezionati."
+    },
+    "Products": {
+      "title": "Tutti i prodotti",
+      "description": "Sfoglia la selezione premium di prodotti biologici FAOS. Scopri l'olio d'oliva puro e il miele naturale al 100% per la tua salute.",
+      "keywords": [
+        "olio d'oliva biologico",
+        "miele naturale",
+        "prodotti salutari",
+        "prodotti FAOS",
+        "cibo premium"
+      ],
+      "ogTitle": "Sfoglia tutti i prodotti premium FAOS",
+      "ogDescription": "Scopri la nostra collezione di olio d'oliva biologico e miele naturale di alta qualità."
+    },
+    "Home": {
+      "title": "Home",
+      "description": "Olio d'oliva e miele biologici premium 100% naturali, selezionati con cura per il tuo benessere.",
+      "keywords": [
+        "FAOS",
+        "olio d'oliva biologico",
+        "miele puro",
+        "miele biologico",
+        "alimenti salutari"
+      ],
+      "ogTitle": "FAOS - Olio d'Oliva e Miele Biologici Premium",
+      "ogDescription": "Prodotti naturali al 100% selezionati per la tua salute e il tuo benessere."
+    }
+  },
+  "Banner": {
+    "marketplace": {
+      "title": "Un nuovo traguardo... Ora siamo disponibili nei principali grandi magazzini e piattaforme online.",
+      "description": "(Scopri i nostri prodotti oggi stesso nei migliori punti vendita vicino a te! Un altro modo per la tua comodità.)"
+    },
+    "customer": "Il nostro sito è progettato per supportare i clienti nei mercati target in Asia, Europa e America <link>per offrirti un'esperienza di acquisto facile e veloce</link>",
+    "certificate": "Qualità garantita da standard internazionali rigorosi <link>perché la tua sicurezza è la nostra priorità</link> in ogni fase della produzione",
+    "advertise": {
+      "title": "Scopri il mondo dell'olio extra vergine di oliva: benefici naturali e consigli per la tua salute",
+      "messages": [
+        "L'olio extra vergine di oliva (EVOO) è la massima espressione di qualità, prodotto con processi meticolosi che privilegiano l'eccellenza rispetto alla quantità.",
+        "Ricco di polifenoli con proprietà antiossidanti e antinfiammatorie, protegge l'olio dall'ossidazione preservandone sapore e valori nutrizionali.",
+        "Contiene oleocantale, che agisce in modo simile all'ibuprofene, aiutando a regolare l'attività cellulare nei processi infiammatori e a ridurre i gonfiori.",
+        "Aiuta a regolare i livelli di colesterolo e trigliceridi, riducendo l'ossidazione del colesterolo LDL per la salute del cuore e dei vasi sanguigni.",
+        "I composti polifenolici supportano la salute mentale e aiutano a prevenire malattie neurodegenerative come l'Alzheimer e la demenza.",
+        "Migliora l'efficacia dell'insulina nel bilanciare i livelli di zucchero nel sangue e gioca un ruolo chiave nel mitigare i sintomi della sindrome metabolica (MS).",
+        "Contiene sitosterolo, che regola l'assorbimento del colesterolo, migliorando la digestione e offrendo un sollievo affidabile contro la stitichezza.",
+        "Prodotto da varietà antiche e uniche come Athenolia e Koroneiki, caratterizzate da un contenuto altissimo di polifenoli e antiossidanti.",
+        "Estratto a freddo con metodi meccanici tradizionali, senza raffinazione, sbiancamento o sostanze chimiche, per preservare la massima purezza.",
+        "I polifenoli riducono i danni da radicali liberi, rinforzano il cuore e aumentano l'energia: la scelta perfetta per migliorare le prestazioni sportive in modo naturale."
+      ]
+    }
+  },
+  "Section": {
+    "Header": {
+      "title": "Trova il Prodotto Perfetto per Te",
+      "description": "Esplora prodotti di qualità su misura per il tuo stile di vita unico."
+    },
+    "similar": "Prodotti Simili"
+  },
+  "CategoryCarousel": {
+    "title": "Acquista per Categoria",
+    "explore": "Vedi Tutti i Prodotti",
+    "empty": {
+      "title": "Nessun prodotto disponibile in questa categoria",
+      "description": "Prova a selezionare un'altra categoria o torna a trovarci più tardi."
+    }
+  },
+  "Footer": {
+    "copyright": "© {year} {name} - {title}",
+    "Menu": {
+      "privacy": "Informativa sulla Privacy"
+    }
+  },
+  "Country": {
+    "TH": "Thailandia",
+    "US": "Stati Uniti",
+    "GR": "Grecia",
+    "IT": "Italia",
+    "NL": "Paesi Bassi",
+    "MY": "Malesia",
+    "SG": "Singapore",
+    "JP": "Giappone",
+    "CN": "Cina",
+    "IS": "Islanda",
+    "VN": "Vietnam",
+    "ID": "Indonesia"
+  },
+  "Dashboard": {
+    "ProductManager": {
+      "addNew": "Aggiungi nuovi prodotti",
+      "manageCategories": "Gestisci categorie",
+      "manageShipping": "Gestisci costi spedizione",
+      "deleteSelected": "Elimina selezionati ({count})",
+      "tableAria": "Tabella dati prodotti",
+      "empty": "Nessuna informazione da visualizzare",
+      "colId": "ID Prodotto",
+      "colDigital": "Prodotto Digitale",
+      "colImage": "Immagine",
+      "colName": "Nome Prodotto",
+      "colPrice": "Prezzo Base",
+      "colStock": "Giacenza",
+      "colCategory": "Categoria",
+      "colActions": "Azioni",
+      "digitalProduct": "Prodotto digitale",
+      "dropdownAria": "Menu gestione prodotti",
+      "editInfo": "Modifica informazioni",
+      "manageImages": "Gestisci immagini",
+      "manageOptions": "Gestisci varianti",
+      "removeProduct": "Rimuovi prodotto"
+    },
+    "UserManager": {
+      "addNew": "Aggiungi Nuovi Utenti",
+      "deleteSelected": "Elimina elementi selezionati ({count})",
+      "tableAria": "Tabella dati utente",
+      "empty": "Nessuna informazione da visualizzare",
+      "colId": "ID Cliente",
+      "colImage": "Immagine",
+      "colName": "Nome Cliente",
+      "colEmail": "Email",
+      "colRole": "Ruolo",
+      "colStatus": "Stato Account",
+      "colActions": "Azioni",
+      "roleAdmin": "Amministratore di sistema",
+      "roleUser": "Cliente",
+      "statusEnable": "Abilitato",
+      "statusDisable": "Account sospeso",
+      "dropdownAria": "Menu gestione utenti",
+      "editInfo": "Modifica informazioni",
+      "deleteUser": "Chiudi account"
+    },
+    "BannerManager": {
+      "title": "Gestione Banner",
+      "noBanners": "Non ci sono ancora banner",
+      "dropdownLabel": "Menu gestione banner",
+      "editBanner": "Modifica banner",
+      "removeBanner": "Rimuovi banner",
+      "addBanner": "Aggiungi banner"
+    },
+    "CategoryManager": {
+      "title": "Gestisci Categorie Prodotti",
+      "loading": "Caricamento...",
+      "noData": "Non ci sono ancora categorie di prodotti",
+      "editInfo": "Modifica informazioni",
+      "removeCategory": "Rimuovi categoria",
+      "cancel": "Annulla",
+      "addCategory": "Aggiungi una categoria"
+    },
+    "ImageManager": {
+      "title": "Gestisci Immagini Prodotto",
+      "loading": "Caricamento...",
+      "noData": "Non ci sono ancora immagini del prodotto",
+      "editInfo": "Modifica informazioni",
+      "removeImage": "Rimuovi immagine",
+      "cancel": "Annulla",
+      "addImage": "Aggiungi immagine"
+    },
+    "ShippingCountryManager": {
+      "title": "Gestisci i costi di spedizione",
+      "loading": "Caricamento...",
+      "noData": "Non ci sono ancora paesi di spedizione.",
+      "baseRate": "Tariffa base",
+      "pricePerKg": "Prezzo al kg",
+      "editInfo": "Modifica informazioni",
+      "removeShipping": "Rimuovi spedizione",
+      "cancel": "Annulla",
+      "addShipping": "Aggiungi paese di spedizione"
+    },
+    "VariantManager": {
+      "title": "Gestisci varianti prodotto",
+      "loading": "Caricamento...",
+      "noData": "Non ci sono ancora varianti prodotto.",
+      "sku": "SKU",
+      "price": "Prezzo",
+      "priceNotSpecified": "(Specificare il prezzo)",
+      "stock": "Magazzino",
+      "stockNotSpecified": "(Specificare la disponibilità)",
+      "editInfo": "Modifica informazioni",
+      "removeOption": "Rimuovi variante",
+      "cancel": "Annulla",
+      "addOption": "Aggiungi varianti"
+    },
+    "Order": {
+      "table": {
+        "orderId": "ID Ordine",
+        "image": "Immagine",
+        "customerName": "Nome Cliente",
+        "orderDate": "Data Ordine",
+        "totalAmount": "Importo Totale",
+        "status": "Stato",
+        "trackingNumber": "Numero Tracking",
+        "actions": "Azioni",
+        "empty": "Non ci sono informazioni da visualizzare",
+        "loading": "Caricamento..."
+      },
+      "action": {
+        "status": "Stato ordine",
+        "details": "Vedi dettagli"
+      }
+    },
+    "ProductForm": {
+      "editTitle": "Modifica Prodotto",
+      "addTitle": "Aggiungi Nuovo Prodotto",
+      "statusSection": "Stato Prodotto",
+      "basicSection": "Informazioni di Base",
+      "priceSection": "Prezzo Prodotto",
+      "stockSection": "Stock e Inventario",
+      "seoSection": "Impostazioni SEO",
+      "fields": {
+        "isActive": "Disponibile per la vendita",
+        "isFeatured": "Prodotto in evidenza",
+        "isPremium": "Prodotto Premium",
+        "isAuthentic": "Autentico 100%",
+        "isDigital": "Prodotto Digitale",
+        "isDemo": "Versione Demo",
+        "name": "Nome Prodotto",
+        "category": "Categorie Prodotti",
+        "unit": "Unità di misura",
+        "sku": "SKU (Codice Prodotto)",
+        "barcode": "Codice a barre",
+        "shortDesc": "Breve Descrizione",
+        "fullDesc": "Descrizione Completa Prodotto",
+        "price": "Prezzo di Vendita",
+        "comparePrice": "Prezzo prima dello sconto",
+        "costPrice": "Prezzo di costo (interno)",
+        "stock": "Quantità in magazzino",
+        "lowStock": "Avviso stock basso",
+        "weight": "Peso (grammi)",
+        "autoSeo": "Genera SEO automaticamente",
+        "slug": "Slug URL",
+        "metaTitle": "Meta Title",
+        "metaDesc": "Meta Description"
+      }
+    },
+    "UserForm": {
+      "editTitle": "Modifica Utente",
+      "addTitle": "Aggiungi Utenti",
+      "imageChangedStatus": "Sono state apportate modifiche ai file immagine.",
+      "licenseHeading": "Licenza",
+      "activeLabel": "Attiva account",
+      "roleLabel": "Stato account",
+      "roleAdmin": "Amministratore di sistema",
+      "roleUser": "Cliente",
+      "infoHeading": "Informazioni di base",
+      "urlLabel": "URL Immagine",
+      "nameLabel": "Nome",
+      "emailLabel": "Email",
+      "passwordLabel": "Password",
+      "passwordChangeLabel": "Cambia password"
+    },
+    "BannerForm": {
+      "addTitle": "Aggiungi Banner",
+      "editTitle": "Modifica Banner",
+      "statusHeading": "Stato del Banner",
+      "activeLabel": "Banner Attivo",
+      "infoHeading": "Informazioni di Base",
+      "urlLabel": "URL Immagine",
+      "altLabel": "Testo Alt"
+    },
+    "manageBanners": "Gestisci Banner",
+    "siteSettings": "Impostazioni Sito",
+    "Stats": {
+      "allOrders": "Totale Ordini",
+      "pendingOrders": "Ordini in Attesa",
+      "deliveredOrders": "Ordini Consegnati",
+      "paymentDelivered": "Pagamenti Ricevuti",
+      "paymentCancelled": "Importi Annullati",
+      "paymentPending": "In Attesa di Pagamento",
+      "allProducts": "Prodotti Totali",
+      "inStockProducts": "Prodotti in Stock",
+      "outOfStockProducts": "Esaurito",
+      "allUsers": "Utenti Totali",
+      "activeUsers": "Utenti Attivi",
+      "inactiveUsers": "Utenti Disattivati"
+    }
+  }
+}

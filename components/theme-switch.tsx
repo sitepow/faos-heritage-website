@@ -1,78 +1,66 @@
-import { useSwitch, type SwitchProps } from '@heroui/switch'
-import { useIsSSR } from '@react-aria/ssr'
-import { VisuallyHidden } from '@react-aria/visually-hidden'
-import { MoonIcon, SunIcon } from 'lucide-react'
-import { useTheme } from 'next-themes'
+'use client'
 
-import type { FC } from 'react'
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  Button,
+} from '@heroui/react'
+import { MonitorCogIcon, MoonIcon, SunIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
+import { useTheme } from 'next-themes'
+import { useEffect, useState } from 'react'
 
 import { cn } from '@/utils/style'
 
-export interface Props {
+interface ThemeSwitchProps {
   className?: string
-  classNames?: SwitchProps['classNames']
 }
 
-const ThemeSwitch: FC<Props> = ({ className, classNames }) => {
+export const ThemeSwitch = ({ className }: ThemeSwitchProps) => {
+  const t = useTranslations('Common.theme')
   const { theme, setTheme } = useTheme()
-  const isSSR = useIsSSR()
+  const [mounted, setMounted] = useState(false)
 
-  const onChange = () => {
-    theme === 'light' ? setTheme('dark') : setTheme('light')
-  }
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
-  const {
-    Component,
-    slots,
-    isSelected,
-    getBaseProps,
-    getInputProps,
-    getWrapperProps,
-  } = useSwitch({
-    isSelected: theme === 'light' || isSSR,
-    'aria-label': `Switch to ${theme === 'light' || isSSR ? 'dark' : 'light'} mode`,
-    onChange,
-  })
+  if (!mounted) return <div className='size-10' />
 
   return (
-    <Component
-      {...getBaseProps({
-        className: cn(
-          'cursor-pointer px-px transition-opacity',
-          className,
-          classNames?.base,
-        ),
-      })}
-    >
-      <VisuallyHidden>
-        <input {...getInputProps()} />
-      </VisuallyHidden>
-      <div
-        {...getWrapperProps()}
-        className={slots.wrapper({
-          class: cn(
-            [
-              'h-auto w-auto',
-              'bg-transparent',
-              'rounded-lg',
-              'flex items-center justify-center',
-              'group-data-[selected=true]:bg-transparent',
-              'pt-px',
-              'px-0',
-              'mx-0',
-            ],
-            classNames?.wrapper,
-          ),
-        })}
-      >
-        {!isSelected || isSSR ? (
-          <SunIcon className='text-default-500' size={22} />
-        ) : (
-          <MoonIcon className='text-default-500' size={22} />
-        )}
-      </div>
-    </Component>
+    <div className={cn('flex items-center', className)}>
+      <Dropdown>
+        <DropdownTrigger>
+          <Button isIconOnly variant='light'>
+            {theme === 'light' && <SunIcon />}
+            {theme === 'dark' && <MoonIcon />}
+            {theme === 'system' && <MonitorCogIcon />}
+          </Button>
+        </DropdownTrigger>
+        <DropdownMenu
+          aria-label='Theme selection'
+          variant='faded'
+          disallowEmptySelection
+          selectionMode='single'
+          selectedKeys={new Set([theme || 'system'])}
+          onSelectionChange={(keys) => {
+            const selectedValue = Array.from(keys)[0] as string
+            setTheme(selectedValue)
+          }}
+        >
+          <DropdownItem key='light' startContent={<SunIcon />}>
+            {t('light')}
+          </DropdownItem>
+          <DropdownItem key='dark' startContent={<MoonIcon />}>
+            {t('dark')}
+          </DropdownItem>
+          <DropdownItem key='system' startContent={<MonitorCogIcon />}>
+            {t('system')}
+          </DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
+    </div>
   )
 }
-
-export { ThemeSwitch }

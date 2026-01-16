@@ -5,9 +5,10 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import FacebookProvider from 'next-auth/providers/facebook'
 import GoogleProvider from 'next-auth/providers/google'
 
-import { prisma } from '@/utils/prisma'
+import { ERROR_CODES } from '@/lib/errors/codes'
+import { prisma } from '@/lib/prisma'
 
-const NEXT_AUTH_OPTIONS: NextAuthOptions = {
+export const NEXT_AUTH_OPTIONS: NextAuthOptions = {
   session: { strategy: 'jwt' },
 
   providers: [
@@ -33,31 +34,27 @@ const NEXT_AUTH_OPTIONS: NextAuthOptions = {
         const password = credentials?.password
 
         if (!email || !password) {
-          throw new Error('กรุณากรอกอีเมลและรหัสผ่าน')
+          throw new Error(ERROR_CODES.INVALID_CREDENTIALS)
         }
 
         if (password.length < 6) {
-          throw new Error('รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร')
+          throw new Error(ERROR_CODES.PASSWORD_TOO_SHORT)
         }
 
         const user = await prisma.user.findUnique({ where: { email } })
 
         if (!user || !user.password) {
-          throw new Error(
-            'ไม่พบบัญชีผู้ใช้นี้ หรือ บัญชีนี้สมัครด้วย Google / Facebook กรุณาเข้าสู่ระบบด้วยวิธีเดิม',
-          )
+          throw new Error(ERROR_CODES.SOCIAL_ACCOUNT_EXISTS)
         }
 
-        if (!user?.isActive) {
-          throw new Error(
-            'บัญชีนี้ถูกระงับการใช้งาน โปรดติดต่อผู้แลระบบเพื่อขอเข้าการใช้งานอีกครั้ง',
-          )
+        if (!user.isActive) {
+          throw new Error(ERROR_CODES.ACCOUNT_SUSPENDED)
         }
 
         const valid = await compare(password, user.password)
 
         if (!valid) {
-          throw new Error('รหัสผ่านไม่ถูกต้อง โปรดลองใหม่อีกครั้ง')
+          throw new Error(ERROR_CODES.INVALID_CREDENTIALS)
         }
 
         return user
@@ -129,5 +126,4 @@ const NEXT_AUTH_OPTIONS: NextAuthOptions = {
 
 const handler = NextAuth(NEXT_AUTH_OPTIONS)
 
-export { NEXT_AUTH_OPTIONS }
 export { handler as GET, handler as POST }

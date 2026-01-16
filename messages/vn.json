@@ -1,0 +1,665 @@
+{
+  "Localization": {
+    "country": "Quốc gia",
+    "currency": "Tiền tệ"
+  },
+  "ProductUnit": {
+    "PIECE": "Cái",
+    "ITEM": "Mặt hàng",
+    "SET": "Bộ",
+    "BOX": "Hộp",
+    "PACK": "Gói",
+    "BAG": "Túi",
+    "BOTTLE": "Chai",
+    "CAN": "Lon",
+    "KG": "Kilogram",
+    "G": "Gram",
+    "L": "Lít",
+    "ML": "Mililit",
+    "PAIR": "Cặp",
+    "ROLL": "Cuộn",
+    "SHEET": "Tờ",
+    "UNIT": "Đơn vị",
+    "CAR": "Xe",
+    "HOUSE": "Nhà"
+  },
+  "Site": {
+    "name": "FAOS",
+    "title": "Dầu Ô Liu & Mật Ong Hữu Cơ Cao Cấp — 100% Thuần Khiết & Tự Nhiên",
+    "description": "Điểm đến hàng đầu cho dầu ô liu và mật ong hữu cơ chất lượng cao, được tuyển chọn cho lối sống lành mạnh của bạn."
+  },
+  "CancelPage": {
+    "title": "Hủy thanh toán",
+    "description": "Thanh toán của bạn chưa hoàn tất hoặc đã bị hủy trước khi hoàn thành. Hệ thống chưa thu phí của bạn.",
+    "referenceText": "Đơn hàng này có mã số tham chiếu là:",
+    "contactText": "Để đặt đơn hàng mới, bạn có thể quay lại và bắt đầu lại quy trình, hoặc sử dụng mã này để liên hệ bộ phận hỗ trợ."
+  },
+  "SuccessPage": {
+    "title": "Thanh toán thành công",
+    "description": "Cảm ơn bạn đã đặt hàng. Thanh toán của bạn đã được xác minh và xác nhận.",
+    "referenceText": "Đơn hàng này có mã số tham chiếu là",
+    "contactText": "Vui lòng giữ mã đơn hàng này để kiểm tra trạng thái sau này hoặc liên hệ bộ phận hỗ trợ."
+  },
+  "Common": {
+    "theme": {
+      "light": "Sáng",
+      "dark": "Tối",
+      "system": "Hệ thống"
+    },
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "loading": "Đang tải...",
+    "saving": "Đang lưu...",
+    "close": "Đóng",
+    "Breadcrumb": { "home": "Trang chủ", "products": "Tất cả sản phẩm" },
+    "ImageDropzone": {
+      "active": "Thả ảnh vào đây...",
+      "idle": "Kéo và thả ảnh vào đây",
+      "hint": "Hoặc nhấp để chọn tệp (hệ thống sẽ tự động thay đổi kích thước để tối ưu hiệu suất)",
+      "limit": "Hỗ trợ tải lên tệp tối đa {size}"
+    }
+  },
+  "OrderStatus": {
+    "PENDING": "Chờ thanh toán",
+    "PAID": "Đã thanh toán",
+    "PROCESSING": "Đang xử lý",
+    "SHIPPED": "Đã giao hàng",
+    "DELIVERED": "Đã nhận hàng",
+    "CANCELLED": "Đã hủy",
+    "REFUNDED": "Đã hoàn tiền"
+  },
+  "Account": {
+    "OrderCancel": {
+      "title": "Hủy đơn hàng",
+      "loading": "Đang tải...",
+      "reasonLabel": "Lý do",
+      "placeholder": "Vui lòng nhập lý do hủy đơn hàng hoặc hoàn tiền.",
+      "back": "Quay lại",
+      "confirm": "Xác nhận hủy",
+      "submitting": "Đang xử lý..."
+    },
+    "OrderView": {
+      "title": "Chi tiết đơn hàng",
+      "orderId": "Mã đơn hàng",
+      "loading": "Đang tải...",
+      "shippingAddress": "Địa chỉ nhận hàng",
+      "logistics": "Thông tin vận chuyển",
+      "trackingNo": "Mã vận đơn",
+      "preparing": "Đang chuẩn bị hàng",
+      "productList": "Danh sách sản phẩm",
+      "subtotal": "Tổng tiền hàng",
+      "shippingFee": "Phí vận chuyển",
+      "totalAmount": "Tổng thanh toán",
+      "cancelNote": "Lý do hủy",
+      "close": "Đóng"
+    },
+    "Orders": {
+      "title": "Đơn hàng của tôi",
+      "emptyState": "Bạn chưa có đơn hàng nào.",
+      "exploreLink": "Khám phá tất cả sản phẩm.",
+      "paymentAlert": "Vui lòng hoàn tất thanh toán trong vòng 20 phút. Nếu không, đơn hàng sẽ bị hủy tự động.",
+      "orderNumber": "Mã đơn hàng",
+      "items": "mục",
+      "orderDate": "Ngày đặt hàng",
+      "trackingNumber": "Mã vận đơn",
+      "buttons": {
+        "details": "Chi tiết đơn hàng",
+        "cancel": "Hủy đơn hàng",
+        "payNow": "Thanh toán ngay",
+        "downloadReceipt": "Tải hóa đơn"
+      }
+    },
+    "Address": {
+      "manageTitle": "Quản lý địa chỉ của tôi",
+      "addButton": "Thêm địa chỉ giao hàng",
+      "noAddressAlert": "Bạn chưa có địa chỉ giao hàng. Vui lòng thêm địa chỉ trước khi tiếp tục đặt hàng.",
+      "noDefaultAlert": "Vui lòng chọn địa chỉ giao hàng mặc định trước khi tiếp tục đặt hàng.",
+      "defaultTag": "Mặc định",
+      "editAddress": "Chỉnh sửa địa chỉ",
+      "removeAddress": "Xóa địa chỉ"
+    },
+    "AddressForm": {
+      "addTitle": "Thêm địa chỉ giao hàng",
+      "editTitle": "Chỉnh sửa địa chỉ giao hàng",
+      "loading": "Đang tải...",
+      "alertDescription": "Vui lòng đảm bảo địa chỉ của bạn chính xác để tránh các vấn đề giao hàng.",
+      "sections": {
+        "status": "Trạng thái địa chỉ",
+        "basic": "Thông tin cơ bản"
+      },
+      "fields": {
+        "enableAddress": "Sử dụng địa chỉ này",
+        "fullName": "Họ và tên",
+        "phone": "Số điện thoại",
+        "street": "Địa chỉ (Số nhà, Đường)",
+        "subDistrict": "Phường / Xã",
+        "district": "Quận / Huyện",
+        "province": "Tỉnh / Thành phố",
+        "postalCode": "Mã bưu điện",
+        "country": "Quốc gia"
+      },
+      "buttons": { "cancel": "Hủy", "save": "Lưu", "saving": "Đang lưu..." },
+      "errors": {
+        "name": "Vui lòng nhập tên",
+        "phone": "Vui lòng nhập số điện thoại",
+        "address": "Vui lòng nhập địa chỉ",
+        "subDistrict": "Vui lòng nhập phường/xã",
+        "district": "Vui lòng nhập quận/huyện",
+        "province": "Vui lòng nhập tỉnh/thành",
+        "postalCode": "Vui lòng nhập mã bưu điện",
+        "country": "Vui lòng chọn quốc gia"
+      }
+    },
+    "welcome": "Tài khoản của {name}",
+    "tabs": {
+      "manage": "Quản lý tài khoản",
+      "orders": "Đơn hàng của tôi",
+      "favorites": "Danh sách yêu thích",
+      "editProfile": "Chỉnh sửa thông tin cá nhân",
+      "editAddress": "Chỉnh sửa địa chỉ giao hàng",
+      "address": "Quản lý địa chỉ"
+    },
+    "personalInfo": "Thông tin cá nhân",
+    "basicInfo": "Thông tin cơ bản",
+    "imageChanged": "Đã có thay đổi đối với các tệp hình ảnh.",
+    "fields": {
+      "imageUrl": "URL hình ảnh",
+      "name": "Họ và tên",
+      "email": "Email",
+      "role": "Quyền hạn",
+      "productId": "Mã sản phẩm"
+    },
+    "buttons": {
+      "removeFavorite": "Xóa khỏi yêu thích",
+      "save": "Lưu",
+      "saving": "Đang lưu...",
+      "cancel": "Hủy"
+    },
+    "modals": {
+      "removeFavorite": {
+        "title": "Xác nhận xóa",
+        "description": "Bạn có chắc chắn muốn xóa sản phẩm này khỏi danh sách yêu thích không?"
+      }
+    },
+    "roles": {
+      "admin": "Quản trị viên",
+      "customer": "Khách hàng"
+    },
+    "favoritesEmpty": "Bạn chưa có sản phẩm yêu thích nào. <br/> <link>Khám phá tất cả sản phẩm</link>"
+  },
+  "Products": {
+    "categoryTitle": "Danh mục {name}",
+    "title": "Tất cả sản phẩm",
+    "loading": "Đang tải...",
+    "notFound": "Xin lỗi, không tìm thấy sản phẩm. Vui lòng thử tìm kiếm lại tại trang chủ.",
+    "breadcrumbs": {
+      "home": "Trang chủ",
+      "products": "Tất cả sản phẩm"
+    },
+    "pagination": "Hiển thị 1–{count} trên tổng số {total} sản phẩm",
+    "sortLabel": "Sắp xếp theo",
+    "sortItems": {
+      "newest": "Mới nhất",
+      "oldest": "Cũ nhất",
+      "price_low": "Giá Thấp đến Cao",
+      "price_high": "Giá Cao đến Thấp",
+      "stock_low": "Kho Thấp đến Cao",
+      "stock_high": "Kho Cao đến Thấp"
+    }
+  },
+  "Auth": {
+    "headerTitle": "Đăng nhập hoặc đăng ký",
+    "headerDesc": "Để truy cập trang web <link>{siteName}</link>",
+    "loginTab": "Đăng nhập",
+    "registerTab": "Đăng ký",
+    "emailLabel": "Email",
+    "passwordLabel": "Mật khẩu",
+    "confirmPasswordLabel": "Xác nhận mật khẩu",
+    "nameLabel": "Họ và tên",
+    "loginBtn": "Đăng nhập",
+    "registerBtn": "Đăng ký",
+    "socialDivider": "Hoặc tiếp tục theo các cách sau"
+  },
+  "Cart": {
+    "Checkout": {
+      "title": "Địa chỉ giao hàng",
+      "currencyAlert": "Quý khách đang chuẩn bị đặt hàng bằng đơn vị tiền tệ đã chọn. Vui lòng kiểm tra kỹ giá trước khi tiếp tục.",
+      "editAddress": "Sửa địa chỉ",
+      "paymentDetails": "Chi tiết thanh toán",
+      "totalPrice": "Tổng tiền hàng",
+      "shippingCost": "Phí vận chuyển",
+      "discount": "Giảm giá",
+      "netTotal": "Tổng thanh toán",
+      "noAddressAlert": "Vui lòng thêm địa chỉ giao hàng trước khi đặt hàng",
+      "addAddress": "Thêm địa chỉ",
+      "proceedBtn": "Tiến hành thanh toán"
+    },
+    "Item": {
+      "productId": "Mã SP",
+      "price": "Giá",
+      "remaining": "Còn lại",
+      "qtyLabel": "Số lượng",
+      "optionsLabel": "Tùy chọn",
+      "optionsPlaceholder": "Chọn tùy chọn"
+    },
+    "List": {
+      "header": "Danh sách sản phẩm",
+      "emptyCart": "Giỏ hàng của bạn đang trống. Hãy quay lại trang chủ để tìm kiếm và thêm sản phẩm vào giỏ."
+    },
+    "Page": {
+      "title": "Giỏ hàng của bạn {count, plural, =0 {} other {(# sản phẩm)}}",
+      "cartId": "Mã giỏ hàng",
+      "clearBtn": "Xóa toàn bộ giỏ hàng"
+    },
+    "Messages": {
+      "confirmDeleteTitle": "Xóa sản phẩm?",
+      "confirmDeleteDesc": "Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng không?",
+      "confirmClearTitle": "Xóa tất cả sản phẩm?",
+      "confirmClearDesc": "Tất cả sản phẩm sẽ bị xóa khỏi giỏ hàng của bạn. Hành động này không thể hoàn tác.",
+      "orderCreated": "Đơn hàng của bạn đã được tạo thành công. Vui lòng kiểm tra và tiến hành thanh toán.",
+      "confirmOrderTitle": "Xác nhận đặt hàng?",
+      "confirmOrderDesc": "Vui lòng xác nhận tính chính xác của danh sách sản phẩm và địa chỉ giao hàng. Nếu mọi thứ đều chính xác, bạn có thể tiến hành đặt hàng ngay lập tức."
+    }
+  },
+  "About": {
+    "title": "Về FAOS - Di Sản Của Sự Thuần Khiết",
+    "description": "FAOS cung cấp dầu ô liu và mật ong hữu cơ cao cấp được làm từ 100% thành phần tự nhiên. Tài liệu này giới thiệu danh mục sản phẩm và tiêu chuẩn chất lượng của chúng tôi.",
+    "philosophy": "Triết lý của chúng tôi bắt nguồn từ sự hài hòa giữa thiên nhiên và sức khỏe.",
+    "quality": "Chúng tôi tuân thủ các tiêu chuẩn hữu cơ quốc tế cao nhất.",
+    "origin": "Được khai thác từ những vùng đất màu mỡ, sản phẩm của chúng tôi kết tinh trí tuệ của nông nghiệp hữu cơ."
+  },
+  "Privacy": {
+    "title": "Chính Sách Bảo Mật",
+    "content": "FAOS cam kết bảo vệ <important>quyền riêng tư</important> và <important>dữ liệu cá nhân</important> của tất cả người dùng. Mọi thông tin liên quan đến cá nhân đều được xử lý <important>bảo mật nghiêm ngặt</important> và lưu trữ một <important>cách an toàn</important>. Điều này bao gồm tên, thông tin liên hệ và <important>dữ liệu giao dịch</important>. FAOS thực hiện các <important>biện pháp an ninh kỹ thuật và tổ chức</important> phù hợp để ngăn chặn việc <important>truy cập, tiết lộ, thay đổi hoặc phá hủy trái phép</important> dữ liệu. Thông tin cá nhân sẽ được thu thập và xử lý duy nhất cho <important>mục đích kinh doanh hợp pháp</important> và tuân thủ <important>luật bảo vệ dữ liệu hiện hành</important>. Dữ liệu cá nhân sẽ không được tiết lộ cho <important>bên thứ ba</important> nếu không có <important>sự đồng ý trước</important>, trừ trường hợp pháp luật quy định."
+  },
+  "Payment": {
+    "Header": {
+      "title": "Phương Thức Thanh Toán & Bảo Mật",
+      "description": "Chúng tôi cung cấp nhiều tùy chọn thanh toán an toàn và tiện lợi để đảm bảo trải nghiệm mua sắm suôn sẻ nhất cho quý khách."
+    },
+    "HowToShop": {
+      "title": "Hướng Dẫn Mua Hàng",
+      "ariaLabel": "Hướng dẫn các bước để bắt đầu mua sản phẩm",
+      "step1": "1. Khám phá bộ sưu tập cao cấp của chúng tôi, chọn sản phẩm bạn yêu thích và nhấn <important>“Thêm vào giỏ hàng”</important> để lưu vào túi mua sắm.",
+      "step2": "2. Mở giỏ hàng ở góc trên bên phải để kiểm tra lại các mặt hàng đã chọn, điều chỉnh số lượng hoặc xóa sản phẩm nếu cần thiết.",
+      "step3": "3. Khi đã hài lòng với lựa chọn của mình, nhấn <important>“Đặt hàng”</important> để chuyển sang hệ thống thanh toán an toàn.",
+      "step4": "4. Quý khách sẽ được chuyển hướng an toàn đến Stripe - đối tác thanh toán của chúng tôi, nơi quý khách có thể nhập thông tin và hoàn tất giao dịch một cách bảo mật."
+    },
+    "CardPayment": {
+      "title": "Thanh Toán Qua Thẻ Ghi Nợ / Thẻ Tín Dụng",
+      "ariaLabel": "Hướng dẫn thanh toán bằng thẻ ghi nợ hoặc thẻ tín dụng",
+      "description": "Chúng tôi hỗ trợ mạng lưới thanh toán toàn cầu. Quý khách có thể thanh toán an toàn bằng thẻ ghi nợ hoặc thẻ tín dụng từ tất cả các ngân hàng lớn trên thế giới.",
+      "acceptedCards": "Chúng tôi chấp nhận các loại thẻ có biểu tượng <important>Visa, Mastercard hoặc JCB</important>, bao gồm cả thẻ ảo và thẻ tín dụng quốc tế để thuận tiện cho quý khách.",
+      "securityNote": "Mọi giao dịch của quý khách đều được mã hóa và bảo vệ bởi công nghệ bảo mật hàng đầu thế giới từ Stripe."
+    },
+    "QRCodePayment": {
+      "title": "Thanh Toán Qua Mã QR (Mobile Banking)",
+      "ariaLabel": "Hướng dẫn thanh toán bằng mã QR",
+      "description": "Để thanh toán nhanh chóng hơn, quý khách có thể chọn thanh toán tức thì qua mã QR. Đây là phương thức được khuyến khích để tăng tính tiện lợi.",
+      "method": "Chỉ cần quét <important>Mã QR PromptPay</important> thông qua ứng dụng ngân hàng di động của quý khách. Dịch vụ này được hỗ trợ bởi các ngân hàng lớn và không mất thêm phí giao dịch.",
+      "expiryNote": "* Vui lòng đảm bảo giao dịch thanh toán được hoàn tất trong khoảng thời gian quy định hiển thị trên trang thanh toán."
+    }
+  },
+  "ProductChip": {
+    "authentic": "Chính Hãng 100%",
+    "premium": "Cao Cấp",
+    "demo": "Bản Demo",
+    "digital": "Sản Phẩm Số",
+    "uncategorized": "Chưa Phân Loại"
+  },
+  "ProductTab": {
+    "description": "Mô Tả Sản Phẩm",
+    "review": "Đánh Giá Khách Hàng"
+  },
+  "ProductCart": {
+    "quantity": "Số Lượng",
+    "productOptions": "Chọn Phân Loại",
+    "addToFavorites": "Thêm Vào Yêu Thích",
+    "addToCart": "Thêm Vào Giỏ Hàng",
+    "pleaseLoginFirst": "Vui lòng đăng nhập để {action}",
+    "outOfStock": "Hết Hàng",
+    "quantityExceedsStock": "Số lượng vượt quá kho hàng có sẵn",
+    "share": "Chia Sẻ Sản Phẩm"
+  },
+  "Navbar": {
+    "Header": "Tinh hoa dầu ô liu và mật ong hữu cơ, cho lối sống khỏe mạnh trường tồn",
+    "Menu": {
+      "home": "Trang Chủ",
+      "products": "Tất Cả Sản Phẩm",
+      "payments": "Phương Thức Thanh Toán",
+      "about": "Về Chúng Tôi",
+      "dashboard": "Bảng Điều Khiển",
+      "users": "Quản Lý Người Dùng",
+      "orders": "Quản Lý Đơn Hàng"
+    },
+    "Panel": {
+      "account": "Tài Khoản Của Tôi",
+      "orders": "Đơn Mua Của Tôi",
+      "favorites": "Danh Sách Yêu Thích",
+      "adminDashboard": "Trang Quản Trị",
+      "logout": "Đăng Xuất"
+    }
+  },
+  "Meta": {
+    "ProductDetail": {
+      "title": "{name}",
+      "defaultDescription": "Mua {name} từ FAOS. Dầu oliu và mật ong hữu cơ cao cấp cho sức khỏe của bạn.",
+      "notFound": "Không tìm thấy sản phẩm"
+    },
+    "Privacy": {
+      "title": "Chính sách bảo mật",
+      "description": "Đọc Chính sách bảo mật của FAOS để hiểu cách chúng tôi thu thập, sử dụng và bảo vệ thông tin cá nhân của bạn một cách an toàn.",
+      "keywords": [
+        "chính sách bảo mật",
+        "bảo vệ dữ liệu",
+        "dữ liệu cá nhân",
+        "FAOS privacy",
+        "quyền riêng tư"
+      ],
+      "ogTitle": "Chính sách bảo mật của FAOS",
+      "ogDescription": "Tìm hiểu cách FAOS thu thập, sử dụng và bảo vệ dữ liệu cá nhân của bạn."
+    },
+    "About": {
+      "title": "Câu chuyện & Sản phẩm của chúng tôi",
+      "description": "Tìm hiểu thêm về dầu oliu và mật ong hữu cơ cao cấp của FAOS. Xem tài liệu sản phẩm chính thức và câu chuyện thương hiệu.",
+      "keywords": [
+        "FAOS",
+        "dầu oliu hữu cơ",
+        "mật ong hữu cơ",
+        "brochure sản phẩm",
+        "câu chuyện thương hiệu"
+      ],
+      "ogTitle": "Về FAOS - Sản phẩm hữu cơ cao cấp",
+      "ogDescription": "Dầu oliu và mật ong hữu cơ nguyên chất. Xem thông tin thương hiệu tại đây."
+    },
+    "Payment": {
+      "title": "Phương thức thanh toán",
+      "description": "Tìm hiểu về các phương thức thanh toán tại FAOS bao gồm thẻ tín dụng và PromptPay QR. Thanh toán an toàn qua Stripe.",
+      "keywords": [
+        "thanh toán FAOS",
+        "thẻ tín dụng",
+        "PromptPay",
+        "thanh toán an toàn",
+        "Stripe"
+      ],
+      "ogTitle": "Phương thức thanh toán an toàn tại FAOS",
+      "ogDescription": "Hỗ trợ thanh toán qua thẻ tín dụng và mã QR PromptPay an toàn."
+    },
+    "Category": {
+      "title": "{categoryName} | Tuyển chọn cao cấp FAOS",
+      "description": "Duyệt tất cả sản phẩm {categoryName} từ FAOS. Chất lượng cao cấp, tự nhiên và được chọn lọc kỹ lưỡng."
+    },
+    "Products": {
+      "title": "Tất cả sản phẩm",
+      "description": "Duyệt qua các sản phẩm hữu cơ cao cấp của FAOS. Khám phá dầu oliu nguyên chất và mật ong tự nhiên 100% cho sức khỏe của bạn.",
+      "keywords": [
+        "dầu oliu hữu cơ",
+        "mật ong tự nhiên",
+        "sản phẩm sức khỏe",
+        "sản phẩm FAOS",
+        "thực phẩm cao cấp"
+      ],
+      "ogTitle": "Xem tất cả sản phẩm cao cấp từ FAOS",
+      "ogDescription": "Khám phá bộ sưu tập dầu oliu hữu cơ và mật ong tự nhiên chất lượng cao."
+    },
+    "Home": {
+      "title": "Trang Chủ",
+      "description": "Cung cấp dầu ô liu và mật ong hữu cơ 100% tự nhiên, được lựa chọn kỹ lưỡng cho sức khỏe của bạn.",
+      "keywords": [
+        "FAOS",
+        "dầu ô liu hữu cơ",
+        "mật ong nguyên chất",
+        "mật ong hữu cơ",
+        "thực phẩm sức khỏe"
+      ],
+      "ogTitle": "FAOS - Dầu Ô Liu & Mật Ong Hữu Cơ Cao Cấp",
+      "ogDescription": "Sản phẩm tự nhiên nguyên chất 100% được tuyển chọn cho sức khỏe và lối sống của bạn."
+    }
+  },
+  "Banner": {
+    "marketplace": {
+      "title": "Một bước tiến mới... Hiện chúng tôi đã có mặt tại các trung tâm thương mại và nền tảng trực tuyến hàng đầu.",
+      "description": "(Trải nghiệm sản phẩm ngay hôm nay tại các cửa hàng gần nhất! Thêm một lựa chọn tiện lợi cho bạn.)"
+    },
+    "customer": "Trang web của chúng tôi được thiết kế để hỗ trợ khách hàng tại các thị trường mục tiêu ở Châu Á, Châu Âu và Châu Mỹ <link>nhằm mang đến cho bạn trải nghiệm mua sắm nhanh chóng và dễ dàng</link>",
+    "certificate": "Tự tin về chất lượng với các tiêu chuẩn quốc tế được chúng tôi kiểm tra nghiêm ngặt <link>vì sự an toàn của bạn là ưu tiên hàng đầu</link> trong mọi quy trình sản xuất",
+    "advertise": {
+      "title": "Khám phá thế giới dầu Ô liu Extra Virgin: Lợi ích tự nhiên và những điều cần biết cho sức khỏe của bạn",
+      "messages": [
+        "Dầu Ô liu Extra Virgin (EVOO) là loại dầu chất lượng cao nhất, được sản xuất thông qua quy trình tỉ mỉ, ưu tiên chất lượng hơn số lượng.",
+        "Giàu polyphenol với đặc tính chống oxy hóa và chống viêm, bảo vệ dầu khỏi bị oxy hóa và giữ nguyên hương vị cũng như giá trị dinh dưỡng.",
+        "Chứa Oleocanthal hoạt động tương tự như ibuprofen, giúp điều chỉnh hoạt động của tế bào trong các tế bào bị viêm và giảm sưng tấy khắp cơ thể.",
+        "Giúp cân bằng mức cholesterol và chất béo trung tính, đồng thời giảm quá trình oxy hóa LDL để có sức khỏe tim mạch và mạch máu tốt hơn.",
+        "Các hợp chất polyphenol giúp cải thiện sức khỏe tinh thần và ngăn ngừa các bệnh thoái hóa thần kinh như Alzheimer và sa sút trí tuệ.",
+        "Tăng cường hiệu quả của insulin trong việc duy trì mức đường huyết cân bằng và đóng vai trò quan trọng trong việc làm giảm các triệu chứng của hội chứng chuyển hóa (MS).",
+        "Chứa 'sitosterol' giúp điều chỉnh sự hấp thụ cholesterol, giúp hệ tiêu hóa khỏe mạnh hơn và giảm táo bón một cách hiệu quả.",
+        "Được sản xuất từ các giống ô liu cổ thụ độc đáo như Athenolia và Koroneiki, có hàm lượng polyphenol và chất chống oxy hóa cực cao.",
+        "Sử dụng kỹ thuật ép lạnh truyền thống chỉ bằng phương pháp cơ học; không tinh chế, không tẩy trắng và không hóa chất để duy trì độ tinh khiết tối đa.",
+        "Polyphenol hoạt động bằng cách giảm tổn thương do gốc tự do, tăng cường sức khỏe tim mạch và mức năng lượng, là lựa chọn hoàn hảo để nâng cao hiệu suất thể thao một cách tự nhiên."
+      ]
+    }
+  },
+  "Section": {
+    "Header": {
+      "title": "Tìm Sản Phẩm Phù Hợp Với Bạn",
+      "description": "Khám phá các sản phẩm chất lượng được thiết kế riêng cho lối sống độc đáo của bạn."
+    },
+    "similar": "Sản Phẩm Tương Tự"
+  },
+  "CategoryCarousel": {
+    "title": "Mua Theo Danh Mục",
+    "explore": "Xem Tất Cả Sản Phẩm",
+    "empty": {
+      "title": "Không có sản phẩm nào trong danh mục này",
+      "description": "Vui lòng thử chọn danh mục khác hoặc quay lại sau."
+    }
+  },
+  "Footer": {
+    "copyright": "© {year} {name} - {title}",
+    "Menu": {
+      "privacy": "Chính Sách Bảo Mật"
+    }
+  },
+  "Country": {
+    "TH": "Thái Lan",
+    "US": "Hoa Kỳ",
+    "GR": "Hy Lạp",
+    "IT": "Ý",
+    "NL": "Hà Lan",
+    "MY": "Malaysia",
+    "SG": "Singapore",
+    "JP": "Nhật Bản",
+    "CN": "Trung Quốc",
+    "IS": "Iceland",
+    "VN": "Việt Nam",
+    "ID": "Indonesia"
+  },
+  "Dashboard": {
+    "ProductManager": {
+      "addNew": "Thêm sản phẩm mới",
+      "manageCategories": "Quản lý danh mục",
+      "manageShipping": "Quản lý phí vận chuyển",
+      "deleteSelected": "Xóa các mục đã chọn ({count})",
+      "tableAria": "Bảng dữ liệu sản phẩm",
+      "empty": "Không có thông tin để hiển thị",
+      "colId": "Mã sản phẩm",
+      "colDigital": "Sản phẩm số",
+      "colImage": "Hình ảnh",
+      "colName": "Tên sản phẩm",
+      "colPrice": "Giá chính",
+      "colStock": "Kho hàng",
+      "colCategory": "Danh mục",
+      "colActions": "Hành động",
+      "digitalProduct": "Sản phẩm kỹ thuật số",
+      "dropdownAria": "Menu quản lý sản phẩm",
+      "editInfo": "Chỉnh sửa thông tin",
+      "manageImages": "Quản lý hình ảnh",
+      "manageOptions": "Quản lý tùy chọn",
+      "removeProduct": "Xóa sản phẩm"
+    },
+    "UserManager": {
+      "addNew": "Thêm người dùng mới",
+      "deleteSelected": "Xóa mục đã chọn ({count})",
+      "tableAria": "Bảng dữ liệu người dùng",
+      "empty": "Không có thông tin để hiển thị",
+      "colId": "Mã khách hàng",
+      "colImage": "Ảnh",
+      "colName": "Tên khách hàng",
+      "colEmail": "Email",
+      "colRole": "Vai trò",
+      "colStatus": "Trạng thái tài khoản",
+      "colActions": "Hành động",
+      "roleAdmin": "Quản trị viên hệ thống",
+      "roleUser": "Khách hàng",
+      "statusEnable": "Đang hoạt động",
+      "statusDisable": "Tài khoản bị tạm ngưng",
+      "dropdownAria": "Menu quản lý người dùng",
+      "editInfo": "Chỉnh sửa thông tin",
+      "deleteUser": "Đóng tài khoản"
+    },
+    "BannerManager": {
+      "title": "Quản lý Banner",
+      "noBanners": "Chưa có banner nào",
+      "dropdownLabel": "Menu quản lý banner",
+      "editBanner": "Chỉnh sửa banner",
+      "removeBanner": "Xóa banner",
+      "addBanner": "Thêm banner"
+    },
+    "CategoryManager": {
+      "title": "Quản lý danh mục sản phẩm",
+      "loading": "Đang tải...",
+      "noData": "Chưa có danh mục sản phẩm nào",
+      "editInfo": "Chỉnh sửa thông tin",
+      "removeCategory": "Xóa danh mục",
+      "cancel": "Hủy",
+      "addCategory": "Thêm danh mục"
+    },
+    "ImageManager": {
+      "title": "Quản lý hình ảnh sản phẩm",
+      "loading": "Đang tải...",
+      "noData": "Chưa có hình ảnh sản phẩm nào",
+      "editInfo": "Chỉnh sửa thông tin",
+      "removeImage": "Xóa hình ảnh",
+      "cancel": "Hủy",
+      "addImage": "Thêm hình ảnh"
+    },
+    "ShippingCountryManager": {
+      "title": "Quản lý chi phí vận chuyển",
+      "loading": "Đang tải...",
+      "noData": "Chưa có quốc gia vận chuyển nào.",
+      "baseRate": "Cước phí cơ bản",
+      "pricePerKg": "Giá mỗi kg",
+      "editInfo": "Chỉnh sửa thông tin",
+      "removeShipping": "Xóa vận chuyển",
+      "cancel": "Hủy",
+      "addShipping": "Thêm quốc gia vận chuyển"
+    },
+    "VariantManager": {
+      "title": "Quản lý tùy chọn sản phẩm",
+      "loading": "Đang tải...",
+      "noData": "Chưa có tùy chọn sản phẩm nào.",
+      "sku": "Mã SKU",
+      "price": "Giá",
+      "priceNotSpecified": "(Vui lòng chỉ định giá)",
+      "stock": "Kho hàng",
+      "stockNotSpecified": "(Vui lòng chỉ định số lượng kho)",
+      "editInfo": "Chỉnh sửa thông tin",
+      "removeOption": "Xóa tùy chọn",
+      "cancel": "Hủy",
+      "addOption": "Thêm tùy chọn"
+    },
+    "Order": {
+      "table": {
+        "orderId": "Mã đơn hàng",
+        "image": "Hình ảnh",
+        "customerName": "Tên khách hàng",
+        "orderDate": "Ngày đặt hàng",
+        "totalAmount": "Tổng tiền",
+        "status": "Trạng thái",
+        "trackingNumber": "Mã vận đơn",
+        "actions": "Thao tác",
+        "empty": "Không có thông tin để hiển thị",
+        "loading": "Đang tải..."
+      },
+      "action": {
+        "status": "Trạng thái đơn hàng",
+        "details": "Xem chi tiết"
+      }
+    },
+    "ProductForm": {
+      "editTitle": "Chỉnh sửa sản phẩm",
+      "addTitle": "Thêm sản phẩm mới",
+      "statusSection": "Trạng thái sản phẩm",
+      "basicSection": "Thông tin cơ bản",
+      "priceSection": "Giá sản phẩm",
+      "stockSection": "Kho hàng",
+      "seoSection": "Cấu hình SEO",
+      "fields": {
+        "isActive": "Sẵn sàng bán",
+        "isFeatured": "Sản phẩm nổi bật",
+        "isPremium": "Sản phẩm cao cấp",
+        "isAuthentic": "Chính hãng 100%",
+        "isDigital": "Sản phẩm số",
+        "isDemo": "Phiên bản thử nghiệm",
+        "name": "Tên sản phẩm",
+        "category": "Danh mục sản phẩm",
+        "unit": "Đơn vị tính",
+        "sku": "SKU (Mã sản phẩm)",
+        "barcode": "Mã vạch",
+        "shortDesc": "Mô tả ngắn",
+        "fullDesc": "Mô tả chi tiết sản phẩm",
+        "price": "Giá bán",
+        "comparePrice": "Giá trước khi giảm",
+        "costPrice": "Giá vốn (nội bộ)",
+        "stock": "Số lượng tồn kho",
+        "lowStock": "Cảnh báo sắp hết hàng",
+        "weight": "Trọng lượng (gram)",
+        "autoSeo": "Tự động tạo SEO",
+        "slug": "Slug (Đường dẫn)",
+        "metaTitle": "Tiêu đề Meta",
+        "metaDesc": "Mô tả Meta"
+      }
+    },
+    "UserForm": {
+      "editTitle": "Chỉnh sửa người dùng",
+      "addTitle": "Thêm người dùng",
+      "imageChangedStatus": "Đã có thay đổi đối với tệp hình ảnh.",
+      "licenseHeading": "Giấy phép & Quyền",
+      "activeLabel": "Kích hoạt tài khoản",
+      "roleLabel": "Trạng thái tài khoản",
+      "roleAdmin": "Quản trị viên hệ thống",
+      "roleUser": "Khách hàng",
+      "infoHeading": "Thông tin cơ bản",
+      "urlLabel": "URL hình ảnh",
+      "nameLabel": "Họ và tên",
+      "emailLabel": "Email",
+      "passwordLabel": "Mật khẩu",
+      "passwordChangeLabel": "Thay đổi mật khẩu"
+    },
+    "BannerForm": {
+      "addTitle": "Thêm Banner",
+      "editTitle": "Chỉnh sửa Banner",
+      "statusHeading": "Trạng thái Banner",
+      "activeLabel": "Kích hoạt Banner này",
+      "infoHeading": "Thông tin cơ bản",
+      "urlLabel": "Đường dẫn hình ảnh",
+      "altLabel": "Văn bản thay thế (Alt)"
+    },
+    "manageBanners": "Quản lý Banner",
+    "siteSettings": "Cài đặt trang web",
+    "Stats": {
+      "allOrders": "Tổng đơn hàng",
+      "pendingOrders": "Đơn hàng chờ xử lý",
+      "deliveredOrders": "Đơn hàng thành công",
+      "paymentDelivered": "Doanh thu thực tế",
+      "paymentCancelled": "Tiền đơn đã hủy",
+      "paymentPending": "Tiền chờ thanh toán",
+      "allProducts": "Tổng sản phẩm",
+      "inStockProducts": "Sản phẩm còn hàng",
+      "outOfStockProducts": "Sản phẩm hết hàng",
+      "allUsers": "Tổng người dùng",
+      "activeUsers": "Người dùng đang hoạt động",
+      "inactiveUsers": "Người dùng bị khóa"
+    }
+  }
+}

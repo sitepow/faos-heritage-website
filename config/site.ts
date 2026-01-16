@@ -1,61 +1,36 @@
-import { ACCOUNT_TAB } from '@/utils/const'
+export type SiteConfig = typeof siteConfig
 
-type SiteConfig = typeof siteConfig
-
-interface NavItem {
+export interface NavItem {
   label: string
   href: string
 }
 
-const siteConfig = {
-  name: 'ZentraCore',
-  title: 'สร้างร้านค้าออนไลน์ของคุณ',
-  description: '',
+export const disableSeoConfig = {
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    noarchive: true,
+    nosnippet: true,
+  },
+}
+
+export const siteConfig = {
   link: {
     login: '/login',
     cart: '/cart',
   },
   mainNavItems: [
-    {
-      label: 'หน้าหลัก',
-      href: '/',
-    },
-    {
-      label: 'สินค้าทั้งหมด',
-      href: '/products',
-    },
-    {
-      label: 'วิธีการชำระเงิน',
-      href: '/payment',
-    },
-    {
-      label: 'คำสั่งซื้อของฉัน',
-      href: `/account?tab=${ACCOUNT_TAB?.ORDER}`,
-    },
-    {
-      label: 'เกี่ยวกับเรา',
-      href: '/about',
-    },
+    { label: 'home', href: '/' },
+    { label: 'products', href: '/products' },
+    { label: 'payments', href: '/payment' },
+    { label: 'about', href: '/about' },
   ] satisfies NavItem[],
+
   adminNavbarItems: [
-    {
-      label: 'ภาพรวม',
-      href: '/dashboard',
-    },
-    {
-      label: 'จัดการข้อมูลผู้ใช้งาน',
-      href: '/dashboard/user',
-    },
-    {
-      label: 'จัดการข้อมูลสินค้า',
-      href: '/dashboard/product',
-    },
-    {
-      label: 'จัดการข้อมูลคำสั่งซื้อ',
-      href: '/dashboard/order',
-    },
+    { label: 'dashboard', href: '/dashboard' },
+    { label: 'users', href: '/dashboard/user' },
+    { label: 'products', href: '/dashboard/product' },
+    { label: 'orders', href: '/dashboard/order' },
   ] satisfies NavItem[],
 }
-
-export type { SiteConfig, NavItem }
-export { siteConfig }

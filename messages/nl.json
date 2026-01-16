@@ -1,0 +1,666 @@
+{
+  "Localization": {
+    "country": "Land",
+    "currency": "Valuta"
+  },
+  "ProductUnit": {
+    "PIECE": "Stuk",
+    "ITEM": "Item",
+    "SET": "Set",
+    "BOX": "Doos",
+    "PACK": "Pakket",
+    "BAG": "Zak",
+    "BOTTLE": "Fles",
+    "CAN": "Blik",
+    "KG": "Kilogram",
+    "G": "Gram",
+    "L": "Liter",
+    "ML": "Milliliter",
+    "PAIR": "Paar",
+    "ROLL": "Rol",
+    "SHEET": "Vel",
+    "UNIT": "Eenheid",
+    "CAR": "Auto",
+    "HOUSE": "Huis"
+  },
+  "Site": {
+    "name": "FAOS",
+    "title": "Premium Biologische Olijfolie & Honing — 100% Puur & Natuurlijk",
+    "description": "Uw adres voor hoogwaardige biologische olijfolie en honing, speciaal geselecteerd voor een gezonde levensstijl."
+  },
+  "CancelPage": {
+    "title": "Betaling Geannuleerd",
+    "description": "Uw betaling is niet voltooid of is geannuleerd voor voltooiing. Er zijn geen kosten in rekening gebracht.",
+    "referenceText": "Deze bestelling heeft het volgende referentienummer:",
+    "contactText": "Om een nieuwe bestelling te plaatsen, kunt u teruggaan en het proces opnieuw starten, of dit nummer gebruiken voor de klantenservice."
+  },
+  "SuccessPage": {
+    "title": "Betaling geslaagd",
+    "description": "Bedankt voor uw bestelling. Uw betaling is geverifieerd en bevestigd.",
+    "referenceText": "Deze bestelling heeft het volgende referentienummer",
+    "contactText": "Bewaar dit ordernummer voor latere statuscontroles of om contact op te nemen met de klantenservice."
+  },
+  "Common": {
+    "theme": {
+      "light": "Licht",
+      "dark": "Donker",
+      "system": "Systeem"
+    },
+    "save": "Opslaan",
+    "cancel": "Annuleren",
+    "loading": "Laden...",
+    "saving": "Opslaan...",
+    "close": "Sluiten",
+    "Breadcrumb": { "home": "Home", "products": "Alle Producten" },
+    "ImageDropzone": {
+      "active": "Plaats de afbeelding hier...",
+      "idle": "Sleep afbeeldingen hiernaartoe",
+      "hint": "Of klik om een bestand te selecteren (systeem past grootte aan voor betere prestaties)",
+      "limit": "Ondersteunt uploads tot {size}"
+    }
+  },
+  "OrderStatus": {
+    "PENDING": "Wacht op betaling",
+    "PAID": "Betaald",
+    "PROCESSING": "In verwerking",
+    "SHIPPED": "Verzonden",
+    "DELIVERED": "Geleverd",
+    "CANCELLED": "Geannuleerd",
+    "REFUNDED": "Terugbetaald"
+  },
+  "Account": {
+    "OrderCancel": {
+      "title": "Bestelling Annuleren",
+      "loading": "Laden...",
+      "reasonLabel": "Reden",
+      "placeholder": "Voer de reden voor annulering of terugbetaling in.",
+      "back": "Terug",
+      "confirm": "Annulering Bevestigen",
+      "submitting": "In uitvoering..."
+    },
+    "OrderView": {
+      "title": "Bestelgegevens",
+      "orderId": "Bestel-ID",
+      "loading": "Laden...",
+      "shippingAddress": "Verzendadres",
+      "logistics": "Logistieke Informatie",
+      "trackingNo": "Trackingnummer",
+      "preparing": "Voorbereiden voor verzending",
+      "productList": "Productoverzicht",
+      "subtotal": "Subtotaal Producten",
+      "shippingFee": "Verzendkosten",
+      "totalAmount": "Totaalbedrag",
+      "cancelNote": "Reden van annulering",
+      "close": "Sluiten"
+    },
+    "Orders": {
+      "title": "Mijn bestellingen",
+      "emptyState": "Je hebt nog geen bestellingen.",
+      "exploreLink": "Bekijk alle producten.",
+      "paymentAlert": "Voltooi de betaling binnen 20 minuten. Anders wordt uw bestelling automatisch geannuleerd.",
+      "orderNumber": "Bestelnummer",
+      "items": "items",
+      "orderDate": "Besteldatum",
+      "trackingNumber": "Trackingnummer",
+      "buttons": {
+        "details": "Bestelgegevens",
+        "cancel": "Bestelling annuleren",
+        "payNow": "Nu betalen",
+        "downloadReceipt": "Download bon"
+      }
+    },
+    "Address": {
+      "manageTitle": "Mijn adressen beheren",
+      "addButton": "Verzendadres toevoegen",
+      "noAddressAlert": "U heeft nog geen verzendadres. Voeg een adres toe voordat u doorgaat met uw bestelling.",
+      "noDefaultAlert": "Selecteer een standaard verzendadres voordat u doorgaat met uw bestelling.",
+      "defaultTag": "Standaard",
+      "editAddress": "Adres bewerken",
+      "removeAddress": "Adres verwijderen"
+    },
+    "AddressForm": {
+      "addTitle": "Verzendadres toevoegen",
+      "editTitle": "Verzendadres bewerken",
+      "loading": "Laden...",
+      "alertDescription": "Zorg ervoor dat uw adres correct is om leveringsproblemen te voorkomen.",
+      "sections": { "status": "Adresstatus", "basic": "Basisinformatie" },
+      "fields": {
+        "enableAddress": "Schakel dit adres in",
+        "fullName": "Volledige naam",
+        "phone": "Telefoonnummer",
+        "street": "Adres (Straat en Huisnummer)",
+        "subDistrict": "Wijk / Buurt",
+        "district": "Gemeente",
+        "province": "Provincie",
+        "postalCode": "Postcode",
+        "country": "Land"
+      },
+      "buttons": {
+        "cancel": "Annuleren",
+        "save": "Opslaan",
+        "saving": "Opslaan..."
+      },
+      "errors": {
+        "name": "Naam is verplicht",
+        "phone": "Telefoonnummer is verplicht",
+        "address": "Adres is verplicht",
+        "subDistrict": "Wijk is verplicht",
+        "district": "Gemeente is verplicht",
+        "province": "Provincie is verplicht",
+        "postalCode": "Postcode is verplicht",
+        "country": "Land is verplicht"
+      }
+    },
+    "welcome": "Jouw account {name}",
+    "tabs": {
+      "manage": "Mijn account beheren",
+      "orders": "Mijn bestellingen",
+      "favorites": "Favorieten",
+      "editProfile": "Persoonlijke gegevens bewerken",
+      "editAddress": "Verzendadres bewerken",
+      "address": "Adressen beheren"
+    },
+    "personalInfo": "Persoonlijke gegevens",
+    "basicInfo": "Basisinformatie",
+    "imageChanged": "Er zijn wijzigingen aangebracht in de afbeeldingsbestanden.",
+    "fields": {
+      "imageUrl": "Afbeelding URL",
+      "name": "Naam - Achternaam",
+      "email": "E-mail",
+      "role": "Licentie",
+      "productId": "Product-ID"
+    },
+    "buttons": {
+      "removeFavorite": "Verwijder uit favorieten",
+      "save": "Opslaan",
+      "saving": "Opslaan...",
+      "cancel": "Annuleren"
+    },
+    "modals": {
+      "removeFavorite": {
+        "title": "Bevestig verwijdering",
+        "description": "Weet je zeker dat je dit item uit je favorieten wilt verwijderen?"
+      }
+    },
+    "roles": {
+      "admin": "Systeembeheerder",
+      "customer": "Klant"
+    },
+    "favoritesEmpty": "Je hebt nog geen items in je favorietenlijst staan. <br/> <link>Bekijk alle producten</link>"
+  },
+  "Products": {
+    "categoryTitle": "Categorie {name}",
+    "title": "Alle producten",
+    "loading": "Laden...",
+    "notFound": "Excuses, het product is niet gevonden. Zoek opnieuw via de homepagina.",
+    "breadcrumbs": {
+      "home": "Home",
+      "products": "Alle producten"
+    },
+    "pagination": "Toont 1–{count} van {total} resultaten",
+    "sortLabel": "Sorteren op",
+    "sortItems": {
+      "newest": "Nieuwste eerst",
+      "oldest": "Oudste eerst",
+      "price_low": "Prijs Laag naar Hoog",
+      "price_high": "Prijs Hoog naar Laag",
+      "stock_low": "Voorraad Laag naar Hoog",
+      "stock_high": "Voorraad Hoog naar Laag"
+    }
+  },
+  "Auth": {
+    "headerTitle": "Inloggen of registreren",
+    "headerDesc": "Om toegang te krijgen tot de website <link>{siteName}</link>",
+    "loginTab": "Inloggen",
+    "registerTab": "Registreren",
+    "emailLabel": "E-mail",
+    "passwordLabel": "Wachtwoord",
+    "confirmPasswordLabel": "Wachtwoord bevestigen",
+    "nameLabel": "Naam",
+    "loginBtn": "Inloggen",
+    "registerBtn": "Registreren",
+    "socialDivider": "Of ga als volgt verder"
+  },
+  "Cart": {
+    "Checkout": {
+      "title": "Verzendadres",
+      "currencyAlert": "U staat op het punt een bestelling te plaatsen in de gekozen valuta. Controleer de prijs zorgvuldig.",
+      "editAddress": "Bewerk",
+      "paymentDetails": "Betalingsgegevens",
+      "totalPrice": "Totaalprijs",
+      "shippingCost": "Verzendkosten",
+      "discount": "Korting",
+      "netTotal": "Netto totaal",
+      "noAddressAlert": "Voeg een verzendadres toe voordat u bestelt",
+      "addAddress": "Adres toevoegen",
+      "proceedBtn": "Afrekenen"
+    },
+    "Item": {
+      "productId": "Product ID",
+      "price": "Prijs",
+      "remaining": "Resterend",
+      "qtyLabel": "Aantal",
+      "optionsLabel": "Productopties",
+      "optionsPlaceholder": "Kies een optie"
+    },
+    "List": {
+      "header": "Productlijst",
+      "emptyCart": "Je winkelwagen is leeg. Bekijk onze producten op de homepagina om items toe te voegen."
+    },
+    "Page": {
+      "title": "Je winkelwagen {count, plural, =0 {} other {(# artikelen)}}",
+      "cartId": "Winkelwagen-ID",
+      "clearBtn": "Winkelwagen leegmaken"
+    },
+    "Messages": {
+      "confirmDeleteTitle": "Artikel verwijderen?",
+      "confirmDeleteDesc": "Weet je zeker dat je dit artikel uit je winkelwagen wilt verwijderen?",
+      "confirmClearTitle": "Hele winkelwagen leegmaken?",
+      "confirmClearDesc": "Hiermee worden alle artikelen uit je winkelwagen verwijderd. Deze actie kan niet ongedaan worden gemaakt.",
+      "orderCreated": "Je bestelling is aangemaakt. Controleer de gegevens en ga verder met de betaling.",
+      "confirmOrderTitle": "Wil je de bestelling plaatsen?",
+      "confirmOrderDesc": "Controleer of de productlijst en het verzendadres correct zijn. Als alles klopt, kun je direct je bestelling afronden."
+    }
+  },
+  "About": {
+    "title": "Over FAOS - Ons Erfgoed van Zuiverheid",
+    "description": "FAOS biedt hoogwaardige biologische olijfolie en honing, gemaakt van 100% natuurlijke ingrediënten. Deze brochure presenteert ons productassortiment en onze kwaliteitsnormen.",
+    "philosophy": "Onze filosofie is geworteld in de harmonie tussen natuur en gezondheid.",
+    "quality": "Wij houden ons aan de hoogste internationale biologische normen.",
+    "origin": "Afkomstig van vruchtbare gronden, belichamen onze producten de traditie van biologische landbouw."
+  },
+  "Privacy": {
+    "title": "Privacybeleid",
+    "content": "FAOS zet zich volledig in voor het beschermen van de <important>privacy</important> en <important>persoonsgegevens</important> van alle gebruikers. Alle informatie die herleidbaar is tot een individu wordt als strikt <important>vertrouwelijk</important> behandeld en op een <important>veilige manier</important> bewaard. Dit omvat namen, contactgegevens en <important>transactiegegevens</important>. FAOS hanteert passende <important>technische en organisatorische beveiligingsmaatregelen</important> om <important>onbevoegde toegang, openbaarmaking, wijziging of vernietiging</important> van gegevens te voorkomen. Persoonsgegevens worden uitsluitend verzameld voor <important>legitieme zakelijke doeleinden</important> en in overeenstemming met de <important>toepasselijke wetgeving inzake gegevensbescherming</important>. Gegevens worden niet gedeeld met <important>derden</important> zonder <important>voorafgaande toestemming</important>, tenzij wettelijk verplicht."
+  },
+  "Payment": {
+    "Header": {
+      "title": "Betaalmethoden & Beveiliging",
+      "description": "Wij bieden verschillende veiligeและhandige betaalopties aan om een soepele winkelervaring voor al onze klanten te garanderen."
+    },
+    "HowToShop": {
+      "title": "Hoe u kunt bestellen",
+      "ariaLabel": "Gids over hoe u producten kunt kopen",
+      "step1": "1. Bekijk onze premium collectie, selecteer de gewenste artikelen en klik op <important>“In Winkelwagen”</important> om ze op te slaan.",
+      "step2": "2. Open uw winkelwagen rechtsboven om uw geselecteerde artikelen te controleren, aantallen aan te passen of producten te verwijderen indien nodig.",
+      "step3": "3. Wanneer u klaar bent met uw selectie, klikt u op <important>“Bestelling Plaatsen”</important> om door te gaan naar het beveiligde afrekensysteem.",
+      "step4": "4. U wordt veilig doorgeleid naar onze betaalpartner Stripe, waar u uw betaalgegevens veilig kunt invoeren en uw aankoop kunt voltooien."
+    },
+    "CardPayment": {
+      "title": "Betalen via Betaalpas / Creditcard",
+      "ariaLabel": "Instructies voor betaling met betaalpas of creditcard",
+      "description": "Wij ondersteunen een breed scala aan wereldwijde betaalnetwerken. U kunt veilig betalen met betaalpassen of creditcards van alle grote banken wereldwijd.",
+      "acceptedCards": "Wij accepteren kaarten met het <important>Visa, Mastercard of JCB</important> logo, inclusief virtuele kaarten en internationale creditcards voor uw gemak.",
+      "securityNote": "Uw transactie is versleuteld en beveiligd door de toonaangevende technologie van Stripe."
+    },
+    "QRCodePayment": {
+      "title": "Betalen via QR-code (Mobiel Bankieren)",
+      "ariaLabel": "Instructies voor betaling via QR-code",
+      "description": "Voor een snellere afhandeling kunt u direct betalen via een QR-code. Deze methode wordt ten zeerste aanbevolen voor uw gemak.",
+      "method": "Scan eenvoudig de <important>PromptPay QR-code</important> via uw mobiel bankieren app. Deze service wordt ondersteund door alle grote banken zonder extra transactiekosten.",
+      "expiryNote": "* Zorg ervoor dat de betaling is voltooid binnen de aangegeven tijd op de betaalpagina."
+    }
+  },
+  "ProductChip": {
+    "authentic": "100% Authentiek",
+    "premium": "Premium",
+    "demo": "Demoversie",
+    "digital": "Digitaal Product",
+    "uncategorized": "Niet Gecategoriseerd"
+  },
+  "ProductTab": {
+    "description": "Productomschrijving",
+    "review": "Klantbeoordelingen"
+  },
+  "ProductCart": {
+    "quantity": "Aantal",
+    "productOptions": "Selecteer Opties",
+    "addToFavorites": "Toevoegen aan Favorieten",
+    "addToCart": "In Winkelwagen",
+    "pleaseLoginFirst": "Log in om te {action}",
+    "outOfStock": "Niet op Voorraad",
+    "quantityExceedsStock": "Aantal overschrijdt de beschikbare voorraad",
+    "share": "Deel Product"
+  },
+  "Navbar": {
+    "Header": "De beste biologische olijfolie en honing, voor uw gezonde levensstijl",
+    "Menu": {
+      "home": "Home",
+      "products": "Alle Producten",
+      "payments": "Betaalmethoden",
+      "about": "Over Ons",
+      "dashboard": "Dashboard",
+      "users": "Gebruikersbeheer",
+      "orders": "Bestelbeheer"
+    },
+    "Panel": {
+      "account": "Mijn Account",
+      "orders": "Mijn Bestellingen",
+      "favorites": "Mijn Favorieten",
+      "adminDashboard": "Beheerderspaneel",
+      "logout": "Uitloggen"
+    }
+  },
+  "Meta": {
+    "ProductDetail": {
+      "title": "{name}",
+      "defaultDescription": "Koop {name} bij FAOS. Hoogwaardige biologische olijfolie en honing.",
+      "notFound": "Product niet gevonden"
+    },
+    "Privacy": {
+      "title": "Privacybeleid",
+      "description": "Lees het Privacybeleid van FAOS om te begrijpen hoe wij uw persoonlijke informatie veilig verzamelen, gebruiken en beschermen.",
+      "keywords": [
+        "privacybeleid",
+        "gegevensbescherming",
+        "persoonsgegevens",
+        "FAOS privacy",
+        "gebruikersprivacy"
+      ],
+      "ogTitle": "Privacybeleid van FAOS",
+      "ogDescription": "Leer hoe FAOS uw persoonlijke gegevens verzamelt, gebruikt en beschermt."
+    },
+    "About": {
+      "title": "Ons Verhaal & Onze Producten",
+      "description": "Lees meer over de premium biologische olijfolie en honing van FAOS. Bekijk onze officiële brochure en het verhaal achter ons merk.",
+      "keywords": [
+        "FAOS",
+        "biologische olijfolie",
+        "biologische honing",
+        "productbrochure",
+        "merkverhaal"
+      ],
+      "ogTitle": "Over FAOS - Premium Biologische Producten",
+      "ogDescription": "Pure biologische olijfolie en honing. Bekijk onze officiële merkoverzicht."
+    },
+    "Payment": {
+      "title": "Betaalmethoden",
+      "description": "Lees meer over de betaalmethoden van FAOS, waaronder creditcard en PromptPay QR. Veilige betalingen via Stripe.",
+      "keywords": [
+        "FAOS betaling",
+        "creditcard betaling",
+        "PromptPay",
+        "veilig betalen",
+        "Stripe"
+      ],
+      "ogTitle": "Veilige Betaalmethoden bij FAOS",
+      "ogDescription": "Veilige betaalmethoden waaronder creditcard en PromptPay QR-code."
+    },
+    "Category": {
+      "title": "{categoryName} | FAOS Premium Selectie",
+      "description": "Bekijk alle {categoryName} producten van FAOS. Premium kwaliteit, natuurlijk en zorgvuldig geselecteerde artikelen."
+    },
+    "Products": {
+      "title": "Όλα τα Προϊόντα",
+      "description": "Περιηγηθείτε στην premium επιλογή βιολογικών προϊόντων FAOS. Ανακαλύψτε αγνό ελαιόλαδο και 100% φυσικό μέλι για την υγεία σας.",
+      "keywords": [
+        "βιολογικό ελαιόλαδο",
+        "φυσικό μέλι",
+        "υγιεινά προϊόντα",
+        "προϊόντα FAOS",
+        "premium τρόφιμα"
+      ],
+      "ogTitle": "Δείτε όλα τα Premium προϊόντα της FAOS",
+      "ogDescription": "Ανακαλύψτε τη συλλογή μας από εξαιρετικής ποιότητας βιολογικό ελαιόλαδο και φυσικό μέλι."
+    },
+    "Home": {
+      "title": "Home",
+      "description": "Premium 100% natuurlijke biologische olijfolie en honing, zorgvuldig geselecteerd voor uw welzijn.",
+      "keywords": [
+        "FAOS",
+        "biologische olijfolie",
+        "pure honing",
+        "biologische honing",
+        "gezonde voeding"
+      ],
+      "ogTitle": "FAOS - Premium Biologische Olijfolie & Honing",
+      "ogDescription": "100% pure natuurlijke producten geselecteerd voor uw gezondheid en welzijn."
+    }
+  },
+  "Banner": {
+    "marketplace": {
+      "title": "Een nieuwe mijlpaal... We zijn nu beschikbaar bij toonaangevende warenhuizen en online platforms.",
+      "description": "(Ervaar onze producten vandaag nog bij de bekende winkels bij u in de buurt! Extra gemak voor u.)"
+    },
+    "customer": "Onze website is ontworpen voor klanten in Azië, Europa en Amerika <link>voor een gemakkelijke en snelle bestelervaring</link>",
+    "certificate": "Vertrouw op kwaliteit met internationale normen die we grondig controleren <link>omdat uw veiligheid centraal staat</link> in elke stap van onze productie",
+    "advertise": {
+      "title": "Maak kennis met de wereld van Extra Vierge Olijfolie: natuurlijke voordelen en feiten voor uw gezondheid",
+      "messages": [
+        "Extra Vierge Olijfolie (EVOO) is de hoogste kwaliteit olie, geproduceerd via een zorgvuldig proces waarbij kwaliteit boven kwantiteit gaat.",
+        "Rijk aan polyfenolen met antioxiderende en ontstekingsremmende eigenschappen, die de olie beschermen tegen oxidatie en de smaak en voedingswaarde behouden.",
+        "Bevat Oleocanthal, wat op dezelfde manier werkt als ibuprofen, helpt bij het reguleren van celactiviteit in ontstoken cellen en vermindert zwellingen in het lichaam.",
+        "Helpt bij het optimaliseren van cholesterol- en triglyceridenspiegels en vermindert de oxidatie van LDL voor een gezond hart en bloedvaten.",
+        "Polyfenolverbindingen helpen de mentale gezondheid te verbeteren en voorkomen neurodegeneratieve ziekten zoals Alzheimer en dementie.",
+        "Verbetert de efficiëntie van insuline om de bloedsuikerspiegel in balans te houden en speelt een belangrijke rol bij het verlichten van symptomen van het metabool syndroom (MS).",
+        "Bevat 'sitosterol' dat helpt bij het reguleren van de cholesterolabsorptie, wat het spijsverteringsstelsel versterkt en betrouwbare verlichting biedt bij constipatie.",
+        "Geproduceerd van unieke oude olijfvariëteiten zoals Athenolia en Koroneiki, die extreem hoge concentraties polyfenolen en antioxidanten bevatten.",
+        "Maakt gebruik van traditionele koude persingstechnieken met alleen mechanische methoden; ongeraffineerd, ongebleekt en vrij van chemicaliën voor maximale zuiverheid.",
+        "Polyfenolen werken door schade door vrije radicalen te verminderen, het hart te versterken en het energieniveau te verhogen, wat het perfect maakt voor natuurlijke sportprestaties."
+      ]
+    }
+  },
+  "Section": {
+    "Header": {
+      "title": "Vind het Product dat bij u Past",
+      "description": "Ontdek kwaliteitsproducten die aansluiten bij uw unieke levensstijl."
+    },
+    "similar": "Vergelijkbare Producten"
+  },
+  "CategoryCarousel": {
+    "title": "Shop per Categorie",
+    "explore": "Bekijk alle Producten",
+    "empty": {
+      "title": "Geen producten beschikbaar in deze categorie",
+      "description": "Probeer een andere categorie of kom later terug."
+    }
+  },
+  "Footer": {
+    "copyright": "© {year} {name} - {title}",
+    "Menu": {
+      "privacy": "Privacybeleid"
+    }
+  },
+  "Country": {
+    "TH": "Thailand",
+    "US": "Verenigde Staten",
+    "GR": "Griekenland",
+    "IT": "Italië",
+    "NL": "Nederland",
+    "MY": "Maleisië",
+    "SG": "Singapore",
+    "JP": "Japan",
+    "CN": "China",
+    "IS": "IJsland",
+    "VN": "Vietnam",
+    "ID": "Indonesië"
+  },
+  "Dashboard": {
+    "ProductManager": {
+      "addNew": "Nieuwe producten toevoegen",
+      "manageCategories": "Productcategorieën beheren",
+      "manageShipping": "Verzendkosten beheren",
+      "deleteSelected": "Geselecteerde items verwijderen ({count})",
+      "tableAria": "Productgegevenstabel",
+      "empty": "Geen informatie om weer te geven",
+      "colId": "Product-ID",
+      "colDigital": "Digitaal Product",
+      "colImage": "Afbeelding",
+      "colName": "Productnaam",
+      "colPrice": "Hoofdprijs",
+      "colStock": "Voorraad",
+      "colCategory": "Categorie",
+      "colActions": "Acties",
+      "digitalProduct": "Digitaal product",
+      "dropdownAria": "Productbeheer menu",
+      "editInfo": "Informatie bewerken",
+      "manageImages": "Afbeeldingen beheren",
+      "manageOptions": "Opties beheren",
+      "removeProduct": "Product verwijderen"
+    },
+    "UserManager": {
+      "addNew": "Nieuwe Gebruikers Toevoegen",
+      "deleteSelected": "Geselecteerde items verwijderen ({count})",
+      "tableAria": "Gebruikersgegevenstabel",
+      "empty": "Geen informatie om weer te geven",
+      "colId": "Klant-ID",
+      "colImage": "Afbeelding",
+      "colName": "Klantnaam",
+      "colEmail": "E-mail",
+      "colRole": "Rol",
+      "colStatus": "Accountstatus",
+      "colActions": "Acties",
+      "roleAdmin": "Systeembeheerder",
+      "roleUser": "Klant",
+      "statusEnable": "Ingeschakeld",
+      "statusDisable": "Account geschorst",
+      "dropdownAria": "Gebruikersbeheer menu",
+      "editInfo": "Informatie bewerken",
+      "deleteUser": "Account sluiten"
+    },
+    "BannerManager": {
+      "title": "Bannerbeheer",
+      "noBanners": "Er zijn nog geen banners",
+      "dropdownLabel": "Bannerbeheer menu",
+      "editBanner": "Banner bewerken",
+      "removeBanner": "Banner verwijderen",
+      "addBanner": "Banner toevoegen"
+    },
+    "CategoryManager": {
+      "title": "Productcategorieën Beheren",
+      "loading": "Laden...",
+      "noData": "Er zijn nog geen productcategorieën",
+      "editInfo": "Informatie bewerken",
+      "removeCategory": "Categorie verwijderen",
+      "cancel": "Annuleren",
+      "addCategory": "Categorie toevoegen"
+    },
+    "ImageManager": {
+      "title": "Productafbeeldingen Beheren",
+      "loading": "Laden...",
+      "noData": "Er zijn nog geen productafbeeldingen",
+      "editInfo": "Informatie bewerken",
+      "removeImage": "Afbeelding verwijderen",
+      "cancel": "Annuleren",
+      "addImage": "Afbeelding toevoegen"
+    },
+    "ShippingCountryManager": {
+      "title": "Verzendkosten beheren",
+      "loading": "Laden...",
+      "noData": "Er zijn nog geen verzendlanden.",
+      "baseRate": "Basistarief",
+      "pricePerKg": "Prijs per kg",
+      "editInfo": "Informatie bewerken",
+      "removeShipping": "Verzending verwijderen",
+      "cancel": "Annuleren",
+      "addShipping": "Verzendland toevoegen"
+    },
+    "VariantManager": {
+      "title": "Productopties beheren",
+      "loading": "Laden...",
+      "noData": "Er zijn nog geen productopties.",
+      "sku": "SKU",
+      "price": "Prijs",
+      "priceNotSpecified": "(Voer een prijs in)",
+      "stock": "Voorraad",
+      "stockNotSpecified": "(Voer voorraad in)",
+      "editInfo": "Informatie bewerken",
+      "removeOption": "Optie verwijderen",
+      "cancel": "Annuleren",
+      "addOption": "Opties toevoegen"
+    },
+    "Order": {
+      "table": {
+        "orderId": "Bestel ID",
+        "image": "Afbeelding",
+        "customerName": "Klantnaam",
+        "orderDate": "Besteldatum",
+        "totalAmount": "Totaalbedrag",
+        "status": "Status",
+        "trackingNumber": "Trackingnummer",
+        "actions": "Acties",
+        "empty": "Geen gegevens om weer te geven",
+        "loading": "Laden..."
+      },
+      "action": {
+        "status": "Bestelstatus",
+        "details": "Bekijk details"
+      }
+    },
+    "ProductForm": {
+      "editTitle": "Product Bewerken",
+      "addTitle": "Nieuw Product Toevoegen",
+      "statusSection": "Productstatus",
+      "basicSection": "Basis informatie",
+      "priceSection": "Productprijs",
+      "stockSection": "Voorraad & Inventaris",
+      "seoSection": "SEO-instellingen",
+      "fields": {
+        "isActive": "Beschikbaar voor verkoop",
+        "isFeatured": "Uitgelicht product",
+        "isPremium": "Premium Product",
+        "isAuthentic": "100% Authentiek",
+        "isDigital": "Digitaal Product",
+        "isDemo": "Demoversie",
+        "name": "Productnaam",
+        "category": "Productcategorieën",
+        "unit": "Meeteenheid",
+        "sku": "SKU (Productcode)",
+        "barcode": "Barcode",
+        "shortDesc": "Korte beschrijving",
+        "fullDesc": "Volledige productomschrijving",
+        "price": "Verkoopprijs",
+        "comparePrice": "Prijs voor korting",
+        "costPrice": "Kostprijs (intern)",
+        "stock": "Aantal in voorraad",
+        "lowStock": "Waarschuwing lage voorraad",
+        "weight": "Gewicht (gram)",
+        "autoSeo": "SEO automatisch genereren",
+        "slug": "Slug",
+        "metaTitle": "Meta-titel",
+        "metaDesc": "Meta-omschrijving"
+      }
+    },
+    "UserForm": {
+      "editTitle": "Gebruiker Bewerken",
+      "addTitle": "Gebruikers Toevoegen",
+      "imageChangedStatus": "Er zijn wijzigingen aangebracht in de afbeeldingsbestanden.",
+      "licenseHeading": "Licentie",
+      "activeLabel": "Account activeren",
+      "roleLabel": "Accountstatus",
+      "roleAdmin": "Systeembeheerder",
+      "roleUser": "Klant",
+      "infoHeading": "Basis informatie",
+      "urlLabel": "Afbeeldings-URL",
+      "nameLabel": "Naam",
+      "emailLabel": "E-mail",
+      "passwordLabel": "Wachtwoord",
+      "passwordChangeLabel": "Wachtwoord wijzigen"
+    },
+    "BannerForm": {
+      "addTitle": "Banner Toevoegen",
+      "editTitle": "Banner Bewerken",
+      "statusHeading": "Banner Status",
+      "activeLabel": "Actieve Banner",
+      "infoHeading": "Basisinformatie",
+      "urlLabel": "Afbeelding URL",
+      "altLabel": "Alt-tekst"
+    },
+    "manageBanners": "Banners Beheren",
+    "siteSettings": "Website Instellingen",
+    "Stats": {
+      "allOrders": "Totaal Bestellingen",
+      "pendingOrders": "Bestellingen in Wacht",
+      "deliveredOrders": "Geleverde Bestellingen",
+      "paymentDelivered": "Ontvangen Betalingen",
+      "paymentCancelled": "Geannuleerde Bedragen",
+      "paymentPending": "Wachten op Betaling",
+      "allProducts": "Totaal Producten",
+      "inStockProducts": "Op Voorraad",
+      "outOfStockProducts": "Niet op Voorraad",
+      "allUsers": "Totaal Gebruikers",
+      "activeUsers": "Actieve Gebruikers",
+      "inactiveUsers": "Inactieve Gebruikers"
+    }
+  }
+}

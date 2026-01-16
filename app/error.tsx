@@ -2,14 +2,12 @@
 
 import { useEffect } from 'react'
 
-import type { FC } from 'react'
-
-interface Props {
+interface ErrorProps {
   error: Error
   reset: () => void
 }
 
-const Error: FC<Props> = ({ error, reset }) => {
+export default function Error({ error, reset }: ErrorProps) {
   useEffect(() => {
     // Log the error to an error reporting service
     /* eslint-disable no-console */
@@ -30,5 +28,3 @@ const Error: FC<Props> = ({ error, reset }) => {
     </div>
   )
 }
-
-export default Error

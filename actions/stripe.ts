@@ -3,42 +3,89 @@
 import { OrderStatus } from '@prisma/client'
 import Stripe from 'stripe'
 
-import { prisma } from '@/utils/prisma'
+import type { ActionResult } from '@/lib/errors/types'
+
+import { ERROR_CODES } from '@/lib/errors/codes'
+import { done, fail } from '@/lib/errors/server'
+import { prisma } from '@/lib/prisma'
+import { decimalToNumber } from '@/utils/helpers/number'
+import { toStripeAmount } from '@/utils/helpers/supabase'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-11-17.clover',
+  apiVersion: '2025-12-15.clover',
 })
 
-interface Params {
+interface CreateStripeCheckoutParams {
   orderId: string
 }
 
-const createStripeCheckout = async ({ orderId }: Params) => {
-  if (!orderId) throw new Error('ไม่พบ orderId')
+export const createStripeCheckout = async ({
+  orderId,
+}: CreateStripeCheckoutParams): Promise<
+  ActionResult<{ checkoutUrl: string }>
+> => {
+  if (!orderId) {
+    return fail(ERROR_CODES.DATA_FIELD_REQUIRED)
+  }
 
-  const order = await prisma.order.findUnique({
-    where: { id: orderId },
-    include: {
-      items: true,
-      user: true,
-    },
-  })
+  const order = decimalToNumber(
+    await prisma.order.findUnique({
+      where: { id: orderId },
+      select: {
+        id: true,
+        status: true,
+        currency: true,
+        shippingCost: true,
+        items: {
+          select: {
+            price: true,
+            quantity: true,
+            productName: true,
+          },
+        },
+        user: {
+          select: {
+            email: true,
+          },
+        },
+      },
+    }),
+  )
 
-  if (!order) throw new Error('ไม่พบคำสั่งซื้อ')
+  if (!order) {
+    return fail(ERROR_CODES.DATA_NOT_FOUND)
+  }
 
-  if (order.status !== OrderStatus.PENDING)
-    throw new Error('คำสั่งซื้อนี้ไม่สามารถชำระเงินได้')
+  if (order.status !== OrderStatus.PENDING) {
+    return fail(ERROR_CODES.DATA_CANNOT_PROCEED)
+  }
 
   const session = await stripe.checkout.sessions.create({
     mode: 'payment',
     payment_method_types: ['card', 'promptpay'],
     customer_email: order.user?.email ?? undefined,
 
+    shipping_options:
+      order.shippingCost > 0
+        ? [
+            {
+              shipping_rate_data: {
+                type: 'fixed_amount',
+                fixed_amount: {
+                  amount: toStripeAmount(order.shippingCost, order.currency),
+                  currency: order.currency,
+                },
+                display_name: 'Shipping fee',
+              },
+            },
+          ]
+        : undefined,
+
     line_items: order.items.map((item) => ({
       quantity: item.quantity,
       price_data: {
-        currency: 'thb',
-        unit_amount: Math.round(item.price * 100),
+        currency: order.currency,
+        unit_amount: toStripeAmount(item?.price ?? 0, order.currency),
         product_data: {
           name: item.productName,
         },
@@ -60,9 +107,9 @@ const createStripeCheckout = async ({ orderId }: Params) => {
     },
   })
 
-  return {
-    checkoutUrl: session.url,
+  if (!session.url) {
+    return fail(ERROR_CODES.SYSTEM_ERROR)
   }
-}
 
-export { createStripeCheckout }
+  return done({ checkoutUrl: session.url })
+}

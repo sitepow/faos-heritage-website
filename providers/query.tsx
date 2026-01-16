@@ -9,21 +9,44 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 
-import type { FC, PropsWithChildren } from 'react'
+import type { ActionResult } from '@/lib/errors/types'
+import type { PropsWithChildren } from 'react'
 
-const QueryProviders: FC<PropsWithChildren> = ({ children }) => {
+import { ERROR_CODES } from '@/lib/errors/codes'
+import { ERROR_MESSAGE_MAP } from '@/lib/errors/map'
+
+function isActionResult(value: unknown): value is ActionResult<unknown> {
+  if (typeof value !== 'object' || value === null) return false
+
+  return (
+    'success' in value &&
+    typeof (value as { success: unknown }).success === 'boolean'
+  )
+}
+
+export const QueryProviders = ({ children }: PropsWithChildren) => {
   const [queryClient] = useState(
     () =>
       new QueryClient({
         defaultOptions: {
           queries: {
-            staleTime: 60 * 1000,
+            staleTime: 5 * 60 * 1000,
+            gcTime: 30 * 60 * 1000,
             refetchOnWindowFocus: false,
           },
         },
         mutationCache: new MutationCache({
-          onError: (error) => {
-            toast.error(error?.message || 'เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง')
+          onSuccess: (data) => {
+            if (isActionResult(data) && !data.success) {
+              toast.error(
+                ERROR_MESSAGE_MAP[data.code] ??
+                  ERROR_MESSAGE_MAP[ERROR_CODES.SYSTEM_ERROR],
+              )
+            }
+          },
+
+          onError: () => {
+            toast.error(ERROR_MESSAGE_MAP[ERROR_CODES.SYSTEM_ERROR])
           },
         }),
       }),
@@ -32,9 +55,9 @@ const QueryProviders: FC<PropsWithChildren> = ({ children }) => {
   return (
     <QueryClientProvider client={queryClient}>
       {children}
-      <ReactQueryDevtools initialIsOpen={false} />
+      {process.env.NODE_ENV === 'development' && (
+        <ReactQueryDevtools initialIsOpen={false} />
+      )}
     </QueryClientProvider>
   )
 }
-
-export default QueryProviders

@@ -2,10 +2,8 @@
 
 import { SessionProvider } from 'next-auth/react'
 
-import type { FC, PropsWithChildren } from 'react'
+import type { PropsWithChildren } from 'react'
 
-const NextAuthProviders: FC<PropsWithChildren> = ({ children }) => {
+export const NextAuthProviders = ({ children }: PropsWithChildren) => {
   return <SessionProvider>{children}</SessionProvider>
 }
-
-export { NextAuthProviders }
