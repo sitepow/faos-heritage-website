@@ -13,7 +13,7 @@ export const MarketplaceBanner = () => {
         style={{
           backgroundImage: `
             linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.7), rgba(0,0,0,1)),
-            url('/images/market/market_place.avif')
+            url('/images/banner/market-place.jpg')
           `,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
@@ -37,7 +37,7 @@ export const MarketplaceBanner = () => {
           </div>
         </div>
 
-        <div className='grid max-w-4xl grid-cols-2 items-center justify-center gap-4 sm:grid-cols-4'>
+        <div className='grid max-w-4xl items-center justify-center gap-4 sm:grid-cols-4'>
           <Image
             src={'/images/market/food-land.png'}
             width={150}

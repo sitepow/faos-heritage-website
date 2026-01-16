@@ -96,7 +96,7 @@ export const Country = () => {
         <DropdownTrigger>
           <Button variant='light' className='min-w-0 px-2 sm:px-4'>
             <div className='flex items-center gap-1 sm:gap-2'>
-              <span className='text-xs font-semibold uppercase sm:text-sm'>
+              <span className='text-xs uppercase sm:text-sm'>
                 {country ? country.currency : t('currency')}
               </span>
               <ChevronDownIcon
