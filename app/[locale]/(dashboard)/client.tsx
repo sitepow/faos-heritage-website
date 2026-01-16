@@ -4,7 +4,6 @@ import { useTheme } from 'next-themes'
 import { type PropsWithChildren } from 'react'
 import { ToastContainer } from 'react-toastify'
 
-import { Footer } from '@/components/footer'
 import { Navbar } from '@/components/navbar/navbar'
 
 export const DashboardClient = ({ children }: PropsWithChildren) => {
@@ -24,7 +23,7 @@ export const DashboardClient = ({ children }: PropsWithChildren) => {
       <main className='container mx-auto flex flex-grow flex-col gap-5 p-6'>
         {children}
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }

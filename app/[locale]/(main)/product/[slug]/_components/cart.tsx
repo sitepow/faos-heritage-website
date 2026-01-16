@@ -115,7 +115,7 @@ export const ProductCart = () => {
   })
 
   return (
-    <Card className='border-default-200 border'>
+    <Card shadow='none' className='border-default-200 border'>
       <CardBody className='flex flex-col gap-3'>
         <div className='flex flex-col'>
           <h1 className='py-3.5 text-xl font-semibold sm:text-2xl lg:text-4xl'>

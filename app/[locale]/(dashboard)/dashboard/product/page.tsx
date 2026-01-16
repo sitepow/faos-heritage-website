@@ -161,32 +161,32 @@ export default function Product() {
 
       <div className='flex w-full flex-wrap gap-3 *:shrink-0 md:justify-end'>
         <Button
-          className='text-secondary'
           color='primary'
+          variant='bordered'
           startContent={<PlusIcon />}
           onPress={() => onOpenProductChange()}
         >
           {t('addNew')}
         </Button>
         <Button
-          className='text-secondary'
           color='primary'
+          variant='bordered'
           startContent={<SettingsIcon />}
           onPress={() => onOpenCategoryManagerChange()}
         >
           {t('manageCategories')}
         </Button>
         <Button
-          className='text-secondary'
           color='primary'
+          variant='bordered'
           startContent={<SettingsIcon />}
           onPress={() => onOpenShippingCountryManagerChange()}
         >
           {t('manageShipping')}
         </Button>
         <Button
-          className='text-secondary'
           color='primary'
+          variant='bordered'
           isDisabled={selectedProductIds.length === 0}
           startContent={<XIcon />}
           onPress={() => {
@@ -199,6 +199,7 @@ export default function Product() {
       </div>
 
       <Table
+        shadow='none'
         className='border-default-200 border'
         aria-label={t('tableAria')}
         selectionMode='multiple'

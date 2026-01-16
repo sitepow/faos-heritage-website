@@ -43,6 +43,7 @@ export const CartLists = ({ className, ...props }: CartListsProp) => {
 
   return (
     <Card
+      shadow='none'
       fullWidth
       className={cn(className, 'border-default-200 border')}
       {...props}

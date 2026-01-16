@@ -43,8 +43,8 @@ export default function Dashboard() {
       <section className='flex flex-col items-center justify-center gap-4 text-center'>
         <div className='flex w-full justify-end gap-2'>
           <Button
-            className='text-secondary'
             color='primary'
+            variant='bordered'
             startContent={<ImageIcon />}
             onClick={() => {
               onOpenImageBannertManagerChange()
@@ -53,8 +53,9 @@ export default function Dashboard() {
             {t('manageBanners')}
           </Button>
           <Button
-            className='text-secondary'
             color='primary'
+            variant='bordered'
+            isDisabled
             startContent={<SettingsIcon />}
           >
             {t('siteSettings')}

@@ -38,7 +38,7 @@ export const OrderCard = () => {
       <OrderViewModal />
       <OrderForm />
 
-      <Card fullWidth className='border-default-200 border'>
+      <Card shadow='none' fullWidth className='border-default-200 border'>
         <CardHeader>
           <span>{t('title')}</span>
         </CardHeader>

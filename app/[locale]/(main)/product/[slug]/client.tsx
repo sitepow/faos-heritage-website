@@ -89,7 +89,7 @@ export const ProductClient = ({
           </div>
         </div>
 
-        <Tabs className='mx-auto' variant='bordered'>
+        <Tabs className='mx-auto' variant='underlined'>
           <Tab title={tTab('description')}>
             <ProductDescription />
           </Tab>

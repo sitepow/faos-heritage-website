@@ -111,7 +111,7 @@ export default function User() {
 
       <div className='flex w-full flex-wrap gap-3 *:shrink-0 md:justify-end'>
         <Button
-          className='text-secondary'
+          variant='bordered'
           color='primary'
           startContent={<PlusIcon />}
           onPress={() => {
@@ -121,7 +121,7 @@ export default function User() {
           {t('addNew')}
         </Button>
         <Button
-          className='text-secondary'
+          variant='bordered'
           color='primary'
           isDisabled={selectedUserIds.length === 0}
           startContent={<XIcon />}
@@ -135,6 +135,7 @@ export default function User() {
       </div>
 
       <Table
+        shadow='none'
         className='border-default-200 border'
         aria-label={t('tableAria')}
         selectionMode='multiple'

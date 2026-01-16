@@ -180,6 +180,7 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
       />
 
       <Card
+        shadow='none'
         fullWidth
         className={cn(className, 'border-default-200 h-fit border')}
         {...props}
