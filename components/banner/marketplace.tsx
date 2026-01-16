@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl'
 export const MarketplaceBanner = () => {
   const t = useTranslations('Banner.marketplace')
   return (
-    <Card fullWidth radius='none' className='min-h-[350px]'>
+    <Card fullWidth radius='none'>
       <CardBody
         className='flex w-full flex-col items-center justify-center gap-10 px-5 py-12 text-white'
         style={{
