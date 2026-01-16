@@ -8,3 +8,6 @@ onlyBuiltDependencies:
   - prisma
   - sharp
   - unrs-resolver
+  - '@parcel/watcher'
+  - '@swc/core'
+  - es5-ext
