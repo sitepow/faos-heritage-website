@@ -72,7 +72,7 @@ export const SHIPPING_PROVIDERS = [
     placeholder: 'SF1234567890123',
   },
   {
-    image: '/images/shipping-providers/thailand-post.svg',
+    image: '/images/shipping-providers/thailand-post.png',
     value: 'https://track.thailandpost.com',
     label: 'Thailand Post',
     placeholder: 'RR123456789TH',
