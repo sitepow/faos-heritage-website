@@ -106,7 +106,7 @@ export default function Cart() {
           </div>
         )}
 
-        <div className='grid w-full items-start gap-5 lg:grid-cols-3'>
+        <div className='grid w-full items-start gap-2 md:gap-4 lg:grid-cols-3'>
           <CartLists className='lg:col-span-2' />
           <div className='lg:sticky lg:top-20'>
             <CartCheckout />

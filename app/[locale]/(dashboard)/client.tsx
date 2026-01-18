@@ -10,7 +10,7 @@ export const DashboardClient = ({ children }: PropsWithChildren) => {
   const { theme } = useTheme()
 
   return (
-    <div className='dark:bg-default-50 relative flex h-screen flex-col overflow-x-hidden'>
+    <div className='relative flex h-screen flex-col overflow-x-hidden'>
       <ToastContainer
         closeOnClick
         hideProgressBar

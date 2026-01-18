@@ -86,12 +86,12 @@ export const FavoriteItem = ({
 
       <Card
         fullWidth
+        shadow='none'
         className={cn(
           className,
           '[&:not(:last-child)]:border-divider [&:not(:last-child)]:border-b',
         )}
         radius='none'
-        shadow='none'
         {...props}
       >
         <CardBody>

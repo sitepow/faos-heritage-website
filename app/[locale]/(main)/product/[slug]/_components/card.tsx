@@ -53,12 +53,8 @@ export const ProductCard = ({ className, product }: ProductCardProps) => {
 
   return (
     <Card
-      className={cn(
-        'border-default-200 flex min-h-[420px] w-full flex-col border',
-        'shrink-0 basis-full sm:basis-[420px] lg:basis-[500px]',
-        className,
-      )}
-      shadow='none'
+      className={cn('flex min-h-[420px] w-full flex-col', className)}
+      radius='sm'
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -93,9 +89,9 @@ export const ProductCard = ({ className, product }: ProductCardProps) => {
 
           <Image
             alt={product?.name}
-            className='aspect-square size-full rounded-2xl bg-white object-contain'
+            className='aspect-square size-full bg-white object-contain'
             classNames={{ wrapper: 'w-full' }}
-            height={400}
+            height={250}
             radius='none'
             src={imageSrc}
             width='100%'
@@ -110,7 +106,7 @@ export const ProductCard = ({ className, product }: ProductCardProps) => {
             isDigitalProduct={product?.isDigitalProduct}
             categoryName={product?.category?.name}
           />
-          <h4 className='line-clamp-2 font-semibold sm:text-lg'>
+          <h4 className='mb-5 line-clamp-2 font-semibold sm:text-lg'>
             {product?.name}
           </h4>
           <ProductPrice

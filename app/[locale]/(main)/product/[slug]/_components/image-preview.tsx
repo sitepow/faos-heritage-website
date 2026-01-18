@@ -37,7 +37,7 @@ export const ProductImagePreview = ({
           <button
             key={`${image}-${index}`}
             className={cn(
-              'border-default-200 relative aspect-square size-full shrink-0 overflow-hidden rounded-xl border bg-white shadow-md transition-all',
+              'relative aspect-square size-full shrink-0 overflow-hidden rounded-lg bg-white shadow-md transition-all',
             )}
             type='button'
             // onClick={() => setSelectedIndex(index)}

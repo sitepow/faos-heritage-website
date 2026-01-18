@@ -135,7 +135,6 @@ export default function User() {
       </div>
 
       <Table
-        shadow='none'
         className='border-default-200 border'
         aria-label={t('tableAria')}
         selectionMode='multiple'

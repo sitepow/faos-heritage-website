@@ -80,7 +80,7 @@ export const AddressCard = () => {
         }}
         onOpenChange={onOpenDeleteChange}
       />
-      <Card shadow='none' fullWidth className='border-default-200 border'>
+      <Card fullWidth className='border-default-200 border'>
         <CardHeader className='flex-wrap items-center justify-between gap-2'>
           <span>{t('manageTitle')}</span>
 

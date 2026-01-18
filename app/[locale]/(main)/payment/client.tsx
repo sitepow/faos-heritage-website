@@ -24,7 +24,7 @@ export const PaymentClient = () => {
       />
 
       <div className='mx-auto w-full'>
-        <Accordion variant='light'>
+        <Accordion variant='splitted'>
           <AccordionItem
             key='1'
             aria-label={t('HowToShop.ariaLabel')}

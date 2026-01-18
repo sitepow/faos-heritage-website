@@ -56,7 +56,7 @@ export default function About() {
 
   return (
     <>
-      <section className='container mx-auto flex flex-wrap justify-center gap-5 p-5 lg:flex-nowrap'>
+      <section className='container mx-auto flex flex-col items-center justify-center gap-5 p-5'>
         <PdfViewer fileUrl='/documents/faos-organic-olive-oil-brochure.pdf' />
         <PdfViewer fileUrl='/documents/CHEMICAL-ANALYSIS-EVOO.pdf' />
       </section>

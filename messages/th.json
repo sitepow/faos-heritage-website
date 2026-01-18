@@ -467,7 +467,7 @@
     }
   },
   "Footer": {
-    "copyright": "© {year} {name} - {title}",
+    "copyright": "© {year} {name}",
     "Menu": {
       "privacy": "นโยบายความเป็นส่วนตัว"
     }

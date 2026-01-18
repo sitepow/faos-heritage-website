@@ -15,13 +15,13 @@ export const ProductRating = ({ rate = 0, ...props }: ProductRatingProps) => {
         <Star
           key={index}
           className={
-            index < Math.floor(rate) ? 'text-default-300' : 'text-default-300'
+            index < Math.floor(rate) ? 'text-default-500' : 'text-default-500'
           }
           fill={index < Math.floor(rate) ? 'currentColor' : 'none'}
           size={15}
         />
       ))}
-      <span className='text-default-300 flex-wrap'>({formatNumber(0)})</span>
+      <span className='text-default-500 flex-wrap'>({formatNumber(0)})</span>
     </div>
   )
 }

@@ -89,7 +89,6 @@ export default function Order() {
       </div>
 
       <Table
-        shadow='none'
         className='border-default-200 border'
         aria-label='Order data table'
         selectionMode='multiple'

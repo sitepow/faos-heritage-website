@@ -7,7 +7,7 @@ import {
   DropdownItem,
   Button,
 } from '@heroui/react'
-import { MonitorCogIcon, MoonIcon, SunIcon } from 'lucide-react'
+import { ChevronDownIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
@@ -33,10 +33,15 @@ export const ThemeSwitch = ({ className }: ThemeSwitchProps) => {
     <div className={cn('flex items-center', className)}>
       <Dropdown>
         <DropdownTrigger>
-          <Button isIconOnly variant='light'>
-            {theme === 'light' && <SunIcon />}
-            {theme === 'dark' && <MoonIcon />}
-            {theme === 'system' && <MonitorCogIcon />}
+          <Button
+            variant='light'
+            className='text-secondary p-0'
+            isIconOnly={false}
+          >
+            <div className='flex items-center gap-2'>
+              <span>{t(theme ?? 'system')}</span>
+              <ChevronDownIcon size={14} className='text-secondary' />
+            </div>
           </Button>
         </DropdownTrigger>
         <DropdownMenu
@@ -49,16 +54,13 @@ export const ThemeSwitch = ({ className }: ThemeSwitchProps) => {
             const selectedValue = Array.from(keys)[0] as string
             setTheme(selectedValue)
           }}
+          classNames={{
+            list: 'max-h-[250px] overflow-y-auto scroll-shadow',
+          }}
         >
-          <DropdownItem key='light' startContent={<SunIcon />}>
-            {t('light')}
-          </DropdownItem>
-          <DropdownItem key='dark' startContent={<MoonIcon />}>
-            {t('dark')}
-          </DropdownItem>
-          <DropdownItem key='system' startContent={<MonitorCogIcon />}>
-            {t('system')}
-          </DropdownItem>
+          <DropdownItem key='light'>{t('light')}</DropdownItem>
+          <DropdownItem key='dark'>{t('dark')}</DropdownItem>
+          <DropdownItem key='system'>{t('system')}</DropdownItem>
         </DropdownMenu>
       </Dropdown>
     </div>

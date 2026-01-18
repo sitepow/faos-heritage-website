@@ -1,133 +1,87 @@
 /* eslint-disable @next/next/no-img-element */
-'use client'
+import { Badge, Button, Input } from '@heroui/react'
+import { MenuIcon, SearchIcon, ShoppingCartIcon } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 
-import {
-  link as linkStyles,
-  Navbar as HeroNavbar,
-  NavbarContent,
-  NavbarItem,
-  NavbarMenu,
-  NavbarMenuItem,
-  NavbarMenuToggle,
-} from '@heroui/react'
-import { LogInIcon } from 'lucide-react'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { useSession } from 'next-auth/react'
-import { useLocale, useTranslations } from 'next-intl'
-import { useState } from 'react'
-
-import type { NavItem } from '@/config/site'
-
-import { NavbarCart } from './cart'
-import { Country } from './country'
 import { NavbarHeader } from './header'
 import { NavbarPanel } from './panel'
-import { ThemeSwitch } from '../theme-switch'
 
 import { siteConfig } from '@/config/site'
-import { cn } from '@/utils/style'
 
 export const Navbar = () => {
-  const t = useTranslations('Navbar.Menu')
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const { status } = useSession()
-  const pathname = usePathname()
-  const locale = useLocale()
-
-  const pathnameWithoutLocale =
-    pathname === `/${locale}` ? '/' : pathname.replace(`/${locale}`, '')
-
-  const isAuthenticated = status === 'authenticated'
-  const isDashboard = pathnameWithoutLocale.startsWith('/dashboard')
-
-  const menuItems = isDashboard
-    ? siteConfig.adminNavbarItems
-    : siteConfig.mainNavItems
-
-  const renderLink = (item: NavItem) => (
-    <Link
-      className={cn(linkStyles({ color: 'foreground' }), 'font-medium')}
-      href={item.href}
-    >
-      {t(item.label)}
-    </Link>
-  )
+  const router = useRouter()
+  const translateNavbar = useTranslations('Navbar.Menu')
 
   return (
-    <>
-      {!isMenuOpen && <NavbarHeader />}
+    <nav className='sticky top-0 z-50 flex w-full flex-col bg-white shadow dark:bg-black'>
+      <NavbarHeader />
 
-      <HeroNavbar
-        className='light:bg-white dark:bg-inherit'
-        isBlurred={false}
-        isMenuOpen={isMenuOpen}
-        maxWidth='full'
-        position='sticky'
-        onMenuOpenChange={setIsMenuOpen}
-      >
-        <NavbarContent className='basis-1/5 sm:basis-full' justify='start'>
-          <Link className='shrink-0' href='/'>
+      <div className='border-divider w-full border-b'>
+        <div className='container mx-auto flex items-center justify-between gap-4 px-5 py-2.5 md:gap-8'>
+          <div className='flex gap-5'>
             <img
-              alt='faos-logo'
-              height={45}
               src='/images/logo.png'
-              width={45}
+              alt='Logo'
+              className='size-[55px] shrink-0 rounded-md object-contain md:size-[75px]'
+              onClick={() => {
+                router.push('/')
+              }}
             />
-          </Link>
 
-          <ul className='ml-4 hidden gap-4 lg:flex'>
-            {menuItems?.map((item) => (
-              <NavbarItem key={item.href}>{renderLink(item)}</NavbarItem>
-            ))}
-          </ul>
-        </NavbarContent>
-
-        <NavbarContent justify='end' className='gap-2 sm:gap-4'>
-          <NavbarItem>
-            <Country />
-          </NavbarItem>
-
-          <NavbarItem className='flex items-center'>
-            <ThemeSwitch />
-          </NavbarItem>
-
-          {isAuthenticated ? (
-            <>
-              {!isDashboard && (
-                <NavbarItem className='flex items-center'>
-                  <NavbarCart />
-                </NavbarItem>
-              )}
-              <NavbarItem className='flex items-center'>
-                <NavbarPanel setIsMenuOpen={setIsMenuOpen} />
-              </NavbarItem>
-            </>
-          ) : (
-            <NavbarItem className='flex items-center'>
-              <Link href={siteConfig.link.login} className='p-2'>
-                <LogInIcon size={22} />
-              </Link>
-            </NavbarItem>
-          )}
-
-          <NavbarMenuToggle className='ml-2 cursor-pointer lg:hidden' />
-        </NavbarContent>
-
-        <NavbarMenu>
-          <div className='mt-4 flex flex-col gap-4'>
-            {menuItems.map((item) => (
-              <NavbarMenuItem
-                key={item.href}
-                className='text-lg'
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {renderLink(item)}
-              </NavbarMenuItem>
-            ))}
+            <div className='hidden w-full flex-wrap items-center justify-center gap-5 md:flex'>
+              {siteConfig.mainNavItems?.map((item) => (
+                <span
+                  className='hover:text-primary decoration-primary cursor-pointer'
+                  onClick={() => {
+                    router.push(item?.href)
+                  }}
+                >
+                  {translateNavbar(item?.label)}
+                </span>
+              ))}
+            </div>
           </div>
-        </NavbarMenu>
-      </HeroNavbar>
-    </>
+
+          <div className='flex items-center gap-3'>
+            <Input
+              size='lg'
+              radius='sm'
+              className='hidden max-w-96 min-w-72 lg:block'
+              variant='bordered'
+              placeholder='ค้นหาชื่อสินค้าหรือหมวดหมู่สินค้า'
+              startContent={<SearchIcon className='text-default-500' />}
+            />
+
+            <NavbarPanel />
+
+            <Badge
+              color='primary'
+              className='text-secondary'
+              content='2'
+              shape='circle'
+            >
+              <Button
+                isIconOnly
+                variant='light'
+                onClick={() => {
+                  router.push('/cart')
+                }}
+              >
+                <ShoppingCartIcon />
+              </Button>
+            </Badge>
+
+            <Button isIconOnly variant='light' className='md:hidden'>
+              <MenuIcon />
+            </Button>
+
+            <Button isIconOnly variant='light' className='lg:hidden'>
+              <SearchIcon />
+            </Button>
+          </div>
+        </div>
+      </div>
+    </nav>
   )
 }

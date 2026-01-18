@@ -23,7 +23,7 @@ export const SectionHeader = ({
         {title}
       </h2>
       {description && (
-        <p className='text-default-500 mx-auto max-w-3/4 sm:text-lg'>
+        <p className='text-primary mx-auto max-w-3/4 sm:text-lg'>
           {description}
         </p>
       )}

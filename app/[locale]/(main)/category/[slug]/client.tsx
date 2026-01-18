@@ -23,10 +23,6 @@ import { ProductSection } from '../../product/[slug]/_components/section'
 import { getProducts } from '../../products/action'
 
 import { getCategory } from '@/app/[locale]/(dashboard)/dashboard/product/action/category'
-import { AdvertiseBanner } from '@/components/banner/advertise'
-import { CertificateBanner } from '@/components/banner/certificate'
-import { CustomerBanner } from '@/components/banner/customer'
-import { MarketplaceBanner } from '@/components/banner/marketplace'
 import { PageNotFound } from '@/components/page-not-found'
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
 import { SORT_ITEMS } from '@/utils/constants/product'
@@ -171,12 +167,12 @@ export const CategoryClient = ({
         />
       </div>
 
-      <div className='flex w-full flex-col'>
+      {/* <div className='flex w-full flex-col'>
         <AdvertiseBanner />
         <CertificateBanner />
         <MarketplaceBanner />
         <CustomerBanner />
-      </div>
+      </div> */}
     </section>
   )
 }

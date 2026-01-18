@@ -5,7 +5,7 @@ import '@react-pdf-viewer/core/lib/styles/index.css'
 
 export default function PdfViewerRender({ fileUrl }: { fileUrl: string }) {
   return (
-    <div className='h-[80vh] w-full max-w-7xl overflow-hidden rounded-lg border border-slate-300'>
+    <div className='h-dvh w-full overflow-hidden rounded-lg'>
       <Worker workerUrl='/javascript/pdf.worker.min.js'>
         <Viewer fileUrl={fileUrl} defaultScale={SpecialZoomLevel.PageWidth} />
       </Worker>

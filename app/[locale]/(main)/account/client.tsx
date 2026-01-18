@@ -64,7 +64,7 @@ export const AccountClient = () => {
           {mounted && (
             <Tabs
               aria-label='Options'
-              className='light:bg-white h-full rounded-lg'
+              className='h-full rounded-lg bg-white dark:bg-inherit'
               classNames={{
                 base: 'w-full flex flex-col lg:flex-row lg:w-fit',
                 tabList: 'flex overflow-x-auto lg:flex-col lg:w-fit gap-1 p-2',

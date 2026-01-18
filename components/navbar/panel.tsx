@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 'use client'
 
 import {
@@ -6,6 +5,7 @@ import {
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
+  Button,
 } from '@heroui/react'
 import { Role } from '@prisma/client'
 import {
@@ -21,11 +21,7 @@ import { useTranslations } from 'next-intl'
 
 import { ACCOUNT_TAB } from '@/utils/constants/account'
 
-interface NavbarPanelProps {
-  setIsMenuOpen: (state: boolean) => void
-}
-
-export const NavbarPanel = ({ setIsMenuOpen }: NavbarPanelProps) => {
+export const NavbarPanel = () => {
   const t = useTranslations('Navbar.Panel')
   const router = useRouter()
   const { data: session } = useSession()
@@ -76,8 +72,9 @@ export const NavbarPanel = ({ setIsMenuOpen }: NavbarPanelProps) => {
   return (
     <Dropdown>
       <DropdownTrigger>
-        <UserIcon />
-        {/* <Avatar src={user?.image ?? NO_IMAGE} /> */}
+        <Button isIconOnly variant='light'>
+          <UserIcon />
+        </Button>
       </DropdownTrigger>
 
       <DropdownMenu aria-label='User menu'>
@@ -88,7 +85,6 @@ export const NavbarPanel = ({ setIsMenuOpen }: NavbarPanelProps) => {
             startContent={item.icon}
             onClick={() => {
               item.action()
-              setIsMenuOpen(false)
             }}
           >
             {t(item.label)}

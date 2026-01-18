@@ -32,7 +32,7 @@ export const OverviewCard = ({
   })
 
   return (
-    <Card shadow='none' fullWidth className='border-default-200 border'>
+    <Card fullWidth className='border-default-200 border'>
       <CardHeader>
         <span className='font-semibold'>{t('tabs.manage')}</span>
       </CardHeader>

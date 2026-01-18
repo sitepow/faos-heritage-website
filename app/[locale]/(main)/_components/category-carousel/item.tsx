@@ -29,7 +29,6 @@ export const CategoryCarouselItem = ({
         'border-default-200 w-32 cursor-pointer border font-semibold sm:w-52',
         isActive && 'border-primary text-primary',
       )}
-      shadow='none'
     >
       <CardBody {...props}>
         <div className='flex flex-col items-center gap-2.5 text-center'>

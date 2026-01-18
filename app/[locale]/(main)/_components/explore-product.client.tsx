@@ -2,7 +2,7 @@
 
 import { Button } from '@heroui/react'
 import { useQuery } from '@tanstack/react-query'
-import { ArrowRight } from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 import { useLocale, useTranslations } from 'next-intl'
 
@@ -49,7 +49,12 @@ export const ExploreProductsClient = ({
         items={products?.items ?? []}
       />
       <Link href='/products'>
-        <Button variant='bordered' color='primary' endContent={<ArrowRight />}>
+        <Button
+          color='primary'
+          radius='sm'
+          className='text-secondary'
+          endContent={<ChevronRight />}
+        >
           {tCategory('explore')}
         </Button>
       </Link>

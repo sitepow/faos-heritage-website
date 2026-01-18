@@ -180,7 +180,6 @@ export const CartItem = ({ className, cart, ...props }: CartItemProps) => {
           '[&:not(:last-child)]:border-divider [&:not(:last-child)]:border-b',
         )}
         radius='none'
-        shadow='none'
         {...props}
       >
         <CardBody>

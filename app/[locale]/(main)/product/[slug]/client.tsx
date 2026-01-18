@@ -16,10 +16,6 @@ import { ProductSimilar } from './_components/similar'
 import { useProductDetailStore } from './store'
 
 import { getProduct } from '@/app/[locale]/(dashboard)/dashboard/product/action/product'
-import { AdvertiseBanner } from '@/components/banner/advertise'
-import { CertificateBanner } from '@/components/banner/certificate'
-import { CustomerBanner } from '@/components/banner/customer'
-import { MarketplaceBanner } from '@/components/banner/marketplace'
 import { PageNotFound } from '@/components/page-not-found'
 import { createSlug } from '@/utils/helpers/slug'
 interface ProductClientProps {
@@ -78,7 +74,7 @@ export const ProductClient = ({
           </Breadcrumbs>
         )}
 
-        <div className='container mx-auto grid items-start gap-2 lg:grid-cols-2'>
+        <div className='container mx-auto grid items-start gap-2 md:gap-4 lg:grid-cols-2'>
           <div className='lg:sticky lg:top-20'>
             <ProductImagePreview
               images={product.images.map((image) => image.url)}
@@ -104,12 +100,12 @@ export const ProductClient = ({
         {/* <CustomerBanner /> */}
       </div>
 
-      <div className='flex w-full flex-col'>
+      {/* <div className='flex w-full flex-col'>
         <AdvertiseBanner />
         <CertificateBanner />
         <MarketplaceBanner />
         <CustomerBanner />
-      </div>
+      </div> */}
     </section>
   )
 }
