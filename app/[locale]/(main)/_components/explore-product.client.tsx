@@ -51,8 +51,8 @@ export const ExploreProductsClient = ({
       <Link href='/products'>
         <Button
           color='primary'
+          variant='bordered'
           radius='sm'
-          className='text-secondary'
           endContent={<ChevronRight />}
         >
           {tCategory('explore')}
