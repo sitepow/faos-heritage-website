@@ -107,7 +107,7 @@ export default function Login() {
   }
 
   return (
-    <Card className='border-default-200 border p-5 sm:w-[400px]'>
+    <Card className='max-w-96 p-5'>
       <CardHeader className='flex w-full flex-col items-center gap-1'>
         <span className='text-lg font-semibold'>
           {translateAuth('headerTitle')}
