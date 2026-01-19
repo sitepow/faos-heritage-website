@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/no-array-index-key */
 'use client'
 
@@ -41,11 +42,13 @@ export const ProductImagePreview = ({
             type='button'
             // onClick={() => setSelectedIndex(index)}
           >
-            <img
-              alt={`${alt}-thumb-${index}`}
-              className='object-contain transition-opacity'
-              src={image}
-            />
+            <div className='relative size-full'>
+              <img
+                src={image}
+                alt={`${alt}-thumb-${index}`}
+                className='absolute inset-0 h-full w-full object-contain transition-opacity'
+              />
+            </div>
           </button>
         )
       })}
