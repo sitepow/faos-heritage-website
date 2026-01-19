@@ -1,7 +1,6 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
-import Image from 'next/image'
 
 import { Carousel } from '../carousel/carousel'
 
@@ -29,16 +28,14 @@ export const CarouselImageBanner = () => {
     >
       {activeBanners.map((banner, index) => (
         <div className='relative h-[300px] min-w-full overflow-hidden rounded-xl bg-gradient-to-b from-black/40 to-black/60 md:h-[420px]'>
-          <Image
+          <img
             src={banner.url}
             alt=''
-            fill
             className='scale-110 object-cover blur-2xl'
           />
-          <Image
+          <img
             src={banner.url}
             alt={banner.alt ?? `banner-${index}`}
-            fill
             className='object-contain'
           />
         </div>

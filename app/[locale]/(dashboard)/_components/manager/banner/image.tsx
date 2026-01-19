@@ -21,7 +21,6 @@ import {
   PlusIcon,
   TrashIcon,
 } from 'lucide-react'
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
 import { deleteImageBanner, getImageBanners } from './action'
@@ -117,7 +116,7 @@ export const ImageBannerManager = () => {
                     className='flex items-center justify-between'
                   >
                     <div className='flex w-full flex-col gap-1'>
-                      <Image
+                      <img
                         alt={banner?.alt ?? ''}
                         className={cn(
                           'border-divider h-40 w-full border object-cover',

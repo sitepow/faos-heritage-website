@@ -13,7 +13,6 @@ import {
 } from '@heroui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
@@ -225,7 +224,7 @@ export default function Login() {
               className='flex-row items-center gap-2 p-2'
               onClick={() => signIn('google')}
             >
-              <Image
+              <img
                 alt='google'
                 className='shrink-0 rounded-full'
                 height={30}
@@ -241,7 +240,7 @@ export default function Login() {
               className='flex-row items-center gap-2 p-2'
               onClick={() => signIn('facebook')}
             >
-              <Image
+              <img
                 alt='facebook'
                 className='shrink-0 rounded-full'
                 height={30}

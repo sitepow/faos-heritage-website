@@ -13,7 +13,6 @@ import {
 } from '@heroui/react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { TrashIcon } from 'lucide-react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
@@ -189,7 +188,7 @@ export const CartItem = ({ className, cart, ...props }: CartItemProps) => {
                 className='size-[150px] shrink-0'
                 href={`/product/${createSlug(cart?.product?.name, cart?.product?.id)}`}
               >
-                <Image
+                <img
                   alt='product-image'
                   className='border-divider aspect-square size-full rounded-xl border bg-white object-contain'
                   height={100}

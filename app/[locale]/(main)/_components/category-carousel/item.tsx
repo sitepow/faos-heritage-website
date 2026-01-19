@@ -1,7 +1,6 @@
 'use client'
 
 import { CardBody, Card, Skeleton } from '@heroui/react'
-import Image from 'next/image'
 
 import type { GetCategoryResult } from '@/app/[locale]/(dashboard)/dashboard/product/action/category'
 import type { ComponentProps } from 'react'
@@ -32,7 +31,7 @@ export const CategoryCarouselItem = ({
     >
       <CardBody {...props}>
         <div className='flex flex-col items-center gap-2.5 text-center'>
-          <Image
+          <img
             alt=''
             className='aspect-square size-12 rounded-full object-cover'
             height={60}

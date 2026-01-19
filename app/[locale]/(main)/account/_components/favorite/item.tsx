@@ -3,7 +3,6 @@
 import { Card, useDisclosure, CardBody, Button } from '@heroui/react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { XIcon } from 'lucide-react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
@@ -101,7 +100,7 @@ export const FavoriteItem = ({
                 className='border-divider size-[150px] shrink-0 rounded-xl border'
                 href={`/product/${createSlug(favorite?.product?.name, favorite?.product?.id)}`}
               >
-                <Image
+                <img
                   alt='product-image'
                   className='aspect-square size-full rounded-xl bg-white object-contain'
                   height={150}

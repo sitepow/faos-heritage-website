@@ -1,7 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 'use client'
 
-import Image from 'next/image'
 // import { useState } from 'react'
 
 import { Carousel } from '@/components/carousel/carousel'
@@ -42,8 +41,7 @@ export const ProductImagePreview = ({
             type='button'
             // onClick={() => setSelectedIndex(index)}
           >
-            <Image
-              fill
+            <img
               alt={`${alt}-thumb-${index}`}
               className='object-contain transition-opacity'
               src={image}

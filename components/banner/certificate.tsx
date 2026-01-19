@@ -2,7 +2,6 @@
 'use client'
 
 import { Card, CardBody } from '@heroui/react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 
@@ -36,7 +35,7 @@ export const CertificateBanner = () => {
 
         <div className='flex flex-wrap gap-2'>
           {CERTIFICATE_IMAGES?.map((certificate) => (
-            <Image
+            <img
               key={certificate}
               alt={certificate}
               className='size-12 object-cover sm:size-20'

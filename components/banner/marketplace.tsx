@@ -1,7 +1,6 @@
 'use client'
 
 import { Card, CardBody } from '@heroui/react'
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
 export const MarketplaceBanner = () => {
@@ -38,28 +37,28 @@ export const MarketplaceBanner = () => {
         </div>
 
         <div className='grid max-w-4xl items-center justify-center gap-4 sm:grid-cols-4'>
-          <Image
+          <img
             src={'/images/market/food-land.png'}
             width={150}
             height={150}
             alt=''
             className='h-fit w-32 object-contain'
           />
-          <Image
+          <img
             src={'/images/market/villa-market.png'}
             width={150}
             height={150}
             alt=''
             className='h-fit w-32 object-contain'
           />
-          <Image
+          <img
             src={'/images/market/lazada.svg'}
             width={150}
             height={150}
             alt=''
             className='h-fit w-32 object-contain'
           />
-          <Image
+          <img
             src={'/images/market/shopee.png'}
             width={150}
             height={150}
