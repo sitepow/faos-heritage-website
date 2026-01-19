@@ -1,22 +1,21 @@
 import sharp from 'sharp'
 
-interface optimizeImageParams {
+interface OptimizeImageParams {
   width?: number
   height?: number
   quality?: number
 }
 
-export const toBuffer = (input: Buffer | ArrayBuffer): Buffer => {
-  return Buffer.isBuffer(input) ? input : Buffer.from(input)
-}
+export const toBuffer = (input: Buffer | ArrayBuffer): Buffer =>
+  Buffer.isBuffer(input) ? input : Buffer.from(input)
 
 export const optimizeImageServer = async (
   input: Buffer | ArrayBuffer,
-  options: optimizeImageParams = {},
+  options: OptimizeImageParams = {},
 ) => {
-  const { width = 800, height, quality = 88 } = options
+  const { width = 1200, height, quality = 82 } = options
 
-  return sharp(toBuffer(input))
+  return sharp(toBuffer(input), { failOn: 'none' })
     .resize({
       width,
       height,
@@ -26,7 +25,8 @@ export const optimizeImageServer = async (
     })
     .webp({
       quality,
-      effort: 4,
+      effort: 6,
+      nearLossless: true,
       smartSubsample: false,
     })
     .toBuffer()

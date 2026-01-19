@@ -1,9 +1,3 @@
-export const getPathFromPublicUrl = (url: string) => {
-  const marker = '/object/public/uploads/'
-
-  return url.split(marker)[1]
-}
-
 export const toStripeAmount = (amount: number, currency: string) => {
   const c = currency.toUpperCase()
 

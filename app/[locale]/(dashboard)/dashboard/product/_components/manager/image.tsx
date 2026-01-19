@@ -84,6 +84,7 @@ export const ImageManager = () => {
         await onRefetchAfterDelete()
         onOpenDeleteChange()
         setState({ imageId: null })
+        onOpenImageManagerChange()
       },
     })
 

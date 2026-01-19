@@ -5,7 +5,7 @@ import type { Prisma } from '@prisma/client'
 
 import { categorySchema } from '../schema/category'
 
-import { deleteFileSupabase } from '@/actions/file'
+import { deleteFile } from '@/actions/file'
 import { ERROR_CODES } from '@/lib/errors/codes'
 import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
@@ -122,7 +122,7 @@ export const deleteCategory = async (categoryIds: string | string[]) => {
       categories
         .map((category) => category.image)
         .filter(Boolean)
-        .map((image) => deleteFileSupabase(image!)),
+        .map((image) => deleteFile(image!)),
     )
 
     await prisma.category.deleteMany({

@@ -4,7 +4,7 @@ import type { Prisma } from '@prisma/client'
 
 import { imageBannerSchema, type ImageBannerInput } from './schema'
 
-import { deleteFileSupabase } from '@/actions/file'
+import { deleteFile } from '@/actions/file'
 import { ERROR_CODES } from '@/lib/errors/codes'
 import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
@@ -82,7 +82,7 @@ export const updateImageBanner = async (data: ImageBannerInput) => {
       }
 
       if (payload.url && banner.url && payload.url !== banner.url) {
-        await deleteFileSupabase(banner.url)
+        await deleteFile(banner.url)
       }
 
       await tx.banner.update({
@@ -117,7 +117,7 @@ export const deleteImageBanner = async (bannerIds: string | string[]) => {
     banners
       .map((banner) => banner.url)
       .filter(Boolean)
-      .map((path) => deleteFileSupabase(path)),
+      .map((path) => deleteFile(path)),
   )
 
   try {

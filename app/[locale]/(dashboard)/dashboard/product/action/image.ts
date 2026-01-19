@@ -4,7 +4,7 @@ import type { Prisma } from '@prisma/client'
 
 import { imageSchema, type ImageInput } from '../schema/image'
 
-import { deleteFileSupabase } from '@/actions/file'
+import { deleteFile } from '@/actions/file'
 import { ERROR_CODES } from '@/lib/errors/codes'
 import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
@@ -110,7 +110,7 @@ export const updateImage = async (data: ImageInput) => {
       }
 
       if (payload.url && image.url && payload.url !== image.url) {
-        await deleteFileSupabase(image.url)
+        await deleteFile(image.url)
       }
 
       if (payload.isPrimary) {
@@ -157,7 +157,7 @@ export const deleteImage = async (imageIds: string | string[]) => {
     images
       .map((image) => image.url)
       .filter(Boolean)
-      .map((imagePath) => deleteFileSupabase(imagePath!)),
+      .map((imagePath) => deleteFile(imagePath!)),
   )
 
   try {

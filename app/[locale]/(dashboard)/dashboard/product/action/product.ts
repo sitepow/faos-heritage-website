@@ -5,7 +5,7 @@ import type { Prisma } from '@prisma/client'
 
 import { productSchema } from '../schema/product'
 
-import { deleteFileSupabase } from '@/actions/file'
+import { deleteFile } from '@/actions/file'
 import { ERROR_CODES } from '@/lib/errors/codes'
 import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
@@ -58,7 +58,7 @@ export const deleteProduct = async (productIds: string | string[]) => {
 
   for (const product of products) {
     for (const image of product.images) {
-      await deleteFileSupabase(image.url)
+      await deleteFile(image.url)
     }
   }
 

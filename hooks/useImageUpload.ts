@@ -1,23 +1,13 @@
-import { createClient } from '@supabase/supabase-js'
 import { useState } from 'react'
 
-import { deleteFileSupabase } from '@/actions/file'
-// import { optimizeImageClient } from '@/utils/optimize/image/client'
+import { uploadFiles, deleteFile } from '@/actions/file'
 
-interface useImageUploadParams {
+interface Params {
   oldImage?: string | null
   previewFiles: File[]
 }
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-)
-
-export const useImageUpload = ({
-  oldImage,
-  previewFiles,
-}: useImageUploadParams) => {
+const useImageUpload = ({ oldImage, previewFiles }: Params) => {
   const [isUploading, setIsUploading] = useState(false)
 
   const resolveImagePath = async (): Promise<string | null | undefined> => {
@@ -30,32 +20,20 @@ export const useImageUpload = ({
     setIsUploading(true)
 
     try {
-      const originalFile = previewFiles[0]
+      const formData = new FormData()
+      previewFiles.forEach((file) => formData.append('files', file))
 
-      // const optimizedFile = await optimizeImageClient(originalFile, {
-      //   maxWidth: 800,
-      //   quality: 0.85,
-      // })
+      const result = await uploadFiles(formData)
 
-      const fileName = `${crypto.randomUUID()}.webp`
-
-      const { error } = await supabase.storage
-        .from('uploads')
-        .upload(fileName, originalFile, {
-          contentType: 'image/webp',
-          upsert: true,
-        })
-
-      if (error) {
+      if (!('data' in result)) {
         return imagePath
       }
 
-      const { data } = supabase.storage.from('uploads').getPublicUrl(fileName)
+      const newImage = result.data.urls[0]
+      imagePath = newImage
 
-      imagePath = data.publicUrl
-
-      if (oldImage && imagePath !== oldImage) {
-        await deleteFileSupabase(oldImage)
+      if (oldImage && oldImage !== newImage) {
+        await deleteFile(oldImage)
       }
 
       return imagePath
@@ -69,3 +47,5 @@ export const useImageUpload = ({
     isUploading,
   }
 }
+
+export { useImageUpload }

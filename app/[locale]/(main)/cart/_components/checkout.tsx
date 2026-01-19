@@ -179,18 +179,11 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
         onOpenChange={onOpenConfirmOrderChange}
       />
 
-      <Card
-        radius='sm'
-        fullWidth
-        className={cn(className, 'border-default-200 h-fit border')}
-        {...props}
-      >
+      <Card radius='sm' fullWidth className={cn(className, 'h-fit')} {...props}>
         <CardBody className='gap-3'>
           {!isLoadingAddress && address && (
             <>
-              <span className='border-primary w-fit border-b pb-1 font-semibold'>
-                {t('Checkout.title')}
-              </span>
+              <span className='w-fit font-semibold'>{t('Checkout.title')}</span>
 
               <Alert
                 className='text-start'
@@ -211,7 +204,7 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
             </>
           )}
 
-          <span className='border-primary w-fit border-b pb-1 font-semibold'>
+          <span className='w-fit font-semibold'>
             {t('Checkout.paymentDetails')}
           </span>
 
