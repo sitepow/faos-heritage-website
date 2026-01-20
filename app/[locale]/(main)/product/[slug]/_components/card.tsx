@@ -2,8 +2,6 @@
 
 import {
   Alert,
-  // Avatar,
-  // AvatarGroup,
   Card,
   CardBody,
   CardHeader,
@@ -53,8 +51,12 @@ export const ProductCard = ({ className, product }: ProductCardProps) => {
 
   return (
     <Card
-      className={cn('flex min-h-[420px] w-full flex-col', className)}
+      className={cn(
+        'border-divider flex min-h-[420px] w-full flex-col border',
+        className,
+      )}
       radius='sm'
+      shadow='none'
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -63,27 +65,11 @@ export const ProductCard = ({ className, product }: ProductCardProps) => {
         href={`/product/${createSlug(product?.name, product?.id)}`}
       >
         <CardHeader className='relative overflow-hidden p-0'>
-          {/* <AvatarGroup
-            max={3}
-            isBordered
-            className='absolute bottom-2 left-2 z-50'
-          >
-            {product?.variants?.map((variant) => (
-              <Avatar
-                size='lg'
-                key={variant?.image}
-                src={variant?.image ?? '/images/no-image.jpg'}
-              />
-            ))}
-          </AvatarGroup> */}
-
           {isOutOfStock && (
             <Alert
               className='absolute top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2 backdrop-blur-md'
-              // color='danger'
               description='Out of stock. Please check similar items'
               radius='none'
-              // variant='faded'
             />
           )}
 
@@ -106,7 +92,7 @@ export const ProductCard = ({ className, product }: ProductCardProps) => {
             isDigitalProduct={product?.isDigitalProduct}
             categoryName={product?.category?.name}
           />
-          <h4 className='mb-5 line-clamp-2 font-semibold sm:text-lg'>
+          <h4 className='mb-2.5 line-clamp-2 font-semibold sm:text-lg'>
             {product?.name}
           </h4>
           <ProductPrice

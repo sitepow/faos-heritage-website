@@ -23,7 +23,7 @@ export const Navbar = () => {
             <img
               src='/images/logo.png'
               alt='Logo'
-              className='size-[55px] shrink-0 rounded-md object-contain md:size-[75px]'
+              className='size-[55px] shrink-0 cursor-pointer rounded-md object-contain md:size-[75px]'
               onClick={() => {
                 router.push('/')
               }}
@@ -47,10 +47,18 @@ export const Navbar = () => {
             <Input
               size='lg'
               radius='sm'
+              classNames={{
+                input: ['!text-primary placeholder:!text-primary'],
+                inputWrapper: [
+                  '!border-primary',
+                  'group-data-[focus=true]:!border-primary',
+                  'after:hidden',
+                ],
+              }}
               className='hidden max-w-96 min-w-72 lg:block'
               variant='bordered'
               placeholder='ค้นหาชื่อสินค้าหรือหมวดหมู่สินค้า'
-              startContent={<SearchIcon className='text-default-500' />}
+              startContent={<SearchIcon className='text-primary' />}
             />
 
             <NavbarPanel />

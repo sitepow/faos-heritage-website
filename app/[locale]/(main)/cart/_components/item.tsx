@@ -173,6 +173,7 @@ export const CartItem = ({ className, cart, ...props }: CartItemProps) => {
       />
 
       <Card
+        shadow='none'
         fullWidth
         className={cn(
           className,
@@ -190,7 +191,7 @@ export const CartItem = ({ className, cart, ...props }: CartItemProps) => {
               >
                 <img
                   alt='product-image'
-                  className='border-divider aspect-square size-full rounded-xl border bg-white object-contain'
+                  className='aspect-square size-full rounded-xl bg-white object-contain'
                   height={100}
                   src={cart?.product?.images?.[0]?.url ?? NO_IMAGE}
                   width={100}

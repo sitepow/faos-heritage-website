@@ -1,8 +1,8 @@
 'use client'
 
-import { Button } from '@heroui/react'
+import { Button, Card, CardHeader } from '@heroui/react'
 import { useQuery } from '@tanstack/react-query'
-import { ChevronRight } from 'lucide-react'
+import { ArrowRightIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useLocale, useTranslations } from 'next-intl'
 
@@ -12,7 +12,6 @@ import {
   getProducts,
   type GetProductsResult,
 } from '@/app/[locale]/(main)/products/action'
-import { SectionHeader } from '@/components/heading'
 
 interface ExploreProductsClientProps {
   initialProducts: GetProductsResult
@@ -39,22 +38,24 @@ export const ExploreProductsClient = ({
 
   return (
     <div className='container mx-auto flex flex-col gap-5'>
-      <SectionHeader
-        description={tSection('Header.description')}
-        title={tSection('Header.title')}
-      />
+      <Card radius='none' shadow='none'>
+        <CardHeader className='border-primary border-b-4 py-5'>
+          <div className='text-primary mx-auto flex flex-col items-center'>
+            <span className='text-xl font-bold sm:text-2xl'>
+              {tSection('Header.title')}
+            </span>
+            <span>{tSection('Header.description')}</span>
+          </div>
+        </CardHeader>
+      </Card>
+
       <ProductSection
         isLoading={isLoadingProducts}
         itemPerPage={itemPerPage}
         items={products?.items ?? []}
       />
       <Link href='/products'>
-        <Button
-          color='primary'
-          variant='bordered'
-          radius='sm'
-          endContent={<ChevronRight />}
-        >
+        <Button variant='faded' radius='sm' endContent={<ArrowRightIcon />}>
           {tCategory('explore')}
         </Button>
       </Link>

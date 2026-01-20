@@ -11,6 +11,8 @@ import { ChevronDownIcon, GlobeIcon } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 import { useEffect } from 'react'
 
+import { CountryFlag } from '../country-flag'
+
 import { useAppStore } from '@/app/store'
 import { usePathname, useRouter } from '@/i18n/navigation'
 import { CURRENCY_LOCALE_MAP } from '@/utils/constants/currency'
@@ -78,7 +80,10 @@ export const Country = () => {
         >
           {CURRENCY_LOCALE_MAP.map((item) => (
             <DropdownItem key={item.country}>
-              <span>{tCountry(item.country)}</span>
+              <div className='flex items-center gap-2'>
+                <CountryFlag countryCode={item?.country} />
+                <span>{tCountry(item.country)}</span>
+              </div>
             </DropdownItem>
           ))}
         </DropdownMenu>

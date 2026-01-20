@@ -9,15 +9,43 @@ import remarkGfm from 'remark-gfm'
 
 import { useProductDetailStore } from '../store'
 
+import { cn } from '@/utils/style'
+
 export const ProductDescription = () => {
   const { product } = useProductDetailStore()
 
   if (!product?.description) return null
 
   return (
-    <Card radius='sm' className='container mx-auto'>
-      <CardBody className='p-6'>
-        <article className='prose prose-neutral dark:prose-invert /* typography base */ /* paragraph – Amazon/Shopee style */ prose-p:my-1.5 prose-p:leading-relaxed /* lists */ prose-ul:my-2 prose-ol:my-2 prose-li:my-0.5 prose-li:leading-relaxed /* headings (ไม่ให้ดูเป็น blog) */ prose-h1:text-lg prose-h1:my-3 prose-h2:text-base prose-h2:my-2 prose-h3:text-sm prose-h3:my-2 /* */ prose-table:my-3 prose-th:px-3 prose-th:py-2 prose-td:px-3 prose-td:py-2 /* misc */ prose-br:leading-none mx-auto table w-full max-w-[920px] text-sm leading-relaxed sm:text-base'>
+    <Card
+      radius='sm'
+      shadow='none'
+      className='border-divider container mx-auto border'
+    >
+      <CardBody>
+        <article
+          className={cn(
+            'mx-auto table w-full max-w-[920px]',
+
+            'prose prose-neutral dark:prose-invert',
+            'text-sm leading-relaxed sm:text-base',
+
+            'prose-p:my-1.5 prose-p:leading-relaxed',
+
+            'prose-h1:text-lg prose-h1:my-3',
+            'prose-h2:text-base prose-h2:my-2',
+            'prose-h3:text-sm prose-h3:my-2',
+
+            'prose-ul:my-2 prose-ol:my-2',
+            'prose-li:my-0.5 prose-li:leading-relaxed',
+
+            'prose-table:my-3',
+            'prose-th:px-3 prose-th:py-2',
+            'prose-td:px-3 prose-td:py-2',
+
+            'prose-br:leading-none',
+          )}
+        >
           <ReactMarkdown
             components={{
               table: ({ children }) => (

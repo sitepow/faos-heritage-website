@@ -30,6 +30,7 @@ import { useProductDetailStore } from '../store'
 
 import { ACCOUNT_TAB } from '@/utils/constants/account'
 import { createSlug } from '@/utils/helpers/slug'
+import { cn } from '@/utils/style'
 
 export const ProductCart = () => {
   const t = useTranslations('ProductCart')
@@ -115,7 +116,7 @@ export const ProductCart = () => {
   })
 
   return (
-    <Card radius='sm'>
+    <Card radius='sm' shadow='none' className='border-divider border'>
       <CardBody className='flex flex-col gap-3'>
         <div className='flex flex-col'>
           <h1 className='py-3.5 text-xl font-semibold sm:text-2xl lg:text-4xl'>
@@ -141,7 +142,29 @@ export const ProductCart = () => {
         {product?.shortDescription && (
           <Card className='bg-default-50 dark:bg-default-100'>
             <CardBody>
-              <article className='prose prose-neutral dark:prose-invert /* typography base */ /* paragraph – Amazon/Shopee style */ prose-p:my-1.5 prose-p:leading-relaxed /* lists */ prose-ul:my-2 prose-ol:my-2 prose-li:my-0.5 prose-li:leading-relaxed /* headings (ไม่ให้ดูเป็น blog) */ prose-h1:text-lg prose-h1:my-3 prose-h2:text-base prose-h2:my-2 prose-h3:text-sm prose-h3:my-2 /* */ prose-table:my-3 prose-th:px-3 prose-th:py-2 prose-td:px-3 prose-td:py-2 /* misc */ prose-br:leading-none mx-auto table w-full text-sm leading-relaxed sm:text-base'>
+              <article
+                className={cn(
+                  'mx-auto table w-full max-w-[920px]',
+
+                  'prose prose-neutral dark:prose-invert',
+                  'text-sm leading-relaxed sm:text-base',
+
+                  'prose-p:my-1.5 prose-p:leading-relaxed',
+
+                  'prose-h1:text-lg prose-h1:my-3',
+                  'prose-h2:text-base prose-h2:my-2',
+                  'prose-h3:text-sm prose-h3:my-2',
+
+                  'prose-ul:my-2 prose-ol:my-2',
+                  'prose-li:my-0.5 prose-li:leading-relaxed',
+
+                  'prose-table:my-3',
+                  'prose-th:px-3 prose-th:py-2',
+                  'prose-td:px-3 prose-td:py-2',
+
+                  'prose-br:leading-none',
+                )}
+              >
                 <ReactMarkdown
                   components={{
                     table: ({ children }) => (
@@ -166,10 +189,6 @@ export const ProductCart = () => {
                   {product?.shortDescription!}
                 </ReactMarkdown>
               </article>
-
-              {/* <span className='line-clamp-6 sm:text-lg'>
-                {product.shortDescription}
-              </span> */}
             </CardBody>
           </Card>
         )}
