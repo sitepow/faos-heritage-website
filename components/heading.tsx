@@ -19,7 +19,7 @@ export const SectionHeader = ({
 }: SectionHeaderProps) => {
   return (
     <div className={cn('space-y-1', className)} {...props}>
-      <h2 className='text-xl font-semibold tracking-tight sm:text-2xl'>
+      <h2 className='text-primary text-xl font-semibold tracking-tight sm:text-2xl'>
         {title}
       </h2>
       {description && (

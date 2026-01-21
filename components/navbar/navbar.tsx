@@ -63,12 +63,7 @@ export const Navbar = () => {
 
             <NavbarPanel />
 
-            <Badge
-              color='primary'
-              className='text-secondary'
-              content='2'
-              shape='circle'
-            >
+            <Badge color='primary' className='text-secondary' shape='circle'>
               <Button
                 isIconOnly
                 variant='light'

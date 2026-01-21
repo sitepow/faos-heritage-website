@@ -23,6 +23,7 @@ import { ProductSection } from '../../product/[slug]/_components/section'
 import { getProducts } from '../../products/action'
 
 import { getCategory } from '@/app/[locale]/(dashboard)/dashboard/product/action/category'
+import { SectionHeader } from '@/components/heading'
 import { PageNotFound } from '@/components/page-not-found'
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
 import { SORT_ITEMS } from '@/utils/constants/product'
@@ -119,9 +120,9 @@ export const CategoryClient = ({
         {isLoadingCategory && <Skeleton className='h-10 w-64 rounded-lg' />}
 
         {!isLoadingCategory && (
-          <span className='container mx-auto text-2xl font-semibold'>
-            {t('categoryTitle', { name: category?.name! })}
-          </span>
+          <SectionHeader
+            title={t('categoryTitle', { name: category?.name! })}
+          />
         )}
 
         <div className='container mx-auto flex w-full flex-wrap items-center justify-center gap-3 sm:justify-between'>
@@ -166,13 +167,6 @@ export const CategoryClient = ({
           items={items}
         />
       </div>
-
-      {/* <div className='flex w-full flex-col'>
-        <AdvertiseBanner />
-        <CertificateBanner />
-        <MarketplaceBanner />
-        <CustomerBanner />
-      </div> */}
     </section>
   )
 }

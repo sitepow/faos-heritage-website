@@ -1,7 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
 'use client'
 
-import { Card, CardBody, CardHeader } from '@heroui/react'
+import { Card, CardHeader } from '@heroui/react'
 import { useQuery } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 
@@ -18,28 +17,37 @@ export const CategoryClient = () => {
   })
 
   return (
-    <Card radius='none' shadow='none' className='container mx-auto bg-inherit'>
-      <CardHeader className='dark:bg-default-50 bg-white py-5 font-semibold'>
-        <span className='text-[#0000008a] dark:text-[#ffffff8a]'>หมวดหมู่</span>
-      </CardHeader>
-      <CardBody className='grid grid-cols-2 gap-px p-px text-center sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6'>
+    <div className='container mx-auto flex flex-col gap-5'>
+      <Card radius='none' shadow='none' className='bg-inherit'>
+        <CardHeader className='dark:bg-default-50 border-primary border-b-4 bg-white py-5 font-semibold'>
+          <span className='text-primary mx-auto text-xl font-bold sm:text-2xl'>
+            หมวดหมู่
+          </span>
+        </CardHeader>
+      </Card>
+
+      <div className='grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8'>
         {categories?.map((category) => (
           <div
-            className='hover:text-primary dark:bg-default-50 flex h-36 cursor-pointer flex-col items-center justify-center gap-2 bg-white p-2'
-            onClick={() => {
-              router.push(
-                `/category/${createSlug(category?.name, category?.id)}`,
-              )
-            }}
+            key={category.id}
+            onClick={() =>
+              router.push(`/category/${createSlug(category.name, category.id)}`)
+            }
+            className='group flex cursor-pointer flex-col items-center gap-2'
           >
-            <img
-              src={category?.image ?? NO_IMAGE}
-              className='size-14 rounded-full sm:size-16'
-            />
-            <span className='line-clamp-2'>{category?.name}</span>
+            <div className='relative overflow-hidden rounded-2xl'>
+              <img
+                src={category?.image ?? NO_IMAGE}
+                alt={category.name}
+                className='border-divider aspect-square size-16 w-full rounded-full border object-cover md:size-20'
+              />
+            </div>
+            <span className='text-default-600 group-hover:text-primary line-clamp-1 text-sm font-medium transition-colors'>
+              {category?.name}
+            </span>
           </div>
         ))}
-      </CardBody>
-    </Card>
+      </div>
+    </div>
   )
 }

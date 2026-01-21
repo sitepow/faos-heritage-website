@@ -55,7 +55,12 @@ export const ExploreProductsClient = ({
         items={products?.items ?? []}
       />
       <Link href='/products'>
-        <Button variant='faded' radius='sm' endContent={<ArrowRightIcon />}>
+        <Button
+          color='primary'
+          className='text-secondary'
+          radius='sm'
+          endContent={<ArrowRightIcon />}
+        >
           {tCategory('explore')}
         </Button>
       </Link>

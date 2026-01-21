@@ -22,6 +22,7 @@ import {
   getProducts,
   type GetProductsResult,
 } from '@/app/[locale]/(main)/products/action'
+import { SectionHeader } from '@/components/heading'
 import { PageNotFound } from '@/components/page-not-found'
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
 import { SORT_ITEMS } from '@/utils/constants/product'
@@ -97,9 +98,7 @@ export const ProductsClient = ({
           </Breadcrumbs>
         </div>
 
-        <span className='container mx-auto text-2xl font-semibold'>
-          {t('title')}
-        </span>
+        <SectionHeader title={t('title')} />
 
         <div className='container mx-auto flex w-full flex-wrap items-center justify-center gap-3 sm:justify-between'>
           <span className='text-primary'>
@@ -143,13 +142,6 @@ export const ProductsClient = ({
           items={items}
         />
       </div>
-
-      {/* <div className='flex w-full flex-col'>
-        <AdvertiseBanner />
-        <CertificateBanner />
-        <MarketplaceBanner />
-        <CustomerBanner />
-      </div> */}
     </section>
   )
 }
