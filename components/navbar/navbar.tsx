@@ -1,8 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
 import { Badge, Button, Input } from '@heroui/react'
-import { MenuIcon, SearchIcon, ShoppingCartIcon } from 'lucide-react'
+import {
+  LogInIcon,
+  MenuIcon,
+  SearchIcon,
+  ShoppingCartIcon,
+  XIcon,
+} from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
+import { useState } from 'react'
 
 import { NavbarHeader } from './header'
 import { NavbarPanel } from './panel'
@@ -10,11 +18,40 @@ import { NavbarPanel } from './panel'
 import { siteConfig } from '@/config/site'
 
 export const Navbar = () => {
+  const { data: session } = useSession()
   const router = useRouter()
   const translateNavbar = useTranslations('Navbar.Menu')
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
     <nav className='sticky top-0 z-50 flex w-full flex-col bg-white shadow dark:bg-black'>
+      {isMenuOpen && (
+        <div className='bg-background fixed inset-0 z-60'>
+          <Button
+            isIconOnly
+            variant='light'
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <XIcon />
+          </Button>
+
+          <nav className='flex flex-col gap-4 p-5'>
+            {siteConfig.mainNavItems?.map((item) => (
+              <button
+                key={item.href}
+                className='hover:text-primary text-left text-base transition-colors'
+                onClick={() => {
+                  setIsMenuOpen(false)
+                  router.push(item.href)
+                }}
+              >
+                {translateNavbar(item.label)}
+              </button>
+            ))}
+          </nav>
+        </div>
+      )}
+
       <NavbarHeader />
 
       <div className='border-divider w-full border-b'>
@@ -61,8 +98,18 @@ export const Navbar = () => {
               startContent={<SearchIcon className='text-primary' />}
             />
 
-            <NavbarPanel />
-
+            {session && <NavbarPanel />}
+            {!session && (
+              <Button
+                isIconOnly
+                variant='light'
+                onClick={() => {
+                  router.push('/login')
+                }}
+              >
+                <LogInIcon />
+              </Button>
+            )}
             <Badge color='primary' className='text-secondary' shape='circle'>
               <Button
                 isIconOnly
@@ -75,7 +122,14 @@ export const Navbar = () => {
               </Button>
             </Badge>
 
-            <Button isIconOnly variant='light' className='md:hidden'>
+            <Button
+              isIconOnly
+              variant='light'
+              className='md:hidden'
+              onClick={() => {
+                setIsMenuOpen(!isMenuOpen)
+              }}
+            >
               <MenuIcon />
             </Button>
 
