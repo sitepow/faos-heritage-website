@@ -42,6 +42,9 @@ const FOOTER_SECTIONS = [
       '/images/market/lazada.svg',
       '/images/market/shopee.png',
     ],
+    maps: [
+      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.367656854077!2d100.5608179!3d13.732689800000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29f1d78e70295%3A0x65672fcbcdb9c20d!2z4Lif4Li54LmJ4LiU4LmB4Lil4LiZ4LiU4LmM!5e1!3m2!1sth!2sth!4v1768955985416!5m2!1sth!2sth',
+    ],
   },
   {
     title: 'มาตรฐานและการรับรอง',
@@ -57,7 +60,10 @@ const FOOTER_SECTIONS = [
     title: 'ติดตามเรา',
     items: [
       { label: 'Facebook', href: '#' },
-      { label: 'Instagram', href: '#' },
+      {
+        label: 'Instagram',
+        href: 'https://www.instagram.com/faos.asia',
+      },
       { label: 'Line', href: '#' },
       { label: 'Lazada', href: '#' },
       { label: 'Shopee', href: '#' },
@@ -113,7 +119,7 @@ export const Footer = ({ className, ...props }: FooterProps) => {
                             key={i}
                             src={img}
                             alt='payment'
-                            className='h-10 w-auto cursor-pointer object-contain sm:h-12'
+                            className='h-10 w-auto cursor-pointer rounded-lg object-contain sm:h-12'
                           />
                         ))}
                     </div>
@@ -141,6 +147,20 @@ export const Footer = ({ className, ...props }: FooterProps) => {
                 ))}
               </div>
             )}
+
+            {section.maps?.map((mapSrc, mIdx) => (
+              <div
+                key={mIdx}
+                className='border-divider overflow-hidden rounded-lg border'
+              >
+                <iframe
+                  title={`map-${mIdx}`}
+                  src={mapSrc}
+                  className='h-32 w-full border-0'
+                  loading='lazy'
+                />
+              </div>
+            ))}
 
             {!section.isGroup &&
               !section.isMarketplace &&
