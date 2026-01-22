@@ -21,8 +21,8 @@ export const CategoryClient = () => {
   return (
     <div className='container mx-auto flex flex-col gap-5'>
       <Card radius='none' shadow='none' className='bg-inherit'>
-        <CardHeader className='dark:bg-default-50 border-primary border-b-4 bg-white py-5 font-semibold'>
-          <span className='text-primary mx-auto text-xl font-bold sm:text-2xl'>
+        <CardHeader className='bg-none py-5 font-semibold'>
+          <span className='text-primary mx-auto border-b-4 pb-2.5 text-xl font-bold sm:text-2xl'>
             {tc('category')}
           </span>
         </CardHeader>
@@ -44,7 +44,7 @@ export const CategoryClient = () => {
                 className='border-divider aspect-square size-14 w-full rounded-full border object-cover md:size-16'
               />
             </div>
-            <span className='group-hover:text-primary line-clamp-1 font-medium'>
+            <span className='group-hover:text-primary line-clamp-1 font-medium sm:text-lg'>
               {category?.name}
             </span>
           </div>

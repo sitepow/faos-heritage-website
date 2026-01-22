@@ -32,7 +32,7 @@ export const OverviewCard = ({
   })
 
   return (
-    <Card fullWidth className='border-default-200 border'>
+    <Card shadow='none' radius='sm' fullWidth className='border-divider border'>
       <CardHeader>
         <span className='font-semibold'>{t('tabs.manage')}</span>
       </CardHeader>
@@ -41,7 +41,7 @@ export const OverviewCard = ({
 
         {!isLoadingUser && (
           <div className='flex flex-col sm:max-w-1/2'>
-            <div className='border-divider bg-default-50 rounded-t-lg border p-2.5'>
+            <div className='border-divider bg-primary rounded-t-lg border p-2.5 text-white'>
               <span className='font-semibold'>{t('personalInfo')}</span>
             </div>
 

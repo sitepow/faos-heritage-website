@@ -44,8 +44,9 @@ export const CartLists = ({ className, ...props }: CartListsProp) => {
   return (
     <Card
       radius='sm'
+      shadow='none'
       fullWidth
-      className={cn(className, 'border-default-200 border')}
+      className={cn(className, 'border-divider border')}
       {...props}
     >
       <CardHeader>

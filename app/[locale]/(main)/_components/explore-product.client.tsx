@@ -38,9 +38,9 @@ export const ExploreProductsClient = ({
 
   return (
     <div className='container mx-auto flex flex-col gap-5'>
-      <Card radius='none' shadow='none'>
-        <CardHeader className='border-primary border-b-4 py-5'>
-          <div className='text-primary mx-auto flex flex-col items-center'>
+      <Card radius='none' shadow='none' className='bg-inherit'>
+        <CardHeader className='bg-none py-5'>
+          <div className='text-primary border-primary mx-auto flex flex-col items-center border-b-4 pb-2.5'>
             <span className='text-xl font-bold sm:text-2xl'>
               {tSection('Header.title')}
             </span>

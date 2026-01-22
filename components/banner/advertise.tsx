@@ -10,7 +10,7 @@ export const AdvertiseBanner = () => {
   return (
     <section className='container mx-auto'>
       <div
-        className='relative overflow-hidden rounded-lg px-6 py-16 text-white shadow-2xl'
+        className='border-divider relative overflow-hidden rounded-lg border px-6 py-16 text-white'
         style={{
           backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.4)), url(/images/banner/faos-waterfall.jpg)`,
           backgroundSize: 'cover',

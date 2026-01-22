@@ -198,6 +198,7 @@ export const ProductCart = () => {
             <NumberInput
               label={t('quantity')}
               variant='bordered'
+              classNames={{ inputWrapper: 'shadow-none border-primary' }}
               minValue={1}
               maxValue={stock}
               value={quantity}
@@ -213,6 +214,9 @@ export const ProductCart = () => {
               label={t('productOptions')}
               selectedKeys={variantId ? [variantId] : []}
               variant='bordered'
+              classNames={{
+                trigger: 'shadow-none border-primary',
+              }}
               onSelectionChange={(option) =>
                 setVariantId(Array.from(option)[0] as string)
               }

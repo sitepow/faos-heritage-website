@@ -179,7 +179,13 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
         onOpenChange={onOpenConfirmOrderChange}
       />
 
-      <Card radius='sm' fullWidth className={cn(className, 'h-fit')} {...props}>
+      <Card
+        radius='sm'
+        fullWidth
+        shadow='none'
+        className={cn(className, 'border-divider h-fit border')}
+        {...props}
+      >
         <CardBody className='gap-3'>
           {!isLoadingAddress && address && (
             <>

@@ -219,7 +219,7 @@ export default function Login() {
         </div>
 
         <div className='grid w-full gap-2 sm:grid-cols-2'>
-          <Card className='border-default-200 cursor-pointer border' fullWidth>
+          <Card className='border-divider cursor-pointer border' fullWidth>
             <CardBody
               className='flex-row items-center gap-2 p-2'
               onClick={() => signIn('google')}
@@ -235,7 +235,7 @@ export default function Login() {
             </CardBody>
           </Card>
 
-          <Card className='border-default-200 cursor-pointer border' fullWidth>
+          <Card className='border-divider cursor-pointer border' fullWidth>
             <CardBody
               className='flex-row items-center gap-2 p-2'
               onClick={() => signIn('facebook')}

@@ -14,7 +14,7 @@ export const Navbar = () => {
   const router = useRouter()
 
   return (
-    <nav className='sticky top-0 z-50 flex w-full flex-col bg-white shadow dark:bg-black'>
+    <nav className='sticky top-0 z-50 flex w-full flex-col bg-[#f1f1f1ec] backdrop-blur-md dark:bg-[#131314ec]'>
       <NavbarHeader />
 
       <div className='border-divider w-full border-b'>
@@ -33,7 +33,6 @@ export const Navbar = () => {
           <div className='flex items-center gap-3'>
             <Input
               size='lg'
-              radius='sm'
               classNames={{
                 input: ['!text-primary placeholder:!text-primary'],
                 inputWrapper: [
@@ -45,7 +44,7 @@ export const Navbar = () => {
               className='hidden w-lg lg:block'
               variant='bordered'
               placeholder={t('search')}
-              startContent={<SearchIcon className='text-primary' />}
+              endContent={<SearchIcon className='text-primary' />}
             />
 
             {session && <NavbarPanel />}
@@ -60,7 +59,12 @@ export const Navbar = () => {
                 <LogInIcon />
               </Button>
             )}
-            <Badge color='primary' className='text-secondary' shape='circle'>
+            <Badge
+              color='primary'
+              content={'99+'}
+              className='text-secondary'
+              shape='circle'
+            >
               <Button
                 isIconOnly
                 variant='light'

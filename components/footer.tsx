@@ -63,7 +63,7 @@ export const Footer = ({ className, ...props }: FooterProps) => {
   return (
     <footer
       className={cn(
-        'border-primary flex w-full flex-col items-center justify-between gap-2 border-t-4 bg-white px-5 py-2.5 dark:bg-neutral-950',
+        'border-primary flex w-full flex-col items-center justify-between gap-2 border-t-4 bg-white px-5 py-2.5 dark:bg-[#131314]',
         className,
       )}
       {...props}

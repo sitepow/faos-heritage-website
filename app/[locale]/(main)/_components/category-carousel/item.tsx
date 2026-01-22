@@ -25,7 +25,7 @@ export const CategoryCarouselItem = ({
   return (
     <Card
       className={cn(
-        'border-default-200 w-32 cursor-pointer border font-semibold sm:w-52',
+        'border-divider w-32 cursor-pointer border font-semibold sm:w-52',
         isActive && 'border-primary text-primary',
       )}
     >
