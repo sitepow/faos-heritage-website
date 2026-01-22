@@ -33,7 +33,6 @@ import {
   StatCardSkeleton,
 } from '@/app/[locale]/(dashboard)/_components/stat-card'
 import { useAppStore } from '@/app/store'
-import { CountryFlag } from '@/components/country-flag'
 import { ITEM_PER_PAGE } from '@/utils/constants/app'
 import { NO_IMAGE } from '@/utils/constants/seo'
 import { formatDate } from '@/utils/helpers/date'
@@ -41,7 +40,6 @@ import { formatCurrency } from '@/utils/helpers/number'
 import { getOrderStatus } from '@/utils/helpers/order'
 
 export default function Order() {
-  const t = useTranslations('Dashboard')
   const tOrder = useTranslations('Dashboard.Order')
 
   const { country, exchangeRates } = useAppStore()
@@ -80,11 +78,7 @@ export default function Order() {
 
         {!isLoadingDashboard &&
           dashboard?.map((data) => (
-            <StatCard
-              key={data.name}
-              {...data}
-              name={t(`Stats.${data.name}`)}
-            />
+            <StatCard key={data.name} {...data} name={data.name} />
           ))}
       </div>
 
@@ -119,11 +113,6 @@ export default function Order() {
               <TableCell>{order.id}</TableCell>
               <TableCell>
                 <AvatarGroup max={3} isBordered>
-                  <CountryFlag
-                    countryCode={order?.address?.countryCode!}
-                    size='md'
-                  />
-
                   {order?.items?.map((item) => (
                     <Avatar
                       key={item?.product?.images?.[0]?.url}

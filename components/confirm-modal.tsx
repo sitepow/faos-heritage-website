@@ -23,8 +23,8 @@ export const ConfirmModal = ({
   onOpenChange,
   onConfirm,
   isPending,
-  title = 'Are you about to delete this information?',
-  description = 'Are you sure you want to delete this data? This deletion is permanent and irrecoverable.',
+  title = 'คุณกำลังจะลบข้อมูลนี้ใช่หรือไม่?',
+  description = 'คุณแน่ใจหรือไม่ว่าต้องการลบข้อมูลนี้ การลบนี้เป็นการลบถาวรและไม่สามารถกู้คืนได้',
 }: ConfirmModalProps) => {
   return (
     <Modal
@@ -43,7 +43,7 @@ export const ConfirmModal = ({
             </ModalBody>
             <ModalFooter className='gap-2'>
               <Button disabled={isPending} variant='faded' onPress={onClose}>
-                Cancel
+                ยกเลิก
               </Button>
               <Button
                 className='text-secondary'
@@ -52,7 +52,7 @@ export const ConfirmModal = ({
                 isLoading={isPending}
                 onPress={onConfirm}
               >
-                OK
+                ตกลง
               </Button>
             </ModalFooter>
           </>

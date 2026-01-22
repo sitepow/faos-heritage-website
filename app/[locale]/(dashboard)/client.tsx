@@ -4,13 +4,13 @@ import { useTheme } from 'next-themes'
 import { type PropsWithChildren } from 'react'
 import { ToastContainer } from 'react-toastify'
 
-import { Navbar } from '@/components/navbar/navbar'
+import { AdminNavbar } from './_components/navbar'
 
 export const DashboardClient = ({ children }: PropsWithChildren) => {
   const { theme } = useTheme()
 
   return (
-    <div className='relative flex h-screen flex-col overflow-x-hidden'>
+    <div className='relative flex h-screen flex-col overflow-x-hidden bg-[#f1f1f1] dark:bg-inherit'>
       <ToastContainer
         closeOnClick
         hideProgressBar
@@ -19,11 +19,10 @@ export const DashboardClient = ({ children }: PropsWithChildren) => {
         closeButton={false}
         theme={theme === 'dark' ? 'dark' : 'light'}
       />
-      <Navbar />
+      <AdminNavbar />
       <main className='container mx-auto flex flex-grow flex-col gap-5 p-6'>
         {children}
       </main>
-      {/* <Footer /> */}
     </div>
   )
 }

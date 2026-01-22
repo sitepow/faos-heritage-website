@@ -65,7 +65,6 @@ import { getRangeDisplayValue } from '@/utils/helpers/range'
 
 export default function Product() {
   const locale = useLocale()
-  const tDash = useTranslations('Dashboard')
   const t = useTranslations('Dashboard.ProductManager')
   const tc = useTranslations('Common')
 
@@ -151,11 +150,7 @@ export default function Product() {
 
         {!isLoadingDashboard &&
           dashboard?.map((data) => (
-            <StatCard
-              key={data.name}
-              {...data}
-              name={tDash(`Stats.${data.name}`)}
-            />
+            <StatCard key={data.name} {...data} name={data.name} />
           ))}
       </div>
 

@@ -87,9 +87,9 @@ export const getOrderStat = async () => {
   ])
 
   return [
-    { name: 'allOrders', value: totalOrders },
-    { name: 'pendingOrders', value: pending },
-    { name: 'deliveredOrders', value: success },
+    { name: 'คำสั่งซื้อทั้งหมด', value: totalOrders },
+    { name: 'คำสั่งซื้อที่รอชำระเงิน', value: pending },
+    { name: 'คำสั่งซื้อที่สำเร็จแล้ว', value: success },
   ]
 }
 
@@ -111,17 +111,17 @@ export const getOrderStatCash = async () => {
 
   return [
     {
-      name: 'paymentDelivered',
+      name: 'ยอดคำสั่งซื้อที่จัดส่งสำเร็จแล้ว',
       value: orderDelivered._sum.total ?? 0,
       isCurrency: true,
     },
     {
-      name: 'paymentCancelled',
+      name: 'ยอดคำสั่งซื้อที่ถูกยกเลิก',
       value: orderCancelled._sum.total ?? 0,
       isCurrency: true,
     },
     {
-      name: 'paymentPending',
+      name: 'ยอดคำสั่งซื้อที่กำลังรอชำระเงิน',
       value: orderPending._sum.total ?? 0,
       isCurrency: true,
     },

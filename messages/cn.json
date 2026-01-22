@@ -41,6 +41,7 @@
     "contactText": "请保留此订单号，以便日后查询状态或联系客服。"
   },
   "Common": {
+    "category": "产品类别",
     "theme": {
       "light": "浅色",
       "dark": "深色",
@@ -319,6 +320,7 @@
     "share": "分享商品"
   },
   "Navbar": {
+    "search": "搜索产品名称或类别",
     "Header": "顶级有机橄榄油与蜂蜜，成就健康生活之道",
     "Menu": {
       "home": "首页",
@@ -435,10 +437,67 @@
     }
   },
   "Footer": {
-    "copyright": "© {year} {name} - {title}",
-    "Menu": {
-      "privacy": "隐私政策"
-    }
+    "copyright": "© {year} {name} 版权所有",
+    "country": "国家和地区:",
+    "Menu": [
+      {
+        "title": "关于 FAOS",
+        "items": [
+          { "label": "关于我们", "href": "/about" },
+          { "label": "支付方式", "href": "/payment" },
+          { "label": "隐私政策", "href": "/privacy" },
+          { "label": "常见问题", "href": "#" },
+          { "label": "帮助?", "href": "#" }
+        ]
+      },
+      {
+        "isGroup": true,
+        "subSections": [
+          { "title": "配送服务", "isShipping": true },
+          {
+            "title": "付款方式",
+            "isPayment": true,
+            "items": ["/images/visa-mastercard.png", "/images/promt-pay.jpg"]
+          }
+        ]
+      },
+      {
+        "title": "销售渠道",
+        "isMarketplace": true,
+        "items": [
+          "/images/market/food-land.png",
+          "/images/market/villa-market.png",
+          "/images/market/lazada.svg",
+          "/images/market/shopee.png"
+        ],
+        "maps": [
+          "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.367656854077!2d100.5608179!3d13.732689800000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29f1d78e70295%3A0x65672fcbcdb9c20d!2z4Lif4Li54LmJ4LiU4LmB4Lil4LiZ4LiU4LmM!5e1!3m2!1sth!2sth!4v1768955985416!5m2!1sth!2sth"
+        ]
+      },
+      {
+        "title": "标准与认证",
+        "isCertificate": true,
+        "items": [
+          "/images/certificate/gmo-free.png",
+          "/images/certificate/iso.png",
+          "/images/certificate/bio.png",
+          "/images/certificate/Chema_logo_medium.png"
+        ]
+      },
+      {
+        "title": "关注我们",
+        "items": [
+          { "label": "Facebook", "href": "#" },
+          {
+            "label": "Instagram",
+            "href": "https://www.instagram.com/faos.asia"
+          },
+          { "label": "Line", "href": "#" },
+          { "label": "Lazada", "href": "#" },
+          { "label": "Shopee", "href": "#" }
+        ]
+      }
+    ]
   },
   "Country": {
     "TH": "泰国",

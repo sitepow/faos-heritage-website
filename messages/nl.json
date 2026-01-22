@@ -41,6 +41,7 @@
     "contactText": "Bewaar dit ordernummer voor latere statuscontroles of om contact op te nemen met de klantenservice."
   },
   "Common": {
+    "category": "Productcategorieën",
     "theme": {
       "light": "Licht",
       "dark": "Donker",
@@ -323,6 +324,7 @@
     "share": "Deel Product"
   },
   "Navbar": {
+    "search": "Zoek productnaam of categorie",
     "Header": "De beste biologische olijfolie en honing, voor uw gezonde levensstijl",
     "Menu": {
       "home": "Home",
@@ -456,10 +458,67 @@
     }
   },
   "Footer": {
-    "copyright": "© {year} {name} - {title}",
-    "Menu": {
-      "privacy": "Privacybeleid"
-    }
+    "copyright": "© {year} {name} Alle rechten voorbehouden",
+    "country": "Land en regio:",
+    "Menu": [
+      {
+        "title": "Over FAOS",
+        "items": [
+          { "label": "Over ons", "href": "/about" },
+          { "label": "Betaalmethoden", "href": "/payment" },
+          { "label": "Privacybeleid", "href": "/privacy" },
+          { "label": "Veelgestelde vragen", "href": "#" },
+          { "label": "Hulp nodig?", "href": "#" }
+        ]
+      },
+      {
+        "isGroup": true,
+        "subSections": [
+          { "title": "Verzend service", "isShipping": true },
+          {
+            "title": "Betaalmethoden",
+            "isPayment": true,
+            "items": ["/images/visa-mastercard.png", "/images/promt-pay.jpg"]
+          }
+        ]
+      },
+      {
+        "title": "Verkooppunten",
+        "isMarketplace": true,
+        "items": [
+          "/images/market/food-land.png",
+          "/images/market/villa-market.png",
+          "/images/market/lazada.svg",
+          "/images/market/shopee.png"
+        ],
+        "maps": [
+          "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.367656854077!2d100.5608179!3d13.732689800000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29f1d78e70295%3A0x65672fcbcdb9c20d!2z4Lif4Li54LmJ4LiU4LmB4Lil4LiZ4LiU4LmM!5e1!3m2!1sth!2sth!4v1768955985416!5m2!1sth!2sth"
+        ]
+      },
+      {
+        "title": "Standaarden & Certificeringen",
+        "isCertificate": true,
+        "items": [
+          "/images/certificate/gmo-free.png",
+          "/images/certificate/iso.png",
+          "/images/certificate/bio.png",
+          "/images/certificate/Chema_logo_medium.png"
+        ]
+      },
+      {
+        "title": "Volg ons",
+        "items": [
+          { "label": "Facebook", "href": "#" },
+          {
+            "label": "Instagram",
+            "href": "https://www.instagram.com/faos.asia"
+          },
+          { "label": "Line", "href": "#" },
+          { "label": "Lazada", "href": "#" },
+          { "label": "Shopee", "href": "#" }
+        ]
+      }
+    ]
   },
   "Country": {
     "TH": "Thailand",

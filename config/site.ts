@@ -20,12 +20,6 @@ export const siteConfig = {
     login: '/login',
     cart: '/cart',
   },
-  mainNavItems: [
-    { label: 'home', href: '/' },
-    { label: 'products', href: '/products' },
-    { label: 'payments', href: '/payment' },
-    { label: 'about', href: '/about' },
-  ] satisfies NavItem[],
 
   adminNavbarItems: [
     { label: 'dashboard', href: '/dashboard' },

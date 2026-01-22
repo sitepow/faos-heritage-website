@@ -12,7 +12,7 @@ export default function MainLayout({ children }: PropsWithChildren) {
   const { theme } = useTheme()
 
   return (
-    <div className='relative flex h-screen flex-col overflow-x-hidden bg-[#f1f1f1] dark:bg-inherit'>
+    <div className='relative flex h-dvh flex-col overflow-x-hidden bg-[#f1f1f1] dark:bg-inherit'>
       <ToastContainer
         closeOnClick
         hideProgressBar

@@ -299,8 +299,8 @@ export const getProductStat = async () => {
   ])
 
   return [
-    { name: 'allProducts', value: totalProducts },
-    { name: 'inStockProducts', value: inStock },
-    { name: 'outOfStockProducts', value: outOfStock },
+    { name: 'สินค้าทั้งหมด', value: totalProducts },
+    { name: 'สินค้าพร้อมจำหน่าย', value: inStock },
+    { name: 'สินค้าไม่พร้อมจำหน่าย (หมดสต็อก)', value: outOfStock },
   ]
 }

@@ -43,7 +43,6 @@ import { ITEM_PER_PAGE } from '@/utils/constants/app'
 import { NO_IMAGE } from '@/utils/constants/seo'
 
 export default function User() {
-  const tDash = useTranslations('Dashboard')
   const t = useTranslations('Dashboard.UserManager')
   const tc = useTranslations('Common')
 
@@ -101,11 +100,7 @@ export default function User() {
 
         {!isLoadingDashboard &&
           dashboard?.map((data) => (
-            <StatCard
-              key={data.name}
-              {...data}
-              name={tDash(`Stats.${data.name}`)}
-            />
+            <StatCard key={data.name} {...data} name={data.name} />
           ))}
       </div>
 

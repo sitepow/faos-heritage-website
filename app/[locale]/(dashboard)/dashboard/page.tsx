@@ -2,8 +2,7 @@
 
 import { Button } from '@heroui/react'
 import { useQueries } from '@tanstack/react-query'
-import { ImageIcon, SettingsIcon } from 'lucide-react'
-import { useTranslations } from 'next-intl'
+import { SettingsIcon } from 'lucide-react'
 
 import { getOrderStat, getOrderStatCash } from './order/action'
 import { getProductStat } from './product/action/product'
@@ -18,7 +17,6 @@ interface StatItem {
 }
 
 export default function Dashboard() {
-  const t = useTranslations('Dashboard')
   const { onOpenImageBannertManagerChange } = useImageBannerStore()
   const statsConfig = [
     {
@@ -45,20 +43,12 @@ export default function Dashboard() {
           <Button
             color='primary'
             variant='bordered'
-            startContent={<ImageIcon />}
+            startContent={<SettingsIcon />}
             onClick={() => {
               onOpenImageBannertManagerChange()
             }}
           >
-            {t('manageBanners')}
-          </Button>
-          <Button
-            color='primary'
-            variant='bordered'
-            isDisabled
-            startContent={<SettingsIcon />}
-          >
-            {t('siteSettings')}
+            จัดการรูปภาพสไลด์
           </Button>
         </div>
 
@@ -69,11 +59,7 @@ export default function Dashboard() {
             }
 
             return result.data?.map((item) => (
-              <StatCard
-                key={item.name}
-                {...item}
-                name={t(`Stats.${item.name}`)}
-              />
+              <StatCard key={item.name} {...item} name={item.name} />
             ))
           })}
         </div>

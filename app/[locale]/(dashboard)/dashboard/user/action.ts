@@ -169,8 +169,8 @@ export const getUserStat = async () => {
   ])
 
   return [
-    { name: 'allUsers', value: totalUsers },
-    { name: 'activeUsers', value: isActive },
-    { name: 'inactiveUsers', value: unActive },
+    { name: 'ผู้ใช้งานทั้งหมด', value: totalUsers },
+    { name: 'ผู้ใช้งานปกติ', value: isActive },
+    { name: 'ผู้ใช้งานถูกระงับบัญชี', value: unActive },
   ]
 }
