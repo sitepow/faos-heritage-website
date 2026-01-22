@@ -478,7 +478,11 @@
           {
             "title": "Betaalmethoden",
             "isPayment": true,
-            "items": ["/images/visa-mastercard.png", "/images/promt-pay.jpg"]
+            "items": [
+              "/images/visa.svg",
+              "/images/mastercard.png",
+              "/images/promt-pay.jpg"
+            ]
           }
         ]
       },

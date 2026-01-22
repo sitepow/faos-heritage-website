@@ -9,6 +9,25 @@ import { CURRENCY_LOCALE_MAP } from '@/utils/constants/currency'
 import { SHIPPING_PROVIDERS } from '@/utils/constants/shipping'
 import { cn } from '@/utils/style'
 
+interface FooterIconProps {
+  src: string
+  alt: string
+  hoverEffect?: boolean
+}
+
+const FooterIcon = ({ src, alt, hoverEffect }: FooterIconProps) => (
+  <div className='border-divider flex size-12 items-center justify-center rounded-md border bg-white p-2 sm:size-14'>
+    <img
+      src={src}
+      alt={alt}
+      className={cn(
+        'h-8 w-auto cursor-pointer object-contain transition-all duration-300',
+        hoverEffect && 'hover:scale-105',
+      )}
+    />
+  </div>
+)
+
 interface FooterLink {
   label: string
   href: string
@@ -71,20 +90,18 @@ export const Footer = ({ className, ...props }: FooterProps) => {
                     <div className='flex flex-wrap gap-2'>
                       {sub.isShipping &&
                         SHIPPING_PROVIDERS.map((shipping, i) => (
-                          <img
-                            key={`ship-${idx}-${i}`}
+                          <FooterIcon
+                            key={`ship-${i}`}
                             src={shipping?.image}
                             alt='shipping'
-                            className='border-divider size-12 cursor-pointer rounded border object-cover sm:size-14'
                           />
                         ))}
                       {sub.isPayment &&
                         sub.items?.map((img, i) => (
-                          <img
-                            key={`pay-${idx}-${i}`}
+                          <FooterIcon
+                            key={`pay-${i}`}
                             src={img}
                             alt='payment'
-                            className='h-10 w-auto cursor-pointer rounded-lg object-contain sm:h-12'
                           />
                         ))}
                     </div>
@@ -94,23 +111,16 @@ export const Footer = ({ className, ...props }: FooterProps) => {
             )}
 
             {(section.isMarketplace || section.isCertificate) && (
-              <div className='mt-1 grid grid-cols-2 gap-2'>
+              <div className='mt-1 flex flex-wrap gap-2'>
                 {section.items?.map((item, imgIdx) => {
                   if (typeof item !== 'string') return null
                   return (
-                    <div
-                      key={`img-${idx}-${imgIdx}`}
-                      className='border-divider flex items-center justify-center rounded-md border bg-white p-2'
-                    >
-                      <img
-                        src={item}
-                        alt='partner'
-                        className={cn(
-                          'h-8 w-auto cursor-pointer object-contain transition-all duration-300',
-                          section.isMarketplace && 'hover:scale-105',
-                        )}
-                      />
-                    </div>
+                    <FooterIcon
+                      key={`img-${imgIdx}`}
+                      src={item}
+                      alt='partner'
+                      hoverEffect={section.isMarketplace}
+                    />
                   )
                 })}
               </div>
@@ -118,7 +128,7 @@ export const Footer = ({ className, ...props }: FooterProps) => {
 
             {section.maps?.map((mapSrc, mIdx) => (
               <div
-                key={`map-${idx}-${mIdx}`}
+                key={`map-${mIdx}`}
                 className='border-divider overflow-hidden rounded-lg border'
               >
                 <iframe
@@ -142,7 +152,7 @@ export const Footer = ({ className, ...props }: FooterProps) => {
                     ) {
                       return (
                         <a
-                          key={`link-${idx}-${lIdx}`}
+                          key={`link-${lIdx}`}
                           href={link.href}
                           className='hover:text-primary transition-colors'
                         >
