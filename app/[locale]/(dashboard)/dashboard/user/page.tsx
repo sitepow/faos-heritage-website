@@ -130,7 +130,7 @@ export default function User() {
       </div>
 
       <Table
-        className='border-divider border'
+        className='border-divider rounded-lg border'
         aria-label={t('tableAria')}
         selectionMode='multiple'
         onSelectionChange={(keys) => {

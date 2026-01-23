@@ -68,7 +68,7 @@ export const Footer = ({ className, ...props }: FooterProps) => {
       )}
       {...props}
     >
-      <div className='border-divider container mx-auto grid justify-start gap-10 border-b py-10 text-sm sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5'>
+      <div className='border-divider container mx-auto grid justify-start gap-10 border-b py-10 text-sm sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5'>
         {menuData.map((section, idx) => (
           <div key={`section-${idx}`} className='flex flex-col gap-4'>
             {!section.isGroup && section.title && (

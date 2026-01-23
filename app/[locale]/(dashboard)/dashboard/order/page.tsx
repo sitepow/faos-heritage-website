@@ -83,7 +83,7 @@ export default function Order() {
       </div>
 
       <Table
-        className='border-divider border'
+        className='border-divider rounded-lg border'
         aria-label='Order data table'
         selectionMode='multiple'
         checkboxesProps={{

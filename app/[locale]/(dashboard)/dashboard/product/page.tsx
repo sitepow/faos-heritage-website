@@ -194,7 +194,7 @@ export default function Product() {
       </div>
 
       <Table
-        className='border-divider border'
+        className='border-divider rounded-lg border'
         aria-label={t('tableAria')}
         selectionMode='multiple'
         onSelectionChange={(keys) => setSelectedKeys(keys as Set<string>)}

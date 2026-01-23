@@ -39,7 +39,7 @@ export default function Dashboard() {
     <>
       <ImageBannerManager />
       <section className='flex flex-col items-center justify-center gap-4 text-center'>
-        <div className='flex w-full justify-end gap-2'>
+        <div className='flex w-full justify-center gap-2'>
           <Button
             color='primary'
             variant='bordered'

@@ -38,7 +38,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         //   'bg-background text-foreground min-h-screen font-sans antialiased',
         //   fontSukhumvit.variable,
         // )}
-        className={`bg-background text-foreground min-h-screen font-sans antialiased ${anuphan.className}`}
+        className={`text-foreground min-h-screen bg-[#f1f1f1] font-sans antialiased dark:bg-[#131314] ${anuphan.className}`}
       >
         <QueryProviders>
           <NextAuthProviders>

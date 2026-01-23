@@ -6,6 +6,7 @@ import { useSession } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
+import { NavbarHeader } from '@/components/navbar/header'
 import { NavbarPanel } from '@/components/navbar/panel'
 import { siteConfig } from '@/config/site'
 
@@ -16,16 +17,18 @@ export const AdminNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
-    <nav className='sticky top-0 z-50 flex w-full flex-col bg-white shadow dark:bg-black'>
+    <nav className='sticky top-0 z-50 flex w-full flex-col bg-[#f1f1f1ec] backdrop-blur-md dark:bg-[#131314ec]'>
       {isMenuOpen && (
-        <div className='bg-background fixed inset-0 z-60'>
-          <Button
-            isIconOnly
-            variant='light'
-            onClick={() => setIsMenuOpen(false)}
-          >
-            <XIcon />
-          </Button>
+        <div className='fixed inset-0 z-60 h-dvh bg-[#f1f1f1] dark:bg-[#131314]'>
+          <div className='flex w-full justify-end'>
+            <Button
+              isIconOnly
+              variant='light'
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <XIcon />
+            </Button>
+          </div>
 
           <nav className='flex flex-col gap-4 p-5'>
             {siteConfig.adminNavbarItems?.map((item) => (
@@ -43,6 +46,8 @@ export const AdminNavbar = () => {
           </nav>
         </div>
       )}
+
+      <NavbarHeader />
 
       <div className='border-divider w-full border-b'>
         <div className='container mx-auto flex items-center justify-between gap-4 px-5 py-2.5 md:gap-8'>
@@ -70,7 +75,7 @@ export const AdminNavbar = () => {
             </div>
           </div>
 
-          <div className='flex items-center gap-3'>
+          <div className='flex items-center'>
             {session && <NavbarPanel />}
             <Button
               isIconOnly
