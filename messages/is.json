@@ -429,21 +429,24 @@
     },
     "customer": "Veffurinn okkar er hannaður til að þjóna viðskiptavinum á markaðssvæðum í Asíu, Evrópu og Ameríku <link>til að tryggja þér einfalda og hraðvirka verslunarupplifun</link>",
     "certificate": "Gæði tryggð með alþjóðlegum stöðlum sem við skoðum ítarlega <link>því öryggi þitt er kjarninn</link> í öllum okkar framleiðsluskrefum",
-    "advertise": {
-      "title": "Kynntu þér heim jómfrúarolíu (Extra Virgin): Náttúrulegir kostir og staðreyndir fyrir heilsuna þína",
-      "messages": [
-        "Extra Virgin ólífuolía (EVOO) er hágæða olía, framleidd með nákvæmu ferli þar sem gæði eru sett fram yfir magn.",
-        "Rík af pólýfenólum með andoxunar- og bólgueyðandi eiginleika, sem verja olíuna gegn oxun og varðveita bragð og næringargildi.",
-        "Inniheldur Oleocanthal, sem virkar svipað og íbúprófen, hjálpar til við að stjórna frumuvirkni í bólgufrumum og dregur úr bólgu í líkamanum.",
-        "Hjálpar til við að stilla kólesteról- og þríglýseríðstig og dregur úr oxun LDL fyrir betri hjarta- og æðaheilsu.",
-        "Pólýfenólsambönd bæta andlega heilsu og koma í veg fyrir taugasjúkdóma eins og Alzheimer og demens.",
-        "Eykur virkni insúlíns við að halda jafnvægi á blóðsykri og gegnir mikilvægu hlutverki við að draga úr einkennum efnaskiptavillu (MS).",
-        "Inniheldur 'sitósteról' sem hjálpar til við að stjórna upptöku kólesteróls, styrkir meltingarkerfið og veitir áreiðanlega léttir á hægðatregðu.",
-        "Framleidd úr einstökum fornum ólífutegundum eins og Athenolia og Koroneiki, sem hafa mjög hátt innihald pólýfenóla og andoxunarefna.",
-        "Notast við hefðbundna kaldpressun með vélrænum aðferðum eingöngu; óunnin, óbleikt og án efna til að viðhalda hámarkshreinleika.",
-        "Pólýfenól vinna gegn skemmdum af völdum sindurefna, styrkja hjartað og auka orkustig, sem gerir þau að fullkomnum valkosti til að bæta íþróttaárangur á náttúrulegan hátt."
-      ]
-    }
+    "advertise": [
+      {
+        "image": "/images/banner/olive-oil.jpg",
+        "title": "Kynntu þér heim jómfrúarolíu (Extra Virgin): Náttúrulegir kostir og staðreyndir fyrir heilsuna þína",
+        "messages": [
+          "Extra Virgin ólífuolía (EVOO) er hágæða olía, framleidd með nákvæmu ferli þar sem gæði eru sett fram yfir magn.",
+          "Rík af pólýfenólum með andoxunar- og bólgueyðandi eiginleika, sem verja olíuna gegn oxun og varðveita bragð og næringargildi.",
+          "Inniheldur Oleocanthal, sem virkar svipað og íbúprófen, hjálpar til við að stjórna frumuvirkni í bólgufrumum og dregur úr bólgu í líkamanum.",
+          "Hjálpar til við að stilla kólesteról- og þríglýseríðstig og dregur úr oxun LDL fyrir betri hjarta- og æðaheilsu.",
+          "Pólýfenólsambönd bæta andlega heilsu og koma í veg fyrir taugasjúkdóma eins og Alzheimer og demens.",
+          "Eykur virkni insúlíns við að halda jafnvægi á blóðsykri og gegnir mikilvægu hlutverki við að draga úr einkennum efnaskiptavillu (MS).",
+          "Inniheldur 'sitósteról' sem hjálpar til við að stjórna upptöku kólesteróls, styrkir meltingarkerfið og veitir áreiðanlega léttir á hægðatregðu.",
+          "Framleidd úr einstökum fornum ólífutegundum eins og Athenolia og Koroneiki, sem hafa mjög hátt innihald pólýfenóla og andoxunarefna.",
+          "Notast við hefðbundna kaldpressun með vélrænum aðferðum eingöngu; óunnin, óbleikt og án efna til að viðhalda hámarkshreinleika.",
+          "Pólýfenól vinna gegn skemmdum af völdum sindurefna, styrkja hjartað og auka orkustig, sem gerir þau að fullkomnum valkosti til að bæta íþróttaárangur á náttúrulegan hátt."
+        ]
+      }
+    ]
   },
   "Section": {
     "Header": {
@@ -515,14 +518,20 @@
       {
         "title": "Fylgdu okkur",
         "items": [
-          { "label": "Facebook", "href": "#" },
+          {
+            "label": "Facebook",
+            "href": "https://web.facebook.com/FAOShertitagefood"
+          },
           {
             "label": "Instagram",
             "href": "https://www.instagram.com/faos.asia"
           },
           { "label": "Line", "href": "#" },
           { "label": "Lazada", "href": "#" },
-          { "label": "Shopee", "href": "#" }
+          {
+            "label": "Shopee",
+            "href": "https://shopee.co.th/ptatom?categoryId=100629&entryPoint=ShopByPDP&itemId=56204803689&upstream=search"
+          }
         ]
       }
     ]

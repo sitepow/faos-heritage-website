@@ -425,21 +425,24 @@
     },
     "customer": "Trang web của chúng tôi được thiết kế để hỗ trợ khách hàng tại các thị trường mục tiêu ở Châu Á, Châu Âu và Châu Mỹ <link>nhằm mang đến cho bạn trải nghiệm mua sắm nhanh chóng và dễ dàng</link>",
     "certificate": "Tự tin về chất lượng với các tiêu chuẩn quốc tế được chúng tôi kiểm tra nghiêm ngặt <link>vì sự an toàn của bạn là ưu tiên hàng đầu</link> trong mọi quy trình sản xuất",
-    "advertise": {
-      "title": "Khám phá thế giới dầu Ô liu Extra Virgin: Lợi ích tự nhiên và những điều cần biết cho sức khỏe của bạn",
-      "messages": [
-        "Dầu Ô liu Extra Virgin (EVOO) là loại dầu chất lượng cao nhất, được sản xuất thông qua quy trình tỉ mỉ, ưu tiên chất lượng hơn số lượng.",
-        "Giàu polyphenol với đặc tính chống oxy hóa và chống viêm, bảo vệ dầu khỏi bị oxy hóa và giữ nguyên hương vị cũng như giá trị dinh dưỡng.",
-        "Chứa Oleocanthal hoạt động tương tự như ibuprofen, giúp điều chỉnh hoạt động của tế bào trong các tế bào bị viêm và giảm sưng tấy khắp cơ thể.",
-        "Giúp cân bằng mức cholesterol và chất béo trung tính, đồng thời giảm quá trình oxy hóa LDL để có sức khỏe tim mạch và mạch máu tốt hơn.",
-        "Các hợp chất polyphenol giúp cải thiện sức khỏe tinh thần và ngăn ngừa các bệnh thoái hóa thần kinh như Alzheimer và sa sút trí tuệ.",
-        "Tăng cường hiệu quả của insulin trong việc duy trì mức đường huyết cân bằng và đóng vai trò quan trọng trong việc làm giảm các triệu chứng của hội chứng chuyển hóa (MS).",
-        "Chứa 'sitosterol' giúp điều chỉnh sự hấp thụ cholesterol, giúp hệ tiêu hóa khỏe mạnh hơn và giảm táo bón một cách hiệu quả.",
-        "Được sản xuất từ các giống ô liu cổ thụ độc đáo như Athenolia và Koroneiki, có hàm lượng polyphenol và chất chống oxy hóa cực cao.",
-        "Sử dụng kỹ thuật ép lạnh truyền thống chỉ bằng phương pháp cơ học; không tinh chế, không tẩy trắng và không hóa chất để duy trì độ tinh khiết tối đa.",
-        "Polyphenol hoạt động bằng cách giảm tổn thương do gốc tự do, tăng cường sức khỏe tim mạch và mức năng lượng, là lựa chọn hoàn hảo để nâng cao hiệu suất thể thao một cách tự nhiên."
-      ]
-    }
+    "advertise": [
+      {
+        "image": "/images/banner/olive-oil.jpg",
+        "title": "Khám phá thế giới dầu Ô liu Extra Virgin: Lợi ích tự nhiên và những điều cần biết cho sức khỏe của bạn",
+        "messages": [
+          "Dầu Ô liu Extra Virgin (EVOO) là loại dầu chất lượng cao nhất, được sản xuất thông qua quy trình tỉ mỉ, ưu tiên chất lượng hơn số lượng.",
+          "Giàu polyphenol với đặc tính chống oxy hóa và chống viêm, bảo vệ dầu khỏi bị oxy hóa và giữ nguyên hương vị cũng như giá trị dinh dưỡng.",
+          "Chứa Oleocanthal hoạt động tương tự như ibuprofen, giúp điều chỉnh hoạt động của tế bào trong các tế bào bị viêm và giảm sưng tấy khắp cơ thể.",
+          "Giúp cân bằng mức cholesterol và chất béo trung tính, đồng thời giảm quá trình oxy hóa LDL để có sức khỏe tim mạch và mạch máu tốt hơn.",
+          "Các hợp chất polyphenol giúp cải thiện sức khỏe tinh thần và ngăn ngừa các bệnh thoái hóa thần kinh như Alzheimer và sa sút trí tuệ.",
+          "Tăng cường hiệu quả của insulin trong việc duy trì mức đường huyết cân bằng và đóng vai trò quan trọng trong việc làm giảm các triệu chứng của hội chứng chuyển hóa (MS).",
+          "Chứa 'sitosterol' giúp điều chỉnh sự hấp thụ cholesterol, giúp hệ tiêu hóa khỏe mạnh hơn và giảm táo bón một cách hiệu quả.",
+          "Được sản xuất từ các giống ô liu cổ thụ độc đáo như Athenolia và Koroneiki, có hàm lượng polyphenol và chất chống oxy hóa cực cao.",
+          "Sử dụng kỹ thuật ép lạnh truyền thống chỉ bằng phương pháp cơ học; không tinh chế, không tẩy trắng và không hóa chất để duy trì độ tinh khiết tối đa.",
+          "Polyphenol hoạt động bằng cách giảm tổn thương do gốc tự do, tăng cường sức khỏe tim mạch và mức năng lượng, là lựa chọn hoàn hảo để nâng cao hiệu suất thể thao một cách tự nhiên."
+        ]
+      }
+    ]
   },
   "Section": {
     "Header": {
@@ -511,14 +514,20 @@
       {
         "title": "Theo dõi chúng tôi",
         "items": [
-          { "label": "Facebook", "href": "#" },
+          {
+            "label": "Facebook",
+            "href": "https://web.facebook.com/FAOShertitagefood"
+          },
           {
             "label": "Instagram",
             "href": "https://www.instagram.com/faos.asia"
           },
           { "label": "Line", "href": "#" },
           { "label": "Lazada", "href": "#" },
-          { "label": "Shopee", "href": "#" }
+          {
+            "label": "Shopee",
+            "href": "https://shopee.co.th/ptatom?categoryId=100629&entryPoint=ShopByPDP&itemId=56204803689&upstream=search"
+          }
         ]
       }
     ]

@@ -425,21 +425,24 @@
     },
     "customer": "Our website is designed to support customers in target markets across Asia, Europe, and America <link>to provide you with a fast and easy shopping experience</link>",
     "certificate": "Confidence in quality with international standards that we inspect thoroughly <link>because your safety is at the heart</link> of every step of our production",
-    "advertise": {
-      "title": "Discover the world of Extra Virgin Olive Oil: Natural benefits and essential facts for your well-being",
-      "messages": [
-        "Extra Virgin Olive Oil (EVOO) is the highest grade of oil, produced through a meticulous process that prioritizes quality over quantity.",
-        "Rich in polyphenols with antioxidant and anti-inflammatory properties, protecting the oil from oxidation and preserving its flavour and nutritional value.",
-        "Contains Oleocanthal, which functions similarly to ibuprofen, helping to regulate cellular activity within inflamed cells and reduce swelling throughout the body.",
-        "Helps balance cholesterol and triglyceride levels while reducing LDL oxidation for better cardiovascular and heart health.",
-        "Polyphenolic compounds help improve mental health and prevent neurodegenerative diseases such as Alzheimer's and dementia.",
-        "Enhances insulin efficiency in maintaining balanced blood sugar levels and plays a vital role in alleviating symptoms of Metabolic Syndrome (MS).",
-        "Contains 'Sitosterol' which helps regulate cholesterol absorption, strengthening the digestive system and providing reliable relief from constipation.",
-        "Produced from unique ancient olive varieties like Athenolia and Koroneiki, which contain exceptionally high levels of polyphenols and antioxidants.",
-        "Uses traditional cold-pressing techniques using only mechanical methods; unrefined, unbleached, and chemical-free to maintain maximum purity.",
-        "Polyphenols work by reducing free radical damage, strengthening the heart, and boosting energy levels, making it a perfect choice for naturally enhancing athletic performance."
-      ]
-    }
+    "advertise": [
+      {
+        "image": "/images/banner/olive-oil.jpg",
+        "title": "Discover the world of Extra Virgin Olive Oil: Natural benefits and essential facts for your well-being",
+        "messages": [
+          "Extra Virgin Olive Oil (EVOO) is the highest grade of oil, produced through a meticulous process that prioritizes quality over quantity.",
+          "Rich in polyphenols with antioxidant and anti-inflammatory properties, protecting the oil from oxidation and preserving its flavour and nutritional value.",
+          "Contains Oleocanthal, which functions similarly to ibuprofen, helping to regulate cellular activity within inflamed cells and reduce swelling throughout the body.",
+          "Helps balance cholesterol and triglyceride levels while reducing LDL oxidation for better cardiovascular and heart health.",
+          "Polyphenolic compounds help improve mental health and prevent neurodegenerative diseases such as Alzheimer's and dementia.",
+          "Enhances insulin efficiency in maintaining balanced blood sugar levels and plays a vital role in alleviating symptoms of Metabolic Syndrome (MS).",
+          "Contains 'Sitosterol' which helps regulate cholesterol absorption, strengthening the digestive system and providing reliable relief from constipation.",
+          "Produced from unique ancient olive varieties like Athenolia and Koroneiki, which contain exceptionally high levels of polyphenols and antioxidants.",
+          "Uses traditional cold-pressing techniques using only mechanical methods; unrefined, unbleached, and chemical-free to maintain maximum purity.",
+          "Polyphenols work by reducing free radical damage, strengthening the heart, and boosting energy levels, making it a perfect choice for naturally enhancing athletic performance."
+        ]
+      }
+    ]
   },
   "Section": {
     "Header": {
@@ -511,14 +514,20 @@
       {
         "title": "Follow Us",
         "items": [
-          { "label": "Facebook", "href": "#" },
+          {
+            "label": "Facebook",
+            "href": "https://web.facebook.com/FAOShertitagefood"
+          },
           {
             "label": "Instagram",
             "href": "https://www.instagram.com/faos.asia"
           },
           { "label": "Line", "href": "#" },
           { "label": "Lazada", "href": "#" },
-          { "label": "Shopee", "href": "#" }
+          {
+            "label": "Shopee",
+            "href": "https://shopee.co.th/ptatom?categoryId=100629&entryPoint=ShopByPDP&itemId=56204803689&upstream=search"
+          }
         ]
       }
     ]

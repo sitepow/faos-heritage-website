@@ -426,21 +426,24 @@
     },
     "customer": "Situs web kami dirancang untuk mendukung pelanggan di pasar target di Asia, Eropa, dan Amerika <link>untuk memberikan Anda pengalaman belanja yang mudah dan cepat</link>",
     "certificate": "Percaya pada kualitas dengan standar internasional yang kami periksa secara teliti <link>karena keamanan Anda adalah prioritas kami</link> dalam setiap langkah produksi kami",
-    "advertise": {
-      "title": "Mengenal dunia Minyak Zaitun Extra Virgin: Manfaat alami dan fakta untuk kesehatan Anda",
-      "messages": [
-        "Minyak Zaitun Extra Virgin (EVOO) adalah minyak kualitas tertinggi, diproduksi melalui proses teliti yang mengutamakan kualitas daripada kuantitas.",
-        "Kaya akan polifenol dengan sifat antioksidan dan anti-inflamasi, melindungi minyak dari oksidasi serta menjaga rasa dan nilai gizinya.",
-        "Mengandung Oleocanthal yang bekerja mirip dengan ibuprofen, membantu mengatur aktivitas sel dalam sel yang meradang dan mengurangi pembengkakan di seluruh tubuh.",
-        "Membantu menyeimbangkan kadar kolesterol dan trigliserida serta mengurangi oksidasi LDL untuk kesehatan jantung dan kardiovaskular yang lebih baik.",
-        "Senyawa polifenol membantu meningkatkan kesehatan mental dan mencegah penyakit neurodegeneratif seperti Alzheimer dan demensia.",
-        "Meningkatkan efisiensi insulin dalam menjaga kadar gula darah yang seimbang dan berperan penting dalam meredakan gejala sindrom metabolik (MS).",
-        "Mengandung 'sitosterol' yang membantu mengatur penyerapan kolesterol, memperkuat sistem pencernaan dan memberikan bantuan yang andal untuk sembelit.",
-        "Diproduksi dari varietas zaitun kuno yang unik seperti Athenolia dan Koroneiki, yang memiliki kadar polifenol dan antioksidan yang sangat tinggi.",
-        "Menggunakan teknik pemerasan dingin tradisional dengan hanya metode mekanis; tanpa pemurnian, tanpa pemutihan, dan tanpa bahan kimia untuk menjaga kemurnian tertinggi.",
-        "Polifenol bekerja dengan mengurangi kerusakan akibat radikal bebas, memperkuat jantung, dan meningkatkan tingkat energi, menjadikannya pilihan sempurna untuk meningkatkan performa olahraga secara alami."
-      ]
-    }
+    "advertise": [
+      {
+        "image": "/images/banner/olive-oil.jpg",
+        "title": "Mengenal dunia Minyak Zaitun Extra Virgin: Manfaat alami dan fakta untuk kesehatan Anda",
+        "messages": [
+          "Minyak Zaitun Extra Virgin (EVOO) adalah minyak kualitas tertinggi, diproduksi melalui proses teliti yang mengutamakan kualitas daripada kuantitas.",
+          "Kaya akan polifenol dengan sifat antioksidan dan anti-inflamasi, melindungi minyak dari oksidasi serta menjaga rasa dan nilai gizinya.",
+          "Mengandung Oleocanthal yang bekerja mirip dengan ibuprofen, membantu mengatur aktivitas sel dalam sel yang meradang dan mengurangi pembengkakan di seluruh tubuh.",
+          "Membantu menyeimbangkan kadar kolesterol dan trigliserida serta mengurangi oksidasi LDL untuk kesehatan jantung dan kardiovaskular yang lebih baik.",
+          "Senyawa polifenol membantu meningkatkan kesehatan mental dan mencegah penyakit neurodegeneratif seperti Alzheimer dan demensia.",
+          "Meningkatkan efisiensi insulin dalam menjaga kadar gula darah yang seimbang dan berperan penting dalam meredakan gejala sindrom metabolik (MS).",
+          "Mengandung 'sitosterol' yang membantu mengatur penyerapan kolesterol, memperkuat sistem pencernaan dan memberikan bantuan yang andal untuk sembelit.",
+          "Diproduksi dari varietas zaitun kuno yang unik seperti Athenolia dan Koroneiki, yang memiliki kadar polifenol dan antioksidan yang sangat tinggi.",
+          "Menggunakan teknik pemerasan dingin tradisional dengan hanya metode mekanis; tanpa pemurnian, tanpa pemutihan, dan tanpa bahan kimia untuk menjaga kemurnian tertinggi.",
+          "Polifenol bekerja dengan mengurangi kerusakan akibat radikal bebas, memperkuat jantung, dan meningkatkan tingkat energi, menjadikannya pilihan sempurna untuk meningkatkan performa olahraga secara alami."
+        ]
+      }
+    ]
   },
   "Section": {
     "Header": {
@@ -512,14 +515,20 @@
       {
         "title": "Ikuti Kami",
         "items": [
-          { "label": "Facebook", "href": "#" },
+          {
+            "label": "Facebook",
+            "href": "https://web.facebook.com/FAOShertitagefood"
+          },
           {
             "label": "Instagram",
             "href": "https://www.instagram.com/faos.asia"
           },
           { "label": "Line", "href": "#" },
           { "label": "Lazada", "href": "#" },
-          { "label": "Shopee", "href": "#" }
+          {
+            "label": "Shopee",
+            "href": "https://shopee.co.th/ptatom?categoryId=100629&entryPoint=ShopByPDP&itemId=56204803689&upstream=search"
+          }
         ]
       }
     ]

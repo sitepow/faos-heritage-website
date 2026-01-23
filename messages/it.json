@@ -429,21 +429,24 @@
     },
     "customer": "Il nostro sito è progettato per supportare i clienti nei mercati target in Asia, Europa e America <link>per offrirti un'esperienza di acquisto facile e veloce</link>",
     "certificate": "Qualità garantita da standard internazionali rigorosi <link>perché la tua sicurezza è la nostra priorità</link> in ogni fase della produzione",
-    "advertise": {
-      "title": "Scopri il mondo dell'olio extra vergine di oliva: benefici naturali e consigli per la tua salute",
-      "messages": [
-        "L'olio extra vergine di oliva (EVOO) è la massima espressione di qualità, prodotto con processi meticolosi che privilegiano l'eccellenza rispetto alla quantità.",
-        "Ricco di polifenoli con proprietà antiossidanti e antinfiammatorie, protegge l'olio dall'ossidazione preservandone sapore e valori nutrizionali.",
-        "Contiene oleocantale, che agisce in modo simile all'ibuprofene, aiutando a regolare l'attività cellulare nei processi infiammatori e a ridurre i gonfiori.",
-        "Aiuta a regolare i livelli di colesterolo e trigliceridi, riducendo l'ossidazione del colesterolo LDL per la salute del cuore e dei vasi sanguigni.",
-        "I composti polifenolici supportano la salute mentale e aiutano a prevenire malattie neurodegenerative come l'Alzheimer e la demenza.",
-        "Migliora l'efficacia dell'insulina nel bilanciare i livelli di zucchero nel sangue e gioca un ruolo chiave nel mitigare i sintomi della sindrome metabolica (MS).",
-        "Contiene sitosterolo, che regola l'assorbimento del colesterolo, migliorando la digestione e offrendo un sollievo affidabile contro la stitichezza.",
-        "Prodotto da varietà antiche e uniche come Athenolia e Koroneiki, caratterizzate da un contenuto altissimo di polifenoli e antiossidanti.",
-        "Estratto a freddo con metodi meccanici tradizionali, senza raffinazione, sbiancamento o sostanze chimiche, per preservare la massima purezza.",
-        "I polifenoli riducono i danni da radicali liberi, rinforzano il cuore e aumentano l'energia: la scelta perfetta per migliorare le prestazioni sportive in modo naturale."
-      ]
-    }
+    "advertise": [
+      {
+        "image": "/images/banner/olive-oil.jpg",
+        "title": "Scopri il mondo dell'olio extra vergine di oliva: benefici naturali e consigli per la tua salute",
+        "messages": [
+          "L'olio extra vergine di oliva (EVOO) è la massima espressione di qualità, prodotto con processi meticolosi che privilegiano l'eccellenza rispetto alla quantità.",
+          "Ricco di polifenoli con proprietà antiossidanti e antinfiammatorie, protegge l'olio dall'ossidazione preservandone sapore e valori nutrizionali.",
+          "Contiene oleocantale, che agisce in modo simile all'ibuprofene, aiutando a regolare l'attività cellulare nei processi infiammatori e a ridurre i gonfiori.",
+          "Aiuta a regolare i livelli di colesterolo e trigliceridi, riducendo l'ossidazione del colesterolo LDL per la salute del cuore e dei vasi sanguigni.",
+          "I composti polifenolici supportano la salute mentale e aiutano a prevenire malattie neurodegenerative come l'Alzheimer e la demenza.",
+          "Migliora l'efficacia dell'insulina nel bilanciare i livelli di zucchero nel sangue e gioca un ruolo chiave nel mitigare i sintomi della sindrome metabolica (MS).",
+          "Contiene sitosterolo, che regola l'assorbimento del colesterolo, migliorando la digestione e offrendo un sollievo affidabile contro la stitichezza.",
+          "Prodotto da varietà antiche e uniche come Athenolia e Koroneiki, caratterizzate da un contenuto altissimo di polifenoli e antiossidanti.",
+          "Estratto a freddo con metodi meccanici tradizionali, senza raffinazione, sbiancamento o sostanze chimiche, per preservare la massima purezza.",
+          "I polifenoli riducono i danni da radicali liberi, rinforzano il cuore e aumentano l'energia: la scelta perfetta per migliorare le prestazioni sportive in modo naturale."
+        ]
+      }
+    ]
   },
   "Section": {
     "Header": {
@@ -515,14 +518,20 @@
       {
         "title": "Seguici",
         "items": [
-          { "label": "Facebook", "href": "#" },
+          {
+            "label": "Facebook",
+            "href": "https://web.facebook.com/FAOShertitagefood"
+          },
           {
             "label": "Instagram",
             "href": "https://www.instagram.com/faos.asia"
           },
           { "label": "Line", "href": "#" },
           { "label": "Lazada", "href": "#" },
-          { "label": "Shopee", "href": "#" }
+          {
+            "label": "Shopee",
+            "href": "https://shopee.co.th/ptatom?categoryId=100629&entryPoint=ShopByPDP&itemId=56204803689&upstream=search"
+          }
         ]
       }
     ]

@@ -426,21 +426,24 @@
     },
     "customer": "Laman web kami direka untuk menyokong pelanggan di pasaran sasaran di Asia, Eropah dan Amerika <link>bagi memberikan anda pengalaman pembelian yang mudah dan pantas</link>",
     "certificate": "Yakin dengan kualiti melalui piawaian antarabangsa yang kami periksa dengan teliti <link>kerana keselamatan anda adalah keutamaan kami</link> dalam setiap langkah pengeluaran",
-    "advertise": {
-      "title": "Kenali dunia Minyak Zaitun Extra Virgin: Manfaat semula jadi dan fakta untuk kesihatan anda",
-      "messages": [
-        "Minyak Zaitun Extra Virgin (EVOO) adalah minyak kualiti tertinggi, dihasilkan melalui proses teliti yang mengutamakan kualiti berbanding kuantiti.",
-        "Kaya dengan polifenol yang mempunyai sifat antioksidan dan anti-radang, melindungi minyak daripada pengoksidaan serta mengekalkan rasa dan nilai pemakanan.",
-        "Mengandungi Oleocanthal yang berfungsi sama seperti ibuprofen, membantu mengawal aktiviti sel dalam sel yang radang dan mengurangkan bengkak di seluruh badan.",
-        "Membantu mengimbangi tahap kolesterol dan trigliserida serta mengurangkan pengoksidaan LDL untuk kesihatan jantung dan kardiovaskular yang lebih baik.",
-        "Sebatian polifenol membantu meningkatkan kesihatan mental dan mencegah penyakit neurodegeneratif seperti Alzheimer dan demensia.",
-        "Meningkatkan kecekapan insulin dalam mengekalkan tahap gula darah yang seimbang dan memainkan peranan penting dalam melegakan simptom sindrom metabolik (MS).",
-        "Mengandungi 'sitosterol' yang membantu mengawal penyerapan kolesterol, menguatkan sistem pencernaan dan memberikan kelegaan yang dipercayai untuk sembelit.",
-        "Dihasilkan daripada varieti zaitun purba yang unik seperti Athenolia dan Koroneiki, yang mempunyai tahap polifenol dan antioksidan yang sangat tinggi.",
-        "Menggunakan teknik perahan sejuk tradisional dengan kaedah mekanikal sahaja; tanpa penapisan, tanpa pelunturan, dan tanpa bahan kimia untuk mengekalkan ketulenan tertinggi.",
-        "Polifenol berfungsi dengan mengurangkan kerosakan radikal bebas, menguatkan jantung, dan meningkatkan tahap tenaga, menjadikannya pilihan sempurna untuk meningkatkan prestasi sukan secara semula jadi."
-      ]
-    }
+    "advertise": [
+      {
+        "image": "/images/banner/olive-oil.jpg",
+        "title": "Kenali dunia Minyak Zaitun Extra Virgin: Manfaat semula jadi dan fakta untuk kesihatan anda",
+        "messages": [
+          "Minyak Zaitun Extra Virgin (EVOO) adalah minyak kualiti tertinggi, dihasilkan melalui proses teliti yang mengutamakan kualiti berbanding kuantiti.",
+          "Kaya dengan polifenol yang mempunyai sifat antioksidan dan anti-radang, melindungi minyak daripada pengoksidaan serta mengekalkan rasa dan nilai pemakanan.",
+          "Mengandungi Oleocanthal yang berfungsi sama seperti ibuprofen, membantu mengawal aktiviti sel dalam sel yang radang dan mengurangkan bengkak di seluruh badan.",
+          "Membantu mengimbangi tahap kolesterol dan trigliserida serta mengurangkan pengoksidaan LDL untuk kesihatan jantung dan kardiovaskular yang lebih baik.",
+          "Sebatian polifenol membantu meningkatkan kesihatan mental dan mencegah penyakit neurodegeneratif seperti Alzheimer dan demensia.",
+          "Meningkatkan kecekapan insulin dalam mengekalkan tahap gula darah yang seimbang dan memainkan peranan penting dalam melegakan simptom sindrom metabolik (MS).",
+          "Mengandungi 'sitosterol' yang membantu mengawal penyerapan kolesterol, menguatkan sistem pencernaan dan memberikan kelegaan yang dipercayai untuk sembelit.",
+          "Dihasilkan daripada varieti zaitun purba yang unik seperti Athenolia dan Koroneiki, yang mempunyai tahap polifenol dan antioksidan yang sangat tinggi.",
+          "Menggunakan teknik perahan sejuk tradisional dengan kaedah mekanikal sahaja; tanpa penapisan, tanpa pelunturan, dan tanpa bahan kimia untuk mengekalkan ketulenan tertinggi.",
+          "Polifenol berfungsi dengan mengurangkan kerosakan radikal bebas, menguatkan jantung, dan meningkatkan tahap tenaga, menjadikannya pilihan sempurna untuk meningkatkan prestasi sukan secara semula jadi."
+        ]
+      }
+    ]
   },
   "Section": {
     "Header": {
@@ -512,14 +515,20 @@
       {
         "title": "Ikuti Kami",
         "items": [
-          { "label": "Facebook", "href": "#" },
+          {
+            "label": "Facebook",
+            "href": "https://web.facebook.com/FAOShertitagefood"
+          },
           {
             "label": "Instagram",
             "href": "https://www.instagram.com/faos.asia"
           },
           { "label": "Line", "href": "#" },
           { "label": "Lazada", "href": "#" },
-          { "label": "Shopee", "href": "#" }
+          {
+            "label": "Shopee",
+            "href": "https://shopee.co.th/ptatom?categoryId=100629&entryPoint=ShopByPDP&itemId=56204803689&upstream=search"
+          }
         ]
       }
     ]
