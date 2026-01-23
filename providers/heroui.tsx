@@ -20,9 +20,9 @@ export const HeroUIProviders = ({
 
   return (
     <HeroUIProvider
-      disableAnimation
-      disableRipple
-      skipFramerMotionAnimations
+      // disableAnimation
+      // disableRipple
+      // skipFramerMotionAnimations
       navigate={router.push}
     >
       <NextThemesProvider {...themeProps} enableSystem>

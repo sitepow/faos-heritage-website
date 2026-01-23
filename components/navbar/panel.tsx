@@ -72,8 +72,8 @@ export const NavbarPanel = () => {
   return (
     <Dropdown>
       <DropdownTrigger>
-        <Button isIconOnly variant='light'>
-          <UserIcon />
+        <Button radius='full' isIconOnly variant='light'>
+          <UserIcon className='text-default-600' size={22} strokeWidth={1.5} />
         </Button>
       </DropdownTrigger>
 

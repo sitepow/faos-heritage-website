@@ -6,7 +6,7 @@ import type { PropsWithChildren } from 'react'
 
 export const PageNotFound = ({ children }: PropsWithChildren) => {
   return (
-    <div className='container mx-auto flex h-full items-center justify-center'>
+    <div className='container mx-auto flex h-full items-center justify-center p-5'>
       <Alert description={children} color='warning' variant='faded' />
     </div>
   )
