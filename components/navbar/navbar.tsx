@@ -668,7 +668,14 @@ export const Navbar = () => {
               {session ? (
                 <NavbarPanel />
               ) : (
-                <Button isIconOnly variant='light' className='text-default-600'>
+                <Button
+                  isIconOnly
+                  variant='light'
+                  className='text-default-600'
+                  onClick={() => {
+                    router.push('/login')
+                  }}
+                >
                   <LogInIcon size={22} strokeWidth={1.5} />
                 </Button>
               )}
