@@ -1,13 +1,6 @@
 'use client'
 
-import {
-  Alert,
-  Card,
-  CardBody,
-  CardHeader,
-  Image,
-  Skeleton,
-} from '@heroui/react'
+import { Card, CardBody, CardHeader, Image, Skeleton } from '@heroui/react'
 import Link from 'next/link'
 import { useState } from 'react'
 
@@ -15,7 +8,6 @@ import type { GetProductResult } from '@/app/[locale]/(main)/products/action'
 
 import { ProductChip } from './chip'
 import { ProductPrice } from './price'
-import { ProductRating } from './rating'
 
 import { NO_IMAGE } from '@/utils/constants/seo'
 import { checkOutOfStock, getProductUnit } from '@/utils/helpers/product'
@@ -29,7 +21,7 @@ interface ProductCardProps {
 
 export const ProductCardSkeleton = () => {
   return (
-    <Skeleton className='h-80 w-full rounded-xl supports-[display:flex]:min-w-72' />
+    <Skeleton className='h-[420px] w-full rounded-[60%_40%_30%_70%/60%_30%_70%_40%]' />
   )
 }
 
@@ -52,56 +44,70 @@ export const ProductCard = ({ className, product }: ProductCardProps) => {
   return (
     <Card
       className={cn(
-        'border-divider flex min-h-[420px] w-full flex-col border',
+        'group flex min-h-[440px] w-full flex-col border-none bg-transparent shadow-none transition-all duration-700',
         className,
       )}
-      radius='sm'
+      radius='none'
       shadow='none'
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <Link
-        className='block'
+        className='block space-y-6'
         href={`/product/${createSlug(product?.name, product?.id)}`}
       >
-        <CardHeader className='relative overflow-hidden p-0'>
-          {isOutOfStock && (
-            <Alert
-              className='absolute top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2 backdrop-blur-md'
-              description='Out of stock. Please check similar items'
-              radius='none'
-            />
-          )}
+        <CardHeader className='relative overflow-visible p-0'>
+          <div
+            className={cn(
+              'relative aspect-square w-full overflow-hidden bg-white transition-all duration-1000 ease-in-out',
+              isHovered
+                ? 'shadow-primary/10 scale-105 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] shadow-2xl'
+                : 'rounded-[60%_40%_30%_70%/60%_30%_70%_40%]',
+            )}
+          >
+            {isOutOfStock && (
+              <div className='absolute inset-0 z-50 flex items-center justify-center bg-white/20 backdrop-blur-md'>
+                <span className='rounded-full bg-zinc-900 px-4 py-1 text-[10px] font-black text-white uppercase'>
+                  Empty
+                </span>
+              </div>
+            )}
 
-          <Image
-            alt={product?.name}
-            className='aspect-square size-full bg-white object-contain'
-            classNames={{ wrapper: 'w-full' }}
-            height={250}
-            radius='none'
-            src={imageSrc}
-            width='100%'
-          />
+            <Image
+              alt={product?.name}
+              className={cn(
+                'size-full object-contain p-10 transition-transform duration-1000',
+                isHovered ? 'scale-110 rotate-3' : 'scale-100',
+              )}
+              classNames={{ wrapper: 'size-full' }}
+              radius='none'
+              src={imageSrc}
+              width='100%'
+            />
+          </div>
         </CardHeader>
 
-        <CardBody>
+        <CardBody className='flex flex-col items-center gap-2 p-0 text-center'>
           <ProductChip
+            className='opacity-40 transition-opacity hover:opacity-100'
             isAuthentic={product?.isAuthentic}
             isPremiumProduct={product?.isPremiumProduct}
-            isDemoProduct={product?.isDemoProduct}
-            isDigitalProduct={product?.isDigitalProduct}
             categoryName={product?.category?.name}
           />
-          <h4 className='mb-2.5 line-clamp-2 font-semibold sm:text-lg'>
+
+          <h4 className='line-clamp-2 text-base font-black tracking-tight text-zinc-800 uppercase dark:text-zinc-200'>
             {product?.name}
           </h4>
-          <ProductPrice
-            price={product?.price}
-            priceMax={product?.priceMax!}
-            priceMin={product?.priceMin!}
-            unit={getProductUnit(product?.unit)}
-          />
-          <ProductRating />
+
+          <div className='flex flex-col items-center'>
+            <ProductPrice
+              className='text-primary text-xl font-black'
+              price={product?.price}
+              priceMax={product?.priceMax!}
+              priceMin={product?.priceMin!}
+              unit={getProductUnit(product?.unit)}
+            />
+          </div>
         </CardBody>
       </Link>
     </Card>

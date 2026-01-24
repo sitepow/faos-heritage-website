@@ -61,16 +61,18 @@ export const ProductPrice = ({
 
   return (
     <div
-      className={cn('mt-auto flex items-center justify-between', className)}
+      className={cn(
+        'flex flex-col items-center justify-center gap-0',
+        className,
+      )}
       {...props}
     >
-      <div>
-        <span className='text-primary text-xl font-semibold sm:text-2xl'>
+      <div className='flex items-baseline gap-1'>
+        <span className='text-2xl font-black tracking-tighter text-zinc-900 dark:text-white'>
           {displayPrice}
         </span>
-        <span className='text-default-600 text-xs'>
-          {' '}
-          /{t(unit?.toUpperCase())}
+        <span className='text-[10px] font-bold tracking-widest text-zinc-400 uppercase'>
+          / {t(unit?.toUpperCase())}
         </span>
       </div>
     </div>

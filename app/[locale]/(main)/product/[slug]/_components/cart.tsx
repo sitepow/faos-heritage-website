@@ -22,7 +22,6 @@ import remarkGfm from 'remark-gfm'
 
 import { ProductChip } from './chip'
 import { ProductPrice } from './price'
-import { ProductRating } from './rating'
 import { ProductShare } from './share'
 import { createFavorite } from '../../../account/_components/favorite/action'
 import { createCart } from '../../../cart/action'
@@ -119,7 +118,7 @@ export const ProductCart = () => {
     <Card radius='sm' shadow='none' className='border-divider border'>
       <CardBody className='flex flex-col gap-3'>
         <div className='flex flex-col'>
-          <h1 className='py-3.5 text-xl font-semibold sm:text-2xl lg:text-4xl'>
+          <h1 className='py-3.5 text-center text-xl font-semibold sm:text-2xl lg:text-4xl'>
             {product?.name}
           </h1>
           <ProductPrice
@@ -128,14 +127,11 @@ export const ProductCart = () => {
             priceMin={!variantId ? product?.priceMin! : null}
             unit={product?.unit}
           />
-          <ProductRating />
         </div>
 
         <ProductChip
           isAuthentic={product?.isAuthentic}
           isPremiumProduct={product?.isPremiumProduct}
-          isDemoProduct={product?.isDemoProduct}
-          isDigitalProduct={product?.isDigitalProduct}
           categoryName={product?.category?.name}
         />
 
