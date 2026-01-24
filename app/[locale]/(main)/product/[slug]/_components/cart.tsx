@@ -118,22 +118,23 @@ export const ProductCart = () => {
     <Card radius='sm' shadow='none' className='border-divider border'>
       <CardBody className='flex flex-col gap-3'>
         <div className='flex flex-col'>
-          <h1 className='py-3.5 text-center text-xl font-semibold sm:text-2xl lg:text-4xl'>
+          <h1 className='py-3.5 text-xl font-semibold sm:text-2xl lg:text-4xl'>
             {product?.name}
           </h1>
+          <ProductChip
+            className='justify-start'
+            isAuthentic={product?.isAuthentic}
+            isPremiumProduct={product?.isPremiumProduct}
+            categoryName={product?.category?.name}
+          />
           <ProductPrice
+            className='mt-5 items-start'
             price={price!}
             priceMax={!variantId ? product?.priceMax! : null}
             priceMin={!variantId ? product?.priceMin! : null}
             unit={product?.unit}
           />
         </div>
-
-        <ProductChip
-          isAuthentic={product?.isAuthentic}
-          isPremiumProduct={product?.isPremiumProduct}
-          categoryName={product?.category?.name}
-        />
 
         {product?.shortDescription && (
           <Card className='bg-default-50 dark:bg-default-100'>
