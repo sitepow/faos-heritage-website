@@ -5,6 +5,7 @@ import {
   Button,
   Card,
   CardBody,
+  Image,
   NumberInput,
   Select,
   SelectItem,
@@ -13,7 +14,6 @@ import {
 } from '@heroui/react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { TrashIcon } from 'lucide-react'
-import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
 import { useEffect, useMemo, useState, type ComponentProps } from 'react'
@@ -28,7 +28,6 @@ import { NO_IMAGE } from '@/utils/constants/seo'
 import { getThbExchangeRates } from '@/utils/helpers/currency/exchange'
 import { formatCurrency, formatNumber } from '@/utils/helpers/number'
 import { getProductUnit } from '@/utils/helpers/product'
-import { createSlug } from '@/utils/helpers/slug'
 import { cn } from '@/utils/style'
 
 type CartItemProps = ComponentProps<typeof Card> & {
@@ -190,31 +189,37 @@ export const CartItem = ({ className, cart, ...props }: CartItemProps) => {
         fullWidth
         className={cn(
           className,
-          '[&:not(:last-child)]:border-divider [&:not(:last-child)]:border-b',
+          // '[&:not(:last-child)]:border-divider [&:not(:last-child)]:border-b',
         )}
         radius='none'
         {...props}
       >
         <CardBody>
-          <div className='grid gap-4 sm:grid-cols-3'>
-            <div className='flex size-full sm:items-center sm:justify-center'>
-              <Link
-                className='size-[150px] shrink-0'
-                href={`/product/${createSlug(cart?.product?.name, cart?.product?.id)}`}
-              >
-                <img
-                  alt='product-image'
-                  className='aspect-square size-full rounded-xl bg-white object-contain'
-                  height={100}
-                  src={cart?.product?.images?.[0]?.url ?? NO_IMAGE}
-                  width={100}
-                />
-              </Link>
+          <div className='grid gap-10 xl:grid-cols-3'>
+            <div
+              className={cn(
+                'border-divider relative aspect-square size-[250px] shrink-0 overflow-hidden border bg-white transition-all duration-1000 ease-in-out',
+                'rounded-[60%_40%_30%_70%/60%_30%_70%_40%]',
+              )}
+            >
+              <Image
+                alt='product-image'
+                className={cn(
+                  'size-full object-contain p-10 transition-transform duration-1000',
+                  'scale-100',
+                )}
+                classNames={{ wrapper: 'size-full' }}
+                radius='none'
+                src={cart?.product?.images?.[0]?.url ?? NO_IMAGE}
+                width='100%'
+              />
             </div>
 
             <div className='col-span-2 flex flex-col justify-between gap-3'>
               <div className='flex flex-col'>
-                <span className='line-clamp-1'>{cart?.product?.name}</span>
+                <span className='line-clamp-1 font-bold'>
+                  {cart?.product?.name}
+                </span>
                 <span className='text-default-500'>
                   {t('Item.productId')}: {cart?.product?.id}
                 </span>
