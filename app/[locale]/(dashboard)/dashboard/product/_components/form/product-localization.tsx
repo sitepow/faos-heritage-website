@@ -151,8 +151,8 @@ export const ProductLocalizationForm = () => {
       <ModalContent>
         <ModalHeader>
           {productLocalizationId
-            ? 'แก้ไขชื่อสินค้าภาษา'
-            : 'เพิ่มชื่อสินค้าภาษาใหม่'}
+            ? 'แก้ไขรายละเอียดสินค้า'
+            : 'เพิ่มรายละเอียดสินค้าใหม่'}
         </ModalHeader>
 
         {isPending && <Spinner label='Loading...' />}

@@ -33,8 +33,9 @@ import {
   StatCardSkeleton,
 } from '@/app/[locale]/(dashboard)/_components/stat-card'
 import { useAppStore } from '@/app/store'
-import { ITEM_PER_PAGE } from '@/utils/constants/app'
+import { EXCHANGE_RATE_TTL, ITEM_PER_PAGE } from '@/utils/constants/app'
 import { NO_IMAGE } from '@/utils/constants/seo'
+import { getThbExchangeRates } from '@/utils/helpers/currency/exchange'
 import { formatDate } from '@/utils/helpers/date'
 import { formatCurrency } from '@/utils/helpers/number'
 import { getOrderStatus } from '@/utils/helpers/order'
@@ -42,7 +43,18 @@ import { getOrderStatus } from '@/utils/helpers/order'
 export default function Order() {
   const tOrder = useTranslations('Dashboard.Order')
 
-  const { country, exchangeRates } = useAppStore()
+  const { country, hasHydrated } = useAppStore()
+
+  const { data: exchangeRates } = useQuery({
+    queryKey: ['exchange-rates', 'THB'],
+    queryFn: getThbExchangeRates,
+    staleTime: EXCHANGE_RATE_TTL,
+    gcTime: EXCHANGE_RATE_TTL * 2,
+    enabled: hasHydrated,
+    refetchOnWindowFocus: false,
+    retry: 1,
+  })
+
   const CURRENCY_OPTIONS = {
     currency: country?.currency,
     locale: country?.locale,

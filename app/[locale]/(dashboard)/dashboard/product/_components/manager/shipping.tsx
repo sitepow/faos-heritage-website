@@ -148,7 +148,7 @@ export const ShippingCountryManager = () => {
                         </div>
 
                         <div className='mt-2.5 flex gap-2 text-sm'>
-                          <Chip>
+                          <Chip variant='bordered'>
                             <span
                               className={cn(
                                 'text-default-500',
@@ -161,7 +161,7 @@ export const ShippingCountryManager = () => {
                             </span>
                           </Chip>
 
-                          <Chip>
+                          <Chip variant='bordered'>
                             <span
                               className={cn(
                                 'text-default-500',

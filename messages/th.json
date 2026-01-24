@@ -578,8 +578,8 @@
       "dropdownAria": "เมนูจัดการสินค้า",
       "editInfo": "แก้ไขข้อมูล",
       "manageImages": "จัดการรูปภาพ",
-      "manageNameLocalization": "จัดการชื่อสินค้า (แต่ละประเทศ)",
-      "manageNameVariantLocalization": "จัดการชื่อตัวเลือกสินค้า (แต่ละประเทศ)",
+      "manageNameLocalization": "แปลรายละเอียดสินค้า",
+      "manageNameVariantLocalization": "แปลรายละเอียดสินค้า",
       "manageOptions": "จัดการตัวเลือกสินค้า",
       "removeProduct": "ลบสินค้า"
     },

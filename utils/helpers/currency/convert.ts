@@ -1,17 +1,15 @@
-import { getUsdExchangeRates } from './exchange'
+import { getThbExchangeRates } from './exchange'
 
-export const convertFromUsd = async (
-  usdValue: number,
+export const convertFromThb = async (
+  thbValue: number,
   targetCurrency: string,
 ): Promise<number> => {
-  if (targetCurrency === 'USD') return usdValue
+  if (targetCurrency === 'THB') return thbValue
 
-  const rates = await getUsdExchangeRates()
+  const rates = await getThbExchangeRates()
   const rate = rates[targetCurrency]
 
-  if (!rate) {
-    return usdValue
-  }
+  if (!rate) return thbValue
 
-  return usdValue * rate
+  return thbValue * rate
 }

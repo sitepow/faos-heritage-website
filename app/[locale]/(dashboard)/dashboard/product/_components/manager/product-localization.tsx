@@ -73,7 +73,7 @@ export const ProductLocalizationManager = () => {
         isDismissable={false}
       >
         <ModalContent>
-          <ModalHeader>ชื่อสินค้าแต่ละประเทศ</ModalHeader>
+          <ModalHeader>แปลรายละเอียดสินค้า</ModalHeader>
 
           <ModalBody>
             {isLoading && <Spinner />}

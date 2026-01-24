@@ -607,7 +607,7 @@
 'use client'
 
 import { Badge, Button, Input } from '@heroui/react'
-import { SearchIcon, ShoppingCartIcon } from 'lucide-react'
+import { LogInIcon, SearchIcon, ShoppingCartIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
@@ -668,22 +668,18 @@ export const Navbar = () => {
               {session ? (
                 <NavbarPanel />
               ) : (
-                <button
-                  onClick={() => router.push('/login')}
-                  className='text-default-600 hover:text-primary text-[10px] font-bold tracking-[0.2em] uppercase transition-colors'
-                >
-                  {t('login') || 'Sign In'}
-                </button>
+                <Button isIconOnly variant='light' className='text-default-600'>
+                  <LogInIcon size={22} strokeWidth={1.5} />
+                </Button>
               )}
 
               <div className='bg-divider h-4 w-[1px]' />
 
               <Badge
                 color='primary'
-                content={'99'}
-                className='bg-primary border-none text-[9px] font-bold text-white'
+                content={'99+'}
+                className='bg-primary border-none font-bold text-white'
                 shape='circle'
-                size='sm'
               >
                 <Button
                   isIconOnly

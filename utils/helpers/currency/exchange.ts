@@ -1,4 +1,4 @@
-import { EXCHANGE_RATE_API } from '@/utils/constants/currency'
+import { EXCHANGE_RATE_API_THB } from '@/utils/constants/currency'
 
 type ExchangeRateResponse = {
   result: 'success'
@@ -6,26 +6,20 @@ type ExchangeRateResponse = {
   rates: Record<string, number>
 }
 
-let rateCache: Record<string, number> | null = null
-let lastFetched = 0
-const CACHE_TTL = 1000 * 60 * 60
+export const getThbExchangeRates = async () => {
+  const res = await fetch(EXCHANGE_RATE_API_THB, {
+    cache: 'no-store',
+  })
 
-export const getUsdExchangeRates = async () => {
-  const now = Date.now()
-
-  if (rateCache && now - lastFetched < CACHE_TTL) {
-    return rateCache
+  if (!res.ok) {
+    throw new Error('Failed to fetch exchange rates')
   }
 
-  const res = await fetch(EXCHANGE_RATE_API)
   const data: ExchangeRateResponse = await res.json()
 
   if (data.result !== 'success') {
     throw new Error('Failed to fetch exchange rates')
   }
 
-  rateCache = data.rates
-  lastFetched = now
-
-  return rateCache
+  return data.rates
 }

@@ -33,13 +33,26 @@ import { VariantForm } from '../form/variant'
 
 import { useAppStore } from '@/app/store'
 import { ConfirmModal } from '@/components/confirm-modal'
+import { EXCHANGE_RATE_TTL } from '@/utils/constants/app'
 import { NO_IMAGE } from '@/utils/constants/seo'
+import { getThbExchangeRates } from '@/utils/helpers/currency/exchange'
 import { formatCurrency, formatNumber } from '@/utils/helpers/number'
 import { cn } from '@/utils/style'
 
 export const VariantManager = () => {
   const t = useTranslations('Dashboard.VariantManager')
-  const { country, exchangeRates } = useAppStore()
+  const { country, hasHydrated } = useAppStore()
+
+  const { data: exchangeRates } = useQuery({
+    queryKey: ['exchange-rates', 'THB'],
+    queryFn: getThbExchangeRates,
+    staleTime: EXCHANGE_RATE_TTL,
+    gcTime: EXCHANGE_RATE_TTL * 2,
+    enabled: hasHydrated,
+    refetchOnWindowFocus: false,
+    retry: 1,
+  })
+
   const CURRENCY_OPTIONS = {
     currency: country?.currency,
     locale: country?.locale,
@@ -145,21 +158,19 @@ export const VariantManager = () => {
                       <div className='line-clamp-1 flex flex-col'>
                         <div className='flex flex-wrap items-center gap-2'>
                           <Avatar src={variant?.image ?? NO_IMAGE} />
-                          <span className='line-clamp-2'>
-                            {variant.name} (Option ID: {variant.id})
-                          </span>
+                          <span className='line-clamp-2'>{variant.name}</span>
                         </div>
 
                         <div className='mt-2.5 flex gap-2 text-sm'>
                           {!!variant.sku && (
-                            <Chip>
+                            <Chip variant='bordered'>
                               <span className='text-default-500'>
                                 {t('sku')}: {variant.sku}
                               </span>
                             </Chip>
                           )}
 
-                          <Chip>
+                          <Chip variant='bordered'>
                             <span
                               className={cn(
                                 'text-default-500',
@@ -172,7 +183,7 @@ export const VariantManager = () => {
                             </span>
                           </Chip>
 
-                          <Chip>
+                          <Chip variant='bordered'>
                             <span
                               className={cn(
                                 'text-default-500',

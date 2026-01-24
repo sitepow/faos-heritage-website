@@ -1,8 +1,13 @@
+'use client'
+
+import { useQuery } from '@tanstack/react-query'
 import { useTranslations } from 'next-intl'
 
 import type { ComponentProps } from 'react'
 
 import { useAppStore } from '@/app/store'
+import { EXCHANGE_RATE_TTL } from '@/utils/constants/app'
+import { getThbExchangeRates } from '@/utils/helpers/currency/exchange'
 import { formatCurrency, formatCurrencyRange } from '@/utils/helpers/number'
 import { getRangeDisplayValue } from '@/utils/helpers/range'
 import { cn } from '@/utils/style'
@@ -23,7 +28,18 @@ export const ProductPrice = ({
   ...props
 }: ProductPriceProps) => {
   const t = useTranslations('ProductUnit')
-  const { country, exchangeRates } = useAppStore()
+  const { country, hasHydrated } = useAppStore()
+
+  const { data: exchangeRates } = useQuery({
+    queryKey: ['exchange-rates', 'THB'],
+    queryFn: getThbExchangeRates,
+    staleTime: EXCHANGE_RATE_TTL,
+    gcTime: EXCHANGE_RATE_TTL * 2,
+    enabled: hasHydrated,
+    refetchOnWindowFocus: false,
+    retry: 1,
+  })
+
   const CURRENCY_OPTIONS = {
     currency: country?.currency,
     locale: country?.locale,

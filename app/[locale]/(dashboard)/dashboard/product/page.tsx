@@ -54,7 +54,8 @@ import {
 } from '@/app/[locale]/(dashboard)/dashboard/product/action/product'
 import { useAppStore } from '@/app/store'
 import { ConfirmModal } from '@/components/confirm-modal'
-import { ITEM_PER_PAGE } from '@/utils/constants/app'
+import { EXCHANGE_RATE_TTL, ITEM_PER_PAGE } from '@/utils/constants/app'
+import { getThbExchangeRates } from '@/utils/helpers/currency/exchange'
 import {
   formatCurrency,
   formatCurrencyRange,
@@ -67,8 +68,18 @@ export default function Product() {
   const locale = useLocale()
   const t = useTranslations('Dashboard.ProductManager')
   const tc = useTranslations('Common')
+  const { country, hasHydrated } = useAppStore()
 
-  const { country, exchangeRates } = useAppStore()
+  const { data: exchangeRates } = useQuery({
+    queryKey: ['exchange-rates', 'THB'],
+    queryFn: getThbExchangeRates,
+    staleTime: EXCHANGE_RATE_TTL,
+    gcTime: EXCHANGE_RATE_TTL * 2,
+    enabled: hasHydrated,
+    refetchOnWindowFocus: false,
+    retry: 1,
+  })
+
   const CURRENCY_OPTIONS = {
     currency: country?.currency,
     locale: country?.locale,

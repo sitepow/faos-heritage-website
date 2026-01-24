@@ -28,8 +28,10 @@ import { useCartStore } from '@/app/[locale]/(main)/cart/store'
 import { useAppStore } from '@/app/store'
 import { ConfirmModal } from '@/components/confirm-modal'
 import { ACCOUNT_TAB } from '@/utils/constants/account'
-import { EXCHANGE_RATE_API } from '@/utils/constants/currency'
+import { EXCHANGE_RATE_TTL } from '@/utils/constants/app'
+import { EXCHANGE_RATE_API_THB } from '@/utils/constants/currency'
 import { getFullAddress } from '@/utils/helpers/account'
+import { getThbExchangeRates } from '@/utils/helpers/currency/exchange'
 import { formatCurrency } from '@/utils/helpers/number'
 import { cn } from '@/utils/style'
 
@@ -59,8 +61,18 @@ const SummaryRow = ({ label, value, options }: SummaryRowProps) => (
 
 export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
   const t = useTranslations('Cart')
+  const { country, hasHydrated } = useAppStore()
 
-  const { country, exchangeRates } = useAppStore()
+  const { data: exchangeRates } = useQuery({
+    queryKey: ['exchange-rates', 'THB'],
+    queryFn: getThbExchangeRates,
+    staleTime: EXCHANGE_RATE_TTL,
+    gcTime: EXCHANGE_RATE_TTL * 2,
+    enabled: hasHydrated,
+    refetchOnWindowFocus: false,
+    retry: 1,
+  })
+
   const CURRENCY_OPTIONS = {
     currency: country?.currency,
     locale: country?.locale,
@@ -158,7 +170,7 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
       userId: userId!,
       currency,
       exchangeRate,
-      exchangeRateSource: EXCHANGE_RATE_API,
+      exchangeRateSource: EXCHANGE_RATE_API_THB,
       exchangeLocale: country?.locale!,
       items: (carts ?? []).map((cart) => ({
         productId: cart.productId,

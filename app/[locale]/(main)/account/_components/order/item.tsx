@@ -3,12 +3,7 @@
 import { AvatarGroup, Avatar, Button, Alert } from '@heroui/react'
 import { OrderStatus } from '@prisma/client'
 import { useMutation } from '@tanstack/react-query'
-import {
-  ArrowUpRightIcon,
-  CreditCardIcon,
-  DownloadIcon,
-  XIcon,
-} from 'lucide-react'
+import { ArrowRight, ArrowUpRightIcon, DownloadIcon, XIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
@@ -17,7 +12,6 @@ import type { GetOrderResult } from '@/app/[locale]/(dashboard)/dashboard/order/
 
 import { createStripeCheckout } from '@/actions/stripe'
 import { useOrderStore } from '@/app/[locale]/(dashboard)/dashboard/order/store'
-import { CountryFlag } from '@/components/country-flag'
 import { Stepper } from '@/components/stepper'
 // import { OmisePayment } from '@/components/features/omise/payment'
 import { NO_IMAGE } from '@/utils/constants/seo'
@@ -77,7 +71,6 @@ export const OrderItem = ({ order, hideButton }: OrderItemProps) => {
       <div className='border-divider flex flex-wrap items-center justify-between gap-3 border-b p-2.5'>
         <div className='flex flex-wrap gap-3 sm:col-span-2'>
           <AvatarGroup max={4} isBordered>
-            <CountryFlag countryCode={order?.address?.countryCode!} />
             {productImages.map((src) => (
               <Avatar size='sm' key={src} src={src} />
             ))}
@@ -138,8 +131,8 @@ export const OrderItem = ({ order, hideButton }: OrderItemProps) => {
                 variant='bordered'
                 isDisabled={isPendingCheckout}
                 isLoading={isPendingCheckout}
-                startContent={
-                  !isPendingCheckout && <CreditCardIcon className='shrink-0' />
+                endContent={
+                  !isPendingCheckout && <ArrowRight className='shrink-0' />
                 }
                 onClick={() => {
                   mutateCheckout()

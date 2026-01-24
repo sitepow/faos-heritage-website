@@ -1,7 +1,7 @@
-export const DEFAULT_CURRENCY = 'USD'
-export const DEFAULT_LOCALE = 'en-US'
+export const DEFAULT_CURRENCY = 'THB'
+export const DEFAULT_LOCALE = 'th-TH'
 
-export const EXCHANGE_RATE_API = 'https://open.er-api.com/v6/latest/USD'
+export const EXCHANGE_RATE_API_THB = 'https://open.er-api.com/v6/latest/THB'
 
 export const CURRENCY_LOCALE_MAP = [
   {

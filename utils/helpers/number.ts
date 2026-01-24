@@ -18,7 +18,7 @@ interface FormatCurrencyOptions {
 }
 
 export const formatCurrency = (
-  usdValue: number,
+  thbValue: number,
   options?: FormatCurrencyOptions & {
     rates?: Record<string, number> | null
   },
@@ -27,10 +27,10 @@ export const formatCurrency = (
   const locale = options?.locale ?? DEFAULT_LOCALE
   const rates = options?.rates
 
-  let value = usdValue
+  let value = thbValue
 
-  if (currency !== 'USD' && rates?.[currency]) {
-    value = usdValue * rates[currency]
+  if (currency !== 'THB' && rates?.[currency]) {
+    value = thbValue * rates[currency]
   }
 
   return new Intl.NumberFormat(locale, {
@@ -40,8 +40,8 @@ export const formatCurrency = (
 }
 
 export const formatCurrencyRange = (
-  minUsd: number,
-  maxUsd: number,
+  minThb: number,
+  maxThb: number,
   options?: FormatCurrencyOptions & {
     rates?: Record<string, number> | null
   },
@@ -50,13 +50,13 @@ export const formatCurrencyRange = (
   const locale = options?.locale ?? DEFAULT_LOCALE
   const rates = options?.rates
 
-  let min = minUsd
-  let max = maxUsd
+  let min = minThb
+  let max = maxThb
 
-  if (currency !== 'USD' && rates?.[currency]) {
+  if (currency !== 'THB' && rates?.[currency]) {
     const rate = rates[currency]
-    min = minUsd * rate
-    max = maxUsd * rate
+    min = minThb * rate
+    max = maxThb * rate
   }
 
   return new Intl.NumberFormat(locale, {

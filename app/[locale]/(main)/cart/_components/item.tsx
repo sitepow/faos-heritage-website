@@ -11,7 +11,7 @@ import {
   Skeleton,
   useDisclosure,
 } from '@heroui/react'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { TrashIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
@@ -23,7 +23,9 @@ import { useCartStore } from '../store'
 
 import { useAppStore } from '@/app/store'
 import { ConfirmModal } from '@/components/confirm-modal'
+import { EXCHANGE_RATE_TTL } from '@/utils/constants/app'
 import { NO_IMAGE } from '@/utils/constants/seo'
+import { getThbExchangeRates } from '@/utils/helpers/currency/exchange'
 import { formatCurrency, formatNumber } from '@/utils/helpers/number'
 import { getProductUnit } from '@/utils/helpers/product'
 import { createSlug } from '@/utils/helpers/slug'
@@ -40,7 +42,18 @@ export const CartItemSkeleton = () => {
 export const CartItem = ({ className, cart, ...props }: CartItemProps) => {
   const t = useTranslations('Cart')
   const tUnit = useTranslations('ProductUnit')
-  const { country, exchangeRates } = useAppStore()
+  const { country, hasHydrated } = useAppStore()
+
+  const { data: exchangeRates } = useQuery({
+    queryKey: ['exchange-rates', 'THB'],
+    queryFn: getThbExchangeRates,
+    staleTime: EXCHANGE_RATE_TTL,
+    gcTime: EXCHANGE_RATE_TTL * 2,
+    enabled: hasHydrated,
+    refetchOnWindowFocus: false,
+    retry: 1,
+  })
+
   const CURRENCY_OPTIONS = {
     currency: country?.currency,
     locale: country?.locale,

@@ -1,8 +1,11 @@
 'use client'
 
 import { Card, Skeleton } from '@heroui/react'
+import { useQuery } from '@tanstack/react-query'
 
 import { useAppStore } from '@/app/store'
+import { EXCHANGE_RATE_TTL } from '@/utils/constants/app'
+import { getThbExchangeRates } from '@/utils/helpers/currency/exchange'
 import { formatCurrency, formatNumber } from '@/utils/helpers/number'
 
 interface StatCardProps {
@@ -16,7 +19,18 @@ export const StatCardSkeleton = () => {
 }
 
 export const StatCard = ({ name, value, isCurrency }: StatCardProps) => {
-  const { country, exchangeRates } = useAppStore()
+  const { country, hasHydrated } = useAppStore()
+
+  const { data: exchangeRates } = useQuery({
+    queryKey: ['exchange-rates', 'THB'],
+    queryFn: getThbExchangeRates,
+    staleTime: EXCHANGE_RATE_TTL,
+    gcTime: EXCHANGE_RATE_TTL * 2,
+    enabled: hasHydrated,
+    refetchOnWindowFocus: false,
+    retry: 1,
+  })
+
   const CURRENCY_OPTIONS = {
     currency: country?.currency,
     locale: country?.locale,
