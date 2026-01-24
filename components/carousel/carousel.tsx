@@ -1,8 +1,15 @@
+/* eslint-disable no-unused-vars */
 'use client'
 
 import Autoplay from 'embla-carousel-autoplay'
 import useEmblaCarousel from 'embla-carousel-react'
-import { useEffect, useRef } from 'react'
+import {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+} from 'react'
 
 import type { ReactNode } from 'react'
 
@@ -10,6 +17,10 @@ import { CarouselNavigateButton } from './navigate-button'
 
 import { useCarouselNavigation } from '@/hooks/useCarouselMethod'
 import { cn } from '@/utils/style'
+
+export type CarouselHandle = {
+  scrollToSlide: (index: number) => void
+}
 
 interface Props {
   wrapperClassName?: string
@@ -21,82 +32,100 @@ interface Props {
   loop?: boolean
 }
 
-export const Carousel = ({
-  wrapperClassName,
-  trackClassName,
-  children,
-  slidesToScroll,
-  isVertical,
-  loop = false,
-  autoPlay = true,
-}: Props) => {
-  const autoplayRef = useRef(
-    Autoplay({
-      delay: 3000,
-      stopOnInteraction: false,
-      stopOnMouseEnter: true,
-    }),
-  )
-
-  const [emblaRef, emblaApi] = useEmblaCarousel(
+export const Carousel = forwardRef<CarouselHandle, Props>(
+  (
     {
-      axis: isVertical ? 'y' : 'x',
-      dragFree: true,
-      align: 'start',
-      slidesToScroll: slidesToScroll ? 'auto' : 1,
-      loop: loop,
+      wrapperClassName,
+      trackClassName,
+      children,
+      slidesToScroll,
+      isVertical,
+      loop = false,
+      autoPlay = true,
     },
-    autoPlay ? [autoplayRef.current] : [],
-  )
+    ref,
+  ) => {
+    const autoplayRef = useRef(
+      Autoplay({
+        delay: 3000,
+        stopOnInteraction: false,
+        stopOnMouseEnter: true,
+      }),
+    )
 
-  const { prevDisabled, nextDisabled, onPrev, onNext } =
-    useCarouselNavigation(emblaApi)
+    const [emblaRef, emblaApi] = useEmblaCarousel(
+      {
+        axis: isVertical ? 'y' : 'x',
+        dragFree: true,
+        align: 'start',
+        slidesToScroll: slidesToScroll ? 'auto' : 1,
+        loop,
+      },
+      autoPlay ? [autoplayRef.current] : [],
+    )
 
-  useEffect(() => {
-    if (!emblaApi || !autoPlay) return
-    autoplayRef.current.reset()
-  }, [emblaApi, autoPlay])
+    const scrollToSlide = useCallback(
+      (index: number) => {
+        if (emblaApi) {
+          emblaApi.scrollTo(index)
+        }
+      },
+      [emblaApi],
+    )
 
-  return (
-    <div className={cn('relative', wrapperClassName)}>
-      <div ref={emblaRef} className='overflow-hidden'>
-        <div
-          className={cn(
-            isVertical ? 'flex flex-col gap-2' : 'flex gap-2',
-            trackClassName,
-          )}
-        >
-          {children}
+    useImperativeHandle(ref, () => ({
+      scrollToSlide,
+    }))
+
+    const { prevDisabled, nextDisabled, onPrev, onNext } =
+      useCarouselNavigation(emblaApi)
+
+    useEffect(() => {
+      if (!emblaApi || !autoPlay) return
+      autoplayRef.current.reset()
+    }, [emblaApi, autoPlay])
+
+    return (
+      <div className={cn('relative', wrapperClassName)}>
+        <div ref={emblaRef} className='overflow-hidden'>
+          <div
+            className={cn(
+              isVertical ? 'flex flex-col gap-2' : 'flex gap-2',
+              trackClassName,
+            )}
+          >
+            {children}
+          </div>
         </div>
+
+        {!prevDisabled && (
+          <CarouselNavigateButton
+            isVertical={isVertical}
+            className={cn(
+              'absolute flex bg-black/20 hover:bg-black/30',
+              isVertical
+                ? 'top-4 left-1/2 -translate-x-1/2'
+                : 'top-1/2 left-4 -translate-y-1/2',
+            )}
+            direction='prev'
+            onClick={onPrev}
+          />
+        )}
+
+        {!nextDisabled && (
+          <CarouselNavigateButton
+            isVertical={isVertical}
+            className={cn(
+              'absolute flex bg-black/20 hover:bg-black/30',
+              isVertical
+                ? 'bottom-4 left-1/2 -translate-x-1/2'
+                : 'top-1/2 right-4 -translate-y-1/2',
+            )}
+            direction='next'
+            onClick={onNext}
+          />
+        )}
       </div>
-
-      {!prevDisabled && (
-        <CarouselNavigateButton
-          isVertical={isVertical}
-          className={cn(
-            'absolute flex bg-black/20 hover:bg-black/30',
-            isVertical
-              ? 'top-4 left-1/2 -translate-x-1/2'
-              : 'top-1/2 left-4 -translate-y-1/2',
-          )}
-          direction='prev'
-          onClick={onPrev}
-        />
-      )}
-
-      {!nextDisabled && (
-        <CarouselNavigateButton
-          isVertical={isVertical}
-          className={cn(
-            'absolute flex bg-black/20 hover:bg-black/30',
-            isVertical
-              ? 'bottom-4 left-1/2 -translate-x-1/2'
-              : 'top-1/2 right-4 -translate-y-1/2',
-          )}
-          direction='next'
-          onClick={onNext}
-        />
-      )}
-    </div>
-  )
-}
+    )
+  },
+)

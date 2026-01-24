@@ -639,7 +639,7 @@ export const CategoryClient = () => {
 
   return (
     <div className='container mx-auto flex flex-col gap-10 p-4'>
-      <div className='border-divider flex flex-wrap items-center justify-center gap-5'>
+      <div className='border-divider flex flex-wrap items-end justify-center gap-2'>
         <h2 className='text-foreground text-5xl font-black'>
           {tc('category')}
         </h2>

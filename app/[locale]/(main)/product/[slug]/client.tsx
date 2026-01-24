@@ -75,7 +75,7 @@ export const ProductClient = ({
         )}
 
         <div className='container mx-auto grid items-start gap-2 md:gap-4 lg:grid-cols-2'>
-          <div className='lg:sticky lg:top-20'>
+          <div className='min-w-0 overflow-hidden'>
             <ProductImagePreview
               images={product.images.map((image) => image.url)}
             />
