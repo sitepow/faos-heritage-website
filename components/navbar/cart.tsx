@@ -1,12 +1,15 @@
+import { Badge, Button } from '@heroui/react'
 import { useQuery } from '@tanstack/react-query'
-import { ShoppingBagIcon } from 'lucide-react'
+import { ShoppingCartIcon } from 'lucide-react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 
 import { getCartStat } from '@/app/[locale]/(main)/cart/action'
 import { siteConfig } from '@/config/site'
 
 export const NavbarCart = () => {
+  const router = useRouter()
   const { data: session } = useSession()
   const userId = session?.user?.id
 
@@ -17,17 +20,26 @@ export const NavbarCart = () => {
   })
 
   const cartCount = data?.totalCarts ?? 0
-  const hasItems = cartCount > 0
   const displayCount = cartCount > 99 ? '99+' : cartCount
 
   return (
     <Link className='relative inline-block' href={siteConfig.link.cart}>
-      <ShoppingBagIcon />
-      {hasItems && (
-        <div className='bg-primary text-secondary absolute -top-2 -right-2 flex size-5 items-center justify-center rounded-full text-xs font-semibold'>
-          {displayCount}
-        </div>
-      )}
+      <Badge
+        color='primary'
+        content={displayCount}
+        className='bg-primary border-none font-bold text-white'
+        shape='circle'
+      >
+        <Button
+          isIconOnly
+          variant='light'
+          radius='full'
+          className='text-default-600 transition-all hover:scale-110'
+          onClick={() => router.push('/cart')}
+        >
+          <ShoppingCartIcon size={22} strokeWidth={1.5} />
+        </Button>
+      </Badge>
     </Link>
   )
 }

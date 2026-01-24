@@ -606,12 +606,13 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
 
-import { Badge, Button, Input } from '@heroui/react'
-import { LogInIcon, SearchIcon, ShoppingCartIcon } from 'lucide-react'
+import { Button, Input } from '@heroui/react'
+import { LogInIcon, SearchIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
 
+import { NavbarCart } from './cart'
 import { NavbarHeader } from './header'
 import { NavbarPanel } from './panel'
 
@@ -682,7 +683,8 @@ export const Navbar = () => {
 
               <div className='bg-divider h-4 w-[1px]' />
 
-              <Badge
+              <NavbarCart />
+              {/* <Badge
                 color='primary'
                 content={'99+'}
                 className='bg-primary border-none font-bold text-white'
@@ -697,7 +699,7 @@ export const Navbar = () => {
                 >
                   <ShoppingCartIcon size={22} strokeWidth={1.5} />
                 </Button>
-              </Badge>
+              </Badge> */}
             </div>
           </div>
         </div>

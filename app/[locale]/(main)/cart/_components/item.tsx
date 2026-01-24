@@ -198,8 +198,8 @@ export const CartItem = ({ className, cart, ...props }: CartItemProps) => {
           <div className='grid gap-10 xl:grid-cols-3'>
             <div
               className={cn(
-                'border-divider relative aspect-square size-[250px] shrink-0 overflow-hidden border bg-white transition-all duration-1000 ease-in-out',
-                'rounded-[60%_40%_30%_70%/60%_30%_70%_40%]',
+                'border-divider relative aspect-square size-[250px] shrink-0 overflow-hidden rounded-lg border bg-white transition-all duration-1000 ease-in-out',
+                // 'rounded-[60%_40%_30%_70%/60%_30%_70%_40%]',
               )}
             >
               <Image

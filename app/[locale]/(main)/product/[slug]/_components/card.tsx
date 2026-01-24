@@ -59,10 +59,10 @@ export const ProductCard = ({ className, product }: ProductCardProps) => {
         <CardHeader className='relative overflow-visible p-0'>
           <div
             className={cn(
-              'relative aspect-square w-full overflow-hidden bg-white transition-all duration-1000 ease-in-out',
-              isHovered
-                ? 'shadow-primary/10 scale-105 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] shadow-2xl'
-                : 'rounded-[60%_40%_30%_70%/60%_30%_70%_40%]',
+              'border-divider relative aspect-square w-full overflow-hidden rounded-lg border bg-white transition-all duration-1000 ease-in-out',
+              // isHovered
+              //   ? 'shadow-primary/10 scale-105 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] shadow-2xl'
+              //   : 'rounded-[60%_40%_30%_70%/60%_30%_70%_40%]',
             )}
           >
             {isOutOfStock && (
@@ -87,9 +87,9 @@ export const ProductCard = ({ className, product }: ProductCardProps) => {
           </div>
         </CardHeader>
 
-        <CardBody className='flex flex-col items-center gap-2 p-0 text-center'>
+        <CardBody className='flex flex-col items-center p-0 text-center'>
           <ProductChip
-            className='opacity-40 transition-opacity hover:opacity-100'
+            className='mb-2.5 opacity-40 transition-opacity hover:opacity-100'
             isAuthentic={product?.isAuthentic}
             isPremiumProduct={product?.isPremiumProduct}
             categoryName={product?.category?.name}

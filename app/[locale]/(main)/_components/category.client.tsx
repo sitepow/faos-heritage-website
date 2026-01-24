@@ -660,7 +660,7 @@ export const CategoryClient = () => {
             <img
               src={category?.image ?? NO_IMAGE}
               alt={category.name}
-              className='h-full w-full object-cover transition-transform duration-700 group-hover:scale-110'
+              className='h-full w-full object-cover grayscale transition-transform duration-700 group-hover:scale-110 group-hover:grayscale-0'
             />
             <div className='absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 transition-opacity group-hover:opacity-90' />
             <div className='absolute inset-0 flex items-center justify-center transition-opacity duration-300 group-hover:opacity-0'>
