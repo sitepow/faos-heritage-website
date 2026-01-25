@@ -220,16 +220,16 @@
     }
   },
   "Auth": {
-    "headerTitle": "เข้าสู่ระบบหรือลงทะเบียน",
+    "headerTitle": "เข้าสู่ระบบหรือสมัครสมาชิก",
     "headerDesc": "เพื่อเข้าใช้งานเว็บไซต์ <link>{siteName}</link>",
     "loginTab": "เข้าสู่ระบบ",
-    "registerTab": "ลงทะเบียน",
+    "registerTab": "สมัครสมาชิก",
     "emailLabel": "อีเมล",
     "passwordLabel": "รหัสผ่าน",
     "confirmPasswordLabel": "ยืนยันรหัสผ่าน",
     "nameLabel": "ชื่อ",
     "loginBtn": "เข้าสู่ระบบ",
-    "registerBtn": "ลงทะเบียน",
+    "registerBtn": "สมัครสมาชิก",
     "socialDivider": "หรือดำเนินการด้วยช่องทางอื่น"
   },
   "Cart": {
