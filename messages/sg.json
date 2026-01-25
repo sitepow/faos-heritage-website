@@ -233,7 +233,7 @@
       "netTotal": "Grand Total",
       "noAddressAlert": "Shipping address required before checkout",
       "addAddress": "Add address",
-      "proceedBtn": "Secure Checkout"
+      "proceedBtn": "Place Order"
     },
     "Item": {
       "productId": "SKU",

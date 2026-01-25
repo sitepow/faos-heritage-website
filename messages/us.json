@@ -233,7 +233,7 @@
       "netTotal": "Net total price",
       "noAddressAlert": "Please add your shipping address before placing your order",
       "addAddress": "Add your address",
-      "proceedBtn": "Proceed to checkout"
+      "proceedBtn": "Create an order"
     },
     "Item": {
       "productId": "Product ID",

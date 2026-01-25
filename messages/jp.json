@@ -237,7 +237,7 @@
       "netTotal": "合計金額",
       "noAddressAlert": "注文前に配送先住所を追加してください",
       "addAddress": "住所を追加する",
-      "proceedBtn": "レジに進む"
+      "proceedBtn": "注文を確定する"
     },
     "Item": {
       "productId": "商品ID",

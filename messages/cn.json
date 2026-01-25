@@ -230,7 +230,7 @@
       "netTotal": "实付款",
       "noAddressAlert": "下单前请先添加收货地址",
       "addAddress": "添加地址",
-      "proceedBtn": "去结算"
+      "proceedBtn": "提交订单"
     },
     "Item": {
       "productId": "商品编号",
