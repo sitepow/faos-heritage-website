@@ -40,7 +40,7 @@ export const FavoriteItem = ({
   const QUERY_KEY = {
     FAVORITES: ['account', 'favorites', userId],
     CART: ['carts', userId],
-    CART_COUNT: ['carts', 'count', userId],
+    CART_COUNT: ['carts', 'stat', userId],
   }
 
   const onRefetch = async () => {

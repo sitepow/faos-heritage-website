@@ -115,7 +115,7 @@ export const CartCheckout = ({ className, ...props }: CartCheckoutProps) => {
     ADDRESS_CHECKOUT: ['account', 'address', 'checkout', userId],
     SHIPPING_COST: ['shipping', 'carts', userId],
     CART: ['carts', userId],
-    CART_COUNT: ['carts', 'count', userId],
+    CART_COUNT: ['carts', 'stat', userId],
     ORDER: ['account', 'orders', 'pagination', userId],
   }
 

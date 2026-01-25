@@ -27,7 +27,7 @@ export default function Cart() {
 
   const QUERY_KEY = {
     CART: ['carts', userId],
-    CART_COUNT: ['carts', 'count', userId],
+    CART_COUNT: ['carts', 'stat', userId],
   }
 
   const { mutate: mutateDeteleCart, isPending: isPendingDeteleCart } =

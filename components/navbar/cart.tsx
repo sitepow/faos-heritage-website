@@ -26,7 +26,7 @@ export const NavbarCart = () => {
     <Link className='relative inline-block' href={siteConfig.link.cart}>
       <Badge
         color='primary'
-        content={displayCount}
+        content={displayCount === 0 ? null : displayCount}
         className='bg-primary border-none font-bold text-white'
         shape='circle'
       >
@@ -37,7 +37,7 @@ export const NavbarCart = () => {
           className='text-default-600 transition-all hover:scale-110'
           onClick={() => router.push('/cart')}
         >
-          <ShoppingCartIcon size={22} strokeWidth={1.5} />
+          <ShoppingCartIcon strokeWidth={1.5} />
         </Button>
       </Badge>
     </Link>

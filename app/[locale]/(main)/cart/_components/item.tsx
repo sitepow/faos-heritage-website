@@ -82,7 +82,7 @@ export const CartItem = ({ className, cart, ...props }: CartItemProps) => {
   const QUERY_KEY = {
     PRODUCT: ['product', cart?.product?.id],
     CART: ['carts', userId],
-    CART_COUNT: ['carts', 'count', userId],
+    CART_COUNT: ['carts', 'stat', userId],
   }
 
   const { mutate: mutateUpdateCart, isPending: isPendingUpdateCart } =

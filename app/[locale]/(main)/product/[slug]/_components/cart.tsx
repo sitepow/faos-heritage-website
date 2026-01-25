@@ -92,7 +92,7 @@ export const ProductCart = () => {
     onSuccess: async () => {
       await Promise.all([
         queryClient.invalidateQueries({ queryKey: ['carts', userId] }),
-        queryClient.invalidateQueries({ queryKey: ['carts', 'count', userId] }),
+        queryClient.invalidateQueries({ queryKey: ['carts', 'stat', userId] }),
         queryClient.invalidateQueries({ queryKey: ['product', product!.id] }),
       ])
       router.push('/cart')
