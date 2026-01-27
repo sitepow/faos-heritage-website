@@ -17,15 +17,15 @@ import { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
 import type { ImageInput } from '../../schema/image'
-import type { ImageWithPreview } from '@/components/dropzone/image'
+import type { ImageWithPreview } from '@/components/ui/ImageDropzone'
 
 import { getImage, createImage, updateImage } from '../../action/image'
 import { imageSchema } from '../../schema/image'
 import { useProductStore } from '../../store'
 
-import { ImageDropzone } from '@/components/dropzone/image'
-import { SubHeading } from '@/components/heading'
-import { useImageUpload } from '@/hooks/useImageUpload'
+import { ImageDropzone } from '@/components/ui/ImageDropzone'
+import { SubHeading } from '@/components/ui/SectionHeader'
+import { useImageUpload } from '@/hooks/useResolveImageUpload'
 
 const DEFAULT_VALUES: ImageInput = {
   url: '',

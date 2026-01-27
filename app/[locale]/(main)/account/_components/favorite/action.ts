@@ -2,11 +2,11 @@
 
 import type { Wishlist } from '@prisma/client'
 
-import { ERROR_CODES } from '@/lib/errors/codes'
+import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
-import { decimalToNumber } from '@/utils/helpers/number'
-import { getVariantPriceStockMinMax } from '@/utils/helpers/product'
+import { decimalToNumber } from '@/utils/number'
+import { getVariantPriceStockMinMax } from '@/utils/product'
 
 export type GetFavoritesResult = Awaited<ReturnType<typeof getFavorites>>
 export type GetFavoriteResult = GetFavoritesResult['items'][number]

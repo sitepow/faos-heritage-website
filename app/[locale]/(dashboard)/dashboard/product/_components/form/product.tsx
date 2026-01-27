@@ -30,9 +30,9 @@ import { productSchema } from '../../schema/product'
 import { useProductStore } from '../../store'
 
 import { useAppStore } from '@/app/store'
-import { SubHeading } from '@/components/heading'
-import { MdEditorCustomize } from '@/components/mdx-editor'
-import { PRODUCT_UNITS } from '@/utils/constants/product'
+import { MdEditorCustomize } from '@/components/ui/MdxEditor'
+import { SubHeading } from '@/components/ui/SectionHeader'
+import { PRODUCT_UNITS } from '@/constants/product'
 
 const DEFAULT_VALUES: ProductInput = {
   isAuthentic: true,

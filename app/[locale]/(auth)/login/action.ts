@@ -7,16 +7,14 @@ import type { UserRegisterInput } from './schema'
 
 import { userRegisterSchema } from './schema'
 
-import { ERROR_CODES } from '@/lib/errors/codes'
-import { done, fail } from '@/lib/errors/server'
+import { fail, ok } from '@/lib/errors'
+import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { prisma } from '@/lib/prisma'
 
-export const createUser = async (data: UserRegisterInput) => {
+const createUser = async (data: UserRegisterInput) => {
   const validated = userRegisterSchema.safeParse(data)
 
-  if (!validated.success) {
-    return fail(ERROR_CODES.VALIDATION_ERROR)
-  }
+  if (!validated.success) return fail(ERROR_CODES.VALIDATION_ERROR)
 
   const { name, email, password } = validated.data
 
@@ -47,5 +45,7 @@ export const createUser = async (data: UserRegisterInput) => {
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
-  return done()
+  return ok()
 }
+
+export { createUser }

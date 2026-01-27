@@ -29,10 +29,10 @@ import {
 import { shippingCountrySchema } from '../../schema/shipping/contry'
 import { useProductStore } from '../../store'
 
-import { CountryFlag } from '@/components/country-flag'
-import { SubHeading } from '@/components/heading'
-import { COUNTRY } from '@/utils/constants/country'
-import { DEFAULT_CURRENCY } from '@/utils/constants/currency'
+import { CountryFlag } from '@/components/ui/CountryFlagAvatar'
+import { SubHeading } from '@/components/ui/SectionHeader'
+import { COUNTRY } from '@/constants/country'
+import { DEFAULT_CURRENCY } from '@/constants/currency'
 
 const DEFAULT_VALUES: ShippingCountryInput = {
   countryCode: '',

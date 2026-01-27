@@ -33,9 +33,9 @@ import {
 import { useProductStore } from '../../store'
 import { ShippingForm } from '../form/shipping'
 
-import { ConfirmModal } from '@/components/confirm-modal'
-import { CountryFlag } from '@/components/country-flag'
-import { formatCurrency } from '@/utils/helpers/number'
+import { ConfirmModal } from '@/components/ui/ConfirmModal'
+import { CountryFlag } from '@/components/ui/CountryFlagAvatar'
+import { formatCurrency } from '@/utils/number'
 import { cn } from '@/utils/style'
 
 export const ShippingCountryManager = () => {

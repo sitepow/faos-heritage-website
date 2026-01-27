@@ -1,42 +1,49 @@
 import { NextResponse } from 'next/server'
-import createMiddleware from 'next-intl/middleware'
+import createIntlMiddleware from 'next-intl/middleware'
 
 import type { NextRequest } from 'next/server'
 
-import { PROTECTED_PATHS, AUTH_PATHS } from './utils/constants/auth'
+import { ROUTES } from './constants/app'
 
 import { routing } from '@/i18n/routing'
 
-const intlMiddleware = createMiddleware(routing)
+const intlMiddleware = createIntlMiddleware(routing)
 
-function stripLocale(pathname: string) {
-  const regex = new RegExp(`^/(${routing.locales.join('|')})(?=/|$)`)
-  return pathname.replace(regex, '') || '/'
+const stripLocaleFromPath = (pathname: string): string => {
+  const localePattern = new RegExp(`^/(${routing.locales.join('|')})(?=/|$)`)
+
+  return pathname.replace(localePattern, '') || '/'
 }
 
-export default function proxy(request: NextRequest) {
-  const { pathname } = request.nextUrl
-
-  const normalizedPath = stripLocale(pathname)
-
-  const isLoggedIn = Boolean(
+const isAuthenticated = (request: NextRequest): boolean => {
+  return Boolean(
     request.cookies.get('next-auth.session-token') ||
     request.cookies.get('__Secure-next-auth.session-token'),
   )
+}
 
-  const isProtected = PROTECTED_PATHS.some((path) =>
+export default function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl
+
+  const normalizedPath = stripLocaleFromPath(pathname)
+  const loggedIn = isAuthenticated(request)
+
+  const isProtectedRoute = ROUTES.PROTECTED.some((path) =>
     normalizedPath.startsWith(path),
   )
 
-  const isAuthPage = AUTH_PATHS.some((path) => normalizedPath.startsWith(path))
+  const isAuthRoute = ROUTES.AUTH.some((path) =>
+    normalizedPath.startsWith(path),
+  )
 
-  if (isProtected && !isLoggedIn) {
-    const url = new URL('/login', request.url)
-    url.searchParams.set('callbackUrl', pathname)
-    return NextResponse.redirect(url)
+  if (isProtectedRoute && !loggedIn) {
+    const redirectUrl = new URL('/login', request.url)
+    redirectUrl.searchParams.set('callbackUrl', pathname)
+
+    return NextResponse.redirect(redirectUrl)
   }
 
-  if (isAuthPage && isLoggedIn) {
+  if (isAuthRoute && loggedIn) {
     return NextResponse.redirect(new URL('/', request.url))
   }
 

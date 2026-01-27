@@ -9,9 +9,9 @@ import type { GetProductResult } from '@/app/[locale]/(main)/products/action'
 import { ProductChip } from './chip'
 import { ProductPrice } from './price'
 
-import { NO_IMAGE } from '@/utils/constants/seo'
-import { checkOutOfStock, getProductUnit } from '@/utils/helpers/product'
-import { createSlug } from '@/utils/helpers/slug'
+import { NO_IMAGE } from '@/constants/seo'
+import { checkOutOfStock, getProductUnit } from '@/utils/product'
+import { createSlug } from '@/utils/slug'
 import { cn } from '@/utils/style'
 
 interface ProductCardProps {

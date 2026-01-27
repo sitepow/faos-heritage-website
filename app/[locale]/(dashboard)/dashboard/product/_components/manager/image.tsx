@@ -28,7 +28,7 @@ import { deleteImage, getImages } from '../../action/image'
 import { useProductStore } from '../../store'
 import { ImageForm } from '../form/image'
 
-import { ConfirmModal } from '@/components/confirm-modal'
+import { ConfirmModal } from '@/components/ui/ConfirmModal'
 import { cn } from '@/utils/style'
 
 export const ImageManager = () => {

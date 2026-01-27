@@ -1,18 +1,36 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
-import { useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 
-export function useDebouncedChange<T>(
-  onChange: (value: T) => void,
-  delay = 500,
-) {
-  const timer = useRef<NodeJS.Timeout | null>(null)
+const useDebouncedChange = <T>(onChange: (value: T) => void, delay = 500) => {
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const onChangeRef = useRef(onChange)
 
-  return (value: T) => {
-    if (timer.current) clearTimeout(timer.current)
+  useEffect(() => {
+    onChangeRef.current = onChange
+  }, [onChange])
 
-    timer.current = setTimeout(() => {
-      onChange(value)
-    }, delay)
-  }
+  const debouncedChange = useCallback(
+    (value: T) => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current)
+      }
+
+      timerRef.current = setTimeout(() => {
+        onChangeRef.current(value)
+      }, delay)
+    },
+    [delay],
+  )
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current)
+      }
+    }
+  }, [])
+
+  return debouncedChange
 }
+
+export { useDebouncedChange }

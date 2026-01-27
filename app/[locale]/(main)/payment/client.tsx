@@ -4,7 +4,7 @@
 import { Accordion, AccordionItem } from '@heroui/react'
 import { useTranslations } from 'next-intl'
 
-import { SectionHeader } from '@/components/heading'
+import { SectionHeader } from '@/components/ui/SectionHeader'
 
 export const PaymentClient = () => {
   const t = useTranslations('Payment')

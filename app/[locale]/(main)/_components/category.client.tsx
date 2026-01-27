@@ -626,8 +626,8 @@ import { useTranslations } from 'next-intl'
 
 import { getCategories } from '../../(dashboard)/dashboard/product/action/category'
 
-import { NO_IMAGE } from '@/utils/constants/seo'
-import { createSlug } from '@/utils/helpers/slug'
+import { IMAGE_FALLBACK } from '@/constants/app'
+import { generateSlugWithId } from '@/utils/app'
 
 export const CategoryClient = () => {
   const tc = useTranslations('Common')
@@ -653,12 +653,14 @@ export const CategoryClient = () => {
           <div
             key={category.id}
             onClick={() =>
-              router.push(`/category/${createSlug(category.name, category.id)}`)
+              router.push(
+                `/category/${generateSlugWithId(category.name, category.id)}`,
+              )
             }
             className='group relative h-full flex-[1] cursor-pointer overflow-hidden rounded-2xl transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] hover:flex-[4]'
           >
             <img
-              src={category?.image ?? NO_IMAGE}
+              src={category?.image ?? IMAGE_FALLBACK.EMPTY}
               alt={category.name}
               className='h-full w-full object-cover grayscale transition-transform duration-700 group-hover:scale-110 group-hover:grayscale-0'
             />

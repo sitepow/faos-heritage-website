@@ -31,7 +31,7 @@ import {
 import { useProductStore } from '../../store'
 import { ProductLocalizationForm } from '../form/product-localization'
 
-import { CountryFlag } from '@/components/country-flag'
+import { CountryFlag } from '@/components/ui/CountryFlagAvatar'
 
 export const ProductLocalizationManager = () => {
   const t = useTranslations('Country')

@@ -12,7 +12,7 @@ import { CartLists } from './_components/lists'
 import { clearCart, deleteCart } from './action'
 import { useCartStore } from './store'
 
-import { ConfirmModal } from '@/components/confirm-modal'
+import { ConfirmModal } from '@/components/ui/ConfirmModal'
 
 export default function Cart() {
   const t = useTranslations('Cart')

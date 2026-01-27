@@ -3,7 +3,7 @@ import type { GetProductResult } from '@/app/[locale]/(main)/products/action'
 
 import { ProductCard, ProductCardSkeleton } from './card'
 
-import { ITEM_PER_PAGE } from '@/utils/constants/app'
+import { ITEM_PER_PAGE } from '@/constants/app'
 
 interface ProductSectionProps {
   items: GetProductResult[]

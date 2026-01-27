@@ -4,8 +4,11 @@
 
 import { useRef, useState } from 'react'
 
-import { Carousel, type CarouselHandle } from '@/components/carousel/carousel'
-import { NO_IMAGE } from '@/utils/constants/seo'
+import {
+  Carousel,
+  type CarouselHandle,
+} from '@/components/ui/Carousel/Carousel'
+import { NO_IMAGE } from '@/constants/seo'
 import { cn } from '@/utils/style'
 
 type Props = {

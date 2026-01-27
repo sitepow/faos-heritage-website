@@ -4,11 +4,11 @@ import type { Prisma } from '@prisma/client'
 
 import { imageBannerSchema, type ImageBannerInput } from './schema'
 
-import { deleteFile } from '@/actions/file'
-import { ERROR_CODES } from '@/lib/errors/codes'
+import { deleteFile } from '@/app/actions/file'
+import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
-import { removeEmptyField } from '@/utils/helpers/object'
+import { removeEmptyField } from '@/utils/object'
 
 export const createImageBanner = async (data: ImageBannerInput) => {
   const validated = imageBannerSchema.safeParse(data)

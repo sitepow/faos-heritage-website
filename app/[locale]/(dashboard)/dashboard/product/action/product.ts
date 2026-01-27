@@ -5,13 +5,13 @@ import type { Prisma } from '@prisma/client'
 
 import { productSchema } from '../schema/product'
 
-import { deleteFile } from '@/actions/file'
-import { ERROR_CODES } from '@/lib/errors/codes'
+import { deleteFile } from '@/app/actions/file'
+import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
-import { decimalToNumber } from '@/utils/helpers/number'
-import { removeEmptyField } from '@/utils/helpers/object'
-import { getVariantPriceStockMinMax } from '@/utils/helpers/product'
+import { decimalToNumber } from '@/utils/number'
+import { removeEmptyField } from '@/utils/object'
+import { getVariantPriceStockMinMax } from '@/utils/product'
 
 export type GetProductResult = Awaited<ReturnType<typeof getProduct>>
 

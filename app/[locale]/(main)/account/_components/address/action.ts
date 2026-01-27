@@ -4,10 +4,10 @@ import type { Prisma } from '@prisma/client'
 
 import { addressSchema, type AddressInput } from './schema'
 
-import { ERROR_CODES } from '@/lib/errors/codes'
+import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
-import { removeEmptyField } from '@/utils/helpers/object'
+import { removeEmptyField } from '@/utils/object'
 
 export type GetAddressResult = Awaited<ReturnType<typeof getAddress>>
 

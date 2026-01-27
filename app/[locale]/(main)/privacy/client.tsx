@@ -3,7 +3,7 @@
 
 import { useTranslations } from 'next-intl'
 
-import { SectionHeader } from '@/components/heading'
+import { SectionHeader } from '@/components/ui/SectionHeader'
 
 export const PrivacyClient = () => {
   const t = useTranslations('Privacy')

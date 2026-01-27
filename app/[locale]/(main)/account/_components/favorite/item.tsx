@@ -11,9 +11,9 @@ import type { ComponentProps } from 'react'
 import { deleteFavorite, type GetFavoriteResult } from './action'
 import { ProductPrice } from '../../../product/[slug]/_components/price'
 
-import { ConfirmModal } from '@/components/confirm-modal'
-import { NO_IMAGE } from '@/utils/constants/seo'
-import { getProductUnit } from '@/utils/helpers/product'
+import { ConfirmModal } from '@/components/ui/ConfirmModal'
+import { NO_IMAGE } from '@/constants/seo'
+import { getProductUnit } from '@/utils/product'
 import { cn } from '@/utils/style'
 
 type FavoriteItemProps = ComponentProps<typeof Card> & {

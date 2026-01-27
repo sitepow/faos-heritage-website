@@ -28,10 +28,10 @@ import {
   getOrder,
   updateOrder,
 } from '@/app/[locale]/(main)/account/_components/order/action'
-import { ORDER_STEPS_ALL } from '@/utils/constants/order'
-import { NO_IMAGE } from '@/utils/constants/seo'
-import { SHIPPING_PROVIDERS } from '@/utils/constants/shipping'
-import { checkOrderStatus } from '@/utils/helpers/order'
+import { ORDER_STEPS_ALL } from '@/constants/order'
+import { NO_IMAGE } from '@/constants/seo'
+import { SHIPPING_PROVIDERS } from '@/constants/shipping'
+import { checkOrderStatus } from '@/utils/order'
 
 const DEFAULT_VALUES: OrderInput = {
   status: OrderStatus.PENDING,

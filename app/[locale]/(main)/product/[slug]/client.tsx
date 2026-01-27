@@ -16,8 +16,8 @@ import { ProductSimilar } from './_components/similar'
 import { useProductDetailStore } from './store'
 
 import { getProduct } from '@/app/[locale]/(dashboard)/dashboard/product/action/product'
-import { PageNotFound } from '@/components/page-not-found'
-import { createSlug } from '@/utils/helpers/slug'
+import { PageNotFound } from '@/components/ui/PageNotFound'
+import { createSlug } from '@/utils/slug'
 interface ProductClientProps {
   initialProduct: GetProductResult
   productId: string

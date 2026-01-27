@@ -11,7 +11,7 @@ import { useTranslations } from 'next-intl'
 import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
-import type { ErrorCode } from '@/lib/errors/codes'
+import type { ErrorCode } from '@/lib/errors/error-codes'
 import type { ActionResult } from '@/lib/errors/types'
 
 import { getCategories } from '../../(dashboard)/dashboard/product/action/category'
@@ -23,9 +23,9 @@ import {
   type UserLoginInput,
   type UserRegisterInput,
 } from '@/app/[locale]/(auth)/login/schema'
-import { Country } from '@/components/navbar/country'
-import { ThemeSwitch } from '@/components/theme-switch'
-import { useQueryParams } from '@/hooks/useQueryParams'
+import { Country } from '@/components/Navbar/Country'
+import { ThemeSwitch } from '@/components/ui/ThemeSwitch'
+import { useQueryParams } from '@/hooks/useUrlQuery'
 
 export default function Login() {
   const translateAuth = useTranslations('Auth')

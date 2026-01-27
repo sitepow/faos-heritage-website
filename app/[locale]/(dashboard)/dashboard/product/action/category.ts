@@ -5,11 +5,11 @@ import type { Prisma } from '@prisma/client'
 
 import { categorySchema } from '../schema/category'
 
-import { deleteFile } from '@/actions/file'
-import { ERROR_CODES } from '@/lib/errors/codes'
+import { deleteFile } from '@/app/actions/file'
+import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
-import { removeEmptyField } from '@/utils/helpers/object'
+import { removeEmptyField } from '@/utils/object'
 
 export type GetCategoryResult = Awaited<ReturnType<typeof getCategory>>
 export type GetCategoriesResult = Awaited<ReturnType<typeof getCategories>>

@@ -22,12 +22,12 @@ import { updateCart, type GetCartResult } from '../action'
 import { useCartStore } from '../store'
 
 import { useAppStore } from '@/app/store'
-import { ConfirmModal } from '@/components/confirm-modal'
-import { EXCHANGE_RATE_TTL } from '@/utils/constants/app'
-import { NO_IMAGE } from '@/utils/constants/seo'
-import { getThbExchangeRates } from '@/utils/helpers/currency/exchange'
-import { formatCurrency, formatNumber } from '@/utils/helpers/number'
-import { getProductUnit } from '@/utils/helpers/product'
+import { ConfirmModal } from '@/components/ui/ConfirmModal'
+import { EXCHANGE_RATE_TTL } from '@/constants/app'
+import { NO_IMAGE } from '@/constants/seo'
+import { getThbExchangeRates } from '@/utils/currency/exchange'
+import { formatCurrency, formatNumber } from '@/utils/number'
+import { getProductUnit } from '@/utils/product'
 import { cn } from '@/utils/style'
 
 type CartItemProps = ComponentProps<typeof Card> & {

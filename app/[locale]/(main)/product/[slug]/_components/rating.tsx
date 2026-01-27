@@ -2,7 +2,7 @@ import { Star } from 'lucide-react'
 
 import type { ComponentProps } from 'react'
 
-import { formatNumber } from '@/utils/helpers/number'
+import { formatNumber } from '@/utils/number'
 import { cn } from '@/utils/style'
 
 type ProductRatingProps = ComponentProps<'div'> & {

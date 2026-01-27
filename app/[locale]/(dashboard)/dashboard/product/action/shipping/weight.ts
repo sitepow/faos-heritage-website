@@ -4,7 +4,7 @@ import type { ShippingWeightTierInput } from '../../schema/shipping/weight'
 
 import { shippingWeightTierSchema } from '../../schema/shipping/weight'
 
-import { ERROR_CODES } from '@/lib/errors/codes'
+import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
 

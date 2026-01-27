@@ -29,9 +29,9 @@ import {
 } from '../../schema/product-localization'
 import { useProductStore } from '../../store'
 
-import { CountryFlag } from '@/components/country-flag'
-import { MdEditorCustomize } from '@/components/mdx-editor'
-import { COUNTRY } from '@/utils/constants/country'
+import { CountryFlag } from '@/components/ui/CountryFlagAvatar'
+import { MdEditorCustomize } from '@/components/ui/MdxEditor'
+import { COUNTRY } from '@/constants/country'
 
 const DEFAULT_VALUES: ProductLocalizationInput = {
   productId: '',

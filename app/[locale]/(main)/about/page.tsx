@@ -3,8 +3,8 @@ import { getTranslations } from 'next-intl/server'
 
 import type { Metadata } from 'next'
 
-import { PdfViewer } from '@/components/pdf-viewer'
-import { OG_IMAGE } from '@/utils/constants/seo'
+import { PdfViewer } from '@/components/ui/PdfViewer/PdfViewer'
+import { IMAGE_FALLBACK } from '@/constants/app'
 
 export async function generateMetadata({
   params,
@@ -35,7 +35,7 @@ export async function generateMetadata({
       type: 'article',
       images: [
         {
-          url: OG_IMAGE,
+          url: IMAGE_FALLBACK.OG,
           width: 1200,
           height: 630,
           alt: t('ogTitle'),
@@ -46,7 +46,7 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title: t('ogTitle'),
       description: t('ogDescription'),
-      images: [OG_IMAGE],
+      images: [IMAGE_FALLBACK.OG],
     },
   }
 }

@@ -4,9 +4,9 @@ import { Card, Skeleton } from '@heroui/react'
 import { useQuery } from '@tanstack/react-query'
 
 import { useAppStore } from '@/app/store'
-import { EXCHANGE_RATE_TTL } from '@/utils/constants/app'
-import { getThbExchangeRates } from '@/utils/helpers/currency/exchange'
-import { formatCurrency, formatNumber } from '@/utils/helpers/number'
+import { EXCHANGE_RATE_TTL } from '@/constants/app'
+import { getThbExchangeRates } from '@/utils/currency/exchange'
+import { formatCurrency, formatNumber } from '@/utils/number'
 
 interface StatCardProps {
   name: string

@@ -5,12 +5,12 @@ import { OrderStatus, PaymentStatus, StockMovementType } from '@prisma/client'
 import type { Currency, Prisma } from '@prisma/client'
 
 import { calculateShippingCost } from '@/app/[locale]/(dashboard)/dashboard/product/action/shipping/cost'
-import { ERROR_CODES } from '@/lib/errors/codes'
+import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
-import { getFullAddress } from '@/utils/helpers/account'
-import { decimalToNumber } from '@/utils/helpers/number'
-import { checkOrderStatus } from '@/utils/helpers/order'
+import { getFullAddress } from '@/utils/account'
+import { decimalToNumber } from '@/utils/number'
+import { checkOrderStatus } from '@/utils/order'
 
 export interface UpdateOrderInput {
   orderId: string

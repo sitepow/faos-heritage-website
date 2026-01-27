@@ -6,9 +6,9 @@ import { useSession } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
-import { NavbarHeader } from '@/components/navbar/header'
-import { NavbarPanel } from '@/components/navbar/panel'
-import { siteConfig } from '@/config/site'
+import { NavbarHeader } from '@/components/Navbar/Header'
+import { NavbarPanel } from '@/components/Navbar/Panel'
+import { siteConfig } from '@/constants/site'
 
 export const AdminNavbar = () => {
   const { data: session } = useSession()

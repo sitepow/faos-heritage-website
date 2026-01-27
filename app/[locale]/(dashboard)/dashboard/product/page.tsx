@@ -53,16 +53,16 @@ import {
   getProducts,
 } from '@/app/[locale]/(dashboard)/dashboard/product/action/product'
 import { useAppStore } from '@/app/store'
-import { ConfirmModal } from '@/components/confirm-modal'
-import { EXCHANGE_RATE_TTL, ITEM_PER_PAGE } from '@/utils/constants/app'
-import { getThbExchangeRates } from '@/utils/helpers/currency/exchange'
+import { ConfirmModal } from '@/components/ui/ConfirmModal'
+import { EXCHANGE_RATE_TTL, ITEM_PER_PAGE } from '@/constants/app'
+import { getThbExchangeRates } from '@/utils/currency/exchange'
 import {
   formatCurrency,
   formatCurrencyRange,
   formatNumber,
   formatNumberRange,
-} from '@/utils/helpers/number'
-import { getRangeDisplayValue } from '@/utils/helpers/range'
+} from '@/utils/number'
+import { getRangeDisplayValue } from '@/utils/range'
 
 export default function Product() {
   const locale = useLocale()

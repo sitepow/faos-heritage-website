@@ -6,9 +6,9 @@ import { CategoryClient } from './_components/category.client'
 import { ExploreProductsClient } from './_components/explore-product.client'
 import { getProducts } from './products/action'
 
-import { AdvertiseBanner } from '@/components/banner/advertise'
-import { ITEM_PER_PAGE } from '@/utils/constants/app'
-import { OG_IMAGE } from '@/utils/constants/seo'
+import { AdvertiseBanner } from '@/components/Banner/advertise'
+import { ITEM_PER_PAGE } from '@/constants/app'
+import { OG_IMAGE } from '@/constants/seo'
 
 export async function generateMetadata({
   params,

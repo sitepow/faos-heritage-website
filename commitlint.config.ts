@@ -1,6 +1,8 @@
-import { RuleConfigSeverity, type UserConfig } from '@commitlint/types'
+import { RuleConfigSeverity } from '@commitlint/types'
 
-const Configuration: UserConfig = {
+import type { UserConfig } from '@commitlint/types'
+
+export default {
   extends: ['@commitlint/config-conventional'],
   rules: {
     'header-max-length': [RuleConfigSeverity.Warning, 'always', 120],
@@ -22,6 +24,4 @@ const Configuration: UserConfig = {
       ],
     ],
   },
-}
-
-export default Configuration
+} satisfies UserConfig

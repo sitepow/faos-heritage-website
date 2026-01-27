@@ -64,12 +64,14 @@ const config = {
       themes: {
         light: {
           colors: {
+            page: '#f1f1f1',
             primary: '#ba8c25',
             secondary: '#ffffff',
           },
         },
         dark: {
           colors: {
+            page: '#131314',
             primary: '#ba8c25',
             secondary: '#ffffff',
           },

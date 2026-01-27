@@ -27,7 +27,7 @@ import { deleteImageBanner, getImageBanners } from './action'
 import { ImageBannerForm } from './form'
 import { useImageBannerStore } from './store'
 
-import { ConfirmModal } from '@/components/confirm-modal'
+import { ConfirmModal } from '@/components/ui/ConfirmModal'
 import { cn } from '@/utils/style'
 
 export const ImageBannerManager = () => {

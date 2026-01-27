@@ -4,10 +4,10 @@ import type { Metadata } from 'next'
 
 import { CategoryClient } from '@/app/[locale]/(main)/category/[slug]/client'
 import { getProducts } from '@/app/[locale]/(main)/products/action'
-import { PageNotFound } from '@/components/page-not-found'
-import { ITEM_PER_PAGE } from '@/utils/constants/app'
-import { OG_IMAGE } from '@/utils/constants/seo'
-import { getIdFromSlug, getNameFromSlug } from '@/utils/helpers/slug'
+import { PageNotFound } from '@/components/ui/PageNotFound'
+import { ITEM_PER_PAGE } from '@/constants/app'
+import { OG_IMAGE } from '@/constants/seo'
+import { getIdFromSlug, getNameFromSlug } from '@/utils/slug'
 
 interface CategoryProps {
   params: Promise<{ slug: string; locale: string }>

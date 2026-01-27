@@ -1,58 +1,37 @@
 import '@/styles/globals.css'
 
-// import { Sarabun } from 'next/font/google'
 import { Anuphan } from 'next/font/google'
 
 import type { Viewport } from 'next'
 import type { PropsWithChildren } from 'react'
 
-import { HeroUIProviders } from '../providers/heroui'
-
-// import { fontSukhumvit } from '@/config/fonts'
-import { NextAuthProviders } from '@/providers/nextauth'
-import { QueryProviders } from '@/providers/query'
+import { Providers } from '@/components/providers/Providers'
+import { BRAND_COLORS } from '@/constants/app'
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: 'white' },
-    { media: '(prefers-color-scheme: dark)', color: 'black' },
+    { media: '(prefers-color-scheme: light)', color: BRAND_COLORS.primary },
+    { media: '(prefers-color-scheme: dark)', color: BRAND_COLORS.primary },
   ],
 }
-
-// const sarabun = Sarabun({
-//   subsets: ['latin'],
-//   weight: ['400', '700'],
-// })
 
 const anuphan = Anuphan({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
+  variable: '--font-anuphan',
 })
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html suppressHydrationWarning>
-      <head />
       <body
-        // className={cn(
-        //   'bg-background text-foreground min-h-screen font-sans antialiased',
-        //   fontSukhumvit.variable,
-        // )}
-        className={`text-foreground min-h-screen bg-[#f1f1f1] font-sans antialiased dark:bg-[#131314] ${anuphan.className}`}
+        className={[
+          'bg-page text-foreground min-h-screen antialiased',
+          'font-sans',
+          anuphan.variable,
+        ].join(' ')}
       >
-        <QueryProviders>
-          <NextAuthProviders>
-            <HeroUIProviders
-              themeProps={{
-                attribute: 'class',
-                defaultTheme: 'system',
-                enableSystem: true,
-              }}
-            >
-              {children}
-            </HeroUIProviders>
-          </NextAuthProviders>
-        </QueryProviders>
+        <Providers>{children}</Providers>
       </body>
     </html>
   )

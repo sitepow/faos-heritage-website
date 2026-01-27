@@ -2,42 +2,42 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
-export interface SelectedCountry {
+import { DEFAULT_LOCALE } from '@/constants/app'
+
+export interface AppLocale {
   country: string
   currency: string
   locale: string
   name: string
 }
 
-interface AppStore {
-  country: SelectedCountry
+interface AppState {
+  appLocale: AppLocale
   hasHydrated: boolean
-
-  setState: (state: Partial<AppStore>) => void
 }
 
-export const useAppStore = create<AppStore>()(
+interface AppActions {
+  setAppLocale: (locale: AppLocale) => void
+}
+
+const useAppStore = create<AppState & AppActions>()(
   persist(
     (set) => ({
-      country: {
-        country: 'TH',
-        currency: 'THB',
-        name: 'Thailand',
-        locale: 'th-TH',
-      },
-
+      appLocale: DEFAULT_LOCALE,
       hasHydrated: false,
 
-      setState: (state) => set(state),
+      setAppLocale: (appLocale) => set({ appLocale }),
     }),
     {
       name: 'app-store',
       partialize: (state) => ({
-        country: state.country,
+        appLocale: state.appLocale,
       }),
-      onRehydrateStorage: () => (state) => {
-        state?.setState({ hasHydrated: true })
+      onRehydrateStorage: () => () => {
+        useAppStore.setState({ hasHydrated: true })
       },
     },
   ),
 )
+
+export { useAppStore }

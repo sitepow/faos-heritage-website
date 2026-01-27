@@ -27,8 +27,8 @@ import { createFavorite } from '../../../account/_components/favorite/action'
 import { createCart } from '../../../cart/action'
 import { useProductDetailStore } from '../store'
 
-import { ACCOUNT_TAB } from '@/utils/constants/account'
-import { createSlug } from '@/utils/helpers/slug'
+import { ACCOUNT_TAB } from '@/constants/account'
+import { createSlug } from '@/utils/slug'
 import { cn } from '@/utils/style'
 
 export const ProductCart = () => {

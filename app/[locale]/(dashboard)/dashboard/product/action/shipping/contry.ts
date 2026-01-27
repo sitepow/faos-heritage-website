@@ -5,10 +5,10 @@ import type { Prisma } from '@prisma/client'
 
 import { shippingCountrySchema } from '../../schema/shipping/contry'
 
-import { ERROR_CODES } from '@/lib/errors/codes'
+import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
-import { decimalToNumber } from '@/utils/helpers/number'
+import { decimalToNumber } from '@/utils/number'
 
 export type GetShippingCountriesResult = Awaited<
   ReturnType<typeof getShippingCountries>

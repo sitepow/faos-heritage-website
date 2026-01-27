@@ -18,16 +18,16 @@ import { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
 import type { VariantInput } from '../../schema/variant'
-import type { ImageWithPreview } from '@/components/dropzone/image'
+import type { ImageWithPreview } from '@/components/ui/ImageDropzone'
 
 import { getVariant, createVariant, updateVariant } from '../../action/variant'
 import { variantSchema } from '../../schema/variant'
 import { useProductStore } from '../../store'
 
-import { ImageDropzone } from '@/components/dropzone/image'
-import { SubHeading } from '@/components/heading'
-import { useImageUpload } from '@/hooks/useImageUpload'
-import { DEFAULT_CURRENCY } from '@/utils/constants/currency'
+import { ImageDropzone } from '@/components/ui/ImageDropzone'
+import { SubHeading } from '@/components/ui/SectionHeader'
+import { DEFAULT_CURRENCY } from '@/constants/currency'
+import { useImageUpload } from '@/hooks/useResolveImageUpload'
 
 const DEFAULT_VALUES: VariantInput = {
   name: '',

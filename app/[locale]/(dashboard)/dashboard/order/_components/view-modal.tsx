@@ -18,10 +18,10 @@ import { useTranslations } from 'next-intl'
 import { useOrderStore } from '../store'
 
 import { getOrder } from '@/app/[locale]/(main)/account/_components/order/action'
-import { Stepper } from '@/components/stepper'
-import { NO_IMAGE } from '@/utils/constants/seo'
-import { formatCurrency, formatNumber } from '@/utils/helpers/number'
-import { getProductUnit } from '@/utils/helpers/product'
+import { Stepper } from '@/components/ui/OrderStepper/OrderStepper'
+import { NO_IMAGE } from '@/constants/seo'
+import { formatCurrency, formatNumber } from '@/utils/number'
+import { getProductUnit } from '@/utils/product'
 
 export const OrderViewModal = () => {
   const t = useTranslations('Account.OrderView')

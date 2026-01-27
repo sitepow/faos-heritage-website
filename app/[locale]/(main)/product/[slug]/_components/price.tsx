@@ -6,10 +6,10 @@ import { useTranslations } from 'next-intl'
 import type { ComponentProps } from 'react'
 
 import { useAppStore } from '@/app/store'
-import { EXCHANGE_RATE_TTL } from '@/utils/constants/app'
-import { getThbExchangeRates } from '@/utils/helpers/currency/exchange'
-import { formatCurrency, formatCurrencyRange } from '@/utils/helpers/number'
-import { getRangeDisplayValue } from '@/utils/helpers/range'
+import { EXCHANGE_RATE_TTL } from '@/constants/app'
+import { getThbExchangeRates } from '@/utils/currency/exchange'
+import { formatCurrency, formatCurrencyRange } from '@/utils/number'
+import { getRangeDisplayValue } from '@/utils/range'
 import { cn } from '@/utils/style'
 
 type ProductPriceProps = ComponentProps<'div'> & {

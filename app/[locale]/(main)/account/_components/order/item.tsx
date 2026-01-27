@@ -10,13 +10,13 @@ import { useTranslations } from 'next-intl'
 
 import type { GetOrderResult } from '@/app/[locale]/(dashboard)/dashboard/order/action'
 
-import { createStripeCheckout } from '@/actions/stripe'
 import { useOrderStore } from '@/app/[locale]/(dashboard)/dashboard/order/store'
-import { Stepper } from '@/components/stepper'
+import { createStripeCheckout } from '@/app/actions/stripe'
+import { Stepper } from '@/components/ui/OrderStepper/OrderStepper'
 // import { OmisePayment } from '@/components/features/omise/payment'
-import { NO_IMAGE } from '@/utils/constants/seo'
-import { formatDate } from '@/utils/helpers/date'
-import { formatCurrency, formatNumber } from '@/utils/helpers/number'
+import { NO_IMAGE } from '@/constants/seo'
+import { formatDate } from '@/utils/date'
+import { formatCurrency, formatNumber } from '@/utils/number'
 
 interface OrderItemProps {
   order: GetOrderResult

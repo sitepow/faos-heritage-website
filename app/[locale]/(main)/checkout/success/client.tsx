@@ -3,7 +3,7 @@
 import { Alert } from '@heroui/react'
 import { useTranslations } from 'next-intl'
 
-import { useQueryParams } from '@/hooks/useQueryParams'
+import { useQueryParams } from '@/hooks/useUrlQuery'
 
 export const SuccessClient = () => {
   const t = useTranslations('SuccessPage')

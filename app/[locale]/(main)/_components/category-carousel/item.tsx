@@ -5,7 +5,7 @@ import { CardBody, Card, Skeleton } from '@heroui/react'
 import type { GetCategoryResult } from '@/app/[locale]/(dashboard)/dashboard/product/action/category'
 import type { ComponentProps } from 'react'
 
-import { NO_IMAGE } from '@/utils/constants/seo'
+import { NO_IMAGE } from '@/constants/seo'
 import { cn } from '@/utils/style'
 
 type CategoryCarouselItemProps = ComponentProps<typeof CardBody> & {

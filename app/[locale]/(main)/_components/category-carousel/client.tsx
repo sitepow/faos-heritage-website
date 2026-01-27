@@ -15,9 +15,9 @@ import { ProductCard } from '../../product/[slug]/_components/card'
 
 import { getCategories } from '@/app/[locale]/(dashboard)/dashboard/product/action/category'
 import { getProducts } from '@/app/[locale]/(main)/products/action'
-import { Carousel } from '@/components/carousel/carousel'
-import { SectionHeader } from '@/components/heading'
-import { createSlug } from '@/utils/helpers/slug'
+import { Carousel } from '@/components/ui/Carousel/Carousel'
+import { SectionHeader } from '@/components/ui/SectionHeader'
+import { createSlug } from '@/utils/slug'
 interface Props {
   initialCategories: GetCategoriesResult
   initialProducts: GetProductsResult

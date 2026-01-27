@@ -25,9 +25,9 @@ import { createAddress, getAddress, updateAddress } from './action'
 import { addressSchema, type AddressInput } from './schema'
 import { useAddressStore } from './store'
 
-import { CountryFlag } from '@/components/country-flag'
-import { SubHeading } from '@/components/heading'
-import { COUNTRY } from '@/utils/constants/country'
+import { CountryFlag } from '@/components/ui/CountryFlagAvatar'
+import { SubHeading } from '@/components/ui/SectionHeader'
+import { COUNTRY } from '@/constants/country'
 
 const DEFAULT_VALUES: AddressInput = {
   id: undefined,

@@ -38,9 +38,9 @@ import {
   StatCard,
   StatCardSkeleton,
 } from '@/app/[locale]/(dashboard)/_components/stat-card'
-import { ConfirmModal } from '@/components/confirm-modal'
-import { ITEM_PER_PAGE } from '@/utils/constants/app'
-import { NO_IMAGE } from '@/utils/constants/seo'
+import { ConfirmModal } from '@/components/ui/ConfirmModal'
+import { ITEM_PER_PAGE } from '@/constants/app'
+import { NO_IMAGE } from '@/constants/seo'
 
 export default function User() {
   const t = useTranslations('Dashboard.UserManager')

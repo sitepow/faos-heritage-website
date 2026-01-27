@@ -30,8 +30,8 @@ import { deleteCategory, getCategories } from '../../action/category'
 import { useProductStore } from '../../store'
 import { CategoryForm } from '../form/category'
 
-import { ConfirmModal } from '@/components/confirm-modal'
-import { NO_IMAGE } from '@/utils/constants/seo'
+import { ConfirmModal } from '@/components/ui/ConfirmModal'
+import { NO_IMAGE } from '@/constants/seo'
 import { cn } from '@/utils/style'
 
 export const CategoryManager = () => {

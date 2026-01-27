@@ -17,7 +17,7 @@ import { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
 import type { CategoryInput } from '../../schema/category'
-import type { ImageWithPreview } from '@/components/dropzone/image'
+import type { ImageWithPreview } from '@/components/ui/ImageDropzone'
 
 import {
   getCategory,
@@ -27,9 +27,9 @@ import {
 import { categorySchema } from '../../schema/category'
 import { useProductStore } from '../../store'
 
-import { ImageDropzone } from '@/components/dropzone/image'
-import { SubHeading } from '@/components/heading'
-import { useImageUpload } from '@/hooks/useImageUpload'
+import { ImageDropzone } from '@/components/ui/ImageDropzone'
+import { SubHeading } from '@/components/ui/SectionHeader'
+import { useImageUpload } from '@/hooks/useResolveImageUpload'
 
 const DEFAULT_VALUES: CategoryInput = {
   name: '',

@@ -4,11 +4,11 @@ import type { Prisma } from '@prisma/client'
 
 import { variantSchema, type VariantInput } from '../schema/variant'
 
-import { ERROR_CODES } from '@/lib/errors/codes'
+import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
-import { decimalToNumber } from '@/utils/helpers/number'
-import { removeEmptyField } from '@/utils/helpers/object'
+import { decimalToNumber } from '@/utils/number'
+import { removeEmptyField } from '@/utils/object'
 
 export const createVariant = async (data: VariantInput) => {
   const validated = variantSchema.safeParse(data)

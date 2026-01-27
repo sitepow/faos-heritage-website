@@ -7,7 +7,7 @@ import { ProductSection } from './section'
 import { useProductDetailStore } from '../store'
 
 import { getProducts } from '@/app/[locale]/(main)/products/action'
-import { ITEM_PER_PAGE } from '@/utils/constants/app'
+import { ITEM_PER_PAGE } from '@/constants/app'
 
 export const ProductSimilar = () => {
   const locale = useLocale()

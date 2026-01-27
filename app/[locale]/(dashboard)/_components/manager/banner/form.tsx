@@ -18,15 +18,15 @@ import { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
 import type { ImageBannerInput } from './schema'
-import type { ImageWithPreview } from '@/components/dropzone/image'
+import type { ImageWithPreview } from '@/components/ui/ImageDropzone'
 
 import { createImageBanner, getImageBanner, updateImageBanner } from './action'
 import { imageBannerSchema } from './schema'
 import { useImageBannerStore } from './store'
 
-import { ImageDropzone } from '@/components/dropzone/image'
-import { SubHeading } from '@/components/heading'
-import { useImageUpload } from '@/hooks/useImageUpload'
+import { ImageDropzone } from '@/components/ui/ImageDropzone'
+import { SubHeading } from '@/components/ui/SectionHeader'
+import { useImageUpload } from '@/hooks/useResolveImageUpload'
 
 const DEFAULT_VALUES: ImageBannerInput = {
   url: '',

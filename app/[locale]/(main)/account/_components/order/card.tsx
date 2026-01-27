@@ -13,7 +13,7 @@ import { OrderItem } from './item'
 import { OrderViewModal } from '@/app/[locale]/(dashboard)/dashboard/order/_components/view-modal'
 import { getOrders } from '@/app/[locale]/(dashboard)/dashboard/order/action'
 import { OrderForm } from '@/app/[locale]/(main)/account/_components/order/form'
-import { ITEM_PER_PAGE } from '@/utils/constants/app'
+import { ITEM_PER_PAGE } from '@/constants/app'
 
 export const OrderCard = () => {
   const t = useTranslations('Account.Orders')

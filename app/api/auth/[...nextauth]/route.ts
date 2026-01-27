@@ -5,11 +5,14 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import FacebookProvider from 'next-auth/providers/facebook'
 import GoogleProvider from 'next-auth/providers/google'
 
-import { ERROR_CODES } from '@/lib/errors/codes'
+import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { prisma } from '@/lib/prisma'
+import { normalizeEmail } from '@/utils/app'
 
 export const NEXT_AUTH_OPTIONS: NextAuthOptions = {
-  session: { strategy: 'jwt' },
+  session: {
+    strategy: 'jwt',
+  },
 
   providers: [
     GoogleProvider({
@@ -23,14 +26,14 @@ export const NEXT_AUTH_OPTIONS: NextAuthOptions = {
     }),
 
     CredentialsProvider({
-      name: 'credentials',
+      name: 'Credentials',
       credentials: {
         email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' },
       },
 
       async authorize(credentials) {
-        const email = credentials?.email?.toLowerCase()
+        const email = normalizeEmail(credentials?.email)
         const password = credentials?.password
 
         if (!email || !password) {
@@ -41,9 +44,15 @@ export const NEXT_AUTH_OPTIONS: NextAuthOptions = {
           throw new Error(ERROR_CODES.PASSWORD_TOO_SHORT)
         }
 
-        const user = await prisma.user.findUnique({ where: { email } })
+        const user = await prisma.user.findUnique({
+          where: { email },
+        })
 
-        if (!user || !user.password) {
+        if (!user) {
+          throw new Error(ERROR_CODES.INVALID_CREDENTIALS)
+        }
+
+        if (!user.password) {
           throw new Error(ERROR_CODES.SOCIAL_ACCOUNT_EXISTS)
         }
 
@@ -51,9 +60,9 @@ export const NEXT_AUTH_OPTIONS: NextAuthOptions = {
           throw new Error(ERROR_CODES.ACCOUNT_SUSPENDED)
         }
 
-        const valid = await compare(password, user.password)
+        const isValid = await compare(password, user.password)
 
-        if (!valid) {
+        if (!isValid) {
           throw new Error(ERROR_CODES.INVALID_CREDENTIALS)
         }
 
@@ -66,21 +75,25 @@ export const NEXT_AUTH_OPTIONS: NextAuthOptions = {
     async signIn({ user, account }) {
       if (account?.provider === 'credentials') return true
 
-      const email = user.email?.toLowerCase()
+      const email = normalizeEmail(user.email)
+      if (!email) {
+        return false
+      }
 
-      if (!email) return false
-
-      const existing = await prisma.user.findUnique({
+      const existingUser = await prisma.user.findUnique({
         where: { email },
+        select: { id: true },
       })
 
-      if (!existing) {
+      if (!existingUser) {
         await prisma.user.create({
           data: {
             email,
             name: user.name ?? '',
+            image: user.image ?? null,
             role: Role.CUSTOMER,
             password: null,
+            isActive: true,
           },
         })
       }
@@ -89,23 +102,30 @@ export const NEXT_AUTH_OPTIONS: NextAuthOptions = {
     },
 
     async jwt({ token }) {
-      if (token.email) {
-        const user = await prisma.user.findUnique({
-          where: { email: token.email.toLowerCase() },
-          select: {
-            id: true,
-            role: true,
-            name: true,
-            image: true,
-          },
-        })
+      if (!token.email) {
+        return token
+      }
 
-        if (user) {
-          token.id = user.id
-          token.role = user.role
-          token.name = user.name
-          token.picture = user.image
-        }
+      const email = normalizeEmail(token.email)
+      if (!email) {
+        return token
+      }
+
+      const user = await prisma.user.findUnique({
+        where: { email },
+        select: {
+          id: true,
+          role: true,
+          name: true,
+          image: true,
+        },
+      })
+
+      if (user) {
+        token.id = user.id
+        token.role = user.role
+        token.name = user.name
+        token.picture = user.image
       }
 
       return token

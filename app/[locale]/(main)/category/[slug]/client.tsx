@@ -23,10 +23,10 @@ import { ProductSection } from '../../product/[slug]/_components/section'
 import { getProducts } from '../../products/action'
 
 import { getCategory } from '@/app/[locale]/(dashboard)/dashboard/product/action/category'
-import { SectionHeader } from '@/components/heading'
-import { PageNotFound } from '@/components/page-not-found'
-import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
-import { SORT_ITEMS } from '@/utils/constants/product'
+import { PageNotFound } from '@/components/ui/PageNotFound'
+import { SectionHeader } from '@/components/ui/SectionHeader'
+import { SORT_ITEMS } from '@/constants/product'
+import { useInfiniteScroll } from '@/hooks/useWindowInfiniteScroll'
 
 interface CategoryClientProps {
   initialProducts: GetProductsResult

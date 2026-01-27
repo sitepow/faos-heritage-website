@@ -14,11 +14,11 @@ import { OrderCard } from './_components/order/card'
 import { OverviewCard } from './_components/overview-card'
 import { ProfileCard } from './_components/profile-card'
 
+import { ACCOUNT_TAB } from '@/constants/account'
+import { IS_TABLET_OR_MOBILE } from '@/constants/responsive'
 import { useIsBelowBreakpoint } from '@/hooks/useIsBelowBreakpoint'
-import { useMounted } from '@/hooks/useMounted'
-import { useQueryParams } from '@/hooks/useQueryParams'
-import { ACCOUNT_TAB } from '@/utils/constants/account'
-import { IS_TABLET_OR_MOBILE } from '@/utils/constants/responsive'
+import { useMounted } from '@/hooks/useIsMounted'
+import { useQueryParams } from '@/hooks/useUrlQuery'
 
 export const AccountClient = () => {
   const t = useTranslations('Account')
