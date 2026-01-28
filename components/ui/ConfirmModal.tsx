@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 'use client'
 
 import {
@@ -11,7 +12,7 @@ import {
 
 interface ConfirmModalProps {
   isOpen: boolean
-  onClose: () => void
+  onOpenChange: (open: boolean) => void
   onConfirm: () => void
   isPending?: boolean
   title?: string
@@ -22,7 +23,7 @@ interface ConfirmModalProps {
 
 const ConfirmModal = ({
   isOpen,
-  onClose,
+  onOpenChange,
   onConfirm,
   isPending = false,
   title = 'คุณกำลังจะลบข้อมูลนี้ใช่หรือไม่?',
@@ -30,13 +31,20 @@ const ConfirmModal = ({
   confirmText = 'ตกลง',
   cancelText = 'ยกเลิก',
 }: ConfirmModalProps) => {
+  const handleCancel = () => {
+    if (isPending) {
+      return
+    }
+    onOpenChange(false)
+  }
+
   return (
     <Modal
       hideCloseButton
       isDismissable={false}
       isOpen={isOpen}
       scrollBehavior='inside'
-      onOpenChange={onClose}
+      onOpenChange={onOpenChange}
     >
       <ModalContent>
         <ModalHeader className='flex flex-col gap-1'>{title}</ModalHeader>
@@ -46,16 +54,16 @@ const ConfirmModal = ({
         </ModalBody>
 
         <ModalFooter className='gap-2'>
-          <Button variant='faded' onPress={onClose} disabled={isPending}>
+          <Button isDisabled={isPending} variant='faded' onPress={handleCancel}>
             {cancelText}
           </Button>
 
           <Button
-            color='primary'
             className='text-secondary'
-            onPress={onConfirm}
+            color='primary'
+            isDisabled={isPending}
             isLoading={isPending}
-            disabled={isPending}
+            onPress={onConfirm}
           >
             {confirmText}
           </Button>

@@ -93,7 +93,7 @@ const createStripeCheckout = async ({
   )
 
   if (!order) {
-    return fail(ERROR_CODES.ORDER_NOT_FOUND)
+    return fail(ERROR_CODES.DATA_NOT_FOUND)
   }
 
   if (order.status !== OrderStatus.PENDING) {

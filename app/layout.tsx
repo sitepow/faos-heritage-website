@@ -26,7 +26,8 @@ export default function RootLayout({ children }: PropsWithChildren) {
     <html suppressHydrationWarning>
       <body
         className={[
-          'bg-page text-foreground min-h-screen antialiased',
+          'text-foreground min-h-screen antialiased',
+          'relative flex h-dvh flex-col',
           'font-sans',
           anuphan.variable,
         ].join(' ')}

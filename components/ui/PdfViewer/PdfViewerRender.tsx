@@ -27,7 +27,7 @@ export default function PdfViewerRender({
       className={`h-dvh w-full overflow-hidden rounded-lg bg-white ${className ?? ''}`}
     >
       <Worker workerUrl={PDF_WORKER_URL}>
-        <Viewer fileUrl={fileUrl} defaultScale={SpecialZoomLevel.PageWidth} />
+        <Viewer defaultScale={SpecialZoomLevel.PageWidth} fileUrl={fileUrl} />
       </Worker>
     </div>
   )

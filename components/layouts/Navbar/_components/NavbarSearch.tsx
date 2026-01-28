@@ -9,10 +9,6 @@ const NavbarSearch = () => {
     <div className='hidden flex-1 lg:block'>
       <div className='group relative max-w-[300px]'>
         <Input
-          size='sm'
-          variant='underlined'
-          placeholder={t('search')}
-          startContent={<SearchIcon />}
           classNames={{
             input: ['text-xs uppercase tracking-widest'],
             inputWrapper: [
@@ -20,6 +16,10 @@ const NavbarSearch = () => {
               'after:bg-primary',
             ],
           }}
+          placeholder={t('search')}
+          size='sm'
+          startContent={<SearchIcon />}
+          variant='underlined'
         />
       </div>
     </div>

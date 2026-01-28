@@ -11,8 +11,8 @@ interface AdvertiseItem {
 }
 
 const AdvertiseBanner = () => {
-  const t = useTranslations('Banner')
-  const advertiseData = t.raw('advertise') as AdvertiseItem[]
+  const translate = useTranslations('Banner')
+  const advertiseData = translate.raw('advertise') as AdvertiseItem[]
 
   if (!Array.isArray(advertiseData) || advertiseData.length === 0) {
     return null

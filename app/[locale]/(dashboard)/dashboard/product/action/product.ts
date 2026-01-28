@@ -6,12 +6,11 @@ import type { Prisma } from '@prisma/client'
 import { productSchema } from '../schema/product'
 
 import { deleteFile } from '@/app/actions/file'
+import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
-import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
+import { calculateVariantRange, omitEmptyFields } from '@/utils/app'
 import { decimalToNumber } from '@/utils/number'
-import { removeEmptyField } from '@/utils/object'
-import { getVariantPriceStockMinMax } from '@/utils/product'
 
 export type GetProductResult = Awaited<ReturnType<typeof getProduct>>
 
@@ -24,7 +23,7 @@ export const createProduct = async (data: ProductInput) => {
 
   try {
     await prisma.product.create({
-      data: removeEmptyField(
+      data: omitEmptyFields(
         validated.data,
       ) as Prisma.ProductUncheckedCreateInput,
     })
@@ -32,14 +31,14 @@ export const createProduct = async (data: ProductInput) => {
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
-  return done()
+  return ok()
 }
 
 export const deleteProduct = async (productIds: string | string[]) => {
   const ids = Array.isArray(productIds) ? productIds : [productIds]
 
   if (!ids.length) {
-    return fail(ERROR_CODES.DATA_FIELD_REQUIRED)
+    return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
   const products = await prisma.product.findMany({
@@ -72,7 +71,7 @@ export const deleteProduct = async (productIds: string | string[]) => {
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
-  return done()
+  return ok()
 }
 
 export const getProduct = async (
@@ -168,7 +167,7 @@ export const getProduct = async (
     return
   }
 
-  const { priceMin, priceMax, stockMin, stockMax } = getVariantPriceStockMinMax(
+  const { priceMin, priceMax, stockMin, stockMax } = calculateVariantRange(
     product.variants,
   )
 
@@ -240,8 +239,9 @@ export const getProducts = async (
   const transformed = decimalToNumber(items)
 
   const productItems = transformed?.map((product) => {
-    const { priceMin, priceMax, stockMin, stockMax } =
-      getVariantPriceStockMinMax(product?.variants)
+    const { priceMin, priceMax, stockMin, stockMax } = calculateVariantRange(
+      product?.variants,
+    )
 
     return {
       ...product,
@@ -284,7 +284,7 @@ export const updateProduct = async (data: ProductInput) => {
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
-  return done()
+  return ok()
 }
 
 export const getProductStat = async () => {

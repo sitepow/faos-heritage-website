@@ -10,59 +10,63 @@ import {
 import { ChevronDownIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useTheme } from 'next-themes'
-import { useEffect, useState } from 'react'
 
+import { useIsMounted } from '@/hooks/useIsMounted'
+import { getSingleKey } from '@/utils/app'
 import { cn } from '@/utils/style'
+
+type ThemeValue = 'light' | 'dark' | 'system'
 
 interface ThemeSwitchProps {
   className?: string
 }
 
-export const ThemeSwitch = ({ className }: ThemeSwitchProps) => {
+const THEME_OPTIONS: ThemeValue[] = ['light', 'dark', 'system']
+
+const ThemeSwitch = ({ className }: ThemeSwitchProps) => {
   const t = useTranslations('Common.theme')
   const { theme, setTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
+  const isMounted = useIsMounted()
 
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  const currentTheme = (theme ?? 'system') as ThemeValue
 
-  if (!mounted) return <div className='size-10' />
+  if (!isMounted) {
+    return
+  }
 
   return (
     <div className={cn('flex items-center', className)}>
       <Dropdown>
         <DropdownTrigger>
-          <Button
-            variant='light'
-            className='text-secondary p-0'
-            isIconOnly={false}
-          >
-            <div className='flex items-center gap-2'>
-              <span>{t(theme ?? 'system')}</span>
-              <ChevronDownIcon size={14} className='text-secondary' />
-            </div>
+          <Button className='text-secondary px-2' variant='light'>
+            <span className='flex items-center gap-2'>
+              <span className='capitalize'>{t(currentTheme)}</span>
+              <ChevronDownIcon size={14} />
+            </span>
           </Button>
         </DropdownTrigger>
+
         <DropdownMenu
-          aria-label='Theme selection'
-          variant='faded'
           disallowEmptySelection
+          aria-label='Theme selection'
+          selectedKeys={new Set([currentTheme])}
           selectionMode='single'
-          selectedKeys={new Set([theme || 'system'])}
+          variant='faded'
           onSelectionChange={(keys) => {
-            const selectedValue = Array.from(keys)[0] as string
-            setTheme(selectedValue)
-          }}
-          classNames={{
-            list: 'max-h-[250px] overflow-y-auto scroll-shadow',
+            const value = getSingleKey(keys)
+
+            if (value) {
+              setTheme(value)
+            }
           }}
         >
-          <DropdownItem key='light'>{t('light')}</DropdownItem>
-          <DropdownItem key='dark'>{t('dark')}</DropdownItem>
-          <DropdownItem key='system'>{t('system')}</DropdownItem>
+          {THEME_OPTIONS.map((value) => (
+            <DropdownItem key={value}>{t(value)}</DropdownItem>
+          ))}
         </DropdownMenu>
       </Dropdown>
     </div>
   )
 }
+
+export { ThemeSwitch }

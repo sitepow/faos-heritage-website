@@ -1,9 +1,9 @@
 import { notFound } from 'next/navigation'
 import { hasLocale, NextIntlClientProvider } from 'next-intl'
 import {
-  setRequestLocale,
   getMessages,
   getTranslations,
+  setRequestLocale,
 } from 'next-intl/server'
 
 import type { Metadata } from 'next'
@@ -11,9 +11,17 @@ import type { ReactNode } from 'react'
 
 import { routing } from '@/i18n/routing'
 
-type Props = {
+interface LocaleLayoutProps {
   children: ReactNode
-  params: Promise<{ locale: string }>
+  params: {
+    locale: string
+  }
+}
+
+function assertValidLocale(locale: string) {
+  if (!hasLocale(routing.locales, locale)) {
+    notFound()
+  }
 }
 
 export async function generateMetadata({
@@ -23,38 +31,35 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params
 
-  if (!hasLocale(routing.locales, locale)) {
-    notFound()
-  }
+  assertValidLocale(locale)
 
   const translate = await getTranslations({
     locale,
     namespace: 'Site',
   })
 
-  const name = translate('name')
+  const siteName = translate('name')
   const title = translate('title')
-  const description = translate('description')
 
   return {
     title: {
-      default: `${name} - ${title}`,
-      template: `%s | ${name} - ${title}`,
+      default: `${siteName} - ${title}`,
+      template: `%s | ${siteName} - ${title}`,
     },
-    description,
+    description: translate('description'),
     icons: {
       icon: '/favicon.ico',
     },
   }
 }
 
-export default async function LocaleLayout({ children, params }: Props) {
+export default async function LocaleLayout({
+  children,
+  params,
+}: LocaleLayoutProps) {
   const { locale } = await params
 
-  if (!hasLocale(routing.locales, locale)) {
-    notFound()
-  }
-
+  assertValidLocale(locale)
   setRequestLocale(locale)
 
   const messages = await getMessages()

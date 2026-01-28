@@ -24,11 +24,11 @@ const FooterGroup = ({
     <div className='flex flex-wrap gap-3'>
       {isShipping &&
         SHIPPING_PROVIDERS.map((s) => (
-          <FooterIcon key={s.key} src={s.image} alt={s.label} />
+          <FooterIcon key={s.key} alt={s.label} src={s.image} />
         ))}
 
       {isPayment &&
-        items?.map((img, i) => <FooterIcon key={i} src={img} alt='payment' />)}
+        items?.map((img, i) => <FooterIcon key={i} alt='payment' src={img} />)}
     </div>
   </div>
 )

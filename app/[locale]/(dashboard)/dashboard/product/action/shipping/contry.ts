@@ -5,8 +5,7 @@ import type { Prisma } from '@prisma/client'
 
 import { shippingCountrySchema } from '../../schema/shipping/contry'
 
-import { ERROR_CODES } from '@/lib/errors/error-codes'
-import { done, fail } from '@/lib/errors/server'
+import { ERROR_CODES, fail, ok } from '@/lib/errors'
 import { prisma } from '@/lib/prisma'
 import { decimalToNumber } from '@/utils/number'
 
@@ -29,7 +28,7 @@ export const createShippingCountry = async (data: ShippingCountryInput) => {
   })
 
   if (exists) {
-    return fail(ERROR_CODES.DATA_ALREADY_EXISTS)
+    return fail(ERROR_CODES.USER_ALREADY_EXISTS)
   }
 
   try {
@@ -44,7 +43,7 @@ export const createShippingCountry = async (data: ShippingCountryInput) => {
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
-  return done()
+  return ok()
 }
 
 export const getShippingCountries = async () => {
@@ -94,12 +93,12 @@ export const updateShippingCountry = async (data: ShippingCountryInput) => {
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
-  return done()
+  return ok()
 }
 
 export const deleteShippingCountry = async (shippingCountryId: string) => {
   if (!shippingCountryId) {
-    return fail(ERROR_CODES.DATA_FIELD_REQUIRED)
+    return fail(ERROR_CODES.FIELD_REQUIRED)
   }
 
   try {
@@ -110,5 +109,5 @@ export const deleteShippingCountry = async (shippingCountryId: string) => {
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
-  return done()
+  return ok()
 }

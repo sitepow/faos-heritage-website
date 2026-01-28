@@ -74,13 +74,13 @@ const OrderStepper = ({
           return (
             <React.Fragment key={stepStatus}>
               <OrderStep
-                status={stepStatus}
-                label={t(stepStatus)}
                 date={date}
                 index={index}
                 isCompleted={isCompleted}
                 isCurrent={isCurrent}
+                label={t(stepStatus)}
                 locale={appLocale?.locale}
+                status={stepStatus}
               />
 
               {index < ORDER_STEPS.length - 1 && (

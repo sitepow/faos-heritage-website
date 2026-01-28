@@ -132,7 +132,7 @@ export default function Login() {
           backgroundColor: '#000',
         }}
       >
-        <img src='/images/logo.png' className='size-32' />
+        <img className='size-32' src='/images/logo.png' />
         <span className='text-secondary text-2xl lg:w-3/4 xl:w-1/2'>
           {translateSite('title')}
         </span>
@@ -180,8 +180,8 @@ export default function Login() {
                 />
                 <Button
                   fullWidth
-                  color='primary'
                   className='text-secondary'
+                  color='primary'
                   isDisabled={isPending}
                   isLoading={isPending}
                   type='submit'
@@ -230,8 +230,8 @@ export default function Login() {
 
                 <Button
                   fullWidth
-                  color='primary'
                   className='text-secondary'
+                  color='primary'
                   isDisabled={isPending}
                   isLoading={isPending}
                   type='submit'
@@ -253,9 +253,9 @@ export default function Login() {
 
             <div className='grid w-full gap-2 sm:grid-cols-2'>
               <Card
+                fullWidth
                 className='border-divider cursor-pointer border'
                 shadow='none'
-                fullWidth
               >
                 <CardBody
                   className='flex-row items-center gap-2 p-2'
@@ -273,9 +273,9 @@ export default function Login() {
               </Card>
 
               <Card
+                fullWidth
                 className='border-divider cursor-pointer border'
                 shadow='none'
-                fullWidth
               >
                 <CardBody
                   className='flex-row items-center gap-2 p-2'

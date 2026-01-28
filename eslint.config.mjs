@@ -72,6 +72,16 @@ export default defineConfig([
 
       'unused-imports/no-unused-imports': 'error',
 
+      'react/jsx-sort-props': [
+        'error',
+        {
+          callbacksLast: true,
+          shorthandFirst: true,
+          noSortAlphabetically: false,
+          reservedFirst: true,
+        },
+      ],
+
       'import/order': [
         'error',
         {

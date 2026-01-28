@@ -84,7 +84,10 @@ const Carousel = forwardRef<CarouselHandle, CarouselProps>(
       useCarouselNavigation(emblaApi)
 
     useEffect(() => {
-      if (!emblaApi) return
+      if (!emblaApi) {
+        return
+      }
+
       autoPlay ? autoplay.current.play() : autoplay.current.stop()
     }, [emblaApi, autoPlay])
 
@@ -96,17 +99,17 @@ const Carousel = forwardRef<CarouselHandle, CarouselProps>(
 
         {!prevDisabled && (
           <CarouselNavigateButton
+            className='absolute top-1/2 left-4 -translate-y-1/2 bg-black/20 hover:bg-black/30'
             direction='prev'
             onClick={onPrev}
-            className='absolute top-1/2 left-4 -translate-y-1/2 bg-black/20 hover:bg-black/30'
           />
         )}
 
         {!nextDisabled && (
           <CarouselNavigateButton
+            className='absolute top-1/2 right-4 -translate-y-1/2 bg-black/20 hover:bg-black/30'
             direction='next'
             onClick={onNext}
-            className='absolute top-1/2 right-4 -translate-y-1/2 bg-black/20 hover:bg-black/30'
           />
         )}
       </div>

@@ -44,16 +44,13 @@ import { VariantManager } from './_components/manager/variant'
 import { useProductStore } from './store'
 
 import {
-  StatCard,
-  StatCardSkeleton,
-} from '@/app/[locale]/(dashboard)/_components/stat-card'
-import {
   deleteProduct,
   getProductStat,
   getProducts,
 } from '@/app/[locale]/(dashboard)/dashboard/product/action/product'
 import { useAppStore } from '@/app/store'
 import { ConfirmModal } from '@/components/ui/ConfirmModal'
+import { StatCard, StatCardSkeleton } from '@/components/ui/StatCard'
 import { EXCHANGE_RATE_TTL, ITEM_PER_PAGE } from '@/constants/app'
 import { getThbExchangeRates } from '@/utils/currency/exchange'
 import {
@@ -168,33 +165,33 @@ export default function Product() {
       <div className='flex w-full flex-wrap gap-3 *:shrink-0 md:justify-end'>
         <Button
           color='primary'
-          variant='bordered'
           startContent={<PlusIcon />}
+          variant='bordered'
           onPress={() => onOpenProductChange()}
         >
           {t('addNew')}
         </Button>
         <Button
           color='primary'
-          variant='bordered'
           startContent={<SettingsIcon />}
+          variant='bordered'
           onPress={() => onOpenCategoryManagerChange()}
         >
           {t('manageCategories')}
         </Button>
         <Button
           color='primary'
-          variant='bordered'
           startContent={<SettingsIcon />}
+          variant='bordered'
           onPress={() => onOpenShippingCountryManagerChange()}
         >
           {t('manageShipping')}
         </Button>
         <Button
           color='primary'
-          variant='bordered'
           isDisabled={selectedProductIds.length === 0}
           startContent={<XIcon />}
+          variant='bordered'
           onPress={() => {
             setState({ productId: null })
             onOpenDeleteChange()
@@ -205,16 +202,16 @@ export default function Product() {
       </div>
 
       <Table
-        className='border-divider rounded-lg border'
         aria-label={t('tableAria')}
-        selectionMode='multiple'
-        onSelectionChange={(keys) => setSelectedKeys(keys as Set<string>)}
         checkboxesProps={{
           classNames: {
             base: 'data-[selected=true]:border-primary',
             icon: 'text-secondary',
           },
         }}
+        className='border-divider rounded-lg border'
+        selectionMode='multiple'
+        onSelectionChange={(keys) => setSelectedKeys(keys as Set<string>)}
       >
         <TableHeader>
           <TableColumn>{t('colId')}</TableColumn>
@@ -281,7 +278,7 @@ export default function Product() {
                   {product?.images?.length === 0 ? (
                     '-'
                   ) : (
-                    <AvatarGroup max={3} isBordered>
+                    <AvatarGroup isBordered max={3}>
                       {product?.images?.map((image) => (
                         <Avatar key={image?.url} src={image?.url} />
                       ))}

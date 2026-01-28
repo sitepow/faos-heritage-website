@@ -1,7 +1,7 @@
 'use server'
 
+import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
-import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
 import { decimalToNumber } from '@/utils/number'
 
@@ -65,7 +65,7 @@ export const createCart = async ({
 }: createCartParams) => {
   try {
     if (quantity < 1) {
-      return fail(ERROR_CODES.DATA_INSUFFICIENT)
+      return fail(ERROR_CODES.PRODUCT_OUT_OF_STOCK)
     }
 
     const product = await prisma.product.findUnique({
@@ -96,7 +96,7 @@ export const createCart = async ({
     }
 
     if (availableStock < quantity) {
-      return fail(ERROR_CODES.DATA_INSUFFICIENT)
+      return fail(ERROR_CODES.PRODUCT_OUT_OF_STOCK)
     }
 
     const existing = await prisma.cart.findFirst({
@@ -129,7 +129,7 @@ export const createCart = async ({
       const newQty = existing.quantity + quantity
 
       if (newQty > availableStock) {
-        return fail(ERROR_CODES.DATA_INSUFFICIENT)
+        return fail(ERROR_CODES.PRODUCT_OUT_OF_STOCK)
       }
 
       return await prisma.cart.update({
@@ -149,7 +149,7 @@ export const createCart = async ({
       },
     })
 
-    return done()
+    return ok()
   } catch {
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
@@ -205,7 +205,7 @@ export const updateCart = async ({
     }
 
     if (quantity > availableStock) {
-      return fail(ERROR_CODES.DATA_INSUFFICIENT)
+      return fail(ERROR_CODES.PRODUCT_OUT_OF_STOCK)
     }
 
     await prisma.cart.update({
@@ -219,7 +219,7 @@ export const updateCart = async ({
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
-  return done()
+  return ok()
 }
 
 export const deleteCart = async (cartId: string) => {
@@ -231,7 +231,7 @@ export const deleteCart = async (cartId: string) => {
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
-  return done()
+  return ok()
 }
 
 export const clearCart = async (userId: string) => {
@@ -243,7 +243,7 @@ export const clearCart = async (userId: string) => {
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
-  return done()
+  return ok()
 }
 
 export const getCartStat = async (userId: string) => {

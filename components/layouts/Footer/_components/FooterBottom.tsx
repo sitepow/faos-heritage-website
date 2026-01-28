@@ -23,7 +23,7 @@ const FooterBottom = () => {
         {CURRENCY_LOCALE_MAP.map((c) => (
           <button
             key={c.country}
-            className='border-divider hover:bg-primary/10 hover:text-primary rounded-full border px-3 py-1 transition'
+            className='border-divider hover:bg-primary/10 hover:text-primary cursor-pointer rounded-full border px-3 py-1 transition'
           >
             {tCountry(c.country)}
           </button>

@@ -11,29 +11,23 @@ import { ChevronDownIcon, GlobeIcon } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 import { useMemo } from 'react'
 
-import type { SharedSelection } from '@heroui/react'
-
 import { useAppStore } from '@/app/store'
 import { CountryFlagAvatar } from '@/components/ui/CountryFlagAvatar'
 import { CURRENCY_LOCALE_MAP } from '@/constants/app'
 import { usePathname, useRouter } from '@/i18n/navigation'
+import { getSingleKey } from '@/utils/app'
 
 type CountryCode = (typeof CURRENCY_LOCALE_MAP)[number]['country']
 
-const getSingleKey = <T extends string>(keys: SharedSelection) => {
-  if (keys === 'all') return undefined
-  return Array.from(keys)[0] as T | undefined
-}
-
 const NavbarLocaleSwitcher = () => {
-  const t = useTranslations('Localization')
+  const translate = useTranslations('Localization')
   const tCountry = useTranslations('Country')
 
   const routeLocale = useLocale()
   const router = useRouter()
   const pathname = usePathname()
 
-  const { appLocale, hasHydrated, setAppLocale } = useAppStore()
+  const { appLocale, setAppLocale } = useAppStore()
 
   const selectedByRoute = useMemo(
     () =>
@@ -54,7 +48,9 @@ const NavbarLocaleSwitcher = () => {
       (item) => item.locale === localeKey,
     )
 
-    if (!selected) return
+    if (!selected) {
+      return
+    }
 
     setAppLocale({
       ...selected,
@@ -62,22 +58,20 @@ const NavbarLocaleSwitcher = () => {
     })
   }
 
-  if (!hasHydrated) return null
-
   return (
     <div className='flex items-center gap-2'>
       <Dropdown placement='bottom-end'>
         <DropdownTrigger>
           <Button
-            variant='light'
-            startContent={<GlobeIcon />}
             className='text-secondary p-0'
+            startContent={<GlobeIcon />}
+            variant='light'
           >
             <div className='flex items-center gap-2'>
               <span>
                 {selectedByRoute
                   ? tCountry(selectedByRoute.country)
-                  : t('country')}
+                  : translate('country')}
               </span>
               <ChevronDownIcon />
             </div>
@@ -85,13 +79,16 @@ const NavbarLocaleSwitcher = () => {
         </DropdownTrigger>
 
         <DropdownMenu
-          selectionMode='single'
           selectedKeys={
             selectedByRoute ? new Set([selectedByRoute.country]) : new Set()
           }
+          selectionMode='single'
           onSelectionChange={(keys) => {
             const value = getSingleKey<CountryCode>(keys)
-            if (value) handleRouteLocaleChange(value)
+
+            if (value) {
+              handleRouteLocaleChange(value)
+            }
           }}
         >
           {CURRENCY_LOCALE_MAP.map((item) => (
@@ -107,10 +104,10 @@ const NavbarLocaleSwitcher = () => {
 
       <Dropdown placement='bottom-end'>
         <DropdownTrigger>
-          <Button variant='light' className='text-secondary p-0'>
+          <Button className='text-secondary p-0' variant='light'>
             <div className='flex items-center gap-1'>
               <span className='uppercase'>
-                {appLocale.currency || t('currency')}
+                {appLocale.currency || translate('currency')}
               </span>
               <ChevronDownIcon />
             </div>
@@ -118,8 +115,8 @@ const NavbarLocaleSwitcher = () => {
         </DropdownTrigger>
 
         <DropdownMenu
-          selectionMode='single'
           selectedKeys={new Set([appLocale.locale])}
+          selectionMode='single'
           onSelectionChange={(keys) => {
             const value = getSingleKey<string>(keys)
             if (value) handleCurrencyChange(value)

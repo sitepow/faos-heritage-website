@@ -21,10 +21,10 @@ const CountryFlagAvatar = ({
   return (
     <Avatar
       {...props}
-      size={size}
-      className={cn('shrink-0', className)}
-      src={getCountryFlagUrl(countryCode)}
       alt={alt ?? countryCode}
+      className={cn('shrink-0', className)}
+      size={size}
+      src={getCountryFlagUrl(countryCode)}
     />
   )
 }

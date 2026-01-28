@@ -2,7 +2,8 @@
 import { OrderStatus } from '@prisma/client'
 import slugify from '@sindresorhus/slugify'
 
-import type { GetAddressResult } from '@/app/[locale]/(main)/account/_components/address/action'
+import type { GetAddressResult } from '@/app/[locale]/(main)/profile/_components/address/action'
+import type { SharedSelection } from '@heroui/system'
 import type { ProductUnit } from '@prisma/client'
 
 import {
@@ -128,7 +129,7 @@ const calculateVariantRange = (variants?: VariantPriceStock[] | null) => {
   )
 }
 
-const isOutOfStock = ({
+const checkIsOutOfStock = ({
   stockMin,
   stockMax,
   stockQuantity,
@@ -173,7 +174,9 @@ const resolveRangeDisplayValue = <T>(
 }
 
 const generateSlugWithId = (name: string, id: string | number) => {
-  if (!name || !id) return ''
+  if (!name || !id) {
+    return ''
+  }
 
   return `${slugify(name, { lowercase: true })}-${id}`
 }
@@ -215,6 +218,11 @@ const getBackgroundStyle = (image: string) => {
   }
 }
 
+const getSingleKey = <T extends string>(keys: SharedSelection) => {
+  if (keys === 'all') return undefined
+  return Array.from(keys)[0] as T | undefined
+}
+
 export {
   formatFullAddress,
   omitEmptyFields,
@@ -222,7 +230,7 @@ export {
   canTransitionOrderStatus,
   resolveProductUnitLabel,
   calculateVariantRange,
-  isOutOfStock,
+  checkIsOutOfStock,
   resolveRangeDisplayValue,
   generateSlugWithId,
   extractIdFromSlug,
@@ -230,4 +238,5 @@ export {
   toStripeMinorUnit,
   normalizeEmail,
   getBackgroundStyle,
+  getSingleKey,
 }

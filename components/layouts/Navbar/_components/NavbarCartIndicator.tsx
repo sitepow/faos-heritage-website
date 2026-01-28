@@ -21,18 +21,18 @@ const NavbarCartIndicator = () => {
   const displayCount = cartCount > 99 ? '99+' : cartCount > 0 ? cartCount : null
 
   return (
-    <Link href={'/cart'} className='relative inline-block' aria-label='Cart'>
+    <Link aria-label='Cart' className='relative inline-block' href={'/cart'}>
       <Badge
+        className='bg-primary border-none font-bold text-white'
         color='primary'
         content={displayCount}
-        className='bg-primary border-none font-bold text-white'
         shape='circle'
       >
         <Button
           isIconOnly
-          variant='light'
-          radius='full'
           className='text-default-600 transition-transform hover:scale-110'
+          radius='full'
+          variant='light'
         >
           <ShoppingCartIcon />
         </Button>

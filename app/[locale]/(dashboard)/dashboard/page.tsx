@@ -4,12 +4,12 @@ import { Button } from '@heroui/react'
 import { useQueries } from '@tanstack/react-query'
 import { SettingsIcon } from 'lucide-react'
 
+import { ImageBannerManager } from './banner/manager'
+import { useImageBannerStore } from './banner/store'
 import { getOrderStat, getOrderStatCash } from './order/action'
 import { getProductStat } from './product/action/product'
 import { getUserStat } from './user/action'
-import { ImageBannerManager } from '../_components/manager/banner/image'
-import { useImageBannerStore } from '../_components/manager/banner/store'
-import { StatCardSkeleton, StatCard } from '../_components/stat-card'
+import { StatCardSkeleton, StatCard } from '../../../../components/ui/StatCard'
 
 interface StatItem {
   name: string
@@ -42,8 +42,8 @@ export default function Dashboard() {
         <div className='flex w-full justify-center gap-2'>
           <Button
             color='primary'
-            variant='bordered'
             startContent={<SettingsIcon />}
+            variant='bordered'
             onClick={() => {
               onOpenImageBannertManagerChange()
             }}

@@ -7,8 +7,6 @@ import Head from 'next/head'
 import { useSession } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
 
-import { CartCheckout } from './_components/checkout'
-import { CartLists } from './_components/lists'
 import { clearCart, deleteCart } from './action'
 import { useCartStore } from './store'
 
@@ -61,10 +59,10 @@ export default function Cart() {
 
       <section className='container mx-auto flex flex-col items-center justify-center gap-4 p-5 text-center'>
         <ConfirmModal
+          description={t('Messages.confirmDeleteDesc')}
           isOpen={isDeleteOpen}
           isPending={isPending}
           title={t('Messages.confirmDeleteTitle')}
-          description={t('Messages.confirmDeleteDesc')}
           onConfirm={() => {
             mutateDeteleCart(cartId!)
           }}
@@ -72,10 +70,10 @@ export default function Cart() {
         />
 
         <ConfirmModal
+          description={t('Messages.confirmClearDesc')}
           isOpen={isClearOpen}
           isPending={isPending}
           title={t('Messages.confirmClearTitle')}
-          description={t('Messages.confirmClearDesc')}
           onConfirm={() => {
             mutateClearCarts(userId!)
           }}
@@ -96,8 +94,8 @@ export default function Cart() {
         {carts && carts.length !== 0 && (
           <div className='flex w-full flex-wrap justify-end gap-2'>
             <Button
-              variant='bordered'
               startContent={<XIcon />}
+              variant='bordered'
               onClick={() => onOpenClearChange()}
             >
               {t('Page.clearBtn')}
@@ -106,10 +104,10 @@ export default function Cart() {
         )}
 
         <div className='grid w-full items-start gap-2 md:gap-4 lg:grid-cols-3'>
-          <CartLists className='lg:col-span-2' />
-          <div className='lg:sticky lg:top-20'>
+          {/* <CartLists className='lg:col-span-2' /> */}
+          {/* <div className='lg:sticky lg:top-20'>
             <CartCheckout />
-          </div>
+          </div> */}
         </div>
       </section>
     </>

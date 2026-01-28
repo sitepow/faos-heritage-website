@@ -17,7 +17,7 @@ const Footer = ({ className, ...props }: ComponentProps<'footer'>) => {
     <footer
       {...props}
       className={cn(
-        'border-divider border-t bg-white dark:bg-[#131314]',
+        'border-divider border-t bg-white p-5 dark:bg-[#131314]',
         className,
       )}
     >

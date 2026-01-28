@@ -6,10 +6,10 @@ import type { Prisma } from '@prisma/client'
 import { categorySchema } from '../schema/category'
 
 import { deleteFile } from '@/app/actions/file'
+import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
-import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
-import { removeEmptyField } from '@/utils/object'
+import { omitEmptyFields } from '@/utils/app'
 
 export type GetCategoryResult = Awaited<ReturnType<typeof getCategory>>
 export type GetCategoriesResult = Awaited<ReturnType<typeof getCategories>>
@@ -26,12 +26,12 @@ export const createCategory = async (data: CategoryInput) => {
   })
 
   if (exists) {
-    return fail(ERROR_CODES.DATA_ALREADY_EXISTS)
+    return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
   try {
     await prisma.category.create({
-      data: removeEmptyField(
+      data: omitEmptyFields(
         validated.data,
       ) as Prisma.CategoryUncheckedCreateInput,
     })
@@ -39,7 +39,7 @@ export const createCategory = async (data: CategoryInput) => {
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
-  return done()
+  return ok()
 }
 
 export const getCategories = async () => {
@@ -92,20 +92,20 @@ export const updateCategory = async (data: CategoryInput) => {
   try {
     await prisma.category.update({
       where: { id },
-      data: removeEmptyField(payload) as Prisma.CategoryUncheckedCreateInput,
+      data: omitEmptyFields(payload) as Prisma.CategoryUncheckedCreateInput,
     })
   } catch {
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
-  return done()
+  return ok()
 }
 
 export const deleteCategory = async (categoryIds: string | string[]) => {
   const ids = Array.isArray(categoryIds) ? categoryIds : [categoryIds]
 
   if (!ids.length) {
-    return fail(ERROR_CODES.DATA_FIELD_REQUIRED)
+    return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
   const categories = await prisma.category.findMany({
@@ -132,5 +132,5 @@ export const deleteCategory = async (categoryIds: string | string[]) => {
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
-  return done()
+  return ok()
 }

@@ -4,11 +4,11 @@ import type { Prisma } from '@prisma/client'
 
 import { variantSchema, type VariantInput } from '../schema/variant'
 
+import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
-import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
+import { omitEmptyFields } from '@/utils/app'
 import { decimalToNumber } from '@/utils/number'
-import { removeEmptyField } from '@/utils/object'
 
 export const createVariant = async (data: VariantInput) => {
   const validated = variantSchema.safeParse(data)
@@ -19,15 +19,13 @@ export const createVariant = async (data: VariantInput) => {
 
   try {
     await prisma.productVariant.create({
-      data: removeEmptyField(
-        validated.data,
-      ) as Prisma.ProductVariantCreateInput,
+      data: omitEmptyFields(validated.data) as Prisma.ProductVariantCreateInput,
     })
   } catch {
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
-  return done()
+  return ok()
 }
 
 export const getVariants = async (productId: string) => {
@@ -87,14 +85,14 @@ export const updateVariant = async (data: VariantInput) => {
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
-  return done()
+  return ok()
 }
 
 export const deleteVariant = async (variantIds: string | string[]) => {
   const ids = Array.isArray(variantIds) ? variantIds : [variantIds]
 
   if (!ids.length) {
-    return fail(ERROR_CODES.DATA_FIELD_REQUIRED)
+    return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
   try {
@@ -109,5 +107,5 @@ export const deleteVariant = async (variantIds: string | string[]) => {
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
-  return done()
+  return ok()
 }

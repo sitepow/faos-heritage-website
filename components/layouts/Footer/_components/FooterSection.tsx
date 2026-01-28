@@ -23,12 +23,26 @@ const FooterSection = ({ section }: { section: FooterMenuSection }) => {
             typeof img === 'string' && (
               <FooterIcon
                 key={i}
-                src={img}
                 alt='partner'
                 hover={section.isMarketplace}
+                src={img}
               />
             ),
         )}
+
+        {section.maps?.map((mapSrc, i) => (
+          <div
+            key={`map-${i}`}
+            className='border-divider mt-2 h-24 w-full overflow-hidden rounded-lg border'
+          >
+            <iframe
+              className='h-full w-full contrast-125 grayscale'
+              loading='lazy'
+              src={mapSrc}
+              title='map'
+            />
+          </div>
+        ))}
       </div>
     )
   }
@@ -40,8 +54,8 @@ const FooterSection = ({ section }: { section: FooterMenuSection }) => {
           typeof link === 'object' && (
             <a
               key={i}
+              className='hover:text-primary text-gray-500 transition-all dark:text-gray-400'
               href={link.href}
-              className='hover:text-primary text-gray-500 transition-all hover:translate-x-1 dark:text-gray-400'
             >
               {link.label}
             </a>

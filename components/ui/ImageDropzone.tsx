@@ -1,5 +1,5 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable @next/next/no-img-element */
+/* eslint-disable no-unused-vars */
 'use client'
 
 import { Button } from '@heroui/react'
@@ -9,10 +9,10 @@ import prettyBytes from 'pretty-bytes'
 import { useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 
-import { ACCEPT_IMAGE_TYPES } from '@/constants/app'
+import { IMAGE_ACCEPT_TYPES } from '@/constants/app'
 import { cn } from '@/utils/style'
 
-export interface ImageWithPreview extends File {
+type ImageWithPreview = File & {
   preview: string
 }
 
@@ -21,24 +21,28 @@ interface ImageDropzoneProps {
   onFilesChange?: (files: ImageWithPreview[]) => void
 }
 
-export const createPreviewFiles = (files: File[]): ImageWithPreview[] =>
-  files.map((file) =>
-    Object.assign(file, {
-      preview: URL.createObjectURL(file),
-    }),
+const createPreviewFiles = (files: File[]): ImageWithPreview[] =>
+  files.map(
+    (file) =>
+      Object.assign(file, {
+        preview: URL.createObjectURL(file),
+      }) as ImageWithPreview,
   )
 
-export const ImageDropzone = ({
+const ImageDropzone = ({
   multiple = false,
   onFilesChange,
 }: ImageDropzoneProps) => {
   const t = useTranslations('Common.ImageDropzone')
   const [files, setFiles] = useState<ImageWithPreview[]>([])
 
-  const notifyChange = useCallback(
-    (updated: ImageWithPreview[]) => {
-      setFiles(updated)
-      onFilesChange?.(updated)
+  const updateFiles = useCallback(
+    (updater: (prev: ImageWithPreview[]) => ImageWithPreview[]) => {
+      setFiles((prev) => {
+        const next = updater(prev)
+        onFilesChange?.(next)
+        return next
+      })
     },
     [onFilesChange],
   )
@@ -47,29 +51,27 @@ export const ImageDropzone = ({
     (acceptedFiles: File[]) => {
       const newFiles = createPreviewFiles(acceptedFiles)
 
-      if (multiple) {
-        const merged = [...files, ...newFiles]
-        notifyChange(merged)
-      } else {
-        notifyChange(newFiles)
-      }
+      updateFiles((prev) => (multiple ? [...prev, ...newFiles] : newFiles))
     },
-    [files, multiple, notifyChange],
+    [multiple, updateFiles],
+  )
+
+  const removeFile = useCallback(
+    (target: ImageWithPreview) => {
+      URL.revokeObjectURL(target.preview)
+
+      updateFiles((prev) =>
+        prev.filter((item) => item.preview !== target.preview),
+      )
+    },
+    [updateFiles],
   )
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    accept: {
-      'image/*': ACCEPT_IMAGE_TYPES,
-    },
+    accept: { 'image/*': IMAGE_ACCEPT_TYPES },
     multiple,
   })
-
-  const removeFile = (fileToRemove: ImageWithPreview) => {
-    URL.revokeObjectURL(fileToRemove.preview)
-    const updated = files.filter((file) => file !== fileToRemove)
-    notifyChange(updated)
-  }
 
   useEffect(() => {
     return () => {
@@ -80,7 +82,7 @@ export const ImageDropzone = ({
   return (
     <div className='flex flex-col gap-4'>
       {files.length > 0 && (
-        <div className={cn('grid', multiple && 'grid-cols-2 gap-4')}>
+        <div className={cn('grid gap-4', multiple && 'grid-cols-2')}>
           {files.map((file) => (
             <div
               key={file.preview}
@@ -118,7 +120,7 @@ export const ImageDropzone = ({
       >
         <input {...getInputProps()} />
 
-        <div className='flex flex-col items-center justify-center gap-3 p-8 text-center'>
+        <div className='flex flex-col items-center gap-3 p-8 text-center'>
           <div
             className={cn(
               'rounded-full p-4 transition-colors',
@@ -139,14 +141,6 @@ export const ImageDropzone = ({
             <div className='flex flex-col gap-1'>
               <p className='font-medium'>{t('idle')}</p>
 
-              <div className='text-default-500 mx-auto flex flex-wrap justify-center gap-1 text-sm'>
-                {ACCEPT_IMAGE_TYPES.map((type) => (
-                  <span key={type} className='uppercase'>
-                    {type.replace('.', '')}
-                  </span>
-                ))}
-              </div>
-
               <p className='text-default-500 text-sm'>{t('hint')}</p>
 
               <p className='text-primary text-sm font-semibold'>
@@ -159,3 +153,6 @@ export const ImageDropzone = ({
     </div>
   )
 }
+
+export { ImageDropzone }
+export type { ImageWithPreview }

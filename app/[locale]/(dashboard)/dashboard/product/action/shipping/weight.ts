@@ -4,8 +4,8 @@ import type { ShippingWeightTierInput } from '../../schema/shipping/weight'
 
 import { shippingWeightTierSchema } from '../../schema/shipping/weight'
 
+import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
-import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
 
 export const createShippingWeightTier = async (
@@ -25,7 +25,7 @@ export const createShippingWeightTier = async (
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
-  return done()
+  return ok()
 }
 
 export const getShippingWeightTiers = async (countryCode: string) => {

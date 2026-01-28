@@ -15,11 +15,12 @@ const ERROR_MESSAGE_MAP: Record<ErrorCode, string> = {
   PASSWORD_TOO_SHORT: 'Password must be at least 6 characters long.',
   ACCOUNT_SUSPENDED: 'Your account has been suspended. Please contact support.',
 
-  USER_NOT_FOUND: 'User not found.',
+  DATA_NOT_FOUND: 'The requested information was not found.',
+  FIELD_REQUIRED: 'Please fill in all the required information.',
+
   USER_ALREADY_EXISTS: 'This user already exists.',
   USER_ADDRESS_NOT_FOUND: 'Shipping address not found.',
 
-  PRODUCT_NOT_FOUND: 'Product not found.',
   PRODUCT_NOT_AVAILABLE: 'This product is currently unavailable.',
   PRODUCT_OUT_OF_STOCK: 'This product is out of stock.',
   PRODUCT_PRICE_CHANGED:
@@ -27,12 +28,10 @@ const ERROR_MESSAGE_MAP: Record<ErrorCode, string> = {
   PRODUCT_DISABLED: 'This product is no longer available.',
 
   CART_EMPTY: 'Your cart is empty.',
-  CART_ITEM_NOT_FOUND: 'Item not found in your cart.',
   CART_ITEM_OUT_OF_STOCK: 'One or more items in your cart are out of stock.',
   CART_LIMIT_EXCEEDED:
     'You have reached the maximum allowed quantity for this item.',
 
-  ORDER_NOT_FOUND: 'Order not found.',
   ORDER_ALREADY_PAID: 'This order has already been paid.',
   ORDER_ALREADY_CANCELLED: 'This order has already been cancelled.',
   ORDER_CANNOT_BE_CANCELLED: 'This order can no longer be cancelled.',
@@ -51,13 +50,11 @@ const ERROR_MESSAGE_MAP: Record<ErrorCode, string> = {
   SHIPPING_METHOD_NOT_SUPPORTED: 'Selected shipping method is not supported.',
   SHIPPING_RATE_NOT_FOUND: 'Unable to calculate shipping cost at this time.',
 
-  COUPON_NOT_FOUND: 'Coupon code not found.',
   COUPON_EXPIRED: 'This coupon has expired.',
   COUPON_USAGE_LIMIT_REACHED: 'This coupon has reached its usage limit.',
   COUPON_NOT_APPLICABLE: 'This coupon cannot be applied to your order.',
 
   STOCK_INSUFFICIENT: 'Insufficient stock available for the selected quantity.',
-  STOCK_NOT_FOUND: 'Stock information not found.',
 
   FILE_UPLOAD_FAILED: 'File upload failed. Please try again.',
   FILE_TOO_LARGE: 'The selected file is too large.',

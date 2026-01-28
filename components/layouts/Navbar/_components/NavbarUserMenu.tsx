@@ -86,7 +86,7 @@ const NavbarUserMenu = () => {
   return (
     <Dropdown placement='bottom-end'>
       <DropdownTrigger>
-        <Button radius='full' isIconOnly variant='light'>
+        <Button isIconOnly radius='full' variant='light'>
           <UserIcon className='text-default-600' size={22} strokeWidth={1.5} />
         </Button>
       </DropdownTrigger>

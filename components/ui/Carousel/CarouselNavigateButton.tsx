@@ -28,9 +28,9 @@ const CarouselNavigateButton = ({
 }: CarouselNavigateButtonProps) => {
   return (
     <button
-      type='button'
       aria-label={direction === 'prev' ? 'Previous slide' : 'Next slide'}
       className={cn(buttonVariants(), className)}
+      type='button'
       {...props}
     >
       <span className='sr-only'>

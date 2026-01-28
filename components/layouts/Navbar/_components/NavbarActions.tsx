@@ -1,6 +1,8 @@
+'use client'
+
 import { Button } from '@heroui/react'
 import { SearchIcon, LogInIcon } from 'lucide-react'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 
 import { NavbarCartIndicator } from './NavbarCartIndicator'
@@ -15,8 +17,8 @@ const NavbarActions = () => {
       <div className='flex items-center gap-4'>
         <Button
           isIconOnly
-          variant='light'
           className='text-default-600 lg:hidden'
+          variant='light'
         >
           <SearchIcon />
         </Button>
@@ -26,8 +28,8 @@ const NavbarActions = () => {
         ) : (
           <Button
             isIconOnly
-            variant='light'
             className='text-default-600'
+            variant='light'
             onClick={() => router.push('/login')}
           >
             <LogInIcon />

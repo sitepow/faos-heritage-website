@@ -34,11 +34,8 @@ import { deleteUser, getUsers, getUserStat } from './action'
 import { UserForm } from './form'
 import { useUserStore } from './store'
 
-import {
-  StatCard,
-  StatCardSkeleton,
-} from '@/app/[locale]/(dashboard)/_components/stat-card'
 import { ConfirmModal } from '@/components/ui/ConfirmModal'
+import { StatCard, StatCardSkeleton } from '@/components/ui/StatCard'
 import { ITEM_PER_PAGE } from '@/constants/app'
 import { NO_IMAGE } from '@/constants/seo'
 
@@ -106,9 +103,9 @@ export default function User() {
 
       <div className='flex w-full flex-wrap gap-3 *:shrink-0 md:justify-end'>
         <Button
-          variant='bordered'
           color='primary'
           startContent={<PlusIcon />}
+          variant='bordered'
           onPress={() => {
             onOpenUserChange()
           }}
@@ -116,10 +113,10 @@ export default function User() {
           {t('addNew')}
         </Button>
         <Button
-          variant='bordered'
           color='primary'
           isDisabled={selectedUserIds.length === 0}
           startContent={<XIcon />}
+          variant='bordered'
           onPress={() => {
             setState({ userId: null })
             onOpenDeleteChange()
@@ -130,17 +127,17 @@ export default function User() {
       </div>
 
       <Table
-        className='border-divider rounded-lg border'
         aria-label={t('tableAria')}
-        selectionMode='multiple'
-        onSelectionChange={(keys) => {
-          setSelectedKeys(keys as Set<string>)
-        }}
         checkboxesProps={{
           classNames: {
             base: 'data-[selected=true]:border-primary',
             icon: 'text-secondary',
           },
+        }}
+        className='border-divider rounded-lg border'
+        selectionMode='multiple'
+        onSelectionChange={(keys) => {
+          setSelectedKeys(keys as Set<string>)
         }}
       >
         <TableHeader>
@@ -164,8 +161,8 @@ export default function User() {
                 {!user?.image && <span>-</span>}
                 {user?.image && (
                   <Avatar
-                    isBordered
                     key={user?.image}
+                    isBordered
                     src={user?.image ?? NO_IMAGE}
                   />
                 )}

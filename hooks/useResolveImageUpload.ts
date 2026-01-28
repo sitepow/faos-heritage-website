@@ -4,7 +4,7 @@ import { uploadFiles, deleteFile } from '@/app/actions/file'
 
 interface UseResolveImageUploadParams {
   oldImage?: string | null
-  previewFiles: File[]
+  previewFiles: readonly File[]
 }
 
 interface UseResolveImageUploadResult {

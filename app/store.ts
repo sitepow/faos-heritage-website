@@ -4,7 +4,7 @@ import { persist } from 'zustand/middleware'
 
 import { DEFAULT_LOCALE } from '@/constants/app'
 
-export interface AppLocale {
+interface AppLocale {
   country: string
   currency: string
   locale: string
@@ -41,3 +41,4 @@ const useAppStore = create<AppState & AppActions>()(
 )
 
 export { useAppStore }
+export type { AppLocale }

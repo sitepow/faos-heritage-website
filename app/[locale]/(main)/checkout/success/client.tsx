@@ -13,9 +13,7 @@ export const SuccessClient = () => {
   return (
     <section className='container mx-auto flex flex-col items-center justify-center gap-3 p-5'>
       <Alert
-        variant='faded'
         color='success'
-        title={t('title')}
         description={
           <span>
             <span>{t('description')}</span>
@@ -28,6 +26,8 @@ export const SuccessClient = () => {
             )}
           </span>
         }
+        title={t('title')}
+        variant='faded'
       />
     </section>
   )

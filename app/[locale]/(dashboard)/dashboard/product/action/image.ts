@@ -5,10 +5,10 @@ import type { Prisma } from '@prisma/client'
 import { imageSchema, type ImageInput } from '../schema/image'
 
 import { deleteFile } from '@/app/actions/file'
+import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
-import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
-import { removeEmptyField } from '@/utils/object'
+import { omitEmptyFields } from '@/utils/app'
 
 export const createImage = async (data: ImageInput) => {
   const validated = imageSchema.safeParse(data)
@@ -17,7 +17,7 @@ export const createImage = async (data: ImageInput) => {
     return fail(ERROR_CODES.VALIDATION_ERROR)
   }
 
-  const payload = removeEmptyField(
+  const payload = omitEmptyFields(
     validated.data,
   ) as Prisma.ProductImageCreateInput
 
@@ -42,7 +42,7 @@ export const createImage = async (data: ImageInput) => {
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
-  return done()
+  return ok()
 }
 
 export const getImages = async (productId: string) => {
@@ -134,14 +134,14 @@ export const updateImage = async (data: ImageInput) => {
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
-  return done()
+  return ok()
 }
 
 export const deleteImage = async (imageIds: string | string[]) => {
   const ids = Array.isArray(imageIds) ? imageIds : [imageIds]
 
   if (!ids.length) {
-    return fail(ERROR_CODES.DATA_FIELD_REQUIRED)
+    return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
   const images = await prisma.productImage.findMany({
@@ -170,5 +170,5 @@ export const deleteImage = async (imageIds: string | string[]) => {
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
-  return done()
+  return ok()
 }
