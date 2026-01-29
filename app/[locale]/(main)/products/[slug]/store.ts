@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { create } from 'zustand'
 
-import type { GetProductResult } from '@/app/[locale]/(dashboard)/dashboard/product/action/product'
+import type { GetProductResult } from '@/features/product/product.action'
 
 interface ProductDetailStore {
   product?: GetProductResult | null

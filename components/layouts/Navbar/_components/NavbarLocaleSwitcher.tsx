@@ -124,7 +124,7 @@ const NavbarLocaleSwitcher = () => {
         >
           {CURRENCY_LOCALE_MAP.map((item) => (
             <DropdownItem key={item.locale}>
-              {tCountry(item.country)} ({item.currency})
+              {item.currency} - {tCountry(item.country)}
             </DropdownItem>
           ))}
         </DropdownMenu>

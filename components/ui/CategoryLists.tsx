@@ -1,27 +1,22 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
 
-import { useQuery } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 
-import { getCategories } from '../../app/[locale]/(dashboard)/dashboard/product/action/category'
-
 import { IMAGE_FALLBACK } from '@/constants/app'
+import { useCategories } from '@/features/category/useCategory'
 import { generateSlugWithId } from '@/utils/app'
 
 const CategoryLists = () => {
   const router = useRouter()
-  const { data: categories } = useQuery({
-    queryKey: ['categories'],
-    queryFn: getCategories,
-  })
+  const { data: categories } = useCategories()
 
   return (
     <div className='container mx-auto flex h-auto w-full flex-wrap gap-4 overflow-hidden p-4 lg:h-[550px] lg:flex-nowrap'>
       {categories?.map((category) => (
         <div
           key={category.id}
-          className='group relative h-[180px] w-full cursor-pointer overflow-hidden rounded-lg transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] lg:h-full lg:flex-[1] lg:hover:flex-[4]'
+          className='group border-divider relative h-[180px] w-full cursor-pointer overflow-hidden rounded-lg border transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] lg:h-full lg:flex-[1] lg:hover:flex-[4]'
           onClick={() =>
             router.push(
               `/categories/${generateSlugWithId(category.name, category.id)}`,
@@ -39,7 +34,7 @@ const CategoryLists = () => {
               {category?.name}
             </span>
           </div>
-          <div className='absolute bottom-0 left-0 flex translate-y-10 items-center justify-center p-8 uppercase opacity-0 duration-500 group-hover:translate-y-0 group-hover:opacity-100'>
+          <div className='absolute bottom-0 left-0 flex translate-y-10 items-center justify-center p-8 uppercase opacity-0 duration-300 group-hover:translate-y-0 group-hover:opacity-100'>
             <h3 className='text-3xl font-black text-white sm:text-4xl'>
               {category?.name}
             </h3>

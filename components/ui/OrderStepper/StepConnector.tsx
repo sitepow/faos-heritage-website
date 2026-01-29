@@ -11,7 +11,7 @@ const StepConnector = ({ isActive }: StepConnectorProps) => {
         <div className='bg-divider absolute inset-0 rounded' />
         <div
           className={cn(
-            'bg-primary absolute inset-0 rounded transition-all duration-500',
+            'bg-primary absolute inset-0 rounded transition-all duration-300',
             isActive ? 'w-full' : 'w-0',
           )}
         />
@@ -21,7 +21,7 @@ const StepConnector = ({ isActive }: StepConnectorProps) => {
         <div className='bg-divider absolute inset-0 rounded' />
         <div
           className={cn(
-            'bg-primary absolute inset-0 rounded transition-all duration-500',
+            'bg-primary absolute inset-0 rounded transition-all duration-300',
             isActive ? 'h-full' : 'h-0',
           )}
         />

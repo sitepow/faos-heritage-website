@@ -2,11 +2,11 @@ import { getLocale, getTranslations } from 'next-intl/server'
 
 import type { Metadata } from 'next'
 
+import { ProductExploreSection } from './_components/ProductExploreSection'
 import { getProducts } from './products/action'
 
 import { AdvertiseBanner } from '@/components/ui/Advertise/AdvertiseBanner'
 import { CategoryLists } from '@/components/ui/CategoryLists'
-import { HomepageProductExploreSection } from '@/components/ui/HomepageProductExploreSection'
 import { IMAGE_FALLBACK, PAGINATION } from '@/constants/app'
 
 export async function generateMetadata({
@@ -51,7 +51,7 @@ export async function generateMetadata({
 
 export default async function Homepage() {
   const locale = await getLocale()
-  const exploreProducts = await getProducts({
+  const products = await getProducts({
     limit: PAGINATION.ITEMS_PER_PAGE,
     locale,
   })
@@ -60,8 +60,8 @@ export default async function Homepage() {
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
       <div className='flex w-full flex-col gap-5 p-5'>
         <CategoryLists />
-        <HomepageProductExploreSection
-          initialProducts={exploreProducts}
+        <ProductExploreSection
+          initialData={products}
           itemsPerPage={PAGINATION.ITEMS_PER_PAGE}
         />
         <AdvertiseBanner />

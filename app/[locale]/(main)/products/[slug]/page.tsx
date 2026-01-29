@@ -3,11 +3,11 @@ import { getTranslations } from 'next-intl/server'
 
 import type { Metadata } from 'next'
 
-import { ProductClient } from './client'
+import { ProductClient } from './product.client'
 
-import { getProduct } from '@/app/[locale]/(dashboard)/dashboard/product/action/product'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { IMAGE_FALLBACK } from '@/constants/app'
+import { getProduct } from '@/features/product/product.action'
 import { extractIdFromSlug } from '@/utils/app'
 
 interface ProductProps {

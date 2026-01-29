@@ -2,11 +2,13 @@
 import { OrderStatus } from '@prisma/client'
 import slugify from '@sindresorhus/slugify'
 
+import type { GetProductResult } from '@/app/[locale]/(main)/products/action'
 import type { GetAddressResult } from '@/app/[locale]/(main)/profile/_components/address/action'
 import type { SharedSelection } from '@heroui/system'
 import type { ProductUnit } from '@prisma/client'
 
 import {
+  IMAGE_FALLBACK,
   ORDER_STATUS_FLOW,
   ORDER_STATUS_LABELS,
   PRODUCT_UNIT_LABELS,
@@ -223,6 +225,19 @@ const getSingleKey = <T extends string>(keys: SharedSelection) => {
   return Array.from(keys)[0] as T | undefined
 }
 
+const resolveProductImages = (product: GetProductResult) => {
+  const images = product?.images ?? []
+
+  const primary = images.find((img) => img.isPrimary) ?? images[0] ?? null
+
+  const hover = images.find((img) => !img.isPrimary) ?? primary
+
+  return {
+    primarySrc: primary?.url ?? IMAGE_FALLBACK.EMPTY,
+    hoverSrc: hover?.url ?? IMAGE_FALLBACK.EMPTY,
+  }
+}
+
 export {
   formatFullAddress,
   omitEmptyFields,
@@ -239,4 +254,5 @@ export {
   normalizeEmail,
   getBackgroundStyle,
   getSingleKey,
+  resolveProductImages,
 }

@@ -14,7 +14,7 @@ import { useForm } from 'react-hook-form'
 import type { ErrorCode } from '@/lib/errors/error-codes'
 import type { ActionResult } from '@/lib/errors/types'
 
-import { getCategories } from '../../(dashboard)/dashboard/product/action/category'
+import { getCategories } from '../../../../features/category/category.action'
 
 import { createUser } from '@/app/[locale]/(auth)/login/action'
 import {

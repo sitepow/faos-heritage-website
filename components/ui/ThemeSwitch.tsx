@@ -7,7 +7,7 @@ import {
   DropdownItem,
   Button,
 } from '@heroui/react'
-import { ChevronDownIcon } from 'lucide-react'
+import { ChevronDownIcon, SunMoonIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useTheme } from 'next-themes'
 
@@ -24,7 +24,7 @@ interface ThemeSwitchProps {
 const THEME_OPTIONS: ThemeValue[] = ['light', 'dark', 'system']
 
 const ThemeSwitch = ({ className }: ThemeSwitchProps) => {
-  const t = useTranslations('Common.theme')
+  const translate = useTranslations('Common.theme')
   const { theme, setTheme } = useTheme()
   const isMounted = useIsMounted()
 
@@ -38,9 +38,13 @@ const ThemeSwitch = ({ className }: ThemeSwitchProps) => {
     <div className={cn('flex items-center', className)}>
       <Dropdown>
         <DropdownTrigger>
-          <Button className='text-secondary px-2' variant='light'>
+          <Button
+            className='text-secondary px-2'
+            startContent={<SunMoonIcon />}
+            variant='light'
+          >
             <span className='flex items-center gap-2'>
-              <span className='capitalize'>{t(currentTheme)}</span>
+              <span className='capitalize'>{translate(currentTheme)}</span>
               <ChevronDownIcon size={14} />
             </span>
           </Button>
@@ -61,7 +65,7 @@ const ThemeSwitch = ({ className }: ThemeSwitchProps) => {
           }}
         >
           {THEME_OPTIONS.map((value) => (
-            <DropdownItem key={value}>{t(value)}</DropdownItem>
+            <DropdownItem key={value}>{translate(value)}</DropdownItem>
           ))}
         </DropdownMenu>
       </Dropdown>

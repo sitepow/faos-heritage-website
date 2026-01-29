@@ -5,7 +5,7 @@ import { ShoppingCartIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 
-import { getCartStat } from '@/app/[locale]/(main)/cart/action'
+import { getCartStat } from '@/features/cart/cart.action'
 
 const NavbarCartIndicator = () => {
   const { data: session } = useSession()

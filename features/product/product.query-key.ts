@@ -15,10 +15,13 @@ const productQueryKeys = {
 
     homepage: (locale?: string, itemsPerPage?: number) =>
       [...productQueryKeys.list.all, 'homepage', locale, itemsPerPage] as const,
+
+    similar: (locale: string, categoryId?: string | null) =>
+      ['products', 'similar', locale, categoryId] as const,
   },
 
   detail: {
-    all: [...['banners'], 'detail'] as const,
+    all: [...['products'], 'detail'] as const,
 
     byId: (id: string) => [...productQueryKeys.detail.all, id] as const,
   },

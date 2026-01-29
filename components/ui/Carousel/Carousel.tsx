@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 'use client'
 
@@ -21,31 +22,33 @@ import { useCarouselNavigation } from '@/hooks/useCarouselNavigation'
 import { cn } from '@/utils/style'
 
 interface CarouselProps {
+  children: ReactNode
   wrapperClassName?: string
   trackClassName?: string
-  children: ReactNode
   slidesToScroll?: boolean
   autoPlay?: boolean
   loop?: boolean
+  onSlideChange?: (index: number) => void
 }
 
-export type CarouselHandle = {
+type CarouselHandle = {
   scrollToSlide: (index: number) => void
 }
 
 const Carousel = forwardRef<CarouselHandle, CarouselProps>(
   (
     {
+      children,
       wrapperClassName,
       trackClassName,
-      children,
       slidesToScroll = false,
-      loop = false,
       autoPlay = true,
+      loop = false,
+      onSlideChange,
     },
     ref,
   ) => {
-    const autoplay = useRef(
+    const autoplayRef = useRef(
       Autoplay({
         delay: 3000,
         stopOnInteraction: false,
@@ -65,7 +68,7 @@ const Carousel = forwardRef<CarouselHandle, CarouselProps>(
     )
 
     const plugins = useMemo(
-      () => (autoPlay ? [autoplay.current] : []),
+      () => (autoPlay ? [autoplayRef.current] : []),
       [autoPlay],
     )
 
@@ -80,15 +83,34 @@ const Carousel = forwardRef<CarouselHandle, CarouselProps>(
 
     useImperativeHandle(ref, () => ({ scrollToSlide }), [scrollToSlide])
 
-    const { prevDisabled, nextDisabled, onPrev, onNext } =
+    const { prevDisabled, nextDisabled, scrollPrev, scrollNext } =
       useCarouselNavigation(emblaApi)
 
     useEffect(() => {
-      if (!emblaApi) {
+      if (!emblaApi || !onSlideChange) {
         return
       }
 
-      autoPlay ? autoplay.current.play() : autoplay.current.stop()
+      const handler = () => {
+        onSlideChange(emblaApi.selectedScrollSnap())
+      }
+
+      emblaApi.on('select', handler)
+      emblaApi.on('reInit', handler)
+
+      return () => {
+        emblaApi.off('select', handler)
+        emblaApi.off('reInit', handler)
+      }
+    }, [emblaApi, onSlideChange])
+
+    useEffect(() => {
+      if (!emblaApi || !autoPlay) {
+        return
+      }
+
+      autoplayRef.current.play()
+      return () => autoplayRef.current.stop()
     }, [emblaApi, autoPlay])
 
     return (
@@ -101,7 +123,7 @@ const Carousel = forwardRef<CarouselHandle, CarouselProps>(
           <CarouselNavigateButton
             className='absolute top-1/2 left-4 -translate-y-1/2 bg-black/20 hover:bg-black/30'
             direction='prev'
-            onClick={onPrev}
+            onClick={scrollPrev}
           />
         )}
 
@@ -109,7 +131,7 @@ const Carousel = forwardRef<CarouselHandle, CarouselProps>(
           <CarouselNavigateButton
             className='absolute top-1/2 right-4 -translate-y-1/2 bg-black/20 hover:bg-black/30'
             direction='next'
-            onClick={onNext}
+            onClick={scrollNext}
           />
         )}
       </div>
@@ -118,3 +140,4 @@ const Carousel = forwardRef<CarouselHandle, CarouselProps>(
 )
 
 export { Carousel }
+export type { CarouselHandle }
