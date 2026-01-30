@@ -1,15 +1,15 @@
-import { Suspense } from 'react'
+// import { Suspense } from 'react'
 
-import { AccountClient } from './client'
+// import { AccountClient } from './profile.client'
 
-import { requireSession } from '@/utils/auth'
+// import { requireSession } from '@/utils/auth'
 
-export default async function Account() {
-  await requireSession()
+// export default async function Account() {
+//   await requireSession()
 
-  return (
-    <Suspense>
-      <AccountClient />
-    </Suspense>
-  )
-}
+//   return (
+//     <Suspense>
+//       <AccountClient />
+//     </Suspense>
+//   )
+// }

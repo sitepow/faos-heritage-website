@@ -3,9 +3,11 @@ import { OrderStatus } from '@prisma/client'
 import slugify from '@sindresorhus/slugify'
 
 import type { GetProductResult } from '@/app/[locale]/(main)/products/action'
-import type { GetAddressResult } from '@/app/[locale]/(main)/profile/_components/address/action'
+import type { GetAddressResult } from '@/features/address/address.action'
 import type { SharedSelection } from '@heroui/system'
-import type { ProductUnit } from '@prisma/client'
+import type { Prisma, ProductUnit } from '@prisma/client'
+
+import { decimalToNumber } from './number'
 
 import {
   IMAGE_FALLBACK,
@@ -238,6 +240,18 @@ const resolveProductImages = (product: GetProductResult) => {
   }
 }
 
+interface FormatStatParams {
+  name: string
+  value: Prisma.Decimal | Number | null
+  isCurrency?: Boolean
+}
+
+const formatStat = ({ name, value, isCurrency = false }: FormatStatParams) => ({
+  name,
+  value: value ? decimalToNumber(value) : 0,
+  isCurrency,
+})
+
 export {
   formatFullAddress,
   omitEmptyFields,
@@ -255,4 +269,5 @@ export {
   getBackgroundStyle,
   getSingleKey,
   resolveProductImages,
+  formatStat,
 }

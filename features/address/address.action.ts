@@ -2,12 +2,12 @@
 
 import type { Prisma } from '@prisma/client'
 
-import { addressSchema, type AddressInput } from './schema'
+import { addressSchema, type AddressInput } from './address.schema'
 
+import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
-import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
-import { removeEmptyField } from '@/utils/object'
+import { omitEmptyFields } from '@/utils/app'
 
 export type GetAddressResult = Awaited<ReturnType<typeof getAddress>>
 
@@ -19,7 +19,7 @@ export const createAddress = async (data: AddressInput) => {
       return fail(ERROR_CODES.VALIDATION_ERROR)
     }
 
-    const payload = removeEmptyField(
+    const payload = omitEmptyFields(
       validatedData.data,
     ) as Prisma.AddressUncheckedCreateInput
 
@@ -41,7 +41,7 @@ export const createAddress = async (data: AddressInput) => {
       })
     })
 
-    return done()
+    return ok()
   } catch {
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
@@ -143,7 +143,7 @@ export const updateAddress = async (data: AddressInput) => {
       })
     })
 
-    return done()
+    return ok()
   } catch {
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
@@ -188,7 +188,7 @@ export const deleteAddress = async (addressId: string | null) => {
       }
     })
 
-    return done()
+    return ok()
   } catch {
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }

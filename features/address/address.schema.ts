@@ -1,8 +1,8 @@
 import { z } from 'zod'
 
-export type AddressInput = z.infer<typeof addressSchema>
+type AddressInput = z.infer<typeof addressSchema>
 
-export const addressSchema = z.object({
+const addressSchema = z.object({
   id: z.string().optional(),
   userId: z.string(),
   name: z.string().min(1, 'Please enter your name'),
@@ -16,3 +16,6 @@ export const addressSchema = z.object({
   countryCode: z.string().length(2, 'Please select the county'),
   isDefault: z.boolean(),
 })
+
+export { addressSchema }
+export type { AddressInput }

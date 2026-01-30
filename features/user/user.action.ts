@@ -7,10 +7,10 @@ import type { Prisma, Role } from '@prisma/client'
 
 import { userCreateSchema, userUpdateSchema } from './user.schema'
 
+import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
-import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
-import { removeEmptyField } from '@/utils/object'
+import { omitEmptyFields } from '@/utils/app'
 
 export const createUser = async (data: UserCreateInput) => {
   const validated = userCreateSchema.safeParse(data)
@@ -38,7 +38,7 @@ export const createUser = async (data: UserCreateInput) => {
   try {
     await prisma.user.create({
       data: {
-        ...removeEmptyField(validated?.data),
+        ...omitEmptyFields(validated?.data),
         password: hashed,
       } as Prisma.UserCreateInput,
     })
@@ -46,7 +46,7 @@ export const createUser = async (data: UserCreateInput) => {
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
-  return done()
+  return ok()
 }
 
 export const getUsers = async (page: number = 1, limit: number = 10) => {
@@ -112,7 +112,7 @@ export const updateUser = async (data: UserUpdateInput) => {
   }
 
   const updateData: Prisma.UserUpdateInput = {
-    ...removeEmptyField(payload),
+    ...omitEmptyFields(payload),
     role: payload?.role as Role,
   }
 
@@ -129,14 +129,14 @@ export const updateUser = async (data: UserUpdateInput) => {
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
-  return done()
+  return ok()
 }
 
 export const deleteUser = async (userIds: string | string[]) => {
   const ids = Array.isArray(userIds) ? userIds : [userIds]
 
   if (!ids.length) {
-    return fail(ERROR_CODES.DATA_FIELD_REQUIRED)
+    return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
   try {
@@ -154,7 +154,7 @@ export const deleteUser = async (userIds: string | string[]) => {
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
-  return done()
+  return ok()
 }
 
 export const getUserStat = async () => {
@@ -174,3 +174,55 @@ export const getUserStat = async () => {
     { name: 'ผู้ใช้งานถูกระงับบัญชี', value: unActive },
   ]
 }
+
+// 'use server'
+
+// import { Role } from '@prisma/client'
+// import { hash } from 'bcryptjs'
+
+// import type { UserRegisterInput } from '../../app/[locale]/(auth)/login/schema'
+
+// import { userRegisterSchema } from '../../app/[locale]/(auth)/login/schema'
+
+// import { fail, ok } from '@/lib/errors'
+// import { ERROR_CODES } from '@/lib/errors/error-codes'
+// import { prisma } from '@/lib/prisma'
+
+// const createUser = async (data: UserRegisterInput) => {
+//   const validated = userRegisterSchema.safeParse(data)
+
+//   if (!validated.success) return fail(ERROR_CODES.VALIDATION_ERROR)
+
+//   const { name, email, password } = validated.data
+
+//   const exists = await prisma.user.findUnique({
+//     where: { email: email.toLowerCase() },
+//   })
+
+//   if (exists && !exists.password) {
+//     return fail(ERROR_CODES.SOCIAL_ACCOUNT_EXISTS)
+//   }
+
+//   if (exists) {
+//     return fail(ERROR_CODES.EMAIL_ALREADY_USED)
+//   }
+
+//   const hashed = await hash(password, 10)
+
+//   try {
+//     await prisma.user.create({
+//       data: {
+//         name,
+//         email,
+//         password: hashed,
+//         role: Role.CUSTOMER,
+//       },
+//     })
+//   } catch {
+//     return fail(ERROR_CODES.SYSTEM_ERROR)
+//   }
+
+//   return ok()
+// }
+
+// export { createUser }

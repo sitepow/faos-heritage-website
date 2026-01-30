@@ -23,7 +23,7 @@ import { Controller, useForm } from 'react-hook-form'
 
 import { createAddress, getAddress, updateAddress } from './action'
 import { addressSchema, type AddressInput } from './schema'
-import { useAddressStore } from './store'
+import { useAddressStore } from '../address.store'
 
 import { CountryFlag } from '@/components/ui/CountryFlagAvatar'
 import { SubHeading } from '@/components/ui/SectionHeader'

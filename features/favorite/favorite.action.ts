@@ -2,11 +2,11 @@
 
 import type { Wishlist } from '@prisma/client'
 
+import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
-import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
+import { calculateVariantRange } from '@/utils/app'
 import { decimalToNumber } from '@/utils/number'
-import { getVariantPriceStockMinMax } from '@/utils/product'
 
 export type GetFavoritesResult = Awaited<ReturnType<typeof getFavorites>>
 export type GetFavoriteResult = GetFavoritesResult['items'][number]
@@ -77,8 +77,9 @@ export const getFavorites = async ({
   const favoriteItems = (
     hasNextPage ? transformed.slice(0, limit) : transformed
   ).map((product) => {
-    const { priceMin, priceMax, stockMin, stockMax } =
-      getVariantPriceStockMinMax(product?.product?.variants)
+    const { priceMin, priceMax, stockMin, stockMax } = calculateVariantRange(
+      product?.product?.variants,
+    )
 
     return {
       ...product,
@@ -104,7 +105,7 @@ export const getFavorites = async ({
 
 export const createFavorite = async (userId: string, productId: string) => {
   if (!userId || !productId) {
-    return fail(ERROR_CODES.DATA_FIELD_REQUIRED)
+    return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
   const existing = await prisma.wishlist.findUnique({
@@ -117,7 +118,7 @@ export const createFavorite = async (userId: string, productId: string) => {
   })
 
   if (existing) {
-    return fail(ERROR_CODES.DATA_ALREADY_EXISTS)
+    return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
   try {
@@ -131,7 +132,7 @@ export const createFavorite = async (userId: string, productId: string) => {
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
-  return done()
+  return ok()
 }
 
 export const deleteFavorite = async ({
@@ -155,5 +156,5 @@ export const deleteFavorite = async ({
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
-  return done()
+  return ok()
 }
