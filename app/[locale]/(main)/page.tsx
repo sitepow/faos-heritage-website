@@ -3,11 +3,11 @@ import { getLocale, getTranslations } from 'next-intl/server'
 import type { Metadata } from 'next'
 
 import { ProductExploreSection } from './_components/ProductExploreSection'
-import { getProducts } from './products/action'
 
 import { AdvertiseBanner } from '@/components/ui/Advertise/AdvertiseBanner'
 import { CategoryLists } from '@/components/ui/CategoryLists'
-import { IMAGE_FALLBACK, PAGINATION } from '@/constants/app'
+import { IMAGE_FALLBACK, PAGINATION } from '@/constants'
+import { getProductsInfinite } from '@/features/product/product.action'
 
 export async function generateMetadata({
   params,
@@ -51,7 +51,7 @@ export async function generateMetadata({
 
 export default async function Homepage() {
   const locale = await getLocale()
-  const products = await getProducts({
+  const products = await getProductsInfinite({
     limit: PAGINATION.ITEMS_PER_PAGE,
     locale,
   })

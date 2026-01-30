@@ -1,14 +1,14 @@
 'use client'
 
 import { Viewer, Worker, SpecialZoomLevel } from '@react-pdf-viewer/core'
+
+import { PDF_WORKER_URL } from '@/constants'
 import '@react-pdf-viewer/core/lib/styles/index.css'
 
 export interface PdfViewerProps {
   fileUrl: string
   className?: string
 }
-
-const PDF_WORKER_URL = '/javascript/pdf.worker.min.js'
 
 export default function PdfViewerRender({
   fileUrl,

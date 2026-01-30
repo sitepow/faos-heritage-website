@@ -1,9 +1,9 @@
 import { ProductUnit } from '@prisma/client'
 import { z } from 'zod'
 
-export type ProductInput = z.infer<typeof productSchema>
+type ProductInput = z.infer<typeof productSchema>
 
-export const productSchema = z.object({
+const productSchema = z.object({
   id: z.string().nullish(),
   name: z
     .string('The product name must be a text.')
@@ -41,3 +41,6 @@ export const productSchema = z.object({
   isAuthentic: z.boolean(),
   unit: z.enum(ProductUnit),
 })
+
+export { productSchema }
+export type { ProductInput }

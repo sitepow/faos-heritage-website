@@ -21,11 +21,11 @@ import { InfoBlock } from './_components/InfoBlock'
 import { Label } from './_components/Label'
 import { SummaryRow } from './_components/SummaryRow'
 
-import { IMAGE_FALLBACK } from '@/constants/app'
-import { getOrder } from '@/features/order/action'
+import { IMAGE_FALLBACK } from '@/constants'
+import { fetchOrderById } from '@/features/order/order.action'
 import { orderQueryKeys } from '@/features/order/order.query-key'
 import { useOrderStore } from '@/features/order/order.store'
-import { resolveProductUnitLabel } from '@/utils/app'
+import { resolveProductUnitLabel } from '@/utils'
 import { formatCurrency, formatNumber } from '@/utils/number'
 
 const OrderViewModal = () => {
@@ -35,7 +35,7 @@ const OrderViewModal = () => {
 
   const { data: order, isLoading } = useQuery({
     queryKey: orderQueryKeys.detail.byId(orderId!),
-    queryFn: () => getOrder(orderId as string),
+    queryFn: () => fetchOrderById(orderId as string),
     enabled: Boolean(orderId),
   })
 

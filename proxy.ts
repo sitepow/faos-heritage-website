@@ -3,7 +3,7 @@ import createIntlMiddleware from 'next-intl/middleware'
 
 import type { NextRequest } from 'next/server'
 
-import { ROUTES } from './constants/app'
+import { ROUTES } from './constants'
 
 import { routing } from '@/i18n/routing'
 

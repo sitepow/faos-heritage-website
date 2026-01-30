@@ -10,7 +10,7 @@ import { userCreateSchema, userUpdateSchema } from './user.schema'
 import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { prisma } from '@/lib/prisma'
-import { omitEmptyFields } from '@/utils/app'
+import { omitEmptyFields } from '@/utils'
 
 export const createUser = async (data: UserCreateInput) => {
   const validated = userCreateSchema.safeParse(data)

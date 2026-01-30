@@ -4,10 +4,10 @@ import crypto from 'crypto'
 import { promises as fs } from 'fs'
 import path from 'path'
 
-import { UPLOAD_DIR, UPLOAD_URL_PREFIX, PUBLIC_DIR } from '@/constants/app'
+import { UPLOAD_DIR, UPLOAD_URL_PREFIX, PUBLIC_DIR } from '@/constants'
 import { fail, ok, type ActionResult } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
-import { ImageOptimizeServer } from '@/utils/image'
+import { ImageOptimizeServer } from '@/utils/image.server'
 
 const ensureUploadDirExists = async () => {
   await fs.mkdir(UPLOAD_DIR, { recursive: true })

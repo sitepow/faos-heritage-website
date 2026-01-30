@@ -8,7 +8,7 @@ import { deleteFile } from '@/app/actions/file'
 import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { prisma } from '@/lib/prisma'
-import { omitEmptyFields } from '@/utils/app'
+import { omitEmptyFields } from '@/utils'
 
 export const createImage = async (data: ImageInput) => {
   const validated = imageSchema.safeParse(data)

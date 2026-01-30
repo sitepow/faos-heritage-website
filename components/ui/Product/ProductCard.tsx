@@ -1,21 +1,20 @@
 'use client'
 
-import { Card, CardBody, CardHeader, Image, Skeleton } from '@heroui/react'
+import { Card, CardBody, CardHeader, cn, Image, Skeleton } from '@heroui/react'
 import Link from 'next/link'
 
-import type { GetProductResult } from '@/app/[locale]/(main)/products/action'
+import type { GetProductResult } from '@/features/product/action'
 
 import { OutOfStockOverlay } from './OutOfStockOverlay'
 import { ProductChip } from './ProductChip'
 
 import { ProductPrice } from '@/app/[locale]/(main)/products/[slug]/_components/ProductPrice'
 import {
+  resolveProductImages,
   checkIsOutOfStock,
   generateSlugWithId,
-  resolveProductImages,
   resolveProductUnitLabel,
-} from '@/utils/app'
-import { cn } from '@/utils/style'
+} from '@/utils'
 
 interface ProductCardProps {
   className?: string

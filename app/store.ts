@@ -2,7 +2,7 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
-import { DEFAULT_LOCALE } from '@/constants/app'
+import { DEFAULT_LOCALE } from '@/constants'
 
 interface AppLocale {
   country: string

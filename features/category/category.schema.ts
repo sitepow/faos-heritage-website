@@ -1,8 +1,8 @@
 import { z } from 'zod'
 
-export type CategoryInput = z.infer<typeof categorySchema>
+type CategoryInput = z.infer<typeof categorySchema>
 
-export const categorySchema = z.object({
+const categorySchema = z.object({
   id: z.string().nullish(),
   name: z
     .string('The category name must be text.')
@@ -12,3 +12,6 @@ export const categorySchema = z.object({
   description: z.string().nullish(),
   isActive: z.boolean(),
 })
+
+export { categorySchema }
+export type { CategoryInput }

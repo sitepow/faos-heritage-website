@@ -1,45 +1,33 @@
-import sharp from 'sharp'
+import type { GetProductResult } from '@/features/product/product.action'
 
-interface ImageOptimizeOptions {
-  width?: number
-  height?: number
-  quality?: number
+import { IMAGE_FALLBACK } from '@/constants'
+
+const getBackgroundStyle = (image: string) => {
+  return {
+    backgroundImage: `
+      linear-gradient(
+        to right,
+        rgba(0,0,0,0.8),
+        rgba(0,0,0,0.4)
+      ),
+      url(${image})
+    `,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  }
 }
 
-const DEFAULT_IMAGE_OPTIONS = {
-  width: 1200,
-  quality: 82,
-} as const
+const resolveProductImages = (product: GetProductResult) => {
+  const images = product?.images ?? []
 
-const toBuffer = (input: Buffer | ArrayBuffer): Buffer =>
-  Buffer.isBuffer(input) ? input : Buffer.from(input)
+  const primary = images.find((img) => img.isPrimary) ?? images[0] ?? null
 
-const ImageOptimizeServer = async (
-  input: Buffer | ArrayBuffer,
-  options: ImageOptimizeOptions = {},
-): Promise<Buffer> => {
-  const {
-    width = DEFAULT_IMAGE_OPTIONS.width,
-    height,
-    quality = DEFAULT_IMAGE_OPTIONS.quality,
-  } = options
+  const hover = images.find((img) => !img.isPrimary) ?? primary
 
-  return await sharp(toBuffer(input), { failOn: 'none' })
-    .resize({
-      width,
-      height,
-      fit: 'inside',
-      withoutEnlargement: true,
-      kernel: sharp.kernel.lanczos3,
-    })
-    .webp({
-      quality,
-      effort: 6,
-      nearLossless: true,
-      smartSubsample: false,
-    })
-    .toBuffer()
+  return {
+    primarySrc: primary?.url ?? IMAGE_FALLBACK.EMPTY,
+    hoverSrc: hover?.url ?? IMAGE_FALLBACK.EMPTY,
+  }
 }
 
-export { ImageOptimizeServer }
-export type { ImageOptimizeOptions }
+export { getBackgroundStyle, resolveProductImages }

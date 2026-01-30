@@ -9,7 +9,7 @@ import type { ActionResult } from '@/lib/errors'
 import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { prisma } from '@/lib/prisma'
-import { toStripeMinorUnit } from '@/utils/app'
+import { toStripeMinorUnit } from '@/utils'
 import { decimalToNumber } from '@/utils/number'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {

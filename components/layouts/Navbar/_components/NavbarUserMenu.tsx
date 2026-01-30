@@ -21,7 +21,7 @@ import { signOut, useSession } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
 import { useMemo } from 'react'
 
-import { ACCOUNT_TAB } from '@/constants/app'
+import { ACCOUNT_TAB } from '@/constants'
 
 type UserMenuItem = {
   key: string
@@ -32,11 +32,10 @@ type UserMenuItem = {
 }
 
 const NavbarUserMenu = () => {
-  const t = useTranslations('Navbar.Panel')
+  const translate = useTranslations('Navbar.Panel')
   const router = useRouter()
   const pathname = usePathname()
-  const { data: session } = useSession()
-  const user = session?.user
+  const user = useSession()?.data?.user
 
   const isAdmin = user?.role === Role.ADMIN
   const isDashboard = pathname.startsWith('/dashboard')
@@ -104,7 +103,7 @@ const NavbarUserMenu = () => {
             className={item.className}
             startContent={item.icon}
           >
-            {t(item.label)}
+            {translate(item.label)}
           </DropdownItem>
         ))}
       </DropdownMenu>

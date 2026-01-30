@@ -14,7 +14,7 @@ import { useTranslations } from 'next-intl'
 import type { Address } from '@prisma/client'
 
 import { CountryFlagAvatar } from '@/components/ui/CountryFlagAvatar'
-import { formatFullAddress } from '@/utils/app'
+import { formatFullAddress } from '@/utils/commo n'
 
 type AddressDisplayProps = Omit<Address, 'createdAt' | 'updatedAt'>
 

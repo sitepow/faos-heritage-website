@@ -8,18 +8,18 @@ type SupportedLocale = (typeof routing.locales)[number]
 type MessageLoader = () => Promise<{ default: Record<string, unknown> }>
 
 const MESSAGE_LOADERS: Record<SupportedLocale, MessageLoader> = {
-  th: () => import('@/constants/localization/thailand.json'),
-  us: () => import('@/constants/localization/unitedstates.json'),
-  gr: () => import('@/constants/localization/greece.json'),
-  it: () => import('@/constants/localization/italy.json'),
-  nl: () => import('@/constants/localization/netherlands.json'),
-  my: () => import('@/constants/localization/malaysia.json'),
-  sg: () => import('@/constants/localization/singapore.json'),
-  jp: () => import('@/constants/localization/japan.json'),
-  cn: () => import('@/constants/localization/china.json'),
-  is: () => import('@/constants/localization/iceland.json'),
-  vn: () => import('@/constants/localization/vietnam.json'),
-  id: () => import('@/constants/localization/indonesia.json'),
+  th: () => import('@/messages/th.json'),
+  us: () => import('@/messages/us.json'),
+  gr: () => import('@/messages/gr.json'),
+  it: () => import('@/messages/it.json'),
+  nl: () => import('@/messages/nl.json'),
+  my: () => import('@/messages/my.json'),
+  sg: () => import('@/messages/sg.json'),
+  jp: () => import('@/messages/jp.json'),
+  cn: () => import('@/messages/cn.json'),
+  is: () => import('@/messages/is.json'),
+  vn: () => import('@/messages/vn.json'),
+  id: () => import('@/messages/id.json'),
 }
 
 export default getRequestConfig(async ({ requestLocale }) => {

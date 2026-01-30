@@ -9,8 +9,8 @@ import prettyBytes from 'pretty-bytes'
 import { useCallback, useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 
-import { IMAGE_ACCEPT_TYPES } from '@/constants/app'
-import { cn } from '@/utils/style'
+import { IMAGE_ACCEPT_TYPES } from '@/constants'
+import { cn } from '@/utils'
 
 type ImageWithPreview = File & {
   preview: string

@@ -6,7 +6,7 @@ import type { Viewport } from 'next'
 import type { PropsWithChildren } from 'react'
 
 import { Providers } from '@/components/providers/Providers'
-import { BRAND_COLORS } from '@/constants/app'
+import { BRAND_COLORS } from '@/constants'
 
 export const viewport: Viewport = {
   themeColor: [

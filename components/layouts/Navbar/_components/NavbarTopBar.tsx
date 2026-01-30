@@ -8,7 +8,7 @@ import { ThemeSwitch } from '@/components/ui/ThemeSwitch'
 import { cn } from '@/utils/style'
 
 const NavbarTopBar = ({ className, ...props }: ComponentProps<'div'>) => {
-  const tHeader = useTranslations('Navbar')
+  const translate = useTranslations('Navbar')
 
   return (
     <div
@@ -16,7 +16,7 @@ const NavbarTopBar = ({ className, ...props }: ComponentProps<'div'>) => {
       {...props}
     >
       <div className='gap- container mx-auto flex flex-wrap items-center justify-between'>
-        <span>{tHeader('Header')}</span>
+        <span>{translate('Header')}</span>
 
         <div className='flex flex-wrap'>
           <NavbarLocaleSwitcher />

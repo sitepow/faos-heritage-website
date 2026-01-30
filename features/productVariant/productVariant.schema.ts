@@ -1,8 +1,8 @@
 import { z } from 'zod'
 
-export type VariantInput = z.infer<typeof variantSchema>
+type VariantInput = z.infer<typeof variantSchema>
 
-export const variantSchema = z.object({
+const variantSchema = z.object({
   id: z.string().nullish(),
   productId: z.string().nullish(),
   image: z.string().nullish(),
@@ -19,3 +19,6 @@ export const variantSchema = z.object({
   stockQuantity: z.number('The inventory quantity must be accurate.'),
   isActive: z.boolean(),
 })
+
+export { variantSchema }
+export type { VariantInput }

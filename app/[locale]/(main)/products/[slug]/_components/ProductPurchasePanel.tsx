@@ -18,7 +18,7 @@ import { ProductShare } from './ProductShare'
 import { MarkdownRenderer } from '@/components/ui/Markdown/MarkdownRenderer'
 import { ProductChip } from '@/components/ui/Product/ProductChip'
 import { useProductPurchase } from '@/features/product/useProduct'
-import { generateSlugWithId } from '@/utils/app'
+import { generateSlugWithId } from '@/utils'
 
 const ProductPurchasePanel = () => {
   const translate = useTranslations('ProductCart')

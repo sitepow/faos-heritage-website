@@ -12,7 +12,7 @@ import { toast } from 'react-toastify'
 import type { ActionResult } from '@/lib/errors'
 import type { PropsWithChildren } from 'react'
 
-import { QUERY_GC_TIME, QUERY_STALE_TIME } from '@/constants/app'
+import { QUERY_GC_TIME, QUERY_STALE_TIME } from '@/constants'
 import { ERROR_MESSAGE_MAP, ERROR_CODES } from '@/lib/errors'
 
 function isActionResult(value: unknown): value is ActionResult<unknown> {

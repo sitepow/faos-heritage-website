@@ -28,8 +28,8 @@ import { userUpdateSchema, userCreateSchema } from '../user.schema'
 import { useUserStore } from '../user.store'
 
 import { ImageDropzone } from '@/components/ui/ImageDropzone'
-import { SubHeading } from '@/components/ui/SectionHeader'
-import { useImageUpload } from '@/hooks/useResolveImageUpload'
+import { SectionLabel } from '@/components/ui/SectionHeader'
+import { useResolveImageUpload } from '@/hooks/useResolveImageUpload'
 
 const DEFAULT_VALUES = {
   email: '',
@@ -41,14 +41,14 @@ const DEFAULT_VALUES = {
 }
 
 export const UserForm = () => {
-  const t = useTranslations('Dashboard.UserForm')
-  const tc = useTranslations('Common')
+  const translate = useTranslations('Dashboard.UserForm')
+  const translateCommon = useTranslations('Common')
   const queryClient = useQueryClient()
   const { isUserOpen, onOpenUserChange, userId, setState } = useUserStore()
 
   const [previewFiles, setPreviewFiles] = useState<ImageWithPreview[]>([])
   const [oldImage, setOldImage] = useState<string | null>(null)
-  const { resolveImagePath, isUploading } = useImageUpload({
+  const { resolveImagePath, isUploading } = useResolveImageUpload({
     oldImage,
     previewFiles,
   })
@@ -122,14 +122,14 @@ export const UserForm = () => {
 
   const isPending =
     isPendingCreateUser || isLoadingUser || isPendingUpdateUser || isUploading
-  const headerLable = userId ? t('editTitle') : t('addTitle')
+  const headerLable = userId ? translate('editTitle') : translate('addTitle')
 
   const onFilesChange = (files: ImageWithPreview[]) => {
     setPreviewFiles(files)
 
     setValue(
       'image',
-      files.length ? t('imageChangedStatus') : (oldImage ?? ''),
+      files.length ? translate('imageChangedStatus') : (oldImage ?? ''),
       {
         shouldDirty: true,
         shouldTouch: true,
@@ -176,19 +176,19 @@ export const UserForm = () => {
       <ModalContent>
         <ModalHeader className='flex flex-col gap-1'>{headerLable}</ModalHeader>
 
-        {isPending && <Spinner label={tc('loading')} />}
+        {isPending && <Spinner label={translateCommon('loading')} />}
 
         {!isPending && (
           <ModalBody>
             <ImageDropzone onFilesChange={onFilesChange} />
 
-            <SubHeading title={t('licenseHeading')} />
+            <SectionLabel>{translate('licenseHeading')}</SectionLabel>
             <Controller
               control={control}
               name='isActive'
               render={({ field: { value, onChange, ...field } }) => (
                 <Switch {...field} isSelected={value} onValueChange={onChange}>
-                  {t('activeLabel')}
+                  {translate('activeLabel')}
                 </Switch>
               )}
             />
@@ -200,7 +200,7 @@ export const UserForm = () => {
                   {...field}
                   errorMessage={errors.role?.message}
                   isInvalid={!!errors.role}
-                  label={t('roleLabel')}
+                  label={translate('roleLabel')}
                   selectedKeys={value ? [value] : []}
                   variant='bordered'
                   onSelectionChange={(keys) => {
@@ -211,14 +211,16 @@ export const UserForm = () => {
                 >
                   {Object.values(Role).map((role) => (
                     <SelectItem key={role}>
-                      {role === 'ADMIN' ? t('roleAdmin') : t('roleUser')}
+                      {role === 'ADMIN'
+                        ? translate('roleAdmin')
+                        : translate('roleUser')}
                     </SelectItem>
                   ))}
                 </Select>
               )}
             />
 
-            <SubHeading title={t('infoHeading')} />
+            <SectionLabel>{translate('infoHeading')}</SectionLabel>
             <Controller
               control={control}
               name='image'
@@ -228,7 +230,7 @@ export const UserForm = () => {
                   isDisabled
                   errorMessage={errors.image?.message}
                   isInvalid={!!errors.image}
-                  label={t('urlLabel')}
+                  label={translate('urlLabel')}
                   value={value ?? ''}
                   variant='bordered'
                 />
@@ -242,7 +244,7 @@ export const UserForm = () => {
                   {...field}
                   errorMessage={errors.name?.message}
                   isInvalid={!!errors.name}
-                  label={t('nameLabel')}
+                  label={translate('nameLabel')}
                   value={value ?? ''}
                   variant='bordered'
                 />
@@ -256,7 +258,7 @@ export const UserForm = () => {
                   {...field}
                   errorMessage={errors.email?.message}
                   isInvalid={!!errors.email}
-                  label={t('emailLabel')}
+                  label={translate('emailLabel')}
                   value={value ?? ''}
                   variant='bordered'
                 />
@@ -270,7 +272,11 @@ export const UserForm = () => {
                   {...field}
                   errorMessage={errors.password?.message}
                   isInvalid={!!errors.password}
-                  label={userId ? t('passwordChangeLabel') : t('passwordLabel')}
+                  label={
+                    userId
+                      ? translate('passwordChangeLabel')
+                      : translate('passwordLabel')
+                  }
                   type='password'
                   value={value ?? ''}
                   variant='bordered'
@@ -281,7 +287,7 @@ export const UserForm = () => {
         )}
         <ModalFooter>
           <Button isDisabled={isPending} variant='faded' onPress={onClose}>
-            {tc('cancel')}
+            {translateCommon('cancel')}
           </Button>
           <Button
             className='text-secondary'
@@ -289,7 +295,7 @@ export const UserForm = () => {
             isDisabled={isPending || !isDirty}
             onClick={handleSubmit(onSubmit)}
           >
-            {isPending ? tc('saving') : tc('save')}
+            {isPending ? translateCommon('saving') : translateCommon('save')}
           </Button>
         </ModalFooter>
       </ModalContent>

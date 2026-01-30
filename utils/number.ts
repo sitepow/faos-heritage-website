@@ -1,6 +1,6 @@
 import { Prisma } from '@prisma/client'
 
-import { CURRENCY } from '@/constants/app'
+import { CURRENCY } from '@/constants'
 
 type DecimalToNumber<T> = T extends Prisma.Decimal
   ? number

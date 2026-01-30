@@ -31,8 +31,8 @@ import {
   SHIPPING_PROVIDERS,
   ORDER_STEPS_ALL,
   IMAGE_FALLBACK,
-} from '@/constants/app'
-import { canTransitionOrderStatus } from '@/utils/app'
+} from '@/constants'
+import { canTransitionOrderStatus } from '@/utils'
 
 interface OrderStatusModalProps {
   mode: 'admin' | 'user'

@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import type { FooterMenuSection } from '../types'
+import type { FooterMenuSection } from '../Footer.types'
 
 import { FooterGroup } from './FooterGroup'
 import { FooterIcon } from './FooterIcon'

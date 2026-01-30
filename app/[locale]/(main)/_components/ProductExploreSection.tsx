@@ -5,13 +5,14 @@ import { ArrowRightIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useLocale, useTranslations } from 'next-intl'
 
-import { type GetProductsResult } from '@/app/[locale]/(main)/products/action'
+import type { GetProductsInfiniteResult } from '@/features/product/product.action'
+
 import { ProductSection } from '@/components/ui/Product/ProductSection'
-import { PAGINATION } from '@/constants/app'
+import { PAGINATION } from '@/constants'
 import { useProducts } from '@/features/product/useProduct'
 
 interface ProductExploreSectionProps {
-  initialData: GetProductsResult
+  initialData: GetProductsInfiniteResult
   itemsPerPage: number
 }
 

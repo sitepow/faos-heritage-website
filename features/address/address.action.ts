@@ -7,7 +7,7 @@ import { addressSchema, type AddressInput } from './address.schema'
 import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { prisma } from '@/lib/prisma'
-import { omitEmptyFields } from '@/utils/app'
+import { omitEmptyFields } from '@/utils'
 
 export type GetAddressResult = Awaited<ReturnType<typeof getAddress>>
 

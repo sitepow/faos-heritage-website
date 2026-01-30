@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl'
 
-import { CURRENCY_LOCALE_MAP } from '@/constants/app'
+import { CURRENCY_LOCALE_MAP } from '@/constants'
 
 const FooterBottom = () => {
   const tFooter = useTranslations('Footer')

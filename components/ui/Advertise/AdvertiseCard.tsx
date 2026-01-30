@@ -1,6 +1,6 @@
 import { CheckCircleIcon } from 'lucide-react'
 
-import { getBackgroundStyle } from '@/utils/app'
+import { getBackgroundStyle } from '@/utils'
 
 interface AdvertiseCardProps {
   title: string

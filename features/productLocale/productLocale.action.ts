@@ -7,8 +7,8 @@ import {
   type ProductLocalizationInput,
 } from './productLocale.schema'
 
+import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
-import { done, fail } from '@/lib/errors/server'
 import { prisma } from '@/lib/prisma'
 
 export const createProductLocalization = async (
@@ -32,7 +32,7 @@ export const createProductLocalization = async (
   })
 
   if (exists) {
-    return fail(ERROR_CODES.DATA_ALREADY_EXISTS)
+    return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
   try {
@@ -43,7 +43,7 @@ export const createProductLocalization = async (
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
-  return done()
+  return ok()
 }
 
 export const getProductLocalizations = async (productId: string) => {
@@ -83,12 +83,12 @@ export const updateProductLocalization = async (
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
-  return done()
+  return ok()
 }
 
 export const deleteProductLocalization = async (id: string) => {
   if (!id) {
-    return fail(ERROR_CODES.DATA_FIELD_REQUIRED)
+    return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
   try {
@@ -99,5 +99,5 @@ export const deleteProductLocalization = async (id: string) => {
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 
-  return done()
+  return ok()
 }

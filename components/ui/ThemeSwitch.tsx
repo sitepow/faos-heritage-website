@@ -6,14 +6,14 @@ import {
   DropdownMenu,
   DropdownItem,
   Button,
+  cn,
 } from '@heroui/react'
 import { ChevronDownIcon, SunMoonIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useTheme } from 'next-themes'
 
 import { useIsMounted } from '@/hooks/useIsMounted'
-import { getSingleKey } from '@/utils/app'
-import { cn } from '@/utils/style'
+import { getSingleKey } from '@/utils'
 
 type ThemeValue = 'light' | 'dark' | 'system'
 

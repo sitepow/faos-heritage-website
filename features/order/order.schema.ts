@@ -1,9 +1,9 @@
 import { OrderStatus } from '@prisma/client'
 import { z } from 'zod'
 
-export type OrderInput = z.infer<typeof orderSchema>
+type OrderInput = z.infer<typeof orderSchema>
 
-export const orderSchema = z.object({
+const orderSchema = z.object({
   reason: z.string('Please specify a note').optional(),
   status: z.enum(OrderStatus),
   tempStatus: z.enum(OrderStatus),
@@ -14,3 +14,6 @@ export const orderSchema = z.object({
     .string(`Please provide the item's tracking number`)
     .optional(),
 })
+
+export { orderSchema }
+export type { OrderInput }

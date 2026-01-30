@@ -1,7 +1,7 @@
 import { Chip } from '@heroui/react'
 import { useTranslations } from 'next-intl'
 
-import { cn } from '@/utils/style'
+import { cn } from '@/utils'
 
 type ProductChipProps = {
   isAuthentic?: boolean

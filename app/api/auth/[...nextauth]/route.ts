@@ -7,7 +7,7 @@ import GoogleProvider from 'next-auth/providers/google'
 
 import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { prisma } from '@/lib/prisma'
-import { normalizeEmail } from '@/utils/app'
+import { normalizeEmail } from '@/utils'
 
 export const NEXT_AUTH_OPTIONS: NextAuthOptions = {
   session: {

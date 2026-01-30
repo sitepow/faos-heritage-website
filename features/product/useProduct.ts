@@ -2,27 +2,27 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useSession } from 'next-auth/react'
 import { useMemo, useState } from 'react'
 
-import type { GetProductsResult } from '@/app/[locale]/(main)/products/action'
+import type { GetProductsInfiniteResult } from './product.action'
 
+import { getProductsInfinite } from './product.action'
 import { productQueryKeys } from './product.query-key'
+import { useProductDetailStore } from './product.store'
 import { createCart } from '../cart/cart.action'
 import { cartQueryKeys } from '../cart/cart.query-key'
 import { useExchangeRate } from '../exchangeRate/useExchangeRate'
 import { favoriteQueryKeys } from '../favorite/favorite.query-key'
 
-import { useProductDetailStore } from '@/app/[locale]/(main)/products/[slug]/store'
-import { getProducts } from '@/app/[locale]/(main)/products/action'
 import { useAppStore } from '@/app/store'
-import { PAGINATION } from '@/constants/app'
+import { PAGINATION } from '@/constants'
 import { createFavorite } from '@/features/favorite/favorite.action'
 import { ERROR_CODES } from '@/lib/errors'
-import { resolveRangeDisplayValue } from '@/utils/app'
+import { resolveRangeDisplayValue } from '@/utils'
 import { formatCurrency, formatCurrencyRange } from '@/utils/number'
 
 interface UseProductsParams {
   locale: string
   itemsPerPage: number
-  initialData?: GetProductsResult
+  initialData?: GetProductsInfiniteResult
 }
 
 interface UseProductPriceParams {
@@ -45,7 +45,7 @@ const useProducts = ({
 }: UseProductsParams) => {
   return useQuery({
     queryKey: productQueryKeys.list.homepage(locale, itemsPerPage),
-    queryFn: () => getProducts({ limit: itemsPerPage, locale }),
+    queryFn: () => getProductsInfinite({ limit: itemsPerPage, locale }),
     initialData,
   })
 }
@@ -95,9 +95,9 @@ const useSimilarProducts = ({
   excludeProductId,
   limit = PAGINATION.ITEMS_PER_PAGE,
 }: UseSimilarProductsParams) => {
-  return useQuery<GetProductsResult>({
+  return useQuery<GetProductsInfiniteResult>({
     queryKey: productQueryKeys.list.similar(locale, categoryId),
-    queryFn: () => getProducts({ locale, categoryId, limit }),
+    queryFn: () => getProductsInfinite({ locale, categoryId, limit }),
     enabled: !!categoryId,
     select: (data) => ({
       ...data,

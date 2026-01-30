@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import { useTranslations } from 'next-intl'
 
-import type { FooterMenuSection } from './types'
+import type { FooterMenuSection } from './Footer.types'
 import type { ComponentProps } from 'react'
 
 import { FooterBottom } from './_components/FooterBottom'

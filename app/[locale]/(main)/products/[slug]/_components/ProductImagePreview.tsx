@@ -7,7 +7,7 @@ import {
   Carousel,
   type CarouselHandle,
 } from '@/components/ui/Carousel/Carousel'
-import { IMAGE_FALLBACK } from '@/constants/app'
+import { IMAGE_FALLBACK } from '@/constants'
 import { cn } from '@/utils/style'
 
 type ProductImagePreviewProps = {

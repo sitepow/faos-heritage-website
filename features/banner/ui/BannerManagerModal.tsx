@@ -23,8 +23,8 @@ import { deleteBanners, getBanners } from '@/features/banner/banner.action'
 import { bannerQueryKeys } from '@/features/banner/banner.query-key'
 
 const BannerManagerModal = () => {
-  const t = useTranslations('Dashboard.BannerManager')
-  const tc = useTranslations('Common')
+  const translate = useTranslations('Dashboard.BannerManager')
+  const translateCommon = useTranslations('Common')
 
   const queryClient = useQueryClient()
   const deleteModal = useDisclosure()
@@ -106,13 +106,15 @@ const BannerManagerModal = () => {
         onOpenChange={(open) => !open && handleClose()}
       >
         <ModalContent>
-          <ModalHeader>{t('title')}</ModalHeader>
+          <ModalHeader>{translate('title')}</ModalHeader>
 
           <ModalBody>
-            {isLoading && <Spinner label={tc('loading')} />}
+            {isLoading && <Spinner label={translateCommon('loading')} />}
 
             {!isLoading && banners.length === 0 && (
-              <p className='text-default-500 text-center'>{t('noBanners')}</p>
+              <p className='text-default-500 text-center'>
+                {translate('noBanners')}
+              </p>
             )}
 
             {!isLoading && banners.length > 0 && (
@@ -131,7 +133,7 @@ const BannerManagerModal = () => {
 
           <ModalFooter>
             <Button variant='faded' onPress={handleClose}>
-              {tc('close')}
+              {translateCommon('close')}
             </Button>
 
             <Button
@@ -140,7 +142,7 @@ const BannerManagerModal = () => {
               startContent={<PlusIcon />}
               onPress={handleCreate}
             >
-              {t('addBanner')}
+              {translate('addBanner')}
             </Button>
           </ModalFooter>
         </ModalContent>

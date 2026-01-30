@@ -39,4 +39,13 @@ const requireAnyRole = async (roles: readonly Role[]) => {
   return session
 }
 
-export { getAuthSession, requireAuth, requireRole, requireAnyRole }
+const normalizeEmail = (email?: string | null) =>
+  email?.trim().toLowerCase() ?? null
+
+export {
+  getAuthSession,
+  requireAuth,
+  requireRole,
+  requireAnyRole,
+  normalizeEmail,
+}

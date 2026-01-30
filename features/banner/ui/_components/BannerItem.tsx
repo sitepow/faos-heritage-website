@@ -10,7 +10,7 @@ import {
 } from '@heroui/react'
 import { EditIcon, EllipsisVerticalIcon, TrashIcon } from 'lucide-react'
 
-import { cn } from '@/utils/style'
+import { cn } from '@/utils'
 
 interface BannerItemProps {
   banner: {

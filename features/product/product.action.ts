@@ -1,18 +1,42 @@
 'use server'
 
-import type { ProductInput } from './product.schema'
-import type { Prisma } from '@prisma/client'
+import { unstable_noStore as noStore } from 'next/cache'
 
-import { productSchema } from './product.schema'
+import type { Prisma, Product } from '@prisma/client'
+
+import { productSchema, type ProductInput } from './product.schema'
 
 import { deleteFile } from '@/app/actions/file'
 import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { prisma } from '@/lib/prisma'
-import { calculateVariantRange, omitEmptyFields } from '@/utils/app'
-import { decimalToNumber } from '@/utils/number'
+import {
+  omitEmptyFields,
+  decimalToNumber,
+  calculateVariantRange,
+} from '@/utils'
 
 export type GetProductResult = Awaited<ReturnType<typeof getProduct>>
+export type GetProductsResult = Awaited<ReturnType<typeof getProducts>>
+export type ProductListItem = GetProductsResult['items'][number]
+
+type SortOrder = 'asc' | 'desc'
+interface SortByItem {
+  readonly field: keyof Product
+  readonly order: SortOrder
+}
+
+export type GetProductsInfiniteResult = Awaited<
+  ReturnType<typeof getProductsInfinite>
+>
+
+interface GetProductsInfiniteProps {
+  cursor?: string | null
+  limit?: number
+  categoryId?: string | null
+  sortBy?: SortByItem
+  locale?: string
+}
 
 export const createProduct = async (data: ProductInput) => {
   const validated = productSchema.safeParse(data)
@@ -34,6 +58,31 @@ export const createProduct = async (data: ProductInput) => {
   return ok()
 }
 
+export const updateProduct = async (data: ProductInput) => {
+  const validated = productSchema.safeParse(data)
+
+  if (!validated?.success) {
+    return fail(ERROR_CODES.VALIDATION_ERROR)
+  }
+
+  const { id, ...payload } = validated.data
+
+  if (!id) {
+    return fail(ERROR_CODES.DATA_NOT_FOUND)
+  }
+
+  try {
+    await prisma.product.update({
+      data: payload as Prisma.ProductUncheckedUpdateInput,
+      where: { id },
+    })
+  } catch {
+    return fail(ERROR_CODES.SYSTEM_ERROR)
+  }
+
+  return ok()
+}
+
 export const deleteProduct = async (productIds: string | string[]) => {
   const ids = Array.isArray(productIds) ? productIds : [productIds]
 
@@ -42,16 +91,10 @@ export const deleteProduct = async (productIds: string | string[]) => {
   }
 
   const products = await prisma.product.findMany({
-    where: {
-      id: { in: ids },
-    },
+    where: { id: { in: ids } },
     select: {
       id: true,
-      images: {
-        select: {
-          url: true,
-        },
-      },
+      images: { select: { url: true } },
     },
   })
 
@@ -63,9 +106,7 @@ export const deleteProduct = async (productIds: string | string[]) => {
 
   try {
     await prisma.product.deleteMany({
-      where: {
-        id: { in: ids },
-      },
+      where: { id: { in: ids } },
     })
   } catch {
     return fail(ERROR_CODES.SYSTEM_ERROR)
@@ -109,12 +150,8 @@ export const getProduct = async (
           : false,
         wishlist: userId
           ? {
-              where: {
-                userId: userId,
-              },
-              select: {
-                id: true,
-              },
+              where: { userId },
+              select: { id: true },
             }
           : false,
         variants: {
@@ -127,10 +164,7 @@ export const getProduct = async (
           },
         },
         category: {
-          select: {
-            id: true,
-            name: true,
-          },
+          select: { id: true, name: true },
         },
         images: {
           orderBy: { isPrimary: 'desc' },
@@ -171,20 +205,20 @@ export const getProduct = async (
     product.variants,
   )
 
+  const localization = product?.localizations?.[0]
+
   return {
     ...product,
     priceMin,
     priceMax,
     stockMin,
     stockMax,
-    name: product?.localizations?.[0]?.name ?? product.name,
+    name: localization?.name ?? product.name,
     shortDescription:
-      product?.localizations?.[0]?.shortDescription ?? product.shortDescription,
-    description:
-      product?.localizations?.[0]?.description ?? product.description,
-    metaTitle: product?.localizations?.[0]?.metaTitle ?? product.metaTitle,
-    metaDescription:
-      product?.localizations?.[0]?.metaDescription ?? product.metaDescription,
+      localization?.shortDescription ?? product.shortDescription,
+    description: localization?.description ?? product.description,
+    metaTitle: localization?.metaTitle ?? product.metaTitle,
+    metaDescription: localization?.metaDescription ?? product.metaDescription,
   }
 }
 
@@ -206,11 +240,7 @@ export const getProducts = async (
         unit: true,
         isDigitalProduct: true,
         stockQuantity: true,
-        images: {
-          select: {
-            url: true,
-          },
-        },
+        images: { select: { url: true } },
         variants: {
           select: {
             name: true,
@@ -221,15 +251,9 @@ export const getProducts = async (
         localizations: {
           where: { languageCode: locale?.toLocaleUpperCase() },
           take: 1,
-          select: {
-            name: true,
-          },
+          select: { name: true },
         },
-        category: {
-          select: {
-            name: true,
-          },
-        },
+        category: { select: { name: true } },
       },
       orderBy: { createdAt: 'desc' },
     }),
@@ -262,29 +286,90 @@ export const getProducts = async (
   }
 }
 
-export const updateProduct = async (data: ProductInput) => {
-  const validated = productSchema.safeParse(data)
+export const getProductsInfinite = async ({
+  cursor,
+  limit = 8,
+  categoryId,
+  sortBy = { field: 'createdAt', order: 'desc' },
+  locale,
+}: GetProductsInfiniteProps) => {
+  noStore()
 
-  if (!validated?.success) {
-    return fail(ERROR_CODES.VALIDATION_ERROR)
+  let totalCount: number | undefined
+  let where = {
+    isActive: true,
+    ...(categoryId && { categoryId }),
   }
 
-  const { id, ...payload } = validated.data
-
-  if (!id) {
-    return fail(ERROR_CODES.DATA_NOT_FOUND)
+  if (!cursor) {
+    totalCount = await prisma.product.count({ where })
   }
 
-  try {
-    await prisma.product.update({
-      data: payload as Prisma.ProductUncheckedUpdateInput,
-      where: { id },
-    })
-  } catch {
-    return fail(ERROR_CODES.SYSTEM_ERROR)
+  const items = await prisma.product.findMany({
+    take: limit + 1,
+    skip: cursor ? 1 : 0,
+    cursor: cursor ? { id: cursor } : undefined,
+    where,
+    select: {
+      id: true,
+      name: true,
+      price: true,
+      stockQuantity: true,
+      isDigitalProduct: true,
+      isAuthentic: true,
+      isPremiumProduct: true,
+      isDemoProduct: true,
+      unit: true,
+      images: { select: { url: true, isPrimary: true } },
+      variants: {
+        select: {
+          image: true,
+          price: true,
+          stockQuantity: true,
+        },
+      },
+      category: { select: { name: true } },
+      localizations: {
+        where: { languageCode: locale?.toLocaleUpperCase() },
+        take: 1,
+        select: { name: true },
+      },
+    },
+    orderBy: {
+      [sortBy.field]: sortBy.order,
+    },
+  })
+
+  const hasNextPage = items.length > limit
+  const transformed = decimalToNumber(items)
+
+  const resultItems = (
+    hasNextPage ? transformed.slice(0, limit) : transformed
+  ).map((product) => {
+    const { priceMin, priceMax, stockMin, stockMax } = calculateVariantRange(
+      product?.variants,
+    )
+
+    return {
+      ...product,
+      priceMin,
+      priceMax,
+      stockMin,
+      stockMax,
+      name: product?.localizations?.[0]?.name ?? product.name,
+    }
+  })
+
+  let nextCursor: string | null = null
+  if (hasNextPage) {
+    nextCursor = resultItems[resultItems.length - 1].id
   }
 
-  return ok()
+  return {
+    items: resultItems,
+    nextCursor,
+    totalCount,
+  }
 }
 
 export const getProductStat = async () => {

@@ -2,9 +2,8 @@
 
 import { Card, CardBody } from '@heroui/react'
 
-import { useProductDetailStore } from '../store'
-
 import { MarkdownRenderer } from '@/components/ui/Markdown/MarkdownRenderer'
+import { useProductDetailStore } from '@/features/product/product.store'
 
 const ProductDescription = () => {
   const { product } = useProductDetailStore()

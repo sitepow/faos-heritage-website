@@ -7,7 +7,7 @@ import { bannerSchema, type BannerInput } from './schema'
 
 import { fail, ok, type ActionResult } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
-import { omitEmptyFields } from '@/utils/app'
+import { omitEmptyFields } from '@/utils'
 
 const createBanner = async (
   input: BannerInput,

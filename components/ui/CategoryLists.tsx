@@ -3,9 +3,9 @@
 
 import { useRouter } from 'next/navigation'
 
-import { IMAGE_FALLBACK } from '@/constants/app'
+import { IMAGE_FALLBACK } from '@/constants'
 import { useCategories } from '@/features/category/useCategory'
-import { generateSlugWithId } from '@/utils/app'
+import { generateSlugWithId } from '@/utils'
 
 const CategoryLists = () => {
   const router = useRouter()

@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import { FooterIcon } from './FooterIcon'
 
-import { SHIPPING_PROVIDERS } from '@/constants/app'
+import { SHIPPING_PROVIDERS } from '@/constants'
 
 interface FooterGroupProps {
   title: string

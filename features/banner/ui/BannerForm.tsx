@@ -8,8 +8,8 @@ import {
   ModalFooter,
   Button,
   Input,
-  Switch,
   Spinner,
+  Switch,
 } from '@heroui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
@@ -35,8 +35,8 @@ const DEFAULT_VALUES: BannerInput = {
 }
 
 const BannerForm = () => {
-  const t = useTranslations('Dashboard.BannerForm')
-  const tc = useTranslations('Common')
+  const translate = useTranslations('Dashboard.BannerForm')
+  const translateCommon = useTranslations('Common')
   const queryClient = useQueryClient()
 
   const {
@@ -150,29 +150,31 @@ const BannerForm = () => {
       onOpenChange={(open) => !open && handleClose()}
     >
       <ModalContent>
-        <ModalHeader>{isEditMode ? t('editTitle') : t('addTitle')}</ModalHeader>
+        <ModalHeader>
+          {isEditMode ? translate('editTitle') : translate('addTitle')}
+        </ModalHeader>
 
         <ModalBody className='relative'>
           {isPending && (
             <div className='bg-background/70 absolute inset-0 z-10 flex items-center justify-center'>
-              <Spinner label={tc('loading')} />
+              <Spinner label={translateCommon('loading')} />
             </div>
           )}
 
           <ImageDropzone onFilesChange={handleFilesChange} />
 
-          <SectionHeader title={t('statusHeading')} />
+          <SectionHeader title={translate('statusHeading')} />
           <Controller
             control={control}
             name='isActive'
             render={({ field }) => (
               <Switch isSelected={field.value} onValueChange={field.onChange}>
-                {t('activeLabel')}
+                {translate('activeLabel')}
               </Switch>
             )}
           />
 
-          <SectionHeader title={t('infoHeading')} />
+          <SectionHeader title={translate('infoHeading')} />
           <Controller
             control={control}
             name='url'
@@ -182,7 +184,7 @@ const BannerForm = () => {
                 isDisabled
                 errorMessage={errors.url?.message}
                 isInvalid={!!errors.url}
-                label={t('urlLabel')}
+                label={translate('urlLabel')}
                 value={value!}
                 variant='bordered'
               />
@@ -197,7 +199,7 @@ const BannerForm = () => {
                 {...field}
                 errorMessage={errors.alt?.message}
                 isInvalid={!!errors.alt}
-                label={t('altLabel')}
+                label={translate('altLabel')}
                 value={value!}
                 variant='bordered'
               />
@@ -207,7 +209,7 @@ const BannerForm = () => {
 
         <ModalFooter>
           <Button variant='faded' onPress={handleClose}>
-            {tc('cancel')}
+            {translateCommon('cancel')}
           </Button>
 
           <Button
@@ -216,7 +218,7 @@ const BannerForm = () => {
             isDisabled={!isDirty || isPending}
             onClick={handleSubmit(handleSubmitForm)}
           >
-            {tc('save')}
+            {translateCommon('save')}
           </Button>
         </ModalFooter>
       </ModalContent>

@@ -5,7 +5,7 @@ import type { Wishlist } from '@prisma/client'
 import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { prisma } from '@/lib/prisma'
-import { calculateVariantRange } from '@/utils/app'
+import { calculateVariantRange } from '@/utils'
 import { decimalToNumber } from '@/utils/number'
 
 export type GetFavoritesResult = Awaited<ReturnType<typeof getFavorites>>

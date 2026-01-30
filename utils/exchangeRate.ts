@@ -1,4 +1,4 @@
-import { CURRENCY } from '@/constants/app'
+import { CURRENCY } from '@/constants'
 
 type ExchangeRateResponse = {
   result: 'success'
@@ -24,4 +24,18 @@ const getExchangeRates = async () => {
   return data.rates
 }
 
-export { getExchangeRates }
+const toStripeMinorUnit = (amount: number, currency: string): number => {
+  const code = currency.toUpperCase()
+
+  if (['JPY', 'VND', 'KRW'].includes(code)) {
+    return Math.round(amount)
+  }
+
+  if (code === 'ISK') {
+    return Math.round(amount) * 100
+  }
+
+  return Math.round(amount * 100)
+}
+
+export { getExchangeRates, toStripeMinorUnit }

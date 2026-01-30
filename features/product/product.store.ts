@@ -1,11 +1,17 @@
 /* eslint-disable no-unused-vars */
 import { create } from 'zustand'
 
+import type { GetProductResult } from '@/features/product/product.action'
+
 interface ProductUIState {
   selectedProductId: string | null
   isFormOpen: boolean
 }
 
+interface ProductDetailStore {
+  product?: GetProductResult | null
+  setProductDetailState: (state: Partial<ProductDetailStore>) => void
+}
 interface ProductUIActions {
   openForm: (productId?: string | null) => void
   closeForm: () => void
@@ -40,4 +46,9 @@ const useProductUIStore = create<ProductUIStore>((set) => ({
     }),
 }))
 
-export { useProductUIStore }
+const useProductDetailStore = create<ProductDetailStore>()((set) => ({
+  product: null,
+  setProductDetailState: (state) => set(state),
+}))
+
+export { useProductUIStore, useProductDetailStore }

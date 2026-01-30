@@ -1,10 +1,10 @@
 'use client'
 
-import type { GetProductResult } from '@/app/[locale]/(main)/products/action'
+import type { GetProductResult } from '@/features/product/action'
 
 import { ProductCard, ProductCardSkeleton } from './ProductCard'
 
-import { PAGINATION } from '@/constants/app'
+import { PAGINATION } from '@/constants'
 
 interface ProductSectionProps {
   items: GetProductResult[]

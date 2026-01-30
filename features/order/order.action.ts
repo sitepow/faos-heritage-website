@@ -12,7 +12,7 @@ import {
   canTransitionOrderStatus,
   formatFullAddress,
   formatStat,
-} from '@/utils/app'
+} from '@/utils'
 import { decimalToNumber } from '@/utils/number'
 
 interface GetOrdersOptions {

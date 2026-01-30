@@ -9,7 +9,7 @@ import { deleteFile } from '@/app/actions/file'
 import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { prisma } from '@/lib/prisma'
-import { omitEmptyFields } from '@/utils/app'
+import { omitEmptyFields } from '@/utils'
 
 export type GetCategoryResult = Awaited<ReturnType<typeof getCategory>>
 export type GetCategoriesResult = Awaited<ReturnType<typeof getCategories>>

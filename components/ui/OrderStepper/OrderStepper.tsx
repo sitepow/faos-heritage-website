@@ -11,7 +11,7 @@ import { StepConnector } from './StepConnector'
 import { getOrderStatusDate, ORDER_STATUS_ICONS } from './stepConfig'
 
 import { useAppStore } from '@/app/store'
-import { ORDER_STEPS } from '@/constants/app'
+import { ORDER_STEPS } from '@/constants'
 import { cn } from '@/utils/style'
 
 interface OrderStepperProps extends ComponentProps<'div'> {

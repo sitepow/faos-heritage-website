@@ -7,8 +7,7 @@ import { variantSchema, type VariantInput } from './productVariant.schema'
 import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { prisma } from '@/lib/prisma'
-import { omitEmptyFields } from '@/utils/app'
-import { decimalToNumber } from '@/utils/number'
+import { omitEmptyFields, decimalToNumber } from '@/utils'
 
 export const createVariant = async (data: VariantInput) => {
   const validated = variantSchema.safeParse(data)
