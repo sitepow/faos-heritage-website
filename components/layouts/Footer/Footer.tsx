@@ -10,8 +10,9 @@ import { FooterSection } from './_components/FooterSection'
 import { cn } from '@/utils/style'
 
 const Footer = ({ className, ...props }: ComponentProps<'footer'>) => {
-  const tFooter = useTranslations('Footer')
-  const menuData = tFooter.raw('Menu') as FooterMenuSection[]
+  const translateFooter = useTranslations('footer')
+
+  const menu = translateFooter.raw('menu') as FooterMenuSection[]
 
   return (
     <footer
@@ -22,7 +23,7 @@ const Footer = ({ className, ...props }: ComponentProps<'footer'>) => {
       )}
     >
       <div className='container mx-auto grid gap-12 py-16 text-sm sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5'>
-        {menuData.map((section, idx) => (
+        {menu.map((section, idx) => (
           <div key={idx} className='flex flex-col gap-6'>
             {section.title && !section.isGroup && (
               <span className='text-primary text-base font-bold uppercase'>

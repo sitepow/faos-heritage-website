@@ -18,20 +18,23 @@ export async function generateMetadata({
 
   const translate = await getTranslations({
     locale,
-    namespace: 'Meta.Home',
   })
 
+  const title = translate('meta.home.title')
+  const description = translate('meta.home.description')
+  const keywords = translate.raw('commonKeywords')
+
   return {
-    description: translate('description'),
-    keywords: translate.raw('keywords'),
+    title,
+    description,
+    keywords,
     alternates: {
       canonical: process.env.APP_URL,
     },
     openGraph: {
-      title: translate('ogTitle'),
-      description: translate('ogDescription'),
+      title,
+      description,
       url: process.env.APP_URL,
-      siteName: 'FAOS',
       type: 'website',
       images: [
         {
@@ -43,7 +46,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: 'summary_large_image',
-      description: translate('ogDescription'),
+      description,
       images: IMAGE_FALLBACK.OG,
     },
   }
