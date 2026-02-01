@@ -22,7 +22,7 @@ const ProductPrice = ({
   className,
   ...props
 }: ProductPriceProps) => {
-  const translate = useTranslations('ProductUnit')
+  const translateProductUnit = useTranslations('global.productUnit')
 
   const { displayPrice } = useProductPrice({
     price,
@@ -42,7 +42,7 @@ const ProductPrice = ({
         <dd className='text-2xl tracking-tighter'>{displayPrice}</dd>
 
         <dt className='text-[10px] font-bold tracking-widest uppercase'>
-          / {translate(unit.toUpperCase())}
+          / {translateProductUnit(unit.toUpperCase())}
         </dt>
       </dl>
     </div>

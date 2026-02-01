@@ -11,16 +11,16 @@ interface AdvertiseItem {
 }
 
 const AdvertiseBanner = () => {
-  const translate = useTranslations('Banner')
-  const advertiseData = translate.raw('advertise') as AdvertiseItem[]
+  const translate = useTranslations('')
+  const translateAdvertise = translate.raw('advertise') as AdvertiseItem[]
 
-  if (!Array.isArray(advertiseData) || advertiseData.length === 0) {
+  if (!Array.isArray(translateAdvertise) || translateAdvertise.length === 0) {
     return null
   }
 
   return (
     <article className='flex flex-col gap-6'>
-      {advertiseData.map((item) => (
+      {translateAdvertise.map((item) => (
         <section key={item.title} className='container mx-auto'>
           <AdvertiseCard {...item} />
         </section>

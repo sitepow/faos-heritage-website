@@ -21,8 +21,9 @@ const ProductExploreSection = ({
   itemsPerPage,
 }: ProductExploreSectionProps) => {
   const locale = useLocale()
-  const translateCategory = useTranslations('CategoryCarousel')
-  const translateSection = useTranslations('Section')
+
+  const translateShared = useTranslations('shared')
+  const translateActions = useTranslations('actions')
 
   const { data: products, isLoading: isProductsLoading } = useProducts({
     locale,
@@ -40,10 +41,10 @@ const ProductExploreSection = ({
         <CardHeader className='py-6'>
           <div className='border-primary mx-auto flex flex-col items-center gap-2'>
             <span className='text-primary text-2xl font-bold sm:text-4xl'>
-              {translateSection('Header.title')}
+              {translateShared('productDiscovery.title')}
             </span>
             <span className='text-foreground/70 border-divider border-b pb-1 text-sm sm:text-base'>
-              {translateSection('Header.description')}
+              {translateShared('productDiscovery.description')}
             </span>
           </div>
         </CardHeader>
@@ -63,7 +64,7 @@ const ProductExploreSection = ({
             endContent={<ArrowRightIcon />}
             radius='sm'
           >
-            {translateCategory('explore')}
+            {translateActions('more')}
           </Button>
         </Link>
       </div>

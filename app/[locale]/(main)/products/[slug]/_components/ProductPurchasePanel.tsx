@@ -12,8 +12,8 @@ import {
 import { HeartIcon, ShoppingCartIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
-import { ProductPrice } from './ProductPrice'
 import { ProductShare } from './ProductShare'
+import { ProductPrice } from '../../../../../../components/ui/Product/ProductPrice'
 
 import { MarkdownRenderer } from '@/components/ui/Markdown/MarkdownRenderer'
 import { ProductChip } from '@/components/ui/Product/ProductChip'

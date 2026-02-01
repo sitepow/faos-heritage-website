@@ -32,7 +32,8 @@ type UserMenuItem = {
 }
 
 const NavbarUserMenu = () => {
-  const translate = useTranslations('Navbar.Panel')
+  const translateUserPanel = useTranslations('navigation.navbar.userPanel')
+
   const router = useRouter()
   const pathname = usePathname()
   const user = useSession()?.data?.user
@@ -65,7 +66,7 @@ const NavbarUserMenu = () => {
     if (isAdmin && !isDashboard) {
       items.push({
         key: 'dashboard',
-        label: 'adminDashboard',
+        label: 'dashboard',
         icon: <SettingsIcon />,
         action: () => router.push('/dashboard'),
       })
@@ -86,7 +87,7 @@ const NavbarUserMenu = () => {
     <Dropdown placement='bottom-end'>
       <DropdownTrigger>
         <Button isIconOnly radius='full' variant='light'>
-          <UserIcon className='text-default-600' size={22} strokeWidth={1.5} />
+          <UserIcon />
         </Button>
       </DropdownTrigger>
 
@@ -103,7 +104,7 @@ const NavbarUserMenu = () => {
             className={item.className}
             startContent={item.icon}
           >
-            {translate(item.label)}
+            {translateUserPanel(item.label)}
           </DropdownItem>
         ))}
       </DropdownMenu>

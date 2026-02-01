@@ -8,7 +8,7 @@ import type { GetProductResult } from '@/features/product/action'
 import { OutOfStockOverlay } from './OutOfStockOverlay'
 import { ProductChip } from './ProductChip'
 
-import { ProductPrice } from '@/app/[locale]/(main)/products/[slug]/_components/ProductPrice'
+import { ProductPrice } from '@/components/ui/Product/ProductPrice'
 import {
   resolveProductImages,
   checkIsOutOfStock,

@@ -20,8 +20,7 @@ import { getSingleKey } from '@/utils'
 type CountryCode = (typeof CURRENCY_LOCALE_MAP)[number]['country']
 
 const NavbarLocaleSwitcher = () => {
-  const translate = useTranslations('Localization')
-  const translateCountry = useTranslations('Country')
+  const translateCountry = useTranslations('global.country')
 
   const routeLocale = useLocale()
   const router = useRouter()
@@ -71,7 +70,7 @@ const NavbarLocaleSwitcher = () => {
               <span>
                 {selectedByRoute
                   ? translateCountry(selectedByRoute.country)
-                  : translate('country')}
+                  : translateCountry('country')}
               </span>
               <ChevronDownIcon />
             </div>
@@ -107,7 +106,7 @@ const NavbarLocaleSwitcher = () => {
           <Button className='text-secondary p-0' variant='light'>
             <div className='flex items-center gap-1'>
               <span className='uppercase'>
-                {appLocale.currency || translate('currency')}
+                {appLocale.currency || translateCountry('currency')}
               </span>
               <ChevronDownIcon />
             </div>

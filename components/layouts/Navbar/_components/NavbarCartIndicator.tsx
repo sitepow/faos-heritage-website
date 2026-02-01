@@ -30,7 +30,7 @@ const NavbarCartIndicator = () => {
       >
         <Button
           isIconOnly
-          className='text-default-600 transition-transform hover:scale-110'
+          className='transition-transform hover:scale-110'
           radius='full'
           variant='light'
         >

@@ -3,7 +3,7 @@ import { SearchIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
 const NavbarSearch = () => {
-  const translate = useTranslations('Navbar')
+  const translateNavigation = useTranslations('navigation.navbar')
 
   return (
     <div className='hidden flex-1 lg:block'>
@@ -16,7 +16,7 @@ const NavbarSearch = () => {
               'after:bg-primary',
             ],
           }}
-          placeholder={translate('search')}
+          placeholder={translateNavigation('search')}
           size='sm'
           startContent={
             <SearchIcon className='group-focus-within:text-primary transition-all duration-300' />
