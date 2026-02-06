@@ -33,7 +33,6 @@ const ProductSimilar = () => {
         description={translateRelatedProducts('description')}
         title={translateRelatedProducts('title')}
       />
-
       <ProductSection
         isLoading={isLoadingProducts}
         itemPerPage={PAGINATION.ITEMS_PER_PAGE}

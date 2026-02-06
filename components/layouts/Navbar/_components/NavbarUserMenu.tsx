@@ -21,6 +21,7 @@ import { signOut, useSession } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
 import { useMemo } from 'react'
 
+import { CustomIcon } from '@/components/ui/CustomIcon'
 import { ACCOUNT_TAB } from '@/constants'
 
 type UserMenuItem = {
@@ -46,19 +47,19 @@ const NavbarUserMenu = () => {
       {
         key: 'account',
         label: 'account',
-        icon: <UserIcon />,
+        icon: <CustomIcon icon={UserIcon} />,
         action: () => router.push(`/account?tab=${ACCOUNT_TAB.ACCOUNT}`),
       },
       {
         key: 'order',
         label: 'orders',
-        icon: <PackageIcon />,
+        icon: <CustomIcon icon={PackageIcon} />,
         action: () => router.push(`/account?tab=${ACCOUNT_TAB.ORDER}`),
       },
       {
         key: 'favorite',
         label: 'favorites',
-        icon: <HeartIcon />,
+        icon: <CustomIcon icon={HeartIcon} />,
         action: () => router.push(`/account?tab=${ACCOUNT_TAB.FAVORITE}`),
       },
     ]
@@ -67,7 +68,7 @@ const NavbarUserMenu = () => {
       items.push({
         key: 'dashboard',
         label: 'dashboard',
-        icon: <SettingsIcon />,
+        icon: <CustomIcon icon={SettingsIcon} />,
         action: () => router.push('/dashboard'),
       })
     }
@@ -75,8 +76,7 @@ const NavbarUserMenu = () => {
     items.push({
       key: 'logout',
       label: 'logout',
-      icon: <LogOutIcon />,
-      className: 'text-danger',
+      icon: <CustomIcon icon={LogOutIcon} />,
       action: () => signOut({ callbackUrl: '/' }),
     })
 
@@ -87,7 +87,7 @@ const NavbarUserMenu = () => {
     <Dropdown placement='bottom-end'>
       <DropdownTrigger>
         <Button isIconOnly radius='full' variant='light'>
-          <UserIcon />
+          <CustomIcon icon={UserIcon} />
         </Button>
       </DropdownTrigger>
 

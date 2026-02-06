@@ -24,7 +24,7 @@ import { formatCurrency, formatCurrencyRange } from '@/utils/number'
 interface UseProductParams {
   locale: string
   productId: string
-  userId: string
+  userId?: string
   initialData?: GetProductResult
 }
 interface UseProductsParams {

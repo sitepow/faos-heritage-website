@@ -21,13 +21,12 @@ const ProductImage = ({ image, className, ...props }: ProductImageProps) => {
     >
       <Image
         alt='product-image'
-        className={cn('size-full object-contain object-center p-10')}
+        className='size-full object-contain p-2'
         classNames={{
-          wrapper: 'size-full !max-w-none',
+          wrapper: 'absolute inset-0 !max-w-none size-full',
         }}
         radius='none'
         src={image ?? IMAGE_FALLBACK.EMPTY}
-        width='100%'
       />
     </div>
   )

@@ -92,7 +92,6 @@ const CartItem = ({ cart }: CartItemProps) => {
 
       <Button
         isIconOnly
-        color='danger'
         isDisabled={isPendingUpdateCart}
         isLoading={isPendingDelete}
         variant='light'

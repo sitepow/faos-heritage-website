@@ -18,7 +18,6 @@ import {
 
 export type GetProductResult = Awaited<ReturnType<typeof getProduct>>
 export type GetProductsResult = Awaited<ReturnType<typeof getProducts>>
-// export type ProductListItem = GetProductsResult['items'][number]
 
 type SortOrder = 'asc' | 'desc'
 interface SortByItem {

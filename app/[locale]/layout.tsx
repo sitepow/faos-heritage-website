@@ -36,10 +36,7 @@ export async function generateMetadata({
   }
 }
 
-export default async function LocaleLayout({
-  children,
-  params,
-}: LocaleLayoutProps) {
+const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
   const { locale } = await params
 
   assertValidLocale(locale)
@@ -53,3 +50,5 @@ export default async function LocaleLayout({
     </NextIntlClientProvider>
   )
 }
+
+export default LocaleLayout

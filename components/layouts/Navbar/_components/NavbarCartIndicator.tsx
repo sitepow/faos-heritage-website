@@ -4,6 +4,7 @@ import { ShoppingCartIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 
+import { CustomIcon } from '@/components/ui/CustomIcon'
 import { useCartStat } from '@/features/cart/useCart'
 
 const NavbarCartIndicator = () => {
@@ -23,7 +24,7 @@ const NavbarCartIndicator = () => {
         shape='circle'
       >
         <Button isIconOnly radius='full' variant='light'>
-          <ShoppingCartIcon />
+          <CustomIcon icon={ShoppingCartIcon} />
         </Button>
       </Badge>
     </Link>

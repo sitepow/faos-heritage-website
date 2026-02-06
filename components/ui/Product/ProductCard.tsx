@@ -20,9 +20,7 @@ interface ProductCardProps {
   product: GetProductResult
 }
 
-const ProductCardSkeleton = () => (
-  <Skeleton className='h-[420px] w-full rounded-[60%_40%_30%_70%/60%_30%_70%_40%]' />
-)
+const ProductCardSkeleton = () => <Skeleton className='h-[420px] w-full' />
 
 const ProductCard = ({ className, product }: ProductCardProps) => {
   const { primarySrc } = resolveProductImages({ images: product?.images })

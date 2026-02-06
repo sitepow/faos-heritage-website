@@ -12,7 +12,7 @@ const ProductDescription = () => {
 
   return (
     <MarkdownRenderer
-      className='mx-auto w-full max-w-[920px]'
+      className='mx-auto w-full max-w-[1280px]'
       content={product.description}
       fallbackAlt={product.name}
     />

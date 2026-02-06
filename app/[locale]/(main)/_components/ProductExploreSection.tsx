@@ -7,20 +7,18 @@ import { useLocale, useTranslations } from 'next-intl'
 
 import type { GetProductsInfiniteResult } from '@/features/product/product.action'
 
+import { Container } from '@/components/layouts/Container'
 import { ProductSection } from '@/components/ui/Product/ProductSection'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { PAGINATION } from '@/constants'
 import { useProducts } from '@/features/product/useProduct'
 
-interface ProductExploreSectionProps {
+interface Props {
   initialData: GetProductsInfiniteResult
   itemsPerPage: number
 }
 
-const ProductExploreSection = ({
-  initialData,
-  itemsPerPage,
-}: ProductExploreSectionProps) => {
+const ProductExploreSection = ({ initialData, itemsPerPage }: Props) => {
   const locale = useLocale()
 
   const translateShared = useTranslations('shared')
@@ -37,7 +35,7 @@ const ProductExploreSection = ({
   }
 
   return (
-    <section className='container mx-auto flex flex-col gap-6'>
+    <Container className='flex flex-col gap-5'>
       <SectionHeader
         description={translateShared('productDiscovery.description')}
         title={translateShared('productDiscovery.title')}
@@ -61,7 +59,7 @@ const ProductExploreSection = ({
           </Button>
         </Link>
       </div>
-    </section>
+    </Container>
   )
 }
 

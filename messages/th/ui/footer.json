@@ -7,8 +7,11 @@
         "title": "เกี่ยวกับ FAOS",
         "items": [
           { "label": "เกี่ยวกับเรา", "href": "/about" },
-          { "label": "ช่องทางการชำระเงิน", "href": "/payment" },
-          { "label": "นโยบายความเป็นส่วนตัวของ FAOS", "href": "/privacy" },
+          { "label": "ช่องทางการชำระเงิน", "href": "/payment-methods" },
+          {
+            "label": "นโยบายความเป็นส่วนตัวของ FAOS",
+            "href": "/privacy-policy"
+          },
           { "label": "คำถามที่พบบ่อย", "href": "#" },
           { "label": "ช่วยเหลือ?", "href": "#" }
         ]

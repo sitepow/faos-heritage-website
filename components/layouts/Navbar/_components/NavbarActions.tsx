@@ -3,38 +3,38 @@
 import { Button } from '@heroui/react'
 import { SearchIcon, LogInIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { useSession } from 'next-auth/react'
 
 import { NavbarCartIndicator } from './NavbarCartIndicator'
+import { NavbarMobileMenu } from './NavbarMobileMenu'
 import { NavbarUserMenu } from './NavbarUserMenu'
+
+import { CustomIcon } from '@/components/ui/CustomIcon'
+import { useUser } from '@/hooks/useUser'
 
 const NavbarActions = () => {
   const router = useRouter()
-  const { data: session } = useSession()
+  const { isAuthenticated } = useUser()
 
   return (
     <div className='flex flex-1 items-center justify-end gap-5'>
       <div className='flex items-center gap-4'>
-        <Button
-          isIconOnly
-          className='text-default-600 lg:hidden'
-          variant='light'
-        >
-          <SearchIcon />
+        <Button isIconOnly className='lg:hidden' variant='light'>
+          <CustomIcon icon={SearchIcon} />
         </Button>
 
-        {session ? (
+        {isAuthenticated ? (
           <NavbarUserMenu />
         ) : (
           <Button
             isIconOnly
-            className='text-default-600'
             variant='light'
             onClick={() => router.push('/login')}
           >
-            <LogInIcon />
+            <CustomIcon icon={LogInIcon} />
           </Button>
         )}
+
+        <NavbarMobileMenu />
 
         <div className='bg-divider h-4 w-[1px]' />
 

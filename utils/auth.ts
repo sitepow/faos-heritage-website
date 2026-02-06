@@ -5,6 +5,14 @@ import type { Role } from '@prisma/client'
 
 import { NEXT_AUTH_OPTIONS } from '@/app/api/auth/[...nextauth]/route'
 
+const redirectIfAuthenticated = async (redirectTo: string = '/') => {
+  const session = await getAuthSession()
+
+  if (session?.user) {
+    redirect(redirectTo)
+  }
+}
+
 const getAuthSession = async () => {
   return getServerSession(NEXT_AUTH_OPTIONS)
 }
@@ -43,6 +51,7 @@ const normalizeEmail = (email?: string | null) =>
   email?.trim().toLowerCase() ?? null
 
 export {
+  redirectIfAuthenticated,
   getAuthSession,
   requireAuth,
   requireRole,

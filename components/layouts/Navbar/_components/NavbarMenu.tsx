@@ -1,21 +1,17 @@
+import { MenuItem } from './MenuItem'
+import { Container } from '../../Container'
+
 import { useCategories } from '@/features/category/useCategory'
 
 const NavbarMenu = () => {
   const { data: categories } = useCategories()
 
   return (
-    <div className='container mx-auto flex justify-center gap-5'>
+    <Container className='hidden justify-center gap-5 lg:flex'>
       {categories?.map(({ name }) => {
-        return (
-          <span
-            key={name}
-            className='text-default-500 hover:text-foreground cursor-pointer text-lg'
-          >
-            {name}
-          </span>
-        )
+        return <MenuItem key={name} label={name} />
       })}
-    </div>
+    </Container>
   )
 }
 

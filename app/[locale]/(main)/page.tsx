@@ -53,7 +53,7 @@ export async function generateMetadata({
   }
 }
 
-export default async function Homepage() {
+const HomePage = async () => {
   const translateCategoryDiscovery = await getTranslations(
     'shared.categoryDiscovery',
   )
@@ -83,3 +83,5 @@ export default async function Homepage() {
     </section>
   )
 }
+
+export default HomePage

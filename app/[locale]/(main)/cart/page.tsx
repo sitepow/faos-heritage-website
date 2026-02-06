@@ -1,20 +1,22 @@
 'use client'
 
 import Head from 'next/head'
-import { useSession } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
 
 import { CartItem } from './_components/CartItem'
 import { CartSummaryCard } from './_components/CartSummaryCard'
 
+import { Container } from '@/components/layouts/Container'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { useCarts } from '@/features/cart/useCart'
+import { useUser } from '@/hooks/useUser'
 
-export default function Cart() {
-  const translateCart = useTranslations('cart')
+const CartPage = () => {
+  const t = useTranslations('cart')
 
-  const userId = useSession()?.data?.user?.id
+  const { userId } = useUser()
   const { data: carts, isLoading: isLoadingCarts } = useCarts({ userId })
+
   const isHasCarts = !isLoadingCarts && carts && carts?.length > 0
   const isEmptyCarts = !isLoadingCarts && carts && carts?.length === 0
 
@@ -24,15 +26,15 @@ export default function Cart() {
         <meta content='noindex, nofollow' name='robots' />
       </Head>
 
-      <section className='container mx-auto flex flex-col gap-10 p-5'>
+      <Container className='flex flex-col gap-5'>
         <span className='text-xl font-semibold'>
-          {translateCart('title', { count: carts?.length || 0 })}
+          {t('title', { count: carts?.length || 0 })}
         </span>
 
         {isEmptyCarts && (
           <EmptyState
             color='default'
-            description={translateCart('empty')}
+            description={t('empty')}
             variant='bordered'
           />
         )}
@@ -41,7 +43,9 @@ export default function Cart() {
           carts?.map((cart) => <CartItem key={cart?.id} cart={cart} />)}
 
         {isHasCarts && <CartSummaryCard />}
-      </section>
+      </Container>
     </>
   )
 }
+
+export default CartPage
