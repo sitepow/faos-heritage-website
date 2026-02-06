@@ -126,7 +126,7 @@
 //   }
 
 //   return (
-//     <Card fullWidth className='border-divider border' radius='sm' shadow='none'>
+//     <Card fullWidth className='border-default-100 border' radius='sm' shadow='none'>
 //       <CardHeader>
 //         <span>{t('tabs.editProfile')}</span>
 //       </CardHeader>

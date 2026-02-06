@@ -10,7 +10,7 @@ const FooterBottom = () => {
   const year = new Date().getFullYear()
 
   return (
-    <div className='border-divider container mx-auto flex flex-col gap-6 border-t py-8 text-xs text-gray-400 md:flex-row md:justify-between'>
+    <div className='border-default-100 container mx-auto flex flex-col gap-6 border-t py-8 text-xs text-gray-400 md:flex-row md:justify-between'>
       <div>
         <p className='font-medium'>
           {translateFooter('copyright', { year, name: translateBrand('name') })}
@@ -26,7 +26,7 @@ const FooterBottom = () => {
         {CURRENCY_LOCALE_MAP.map((c) => (
           <button
             key={c.country}
-            className='border-divider hover:bg-primary/10 hover:text-primary cursor-pointer rounded-full border px-3 py-1 transition'
+            className='border-default-100 hover:bg-primary/10 hover:text-primary cursor-pointer rounded-full border px-3 py-1 transition'
           >
             {translateCountry(c.country)}
           </button>

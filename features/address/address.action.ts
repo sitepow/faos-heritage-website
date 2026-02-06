@@ -47,7 +47,7 @@ export const createAddress = async (data: AddressInput) => {
   }
 }
 
-export const getAddressCheckout = async (userId: string) => {
+export const getAddressByUserId = async (userId: string) => {
   return await prisma.address.findFirst({
     where: { userId, isDefault: true },
     select: {

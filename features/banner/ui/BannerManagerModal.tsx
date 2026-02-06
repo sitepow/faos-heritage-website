@@ -18,7 +18,7 @@ import { useBannerUIStore } from '../banner.store'
 import { BannerForm } from './BannerForm'
 import { BannerItem } from './_components/BannerItem'
 
-import { ConfirmModal } from '@/components/ui/ConfirmModal'
+import { ConfirmModal } from '@/components/ui/ConfirmDeleteModal'
 import { deleteBanners, getBanners } from '@/features/banner/banner.action'
 import { bannerQueryKeys } from '@/features/banner/banner.query-key'
 

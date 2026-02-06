@@ -40,7 +40,7 @@
 
 //       <Card
 //         fullWidth
-//         className='border-divider border'
+//         className='border-default-100 border'
 //         radius='sm'
 //         shadow='none'
 //       >

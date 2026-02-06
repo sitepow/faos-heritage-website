@@ -47,6 +47,7 @@ export const getCarts = async (userId: string) => {
             images: {
               select: {
                 url: true,
+                isPrimary: true,
               },
             },
           },

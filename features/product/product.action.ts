@@ -18,7 +18,7 @@ import {
 
 export type GetProductResult = Awaited<ReturnType<typeof getProduct>>
 export type GetProductsResult = Awaited<ReturnType<typeof getProducts>>
-export type ProductListItem = GetProductsResult['items'][number]
+// export type ProductListItem = GetProductsResult['items'][number]
 
 type SortOrder = 'asc' | 'desc'
 interface SortByItem {
@@ -29,6 +29,10 @@ interface SortByItem {
 export type GetProductsInfiniteResult = Awaited<
   ReturnType<typeof getProductsInfinite>
 >
+
+export type ProductListItem = NonNullable<
+  GetProductsInfiniteResult['items']
+>[number]
 
 interface GetProductsInfiniteProps {
   cursor?: string | null

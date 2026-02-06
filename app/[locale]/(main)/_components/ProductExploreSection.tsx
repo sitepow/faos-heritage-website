@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, Card, CardHeader } from '@heroui/react'
+import { Button } from '@heroui/react'
 import { ArrowRightIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useLocale, useTranslations } from 'next-intl'
@@ -8,6 +8,7 @@ import { useLocale, useTranslations } from 'next-intl'
 import type { GetProductsInfiniteResult } from '@/features/product/product.action'
 
 import { ProductSection } from '@/components/ui/Product/ProductSection'
+import { SectionHeader } from '@/components/ui/SectionHeader'
 import { PAGINATION } from '@/constants'
 import { useProducts } from '@/features/product/useProduct'
 
@@ -37,18 +38,10 @@ const ProductExploreSection = ({
 
   return (
     <section className='container mx-auto flex flex-col gap-6'>
-      <Card className='bg-transparent' radius='none' shadow='none'>
-        <CardHeader className='py-6'>
-          <div className='border-primary mx-auto flex flex-col items-center gap-2'>
-            <span className='text-primary text-2xl font-bold sm:text-4xl'>
-              {translateShared('productDiscovery.title')}
-            </span>
-            <span className='text-foreground/70 border-divider border-b pb-1 text-sm sm:text-base'>
-              {translateShared('productDiscovery.description')}
-            </span>
-          </div>
-        </CardHeader>
-      </Card>
+      <SectionHeader
+        description={translateShared('productDiscovery.description')}
+        title={translateShared('productDiscovery.title')}
+      />
 
       <ProductSection
         isLoading={isProductsLoading}

@@ -29,7 +29,7 @@
 
 //   return (
 //     <div className='group flex w-full flex-col'>
-//       <div className='border-divider bg-default-50/50 flex items-center justify-between gap-2 rounded-t-lg border p-3'>
+//       <div className='border-default-100 bg-default-50/50 flex items-center justify-between gap-2 rounded-t-lg border p-3'>
 //         <div className='flex items-center gap-2 overflow-hidden'>
 //           <CountryFlagAvatar countryCode={address.countryCode} />
 //           <span className='truncate text-sm font-semibold'>
@@ -69,7 +69,7 @@
 //         </Dropdown>
 //       </div>
 
-//       <div className='border-divider flex flex-col gap-1 rounded-b-lg border-x border-b p-3 text-sm'>
+//       <div className='border-default-100 flex flex-col gap-1 rounded-b-lg border-x border-b p-3 text-sm'>
 //         <p className='text-default-600 leading-relaxed'>
 //           {formatFullAddress(address)}
 //         </p>

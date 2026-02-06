@@ -38,12 +38,10 @@ const ProductPrice = ({
       )}
       {...props}
     >
-      <dl className='flex items-baseline gap-1'>
-        <dd className='text-2xl tracking-tighter'>{displayPrice}</dd>
+      <dl className='flex items-baseline gap-1 text-xl'>
+        <dd>{displayPrice}</dd>
 
-        <dt className='text-[10px] font-bold tracking-widest uppercase'>
-          / {translateProductUnit(unit.toUpperCase())}
-        </dt>
+        <dt>/ {translateProductUnit(unit.toUpperCase())}</dt>
       </dl>
     </div>
   )

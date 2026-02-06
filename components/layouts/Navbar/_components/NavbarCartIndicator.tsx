@@ -1,23 +1,17 @@
 /* eslint-disable no-nested-ternary */
 import { Badge, Button } from '@heroui/react'
-import { useQuery } from '@tanstack/react-query'
 import { ShoppingCartIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 
-import { getCartStat } from '@/features/cart/cart.action'
+import { useCartStat } from '@/features/cart/useCart'
 
 const NavbarCartIndicator = () => {
-  const { data: session } = useSession()
-  const userId = session?.user?.id
+  const userId = useSession()?.data?.user?.id
 
-  const { data } = useQuery({
-    queryKey: ['carts', 'stat', userId],
-    queryFn: () => getCartStat(userId as string),
-    enabled: !!userId,
-  })
+  const { data: cartStat } = useCartStat({ userId })
 
-  const cartCount = data?.totalCarts ?? 0
+  const cartCount = cartStat?.totalCarts ?? 0
   const displayCount = cartCount > 99 ? '99+' : cartCount > 0 ? cartCount : null
 
   return (
@@ -28,12 +22,7 @@ const NavbarCartIndicator = () => {
         content={displayCount}
         shape='circle'
       >
-        <Button
-          isIconOnly
-          className='transition-transform hover:scale-110'
-          radius='full'
-          variant='light'
-        >
+        <Button isIconOnly radius='full' variant='light'>
           <ShoppingCartIcon />
         </Button>
       </Badge>

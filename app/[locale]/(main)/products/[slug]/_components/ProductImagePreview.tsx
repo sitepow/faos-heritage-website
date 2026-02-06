@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 'use client'
 
 import { useCallback, useMemo, useRef, useState } from 'react'
@@ -7,18 +6,15 @@ import {
   Carousel,
   type CarouselHandle,
 } from '@/components/ui/Carousel/Carousel'
+import { ProductImage } from '@/components/ui/Product/ProductImage'
 import { IMAGE_FALLBACK } from '@/constants'
-import { cn } from '@/utils/style'
+import { cn } from '@/utils'
 
 type ProductImagePreviewProps = {
   images?: string[]
-  alt?: string
 }
 
-const ProductImagePreview = ({
-  images = [],
-  alt = 'product-image',
-}: ProductImagePreviewProps) => {
+const ProductImagePreview = ({ images = [] }: ProductImagePreviewProps) => {
   const mainCarouselRef = useRef<CarouselHandle>(null)
   const [activeIndex, setActiveIndex] = useState(0)
 
@@ -40,19 +36,8 @@ const ProductImagePreview = ({
         autoPlay={false}
         onSlideChange={setActiveIndex}
       >
-        {displayImages.map((image, index) => (
-          <button
-            key={image}
-            aria-label={`View image ${index + 1}`}
-            className='border-divider relative aspect-square size-full shrink-0 overflow-hidden rounded-lg border bg-white'
-            type='button'
-          >
-            <img
-              alt={`${alt}-${index}`}
-              className='absolute inset-0 h-full w-full object-contain'
-              src={image}
-            />
-          </button>
+        {displayImages.map((image) => (
+          <ProductImage key={image} image={image} />
         ))}
       </Carousel>
 
@@ -61,22 +46,15 @@ const ProductImagePreview = ({
           const isActive = index === activeIndex
 
           return (
-            <button
-              key={`${image}-thumb`}
-              aria-label={`Select image ${index + 1}`}
+            <ProductImage
+              key={image}
               className={cn(
-                'relative aspect-square size-20 shrink-0 overflow-hidden rounded-lg border bg-white transition-colors sm:size-32',
-                isActive ? 'border-primary' : 'border-divider',
+                'size-20 cursor-pointer',
+                isActive ? 'border-primary' : 'border-default-100',
               )}
-              type='button'
+              image={image}
               onClick={() => handleSelectImage(index)}
-            >
-              <img
-                alt={`${alt}-thumbnail-${index}`}
-                className='absolute inset-0 h-full w-full object-contain'
-                src={image}
-              />
-            </button>
+            />
           )
         })}
       </Carousel>

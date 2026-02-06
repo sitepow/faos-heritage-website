@@ -1,115 +1,47 @@
-// 'use client'
+'use client'
 
-// import { Button, useDisclosure } from '@heroui/react'
-// import { useMutation, useQueryClient } from '@tanstack/react-query'
-// import { XIcon } from 'lucide-react'
-// import Head from 'next/head'
-// import { useSession } from 'next-auth/react'
-// import { useTranslations } from 'next-intl'
+import Head from 'next/head'
+import { useSession } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 
-// import { clearCart, deleteCart } from '../../../../features/cart/cart.action'
-// import { useCartStore } from '../../../../features/cart/cart.store'
+import { CartItem } from './_components/CartItem'
+import { CartSummaryCard } from './_components/CartSummaryCard'
 
-// import { ConfirmModal } from '@/components/ui/ConfirmModal'
+import { EmptyState } from '@/components/ui/EmptyState'
+import { useCarts } from '@/features/cart/useCart'
 
-// export default function Cart() {
-//   const t = useTranslations('Cart')
-//   const queryClient = useQueryClient()
-//   const { carts, setState, cartId, onOpenDeleteChange, isDeleteOpen } =
-//     useCartStore()
-//   const { isOpen: isClearOpen, onOpenChange: onOpenClearChange } =
-//     useDisclosure()
+export default function Cart() {
+  const translateCart = useTranslations('cart')
 
-//   const { data: session } = useSession()
-//   const userId = session?.user?.id
+  const userId = useSession()?.data?.user?.id
+  const { data: carts, isLoading: isLoadingCarts } = useCarts({ userId })
+  const isHasCarts = !isLoadingCarts && carts && carts?.length > 0
+  const isEmptyCarts = !isLoadingCarts && carts && carts?.length === 0
 
-//   const QUERY_KEY = {
-//     CART: ['carts', userId],
-//     CART_COUNT: ['carts', 'stat', userId],
-//   }
+  return (
+    <>
+      <Head>
+        <meta content='noindex, nofollow' name='robots' />
+      </Head>
 
-//   const { mutate: mutateDeteleCart, isPending: isPendingDeteleCart } =
-//     useMutation({
-//       mutationFn: deleteCart,
-//       onSuccess: () => {
-//         queryClient.invalidateQueries({ queryKey: QUERY_KEY.CART })
-//         queryClient.invalidateQueries({ queryKey: QUERY_KEY.CART_COUNT })
-//         setState({ cartId: null })
-//         onOpenDeleteChange()
-//       },
-//     })
+      <section className='container mx-auto flex flex-col gap-10 p-5'>
+        <span className='text-xl font-semibold'>
+          {translateCart('title', { count: carts?.length || 0 })}
+        </span>
 
-//   const { mutate: mutateClearCarts, isPending: isPendingClearCarts } =
-//     useMutation({
-//       mutationFn: clearCart,
-//       onSuccess: () => {
-//         queryClient.invalidateQueries({ queryKey: QUERY_KEY.CART })
-//         queryClient.invalidateQueries({ queryKey: QUERY_KEY.CART_COUNT })
-//         onOpenClearChange()
-//       },
-//     })
+        {isEmptyCarts && (
+          <EmptyState
+            color='default'
+            description={translateCart('empty')}
+            variant='bordered'
+          />
+        )}
 
-//   const isPending = isPendingClearCarts || isPendingDeteleCart
+        {isHasCarts &&
+          carts?.map((cart) => <CartItem key={cart?.id} cart={cart} />)}
 
-//   return (
-//     <>
-//       <Head>
-//         <meta content='noindex, nofollow' name='robots' />
-//       </Head>
-
-//       <section className='container mx-auto flex flex-col items-center justify-center gap-4 p-5 text-center'>
-//         <ConfirmModal
-//           description={t('Messages.confirmDeleteDesc')}
-//           isOpen={isDeleteOpen}
-//           isPending={isPending}
-//           title={t('Messages.confirmDeleteTitle')}
-//           onConfirm={() => {
-//             mutateDeteleCart(cartId!)
-//           }}
-//           onOpenChange={onOpenDeleteChange}
-//         />
-
-//         <ConfirmModal
-//           description={t('Messages.confirmClearDesc')}
-//           isOpen={isClearOpen}
-//           isPending={isPending}
-//           title={t('Messages.confirmClearTitle')}
-//           onConfirm={() => {
-//             mutateClearCarts(userId!)
-//           }}
-//           onOpenChange={onOpenClearChange}
-//         />
-
-//         <div className='flex w-full flex-wrap justify-between gap-2 text-start'>
-//           <span className='text-xl font-semibold'>
-//             {t('Page.title', {
-//               count: carts?.length,
-//             })}
-//           </span>
-//           <span className='text-default-500'>
-//             {t('Page.cartId')}: {userId}
-//           </span>
-//         </div>
-
-//         {carts && carts.length !== 0 && (
-//           <div className='flex w-full flex-wrap justify-end gap-2'>
-//             <Button
-//               startContent={<XIcon />}
-//               variant='bordered'
-//               onClick={() => onOpenClearChange()}
-//             >
-//               {t('Page.clearBtn')}
-//             </Button>
-//           </div>
-//         )}
-
-//         <div className='grid w-full items-start gap-2 md:gap-4 lg:grid-cols-3'>
-//           {/* <CartLists className='lg:col-span-2' /> */}
-//           {/* <div className='lg:sticky lg:top-20'>
-//             <CartCheckout />
-//           </div> */}
-//         </div>
-//       </section>
-//     </>
-//   )
-// }
+        {isHasCarts && <CartSummaryCard />}
+      </section>
+    </>
+  )
+}

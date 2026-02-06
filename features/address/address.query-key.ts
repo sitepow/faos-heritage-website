@@ -12,15 +12,14 @@ const addressQueryKeys = {
 
     byFilter: (filters: AddressListFilters = {}) =>
       [...addressQueryKeys.list.all, filters] as const,
-
-    homepage: (locale?: string, itemsPerPage?: number) =>
-      [...addressQueryKeys.list.all, 'homepage', locale, itemsPerPage] as const,
   },
 
   detail: {
     all: [...['addresses'], 'detail'] as const,
 
     byId: (id: string) => [...addressQueryKeys.detail.all, id] as const,
+
+    byUserId: (id: string) => [...addressQueryKeys.detail.all, id] as const,
   },
 }
 

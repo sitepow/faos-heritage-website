@@ -9,7 +9,7 @@ interface FooterIconProps {
 }
 
 const FooterIcon = ({ src, alt, hover }: FooterIconProps) => (
-  <div className='border-divider hover:border-primary flex size-12 cursor-pointer items-center justify-center rounded-full border bg-white p-2.5 shadow-sm transition-all sm:size-14'>
+  <div className='border-default-100 hover:border-primary flex size-12 cursor-pointer items-center justify-center rounded-lg border bg-white p-2.5 transition-all sm:size-14'>
     <img
       alt={alt}
       className={cn(

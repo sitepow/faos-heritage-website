@@ -33,7 +33,7 @@ const FooterSection = ({ section }: { section: FooterMenuSection }) => {
         {section.maps?.map((mapSrc, i) => (
           <div
             key={`map-${i}`}
-            className='border-divider mt-2 h-24 w-full overflow-hidden rounded-lg border'
+            className='border-default-100 mt-2 h-24 w-full overflow-hidden rounded-lg border'
           >
             <iframe
               className='h-full w-full contrast-125 grayscale'

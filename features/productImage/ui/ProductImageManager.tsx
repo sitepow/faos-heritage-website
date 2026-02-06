@@ -140,7 +140,7 @@
 //                       <Image
 //                         alt={image?.alt ?? ''}
 //                         className={cn(
-//                           'border-divider h-40 w-full border object-cover',
+//                           'border-default-100 h-40 w-full border object-cover',
 //                           image?.isPrimary &&
 //                             'border-primary border-r-divider border-y-divider border-l-4',
 //                         )}

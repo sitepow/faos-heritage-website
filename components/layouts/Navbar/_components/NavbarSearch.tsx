@@ -10,17 +10,11 @@ const NavbarSearch = () => {
       <div className='group relative max-w-[300px]'>
         <Input
           classNames={{
-            input: ['text-xs uppercase tracking-widest'],
-            inputWrapper: [
-              'border-b border-divider group-hover:border-primary transition-all duration-300',
-              'after:bg-primary',
-            ],
+            inputWrapper: ['after:bg-tranparent'],
           }}
           placeholder={translateNavigation('search')}
-          size='sm'
-          startContent={
-            <SearchIcon className='group-focus-within:text-primary transition-all duration-300' />
-          }
+          size='lg'
+          startContent={<SearchIcon className='text-default-200' />}
           variant='underlined'
         />
       </div>

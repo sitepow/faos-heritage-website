@@ -64,7 +64,7 @@ const OrderViewModal = () => {
     <Modal
       hideCloseButton
       classNames={{
-        base: 'bg-[#f1f1f1] dark:bg-[#131314] rounded-xl shadow-sm border border-divider',
+        base: 'bg-[#f1f1f1] dark:bg-[#131314] rounded-xl shadow-sm border border-default-100',
         header: 'px-8 pt-8 pb-0',
         body: 'px-8 py-6 gap-8',
         footer: 'px-8 pb-8 pt-2',
@@ -103,7 +103,7 @@ const OrderViewModal = () => {
               <ModalBody>
                 <OrderStepper {...order} />
 
-                <div className='border-divider grid grid-cols-1 gap-x-12 gap-y-6 border-t pt-5 md:grid-cols-2'>
+                <div className='border-default-100 grid grid-cols-1 gap-x-12 gap-y-6 border-t pt-5 md:grid-cols-2'>
                   <InfoBlock label={translate('shippingAddress')}>
                     {order.shippingAddressText}
                   </InfoBlock>
@@ -160,7 +160,7 @@ const OrderViewModal = () => {
                   ))}
                 </section>
 
-                <section className='border-divider mt-6 space-y-2 border-t pt-6'>
+                <section className='border-default-100 mt-6 space-y-2 border-t pt-6'>
                   <SummaryRow
                     label={translate('subtotal')}
                     value={formatCurrency(

@@ -30,7 +30,7 @@ const BannerItem = ({ banner, onEdit, onDelete }: BannerItemProps) => {
         <img
           alt={banner.alt!}
           className={cn(
-            'border-divider h-40 w-full rounded-md border object-cover',
+            'border-default-100 h-40 w-full rounded-md border object-cover',
             banner.isActive &&
               'border-primary border-y-divider border-r-divider border-l-4',
           )}

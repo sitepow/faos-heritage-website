@@ -2,15 +2,15 @@
 
 import { useLocale, useTranslations } from 'next-intl'
 
-import { useProductDetailStore } from '../store'
-
 import { ProductSection } from '@/components/ui/Product/ProductSection'
-import { PAGINATION } from '@/constants/app'
+import { SectionHeader } from '@/components/ui/SectionHeader'
+import { PAGINATION } from '@/constants'
+import { useProductDetailStore } from '@/features/product/product.store'
 import { useSimilarProducts } from '@/features/product/useProduct'
 
 const ProductSimilar = () => {
   const locale = useLocale()
-  const translate = useTranslations('Section')
+  const translateRelatedProducts = useTranslations('shared.relatedProducts')
 
   const { product } = useProductDetailStore()
 
@@ -28,10 +28,11 @@ const ProductSimilar = () => {
   }
 
   return (
-    <section className='flex flex-col gap-4'>
-      <h2 className='mx-auto w-fit pb-1 text-xl font-semibold'>
-        {translate('similar')}
-      </h2>
+    <section className='flex flex-col gap-5'>
+      <SectionHeader
+        description={translateRelatedProducts('description')}
+        title={translateRelatedProducts('title')}
+      />
 
       <ProductSection
         isLoading={isLoadingProducts}

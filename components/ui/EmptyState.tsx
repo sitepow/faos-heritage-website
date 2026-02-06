@@ -7,14 +7,14 @@ import type { PropsWithChildren } from 'react'
 import { cn } from '@/utils/style'
 
 interface EmptyStateProps extends PropsWithChildren {
-  title?: string
+  description?: string
   color?: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'
   variant?: 'solid' | 'faded' | 'bordered' | 'flat'
   className?: string
 }
 
 const EmptyState = ({
-  title = 'Not found',
+  description = 'Not found',
   color = 'warning',
   variant = 'faded',
   className,
@@ -23,11 +23,11 @@ const EmptyState = ({
   return (
     <div
       className={cn(
-        'container mx-auto flex h-full items-center justify-center p-5',
+        'container mx-auto flex h-full items-center justify-center',
         className,
       )}
     >
-      <Alert color={color} title={title} variant={variant}>
+      <Alert color={color} description={description} variant={variant}>
         {children}
       </Alert>
     </div>

@@ -12,14 +12,6 @@ const favoriteQueryKeys = {
 
     byFilter: (filters: FavoriteListFilters = {}) =>
       [...favoriteQueryKeys.list.all, filters] as const,
-
-    homepage: (locale?: string, itemsPerPage?: number) =>
-      [
-        ...favoriteQueryKeys.list.all,
-        'homepage',
-        locale,
-        itemsPerPage,
-      ] as const,
   },
 
   detail: {

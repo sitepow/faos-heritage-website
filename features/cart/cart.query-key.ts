@@ -1,26 +1,19 @@
-type CartListFilters = {
-  locale?: string
-  isActive?: boolean
-  position?: 'homepage' | 'dashboard'
+type CartStatParams = {
+  userId?: string
 }
 
+const cartRootKey = ['carts'] as const
+
 const cartQueryKeys = {
-  root: ['carts'] as const,
+  root: cartRootKey,
 
   list: {
-    all: [...['carts'], 'list'] as const,
-
-    byFilter: (filters: CartListFilters = {}) =>
-      [...cartQueryKeys.list.all, filters] as const,
-
-    homepage: (locale?: string, itemsPerPage?: number) =>
-      [...cartQueryKeys.list.all, 'homepage', locale, itemsPerPage] as const,
+    all: (params: CartStatParams) => [...cartRootKey, 'list', params] as const,
   },
 
-  detail: {
-    all: [...['carts'], 'detail'] as const,
-
-    byId: (id: string) => [...cartQueryKeys.detail.all, id] as const,
+  stat: {
+    byUser: (params: CartStatParams) =>
+      [...cartRootKey, 'stat', params] as const,
   },
 }
 

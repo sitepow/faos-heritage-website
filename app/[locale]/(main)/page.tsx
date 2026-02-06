@@ -6,6 +6,7 @@ import { ProductExploreSection } from './_components/ProductExploreSection'
 
 import { AdvertiseBanner } from '@/components/ui/Advertise/AdvertiseBanner'
 import { CategoryLists } from '@/components/ui/CategoryLists'
+import { SectionHeader } from '@/components/ui/SectionHeader'
 import { IMAGE_FALLBACK, PAGINATION } from '@/constants'
 import { getProductsInfinite } from '@/features/product/product.action'
 
@@ -53,6 +54,10 @@ export async function generateMetadata({
 }
 
 export default async function Homepage() {
+  const translateCategoryDiscovery = await getTranslations(
+    'shared.categoryDiscovery',
+  )
+
   const locale = await getLocale()
   const products = await getProductsInfinite({
     limit: PAGINATION.ITEMS_PER_PAGE,
@@ -62,7 +67,13 @@ export default async function Homepage() {
   return (
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
       <div className='flex w-full flex-col gap-5 p-5'>
-        <CategoryLists />
+        <div className='flex flex-col gap-5'>
+          <SectionHeader
+            description={translateCategoryDiscovery('description')}
+            title={translateCategoryDiscovery('title')}
+          />
+          <CategoryLists />
+        </div>
         <ProductExploreSection
           initialData={products}
           itemsPerPage={PAGINATION.ITEMS_PER_PAGE}

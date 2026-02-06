@@ -16,9 +16,9 @@
       {
         "isGroup": true,
         "subSections": [
-          { "title": "[บริการจัดส่ง]", "isShipping": true },
+          { "title": "บริการจัดส่ง", "isShipping": true },
           {
-            "title": "[วิธีการชำระเงิน]",
+            "title": "วิธีการชำระเงิน",
             "isPayment": true,
             "items": [
               "/images/visa.svg",

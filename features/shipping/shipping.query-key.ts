@@ -1,7 +1,6 @@
 type ShippingListFilters = {
   locale?: string
   isActive?: boolean
-  position?: 'homepage' | 'dashboard'
 }
 
 const shippingQueryKeys = {
@@ -12,9 +11,16 @@ const shippingQueryKeys = {
 
     byFilter: (filters: ShippingListFilters = {}) =>
       [...shippingQueryKeys.list.all, filters] as const,
+  },
 
-    homepage: (locale?: string) =>
-      [...shippingQueryKeys.list.all, 'homepage', locale] as const,
+  cost: {
+    byUserId: (id: string, countryCode?: string, cartItems?: any[]) =>
+      [
+        ...shippingQueryKeys.root,
+        'cost',
+        id,
+        { countryCode, cartItems },
+      ] as const,
   },
 
   detail: {

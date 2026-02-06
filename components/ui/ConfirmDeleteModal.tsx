@@ -9,8 +9,9 @@ import {
   ModalFooter,
   Button,
 } from '@heroui/react'
+import { useTranslations } from 'next-intl'
 
-interface ConfirmModalProps {
+interface ConfirmDeleteModalProps {
   isOpen: boolean
   onOpenChange: (open: boolean) => void
   onConfirm: () => void
@@ -21,16 +22,19 @@ interface ConfirmModalProps {
   cancelText?: string
 }
 
-const ConfirmModal = ({
+const ConfirmDeleteModal = ({
   isOpen,
   onOpenChange,
   onConfirm,
   isPending = false,
-  title = 'คุณกำลังจะลบข้อมูลนี้ใช่หรือไม่?',
-  description = 'การลบนี้เป็นการลบถาวรและไม่สามารถกู้คืนได้',
-  confirmText = 'ตกลง',
-  cancelText = 'ยกเลิก',
-}: ConfirmModalProps) => {
+  title,
+  description,
+  confirmText,
+  cancelText,
+}: ConfirmDeleteModalProps) => {
+  const translateDeleteAlert = useTranslations('global.alert.delete')
+  const translateActions = useTranslations('actions')
+
   const handleCancel = () => {
     if (isPending) {
       return
@@ -47,15 +51,17 @@ const ConfirmModal = ({
       onOpenChange={onOpenChange}
     >
       <ModalContent>
-        <ModalHeader className='flex flex-col gap-1'>{title}</ModalHeader>
+        <ModalHeader className='flex flex-col gap-1'>
+          {title ?? translateDeleteAlert('title')}
+        </ModalHeader>
 
         <ModalBody>
-          <p className='text-default-500 text-sm'>{description}</p>
+          <p>{description ?? translateDeleteAlert('description')}</p>
         </ModalBody>
 
         <ModalFooter className='gap-2'>
           <Button isDisabled={isPending} variant='faded' onPress={handleCancel}>
-            {cancelText}
+            {cancelText ?? translateActions('cancel')}
           </Button>
 
           <Button
@@ -65,7 +71,7 @@ const ConfirmModal = ({
             isLoading={isPending}
             onPress={onConfirm}
           >
-            {confirmText}
+            {confirmText ?? translateActions('confirm')}
           </Button>
         </ModalFooter>
       </ModalContent>
@@ -73,4 +79,4 @@ const ConfirmModal = ({
   )
 }
 
-export { ConfirmModal }
+export { ConfirmDeleteModal }

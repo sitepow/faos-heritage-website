@@ -46,7 +46,7 @@ const ProductShare = ({
 
         <button
           aria-label='Copy link'
-          className='border-divider flex items-center justify-center rounded-full border'
+          className='border-default-100 flex items-center justify-center rounded-full border'
           style={{ width: size, height: size }}
           type='button'
           onClick={copy}

@@ -68,7 +68,7 @@
 //         />
 //       )}
 
-//       <div className='border-divider flex flex-wrap items-center justify-between gap-3 border-b p-2.5'>
+//       <div className='border-default-100 flex flex-wrap items-center justify-between gap-3 border-b p-2.5'>
 //         <div className='flex flex-wrap gap-3 sm:col-span-2'>
 //           <AvatarGroup isBordered max={4}>
 //             {productImages.map((src) => (

@@ -2,9 +2,12 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useSession } from 'next-auth/react'
 import { useMemo, useState } from 'react'
 
-import type { GetProductsInfiniteResult } from './product.action'
+import type {
+  GetProductResult,
+  GetProductsInfiniteResult,
+} from './product.action'
 
-import { getProductsInfinite } from './product.action'
+import { getProduct, getProductsInfinite } from './product.action'
 import { productQueryKeys } from './product.query-key'
 import { useProductDetailStore } from './product.store'
 import { createCart } from '../cart/cart.action'
@@ -12,13 +15,18 @@ import { cartQueryKeys } from '../cart/cart.query-key'
 import { useExchangeRate } from '../exchangeRate/useExchangeRate'
 import { favoriteQueryKeys } from '../favorite/favorite.query-key'
 
-import { useAppStore } from '@/app/store'
 import { PAGINATION } from '@/constants'
 import { createFavorite } from '@/features/favorite/favorite.action'
 import { ERROR_CODES } from '@/lib/errors'
 import { resolveRangeDisplayValue } from '@/utils'
 import { formatCurrency, formatCurrencyRange } from '@/utils/number'
 
+interface UseProductParams {
+  locale: string
+  productId: string
+  userId: string
+  initialData?: GetProductResult
+}
 interface UseProductsParams {
   locale: string
   itemsPerPage: number
@@ -38,6 +46,20 @@ interface UseSimilarProductsParams {
   limit?: number
 }
 
+const useProduct = ({
+  locale,
+  productId,
+  userId,
+  initialData,
+}: UseProductParams) => {
+  return useQuery({
+    queryKey: ['product', productId, locale],
+    queryFn: async () => getProduct(productId, userId, locale),
+    initialData,
+    enabled: !!productId,
+  })
+}
+
 const useProducts = ({
   locale,
   itemsPerPage,
@@ -55,18 +77,7 @@ const useProductPrice = ({
   priceMin,
   priceMax,
 }: UseProductPriceParams) => {
-  const { appLocale } = useAppStore()
-
-  const { data: exchangeRates } = useExchangeRate()
-
-  const currencyOptions = useMemo(
-    () => ({
-      currency: appLocale?.currency,
-      locale: appLocale?.locale,
-      rates: exchangeRates,
-    }),
-    [appLocale?.currency, appLocale?.locale, exchangeRates],
-  )
+  const { currencyOptions } = useExchangeRate()
 
   const displayPrice = useMemo(
     () =>
@@ -147,9 +158,6 @@ const useProductPurchase = () => {
     onSuccess: async () => {
       await Promise.all([
         queryClient.invalidateQueries({ queryKey: cartQueryKeys.root }),
-        queryClient.invalidateQueries({
-          queryKey: productQueryKeys.detail.byId(product!.id),
-        }),
       ])
     },
   })
@@ -163,10 +171,7 @@ const useProductPurchase = () => {
       return createFavorite(userId, product.id)
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: favoriteQueryKeys.detail.all })
-      queryClient.invalidateQueries({
-        queryKey: productQueryKeys.detail.byId(product!.id),
-      })
+      queryClient.invalidateQueries({ queryKey: favoriteQueryKeys.root })
     },
   })
 
@@ -195,4 +200,10 @@ const useProductPurchase = () => {
   }
 }
 
-export { useProducts, useProductPrice, useSimilarProducts, useProductPurchase }
+export {
+  useProduct,
+  useProducts,
+  useProductPrice,
+  useSimilarProducts,
+  useProductPurchase,
+}

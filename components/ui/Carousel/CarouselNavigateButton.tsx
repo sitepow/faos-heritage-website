@@ -10,15 +10,14 @@ type CarouselNavigateButtonProps = ComponentProps<'button'> & {
 }
 
 const buttonVariants = cva([
-  'flex size-9 items-center justify-center rounded-full',
-  'bg-white shadow-md',
-  'hover:bg-gray-50',
+  'flex size-9 cursor-pointer items-center justify-center rounded-full',
+  'bg-white/50 backdrop-blur-md',
   'focus-visible:ring focus-visible:outline-none',
 ])
 
 const ICON_MAP = {
-  prev: <ChevronLeftIcon className='size-5 text-gray-500' />,
-  next: <ChevronRightIcon className='size-5 text-gray-500' />,
+  prev: <ChevronLeftIcon className='text-black/50' />,
+  next: <ChevronRightIcon className='text-black/50' />,
 }
 
 const CarouselNavigateButton = ({

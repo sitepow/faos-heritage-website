@@ -1,5 +1,3 @@
-import type { GetProductResult } from '@/features/product/product.action'
-
 import { IMAGE_FALLBACK } from '@/constants'
 
 const getBackgroundStyle = (image: string) => {
@@ -17,12 +15,16 @@ const getBackgroundStyle = (image: string) => {
   }
 }
 
-const resolveProductImages = (product: GetProductResult) => {
-  const images = product?.images ?? []
+interface ResolveProductimagesProps {
+  images?: { url: string; isPrimary: boolean }[]
+}
 
-  const primary = images.find((img) => img.isPrimary) ?? images[0] ?? null
+const resolveProductImages = ({ images }: ResolveProductimagesProps = {}) => {
+  const safeImages = Array.isArray(images) ? images : []
 
-  const hover = images.find((img) => !img.isPrimary) ?? primary
+  const primary =
+    safeImages.find((img) => img.isPrimary) ?? safeImages[0] ?? null
+  const hover = safeImages.find((img) => !img.isPrimary) ?? primary
 
   return {
     primarySrc: primary?.url ?? IMAGE_FALLBACK.EMPTY,

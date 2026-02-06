@@ -1,5 +1,7 @@
 import { CheckCircleIcon } from 'lucide-react'
 
+import { SectionHeader } from '../SectionHeader'
+
 import { getBackgroundStyle } from '@/utils'
 
 interface AdvertiseCardProps {
@@ -15,9 +17,7 @@ const AdvertiseCard = ({ title, image, messages }: AdvertiseCardProps) => {
       style={getBackgroundStyle(image)}
     >
       <div className='relative z-10 flex flex-col items-center gap-10'>
-        <h2 className='max-w-2xl text-center text-xl leading-tight font-bold tracking-tight sm:text-2xl'>
-          {title}
-        </h2>
+        <SectionHeader className='max-w-2xl text-white' title={title} />
 
         <ul className='grid w-full max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-3'>
           {messages.map((message) => (

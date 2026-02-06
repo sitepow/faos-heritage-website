@@ -134,7 +134,7 @@
 //             icon: 'text-secondary',
 //           },
 //         }}
-//         className='border-divider rounded-lg border'
+//         className='border-default-100 rounded-lg border'
 //         selectionMode='multiple'
 //         onSelectionChange={(keys) => {
 //           setSelectedKeys(keys as Set<string>)

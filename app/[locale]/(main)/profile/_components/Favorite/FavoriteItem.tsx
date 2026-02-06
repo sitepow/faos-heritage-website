@@ -89,7 +89,7 @@
 //         fullWidth
 //         className={cn(
 //           className,
-//           // '[&:not(:last-child)]:border-divider [&:not(:last-child)]:border-b',
+//           // '[&:not(:last-child)]:border-default-100 [&:not(:last-child)]:border-b',
 //         )}
 //         radius='none'
 //         shadow='none'
@@ -100,7 +100,7 @@
 //             <div className='flex flex-wrap items-center gap-10 lg:max-w-1/2 lg:flex-nowrap'>
 //               <div
 //                 className={cn(
-//                   'border-divider relative aspect-square size-[250px] shrink-0 overflow-hidden rounded-lg border bg-white transition-all duration-1000 ease-in-out',
+//                   'border-default-100 relative aspect-square size-[250px] shrink-0 overflow-hidden rounded-lg border bg-white transition-all duration-1000 ease-in-out',
 //                   // 'rounded-[60%_40%_30%_70%/60%_30%_70%_40%]',
 //                 )}
 //               >
@@ -118,7 +118,7 @@
 //               </div>
 
 //               {/* <Link
-//                 className='border-divider size-[150px] shrink-0 rounded-xl border'
+//                 className='border-default-100 size-[150px] shrink-0 rounded-xl border'
 //                 href={`/product/${createSlug(favorite?.product?.name, favorite?.product?.id)}`}
 //               >
 //                 <img

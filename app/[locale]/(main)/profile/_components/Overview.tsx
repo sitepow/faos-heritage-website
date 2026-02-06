@@ -32,7 +32,7 @@
 //   })
 
 //   return (
-//     <Card fullWidth className='border-divider border' radius='sm' shadow='none'>
+//     <Card fullWidth className='border-default-100 border' radius='sm' shadow='none'>
 //       <CardHeader>
 //         <span className='font-semibold'>{t('tabs.manage')}</span>
 //       </CardHeader>
@@ -41,11 +41,11 @@
 
 //         {!isLoadingUser && (
 //           <div className='flex flex-col sm:max-w-1/2'>
-//             <div className='border-divider bg-primary rounded-t-lg border p-2.5 text-white'>
+//             <div className='border-default-100 bg-primary rounded-t-lg border p-2.5 text-white'>
 //               <span className='font-semibold'>{t('personalInfo')}</span>
 //             </div>
 
-//             <div className='border-divider rounded-b-lg border-x border-b p-2.5 *:flex *:gap-3'>
+//             <div className='border-default-100 rounded-b-lg border-x border-b p-2.5 *:flex *:gap-3'>
 //               <span>
 //                 {t('fields.name')} : {user?.name ?? '-'}
 //               </span>

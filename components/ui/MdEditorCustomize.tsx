@@ -87,7 +87,7 @@ const MdEditorCustomize = ({
     <MDXEditor
       {...props}
       className={cn(
-        'border-divider dark-theme dark-editor col-span-2 rounded-xl border',
+        'border-default-100 dark-theme dark-editor col-span-2 rounded-xl border',
         className,
       )}
       markdown={localValue}

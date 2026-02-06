@@ -22,4 +22,8 @@ const getSingleKey = <T extends string>(keys: SharedSelection) => {
   return Array.from(keys)[0] as T | undefined
 }
 
-export { omitEmptyFields, getSingleKey }
+const calculateTotalPrice = (price: number, quantity: number) => {
+  return (price ?? 0) * (quantity ?? 0)
+}
+
+export { omitEmptyFields, getSingleKey, calculateTotalPrice }

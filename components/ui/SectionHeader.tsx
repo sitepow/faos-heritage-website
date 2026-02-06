@@ -7,6 +7,10 @@ type SectionHeaderProps = ComponentPropsWithoutRef<'div'> & {
   description?: ReactNode
 }
 
+type SectionLabelProps = ComponentPropsWithoutRef<'span'> & {
+  children: ReactNode
+}
+
 const SectionHeader = ({
   title,
   description,
@@ -14,13 +18,19 @@ const SectionHeader = ({
   ...props
 }: SectionHeaderProps) => {
   return (
-    <div className={cn('space-y-1', className)} {...props}>
-      <h2 className='text-primary text-xl font-semibold tracking-tight sm:text-2xl'>
+    <div
+      className={cn(
+        'text-primary flex flex-col items-center space-y-1',
+        className,
+      )}
+      {...props}
+    >
+      <h2 className='text-xl font-semibold tracking-tight sm:text-2xl'>
         {title}
       </h2>
 
       {description ? (
-        <p className='text-primary mx-auto max-w-[75%] sm:text-lg'>
+        <p className='mx-auto max-w-[75%] opacity-90 sm:text-lg'>
           {description}
         </p>
       ) : null}
@@ -28,15 +38,11 @@ const SectionHeader = ({
   )
 }
 
-type SectionLabelProps = ComponentPropsWithoutRef<'span'> & {
-  children: ReactNode
-}
-
 const SectionLabel = ({ children, className, ...props }: SectionLabelProps) => {
   return (
     <span
       className={cn(
-        'border-divider text-default-500 block w-fit border-b pb-1 text-sm',
+        'border-default-100 text-default-500 block w-fit border-b pb-1 text-sm',
         className,
       )}
       {...props}

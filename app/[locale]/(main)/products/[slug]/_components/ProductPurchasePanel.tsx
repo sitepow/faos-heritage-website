@@ -7,74 +7,67 @@ import {
   SelectItem,
   Button,
   Avatar,
-  NumberInput,
 } from '@heroui/react'
 import { HeartIcon, ShoppingCartIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
 import { ProductShare } from './ProductShare'
-import { ProductPrice } from '../../../../../../components/ui/Product/ProductPrice'
 
 import { MarkdownRenderer } from '@/components/ui/Markdown/MarkdownRenderer'
 import { ProductChip } from '@/components/ui/Product/ProductChip'
+import { ProductPrice } from '@/components/ui/Product/ProductPrice'
 import { useProductPurchase } from '@/features/product/useProduct'
 import { generateSlugWithId } from '@/utils'
 
 const ProductPurchasePanel = () => {
-  const translate = useTranslations('ProductCart')
-  const { product, state, actions, loading } = useProductPurchase()
+  const translateActions = useTranslations('actions')
+  const translateCartActions = useTranslations('productDetail.cartActions')
+
+  const {
+    product,
+    state,
+    actions,
+    loading: { isAddingToCart, isAddingToFavorite },
+  } = useProductPurchase()
 
   if (!product) {
     return null
   }
 
   return (
-    <Card className='border-divider border' radius='sm' shadow='none'>
+    <Card className='border-default-100 border' radius='sm' shadow='none'>
       <CardBody className='flex flex-col gap-4'>
         <div>
           <h1 className='py-3 text-xl font-semibold sm:text-2xl lg:text-4xl'>
             {product.name}
           </h1>
 
-          <ProductChip
-            categoryName={product.category?.name}
-            isAuthentic={product.isAuthentic}
-            isPremiumProduct={product.isPremiumProduct}
-          />
+          <div>
+            <ProductChip
+              categoryName={product.category?.name}
+              className='my-5 justify-start'
+              isAuthentic={product.isAuthentic}
+              isPremiumProduct={product.isPremiumProduct}
+            />
 
-          <ProductPrice
-            className='mt-5 items-start'
-            price={state.price}
-            priceMax={!state.selectedVariantId ? product.priceMax : null}
-            priceMin={!state.selectedVariantId ? product.priceMin : null}
-            unit={product.unit}
-          />
+            <ProductPrice
+              className='items-start'
+              price={state.price}
+              priceMax={!state.selectedVariantId ? product.priceMax : null}
+              priceMin={!state.selectedVariantId ? product.priceMin : null}
+              unit={product.unit}
+            />
+          </div>
         </div>
-
-        {product.shortDescription && (
-          <Card className='bg-default-50 dark:bg-default-100'>
-            <CardBody>
-              <MarkdownRenderer content={product.shortDescription} />
-            </CardBody>
-          </Card>
-        )}
 
         {state.hasVariants && (
           <div className='flex flex-col gap-2 sm:flex-row'>
-            <NumberInput
-              isDisabled={state.isOutOfStock}
-              label={translate('quantity')}
-              maxValue={state.stock}
-              minValue={1}
-              value={state.quantity}
-              variant='bordered'
-              onValueChange={(v) =>
-                typeof v === 'number' && actions.changeQuantity(v)
-              }
-            />
-
             <Select
-              label={translate('productOptions')}
+              classNames={{
+                trigger: 'shadow-none',
+              }}
+              label={translateCartActions('options')}
+              radius='none'
               selectedKeys={
                 state.selectedVariantId ? [state.selectedVariantId] : []
               }
@@ -97,17 +90,24 @@ const ProductPurchasePanel = () => {
           </div>
         )}
 
+        {product.shortDescription && (
+          <MarkdownRenderer content={product.shortDescription} />
+        )}
+
         <div className='flex gap-2'>
           <Button
             fullWidth
+            className='bg-primary/20 border-primary text-primary border'
             isDisabled={state.hasFavorite}
-            isLoading={loading.isAddingToFavorite}
-            startContent={<HeartIcon />}
+            isLoading={isAddingToFavorite}
+            radius='none'
+            size='lg'
+            startContent={!isAddingToFavorite && <HeartIcon />}
             variant='faded'
             onPress={() => actions.addToFavorite()}
           >
             <span className='hidden md:block'>
-              {translate('addToFavorites')}
+              {translateCartActions('fav')}
             </span>
           </Button>
 
@@ -119,16 +119,20 @@ const ProductPurchasePanel = () => {
               state.isOutOfStock ||
               (state.hasVariants && !state.selectedVariantId)
             }
-            isLoading={loading.isAddingToCart}
-            startContent={<ShoppingCartIcon />}
+            isLoading={isAddingToCart}
+            radius='none'
+            size='lg'
+            startContent={!isAddingToCart && <ShoppingCartIcon />}
             onPress={() => actions.addToCart()}
           >
-            <span className='hidden md:block'>{translate('addToCart')}</span>
+            <span className='hidden md:block'>
+              {translateCartActions('add')}
+            </span>
           </Button>
         </div>
 
         <ProductShare
-          label={translate('share')}
+          label={translateActions('share')}
           title={product.name}
           url={`${process.env.NEXT_PUBLIC_APP_URL}/product/${generateSlugWithId(
             product.name,

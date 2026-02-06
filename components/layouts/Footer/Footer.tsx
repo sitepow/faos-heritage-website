@@ -18,7 +18,7 @@ const Footer = ({ className, ...props }: ComponentProps<'footer'>) => {
     <footer
       {...props}
       className={cn(
-        'border-divider border-t bg-white p-5 dark:bg-[#131314]',
+        'border-default-100 border-t bg-white p-5 dark:bg-[#131314]',
         className,
       )}
     >
@@ -26,9 +26,7 @@ const Footer = ({ className, ...props }: ComponentProps<'footer'>) => {
         {menu.map((section, idx) => (
           <div key={idx} className='flex flex-col gap-6'>
             {section.title && !section.isGroup && (
-              <span className='text-primary text-base font-bold uppercase'>
-                {section.title}
-              </span>
+              <span className='text-primary font-bold'>{section.title}</span>
             )}
 
             <FooterSection section={section} />
