@@ -1,6 +1,7 @@
 'use client'
 
 import { MenuIcon, XIcon } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 import { MenuItem } from './MenuItem'
@@ -8,9 +9,11 @@ import { NavbarLogo } from './NavbarLogo'
 
 import { CustomIcon } from '@/components/ui/CustomIcon'
 import { useCategories } from '@/features/category/useCategory'
-import { cn } from '@/utils'
+import { cn, generateSlugWithId } from '@/utils'
 
 const NavbarMobileMenu = () => {
+  const router = useRouter()
+
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { data: categories } = useCategories()
 
@@ -34,8 +37,17 @@ const NavbarMobileMenu = () => {
 
         <NavbarLogo />
         <div className='flex flex-col items-center gap-5 pt-10'>
-          {categories?.map(({ name }) => {
-            return <MenuItem key={name} label={name} />
+          {categories?.map(({ name, id }) => {
+            return (
+              <MenuItem
+                key={name}
+                label={name}
+                onClick={() => {
+                  toggleMenu()
+                  router.push(`/categories/${generateSlugWithId(name!, id!)}`)
+                }}
+              />
+            )
           })}
         </div>
       </div>
