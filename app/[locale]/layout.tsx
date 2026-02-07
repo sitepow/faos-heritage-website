@@ -1,11 +1,16 @@
 import { notFound } from 'next/navigation'
 import { hasLocale, NextIntlClientProvider } from 'next-intl'
-import { getMessages, setRequestLocale } from 'next-intl/server'
+import {
+  getMessages,
+  getTranslations,
+  setRequestLocale,
+} from 'next-intl/server'
 
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 
 import { routing } from '@/i18n/routing'
+import { constructMetadata } from '@/lib/metadata'
 
 interface LocaleLayoutProps {
   children: ReactNode
@@ -26,14 +31,14 @@ export async function generateMetadata({
   params: { locale: string }
 }): Promise<Metadata> {
   const { locale } = await params
-
   assertValidLocale(locale)
 
-  return {
-    icons: {
-      icon: '/favicon.ico',
-    },
-  }
+  const t = await getTranslations({ locale, namespace: 'meta' })
+
+  return constructMetadata({
+    title: t('home.title'),
+    description: t('home.description'),
+  })
 }
 
 const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {

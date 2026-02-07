@@ -56,6 +56,9 @@ const constructMetadata = async ({
     ...(noIndex && {
       robots: { index: false, follow: false },
     }),
+    icons: {
+      icon: '/favicon.ico',
+    },
   }
 }
 
