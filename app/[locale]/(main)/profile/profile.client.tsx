@@ -2,36 +2,35 @@
 
 // import { Tab, Tabs } from '@heroui/react'
 // import Head from 'next/head'
-// import { useSession } from 'next-auth/react'
 // import { useTranslations } from 'next-intl'
 // import { useEffect, useState } from 'react'
 
 // import type { Key } from 'react'
 
-// import { AddressCard } from './_components/Address/AddressItem'
+// import { AddressCard } from './_components/Address/AddressCard'
 // import { FavoriteCard } from './_components/Favorite/FavoriteLists'
 // import { OrderCard } from './_components/Order/OrderLists'
 // import { OverviewCard } from './_components/Overview'
 // import { ProfileCard } from './_components/ProfileForm'
 
-// import { ACCOUNT_TAB } from '@/constants/account'
-// import { IS_TABLET_OR_MOBILE } from '@/constants/responsive'
+// import { PROFILE_TABS } from '@/constants'
+// import { BREAKPOINTS } from '@/constants'
 // import { useIsBelowBreakpoint } from '@/hooks/useIsBelowBreakpoint'
-// import { useMounted } from '@/hooks/useIsMounted'
-// import { useQueryParams } from '@/hooks/useUrlQuery'
+// import { useIsMounted } from '@/hooks/useIsMounted'
+// import { useUrlQuery } from '@/hooks/useUrlQuery'
+// import { useUser } from '@/hooks/useUser'
 
-// export const AccountClient = () => {
-//   const t = useTranslations('Account')
-//   const isTabletOrMobile = useIsBelowBreakpoint(IS_TABLET_OR_MOBILE)
-//   const mounted = useMounted()
+// const ProfileClient = () => {
+//   const t = useTranslations('profile')
+//   const isTabletOrMobile = useIsBelowBreakpoint(BREAKPOINTS.TABLET)
+//   const mounted = useIsMounted()
 
-//   const { data: session } = useSession()
-//   const user = session?.user
-//   const { setQueryParam, getQueryParam } = useQueryParams()
+//   const { user } = useUser()
+//   const { setQueryParam, getQueryParam } = useUrlQuery()
 
-//   const tabParam = getQueryParam('tab') as ACCOUNT_TAB | null
-//   const [selectedTabKey, setSelectedTabKey] = useState<ACCOUNT_TAB>(
-//     tabParam ?? ACCOUNT_TAB.ACCOUNT,
+//   const tabParam = getQueryParam('tab') as PROFILE_TABS | null
+//   const [selectedTabKey, setSelectedTabKey] = useState<PROFILE_TABS>(
+//     tabParam ?? PROFILE_TABS.ACCOUNT,
 //   )
 
 //   useEffect(() => {
@@ -41,7 +40,7 @@
 //   }, [selectedTabKey, tabParam])
 
 //   const handleTabChange = (key: Key) => {
-//     const tab = key as ACCOUNT_TAB
+//     const tab = key as PROFILE_TABS
 
 //     setSelectedTabKey(tab)
 //     setQueryParam('tab', tab)
@@ -75,22 +74,22 @@
 //               variant='bordered'
 //               onSelectionChange={handleTabChange}
 //             >
-//               <Tab key={ACCOUNT_TAB.ACCOUNT} title={t('tabs.manage')}>
+//               <Tab key={PROFILE_TABS.ACCOUNT} title={t('tabs.manage')}>
 //                 <OverviewCard
-//                   onclickAddress={() => handleTabChange(ACCOUNT_TAB.ADDRESS)}
-//                   onclickProfile={() => handleTabChange(ACCOUNT_TAB.PROFILE)}
+//                   onclickAddress={() => handleTabChange(PROFILE_TABS.ADDRESS)}
+//                   onclickProfile={() => handleTabChange(PROFILE_TABS.PROFILE)}
 //                 />
 //               </Tab>
-//               <Tab key={ACCOUNT_TAB.ORDER} title={t('tabs.orders')}>
+//               <Tab key={PROFILE_TABS.ORDER} title={t('tabs.orders')}>
 //                 <OrderCard />
 //               </Tab>
-//               <Tab key={ACCOUNT_TAB.FAVORITE} title={t('tabs.favorites')}>
+//               <Tab key={PROFILE_TABS.FAVORITE} title={t('tabs.favorites')}>
 //                 <FavoriteCard />
 //               </Tab>
-//               <Tab key={ACCOUNT_TAB.PROFILE} title={t('tabs.editProfile')}>
+//               <Tab key={PROFILE_TABS.PROFILE} title={t('tabs.editProfile')}>
 //                 <ProfileCard />
 //               </Tab>
-//               <Tab key={ACCOUNT_TAB.ADDRESS} title={t('tabs.address')}>
+//               <Tab key={PROFILE_TABS.ADDRESS} title={t('tabs.address')}>
 //                 <AddressCard />
 //               </Tab>
 //             </Tabs>
@@ -100,3 +99,5 @@
 //     </>
 //   )
 // }
+
+// export { ProfileClient }

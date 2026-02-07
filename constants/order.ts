@@ -3,7 +3,7 @@ import type { OrderStatus } from '@prisma/client'
 
 const UNKNOWN_ADDRESS_MESSAGE = 'The shipping address is unknown.'
 
-enum ACCOUNT_TAB {
+enum PROFILE_TABS {
   ACCOUNT = 'account',
   ORDER = 'order',
   FAVORITE = 'favorite',
@@ -175,7 +175,7 @@ const SHIPPING_PROVIDERS = [
 ] as const
 
 export {
-  ACCOUNT_TAB,
+  PROFILE_TABS,
   UNKNOWN_ADDRESS_MESSAGE,
   ORDER_STATUS_LABELS,
   ACTIVE_ORDER_STATUS,

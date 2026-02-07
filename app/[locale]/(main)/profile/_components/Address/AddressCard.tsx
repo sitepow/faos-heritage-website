@@ -18,7 +18,7 @@
 
 // import { AddressItem } from './AddressItem'
 
-// import { ConfirmModal } from '@/components/ui/ConfirmModal'
+// import { ConfirmDeleteModal } from '@/components/ui/ConfirmDeleteModal'
 // import { deleteAddress } from '@/features/address/address.action'
 // import { addressQueryKeys } from '@/features/address/address.query-key'
 // import { useAddressStore } from '@/features/address/address.store'
@@ -58,7 +58,7 @@
 
 //   return (
 //     <>
-//       <ConfirmModal
+//       <ConfirmDeleteModal
 //         isOpen={isDeleteOpen}
 //         isPending={isDeleting}
 //         onConfirm={() => performDelete(addressId)}

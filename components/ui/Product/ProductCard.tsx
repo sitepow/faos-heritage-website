@@ -1,9 +1,11 @@
 'use client'
 
-import { Card, CardBody, CardHeader, cn, Skeleton } from '@heroui/react'
+import { Card, CardBody, cn, Skeleton } from '@heroui/react'
 import Link from 'next/link'
 
-import type { GetProductResult } from '@/features/product/product.action'
+type ProductItem = GetProductsInfiniteResult['items'][number]
+
+import type { GetProductsInfiniteResult } from '@/features/product/product.action'
 
 import { ProductChip } from './ProductChip'
 import { ProductImage } from './ProductImage'
@@ -17,7 +19,7 @@ import {
 
 interface ProductCardProps {
   className?: string
-  product: GetProductResult
+  product: ProductItem
 }
 
 const ProductCardSkeleton = () => <Skeleton className='h-[420px] w-full' />
@@ -30,16 +32,14 @@ const ProductCard = ({ className, product }: ProductCardProps) => {
   return (
     <Card
       className={cn(
-        'group flex w-full flex-col border-none bg-transparent shadow-none',
+        'group flex w-full flex-col bg-transparent shadow-none',
         className,
       )}
       radius='none'
       shadow='none'
     >
       <Link className='block space-y-6' href={productHref}>
-        <CardHeader>
-          <ProductImage image={primarySrc} />
-        </CardHeader>
+        <ProductImage className='h-[350px] w-full' image={primarySrc} />
 
         <CardBody className='flex flex-col items-start overflow-hidden p-0'>
           <ProductChip

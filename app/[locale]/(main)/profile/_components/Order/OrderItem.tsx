@@ -8,13 +8,10 @@
 // import { useRouter } from 'next/navigation'
 // import { useTranslations } from 'next-intl'
 
-// import type { GetOrderResult } from '@/app/[locale]/(dashboard)/dashboard/order/action'
-
-// import { useOrderStore } from '@/app/[locale]/(dashboard)/dashboard/order/store'
 // import { createStripeCheckout } from '@/app/actions/stripe'
-// import { Stepper } from '@/components/ui/OrderStepper/OrderStepper'
-// // import { OmisePayment } from '@/components/features/omise/payment'
-// import { NO_IMAGE } from '@/constants/seo'
+// import { OrderStepper } from '@/components/ui/OrderStepper/OrderStepper'
+// import { IMAGE_FALLBACK } from '@/constants'
+// import { useOrderStore } from '@/features/order/order.store'
 // import { formatDate } from '@/utils/date'
 // import { formatCurrency, formatNumber } from '@/utils/number'
 
@@ -53,7 +50,7 @@
 //   })
 
 //   const productImages = order.items?.map(
-//     (item) => item.product?.images?.[0]?.url ?? NO_IMAGE,
+//     (item) => item.product?.images?.[0]?.url ?? IMAGE_FALLBACK.EMPTY,
 //   )
 
 //   const isDisableReceipt = DISABLE_RECEIPT_STATUSES.includes(order.status)
@@ -155,7 +152,7 @@
 //         )}
 //       </div>
 
-//       <Stepper
+//       <OrderStepper
 //         className='p-5'
 //         createdAt={order?.createdAt!}
 //         deliveredAt={order?.deliveredAt!}

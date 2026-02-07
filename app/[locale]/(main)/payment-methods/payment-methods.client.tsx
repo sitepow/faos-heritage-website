@@ -18,26 +18,32 @@ interface Props {
   }
 }
 
+const ACCORDION_CLASSNAME =
+  'border-default-100 bg-background border text-start shadow-none'
+
 const PaymentMethodsClient = ({ data }: Props) => {
   return (
     <Accordion variant='splitted'>
-      <AccordionItem title={data.howToShop.title}>
+      <AccordionItem
+        className={ACCORDION_CLASSNAME}
+        title={data.howToShop.title}
+      >
         {data.howToShop.steps.map((step, index) => (
           <StepItem key={index} index={index} text={step} />
         ))}
       </AccordionItem>
 
-      <AccordionItem className='text-start' title={data.card.title}>
+      <AccordionItem className={ACCORDION_CLASSNAME} title={data.card.title}>
         <p>{data.card.accepted}</p>
         <p>{data.card.security}</p>
       </AccordionItem>
 
-      <AccordionItem className='text-start' title={data.qr.title}>
+      <AccordionItem className={ACCORDION_CLASSNAME} title={data.qr.title}>
         <p>{data.qr.method}</p>
         <p>{data.qr.note}</p>
       </AccordionItem>
 
-      <AccordionItem className='text-start' title={data.atStore.title}>
+      <AccordionItem className={ACCORDION_CLASSNAME} title={data.atStore.title}>
         <p>{data.atStore.description}</p>
 
         <div className='my-2.5 flex flex-col gap-1.5'>

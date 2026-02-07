@@ -1,15 +1,23 @@
 // import { Suspense } from 'react'
 
-// import { AccountClient } from './profile.client'
+// import { ProfileClient } from './profile.client'
 
-// import { requireSession } from '@/utils/auth'
+// import { requireAuth } from '@/utils/auth'
 
-// export default async function Account() {
-//   await requireSession()
+// const ProfilePage = async () => {
+//   await requireAuth()
 
 //   return (
 //     <Suspense>
-//       <AccountClient />
+//       <ProfileClient />
 //     </Suspense>
 //   )
 // }
+
+// export { ProfilePage }
+
+const ProfilePage = () => {
+  return <div />
+}
+
+export default ProfilePage

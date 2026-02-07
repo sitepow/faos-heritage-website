@@ -11,7 +11,7 @@
 // import { FavoriteItem } from './FavoriteItem'
 // import { getFavorites } from '../../../../../../features/favorite/favorite.action'
 
-// export const FavoriteCard = () => {
+// const FavoriteCard = () => {
 //   const t = useTranslations('Account')
 //   const { data: session } = useSession()
 //   const userId = session?.user?.id
@@ -28,7 +28,12 @@
 //   const favoritesLength = favorites?.items?.length
 
 //   return (
-//     <Card fullWidth className='border-default-100 border' radius='sm' shadow='none'>
+//     <Card
+//       fullWidth
+//       className='border-default-100 border'
+//       radius='sm'
+//       shadow='none'
+//     >
 //       <CardHeader className='font-semibold'>{t('tabs.favorites')}</CardHeader>
 //       <CardBody className='gap-4'>
 //         {isLoadingFaorites && <Skeleton className='h-40 w-full rounded-xl' />}
@@ -61,3 +66,5 @@
 //     </Card>
 //   )
 // }
+
+// export { FavoriteCard }

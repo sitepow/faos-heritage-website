@@ -10,12 +10,10 @@
 
 // import { OrderItem } from './OrderItem'
 
-// import { getOrders } from '@/app/[locale]/(dashboard)/dashboard/order/action'
-// import { OrderForm } from '@/app/[locale]/(main)/account/_components/order/form'
 // import { OrderViewModal } from '@/components/ui/OrderViewModal/OrderViewModal'
-// import { ITEM_PER_PAGE } from '@/constants/app'
+// import { PAGINATION } from '@/constants'
 
-// export const OrderCard = () => {
+// const OrderCard = () => {
 //   const t = useTranslations('Account.Orders')
 //   const [page, setPage] = useState(1)
 
@@ -28,7 +26,7 @@
 
 //   const { data: orders, isLoading: isLoadingOrders } = useQuery({
 //     queryKey: QUERY_KEY.ORDERS,
-//     queryFn: () => getOrders(page, ITEM_PER_PAGE, userId),
+//     queryFn: () => getOrders(page, PAGINATION.ITEMS_PER_PAGE, userId),
 //   })
 
 //   const ordersLength = orders?.items?.length
@@ -92,3 +90,5 @@
 //     </div>
 //   )
 // }
+
+// export { OrderCard }

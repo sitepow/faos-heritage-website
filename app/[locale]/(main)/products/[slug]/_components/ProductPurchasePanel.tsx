@@ -97,14 +97,16 @@ const ProductPurchasePanel = () => {
         <div className='flex gap-2'>
           <Button
             fullWidth
-            className='bg-primary/20 border-primary text-primary border'
-            isDisabled={state.hasFavorite}
             isLoading={isAddingToFavorite}
             radius='none'
             size='lg'
             startContent={!isAddingToFavorite && <HeartIcon />}
             variant='faded'
+            // eslint-disable-next-line react/jsx-sort-props
             onPress={() => actions.addToFavorite()}
+            className='bg-primary/20 border-primary text-primary border'
+            // isDisabled={state.hasFavorite}
+            isDisabled
           >
             <span className='hidden md:block'>
               {translateCartActions('fav')}
@@ -115,10 +117,12 @@ const ProductPurchasePanel = () => {
             fullWidth
             className='text-secondary'
             color='primary'
-            isDisabled={
-              state.isOutOfStock ||
-              (state.hasVariants && !state.selectedVariantId)
-            }
+            // eslint-disable-next-line react/jsx-sort-props
+            isDisabled
+            // isDisabled={
+            //   state.isOutOfStock ||
+            //   (state.hasVariants && !state.selectedVariantId)
+            // }
             isLoading={isAddingToCart}
             radius='none'
             size='lg'

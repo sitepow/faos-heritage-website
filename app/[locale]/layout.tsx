@@ -9,9 +9,9 @@ import { routing } from '@/i18n/routing'
 
 interface LocaleLayoutProps {
   children: ReactNode
-  params: {
+  params: Promise<{
     locale: string
-  }
+  }>
 }
 
 function assertValidLocale(locale: string) {

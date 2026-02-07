@@ -12,7 +12,7 @@ import type { ComponentProps } from 'react'
 import { CartSummaryRow } from './CartSummaryRow'
 
 import { useAppStore } from '@/app/store'
-import { ACCOUNT_TAB, CURRENCY } from '@/constants'
+import { PROFILE_TABS, CURRENCY } from '@/constants'
 import { useAddressByUserId } from '@/features/address/useAddress'
 import { useCarts } from '@/features/cart/useCart'
 import { useExchangeRate } from '@/features/exchangeRate/useExchangeRate'
@@ -29,9 +29,9 @@ const CartSummaryCard = ({ className, ...props }: CartCheckoutProps) => {
   const translateSummary = useTranslations('cart.checkout.summary')
 
   const router = useRouter()
-  const ROUTER_PATH = {
-    ADDRESS: () => router.push(`/account?tab=${ACCOUNT_TAB?.ADDRESS}`),
-    ORDER: () => router.push(`/account?tab=${ACCOUNT_TAB?.ORDER}`),
+  const ROUTER_PATHS = {
+    ADDRESS: () => router.push(`/account?tab=${PROFILE_TABS?.ADDRESS}`),
+    ORDER: () => router.push(`/account?tab=${PROFILE_TABS?.ORDER}`),
   }
 
   const userId = useSession()?.data?.user?.id
@@ -71,7 +71,7 @@ const CartSummaryCard = ({ className, ...props }: CartCheckoutProps) => {
       },
       {
         onSuccess: () => {
-          ROUTER_PATH.ORDER
+          ROUTER_PATHS.ORDER
         },
       },
     )
@@ -101,7 +101,7 @@ const CartSummaryCard = ({ className, ...props }: CartCheckoutProps) => {
               {formatFullAddress(address)}{' '}
               <button
                 className='text-primary cursor-pointer underline'
-                onClick={ROUTER_PATH.ADDRESS}
+                onClick={ROUTER_PATHS.ADDRESS}
               >
                 {translateAction('editAddress')}
               </button>
@@ -139,7 +139,7 @@ const CartSummaryCard = ({ className, ...props }: CartCheckoutProps) => {
                   button: (chunks) => (
                     <button
                       className='cursor-pointer underline'
-                      onClick={ROUTER_PATH.ADDRESS}
+                      onClick={ROUTER_PATHS.ADDRESS}
                     >
                       {chunks}
                     </button>

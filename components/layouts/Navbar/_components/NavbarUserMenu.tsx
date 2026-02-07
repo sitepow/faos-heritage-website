@@ -17,12 +17,13 @@ import {
   UserIcon,
 } from 'lucide-react'
 import { usePathname, useRouter } from 'next/navigation'
-import { signOut, useSession } from 'next-auth/react'
+import { signOut } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
 import { useMemo } from 'react'
 
 import { CustomIcon } from '@/components/ui/CustomIcon'
-import { ACCOUNT_TAB } from '@/constants'
+import { PROFILE_TABS } from '@/constants'
+import { useUser } from '@/hooks/useUser'
 
 type UserMenuItem = {
   key: string
@@ -35,12 +36,19 @@ type UserMenuItem = {
 const NavbarUserMenu = () => {
   const translateUserPanel = useTranslations('navigation.navbar.userPanel')
 
-  const router = useRouter()
   const pathname = usePathname()
-  const user = useSession()?.data?.user
+  const { user } = useUser()
 
   const isAdmin = user?.role === Role.ADMIN
   const isDashboard = pathname.startsWith('/dashboard')
+
+  const router = useRouter()
+  const ROUTER_PATHS = {
+    ACCOUNT: () => router.push(`/profile?tab=${PROFILE_TABS.ACCOUNT}`),
+    ORDER: () => router.push(`/profile?tab=${PROFILE_TABS.ORDER}`),
+    FAVORITE: () => router.push(`/profile?tab=${PROFILE_TABS.FAVORITE}`),
+    DASHBOARD: () => router.push('/dashboard'),
+  }
 
   const menuItems = useMemo<UserMenuItem[]>(() => {
     const items: UserMenuItem[] = [
@@ -48,19 +56,19 @@ const NavbarUserMenu = () => {
         key: 'account',
         label: 'account',
         icon: <CustomIcon icon={UserIcon} />,
-        action: () => router.push(`/account?tab=${ACCOUNT_TAB.ACCOUNT}`),
+        action: () => ROUTER_PATHS.ACCOUNT,
       },
       {
         key: 'order',
         label: 'orders',
         icon: <CustomIcon icon={PackageIcon} />,
-        action: () => router.push(`/account?tab=${ACCOUNT_TAB.ORDER}`),
+        action: () => ROUTER_PATHS.ORDER,
       },
       {
         key: 'favorite',
         label: 'favorites',
         icon: <CustomIcon icon={HeartIcon} />,
-        action: () => router.push(`/account?tab=${ACCOUNT_TAB.FAVORITE}`),
+        action: () => ROUTER_PATHS.FAVORITE,
       },
     ]
 
@@ -69,7 +77,7 @@ const NavbarUserMenu = () => {
         key: 'dashboard',
         label: 'dashboard',
         icon: <CustomIcon icon={SettingsIcon} />,
-        action: () => router.push('/dashboard'),
+        action: () => ROUTER_PATHS.DASHBOARD,
       })
     }
 
@@ -81,7 +89,14 @@ const NavbarUserMenu = () => {
     })
 
     return items
-  }, [isAdmin, isDashboard, router])
+  }, [
+    ROUTER_PATHS.ACCOUNT,
+    ROUTER_PATHS.DASHBOARD,
+    ROUTER_PATHS.FAVORITE,
+    ROUTER_PATHS.ORDER,
+    isAdmin,
+    isDashboard,
+  ])
 
   return (
     <Dropdown placement='bottom-end'>

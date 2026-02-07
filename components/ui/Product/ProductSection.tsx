@@ -1,6 +1,6 @@
 'use client'
 
-import type { GetProductResult } from '@/features/product/product.action'
+import type { GetProductsInfiniteResult } from '@/features/product/product.action'
 
 import { ProductCard, ProductCardSkeleton } from './ProductCard'
 
@@ -8,7 +8,7 @@ import { Container } from '@/components/layouts/Container'
 import { PAGINATION } from '@/constants'
 
 interface ProductSectionProps {
-  items: GetProductResult[]
+  items: GetProductsInfiniteResult['items']
   isLoading?: boolean
   isFetchingNextPage?: boolean
   itemPerPage?: number

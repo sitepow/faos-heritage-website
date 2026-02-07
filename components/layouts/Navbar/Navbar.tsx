@@ -12,7 +12,7 @@ const Navbar = () => {
     <nav className='sticky top-0 z-50 w-full bg-white dark:bg-[#0a0a0a]'>
       <NavbarTopBar />
 
-      <div className='border-default-100 border-b pb-5'>
+      <div className='border-default-100 border-b pb-2.5 md:pb-5'>
         <Container className='flex items-center justify-between gap-4 px-6 py-4'>
           <NavbarSearch />
           <NavbarLogo />

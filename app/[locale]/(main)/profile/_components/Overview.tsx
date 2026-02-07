@@ -6,17 +6,14 @@
 // import { useSession } from 'next-auth/react'
 // import { useTranslations } from 'next-intl'
 
-// import { getUser } from '@/app/[locale]/(dashboard)/dashboard/user/action'
+// import { getUser } from '@/features/user/user.action'
 
-// interface OverviewCardProps {
+// interface Props {
 //   onclickProfile?: () => void
 //   onclickAddress?: () => void
 // }
 
-// export const OverviewCard = ({
-//   onclickProfile,
-//   onclickAddress,
-// }: OverviewCardProps) => {
+// const OverviewCard = ({ onclickProfile, onclickAddress }: Props) => {
 //   const t = useTranslations('Account')
 //   const { data: session } = useSession()
 //   const userId = session?.user?.id
@@ -32,7 +29,12 @@
 //   })
 
 //   return (
-//     <Card fullWidth className='border-default-100 border' radius='sm' shadow='none'>
+//     <Card
+//       fullWidth
+//       className='border-default-100 border'
+//       radius='sm'
+//       shadow='none'
+//     >
 //       <CardHeader>
 //         <span className='font-semibold'>{t('tabs.manage')}</span>
 //       </CardHeader>
@@ -84,3 +86,5 @@
 //     </Card>
 //   )
 // }
+
+// export { OverviewCard }

@@ -18,17 +18,14 @@
 
 // import type { ImageWithPreview } from '@/components/ui/ImageDropzone'
 
-// import {
-//   getUser,
-//   updateUser,
-// } from '@/app/[locale]/(dashboard)/dashboard/user/action'
+// import { ImageDropzone } from '@/components/ui/ImageDropzone'
+// import { SectionLabel } from '@/components/ui/SectionHeader'
+// import { getUser, updateUser } from '@/features/user/user.action'
 // import {
 //   userUpdateSchema,
 //   type UserUpdateInput,
-// } from '@/app/[locale]/(dashboard)/dashboard/user/schema'
-// import { ImageDropzone } from '@/components/ui/ImageDropzone'
-// import { SubHeading } from '@/components/ui/SectionHeader'
-// import { useImageUpload } from '@/hooks/useResolveImageUpload'
+// } from '@/features/user/user.schema'
+// import { useResolveImageUpload } from '@/hooks/useResolveImageUpload'
 
 // const DEFAULT_VALUES: UserUpdateInput = {
 //   name: '',
@@ -38,7 +35,7 @@
 //   role: Role.CUSTOMER,
 // }
 
-// export const ProfileCard = () => {
+// const ProfileCard = () => {
 //   const t = useTranslations('Account')
 //   const queryClient = useQueryClient()
 
@@ -51,7 +48,7 @@
 
 //   const [previewFiles, setPreviewFiles] = useState<ImageWithPreview[]>([])
 //   const [oldImage, setOldImage] = useState<string | null>(null)
-//   const { resolveImagePath, isUploading } = useImageUpload({
+//   const { resolveImagePath, isUploading } = useResolveImageUpload({
 //     oldImage,
 //     previewFiles,
 //   })
@@ -126,7 +123,12 @@
 //   }
 
 //   return (
-//     <Card fullWidth className='border-default-100 border' radius='sm' shadow='none'>
+//     <Card
+//       fullWidth
+//       className='border-default-100 border'
+//       radius='sm'
+//       shadow='none'
+//     >
 //       <CardHeader>
 //         <span>{t('tabs.editProfile')}</span>
 //       </CardHeader>
@@ -135,7 +137,7 @@
 //           <ImageDropzone onFilesChange={onFilesChange} />
 //         </div>
 
-//         <SubHeading title={t('basicInfo')} />
+//         <SectionLabel>{t('basicInfo')} </SectionLabel>
 //         <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
 //           <Controller
 //             control={control}
@@ -202,3 +204,5 @@
 //     </Card>
 //   )
 // }
+
+// export { ProfileCard }

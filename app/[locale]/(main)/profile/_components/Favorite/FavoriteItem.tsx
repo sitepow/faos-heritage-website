@@ -8,26 +8,20 @@
 
 // import type { ComponentProps } from 'react'
 
+// import { ConfirmDeleteModal } from '@/components/ui/ConfirmDeleteModal'
+// import { ProductPrice } from '@/components/ui/Product/ProductPrice'
+// import { IMAGE_FALLBACK } from '@/constants'
 // import {
 //   deleteFavorite,
 //   type GetFavoriteResult,
-// } from '../../../../../../features/favorite/favorite.action'
-// import { ProductPrice } from '../../../product/[slug]/_components/price'
-
-// import { ConfirmModal } from '@/components/ui/ConfirmModal'
-// import { NO_IMAGE } from '@/constants/seo'
-// import { getProductUnit } from '@/utils/product'
-// import { cn } from '@/utils/style'
+// } from '@/features/favorite/favorite.action'
+// import { cn, resolveProductUnitLabel } from '@/utils'
 
 // type FavoriteItemProps = ComponentProps<typeof Card> & {
 //   favorite: GetFavoriteResult
 // }
 
-// export const FavoriteItem = ({
-//   className,
-//   favorite,
-//   ...props
-// }: FavoriteItemProps) => {
+// const FavoriteItem = ({ favorite, ...props }: FavoriteItemProps) => {
 //   const t = useTranslations('Account')
 //   const queryClient = useQueryClient()
 
@@ -74,7 +68,7 @@
 
 //   return (
 //     <>
-//       <ConfirmModal
+//       <ConfirmDeleteModal
 //         description={t('modals.removeFavorite.description')}
 //         isOpen={isOpenDeleteFavorite}
 //         isPending={isPendingDeleteFavorite}
@@ -85,23 +79,13 @@
 //         onOpenChange={onOpenDeleteFavoriteChange}
 //       />
 
-//       <Card
-//         fullWidth
-//         className={cn(
-//           className,
-//           // '[&:not(:last-child)]:border-default-100 [&:not(:last-child)]:border-b',
-//         )}
-//         radius='none'
-//         shadow='none'
-//         {...props}
-//       >
+//       <Card fullWidth radius='none' shadow='none' {...props}>
 //         <CardBody>
 //           <div className='flex flex-wrap justify-between gap-4'>
 //             <div className='flex flex-wrap items-center gap-10 lg:max-w-1/2 lg:flex-nowrap'>
 //               <div
 //                 className={cn(
 //                   'border-default-100 relative aspect-square size-[250px] shrink-0 overflow-hidden rounded-lg border bg-white transition-all duration-1000 ease-in-out',
-//                   // 'rounded-[60%_40%_30%_70%/60%_30%_70%_40%]',
 //                 )}
 //               >
 //                 <Image
@@ -112,23 +96,10 @@
 //                   )}
 //                   classNames={{ wrapper: 'size-full' }}
 //                   radius='none'
-//                   src={primaryImage?.url ?? NO_IMAGE}
+//                   src={primaryImage?.url ?? IMAGE_FALLBACK.EMPTY}
 //                   width='100%'
 //                 />
 //               </div>
-
-//               {/* <Link
-//                 className='border-default-100 size-[150px] shrink-0 rounded-xl border'
-//                 href={`/product/${createSlug(favorite?.product?.name, favorite?.product?.id)}`}
-//               >
-//                 <img
-//                   alt='product-image'
-//                   className='aspect-square size-full rounded-xl bg-white object-contain'
-//                   height={150}
-//                   src={primaryImage?.url ?? '/images/no-image.jpg'}
-//                   width={150}
-//                 />
-//               </Link> */}
 
 //               <div className='flex flex-col gap-1 sm:w-1/2'>
 //                 <span className='font-semibold'>{favorite?.product?.name}</span>
@@ -143,7 +114,7 @@
 //                   price={favorite?.product?.price}
 //                   priceMax={favorite?.priceMax!}
 //                   priceMin={favorite?.priceMin!}
-//                   unit={getProductUnit(favorite?.product?.unit)}
+//                   unit={resolveProductUnitLabel(favorite?.product?.unit)}
 //                 />
 //               </div>
 //             </div>
@@ -155,7 +126,7 @@
 //                 isLoading={isPendingDeleteFavorite}
 //                 startContent={!isPendingDeleteFavorite && <XIcon size={18} />}
 //                 variant='bordered'
-//                 onClick={onOpenDeleteFavoriteChange}
+//                 onPress={onOpenDeleteFavoriteChange}
 //               >
 //                 {t('buttons.removeFavorite')}
 //               </Button>
@@ -166,3 +137,5 @@
 //     </>
 //   )
 // }
+
+// export { FavoriteItem }

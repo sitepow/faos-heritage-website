@@ -36,7 +36,7 @@ const PrivacyPolicyPage = async ({
         title={t('intro.title')}
       />
 
-      <span className='sm:text-lg'>{t('content')}</span>
+      <span>{t('content')}</span>
     </Container>
   )
 }
