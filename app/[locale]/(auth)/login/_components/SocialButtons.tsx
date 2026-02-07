@@ -11,11 +11,11 @@ const SocialButtons = ({ dividerText }: { dividerText: string }) => {
   return (
     <div className='mt-6 flex flex-col gap-4'>
       <div className='relative flex w-full items-center'>
-        <div className='border-default-100 flex-grow border-t' />
+        <div className='border-divider flex-grow border-t' />
         <span className='px-4 text-xs whitespace-nowrap text-gray-500 uppercase'>
           {dividerText}
         </span>
-        <div className='border-default-100 flex-grow border-t' />
+        <div className='border-divider flex-grow border-t' />
       </div>
 
       <div className='grid w-full gap-2 sm:grid-cols-2'>

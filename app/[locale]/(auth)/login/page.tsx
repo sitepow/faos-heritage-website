@@ -38,7 +38,7 @@ const LoginPage = () => {
   })
 
   return (
-    <div className='flex h-dvh w-dvw'>
+    <div className='flex sm:h-dvh sm:w-dvw'>
       <AuthSidebar />
 
       <div className='bg-page flex w-full items-center justify-center sm:w-[50%]'>

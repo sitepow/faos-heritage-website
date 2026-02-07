@@ -39,6 +39,7 @@ const LoginForm = ({
       />
       <Button
         fullWidth
+        className='text-secondary'
         color='primary'
         isDisabled={isPending}
         isLoading={isPending}

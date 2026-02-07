@@ -54,6 +54,7 @@ const RegisterForm = ({
       />
       <Button
         fullWidth
+        className='text-secondary'
         color='primary'
         isDisabled={isPending}
         isLoading={isPending}
