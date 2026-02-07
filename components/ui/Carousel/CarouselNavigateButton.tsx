@@ -3,6 +3,8 @@ import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
 
 import type { ComponentProps } from 'react'
 
+import { CustomIcon } from '../CustomIcon'
+
 import { cn } from '@/utils/style'
 
 type CarouselNavigateButtonProps = ComponentProps<'button'> & {
@@ -11,13 +13,13 @@ type CarouselNavigateButtonProps = ComponentProps<'button'> & {
 
 const buttonVariants = cva([
   'flex size-9 cursor-pointer items-center justify-center rounded-full',
-  'bg-white/50 backdrop-blur-md',
+  'bg-white',
   'focus-visible:ring focus-visible:outline-none',
 ])
 
 const ICON_MAP = {
-  prev: <ChevronLeftIcon className='text-black/50' />,
-  next: <ChevronRightIcon className='text-black/50' />,
+  prev: <CustomIcon icon={ChevronLeftIcon} />,
+  next: <CustomIcon icon={ChevronRightIcon} />,
 }
 
 const CarouselNavigateButton = ({
