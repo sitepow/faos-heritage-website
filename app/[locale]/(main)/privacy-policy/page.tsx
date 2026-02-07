@@ -30,7 +30,7 @@ const PrivacyPolicyPage = async ({
   const t = await getTranslations({ locale, namespace: 'privacyPolicy' })
 
   return (
-    <Container className='flex flex-col gap-5 p-5 text-center'>
+    <Container className='flex flex-col gap-5 p-5 text-start'>
       <SectionHeader
         description={t('intro.description')}
         title={t('intro.title')}
