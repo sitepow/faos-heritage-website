@@ -4,6 +4,7 @@ import { MenuIcon, XIcon } from 'lucide-react'
 import { useState } from 'react'
 
 import { MenuItem } from './MenuItem'
+import { NavbarLogo } from './NavbarLogo'
 
 import { CustomIcon } from '@/components/ui/CustomIcon'
 import { useCategories } from '@/features/category/useCategory'
@@ -31,6 +32,7 @@ const NavbarMobileMenu = () => {
           <CustomIcon icon={XIcon} onClick={toggleMenu} />
         </div>
 
+        <NavbarLogo />
         <div className='flex flex-col items-center gap-5 pt-10'>
           {categories?.map(({ name }) => {
             return <MenuItem key={name} label={name} />

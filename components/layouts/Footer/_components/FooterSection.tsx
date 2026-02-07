@@ -74,19 +74,22 @@ const FooterSection = ({ section }: { section: FooterMenuSection }) => {
 
   return (
     <nav className='flex flex-col gap-3'>
-      {section.items?.map(
-        (link, i) =>
-          typeof link === 'object' &&
-          'label' in link && (
-            <a
-              key={i}
-              className='hover:text-primary text-gray-500 transition-all dark:text-gray-400'
-              href={link.href}
-            >
-              {link.label}
-            </a>
-          ),
-      )}
+      <ul className='list-disc pl-5'>
+        {section.items?.map(
+          (link, i) =>
+            typeof link === 'object' &&
+            'label' in link && (
+              <li key={i} className='mb-2'>
+                <a
+                  className='hover:text-primary text-gray-500 transition-all dark:text-gray-400'
+                  href={link.href}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ),
+        )}
+      </ul>
     </nav>
   )
 }

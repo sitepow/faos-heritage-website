@@ -10,12 +10,12 @@ const FooterBottom = () => {
   const year = new Date().getFullYear()
 
   return (
-    <div className='border-default-100 container mx-auto flex flex-col gap-5 border-t py-8 text-xs text-gray-400'>
+    <div className='border-default-100 container mx-auto flex flex-col items-center justify-between gap-5 border-t py-8 text-xs text-gray-400 xl:flex-row'>
       <p className='font-medium'>
         {translateFooter('copyright', { year, name: translateBrand('name') })}
       </p>
 
-      <div className='flex flex-wrap items-center gap-2'>
+      <div className='flex flex-wrap items-center justify-center gap-2'>
         <span className='tracking-tight uppercase'>
           {translateFooter('countryLabel')}
         </span>

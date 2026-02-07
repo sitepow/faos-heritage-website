@@ -56,19 +56,19 @@ const NavbarUserMenu = () => {
         key: 'account',
         label: 'account',
         icon: <CustomIcon icon={UserIcon} />,
-        action: () => ROUTER_PATHS.ACCOUNT,
+        action: ROUTER_PATHS.ACCOUNT,
       },
       {
         key: 'order',
         label: 'orders',
         icon: <CustomIcon icon={PackageIcon} />,
-        action: () => ROUTER_PATHS.ORDER,
+        action: ROUTER_PATHS.ORDER,
       },
       {
         key: 'favorite',
         label: 'favorites',
         icon: <CustomIcon icon={HeartIcon} />,
-        action: () => ROUTER_PATHS.FAVORITE,
+        action: ROUTER_PATHS.FAVORITE,
       },
     ]
 
@@ -77,7 +77,7 @@ const NavbarUserMenu = () => {
         key: 'dashboard',
         label: 'dashboard',
         icon: <CustomIcon icon={SettingsIcon} />,
-        action: () => ROUTER_PATHS.DASHBOARD,
+        action: ROUTER_PATHS.DASHBOARD,
       })
     }
 
