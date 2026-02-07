@@ -1,6 +1,7 @@
 interface FooterLink {
   label: string
   href: string
+  image?: string
 }
 
 interface FooterSubSection {

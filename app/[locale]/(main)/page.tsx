@@ -7,8 +7,9 @@ import { ProductExploreSection } from './_components/ProductExploreSection'
 import { AdvertiseBanner } from '@/components/ui/Advertise/AdvertiseBanner'
 import { CategoryLists } from '@/components/ui/CategoryLists'
 import { SectionHeader } from '@/components/ui/SectionHeader'
-import { IMAGE_FALLBACK, PAGINATION } from '@/constants'
+import { PAGINATION } from '@/constants'
 import { getProductsInfinite } from '@/features/product/product.action'
+import { constructMetadata } from '@/lib/metadata'
 
 export async function generateMetadata({
   params,
@@ -16,47 +17,16 @@ export async function generateMetadata({
   params: { locale: string }
 }): Promise<Metadata> {
   const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'meta' })
 
-  const translate = await getTranslations({
-    locale,
+  return constructMetadata({
+    title: t('home.title'),
+    description: t('home.description'),
   })
-
-  const title = translate('meta.home.title')
-  const description = translate('meta.home.description')
-  const keywords = translate.raw('commonKeywords')
-
-  return {
-    title,
-    description,
-    keywords,
-    alternates: {
-      canonical: process.env.APP_URL,
-    },
-    openGraph: {
-      title,
-      description,
-      url: process.env.APP_URL,
-      type: 'website',
-      images: [
-        {
-          url: IMAGE_FALLBACK.OG,
-          width: 1200,
-          height: 630,
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      description,
-      images: IMAGE_FALLBACK.OG,
-    },
-  }
 }
 
 const HomePage = async () => {
-  const translateCategoryDiscovery = await getTranslations(
-    'shared.categoryDiscovery',
-  )
+  const t = await getTranslations('shared.categoryDiscovery')
 
   const locale = await getLocale()
   const products = await getProductsInfinite({
@@ -68,10 +38,7 @@ const HomePage = async () => {
     <section className='flex flex-col items-center justify-center gap-4 text-center'>
       <div className='flex w-full flex-col gap-5 p-5'>
         <div className='flex flex-col gap-5'>
-          <SectionHeader
-            description={translateCategoryDiscovery('description')}
-            title={translateCategoryDiscovery('title')}
-          />
+          <SectionHeader description={t('description')} title={t('title')} />
           <CategoryLists />
         </div>
         <ProductExploreSection

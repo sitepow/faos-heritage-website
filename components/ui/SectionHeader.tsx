@@ -20,7 +20,7 @@ const SectionHeader = ({
   return (
     <div
       className={cn(
-        'text-primary flex flex-col items-center space-y-1',
+        'text-primary flex flex-col items-center space-y-1 text-center',
         className,
       )}
       {...props}
@@ -30,9 +30,7 @@ const SectionHeader = ({
       </h2>
 
       {description ? (
-        <p className='mx-auto max-w-[75%] opacity-90 sm:text-lg'>
-          {description}
-        </p>
+        <p className='mx-auto max-w-[75%] sm:text-lg'>{description}</p>
       ) : null}
     </div>
   )

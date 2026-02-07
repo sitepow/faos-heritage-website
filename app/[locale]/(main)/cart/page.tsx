@@ -26,7 +26,7 @@ const CartPage = () => {
         <meta content='noindex, nofollow' name='robots' />
       </Head>
 
-      <Container className='flex flex-col gap-5'>
+      <Container className='flex flex-col gap-5 p-5'>
         <span className='text-xl font-semibold'>
           {t('title', { count: carts?.length || 0 })}
         </span>

@@ -18,17 +18,42 @@ const FooterSection = ({ section }: { section: FooterMenuSection }) => {
   if (section.isMarketplace || section.isCertificate) {
     return (
       <div className='flex flex-wrap gap-3'>
-        {section.items?.map(
-          (img, i) =>
-            typeof img === 'string' && (
+        {section.items?.map((item, i) => {
+          if (typeof item === 'object' && 'image' in item) {
+            return (
+              <a
+                key={i}
+                className={
+                  item.href === '#'
+                    ? 'cursor-default'
+                    : 'transition-opacity hover:opacity-80'
+                }
+                href={item.href}
+                rel='noopener noreferrer'
+                target={item.href !== '#' ? '_blank' : undefined}
+              >
+                <FooterIcon
+                  alt='partner'
+                  hover={section.isMarketplace}
+                  src={item.image!}
+                />
+              </a>
+            )
+          }
+
+          if (typeof item === 'string') {
+            return (
               <FooterIcon
                 key={i}
-                alt='partner'
+                alt='certification'
                 hover={section.isMarketplace}
-                src={img}
+                src={item}
               />
-            ),
-        )}
+            )
+          }
+
+          return null
+        })}
 
         {section.maps?.map((mapSrc, i) => (
           <div
@@ -51,7 +76,8 @@ const FooterSection = ({ section }: { section: FooterMenuSection }) => {
     <nav className='flex flex-col gap-3'>
       {section.items?.map(
         (link, i) =>
-          typeof link === 'object' && (
+          typeof link === 'object' &&
+          'label' in link && (
             <a
               key={i}
               className='hover:text-primary text-gray-500 transition-all dark:text-gray-400'

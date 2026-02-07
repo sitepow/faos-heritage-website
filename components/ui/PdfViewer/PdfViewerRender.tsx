@@ -14,17 +14,9 @@ export default function PdfViewerRender({
   fileUrl,
   className,
 }: PdfViewerProps) {
-  if (!fileUrl) {
-    return (
-      <div className='flex h-64 w-full items-center justify-center text-sm text-gray-500'>
-        No PDF file
-      </div>
-    )
-  }
-
   return (
     <div
-      className={`h-dvh w-full overflow-hidden rounded-lg bg-white ${className ?? ''}`}
+      className={`border-default-100 h-dvh w-full overflow-hidden rounded-lg border bg-white ${className ?? ''}`}
     >
       <Worker workerUrl={PDF_WORKER_URL}>
         <Viewer defaultScale={SpecialZoomLevel.PageWidth} fileUrl={fileUrl} />

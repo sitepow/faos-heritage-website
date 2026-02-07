@@ -12,7 +12,7 @@ const CartSummaryRow = ({ label, value }: CartSummaryRowProps) => {
   } = useExchangeRate()
 
   return (
-    <div className='text-default-500 flex justify-between'>
+    <div className='text-default-500 border-default-100 flex justify-between border-b'>
       <span>{label}</span>
       <span>
         {formatCurrency(value, {

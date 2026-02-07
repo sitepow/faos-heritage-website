@@ -1,15 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
 
+import type { ComponentProps } from 'react'
+
 import { cn } from '@/utils/style'
 
-interface FooterIconProps {
+interface FooterIconProps extends ComponentProps<'div'> {
   src: string
   alt: string
   hover?: boolean
 }
 
-const FooterIcon = ({ src, alt, hover }: FooterIconProps) => (
-  <div className='border-default-100 hover:border-primary flex size-12 cursor-pointer items-center justify-center rounded-lg border bg-white p-2.5 transition-all sm:size-14'>
+const FooterIcon = ({ src, alt, hover, ...props }: FooterIconProps) => (
+  <div
+    className='border-default-100 hover:border-primary flex size-12 cursor-pointer items-center justify-center rounded-lg border bg-white p-2.5 transition-all sm:size-14'
+    {...props}
+  >
     <img
       alt={alt}
       className={cn(
