@@ -1,0 +1,35 @@
+{
+  "meta": {
+    "keywords": [
+      "FAOS",
+      "Dầu Ô liu Hữu cơ",
+      "Dầu Ô liu Nguyên chất Thượng hạng",
+      "Mật ong Tự nhiên Nguyên chất 100%",
+      "Mật ong Hữu cơ",
+      "Thực phẩm Sức khỏe Cao cấp",
+      "Thương hiệu dầu ô liu thô tốt nhất",
+      "Mua mật ong nguyên chất ở đâu",
+      "Dầu ô liu tốt cho sức khỏe"
+    ],
+    "home": {
+      "title": "FAOS - Dầu Ô liu Hữu cơ Thượng hạng & Mật ong Nguyên chất 100%",
+      "description": "Nguồn cung cấp hàng đầu dầu ô liu nguyên chất thượng hạng และ mật ong hữu cơ 100% tự nhiên. Sản phẩm cao cấp cho sức khỏe tối ưu, giao hàng tận nơi với nhiều ưu đãi độc quyền."
+    },
+    "products": {
+      "title": "Mua Dầu Ô liu & Mật ong Nguyên chất - Tất cả Sản phẩm | FAOS",
+      "description": "Khám phá danh mục sản phẩm sức khỏe được tuyển chọn, gồm dầu ô liu nguyên chất thượng hạng và mật ong rừng tự nhiên. Chứng nhận hữu cơ, an toàn và không phụ gia."
+    },
+    "productDetail": {
+      "title": "{name} - Dầu Ô liu & Mật ong Cao cấp bởi FAOS",
+      "description": "Đặt mua {name}, chất lượng cao cấp 100% từ thiên nhiên. Đảm bảo độ tinh khiết với tiêu chuẩn hữu cơ. Đặt hàng dễ dàng, giao hàng nhanh và cam kết chính hãng."
+    },
+    "category": {
+      "title": "{categoryName} Hữu cơ - Sản phẩm Sức khỏe & Wellness FAOS",
+      "description": "Khám phá những sản phẩm tốt nhất trong bộ sưu tập {categoryName}. Sản phẩm tự nhiên tiêu chuẩn xuất khẩu dành riêng cho lối sống lành mạnh của bạn."
+    },
+    "about": {
+      "title": "Về FAOS - Di sản Tinh khiết từ Thiên nhiên",
+      "description": "FAOS chuyên gia về dầu ô liu và mật ong hữu cơ thượng hạng, được chế tác tỉ mỉ từ nguồn nguyên liệu 100% tự nhiên và bền vững."
+    }
+  }
+}

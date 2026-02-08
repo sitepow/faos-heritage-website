@@ -1,0 +1,44 @@
+{
+  "privacyPolicy": {
+    "intro": {
+      "seoTitle": "Privacy Policy - FAOS",
+      "title": "Privacy Policy",
+      "description": "Read the FAOS Privacy Policy to understand how we collect, use, and protect your personal information."
+    },
+    "content": "FAOS is committed to protecting the privacy and personal data of all users. All information related to identifiable individuals will be handled with strict confidentiality and stored securely, including but not limited to personal details such as names, contact information, and transaction data. FAOS implements appropriate technical and organizational security measures to prevent unauthorized access, disclosure, alteration, or destruction of personal data. Personal information will only be collected and processed for legitimate business purposes and in compliance with applicable data protection laws. Personal data will not be disclosed to third parties without prior consent, unless required by law."
+  },
+  "paymentMethods": {
+    "intro": {
+      "seoTitle": "Payment Methods & Security - FAOS",
+      "title": "Payment Methods & Security",
+      "description": "We offer a variety of convenient and secure payment options to provide you with the best shopping experience."
+    },
+    "guides": {
+      "howToShop": {
+        "title": "How to Order",
+        "steps": [
+          "1. Browse our premium products and click “Add to Cart”.",
+          "2. Review your items in the shopping cart; you can adjust quantities or remove items as needed.",
+          "3. Click the “Checkout” button to enter our secure payment system.",
+          "4. You will be redirected to the Stripe payment page to securely enter your details and confirm your order."
+        ]
+      },
+      "atStore": {
+        "title": "In-Store Purchase (Thailand Only)",
+        "description": "If you prefer to shop in person, visit leading supermarkets near you.",
+        "locations": ["Villa Market", "Foodland"],
+        "note": "Check product availability at your local branch today."
+      },
+      "card": {
+        "title": "Credit / Debit Card",
+        "accepted": "We accept Visa, Mastercard, and JCB, including virtual cards and international credit cards.",
+        "security": "Every transaction is encrypted and protected by Stripe’s world-class security technology."
+      },
+      "qr": {
+        "title": "QR Code Payment (Mobile Banking)",
+        "method": "Scan Thai QR Payment / PromptPay via your banking app. No additional fees applied.",
+        "note": "* Please complete the transaction within the specified time frame on the payment page."
+      }
+    }
+  }
+}

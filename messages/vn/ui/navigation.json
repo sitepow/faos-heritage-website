@@ -1,0 +1,19 @@
+{
+  "navigation": {
+    "navbar": {
+      "search": "Tìm kiếm sản phẩm hoặc danh mục...",
+      "slogan": "Đỉnh cao dầu ô liu và mật ong hữu cơ cho hành trình sức khỏe của bạn",
+      "userPanel": {
+        "account": "Tài khoản của tôi",
+        "orders": "Đơn hàng của tôi",
+        "favorites": "Sản phẩm yêu thích",
+        "dashboard": "Bảng điều khiển Admin",
+        "logout": "Đăng xuất"
+      }
+    },
+    "breadcrumb": {
+      "home": "Trang chủ",
+      "products": "Tất cả sản phẩm"
+    }
+  }
+}

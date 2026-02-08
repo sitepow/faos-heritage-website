@@ -1,0 +1,19 @@
+{
+  "navigation": {
+    "navbar": {
+      "search": "Cari produk atau kategori...",
+      "slogan": "Puncak kebaikan minyak zaitun และ madu organik untuk perjalanan kesehatan Anda",
+      "userPanel": {
+        "account": "Akun Saya",
+        "orders": "Pesanan Saya",
+        "favorites": "Produk Favorit",
+        "dashboard": "Dashboard Admin",
+        "logout": "Keluar"
+      }
+    },
+    "breadcrumb": {
+      "home": "Beranda",
+      "products": "Semua Produk"
+    }
+  }
+}

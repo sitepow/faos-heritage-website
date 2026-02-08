@@ -1,0 +1,105 @@
+{
+  "actions": {
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "edit": "Chỉnh sửa",
+    "delete": "Xóa",
+    "new": "Thêm mới",
+    "close": "Đóng",
+    "back": "Quay lại",
+    "confirm": "Xác nhận",
+    "share": "Chia sẻ",
+    "more": "Xem thêm"
+  },
+  "status": {
+    "loading": "Đang tải...",
+    "saving": "Đang lưu...",
+    "submitting": "Đang xử lý...",
+    "noData": "Không có dữ liệu"
+  },
+  "theme": {
+    "light": "Sáng",
+    "dark": "Tối",
+    "system": "Hệ thống"
+  },
+  "form": {
+    "placeholder": "Nhập thông tin...",
+    "require": "Trường bắt buộc",
+    "optional": "(Tùy chọn)",
+    "product": {
+      "title_manage": "Quản lý sản phẩm",
+      "title_create": "Thêm sản phẩm mới",
+      "title_edit": "Chỉnh sửa chi tiết sản phẩm"
+    }
+  },
+  "fields": {
+    "fullName": "Họ và tên",
+    "email": "Địa chỉ Email",
+    "phone": "Số điện thoại",
+    "address": "Địa chỉ (Số nhà, Tên đường)",
+    "subDistrict": "Phường / Xã",
+    "district": "Quận / Huyện",
+    "province": "Tỉnh / Thành phố",
+    "postalCode": "Mã bưu chính",
+    "country": "Quốc gia",
+    "orderId": "Mã đơn hàng",
+    "cartId": "Mã giỏ hàng",
+    "trackingNo": "Mã vận đơn"
+  },
+  "global": {
+    "country": {
+      "TH": "Thái Lan",
+      "US": "Hoa Kỳ",
+      "GR": "Hy Lạp",
+      "IT": "Ý",
+      "NL": "Hà Lan",
+      "MY": "Malaysia",
+      "SG": "Singapore",
+      "JP": "Nhật Bản",
+      "CN": "Trung Quốc",
+      "IS": "Iceland",
+      "VN": "Việt Nam",
+      "ID": "Indonesia"
+    },
+    "productUnit": {
+      "PIECE": "Cái / Chiếc",
+      "ITEM": "Sản phẩm",
+      "SET": "Bộ",
+      "BOX": "Hộp",
+      "PACK": "Gói",
+      "BAG": "Túi",
+      "BOTTLE": "Chai",
+      "CAN": "Lon",
+      "KG": "kg",
+      "G": "g",
+      "L": "L",
+      "ML": "ml",
+      "PAIR": "Đôi",
+      "ROLL": "Cuộn",
+      "SHEET": "Tờ",
+      "UNIT": "Đơn vị"
+    },
+    "orderStatus": {
+      "PENDING": "Chờ thanh toán",
+      "PAID": "Đã thanh toán",
+      "PROCESSING": "Đang xử lý",
+      "SHIPPED": "Đang giao hàng",
+      "DELIVERED": "Đã giao hàng",
+      "CANCELLED": "Đã hủy",
+      "REFUNDED": "Đã hoàn tiền"
+    }
+  },
+  "alert": {
+    "delete": {
+      "title": "Bạn có chắc chắn muốn xóa mục này?",
+      "description": "Hành động này là vĩnh viễn và không thể hoàn tác."
+    }
+  },
+  "messages": {
+    "create_success": "Tạo thành công",
+    "update_success": "Cập nhật thành công",
+    "delete_success": "Xóa thành công",
+    "error": "Thao tác thất bại, vui lòng thử lại",
+    "system_error": "Đã xảy ra lỗi hệ thống"
+  }
+}

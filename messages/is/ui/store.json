@@ -1,0 +1,56 @@
+{
+  "products": {
+    "pagination": "Sýnir 1–{count} af {total} vörum",
+    "sortLabel": "Raða eftir",
+    "sortItems": {
+      "newest": "Nýjast fyrst",
+      "price_low": "Verð: Lægst til hæst",
+      "price_high": "Verð: Hæst til lægst",
+      "stock_low": "Lagerstaða: Minnst til mest"
+    },
+    "empty": "Því miður fundust engar vörur í vörulistanum okkar."
+  },
+  "productDetail": {
+    "tabs": {
+      "description": "Vörulýsing",
+      "review": "Umsagnir viðskiptavina"
+    },
+    "chips": {
+      "authentic": "100% ekta",
+      "premium": "Úrvals gæði"
+    },
+    "cartActions": {
+      "quantity": "Magn",
+      "options": "Veldu valmöguleika",
+      "add": "Setja í körfu",
+      "fav": "Bæta í eftirlæti",
+      "outOfStock": "Uppselt",
+      "require": "Vinsamlegast veldu valmöguleika fyrir vöruna"
+    }
+  },
+  "cart": {
+    "title": "Karfan þín {count, plural, =0 {} other {(# vörur)}}",
+    "empty": "Karfan þín er tóm eins og er.",
+    "header": "Vörur í körfu",
+    "checkout": {
+      "addressTitle": "Sendingarheimilisfang",
+      "summaryTitle": "Samantekt pöntunar",
+      "currencyAlert": "Þú ert að versla með valinn gjaldmiðil. Vinsamlegast athugaðu verð og gjaldmiðil vandlega áður en þú heldur áfram.",
+      "emptyAddressAlert": "Vinsamlegast bættu við sendingarheimilisfangi <button>Bæta við heimilisfangi</button>",
+      "summary": {
+        "total": "Millisamtala",
+        "shipping": "Sendingarkostnaður",
+        "discount": "Afsláttur",
+        "net": "Heildarupphæð"
+      },
+      "action": {
+        "order": "Ganga frá pöntun",
+        "clear": "Tæma körfu",
+        "editAddress": "Breyta sendingarheimilisfangi"
+      }
+    },
+    "messages": {
+      "orderCreated": "Pöntun tókst. Vinsamlegast haltu áfram í greiðslu."
+    }
+  }
+}

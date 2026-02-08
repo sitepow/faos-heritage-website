@@ -1,0 +1,56 @@
+{
+  "products": {
+    "pagination": "Showing 1–{count} of {total} items",
+    "sortLabel": "Sort by",
+    "sortItems": {
+      "newest": "Newest First",
+      "price_low": "Price: Low to High",
+      "price_high": "Price: High to Low",
+      "stock_low": "Stock: Low to High"
+    },
+    "empty": "Sorry, no products were found in our catalog."
+  },
+  "productDetail": {
+    "tabs": {
+      "description": "Product Description",
+      "review": "Customer Reviews"
+    },
+    "chips": {
+      "authentic": "100% Authentic",
+      "premium": "Premium Quality"
+    },
+    "cartActions": {
+      "quantity": "Quantity",
+      "options": "Select Options",
+      "add": "Add to Cart",
+      "fav": "Add to Favorites",
+      "outOfStock": "Out of Stock",
+      "require": "Please select a product option"
+    }
+  },
+  "cart": {
+    "title": "Your Cart {count, plural, =0 {} other {(# items)}}",
+    "empty": "Your cart is currently empty.",
+    "header": "Items in Cart",
+    "checkout": {
+      "addressTitle": "Shipping Address",
+      "summaryTitle": "Order Summary",
+      "currencyAlert": "You are purchasing with your selected currency. Please review the price and currency carefully before proceeding.",
+      "emptyAddressAlert": "Please add a shipping address <button>Add Shipping Address</button>",
+      "summary": {
+        "total": "Subtotal",
+        "shipping": "Shipping Fee",
+        "discount": "Discount",
+        "net": "Grand Total"
+      },
+      "action": {
+        "order": "Place Order",
+        "clear": "Clear Cart",
+        "editAddress": "Edit Shipping Address"
+      }
+    },
+    "messages": {
+      "orderCreated": "Order created successfully. Please proceed to payment."
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "profile": {
+    "welcome": "Your Account, {name}",
+    "sections": {
+      "basic": "Basic Information",
+      "personal": "Personal Information",
+      "address": "Manage My Addresses"
+    },
+    "tabs": {
+      "orders": "My Orders",
+      "favs": "Favorites",
+      "edit": "Edit Profile"
+    }
+  },
+  "orders": {
+    "empty": "You have no orders at the moment.",
+    "paymentAlert": "Please complete your payment within 20 minutes, otherwise your order will be automatically cancelled.",
+    "view": {
+      "shipping": "Shipping Address",
+      "logistics": "Shipping Information",
+      "preparing": "Preparing for shipment"
+    },
+    "cancel": {
+      "title": "Cancel Order",
+      "reason": "Reason",
+      "placeholder": "Enter reason for cancellation/refund"
+    }
+  },
+  "address": {
+    "empty": "You have no shipping addresses. Please add an address before placing an order.",
+    "default": "Default",
+    "form": {
+      "add": "Add Shipping Address",
+      "edit": "Edit Shipping Address",
+      "hint": "Please double-check your address for accuracy."
+    },
+    "errors": { "required": "Please enter {field}" }
+  }
+}

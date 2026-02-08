@@ -1,0 +1,21 @@
+{
+  "brand": {
+    "name": "FAOS",
+    "slogan": "Minyak Zaitun & Madu Organik Premium — 100% Kemurnian Alam",
+    "mission": "Destinasi utama untuk minyak zaitun dan madu asli berkualitas tinggi demi kesejahteraan optimal Anda."
+  },
+  "shared": {
+    "productDiscovery": {
+      "title": "Rekomendasi Premium",
+      "description": "Rasakan keahlian yang teliti melalui pilihan produk dengan kualitas terbaik kami."
+    },
+    "categoryDiscovery": {
+      "title": "Kategori Produk",
+      "description": "Jelajahi koleksi kamiที่ dikurasi dengan cermat untuk setiap kebutuhan Anda."
+    },
+    "relatedProducts": {
+      "title": "Produk Terkait",
+      "description": "Produk luar biasa lainnya dalam kategori iniที่ mungkin Anda minati."
+    }
+  }
+}

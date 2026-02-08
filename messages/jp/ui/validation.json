@@ -1,0 +1,14 @@
+{
+  "validation": {
+    "product": {
+      "nameRequired": "商品名は必須項目です",
+      "priceInvalid": "価格の形式が正しくありません",
+      "priceMin": "価格は0円以上に設定してください",
+      "stockInvalid": "在庫数が正しくありません",
+      "stockMin": "在庫数は0未満に設定できません",
+      "weightInvalid": "重量の形式が正しくありません",
+      "categoryRequired": "カテゴリーを選択してください",
+      "comparePriceError": "元の価格（定価）は販売価格より高く設定してください"
+    }
+  }
+}

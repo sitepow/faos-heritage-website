@@ -1,0 +1,105 @@
+{
+  "actions": {
+    "save": "Opslaan",
+    "cancel": "Annuleren",
+    "edit": "Bewerken",
+    "delete": "Verwijderen",
+    "new": "Nieuwe toevoegen",
+    "close": "Sluiten",
+    "back": "Terug",
+    "confirm": "Bevestigen",
+    "share": "Delen",
+    "more": "Bekijk meer"
+  },
+  "status": {
+    "loading": "Laden...",
+    "saving": "Opslaan...",
+    "submitting": "Verwerken...",
+    "noData": "Geen gegevens beschikbaar"
+  },
+  "theme": {
+    "light": "Licht",
+    "dark": "Donker",
+    "system": "Systeem"
+  },
+  "form": {
+    "placeholder": "Voer informatie in...",
+    "require": "Verplicht veld",
+    "optional": "(Optioneel)",
+    "product": {
+      "title_manage": "Producten beheren",
+      "title_create": "Nieuw product toevoegen",
+      "title_edit": "Productdetails bewerken"
+    }
+  },
+  "fields": {
+    "fullName": "Volledige naam",
+    "email": "E-mailadres",
+    "phone": "Telefoonnummer",
+    "address": "Adres (Huisnr., Straat)",
+    "subDistrict": "Wijk / Buurt",
+    "district": "Gemeente",
+    "province": "Provincie / Staat",
+    "postalCode": "Postcode",
+    "country": "Land",
+    "orderId": "Bestel-ID",
+    "cartId": "Winkelwagen-ID",
+    "trackingNo": "Trackingnummer"
+  },
+  "global": {
+    "country": {
+      "TH": "Thailand",
+      "US": "Verenigde Staten",
+      "GR": "Griekenland",
+      "IT": "Italië",
+      "NL": "Nederland",
+      "MY": "Maleisië",
+      "SG": "Singapore",
+      "JP": "Japan",
+      "CN": "China",
+      "IS": "IJsland",
+      "VN": "Vietnam",
+      "ID": "Indonesië"
+    },
+    "productUnit": {
+      "PIECE": "Stuk",
+      "ITEM": "Item",
+      "SET": "Set",
+      "BOX": "Doos",
+      "PACK": "Pak",
+      "BAG": "Zak",
+      "BOTTLE": "Fles",
+      "CAN": "Blik",
+      "KG": "kg",
+      "G": "g",
+      "L": "L",
+      "ML": "ml",
+      "PAIR": "Paar",
+      "ROLL": "Rol",
+      "SHEET": "Vel",
+      "UNIT": "Eenheid"
+    },
+    "orderStatus": {
+      "PENDING": "Wacht op betaling",
+      "PAID": "Betaald",
+      "PROCESSING": "In behandeling",
+      "SHIPPED": "Verzonden",
+      "DELIVERED": "Bezorgd",
+      "CANCELLED": "Geannuleerd",
+      "REFUNDED": "Terugbetaald"
+    }
+  },
+  "alert": {
+    "delete": {
+      "title": "Weet u zeker dat u dit wilt verwijderen?",
+      "description": "Deze actie is definitief en kan niet ongedaan worden gemaakt."
+    }
+  },
+  "messages": {
+    "create_success": "Succesvol aangemaakt",
+    "update_success": "Succesvol bijgewerkt",
+    "delete_success": "Succesvol verwijderd",
+    "error": "Bewerking mislukt, probeer het opnieuw",
+    "system_error": "Er is een systeemfout opgetreden"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "products": {
+    "pagination": "Menunjukkan 1–{count} daripada {total} barangan",
+    "sortLabel": "Isih mengikut",
+    "sortItems": {
+      "newest": "Terbaharu",
+      "price_low": "Harga: Rendah ke Tinggi",
+      "price_high": "Harga: Tinggi ke Rendah",
+      "stock_low": "Stok: Rendah ke Tinggi"
+    },
+    "empty": "Maaf, tiada produk ditemui dalam katalog kami."
+  },
+  "productDetail": {
+    "tabs": {
+      "description": "Penerangan Produk",
+      "review": "Ulasan Pelanggan"
+    },
+    "chips": {
+      "authentic": "100% Tulen",
+      "premium": "Kualiti Premium"
+    },
+    "cartActions": {
+      "quantity": "Kuantiti",
+      "options": "Pilih Pilihan",
+      "add": "Tambah ke Troli",
+      "fav": "Tambah ke Kegemaran",
+      "outOfStock": "Kehabisan Stok",
+      "require": "Sila pilih pilihan produk"
+    }
+  },
+  "cart": {
+    "title": "Troli Anda {count, plural, =0 {} other {(# barangan)}}",
+    "empty": "Troli anda pada masa ini kosong.",
+    "header": "Barangan dalam Troli",
+    "checkout": {
+      "addressTitle": "Alamat Penghantaran",
+      "summaryTitle": "Ringkasan Pesanan",
+      "currencyAlert": "Anda membeli dengan mata wangที่ dipilih. Sila semak harga dan mata wangด้วย teliti sebelum meneruskan.",
+      "emptyAddressAlert": "Sila tambah alamat penghantaran <button>Tambah Alamat Penghantaran</button>",
+      "summary": {
+        "total": "Jumlah Kecil",
+        "shipping": "Kos Penghantaran",
+        "discount": "Diskaun",
+        "net": "Jumlah Keseluruhan"
+      },
+      "action": {
+        "order": "Buat Pesanan",
+        "clear": "Kosongkan Troli",
+        "editAddress": "Edit Alamat Penghantaran"
+      }
+    },
+    "messages": {
+      "orderCreated": "Pesanan berjaya dicipta. Sila teruskan ke pembayaran."
+    }
+  }
+}

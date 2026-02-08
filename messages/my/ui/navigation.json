@@ -1,0 +1,19 @@
+{
+  "navigation": {
+    "navbar": {
+      "search": "Cari produk atau kategori...",
+      "slogan": "Kemuncak minyak zaitun dan madu organik untuk perjalanan kesejahteraan anda",
+      "userPanel": {
+        "account": "Akaun Saya",
+        "orders": "Pesanan Saya",
+        "favorites": "Kegemaran",
+        "dashboard": "Papan Pemuka Admin",
+        "logout": "Log Keluar"
+      }
+    },
+    "breadcrumb": {
+      "home": "Laman Utama",
+      "products": "Semua Produk"
+    }
+  }
+}

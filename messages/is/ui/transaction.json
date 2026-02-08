@@ -1,0 +1,13 @@
+{
+  "success": {
+    "title": "Greiðsla tókst",
+    "desc": "Kærar þakkir fyrir viðskiptin! Greiðsla þín hefur verið staðfest.",
+    "ref": "Tilvísunarnúmer:",
+    "note": "Vinsamlegast geymdu þetta tilvísunarnúmer fyrir allar frekari fyrirspurnir til þjónustuvers okkar."
+  },
+  "cancel": {
+    "title": "Hætt við greiðslu",
+    "desc": "Greiðsluferlinu var ekki lokið eða því var hætt. Engin gjaldfærsla hefur átt sér stað á reikningi þínum.",
+    "action": "Þú getur farið aftur á greiðslusíðuna til að reyna aftur."
+  }
+}

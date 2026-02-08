@@ -1,0 +1,56 @@
+{
+  "products": {
+    "pagination": "Toont 1–{count} van {total} artikelen",
+    "sortLabel": "Sorteren op",
+    "sortItems": {
+      "newest": "Nieuwste eerst",
+      "price_low": "Prijs: laag naar hoog",
+      "price_high": "Prijs: hoog naar laag",
+      "stock_low": "Voorraad: laag naar hoog"
+    },
+    "empty": "Helaas, er zijn geen producten gevonden in onze catalogus."
+  },
+  "productDetail": {
+    "tabs": {
+      "description": "Productbeschrijving",
+      "review": "Klantbeoordelingen"
+    },
+    "chips": {
+      "authentic": "100% Authentiek",
+      "premium": "Premium Kwaliteit"
+    },
+    "cartActions": {
+      "quantity": "Aantal",
+      "options": "Selecteer opties",
+      "add": "In winkelwagen",
+      "fav": "Toevoegen aan favorieten",
+      "outOfStock": "Niet op voorraad",
+      "require": "Selecteer een productoptie"
+    }
+  },
+  "cart": {
+    "title": "Uw winkelwagen {count, plural, =0 {} other {(# artikelen)}}",
+    "empty": "Uw winkelwagen is momenteel leeg.",
+    "header": "Artikelen in winkelwagen",
+    "checkout": {
+      "addressTitle": "Verzendadres",
+      "summaryTitle": "Besteloverzicht",
+      "currencyAlert": "U rekent af in de geselecteerde valuta. Controleer de prijs en valuta zorgvuldig voordat u doorgaat.",
+      "emptyAddressAlert": "Voeg een verzendadres toe <button>Verzendadres toevoegen</button>",
+      "summary": {
+        "total": "Subtotaal",
+        "shipping": "Verzendkosten",
+        "discount": "Korting",
+        "net": "Totaalbedrag"
+      },
+      "action": {
+        "order": "Bestelling plaatsen",
+        "clear": "Winkelwagen legen",
+        "editAddress": "Verzendadres bewerken"
+      }
+    },
+    "messages": {
+      "orderCreated": "Bestelling succesvol aangemaakt. Ga door naar betaling."
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "privacyPolicy": {
+    "intro": {
+      "seoTitle": "Kebijakan Privasi - FAOS",
+      "title": "Kebijakan Privasi",
+      "description": "Baca Kebijakan Privasi FAOS untuk memahami bagaimana kami mengumpulkan, menggunakan, dan melindungi informasi pribadi Anda."
+    },
+    "content": "FAOS berkomitmen untuk melindungi privasi dan data pribadi seluruh pengguna. Semua informasi yang berkaitan dengan individu yang dapat diidentifikasi akan ditangani dengan kerahasiaan ketat dan disimpan dengan aman, termasuk namun tidak terbatas pada detail pribadi seperti nama, informasi kontak, dan data transaksi. FAOS menerapkan langkah-langkah keamanan teknis dan organisasinal yang tepat untuk mencegah akses, pengungkapan, perubahan, atau penghancuran data pribadi yang tidak sah. Informasi pribadi hanya akan dikumpulkan dan diproses untuk tujuan bisnis yang sah dan sesuai dengan undang-undang perlindungan data yang berlaku. Data pribadi tidak akan diungkapkan kepada pihak ketiga tanpa persetujuan sebelumnya, kecuali diwajibkan oleh hukum."
+  },
+  "paymentMethods": {
+    "intro": {
+      "seoTitle": "Metode Pembayaran & Keamanan - FAOS",
+      "title": "Metode Pembayaran & Keamanan",
+      "description": "Kami menawarkan berbagai pilihan pembayaran yang nyaman dan aman untuk memberikan pengalaman berbelanja terbaik bagi Anda."
+    },
+    "guides": {
+      "howToShop": {
+        "title": "Cara Memesan",
+        "steps": [
+          "1. Jelajahi produk premium kami dan klik “Tambah ke Keranjang”.",
+          "2. Periksa kembali item Anda di keranjang belanja; Anda dapat menyesuaikan jumlah atau menghapus item jika diperlukan.",
+          "3. Klik tombol “Checkout” untuk masuk ke sistem pembayaran aman kami.",
+          "4. Anda akan diarahkan ke halaman pembayaran Stripe untuk memasukkan detail Anda dengan aman dan mengonfirmasi pesanan Anda."
+        ]
+      },
+      "atStore": {
+        "title": "Pembelian di Toko (Hanya di Thailand)",
+        "description": "Jika Anda lebih suka berbelanja secara langsung, kunjungi supermarket terkemuka di dekat Anda.",
+        "locations": ["Villa Market", "Foodland"],
+        "note": "Cek ketersediaan produk di cabang terdekat Anda hari ini."
+      },
+      "card": {
+        "title": "Kartu Kredit / Debit",
+        "accepted": "Kami menerima Visa, Mastercard, dan JCB, termasuk kartu virtual dan kartu kredit internasional.",
+        "security": "Setiap transaksi dienkripsi dan dilindungi oleh teknologi keamanan kelas dunia dari Stripe."
+      },
+      "qr": {
+        "title": "Pembayaran Kode QR (Mobile Banking)",
+        "method": "Pindai Thai QR Payment / PromptPay melalui aplikasi perbankan Anda. Tidak dikenakan biaya tambahan.",
+        "note": "* Harap selesaikan transaksi dalam jangka waktu yang ditentukan pada halaman pembayaran."
+      }
+    }
+  }
+}

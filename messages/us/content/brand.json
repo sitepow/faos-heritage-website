@@ -1,0 +1,21 @@
+{
+  "brand": {
+    "name": "FAOS",
+    "slogan": "Premium Organic Olive Oil & Honey — 100% Pure Nature",
+    "mission": "The premier destination for high-quality, authentic olive oil and honey for your optimal well-being."
+  },
+  "shared": {
+    "productDiscovery": {
+      "title": "Premium Recommendations",
+      "description": "Experience meticulous craftsmanship through our selection of the finest quality products."
+    },
+    "categoryDiscovery": {
+      "title": "Product Categories",
+      "description": "Explore our thoughtfully curated collections across every category you need."
+    },
+    "relatedProducts": {
+      "title": "Related Products",
+      "description": "Other exceptional products in this category that you might be interested in."
+    }
+  }
+}

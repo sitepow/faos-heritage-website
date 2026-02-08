@@ -1,0 +1,39 @@
+{
+  "profile": {
+    "welcome": "Tài khoản của bạn, {name}",
+    "sections": {
+      "basic": "Thông tin cơ bản",
+      "personal": "Thông tin cá nhân",
+      "address": "Quản lý địa chỉ"
+    },
+    "tabs": {
+      "orders": "Đơn hàng của tôi",
+      "favs": "Sản phẩm yêu thích",
+      "edit": "Chỉnh sửa hồ sơ"
+    }
+  },
+  "orders": {
+    "empty": "Bạn hiện chưa có đơn hàng nào.",
+    "paymentAlert": "Vui lòng hoàn tất thanh toán trong vòng 20 phút, nếu không đơn hàng của bạn sẽ tự động bị hủy.",
+    "view": {
+      "shipping": "Địa chỉ giao hàng",
+      "logistics": "Thông tin vận chuyển",
+      "preparing": "Đang chuẩn bị hàng"
+    },
+    "cancel": {
+      "title": "Hủy đơn hàng",
+      "reason": "Lý do",
+      "placeholder": "Nhập lý do hủy đơn/hoàn tiền"
+    }
+  },
+  "address": {
+    "empty": "Bạn chưa có địa chỉ giao hàng nào. Vui lòng thêm địa chỉ trước khi đặt hàng.",
+    "default": "Mặc định",
+    "form": {
+      "add": "Thêm địa chỉ giao hàng",
+      "edit": "Chỉnh sửa địa chỉ giao hàng",
+      "hint": "Vui lòng kiểm tra kỹ địa chỉ để đảm bảo tính chính xác."
+    },
+    "errors": { "required": "Vui lòng nhập {field}" }
+  }
+}

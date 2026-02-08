@@ -1,0 +1,13 @@
+{
+  "success": {
+    "title": "Pembayaran Berhasil",
+    "desc": "Terima kasih atas pembelian Anda! Pembayaran Anda telah berhasil dikonfirmasi.",
+    "ref": "Nomor Referensi:",
+    "note": "Harap simpan nomor referensi ini untuk pertanyaan di masa mendatang kepada tim dukungan kami."
+  },
+  "cancel": {
+    "title": "Pembayaran Dibatalkan",
+    "desc": "Proses pembayaran tidak selesai atau telah dibatalkan. Tidak ada biaya yang dikenakan ke akun Anda.",
+    "action": "Anda dapat kembali ke halaman checkout untuk mencoba lagi."
+  }
+}

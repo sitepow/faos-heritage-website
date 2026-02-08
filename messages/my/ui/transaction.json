@@ -1,0 +1,13 @@
+{
+  "success": {
+    "title": "Pembayaran Berjaya",
+    "desc": "Terima kasih atas pembelian anda! Pembayaran anda telah berjaya disahkan.",
+    "ref": "Nombor Rujukan:",
+    "note": "Sila simpan nombor rujukan ini untuk sebarang pertanyaan lanjut dengan pasukan sokongan kami."
+  },
+  "cancel": {
+    "title": "Pembayaran Dibatalkan",
+    "desc": "Proses pembayaran tidak selesai atau telah dibatalkan. Tiada caj telah dikenakan pada akaun anda.",
+    "action": "Anda boleh kembali ke halaman daftar keluar untuk mencuba lagi."
+  }
+}

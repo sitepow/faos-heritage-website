@@ -1,0 +1,44 @@
+{
+  "privacyPolicy": {
+    "intro": {
+      "seoTitle": "Chính sách Bảo mật - FAOS",
+      "title": "Chính sách Bảo mật",
+      "description": "Đọc Chính sách Bảo mật của FAOS để hiểu cách chúng tôi thu thập, sử dụng và bảo vệ thông tin cá nhân của bạn."
+    },
+    "content": "FAOS cam kết bảo vệ quyền riêng tư và dữ liệu cá nhân của tất cả người dùng. Mọi thông tin liên quan đến các cá nhân có thể nhận dạng sẽ được xử lý với chế độ bảo mật nghiêm ngặt và lưu trữ an toàn, bao gồm nhưng không giới hạn ở các chi tiết cá nhân như tên, thông tin liên hệ và dữ liệu giao dịch. FAOS triển khai các biện pháp bảo mật kỹ thuật và tổ chức phù hợp để ngăn chặn việc truy cập, tiết lộ, thay đổi hoặc tiêu hủy dữ liệu cá nhân trái phép. Thông tin cá nhân sẽ chỉ được thu thập và xử lý cho các mục đích kinh doanh hợp pháp và tuân thủ các luật bảo vệ dữ liệu hiện hành. Dữ liệu cá nhân sẽ không được tiết lộ cho bên thứ ba khi chưa có sự đồng ý trước, trừ khi pháp luật có yêu cầu."
+  },
+  "paymentMethods": {
+    "intro": {
+      "seoTitle": "Phương thức Thanh toán & Bảo mật - FAOS",
+      "title": "Phương thức Thanh toán & Bảo mật",
+      "description": "Chúng tôi cung cấp nhiều lựa chọn thanh toán thuận tiện và an toàn để mang lại cho bạn trải nghiệm mua sắm tốt nhất."
+    },
+    "guides": {
+      "howToShop": {
+        "title": "Hướng dẫn Đặt hàng",
+        "steps": [
+          "1. Duyệt qua các sản phẩm cao cấp của chúng tôi và nhấp vào “Thêm vào giỏ hàng”.",
+          "2. Kiểm tra các mặt hàng trong giỏ hàng; bạn có thể điều chỉnh số lượng hoặc xóa bớt mặt hàng nếu cần.",
+          "3. Nhấp vào nút “Thanh toán” để truy cập hệ thống thanh toán an toàn của chúng tôi.",
+          "4. Bạn sẽ được chuyển hướng đến trang thanh toán Stripe để nhập thông tin chi tiết một cách an toàn và xác nhận đơn hàng của mình."
+        ]
+      },
+      "atStore": {
+        "title": "Mua hàng trực tiếp (Chỉ tại Thái Lan)",
+        "description": "Nếu bạn muốn mua sắm trực tiếp, hãy ghé thăm các siêu thị hàng đầu gần bạn.",
+        "locations": ["Villa Market", "Foodland"],
+        "note": "Kiểm tra tình trạng sẵn có của sản phẩm tại chi nhánh địa phương của bạn ngay hôm nay."
+      },
+      "card": {
+        "title": "Thẻ Tín dụng / Thẻ Ghi nợ",
+        "accepted": "Chúng tôi chấp nhận Visa, Mastercard và JCB, bao gồm cả thẻ ảo và thẻ tín dụng quốc tế.",
+        "security": "Mọi giao dịch đều được mã hóa và bảo vệ bởi công nghệ bảo mật đẳng cấp thế giới của Stripe."
+      },
+      "qr": {
+        "title": "Thanh toán mã QR (Mobile Banking)",
+        "method": "Quét mã Thai QR Payment / PromptPay qua ứng dụng ngân hàng của bạn. Không áp dụng thêm phí dịch vụ.",
+        "note": "* Vui lòng hoàn tất giao dịch trong khung thời gian quy định trên trang thanh toán."
+      }
+    }
+  }
+}

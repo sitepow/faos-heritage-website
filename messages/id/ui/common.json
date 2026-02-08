@@ -1,0 +1,105 @@
+{
+  "actions": {
+    "save": "Simpan",
+    "cancel": "Batal",
+    "edit": "Ubah",
+    "delete": "Hapus",
+    "new": "Tambah Baru",
+    "close": "Tutup",
+    "back": "Kembali",
+    "confirm": "Konfirmasi",
+    "share": "Bagikan",
+    "more": "Lihat Lebih Banyak"
+  },
+  "status": {
+    "loading": "Memuat...",
+    "saving": "Menyimpan...",
+    "submitting": "Memproses...",
+    "noData": "Data tidak tersedia"
+  },
+  "theme": {
+    "light": "Terang",
+    "dark": "Gelap",
+    "system": "Sistem"
+  },
+  "form": {
+    "placeholder": "Masukkan informasi...",
+    "require": "Kolom wajib diisi",
+    "optional": "(Opsional)",
+    "product": {
+      "title_manage": "Kelola Produk",
+      "title_create": "Tambah Produk Baru",
+      "title_edit": "Ubah Detail Produk"
+    }
+  },
+  "fields": {
+    "fullName": "Nama Lengkap",
+    "email": "Alamat Email",
+    "phone": "Nomor Telepon",
+    "address": "Alamat (No. Rumah, Nama Jalan)",
+    "subDistrict": "Kelurahan",
+    "district": "Kecamatan",
+    "province": "Provinsi",
+    "postalCode": "Kode Pos",
+    "country": "Negara",
+    "orderId": "ID Pesanan",
+    "cartId": "ID Keranjang",
+    "trackingNo": "Nomor Resi"
+  },
+  "global": {
+    "country": {
+      "TH": "Thailand",
+      "US": "Amerika Serikat",
+      "GR": "Yunani",
+      "IT": "Italia",
+      "NL": "Belanda",
+      "MY": "Malaysia",
+      "SG": "Singapura",
+      "JP": "Jepang",
+      "CN": "Tiongkok",
+      "IS": "Islandia",
+      "VN": "Vietnam",
+      "ID": "Indonesia"
+    },
+    "productUnit": {
+      "PIECE": "Buah",
+      "ITEM": "Item",
+      "SET": "Set",
+      "BOX": "Kotak",
+      "PACK": "Pak",
+      "BAG": "Kantong",
+      "BOTTLE": "Botol",
+      "CAN": "Kaleng",
+      "KG": "kg",
+      "G": "g",
+      "L": "L",
+      "ML": "ml",
+      "PAIR": "Pasang",
+      "ROLL": "Gulung",
+      "SHEET": "Lembar",
+      "UNIT": "Unit"
+    },
+    "orderStatus": {
+      "PENDING": "Menunggu Pembayaran",
+      "PAID": "Dibayar",
+      "PROCESSING": "Diproses",
+      "SHIPPED": "Dikirim",
+      "DELIVERED": "Diterima",
+      "CANCELLED": "Dibatalkan",
+      "REFUNDED": "Dikembalikan (Refund)"
+    }
+  },
+  "alert": {
+    "delete": {
+      "title": "Apakah Anda yakin ingin menghapus ini?",
+      "description": "Tindakan ini permanen dan tidak dapat dibatalkan."
+    }
+  },
+  "messages": {
+    "create_success": "Berhasil dibuat",
+    "update_success": "Berhasil diperbarui",
+    "delete_success": "Berhasil dihapus",
+    "error": "Operasi gagal, silakan coba lagi",
+    "system_error": "Terjadi kesalahan sistem"
+  }
+}

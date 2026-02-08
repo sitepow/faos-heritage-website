@@ -1,0 +1,13 @@
+{
+  "success": {
+    "title": "Thanh toán thành công",
+    "desc": "Cảm ơn bạn đã mua hàng! Giao dịch thanh toán của bạn đã được xác nhận thành công.",
+    "ref": "Mã tham chiếu:",
+    "note": "Vui lòng lưu lại mã tham chiếu này để được hỗ trợ cho các thắc mắc sau này với đội ngũ của chúng tôi."
+  },
+  "cancel": {
+    "title": "Thanh toán đã bị hủy",
+    "desc": "Quá trình thanh toán không hoàn tất hoặc đã bị hủy. Tài khoản của bạn không bị trừ tiền.",
+    "action": "Bạn có thể quay lại trang thanh toán để thực hiện lại giao dịch."
+  }
+}

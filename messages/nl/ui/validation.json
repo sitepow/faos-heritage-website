@@ -1,0 +1,14 @@
+{
+  "validation": {
+    "product": {
+      "nameRequired": "Productnaam is verplicht",
+      "priceInvalid": "Ongeldig prijsformaat",
+      "priceMin": "De prijs moet minimaal 0 zijn",
+      "stockInvalid": "Ongeldige voorraadhoeveelheid",
+      "stockMin": "Voorraad mag niet minder dan 0 zijn",
+      "weightInvalid": "Ongeldig gewicht",
+      "categoryRequired": "Selecteer een productcategorie",
+      "comparePriceError": "De oorspronkelijke prijs moet hoger zijn dan de verkoopprijs"
+    }
+  }
+}

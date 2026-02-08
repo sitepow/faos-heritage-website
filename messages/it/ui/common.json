@@ -1,0 +1,105 @@
+{
+  "actions": {
+    "save": "Salva",
+    "cancel": "Annulla",
+    "edit": "Modifica",
+    "delete": "Elimina",
+    "new": "Aggiungi Nuovo",
+    "close": "Chiudi",
+    "back": "Indietro",
+    "confirm": "Conferma",
+    "share": "Condividi",
+    "more": "Vedi Altro"
+  },
+  "status": {
+    "loading": "Caricamento...",
+    "saving": "Salvataggio...",
+    "submitting": "In elaborazione...",
+    "noData": "Nessun dato disponibile"
+  },
+  "theme": {
+    "light": "Chiaro",
+    "dark": "Scuro",
+    "system": "Sistema"
+  },
+  "form": {
+    "placeholder": "Inserisci informazioni...",
+    "require": "Campo obbligatorio",
+    "optional": "(Opzionale)",
+    "product": {
+      "title_manage": "Gestisci Prodotti",
+      "title_create": "Aggiungi Nuovo Prodotto",
+      "title_edit": "Modifica Dettagli Prodotto"
+    }
+  },
+  "fields": {
+    "fullName": "Nome e Cognome",
+    "email": "Indirizzo Email",
+    "phone": "Numero di Telefono",
+    "address": "Indirizzo (N. civico, Via)",
+    "subDistrict": "Quartiere / Sotto-distretto",
+    "district": "Comune / Distretto",
+    "province": "Provincia / Stato",
+    "postalCode": "Codice Postale (CAP)",
+    "country": "Paese",
+    "orderId": "ID Ordine",
+    "cartId": "ID Carrello",
+    "trackingNo": "Numero di Tracciamento"
+  },
+  "global": {
+    "country": {
+      "TH": "Thailandia",
+      "US": "Stati Uniti",
+      "GR": "Grecia",
+      "IT": "Italia",
+      "NL": "Paesi Bassi",
+      "MY": "Malesia",
+      "SG": "Singapore",
+      "JP": "Giappone",
+      "CN": "Cina",
+      "IS": "Islanda",
+      "VN": "Vietnam",
+      "ID": "Indonesia"
+    },
+    "productUnit": {
+      "PIECE": "Pezzo",
+      "ITEM": "Articolo",
+      "SET": "Set",
+      "BOX": "Scatola",
+      "PACK": "Confezione",
+      "BAG": "Sacchetto",
+      "BOTTLE": "Bottiglia",
+      "CAN": "Lattina",
+      "KG": "kg",
+      "G": "g",
+      "L": "L",
+      "ML": "ml",
+      "PAIR": "Paio",
+      "ROLL": "Rotolo",
+      "SHEET": "Foglio",
+      "UNIT": "Unità"
+    },
+    "orderStatus": {
+      "PENDING": "Pagamento Pendente",
+      "PAID": "Pagato",
+      "PROCESSING": "In elaborazione",
+      "SHIPPED": "Spedito",
+      "DELIVERED": "Consegnato",
+      "CANCELLED": "Annullato",
+      "REFUNDED": "Rimborsato"
+    }
+  },
+  "alert": {
+    "delete": {
+      "title": "Sei sicuro di voler eliminare questo elemento?",
+      "description": "Questa azione è permanente e non può essere annullata."
+    }
+  },
+  "messages": {
+    "create_success": "Creato con successo",
+    "update_success": "Aggiornato con successo",
+    "delete_success": "Eliminato con successo",
+    "error": "Operazione fallita, riprova",
+    "system_error": "Si è verificato un errore di sistema"
+  }
+}

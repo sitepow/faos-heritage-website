@@ -1,0 +1,19 @@
+{
+  "navigation": {
+    "navbar": {
+      "search": "Leita að vörum eða vöruflokkum...",
+      "slogan": "Hápunktur lífrænnar ólífuolíu og hunangs fyrir þína heilsuvegferð",
+      "userPanel": {
+        "account": "Minn aðgangur",
+        "orders": "Mínar pantanir",
+        "favorites": "Mínar uppáhaldsvörur",
+        "dashboard": "Stjórnborð stjórnanda",
+        "logout": "Skrá út"
+      }
+    },
+    "breadcrumb": {
+      "home": "Heim",
+      "products": "Allar vörur"
+    }
+  }
+}

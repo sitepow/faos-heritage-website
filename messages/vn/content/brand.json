@@ -1,0 +1,21 @@
+{
+  "brand": {
+    "name": "FAOS",
+    "slogan": "Dầu Ô liu & Mật ong Hữu cơ Thượng hạng — 100% Thiên nhiên Tinh khiết",
+    "mission": "Điểm đến hàng đầu cung cấp dầu ô liu và mật ong nguyên chất, chất lượng cao vì sức khỏe toàn diện của bạn."
+  },
+  "shared": {
+    "productDiscovery": {
+      "title": "Gợi ý Thượng hạng",
+      "description": "Trải nghiệm nghệ thuật chế tác tỉ mỉ thông qua danh mục những sản phẩm chất lượng hàng đầu của chúng tôi."
+    },
+    "categoryDiscovery": {
+      "title": "Danh mục Sản phẩm",
+      "description": "Khám phá các bộ sưu tập được tuyển chọn kỹ lưỡng theo mọi nhu cầu của bạn."
+    },
+    "relatedProducts": {
+      "title": "Sản phẩm Tương tự",
+      "description": "Những sản phẩm nổi bật khác trong danh mục này mà bạn có thể quan tâm."
+    }
+  }
+}

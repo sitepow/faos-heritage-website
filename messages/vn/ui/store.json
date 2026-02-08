@@ -1,0 +1,56 @@
+{
+  "products": {
+    "pagination": "Hiển thị 1–{count} trên tổng số {total} sản phẩm",
+    "sortLabel": "Sắp xếp theo",
+    "sortItems": {
+      "newest": "Mới nhất",
+      "price_low": "Giá: Thấp đến Cao",
+      "price_high": "Giá: Cao đến Thấp",
+      "stock_low": "Tồn kho: Thấp đến Cao"
+    },
+    "empty": "Rất tiếc, không tìm thấy sản phẩm nào trong danh mục của chúng tôi."
+  },
+  "productDetail": {
+    "tabs": {
+      "description": "Mô tả Sản phẩm",
+      "review": "Đánh giá từ Khách hàng"
+    },
+    "chips": {
+      "authentic": "100% Chính hãng",
+      "premium": "Chất lượng Cao cấp"
+    },
+    "cartActions": {
+      "quantity": "Số lượng",
+      "options": "Chọn phân loại",
+      "add": "Thêm vào giỏ hàng",
+      "fav": "Thêm vào yêu thích",
+      "outOfStock": "Hết hàng",
+      "require": "Vui lòng chọn phân loại sản phẩm"
+    }
+  },
+  "cart": {
+    "title": "Giỏ hàng của bạn {count, plural, =0 {} other {(# sản phẩm)}}",
+    "empty": "Giỏ hàng của bạn hiện đang trống.",
+    "header": "Sản phẩm trong giỏ hàng",
+    "checkout": {
+      "addressTitle": "Địa chỉ giao hàng",
+      "summaryTitle": "Tóm tắt đơn hàng",
+      "currencyAlert": "Bạn đang mua hàng bằng đơn vị tiền tệ đã chọn. Vui lòng kiểm tra kỹ giá và loại tiền trước khi tiếp tục.",
+      "emptyAddressAlert": "Vui lòng thêm địa chỉ giao hàng <button>Thêm địa chỉ giao hàng</button>",
+      "summary": {
+        "total": "Tạm tính",
+        "shipping": "Phí vận chuyển",
+        "discount": "Giảm giá",
+        "net": "Tổng thanh toán"
+      },
+      "action": {
+        "order": "Đặt hàng",
+        "clear": "Xóa giỏ hàng",
+        "editAddress": "Chỉnh sửa địa chỉ"
+      }
+    },
+    "messages": {
+      "orderCreated": "Đơn hàng đã được tạo thành công. Vui lòng tiến hành thanh toán."
+    }
+  }
+}

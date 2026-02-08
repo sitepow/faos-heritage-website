@@ -1,0 +1,35 @@
+{
+  "meta": {
+    "keywords": [
+      "FAOS",
+      "Minyak Zaitun Organik",
+      "Minyak Zaitun Extra Virgin",
+      "100% Madu Asli Semulajadi",
+      "Madu Organik",
+      "Makanan Kesihatan Premium",
+      "Jenama minyak zaitun mentah terbaik",
+      "Mana nak beli madu asli",
+      "Minyak zaitun untuk kesihatan"
+    ],
+    "home": {
+      "title": "FAOS - Minyak Zaitun Organik Premium & 100% Madu Asli Tulen",
+      "description": "Sumber utama untuk Minyak Zaitun Extra Virgin 100% semulajadi dan Madu Organik. Kualiti premium yang dikurasi untuk kesihatan optimum anda, dihantar terus ke pintu rumah dengan promosi eksklusif."
+    },
+    "products": {
+      "title": "Beli Minyak Zaitun & Madu Asli - Semua Produk | FAOS",
+      "description": "Terokai pilihan produk fokus kesihatan kami yang disusun rapi, menampilkan Minyak Zaitun Extra Virgin tulen dan madu hutan semulajadi. Diiktiraf organik, selamat, dan bebas daripada bahan tambahan."
+    },
+    "productDetail": {
+      "title": "{name} - Minyak Zaitun & Madu Premium oleh FAOS",
+      "description": "Pesan {name}, kualiti premium 100% daripada alam semulajadi. Ketulenan terjamin dengan piawaian organik. Pesanan mudah, penghantaran pantas, dan jaminan 100% keaslian."
+    },
+    "category": {
+      "title": "{categoryName} Organik - Produk Kesihatan & Kesejahteraan FAOS",
+      "description": "Temui produk terbaik dalam koleksi {categoryName} kami. Produk semulajadi gred eksport yang dikurasi secara eksklusif untuk gaya hidup sihat anda."
+    },
+    "about": {
+      "title": "Mengenai FAOS - Warisan Ketulenan daripada Alam Semulajadi",
+      "description": "FAOS adalah pakar dalam minyak zaitun dan madu organik premium, dihasilkan dengan teliti daripada sumber 100% semulajadi dan mampan."
+    }
+  }
+}

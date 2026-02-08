@@ -1,0 +1,39 @@
+{
+  "profile": {
+    "welcome": "Akaun Anda, {name}",
+    "sections": {
+      "basic": "Maklumat Asas",
+      "personal": "Maklumat Peribadi",
+      "address": "Urus Alamat Saya"
+    },
+    "tabs": {
+      "orders": "Pesanan Saya",
+      "favs": "Kegemaran",
+      "edit": "Edit Profil"
+    }
+  },
+  "orders": {
+    "empty": "Anda tiada pesanan buat masa ini.",
+    "paymentAlert": "Sila lengkapkan pembayaran anda dalam tempoh 20 minit, jika tidak pesanan anda akan dibatalkan secara automatik.",
+    "view": {
+      "shipping": "Alamat Penghantaran",
+      "logistics": "Maklumat Penghantaran",
+      "preparing": "Sedang disediakan untuk penghantaran"
+    },
+    "cancel": {
+      "title": "Batal Pesanan",
+      "reason": "Sebab",
+      "placeholder": "Masukkan sebab pembatalan/bayaran balik"
+    }
+  },
+  "address": {
+    "empty": "Anda tiada alamat penghantaran. Sila tambah alamat sebelum membuat pesanan.",
+    "default": "Utama",
+    "form": {
+      "add": "Tambah Alamat Penghantaran",
+      "edit": "Edit Alamat Penghantaran",
+      "hint": "Sila semak semula alamat anda untuk memastikan ketepatan."
+    },
+    "errors": { "required": "Sila masukkan {field}" }
+  }
+}

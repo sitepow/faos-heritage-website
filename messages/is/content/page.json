@@ -1,0 +1,44 @@
+{
+  "privacyPolicy": {
+    "intro": {
+      "seoTitle": "Persónuverndarstefna - FAOS",
+      "title": "Persónuverndarstefna",
+      "description": "Lestu persónuverndarstefnu FAOS til að skilja hvernig við söfnum, notum og verndum persónuupplýsingar þínar."
+    },
+    "content": "FAOS leggur metnað í að vernda friðhelgi og persónuupplýsingar allra notenda. Öll gögn sem tengjast persónugreinanlegum einstaklingum verða meðhöndluð með ítrustu trúnaði og geymd á öruggan hátt, þar með talið en takmarkast ekki við persónuupplýsingar eins og nöfn, tengiliðaupplýsingar og viðskiptasögu. FAOS innleiðir viðeigandi tæknilegar og skipulagslegar öryggisráðstafanir til að koma í veg fyrir óheimilan aðgang, birtingu, breytingar eða eyðileggingu persónuupplýsinga. Persónuupplýsingum verður aðeins safnað og þær unnar í lögmætum viðskiptalegum tilgangi og í samræmi við gildandi lög um persónuvernd. Persónuupplýsingar verða ekki afhentar þriðja aðila án fyrirfram samþykkis, nema lög krefjist þess."
+  },
+  "paymentMethods": {
+    "intro": {
+      "seoTitle": "Greiðsluleiðir og öryggi - FAOS",
+      "title": "Greiðsluleiðir og öryggi",
+      "description": "Við bjóðum upp á fjölbreyttar, þægilegar og öruggar greiðsluleiðir til að tryggja þér bestu mögulegu verslunarupplifunina."
+    },
+    "guides": {
+      "howToShop": {
+        "title": "Hvernig á að panta",
+        "steps": [
+          "1. Skoðaðu úrvals vörur okkar og smelltu á „Setja í körfu“.",
+          "2. Farðu yfir vörurnar í körfunni; þú getur breytt magni eða fjarlægt vörur eftir þörfum.",
+          "3. Smelltu á „Greiða“ hnappinn til að fara í gegnum örugga greiðslukerfið okkar.",
+          "4. Þér verður vísað á Stripe greiðslusíðuna til að skrá upplýsingar þínar á öruggan hátt og staðfesta pöntunina."
+        ]
+      },
+      "atStore": {
+        "title": "Keypt í verslun (aðeins í Taílandi)",
+        "description": "Ef þú vilt frekar versla á staðnum, geturðu fundið vörur okkar í helstu stórmörkuðum.",
+        "locations": ["Villa Market", "Foodland"],
+        "note": "Kannaðu framboð vöru í þinni verslun í dag."
+      },
+      "card": {
+        "title": "Kredit- eða debetkort",
+        "accepted": "Við tökum á móti Visa, Mastercard og JCB, þar með talið sýndarkortum og alþjóðlegum kreditkortum.",
+        "security": "Hver færsla er dulkóðuð og vernduð með heimsklassa öryggistækni Stripe."
+      },
+      "qr": {
+        "title": "Greiðsla með QR-kóða (farsímabanki)",
+        "method": "Skannaðu Thai QR Payment / PromptPay í gegnum bankaappið þitt. Engin aukagjöld eiga við.",
+        "note": "* Vinsamlegast ljúktu færslunni innan þess tíma sem gefinn er upp á greiðslusíðunni."
+      }
+    }
+  }
+}

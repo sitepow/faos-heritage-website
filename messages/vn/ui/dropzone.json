@@ -1,0 +1,8 @@
+{
+  "imageDropzone": {
+    "active": "Thả ảnh của bạn vào đây...",
+    "idle": "Kéo và thả ảnh tại đây",
+    "hint": "Hoặc nhấp để chọn tệp (hình ảnh sẽ được tự động thay đổi kích thước để tối ưu hóa hiệu suất)",
+    "limit": "Hỗ trợ kích thước tệp tối đa lên đến {size}"
+  }
+}

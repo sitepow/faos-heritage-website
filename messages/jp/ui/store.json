@@ -1,0 +1,56 @@
+{
+  "products": {
+    "pagination": "{total}件中 1–{count}件を表示",
+    "sortLabel": "並べ替え",
+    "sortItems": {
+      "newest": "新着順",
+      "price_low": "価格の安い順",
+      "price_high": "価格の高い順",
+      "stock_low": "在庫の少ない順"
+    },
+    "empty": "申し訳ありませんが、該当する商品が見つかりませんでした。"
+  },
+  "productDetail": {
+    "tabs": {
+      "description": "商品説明",
+      "review": "カスタマーレビュー"
+    },
+    "chips": {
+      "authentic": "100%本物保証",
+      "premium": "プレミアム品質"
+    },
+    "cartActions": {
+      "quantity": "数量",
+      "options": "オプションを選択",
+      "add": "カートに入れる",
+      "fav": "お気に入りに追加",
+      "outOfStock": "在庫切れ",
+      "require": "商品のオプションを選択してください"
+    }
+  },
+  "cart": {
+    "title": "ショッピングカート {count, plural, =0 {} other {(#点)}}",
+    "empty": "カートに商品が入っていません。",
+    "header": "カート内の商品",
+    "checkout": {
+      "addressTitle": "お届け先住所",
+      "summaryTitle": "ご注文の概要",
+      "currencyAlert": "選択された通貨で購入手続きを進めています。決済を確定する前に、価格と通貨を再度ご確認ください。",
+      "emptyAddressAlert": "配送先住所を追加してください <button>住所を追加する</button>",
+      "summary": {
+        "total": "小計",
+        "shipping": "送料",
+        "discount": "割引",
+        "net": "合計金額"
+      },
+      "action": {
+        "order": "注文を確定する",
+        "clear": "カートを空にする",
+        "editAddress": "お届け先住所を編集"
+      }
+    },
+    "messages": {
+      "orderCreated": "注文が正常に作成されました。お支払い手続きにお進みください。"
+    }
+  }
+}

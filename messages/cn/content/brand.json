@@ -1,0 +1,21 @@
+{
+  "brand": {
+    "name": "FAOS",
+    "slogan": "尊享有机橄榄油与蜂蜜 — 100% 纯正自然",
+    "mission": "为您的极致健康提供高品质、纯正橄榄油与蜂蜜的首选殿堂。"
+  },
+  "shared": {
+    "productDiscovery": {
+      "title": "精选尊享推荐",
+      "description": "从我们严选的顶级产品中，领略匠心独运的精湛工艺。"
+    },
+    "categoryDiscovery": {
+      "title": "产品分类",
+      "description": "探索我们为您精心策划的各系列产品，满足您的全方位需求。"
+    },
+    "relatedProducts": {
+      "title": "相关推荐",
+      "description": "该系列中其他卓越的产品，您可能也会感兴趣。"
+    }
+  }
+}

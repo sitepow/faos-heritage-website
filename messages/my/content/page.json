@@ -1,0 +1,44 @@
+{
+  "privacyPolicy": {
+    "intro": {
+      "seoTitle": "Dasar Privasi - FAOS",
+      "title": "Dasar Privasi",
+      "description": "Baca Dasar Privasi FAOSเพื่อ memahami cara kami mengumpul, menggunakan, dan melindungi maklumat peribadi anda."
+    },
+    "content": "FAOS komited untuk melindungi privasi dan data peribadi semua pengguna. Segala maklumat berkaitan individuที่ boleh dikenal pasti akan dikendalikanด้วย kerahsiaanที่ ketat dan disimpanด้วย selamat, termasuk tetapi tidak terhad kepada butiran peribadi seperti nama, maklumat hubungan, dan data transaksi. FAOS melaksanakan langkah-langkah keselamatan teknikal dan organisasi yang sewajarnyaเพื่อ menghalang akses tanpa kebenaran, pendedahan, pengubahan, atau pemusnahan data peribadi. Maklumat peribadi hanya akan dikumpul dan diprosesเพื่อ tujuan perniagaan yang sah dan mematuhi undang-undang perlindungan data yang terpakai. Data peribadi tidak akan didedahkan kepada pihak ketiga tanpa kebenaran terlebih dahulu, kecuali jika dikehendaki oleh undang-undang."
+  },
+  "paymentMethods": {
+    "intro": {
+      "seoTitle": "Kaedah Pembayaran & Keselamatan - FAOS",
+      "title": "Kaedah Pembayaran & Keselamatan",
+      "description": "Kami menawarkan pelbagai pilihan pembayaran yang mudah dan selamatเพื่อ memberikan anda pengalaman membeli-belahที่ terbaik."
+    },
+    "guides": {
+      "howToShop": {
+        "title": "Cara Membuat Pesanan",
+        "steps": [
+          "1. Semak produk premium kami dan klik “Tambah ke Troli”.",
+          "2. Semak semula barangan anda di dalam troli; anda boleh melaraskan kuantiti atau mengeluarkan barangan jika perlu.",
+          "3. Klik butang “Daftar Keluar”เพื่อ memasuki sistem pembayaran selamat kami.",
+          "4. Anda akan dibawa ke halaman pembayaran Stripeเพื่อ memasukkan butiran andaด้วย selamat dan mengesahkan pesanan anda."
+        ]
+      },
+      "atStore": {
+        "title": "Pembelian di Kedai (Thailand Sahaja)",
+        "description": "Jika anda lebih suka membeli-belah secara bersemuka, layari pasar raya terkemuka berhampiran anda.",
+        "locations": ["Villa Market", "Foodland"],
+        "note": "Semak ketersediaan produk di cawangan tempatan anda hari ini."
+      },
+      "card": {
+        "title": "Kad Kredit / Debit",
+        "accepted": "Kami menerima Visa, Mastercard, dan JCB, termasuk kad maya dan kad kredit antarabangsa.",
+        "security": "Setiap transaksi disulitkan dan dilindungi oleh teknologi keselamatan kelas dunia Stripe."
+      },
+      "qr": {
+        "title": "Pembayaran Kod QR (Perbankan Mudah Alih)",
+        "method": "Imbas Pembayaran Thai QR / PromptPay melalui aplikasi perbankan anda. Tiada yuran tambahan dikenakan.",
+        "note": "* Sila selesaikan transaksi dalam tempoh masaที่ ditetapkan pada halaman pembayaran."
+      }
+    }
+  }
+}

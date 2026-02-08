@@ -1,0 +1,105 @@
+{
+  "actions": {
+    "save": "保存",
+    "cancel": "取消",
+    "edit": "编辑",
+    "delete": "删除",
+    "new": "新增",
+    "close": "关闭",
+    "back": "返回",
+    "confirm": "确认",
+    "share": "分享",
+    "more": "查看更多"
+  },
+  "status": {
+    "loading": "加载中...",
+    "saving": "保存中...",
+    "submitting": "处理中...",
+    "noData": "暂无数据"
+  },
+  "theme": {
+    "light": "浅色模式",
+    "dark": "深色模式",
+    "system": "跟随系统"
+  },
+  "form": {
+    "placeholder": "请输入信息...",
+    "require": "必填项",
+    "optional": "(选填)",
+    "product": {
+      "title_manage": "商品管理",
+      "title_create": "添加新商品",
+      "title_edit": "编辑商品详情"
+    }
+  },
+  "fields": {
+    "fullName": "姓名",
+    "email": "电子邮箱",
+    "phone": "电话号码",
+    "address": "地址 (门牌号、街道)",
+    "subDistrict": "街道 / 乡镇",
+    "district": "区 / 县",
+    "province": "省份 / 州",
+    "postalCode": "邮政编码",
+    "country": "国家",
+    "orderId": "订单 ID",
+    "cartId": "购物车 ID",
+    "trackingNo": "快递单号"
+  },
+  "global": {
+    "country": {
+      "TH": "泰国",
+      "US": "美国",
+      "GR": "希腊",
+      "IT": "意大利",
+      "NL": "荷兰",
+      "MY": "马来西亚",
+      "SG": "新加坡",
+      "JP": "日本",
+      "CN": "中国",
+      "IS": "冰岛",
+      "VN": "越南",
+      "ID": "印度尼西亚"
+    },
+    "productUnit": {
+      "PIECE": "件",
+      "ITEM": "项",
+      "SET": "套",
+      "BOX": "盒",
+      "PACK": "包",
+      "BAG": "袋",
+      "BOTTLE": "瓶",
+      "CAN": "罐",
+      "KG": "公斤",
+      "G": "克",
+      "L": "升",
+      "ML": "毫升",
+      "PAIR": "双",
+      "ROLL": "卷",
+      "SHEET": "张",
+      "UNIT": "单位"
+    },
+    "orderStatus": {
+      "PENDING": "待付款",
+      "PAID": "已付款",
+      "PROCESSING": "处理中",
+      "SHIPPED": "已发货",
+      "DELIVERED": "已送达",
+      "CANCELLED": "已取消",
+      "REFUNDED": "已退款"
+    }
+  },
+  "alert": {
+    "delete": {
+      "title": "您确定要删除吗？",
+      "description": "此操作永久生效，无法撤销。"
+    }
+  },
+  "messages": {
+    "create_success": "创建成功",
+    "update_success": "更新成功",
+    "delete_success": "删除成功",
+    "error": "操作失败，请重试",
+    "system_error": "系统发生错误"
+  }
+}

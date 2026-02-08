@@ -1,0 +1,8 @@
+{
+  "imageDropzone": {
+    "active": "Slepptu myndunum hér...",
+    "idle": "Dragðu og slepptu myndum hér",
+    "hint": "Eða smelltu til að velja skrár (stærð mynda verður sjálfkrafa breytt til að tryggja sem best afköst)",
+    "limit": "Styður hámarks skráarstærð allt að {size}"
+  }
+}

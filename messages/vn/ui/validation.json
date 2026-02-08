@@ -1,0 +1,14 @@
+{
+  "validation": {
+    "product": {
+      "nameRequired": "Tên sản phẩm là bắt buộc",
+      "priceInvalid": "Định dạng giá không hợp lệ",
+      "priceMin": "Giá phải ít nhất là 0",
+      "stockInvalid": "Số lượng tồn kho không hợp lệ",
+      "stockMin": "Tồn kho không thể ít hơn 0",
+      "weightInvalid": "Trọng lượng không hợp lệ",
+      "categoryRequired": "Vui lòng chọn danh mục sản phẩm",
+      "comparePriceError": "Giá gốc phải lớn hơn giá bán"
+    }
+  }
+}

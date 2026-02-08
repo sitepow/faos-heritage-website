@@ -1,0 +1,21 @@
+{
+  "brand": {
+    "name": "FAOS",
+    "slogan": "Olio d'Oliva e Miele Biologici Premium — 100% Natura Pura",
+    "mission": "Il punto di riferimento per olio d'oliva e miele autentici di alta qualità, dedicati al tuo benessere ottimale."
+  },
+  "shared": {
+    "productDiscovery": {
+      "title": "Consigliati Premium",
+      "description": "Scopri l'artigianalità meticolosa attraverso la nostra selezione di prodotti della migliore qualità."
+    },
+    "categoryDiscovery": {
+      "title": "Categorie di Prodotti",
+      "description": "Esplora le nostre collezioni accuratamente selezionate per ogni tua esigenza."
+    },
+    "relatedProducts": {
+      "title": "Prodotti Correlati",
+      "description": "Altri prodotti eccezionali in questa categoria che potrebbero interessarti."
+    }
+  }
+}

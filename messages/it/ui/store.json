@@ -1,0 +1,56 @@
+{
+  "products": {
+    "pagination": "Mostrando 1–{count} di {total} articoli",
+    "sortLabel": "Ordina per",
+    "sortItems": {
+      "newest": "Più recenti",
+      "price_low": "Prezzo: dal più basso",
+      "price_high": "Prezzo: dal più alto",
+      "stock_low": "Disponibilità: dalla più bassa"
+    },
+    "empty": "Spiacenti, non sono stati trovati prodotti nel nostro catalogo."
+  },
+  "productDetail": {
+    "tabs": {
+      "description": "Descrizione prodotto",
+      "review": "Recensioni clienti"
+    },
+    "chips": {
+      "authentic": "100% Autentico",
+      "premium": "Qualità Premium"
+    },
+    "cartActions": {
+      "quantity": "Quantità",
+      "options": "Seleziona opzioni",
+      "add": "Aggiungi al carrello",
+      "fav": "Aggiungi ai preferiti",
+      "outOfStock": "Esaurito",
+      "require": "Si prega di selezionare un'opzione del prodotto"
+    }
+  },
+  "cart": {
+    "title": "Il tuo carrello {count, plural, =0 {} other {(# articoli)}}",
+    "empty": "Il tuo carrello è attualmente vuoto.",
+    "header": "Articoli nel carrello",
+    "checkout": {
+      "addressTitle": "Indirizzo di spedizione",
+      "summaryTitle": "Riepilogo ordine",
+      "currencyAlert": "Stai effettuando l'acquisto con la valuta selezionata. Ti preghiamo di controllare attentamente il prezzo e la valuta prima di procedere.",
+      "emptyAddressAlert": "Si prega di aggiungere un indirizzo di spedizione <button>Aggiungi indirizzo di spedizione</button>",
+      "summary": {
+        "total": "Totale parziale",
+        "shipping": "Spese di spedizione",
+        "discount": "Sconto",
+        "net": "Totale complessivo"
+      },
+      "action": {
+        "order": "Effettua ordine",
+        "clear": "Svuota carrello",
+        "editAddress": "Modifica indirizzo di spedizione"
+      }
+    },
+    "messages": {
+      "orderCreated": "Ordine creato con successo. Si prega di procedere al pagamento."
+    }
+  }
+}

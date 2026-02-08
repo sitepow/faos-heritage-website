@@ -1,0 +1,35 @@
+{
+  "meta": {
+    "keywords": [
+      "FAOS",
+      "Biologische Olijfolie",
+      "Extra Vierge Olijfolie",
+      "100% Puur Natuurlijke Honing",
+      "Biologische Honing",
+      "Premium Gezondheidsvoeding",
+      "Beste merk voor rauwe olijfolie",
+      "Waar authentieke honing te kopen",
+      "Olijfolie voor de gezondheid"
+    ],
+    "home": {
+      "title": "FAOS - Premium Biologische Olijfolie & 100% Puur Authentieke Honing",
+      "description": "De belangrijkste bron voor 100% natuurlijke Extra Vierge Olijfolie en Biologische Honing. Geselecteerde premium kwaliteit voor uw optimale gezondheid, aan huis bezorgd met exclusieve promoties."
+    },
+    "products": {
+      "title": "Koop Authentieke Olijfolie & Honing - Alle Producten | FAOS",
+      "description": "Ontdek onze zorgvuldig samengestelde selectie gezondheidsproducten, met pure Extra Vierge Olijfolie en wilde natuurlijke honing. Gecertificeerd biologisch, veilig en vrij van additieven."
+    },
+    "productDetail": {
+      "title": "{name} - Premium Olijfolie & Honing door FAOS",
+      "description": "Bestel {name}, 100% premium kwaliteit uit de natuur. Gegarandeerde zuiverheid met biologische normen. Eenvoudig bestellen, snelle verzending en 100% gegarandeerde authenticiteit."
+    },
+    "category": {
+      "title": "Biologische {categoryName} - FAOS Gezondheids- & Welzijnsproducten",
+      "description": "Ontdek de beste producten in onze {categoryName} collectie. Exclusief samengestelde natuurlijke producten van exportkwaliteit voor uw gezonde levensstijl."
+    },
+    "about": {
+      "title": "Over FAOS - Een Erfgoed van Zuiverheid uit de Natuur",
+      "description": "FAOS is een specialist in premium biologische olijfolie en honing, nauwgezet vervaardigd uit 100% natuurlijke en duurzame bronnen."
+    }
+  }
+}

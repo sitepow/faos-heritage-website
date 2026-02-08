@@ -1,0 +1,39 @@
+{
+  "profile": {
+    "welcome": "您的账户，{name}",
+    "sections": {
+      "basic": "基本信息",
+      "personal": "个人资料",
+      "address": "地址管理"
+    },
+    "tabs": {
+      "orders": "我的订单",
+      "favs": "我的收藏",
+      "edit": "编辑个人资料"
+    }
+  },
+  "orders": {
+    "empty": "您目前没有任何订单。",
+    "paymentAlert": "请在 20 分钟内完成支付，否则您的订单将被自动取消。",
+    "view": {
+      "shipping": "收货地址",
+      "logistics": "物流信息",
+      "preparing": "正在备货"
+    },
+    "cancel": {
+      "title": "取消订单",
+      "reason": "原因",
+      "placeholder": "请输入取消/退款原因"
+    }
+  },
+  "address": {
+    "empty": "您尚未添加收货地址。下单前请先添加地址。",
+    "default": "默认",
+    "form": {
+      "add": "添加收货地址",
+      "edit": "编辑收货地址",
+      "hint": "请仔细核对您的地址，确保准确无误。"
+    },
+    "errors": { "required": "请输入{field}" }
+  }
+}

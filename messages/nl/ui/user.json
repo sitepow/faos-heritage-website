@@ -1,0 +1,39 @@
+{
+  "profile": {
+    "welcome": "Uw account, {name}",
+    "sections": {
+      "basic": "Basisinformatie",
+      "personal": "Persoonlijke gegevens",
+      "address": "Mijn adressen beheren"
+    },
+    "tabs": {
+      "orders": "Mijn bestellingen",
+      "favs": "Favorieten",
+      "edit": "Profiel bewerken"
+    }
+  },
+  "orders": {
+    "empty": "U heeft momenteel geen bestellingen.",
+    "paymentAlert": "Voltooi uw betaling binnen 20 minuten, anders wordt uw bestelling automatisch geannuleerd.",
+    "view": {
+      "shipping": "Verzendadres",
+      "logistics": "Verzendinformatie",
+      "preparing": "In voorbereiding voor verzending"
+    },
+    "cancel": {
+      "title": "Bestelling annuleren",
+      "reason": "Reden",
+      "placeholder": "Voer de reden voor annulering/restitutie in"
+    }
+  },
+  "address": {
+    "empty": "U heeft geen verzendadressen. Voeg een adres toe voordat u een bestelling plaatst.",
+    "default": "Standaard",
+    "form": {
+      "add": "Verzendadres toevoegen",
+      "edit": "Verzendadres bewerken",
+      "hint": "Controleer uw adres zorgvuldig op juistheid."
+    },
+    "errors": { "required": "Voer {field} in" }
+  }
+}

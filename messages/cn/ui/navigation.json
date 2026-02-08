@@ -1,0 +1,19 @@
+{
+  "navigation": {
+    "navbar": {
+      "search": "搜索产品或类别...",
+      "slogan": "为您健康之旅打造的有机橄榄油与蜂蜜之巅峰",
+      "userPanel": {
+        "account": "我的账户",
+        "orders": "我的订单",
+        "favorites": "我的收藏",
+        "dashboard": "管理员控制台",
+        "logout": "退出登录"
+      }
+    },
+    "breadcrumb": {
+      "home": "首页",
+      "products": "全部产品"
+    }
+  }
+}

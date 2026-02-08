@@ -1,0 +1,39 @@
+{
+  "profile": {
+    "welcome": "Il tuo account, {name}",
+    "sections": {
+      "basic": "Informazioni di base",
+      "personal": "Informazioni personali",
+      "address": "Gestisci i miei indirizzi"
+    },
+    "tabs": {
+      "orders": "I miei ordini",
+      "favs": "Preferiti",
+      "edit": "Modifica profilo"
+    }
+  },
+  "orders": {
+    "empty": "Al momento non hai ordini.",
+    "paymentAlert": "Si prega di completare il pagamento entro 20 minuti, altrimenti l'ordine verrà annullato automaticamente.",
+    "view": {
+      "shipping": "Indirizzo di spedizione",
+      "logistics": "Informazioni sulla spedizione",
+      "preparing": "In preparazione per la spedizione"
+    },
+    "cancel": {
+      "title": "Annulla ordine",
+      "reason": "Motivo",
+      "placeholder": "Inserisci il motivo dell'annullamento/rimborso"
+    }
+  },
+  "address": {
+    "empty": "Non hai indirizzi di spedizione. Aggiungi un indirizzo prima di effettuare un ordine.",
+    "default": "Predefinito",
+    "form": {
+      "add": "Aggiungi indirizzo di spedizione",
+      "edit": "Modifica indirizzo di spedizione",
+      "hint": "Controlla attentamente che l'indirizzo sia corretto."
+    },
+    "errors": { "required": "Si prega di inserire {field}" }
+  }
+}

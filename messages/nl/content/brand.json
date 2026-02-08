@@ -1,0 +1,21 @@
+{
+  "brand": {
+    "name": "FAOS",
+    "slogan": "Premium Biologische Olijfolie & Honing — 100% Pure Natuur",
+    "mission": "Dé plek voor authentieke olijfolie en honing van topkwaliteit, toegewijd aan uw optimaal welzijn."
+  },
+  "shared": {
+    "productDiscovery": {
+      "title": "Premium Aanbevelingen",
+      "description": "Ervaar nauwgezet vakmanschap via onze selectie van de allerbeste producten."
+    },
+    "categoryDiscovery": {
+      "title": "Productcategorieën",
+      "description": "Ontdek onze zorgvuldig samengestelde collecties in elke gewenste categorie."
+    },
+    "relatedProducts": {
+      "title": "Gerelateerde Producten",
+      "description": "Andere uitzonderlijke producten in deze categorie die wellicht interessant voor u zijn."
+    }
+  }
+}

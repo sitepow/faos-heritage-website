@@ -1,0 +1,35 @@
+{
+  "meta": {
+    "keywords": [
+      "FAOS",
+      "Lífræn ólífuolía",
+      "Extra virgin ólífuolía",
+      "100% hreint náttúrulegt hunang",
+      "Lífrænt hunang",
+      "Úrvals heilsufæði",
+      "Besta merkið fyrir hráa ólífuolíu",
+      "Hvar á að kaupa ekta hunang",
+      "Ólífuolía fyrir heilsuna"
+    ],
+    "home": {
+      "title": "FAOS - Úrvals lífræn ólífuolía og 100% hreint ekta hunang",
+      "description": "Helsta uppspretta 100% náttúrulegrar extra virgin ólífuolíu og lífræns hunangs. Úrvals gæði valin fyrir þína bestu heilsu, afhent heim að dyrum með sértilboðum."
+    },
+    "products": {
+      "title": "Kaupa ekta ólífuolíu og hunang - Allar vörur | FAOS",
+      "description": "Kannaðu úrval okkar af heilsuvörum, þar á meðal hreina extra virgin ólífuolíu og villt náttúrulegt hunang. Lífrænt vottað, öruggt og án íblöndunarefna."
+    },
+    "productDetail": {
+      "title": "{name} - Úrvals ólífuolía og hunang frá FAOS",
+      "description": "Pantaðu {name}, 100% úrvals gæði úr náttúrunni. Tryggður hreinleiki með lífrænum stöðlum. Einföld pöntun, hröð sending og 100% ábyrgð á áreiðanleika."
+    },
+    "category": {
+      "title": "Lífrænt {categoryName} - FAOS heilsu- og vellíðunarvörur",
+      "description": "Uppgötvaðu bestu vörurnar í {categoryName} úrvalinu okkar. Sérvalið náttúrulegt gæðavörur fyrir þinn heilbrigða lífsstíl."
+    },
+    "about": {
+      "title": "Um FAOS - Arfleifð hreinleika úr náttúrunni",
+      "description": "FAOS er sérfræðingur í úrvals lífrænni ólífuolíu og hunangi, unnið af kostgæfni úr 100% náttúrulegum og sjálfbærum uppsprettum."
+    }
+  }
+}

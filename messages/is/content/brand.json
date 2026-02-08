@@ -1,0 +1,21 @@
+{
+  "brand": {
+    "name": "FAOS",
+    "slogan": "Úrvals lífræn ólífuolía og hunang — 100% hrein náttúra",
+    "mission": "Helsti áfangastaðurinn fyrir hágæða, ekta ólífuolíu og hunang fyrir þína hámarksvellíðan."
+  },
+  "shared": {
+    "productDiscovery": {
+      "title": "Úrvals meðmæli",
+      "description": "Upplifðu vandvirkni í gegnum úrval okkar af bestu fáanlegu gæðavörum."
+    },
+    "categoryDiscovery": {
+      "title": "Vöruflokkar",
+      "description": "Kannaðu úrval okkar sem er valið af kostgæfni í öllum þeim flokkum sem þú þarfnast."
+    },
+    "relatedProducts": {
+      "title": "Tengdar vörur",
+      "description": "Aðrar framúrskarandi vörur í þessum flokki sem þú gætir haft áhuga á."
+    }
+  }
+}

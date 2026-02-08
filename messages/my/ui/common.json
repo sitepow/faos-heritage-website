@@ -1,0 +1,105 @@
+{
+  "actions": {
+    "save": "Simpan",
+    "cancel": "Batal",
+    "edit": "Edit",
+    "delete": "Padam",
+    "new": "Tambah Baharu",
+    "close": "Tutup",
+    "back": "Kembali",
+    "confirm": "Sahkan",
+    "share": "Kongsi",
+    "more": "Lihat Lagi"
+  },
+  "status": {
+    "loading": "Memuatkan...",
+    "saving": "Menyimpan...",
+    "submitting": "Memproses...",
+    "noData": "Tiada data tersedia"
+  },
+  "theme": {
+    "light": "Terang",
+    "dark": "Gelap",
+    "system": "Sistem"
+  },
+  "form": {
+    "placeholder": "Masukkan maklumat...",
+    "require": "Ruangan wajib",
+    "optional": "(Pilihan)",
+    "product": {
+      "title_manage": "Urus Produk",
+      "title_create": "Tambah Produk Baharu",
+      "title_edit": "Edit Butiran Produk"
+    }
+  },
+  "fields": {
+    "fullName": "Nama Penuh",
+    "email": "Alamat E-mel",
+    "phone": "Nombor Telefon",
+    "address": "Alamat (No. Rumah, Jalan)",
+    "subDistrict": "Mukim / Sub-daerah",
+    "district": "Daerah",
+    "province": "Negeri",
+    "postalCode": "Poskod",
+    "country": "Negara",
+    "orderId": "ID Pesanan",
+    "cartId": "ID Troli",
+    "trackingNo": "Nombor Penjejakan"
+  },
+  "global": {
+    "country": {
+      "TH": "Thailand",
+      "US": "Amerika Syarikat",
+      "GR": "Greece",
+      "IT": "Itali",
+      "NL": "Belanda",
+      "MY": "Malaysia",
+      "SG": "Singapura",
+      "JP": "Jepun",
+      "CN": "China",
+      "IS": "Iceland",
+      "VN": "Vietnam",
+      "ID": "Indonesia"
+    },
+    "productUnit": {
+      "PIECE": "Biji",
+      "ITEM": "Barangan",
+      "SET": "Set",
+      "BOX": "Kotak",
+      "PACK": "Pek",
+      "BAG": "Beg",
+      "BOTTLE": "Botol",
+      "CAN": "Tin",
+      "KG": "kg",
+      "G": "g",
+      "L": "L",
+      "ML": "ml",
+      "PAIR": "Pasang",
+      "ROLL": "Gulung",
+      "SHEET": "Helaian",
+      "UNIT": "Unit"
+    },
+    "orderStatus": {
+      "PENDING": "Menunggu Bayaran",
+      "PAID": "Dibayar",
+      "PROCESSING": "Diproses",
+      "SHIPPED": "Dihantar",
+      "DELIVERED": "Telah Sampai",
+      "CANCELLED": "Dibatalkan",
+      "REFUNDED": "Dibayar Balik"
+    }
+  },
+  "alert": {
+    "delete": {
+      "title": "Adakah anda pasti mahu memadamkan ini?",
+      "description": "Tindakan ini adalah kekal dan tidak boleh diubah semula."
+    }
+  },
+  "messages": {
+    "create_success": "Berjaya dicipta",
+    "update_success": "Berjaya dikemas kini",
+    "delete_success": "Berjaya dipadam",
+    "error": "Operasi gagal, sila cuba lagi",
+    "system_error": "Ralat sistem telah berlaku"
+  }
+}

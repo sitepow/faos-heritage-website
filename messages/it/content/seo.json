@@ -1,0 +1,35 @@
+{
+  "meta": {
+    "keywords": [
+      "FAOS",
+      "Olio d'Oliva Biologico",
+      "Olio Extra Vergine di Oliva",
+      "Miele Naturale Puro al 100%",
+      "Miele Biologico",
+      "Alimenti Salutari Premium",
+      "Migliore marca di olio d'oliva a crudo",
+      "Dove acquistare miele autentico",
+      "Olio d'oliva per la salute"
+    ],
+    "home": {
+      "title": "FAOS - Olio d'Oliva Biologico Premium e Miele Autentico Puro al 100%",
+      "description": "La fonte principale di Olio Extra Vergine di Oliva e Miele Biologico 100% naturali. Qualità premium selezionata per la tua salute ottimale, consegnata a casa tua con promozioni esclusive."
+    },
+    "products": {
+      "title": "Acquista Olio d'Oliva e Miele Autentici - Tutti i Prodotti | FAOS",
+      "description": "Esplora la nostra selezione curata di prodotti per la salute, con puro Olio Extra Vergine di Oliva e miele naturale selvatico. Certificato biologico, sicuro e privo di additivi."
+    },
+    "productDetail": {
+      "title": "{name} - Olio d'Oliva e Miele Premium di FAOS",
+      "description": "Ordina {name}, qualità premium al 100% dalla natura. Purezza garantita con standard biologici. Ordine facile, spedizione veloce e autenticità garantita al 100%."
+    },
+    "category": {
+      "title": "{categoryName} Biologico - Prodotti per la Salute e il Benessere FAOS",
+      "description": "Scopri i migliori prodotti nella nostra collezione {categoryName}. Prodotti naturali di qualità export curati esclusivamente per il tuo stile di vita sano."
+    },
+    "about": {
+      "title": "Chi Siamo FAOS - Un'Eredità di Purezza dalla Natura",
+      "description": "FAOS è specialista in olio d'oliva e miele biologici premium, creati meticolosamente da fonti 100% naturali e sostenibili."
+    }
+  }
+}

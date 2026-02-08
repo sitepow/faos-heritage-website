@@ -1,0 +1,105 @@
+{
+  "actions": {
+    "save": "Vista",
+    "cancel": "Hætta við",
+    "edit": "Breyta",
+    "delete": "Eyða",
+    "new": "Bæta við nýju",
+    "close": "Loka",
+    "back": "Til baka",
+    "confirm": "Staðfesta",
+    "share": "Deila",
+    "more": "Sjá meira"
+  },
+  "status": {
+    "loading": "Hleður...",
+    "saving": "Vistar...",
+    "submitting": "Í vinnslu...",
+    "noData": "Engin gögn tiltæk"
+  },
+  "theme": {
+    "light": "Ljóst",
+    "dark": "Dökkt",
+    "system": "Kerfi"
+  },
+  "form": {
+    "placeholder": "Sláðu inn upplýsingar...",
+    "require": "Skyldureitur",
+    "optional": "(Valfrjálst)",
+    "product": {
+      "title_manage": "Sýsla með vörur",
+      "title_create": "Bæta við nýrri vöru",
+      "title_edit": "Breyta vöruupplýsingum"
+    }
+  },
+  "fields": {
+    "fullName": "Fullt nafn",
+    "email": "Netfang",
+    "phone": "Símanúmer",
+    "address": "Heimilisfang (Gata, hús númer)",
+    "subDistrict": "Hverfi / Bæjarhluti",
+    "district": "Sveitarfélag",
+    "province": "Fylki / Hérað",
+    "postalCode": "Póstnúmer",
+    "country": "Land",
+    "orderId": "Pöntunarnúmer",
+    "cartId": "Körfunúmer",
+    "trackingNo": "Sendingarnúmer"
+  },
+  "global": {
+    "country": {
+      "TH": "Taíland",
+      "US": "Bandaríkin",
+      "GR": "Grikkland",
+      "IT": "Ítalía",
+      "NL": "Holland",
+      "MY": "Malasía",
+      "SG": "Singapúr",
+      "JP": "Japan",
+      "CN": "Kína",
+      "IS": "Ísland",
+      "VN": "Víetnam",
+      "ID": "Indónesía"
+    },
+    "productUnit": {
+      "PIECE": "Stykki",
+      "ITEM": "Vara",
+      "SET": "Sett",
+      "BOX": "Kassi",
+      "PACK": "Pakki",
+      "BAG": "Poki",
+      "BOTTLE": "Flaska",
+      "CAN": "Dós",
+      "KG": "kg",
+      "G": "g",
+      "L": "L",
+      "ML": "ml",
+      "PAIR": "Par",
+      "ROLL": "Rúlla",
+      "SHEET": "Blað",
+      "UNIT": "Eining"
+    },
+    "orderStatus": {
+      "PENDING": "Bíður greiðslu",
+      "PAID": "Greitt",
+      "PROCESSING": "Í vinnslu",
+      "SHIPPED": "Sent",
+      "DELIVERED": "Afhent",
+      "CANCELLED": "Hætt við",
+      "REFUNDED": "Endurgreitt"
+    }
+  },
+  "alert": {
+    "delete": {
+      "title": "Ertu viss um að þú viljir eyða þessu?",
+      "description": "Þessi aðgerð er varanleg og henni er ekki hægt að hneppa aftur."
+    }
+  },
+  "messages": {
+    "create_success": "Tókst að búa til",
+    "update_success": "Tókst að uppfæra",
+    "delete_success": "Tókst að eyða",
+    "error": "Aðgerð mistókst, vinsamlegast reyndu aftur",
+    "system_error": "Kerfisvilla kom upp"
+  }
+}

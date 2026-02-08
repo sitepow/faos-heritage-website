@@ -1,0 +1,35 @@
+{
+  "meta": {
+    "keywords": [
+      "FAOS",
+      "Minyak Zaitun Organik",
+      "Minyak Zaitun Extra Virgin",
+      "Madu Alami Murni 100%",
+      "Madu Organik",
+      "Makanan Kesehatan Premium",
+      "Merk minyak zaitun mentah terbaik",
+      "Tempat beli madu asli",
+      "Minyak zaitun untuk kesehatan"
+    ],
+    "home": {
+      "title": "FAOS - Minyak Zaitun Organik Premium & Madu Asli Murni 100%",
+      "description": "Sumber utama untuk Minyak Zaitun Extra Virgin 100% alami dan Madu Organik. Kualitas premium yang dikurasi untuk kesehatan optimal Anda, diantar langsung ke rumah dengan promosi eksklusif."
+    },
+    "products": {
+      "title": "Belanja Minyak Zaitun & Madu Asli - Semua Produk | FAOS",
+      "description": "Jelajahi pilihan produk fokus kesehatan kami, menampilkan Minyak Zaitun Extra Virgin murni dan madu hutan alami. Bersertifikat organik, aman, dan bebas bahan tambahan."
+    },
+    "productDetail": {
+      "title": "{name} - Minyak Zaitun & Madu Premium oleh FAOS",
+      "description": "Pesan {name}, kualitas premium 100%จาก alam. Kemurnian terjamin dengan standar organik. Pemesanan mudah, pengiriman cepat, dan jaminan keaslian 100%."
+    },
+    "category": {
+      "title": "{categoryName} Organik - Produk Kesehatan & Wellness FAOS",
+      "description": "Temukan produk terbaik dalam koleksi {categoryName} kami. Produk alami kelas ekspor yang dikurasi secara eksklusif untuk gaya hidup sehat Anda."
+    },
+    "about": {
+      "title": "Tentang FAOS - Warisan Kemurnian dari Alam",
+      "description": "FAOS adalah spesialis dalam minyak zaitun dan madu organik premium, dibuat dengan telitiจาก 100% sumber alami dan berkelanjutan."
+    }
+  }
+}
