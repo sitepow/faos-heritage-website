@@ -32,6 +32,10 @@ const VariantSelect = ({
   return (
     <Select
       disallowEmptySelection
+      classNames={{
+        trigger:
+          'border-default-100 data-[hover=true]:border-default-200 data-[open=true]:border-default-300 shadow-none',
+      }}
       isDisabled={isDisabled}
       placeholder={tForm('require')}
       radius='none'

@@ -37,7 +37,7 @@ const CartItem = ({ cart }: CartItemProps) => {
   )
 
   return (
-    <div className='group border-divider relative flex flex-col gap-4 border-b py-6 lg:grid lg:grid-cols-12 lg:items-center lg:gap-5'>
+    <div className='group border-default-100 relative flex flex-col gap-4 border-b py-6 lg:grid lg:grid-cols-12 lg:items-center lg:gap-5'>
       <div className='flex gap-4 lg:col-span-5 lg:items-center'>
         <ProductImage
           className='size-24 object-cover lg:size-20'
@@ -63,14 +63,12 @@ const CartItem = ({ cart }: CartItemProps) => {
       </div>
 
       <div className='flex flex-wrap items-center justify-between gap-4 lg:col-span-4 lg:grid lg:grid-cols-2 lg:justify-items-center'>
-        <div className='w-[140px] lg:w-full'>
-          <VariantSelect
-            isDisabled={loading.isUpdating}
-            selectedVariantId={variantId}
-            variants={product?.variants ?? []}
-            onChange={actions.handleVariantChange}
-          />
-        </div>
+        <VariantSelect
+          isDisabled={loading.isUpdating}
+          selectedVariantId={variantId}
+          variants={product?.variants ?? []}
+          onChange={actions.handleVariantChange}
+        />
 
         <ProductQty
           currentStockQuantity={currentStock}
@@ -80,7 +78,7 @@ const CartItem = ({ cart }: CartItemProps) => {
         />
       </div>
 
-      <div className='border-divider flex items-center justify-between border-t pt-4 lg:col-span-2 lg:justify-end lg:gap-4 lg:border-none lg:pt-0'>
+      <div className='border-default-100 flex items-center justify-between border-t pt-4 lg:col-span-2 lg:justify-end lg:gap-4 lg:border-none lg:pt-0'>
         <div className='flex flex-col items-start lg:items-end'>
           <span className='text-primary text-lg font-bold'>
             {formatCurrency(totalPrice, currencyOptions)}
@@ -92,11 +90,10 @@ const CartItem = ({ cart }: CartItemProps) => {
           className='transition-opacity lg:opacity-0 lg:group-hover:opacity-100'
           isDisabled={loading.isUpdating}
           isLoading={loading.isRemoving}
-          size='sm'
-          variant='flat'
+          variant='light'
           onPress={actions.handleDelete}
         >
-          <XIcon size={18} />
+          <XIcon />
         </Button>
       </div>
     </div>

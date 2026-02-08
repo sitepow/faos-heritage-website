@@ -71,7 +71,10 @@ const CartSummaryCard = ({ className, ...props }: CartCheckoutProps) => {
 
   return (
     <Card
-      className={cn(className, 'border-default-100 mx-auto border p-5 sm:w-xl')}
+      className={cn(
+        className,
+        'border-default-100 mx-auto border p-2.5 sm:w-xl sm:p-5',
+      )}
       radius='sm'
       shadow='none'
       {...props}
