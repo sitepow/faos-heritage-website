@@ -19,10 +19,13 @@ const AppMain = ({ className, children, ...props }: AppMainProps) => {
 
   return (
     <main
-      className={cn('mx-auto flex w-full flex-grow flex-col gap-5', className)}
+      className={cn(
+        'mx-auto flex w-full flex-grow flex-col gap-5 p-5',
+        className,
+      )}
       {...props}
     >
-      <Container className='py-5'>
+      <Container>
         <Alert
           color='warning'
           description={t('development.description')}

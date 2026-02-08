@@ -22,7 +22,7 @@ export async function generateMetadata({
 
 const AboutPage = () => {
   return (
-    <Container className='flex flex-col gap-5 p-5'>
+    <Container className='flex flex-col gap-5'>
       <PdfViewer fileUrl='/documents/EN_Brochure-FAOS-Siam10-by-Nicolas.pdf' />
       <PdfViewer fileUrl='/documents/TH_Brochure-FAOS-Siam10-by-Nicolas.pdf' />
     </Container>

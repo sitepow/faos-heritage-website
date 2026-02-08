@@ -40,7 +40,7 @@ const CategoryClient = ({ categoryId }: Props) => {
   const products = data?.pages.flatMap((page) => page.items) ?? []
 
   return (
-    <Container className='flex flex-col gap-5 p-5'>
+    <Container className='flex flex-col gap-5'>
       <SectionHeader
         description={tShared('categoryDiscovery.description')}
         title={category?.name!}

@@ -55,7 +55,7 @@ const PaymentMethodsPage = async ({
   }
 
   return (
-    <Container className='flex flex-col gap-5 p-5 text-center'>
+    <Container className='flex flex-col gap-5 text-center'>
       <SectionHeader
         description={t('intro.description')}
         title={t('intro.title')}
