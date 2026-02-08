@@ -1,13 +1,5 @@
 {
   "products": {
-    "pagination": "Toont 1–{count} van {total} artikelen",
-    "sortLabel": "Sorteren op",
-    "sortItems": {
-      "newest": "Nieuwste eerst",
-      "price_low": "Prijs: laag naar hoog",
-      "price_high": "Prijs: hoog naar laag",
-      "stock_low": "Voorraad: laag naar hoog"
-    },
     "empty": "Helaas, er zijn geen producten gevonden in onze catalogus."
   },
   "productDetail": {
@@ -48,9 +40,6 @@
         "clear": "Winkelwagen legen",
         "editAddress": "Verzendadres bewerken"
       }
-    },
-    "messages": {
-      "orderCreated": "Bestelling succesvol aangemaakt. Ga door naar betaling."
     }
   }
 }

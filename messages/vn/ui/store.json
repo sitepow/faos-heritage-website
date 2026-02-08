@@ -1,13 +1,5 @@
 {
   "products": {
-    "pagination": "Hiển thị 1–{count} trên tổng số {total} sản phẩm",
-    "sortLabel": "Sắp xếp theo",
-    "sortItems": {
-      "newest": "Mới nhất",
-      "price_low": "Giá: Thấp đến Cao",
-      "price_high": "Giá: Cao đến Thấp",
-      "stock_low": "Tồn kho: Thấp đến Cao"
-    },
     "empty": "Rất tiếc, không tìm thấy sản phẩm nào trong danh mục của chúng tôi."
   },
   "productDetail": {
@@ -48,9 +40,6 @@
         "clear": "Xóa giỏ hàng",
         "editAddress": "Chỉnh sửa địa chỉ"
       }
-    },
-    "messages": {
-      "orderCreated": "Đơn hàng đã được tạo thành công. Vui lòng tiến hành thanh toán."
     }
   }
 }

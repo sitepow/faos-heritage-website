@@ -1,13 +1,5 @@
 {
   "products": {
-    "pagination": "Sýnir 1–{count} af {total} vörum",
-    "sortLabel": "Raða eftir",
-    "sortItems": {
-      "newest": "Nýjast fyrst",
-      "price_low": "Verð: Lægst til hæst",
-      "price_high": "Verð: Hæst til lægst",
-      "stock_low": "Lagerstaða: Minnst til mest"
-    },
     "empty": "Því miður fundust engar vörur í vörulistanum okkar."
   },
   "productDetail": {
@@ -48,9 +40,6 @@
         "clear": "Tæma körfu",
         "editAddress": "Breyta sendingarheimilisfangi"
       }
-    },
-    "messages": {
-      "orderCreated": "Pöntun tókst. Vinsamlegast haltu áfram í greiðslu."
     }
   }
 }

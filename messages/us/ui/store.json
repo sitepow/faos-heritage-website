@@ -1,13 +1,5 @@
 {
   "products": {
-    "pagination": "Showing 1–{count} of {total} items",
-    "sortLabel": "Sort by",
-    "sortItems": {
-      "newest": "Newest First",
-      "price_low": "Price: Low to High",
-      "price_high": "Price: High to Low",
-      "stock_low": "Stock: Low to High"
-    },
     "empty": "Sorry, no products were found in our catalog."
   },
   "productDetail": {
@@ -48,9 +40,6 @@
         "clear": "Clear Cart",
         "editAddress": "Edit Shipping Address"
       }
-    },
-    "messages": {
-      "orderCreated": "Order created successfully. Please proceed to payment."
     }
   }
 }

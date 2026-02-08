@@ -1,13 +1,5 @@
 {
   "products": {
-    "pagination": "Menunjukkan 1–{count} daripada {total} barangan",
-    "sortLabel": "Isih mengikut",
-    "sortItems": {
-      "newest": "Terbaharu",
-      "price_low": "Harga: Rendah ke Tinggi",
-      "price_high": "Harga: Tinggi ke Rendah",
-      "stock_low": "Stok: Rendah ke Tinggi"
-    },
     "empty": "Maaf, tiada produk ditemui dalam katalog kami."
   },
   "productDetail": {
@@ -48,9 +40,6 @@
         "clear": "Kosongkan Troli",
         "editAddress": "Edit Alamat Penghantaran"
       }
-    },
-    "messages": {
-      "orderCreated": "Pesanan berjaya dicipta. Sila teruskan ke pembayaran."
     }
   }
 }

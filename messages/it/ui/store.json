@@ -1,13 +1,5 @@
 {
   "products": {
-    "pagination": "Mostrando 1–{count} di {total} articoli",
-    "sortLabel": "Ordina per",
-    "sortItems": {
-      "newest": "Più recenti",
-      "price_low": "Prezzo: dal più basso",
-      "price_high": "Prezzo: dal più alto",
-      "stock_low": "Disponibilità: dalla più bassa"
-    },
     "empty": "Spiacenti, non sono stati trovati prodotti nel nostro catalogo."
   },
   "productDetail": {
@@ -48,9 +40,6 @@
         "clear": "Svuota carrello",
         "editAddress": "Modifica indirizzo di spedizione"
       }
-    },
-    "messages": {
-      "orderCreated": "Ordine creato con successo. Si prega di procedere al pagamento."
     }
   }
 }

@@ -1,13 +1,5 @@
 {
   "products": {
-    "pagination": "{total}件中 1–{count}件を表示",
-    "sortLabel": "並べ替え",
-    "sortItems": {
-      "newest": "新着順",
-      "price_low": "価格の安い順",
-      "price_high": "価格の高い順",
-      "stock_low": "在庫の少ない順"
-    },
     "empty": "申し訳ありませんが、該当する商品が見つかりませんでした。"
   },
   "productDetail": {
@@ -48,9 +40,6 @@
         "clear": "カートを空にする",
         "editAddress": "お届け先住所を編集"
       }
-    },
-    "messages": {
-      "orderCreated": "注文が正常に作成されました。お支払い手続きにお進みください。"
     }
   }
 }

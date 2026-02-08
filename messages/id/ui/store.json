@@ -1,13 +1,5 @@
 {
   "products": {
-    "pagination": "Menampilkan 1–{count} dari {total} produk",
-    "sortLabel": "Urutkan berdasarkan",
-    "sortItems": {
-      "newest": "Terbaru",
-      "price_low": "Harga: Rendah ke Tinggi",
-      "price_high": "Harga: Tinggi ke Rendah",
-      "stock_low": "Stok: Sedikit ke Banyak"
-    },
     "empty": "Maaf, tidak ada produkที่ ditemukan dalam katalog kami."
   },
   "productDetail": {
@@ -48,9 +40,6 @@
         "clear": "Kosongkan Keranjang",
         "editAddress": "Ubah Alamat Pengiriman"
       }
-    },
-    "messages": {
-      "orderCreated": "Pesanan berhasil dibuat. Silakan lanjut ke pembayaran."
     }
   }
 }
