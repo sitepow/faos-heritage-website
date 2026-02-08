@@ -74,7 +74,7 @@ const FooterSection = ({ section }: { section: FooterMenuSection }) => {
 
   return (
     <nav className='flex flex-col gap-3'>
-      <ul className='list-disc pl-5'>
+      <ul className='marker:text-primary list-disc pl-5'>
         {section.items?.map(
           (link, i) =>
             typeof link === 'object' &&
