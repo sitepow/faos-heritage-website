@@ -1,5 +1,6 @@
 {
   "products": {
+    "title": "Semua Produk",
     "empty": "Maaf, tiada produk ditemui dalam katalog kami."
   },
   "productDetail": {

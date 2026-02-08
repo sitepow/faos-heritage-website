@@ -1,6 +1,7 @@
 {
   "products": {
-    "empty": "Helaas, er zijn geen producten gevonden in onze catalogus."
+    "title": "Alle Producten",
+    "empty": "Sorry, er zijn geen producten gevonden in onze catalogus."
   },
   "productDetail": {
     "tabs": {

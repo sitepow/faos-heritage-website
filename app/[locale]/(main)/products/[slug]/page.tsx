@@ -34,9 +34,9 @@ export async function generateMetadata({
     product.images?.[0]?.url
 
   return constructMetadata({
-    title: t('title', { name: product.name }),
+    title: t('title', { name: product?.name! }),
     description:
-      product.shortDescription || t('description', { name: product.name }),
+      product.shortDescription || t('description', { name: product?.name! }),
     ogImage: ogImage,
     canonicalPath: `/products/${slug}`,
     keywords: [product.name, product.category?.name || ''],

@@ -1,5 +1,6 @@
 {
   "products": {
+    "title": "All Products",
     "empty": "Sorry, no products were found in our catalog."
   },
   "productDetail": {

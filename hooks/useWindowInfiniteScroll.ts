@@ -16,7 +16,10 @@ const useWindowInfiniteScroll = ({
   const canFetchMore = hasNextPage && !isFetchingNextPage
 
   const handleFetchNext = useCallback(() => {
-    if (!canFetchMore) return
+    if (!canFetchMore) {
+      return
+    }
+
     fetchNextPage()
   }, [canFetchMore, fetchNextPage])
 

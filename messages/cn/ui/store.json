@@ -1,6 +1,7 @@
 {
   "products": {
-    "empty": "抱歉，目录中未找到相关产品。"
+    "title": "所有产品",
+    "empty": "抱歉，我们的目录中没有找到相关产品。"
   },
   "productDetail": {
     "tabs": {

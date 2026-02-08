@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
 
 import type {
@@ -30,7 +30,6 @@ const useProduct = ({
     enabled: !!productId,
   })
 }
-
 const useProducts = ({
   locale,
   itemsPerPage,
@@ -40,6 +39,29 @@ const useProducts = ({
     queryKey: productQueryKeys.lists.filtered({ locale, limit: itemsPerPage }),
     queryFn: () => getProductsInfinite({ limit: itemsPerPage, locale }),
     initialData,
+  })
+}
+
+const useProductsInfinite = ({
+  locale,
+  categoryId,
+  itemsPerPage = 12,
+}: UseProductsParams & { categoryId?: string }) => {
+  return useInfiniteQuery({
+    queryKey: productQueryKeys.lists.filtered({
+      locale,
+      categoryId,
+      limit: itemsPerPage,
+    }),
+    queryFn: ({ pageParam }) =>
+      getProductsInfinite({
+        cursor: pageParam as string | undefined,
+        limit: itemsPerPage,
+        categoryId,
+        locale,
+      }),
+    initialPageParam: null as string | null,
+    getNextPageParam: (lastPage) => lastPage.nextCursor,
   })
 }
 
@@ -82,4 +104,10 @@ const useSimilarProducts = ({
   })
 }
 
-export { useProduct, useProducts, useProductPrice, useSimilarProducts }
+export {
+  useProduct,
+  useProducts,
+  useProductsInfinite,
+  useProductPrice,
+  useSimilarProducts,
+}

@@ -120,6 +120,7 @@ const getCategory = async (categoryId: string) => {
       image: true,
     },
   })
+
   return category || null
 }
 

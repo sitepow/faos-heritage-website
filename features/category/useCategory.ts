@@ -2,8 +2,15 @@
 
 import { useQuery } from '@tanstack/react-query'
 
-import { getCategories } from './category.action'
+import { getCategories, getCategory } from './category.action'
 import { categoryQueryKeys } from './category.query-key'
+
+const useCategory = (categoryId: string) => {
+  return useQuery({
+    queryKey: categoryQueryKeys.details.byId(categoryId!),
+    queryFn: () => getCategory(categoryId!),
+  })
+}
 
 const useCategories = () => {
   return useQuery({
@@ -12,4 +19,4 @@ const useCategories = () => {
   })
 }
 
-export { useCategories }
+export { useCategory, useCategories }

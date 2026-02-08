@@ -1,5 +1,6 @@
 {
   "products": {
+    "title": "Tutti i Prodotti",
     "empty": "Spiacenti, non sono stati trovati prodotti nel nostro catalogo."
   },
   "productDetail": {

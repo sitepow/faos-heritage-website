@@ -13,6 +13,8 @@ const UPLOAD_URL_PREFIX = '/uploads'
 
 const PDF_WORKER_URL = '/javascript/pdf.worker.min.js'
 
+const THRESHOLD_SCROLL_FETCH = 1500
+
 export {
   SECOND,
   MINUTE,
@@ -23,4 +25,5 @@ export {
   UPLOAD_DIR,
   UPLOAD_URL_PREFIX,
   PDF_WORKER_URL,
+  THRESHOLD_SCROLL_FETCH,
 }

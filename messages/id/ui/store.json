@@ -1,6 +1,7 @@
 {
   "products": {
-    "empty": "Maaf, tidak ada produkที่ ditemukan dalam katalog kami."
+    "title": "Semua Produk",
+    "empty": "Maaf, tidak ada produk yang ditemukan dalam katalog kami."
   },
   "productDetail": {
     "tabs": {

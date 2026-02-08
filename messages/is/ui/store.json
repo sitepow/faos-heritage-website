@@ -1,5 +1,6 @@
 {
   "products": {
+    "title": "Allar vörur",
     "empty": "Því miður fundust engar vörur í vörulistanum okkar."
   },
   "productDetail": {
