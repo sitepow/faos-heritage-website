@@ -7,7 +7,7 @@ import { categoryQueryKeys } from './category.query-key'
 
 const useCategories = () => {
   return useQuery({
-    queryKey: categoryQueryKeys.list.all,
+    queryKey: categoryQueryKeys.lists.all(),
     queryFn: getCategories,
   })
 }

@@ -1,287 +1,143 @@
 'use server'
 
+import { Role, type Prisma } from '@prisma/client'
 import { unstable_noStore as noStore } from 'next/cache'
 
-import type { Prisma, Product } from '@prisma/client'
-
+import { transformProduct } from './product.helper'
 import { productSchema, type ProductInput } from './product.schema'
 
 import { deleteFile } from '@/app/actions/file'
 import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { prisma } from '@/lib/prisma'
-import {
-  omitEmptyFields,
-  decimalToNumber,
-  calculateVariantRange,
-} from '@/utils'
+import { getServerUser, withRole } from '@/lib/session'
+import { omitEmptyFields, decimalToNumber } from '@/utils'
 
-export type GetProductResult = Awaited<ReturnType<typeof getProduct>>
-export type GetProductsResult = Awaited<ReturnType<typeof getProducts>>
-
-type SortOrder = 'asc' | 'desc'
-interface SortByItem {
-  readonly field: keyof Product
-  readonly order: SortOrder
-}
-
-export type GetProductsInfiniteResult = Awaited<
-  ReturnType<typeof getProductsInfinite>
->
-
-export type ProductListItem = NonNullable<
-  GetProductsInfiniteResult['items']
+type ProductWithPayload = Awaited<ReturnType<typeof getProduct>>
+type ProductListItem = NonNullable<
+  Awaited<ReturnType<typeof getProducts>>['items']
 >[number]
 
-interface GetProductsInfiniteProps {
-  cursor?: string | null
-  limit?: number
-  categoryId?: string | null
-  sortBy?: SortByItem
-  locale?: string
-}
+const createProduct = async (data: ProductInput) =>
+  withRole([Role.ADMIN], async () => {
+    const validated = productSchema.safeParse(data)
 
-export const createProduct = async (data: ProductInput) => {
-  const validated = productSchema.safeParse(data)
+    if (!validated.success) {
+      return fail(ERROR_CODES.VALIDATION_ERROR)
+    }
 
-  if (!validated.success) {
-    return fail(ERROR_CODES.VALIDATION_ERROR)
-  }
-
-  try {
-    await prisma.product.create({
-      data: omitEmptyFields(
+    try {
+      const payload = omitEmptyFields(
         validated.data,
-      ) as Prisma.ProductUncheckedCreateInput,
-    })
-  } catch {
-    return fail(ERROR_CODES.SYSTEM_ERROR)
-  }
+      ) as Prisma.ProductUncheckedCreateInput
 
-  return ok()
-}
+      await prisma.product.create({ data: payload })
 
-export const updateProduct = async (data: ProductInput) => {
-  const validated = productSchema.safeParse(data)
+      return ok()
+    } catch {
+      return fail(ERROR_CODES.SYSTEM_ERROR)
+    }
+  })
 
-  if (!validated?.success) {
-    return fail(ERROR_CODES.VALIDATION_ERROR)
-  }
+const updateProduct = async (data: ProductInput) =>
+  withRole(['ADMIN'], async () => {
+    const validated = productSchema.safeParse(data)
 
-  const { id, ...payload } = validated.data
+    if (!validated.success) {
+      return fail(ERROR_CODES.VALIDATION_ERROR)
+    }
 
-  if (!id) {
-    return fail(ERROR_CODES.DATA_NOT_FOUND)
-  }
+    const { id, ...payload } = validated.data
 
-  try {
-    await prisma.product.update({
-      data: payload as Prisma.ProductUncheckedUpdateInput,
-      where: { id },
-    })
-  } catch {
-    return fail(ERROR_CODES.SYSTEM_ERROR)
-  }
+    if (!id) {
+      return fail(ERROR_CODES.DATA_NOT_FOUND)
+    }
 
-  return ok()
-}
+    try {
+      await prisma.product.update({
+        where: { id },
+        data: payload as Prisma.ProductUncheckedUpdateInput,
+      })
 
-export const deleteProduct = async (productIds: string | string[]) => {
-  const ids = Array.isArray(productIds) ? productIds : [productIds]
+      return ok()
+    } catch {
+      return fail(ERROR_CODES.SYSTEM_ERROR)
+    }
+  })
 
-  if (!ids.length) {
-    return fail(ERROR_CODES.SYSTEM_ERROR)
-  }
+const deleteProduct = async (productIds: string | string[]) =>
+  withRole(['ADMIN'], async () => {
+    const ids = Array.isArray(productIds) ? productIds : [productIds]
 
-  const products = await prisma.product.findMany({
-    where: { id: { in: ids } },
-    select: {
-      id: true,
-      images: { select: { url: true } },
+    if (!ids.length) {
+      return fail(ERROR_CODES.BAD_REQUEST)
+    }
+
+    try {
+      const products = await prisma.product.findMany({
+        where: { id: { in: ids } },
+        select: { images: { select: { url: true } } },
+      })
+
+      const imageUrls = products.flatMap((p) => p.images.map((img) => img.url))
+      await Promise.all(imageUrls.map((url) => deleteFile(url)))
+
+      await prisma.product.deleteMany({ where: { id: { in: ids } } })
+
+      return ok()
+    } catch {
+      return fail(ERROR_CODES.SYSTEM_ERROR)
+    }
+  })
+
+const getProduct = async (productId: string, locale?: string) => {
+  const { userId } = await getServerUser()
+
+  const product = await prisma.product.findUnique({
+    where: { id: productId },
+    include: {
+      category: { select: { id: true, name: true } },
+      images: { orderBy: { isPrimary: 'desc' } },
+      variants: true,
+      localizations: {
+        where: { languageCode: locale?.toUpperCase() },
+        take: 1,
+      },
+      ...(userId && {
+        cart: { where: { userId }, select: { variantId: true } },
+        wishlist: { where: { userId }, select: { id: true } },
+      }),
     },
   })
 
-  for (const product of products) {
-    for (const image of product.images) {
-      await deleteFile(image.url)
-    }
-  }
-
-  try {
-    await prisma.product.deleteMany({
-      where: { id: { in: ids } },
-    })
-  } catch {
-    return fail(ERROR_CODES.SYSTEM_ERROR)
-  }
-
-  return ok()
+  return transformProduct(decimalToNumber(product))
 }
 
-export const getProduct = async (
-  productId: string,
-  userId?: string,
-  locale?: string,
-) => {
-  const product = decimalToNumber(
-    await prisma.product.findUnique({
-      where: { id: productId },
-      select: {
-        id: true,
-        name: true,
-        slug: true,
-        sku: true,
-        barcode: true,
-        price: true,
-        compareAtPrice: true,
-        costPrice: true,
-        stockQuantity: true,
-        lowStockAlert: true,
-        weight: true,
-        categoryId: true,
-        shortDescription: true,
-        isAuthentic: true,
-        isPremiumProduct: true,
-        isDigitalProduct: true,
-        isDemoProduct: true,
-        unit: true,
-        cart: userId
-          ? {
-              where: { userId },
-              select: { variantId: true },
-            }
-          : false,
-        wishlist: userId
-          ? {
-              where: { userId },
-              select: { id: true },
-            }
-          : false,
-        variants: {
-          select: {
-            id: true,
-            name: true,
-            price: true,
-            stockQuantity: true,
-            image: true,
-          },
-        },
-        category: {
-          select: { id: true, name: true },
-        },
-        images: {
-          orderBy: { isPrimary: 'desc' },
-          select: {
-            url: true,
-            alt: true,
-            isPrimary: true,
-          },
-        },
-        localizations: {
-          where: { languageCode: locale?.toLocaleUpperCase() },
-          take: 1,
-          select: {
-            name: true,
-            shortDescription: true,
-            description: true,
-            metaTitle: true,
-            metaDescription: true,
-          },
-        },
-        description: true,
-        metaTitle: true,
-        metaDescription: true,
-        isActive: true,
-        useSeoFromBasicData: true,
-        isFeatured: true,
-        createdAt: true,
-        updatedAt: true,
-      },
-    }),
-  )
-
-  if (!product) {
-    return
-  }
-
-  const { priceMin, priceMax, stockMin, stockMax } = calculateVariantRange(
-    product.variants,
-  )
-
-  const localization = product?.localizations?.[0]
-
-  return {
-    ...product,
-    priceMin,
-    priceMax,
-    stockMin,
-    stockMax,
-    name: localization?.name ?? product.name,
-    shortDescription:
-      localization?.shortDescription ?? product.shortDescription,
-    description: localization?.description ?? product.description,
-    metaTitle: localization?.metaTitle ?? product.metaTitle,
-    metaDescription: localization?.metaDescription ?? product.metaDescription,
-  }
-}
-
-export const getProducts = async (
-  page: number = 1,
-  limit: number = 10,
-  locale?: string,
-) => {
+const getProducts = async (page = 1, limit = 10, locale?: string) => {
   const skip = (page - 1) * limit
+  const languageCode = locale?.toUpperCase()
 
-  const [items, total] = await Promise.all([
+  const [items, total] = await prisma.$transaction([
     prisma.product.findMany({
       skip,
       take: limit,
-      select: {
-        id: true,
-        name: true,
-        price: true,
-        unit: true,
-        isDigitalProduct: true,
-        stockQuantity: true,
-        images: { select: { url: true } },
-        variants: {
-          select: {
-            name: true,
-            price: true,
-            stockQuantity: true,
-          },
-        },
+      include: {
+        category: { select: { name: true } },
+        images: { select: { url: true, isPrimary: true } },
+        variants: { select: { price: true, stockQuantity: true } },
         localizations: {
-          where: { languageCode: locale?.toLocaleUpperCase() },
+          where: { languageCode },
           take: 1,
           select: { name: true },
         },
-        category: { select: { name: true } },
       },
       orderBy: { createdAt: 'desc' },
     }),
     prisma.product.count(),
   ])
 
-  const transformed = decimalToNumber(items)
-
-  const productItems = transformed?.map((product) => {
-    const { priceMin, priceMax, stockMin, stockMax } = calculateVariantRange(
-      product?.variants,
-    )
-
-    return {
-      ...product,
-      priceMin,
-      priceMax,
-      stockMin,
-      stockMax,
-      name: product?.localizations?.[0]?.name ?? product.name,
-    }
-  })
-
   return {
-    items: productItems,
+    items: decimalToNumber(items).map(transformProduct),
     total,
     page,
     limit,
@@ -289,106 +145,76 @@ export const getProducts = async (
   }
 }
 
-export const getProductsInfinite = async ({
+const getProductsInfinite = async ({
   cursor,
   limit = 8,
   categoryId,
-  sortBy = { field: 'createdAt', order: 'desc' },
   locale,
-}: GetProductsInfiniteProps) => {
+}: {
+  cursor?: string | null
+  limit?: number
+  categoryId?: string | null
+  locale?: string
+}) => {
   noStore()
-
-  let totalCount: number | undefined
-  let where = {
+  const languageCode = locale?.toUpperCase()
+  const where: Prisma.ProductWhereInput = {
     isActive: true,
     ...(categoryId && { categoryId }),
   }
 
-  if (!cursor) {
-    totalCount = await prisma.product.count({ where })
-  }
-
-  const items = await prisma.product.findMany({
-    take: limit + 1,
-    skip: cursor ? 1 : 0,
-    cursor: cursor ? { id: cursor } : undefined,
-    where,
-    select: {
-      id: true,
-      name: true,
-      price: true,
-      stockQuantity: true,
-      isDigitalProduct: true,
-      isAuthentic: true,
-      isPremiumProduct: true,
-      isDemoProduct: true,
-      unit: true,
-      images: { select: { url: true, isPrimary: true } },
-      variants: {
-        select: {
-          image: true,
-          price: true,
-          stockQuantity: true,
+  const [items, totalCount] = await Promise.all([
+    prisma.product.findMany({
+      take: limit + 1,
+      skip: cursor ? 1 : 0,
+      cursor: cursor ? { id: cursor } : undefined,
+      where,
+      include: {
+        category: { select: { name: true } },
+        images: { select: { url: true, isPrimary: true } },
+        variants: { select: { price: true, stockQuantity: true, image: true } },
+        localizations: {
+          where: { languageCode },
+          take: 1,
+          select: { name: true },
         },
       },
-      category: { select: { name: true } },
-      localizations: {
-        where: { languageCode: locale?.toLocaleUpperCase() },
-        take: 1,
-        select: { name: true },
-      },
-    },
-    orderBy: {
-      [sortBy.field]: sortBy.order,
-    },
-  })
-
-  const hasNextPage = items.length > limit
-  const transformed = decimalToNumber(items)
-
-  const resultItems = (
-    hasNextPage ? transformed.slice(0, limit) : transformed
-  ).map((product) => {
-    const { priceMin, priceMax, stockMin, stockMax } = calculateVariantRange(
-      product?.variants,
-    )
-
-    return {
-      ...product,
-      priceMin,
-      priceMax,
-      stockMin,
-      stockMax,
-      name: product?.localizations?.[0]?.name ?? product.name,
-    }
-  })
-
-  let nextCursor: string | null = null
-  if (hasNextPage) {
-    nextCursor = resultItems[resultItems.length - 1].id
-  }
-
-  return {
-    items: resultItems,
-    nextCursor,
-    totalCount,
-  }
-}
-
-export const getProductStat = async () => {
-  const [totalProducts, inStock, outOfStock] = await Promise.all([
-    prisma.product.count(),
-    prisma.product.count({
-      where: { stockQuantity: { gt: 0 } },
+      orderBy: { createdAt: 'desc' },
     }),
-    prisma.product.count({
-      where: { stockQuantity: 0 },
-    }),
+    cursor ? Promise.resolve(undefined) : prisma.product.count({ where }),
   ])
 
-  return [
-    { name: 'สินค้าทั้งหมด', value: totalProducts },
-    { name: 'สินค้าพร้อมจำหน่าย', value: inStock },
-    { name: 'สินค้าไม่พร้อมจำหน่าย (หมดสต็อก)', value: outOfStock },
-  ]
+  const hasNextPage = items.length > limit
+  const resultItems = decimalToNumber(
+    hasNextPage ? items.slice(0, limit) : items,
+  ).map(transformProduct)
+  const nextCursor = hasNextPage
+    ? resultItems[resultItems.length - 1]?.id
+    : null
+
+  return { items: resultItems, nextCursor, totalCount }
 }
+
+const getProductStat = async () =>
+  withRole(['ADMIN'], async () => {
+    const stats = await prisma.$transaction([
+      prisma.product.count(),
+      prisma.product.count({ where: { stockQuantity: { gt: 0 } } }),
+      prisma.product.count({ where: { stockQuantity: 0 } }),
+    ])
+
+    const labels = ['สินค้าทั้งหมด', 'สินค้าพร้อมจำหน่าย', 'สินค้าหมดสต็อก']
+    return stats.map((value, idx) => ({ name: labels[idx], value }))
+  })
+
+export {
+  createProduct,
+  updateProduct,
+  deleteProduct,
+  getProduct,
+  getProducts,
+  getProductsInfinite,
+  getProductStat,
+}
+
+export type { ProductWithPayload, ProductListItem }

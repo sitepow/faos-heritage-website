@@ -1,30 +1,35 @@
 type ProductListFilters = {
   locale?: string
   isActive?: boolean
-  position?: 'homepage' | 'dashboard'
+  categoryId?: string | null
+  limit?: number
 }
 
 const productQueryKeys = {
-  root: ['products'] as const,
+  all: ['products'] as const,
 
-  list: {
-    all: [...['products'], 'list'] as const,
+  lists: {
+    all: () => [...productQueryKeys.all, 'list'] as const,
 
-    byFilter: (filters: ProductListFilters = {}) =>
-      [...productQueryKeys.list.all, filters] as const,
+    filtered: (filters: ProductListFilters) =>
+      [...productQueryKeys.lists.all(), filters] as const,
 
-    homepage: (locale?: string, itemsPerPage?: number) =>
-      [...productQueryKeys.list.all, 'homepage', locale, itemsPerPage] as const,
+    infinite: (filters: ProductListFilters & { cursor?: string | null }) =>
+      [...productQueryKeys.lists.all(), 'infinite', filters] as const,
 
     similar: (locale: string, categoryId?: string | null) =>
-      ['products', 'similar', locale, categoryId] as const,
+      [...productQueryKeys.lists.all(), 'similar', locale, categoryId] as const,
   },
 
-  detail: {
-    all: [...['products'], 'detail'] as const,
+  details: {
+    all: () => [...productQueryKeys.all, 'detail'] as const,
 
-    byId: (id: string) => [...productQueryKeys.detail.all, id] as const,
+    byId: (id: string, context?: { locale?: string; userId?: string }) =>
+      [...productQueryKeys.details.all(), id, context ?? {}] as const,
   },
+
+  stats: () => [...productQueryKeys.all, 'stats'] as const,
 }
 
 export { productQueryKeys }
+export type { ProductListFilters }

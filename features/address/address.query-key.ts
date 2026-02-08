@@ -1,26 +1,27 @@
 type AddressListFilters = {
-  locale?: string
-  isActive?: boolean
-  position?: 'homepage' | 'dashboard'
+  userId?: string
+  isDefault?: boolean
 }
 
 const addressQueryKeys = {
-  root: ['addresses'] as const,
+  all: ['addresses'] as const,
 
-  list: {
-    all: [...['addresses'], 'list'] as const,
+  lists: {
+    all: () => [...addressQueryKeys.all, 'list'] as const,
 
-    byFilter: (filters: AddressListFilters = {}) =>
-      [...addressQueryKeys.list.all, filters] as const,
+    byUserId: (userId: string, filters: AddressListFilters = {}) =>
+      [...addressQueryKeys.lists.all(), userId, filters] as const,
   },
 
-  detail: {
-    all: [...['addresses'], 'detail'] as const,
+  details: {
+    all: () => [...addressQueryKeys.all, 'detail'] as const,
 
-    byId: (id: string) => [...addressQueryKeys.detail.all, id] as const,
+    byId: (id: string) => [...addressQueryKeys.details.all(), id] as const,
 
-    byUserId: (id: string) => [...addressQueryKeys.detail.all, id] as const,
+    defaultByUserId: (userId: string) =>
+      [...addressQueryKeys.details.all(), 'default', userId] as const,
   },
 }
 
 export { addressQueryKeys }
+export type { AddressListFilters }

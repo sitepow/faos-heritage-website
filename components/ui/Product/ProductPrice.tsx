@@ -7,7 +7,7 @@ import type { ComponentProps } from 'react'
 import { useProductPrice } from '@/features/product/useProduct'
 import { cn } from '@/utils/style'
 
-type ProductPriceProps = ComponentProps<'div'> & {
+type Props = ComponentProps<'div'> & {
   price: number
   priceMin: number | null
   priceMax: number | null
@@ -21,7 +21,7 @@ const ProductPrice = ({
   unit = 'item',
   className,
   ...props
-}: ProductPriceProps) => {
+}: Props) => {
   const translateProductUnit = useTranslations('global.productUnit')
 
   const { displayPrice } = useProductPrice({
@@ -32,10 +32,7 @@ const ProductPrice = ({
 
   return (
     <div
-      className={cn(
-        'flex flex-col items-center justify-center duration-300',
-        className,
-      )}
+      className={cn('flex flex-col justify-center duration-300', className)}
       {...props}
     >
       <dl className='flex items-baseline gap-1 text-xl'>

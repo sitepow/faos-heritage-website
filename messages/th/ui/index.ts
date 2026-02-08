@@ -6,6 +6,7 @@ import navigation from './navigation.json'
 import store from './store.json'
 import transaction from './transaction.json'
 import user from './user.json'
+import validation from './validation.json'
 
 export const ui = {
   ...common,
@@ -16,6 +17,7 @@ export const ui = {
   ...store,
   ...transaction,
   ...user,
+  ...validation,
 }
 
 export default ui

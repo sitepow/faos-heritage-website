@@ -24,8 +24,8 @@ const constructMetadata = async ({
 }: Props = {}): Promise<Metadata> => {
   const url = `${process.env.APP_URL}${canonicalPath}`
 
-  const t = await getTranslations('metadata')
-  const defaultKeywords = t.raw('commonKeywords') || []
+  const t = await getTranslations('meta')
+  const defaultKeywords = t.raw('keywords') || []
 
   const finalKeywords = Array.isArray(keywords)
     ? [...keywords, ...defaultKeywords]

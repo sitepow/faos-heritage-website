@@ -2,6 +2,8 @@ import type { ErrorCode } from './error-codes'
 
 const ERROR_MESSAGE_MAP: Record<ErrorCode, string> = {
   SYSTEM_ERROR: 'Something went wrong. Please try again later.',
+  BAD_REQUEST:
+    'The request could not be understood or was missing required parameters.',
   UNKNOWN_ERROR: 'An unexpected error occurred. Please try again.',
   VALIDATION_ERROR: 'Some information is invalid. Please check and try again.',
   OPERATION_NOT_ALLOWED: 'This operation is not allowed.',

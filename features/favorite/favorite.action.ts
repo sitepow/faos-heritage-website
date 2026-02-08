@@ -1,100 +1,135 @@
 'use server'
 
-import type { Wishlist } from '@prisma/client'
+import { Role, type Prisma } from '@prisma/client'
 
 import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { prisma } from '@/lib/prisma'
+import { getServerUser, withRole } from '@/lib/session'
 import { calculateVariantRange } from '@/utils'
 import { decimalToNumber } from '@/utils/number'
-
-export type GetFavoritesResult = Awaited<ReturnType<typeof getFavorites>>
-export type GetFavoriteResult = GetFavoritesResult['items'][number]
-
-type SortOrder = 'asc' | 'desc'
-
-interface SortByItem {
-  readonly field: keyof Wishlist
-  readonly order: SortOrder
-}
 
 interface GetFavoritesProps {
   cursor?: string | null
   limit?: number
   userId?: string | null
-  sortBy?: SortByItem
 }
 
-export const getFavorites = async ({
+type GetFavoritesResult = Awaited<ReturnType<typeof getFavorites>>
+type FavoriteListItem = GetFavoritesResult['items'][number]
+
+const createFavorite = async (productId: string) =>
+  withRole([Role.CUSTOMER, Role.ADMIN], async (userId) => {
+    if (!productId) {
+      return fail(ERROR_CODES.BAD_REQUEST)
+    }
+
+    try {
+      const existing = await prisma.wishlist.findUnique({
+        where: {
+          userId_productId: { userId, productId },
+        },
+      })
+
+      if (existing) {
+        return ok()
+      }
+
+      await prisma.wishlist.create({
+        data: { userId, productId },
+      })
+
+      return ok()
+    } catch {
+      return fail(ERROR_CODES.SYSTEM_ERROR)
+    }
+  })
+
+const deleteFavorite = async (input: {
+  favoriteId?: string
+  productId?: string
+}) =>
+  withRole([Role.CUSTOMER, Role.ADMIN], async (userId) => {
+    const { favoriteId, productId } = input
+
+    try {
+      if (favoriteId) {
+        await prisma.wishlist.delete({
+          where: { id: favoriteId, userId },
+        })
+      } else if (productId) {
+        await prisma.wishlist.delete({
+          where: { userId_productId: { userId, productId } },
+        })
+      } else {
+        return fail(ERROR_CODES.BAD_REQUEST)
+      }
+
+      return ok()
+    } catch {
+      return fail(ERROR_CODES.SYSTEM_ERROR)
+    }
+  })
+
+const getFavorites = async ({
   cursor,
   limit = 8,
-  userId,
-  sortBy = { field: 'createdAt', order: 'desc' },
+  userId: propUserId,
 }: GetFavoritesProps) => {
-  let totalCount: number | undefined
-  const where = userId ? { userId } : undefined
+  const { userId } = await getServerUser()
+  const activeUserId = propUserId || userId
 
-  if (!cursor) {
-    totalCount = await prisma.wishlist.count({ where })
+  if (!activeUserId) {
+    return { items: [], nextCursor: null, totalCount: 0 }
   }
 
-  const items = await prisma.wishlist.findMany({
-    take: limit + 1,
-    skip: cursor ? 1 : 0,
-    cursor: cursor ? { id: cursor } : undefined,
-    where,
-    select: {
-      id: true,
-      product: {
-        select: {
-          id: true,
-          name: true,
-          price: true,
-          unit: true,
-          variants: {
-            select: {
-              price: true,
-            },
-          },
-          shortDescription: true,
-          images: {
-            select: {
-              url: true,
-              isPrimary: true,
+  const where: Prisma.WishlistWhereInput = { userId: activeUserId }
+
+  const [items, totalCount] = await Promise.all([
+    prisma.wishlist.findMany({
+      take: limit + 1,
+      skip: cursor ? 1 : 0,
+      cursor: cursor ? { id: cursor } : undefined,
+      where,
+      select: {
+        id: true,
+        product: {
+          select: {
+            id: true,
+            name: true,
+            price: true,
+            unit: true,
+            variants: { select: { price: true } },
+            shortDescription: true,
+            images: {
+              where: { isPrimary: true },
+              take: 1,
+              select: { url: true },
             },
           },
         },
       },
-    },
-    orderBy: {
-      [sortBy.field]: sortBy.order,
-    },
-  })
+    }),
+    cursor ? Promise.resolve(undefined) : prisma.wishlist.count({ where }),
+  ])
 
   const hasNextPage = items.length > limit
+  const transformed = decimalToNumber(
+    hasNextPage ? items.slice(0, limit) : items,
+  )
 
-  const transformed = decimalToNumber(items)
-  const favoriteItems = (
-    hasNextPage ? transformed.slice(0, limit) : transformed
-  ).map((product) => {
-    const { priceMin, priceMax, stockMin, stockMax } = calculateVariantRange(
-      product?.product?.variants,
-    )
-
+  const favoriteItems = transformed.map((item) => {
+    const { priceMin, priceMax } = calculateVariantRange(item.product?.variants)
     return {
-      ...product,
+      ...item,
       priceMin,
       priceMax,
-      stockMin,
-      stockMax,
     }
   })
 
-  let nextCursor: string | null = null
-
-  if (hasNextPage) {
-    nextCursor = favoriteItems[favoriteItems.length - 1].id
-  }
+  const nextCursor = hasNextPage
+    ? favoriteItems[favoriteItems.length - 1].id
+    : null
 
   return {
     items: favoriteItems,
@@ -103,58 +138,6 @@ export const getFavorites = async ({
   }
 }
 
-export const createFavorite = async (userId: string, productId: string) => {
-  if (!userId || !productId) {
-    return fail(ERROR_CODES.SYSTEM_ERROR)
-  }
+export { getFavorites, createFavorite, deleteFavorite }
 
-  const existing = await prisma.wishlist.findUnique({
-    where: {
-      userId_productId: {
-        userId,
-        productId,
-      },
-    },
-  })
-
-  if (existing) {
-    return fail(ERROR_CODES.SYSTEM_ERROR)
-  }
-
-  try {
-    await prisma.wishlist.create({
-      data: {
-        userId,
-        productId,
-      },
-    })
-  } catch {
-    return fail(ERROR_CODES.SYSTEM_ERROR)
-  }
-
-  return ok()
-}
-
-export const deleteFavorite = async ({
-  favoriteId,
-  userId,
-  productId,
-}: {
-  favoriteId?: string
-  userId?: string
-  productId?: string
-}) => {
-  try {
-    if (favoriteId) {
-      return await prisma.wishlist.delete({ where: { id: favoriteId } })
-    }
-
-    if (userId && productId) {
-      return await prisma.wishlist.deleteMany({ where: { userId, productId } })
-    }
-  } catch {
-    return fail(ERROR_CODES.SYSTEM_ERROR)
-  }
-
-  return ok()
-}
+export type { GetFavoritesProps, GetFavoritesResult, FavoriteListItem }

@@ -5,7 +5,7 @@ import { ArrowRightIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useLocale, useTranslations } from 'next-intl'
 
-import type { GetProductsInfiniteResult } from '@/features/product/product.action'
+import type { GetProductsInfiniteResult } from '@/features/product/product.types'
 
 import { Container } from '@/components/layouts/Container'
 import { ProductSection } from '@/components/ui/Product/ProductSection'

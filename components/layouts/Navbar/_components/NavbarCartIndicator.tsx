@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 
 import { CustomIcon } from '@/components/ui/CustomIcon'
-import { useCartStat } from '@/features/cart/useCart'
+import { useCartStat } from '@/features/cart/hooks/useCart'
 
 const NavbarCartIndicator = () => {
   const userId = useSession()?.data?.user?.id

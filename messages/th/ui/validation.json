@@ -1,0 +1,14 @@
+{
+  "validation": {
+    "product": {
+      "nameRequired": "กรุณาระบุชื่อสินค้า",
+      "priceInvalid": "รูปแบบราคาไม่ถูกต้อง",
+      "priceMin": "ราคาต้องไม่ต่ำกว่า 0",
+      "stockInvalid": "จำนวนสต็อกไม่ถูกต้อง",
+      "stockMin": "สต็อกต้องไม่ต่ำกว่า 0",
+      "weightInvalid": "น้ำหนักไม่ถูกต้อง",
+      "categoryRequired": "กรุณาเลือกหมวดหมู่สินค้า",
+      "comparePriceError": "ราคาก่อนลดต้องสูงกว่าราคาขายจริง"
+    }
+  }
+}

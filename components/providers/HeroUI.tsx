@@ -16,12 +16,7 @@ const HeroUIProviders = ({ children, themeProps }: HeroUIProvidersProps) => {
   const router = useRouter()
 
   return (
-    <HeroUIProvider
-      // disableAnimation
-      // disableRipple
-      // skipFramerMotionAnimations
-      navigate={router.push}
-    >
+    <HeroUIProvider navigate={router.push}>
       <NextThemesProvider {...themeProps} enableSystem>
         {children}
       </NextThemesProvider>

@@ -9,7 +9,7 @@ export const metadata = DISABLE_SEO_CONFIG
 const AuthLayout = async ({ children }: PropsWithChildren) => {
   await redirectIfAuthenticated('/')
 
-  return <AppMain>{children}</AppMain>
+  return <AppMain className='overflow-hidden'>{children}</AppMain>
 }
 
 export default AuthLayout

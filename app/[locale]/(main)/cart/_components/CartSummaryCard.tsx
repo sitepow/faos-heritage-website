@@ -4,7 +4,6 @@
 import { Card, CardBody, CardFooter, Alert, Button } from '@heroui/react'
 import { Currency } from '@prisma/client'
 import { useRouter } from 'next/navigation'
-import { useSession } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
 
 import type { ComponentProps } from 'react'
@@ -13,11 +12,12 @@ import { CartSummaryRow } from './CartSummaryRow'
 
 import { useAppStore } from '@/app/store'
 import { PROFILE_TABS, CURRENCY } from '@/constants'
-import { useAddressByUserId } from '@/features/address/useAddress'
-import { useCarts } from '@/features/cart/useCart'
+import { useDefaultAddress } from '@/features/address/useAddress'
+import { useCarts } from '@/features/cart/hooks/useCart'
 import { useExchangeRate } from '@/features/exchangeRate/useExchangeRate'
-import { useCreateOrder } from '@/features/order/useOrder'
+import { useOrderMutation } from '@/features/order/order.mutation'
 import { useShipping } from '@/features/shipping/useShipping'
+import { useUser } from '@/hooks/useUser'
 import { formatCurrency, formatFullAddress } from '@/utils'
 import { cn } from '@/utils/style'
 
@@ -30,11 +30,11 @@ const CartSummaryCard = ({ className, ...props }: CartCheckoutProps) => {
 
   const router = useRouter()
   const ROUTER_PATHS = {
-    ADDRESS: () => router.push(`/account?tab=${PROFILE_TABS?.ADDRESS}`),
-    ORDER: () => router.push(`/account?tab=${PROFILE_TABS?.ORDER}`),
+    ADDRESS: () => router.push(`/profile?tab=${PROFILE_TABS?.ADDRESS}`),
+    ORDER: () => router.push(`/profile?tab=${PROFILE_TABS?.ORDER}`),
   }
 
-  const userId = useSession()?.data?.user?.id
+  const { userId } = useUser()
   const { data: carts = [], subTotal } = useCarts({ userId })
   const { currencyOptions } = useExchangeRate()
 
@@ -43,43 +43,35 @@ const CartSummaryCard = ({ className, ...props }: CartCheckoutProps) => {
   const currency: Currency = (appLocale?.currency as Currency) ?? Currency.THB
   const exchangeRate = exchangeRates?.[currency] ?? 1
 
-  const { data: address, isLoading: isLoadingAddress } = useAddressByUserId(
+  const { data: address, isLoading: isLoadingAddress } = useDefaultAddress(
     userId!,
   )
   const { shippingCost } = useShipping({ userId, address, carts })
-  const { mutate: onCreateOrder, isPending: isPendingCreateOrder } =
-    useCreateOrder()
+  const { createOrder, isCreating } = useOrderMutation()
 
   const handleOrder = () => {
     if (!address || carts.length === 0 || !userId) {
       return
     }
 
-    onCreateOrder(
-      {
-        addressId: address.id,
-        userId: userId!,
-        currency,
-        exchangeRate,
-        exchangeRateSource: CURRENCY.EXCHANGE_API_THB,
-        exchangeLocale: appLocale.locale,
-        items: carts.map(({ productId, variantId, quantity }) => ({
-          productId,
-          variantId,
-          quantity,
-        })),
-      },
-      {
-        onSuccess: () => {
-          ROUTER_PATHS.ORDER
-        },
-      },
-    )
+    createOrder({
+      addressId: address.id,
+      userId: userId!,
+      currency,
+      exchangeRate,
+      exchangeRateSource: CURRENCY.EXCHANGE_API_THB,
+      exchangeLocale: appLocale.locale,
+      items: carts.map(({ productId, variantId, quantity }) => ({
+        productId,
+        variantId,
+        quantity,
+      })),
+    })
   }
 
   return (
     <Card
-      className={cn(className, 'border-default-100 mx-auto w-xl border p-5')}
+      className={cn(className, 'border-default-100 mx-auto border p-5 sm:w-xl')}
       radius='sm'
       shadow='none'
       {...props}
@@ -156,7 +148,7 @@ const CartSummaryCard = ({ className, ...props }: CartCheckoutProps) => {
             className='text-secondary'
             color='primary'
             isDisabled={carts?.length === 0}
-            isLoading={isPendingCreateOrder}
+            isLoading={isCreating}
             radius='none'
             size='lg'
             onPress={handleOrder}

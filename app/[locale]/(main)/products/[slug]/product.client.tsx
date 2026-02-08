@@ -3,7 +3,7 @@
 import { useLocale, useTranslations } from 'next-intl'
 import { useEffect } from 'react'
 
-import type { GetProductResult } from '@/features/product/product.action'
+import type { GetProductResult } from '@/features/product/product.types'
 
 import { ProductPreview } from './_components/ProductPreview'
 import { ProductSimilar } from './_components/ProductSectionSemilar'
@@ -21,15 +21,12 @@ interface ProductClientProps {
   userId: string
 }
 
-export const ProductClient = ({
-  initialData,
-  productId,
-}: ProductClientProps) => {
+const ProductClient = ({ initialData, productId }: ProductClientProps) => {
   const { userId } = useUser()
 
   const locale = useLocale()
   const translateBreadcrumb = useTranslations('navigation.breadcrumb')
-  const { setProductDetailState } = useProductDetailStore()
+  const { setProduct } = useProductDetailStore()
 
   const { data: product } = useProduct({
     locale,
@@ -40,9 +37,9 @@ export const ProductClient = ({
 
   useEffect(() => {
     if (product) {
-      setProductDetailState({ product })
+      setProduct(product)
     }
-  }, [product, setProductDetailState])
+  }, [product, setProduct])
 
   const categoryId = product?.category?.id
   const categoryName = product?.category?.name
@@ -70,3 +67,5 @@ export const ProductClient = ({
     </section>
   )
 }
+
+export { ProductClient }

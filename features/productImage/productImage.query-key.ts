@@ -1,27 +1,28 @@
 type ProductImageListFilters = {
-  locale?: string
+  productId?: string
+  isPrimary?: boolean
   isActive?: boolean
-  position?: 'homepage' | 'dashboard'
 }
 
 const productImageQueryKeys = {
-  root: ['productImages'] as const,
+  all: ['productImages'] as const,
 
-  list: {
-    all: [...['productImages'], 'list'] as const,
+  lists: {
+    all: () => [...productImageQueryKeys.all, 'list'] as const,
 
-    byFilter: (filters: ProductImageListFilters = {}) =>
-      [...productImageQueryKeys.list.all, filters] as const,
+    byProductId: (productId: string, filters: ProductImageListFilters = {}) =>
+      [...productImageQueryKeys.lists.all(), productId, filters] as const,
 
-    homepage: (locale?: string) =>
-      [...productImageQueryKeys.list.all, 'homepage', locale] as const,
+    filtered: (filters: ProductImageListFilters) =>
+      [...productImageQueryKeys.lists.all(), 'filter', filters] as const,
   },
 
-  detail: {
-    all: [...['productImages'], 'detail'] as const,
+  details: {
+    all: () => [...productImageQueryKeys.all, 'detail'] as const,
 
-    byId: (id: string) => [...productImageQueryKeys.detail.all, id] as const,
+    byId: (id: string) => [...productImageQueryKeys.details.all(), id] as const,
   },
 }
 
 export { productImageQueryKeys }
+export type { ProductImageListFilters }

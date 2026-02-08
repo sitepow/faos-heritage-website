@@ -1,49 +1,103 @@
 'use server'
 
-import type { CategoryInput } from './category.schema'
-import type { Prisma } from '@prisma/client'
+import { Role, type Prisma } from '@prisma/client'
 
-import { categorySchema } from './category.schema'
+import { categorySchema, type CategoryInput } from './category.schema'
 
 import { deleteFile } from '@/app/actions/file'
 import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { prisma } from '@/lib/prisma'
+import { withRole } from '@/lib/session'
 import { omitEmptyFields } from '@/utils'
 
-export type GetCategoryResult = Awaited<ReturnType<typeof getCategory>>
-export type GetCategoriesResult = Awaited<ReturnType<typeof getCategories>>
+type GetCategoryResult = Awaited<ReturnType<typeof getCategory>>
+type GetCategoriesResult = Awaited<ReturnType<typeof getCategories>>
 
-export const createCategory = async (data: CategoryInput) => {
-  const validated = categorySchema.safeParse(data)
+const createCategory = async (data: CategoryInput) =>
+  withRole([Role.ADMIN], async () => {
+    const validated = categorySchema.safeParse(data)
+    if (!validated.success) {
+      return fail(ERROR_CODES.VALIDATION_ERROR)
+    }
 
-  if (!validated.success) {
-    return fail(ERROR_CODES.VALIDATION_ERROR)
-  }
+    try {
+      const exists = await prisma.category.findFirst({
+        where: { name: { equals: validated.data.name, mode: 'insensitive' } },
+      })
 
-  const exists = await prisma.category.findFirst({
-    where: { name: validated.data.name },
+      if (exists) {
+        return fail(ERROR_CODES.BAD_REQUEST)
+      }
+
+      await prisma.category.create({
+        data: omitEmptyFields(
+          validated.data,
+        ) as Prisma.CategoryUncheckedCreateInput,
+      })
+
+      return ok()
+    } catch {
+      return fail(ERROR_CODES.SYSTEM_ERROR)
+    }
   })
 
-  if (exists) {
-    return fail(ERROR_CODES.SYSTEM_ERROR)
-  }
+const updateCategory = async (data: CategoryInput) =>
+  withRole([Role.ADMIN], async () => {
+    const validated = categorySchema.safeParse(data)
+    if (!validated.success) {
+      return fail(ERROR_CODES.VALIDATION_ERROR)
+    }
 
-  try {
-    await prisma.category.create({
-      data: omitEmptyFields(
-        validated.data,
-      ) as Prisma.CategoryUncheckedCreateInput,
-    })
-  } catch {
-    return fail(ERROR_CODES.SYSTEM_ERROR)
-  }
+    const { id, ...payload } = validated.data
+    if (!id) {
+      return fail(ERROR_CODES.DATA_NOT_FOUND)
+    }
 
-  return ok()
-}
+    try {
+      await prisma.category.update({
+        where: { id },
+        data: omitEmptyFields(payload) as Prisma.CategoryUncheckedUpdateInput,
+      })
 
-export const getCategories = async () => {
-  const categories = await prisma.category.findMany({
+      return ok()
+    } catch {
+      return fail(ERROR_CODES.SYSTEM_ERROR)
+    }
+  })
+
+const deleteCategory = async (categoryIds: string | string[]) =>
+  withRole([Role.ADMIN], async () => {
+    const ids = Array.isArray(categoryIds) ? categoryIds : [categoryIds]
+    if (!ids.length) {
+      return fail(ERROR_CODES.BAD_REQUEST)
+    }
+
+    try {
+      const categories = await prisma.category.findMany({
+        where: { id: { in: ids } },
+        select: { image: true },
+      })
+
+      const imagesToDelete = categories
+        .map((c) => c.image)
+        .filter(Boolean) as string[]
+      if (imagesToDelete.length > 0) {
+        await Promise.all(imagesToDelete.map((url) => deleteFile(url)))
+      }
+
+      await prisma.category.deleteMany({
+        where: { id: { in: ids } },
+      })
+
+      return ok()
+    } catch {
+      return fail(ERROR_CODES.SYSTEM_ERROR)
+    }
+  })
+
+const getCategories = async () => {
+  return await prisma.category.findMany({
     select: {
       id: true,
       name: true,
@@ -53,11 +107,9 @@ export const getCategories = async () => {
     },
     orderBy: { name: 'asc' },
   })
-
-  return categories
 }
 
-export const getCategory = async (categoryId: string) => {
+const getCategory = async (categoryId: string) => {
   const category = await prisma.category.findUnique({
     where: { id: categoryId },
     select: {
@@ -68,69 +120,15 @@ export const getCategory = async (categoryId: string) => {
       image: true,
     },
   })
-
-  if (!category) {
-    return
-  }
-
-  return category
+  return category || null
 }
 
-export const updateCategory = async (data: CategoryInput) => {
-  const validated = categorySchema.safeParse(data)
-
-  if (!validated.success) {
-    return fail(ERROR_CODES.VALIDATION_ERROR)
-  }
-
-  const { id, ...payload } = validated.data
-
-  if (!id) {
-    return fail(ERROR_CODES.DATA_NOT_FOUND)
-  }
-
-  try {
-    await prisma.category.update({
-      where: { id },
-      data: omitEmptyFields(payload) as Prisma.CategoryUncheckedCreateInput,
-    })
-  } catch {
-    return fail(ERROR_CODES.SYSTEM_ERROR)
-  }
-
-  return ok()
+export {
+  createCategory,
+  getCategories,
+  getCategory,
+  updateCategory,
+  deleteCategory,
 }
 
-export const deleteCategory = async (categoryIds: string | string[]) => {
-  const ids = Array.isArray(categoryIds) ? categoryIds : [categoryIds]
-
-  if (!ids.length) {
-    return fail(ERROR_CODES.SYSTEM_ERROR)
-  }
-
-  const categories = await prisma.category.findMany({
-    where: { id: { in: ids } },
-    select: { image: true },
-  })
-
-  if (!categories) {
-    return fail(ERROR_CODES.DATA_NOT_FOUND)
-  }
-
-  try {
-    await Promise.all(
-      categories
-        .map((category) => category.image)
-        .filter(Boolean)
-        .map((image) => deleteFile(image!)),
-    )
-
-    await prisma.category.deleteMany({
-      where: { id: { in: ids } },
-    })
-  } catch {
-    return fail(ERROR_CODES.SYSTEM_ERROR)
-  }
-
-  return ok()
-}
+export type { GetCategoryResult, GetCategoriesResult }

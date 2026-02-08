@@ -1,27 +1,29 @@
-type ProductVariantListFilters = {
-  locale?: string
+type ProductVariantFilters = {
+  productId?: string
   isActive?: boolean
-  position?: 'homepage' | 'dashboard'
+  sku?: string
 }
 
 const productVariantQueryKeys = {
-  root: ['productVariants'] as const,
+  all: ['productVariants'] as const,
 
-  list: {
-    all: [...['productVariants'], 'list'] as const,
+  lists: {
+    all: () => [...productVariantQueryKeys.all, 'list'] as const,
 
-    byFilter: (filters: ProductVariantListFilters = {}) =>
-      [...productVariantQueryKeys.list.all, filters] as const,
+    byProductId: (productId: string, filters: ProductVariantFilters = {}) =>
+      [...productVariantQueryKeys.lists.all(), productId, filters] as const,
 
-    homepage: (locale?: string) =>
-      [...productVariantQueryKeys.list.all, 'homepage', locale] as const,
+    filtered: (filters: ProductVariantFilters) =>
+      [...productVariantQueryKeys.lists.all(), 'filter', filters] as const,
   },
 
-  detail: {
-    all: [...['productVariants'], 'detail'] as const,
+  details: {
+    all: () => [...productVariantQueryKeys.all, 'detail'] as const,
 
-    byId: (id: string) => [...productVariantQueryKeys.detail.all, id] as const,
+    byId: (id: string) =>
+      [...productVariantQueryKeys.details.all(), id] as const,
   },
 }
 
 export { productVariantQueryKeys }
+export type { ProductVariantFilters }

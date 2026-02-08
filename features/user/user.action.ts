@@ -1,58 +1,125 @@
 'use server'
 
+import { Role, type Prisma } from '@prisma/client'
 import { hash } from 'bcryptjs'
 
-import type { UserCreateInput, UserUpdateInput } from './user.schema'
-import type { Prisma, Role } from '@prisma/client'
+import type { UserUpdateInput } from './user.schema'
 
-import { userCreateSchema, userUpdateSchema } from './user.schema'
+import {
+  userCreateSchema,
+  userUpdateSchema,
+  type UserCreateInput,
+} from './user.schema'
 
 import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { prisma } from '@/lib/prisma'
+import { withRole } from '@/lib/session'
 import { omitEmptyFields } from '@/utils'
 
-export const createUser = async (data: UserCreateInput) => {
-  const validated = userCreateSchema.safeParse(data)
+const createUser = async (data: UserCreateInput & { isRegister?: boolean }) => {
+  const { isRegister, ...rest } = data
 
+  const validated = userCreateSchema.safeParse(rest)
   if (!validated.success) {
     return fail(ERROR_CODES.VALIDATION_ERROR)
   }
 
-  const { email, password } = validated?.data ?? []
+  const { email, password } = validated.data
 
   if (!password || password.trim().length < 6) {
     return fail(ERROR_CODES.PASSWORD_TOO_SHORT)
   }
 
+  const normalizedEmail = email.toLowerCase()
   const exists = await prisma.user.findUnique({
-    where: { email: email.toLowerCase() },
+    where: { email: normalizedEmail },
   })
 
   if (exists) {
+    if (!exists.password) {
+      return fail(ERROR_CODES.SOCIAL_ACCOUNT_EXISTS)
+    }
+
     return fail(ERROR_CODES.EMAIL_ALREADY_USED)
   }
 
-  const hashed = await hash(password!, 10)
+  const hashedPassword = await hash(password, 10)
 
   try {
     await prisma.user.create({
       data: {
-        ...omitEmptyFields(validated?.data),
-        password: hashed,
+        ...omitEmptyFields(validated.data),
+        email: normalizedEmail,
+        password: hashedPassword,
+        role: isRegister
+          ? Role.CUSTOMER
+          : (validated.data.role as Role) || Role.CUSTOMER,
       } as Prisma.UserCreateInput,
     })
+
+    return ok()
   } catch {
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
-
-  return ok()
 }
 
-export const getUsers = async (page: number = 1, limit: number = 10) => {
+const updateUser = async (data: UserUpdateInput) =>
+  withRole([Role.ADMIN], async () => {
+    const validated = userUpdateSchema.safeParse(data)
+    if (!validated.success) {
+      return fail(ERROR_CODES.VALIDATION_ERROR)
+    }
+
+    const { id, password, ...payload } = validated.data
+    if (!id) {
+      return fail(ERROR_CODES.DATA_NOT_FOUND)
+    }
+
+    const updateData: Prisma.UserUpdateInput = {
+      ...omitEmptyFields(payload),
+      role: payload?.role as Role,
+    }
+
+    if (password && password.trim().length >= 6) {
+      updateData.password = await hash(password, 10)
+    }
+
+    try {
+      await prisma.user.update({
+        where: { id },
+        data: updateData,
+      })
+
+      return ok()
+    } catch {
+      return fail(ERROR_CODES.SYSTEM_ERROR)
+    }
+  })
+
+const deleteUser = async (userIds: string | string[]) =>
+  withRole([Role.ADMIN], async () => {
+    const ids = Array.isArray(userIds) ? userIds : [userIds]
+    if (!ids.length) {
+      return fail(ERROR_CODES.BAD_REQUEST)
+    }
+
+    try {
+      await prisma.user.updateMany({
+        where: { id: { in: ids } },
+        data: { isActive: false },
+      })
+
+      return ok()
+    } catch {
+      return fail(ERROR_CODES.SYSTEM_ERROR)
+    }
+  })
+
+const getUsers = async (page = 1, limit = 10) => {
   const skip = (page - 1) * limit
 
-  const [items, total] = await Promise.all([
+  const [items, total] = await prisma.$transaction([
     prisma.user.findMany({
       skip,
       take: limit,
@@ -63,10 +130,11 @@ export const getUsers = async (page: number = 1, limit: number = 10) => {
         image: true,
         role: true,
         isActive: true,
+        createdAt: true,
       },
       orderBy: { createdAt: 'desc' },
     }),
-    prisma.product.count(),
+    prisma.user.count(),
   ])
 
   return {
@@ -78,7 +146,7 @@ export const getUsers = async (page: number = 1, limit: number = 10) => {
   }
 }
 
-export const getUser = async (userId: string) => {
+const getUser = async (userId: string) => {
   const user = await prisma.user.findUnique({
     where: { id: userId },
     select: {
@@ -90,139 +158,21 @@ export const getUser = async (userId: string) => {
       isActive: true,
     },
   })
-
-  if (!user) {
-    return
-  }
-
-  return user
+  return user || null
 }
 
-export const updateUser = async (data: UserUpdateInput) => {
-  const validated = userUpdateSchema.safeParse(data)
-
-  if (!validated.success) {
-    return fail(ERROR_CODES.VALIDATION_ERROR)
-  }
-
-  const { id, password, ...payload } = validated.data
-
-  if (!id) {
-    return fail(ERROR_CODES.DATA_NOT_FOUND)
-  }
-
-  const updateData: Prisma.UserUpdateInput = {
-    ...omitEmptyFields(payload),
-    role: payload?.role as Role,
-  }
-
-  if (password && password.trim() !== '') {
-    updateData.password = await hash(password, 10)
-  }
-
-  try {
-    await prisma.user.update({
-      data: updateData,
-      where: { id },
-    })
-  } catch {
-    return fail(ERROR_CODES.SYSTEM_ERROR)
-  }
-
-  return ok()
-}
-
-export const deleteUser = async (userIds: string | string[]) => {
-  const ids = Array.isArray(userIds) ? userIds : [userIds]
-
-  if (!ids.length) {
-    return fail(ERROR_CODES.SYSTEM_ERROR)
-  }
-
-  try {
-    await prisma.user.updateMany({
-      where: {
-        id: {
-          in: ids,
-        },
-      },
-      data: {
-        isActive: false,
-      },
-    })
-  } catch {
-    return fail(ERROR_CODES.SYSTEM_ERROR)
-  }
-
-  return ok()
-}
-
-export const getUserStat = async () => {
-  const [totalUsers, isActive, unActive] = await Promise.all([
+const getUserStat = async () => {
+  const [total, active, inactive] = await Promise.all([
     prisma.user.count(),
-    prisma.user.count({
-      where: { isActive: true },
-    }),
-    prisma.user.count({
-      where: { isActive: false },
-    }),
+    prisma.user.count({ where: { isActive: true } }),
+    prisma.user.count({ where: { isActive: false } }),
   ])
 
   return [
-    { name: 'ผู้ใช้งานทั้งหมด', value: totalUsers },
-    { name: 'ผู้ใช้งานปกติ', value: isActive },
-    { name: 'ผู้ใช้งานถูกระงับบัญชี', value: unActive },
+    { name: 'ผู้ใช้งานทั้งหมด', value: total },
+    { name: 'ผู้ใช้งานปกติ', value: active },
+    { name: 'ผู้ใช้งานถูกระงับบัญชี', value: inactive },
   ]
 }
 
-// 'use server'
-
-// import { Role } from '@prisma/client'
-// import { hash } from 'bcryptjs'
-
-// import type { UserRegisterInput } from '../../app/[locale]/(auth)/login/schema'
-
-// import { userRegisterSchema } from '../../app/[locale]/(auth)/login/schema'
-
-// import { fail, ok } from '@/lib/errors'
-// import { ERROR_CODES } from '@/lib/errors/error-codes'
-// import { prisma } from '@/lib/prisma'
-
-// const createUser = async (data: UserRegisterInput) => {
-//   const validated = userRegisterSchema.safeParse(data)
-
-//   if (!validated.success) return fail(ERROR_CODES.VALIDATION_ERROR)
-
-//   const { name, email, password } = validated.data
-
-//   const exists = await prisma.user.findUnique({
-//     where: { email: email.toLowerCase() },
-//   })
-
-//   if (exists && !exists.password) {
-//     return fail(ERROR_CODES.SOCIAL_ACCOUNT_EXISTS)
-//   }
-
-//   if (exists) {
-//     return fail(ERROR_CODES.EMAIL_ALREADY_USED)
-//   }
-
-//   const hashed = await hash(password, 10)
-
-//   try {
-//     await prisma.user.create({
-//       data: {
-//         name,
-//         email,
-//         password: hashed,
-//         role: Role.CUSTOMER,
-//       },
-//     })
-//   } catch {
-//     return fail(ERROR_CODES.SYSTEM_ERROR)
-//   }
-
-//   return ok()
-// }
-
-// export { createUser }
+export { createUser, getUsers, getUser, updateUser, deleteUser, getUserStat }

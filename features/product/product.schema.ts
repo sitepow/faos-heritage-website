@@ -1,46 +1,53 @@
 import { ProductUnit } from '@prisma/client'
 import { z } from 'zod'
 
-type ProductInput = z.infer<typeof productSchema>
+const productSchema = z
+  .object({
+    id: z.string().nullish(),
 
-const productSchema = z.object({
-  id: z.string().nullish(),
-  name: z
-    .string('The product name must be a text.')
-    .min(1, 'Please specify the product name (do not leave it blank).'),
-  slug: z.string('The slug must be a valid text.').nullish(),
-  sku: z.string().nullish(),
-  barcode: z.string().nullish(),
-  price: z
-    .number('The price must be the correct figure.')
-    .min(0, 'The price must be 0 or higher.'),
-  compareAtPrice: z
-    .number('The price before the discount must be the correct figure.')
-    .nullish(),
-  costPrice: z.number('The cost price must be an accurate figure.').nullish(),
-  stockQuantity: z.number('The inventory quantity must be accurate.'),
-  lowStockAlert: z
-    .number('Low stock alerts require the correct number.')
-    .nullish(),
-  weight: z
-    .number('The weight of the goods must be the correct figure.')
-    .nullish(),
-  categoryId: z.string('Please select a product category.').nullish(),
-  shortDescription: z.string().nullish(),
-  description: z.string().nullish(),
-  metaTitle: z.string('The meta title must be valid text.').nullish(),
-  metaDescription: z
-    .string('The Meta Description must be valid text.')
-    .nullish(),
-  isActive: z.boolean(),
-  useSeoFromBasicData: z.boolean(),
-  isFeatured: z.boolean(),
-  isDigitalProduct: z.boolean(),
-  isDemoProduct: z.boolean(),
-  isPremiumProduct: z.boolean(),
-  isAuthentic: z.boolean(),
-  unit: z.enum(ProductUnit),
-})
+    name: z.string().min(1, 'nameRequired'),
+    slug: z.string().nullish(),
+    sku: z.string().nullish(),
+    barcode: z.string().nullish(),
+
+    price: z.number('priceInvalid').min(0, 'priceMin'),
+    compareAtPrice: z.number('priceInvalid').nullish(),
+    costPrice: z.number('priceInvalid').nullish(),
+
+    stockQuantity: z.number('stockInvalid').min(0, 'stockMin'),
+    lowStockAlert: z.number('stockInvalid').nullish(),
+    weight: z.number('weightInvalid').nullish(),
+    unit: z.enum(ProductUnit),
+
+    categoryId: z.string().min(1, 'categoryRequired').nullish(),
+    shortDescription: z.string().nullish(),
+    description: z.string().nullish(),
+
+    isActive: z.boolean().default(true),
+    isFeatured: z.boolean().default(false),
+    isDigitalProduct: z.boolean().default(false),
+    isDemoProduct: z.boolean().default(false),
+    isPremiumProduct: z.boolean().default(false),
+    isAuthentic: z.boolean().default(true),
+
+    useSeoFromBasicData: z.boolean().default(true),
+    metaTitle: z.string().nullish(),
+    metaDescription: z.string().nullish(),
+  })
+  .refine(
+    (data) => {
+      if (data.compareAtPrice && data.compareAtPrice < data.price) {
+        return false
+      }
+      return true
+    },
+    {
+      message: 'comparePriceError',
+      path: ['compareAtPrice'],
+    },
+  )
+
+type ProductInput = z.infer<typeof productSchema>
 
 export { productSchema }
 export type { ProductInput }

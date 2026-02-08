@@ -1,24 +1,33 @@
 type FavoriteListFilters = {
-  locale?: string
-  isActive?: boolean
-  position?: 'homepage' | 'dashboard'
+  userId?: string
+  productId?: string
+  page?: number
+  limit?: number
 }
 
 const favoriteQueryKeys = {
-  root: ['favorities'] as const,
+  all: ['favorites'] as const,
 
-  list: {
-    all: [...['favorities'], 'list'] as const,
+  lists: {
+    all: () => [...favoriteQueryKeys.all, 'list'] as const,
 
-    byFilter: (filters: FavoriteListFilters = {}) =>
-      [...favoriteQueryKeys.list.all, filters] as const,
+    byUserId: (userId: string, filters: FavoriteListFilters = {}) =>
+      [...favoriteQueryKeys.lists.all(), userId, filters] as const,
+
+    byProduct: (userId: string, productId: string) =>
+      [
+        ...favoriteQueryKeys.lists.all(),
+        'check',
+        { userId, productId },
+      ] as const,
   },
 
-  detail: {
-    all: [...['favorities'], 'detail'] as const,
+  details: {
+    all: () => [...favoriteQueryKeys.all, 'detail'] as const,
 
-    byId: (id: string) => [...favoriteQueryKeys.detail.all, id] as const,
+    byId: (id: string) => [...favoriteQueryKeys.details.all(), id] as const,
   },
 }
 
 export { favoriteQueryKeys }
+export type { FavoriteListFilters }

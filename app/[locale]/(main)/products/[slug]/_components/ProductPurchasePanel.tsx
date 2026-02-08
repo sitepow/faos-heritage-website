@@ -1,147 +1,138 @@
 'use client'
 
-import {
-  Card,
-  CardBody,
-  Select,
-  SelectItem,
-  Button,
-  Avatar,
-} from '@heroui/react'
+import { Card, CardBody, Button } from '@heroui/react'
 import { HeartIcon, ShoppingCartIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
+import { useState, useMemo, useEffect } from 'react'
 
 import { ProductShare } from './ProductShare'
 
 import { MarkdownRenderer } from '@/components/ui/Markdown/MarkdownRenderer'
 import { ProductChip } from '@/components/ui/Product/ProductChip'
 import { ProductPrice } from '@/components/ui/Product/ProductPrice'
-import { useProductPurchase } from '@/features/product/useProduct'
+import { VariantSelect } from '@/components/ui/VariantSelect'
+import { useCartMutation } from '@/features/cart/cart.mutation'
+import { useFavoriteMutation } from '@/features/favorite/favorite.mutation'
+import { useProductDetailStore } from '@/features/product/product.store'
 import { generateSlugWithId } from '@/utils'
 
 const ProductPurchasePanel = () => {
-  const translateActions = useTranslations('actions')
-  const translateCartActions = useTranslations('productDetail.cartActions')
+  const tActions = useTranslations('actions')
+  const tCart = useTranslations('productDetail.cartActions')
 
-  const {
-    product,
-    state,
-    actions,
-    loading: { isAddingToCart, isAddingToFavorite },
-  } = useProductPurchase()
+  const product = useProductDetailStore((state) => state.product)
 
-  if (!product) {
-    return null
-  }
+  const { addToCart, isAdding: isAddingToCart } = useCartMutation()
+  const { addToFav, isAdding: isAddingToFav } = useFavoriteMutation()
+
+  const [selectedVariantId, setSelectedVariantId] = useState<string | null>(
+    product?.variants?.[0]?.id ?? null,
+  )
+
+  useEffect(() => {
+    if (product?.variants?.[0]?.id) {
+      setSelectedVariantId(product.variants[0].id)
+    }
+  }, [product])
+
+  const selectedVariant = useMemo(() => {
+    if (!selectedVariantId || !product?.variants) {
+      return null
+    }
+
+    return product.variants.find((v) => v.id === selectedVariantId)
+  }, [product?.variants, selectedVariantId])
+
+  const currentPrice = selectedVariant?.price ?? product?.price ?? 0
+  const currentStock =
+    selectedVariant?.stockQuantity ?? product?.stockQuantity ?? 0
+  const isOutOfStock = currentStock <= 0
+  const hasVariants = Boolean(product?.variants?.length)
+  const hasFavorite = Boolean(product?.wishlist?.length)
+
+  if (!product) return null
+
+  const canAddToCart = !isOutOfStock && (!hasVariants || !!selectedVariantId)
 
   return (
     <Card className='border-default-100 border' radius='sm' shadow='none'>
       <CardBody className='flex flex-col gap-4'>
-        <div>
-          <h1 className='py-3 text-xl font-semibold sm:text-2xl lg:text-4xl'>
-            {product.name}
-          </h1>
+        <h1 className='py-3 text-xl font-semibold sm:text-2xl lg:text-4xl'>
+          {product.name}
+        </h1>
 
-          <div>
-            <ProductChip
-              categoryName={product.category?.name}
-              className='my-5 justify-start'
-              isAuthentic={product.isAuthentic}
-              isPremiumProduct={product.isPremiumProduct}
-            />
+        <ProductChip
+          categoryName={product.category?.name}
+          isAuthentic={product.isAuthentic}
+          isPremiumProduct={product.isPremiumProduct}
+        />
 
-            <ProductPrice
-              className='items-start'
-              price={state.price}
-              priceMax={!state.selectedVariantId ? product.priceMax : null}
-              priceMin={!state.selectedVariantId ? product.priceMin : null}
-              unit={product.unit}
-            />
-          </div>
-        </div>
+        <ProductPrice
+          price={currentPrice}
+          priceMax={selectedVariantId ? null : product?.priceMax}
+          priceMin={selectedVariantId ? null : product?.priceMin}
+          unit={product.unit}
+        />
 
-        {state.hasVariants && (
-          <div className='flex flex-col gap-2 sm:flex-row'>
-            <Select
-              classNames={{
-                trigger: 'shadow-none',
-              }}
-              label={translateCartActions('options')}
-              radius='none'
-              selectedKeys={
-                state.selectedVariantId ? [state.selectedVariantId] : []
-              }
-              variant='bordered'
-              onSelectionChange={(keys) =>
-                actions.selectVariant(Array.from(keys)[0] as string)
-              }
-            >
-              {(product.variants ?? []).map((variant) => (
-                <SelectItem
-                  key={variant.id}
-                  startContent={
-                    <Avatar src={variant.image ?? '/images/no-image.jpg'} />
-                  }
-                >
-                  {variant.name}
-                </SelectItem>
-              ))}
-            </Select>
-          </div>
+        {hasVariants && (
+          <VariantSelect
+            selectedVariantId={selectedVariantId}
+            variants={product.variants ?? []}
+            onChange={(id) => setSelectedVariantId(id)}
+          />
         )}
 
         {product.shortDescription && (
           <MarkdownRenderer content={product.shortDescription} />
         )}
 
-        <div className='flex gap-2'>
+        <div className='flex gap-2 pt-4'>
           <Button
             fullWidth
-            isLoading={isAddingToFavorite}
+            className='bg-primary/10 border-primary text-primary'
+            isLoading={isAddingToFav}
             radius='none'
             size='lg'
-            startContent={!isAddingToFavorite && <HeartIcon />}
+            startContent={
+              !isAddingToFav && (
+                <HeartIcon className={hasFavorite ? 'fill-current' : ''} />
+              )
+            }
             variant='faded'
-            // eslint-disable-next-line react/jsx-sort-props
-            onPress={() => actions.addToFavorite()}
-            className='bg-primary/20 border-primary text-primary border'
-            // isDisabled={state.hasFavorite}
-            isDisabled
+            onPress={() => addToFav(product.id)}
           >
-            <span className='hidden md:block'>
-              {translateCartActions('fav')}
-            </span>
+            <span className='hidden md:block'>{tCart('fav')}</span>
           </Button>
 
           <Button
             fullWidth
             className='text-secondary'
             color='primary'
-            // eslint-disable-next-line react/jsx-sort-props
-            isDisabled
-            // isDisabled={
-            //   state.isOutOfStock ||
-            //   (state.hasVariants && !state.selectedVariantId)
-            // }
+            isDisabled={!canAddToCart}
             isLoading={isAddingToCart}
             radius='none'
             size='lg'
             startContent={!isAddingToCart && <ShoppingCartIcon />}
-            onPress={() => actions.addToCart()}
+            onPress={() =>
+              addToCart({
+                productId: product.id,
+                variantId: selectedVariantId,
+                quantity: 1,
+              })
+            }
           >
-            <span className='hidden md:block'>
-              {translateCartActions('add')}
-            </span>
+            {hasVariants && !selectedVariantId ? (
+              <span>{tCart('require')}</span>
+            ) : (
+              <span>{isOutOfStock ? tCart('outOfStock') : tCart('add')}</span>
+            )}
           </Button>
         </div>
 
         <ProductShare
-          label={translateActions('share')}
+          label={tActions('share')}
           title={product.name}
-          url={`${process.env.NEXT_PUBLIC_APP_URL}/product/${generateSlugWithId(
-            product.name,
-            product.id,
-          )}`}
+          url={`${process.env.NEXT_PUBLIC_APP_URL}/product/${generateSlugWithId(product.name, product.id)}`}
         />
       </CardBody>
     </Card>

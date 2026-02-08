@@ -1,6 +1,6 @@
 'use server'
 
-import type { Prisma } from '@prisma/client'
+import { Role, type Prisma } from '@prisma/client'
 
 import { imageSchema, type ImageInput } from './productImage.schema'
 
@@ -8,44 +8,113 @@ import { deleteFile } from '@/app/actions/file'
 import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { prisma } from '@/lib/prisma'
+import { withRole } from '@/lib/session'
 import { omitEmptyFields } from '@/utils'
 
-export const createImage = async (data: ImageInput) => {
-  const validated = imageSchema.safeParse(data)
+const createProductImage = async (data: ImageInput) =>
+  withRole([Role.ADMIN], async () => {
+    const validated = imageSchema.safeParse(data)
+    if (!validated.success) {
+      return fail(ERROR_CODES.VALIDATION_ERROR)
+    }
 
-  if (!validated.success) {
-    return fail(ERROR_CODES.VALIDATION_ERROR)
-  }
+    const payload = omitEmptyFields(
+      validated.data,
+    ) as Prisma.ProductImageUncheckedCreateInput
 
-  const payload = omitEmptyFields(
-    validated.data,
-  ) as Prisma.ProductImageCreateInput
+    try {
+      await prisma.$transaction(async (tx) => {
+        if (payload.isPrimary && payload.productId) {
+          await tx.productImage.updateMany({
+            where: { productId: payload.productId },
+            data: { isPrimary: false },
+          })
+        }
 
-  try {
-    await prisma.$transaction(async (tx) => {
-      if (payload.isPrimary && data.productId) {
-        await tx.productImage.updateMany({
-          where: {
-            productId: data.productId,
-          },
-          data: {
-            isPrimary: false,
-          },
-        })
-      }
-
-      await tx.productImage.create({
-        data: payload,
+        await tx.productImage.create({ data: payload })
       })
-    })
-  } catch {
-    return fail(ERROR_CODES.SYSTEM_ERROR)
-  }
+      return ok()
+    } catch {
+      return fail(ERROR_CODES.SYSTEM_ERROR)
+    }
+  })
 
-  return ok()
-}
+const updateProductImage = async (data: ImageInput) =>
+  withRole([Role.ADMIN], async () => {
+    const validated = imageSchema.safeParse(data)
+    if (!validated.success) {
+      return fail(ERROR_CODES.VALIDATION_ERROR)
+    }
 
-export const getImages = async (productId: string) => {
+    const { id, ...payload } = validated.data
+    if (!id) return fail(ERROR_CODES.DATA_NOT_FOUND)
+
+    try {
+      await prisma.$transaction(async (tx) => {
+        const currentImage = await tx.productImage.findUnique({
+          where: { id },
+          select: { productId: true, url: true },
+        })
+
+        if (!currentImage) {
+          throw new Error('NOT_FOUND')
+        }
+
+        if (
+          payload.url &&
+          currentImage.url &&
+          payload.url !== currentImage.url
+        ) {
+          await deleteFile(currentImage.url)
+        }
+
+        if (payload.isPrimary) {
+          await tx.productImage.updateMany({
+            where: {
+              productId: currentImage.productId,
+              NOT: { id },
+            },
+            data: { isPrimary: false },
+          })
+        }
+
+        await tx.productImage.update({
+          where: { id },
+          data: payload as Prisma.ProductImageUpdateInput,
+        })
+      })
+      return ok()
+    } catch {
+      return fail(ERROR_CODES.SYSTEM_ERROR)
+    }
+  })
+
+const deleteProductImage = async (imageIds: string | string[]) =>
+  withRole([Role.ADMIN], async () => {
+    const ids = Array.isArray(imageIds) ? imageIds : [imageIds]
+    if (!ids.length) {
+      return fail(ERROR_CODES.BAD_REQUEST)
+    }
+
+    try {
+      const images = await prisma.productImage.findMany({
+        where: { id: { in: ids } },
+        select: { url: true },
+      })
+
+      const fileUrls = images.map((img) => img.url).filter(Boolean)
+      await Promise.all(fileUrls.map((url) => deleteFile(url!)))
+
+      await prisma.productImage.deleteMany({
+        where: { id: { in: ids } },
+      })
+      return ok()
+    } catch {
+      return fail(ERROR_CODES.SYSTEM_ERROR)
+    }
+  })
+
+const getProductImages = async (productId: string) => {
   const images = await prisma.productImage.findMany({
     where: { productId },
     select: {
@@ -54,17 +123,12 @@ export const getImages = async (productId: string) => {
       alt: true,
       isPrimary: true,
     },
-    orderBy: { url: 'desc' },
+    orderBy: { isPrimary: 'desc' },
   })
-
-  if (!images) {
-    return
-  }
-
-  return images
+  return images || []
 }
 
-export const getImage = async (imageId: string) => {
+const getProductImage = async (imageId: string) => {
   const image = await prisma.productImage.findUnique({
     where: { id: imageId },
     select: {
@@ -74,101 +138,13 @@ export const getImage = async (imageId: string) => {
       isPrimary: true,
     },
   })
-
-  if (!image) {
-    return
-  }
-
-  return image
+  return image || null
 }
 
-export const updateImage = async (data: ImageInput) => {
-  const validated = imageSchema.safeParse(data)
-
-  if (!validated.success) {
-    return fail(ERROR_CODES.VALIDATION_ERROR)
-  }
-
-  const { id, ...payload } = validated.data
-
-  if (!id) {
-    return fail(ERROR_CODES.DATA_NOT_FOUND)
-  }
-
-  try {
-    await prisma.$transaction(async (tx) => {
-      const image = await tx.productImage.findUnique({
-        where: { id },
-        select: {
-          productId: true,
-          url: true,
-        },
-      })
-
-      if (!image) {
-        throw new Error(ERROR_CODES.DATA_NOT_FOUND)
-      }
-
-      if (payload.url && image.url && payload.url !== image.url) {
-        await deleteFile(image.url)
-      }
-
-      if (payload.isPrimary) {
-        await tx.productImage.updateMany({
-          where: {
-            productId: image.productId,
-            NOT: { id },
-          },
-          data: {
-            isPrimary: false,
-          },
-        })
-      }
-
-      await tx.productImage.update({
-        where: { id },
-        data: payload as Prisma.ProductImageUpdateInput,
-      })
-    })
-  } catch {
-    return fail(ERROR_CODES.SYSTEM_ERROR)
-  }
-
-  return ok()
-}
-
-export const deleteImage = async (imageIds: string | string[]) => {
-  const ids = Array.isArray(imageIds) ? imageIds : [imageIds]
-
-  if (!ids.length) {
-    return fail(ERROR_CODES.SYSTEM_ERROR)
-  }
-
-  const images = await prisma.productImage.findMany({
-    where: {
-      id: { in: ids },
-    },
-    select: {
-      url: true,
-    },
-  })
-
-  await Promise.all(
-    images
-      .map((image) => image.url)
-      .filter(Boolean)
-      .map((imagePath) => deleteFile(imagePath!)),
-  )
-
-  try {
-    await prisma.productImage.deleteMany({
-      where: {
-        id: { in: ids },
-      },
-    })
-  } catch {
-    return fail(ERROR_CODES.SYSTEM_ERROR)
-  }
-
-  return ok()
+export {
+  createProductImage,
+  getProductImages,
+  getProductImage,
+  updateProductImage,
+  deleteProductImage,
 }

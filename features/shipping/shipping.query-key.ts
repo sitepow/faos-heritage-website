@@ -1,33 +1,40 @@
 type ShippingListFilters = {
-  locale?: string
   isActive?: boolean
+  countryCode?: string
 }
 
 const shippingQueryKeys = {
-  root: ['shippings'] as const,
+  all: ['shippings'] as const,
 
-  list: {
-    all: [...['shippings'], 'list'] as const,
+  lists: {
+    all: () => [...shippingQueryKeys.all, 'list'] as const,
 
-    byFilter: (filters: ShippingListFilters = {}) =>
-      [...shippingQueryKeys.list.all, filters] as const,
+    countries: (filters: ShippingListFilters = {}) =>
+      [...shippingQueryKeys.lists.all(), 'countries', filters] as const,
+
+    weightTiers: (countryCode: string) =>
+      [...shippingQueryKeys.lists.all(), 'weightTiers', countryCode] as const,
   },
 
-  cost: {
-    byUserId: (id: string, countryCode?: string, cartItems?: any[]) =>
+  costs: {
+    all: () => [...shippingQueryKeys.all, 'cost'] as const,
+    calculate: (
+      countryCode: string,
+      items: { quantity: number; weight: number }[],
+    ) =>
       [
-        ...shippingQueryKeys.root,
-        'cost',
-        id,
-        { countryCode, cartItems },
+        ...shippingQueryKeys.costs.all(),
+        'calculate',
+        { countryCode, items },
       ] as const,
   },
 
-  detail: {
-    all: [...['shippings'], 'detail'] as const,
+  details: {
+    all: () => [...shippingQueryKeys.all, 'detail'] as const,
 
-    byId: (id: string) => [...shippingQueryKeys.detail.all, id] as const,
+    byId: (id: string) => [...shippingQueryKeys.details.all(), id] as const,
   },
 }
 
 export { shippingQueryKeys }
+export type { ShippingListFilters }

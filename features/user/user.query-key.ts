@@ -1,27 +1,33 @@
+import type { Role } from '@prisma/client'
+
 type UserListFilters = {
-  locale?: string
   isActive?: boolean
-  position?: 'homepage' | 'dashboard'
+  role?: Role
+  search?: string
+  page?: number
+  limit?: number
 }
 
 const userQueryKeys = {
-  root: ['users'] as const,
+  all: ['users'] as const,
 
-  list: {
-    all: [...['users'], 'list'] as const,
+  lists: {
+    all: () => [...userQueryKeys.all, 'list'] as const,
 
-    byFilter: (filters: UserListFilters = {}) =>
-      [...userQueryKeys.list.all, filters] as const,
-
-    homepage: (locale?: string) =>
-      [...userQueryKeys.list.all, 'homepage', locale] as const,
+    filtered: (filters: UserListFilters) =>
+      [...userQueryKeys.lists.all(), filters] as const,
   },
 
-  detail: {
-    all: [...['users'], 'detail'] as const,
+  details: {
+    all: () => [...userQueryKeys.all, 'detail'] as const,
 
-    byId: (id: string) => [...userQueryKeys.detail.all, id] as const,
+    me: () => [...userQueryKeys.details.all(), 'me'] as const,
+
+    byId: (id: string) => [...userQueryKeys.details.all(), id] as const,
   },
+
+  stats: () => [...userQueryKeys.all, 'stats'] as const,
 }
 
 export { userQueryKeys }
+export type { UserListFilters }

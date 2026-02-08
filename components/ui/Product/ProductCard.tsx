@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 type ProductItem = GetProductsInfiniteResult['items'][number]
 
-import type { GetProductsInfiniteResult } from '@/features/product/product.action'
+import type { GetProductsInfiniteResult } from '@/features/product/product.types'
 
 import { ProductChip } from './ProductChip'
 import { ProductImage } from './ProductImage'

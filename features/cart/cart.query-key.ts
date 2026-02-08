@@ -1,20 +1,24 @@
-type CartStatParams = {
+type CartFilters = {
   userId?: string
 }
 
-const cartRootKey = ['carts'] as const
-
 const cartQueryKeys = {
-  root: cartRootKey,
+  all: ['carts'] as const,
 
-  list: {
-    all: (params: CartStatParams) => [...cartRootKey, 'list', params] as const,
+  lists: {
+    all: () => [...cartQueryKeys.all, 'list'] as const,
+
+    byUserId: (userId: string) =>
+      [...cartQueryKeys.lists.all(), userId] as const,
   },
 
-  stat: {
-    byUser: (params: CartStatParams) =>
-      [...cartRootKey, 'stat', params] as const,
+  stats: {
+    all: () => [...cartQueryKeys.all, 'stat'] as const,
+
+    byUserId: (userId: string) =>
+      [...cartQueryKeys.stats.all(), userId] as const,
   },
 }
 
 export { cartQueryKeys }
+export type { CartFilters }

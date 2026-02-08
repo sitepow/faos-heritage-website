@@ -8,13 +8,13 @@ import { exchangeRateQueryKeys } from './exchangeRate.query-key'
 import { useAppStore } from '@/app/store'
 import { getExchangeRates } from '@/utils/exchangeRate'
 
-const useExchangeRate = (country: string = 'TH') => {
+const useExchangeRate = (currency: string = 'TH') => {
   const { appLocale, hasHydrated } = useAppStore()
 
   const exchangeRate = useQuery({
-    queryKey: exchangeRateQueryKeys.list(country),
+    queryKey: exchangeRateQueryKeys.lists.byCurrency(currency),
     queryFn: () => getExchangeRates(),
-    enabled: !!country && hasHydrated,
+    enabled: !!currency && hasHydrated,
     refetchOnWindowFocus: false,
     retry: 1,
   })

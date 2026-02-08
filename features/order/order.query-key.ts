@@ -1,27 +1,36 @@
+import type { OrderStatus } from '@prisma/client'
+
 type OrderListFilters = {
-  locale?: string
-  isActive?: boolean
-  position?: 'homepage' | 'dashboard'
+  page?: number
+  limit?: number
+  userId?: string
+  status?: OrderStatus
 }
 
 const orderQueryKeys = {
-  root: ['orders'] as const,
+  all: ['orders'] as const,
 
-  list: {
-    all: [...['orders'], 'list'] as const,
+  lists: {
+    all: () => [...orderQueryKeys.all, 'list'] as const,
 
-    byFilter: (filters: OrderListFilters = {}) =>
-      [...orderQueryKeys.list.all, filters] as const,
-
-    homepage: (locale?: string, itemsPerPage?: number) =>
-      [...orderQueryKeys.list.all, 'homepage', locale, itemsPerPage] as const,
+    filtered: (filters: OrderListFilters) =>
+      [...orderQueryKeys.lists.all(), filters] as const,
   },
 
-  detail: {
-    all: [...['orders'], 'detail'] as const,
+  details: {
+    all: () => [...orderQueryKeys.all, 'detail'] as const,
 
-    byId: (id: string) => [...orderQueryKeys.detail.all, id] as const,
+    byId: (id: string) => [...orderQueryKeys.details.all(), id] as const,
+  },
+
+  stats: {
+    all: () => [...orderQueryKeys.all, 'stats'] as const,
+
+    overview: () => [...orderQueryKeys.stats.all(), 'overview'] as const,
+
+    revenue: () => [...orderQueryKeys.stats.all(), 'revenue'] as const,
   },
 }
 
 export { orderQueryKeys }
+export type { OrderListFilters }

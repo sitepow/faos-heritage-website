@@ -1,8 +1,15 @@
 const exchangeRateQueryKeys = {
-  root: ['exchangeRates'] as const,
-  lists: () => [...exchangeRateQueryKeys.root, 'list'] as const,
-  list: (country: string) =>
-    [...exchangeRateQueryKeys.lists(), country] as const,
+  all: ['exchangeRates'] as const,
+
+  lists: {
+    all: () => [...exchangeRateQueryKeys.all, 'list'] as const,
+
+    byCurrency: (currency: string) =>
+      [...exchangeRateQueryKeys.lists.all(), currency] as const,
+
+    bySource: (source: string) =>
+      [...exchangeRateQueryKeys.lists.all(), 'source', source] as const,
+  },
 }
 
 export { exchangeRateQueryKeys }

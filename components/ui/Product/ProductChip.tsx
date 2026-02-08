@@ -45,7 +45,7 @@ const ProductChip = ({
   ]
 
   return (
-    <div className={cn('flex flex-wrap justify-center gap-1.5', className)}>
+    <div className={cn('flex flex-wrap gap-1.5', className)}>
       {chips
         .filter((chip) => chip.visible)
         .map(({ key, label, className: chipClassName }) => (

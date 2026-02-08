@@ -48,6 +48,7 @@ const ProductQty = ({
         </Button>
       }
       radius='none'
+      size='lg'
       startContent={
         <Button
           isIconOnly

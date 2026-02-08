@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 
-import type { GetCartResult } from '../cart/cart.action'
+import type { GetCartsResult } from '../cart/cart.action'
 
 import { calculateShippingCost } from './shipping.action'
 import { shippingQueryKeys } from './shipping.query-key'
@@ -8,30 +8,35 @@ import { shippingQueryKeys } from './shipping.query-key'
 interface UseShippingParams {
   userId?: string
   address?: { countryCode: string } | null
-  carts: GetCartResult[]
+  carts: GetCartsResult
 }
 
 const useShipping = ({ userId, address, carts }: UseShippingParams) => {
+  const shippingItems = (carts ?? []).map((cart) => {
+    const product = cart.product
+    const variants = product?.variants ?? []
+
+    const variantWeight = variants.find((v) => v.id === cart.variantId)?.weight
+    const productWeight = product?.weight ?? 0
+
+    return {
+      quantity: cart.quantity ?? 0,
+      weight: variantWeight ?? productWeight,
+    }
+  })
+
+  const countryCode = address?.countryCode
+
   const query = useQuery({
-    queryKey: shippingQueryKeys.cost.byUserId(
-      userId!,
-      address?.countryCode,
-      carts.map((c) => ({ id: c.id, q: c.quantity })),
-    ),
+    queryKey: shippingQueryKeys.costs.calculate(countryCode!, shippingItems),
+
     queryFn: () =>
       calculateShippingCost({
-        countryCode: address!.countryCode,
-        items: carts.map((cart) => ({
-          quantity: cart.quantity,
-          weight:
-            cart.product?.variants?.find(
-              (variant) => variant.id === cart.variantId,
-            )?.weight ??
-            cart.product?.weight ??
-            0,
-        })),
+        countryCode: countryCode!,
+        items: shippingItems,
       }),
-    enabled: !!address?.countryCode && carts.length > 0 && !!userId,
+
+    enabled: !!countryCode && shippingItems.length > 0 && !!userId,
   })
 
   return {

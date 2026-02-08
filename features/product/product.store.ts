@@ -1,17 +1,14 @@
 /* eslint-disable no-unused-vars */
 import { create } from 'zustand'
+import { immer } from 'zustand/middleware/immer'
 
-import type { GetProductResult } from '@/features/product/product.action'
+import type { GetProductResult } from './product.types'
 
 interface ProductUIState {
   selectedProductId: string | null
   isFormOpen: boolean
 }
 
-interface ProductDetailStore {
-  product?: GetProductResult | null
-  setProductDetailState: (state: Partial<ProductDetailStore>) => void
-}
 interface ProductUIActions {
   openForm: (productId?: string | null) => void
   closeForm: () => void
@@ -19,36 +16,70 @@ interface ProductUIActions {
   reset: () => void
 }
 
+interface ProductDetailState {
+  product: GetProductResult | null
+}
+
+interface ProductDetailActions {
+  setProduct: (product: GetProductResult | null) => void
+  updateProductFields: (fields: Partial<NonNullable<GetProductResult>>) => void
+  reset: () => void
+}
+
 type ProductUIStore = ProductUIState & ProductUIActions
+type ProductDetailStore = ProductDetailState & ProductDetailActions
 
-const useProductUIStore = create<ProductUIStore>((set) => ({
-  selectedProductId: null,
-  isFormOpen: false,
+const useProductUIStore = create<ProductUIStore>()(
+  immer((set) => ({
+    selectedProductId: null,
+    isFormOpen: false,
 
-  openForm: (productId = null) =>
-    set({
-      selectedProductId: productId,
-      isFormOpen: true,
-    }),
+    openForm: (productId = null) =>
+      set((state) => {
+        state.selectedProductId = productId
+        state.isFormOpen = true
+      }),
 
-  closeForm: () =>
-    set({
-      isFormOpen: false,
-      selectedProductId: null,
-    }),
+    closeForm: () =>
+      set((state) => {
+        state.isFormOpen = false
+        state.selectedProductId = null
+      }),
 
-  selectProduct: (productId) => set({ selectedProductId: productId }),
+    selectProduct: (productId) =>
+      set((state) => {
+        state.selectedProductId = productId
+      }),
 
-  reset: () =>
-    set({
-      selectedProductId: null,
-      isFormOpen: false,
-    }),
-}))
+    reset: () =>
+      set((state) => {
+        state.selectedProductId = null
+        state.isFormOpen = false
+      }),
+  })),
+)
 
-const useProductDetailStore = create<ProductDetailStore>()((set) => ({
-  product: null,
-  setProductDetailState: (state) => set(state),
-}))
+const useProductDetailStore = create<ProductDetailStore>()(
+  immer((set) => ({
+    product: null,
+
+    setProduct: (product) =>
+      set((state) => {
+        state.product = product
+      }),
+
+    updateProductFields: (fields) =>
+      set((state) => {
+        if (state.product) {
+          state.product = { ...state.product, ...fields }
+        }
+      }),
+
+    reset: () =>
+      set((state) => {
+        state.product = null
+      }),
+  })),
+)
 
 export { useProductUIStore, useProductDetailStore }
