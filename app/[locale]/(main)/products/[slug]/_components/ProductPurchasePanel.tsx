@@ -50,7 +50,9 @@ const ProductPurchasePanel = () => {
   const hasVariants = Boolean(product?.variants?.length)
   const hasFavorite = Boolean(product?.wishlist?.length)
 
-  if (!product) return null
+  if (!product) {
+    return null
+  }
 
   const canAddToCart = !isOutOfStock && (!hasVariants || !!selectedVariantId)
 
@@ -121,11 +123,13 @@ const ProductPurchasePanel = () => {
               })
             }
           >
-            {hasVariants && !selectedVariantId ? (
-              <span>{tCart('require')}</span>
-            ) : (
-              <span>{isOutOfStock ? tCart('outOfStock') : tCart('add')}</span>
-            )}
+            <span className='hidden sm:block'>
+              {hasVariants && !selectedVariantId ? (
+                <span>{tCart('require')}</span>
+              ) : (
+                <span>{isOutOfStock ? tCart('outOfStock') : tCart('add')}</span>
+              )}
+            </span>
           </Button>
         </div>
 
