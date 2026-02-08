@@ -22,7 +22,7 @@ const Footer = ({ className, ...props }: ComponentProps<'footer'>) => {
         className,
       )}
     >
-      <div className='container mx-auto grid gap-12 py-16 text-sm sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5'>
+      <div className='container mx-auto grid gap-12 py-5 text-sm sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5'>
         {menu.map((section, idx) => (
           <div key={idx} className='flex flex-col gap-6'>
             {section.title && !section.isGroup && (
