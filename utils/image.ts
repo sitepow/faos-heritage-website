@@ -23,7 +23,7 @@ const resolveProductImages = ({ images }: ResolveProductimagesProps = {}) => {
   const safeImages = Array.isArray(images) ? images : []
 
   const primary =
-    safeImages.find((img) => img.isPrimary) ?? safeImages[0] ?? null
+    safeImages.find((img) => img.isPrimary) ?? safeImages[0] ?? safeImages[0]
   const hover = safeImages.find((img) => !img.isPrimary) ?? primary
 
   return {
