@@ -93,6 +93,10 @@
     "delete": {
       "title": "您确定要删除吗？",
       "description": "此操作永久生效，无法撤销。"
+    },
+    "development": {
+      "title": "系统临时维护公告",
+      "description": "为您带来不便，敬请谅解。为了提供更好的服务，网站正在进行系统维护。**订购及数据管理系统暂时无法使用。** 您仍可通过以下方式正常下单：[Facebook](https://web.facebook.com/FAOShertitagefood)、[Shopee](https://shopee.co.th/ptatom) 或亲临 **Foodland** 门店。"
     }
   },
   "messages": {

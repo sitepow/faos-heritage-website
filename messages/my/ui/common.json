@@ -93,6 +93,10 @@
     "delete": {
       "title": "Adakah anda pasti mahu memadamkan ini?",
       "description": "Tindakan ini adalah kekal dan tidak boleh diubah semula."
+    },
+    "development": {
+      "title": "Pengumuman Penyelenggaraan Sistem Sementara",
+      "description": "Maaf atas kesulitan yang timbul. Laman web kami sedang diselenggara untuk penambahbaikan. **Sistem pesanan dan pengurusan data tidak boleh digunakan buat masa ini.** Namun, anda masih boleh membuat pesanan melalui: [Facebook](https://web.facebook.com/FAOShertitagefood), [Shopee](https://shopee.co.th/ptatom) atau di cawangan **Foodland**."
     }
   },
   "messages": {

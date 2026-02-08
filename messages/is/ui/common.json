@@ -93,6 +93,10 @@
     "delete": {
       "title": "Ertu viss um að þú viljir eyða þessu?",
       "description": "Þessi aðgerð er varanleg og henni er ekki hægt að hneppa aftur."
+    },
+    "development": {
+      "title": "Tilkynning um tímabundið kerfisviðhald",
+      "description": "Við biðjumst velvirðingar á óþægindunum. Vefsíðan okkar er í viðhaldi til að bæta þjónustuna. **Pöntunarkerfi og gagnastjórnun eru óvirk í augnablikinu.** Þú getur samt pantað eins og venjulega í gegnum: [Facebook](https://web.facebook.com/FAOShertitagefood), [Shopee](https://shopee.co.th/ptatom) eða í **Foodland** verslunum."
     }
   },
   "messages": {

@@ -93,6 +93,10 @@
     "delete": {
       "title": "Sei sicuro di voler eliminare questo elemento?",
       "description": "Questa azione è permanente e non può essere annullata."
+    },
+    "development": {
+      "title": "Annuncio di Manutenzione Temporanea del Sistema",
+      "description": "Ci scusiamo per l'inconveniente. Il nostro sito è attualmente in manutenzione per miglioramenti. **I sistemi di ordinazione e gestione dati non sono disponibili.** È comunque possibile ordinare tramite: [Facebook](https://web.facebook.com/FAOShertitagefood), [Shopee](https://shopee.co.th/ptatom) o presso i punti vendita **Foodland**."
     }
   },
   "messages": {

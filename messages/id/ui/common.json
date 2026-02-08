@@ -93,6 +93,10 @@
     "delete": {
       "title": "Apakah Anda yakin ingin menghapus ini?",
       "description": "Tindakan ini permanen dan tidak dapat dibatalkan."
+    },
+    "development": {
+      "title": "Pengumuman Pemeliharaan Sistem Sementara",
+      "description": "Mohon maaf atas ketidaknyamanan ini. Situs web kami sedang dalam pemeliharaan untuk meningkatkan layanan. **Sistem pemesanan dan pengelolaan data tidak dapat digunakan saat ini.** Anda tetap dapat memesan melalui: [Facebook](https://web.facebook.com/FAOShertitagefood), [Shopee](https://shopee.co.th/ptatom) atau di gerai **Foodland**."
     }
   },
   "messages": {

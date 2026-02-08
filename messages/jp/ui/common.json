@@ -93,6 +93,10 @@
     "delete": {
       "title": "本当に削除しますか？",
       "description": "この操作は取り消すことができません。永久に削除されます。"
+    },
+    "development": {
+      "title": "システム一時メンテナンスのお知らせ",
+      "description": "ご不便をおかけして申し訳ございません。現在、サービス向上のためシステムメンテナンスを行っております。**注文およびデータ管理システムはご利用いただけません。** なお、[Facebook](https://web.facebook.com/FAOShertitagefood)、[Shopee](https://shopee.co.th/ptatom)、または**フードランド**の各店舗にて通常通りご注文いただけます。"
     }
   },
   "messages": {

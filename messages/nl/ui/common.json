@@ -93,6 +93,10 @@
     "delete": {
       "title": "Weet u zeker dat u dit wilt verwijderen?",
       "description": "Deze actie is definitief en kan niet ongedaan worden gemaakt."
+    },
+    "development": {
+      "title": "Aankondiging Tijdelijk Systeemonderhoud",
+      "description": "Onze excuses voor het ongemak. Onze website ondergaat momenteel onderhoud voor verbeteringen. **Bestel- en gegevensbeheersystemen zijn tijdelijk niet beschikbaar.** U kunt nog steeds bestellen via: [Facebook](https://web.facebook.com/FAOShertitagefood), [Shopee](https://shopee.co.th/ptatom) of bij **Foodland** winkels."
     }
   },
   "messages": {

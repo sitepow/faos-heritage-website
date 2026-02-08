@@ -93,6 +93,10 @@
     "delete": {
       "title": "Bạn có chắc chắn muốn xóa mục này?",
       "description": "Hành động này là vĩnh viễn và không thể hoàn tác."
+    },
+    "development": {
+      "title": "Thông báo Bảo trì Hệ thống Tạm thời",
+      "description": "Chúng tôi xin lỗi vì sự bất tiện này. Hiện tại trang web đang được bảo trì để nâng cấp dịch vụ. **Hệ thống đặt hàng và quản lý dữ liệu tạm thời không khả dụng.** Quý khách vẫn có thể đặt hàng qua: [Facebook](https://web.facebook.com/FAOShertitagefood), [Shopee](https://shopee.co.th/ptatom) hoặc tại hệ thống siêu thị **Foodland**."
     }
   },
   "messages": {
