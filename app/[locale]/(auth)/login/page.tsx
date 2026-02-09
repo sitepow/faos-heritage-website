@@ -41,8 +41,8 @@ const LoginPage = () => {
     <div className='flex sm:h-dvh sm:w-dvw'>
       <AuthSidebar />
 
-      <div className='bg-page flex w-full items-center justify-center sm:w-[50%]'>
-        <Card className='bg-page w-[450px] p-5' radius='sm' shadow='none'>
+      <div className='bg-background flex w-full items-center justify-center sm:w-[50%]'>
+        <Card className='bg-background w-[450px] p-5' radius='sm' shadow='none'>
           <div className='mb-5 flex justify-start'>
             <Button isIconOnly variant='light' onPress={() => router.push('/')}>
               <ArrowLeftIcon />

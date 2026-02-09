@@ -18,13 +18,13 @@ const Footer = ({ className, ...props }: ComponentProps<'footer'>) => {
     <footer
       {...props}
       className={cn(
-        'border-default-100 border-t bg-white p-5 dark:bg-[#131314]',
+        'border-default-100 border-t bg-white dark:bg-[#131314]',
         className,
       )}
     >
-      <Container className='grid gap-12 py-5 text-sm sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5'>
+      <Container className='grid gap-12 p-5 text-sm sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5'>
         {menu.map((section, idx) => (
-          <div key={idx} className='flex flex-col gap-6'>
+          <div key={idx} className='flex flex-col gap-5'>
             {section.title && !section.isGroup && (
               <span className='text-primary font-bold'>{section.title}</span>
             )}

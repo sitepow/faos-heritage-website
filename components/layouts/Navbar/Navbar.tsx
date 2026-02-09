@@ -13,7 +13,7 @@ const Navbar = () => {
       <NavbarTopBar />
 
       <div className='border-default-100 border-b pb-2.5 md:pb-5'>
-        <Container className='flex items-center justify-between gap-4 px-6 py-4'>
+        <Container className='flex items-center justify-between gap-4 p-5'>
           <NavbarSearch />
           <NavbarLogo />
           <NavbarActions />

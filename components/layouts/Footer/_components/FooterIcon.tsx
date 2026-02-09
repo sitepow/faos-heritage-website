@@ -4,13 +4,13 @@ import type { ComponentProps } from 'react'
 
 import { cn } from '@/utils/style'
 
-interface FooterIconProps extends ComponentProps<'div'> {
+interface Props extends ComponentProps<'div'> {
   src: string
   alt: string
   hover?: boolean
 }
 
-const FooterIcon = ({ src, alt, hover, ...props }: FooterIconProps) => (
+const FooterIcon = ({ src, alt, hover, ...props }: Props) => (
   <div
     className='border-default-100 hover:border-primary flex size-12 cursor-pointer items-center justify-center rounded-lg border bg-white p-2.5 transition-all sm:size-14'
     {...props}
