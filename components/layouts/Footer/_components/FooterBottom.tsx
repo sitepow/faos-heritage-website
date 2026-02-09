@@ -1,5 +1,7 @@
 import { useTranslations } from 'next-intl'
 
+import { Container } from '../../Container'
+
 import { CURRENCY_LOCALE_MAP } from '@/constants'
 
 const FooterBottom = () => {
@@ -10,7 +12,7 @@ const FooterBottom = () => {
   const year = new Date().getFullYear()
 
   return (
-    <div className='border-default-100 container mx-auto flex flex-col items-center justify-between gap-5 border-t py-8 text-xs text-gray-400 xl:flex-row'>
+    <Container className='border-default-100 text-default-500 flex flex-col items-center justify-between gap-5 border-t py-8 text-xs xl:flex-row'>
       <p>
         {translateFooter('copyright', { year, name: translateBrand('name') })}
       </p>
@@ -27,7 +29,7 @@ const FooterBottom = () => {
           </button>
         ))}
       </div>
-    </div>
+    </Container>
   )
 }
 

@@ -81,7 +81,7 @@ const FooterSection = ({ section }: { section: FooterMenuSection }) => {
             'label' in link && (
               <li key={i} className='mb-2'>
                 <a
-                  className='hover:text-primary text-gray-500 transition-all dark:text-gray-400'
+                  className='hover:text-primary text-default-500 transition-all'
                   href={link.href}
                 >
                   {link.label}

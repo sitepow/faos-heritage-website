@@ -2,11 +2,11 @@ import type { ComponentProps } from 'react'
 
 import { cn } from '@/utils'
 
-interface ContainerProps extends ComponentProps<'div'> {
+interface Props extends ComponentProps<'div'> {
   className?: string
 }
 
-const Container = ({ children, className }: ContainerProps) => {
+const Container = ({ children, className }: Props) => {
   return <div className={cn('container mx-auto', className)}>{children}</div>
 }
 

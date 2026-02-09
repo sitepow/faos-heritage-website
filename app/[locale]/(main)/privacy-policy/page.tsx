@@ -2,6 +2,7 @@ import { getTranslations } from 'next-intl/server'
 
 import type { Metadata } from 'next'
 
+import { AppSection } from '@/components/layouts/AppSection'
 import { Container } from '@/components/layouts/Container'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { constructMetadata } from '@/lib/metadata'
@@ -30,13 +31,15 @@ const PrivacyPolicyPage = async ({
   const t = await getTranslations({ locale, namespace: 'privacyPolicy' })
 
   return (
-    <Container className='flex flex-col gap-5 text-start'>
-      <SectionHeader
-        description={t('intro.description')}
-        title={t('intro.title')}
-      />
+    <Container>
+      <AppSection>
+        <SectionHeader
+          description={t('intro.description')}
+          title={t('intro.title')}
+        />
 
-      <span>{t('content')}</span>
+        <p className='text-default-500'>{t('content')}</p>
+      </AppSection>
     </Container>
   )
 }

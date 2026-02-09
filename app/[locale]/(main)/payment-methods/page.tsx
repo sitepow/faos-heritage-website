@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 
 import { PaymentMethodsClient } from './payment-methods.client'
 
+import { AppSection } from '@/components/layouts/AppSection'
 import { Container } from '@/components/layouts/Container'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { constructMetadata } from '@/lib/metadata'
@@ -55,12 +56,14 @@ const PaymentMethodsPage = async ({
   }
 
   return (
-    <Container className='flex flex-col gap-5 text-center'>
-      <SectionHeader
-        description={t('intro.description')}
-        title={t('intro.title')}
-      />
-      <PaymentMethodsClient data={paymentData} />
+    <Container>
+      <AppSection>
+        <SectionHeader
+          description={t('intro.description')}
+          title={t('intro.title')}
+        />
+        <PaymentMethodsClient data={paymentData} />
+      </AppSection>
     </Container>
   )
 }

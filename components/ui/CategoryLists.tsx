@@ -18,7 +18,7 @@ const CategoryLists = () => {
       {categories?.map(({ name, id, image }) => (
         <div
           key={id}
-          className='group border-default-100 relative h-[180px] w-full cursor-pointer overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] lg:h-full lg:flex-[1] lg:hover:flex-[4]'
+          className='group border-default-100 relative h-[300px] w-full cursor-pointer overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] lg:h-full lg:flex-[1] lg:hover:flex-[4]'
           onClick={() =>
             router.push(`/categories/${generateSlugWithId(name!, id!)}`)
           }

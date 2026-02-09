@@ -9,7 +9,8 @@ import { ProductPreview } from './_components/ProductPreview'
 import { ProductSimilar } from './_components/ProductSectionSemilar'
 import { ProductTabs } from './_components/ProductTabs'
 
-import DynamicBreadcrumb from '@/components/ui/DynamicBreadcrumb'
+import { AppSection } from '@/components/layouts/AppSection'
+import { DynamicBreadcrumb } from '@/components/ui/DynamicBreadcrumb'
 import { useProductDetailStore } from '@/features/product/product.store'
 import { useProduct } from '@/features/product/useProduct'
 import { useUser } from '@/hooks/useUser'
@@ -54,17 +55,12 @@ const ProductClient = ({ initialData, productId }: ProductClientProps) => {
   ]
 
   return (
-    <section className='flex flex-col gap-4'>
-      <div className='flex w-full flex-col gap-5 p-5'>
-        <DynamicBreadcrumb
-          className='container mx-auto font-semibold'
-          items={breadcrumbItems}
-        />
-        <ProductPreview />
-        <ProductTabs />
-        <ProductSimilar />
-      </div>
-    </section>
+    <AppSection>
+      <DynamicBreadcrumb items={breadcrumbItems} />
+      <ProductPreview />
+      <ProductTabs />
+      <ProductSimilar />
+    </AppSection>
   )
 }
 

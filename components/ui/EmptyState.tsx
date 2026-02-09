@@ -4,9 +4,11 @@ import { Alert } from '@heroui/react'
 
 import type { PropsWithChildren } from 'react'
 
+import { Container } from '../layouts/Container'
+
 import { cn } from '@/utils/style'
 
-interface EmptyStateProps extends PropsWithChildren {
+interface Props extends PropsWithChildren {
   description?: string
   color?: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'
   variant?: 'solid' | 'faded' | 'bordered' | 'flat'
@@ -19,18 +21,15 @@ const EmptyState = ({
   variant = 'faded',
   className,
   children,
-}: EmptyStateProps) => {
+}: Props) => {
   return (
-    <div
-      className={cn(
-        'container mx-auto flex h-full items-center justify-center',
-        className,
-      )}
+    <Container
+      className={cn('flex h-full items-center justify-center', className)}
     >
       <Alert color={color} description={description} variant={variant}>
         {children}
       </Alert>
-    </div>
+    </Container>
   )
 }
 

@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl'
 import { CartItem } from './_components/CartItem'
 import { CartSummaryCard } from './_components/CartSummaryCard'
 
+import { AppSection } from '@/components/layouts/AppSection'
 import { Container } from '@/components/layouts/Container'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { useCarts } from '@/features/cart/hooks/useCart'
@@ -21,7 +22,7 @@ const CartPage = () => {
   const isEmptyCarts = !isLoadingCarts && carts && carts?.length === 0
 
   return (
-    <>
+    <AppSection>
       <Head>
         <meta content='noindex, nofollow' name='robots' />
       </Head>
@@ -38,7 +39,7 @@ const CartPage = () => {
 
         {isHasCarts && <CartSummaryCard />}
       </Container>
-    </>
+    </AppSection>
   )
 }
 

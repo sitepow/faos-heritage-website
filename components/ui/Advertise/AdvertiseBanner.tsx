@@ -4,6 +4,8 @@ import { useTranslations } from 'next-intl'
 
 import { AdvertiseCard } from './AdvertiseCard'
 
+import { AppSection } from '@/components/layouts/AppSection'
+
 interface AdvertiseItem {
   title: string
   image: string
@@ -19,13 +21,11 @@ const AdvertiseBanner = () => {
   }
 
   return (
-    <article className='flex flex-col gap-6'>
+    <AppSection>
       {translateAdvertise.map((item) => (
-        <section key={item.title} className='container mx-auto'>
-          <AdvertiseCard {...item} />
-        </section>
+        <AdvertiseCard key={item?.title} {...item} />
       ))}
-    </article>
+    </AppSection>
   )
 }
 

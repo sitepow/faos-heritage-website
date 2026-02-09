@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 
 import { ProductExploreSection } from './_components/ProductExploreSection'
 
+import { AppSection } from '@/components/layouts/AppSection'
 import { AdvertiseBanner } from '@/components/ui/Advertise/AdvertiseBanner'
 import { CategoryLists } from '@/components/ui/CategoryLists'
 import { SectionHeader } from '@/components/ui/SectionHeader'
@@ -35,19 +36,18 @@ const HomePage = async () => {
   })
 
   return (
-    <section className='flex flex-col items-center justify-center gap-4 text-center'>
-      <div className='flex w-full flex-col gap-5 p-5'>
-        <div className='flex flex-col gap-5'>
-          <SectionHeader description={t('description')} title={t('title')} />
-          <CategoryLists />
-        </div>
-        <ProductExploreSection
-          initialData={products}
-          itemsPerPage={PAGINATION.ITEMS_PER_PAGE}
-        />
-        <AdvertiseBanner />
+    <AppSection>
+      <div className='flex flex-col gap-5'>
+        <SectionHeader description={t('description')} title={t('title')} />
+        <CategoryLists />
       </div>
-    </section>
+
+      <ProductExploreSection
+        initialData={products}
+        itemsPerPage={PAGINATION.ITEMS_PER_PAGE}
+      />
+      <AdvertiseBanner />
+    </AppSection>
   )
 }
 

@@ -8,17 +8,14 @@ interface BreadcrumbStep {
   href?: string
 }
 
-interface DynamicBreadcrumbProps {
+interface Props {
   items: BreadcrumbStep[]
   className?: string
 }
 
-const DynamicBreadcrumb: React.FC<DynamicBreadcrumbProps> = ({
-  items,
-  className,
-}) => {
+const DynamicBreadcrumb = ({ items, className }: Props) => {
   return (
-    <Breadcrumbs className={cn('container mx-auto font-semibold', className)}>
+    <Breadcrumbs className={cn('font-semibold', className)}>
       {items.map((item) => (
         <BreadcrumbItem key={item.href || item.label} href={item.href}>
           {item.label}
@@ -28,4 +25,4 @@ const DynamicBreadcrumb: React.FC<DynamicBreadcrumbProps> = ({
   )
 }
 
-export default DynamicBreadcrumb
+export { DynamicBreadcrumb }

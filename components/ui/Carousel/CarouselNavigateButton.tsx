@@ -7,13 +7,12 @@ import { CustomIcon } from '../CustomIcon'
 
 import { cn } from '@/utils/style'
 
-type CarouselNavigateButtonProps = ComponentProps<'button'> & {
+type Props = ComponentProps<'button'> & {
   direction: 'prev' | 'next'
 }
 
 const buttonVariants = cva([
   'flex size-9 cursor-pointer items-center justify-center rounded-full',
-  'bg-white',
   'focus-visible:ring focus-visible:outline-none',
 ])
 
@@ -22,11 +21,7 @@ const ICON_MAP = {
   next: <CustomIcon icon={ChevronRightIcon} />,
 }
 
-const CarouselNavigateButton = ({
-  direction,
-  className,
-  ...props
-}: CarouselNavigateButtonProps) => {
+const CarouselNavigateButton = ({ direction, className, ...props }: Props) => {
   return (
     <button
       aria-label={direction === 'prev' ? 'Previous slide' : 'Next slide'}

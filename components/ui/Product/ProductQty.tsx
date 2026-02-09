@@ -34,7 +34,7 @@ const ProductQty = ({
       classNames={{
         input: 'text-center font-bold',
         inputWrapper:
-          'p-0 h-10 overflow-hidden shadow-none border-default-100 data-[hover=true]:border-default-200 focus-within:!border-default-300',
+          'p-0 h-10 overflow-hidden shadow-none border-1 border-default-100 data-[hover=true]:border-default-200 focus-within:!border-default-300',
       }}
       endContent={
         <Button

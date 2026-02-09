@@ -2,6 +2,7 @@
 
 import { useLocale, useTranslations } from 'next-intl'
 
+import { AppSection } from '@/components/layouts/AppSection'
 import { Container } from '@/components/layouts/Container'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { ProductSection } from '@/components/ui/Product/ProductSection'
@@ -40,17 +41,19 @@ const CategoryClient = ({ categoryId }: Props) => {
   const products = data?.pages.flatMap((page) => page.items) ?? []
 
   return (
-    <Container className='flex flex-col gap-5'>
-      <SectionHeader
-        description={tShared('categoryDiscovery.description')}
-        title={category?.name!}
-      />
+    <Container>
+      <AppSection>
+        <SectionHeader
+          description={tShared('categoryDiscovery.description')}
+          title={category?.name!}
+        />
 
-      <ProductSection items={products} />
+        <ProductSection items={products} />
 
-      {!isLoading && products.length === 0 && (
-        <EmptyState description={t('empty')} />
-      )}
+        {!isLoading && products.length === 0 && (
+          <EmptyState description={t('empty')} />
+        )}
+      </AppSection>
     </Container>
   )
 }

@@ -28,7 +28,7 @@ const ProductSimilar = () => {
   }
 
   return (
-    <section className='flex flex-col gap-5'>
+    <>
       <SectionHeader
         description={translateRelatedProducts('description')}
         title={translateRelatedProducts('title')}
@@ -38,7 +38,7 @@ const ProductSimilar = () => {
         itemPerPage={PAGINATION.ITEMS_PER_PAGE}
         items={items}
       />
-    </section>
+    </>
   )
 }
 

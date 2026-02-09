@@ -4,13 +4,13 @@ import { SectionHeader } from '../SectionHeader'
 
 import { getBackgroundStyle } from '@/utils'
 
-interface AdvertiseCardProps {
+interface Props {
   title: string
   image: string
   messages: string[]
 }
 
-const AdvertiseCard = ({ title, image, messages }: AdvertiseCardProps) => {
+const AdvertiseCard = ({ title, image, messages }: Props) => {
   return (
     <div
       className='relative overflow-hidden rounded-lg px-6 py-16 text-white'

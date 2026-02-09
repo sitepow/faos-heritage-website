@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl'
 import type { FooterMenuSection } from './Footer.types'
 import type { ComponentProps } from 'react'
 
+import { Container } from '../Container'
 import { FooterBottom } from './_components/FooterBottom'
 import { FooterSection } from './_components/FooterSection'
 
@@ -11,7 +12,6 @@ import { cn } from '@/utils/style'
 
 const Footer = ({ className, ...props }: ComponentProps<'footer'>) => {
   const translateFooter = useTranslations('footer')
-
   const menu = translateFooter.raw('menu') as FooterMenuSection[]
 
   return (
@@ -22,7 +22,7 @@ const Footer = ({ className, ...props }: ComponentProps<'footer'>) => {
         className,
       )}
     >
-      <div className='container mx-auto grid gap-12 py-5 text-sm sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5'>
+      <Container className='grid gap-12 py-5 text-sm sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5'>
         {menu.map((section, idx) => (
           <div key={idx} className='flex flex-col gap-6'>
             {section.title && !section.isGroup && (
@@ -32,8 +32,7 @@ const Footer = ({ className, ...props }: ComponentProps<'footer'>) => {
             <FooterSection section={section} />
           </div>
         ))}
-      </div>
-
+      </Container>
       <FooterBottom />
     </footer>
   )

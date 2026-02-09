@@ -7,6 +7,7 @@ import { useLocale, useTranslations } from 'next-intl'
 
 import type { GetProductsInfiniteResult } from '@/features/product/product.types'
 
+import { AppSection } from '@/components/layouts/AppSection'
 import { Container } from '@/components/layouts/Container'
 import { ProductSection } from '@/components/ui/Product/ProductSection'
 import { SectionHeader } from '@/components/ui/SectionHeader'
@@ -35,20 +36,20 @@ const ProductExploreSection = ({ initialData, itemsPerPage }: Props) => {
   }
 
   return (
-    <Container className='flex flex-col gap-5'>
-      <SectionHeader
-        description={translateShared('productDiscovery.description')}
-        title={translateShared('productDiscovery.title')}
-      />
+    <Container>
+      <AppSection>
+        <SectionHeader
+          description={translateShared('productDiscovery.description')}
+          title={translateShared('productDiscovery.title')}
+        />
 
-      <ProductSection
-        isLoading={isProductsLoading}
-        itemPerPage={itemsPerPage}
-        items={products.items}
-      />
+        <ProductSection
+          isLoading={isProductsLoading}
+          itemPerPage={itemsPerPage}
+          items={products.items}
+        />
 
-      <div className='flex justify-center'>
-        <Link href='/products'>
+        <Link className='mx-auto' href='/products'>
           <Button
             className='text-secondary'
             color='primary'
@@ -58,7 +59,7 @@ const ProductExploreSection = ({ initialData, itemsPerPage }: Props) => {
             {translateActions('more')}
           </Button>
         </Link>
-      </div>
+      </AppSection>
     </Container>
   )
 }
