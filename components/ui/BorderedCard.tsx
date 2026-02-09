@@ -14,7 +14,7 @@ const BorderedCard = ({
   return (
     <Card
       fullWidth
-      className={cn('border-default-100 border', className)}
+      className={cn('border-default-100 size-full border', className)}
       radius='sm'
       shadow='none'
       {...props}
