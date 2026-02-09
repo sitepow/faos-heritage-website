@@ -12,11 +12,8 @@ const NavbarTopBar = ({ className, ...props }: ComponentProps<'div'>) => {
   const translateNavigation = useTranslations('navigation.navbar')
 
   return (
-    <div
-      className={cn('bg-primary text-secondary px-5 py-2.5', className)}
-      {...props}
-    >
-      <Container className='flex flex-wrap items-center justify-between'>
+    <div className={cn('bg-primary text-secondary', className)} {...props}>
+      <Container className='flex flex-wrap items-center justify-between px-5 py-2.5'>
         <span>{translateNavigation('slogan')}</span>
 
         <div className='flex flex-wrap'>
