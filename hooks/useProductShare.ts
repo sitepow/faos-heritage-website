@@ -2,12 +2,12 @@
 
 import { useCallback, useMemo, useState } from 'react'
 
-interface UseProductShareParams {
+interface Params {
   url: string
   title?: string
 }
 
-const useProductShare = ({ url, title = '' }: UseProductShareParams) => {
+const useProductShare = ({ url, title = '' }: Params) => {
   const [copied, setCopied] = useState(false)
 
   const encodedUrl = useMemo(() => encodeURIComponent(url), [url])

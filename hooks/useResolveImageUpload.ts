@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react'
 
 import { uploadFiles, deleteFile } from '@/app/actions/file'
 
-interface UseResolveImageUploadParams {
+interface Params {
   oldImage?: string | null
   previewFiles: readonly File[]
 }
@@ -15,7 +15,7 @@ interface UseResolveImageUploadResult {
 const useResolveImageUpload = ({
   oldImage,
   previewFiles,
-}: UseResolveImageUploadParams): UseResolveImageUploadResult => {
+}: Params): UseResolveImageUploadResult => {
   const [isUploading, setIsUploading] = useState(false)
 
   const resolveImagePath = useCallback(async () => {

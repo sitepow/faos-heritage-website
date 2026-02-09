@@ -2,16 +2,14 @@ import { useCallback, useEffect, useState } from 'react'
 
 import type { EmblaCarouselType } from 'embla-carousel'
 
-interface CarouselNavigationParams {
+interface Params {
   prevDisabled: boolean
   nextDisabled: boolean
   scrollPrev: () => void
   scrollNext: () => void
 }
 
-const useCarouselNavigation = (
-  emblaApi?: EmblaCarouselType,
-): CarouselNavigationParams => {
+const useCarouselNavigation = (emblaApi?: EmblaCarouselType): Params => {
   const [prevDisabled, setPrevDisabled] = useState(false)
   const [nextDisabled, setNextDisabled] = useState(false)
 

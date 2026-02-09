@@ -4,15 +4,12 @@ import { useAppStore } from '@/app/store'
 import { getExchangeRates } from '@/utils/exchangeRate'
 import { formatCurrency, formatNumber } from '@/utils/number'
 
-interface UseStatCardValueParams {
+interface Params {
   value: number
   isCurrency?: boolean
 }
 
-const useStatCardValue = ({
-  value,
-  isCurrency,
-}: UseStatCardValueParams): string => {
+const useStatCardValue = ({ value, isCurrency }: Params): string => {
   const { appLocale, hasHydrated } = useAppStore()
 
   const { data: exchangeRates } = useQuery({

@@ -8,7 +8,6 @@ import {
   DropdownItem,
   Button,
 } from '@heroui/react'
-import { Role } from '@prisma/client'
 import {
   HeartIcon,
   LogOutIcon,
@@ -16,13 +15,13 @@ import {
   SettingsIcon,
   UserIcon,
 } from 'lucide-react'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { signOut } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
 import { useMemo } from 'react'
 
 import { CustomIcon } from '@/components/ui/CustomIcon'
-import { PROFILE_TABS } from '@/constants'
+import { useAppNavigation } from '@/hooks/useAppNavigation'
 import { useAuth } from '@/hooks/useAuth'
 
 type UserMenuItem = {
@@ -34,21 +33,11 @@ type UserMenuItem = {
 }
 
 const NavbarUserMenu = () => {
-  const translateUserPanel = useTranslations('navigation.navbar.userPanel')
-
+  const t = useTranslations('navigation.navbar.userPanel')
   const pathname = usePathname()
-  const { user } = useAuth()
-
-  const isAdmin = user?.role === Role.ADMIN
+  const { isAdmin } = useAuth()
   const isDashboard = pathname.startsWith('/dashboard')
-
-  const router = useRouter()
-  const ROUTER_PATHS = {
-    ACCOUNT: () => router.push(`/profile?tab=${PROFILE_TABS.ACCOUNT}`),
-    ORDER: () => router.push(`/profile?tab=${PROFILE_TABS.ORDER}`),
-    FAVORITE: () => router.push(`/profile?tab=${PROFILE_TABS.FAVORITE}`),
-    DASHBOARD: () => router.push('/dashboard'),
-  }
+  const navigation = useAppNavigation()
 
   const menuItems = useMemo<UserMenuItem[]>(() => {
     const items: UserMenuItem[] = [
@@ -56,19 +45,19 @@ const NavbarUserMenu = () => {
         key: 'account',
         label: 'account',
         icon: <CustomIcon icon={UserIcon} />,
-        action: ROUTER_PATHS.ACCOUNT,
+        action: navigation.ACCOUNT,
       },
       {
         key: 'order',
         label: 'orders',
         icon: <CustomIcon icon={PackageIcon} />,
-        action: ROUTER_PATHS.ORDER,
+        action: navigation.ORDER,
       },
       {
         key: 'favorite',
         label: 'favorites',
         icon: <CustomIcon icon={HeartIcon} />,
-        action: ROUTER_PATHS.FAVORITE,
+        action: navigation.FAVORITE,
       },
     ]
 
@@ -77,7 +66,7 @@ const NavbarUserMenu = () => {
         key: 'dashboard',
         label: 'dashboard',
         icon: <CustomIcon icon={SettingsIcon} />,
-        action: ROUTER_PATHS.DASHBOARD,
+        action: navigation.DASHBOARD,
       })
     }
 
@@ -90,12 +79,12 @@ const NavbarUserMenu = () => {
 
     return items
   }, [
-    ROUTER_PATHS.ACCOUNT,
-    ROUTER_PATHS.DASHBOARD,
-    ROUTER_PATHS.FAVORITE,
-    ROUTER_PATHS.ORDER,
     isAdmin,
     isDashboard,
+    navigation.ACCOUNT,
+    navigation.DASHBOARD,
+    navigation.FAVORITE,
+    navigation.ORDER,
   ])
 
   return (
@@ -119,7 +108,7 @@ const NavbarUserMenu = () => {
             className={item.className}
             startContent={item.icon}
           >
-            {translateUserPanel(item.label)}
+            {t(item.label)}
           </DropdownItem>
         ))}
       </DropdownMenu>

@@ -7,6 +7,7 @@ import { InfoItem } from './InfoItem'
 
 import { BorderedCard } from '@/components/ui/BorderedCard'
 import { useUser } from '@/features/user/useUser'
+import { useAppNavigation } from '@/hooks/useAppNavigation'
 import { useAuth } from '@/hooks/useAuth'
 import { useRoleLabel } from '@/hooks/useRoleLabel'
 
@@ -17,6 +18,7 @@ const AccountCard = () => {
   const { userId } = useAuth()
   const { getRoleLabel } = useRoleLabel()
   const { data: user, isLoading, isError } = useUser(userId!)
+  const navigation = useAppNavigation()
 
   if (!userId || isError) {
     return null
@@ -39,10 +41,20 @@ const AccountCard = () => {
             />
 
             <div className='mt-5 flex flex-wrap gap-2'>
-              <Button color='primary' isDisabled={isLoading} variant='bordered'>
+              <Button
+                color='primary'
+                isDisabled={isLoading}
+                variant='bordered'
+                onPress={navigation.PROFILE}
+              >
                 {t('tabs.edit')}
               </Button>
-              <Button color='primary' isDisabled={isLoading} variant='bordered'>
+              <Button
+                color='primary'
+                isDisabled={isLoading}
+                variant='bordered'
+                onPress={navigation.ADDRESS}
+              >
                 {t('sections.address')}
               </Button>
             </div>

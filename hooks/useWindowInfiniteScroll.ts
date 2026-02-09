@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react'
 
-interface UseWindowInfiniteScrollParams {
+interface Params {
   hasNextPage?: boolean
   isFetchingNextPage: boolean
   fetchNextPage: () => void
@@ -12,7 +12,7 @@ const useWindowInfiniteScroll = ({
   isFetchingNextPage,
   fetchNextPage,
   threshold = 300,
-}: UseWindowInfiniteScrollParams) => {
+}: Params) => {
   const canFetchMore = hasNextPage && !isFetchingNextPage
 
   const handleFetchNext = useCallback(() => {
