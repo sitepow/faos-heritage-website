@@ -7,14 +7,14 @@ import { ProductDescription } from './ProductDescription'
 import { ProductReview } from './ProductReview'
 
 const ProductTabs = () => {
-  const translateProductDetail = useTranslations('productDetail')
+  const tProductDetail = useTranslations('productDetail')
 
   return (
     <Tabs className='mx-auto' variant='light'>
-      <Tab title={translateProductDetail('tabs.description')}>
+      <Tab title={tProductDetail('tabs.description')}>
         <ProductDescription />
       </Tab>
-      <Tab title={translateProductDetail('tabs.review')}>
+      <Tab title={tProductDetail('tabs.review')}>
         <ProductReview />
       </Tab>
     </Tabs>

@@ -13,16 +13,16 @@ interface AdvertiseItem {
 }
 
 const AdvertiseBanner = () => {
-  const translate = useTranslations('')
-  const translateAdvertise = translate.raw('advertise') as AdvertiseItem[]
+  const t = useTranslations('')
+  const tAdvertise = t.raw('advertise') as AdvertiseItem[]
 
-  if (!Array.isArray(translateAdvertise) || translateAdvertise.length === 0) {
+  if (!Array.isArray(tAdvertise) || tAdvertise.length === 0) {
     return null
   }
 
   return (
     <AppSection>
-      {translateAdvertise.map((item) => (
+      {tAdvertise.map((item) => (
         <AdvertiseCard key={item?.title} {...item} />
       ))}
     </AppSection>

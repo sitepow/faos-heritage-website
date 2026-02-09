@@ -121,7 +121,7 @@ const Carousel = forwardRef<CarouselHandle, CarouselProps>(
 
         {!prevDisabled && (
           <CarouselNavigateButton
-            className='absolute top-1/2 left-4 -translate-y-1/2'
+            className='-t-y-1/2 absolute top-1/2 left-4'
             direction='prev'
             onClick={scrollPrev}
           />
@@ -129,7 +129,7 @@ const Carousel = forwardRef<CarouselHandle, CarouselProps>(
 
         {!nextDisabled && (
           <CarouselNavigateButton
-            className='absolute top-1/2 right-4 -translate-y-1/2'
+            className='-t-y-1/2 absolute top-1/2 right-4'
             direction='next'
             onClick={scrollNext}
           />

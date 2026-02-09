@@ -39,7 +39,7 @@
 // }
 
 // const OrderStatusModal = ({ mode }: OrderStatusModalProps) => {
-//   const translate = useTranslations(
+//   const t = useTranslations(
 //     mode === 'user' ? 'Account.OrderCancel' : 'Dashboard.Order',
 //   )
 //   const queryClient = useQueryClient()
@@ -138,13 +138,13 @@
 //     >
 //       <ModalContent>
 //         <ModalHeader>
-//           {isUserMode ? translate('title') : 'Update Order Status'}
+//           {isUserMode ? t('title') : 'Update Order Status'}
 //         </ModalHeader>
 
 //         <ModalBody>
 //           {isLoading ? (
 //             <div className='flex justify-center py-8'>
-//               <Spinner label={translate('loading') || 'Processing...'} />
+//               <Spinner label={t('loading') || 'Processing...'} />
 //             </div>
 //           ) : (
 //             <div className='flex flex-col gap-4'>
@@ -188,10 +188,10 @@
 //                       {...field}
 //                       label={
 //                         isUserMode
-//                           ? translate('reasonLabel')
+//                           ? t('reasonLabel')
 //                           : 'Reason for Cancellation'
 //                       }
-//                       placeholder={translate('placeholder')}
+//                       placeholder={t('placeholder')}
 //                       variant='bordered'
 //                     />
 //                   )}
@@ -248,7 +248,7 @@
 
 //         <ModalFooter>
 //           <Button isDisabled={isUpdating} variant='faded' onPress={onClose}>
-//             {translate('back') || 'Cancel'}
+//             {t('back') || 'Cancel'}
 //           </Button>
 //           <Button
 //             className='text-secondary'
@@ -259,8 +259,8 @@
 //             onPress={() => handleSubmit(onSubmit)}
 //           >
 //             {isUpdating
-//               ? translate('submitting') || 'Saving...'
-//               : translate('confirm') || 'Save Changes'}
+//               ? t('submitting') || 'Saving...'
+//               : t('confirm') || 'Save Changes'}
 //           </Button>
 //         </ModalFooter>
 //       </ModalContent>

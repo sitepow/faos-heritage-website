@@ -24,7 +24,7 @@ interface ThemeSwitchProps {
 const THEME_OPTIONS: ThemeValue[] = ['light', 'dark', 'system']
 
 const ThemeSwitch = ({ className }: ThemeSwitchProps) => {
-  const translateTheme = useTranslations('theme')
+  const tTheme = useTranslations('theme')
 
   const { theme, setTheme } = useTheme()
   const isMounted = useIsMounted()
@@ -45,7 +45,7 @@ const ThemeSwitch = ({ className }: ThemeSwitchProps) => {
             variant='light'
           >
             <span className='flex items-center gap-2'>
-              <span className='capitalize'>{translateTheme(currentTheme)}</span>
+              <span className='capitalize'>{tTheme(currentTheme)}</span>
               <ChevronDownIcon size={14} />
             </span>
           </Button>
@@ -66,7 +66,7 @@ const ThemeSwitch = ({ className }: ThemeSwitchProps) => {
           }}
         >
           {THEME_OPTIONS.map((value) => (
-            <DropdownItem key={value}>{translateTheme(value)}</DropdownItem>
+            <DropdownItem key={value}>{tTheme(value)}</DropdownItem>
           ))}
         </DropdownMenu>
       </Dropdown>

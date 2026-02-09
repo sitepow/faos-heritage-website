@@ -27,7 +27,7 @@
 
 // const AddressCard = () => {
 //   const queryClient = useQueryClient()
-//   const translate = useTranslations('Account.Address')
+//   const t = useTranslations('Account.Address')
 //   const { onOpenAddressChange, setState, addressId } = useAddressStore()
 //   const { isOpen: isDeleteOpen, onOpenChange: onOpenDeleteChange } =
 //     useDisclosure()
@@ -73,7 +73,7 @@
 //       >
 //         <CardHeader className='flex-wrap items-center justify-between gap-2'>
 //           <span className='text-lg font-medium'>
-//             {translate('manageTitle')}
+//             {t('manageTitle')}
 //           </span>
 //           <Button
 //             color='primary'
@@ -81,7 +81,7 @@
 //             variant='bordered'
 //             onPress={() => handleOpenForm()}
 //           >
-//             {translate('addButton')}
+//             {t('addButton')}
 //           </Button>
 //         </CardHeader>
 
@@ -96,7 +96,7 @@
 //           ) : isEmpty ? (
 //             <Alert
 //               color='warning'
-//               description={translate('noAddressAlert')}
+//               description={t('noAddressAlert')}
 //               variant='bordered'
 //             />
 //           ) : (
@@ -104,7 +104,7 @@
 //               {!hasDefault && (
 //                 <Alert
 //                   color='warning'
-//                   description={translate('noDefaultAlert')}
+//                   description={t('noDefaultAlert')}
 //                   variant='bordered'
 //                 />
 //               )}

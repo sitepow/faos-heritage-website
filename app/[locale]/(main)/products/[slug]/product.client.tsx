@@ -26,7 +26,7 @@ const ProductClient = ({ initialData, productId }: ProductClientProps) => {
   const { userId } = useAuth()
 
   const locale = useLocale()
-  const translateBreadcrumb = useTranslations('navigation.breadcrumb')
+  const tBreadcrumb = useTranslations('navigation.breadcrumb')
   const { setProduct } = useProductDetailStore()
 
   const { data: product } = useProduct({
@@ -46,8 +46,8 @@ const ProductClient = ({ initialData, productId }: ProductClientProps) => {
   const categoryName = product?.category?.name
 
   const breadcrumbItems = [
-    { label: translateBreadcrumb('home'), href: '/' },
-    { label: translateBreadcrumb('products'), href: '/products' },
+    { label: tBreadcrumb('home'), href: '/' },
+    { label: tBreadcrumb('products'), href: '/products' },
     {
       label: categoryName!,
       href: `/categories/${generateSlugWithId(categoryId!, categoryName!)}`,

@@ -9,12 +9,12 @@ import { ThemeSwitch } from '@/components/ui/ThemeSwitch'
 import { cn } from '@/utils/style'
 
 const NavbarTopBar = ({ className, ...props }: ComponentProps<'div'>) => {
-  const translateNavigation = useTranslations('navigation.navbar')
+  const tNavigation = useTranslations('navigation.navbar')
 
   return (
     <div className={cn('bg-primary text-secondary', className)} {...props}>
       <Container className='flex flex-wrap items-center justify-between px-5 py-2.5'>
-        <span>{translateNavigation('slogan')}</span>
+        <span>{tNavigation('slogan')}</span>
 
         <div className='flex flex-wrap'>
           <NavbarLocaleSwitcher />

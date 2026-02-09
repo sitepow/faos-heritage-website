@@ -10,7 +10,7 @@ import { useSimilarProducts } from '@/features/product/useProduct'
 
 const ProductSimilar = () => {
   const locale = useLocale()
-  const translateRelatedProducts = useTranslations('shared.relatedProducts')
+  const tRelatedProducts = useTranslations('shared.relatedProducts')
 
   const { product } = useProductDetailStore()
 
@@ -30,8 +30,8 @@ const ProductSimilar = () => {
   return (
     <>
       <SectionHeader
-        description={translateRelatedProducts('description')}
-        title={translateRelatedProducts('title')}
+        description={tRelatedProducts('description')}
+        title={tRelatedProducts('title')}
       />
       <ProductSection
         isLoading={isLoadingProducts}

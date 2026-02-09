@@ -32,8 +32,8 @@ const ConfirmDeleteModal = ({
   confirmText,
   cancelText,
 }: ConfirmDeleteModalProps) => {
-  const translateDeleteAlert = useTranslations('global.alert.delete')
-  const translateActions = useTranslations('actions')
+  const tDeleteAlert = useTranslations('global.alert.delete')
+  const tActions = useTranslations('actions')
 
   const handleCancel = () => {
     if (isPending) {
@@ -52,16 +52,16 @@ const ConfirmDeleteModal = ({
     >
       <ModalContent>
         <ModalHeader className='flex flex-col gap-1'>
-          {title ?? translateDeleteAlert('title')}
+          {title ?? tDeleteAlert('title')}
         </ModalHeader>
 
         <ModalBody>
-          <p>{description ?? translateDeleteAlert('description')}</p>
+          <p>{description ?? tDeleteAlert('description')}</p>
         </ModalBody>
 
         <ModalFooter className='gap-2'>
           <Button isDisabled={isPending} variant='faded' onPress={handleCancel}>
-            {cancelText ?? translateActions('cancel')}
+            {cancelText ?? tActions('cancel')}
           </Button>
 
           <Button
@@ -71,7 +71,7 @@ const ConfirmDeleteModal = ({
             isLoading={isPending}
             onPress={onConfirm}
           >
-            {confirmText ?? translateActions('confirm')}
+            {confirmText ?? tActions('confirm')}
           </Button>
         </ModalFooter>
       </ModalContent>

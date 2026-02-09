@@ -26,8 +26,8 @@ const NavbarMobileMenu = () => {
         className={cn(
           'bg-background fixed inset-0 z-60 p-5',
           isMenuOpen
-            ? 'translate-x-0 opacity-100'
-            : 'pointer-events-none translate-x-full opacity-0',
+            ? 't-x-0 opacity-100'
+            : 't-x-full pointer-events-none opacity-0',
         )}
       >
         <div className='flex justify-end'>

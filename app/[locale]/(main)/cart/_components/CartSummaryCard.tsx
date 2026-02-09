@@ -1,9 +1,8 @@
 /* eslint-disable react/no-unstable-nested-components */
 'use client'
 
-import { Card, CardBody, CardFooter, Alert, Button } from '@heroui/react'
+import { Alert, Button, Card, CardBody, CardFooter } from '@heroui/react'
 import { Currency } from '@prisma/client'
-import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 
 import type { ComponentProps } from 'react'
@@ -11,114 +10,117 @@ import type { ComponentProps } from 'react'
 import { CartSummaryRow } from './CartSummaryRow'
 
 import { useAppStore } from '@/app/store'
-import { PROFILE_TABS, CURRENCY } from '@/constants'
+import { CURRENCY } from '@/constants'
 import { useDefaultAddress } from '@/features/address/useAddress'
 import { useCarts } from '@/features/cart/hooks/useCart'
 import { useExchangeRate } from '@/features/exchangeRate/useExchangeRate'
 import { useOrderMutation } from '@/features/order/order.mutation'
 import { useShipping } from '@/features/shipping/useShipping'
+import { useAppNavigation } from '@/hooks/useAppNavigation'
 import { useAuth } from '@/hooks/useAuth'
 import { formatCurrency, formatFullAddress } from '@/utils'
 import { cn } from '@/utils/style'
 
-type CartCheckoutProps = ComponentProps<typeof Card>
+type Props = ComponentProps<typeof Card>
 
-const CartSummaryCard = ({ className, ...props }: CartCheckoutProps) => {
-  const translateCheckout = useTranslations('cart.checkout')
-  const translateAction = useTranslations('cart.checkout.action')
-  const translateSummary = useTranslations('cart.checkout.summary')
-
-  const router = useRouter()
-  const ROUTER_PATHS = {
-    ADDRESS: () => router.push(`/profile?tab=${PROFILE_TABS?.ADDRESS}`),
-    ORDER: () => router.push(`/profile?tab=${PROFILE_TABS?.ORDER}`),
-  }
+const CartSummaryCard = ({ className, ...props }: Props) => {
+  const tCheckout = useTranslations('cart.checkout')
+  const tAction = useTranslations('cart.checkout.action')
+  const tSummary = useTranslations('cart.checkout.summary')
+  const navigation = useAppNavigation()
+  const { appLocale } = useAppStore()
 
   const { userId } = useAuth()
+
   const { data: carts = [], subTotal } = useCarts({ userId })
-  const { currencyOptions } = useExchangeRate()
-
-  const { appLocale } = useAppStore()
-  const { data: exchangeRates } = useExchangeRate()
-  const currency: Currency = (appLocale?.currency as Currency) ?? Currency.THB
-  const exchangeRate = exchangeRates?.[currency] ?? 1
-
   const { data: address, isLoading: isLoadingAddress } = useDefaultAddress(
     userId!,
   )
+  const { data: exchangeRates, currencyOptions } = useExchangeRate()
+
+  const currency: Currency = (appLocale?.currency as Currency) ?? Currency.THB
+  const exchangeRate = exchangeRates?.[currency] ?? 1
   const { shippingCost } = useShipping({ userId, address, carts })
+  const totalAmount = subTotal + shippingCost
+  const hasItems = carts.length > 0
+  const canOrder = address && hasItems && userId
+
   const { createOrder, isCreating } = useOrderMutation()
 
-  const handleOrder = () => {
-    if (!address || carts.length === 0 || !userId) {
+  const handleOrder = async () => {
+    if (!canOrder) {
       return
     }
 
-    createOrder({
-      addressId: address.id,
-      userId: userId!,
-      currency,
-      exchangeRate,
-      exchangeRateSource: CURRENCY.EXCHANGE_API_THB,
-      exchangeLocale: appLocale.locale,
-      items: carts.map(({ productId, variantId, quantity }) => ({
-        productId,
-        variantId,
-        quantity,
-      })),
-    })
+    await createOrder(
+      {
+        addressId: address.id,
+        userId: userId!,
+        currency,
+        exchangeRate,
+        exchangeRateSource: CURRENCY.EXCHANGE_API_THB,
+        exchangeLocale: appLocale.locale,
+        items: carts.map(({ productId, variantId, quantity }) => ({
+          productId,
+          variantId,
+          quantity,
+        })),
+      },
+      {
+        onSuccess: navigation.ORDER,
+      },
+    )
+  }
+
+  const renderAddressSection = () => {
+    if (isLoadingAddress || !address) {
+      return null
+    }
+
+    return (
+      <>
+        <span className='w-fit font-semibold'>{tCheckout('addressTitle')}</span>
+        <Alert
+          className='text-start'
+          description={tCheckout('currencyAlert')}
+          variant='bordered'
+        />
+        <span className='text-default-500'>
+          {formatFullAddress(address)}{' '}
+          <button
+            className='text-primary cursor-pointer underline'
+            onClick={navigation.ADDRESS}
+          >
+            {tAction('editAddress')}
+          </button>
+        </span>
+      </>
+    )
   }
 
   return (
     <Card
       className={cn(
-        className,
         'border-default-100 mx-auto border p-2.5 sm:w-xl sm:p-5',
+        className,
       )}
       radius='sm'
       shadow='none'
       {...props}
     >
       <CardBody className='gap-3'>
-        {!isLoadingAddress && address && (
-          <>
-            <span className='w-fit font-semibold'>
-              {translateCheckout('addressTitle')}
-            </span>
+        {renderAddressSection()}
 
-            <Alert
-              className='text-start'
-              description={translateCheckout('currencyAlert')}
-              variant='bordered'
-            />
+        <span className='w-fit font-semibold'>{tCheckout('summaryTitle')}</span>
 
-            <span className='text-default-500'>
-              {formatFullAddress(address)}{' '}
-              <button
-                className='text-primary cursor-pointer underline'
-                onClick={ROUTER_PATHS.ADDRESS}
-              >
-                {translateAction('editAddress')}
-              </button>
-            </span>
-          </>
-        )}
-
-        <span className='w-fit font-semibold'>
-          {translateCheckout('summaryTitle')}
-        </span>
-
-        <CartSummaryRow label={translateSummary('total')} value={subTotal} />
-        <CartSummaryRow
-          label={translateSummary('shipping')}
-          value={shippingCost}
-        />
-        <CartSummaryRow label={translateSummary('discount')} value={0} />
+        <CartSummaryRow label={tSummary('total')} value={subTotal} />
+        <CartSummaryRow label={tSummary('shipping')} value={shippingCost} />
+        <CartSummaryRow label={tSummary('discount')} value={0} />
 
         <div className='flex items-center justify-between pt-1'>
-          <span className='font-semibold'>{translateSummary('net')} :</span>
+          <span className='font-semibold'>{tSummary('net')} :</span>
           <span className='text-primary text-2xl font-semibold'>
-            {formatCurrency(subTotal + shippingCost, currencyOptions)}
+            {formatCurrency(totalAmount, currencyOptions)}
           </span>
         </div>
       </CardBody>
@@ -130,11 +132,11 @@ const CartSummaryCard = ({ className, ...props }: CartCheckoutProps) => {
             color='warning'
             description={
               <span>
-                {translateCheckout.rich('emptyAddressAlert', {
+                {tCheckout.rich('emptyAddressAlert', {
                   button: (chunks) => (
                     <button
                       className='cursor-pointer underline'
-                      onClick={ROUTER_PATHS.ADDRESS}
+                      onClick={navigation.ADDRESS}
                     >
                       {chunks}
                     </button>
@@ -150,13 +152,13 @@ const CartSummaryCard = ({ className, ...props }: CartCheckoutProps) => {
           <Button
             className='text-secondary'
             color='primary'
-            isDisabled={carts?.length === 0}
+            isDisabled={!hasItems}
             isLoading={isCreating}
             radius='none'
             size='lg'
             onPress={handleOrder}
           >
-            {translateAction('order')}
+            {tAction('order')}
           </Button>
         )}
       </CardFooter>

@@ -22,8 +22,8 @@ interface Props {
 const ProductExploreSection = ({ initialData, itemsPerPage }: Props) => {
   const locale = useLocale()
 
-  const translateShared = useTranslations('shared')
-  const translateActions = useTranslations('actions')
+  const tShared = useTranslations('shared')
+  const tActions = useTranslations('actions')
 
   const { data: products, isLoading: isProductsLoading } = useProducts({
     locale,
@@ -39,8 +39,8 @@ const ProductExploreSection = ({ initialData, itemsPerPage }: Props) => {
     <Container>
       <AppSection>
         <SectionHeader
-          description={translateShared('productDiscovery.description')}
-          title={translateShared('productDiscovery.title')}
+          description={tShared('productDiscovery.description')}
+          title={tShared('productDiscovery.title')}
         />
 
         <ProductSection
@@ -56,7 +56,7 @@ const ProductExploreSection = ({ initialData, itemsPerPage }: Props) => {
             endContent={<ArrowRightIcon />}
             radius='sm'
           >
-            {translateActions('more')}
+            {tActions('more')}
           </Button>
         </Link>
       </AppSection>

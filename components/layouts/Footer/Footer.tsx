@@ -11,8 +11,8 @@ import { FooterSection } from './_components/FooterSection'
 import { cn } from '@/utils/style'
 
 const Footer = ({ className, ...props }: ComponentProps<'footer'>) => {
-  const translateFooter = useTranslations('footer')
-  const menu = translateFooter.raw('menu') as FooterMenuSection[]
+  const tFooter = useTranslations('footer')
+  const menu = tFooter.raw('menu') as FooterMenuSection[]
 
   return (
     <footer

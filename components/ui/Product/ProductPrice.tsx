@@ -22,7 +22,7 @@ const ProductPrice = ({
   className,
   ...props
 }: Props) => {
-  const translateProductUnit = useTranslations('global.productUnit')
+  const tProductUnit = useTranslations('global.productUnit')
 
   const { displayPrice } = useProductPrice({
     price,
@@ -38,7 +38,7 @@ const ProductPrice = ({
       <dl className='flex items-baseline gap-1 text-xl'>
         <dd>{displayPrice}</dd>
 
-        <dt>/ {translateProductUnit(unit.toUpperCase())}</dt>
+        <dt>/ {tProductUnit(unit.toUpperCase())}</dt>
       </dl>
     </div>
   )

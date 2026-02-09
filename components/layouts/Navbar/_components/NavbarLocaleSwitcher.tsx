@@ -20,7 +20,7 @@ import { getSingleKey } from '@/utils'
 type CountryCode = (typeof CURRENCY_LOCALE_MAP)[number]['country']
 
 const NavbarLocaleSwitcher = () => {
-  const translateCountry = useTranslations('global.country')
+  const tCountry = useTranslations('global.country')
 
   const routeLocale = useLocale()
   const router = useRouter()
@@ -36,9 +36,9 @@ const NavbarLocaleSwitcher = () => {
     [routeLocale],
   )
 
-  const handleRouteLocaleChange = (nextranslateCountryCode: CountryCode) => {
+  const handleRouteLocaleChange = (nextCountryCode: CountryCode) => {
     router.push(pathname, {
-      locale: nextranslateCountryCode.toLowerCase(),
+      locale: nextCountryCode.toLowerCase(),
     })
   }
 
@@ -53,7 +53,7 @@ const NavbarLocaleSwitcher = () => {
 
     setAppLocale({
       ...selected,
-      name: translateCountry(selected.country),
+      name: tCountry(selected.country),
     })
   }
 
@@ -69,8 +69,8 @@ const NavbarLocaleSwitcher = () => {
             <div className='flex items-center gap-2'>
               <span>
                 {selectedByRoute
-                  ? translateCountry(selectedByRoute.country)
-                  : translateCountry('country')}
+                  ? tCountry(selectedByRoute.country)
+                  : tCountry('country')}
               </span>
               <ChevronDownIcon />
             </div>
@@ -95,7 +95,7 @@ const NavbarLocaleSwitcher = () => {
             <DropdownItem key={item.country}>
               <div className='flex items-center gap-2'>
                 <CountryFlagAvatar countryCode={item.country} />
-                {translateCountry(item.country)}
+                {tCountry(item.country)}
               </div>
             </DropdownItem>
           ))}
@@ -107,7 +107,7 @@ const NavbarLocaleSwitcher = () => {
           <Button className='text-secondary p-0' variant='light'>
             <div className='flex items-center gap-1'>
               <span className='uppercase'>
-                {appLocale.currency || translateCountry('currency')}
+                {appLocale.currency || tCountry('currency')}
               </span>
               <ChevronDownIcon />
             </div>
@@ -125,7 +125,7 @@ const NavbarLocaleSwitcher = () => {
         >
           {CURRENCY_LOCALE_MAP.map((item) => (
             <DropdownItem key={item.locale}>
-              {item.currency} - {translateCountry(item.country)}
+              {item.currency} - {tCountry(item.country)}
             </DropdownItem>
           ))}
         </DropdownMenu>

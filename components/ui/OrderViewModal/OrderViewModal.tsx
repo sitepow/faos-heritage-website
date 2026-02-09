@@ -29,7 +29,7 @@
 // import { formatCurrency, formatNumber } from '@/utils/number'
 
 // const OrderViewModal = () => {
-//   const translate = useTranslations('Account.OrderView')
+//   const t = useTranslations('Account.OrderView')
 //   const queryClient = useQueryClient()
 //   const { isViewOpen, onOpenViewChange, orderId, setState } = useOrderStore()
 
@@ -93,7 +93,7 @@
 //             <>
 //               <ModalHeader className='flex flex-col items-start gap-1'>
 //                 <h2 className='text-lg font-bold text-zinc-900 dark:text-zinc-100'>
-//                   {translate('title')}
+//                   {t('title')}
 //                 </h2>
 //                 <p className='text-[10px] font-medium tracking-widest text-zinc-400 uppercase'>
 //                   ID: {order.id.slice(-12)}
@@ -104,11 +104,11 @@
 //                 <OrderStepper {...order} />
 
 //                 <div className='border-default-100 grid grid-cols-1 gap-x-12 gap-y-6 border-t pt-5 md:grid-cols-2'>
-//                   <InfoBlock label={translate('shippingAddress')}>
+//                   <InfoBlock label={t('shippingAddress')}>
 //                     {order.shippingAddressText}
 //                   </InfoBlock>
 
-//                   <InfoBlock label={translate('logistics')}>
+//                   <InfoBlock label={t('logistics')}>
 //                     {order.trackingNumber ? (
 //                       <Link
 //                         className='border-b text-sm font-bold'
@@ -119,14 +119,14 @@
 //                       </Link>
 //                     ) : (
 //                       <span className='text-zinc-300 italic'>
-//                         {translate('preparing')}
+//                         {t('preparing')}
 //                       </span>
 //                     )}
 //                   </InfoBlock>
 //                 </div>
 
 //                 <section className='space-y-4'>
-//                   <Label>{translate('productList')}</Label>
+//                   <Label>{t('productList')}</Label>
 
 //                   {order.items.map((item) => (
 //                     <div key={item.id} className='flex items-center gap-4'>
@@ -162,7 +162,7 @@
 
 //                 <section className='border-default-100 mt-6 space-y-2 border-t pt-6'>
 //                   <SummaryRow
-//                     label={translate('subtotal')}
+//                     label={t('subtotal')}
 //                     value={formatCurrency(
 //                       order.total - (order.shippingCost ?? 0),
 //                       currencyOptions,
@@ -170,7 +170,7 @@
 //                   />
 
 //                   <SummaryRow
-//                     label={translate('shippingFee')}
+//                     label={t('shippingFee')}
 //                     value={
 //                       order.shippingCost === 0
 //                         ? 'Complimentary'
@@ -183,7 +183,7 @@
 
 //                   <div className='flex justify-between pt-4'>
 //                     <span className='text-xs font-bold tracking-widest uppercase'>
-//                       {translate('totalAmount')}
+//                       {t('totalAmount')}
 //                     </span>
 //                     <span className='text-3xl font-bold'>
 //                       {formatCurrency(order.total, currencyOptions)}
@@ -198,7 +198,7 @@
 //                   variant='bordered'
 //                   onClick={handleClose}
 //                 >
-//                   {translate('close')}
+//                   {t('close')}
 //                 </Button>
 //               </ModalFooter>
 //             </>

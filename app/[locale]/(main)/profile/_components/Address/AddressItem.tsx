@@ -25,7 +25,7 @@
 // }
 
 // const AddressItem = ({ address, onEdit, onDelete }: AddressItemProps) => {
-//   const translate = useTranslations('Account.Address')
+//   const t = useTranslations('Account.Address')
 
 //   return (
 //     <div className='group flex w-full flex-col'>
@@ -37,7 +37,7 @@
 //           </span>
 //           {address?.isDefault && (
 //             <Chip color='primary' radius='sm' size='sm' variant='flat'>
-//               {translate('defaultTag')}
+//               {t('defaultTag')}
 //             </Chip>
 //           )}
 //         </div>
@@ -54,7 +54,7 @@
 //               startContent={<EditIcon className='size-4' />}
 //               onPress={onEdit}
 //             >
-//               {translate('editAddress')}
+//               {t('editAddress')}
 //             </DropdownItem>
 //             <DropdownItem
 //               key='delete'
@@ -63,7 +63,7 @@
 //               startContent={<TrashIcon className='size-4' />}
 //               onPress={onDelete}
 //             >
-//               {translate('removeAddress')}
+//               {t('removeAddress')}
 //             </DropdownItem>
 //           </DropdownMenu>
 //         </Dropdown>

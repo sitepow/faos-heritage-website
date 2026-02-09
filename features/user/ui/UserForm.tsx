@@ -41,8 +41,8 @@
 // }
 
 // export const UserForm = () => {
-//   const translate = useTranslations('Dashboard.UserForm')
-//   const translateCommon = useTranslations('Common')
+//   const t = useTranslations('Dashboard.UserForm')
+//   const tCommon = useTranslations('Common')
 //   const queryClient = useQueryClient()
 //   const { isUserOpen, onOpenUserChange, userId, setState } = useAuthStore()
 
@@ -122,14 +122,14 @@
 
 //   const isPending =
 //     isPendingCreateUser || isLoadingUser || isPendingUpdateUser || isUploading
-//   const headerLable = userId ? translate('editTitle') : translate('addTitle')
+//   const headerLable = userId ? t('editTitle') : t('addTitle')
 
 //   const onFilesChange = (files: ImageWithPreview[]) => {
 //     setPreviewFiles(files)
 
 //     setValue(
 //       'image',
-//       files.length ? translate('imageChangedStatus') : (oldImage ?? ''),
+//       files.length ? t('imageChangedStatus') : (oldImage ?? ''),
 //       {
 //         shouldDirty: true,
 //         shouldTouch: true,
@@ -176,19 +176,19 @@
 //       <ModalContent>
 //         <ModalHeader className='flex flex-col gap-1'>{headerLable}</ModalHeader>
 
-//         {isPending && <Spinner label={translateCommon('loading')} />}
+//         {isPending && <Spinner label={tCommon('loading')} />}
 
 //         {!isPending && (
 //           <ModalBody>
 //             <ImageDropzone onFilesChange={onFilesChange} />
 
-//             <SectionLabel>{translate('licenseHeading')}</SectionLabel>
+//             <SectionLabel>{t('licenseHeading')}</SectionLabel>
 //             <Controller
 //               control={control}
 //               name='isActive'
 //               render={({ field: { value, onChange, ...field } }) => (
 //                 <Switch {...field} isSelected={value} onValueChange={onChange}>
-//                   {translate('activeLabel')}
+//                   {t('activeLabel')}
 //                 </Switch>
 //               )}
 //             />
@@ -200,7 +200,7 @@
 //                   {...field}
 //                   errorMessage={errors.role?.message}
 //                   isInvalid={!!errors.role}
-//                   label={translate('roleLabel')}
+//                   label={t('roleLabel')}
 //                   selectedKeys={value ? [value] : []}
 //                   variant='bordered'
 //                   onSelectionChange={(keys) => {
@@ -212,15 +212,15 @@
 //                   {Object.values(Role).map((role) => (
 //                     <SelectItem key={role}>
 //                       {role === 'ADMIN'
-//                         ? translate('roleAdmin')
-//                         : translate('roleUser')}
+//                         ? t('roleAdmin')
+//                         : t('roleUser')}
 //                     </SelectItem>
 //                   ))}
 //                 </Select>
 //               )}
 //             />
 
-//             <SectionLabel>{translate('infoHeading')}</SectionLabel>
+//             <SectionLabel>{t('infoHeading')}</SectionLabel>
 //             <Controller
 //               control={control}
 //               name='image'
@@ -230,7 +230,7 @@
 //                   isDisabled
 //                   errorMessage={errors.image?.message}
 //                   isInvalid={!!errors.image}
-//                   label={translate('urlLabel')}
+//                   label={t('urlLabel')}
 //                   value={value ?? ''}
 //                   variant='bordered'
 //                 />
@@ -244,7 +244,7 @@
 //                   {...field}
 //                   errorMessage={errors.name?.message}
 //                   isInvalid={!!errors.name}
-//                   label={translate('nameLabel')}
+//                   label={t('nameLabel')}
 //                   value={value ?? ''}
 //                   variant='bordered'
 //                 />
@@ -258,7 +258,7 @@
 //                   {...field}
 //                   errorMessage={errors.email?.message}
 //                   isInvalid={!!errors.email}
-//                   label={translate('emailLabel')}
+//                   label={t('emailLabel')}
 //                   value={value ?? ''}
 //                   variant='bordered'
 //                 />
@@ -274,8 +274,8 @@
 //                   isInvalid={!!errors.password}
 //                   label={
 //                     userId
-//                       ? translate('passwordChangeLabel')
-//                       : translate('passwordLabel')
+//                       ? t('passwordChangeLabel')
+//                       : t('passwordLabel')
 //                   }
 //                   type='password'
 //                   value={value ?? ''}
@@ -287,7 +287,7 @@
 //         )}
 //         <ModalFooter>
 //           <Button isDisabled={isPending} variant='faded' onPress={onClose}>
-//             {translateCommon('cancel')}
+//             {tCommon('cancel')}
 //           </Button>
 //           <Button
 //             className='text-secondary'
@@ -295,7 +295,7 @@
 //             isDisabled={isPending || !isDirty}
 //             onClick={handleSubmit(onSubmit)}
 //           >
-//             {isPending ? translateCommon('saving') : translateCommon('save')}
+//             {isPending ? tCommon('saving') : tCommon('save')}
 //           </Button>
 //         </ModalFooter>
 //       </ModalContent>

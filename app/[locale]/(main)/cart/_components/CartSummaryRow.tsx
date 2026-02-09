@@ -1,12 +1,12 @@
 import { useExchangeRate } from '@/features/exchangeRate/useExchangeRate'
 import { formatCurrency } from '@/utils'
 
-type CartSummaryRowProps = {
+type Props = {
   label: string
   value: number
 }
 
-const CartSummaryRow = ({ label, value }: CartSummaryRowProps) => {
+const CartSummaryRow = ({ label, value }: Props) => {
   const {
     currencyOptions: { currency, locale, rates },
   } = useExchangeRate()

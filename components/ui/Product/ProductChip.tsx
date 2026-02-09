@@ -23,23 +23,23 @@ const ProductChip = ({
   categoryName,
   className,
 }: ProductChipProps) => {
-  const translateChip = useTranslations('productDetail.chips')
+  const tChip = useTranslations('productDetail.chips')
 
   const chips: ChipItem[] = [
     {
       key: 'authentic',
-      label: translateChip('authentic'),
+      label: tChip('authentic'),
       visible: isAuthentic,
     },
     {
       key: 'premium',
-      label: translateChip('premium'),
+      label: tChip('premium'),
       visible: isPremiumProduct,
       className: 'bg-primary/10 text-primary',
     },
     {
       key: 'category',
-      label: categoryName ?? translateChip('uncategorized'),
+      label: categoryName ?? tChip('uncategorized'),
       visible: true,
     },
   ]
