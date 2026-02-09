@@ -1,6 +1,6 @@
 import { useSession } from 'next-auth/react'
 
-const useUser = () => {
+const useAuth = () => {
   const { data: session, status } = useSession()
 
   const userId = session?.user?.id
@@ -17,4 +17,4 @@ const useUser = () => {
   }
 }
 
-export { useUser }
+export { useAuth }

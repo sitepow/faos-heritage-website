@@ -4,6 +4,8 @@ import { Tab, Tabs } from '@heroui/react'
 import { useTranslations } from 'next-intl'
 import React, { useMemo } from 'react'
 
+import { AccountCard } from './AccountCard'
+
 import { BREAKPOINTS, PROFILE_TABS } from '@/constants'
 import { useIsBelowBreakpoint } from '@/hooks/useIsBelowBreakpoint'
 import { useIsMounted } from '@/hooks/useIsMounted'
@@ -63,7 +65,7 @@ const ProfileTabs = () => {
 const renderTabContent = (tab: PROFILE_TABS) => {
   switch (tab) {
     case PROFILE_TABS.ACCOUNT:
-      return <div />
+      return <AccountCard />
     case PROFILE_TABS.ORDER:
       return <div />
     case PROFILE_TABS.FAVORITE:

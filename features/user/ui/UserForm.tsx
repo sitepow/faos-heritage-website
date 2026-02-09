@@ -25,7 +25,7 @@
 
 // import { getUser, createUser, updateUser } from '../user.action'
 // import { userUpdateSchema, userCreateSchema } from '../user.schema'
-// import { useUserStore } from '../user.store'
+// import { useAuthStore } from '../user.store'
 
 // import { ImageDropzone } from '@/components/ui/ImageDropzone'
 // import { SectionLabel } from '@/components/ui/SectionHeader'
@@ -44,7 +44,7 @@
 //   const translate = useTranslations('Dashboard.UserForm')
 //   const translateCommon = useTranslations('Common')
 //   const queryClient = useQueryClient()
-//   const { isUserOpen, onOpenUserChange, userId, setState } = useUserStore()
+//   const { isUserOpen, onOpenUserChange, userId, setState } = useAuthStore()
 
 //   const [previewFiles, setPreviewFiles] = useState<ImageWithPreview[]>([])
 //   const [oldImage, setOldImage] = useState<string | null>(null)

@@ -8,7 +8,7 @@ interface UserStore {
   setState: (state: Partial<UserStore>) => void
 }
 
-export const useUserStore = create<UserStore>()((set) => ({
+export const useAuthStore = create<UserStore>()((set) => ({
   userId: null,
   isUserOpen: false,
   onOpenUserChange: (open) =>

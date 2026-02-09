@@ -32,7 +32,7 @@
 
 // import { deleteUser, getUsers, getUserStat } from './action'
 // import { UserForm } from './form'
-// import { useUserStore } from './store'
+// import { useAuthStore } from './store'
 
 // import { ConfirmModal } from '@/components/ui/ConfirmModal'
 // import { StatCard, StatCardSkeleton } from '@/components/ui/StatCard'
@@ -44,7 +44,7 @@
 //   const tc = useTranslations('Common')
 
 //   const queryClient = useQueryClient()
-//   const { userId, setState, onOpenUserChange } = useUserStore()
+//   const { userId, setState, onOpenUserChange } = useAuthStore()
 
 //   const { isOpen: isDeleteOpen, onOpenChange: onOpenDeleteChange } =
 //     useDisclosure()

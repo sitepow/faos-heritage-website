@@ -10,12 +10,12 @@ import { AppSection } from '@/components/layouts/AppSection'
 import { Container } from '@/components/layouts/Container'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { useCarts } from '@/features/cart/hooks/useCart'
-import { useUser } from '@/hooks/useUser'
+import { useAuth } from '@/hooks/useAuth'
 
 const CartPage = () => {
   const t = useTranslations('cart')
 
-  const { userId } = useUser()
+  const { userId } = useAuth()
   const { data: carts, isLoading: isLoadingCarts } = useCarts({ userId })
 
   const isHasCarts = !isLoadingCarts && carts && carts?.length > 0

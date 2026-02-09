@@ -23,7 +23,7 @@ import { useMemo } from 'react'
 
 import { CustomIcon } from '@/components/ui/CustomIcon'
 import { PROFILE_TABS } from '@/constants'
-import { useUser } from '@/hooks/useUser'
+import { useAuth } from '@/hooks/useAuth'
 
 type UserMenuItem = {
   key: string
@@ -37,7 +37,7 @@ const NavbarUserMenu = () => {
   const translateUserPanel = useTranslations('navigation.navbar.userPanel')
 
   const pathname = usePathname()
-  const { user } = useUser()
+  const { user } = useAuth()
 
   const isAdmin = user?.role === Role.ADMIN
   const isDashboard = pathname.startsWith('/dashboard')

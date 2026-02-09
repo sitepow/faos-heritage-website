@@ -9,11 +9,11 @@ import { NavbarMobileMenu } from './NavbarMobileMenu'
 import { NavbarUserMenu } from './NavbarUserMenu'
 
 import { CustomIcon } from '@/components/ui/CustomIcon'
-import { useUser } from '@/hooks/useUser'
+import { useAuth } from '@/hooks/useAuth'
 
 const NavbarActions = () => {
   const router = useRouter()
-  const { isAuthenticated } = useUser()
+  const { isAuthenticated } = useAuth()
 
   return (
     <div className='flex flex-1 items-center justify-end gap-5'>
@@ -28,7 +28,7 @@ const NavbarActions = () => {
           <Button
             isIconOnly
             variant='light'
-            onClick={() => router.push('/login')}
+            onPress={() => router.push('/login')}
           >
             <CustomIcon icon={LogInIcon} />
           </Button>

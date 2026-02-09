@@ -17,7 +17,7 @@ import { useCarts } from '@/features/cart/hooks/useCart'
 import { useExchangeRate } from '@/features/exchangeRate/useExchangeRate'
 import { useOrderMutation } from '@/features/order/order.mutation'
 import { useShipping } from '@/features/shipping/useShipping'
-import { useUser } from '@/hooks/useUser'
+import { useAuth } from '@/hooks/useAuth'
 import { formatCurrency, formatFullAddress } from '@/utils'
 import { cn } from '@/utils/style'
 
@@ -34,7 +34,7 @@ const CartSummaryCard = ({ className, ...props }: CartCheckoutProps) => {
     ORDER: () => router.push(`/profile?tab=${PROFILE_TABS?.ORDER}`),
   }
 
-  const { userId } = useUser()
+  const { userId } = useAuth()
   const { data: carts = [], subTotal } = useCarts({ userId })
   const { currencyOptions } = useExchangeRate()
 

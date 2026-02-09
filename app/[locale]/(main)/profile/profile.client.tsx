@@ -7,11 +7,11 @@ import { ProfileTabs } from './_components/ProfileTabs'
 
 import { AppSection } from '@/components/layouts/AppSection'
 import { Container } from '@/components/layouts/Container'
-import { useUser } from '@/hooks/useUser'
+import { useAuth } from '@/hooks/useAuth'
 
 const ProfileClient = () => {
   const t = useTranslations('profile')
-  const { user } = useUser()
+  const { user } = useAuth()
 
   return (
     <Container>

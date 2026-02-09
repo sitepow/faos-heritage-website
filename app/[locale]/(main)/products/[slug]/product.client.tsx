@@ -13,7 +13,7 @@ import { AppSection } from '@/components/layouts/AppSection'
 import { DynamicBreadcrumb } from '@/components/ui/DynamicBreadcrumb'
 import { useProductDetailStore } from '@/features/product/product.store'
 import { useProduct } from '@/features/product/useProduct'
-import { useUser } from '@/hooks/useUser'
+import { useAuth } from '@/hooks/useAuth'
 import { generateSlugWithId } from '@/utils'
 
 interface ProductClientProps {
@@ -23,7 +23,7 @@ interface ProductClientProps {
 }
 
 const ProductClient = ({ initialData, productId }: ProductClientProps) => {
-  const { userId } = useUser()
+  const { userId } = useAuth()
 
   const locale = useLocale()
   const translateBreadcrumb = useTranslations('navigation.breadcrumb')
