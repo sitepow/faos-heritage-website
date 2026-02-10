@@ -44,7 +44,8 @@
     "country": "Paese",
     "orderId": "ID Ordine",
     "cartId": "ID Carrello",
-    "trackingNo": "Numero di Tracciamento"
+    "trackingNo": "Numero di Tracciamento",
+    "role": "Ruolo"
   },
   "global": {
     "country": {

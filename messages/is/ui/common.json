@@ -44,7 +44,8 @@
     "country": "Land",
     "orderId": "Pöntunarnúmer",
     "cartId": "Körfunúmer",
-    "trackingNo": "Sendingarnúmer"
+    "trackingNo": "Sendingarnúmer",
+    "role": "Hlutverk"
   },
   "global": {
     "country": {

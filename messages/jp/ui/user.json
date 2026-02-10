@@ -10,6 +10,10 @@
       "orders": "注文履歴",
       "favs": "お気に入り",
       "edit": "プロフィールの編集"
+    },
+    "roles": {
+      "admin": "管理者",
+      "customer": "顧客"
     }
   },
   "orders": {
@@ -24,6 +28,12 @@
       "title": "注文のキャンセル",
       "reason": "理由",
       "placeholder": "キャンセル・返金の理由を入力してください"
+    },
+    "actions": {
+      "view": "詳細を見る",
+      "cancel": "注文をキャンセル",
+      "payNow": "今すぐ支払う",
+      "downloadReceipt": "領収書をダウンロード"
     }
   },
   "address": {

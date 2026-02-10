@@ -1,165 +1,169 @@
-// 'use client'
+'use client'
 
-// import { AvatarGroup, Avatar, Button, Alert } from '@heroui/react'
-// import { OrderStatus } from '@prisma/client'
-// import { useMutation } from '@tanstack/react-query'
-// import { ArrowRight, ArrowUpRightIcon, DownloadIcon, XIcon } from 'lucide-react'
-// import Link from 'next/link'
-// import { useRouter } from 'next/navigation'
-// import { useTranslations } from 'next-intl'
+import { Button, Alert } from '@heroui/react'
+import { OrderStatus } from '@prisma/client'
+import { useMutation } from '@tanstack/react-query'
+import { ArrowRight, ArrowUpRightIcon, DownloadIcon, XIcon } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
+import { useMemo } from 'react'
 
-// import { createStripeCheckout } from '@/app/actions/stripe'
-// import { OrderStepper } from '@/components/ui/OrderStepper/OrderStepper'
-// import { IMAGE_FALLBACK } from '@/constants'
-// import { useOrderStore } from '@/features/order/order.store'
-// import { formatDate } from '@/utils/date'
-// import { formatCurrency, formatNumber } from '@/utils/number'
+import type { Order } from '@/features/order/useOrder'
 
-// interface OrderItemProps {
-//   order: GetOrderResult
-//   hideButton?: boolean
-// }
+import { createStripeCheckout } from '@/app/actions/stripe'
+import { AvatarGroupWrapper } from '@/components/ui/AvatarGroupWrapper'
+import { OrderStepper } from '@/components/ui/OrderStepper/OrderStepper'
+import { IMAGE_FALLBACK } from '@/constants'
+import { useExchangeRate } from '@/features/exchangeRate/useExchangeRate'
+import { formatDate } from '@/utils/date'
+import { formatCurrency, formatNumber } from '@/utils/number'
 
-// const DISABLE_RECEIPT_STATUSES: OrderStatus[] = [
-//   OrderStatus.CANCELLED,
-//   OrderStatus.PAID,
-//   OrderStatus.PROCESSING,
-//   OrderStatus.REFUNDED,
-// ]
+interface Props {
+  order: Order
+  hideButton?: boolean
+}
 
-// export const OrderItem = ({ order, hideButton }: OrderItemProps) => {
-//   const t = useTranslations('Account.Orders')
-//   const st = useTranslations('OrderStatus')
+const DISABLE_RECEIPT_STATUSES: OrderStatus[] = [
+  OrderStatus.CANCELLED,
+  OrderStatus.PAID,
+  OrderStatus.PROCESSING,
+  OrderStatus.REFUNDED,
+]
 
-//   const CURRENCY_OPTIONS = {
-//     currency: order?.currency,
-//     locale: order?.exchangeLocale!,
-//   }
+const OrderItem = ({ order, hideButton }: Props) => {
+  const t = useTranslations('orders')
+  const tField = useTranslations('fields')
+  const tProductUnit = useTranslations('global.productUnit')
+  const tOrderStatus = useTranslations('global.orderStatus')
 
-//   const router = useRouter()
-//   const { onOpenViewChange, onOpenOrderCancelChange, setState } =
-//     useOrderStore()
+  const router = useRouter()
 
-//   const { mutate: mutateCheckout, isPending: isPendingCheckout } = useMutation({
-//     mutationFn: () => createStripeCheckout({ orderId: order?.id! }),
-//     onSuccess: (result) => {
-//       if (result.success) {
-//         router.push(result.data.checkoutUrl)
-//       }
-//     },
-//   })
+  const isPending = order?.status === OrderStatus.PENDING
+  const isDisableReceipt = DISABLE_RECEIPT_STATUSES.includes(order.status)
 
-//   const productImages = order.items?.map(
-//     (item) => item.product?.images?.[0]?.url ?? IMAGE_FALLBACK.EMPTY,
-//   )
+  const productImages = useMemo(
+    () =>
+      order.items?.map(
+        (item) => item.product?.images?.[0]?.url ?? IMAGE_FALLBACK.EMPTY,
+      ),
+    [order.items],
+  )
 
-//   const isDisableReceipt = DISABLE_RECEIPT_STATUSES.includes(order.status)
+  const { currencyOptions } = useExchangeRate()
 
-//   return (
-//     <div className='flex flex-col gap-4'>
-//       {order?.status === OrderStatus.PENDING && (
-//         <Alert
-//           color='warning'
-//           description={t('paymentAlert')}
-//           variant='faded'
-//         />
-//       )}
+  const { mutate: mutateCheckout, isPending: isPendingCheckout } = useMutation({
+    mutationFn: () => createStripeCheckout({ orderId: order?.id! }),
+    onSuccess: (result) => {
+      if (result.success) {
+        router.push(result.data.checkoutUrl)
+      }
+    },
+  })
 
-//       <div className='border-default-100 flex flex-wrap items-center justify-between gap-3 border-b p-2.5'>
-//         <div className='flex flex-wrap gap-3 sm:col-span-2'>
-//           <AvatarGroup isBordered max={4}>
-//             {productImages.map((src) => (
-//               <Avatar key={src} size='sm' src={src} />
-//             ))}
-//           </AvatarGroup>
+  const renderActions = () => {
+    if (hideButton) {
+      return null
+    }
 
-//           <div className='flex flex-col'>
-//             <span>
-//               {t('orderNumber')} {order?.id} (
-//               {formatNumber(order?.items?.length)} {t('items')}){' '}
-//               {formatCurrency(order?.total, CURRENCY_OPTIONS)}
-//             </span>
+    return (
+      <div className='flex flex-wrap items-center gap-2 sm:justify-end'>
+        <Button
+          color='primary'
+          size='sm'
+          startContent={<ArrowUpRightIcon />}
+          variant='bordered'
+        >
+          {t('actions.view')}
+        </Button>
+        {isPending && (
+          <>
+            <Button
+              color='danger'
+              size='sm'
+              startContent={<XIcon />}
+              variant='bordered'
+            >
+              {t('actions.cancel')}
+            </Button>
+            <Button
+              className='text-secondary'
+              color='primary'
+              endContent={!isPendingCheckout && <ArrowRight />}
+              isLoading={isPendingCheckout}
+              size='sm'
+              onPress={() => mutateCheckout()}
+            >
+              {t('actions.payNow')}
+            </Button>
+          </>
+        )}
 
-//             <span className='text-default-500'>
-//               {t('orderDate')} {formatDate(order.createdAt)} ({st(order.status)}
-//               ){' '}
-//               {order.trackingNumber && (
-//                 <Link
-//                   className='underline'
-//                   href={order.trackingWebsite ?? ''}
-//                   target='_blank'
-//                 >
-//                   {t('trackingNumber')} <span>{order.trackingNumber}</span>
-//                 </Link>
-//               )}
-//             </span>
-//           </div>
-//         </div>
+        {!isPending && (
+          <Button
+            color='default'
+            isDisabled={!isDisableReceipt}
+            size='sm'
+            startContent={<DownloadIcon />}
+            variant='bordered'
+          >
+            {t('actions.downloadReceipt')}
+          </Button>
+        )}
+      </div>
+    )
+  }
 
-//         {!hideButton && (
-//           <div className='flex flex-wrap items-center gap-2 sm:justify-end'>
-//             <Button
-//               color='primary'
-//               startContent={<ArrowUpRightIcon className='shrink-0' />}
-//               variant='bordered'
-//               onClick={() => {
-//                 setState({ orderId: order?.id })
-//                 onOpenViewChange()
-//               }}
-//             >
-//               {t('buttons.details')}
-//             </Button>
-//             {order?.status === OrderStatus.PENDING && (
-//               <Button
-//                 color='primary'
-//                 startContent={<XIcon className='shrink-0' />}
-//                 variant='bordered'
-//                 onClick={() => {
-//                   setState({ orderId: order?.id })
-//                   onOpenOrderCancelChange()
-//                 }}
-//               >
-//                 {t('buttons.cancel')}
-//               </Button>
-//             )}
-//             {order?.status === OrderStatus.PENDING && (
-//               <Button
-//                 color='primary'
-//                 endContent={
-//                   !isPendingCheckout && <ArrowRight className='shrink-0' />
-//                 }
-//                 isDisabled={isPendingCheckout}
-//                 isLoading={isPendingCheckout}
-//                 variant='bordered'
-//                 onClick={() => {
-//                   mutateCheckout()
-//                 }}
-//               >
-//                 {t('buttons.payNow')}
-//               </Button>
-//             )}
-//             {order?.status !== OrderStatus.PENDING && (
-//               <Button
-//                 color='primary'
-//                 isDisabled={isDisableReceipt}
-//                 startContent={<DownloadIcon className='shrink-0' />}
-//                 variant='bordered'
-//               >
-//                 {t('buttons.downloadReceipt')}
-//               </Button>
-//             )}
-//           </div>
-//         )}
-//       </div>
+  return (
+    <div className='border-default-100 hover:bg-default-50/50 flex flex-col gap-4 rounded-xl border p-4 transition-all'>
+      {isPending && (
+        <Alert
+          color='warning'
+          description={t('paymentAlert')}
+          variant='faded'
+        />
+      )}
 
-//       <OrderStepper
-//         className='p-5'
-//         createdAt={order?.createdAt!}
-//         deliveredAt={order?.deliveredAt!}
-//         paidAt={order?.paidAt!}
-//         shippedAt={order?.shippedAt!}
-//         status={order.status}
-//       />
-//     </div>
-//   )
-// }
+      <div className='flex flex-wrap items-center justify-between gap-4'>
+        <div className='flex flex-1 flex-wrap gap-4'>
+          <AvatarGroupWrapper images={productImages} max={3} />
+
+          <div className='flex flex-col gap-0.5'>
+            <p className='text-sm font-semibold'>
+              {tField('orderId')} #{order?.id.slice(-8).toUpperCase()}
+              <span className='ml-2'>
+                ({formatNumber(order?.items?.length)} {tProductUnit('ITEM')})
+              </span>
+            </p>
+            <p className='text-default-500 text-xs'>
+              {formatDate(order.createdAt)} •
+              <span className='text-primary ml-1 font-medium'>
+                {tOrderStatus(order.status)}
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <div className='text-right'>
+          <p className='text-primary text-lg font-bold'>
+            {formatCurrency(order?.total, currencyOptions)}
+          </p>
+        </div>
+      </div>
+
+      <div className='bg-default-50 rounded-lg'>
+        <OrderStepper
+          className='py-5'
+          createdAt={order?.createdAt!}
+          deliveredAt={order?.deliveredAt!}
+          paidAt={order?.paidAt!}
+          shippedAt={order?.shippedAt!}
+          status={order.status}
+        />
+      </div>
+
+      <div className='border-default-100 border-t pt-4'>{renderActions()}</div>
+    </div>
+  )
+}
+
+export { OrderItem }

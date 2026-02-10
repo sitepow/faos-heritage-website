@@ -22,7 +22,6 @@ const OrderStep = ({
   index,
   isCompleted,
   isCurrent,
-  locale,
 }: OrderStepProps) => {
   const Icon = ORDER_STATUS_ICONS[status]
 
@@ -50,7 +49,7 @@ const OrderStep = ({
         )}
       >
         <div>{label}</div>
-        {date && <div>{formatDate(date, locale)}</div>}
+        {date && <div>{formatDate(date)}</div>}
       </div>
     </div>
   )

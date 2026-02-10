@@ -44,7 +44,8 @@
     "country": "国家",
     "orderId": "订单 ID",
     "cartId": "购物车 ID",
-    "trackingNo": "快递单号"
+    "trackingNo": "快递单号",
+    "role": "角色"
   },
   "global": {
     "country": {

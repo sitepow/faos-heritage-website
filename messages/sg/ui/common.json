@@ -44,7 +44,8 @@
     "country": "Country",
     "orderId": "Order ID",
     "cartId": "Cart ID",
-    "trackingNo": "Tracking Number"
+    "trackingNo": "Tracking Number",
+    "role": "Role"
   },
   "global": {
     "country": {

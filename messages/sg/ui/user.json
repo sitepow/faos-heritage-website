@@ -10,6 +10,10 @@
       "orders": "My Orders",
       "favs": "Favorites",
       "edit": "Edit Profile"
+    },
+    "roles": {
+      "admin": "Administrator",
+      "customer": "Customer"
     }
   },
   "orders": {
@@ -24,6 +28,12 @@
       "title": "Cancel Order",
       "reason": "Reason",
       "placeholder": "Enter reason for cancellation/refund"
+    },
+    "actions": {
+      "view": "View details",
+      "cancel": "Cancel order",
+      "payNow": "Pay now",
+      "downloadReceipt": "Download receipt"
     }
   },
   "address": {

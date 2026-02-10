@@ -10,6 +10,10 @@
       "orders": "Đơn hàng của tôi",
       "favs": "Sản phẩm yêu thích",
       "edit": "Chỉnh sửa hồ sơ"
+    },
+    "roles": {
+      "admin": "Quản trị viên",
+      "customer": "Khách hàng"
     }
   },
   "orders": {
@@ -24,6 +28,12 @@
       "title": "Hủy đơn hàng",
       "reason": "Lý do",
       "placeholder": "Nhập lý do hủy đơn/hoàn tiền"
+    },
+    "actions": {
+      "view": "Xem chi tiết",
+      "cancel": "Hủy đơn hàng",
+      "payNow": "Thanh toán ngay",
+      "downloadReceipt": "Tải hóa đơn"
     }
   },
   "address": {

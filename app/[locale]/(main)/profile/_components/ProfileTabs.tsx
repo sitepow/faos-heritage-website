@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl'
 import React, { useMemo } from 'react'
 
 import { AccountCard } from './AccountCard'
+import { OrderCard } from './Order/OrderCard'
 
 import { BorderedCard } from '@/components/ui/BorderedCard'
 import { BREAKPOINTS, PROFILE_TABS } from '@/constants'
@@ -35,8 +36,13 @@ const ProfileTabs = () => {
 
   const tabStyles = useMemo(
     () => ({
-      base: 'w-full flex flex-col lg:flex-row lg:w-fit',
-      tabList: 'flex overflow-x-auto lg:flex-col lg:w-[240px] p-2',
+      base: 'w-full flex flex-col lg:flex-row lg:w-fit lg:items-start lg:gap-5',
+      tabList: `
+      flex overflow-x-auto p-2 
+      lg:bg-background/70 lg:backdrop-blur-md lg:z-20 
+      lg:sticky lg:top-55
+      lg:flex-col lg:w-[240px] 
+    `,
       panel: 'w-full',
     }),
     [],
@@ -68,7 +74,7 @@ const renderTabContent = (tab: PROFILE_TABS) => {
     case PROFILE_TABS.ACCOUNT:
       return <AccountCard />
     case PROFILE_TABS.ORDER:
-      return <BorderedCard />
+      return <OrderCard />
     case PROFILE_TABS.FAVORITE:
       return <BorderedCard />
     case PROFILE_TABS.PROFILE:

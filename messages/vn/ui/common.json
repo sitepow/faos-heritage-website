@@ -44,7 +44,8 @@
     "country": "Quốc gia",
     "orderId": "Mã đơn hàng",
     "cartId": "Mã giỏ hàng",
-    "trackingNo": "Mã vận đơn"
+    "trackingNo": "Mã vận đơn",
+    "role": "Vai trò"
   },
   "global": {
     "country": {

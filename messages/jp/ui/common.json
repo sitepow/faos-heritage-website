@@ -44,7 +44,8 @@
     "country": "国",
     "orderId": "注文ID",
     "cartId": "カートID",
-    "trackingNo": "追跡番号"
+    "trackingNo": "追跡番号",
+    "role": "役割"
   },
   "global": {
     "country": {

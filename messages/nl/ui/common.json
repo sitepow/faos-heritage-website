@@ -44,7 +44,8 @@
     "country": "Land",
     "orderId": "Bestel-ID",
     "cartId": "Winkelwagen-ID",
-    "trackingNo": "Trackingnummer"
+    "trackingNo": "Trackingnummer",
+    "role": "Rol"
   },
   "global": {
     "country": {

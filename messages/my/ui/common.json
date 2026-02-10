@@ -44,7 +44,8 @@
     "country": "Negara",
     "orderId": "ID Pesanan",
     "cartId": "ID Troli",
-    "trackingNo": "Nombor Penjejakan"
+    "trackingNo": "Nombor Penjejakan",
+    "role": "Peranan"
   },
   "global": {
     "country": {

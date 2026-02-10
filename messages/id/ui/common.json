@@ -44,7 +44,8 @@
     "country": "Negara",
     "orderId": "ID Pesanan",
     "cartId": "ID Keranjang",
-    "trackingNo": "Nomor Resi"
+    "trackingNo": "Nomor Resi",
+    "role": "Peran"
   },
   "global": {
     "country": {

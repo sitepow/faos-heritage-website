@@ -10,6 +10,10 @@
       "orders": "Mínar pantanir",
       "favs": "Eftirlæti",
       "edit": "Breyta prófíl"
+    },
+    "roles": {
+      "admin": "Stjórnandi",
+      "customer": "Viðskiptavinur"
     }
   },
   "orders": {
@@ -24,6 +28,12 @@
       "title": "Hætta við pöntun",
       "reason": "Ástæða",
       "placeholder": "Sláðu inn ástæðu fyrir afbókun/endurgreiðslu"
+    },
+    "actions": {
+      "view": "Skoða nánar",
+      "cancel": "Hætta við pöntun",
+      "payNow": "Greiða núna",
+      "downloadReceipt": "Sækja kvittun"
     }
   },
   "address": {

@@ -10,6 +10,10 @@
       "orders": "Mijn bestellingen",
       "favs": "Favorieten",
       "edit": "Profiel bewerken"
+    },
+    "roles": {
+      "admin": "Beheerder",
+      "customer": "Klant"
     }
   },
   "orders": {
@@ -24,6 +28,12 @@
       "title": "Bestelling annuleren",
       "reason": "Reden",
       "placeholder": "Voer de reden voor annulering/restitutie in"
+    },
+    "actions": {
+      "view": "Details bekijken",
+      "cancel": "Bestelling annuleren",
+      "payNow": "Nu betalen",
+      "downloadReceipt": "Ontvangstbewijs downloaden"
     }
   },
   "address": {

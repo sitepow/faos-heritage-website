@@ -10,6 +10,10 @@
       "orders": "I miei ordini",
       "favs": "Preferiti",
       "edit": "Modifica profilo"
+    },
+    "roles": {
+      "admin": "Amministratore",
+      "customer": "Cliente"
     }
   },
   "orders": {
@@ -24,6 +28,12 @@
       "title": "Annulla ordine",
       "reason": "Motivo",
       "placeholder": "Inserisci il motivo dell'annullamento/rimborso"
+    },
+    "actions": {
+      "view": "Visualizza dettagli",
+      "cancel": "Annulla ordine",
+      "payNow": "Paga ora",
+      "downloadReceipt": "Scarica ricevuta"
     }
   },
   "address": {

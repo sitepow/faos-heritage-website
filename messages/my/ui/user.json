@@ -10,6 +10,10 @@
       "orders": "Pesanan Saya",
       "favs": "Kegemaran",
       "edit": "Edit Profil"
+    },
+    "roles": {
+      "admin": "Pentadbir",
+      "customer": "Pelanggan"
     }
   },
   "orders": {
@@ -24,6 +28,12 @@
       "title": "Batal Pesanan",
       "reason": "Sebab",
       "placeholder": "Masukkan sebab pembatalan/bayaran balik"
+    },
+    "actions": {
+      "view": "Lihat butiran",
+      "cancel": "Batal pesanan",
+      "payNow": "Bayar sekarang",
+      "downloadReceipt": "Muat turun resit"
     }
   },
   "address": {

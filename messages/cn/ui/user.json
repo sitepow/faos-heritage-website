@@ -10,6 +10,10 @@
       "orders": "我的订单",
       "favs": "我的收藏",
       "edit": "编辑个人资料"
+    },
+    "roles": {
+      "admin": "管理员",
+      "customer": "客户"
     }
   },
   "orders": {
@@ -24,6 +28,12 @@
       "title": "取消订单",
       "reason": "原因",
       "placeholder": "请输入取消/退款原因"
+    },
+    "actions": {
+      "view": "查看详情",
+      "cancel": "取消订单",
+      "payNow": "立即支付",
+      "downloadReceipt": "下载收据"
     }
   },
   "address": {

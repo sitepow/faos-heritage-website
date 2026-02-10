@@ -10,11 +10,10 @@ import { OrderStep } from './OrderStep'
 import { StepConnector } from './StepConnector'
 import { getOrderStatusDate, ORDER_STATUS_ICONS } from './stepConfig'
 
-import { useAppStore } from '@/app/store'
 import { ORDER_STEPS } from '@/constants'
 import { cn } from '@/utils/style'
 
-interface OrderStepperProps extends ComponentProps<'div'> {
+interface Props extends ComponentProps<'div'> {
   status: OrderStatus
   createdAt: Date
   paidAt?: Date | null
@@ -30,9 +29,8 @@ const OrderStepper = ({
   shippedAt,
   deliveredAt,
   ...props
-}: OrderStepperProps) => {
-  const t = useTranslations('OrderStatus')
-  const { appLocale } = useAppStore()
+}: Props) => {
+  const t = useTranslations('global.orderStatus')
 
   const isCancelled =
     status === OrderStatus.CANCELLED || status === OrderStatus.REFUNDED
@@ -79,7 +77,6 @@ const OrderStepper = ({
                 isCompleted={isCompleted}
                 isCurrent={isCurrent}
                 label={t(stepStatus)}
-                locale={appLocale?.locale}
                 status={stepStatus}
               />
 
