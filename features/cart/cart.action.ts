@@ -2,6 +2,8 @@
 
 import { Role } from '@prisma/client'
 
+import { transformProduct } from '../product/product.helper'
+
 import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { prisma } from '@/lib/prisma'
@@ -167,9 +169,10 @@ const clearCart = async () =>
     }
   })
 
-const getCarts = async (userIdProp?: string) => {
+const getCarts = async (userIdProp?: string, locale?: string) => {
   const { userId } = await getServerUser()
   const activeUserId = userIdProp || userId
+  const languageCode = locale?.toUpperCase()
 
   if (!activeUserId) {
     return []
@@ -196,6 +199,11 @@ const getCarts = async (userIdProp?: string) => {
               image: true,
             },
           },
+          localizations: {
+            where: { languageCode },
+            take: 1,
+            select: { name: true },
+          },
           images: {
             where: { isPrimary: true },
             take: 1,
@@ -207,7 +215,10 @@ const getCarts = async (userIdProp?: string) => {
     orderBy: { createdAt: 'desc' },
   })
 
-  return decimalToNumber(items)
+  return decimalToNumber(items).map((item) => ({
+    ...item,
+    product: transformProduct(item.product),
+  }))
 }
 
 const getCartStat = async () => {

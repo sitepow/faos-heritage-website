@@ -1,5 +1,6 @@
 type CartFilters = {
   userId?: string
+  locale?: string
 }
 
 const cartQueryKeys = {
@@ -8,8 +9,8 @@ const cartQueryKeys = {
   lists: {
     all: () => [...cartQueryKeys.all, 'list'] as const,
 
-    byUserId: (userId: string) =>
-      [...cartQueryKeys.lists.all(), userId] as const,
+    byUserId: ({ userId, locale }: CartFilters) =>
+      [...cartQueryKeys.lists.all(), userId, locale] as const,
   },
 
   stats: {

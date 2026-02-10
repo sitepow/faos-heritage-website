@@ -3,7 +3,7 @@
 
 import { Alert, Button, Card, CardBody, CardFooter } from '@heroui/react'
 import { Currency } from '@prisma/client'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 
 import type { ComponentProps } from 'react'
 
@@ -29,10 +29,14 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
   const tSummary = useTranslations('cart.checkout.summary')
   const navigation = useAppNavigation()
   const { appLocale } = useAppStore()
+  const locale = useLocale()
 
   const { userId } = useAuth()
 
-  const { data: carts = [], subTotal } = useCarts({ userId })
+  const { data: carts = [], subTotal } = useCarts({
+    userId,
+    locale,
+  })
   const { data: address, isLoading: isLoadingAddress } = useDefaultAddress(
     userId!,
   )

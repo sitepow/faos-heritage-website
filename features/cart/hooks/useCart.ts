@@ -4,10 +4,10 @@ import { useMemo } from 'react'
 import { getCarts, getCartStat } from '../cart.action'
 import { cartQueryKeys } from '../cart.query-key'
 
-const useCarts = ({ userId }: { userId?: string }) => {
+const useCarts = ({ userId, locale }: { userId?: string; locale?: string }) => {
   const query = useQuery({
-    queryKey: cartQueryKeys.lists.byUserId(userId!),
-    queryFn: () => getCarts(userId!),
+    queryKey: cartQueryKeys.lists.byUserId({ userId: userId!, locale }),
+    queryFn: () => getCarts(userId!, locale),
     enabled: !!userId,
   })
 

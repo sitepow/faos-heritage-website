@@ -1,7 +1,7 @@
 'use client'
 
 import Head from 'next/head'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 
 import { CartItem } from './_components/CartItem'
 import { CartSummaryCard } from './_components/CartSummaryCard'
@@ -14,9 +14,13 @@ import { useAuth } from '@/hooks/useAuth'
 
 const CartPage = () => {
   const t = useTranslations('cart')
+  const locale = useLocale()
 
   const { userId } = useAuth()
-  const { data: carts, isLoading: isLoadingCarts } = useCarts({ userId })
+  const { data: carts, isLoading: isLoadingCarts } = useCarts({
+    userId,
+    locale,
+  })
 
   const isHasCarts = !isLoadingCarts && carts && carts?.length > 0
   const isEmptyCarts = !isLoadingCarts && carts && carts?.length === 0
