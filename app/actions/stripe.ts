@@ -20,6 +20,8 @@ interface CreateStripeCheckoutParams {
   orderId: string
 }
 
+const PROFILE_ORDER_TAB = `${process.env.NEXT_PUBLIC_APP_URL}/profile?tab=order`
+
 const buildShippingOptions = (
   shippingCost: number,
   currency: string,
@@ -119,8 +121,8 @@ const createStripeCheckout = async ({
         orderId: order.id,
       },
 
-      success_url: `${process.env.NEXT_PUBLIC_APP_URL}/checkout/success?orderId=${order.id}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/checkout/cancel?orderId=${order.id}`,
+      success_url: PROFILE_ORDER_TAB,
+      cancel_url: PROFILE_ORDER_TAB,
     })
   } catch (error) {
     console.error('[STRIPE_CHECKOUT_ERROR]', error)
