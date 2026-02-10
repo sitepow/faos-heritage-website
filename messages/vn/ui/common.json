@@ -83,9 +83,7 @@
     "orderStatus": {
       "PENDING": "Chờ thanh toán",
       "PAID": "Đã thanh toán",
-      "PROCESSING": "Đang xử lý",
-      "SHIPPED": "Đang giao hàng",
-      "DELIVERED": "Đã giao hàng",
+      "DELIVERED": "Đang xử lý",
       "CANCELLED": "Đã hủy",
       "REFUNDED": "Đã hoàn tiền"
     }

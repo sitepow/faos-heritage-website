@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 
 import { ProductClient } from './product.client'
 
+import { DEFALUT_APP_PATH } from '@/constants'
 import { getProduct } from '@/features/product/product.action'
 import { constructMetadata } from '@/lib/metadata'
 import { getServerUser } from '@/lib/session'
@@ -37,7 +38,7 @@ export async function generateMetadata({
     title: t('title', { name: product?.name! }),
     description:
       product.shortDescription || t('description', { name: product?.name! }),
-    ogImage: ogImage,
+    ogImage: `${DEFALUT_APP_PATH}/${ogImage}`,
     canonicalPath: `/products/${slug}`,
     keywords: [product.name, product.category?.name || ''],
   })

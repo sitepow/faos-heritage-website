@@ -6,6 +6,7 @@ import Stripe from 'stripe'
 
 import type { ActionResult } from '@/lib/errors'
 
+import { DEFALUT_APP_PATH, PROFILE_TABS } from '@/constants'
 import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { prisma } from '@/lib/prisma'
@@ -20,7 +21,7 @@ interface CreateStripeCheckoutParams {
   orderId: string
 }
 
-const PROFILE_ORDER_TAB = `${process.env.NEXT_PUBLIC_APP_URL}/profile?tab=order`
+const PROFILE_ORDER_PATH = `${DEFALUT_APP_PATH}/profile?tab=${PROFILE_TABS.ORDER}`
 
 const buildShippingOptions = (
   shippingCost: number,
@@ -121,8 +122,8 @@ const createStripeCheckout = async ({
         orderId: order.id,
       },
 
-      success_url: PROFILE_ORDER_TAB,
-      cancel_url: PROFILE_ORDER_TAB,
+      success_url: PROFILE_ORDER_PATH,
+      cancel_url: PROFILE_ORDER_PATH,
     })
   } catch (error) {
     console.error('[STRIPE_CHECKOUT_ERROR]', error)

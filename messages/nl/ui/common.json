@@ -84,8 +84,7 @@
       "PENDING": "Wacht op betaling",
       "PAID": "Betaald",
       "PROCESSING": "In behandeling",
-      "SHIPPED": "Verzonden",
-      "DELIVERED": "Bezorgd",
+      "DELIVERED": "Verzonden",
       "CANCELLED": "Geannuleerd",
       "REFUNDED": "Terugbetaald"
     }

@@ -84,8 +84,7 @@
       "PENDING": "Menunggu Pembayaran",
       "PAID": "Dibayar",
       "PROCESSING": "Diproses",
-      "SHIPPED": "Dikirim",
-      "DELIVERED": "Diterima",
+      "DELIVERED": "Dikirim",
       "CANCELLED": "Dibatalkan",
       "REFUNDED": "Dikembalikan (Refund)"
     }

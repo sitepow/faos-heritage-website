@@ -84,8 +84,7 @@
       "PENDING": "Pagamento Pendente",
       "PAID": "Pagato",
       "PROCESSING": "In elaborazione",
-      "SHIPPED": "Spedito",
-      "DELIVERED": "Consegnato",
+      "DELIVERED": "Spedito",
       "CANCELLED": "Annullato",
       "REFUNDED": "Rimborsato"
     }

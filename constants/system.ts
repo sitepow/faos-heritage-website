@@ -7,6 +7,7 @@ const HOUR = 60 * MINUTE
 const QUERY_STALE_TIME = 5 * MINUTE
 const QUERY_GC_TIME = 30 * MINUTE
 
+const DEFALUT_APP_PATH = `${process.env.NEXT_PUBLIC_APP_URL}`
 const PUBLIC_DIR = path.join(process.cwd(), 'public')
 const UPLOAD_DIR = path.join(PUBLIC_DIR, 'uploads')
 const UPLOAD_URL_PREFIX = '/uploads'
@@ -15,15 +16,27 @@ const PDF_WORKER_URL = '/javascript/pdf.worker.min.js'
 
 const THRESHOLD_SCROLL_FETCH = 1500
 
+const GRAMS_PER_KILOGRAM = 1000
+const SHIPPING_COST_DEFAULT = 0
+const BASE_RATE_DEFAULT = 0
+const PRICE_PER_KG_DEFAULT = 0
+const KG_DEFAULT = 0
+
 export {
   SECOND,
   MINUTE,
   HOUR,
   QUERY_STALE_TIME,
   QUERY_GC_TIME,
+  DEFALUT_APP_PATH,
   PUBLIC_DIR,
   UPLOAD_DIR,
   UPLOAD_URL_PREFIX,
   PDF_WORKER_URL,
   THRESHOLD_SCROLL_FETCH,
+  GRAMS_PER_KILOGRAM,
+  SHIPPING_COST_DEFAULT,
+  BASE_RATE_DEFAULT,
+  PRICE_PER_KG_DEFAULT,
+  KG_DEFAULT,
 }
