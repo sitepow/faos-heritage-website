@@ -12,6 +12,9 @@
     "prepare": "husky install",
     "postinstall": "prisma generate"
   },
+  "prisma": {
+    "seed": "npx tsx prisma/seed.ts"
+  },
   "dependencies": {
     "@commitlint/types": "^20.2.0",
     "@heroui/react": "^2.8.7",
