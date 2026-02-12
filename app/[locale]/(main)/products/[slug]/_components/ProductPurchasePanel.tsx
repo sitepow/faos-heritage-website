@@ -7,8 +7,8 @@ import { useState, useMemo, useEffect } from 'react'
 
 import { ProductShare } from './ProductShare'
 
+import { CategoryChip } from '@/components/ui/CategoryChip'
 import { MarkdownRenderer } from '@/components/ui/Markdown/MarkdownRenderer'
-import { ProductChip } from '@/components/ui/Product/ProductChip'
 import { ProductPrice } from '@/components/ui/Product/ProductPrice'
 import { VariantSelect } from '@/components/ui/VariantSelect'
 import { useCartMutation } from '@/features/cart/cart.mutation'
@@ -63,11 +63,7 @@ const ProductPurchasePanel = () => {
           {product.name}
         </h1>
 
-        <ProductChip
-          categoryName={product.category?.name}
-          isAuthentic={product.isAuthentic}
-          isPremiumProduct={product.isPremiumProduct}
-        />
+        <CategoryChip categoryName={product.category?.name} />
 
         <ProductPrice
           price={currentPrice}
@@ -84,9 +80,7 @@ const ProductPurchasePanel = () => {
           />
         )}
 
-        {product.shortDescription && (
-          <MarkdownRenderer content={product.shortDescription} />
-        )}
+        {product.summary && <MarkdownRenderer content={product.summary} />}
 
         <div className='flex gap-2 pt-4'>
           <Button

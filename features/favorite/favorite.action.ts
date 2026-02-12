@@ -100,7 +100,7 @@ const getFavorites = async ({
             price: true,
             unit: true,
             variants: { select: { price: true } },
-            shortDescription: true,
+            summary: true,
             images: {
               where: { isPrimary: true },
               take: 1,

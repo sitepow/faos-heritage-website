@@ -7,7 +7,7 @@ type ProductItem = GetProductsInfiniteResult['items'][number]
 
 import type { GetProductsInfiniteResult } from '@/features/product/product.types'
 
-import { ProductChip } from './ProductChip'
+import { CategoryChip } from '../CategoryChip'
 import { ProductImage } from './ProductImage'
 
 import { ProductPrice } from '@/components/ui/Product/ProductPrice'
@@ -41,22 +41,19 @@ const ProductCard = ({ className, product }: ProductCardProps) => {
       <Link className='block space-y-6' href={productHref}>
         <ProductImage className='h-[350px] w-full' image={primarySrc} />
 
-        <CardBody className='flex flex-col items-start overflow-hidden p-0'>
-          <ProductChip
-            categoryName={product?.category?.name!}
-            className='mb-2.5 opacity-40 transition-opacity group-hover:opacity-100'
-            isAuthentic={product?.isAuthentic}
-            isPremiumProduct={product?.isPremiumProduct}
-          />
+        <CardBody className='flex flex-col items-start gap-5 overflow-hidden p-0'>
+          <CategoryChip categoryName={product?.category?.name!} />
 
-          <h4 className='line-clamp-2 text-xl'>{product?.name}</h4>
+          <div className='flex flex-col'>
+            <h4 className='line-clamp-2 text-xl'>{product?.name}</h4>
 
-          <ProductPrice
-            price={product?.price!}
-            priceMax={product?.priceMax!}
-            priceMin={product?.priceMin!}
-            unit={resolveProductUnitLabel(product?.unit!)}
-          />
+            <ProductPrice
+              price={product?.price!}
+              priceMax={product?.priceMax!}
+              priceMin={product?.priceMin!}
+              unit={resolveProductUnitLabel(product?.unit!)}
+            />
+          </div>
         </CardBody>
       </Link>
     </Card>

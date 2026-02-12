@@ -10,7 +10,6 @@ import type { ComponentProps } from 'react'
 import { CartSummaryRow } from './CartSummaryRow'
 
 import { useAppStore } from '@/app/store'
-import { CURRENCY } from '@/constants'
 import { useDefaultAddress } from '@/features/address/useAddress'
 import { useCarts } from '@/features/cart/hooks/useCart'
 import { useExchangeRate } from '@/features/exchangeRate/useExchangeRate'
@@ -59,10 +58,8 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
     await createOrder(
       {
         addressId: address.id,
-        userId: userId!,
         currency,
         exchangeRate,
-        exchangeRateSource: CURRENCY.EXCHANGE_API_THB,
         exchangeLocale: appLocale.locale,
         items: carts.map(({ productId, variantId, quantity }) => ({
           productId,

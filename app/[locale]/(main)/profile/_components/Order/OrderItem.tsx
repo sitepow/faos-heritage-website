@@ -49,7 +49,10 @@ const OrderItem = ({ order, hideButton }: Props) => {
     [order.items],
   )
 
-  const { currencyOptions } = useExchangeRate()
+  const { currencyOptions } = useExchangeRate({
+    currency: order.currency,
+    locale: order.exchangeLocale || undefined,
+  })
 
   const { mutate: mutateCheckout, isPending: isPendingCheckout } = useMutation({
     mutationFn: () => createStripeCheckout({ orderId: order?.id! }),
@@ -145,7 +148,10 @@ const OrderItem = ({ order, hideButton }: Props) => {
 
         <div className='text-right'>
           <p className='text-primary text-lg font-bold'>
-            {formatCurrency(order?.total, currencyOptions)}
+            {formatCurrency(order?.total, {
+              ...currencyOptions,
+              skipCalculation: true,
+            })}
           </p>
         </div>
       </div>

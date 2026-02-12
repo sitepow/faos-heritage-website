@@ -101,7 +101,6 @@ const getCategories = async () => {
     select: {
       id: true,
       name: true,
-      slug: true,
       isActive: true,
       image: true,
     },
@@ -115,7 +114,6 @@ const getCategory = async (categoryId: string) => {
     select: {
       id: true,
       name: true,
-      slug: true,
       isActive: true,
       image: true,
     },

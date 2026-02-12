@@ -78,7 +78,6 @@ const getVariants = async (productId: string) => {
     select: {
       id: true,
       name: true,
-      sku: true,
       price: true,
       stockQuantity: true,
       isActive: true,
@@ -96,7 +95,6 @@ const getVariant = async (variantId: string) => {
     select: {
       id: true,
       name: true,
-      sku: true,
       price: true,
       weight: true,
       stockQuantity: true,

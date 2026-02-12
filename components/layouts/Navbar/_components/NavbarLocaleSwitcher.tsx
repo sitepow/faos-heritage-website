@@ -37,6 +37,17 @@ const NavbarLocaleSwitcher = () => {
   )
 
   const handleRouteLocaleChange = (nextCountryCode: CountryCode) => {
+    const selected = CURRENCY_LOCALE_MAP.find(
+      (item) => item.country === nextCountryCode,
+    )
+
+    if (selected) {
+      setAppLocale({
+        ...selected,
+        name: tCountry(selected.country),
+      })
+    }
+
     router.push(pathname, {
       locale: nextCountryCode.toLowerCase(),
     })

@@ -13,6 +13,10 @@ const CategoryLists = () => {
   const router = useRouter()
   const { data: categories } = useCategories()
 
+  if (categories?.length === 0) {
+    return
+  }
+
   return (
     <Container className='flex h-auto w-full flex-wrap overflow-hidden lg:h-[550px] lg:flex-nowrap'>
       {categories?.map(({ name, id, image }) => (

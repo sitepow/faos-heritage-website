@@ -16,39 +16,57 @@ interface CurrencyFormatOptions {
   currency?: string
   locale?: string
   rates?: Record<string, number> | null
+  skipCalculation?: boolean
 }
 
 const resolveCurrencyValue = (
-  thbValue: number,
+  value: number,
   currency: string,
   rates?: Record<string, number> | null,
+  skipCalculation: boolean = false,
 ) => {
-  if (currency === 'THB') return thbValue
-  if (!rates?.[currency]) return thbValue
-  return thbValue * rates[currency]
+  if (skipCalculation) {
+    return value
+  }
+
+  if (currency === 'THB' || currency === 'TH') {
+    return value
+  }
+
+  if (!rates || !rates[currency]) {
+    return value
+  }
+
+  return value * rates[currency]
 }
 
 const getCurrencyFormatter = (locale: string, currency: string) =>
   new Intl.NumberFormat(locale, {
     style: 'currency',
-    currency,
+    currency: currency === 'TH' ? 'THB' : currency,
   })
 
 const formatCurrency = (
-  thbValue: number,
+  value: number,
   {
     currency = CURRENCY.DEFAULT_CODE,
     locale = CURRENCY.DEFAULT_LOCALE,
     rates,
+    skipCalculation = false,
   }: CurrencyFormatOptions = {},
 ) => {
-  const value = resolveCurrencyValue(thbValue, currency, rates)
-  return getCurrencyFormatter(locale, currency).format(value)
+  const finalValue = resolveCurrencyValue(
+    value,
+    currency,
+    rates,
+    skipCalculation,
+  )
+  return getCurrencyFormatter(locale, currency).format(finalValue)
 }
 
 const formatCurrencyRange = (
-  minThb: number,
-  maxThb: number,
+  minValue: number,
+  maxValue: number,
   {
     currency = CURRENCY.DEFAULT_CODE,
     locale = CURRENCY.DEFAULT_LOCALE,
@@ -57,8 +75,8 @@ const formatCurrencyRange = (
 ) => {
   const formatter = getCurrencyFormatter(locale, currency)
 
-  const min = resolveCurrencyValue(minThb, currency, rates)
-  const max = resolveCurrencyValue(maxThb, currency, rates)
+  const min = resolveCurrencyValue(minValue, currency, rates)
+  const max = resolveCurrencyValue(maxValue, currency, rates)
 
   return formatter.formatRange(min, max)
 }

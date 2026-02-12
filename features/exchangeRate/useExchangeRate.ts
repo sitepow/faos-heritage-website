@@ -1,3 +1,5 @@
+'use client'
+
 import { useQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
 
@@ -6,26 +8,36 @@ import type { CurrencyFormatOptions } from '@/utils'
 import { exchangeRateQueryKeys } from './exchangeRate.query-key'
 
 import { useAppStore } from '@/app/store'
+import { CURRENCY } from '@/constants'
 import { getExchangeRates } from '@/utils/exchangeRate'
 
-const useExchangeRate = (currency: string = 'TH') => {
-  const { appLocale, hasHydrated } = useAppStore()
+interface Props {
+  currency?: string
+  locale?: string
+}
+
+const useExchangeRate = (overrides?: Props) => {
+  const { appLocale } = useAppStore()
+
+  const currentCurrency =
+    overrides?.currency || appLocale?.currency || CURRENCY.DEFAULT_CODE
+  const currentLocale =
+    overrides?.locale || appLocale?.locale || CURRENCY.DEFAULT_LOCALE
 
   const exchangeRate = useQuery({
-    queryKey: exchangeRateQueryKeys.lists.byCurrency(currency),
+    queryKey: exchangeRateQueryKeys.lists.byCurrency(currentCurrency),
     queryFn: () => getExchangeRates(),
-    enabled: !!currency && hasHydrated,
-    refetchOnWindowFocus: false,
+    refetchOnWindowFocus: true,
     retry: 1,
   })
 
   const currencyOptions = useMemo(
     () => ({
-      currency: appLocale?.currency,
-      locale: appLocale?.locale,
-      rates: exchangeRate?.data?.exchangeRates,
+      currency: currentCurrency,
+      locale: currentLocale,
+      rates: exchangeRate?.data,
     }),
-    [appLocale?.currency, appLocale?.locale, exchangeRate?.data?.exchangeRates],
+    [currentCurrency, currentLocale, exchangeRate?.data],
   ) as CurrencyFormatOptions
 
   return {

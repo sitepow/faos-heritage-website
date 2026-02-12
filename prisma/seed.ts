@@ -1,4 +1,5 @@
-import { PrismaClient, ProductUnit } from '@prisma/client'
+import { Currency, PrismaClient, ProductUnit } from '@prisma/client'
+
 const prisma = new PrismaClient()
 
 async function main() {
@@ -17,7 +18,6 @@ async function main() {
       unit: ProductUnit.BOTTLE,
       categoryId: oliveOilCategory.id,
       isActive: true,
-
       localizations: {
         create: [
           {
@@ -40,7 +40,7 @@ async function main() {
           {
             name: '250ml Bottle',
             price: 450.0,
-            weight: 0.25,
+            weight: 580.0,
             stockQuantity: 50,
             isActive: true,
             options: { size: '250ml', material: 'Glass' },
@@ -48,7 +48,7 @@ async function main() {
           {
             name: '500ml Bottle',
             price: 850.0,
-            weight: 0.5,
+            weight: 1050.0,
             stockQuantity: 30,
             isActive: true,
             options: { size: '500ml', material: 'Glass' },
@@ -56,7 +56,7 @@ async function main() {
           {
             name: '1L Bottle',
             price: 1500.0,
-            weight: 1.0,
+            weight: 1850.0,
             stockQuantity: 15,
             isActive: true,
             options: { size: '1L', material: 'Glass' },
@@ -65,6 +65,112 @@ async function main() {
       },
     },
   })
+
+  const shippingData = [
+    {
+      countryCode: 'TH',
+      countryName: 'Thailand',
+      baseRate: 45.0,
+      pricePerKg: 55.0,
+      currency: Currency.THB,
+    },
+    {
+      countryCode: 'US',
+      countryName: 'United States',
+      baseRate: 300.0,
+      pricePerKg: 480.0,
+      currency: Currency.THB,
+    },
+    {
+      countryCode: 'IS',
+      countryName: 'Iceland',
+      baseRate: 350.0,
+      pricePerKg: 550.0,
+      currency: Currency.THB,
+    },
+    {
+      countryCode: 'ID',
+      countryName: 'Indonesia',
+      baseRate: 160.0,
+      pricePerKg: 220.0,
+      currency: Currency.THB,
+    },
+    {
+      countryCode: 'VN',
+      countryName: 'Vietnam',
+      baseRate: 140.0,
+      pricePerKg: 200.0,
+      currency: Currency.THB,
+    },
+    {
+      countryCode: 'MY',
+      countryName: 'Malaysia',
+      baseRate: 120.0,
+      pricePerKg: 180.0,
+      currency: Currency.THB,
+    },
+    {
+      countryCode: 'SG',
+      countryName: 'Singapore',
+      baseRate: 130.0,
+      pricePerKg: 190.0,
+      currency: Currency.THB,
+    },
+    {
+      countryCode: 'CN',
+      countryName: 'China',
+      baseRate: 200.0,
+      pricePerKg: 280.0,
+      currency: Currency.THB,
+    },
+    {
+      countryCode: 'JP',
+      countryName: 'Japan',
+      baseRate: 220.0,
+      pricePerKg: 320.0,
+      currency: Currency.THB,
+    },
+    {
+      countryCode: 'GR',
+      countryName: 'Greece',
+      baseRate: 300.0,
+      pricePerKg: 450.0,
+      currency: Currency.THB,
+    },
+    {
+      countryCode: 'IT',
+      countryName: 'Italy',
+      baseRate: 280.0,
+      pricePerKg: 420.0,
+      currency: Currency.THB,
+    },
+    {
+      countryCode: 'NL',
+      countryName: 'Netherlands',
+      baseRate: 260.0,
+      pricePerKg: 400.0,
+      currency: Currency.THB,
+    },
+  ]
+
+  for (const item of shippingData) {
+    await prisma.shippingCountry.upsert({
+      where: { countryCode: item.countryCode },
+      update: {
+        baseRate: item.baseRate,
+        pricePerKg: item.pricePerKg,
+        currency: item.currency,
+      },
+      create: {
+        countryCode: item.countryCode,
+        countryName: item.countryName,
+        baseRate: item.baseRate,
+        pricePerKg: item.pricePerKg,
+        currency: item.currency,
+        isActive: true,
+      },
+    })
+  }
 }
 
 main()

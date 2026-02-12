@@ -48,7 +48,7 @@ const getAvailableStock = async (
 }
 
 const createCart = async (params: CreateCartParams) =>
-  withRole([Role.ADMIN], async (userId) => {
+  withRole([Role.ADMIN, Role.CUSTOMER], async (userId) => {
     const { productId, variantId, quantity } = params
     if (quantity < 1) {
       return fail(ERROR_CODES.BAD_REQUEST)
@@ -108,7 +108,7 @@ const createCart = async (params: CreateCartParams) =>
   })
 
 const updateCart = async ({ cartId, quantity, variantId }: UpdateCartParams) =>
-  withRole([Role.ADMIN], async (userId) => {
+  withRole([Role.ADMIN, Role.CUSTOMER], async (userId) => {
     if (quantity <= 0) {
       return deleteCart(cartId)
     }
@@ -150,7 +150,7 @@ const updateCart = async ({ cartId, quantity, variantId }: UpdateCartParams) =>
   })
 
 const deleteCart = async (cartId: string) =>
-  withRole([Role.ADMIN], async (userId) => {
+  withRole([Role.ADMIN, Role.CUSTOMER], async (userId) => {
     try {
       await prisma.cart.delete({ where: { id: cartId, userId } })
       return ok()
@@ -160,7 +160,7 @@ const deleteCart = async (cartId: string) =>
   })
 
 const clearCart = async () =>
-  withRole([Role.ADMIN], async (userId) => {
+  withRole([Role.ADMIN, Role.CUSTOMER], async (userId) => {
     try {
       await prisma.cart.deleteMany({ where: { userId } })
       return ok()

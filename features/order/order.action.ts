@@ -9,7 +9,7 @@ import { calculateShippingCost } from '../shipping/shipping.action'
 
 import { ERROR_CODES, fail, ok } from '@/lib/errors'
 import { prisma } from '@/lib/prisma'
-import { withAuth } from '@/lib/session'
+import { getServerUser, withAuth } from '@/lib/session'
 import {
   canTransitionOrderStatus,
   formatFullAddress,
@@ -34,11 +34,9 @@ interface UpdateOrderInput {
 interface CreateOrderInput {
   items: { productId: string; variantId?: string | null; quantity: number }[]
   addressId: string
-  userId: string
   currency: Currency
   exchangeRate: number
   exchangeLocale: string
-  exchangeRateSource?: string
 }
 
 type TransactionClient = Prisma.TransactionClient
@@ -184,16 +182,10 @@ const getRevenueStats = async () => {
 
 const createOrder = async (input: CreateOrderInput) =>
   withAuth(async () => {
+    const { userId } = await getServerUser()
+
     return prisma.$transaction(async (tx) => {
-      const {
-        items,
-        addressId,
-        userId,
-        currency,
-        exchangeRate,
-        exchangeLocale,
-        exchangeRateSource,
-      } = input
+      const { items, addressId, currency, exchangeRate, exchangeLocale } = input
 
       const address = await tx.address.findUnique({ where: { id: addressId } })
       if (!address || items.length === 0) {
@@ -219,9 +211,9 @@ const createOrder = async (input: CreateOrderInput) =>
           return fail(ERROR_CODES.DATA_NOT_FOUND)
         }
 
-        const priceUsd = variant ? variant.price : product.price
+        const basePrice = variant ? variant.price : product.price
         const priceLocal = Number(
-          (decimalToNumber(priceUsd) * exchangeRate).toFixed(2),
+          (decimalToNumber(basePrice) * exchangeRate).toFixed(2),
         )
 
         orderItemsPayload.push({
@@ -230,8 +222,8 @@ const createOrder = async (input: CreateOrderInput) =>
           productName: product.name,
           variantName: variant?.name,
           quantity: item.quantity,
-          priceUsd,
-          subtotalUsd: Number(priceUsd) * item.quantity,
+          basePrice,
+          baseSubtotal: Number(basePrice) * item.quantity,
           price: priceLocal,
           subtotal: priceLocal * item.quantity,
           currency,
@@ -243,41 +235,40 @@ const createOrder = async (input: CreateOrderInput) =>
         })
       }
 
-      const subtotalUsd = orderItemsPayload.reduce(
-        (sum, item) => sum + Number(item.subtotalUsd),
+      const baseSubtotal = orderItemsPayload.reduce(
+        (sum, item) => sum + Number(item.baseSubtotal),
         0,
       )
-      const shippingUsd = await calculateShippingCost({
+      const baseShipping = await calculateShippingCost({
         items: shippingItems,
         countryCode: address.countryCode,
       })
 
-      const totalUsd = subtotalUsd + shippingUsd
+      const baseTotal = baseSubtotal + baseShipping
       const exchange = (val: number) => Number((val * exchangeRate).toFixed(2))
 
       const order = await tx.order.create({
         data: {
-          userId,
+          user: { connect: { id: userId } },
           currency,
           exchangeRate,
-          exchangeRateSource,
           exchangeLocale,
-          subtotalUsd,
-          shippingUsd,
-          totalUsd,
-          discountUsd: 0,
-          taxUsd: 0,
+          baseSubtotal,
+          baseShipping,
+          baseTotal,
+          baseDiscount: 0,
+          baseTax: 0,
           discount: 0,
           tax: 0,
-          subtotal: exchange(subtotalUsd),
-          shippingCost: exchange(shippingUsd),
-          total: exchange(totalUsd),
-          shippingAddressId: addressId,
+          subtotal: exchange(baseSubtotal),
+          shippingCost: exchange(baseShipping),
+          total: exchange(baseTotal),
+          address: { connect: { id: addressId } },
           shippingName: address.name,
           shippingPhone: address.phone,
           shippingAddressText: formatFullAddress(address),
           items: { createMany: { data: orderItemsPayload } },
-        } as Prisma.OrderUncheckedCreateInput,
+        },
       })
 
       await Promise.all(
