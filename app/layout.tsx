@@ -29,7 +29,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
           'text-foreground min-h-screen antialiased',
           'relative flex h-dvh flex-col',
           'font-sans',
-          anuphan.variable,
+          anuphan.className,
         ].join(' ')}
       >
         <Providers>{children}</Providers>
