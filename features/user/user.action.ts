@@ -65,13 +65,13 @@ const createUser = async (data: UserCreateInput & { isRegister?: boolean }) => {
 }
 
 const updateUser = async (data: UserUpdateInput) =>
-  withRole([Role.ADMIN], async () => {
+  withRole([Role.ADMIN, Role.CUSTOMER], async () => {
     const validated = userUpdateSchema.safeParse(data)
     if (!validated.success) {
       return fail(ERROR_CODES.VALIDATION_ERROR)
     }
 
-    const { id, password, ...payload } = validated.data
+    const { id, ...payload } = validated.data
     if (!id) {
       return fail(ERROR_CODES.DATA_NOT_FOUND)
     }
@@ -79,10 +79,6 @@ const updateUser = async (data: UserUpdateInput) =>
     const updateData: Prisma.UserUpdateInput = {
       ...omitEmptyFields(payload),
       role: payload?.role as Role,
-    }
-
-    if (password && password.trim().length >= 6) {
-      updateData.password = await hash(password, 10)
     }
 
     try {

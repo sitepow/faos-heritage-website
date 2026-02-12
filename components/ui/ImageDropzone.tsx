@@ -12,9 +12,7 @@ import { useDropzone } from 'react-dropzone'
 import { IMAGE_ACCEPT_TYPES } from '@/constants'
 import { cn } from '@/utils'
 
-type ImageWithPreview = File & {
-  preview: string
-}
+type ImageWithPreview = File & { preview: string }
 
 interface ImageDropzoneProps {
   multiple?: boolean
@@ -33,51 +31,37 @@ const ImageDropzone = ({
   multiple = false,
   onFilesChange,
 }: ImageDropzoneProps) => {
-  const t = useTranslations('Common.ImageDropzone')
+  const t = useTranslations('imageDropzone')
   const [files, setFiles] = useState<ImageWithPreview[]>([])
 
-  const updateFiles = useCallback(
-    (updater: (prev: ImageWithPreview[]) => ImageWithPreview[]) => {
-      setFiles((prev) => {
-        const next = updater(prev)
-        onFilesChange?.(next)
-        return next
-      })
-    },
-    [onFilesChange],
-  )
+  useEffect(() => {
+    onFilesChange?.(files)
+  }, [files, onFilesChange])
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
       const newFiles = createPreviewFiles(acceptedFiles)
-
-      updateFiles((prev) => (multiple ? [...prev, ...newFiles] : newFiles))
+      setFiles((prev) => (multiple ? [...prev, ...newFiles] : newFiles))
     },
-    [multiple, updateFiles],
+    [multiple],
   )
 
-  const removeFile = useCallback(
-    (target: ImageWithPreview) => {
-      URL.revokeObjectURL(target.preview)
-
-      updateFiles((prev) =>
-        prev.filter((item) => item.preview !== target.preview),
-      )
-    },
-    [updateFiles],
-  )
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop,
-    accept: { 'image/*': IMAGE_ACCEPT_TYPES },
-    multiple,
-  })
+  const removeFile = useCallback((target: ImageWithPreview) => {
+    URL.revokeObjectURL(target.preview)
+    setFiles((prev) => prev.filter((item) => item.preview !== target.preview))
+  }, [])
 
   useEffect(() => {
     return () => {
       files.forEach((file) => URL.revokeObjectURL(file.preview))
     }
   }, [files])
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: { 'image/*': IMAGE_ACCEPT_TYPES },
+    multiple,
+  })
 
   return (
     <div className='flex flex-col gap-4'>
@@ -93,14 +77,12 @@ const ImageDropzone = ({
                 className='max-h-96 min-h-40 w-full rounded-lg object-cover'
                 src={file.preview}
               />
-
               <Button
                 className='absolute top-2 right-2'
                 startContent={<XIcon className='text-default-500 size-4' />}
                 variant='faded'
                 onPress={() => removeFile(file)}
               />
-
               <p className='text-default-500 line-clamp-1 text-xs'>
                 {file.name} ({prettyBytes(file.size)})
               </p>
@@ -119,33 +101,19 @@ const ImageDropzone = ({
         )}
       >
         <input {...getInputProps()} />
-
         <div className='flex flex-col items-center gap-3 p-8 text-center'>
-          <div
+          <ImageIcon
             className={cn(
-              'rounded-full p-4 transition-colors',
-              isDragActive && 'bg-primary/25',
+              'text-default-500 size-12',
+              isDragActive && 'text-primary',
             )}
-          >
-            <ImageIcon
-              className={cn(
-                'text-default-500 size-12',
-                isDragActive && 'text-primary',
-              )}
-            />
-          </div>
-
+          />
           {isDragActive ? (
             <p className='text-primary'>{t('active')}</p>
           ) : (
             <div className='flex flex-col gap-1'>
               <p className='font-medium'>{t('idle')}</p>
-
               <p className='text-default-500 text-sm'>{t('hint')}</p>
-
-              <p className='text-primary text-sm font-semibold'>
-                {t('limit', { size: '50 MB' })}
-              </p>
             </div>
           )}
         </div>
