@@ -1,0 +1,98 @@
+[
+  {
+    "id": "cmj5ob1h40000u53wj32bykze",
+    "email": "kteeraphatt@gmail.com",
+    "name": "Teeraphat Saengkum",
+    "password": null,
+    "emailVerified": null,
+    "image": "/uploads/21165fa0-db58-452d-8337-482fccbc1705.webp",
+    "role": "ADMIN",
+    "createdAt": "2025-12-14 12:00:31.288",
+    "updatedAt": "2025-12-25 15:40:26.415",
+    "isActive": true
+  },
+  {
+    "id": "cmj5tsnbf0000l204qv4bycsp",
+    "email": "organ_29@hotmail.com",
+    "name": "organ",
+    "password": "$2b$10$7pUzrvDe5d6qlMUQLYf.POg8UDYGO1zsDeE8UrIEle2UIDnNa1TR2",
+    "emailVerified": null,
+    "image": null,
+    "role": "ADMIN",
+    "createdAt": "2025-12-14 14:34:10.827",
+    "updatedAt": "2025-12-14 14:34:10.827",
+    "isActive": true
+  },
+  {
+    "id": "cmj5xlkbc0000l804db989u9d",
+    "email": "pompatcharin@gmail.com",
+    "name": "Patcharin FOAS",
+    "password": null,
+    "emailVerified": null,
+    "image": null,
+    "role": "ADMIN",
+    "createdAt": "2025-12-14 16:20:38.809",
+    "updatedAt": "2025-12-25 15:27:49.785",
+    "isActive": true
+  },
+  {
+    "id": "cmj6t1kp00000vfkiirkzbdo3",
+    "email": "6442470009@dru.ac.th",
+    "name": "ZentraCoreAccount!",
+    "password": "$2b$10$jN7HoJEdAIUoxSG0M467U.UEFanavGA2Kufwi6q0EPxW.YR.rNoe.",
+    "emailVerified": null,
+    "image": null,
+    "role": "ADMIN",
+    "createdAt": "2025-12-15 07:00:53.893",
+    "updatedAt": "2025-12-15 07:00:53.893",
+    "isActive": true
+  },
+  {
+    "id": "cmj7824mq000cvfgjxwyri04h",
+    "email": "faosthailand@gmail.com",
+    "name": "Foas",
+    "password": "$2b$10$.sOB9vLVq509ihmNWYsqQewVcnK7UMBi4eyEHYvIieCPBpUd1mg7i",
+    "emailVerified": null,
+    "image": null,
+    "role": "CUSTOMER",
+    "createdAt": "2025-12-15 14:01:13.97",
+    "updatedAt": "2025-12-15 14:01:13.97",
+    "isActive": true
+  },
+  {
+    "id": "cmjn2re2f000hjxkg6c8icfb8",
+    "email": "basouk790@gmail.com",
+    "name": "Nikolaos Basoukos ",
+    "password": "$2b$10$Ol0QUAWMOiJdl/0wKMdL5ueFX0S4YJdKVY7A9F/DecQ8rKec2jQbK",
+    "emailVerified": null,
+    "image": null,
+    "role": "CUSTOMER",
+    "createdAt": "2025-12-26 16:17:13.719",
+    "updatedAt": "2025-12-26 16:17:13.719",
+    "isActive": true
+  },
+  {
+    "id": "cmjoaoyty000ajx6xd17bnef6",
+    "email": "ounceolgkvm@gmail.com",
+    "name": "Kamolwan Yunarin",
+    "password": null,
+    "emailVerified": null,
+    "image": null,
+    "role": "CUSTOMER",
+    "createdAt": "2025-12-27 12:47:03.766",
+    "updatedAt": "2026-01-27 04:18:41.985",
+    "isActive": false
+  },
+  {
+    "id": "cmkwcy809000hjx4wj00949gg",
+    "email": "mooksquid@gmail.com",
+    "name": "Oranee",
+    "password": "$2b$10$bo/WQrRNB9pPgBQhpg8yDOgygww9asYDE7k/mpkWuscx8Fg876iNu",
+    "emailVerified": null,
+    "image": null,
+    "role": "CUSTOMER",
+    "createdAt": "2026-01-27 08:52:06.537",
+    "updatedAt": "2026-01-27 08:52:06.537",
+    "isActive": true
+  }
+]
