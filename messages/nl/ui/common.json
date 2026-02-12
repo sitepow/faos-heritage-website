@@ -33,6 +33,7 @@
     }
   },
   "fields": {
+    "imageUrl": "Afbeelding",
     "fullName": "Volledige naam",
     "email": "E-mailadres",
     "phone": "Telefoonnummer",

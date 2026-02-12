@@ -33,6 +33,7 @@
     }
   },
   "fields": {
+    "imageUrl": "Image",
     "fullName": "Full Name",
     "email": "Email Address",
     "phone": "Phone Number",

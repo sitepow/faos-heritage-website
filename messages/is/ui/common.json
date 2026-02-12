@@ -33,6 +33,7 @@
     }
   },
   "fields": {
+    "imageUrl": "Mynd",
     "fullName": "Fullt nafn",
     "email": "Netfang",
     "phone": "Símanúmer",

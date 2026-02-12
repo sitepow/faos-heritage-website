@@ -33,6 +33,7 @@
     }
   },
   "fields": {
+    "imageUrl": "Immagine",
     "fullName": "Nome e Cognome",
     "email": "Indirizzo Email",
     "phone": "Numero di Telefono",

@@ -33,6 +33,7 @@
     }
   },
   "fields": {
+    "imageUrl": "画像",
     "fullName": "氏名",
     "email": "メールアドレス",
     "phone": "電話番号",

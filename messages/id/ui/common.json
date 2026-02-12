@@ -33,6 +33,7 @@
     }
   },
   "fields": {
+    "imageUrl": "Gambar",
     "fullName": "Nama Lengkap",
     "email": "Alamat Email",
     "phone": "Nomor Telepon",

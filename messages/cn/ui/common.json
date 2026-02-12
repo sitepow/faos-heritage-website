@@ -33,6 +33,7 @@
     }
   },
   "fields": {
+    "imageUrl": "图片",
     "fullName": "姓名",
     "email": "电子邮箱",
     "phone": "电话号码",

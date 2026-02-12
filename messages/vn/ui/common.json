@@ -33,6 +33,7 @@
     }
   },
   "fields": {
+    "imageUrl": "Hình ảnh",
     "fullName": "Họ và tên",
     "email": "Địa chỉ Email",
     "phone": "Số điện thoại",

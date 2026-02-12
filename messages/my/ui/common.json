@@ -33,6 +33,7 @@
     }
   },
   "fields": {
+    "imageUrl": "Imej",
     "fullName": "Nama Penuh",
     "email": "Alamat E-mel",
     "phone": "Nombor Telefon",
