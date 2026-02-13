@@ -1,13 +1,11 @@
 import { CardHeader } from '@heroui/react'
 
-interface Props {
-  title?: string
-}
+import type { PropsWithChildren } from 'react'
 
-const ProfileHeader = ({ title }: Props) => {
+const ProfileHeader = ({ children }: PropsWithChildren) => {
   return (
     <CardHeader className='border-default-100 flex justify-between border-b'>
-      <b className='text-lg'>{title}</b>
+      {children}
     </CardHeader>
   )
 }

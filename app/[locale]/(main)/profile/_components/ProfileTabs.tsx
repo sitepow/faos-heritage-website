@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl'
 import React, { useMemo } from 'react'
 
 import { AccountCard } from './AccountCard'
+import { AddressCard } from './Address/AddressCard'
 import { OrderCard } from './Order/OrderCard'
 import { ProfileCard } from './ProfileCard'
 
@@ -81,7 +82,7 @@ const renderTabContent = (tab: PROFILE_TABS) => {
     case PROFILE_TABS.PROFILE:
       return <ProfileCard />
     case PROFILE_TABS.ADDRESS:
-      return <BorderedCard />
+      return <AddressCard />
     default:
       return null
   }

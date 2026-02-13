@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 
-import { getAddresses, getDefaultAddress } from './address.action'
+import { getAddress, getAddresses, getDefaultAddress } from './address.action'
 import { addressQueryKeys } from './address.query-key'
 
 const useAddresses = (userId?: string) => {
@@ -20,4 +20,12 @@ const useDefaultAddress = (userId?: string) => {
   })
 }
 
-export { useAddresses, useDefaultAddress }
+const useAddress = (addressId?: string | null) => {
+  return useQuery({
+    queryKey: addressQueryKeys.details.byId(addressId!),
+    queryFn: () => getAddress(addressId!),
+    enabled: !!addressId,
+  })
+}
+
+export { useAddresses, useDefaultAddress, useAddress }

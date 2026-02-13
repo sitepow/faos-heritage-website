@@ -4,7 +4,7 @@ type AddressInput = z.infer<typeof addressSchema>
 
 const addressSchema = z.object({
   id: z.string().optional(),
-  userId: z.string(),
+  // userId: z.string(),
   name: z.string().min(1, 'Please enter your name'),
   phone: z.string().min(1, 'Please enter your phone number'),
   address: z.string().min(1, 'Please enter your address'),

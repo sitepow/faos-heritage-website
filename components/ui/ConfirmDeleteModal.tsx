@@ -11,7 +11,7 @@ import {
 } from '@heroui/react'
 import { useTranslations } from 'next-intl'
 
-interface ConfirmDeleteModalProps {
+interface Props {
   isOpen: boolean
   onOpenChange: (open: boolean) => void
   onConfirm: () => void
@@ -31,8 +31,8 @@ const ConfirmDeleteModal = ({
   description,
   confirmText,
   cancelText,
-}: ConfirmDeleteModalProps) => {
-  const tDeleteAlert = useTranslations('global.alert.delete')
+}: Props) => {
+  const tDeleteAlert = useTranslations('alert.delete')
   const tActions = useTranslations('actions')
 
   const handleCancel = () => {

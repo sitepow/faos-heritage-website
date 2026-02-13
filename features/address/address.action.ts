@@ -10,10 +10,10 @@ import { prisma } from '@/lib/prisma'
 import { getServerUser, withRole } from '@/lib/session'
 import { omitEmptyFields } from '@/utils'
 
-export type GetAddressResult = Awaited<ReturnType<typeof getAddress>>
+type GetAddressResult = Awaited<ReturnType<typeof getAddress>>
 
 const createAddress = async (data: AddressInput) =>
-  withRole([Role.ADMIN], async (userId) => {
+  withRole([Role.ADMIN, Role.CUSTOMER], async (userId) => {
     const validated = addressSchema.safeParse(data)
 
     if (!validated.success) {
@@ -44,7 +44,7 @@ const createAddress = async (data: AddressInput) =>
   })
 
 const updateAddress = async (data: AddressInput) =>
-  withRole([Role.ADMIN], async (userId) => {
+  withRole([Role.ADMIN, Role.CUSTOMER], async (userId) => {
     const validated = addressSchema.safeParse(data)
     if (!validated.success) {
       return fail(ERROR_CODES.VALIDATION_ERROR)
@@ -85,7 +85,7 @@ const updateAddress = async (data: AddressInput) =>
   })
 
 const deleteAddress = async (addressId: string) =>
-  withRole([Role.ADMIN], async (userId) => {
+  withRole([Role.ADMIN, Role.CUSTOMER], async (userId) => {
     if (!addressId) {
       return fail(ERROR_CODES.BAD_REQUEST)
     }
@@ -171,3 +171,5 @@ export {
   getAddress,
   getDefaultAddress,
 }
+
+export type { GetAddressResult }

@@ -92,8 +92,8 @@
   },
   "alert": {
     "delete": {
-      "title": "Apakah Anda yakin ingin menghapus ini?",
-      "description": "Tindakan ini permanen dan tidak dapat dibatalkan."
+      "title": "Konfirmasi Penghapusan",
+      "description": "Apakah Anda yakin ingin menghapus item ini? Setelah selesai, data akan dihapus secara permanen dan tidak dapat dipulihkan. Harap tinjau kembali dengan teliti sebelum mengonfirmasi."
     },
     "development": {
       "title": "Pengumuman Pemeliharaan Sistem Sementara",

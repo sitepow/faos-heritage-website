@@ -92,8 +92,8 @@
   },
   "alert": {
     "delete": {
-      "title": "Sei sicuro di voler eliminare questo elemento?",
-      "description": "Questa azione è permanente e non può essere annullata."
+      "title": "Conferma Cancellazione",
+      "description": "Sei sicuro di voler eliminare questo elemento? Una volta completata l'operazione, i dati verranno rimossi in modo permanente e non potranno essere recuperati. Si prega di controllare attentamente prima di confermare."
     },
     "development": {
       "title": "Annuncio di Manutenzione Temporanea del Sistema",

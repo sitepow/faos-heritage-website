@@ -53,7 +53,9 @@ const OrderCard = () => {
 
   return (
     <BorderedCard>
-      <ProfileHeader title={t('tabs.orders')} />
+      <ProfileHeader>
+        <b>{t('tabs.orders')}</b>
+      </ProfileHeader>
       {renderContent()}
       {showPagination && (
         <PaginationWrapper page={page} total={totalPages} onChange={setPage} />

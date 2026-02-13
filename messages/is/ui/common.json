@@ -92,8 +92,8 @@
   },
   "alert": {
     "delete": {
-      "title": "Ertu viss um að þú viljir eyða þessu?",
-      "description": "Þessi aðgerð er varanleg og henni er ekki hægt að hneppa aftur."
+      "title": "Staðfesta eyðingu",
+      "description": "Ertu viss um að þú viljir eyða þessu atriði? Þegar því er lokið verður gögnunum eytt varanlega og ekki hægt að endurheimta þau. Vinsamlegast athugaðu málið vandlega áður en þú staðfestir."
     },
     "development": {
       "title": "Tilkynning um tímabundið kerfisviðhald",

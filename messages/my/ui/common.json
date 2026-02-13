@@ -92,8 +92,8 @@
   },
   "alert": {
     "delete": {
-      "title": "Adakah anda pasti mahu memadamkan ini?",
-      "description": "Tindakan ini adalah kekal dan tidak boleh diubah semula."
+      "title": "Sahkan Padam",
+      "description": "Adakah anda pasti mahu memadamkan item ini? Selepas selesai, data akan dialih keluar secara kekal dan tidak boleh dipulihkan. Sila semak dengan teliti sebelum mengesahkan."
     },
     "development": {
       "title": "Pengumuman Penyelenggaraan Sistem Sementara",

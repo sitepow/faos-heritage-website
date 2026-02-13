@@ -92,8 +92,8 @@
   },
   "alert": {
     "delete": {
-      "title": "您确定要删除吗？",
-      "description": "此操作永久生效，无法撤销。"
+      "title": "确认删除",
+      "description": "您确定要删除此项目吗？操作完成后，数据将被永久移除且无法恢复。请在确认前仔细检查。"
     },
     "development": {
       "title": "系统临时维护公告",

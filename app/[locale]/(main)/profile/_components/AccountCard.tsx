@@ -27,7 +27,9 @@ const AccountCard = () => {
 
   return (
     <BorderedCard>
-      <ProfileHeader title={t('sections.personal')} />
+      <ProfileHeader>
+        <b>{t('sections.personal')}</b>
+      </ProfileHeader>
       <CardBody>
         <div className='border-default-100 flex flex-col gap-3 rounded-lg border p-2.5 sm:max-w-1/2'>
           <InfoItem label={tField('fullName')} value={user?.name} />

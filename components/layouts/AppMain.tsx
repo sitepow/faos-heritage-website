@@ -1,7 +1,7 @@
 'use client'
 
-import { Alert } from '@heroui/react'
-import { useTranslations } from 'next-intl'
+// import { Alert } from '@heroui/react'
+// import { useTranslations } from 'next-intl'
 
 import type { ComponentProps, ReactNode } from 'react'
 
@@ -16,12 +16,12 @@ interface AppMainProps extends ComponentProps<'div'> {
 }
 
 const AppMain = ({ className, children, ...props }: AppMainProps) => {
-  const t = useTranslations('alert')
+  // const t = useTranslations('alert')
 
   return (
     <Container className={cn('p-5', className)} {...props}>
       <AppSection>
-        <Alert
+        {/* <Alert
           classNames={{
             base: 'max-w-full overflow-hidden',
             mainWrapper: 'overflow-hidden',
@@ -31,7 +31,7 @@ const AppMain = ({ className, children, ...props }: AppMainProps) => {
           description={t('development.description')}
           title={t('development.title')}
           variant='faded'
-        />
+        /> */}
         {children}
       </AppSection>
     </Container>

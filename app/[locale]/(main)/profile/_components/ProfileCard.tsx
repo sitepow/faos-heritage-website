@@ -1,7 +1,9 @@
 'use client'
 
-import { Card, CardHeader, CardBody, CardFooter, Button } from '@heroui/react'
+import { Card, CardBody, CardFooter, Button } from '@heroui/react'
 import { useTranslations } from 'next-intl'
+
+import { ProfileHeader } from './ProfileHeader'
 
 import { FormInput } from '@/components/ui/FormInput'
 import { ImageDropzone } from '@/components/ui/ImageDropzone'
@@ -23,9 +25,9 @@ const ProfileCard = () => {
       radius='sm'
       shadow='none'
     >
-      <CardHeader>
-        <span className='font-medium'>{t('tabs.edit')}</span>
-      </CardHeader>
+      <ProfileHeader>
+        <b>{t('tabs.edit')}</b>
+      </ProfileHeader>
 
       <CardBody className='gap-6'>
         <div className='mx-auto w-full max-w-2xl'>
@@ -61,6 +63,7 @@ const ProfileCard = () => {
           {tActions('cancel')}
         </Button>
         <Button
+          className='text-secondary'
           color='primary'
           isDisabled={isLoading || !isDirty}
           isLoading={isLoading}

@@ -92,8 +92,8 @@
   },
   "alert": {
     "delete": {
-      "title": "Weet u zeker dat u dit wilt verwijderen?",
-      "description": "Deze actie is definitief en kan niet ongedaan worden gemaakt."
+      "title": "Verwijdering Bevestigen",
+      "description": "Weet u zeker dat u dit item wilt verwijderen? Eenmaal voltooid, worden de gegevens permanent verwijderd en kunnen ze niet meer worden hersteld. Controleer dit zorgvuldig voordat u bevestigt."
     },
     "development": {
       "title": "Aankondiging Tijdelijk Systeemonderhoud",
