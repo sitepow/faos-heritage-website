@@ -6,10 +6,10 @@ import React, { useMemo } from 'react'
 
 import { AccountCard } from './AccountCard'
 import { AddressCard } from './Address/AddressCard'
+import { FavoriteCard } from './Favorite/FavoriteCard'
 import { OrderCard } from './Order/OrderCard'
 import { ProfileCard } from './ProfileCard'
 
-import { BorderedCard } from '@/components/ui/BorderedCard'
 import { BREAKPOINTS, PROFILE_TABS } from '@/constants'
 import { useIsBelowBreakpoint } from '@/hooks/useIsBelowBreakpoint'
 import { useIsMounted } from '@/hooks/useIsMounted'
@@ -78,7 +78,7 @@ const renderTabContent = (tab: PROFILE_TABS) => {
     case PROFILE_TABS.ORDER:
       return <OrderCard />
     case PROFILE_TABS.FAVORITE:
-      return <BorderedCard />
+      return <FavoriteCard />
     case PROFILE_TABS.PROFILE:
       return <ProfileCard />
     case PROFILE_TABS.ADDRESS:

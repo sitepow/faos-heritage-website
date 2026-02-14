@@ -2,6 +2,8 @@
 
 import { Role, type Prisma } from '@prisma/client'
 
+import { transformProduct } from '../product/product.helper'
+
 import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { prisma } from '@/lib/prisma'
@@ -13,6 +15,7 @@ interface GetFavoritesProps {
   cursor?: string | null
   limit?: number
   userId?: string | null
+  locale?: string
 }
 
 type GetFavoritesResult = Awaited<ReturnType<typeof getFavorites>>
@@ -75,9 +78,11 @@ const getFavorites = async ({
   cursor,
   limit = 8,
   userId: propUserId,
+  locale,
 }: GetFavoritesProps) => {
   const { userId } = await getServerUser()
   const activeUserId = propUserId || userId
+  const languageCode = locale?.toUpperCase()
 
   if (!activeUserId) {
     return { items: [], nextCursor: null, totalCount: 0 }
@@ -99,12 +104,17 @@ const getFavorites = async ({
             name: true,
             price: true,
             unit: true,
-            variants: { select: { price: true } },
+            variants: { select: { price: true, stockQuantity: true } },
+            localizations: {
+              where: { languageCode },
+              take: 1,
+              select: { name: true, summary: true, description: true },
+            },
             summary: true,
             images: {
               where: { isPrimary: true },
               take: 1,
-              select: { url: true },
+              select: { url: true, isPrimary: true },
             },
           },
         },
@@ -114,18 +124,32 @@ const getFavorites = async ({
   ])
 
   const hasNextPage = items.length > limit
-  const transformed = decimalToNumber(
-    hasNextPage ? items.slice(0, limit) : items,
-  )
+  const rawItems = hasNextPage ? items.slice(0, limit) : items
 
-  const favoriteItems = transformed.map((item) => {
+  const data = decimalToNumber(rawItems)
+
+  const favoriteItems = data.map((item) => {
     const { priceMin, priceMax } = calculateVariantRange(item.product?.variants)
+
     return {
-      ...item,
+      id: item.id,
+      product: transformProduct(item.product),
       priceMin,
       priceMax,
     }
   })
+
+  // const favoriteItems = transformed.map((item) => {
+  //   const { priceMin, priceMax } = calculateVariantRange(item.product?.variants)
+
+  //   return {
+  //     ...item,
+
+  //     priceMin,
+
+  //     priceMax,
+  //   }
+  // })
 
   const nextCursor = hasNextPage
     ? favoriteItems[favoriteItems.length - 1].id
@@ -134,7 +158,7 @@ const getFavorites = async ({
   return {
     items: favoriteItems,
     nextCursor,
-    totalCount,
+    totalCount: totalCount ?? 0,
   }
 }
 

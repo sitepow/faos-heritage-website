@@ -1,141 +1,95 @@
-// 'use client'
+'use client'
 
-// import { Card, useDisclosure, CardBody, Button, Image } from '@heroui/react'
-// import { useMutation, useQueryClient } from '@tanstack/react-query'
-// import { XIcon } from 'lucide-react'
-// import { useSession } from 'next-auth/react'
-// import { useTranslations } from 'next-intl'
+import { Card, useDisclosure, CardBody, Button, Image } from '@heroui/react'
+import { XIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
-// import type { ComponentProps } from 'react'
+import type { ComponentProps } from 'react'
 
-// import { ConfirmDeleteModal } from '@/components/ui/ConfirmDeleteModal'
-// import { ProductPrice } from '@/components/ui/Product/ProductPrice'
-// import { IMAGE_FALLBACK } from '@/constants'
-// import {
-//   deleteFavorite,
-//   type GetFavoriteResult,
-// } from '@/features/favorite/favorite.action'
-// import { cn, resolveProductUnitLabel } from '@/utils'
+import { ConfirmDeleteModal } from '@/components/ui/ConfirmDeleteModal'
+import { ProductPrice } from '@/components/ui/Product/ProductPrice'
+import { IMAGE_FALLBACK } from '@/constants'
+import { type FavoriteListItem } from '@/features/favorite/favorite.action'
+import { useFavoriteMutation } from '@/features/favorite/favorite.mutation'
+import { resolveProductUnitLabel } from '@/utils'
 
-// type FavoriteItemProps = ComponentProps<typeof Card> & {
-//   favorite: GetFavoriteResult
-// }
+type Props = ComponentProps<typeof Card> & {
+  favorite: FavoriteListItem
+}
 
-// const FavoriteItem = ({ favorite, ...props }: FavoriteItemProps) => {
-//   const t = useTranslations('Account')
-//   const queryClient = useQueryClient()
+const FavoriteItem = ({ favorite, ...props }: Props) => {
+  const tActions = useTranslations('actions')
 
-//   const {
-//     isOpen: isOpenDeleteFavorite,
-//     onOpenChange: onOpenDeleteFavoriteChange,
-//   } = useDisclosure()
+  const { isOpen, onOpen, onOpenChange } = useDisclosure()
+  const { removeFromFav, isRemoving } = useFavoriteMutation()
 
-//   const { data: session } = useSession()
-//   const userId = session?.user?.id
-//   const productId = favorite?.product?.id
+  const { product, priceMin, priceMax } = favorite
+  const primaryImage = product?.images?.[0]?.url ?? IMAGE_FALLBACK.EMPTY
 
-//   const QUERY_KEY = {
-//     FAVORITES: ['account', 'favorites', userId],
-//     CART: ['carts', userId],
-//     CART_COUNT: ['carts', 'stat', userId],
-//   }
+  const handleRemove = async () => {
+    if (!product?.id) {
+      return
+    }
+    await removeFromFav(product.id)
+    onOpenChange()
+  }
 
-//   const onRefetch = async () => {
-//     await Promise.all([
-//       queryClient.invalidateQueries({
-//         queryKey: QUERY_KEY.CART,
-//       }),
-//       queryClient.invalidateQueries({
-//         queryKey: QUERY_KEY.CART_COUNT,
-//       }),
-//       queryClient.invalidateQueries({
-//         queryKey: QUERY_KEY.FAVORITES,
-//       }),
-//     ])
-//   }
+  return (
+    <>
+      <ConfirmDeleteModal
+        isOpen={isOpen}
+        isPending={isRemoving}
+        onConfirm={handleRemove}
+        onOpenChange={onOpenChange}
+      />
 
-//   const { mutate: mutateDeleteFavorite, isPending: isPendingDeleteFavorite } =
-//     useMutation({
-//       mutationFn: () => deleteFavorite({ userId, productId }),
-//       onSuccess: async () => {
-//         onRefetch()
-//       },
-//     })
+      <Card fullWidth radius='none' shadow='none' {...props}>
+        <CardBody>
+          <div className='flex flex-wrap justify-between gap-4'>
+            <div className='flex flex-wrap items-center gap-10 lg:max-w-1/2 lg:flex-nowrap'>
+              <div className='border-default-100 relative aspect-square size-[250px] shrink-0 overflow-hidden rounded-lg border bg-white'>
+                <Image
+                  alt={product?.name ?? 'product'}
+                  className='size-full object-contain p-10'
+                  classNames={{ wrapper: 'size-full' }}
+                  radius='none'
+                  src={primaryImage}
+                  width='100%'
+                />
+              </div>
 
-//   const primaryImage =
-//     favorite?.product?.images?.find((img) => img.isPrimary) ??
-//     favorite?.product?.images?.[0]
+              <div className='flex flex-col gap-1 sm:w-1/2'>
+                <span className='font-semibold'>{product?.name}</span>
+                <span className='text-default-500 line-clamp-2 text-sm'>
+                  {product?.summary}
+                </span>
+                <ProductPrice
+                  className='items-start'
+                  price={product?.price!}
+                  priceMax={priceMax}
+                  priceMin={priceMin}
+                  unit={resolveProductUnitLabel(product?.unit!)}
+                />
+              </div>
+            </div>
 
-//   return (
-//     <>
-//       <ConfirmDeleteModal
-//         description={t('modals.removeFavorite.description')}
-//         isOpen={isOpenDeleteFavorite}
-//         isPending={isPendingDeleteFavorite}
-//         title={t('modals.removeFavorite.title')}
-//         onConfirm={() => {
-//           mutateDeleteFavorite()
-//         }}
-//         onOpenChange={onOpenDeleteFavoriteChange}
-//       />
+            <div className='flex flex-wrap items-center gap-2'>
+              <Button
+                color='primary'
+                isDisabled={isRemoving}
+                isLoading={isRemoving}
+                startContent={!isRemoving && <XIcon />}
+                variant='bordered'
+                onPress={onOpen}
+              >
+                {tActions('delete')}
+              </Button>
+            </div>
+          </div>
+        </CardBody>
+      </Card>
+    </>
+  )
+}
 
-//       <Card fullWidth radius='none' shadow='none' {...props}>
-//         <CardBody>
-//           <div className='flex flex-wrap justify-between gap-4'>
-//             <div className='flex flex-wrap items-center gap-10 lg:max-w-1/2 lg:flex-nowrap'>
-//               <div
-//                 className={cn(
-//                   'border-default-100 relative aspect-square size-[250px] shrink-0 overflow-hidden rounded-lg border bg-white transition-all duration-1000 ease-in-out',
-//                 )}
-//               >
-//                 <Image
-//                   alt='product-image'
-//                   className={cn(
-//                     'size-full object-contain p-10 transition-transform duration-1000',
-//                     'scale-100',
-//                   )}
-//                   classNames={{ wrapper: 'size-full' }}
-//                   radius='none'
-//                   src={primaryImage?.url ?? IMAGE_FALLBACK.EMPTY}
-//                   width='100%'
-//                 />
-//               </div>
-
-//               <div className='flex flex-col gap-1 sm:w-1/2'>
-//                 <span className='font-semibold'>{favorite?.product?.name}</span>
-//                 <span className='text-default-500 line-clamp-2 text-sm'>
-//                   {favorite?.product?.shortDescription}
-//                 </span>
-//                 <span className='text-default-500 text-sm'>
-//                   {t('fields.productId')} : {favorite?.product?.id}
-//                 </span>
-//                 <ProductPrice
-//                   className='items-start'
-//                   price={favorite?.product?.price}
-//                   priceMax={favorite?.priceMax!}
-//                   priceMin={favorite?.priceMin!}
-//                   unit={resolveProductUnitLabel(favorite?.product?.unit)}
-//                 />
-//               </div>
-//             </div>
-
-//             <div className='flex flex-wrap items-center gap-2'>
-//               <Button
-//                 color='primary'
-//                 isDisabled={isPendingDeleteFavorite}
-//                 isLoading={isPendingDeleteFavorite}
-//                 startContent={!isPendingDeleteFavorite && <XIcon size={18} />}
-//                 variant='bordered'
-//                 onPress={onOpenDeleteFavoriteChange}
-//               >
-//                 {t('buttons.removeFavorite')}
-//               </Button>
-//             </div>
-//           </div>
-//         </CardBody>
-//       </Card>
-//     </>
-//   )
-// }
-
-// export { FavoriteItem }
+export { FavoriteItem }
