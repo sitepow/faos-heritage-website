@@ -11,8 +11,8 @@ const intlMiddleware = createIntlMiddleware(routing)
 
 const stripLocaleFromPath = (pathname: string): string => {
   const localePattern = new RegExp(`^/(${routing.locales.join('|')})(?=/|$)`)
-
-  return pathname.replace(localePattern, '') || '/'
+  const pathWithoutLocale = pathname.replace(localePattern, '')
+  return pathWithoutLocale || '/'
 }
 
 const isAuthenticated = (request: NextRequest): boolean => {
@@ -28,23 +28,28 @@ export default function middleware(request: NextRequest) {
   const normalizedPath = stripLocaleFromPath(pathname)
   const loggedIn = isAuthenticated(request)
 
+  const pathParts = pathname.split('/')
+  const localeInPath = pathParts[1]
+  const currentLocale = routing.locales.includes(localeInPath)
+    ? localeInPath
+    : routing.defaultLocale
+
   const isProtectedRoute = ROUTES.PROTECTED.some((path) =>
     normalizedPath.startsWith(path),
   )
-
   const isAuthRoute = ROUTES.AUTH.some((path) =>
     normalizedPath.startsWith(path),
   )
 
   if (isProtectedRoute && !loggedIn) {
-    const redirectUrl = new URL('/login', request.url)
+    const loginPath = `/${currentLocale}/login`
+    const redirectUrl = new URL(loginPath, request.url)
     redirectUrl.searchParams.set('callbackUrl', pathname)
-
     return NextResponse.redirect(redirectUrl)
   }
 
   if (isAuthRoute && loggedIn) {
-    return NextResponse.redirect(new URL('/', request.url))
+    return NextResponse.redirect(new URL(`/${currentLocale}`, request.url))
   }
 
   return intlMiddleware(request)
