@@ -35,17 +35,15 @@ const ProductCard = ({ className, product }: Props) => {
   return (
     <Card
       className={cn(
-        'group hover:bg-default-50/50 flex w-full flex-col bg-transparent p-2 shadow-none transition-all duration-300',
+        'group flex w-full flex-col bg-transparent p-2 transition-all duration-300',
         className,
       )}
       radius='lg'
+      shadow='none'
     >
       <Link className='flex flex-col gap-4' href={productHref}>
         <div className='relative overflow-hidden rounded-xl'>
-          <ProductImage
-            className='h-[300px] w-full transition-transform duration-500 group-hover:scale-105'
-            image={primarySrc}
-          />
+          <ProductImage className='h-[300px] w-full' image={primarySrc} />
         </div>
 
         <CardBody className='flex flex-col items-start gap-4 overflow-hidden p-1'>
