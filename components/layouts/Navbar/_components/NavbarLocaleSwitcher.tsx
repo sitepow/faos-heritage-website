@@ -9,7 +9,7 @@ import {
 } from '@heroui/react'
 import { ChevronDownIcon, GlobeIcon } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 
 import { useAppStore } from '@/app/store'
 import { CountryFlagAvatar } from '@/components/ui/CountryFlagAvatar'
@@ -31,10 +31,19 @@ const NavbarLocaleSwitcher = () => {
   const selectedByRoute = useMemo(
     () =>
       CURRENCY_LOCALE_MAP.find(
-        (item) => item.country.toLowerCase() === routeLocale,
+        (item) => item.country.toLowerCase() === routeLocale.toLowerCase(),
       ),
     [routeLocale],
   )
+
+  useEffect(() => {
+    if (selectedByRoute) {
+      setAppLocale({
+        ...selectedByRoute,
+        name: tCountry(selectedByRoute.country),
+      })
+    }
+  }, [selectedByRoute, setAppLocale, tCountry])
 
   const handleRouteLocaleChange = (nextCountryCode: CountryCode) => {
     const selected = CURRENCY_LOCALE_MAP.find(
