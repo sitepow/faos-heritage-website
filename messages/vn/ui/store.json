@@ -8,10 +8,6 @@
       "description": "Mô tả Sản phẩm",
       "review": "Đánh giá từ Khách hàng"
     },
-    "chips": {
-      "authentic": "100% Chính hãng",
-      "premium": "Chất lượng Cao cấp"
-    },
     "cartActions": {
       "quantity": "Số lượng",
       "options": "Chọn phân loại",

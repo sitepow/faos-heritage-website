@@ -8,10 +8,6 @@
       "description": "Vörulýsing",
       "review": "Umsagnir viðskiptavina"
     },
-    "chips": {
-      "authentic": "100% ekta",
-      "premium": "Úrvals gæði"
-    },
     "cartActions": {
       "quantity": "Magn",
       "options": "Veldu valmöguleika",

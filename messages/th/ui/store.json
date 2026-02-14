@@ -5,10 +5,6 @@
   },
   "productDetail": {
     "tabs": { "description": "รายละเอียดสินค้า", "review": "รีวิวสินค้า" },
-    "chips": {
-      "authentic": "ของแท้ 100%",
-      "premium": "พรีเมียม"
-    },
     "cartActions": {
       "quantity": "จำนวนสินค้า",
       "options": "เลือกแบบสินค้า",

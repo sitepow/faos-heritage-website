@@ -8,10 +8,6 @@
       "description": "Productbeschrijving",
       "review": "Klantbeoordelingen"
     },
-    "chips": {
-      "authentic": "100% Authentiek",
-      "premium": "Premium Kwaliteit"
-    },
     "cartActions": {
       "quantity": "Aantal",
       "options": "Selecteer opties",

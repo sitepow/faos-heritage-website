@@ -8,10 +8,6 @@
       "description": "Περιγραφή Προϊόντος",
       "review": "Αξιολογήσεις Πελατών"
     },
-    "chips": {
-      "authentic": "100% Αυθεντικό",
-      "premium": "Ποιότητα Premium"
-    },
     "cartActions": {
       "quantity": "Ποσότητα",
       "options": "Επιλέξτε Επιλογές",

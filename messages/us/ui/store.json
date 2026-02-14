@@ -8,10 +8,6 @@
       "description": "Product Description",
       "review": "Customer Reviews"
     },
-    "chips": {
-      "authentic": "100% Authentic",
-      "premium": "Premium Quality"
-    },
     "cartActions": {
       "quantity": "Quantity",
       "options": "Select Options",

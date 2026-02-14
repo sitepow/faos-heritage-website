@@ -8,10 +8,6 @@
       "description": "商品説明",
       "review": "カスタマーレビュー"
     },
-    "chips": {
-      "authentic": "100%本物保証",
-      "premium": "プレミアム品質"
-    },
     "cartActions": {
       "quantity": "数量",
       "options": "オプションを選択",

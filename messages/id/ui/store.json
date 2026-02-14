@@ -8,10 +8,6 @@
       "description": "Deskripsi Produk",
       "review": "Ulasan Pelanggan"
     },
-    "chips": {
-      "authentic": "100% Asli",
-      "premium": "Kualitas Premium"
-    },
     "cartActions": {
       "quantity": "Jumlah",
       "options": "Pilih Opsi",

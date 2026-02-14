@@ -8,10 +8,6 @@
       "description": "产品详情",
       "review": "客户评价"
     },
-    "chips": {
-      "authentic": "100% 正品保障",
-      "premium": "顶级品质"
-    },
     "cartActions": {
       "quantity": "数量",
       "options": "选择规格",

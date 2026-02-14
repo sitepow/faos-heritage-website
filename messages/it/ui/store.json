@@ -8,10 +8,6 @@
       "description": "Descrizione prodotto",
       "review": "Recensioni clienti"
     },
-    "chips": {
-      "authentic": "100% Autentico",
-      "premium": "Qualità Premium"
-    },
     "cartActions": {
       "quantity": "Quantità",
       "options": "Seleziona opzioni",

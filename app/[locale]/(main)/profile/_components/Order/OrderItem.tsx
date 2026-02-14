@@ -1,9 +1,9 @@
 'use client'
 
-import { Button, Alert } from '@heroui/react'
+import { Button, Alert, useDisclosure } from '@heroui/react'
 import { OrderStatus } from '@prisma/client'
 import { useMutation } from '@tanstack/react-query'
-import { ArrowRight, ArrowUpRightIcon, DownloadIcon, XIcon } from 'lucide-react'
+import { ArrowRight, ArrowUpRightIcon, DownloadIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useMemo } from 'react'
@@ -12,6 +12,7 @@ import type { Order } from '@/features/order/useOrder'
 
 import { createStripeCheckout } from '@/app/actions/stripe'
 import { AvatarGroupWrapper } from '@/components/ui/AvatarGroupWrapper'
+import { OrderDetailsModal } from '@/components/ui/OrderDetailsModal'
 import { OrderStepper } from '@/components/ui/OrderStepper/OrderStepper'
 import { IMAGE_FALLBACK } from '@/constants'
 import { useExchangeRate } from '@/features/exchangeRate/useExchangeRate'
@@ -37,6 +38,8 @@ const OrderItem = ({ order, hideButton }: Props) => {
   const tOrderStatus = useTranslations('global.orderStatus')
 
   const router = useRouter()
+
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   const isPending = order?.status === OrderStatus.PENDING
   const isDisableReceipt = DISABLE_RECEIPT_STATUSES.includes(order.status)
@@ -73,32 +76,24 @@ const OrderItem = ({ order, hideButton }: Props) => {
         <Button
           color='primary'
           size='sm'
-          startContent={<ArrowUpRightIcon />}
+          startContent={<ArrowUpRightIcon size={16} />}
           variant='bordered'
+          onPress={onOpen}
         >
           {t('actions.view')}
         </Button>
+
         {isPending && (
-          <>
-            <Button
-              color='danger'
-              size='sm'
-              startContent={<XIcon />}
-              variant='bordered'
-            >
-              {t('actions.cancel')}
-            </Button>
-            <Button
-              className='text-secondary'
-              color='primary'
-              endContent={!isPendingCheckout && <ArrowRight />}
-              isLoading={isPendingCheckout}
-              size='sm'
-              onPress={() => mutateCheckout()}
-            >
-              {t('actions.payNow')}
-            </Button>
-          </>
+          <Button
+            className='text-secondary'
+            color='primary'
+            endContent={!isPendingCheckout && <ArrowRight size={16} />}
+            isLoading={isPendingCheckout}
+            size='sm'
+            onPress={() => mutateCheckout()}
+          >
+            {t('actions.payNow')}
+          </Button>
         )}
 
         {!isPending && (
@@ -106,7 +101,7 @@ const OrderItem = ({ order, hideButton }: Props) => {
             color='default'
             isDisabled={!isDisableReceipt}
             size='sm'
-            startContent={<DownloadIcon />}
+            startContent={<DownloadIcon size={16} />}
             variant='bordered'
           >
             {t('actions.downloadReceipt')}
@@ -117,7 +112,7 @@ const OrderItem = ({ order, hideButton }: Props) => {
   }
 
   return (
-    <div className='border-default-100 flex flex-col gap-4 rounded-xl border p-4 transition-all'>
+    <div className='border-default-100 flex flex-col gap-4 rounded-xl border p-4'>
       {isPending && (
         <Alert
           color='warning'
@@ -131,15 +126,15 @@ const OrderItem = ({ order, hideButton }: Props) => {
           <AvatarGroupWrapper images={productImages} max={3} />
 
           <div className='flex flex-col gap-0.5'>
-            <p className='text-sm font-semibold'>
+            <p className='text-foreground text-sm font-semibold'>
               {tField('orderId')} #{order?.id.slice(-8).toUpperCase()}
-              <span className='ml-2'>
+              <span className='text-default-500 ml-2 font-normal'>
                 ({formatNumber(order?.items?.length)} {tProductUnit('ITEM')})
               </span>
             </p>
             <p className='text-default-500 text-xs'>
               {formatDate(order.createdAt)} •
-              <span className='text-primary ml-1 font-medium'>
+              <span className='text-primary ml-1 font-medium uppercase'>
                 {tOrderStatus(order.status)}
               </span>
             </p>
@@ -168,6 +163,8 @@ const OrderItem = ({ order, hideButton }: Props) => {
       </div>
 
       <div className='border-default-100 border-t pt-4'>{renderActions()}</div>
+
+      <OrderDetailsModal isOpen={isOpen} order={order} onClose={onClose} />
     </div>
   )
 }
