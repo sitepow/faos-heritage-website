@@ -4,8 +4,8 @@ import { CardBody } from '@heroui/react'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
-import { ProfileHeader } from '../ProfileHeader'
 import { OrderItem } from './OrderItem'
+import { ProfileHeader } from '../Profile/ProfileHeader'
 
 import { BorderedCard } from '@/components/ui/BorderedCard'
 import { EmptyState } from '@/components/ui/EmptyState'

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 'use client'
 
 import { Card, Button, CardBody, useDisclosure, Alert } from '@heroui/react'
@@ -6,7 +7,7 @@ import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
 import { AddressItem } from './AddressItem'
-import { ProfileHeader } from '../ProfileHeader'
+import { ProfileHeader } from '../Profile/ProfileHeader'
 
 import { ConfirmDeleteModal } from '@/components/ui/ConfirmDeleteModal'
 import { useAddressStore } from '@/features/address/address.store'

@@ -4,7 +4,7 @@ import { Button, CardBody } from '@heroui/react'
 import { useTranslations } from 'next-intl'
 
 import { InfoItem } from './InfoItem'
-import { ProfileHeader } from './ProfileHeader'
+import { ProfileHeader } from './Profile/ProfileHeader'
 
 import { BorderedCard } from '@/components/ui/BorderedCard'
 import { useUser } from '@/features/user/useUser'

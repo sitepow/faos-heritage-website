@@ -4,7 +4,7 @@ import { Card, CardBody } from '@heroui/react'
 import { useLocale, useTranslations } from 'next-intl'
 
 import { FavoriteItem } from './FavoriteItem'
-import { ProfileHeader } from '../ProfileHeader'
+import { ProfileHeader } from '../Profile/ProfileHeader'
 
 import { EmptyState } from '@/components/ui/EmptyState'
 import { useFavorites } from '@/features/favorite/useFavorite'

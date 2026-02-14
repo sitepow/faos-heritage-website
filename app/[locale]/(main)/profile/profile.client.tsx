@@ -2,8 +2,8 @@
 
 import { useTranslations } from 'next-intl'
 
-import { ProfileLabel } from './_components/ProfileLabel'
-import { ProfileTabs } from './_components/ProfileTabs'
+import { ProfileLabel } from './_components/Profile/ProfileLabel'
+import { ProfileTabs } from './_components/Profile/ProfileTabs'
 
 import { AppSection } from '@/components/layouts/AppSection'
 import { Container } from '@/components/layouts/Container'

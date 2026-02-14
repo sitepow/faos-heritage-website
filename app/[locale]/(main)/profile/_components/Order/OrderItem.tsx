@@ -117,7 +117,7 @@ const OrderItem = ({ order, hideButton }: Props) => {
   }
 
   return (
-    <div className='border-default-100 hover:bg-default-50/50 flex flex-col gap-4 rounded-xl border p-4 transition-all'>
+    <div className='border-default-100 flex flex-col gap-4 rounded-xl border p-4 transition-all'>
       {isPending && (
         <Alert
           color='warning'
