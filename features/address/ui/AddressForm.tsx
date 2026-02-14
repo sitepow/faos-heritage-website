@@ -38,94 +38,94 @@ const AddressForm = () => {
       onClose={onClose}
     >
       <ModalContent>
-        <form onSubmit={onSubmit}>
-          <ModalHeader>
-            {addressId ? tActions('edit') : tActions('new')}
-          </ModalHeader>
+        <ModalHeader>
+          {addressId ? tActions('edit') : tActions('new')}
+        </ModalHeader>
 
-          <ModalBody>
-            {!isPending && (
-              <div className='flex flex-col gap-6'>
-                <FormSwitch control={form.control} name='isDefault'>
-                  {tAddress('default')}
-                </FormSwitch>
+        <ModalBody>
+          {!isPending && (
+            <div className='flex flex-col gap-6'>
+              <FormSwitch control={form.control} name='isDefault'>
+                {tAddress('default')}
+              </FormSwitch>
 
-                <div className='space-y-4'>
-                  <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
-                    <FormInput
-                      control={form.control}
-                      label={t('fullName')}
-                      name='name'
-                    />
-                    <FormInput
-                      control={form.control}
-                      label={t('phone')}
-                      name='phone'
-                    />
-                    <FormInput
-                      className='sm:col-span-2'
-                      control={form.control}
-                      label={t('address')}
-                      name='address'
-                    />
-                    <FormInput
-                      control={form.control}
-                      label={t('subDistrict')}
-                      name='subDistrict'
-                    />
-                    <FormInput
-                      control={form.control}
-                      label={t('district')}
-                      name='district'
-                    />
-                    <FormInput
-                      control={form.control}
-                      label={t('province')}
-                      name='province'
-                    />
-                    <FormInput
-                      control={form.control}
-                      label={t('postalCode')}
-                      name='postalCode'
-                    />
+              <div className='space-y-4'>
+                <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
+                  <FormInput
+                    control={form.control}
+                    label={t('fullName')}
+                    name='name'
+                  />
+                  <FormInput
+                    control={form.control}
+                    label={t('phone')}
+                    name='phone'
+                  />
+                  <FormInput
+                    className='sm:col-span-2'
+                    control={form.control}
+                    label={t('address')}
+                    name='address'
+                  />
+                  <FormInput
+                    control={form.control}
+                    label={t('subDistrict')}
+                    name='subDistrict'
+                  />
+                  <FormInput
+                    control={form.control}
+                    label={t('district')}
+                    name='district'
+                  />
+                  <FormInput
+                    control={form.control}
+                    label={t('province')}
+                    name='province'
+                  />
+                  <FormInput
+                    control={form.control}
+                    label={t('postalCode')}
+                    name='postalCode'
+                  />
 
-                    <FormSelect
-                      control={form.control}
-                      label={t('country')}
-                      name='countryCode'
-                      options={COUNTRIES.map((c) => ({
-                        label: c.name,
-                        value: c.code,
-                      }))}
-                      onSelectionChange={(keys) => {
-                        const code = Array.from(keys)[0] as string
-                        const country = COUNTRIES.find((c) => c.code === code)
-                        form.setValue('country', country?.name ?? '', {
-                          shouldDirty: true,
-                        })
-                      }}
-                    />
-                  </div>
+                  <FormSelect
+                    control={form.control}
+                    label={t('country')}
+                    name='countryCode'
+                    options={COUNTRIES.map((c) => ({
+                      label: c.name,
+                      value: c.code,
+                    }))}
+                    onSelectionChange={(keys) => {
+                      const code = Array.from(keys)[0] as string
+                      const country = COUNTRIES.find((c) => c.code === code)
+                      form.setValue('country', country?.name ?? '', {
+                        shouldDirty: true,
+                      })
+                    }}
+                  />
                 </div>
               </div>
-            )}
-          </ModalBody>
+            </div>
+          )}
+        </ModalBody>
 
-          <ModalFooter>
-            <Button isDisabled={isPending} variant='faded' onPress={onClose}>
-              {tActions('cancel')}
-            </Button>
-            <Button
-              className='text-secondary'
-              color='primary'
-              isDisabled={isPending || !form.formState.isDirty}
-              isLoading={isPending}
-              type='submit'
-            >
-              {tActions('save')}
-            </Button>
-          </ModalFooter>
-        </form>
+        <ModalFooter>
+          <Button isDisabled={isPending} variant='faded' onPress={onClose}>
+            {tActions('cancel')}
+          </Button>
+          <Button
+            className='text-secondary'
+            color='primary'
+            isDisabled={isPending || !form.formState.isDirty}
+            isLoading={isPending}
+            onPress={() => {
+              onSubmit()
+            }}
+          >
+            {tActions('save')}
+          </Button>
+        </ModalFooter>
       </ModalContent>
     </Modal>
   )
