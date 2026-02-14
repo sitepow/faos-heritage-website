@@ -42,5 +42,10 @@
         "editAddress": "Ubah Alamat Pengiriman"
       }
     }
+  },
+  "variantTable": {
+    "size": "Ukuran",
+    "price": "Harga",
+    "stock": "Stok"
   }
 }

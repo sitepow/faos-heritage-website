@@ -42,5 +42,10 @@
         "editAddress": "お届け先住所を編集"
       }
     }
+  },
+  "variantTable": {
+    "size": "サイズ",
+    "price": "価格",
+    "stock": "在庫"
   }
 }

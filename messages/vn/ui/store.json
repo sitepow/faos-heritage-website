@@ -42,5 +42,10 @@
         "editAddress": "Chỉnh sửa địa chỉ"
       }
     }
+  },
+  "variantTable": {
+    "size": "Kích thước",
+    "price": "Giá",
+    "stock": "Kho hàng"
   }
 }

@@ -172,7 +172,9 @@ const getProductsInfinite = async ({
       include: {
         category: { select: { name: true } },
         images: { select: { url: true, isPrimary: true } },
-        variants: { select: { price: true, stockQuantity: true, image: true } },
+        variants: {
+          select: { name: true, price: true, stockQuantity: true, image: true },
+        },
         localizations: {
           where: { languageCode },
           take: 1,

@@ -42,5 +42,10 @@
         "editAddress": "Edit Shipping Address"
       }
     }
+  },
+  "variantTable": {
+    "size": "Size",
+    "price": "Price",
+    "stock": "Stock"
   }
 }

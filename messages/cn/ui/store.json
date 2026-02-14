@@ -42,5 +42,10 @@
         "editAddress": "修改收货地址"
       }
     }
+  },
+  "variantTable": {
+    "size": "尺寸",
+    "price": "价格",
+    "stock": "库存"
   }
 }

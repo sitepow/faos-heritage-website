@@ -42,5 +42,10 @@
         "editAddress": "Breyta sendingarheimilisfangi"
       }
     }
+  },
+  "variantTable": {
+    "size": "Stærð",
+    "price": "Verð",
+    "stock": "Lagerstaða"
   }
 }

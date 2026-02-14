@@ -42,5 +42,10 @@
         "editAddress": "Verzendadres bewerken"
       }
     }
+  },
+  "variantTable": {
+    "size": "Maat",
+    "price": "Prijs",
+    "stock": "Voorraad"
   }
 }

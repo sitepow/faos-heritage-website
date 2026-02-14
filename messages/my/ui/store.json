@@ -42,5 +42,10 @@
         "editAddress": "Edit Alamat Penghantaran"
       }
     }
+  },
+  "variantTable": {
+    "size": "Saiz",
+    "price": "Harga",
+    "stock": "Stok"
   }
 }

@@ -9,7 +9,7 @@ import { ProductShare } from './ProductShare'
 
 import { CategoryChip } from '@/components/ui/CategoryChip'
 import { MarkdownRenderer } from '@/components/ui/Markdown/MarkdownRenderer'
-import { ProductPrice } from '@/components/ui/Product/ProductPrice'
+import { VariantTable } from '@/components/ui/Product/VariantTable'
 import { VariantSelect } from '@/components/ui/VariantSelect'
 import { useCartMutation } from '@/features/cart/cart.mutation'
 import { useFavoriteMutation } from '@/features/favorite/favorite.mutation'
@@ -43,7 +43,6 @@ const ProductPurchasePanel = () => {
     return product.variants.find((v) => v.id === selectedVariantId)
   }, [product?.variants, selectedVariantId])
 
-  const currentPrice = selectedVariant?.price ?? product?.price ?? 0
   const currentStock =
     selectedVariant?.stockQuantity ?? product?.stockQuantity ?? 0
   const isOutOfStock = currentStock <= 0
@@ -65,12 +64,7 @@ const ProductPurchasePanel = () => {
 
         <CategoryChip categoryName={product.category?.name} />
 
-        <ProductPrice
-          price={currentPrice}
-          priceMax={selectedVariantId ? null : product?.priceMax}
-          priceMin={selectedVariantId ? null : product?.priceMin}
-          unit={product.unit}
-        />
+        <VariantTable variants={product?.variants || []} />
 
         {hasVariants && (
           <VariantSelect

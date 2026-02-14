@@ -39,5 +39,10 @@
         "editAddress": "แก้ไขที่อยู่จัดส่ง"
       }
     }
+  },
+  "variantTable": {
+    "size": "ขนาด",
+    "price": "ราคา",
+    "stock": "คงเหลือ"
   }
 }

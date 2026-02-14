@@ -42,5 +42,10 @@
         "editAddress": "Modifica indirizzo di spedizione"
       }
     }
+  },
+  "variantTable": {
+    "size": "Taglia",
+    "price": "Prezzo",
+    "stock": "Disponibilità"
   }
 }

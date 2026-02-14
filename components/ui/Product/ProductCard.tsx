@@ -2,57 +2,59 @@
 
 import { Card, CardBody, cn, Skeleton } from '@heroui/react'
 import Link from 'next/link'
-
-type ProductItem = GetProductsInfiniteResult['items'][number]
+import React, { useMemo } from 'react'
 
 import type { GetProductsInfiniteResult } from '@/features/product/product.types'
 
 import { CategoryChip } from '../CategoryChip'
 import { ProductImage } from './ProductImage'
+import { VariantTable } from './VariantTable'
 
-import { ProductPrice } from '@/components/ui/Product/ProductPrice'
-import {
-  resolveProductImages,
-  generateSlugWithId,
-  resolveProductUnitLabel,
-} from '@/utils'
+import { resolveProductImages, generateSlugWithId } from '@/utils'
 
-interface ProductCardProps {
+type ProductItem = GetProductsInfiniteResult['items'][number]
+
+const ProductCardSkeleton = () => <Skeleton className='h-[420px] w-full' />
+
+interface Props {
   className?: string
   product: ProductItem
 }
 
-const ProductCardSkeleton = () => <Skeleton className='h-[420px] w-full' />
-
-const ProductCard = ({ className, product }: ProductCardProps) => {
+const ProductCard = ({ className, product }: Props) => {
   const { primarySrc } = resolveProductImages({ images: product?.images })
 
-  const productHref = `/products/${generateSlugWithId(product?.name!, product?.id!)}`
+  const productHref = useMemo(
+    () =>
+      product
+        ? `/products/${generateSlugWithId(product.name, product.id)}`
+        : '#',
+    [product],
+  )
 
   return (
     <Card
       className={cn(
-        'group flex w-full flex-col bg-transparent shadow-none',
+        'group hover:bg-default-50/50 flex w-full flex-col bg-transparent p-2 shadow-none transition-all duration-300',
         className,
       )}
-      radius='none'
-      shadow='none'
+      radius='lg'
     >
-      <Link className='block space-y-6' href={productHref}>
-        <ProductImage className='h-[350px] w-full' image={primarySrc} />
+      <Link className='flex flex-col gap-4' href={productHref}>
+        <div className='relative overflow-hidden rounded-xl'>
+          <ProductImage
+            className='h-[300px] w-full transition-transform duration-500 group-hover:scale-105'
+            image={primarySrc}
+          />
+        </div>
 
-        <CardBody className='flex flex-col items-start gap-5 overflow-hidden p-0'>
-          <CategoryChip categoryName={product?.category?.name!} />
+        <CardBody className='flex flex-col items-start gap-4 overflow-hidden p-1'>
+          <CategoryChip categoryName={product?.category?.name} />
 
-          <div className='flex flex-col'>
+          <div className='flex w-full flex-col gap-4'>
             <h4 className='line-clamp-2 text-xl'>{product?.name}</h4>
 
-            <ProductPrice
-              price={product?.price!}
-              priceMax={product?.priceMax!}
-              priceMin={product?.priceMin!}
-              unit={resolveProductUnitLabel(product?.unit!)}
-            />
+            <VariantTable variants={product?.variants || []} />
           </div>
         </CardBody>
       </Link>
