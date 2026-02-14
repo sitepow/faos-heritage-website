@@ -25,14 +25,30 @@ const isAuthenticated = (request: NextRequest): boolean => {
 export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  const normalizedPath = stripLocaleFromPath(pathname)
-  const loggedIn = isAuthenticated(request)
-
   const pathParts = pathname.split('/')
   const localeInPath = pathParts[1]
-  const currentLocale = routing.locales.includes(localeInPath)
-    ? localeInPath
-    : routing.defaultLocale
+  const hasValidLocale = routing.locales.includes(localeInPath)
+
+  if (!hasValidLocale) {
+    const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value
+    const finalLocale =
+      cookieLocale && routing.locales.includes(cookieLocale)
+        ? cookieLocale
+        : routing.defaultLocale
+
+    const response = NextResponse.redirect(
+      new URL(
+        `/${finalLocale}${pathname === '/' ? '' : pathname}`,
+        request.url,
+      ),
+    )
+    response.headers.set('x-middleware-cache', 'no-cache')
+    return response
+  }
+
+  const currentLocale = localeInPath
+  const normalizedPath = stripLocaleFromPath(pathname)
+  const loggedIn = isAuthenticated(request)
 
   const isProtectedRoute = ROUTES.PROTECTED.some((path) =>
     normalizedPath.startsWith(path),
@@ -42,10 +58,9 @@ export default function middleware(request: NextRequest) {
   )
 
   if (isProtectedRoute && !loggedIn) {
-    const loginPath = `/${currentLocale}/login`
-    const redirectUrl = new URL(loginPath, request.url)
-    redirectUrl.searchParams.set('callbackUrl', pathname)
-    return NextResponse.redirect(redirectUrl)
+    const loginUrl = new URL(`/${currentLocale}/login`, request.url)
+    loginUrl.searchParams.set('callbackUrl', pathname)
+    return NextResponse.redirect(loginUrl)
   }
 
   if (isAuthRoute && loggedIn) {
