@@ -4,6 +4,7 @@ import { getTranslations } from 'next-intl/server'
 import type { Metadata } from 'next'
 
 import { IMAGE_FALLBACK } from '@/constants'
+import { routing } from '@/i18n/routing'
 
 interface Props {
   title?: string
@@ -22,7 +23,9 @@ const constructMetadata = async ({
   noIndex = false,
   keywords,
 }: Props = {}): Promise<Metadata> => {
-  const url = `${process.env.APP_URL}${canonicalPath}`
+  const baseUrl = process.env.APP_URL!
+
+  const url = `${baseUrl}${canonicalPath}`
 
   const t = await getTranslations('meta')
   const defaultKeywords = t.raw('keywords') || []
@@ -33,12 +36,17 @@ const constructMetadata = async ({
       ? [keywords, ...defaultKeywords]
       : defaultKeywords
 
+  const languageAlternates = Object.fromEntries(
+    routing.locales.map((loc) => [loc, `${baseUrl}/${loc}${canonicalPath}`]),
+  )
+
   return {
     title,
     description,
     keywords: finalKeywords,
     alternates: {
       canonical: url,
+      languages: languageAlternates,
     },
     openGraph: {
       title: title ?? undefined,
