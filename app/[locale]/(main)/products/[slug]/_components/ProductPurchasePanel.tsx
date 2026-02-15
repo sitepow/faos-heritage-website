@@ -2,7 +2,7 @@
 
 import { Card, CardBody, Button } from '@heroui/react'
 import { HeartIcon, ShoppingCartIcon } from 'lucide-react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useState, useMemo, useEffect } from 'react'
 
 import { ProductShare } from './ProductShare'
@@ -19,6 +19,7 @@ import { generateSlugWithId } from '@/utils'
 const ProductPurchasePanel = () => {
   const tActions = useTranslations('actions')
   const tCart = useTranslations('productDetail.cartActions')
+  const locale = useLocale()
 
   const product = useProductDetailStore((state) => state.product)
 
@@ -124,7 +125,7 @@ const ProductPurchasePanel = () => {
         <ProductShare
           label={tActions('share')}
           title={product.name}
-          url={`${process.env.NEXT_PUBLIC_APP_URL}/product/${generateSlugWithId(product.name, product.id)}`}
+          url={`${process.env.NEXT_PUBLIC_APP_URL}/${locale}/products/${generateSlugWithId(product.name, product.id)}`}
         />
       </CardBody>
     </Card>
