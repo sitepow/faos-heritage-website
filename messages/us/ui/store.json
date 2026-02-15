@@ -14,6 +14,7 @@
       "add": "Add to Cart",
       "fav": "Add to Favorites",
       "outOfStock": "Out of Stock",
+      "inStock": "In stock",
       "require": "Please select a product option"
     }
   },

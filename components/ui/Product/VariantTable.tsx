@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 'use client'
 
-import { cn } from '@heroui/react'
+import { Chip, cn } from '@heroui/react'
 import { useTranslations } from 'next-intl'
 
 import { useExchangeRate } from '@/features/exchangeRate/useExchangeRate'
@@ -22,7 +22,10 @@ interface Props {
 
 const VariantTable = ({ variants, className, showStock = true }: Props) => {
   const t = useTranslations('variantTable')
+  const tProductDetail = useTranslations('productDetail')
+
   const { currencyOptions } = useExchangeRate()
+
   if (!variants || variants.length === 0) {
     return null
   }
@@ -51,20 +54,20 @@ const VariantTable = ({ variants, className, showStock = true }: Props) => {
                 key={`${variant.name}-${idx}`}
                 className='hover:bg-default-100/30 transition-colors *:px-3 *:py-2.5'
               >
-                <td className='text-default-700 font-medium'>{variant.name}</td>
-                <td className='text-primary text-right font-bold'>
+                <td className='text-default-700 font-bold'>{variant.name}</td>
+                <td className='text-default-700 text-right font-bold'>
                   {formatCurrency(variant.price, currencyOptions)}
                 </td>
                 {showStock && (
-                  <td
-                    className={cn(
-                      'text-right tabular-nums',
-                      isOutOfStock
-                        ? 'text-danger font-medium'
-                        : 'text-default-400',
-                    )}
-                  >
-                    {isOutOfStock ? 'Out of stock' : variant.stockQuantity}
+                  <td className={'text-right'}>
+                    <Chip
+                      color={isOutOfStock ? 'danger' : 'success'}
+                      variant='dot'
+                    >
+                      {isOutOfStock
+                        ? tProductDetail('cartActions.outOfStock')
+                        : tProductDetail('cartActions.inStock')}
+                    </Chip>
                   </td>
                 )}
               </tr>

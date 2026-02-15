@@ -14,6 +14,7 @@
       "add": "Setja í körfu",
       "fav": "Bæta í eftirlæti",
       "outOfStock": "Uppselt",
+      "inStock": "Á lager",
       "require": "Vinsamlegast veldu valmöguleika fyrir vöruna"
     }
   },

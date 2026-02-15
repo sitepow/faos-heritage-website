@@ -14,6 +14,7 @@
       "add": "Aggiungi al carrello",
       "fav": "Aggiungi ai preferiti",
       "outOfStock": "Esaurito",
+      "inStock": "Disponibile",
       "require": "Si prega di selezionare un'opzione del prodotto"
     }
   },

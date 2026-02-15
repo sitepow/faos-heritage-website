@@ -14,6 +14,7 @@
       "add": "Tambah ke Troli",
       "fav": "Tambah ke Kegemaran",
       "outOfStock": "Kehabisan Stok",
+      "inStock": "Stok tersedia",
       "require": "Sila pilih pilihan produk"
     }
   },
