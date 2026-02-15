@@ -176,6 +176,7 @@ model Product {
   metaTitle         String? @db.Text
   metaDescription   String? @db.Text
   price             Decimal @db.Decimal(12, 2)
+  salePrice         Decimal? @db.Decimal(12, 2)
   weight            Decimal? @db.Decimal(10, 3)
   stockQuantity Int @default(0)
   unit              ProductUnit @default(UNIT)
@@ -226,6 +227,7 @@ model ProductVariant {
   image       String?
   name          String
   price         Decimal @db.Decimal(12, 2)
+  salePrice     Decimal? @db.Decimal(12, 2)
   weight        Decimal @db.Decimal(10, 3)
   stockQuantity Int     @default(0)
   isActive      Boolean @default(true)
