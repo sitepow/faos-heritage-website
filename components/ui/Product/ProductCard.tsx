@@ -34,28 +34,25 @@ const ProductCard = ({ className, product }: Props) => {
 
   return (
     <Card
-      className={cn(
-        'group flex w-full flex-col bg-transparent p-2 transition-all duration-300',
-        className,
-      )}
+      className={cn('flex w-full flex-col gap-4 bg-transparent', className)}
       radius='lg'
       shadow='none'
     >
-      <Link className='flex flex-col gap-4' href={productHref}>
-        <div className='relative overflow-hidden rounded-xl'>
+      <Link href={productHref}>
+        <div className='relative overflow-hidden rounded-lg'>
           <ProductImage className='h-[300px] w-full' image={primarySrc} />
         </div>
-
-        <CardBody className='flex flex-col items-start gap-4 overflow-hidden p-1'>
-          <CategoryChip categoryName={product?.category?.name} />
-
-          <div className='flex w-full flex-col gap-4'>
-            <h4 className='line-clamp-2 text-xl'>{product?.name}</h4>
-
-            <VariantTable variants={product?.variants || []} />
-          </div>
-        </CardBody>
       </Link>
+
+      <CardBody className='flex flex-col items-start gap-4 overflow-hidden p-1'>
+        <CategoryChip categoryName={product?.category?.name} />
+
+        <div className='flex w-full flex-col gap-4'>
+          <h4 className='line-clamp-2 text-xl'>{product?.name}</h4>
+
+          <VariantTable variants={product?.variants || []} />
+        </div>
+      </CardBody>
     </Card>
   )
 }

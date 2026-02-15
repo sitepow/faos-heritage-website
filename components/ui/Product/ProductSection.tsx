@@ -7,7 +7,7 @@ import { ProductCard, ProductCardSkeleton } from './ProductCard'
 import { Container } from '@/components/layouts/Container'
 import { PAGINATION } from '@/constants'
 
-interface ProductSectionProps {
+interface Props {
   items: GetProductsInfiniteResult['items']
   isLoading?: boolean
   isFetchingNextPage?: boolean
@@ -22,12 +22,12 @@ const ProductSection = ({
   isLoading = false,
   isFetchingNextPage = false,
   itemPerPage = PAGINATION.ITEMS_PER_PAGE,
-}: ProductSectionProps) => {
+}: Props) => {
   const shouldShowSkeleton = isLoading || isFetchingNextPage
   const skeletonKeys = createSkeletonKeys(itemPerPage)
 
   return (
-    <Container className='grid gap-5 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4'>
+    <Container className='grid gap-5 sm:grid-cols-2 xl:grid-cols-3'>
       {!isLoading &&
         items.map((product) => (
           <ProductCard
