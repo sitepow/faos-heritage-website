@@ -102,6 +102,7 @@ model User {
 
   email         String   @unique
   name          String?
+  referrerCode  String? @unique
   password      String?
   image         String?
   emailVerified DateTime?
@@ -120,6 +121,7 @@ model User {
   @@index([role])
   @@index([isActive])
   @@index([createdAt])
+  @@index([referrerCode])
 }
 
 model Address {
@@ -282,6 +284,7 @@ model Order {
   userId              String?
   shippingAddressId   String?
   couponId            String?
+  referrerCode        String?
 
   status        OrderStatus   @default(PENDING)
   paymentStatus PaymentStatus @default(PENDING)

@@ -23,6 +23,8 @@
     "empty": "您的购物车目前是空的。",
     "header": "购物车商品",
     "checkout": {
+      "referrerTitle": "推荐编号 (选填)",
+      "referrerPlaceholder": "请输入销售代码 (例如 0001)",
       "addressTitle": "收货地址",
       "summaryTitle": "订单摘要",
       "currencyAlert": "您正在使用所选货币进行结算。请在继续操作前仔细核对价格和货币。",

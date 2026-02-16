@@ -23,6 +23,8 @@
     "empty": "Your cart is currently empty.",
     "header": "Items in Cart",
     "checkout": {
+      "referrerTitle": "Refer No. (Optional)",
+      "referrerPlaceholder": "Enter Sale Code (e.g. 0001)",
       "addressTitle": "Shipping Address",
       "summaryTitle": "Order Summary",
       "currencyAlert": "You are purchasing with your selected currency. Please review the price and currency carefully before proceeding.",

@@ -23,6 +23,8 @@
     "empty": "Karfan þín er tóm eins og er.",
     "header": "Vörur í körfu",
     "checkout": {
+      "referrerTitle": "Tilvísunarnúmer (Valkvætt)",
+      "referrerPlaceholder": "Sláðu inn sölukóða (t.d. 0001)",
       "addressTitle": "Sendingarheimilisfang",
       "summaryTitle": "Samantekt pöntunar",
       "currencyAlert": "Þú ert að versla með valinn gjaldmiðil. Vinsamlegast athugaðu verð og gjaldmiðil vandlega áður en þú heldur áfram.",

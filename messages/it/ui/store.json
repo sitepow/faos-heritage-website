@@ -23,6 +23,8 @@
     "empty": "Il tuo carrello è attualmente vuoto.",
     "header": "Articoli nel carrello",
     "checkout": {
+      "referrerTitle": "N. Riferimento (Opzionale)",
+      "referrerPlaceholder": "Inserisci codice vendita (es. 0001)",
       "addressTitle": "Indirizzo di spedizione",
       "summaryTitle": "Riepilogo ordine",
       "currencyAlert": "Stai effettuando l'acquisto con la valuta selezionata. Ti preghiamo di controllare attentamente il prezzo e la valuta prima di procedere.",

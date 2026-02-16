@@ -38,6 +38,7 @@ interface CreateOrderInput {
   currency: Currency
   exchangeRate: number
   exchangeLocale: string
+  referrerId?: string
 }
 
 type TransactionClient = Prisma.TransactionClient
@@ -200,7 +201,14 @@ const createOrder = async (input: CreateOrderInput) =>
     const { userId } = await getServerUser()
 
     return prisma.$transaction(async (tx) => {
-      const { items, addressId, currency, exchangeRate, exchangeLocale } = input
+      const {
+        items,
+        addressId,
+        currency,
+        exchangeRate,
+        exchangeLocale,
+        referrerId,
+      } = input
 
       const address = await tx.address.findUnique({ where: { id: addressId } })
       if (!address || items.length === 0) {
@@ -288,6 +296,7 @@ const createOrder = async (input: CreateOrderInput) =>
           shippingPhone: address.phone,
           shippingAddressText: formatFullAddress(address),
           items: { createMany: { data: orderItemsPayload } },
+          referrerCode: referrerId || null,
         },
       })
 

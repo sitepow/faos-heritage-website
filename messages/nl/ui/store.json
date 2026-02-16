@@ -23,6 +23,8 @@
     "empty": "Uw winkelwagen is momenteel leeg.",
     "header": "Artikelen in winkelwagen",
     "checkout": {
+      "referrerTitle": "Referentienummer (Optioneel)",
+      "referrerPlaceholder": "Voer verkoopcode in (bijv. 0001)",
       "addressTitle": "Verzendadres",
       "summaryTitle": "Besteloverzicht",
       "currencyAlert": "U rekent af in de geselecteerde valuta. Controleer de prijs en valuta zorgvuldig voordat u doorgaat.",

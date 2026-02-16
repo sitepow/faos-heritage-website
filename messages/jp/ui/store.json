@@ -23,6 +23,8 @@
     "empty": "カートに商品が入っていません。",
     "header": "カート内の商品",
     "checkout": {
+      "referrerTitle": "紹介番号（任意）",
+      "referrerPlaceholder": "販売コードを入力してください（例：0001）",
       "addressTitle": "お届け先住所",
       "summaryTitle": "ご注文の概要",
       "currencyAlert": "選択された通貨で購入手続きを進めています。決済を確定する前に、価格と通貨を再度ご確認ください。",

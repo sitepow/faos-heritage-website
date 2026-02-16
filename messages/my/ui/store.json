@@ -23,6 +23,8 @@
     "empty": "Troli anda pada masa ini kosong.",
     "header": "Barangan dalam Troli",
     "checkout": {
+      "referrerTitle": "No. Rujukan (Opsional)",
+      "referrerPlaceholder": "Masukkan Kod Jualan (cth. 0001)",
       "addressTitle": "Alamat Penghantaran",
       "summaryTitle": "Ringkasan Pesanan",
       "currencyAlert": "Anda membeli dengan mata wangที่ dipilih. Sila semak harga dan mata wangด้วย teliti sebelum meneruskan.",

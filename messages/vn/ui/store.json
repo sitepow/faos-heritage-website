@@ -23,6 +23,8 @@
     "empty": "Giỏ hàng của bạn hiện đang trống.",
     "header": "Sản phẩm trong giỏ hàng",
     "checkout": {
+      "referrerTitle": "Số tham chiếu (Tùy chọn)",
+      "referrerPlaceholder": "Nhập mã bán hàng (VD: 0001)",
       "addressTitle": "Địa chỉ giao hàng",
       "summaryTitle": "Tóm tắt đơn hàng",
       "currencyAlert": "Bạn đang mua hàng bằng đơn vị tiền tệ đã chọn. Vui lòng kiểm tra kỹ giá và loại tiền trước khi tiếp tục.",

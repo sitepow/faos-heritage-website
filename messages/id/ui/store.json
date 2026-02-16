@@ -23,6 +23,8 @@
     "empty": "Keranjang Anda saat ini kosong.",
     "header": "Produk dalam Keranjang",
     "checkout": {
+      "referrerTitle": "No. Referensi (Opsional)",
+      "referrerPlaceholder": "Masukkan Kode Sales (msl. 0001)",
       "addressTitle": "Alamat Pengiriman",
       "summaryTitle": "Ringkasan Pesanan",
       "currencyAlert": "Anda membeli dengan mata uang yang dipilih. Harap tinjau harga dan mata uang dengan cermat sebelum melanjutkan.",

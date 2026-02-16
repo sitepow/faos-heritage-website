@@ -8,9 +8,11 @@ import {
   CardBody,
   CardFooter,
   Divider,
+  Input,
 } from '@heroui/react'
 import { Currency } from '@prisma/client'
 import { useLocale, useTranslations } from 'next-intl'
+import { useState } from 'react'
 
 import type { ComponentProps } from 'react'
 
@@ -38,6 +40,8 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
   const { appLocale } = useAppStore()
   const locale = useLocale()
   const { userId } = useAuth()
+
+  const [referrerCode, setReferrerCode] = useState('')
 
   const {
     data: carts = [],
@@ -73,6 +77,7 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
         currency,
         exchangeRate,
         exchangeLocale: appLocale.locale,
+        referrerId: referrerCode || undefined,
         items: carts.map(({ productId, variantId, quantity }) => ({
           productId,
           variantId,
@@ -80,7 +85,9 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
         })),
       },
       {
-        onSuccess: navigation.ORDER,
+        onSuccess: () => {
+          navigation.ORDER()
+        },
       },
     )
   }
@@ -111,6 +118,31 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
     )
   }
 
+  const renderReferrerSection = () => {
+    return (
+      <div className='flex flex-col gap-2'>
+        <span className='w-fit text-sm font-semibold'>
+          {tCheckout('referrerTitle') || 'Refer No. (Optional)'}
+        </span>
+        <Input
+          classNames={{
+            input: 'text-center',
+            inputWrapper:
+              'p-0 h-10 overflow-hidden shadow-none border-1 border-default-100 data-[hover=true]:border-default-200 focus-within:!border-default-300',
+          }}
+          placeholder={
+            tCheckout('referrerPlaceholder') || 'Enter Sale Code (e.g. 0001)'
+          }
+          radius='none'
+          size='lg'
+          value={referrerCode}
+          variant='bordered'
+          onValueChange={setReferrerCode}
+        />
+      </div>
+    )
+  }
+
   return (
     <Card
       className={cn(
@@ -126,13 +158,16 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
 
         <Divider className='bg-default-100/50' />
 
+        {renderReferrerSection()}
+
+        <Divider className='bg-default-100/50' />
+
         <div className='flex flex-col gap-3'>
           <span className='w-fit font-semibold'>
             {tCheckout('summaryTitle')}
           </span>
 
           <CartSummaryRow label={tSummary('total')} value={grossTotal} />
-
           <CartSummaryRow label={tSummary('shipping')} value={shippingCost} />
 
           {totalDiscount > 0 && (
