@@ -6,6 +6,7 @@ import { useMemo } from 'react'
 
 import type { GetCartsResult } from '@/features/cart/cart.action'
 
+import { PriceDisplay } from '@/components/ui/Product/PriceDisplay'
 import { ProductImage } from '@/components/ui/Product/ProductImage'
 import { ProductQty } from '@/components/ui/Product/ProductQty'
 import { VariantSelect } from '@/components/ui/VariantSelect'
@@ -19,14 +20,21 @@ import {
 
 type CartItemData = NonNullable<GetCartsResult>[number]
 
-interface CartItemProps {
+interface Props {
   cart: CartItemData
 }
 
-const CartItem = ({ cart }: CartItemProps) => {
+const CartItem = ({ cart }: Props) => {
   const { currencyOptions } = useExchangeRate()
-  const { quantity, variantId, currentPrice, currentStock, loading, actions } =
-    useCartItem(cart)
+  const {
+    quantity,
+    variantId,
+    currentPrice,
+    priceInfo,
+    currentStock,
+    actions,
+    loading,
+  } = useCartItem(cart)
 
   const product = cart.product
   const { primarySrc } = resolveProductImages({ images: product?.images })
@@ -48,18 +56,15 @@ const CartItem = ({ cart }: CartItemProps) => {
           <span className='line-clamp-2 text-sm font-bold lg:text-base'>
             {product?.name}
           </span>
+
           <div className='lg:hidden'>
-            <span className='text-default-500 text-sm'>
-              {formatCurrency(currentPrice, currencyOptions)}
-            </span>
+            <PriceDisplay {...priceInfo} className='items-start' size='sm' />
           </div>
         </div>
       </div>
 
       <div className='hidden text-center lg:col-span-1 lg:block'>
-        <span className='text-sm font-medium'>
-          {formatCurrency(currentPrice, currencyOptions)}
-        </span>
+        <PriceDisplay {...priceInfo} size='sm' />
       </div>
 
       <div className='flex flex-wrap items-center justify-between gap-4 lg:col-span-4 lg:grid lg:grid-cols-2 lg:justify-items-center'>
@@ -93,7 +98,7 @@ const CartItem = ({ cart }: CartItemProps) => {
           variant='light'
           onPress={actions.handleDelete}
         >
-          <XIcon />
+          <XIcon size={20} />
         </Button>
       </div>
     </div>

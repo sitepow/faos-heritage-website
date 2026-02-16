@@ -2,21 +2,28 @@
 
 import { useCallback, useMemo, useRef, useState } from 'react'
 
+import type { GetProductResult } from '@/features/product/product.types'
+
 import {
   Carousel,
   type CarouselHandle,
 } from '@/components/ui/Carousel/Carousel'
+import { DiscountBadge } from '@/components/ui/Product/DiscountBadge'
 import { ProductImage } from '@/components/ui/Product/ProductImage'
 import { IMAGE_FALLBACK } from '@/constants'
+import { useProductPrice } from '@/features/product/useProduct'
 import { cn } from '@/utils'
 
-type ProductImagePreviewProps = {
+type Props = {
+  product: GetProductResult | null
   images?: string[]
 }
 
-const ProductImagePreview = ({ images = [] }: ProductImagePreviewProps) => {
+const ProductImagePreview = ({ product, images = [] }: Props) => {
   const mainCarouselRef = useRef<CarouselHandle>(null)
   const [activeIndex, setActiveIndex] = useState(0)
+
+  const { maxDiscountPercentage } = useProductPrice(product)
 
   const displayImages = useMemo(
     () => (images.length > 0 ? images : [IMAGE_FALLBACK.EMPTY]),
@@ -30,16 +37,24 @@ const ProductImagePreview = ({ images = [] }: ProductImagePreviewProps) => {
 
   return (
     <div className='flex flex-col gap-5'>
-      <Carousel
-        ref={mainCarouselRef}
-        slidesToScroll
-        autoPlay={false}
-        onSlideChange={setActiveIndex}
-      >
-        {displayImages.map((image) => (
-          <ProductImage key={image} image={image} />
-        ))}
-      </Carousel>
+      <div className='relative'>
+        <Carousel
+          ref={mainCarouselRef}
+          slidesToScroll
+          autoPlay={false}
+          onSlideChange={setActiveIndex}
+        >
+          {displayImages.map((image) => (
+            <ProductImage
+              key={image}
+              className='aspect-square w-full object-cover'
+              image={image}
+            />
+          ))}
+        </Carousel>
+
+        <DiscountBadge className='' percentage={maxDiscountPercentage} />
+      </div>
 
       <Carousel slidesToScroll autoPlay={false}>
         {displayImages.map((image, index) => {
@@ -49,8 +64,10 @@ const ProductImagePreview = ({ images = [] }: ProductImagePreviewProps) => {
             <ProductImage
               key={image}
               className={cn(
-                'size-20 cursor-pointer',
-                isActive ? 'border-primary' : 'border-default-100',
+                'size-20 cursor-pointer border-2 transition-all',
+                isActive
+                  ? 'border-primary'
+                  : 'border-transparent opacity-60 hover:opacity-100',
               )}
               image={image}
               onClick={() => handleSelectImage(index)}

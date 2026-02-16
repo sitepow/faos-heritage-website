@@ -1,25 +1,33 @@
 import { useExchangeRate } from '@/features/exchangeRate/useExchangeRate'
-import { formatCurrency } from '@/utils'
+import { cn, formatCurrency } from '@/utils'
 
 type Props = {
   label: string
   value: number
+  variant?: 'default' | 'danger' | 'primary'
 }
 
-const CartSummaryRow = ({ label, value }: Props) => {
-  const {
-    currencyOptions: { currency, locale, rates },
-  } = useExchangeRate()
+const CartSummaryRow = ({ label, value, variant = 'default' }: Props) => {
+  const { currencyOptions } = useExchangeRate()
+
+  const isDanger = variant === 'danger'
+  const isPrimary = variant === 'primary'
 
   return (
-    <div className='text-default-500 border-default-100 flex justify-between border-b'>
-      <span>{label}</span>
+    <div
+      className={cn(
+        'border-default-100 flex justify-between border-b pb-1',
+        isDanger && 'text-danger border-dashed italic',
+        isPrimary && 'text-primary border-none pt-1 text-lg font-bold',
+        !isDanger && !isPrimary && 'text-default-500',
+      )}
+    >
       <span>
-        {formatCurrency(value, {
-          currency,
-          locale,
-          rates,
-        })}
+        {label} {isPrimary ? ':' : ''}
+      </span>
+      <span className={cn(isPrimary && 'text-2xl')}>
+        {isDanger && '-'}
+        {formatCurrency(value, currencyOptions)}
       </span>
     </div>
   )

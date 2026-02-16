@@ -12,6 +12,7 @@ const resolveProductUnitLabel = (unit: ProductUnit): string =>
 
 interface VariantPriceStock {
   price?: number
+  salePrice?: number | null
   stockQuantity?: number
 }
 
@@ -26,12 +27,19 @@ const calculateVariantRange = (variants?: VariantPriceStock[] | null) => {
   }
 
   return variants.reduce(
-    (acc, { price, stockQuantity }) => {
-      if (price != null) {
+    (acc, { price, salePrice, stockQuantity }) => {
+      const currentPrice =
+        salePrice !== null && salePrice !== undefined ? salePrice : price
+
+      if (currentPrice != null) {
         acc.priceMin =
-          acc.priceMin == null ? price : Math.min(acc.priceMin, price)
+          acc.priceMin == null
+            ? currentPrice
+            : Math.min(acc.priceMin, currentPrice)
         acc.priceMax =
-          acc.priceMax == null ? price : Math.max(acc.priceMax, price)
+          acc.priceMax == null
+            ? currentPrice
+            : Math.max(acc.priceMax, currentPrice)
       }
 
       if (stockQuantity != null) {

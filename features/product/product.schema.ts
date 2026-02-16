@@ -11,6 +11,7 @@ const productSchema = z
     barcode: z.string().nullish(),
 
     price: z.number('priceInvalid').min(0, 'priceMin'),
+    salePrice: z.number().nullable().optional(),
     compareAtPrice: z.number('priceInvalid').nullish(),
     costPrice: z.number('priceInvalid').nullish(),
 

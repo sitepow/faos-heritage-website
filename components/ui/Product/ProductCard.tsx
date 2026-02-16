@@ -2,14 +2,16 @@
 
 import { Card, CardBody, cn, Skeleton } from '@heroui/react'
 import Link from 'next/link'
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 
 import type { GetProductsInfiniteResult } from '@/features/product/product.types'
 
 import { CategoryChip } from '../CategoryChip'
+import { DiscountBadge } from './DiscountBadge'
 import { ProductImage } from './ProductImage'
 import { VariantTable } from './VariantTable'
 
+import { useProductPrice } from '@/features/product/useProduct'
 import { resolveProductImages, generateSlugWithId } from '@/utils'
 
 type ProductItem = GetProductsInfiniteResult['items'][number]
@@ -23,6 +25,8 @@ interface Props {
 
 const ProductCard = ({ className, product }: Props) => {
   const { primarySrc } = resolveProductImages({ images: product?.images })
+
+  const { maxDiscountPercentage } = useProductPrice(product)
 
   const productHref = useMemo(
     () =>
@@ -40,7 +44,12 @@ const ProductCard = ({ className, product }: Props) => {
     >
       <Link href={productHref}>
         <div className='relative overflow-hidden rounded-lg'>
-          <ProductImage className='h-[300px] w-full' image={primarySrc} />
+          <ProductImage
+            className='h-[300px] w-full transition-transform duration-300'
+            image={primarySrc}
+          />
+
+          <DiscountBadge percentage={maxDiscountPercentage} />
         </div>
       </Link>
 
@@ -48,7 +57,7 @@ const ProductCard = ({ className, product }: Props) => {
         <CategoryChip categoryName={product?.category?.name} />
 
         <div className='flex w-full flex-col gap-4'>
-          <h4 className='line-clamp-2 text-xl'>{product?.name}</h4>
+          <h4 className='line-clamp-2 text-xl font-medium'>{product?.name}</h4>
 
           <VariantTable variants={product?.variants || []} />
         </div>

@@ -12,7 +12,7 @@ import type { Order } from '@/features/order/useOrder'
 
 import { createStripeCheckout } from '@/app/actions/stripe'
 import { AvatarGroupWrapper } from '@/components/ui/AvatarGroupWrapper'
-import { OrderDetailsModal } from '@/components/ui/OrderDetailsModal'
+import { OrderDetailsModal } from '@/components/ui/OrderDetailModal/OrderDetailsModal'
 import { OrderStepper } from '@/components/ui/OrderStepper/OrderStepper'
 import { IMAGE_FALLBACK } from '@/constants'
 import { useExchangeRate } from '@/features/exchangeRate/useExchangeRate'
@@ -38,11 +38,11 @@ const OrderItem = ({ order, hideButton }: Props) => {
   const tOrderStatus = useTranslations('global.orderStatus')
 
   const router = useRouter()
-
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const isPending = order?.status === OrderStatus.PENDING
   const isDisableReceipt = DISABLE_RECEIPT_STATUSES.includes(order.status)
+  const hasDiscount = order.discount > 0
 
   const productImages = useMemo(
     () =>
@@ -126,9 +126,9 @@ const OrderItem = ({ order, hideButton }: Props) => {
           <AvatarGroupWrapper images={productImages} max={3} />
 
           <div className='flex flex-col gap-0.5'>
-            <p className='text-foreground text-sm font-semibold'>
+            <p className='text-foreground text-sm font-semibold uppercase'>
               {tField('orderId')} #{order?.id.slice(-8).toUpperCase()}
-              <span className='text-default-500 ml-2 font-normal'>
+              <span className='text-default-500 ml-2 font-normal lowercase'>
                 ({formatNumber(order?.items?.length)} {tProductUnit('ITEM')})
               </span>
             </p>
@@ -142,12 +142,22 @@ const OrderItem = ({ order, hideButton }: Props) => {
         </div>
 
         <div className='text-right'>
-          <p className='text-primary text-lg font-bold'>
-            {formatCurrency(order?.total, {
-              ...currencyOptions,
-              skipCalculation: true,
-            })}
-          </p>
+          <div className='flex flex-col items-end gap-0'>
+            <p className='text-primary text-lg font-bold'>
+              {formatCurrency(order?.total, {
+                ...currencyOptions,
+                skipCalculation: true,
+              })}
+            </p>
+            {hasDiscount && (
+              <p className='text-default-400 text-xs font-normal line-through'>
+                {formatCurrency(Number(order.total) + Number(order.discount), {
+                  ...currencyOptions,
+                  skipCalculation: true,
+                })}
+              </p>
+            )}
+          </div>
         </div>
       </div>
 

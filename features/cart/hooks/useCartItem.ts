@@ -6,6 +6,7 @@ import type { GetCartsResult } from '../cart.action'
 import { useCartMutation } from '../cart.mutation'
 
 import { useDebouncedChange } from '@/hooks/useDebouncedChange'
+import { getProductPriceInfo } from '@/utils/productPrice'
 
 type CartItemData = NonNullable<GetCartsResult>[number]
 
@@ -31,13 +32,18 @@ const useCartItem = (cart: CartItemData) => {
     updateCart(payload)
   }, 500)
 
+  const priceInfo = useMemo(
+    () => getProductPriceInfo(cart.product, variantId),
+    [cart.product, variantId],
+  )
+
   const currentVariant = useMemo(
     () => cart?.product?.variants?.find((v) => v?.id === variantId),
     [cart?.product?.variants, variantId],
   )
 
   const state = {
-    currentPrice: currentVariant?.price ?? cart?.product?.price ?? 0,
+    currentPrice: priceInfo.price,
     currentStock:
       currentVariant?.stockQuantity ?? cart?.product?.stockQuantity ?? 0,
   }
@@ -86,6 +92,7 @@ const useCartItem = (cart: CartItemData) => {
     quantity,
     variantId,
     ...state,
+    priceInfo,
     isDeleteQtyOpen,
     onOpenChange,
     loading: {

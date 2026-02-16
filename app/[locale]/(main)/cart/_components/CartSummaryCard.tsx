@@ -1,7 +1,14 @@
 /* eslint-disable react/no-unstable-nested-components */
 'use client'
 
-import { Alert, Button, Card, CardBody, CardFooter } from '@heroui/react'
+import {
+  Alert,
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  Divider,
+} from '@heroui/react'
 import { Currency } from '@prisma/client'
 import { useLocale, useTranslations } from 'next-intl'
 
@@ -17,7 +24,7 @@ import { useOrderMutation } from '@/features/order/order.mutation'
 import { useShipping } from '@/features/shipping/useShipping'
 import { useAppNavigation } from '@/hooks/useAppNavigation'
 import { useAuth } from '@/hooks/useAuth'
-import { formatCurrency, formatFullAddress } from '@/utils'
+import { formatFullAddress } from '@/utils'
 import { cn } from '@/utils/style'
 
 type Props = ComponentProps<typeof Card>
@@ -26,25 +33,30 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
   const tCheckout = useTranslations('cart.checkout')
   const tAction = useTranslations('cart.checkout.action')
   const tSummary = useTranslations('cart.checkout.summary')
+
   const navigation = useAppNavigation()
   const { appLocale } = useAppStore()
   const locale = useLocale()
-
   const { userId } = useAuth()
 
-  const { data: carts = [], subTotal } = useCarts({
-    userId,
-    locale,
-  })
+  const {
+    data: carts = [],
+    subTotal,
+    grossTotal,
+    totalDiscount,
+  } = useCarts({ userId, locale })
+
   const { data: address, isLoading: isLoadingAddress } = useDefaultAddress(
     userId!,
   )
-  const { data: exchangeRates, currencyOptions } = useExchangeRate()
+  const { currencyOptions } = useExchangeRate()
 
-  const currency: Currency = (appLocale?.currency as Currency) ?? Currency.THB
-  const exchangeRate = exchangeRates?.[currency] ?? 1
   const { shippingCost } = useShipping({ userId, address, carts })
+
   const totalAmount = subTotal + shippingCost
+  const currency = (appLocale?.currency as Currency) ?? Currency.THB
+  const exchangeRate = currencyOptions.rates?.[currency] ?? 1
+
   const hasItems = carts.length > 0
   const canOrder = address && hasItems && userId
 
@@ -79,23 +91,23 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
     }
 
     return (
-      <>
+      <div className='flex flex-col gap-2'>
         <span className='w-fit font-semibold'>{tCheckout('addressTitle')}</span>
         <Alert
           className='text-start'
           description={tCheckout('currencyAlert')}
           variant='bordered'
         />
-        <span className='text-default-500'>
+        <div className='text-default-500 text-sm'>
           {formatFullAddress(address)}{' '}
           <button
-            className='text-primary cursor-pointer underline'
+            className='text-primary hover:text-primary-600 font-medium underline transition-colors'
             onClick={navigation.ADDRESS}
           >
             {tAction('editAddress')}
           </button>
-        </span>
-      </>
+        </div>
+      </div>
     )
   }
 
@@ -109,24 +121,37 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
       shadow='none'
       {...props}
     >
-      <CardBody className='gap-3'>
+      <CardBody className='gap-4'>
         {renderAddressSection()}
 
-        <span className='w-fit font-semibold'>{tCheckout('summaryTitle')}</span>
+        <Divider className='bg-default-100/50' />
 
-        <CartSummaryRow label={tSummary('total')} value={subTotal} />
-        <CartSummaryRow label={tSummary('shipping')} value={shippingCost} />
-        <CartSummaryRow label={tSummary('discount')} value={0} />
-
-        <div className='flex items-center justify-between pt-1'>
-          <span className='font-semibold'>{tSummary('net')} :</span>
-          <span className='text-primary text-2xl font-semibold'>
-            {formatCurrency(totalAmount, currencyOptions)}
+        <div className='flex flex-col gap-3'>
+          <span className='w-fit font-semibold'>
+            {tCheckout('summaryTitle')}
           </span>
+
+          <CartSummaryRow label={tSummary('total')} value={grossTotal} />
+
+          <CartSummaryRow label={tSummary('shipping')} value={shippingCost} />
+
+          {totalDiscount > 0 && (
+            <CartSummaryRow
+              label={tSummary('discount')}
+              value={totalDiscount}
+              variant='danger'
+            />
+          )}
+
+          <CartSummaryRow
+            label={tSummary('net')}
+            value={totalAmount}
+            variant='primary'
+          />
         </div>
       </CardBody>
 
-      <CardFooter className='flex-col gap-2'>
+      <CardFooter className='flex-col gap-3'>
         {!isLoadingAddress && !address && (
           <Alert
             className='text-start'
@@ -136,7 +161,7 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
                 {tCheckout.rich('emptyAddressAlert', {
                   button: (chunks) => (
                     <button
-                      className='cursor-pointer underline'
+                      className='cursor-pointer font-bold underline'
                       onClick={navigation.ADDRESS}
                     >
                       {chunks}
@@ -149,9 +174,9 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
           />
         )}
 
-        {!isLoadingAddress && address && (
+        {address && (
           <Button
-            className='text-secondary'
+            className='text-secondary w-full font-bold'
             color='primary'
             isDisabled={!hasItems}
             isLoading={isCreating}

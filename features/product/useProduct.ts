@@ -1,10 +1,12 @@
+'use client'
+
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
 
 import type {
+  ProductWithVariants,
   UseProductParams,
   UseProductsParams,
-  UseProductPriceParams,
   UseSimilarProductsParams,
 } from './product.types'
 
@@ -13,8 +15,8 @@ import { productQueryKeys } from './product.query-key'
 import { useExchangeRate } from '../exchangeRate/useExchangeRate'
 
 import { PAGINATION } from '@/constants'
-import { resolveRangeDisplayValue } from '@/utils'
 import { formatCurrency, formatCurrencyRange } from '@/utils/number'
+import { getProductPriceInfo } from '@/utils/productPrice'
 
 const useProduct = ({
   locale,
@@ -30,6 +32,7 @@ const useProduct = ({
     enabled: !!productId,
   })
 }
+
 const useProducts = ({
   locale,
   itemsPerPage,
@@ -65,26 +68,46 @@ const useProductsInfinite = ({
   })
 }
 
-const useProductPrice = ({
-  price,
-  priceMin,
-  priceMax,
-}: UseProductPriceParams) => {
+const useProductPrice = (product: ProductWithVariants | null | undefined) => {
   const { currencyOptions } = useExchangeRate()
 
-  const displayPrice = useMemo(
-    () =>
-      resolveRangeDisplayValue(
-        { min: priceMin, max: priceMax, fallback: price },
-        {
-          single: (value) => formatCurrency(value, currencyOptions),
-          range: (min, max) => formatCurrencyRange(min, max, currencyOptions),
-        },
-      ),
-    [price, priceMin, priceMax, currencyOptions],
-  )
+  return useMemo(() => {
+    if (!product) {
+      return {
+        maxDiscountPercentage: 0,
+        minPrice: 0,
+        maxPrice: 0,
+        displayPrice: '',
+        allPriceInfos: [],
+      }
+    }
 
-  return { displayPrice }
+    const variants = product.variants || []
+
+    const allPriceInfos =
+      variants.length === 0
+        ? [getProductPriceInfo(product)]
+        : variants.map((v) => getProductPriceInfo(v))
+
+    const maxDiscountPercentage = Math.max(
+      ...allPriceInfos.map((i) => i.discountPercentage),
+    )
+    const minPrice = Math.min(...allPriceInfos.map((i) => i.price))
+    const maxPrice = Math.max(...allPriceInfos.map((i) => i.price))
+
+    const displayPrice =
+      minPrice === maxPrice
+        ? formatCurrency(minPrice, currencyOptions)
+        : formatCurrencyRange(minPrice, maxPrice, currencyOptions)
+
+    return {
+      maxDiscountPercentage,
+      minPrice,
+      maxPrice,
+      displayPrice,
+      allPriceInfos,
+    }
+  }, [product, currencyOptions])
 }
 
 const useSimilarProducts = ({

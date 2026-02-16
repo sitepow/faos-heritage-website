@@ -124,7 +124,9 @@ const getProducts = async (page = 1, limit = 10, locale?: string) => {
       include: {
         category: { select: { name: true } },
         images: { select: { url: true, isPrimary: true } },
-        variants: { select: { price: true, stockQuantity: true } },
+        variants: {
+          select: { price: true, salePrice: true, stockQuantity: true },
+        },
         localizations: {
           where: { languageCode },
           take: 1,
@@ -173,7 +175,14 @@ const getProductsInfinite = async ({
         category: { select: { name: true } },
         images: { select: { url: true, isPrimary: true } },
         variants: {
-          select: { name: true, price: true, stockQuantity: true, image: true },
+          select: {
+            id: true,
+            name: true,
+            price: true,
+            salePrice: true,
+            stockQuantity: true,
+            image: true,
+          },
         },
         localizations: {
           where: { languageCode },

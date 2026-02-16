@@ -4,27 +4,45 @@ import { useMemo } from 'react'
 import { getCarts, getCartStat } from '../cart.action'
 import { cartQueryKeys } from '../cart.query-key'
 
-const useCarts = ({ userId, locale }: { userId?: string; locale?: string }) => {
+import { getProductPriceInfo } from '@/utils/productPrice'
+
+interface useCartsProps {
+  userId?: string
+  locale?: string
+}
+
+const useCarts = ({ userId, locale }: useCartsProps) => {
   const query = useQuery({
     queryKey: cartQueryKeys.lists.byUserId({ userId: userId!, locale }),
     queryFn: () => getCarts(userId!, locale),
     enabled: !!userId,
   })
 
-  const subTotal = useMemo(() => {
+  const totals = useMemo(() => {
     const items = query.data ?? []
-    return items.reduce((sum, cart) => {
-      const variant = cart?.product?.variants?.find(
-        (v) => v.id === cart?.variantId,
-      )
-      const price = variant?.price ?? cart?.product?.price ?? 0
-      return sum + price * (cart.quantity ?? 0)
-    }, 0)
+
+    return items.reduce(
+      (acc, cart) => {
+        const { price, originalPrice, discountAmount } = getProductPriceInfo(
+          cart.product,
+          cart.variantId,
+        )
+
+        const qty = cart.quantity ?? 0
+
+        acc.grossTotal += originalPrice * qty
+        acc.subTotal += price * qty
+        acc.totalDiscount += discountAmount * qty
+
+        return acc
+      },
+      { grossTotal: 0, subTotal: 0, totalDiscount: 0 },
+    )
   }, [query.data])
 
   return {
     ...query,
-    subTotal,
+    ...totals,
     isEmpty: (query.data ?? []).length === 0,
   }
 }

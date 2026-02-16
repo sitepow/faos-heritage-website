@@ -2,33 +2,26 @@
 
 import { useTranslations } from 'next-intl'
 
+import type { ProductWithVariants } from '@/features/product/product.types'
 import type { ComponentProps } from 'react'
 
 import { useProductPrice } from '@/features/product/useProduct'
 import { cn } from '@/utils/style'
 
 type Props = ComponentProps<'div'> & {
-  price: number
-  priceMin: number | null
-  priceMax: number | null
+  product: ProductWithVariants | null | undefined
   unit?: string
 }
 
 const ProductPrice = ({
-  price,
-  priceMin,
-  priceMax,
+  product,
   unit = 'item',
   className,
   ...props
 }: Props) => {
   const tProductUnit = useTranslations('global.productUnit')
 
-  const { displayPrice } = useProductPrice({
-    price,
-    priceMin,
-    priceMax,
-  })
+  const { displayPrice } = useProductPrice(product)
 
   return (
     <div
@@ -36,9 +29,11 @@ const ProductPrice = ({
       {...props}
     >
       <dl className='flex items-baseline gap-1 text-xl'>
-        <dd>{displayPrice}</dd>
+        <dd className='font-bold'>{displayPrice}</dd>
 
-        <dt>/ {tProductUnit(unit.toUpperCase())}</dt>
+        <dt className='text-default-500 text-sm'>
+          / {tProductUnit(unit.toUpperCase())}
+        </dt>
       </dl>
     </div>
   )

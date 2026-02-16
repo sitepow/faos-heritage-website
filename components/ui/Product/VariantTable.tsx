@@ -4,27 +4,19 @@
 import { Chip, cn } from '@heroui/react'
 import { useTranslations } from 'next-intl'
 
-import { useExchangeRate } from '@/features/exchangeRate/useExchangeRate'
-import { formatCurrency } from '@/utils'
+import type { ProductVariant } from '@/features/product/product.types'
 
-interface ProductVariant {
-  name: string
-  price: number
-  stockQuantity: number
-  image?: string | null
-}
+import { PriceDisplay } from '@/components/ui/Product/PriceDisplay'
+import { getProductPriceInfo } from '@/utils/productPrice'
 
 interface Props {
   variants: ProductVariant[]
   className?: string
   showStock?: boolean
 }
-
 const VariantTable = ({ variants, className, showStock = true }: Props) => {
   const t = useTranslations('variantTable')
   const tProductDetail = useTranslations('productDetail')
-
-  const { currencyOptions } = useExchangeRate()
 
   if (!variants || variants.length === 0) {
     return null
@@ -57,7 +49,9 @@ const VariantTable = ({ variants, className, showStock = true }: Props) => {
         </thead>
         <tbody className='divide-divider divide-y'>
           {variants.map((variant, idx) => {
-            const isOutOfStock = variant.stockQuantity <= 0
+            const stock = variant.stockQuantity ?? 0
+            const isOutOfStock = stock <= 0
+            const priceInfo = getProductPriceInfo(variant)
 
             return (
               <tr
@@ -72,8 +66,8 @@ const VariantTable = ({ variants, className, showStock = true }: Props) => {
                 >
                   {variant.name}
                 </td>
-                <td className='text-default-700 text-right font-bold'>
-                  {formatCurrency(variant.price, currencyOptions)}
+                <td className='text-right'>
+                  <PriceDisplay {...priceInfo} size='sm' />
                 </td>
                 {showStock && (
                   <td className='text-right'>
@@ -98,4 +92,3 @@ const VariantTable = ({ variants, className, showStock = true }: Props) => {
 }
 
 export { VariantTable }
-export type { ProductVariant }

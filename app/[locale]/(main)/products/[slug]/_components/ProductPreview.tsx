@@ -14,6 +14,7 @@ const ProductPreview = () => {
       <div className='min-w-0 overflow-hidden'>
         <ProductImagePreview
           images={product?.images?.map((image) => image.url)}
+          product={product}
         />
       </div>
       <div className='min-w-0 lg:sticky lg:top-20'>

@@ -14,12 +14,20 @@ const transformProduct = <T extends Record<string, any>>(product: T | null) => {
     localizedProduct.variants ?? [],
   )
 
+  const hasAnyDiscount = localizedProduct.variants?.some(
+    (v: any) =>
+      v.salePrice !== null &&
+      v.salePrice !== undefined &&
+      v.salePrice < v.price,
+  )
+
   return {
     ...localizedProduct,
     priceMin,
     priceMax,
     stockMin,
     stockMax,
+    hasAnyDiscount,
   }
 }
 

@@ -23,7 +23,7 @@ const FavoriteItem = ({ favorite, ...props }: Props) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
   const { removeFromFav, isRemoving } = useFavoriteMutation()
 
-  const { product, priceMin, priceMax } = favorite
+  const { product } = favorite
   const primaryImage = product?.images?.[0]?.url ?? IMAGE_FALLBACK.EMPTY
 
   const handleRemove = async () => {
@@ -65,9 +65,7 @@ const FavoriteItem = ({ favorite, ...props }: Props) => {
                 </span>
                 <ProductPrice
                   className='items-start'
-                  price={product?.price!}
-                  priceMax={priceMax}
-                  priceMin={priceMin}
+                  product={product}
                   unit={resolveProductUnitLabel(product?.unit!)}
                 />
               </div>

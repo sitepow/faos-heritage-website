@@ -16,6 +16,7 @@ import {
   formatStat,
 } from '@/utils'
 import { decimalToNumber } from '@/utils/number'
+import { getProductPriceInfo } from '@/utils/productPrice'
 
 interface GetOrdersOptions {
   page?: number
@@ -61,20 +62,34 @@ const processStockMovement = async (
   const isIncrement = direction === 'increment'
   const amount = isIncrement ? quantity : -quantity
 
-  const model = variantId ? tx.productVariant : tx.product
-  const updated = await (model as any).updateMany({
-    where: {
-      id: variantId || productId,
-      ...(direction === 'decrement' && { stockQuantity: { gte: quantity } }),
-    },
-    data: {
-      stockQuantity: isIncrement
-        ? { increment: quantity }
-        : { decrement: quantity },
-    },
-  })
+  const whereFilter = {
+    id: variantId || productId,
+    ...(direction === 'decrement' && { stockQuantity: { gte: quantity } }),
+  }
 
-  if (updated.count === 0 && direction === 'decrement') {
+  const updateData = {
+    stockQuantity: isIncrement
+      ? { increment: quantity }
+      : { decrement: quantity },
+  }
+
+  let updatedCount = 0
+
+  if (variantId) {
+    const result = await tx.productVariant.updateMany({
+      where: whereFilter,
+      data: updateData,
+    })
+    updatedCount = result.count
+  } else {
+    const result = await tx.product.updateMany({
+      where: whereFilter,
+      data: updateData,
+    })
+    updatedCount = result.count
+  }
+
+  if (updatedCount === 0 && direction === 'decrement') {
     throw new Error('INSUFFICIENT_STOCK')
   }
 
@@ -200,21 +215,26 @@ const createOrder = async (input: CreateOrderInput) =>
       const productMap = new Map(products.map((p) => [p.id, p]))
       const orderItemsPayload: Prisma.OrderItemCreateManyOrderInput[] = []
       const shippingItems: { quantity: number; weight: number }[] = []
+      let totalBaseProductDiscount = 0
 
       for (const item of items) {
         const product = productMap.get(item.productId)
-        const variant = item.variantId
-          ? product?.variants.find((v) => v.id === item.variantId)
-          : null
-
         if (!product) {
           return fail(ERROR_CODES.DATA_NOT_FOUND)
         }
 
-        const basePrice = variant ? variant.price : product.price
+        const { price: effectiveBasePrice, discountAmount } =
+          getProductPriceInfo(product, item.variantId)
+
+        const variant = item.variantId
+          ? product.variants.find((v) => v.id === item.variantId)
+          : null
+
         const priceLocal = Number(
-          (decimalToNumber(basePrice) * exchangeRate).toFixed(2),
+          (effectiveBasePrice * exchangeRate).toFixed(2),
         )
+
+        totalBaseProductDiscount += discountAmount * item.quantity
 
         orderItemsPayload.push({
           productId: product.id,
@@ -222,8 +242,8 @@ const createOrder = async (input: CreateOrderInput) =>
           productName: product.name,
           variantName: variant?.name,
           quantity: item.quantity,
-          basePrice,
-          baseSubtotal: Number(basePrice) * item.quantity,
+          basePrice: effectiveBasePrice,
+          baseSubtotal: effectiveBasePrice * item.quantity,
           price: priceLocal,
           subtotal: priceLocal * item.quantity,
           currency,
@@ -244,8 +264,8 @@ const createOrder = async (input: CreateOrderInput) =>
         countryCode: address.countryCode,
       })
 
-      const baseTotal = baseSubtotal + baseShipping
       const exchange = (val: number) => Number((val * exchangeRate).toFixed(2))
+      const baseTotal = baseSubtotal + baseShipping
 
       const order = await tx.order.create({
         data: {
@@ -255,13 +275,13 @@ const createOrder = async (input: CreateOrderInput) =>
           exchangeLocale,
           baseSubtotal,
           baseShipping,
-          baseTotal,
-          baseDiscount: 0,
+          baseDiscount: totalBaseProductDiscount,
           baseTax: 0,
-          discount: 0,
-          tax: 0,
+          baseTotal,
           subtotal: exchange(baseSubtotal),
           shippingCost: exchange(baseShipping),
+          discount: exchange(totalBaseProductDiscount),
+          tax: 0,
           total: exchange(baseTotal),
           address: { connect: { id: addressId } },
           shippingName: address.name,
@@ -271,8 +291,8 @@ const createOrder = async (input: CreateOrderInput) =>
         },
       })
 
-      await Promise.all(
-        items.map((item) =>
+      await Promise.all([
+        ...items.map((item) =>
           processStockMovement(tx, {
             ...item,
             type: StockMovementType.SALE,
@@ -280,9 +300,9 @@ const createOrder = async (input: CreateOrderInput) =>
             direction: 'decrement',
           }),
         ),
-      )
+        tx.cart.deleteMany({ where: { userId } }),
+      ])
 
-      await tx.cart.deleteMany({ where: { userId } })
       return ok(order.id)
     })
   })
