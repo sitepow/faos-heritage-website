@@ -58,13 +58,13 @@ const CartItem = ({ cart }: Props) => {
           </span>
 
           <div className='lg:hidden'>
-            <PriceDisplay {...priceInfo} className='items-start' size='sm' />
+            <PriceDisplay {...priceInfo} className='items-start' />
           </div>
         </div>
       </div>
 
       <div className='hidden text-center lg:col-span-1 lg:block'>
-        <PriceDisplay {...priceInfo} size='sm' />
+        <PriceDisplay {...priceInfo} />
       </div>
 
       <div className='flex flex-wrap items-center justify-between gap-4 lg:col-span-4 lg:grid lg:grid-cols-2 lg:justify-items-center'>

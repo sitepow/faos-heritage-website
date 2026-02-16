@@ -67,7 +67,7 @@ const VariantTable = ({ variants, className, showStock = true }: Props) => {
                   {variant.name}
                 </td>
                 <td className='text-right'>
-                  <PriceDisplay {...priceInfo} size='sm' />
+                  <PriceDisplay {...priceInfo} />
                 </td>
                 {showStock && (
                   <td className='text-right'>
