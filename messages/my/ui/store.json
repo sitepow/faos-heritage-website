@@ -33,7 +33,8 @@
         "total": "Jumlah Kecil",
         "shipping": "Kos Penghantaran",
         "discount": "Diskaun",
-        "net": "Jumlah Keseluruhan"
+        "net": "Jumlah Keseluruhan",
+        "weight": "Berat keseluruhan"
       },
       "action": {
         "order": "Buat Pesanan",

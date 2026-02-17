@@ -33,7 +33,8 @@
         "total": "Totale parziale",
         "shipping": "Spese di spedizione",
         "discount": "Sconto",
-        "net": "Totale complessivo"
+        "net": "Totale complessivo",
+        "weight": "Peso totale"
       },
       "action": {
         "order": "Effettua ordine",

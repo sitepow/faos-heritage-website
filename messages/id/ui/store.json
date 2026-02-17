@@ -33,7 +33,8 @@
         "total": "Subtotal",
         "shipping": "Biaya Pengiriman",
         "discount": "Diskon",
-        "net": "Total Keseluruhan"
+        "net": "Total Keseluruhan",
+        "weight": "Berat total"
       },
       "action": {
         "order": "Buat Pesanan",

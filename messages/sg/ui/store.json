@@ -33,7 +33,8 @@
         "total": "Subtotal",
         "shipping": "Shipping Fee",
         "discount": "Discount",
-        "net": "Grand Total"
+        "net": "Grand Total",
+        "weight": "Total Weight"
       },
       "action": {
         "order": "Place Order",

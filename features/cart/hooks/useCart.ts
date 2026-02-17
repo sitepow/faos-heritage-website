@@ -28,15 +28,21 @@ const useCarts = ({ userId, locale }: useCartsProps) => {
           cart.variantId,
         )
 
+        const variant = cart?.product?.variants?.find(
+          (v) => v.id === cart.variantId,
+        )
+        const weight = variant?.weight ?? cart?.product?.weight ?? 0
+
         const qty = cart.quantity ?? 0
 
         acc.grossTotal += originalPrice * qty
         acc.subTotal += price * qty
         acc.totalDiscount += discountAmount * qty
+        acc.totalWeight += weight * qty
 
         return acc
       },
-      { grossTotal: 0, subTotal: 0, totalDiscount: 0 },
+      { grossTotal: 0, subTotal: 0, totalDiscount: 0, totalWeight: 0 },
     )
   }, [query.data])
 

@@ -48,6 +48,7 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
     subTotal,
     grossTotal,
     totalDiscount,
+    totalWeight,
   } = useCarts({ userId, locale })
 
   const { data: address, isLoading: isLoadingAddress } = useDefaultAddress(
@@ -168,6 +169,11 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
           </span>
 
           <CartSummaryRow label={tSummary('total')} value={grossTotal} />
+          <CartSummaryRow
+            label={tSummary('weight')}
+            type='weight'
+            value={totalWeight}
+          />
           <CartSummaryRow label={tSummary('shipping')} value={shippingCost} />
 
           {totalDiscount > 0 && (

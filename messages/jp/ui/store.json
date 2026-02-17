@@ -33,7 +33,8 @@
         "total": "小計",
         "shipping": "送料",
         "discount": "割引",
-        "net": "合計金額"
+        "net": "合計金額",
+        "weight": "総重量"
       },
       "action": {
         "order": "注文を確定する",

@@ -33,7 +33,8 @@
         "total": "Millisamtala",
         "shipping": "Sendingarkostnaður",
         "discount": "Afsláttur",
-        "net": "Heildarupphæð"
+        "net": "Heildarupphæð",
+        "weight": "Heildarþyngd"
       },
       "action": {
         "order": "Ganga frá pöntun",

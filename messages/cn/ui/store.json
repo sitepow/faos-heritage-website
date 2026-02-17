@@ -33,7 +33,8 @@
         "total": "小计",
         "shipping": "运费",
         "discount": "折扣",
-        "net": "应付总额"
+        "net": "应付总额",
+        "weight": "总重量"
       },
       "action": {
         "order": "提交订单",

@@ -33,7 +33,8 @@
         "total": "Subtotaal",
         "shipping": "Verzendkosten",
         "discount": "Korting",
-        "net": "Totaalbedrag"
+        "net": "Totaalbedrag",
+        "weight": "Totaalgewicht"
       },
       "action": {
         "order": "Bestelling plaatsen",

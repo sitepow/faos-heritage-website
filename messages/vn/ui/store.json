@@ -33,7 +33,8 @@
         "total": "Tạm tính",
         "shipping": "Phí vận chuyển",
         "discount": "Giảm giá",
-        "net": "Tổng thanh toán"
+        "net": "Tổng thanh toán",
+        "weight": "Tổng trọng lượng"
       },
       "action": {
         "order": "Đặt hàng",
