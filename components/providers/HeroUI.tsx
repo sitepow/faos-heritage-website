@@ -17,7 +17,7 @@ const HeroUIProviders = ({ children, themeProps }: HeroUIProvidersProps) => {
 
   return (
     <HeroUIProvider navigate={router.push}>
-      <NextThemesProvider {...themeProps} enableSystem>
+      <NextThemesProvider {...themeProps} enableSystem defaultTheme='dark'>
         {children}
       </NextThemesProvider>
     </HeroUIProvider>
