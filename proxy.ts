@@ -33,14 +33,16 @@ const middleware = async (request: NextRequest) => {
 
     if (code) {
       try {
-        const apiResponse = await fetch(
-          `${request.nextUrl.origin}/api/shorten/${code}`,
-        )
+        const baseUrl = request.nextUrl.origin
+
+        const apiResponse = await fetch(`${baseUrl}/api/shorten/${code}`, {
+          cache: 'no-store',
+        })
 
         if (apiResponse.ok) {
           const data = await apiResponse.json()
 
-          if (data?.url) {
+          if (data?.url && data.url !== request.url) {
             return NextResponse.redirect(new URL(data.url, request.url), {
               status: 308,
             })
