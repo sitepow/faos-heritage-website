@@ -25,8 +25,10 @@ const isAuthenticated = (request: NextRequest): boolean => {
 const middleware = async (request: NextRequest) => {
   const { pathname } = request.nextUrl
 
-  if (pathname.startsWith('/s/')) {
-    const pathParts = pathname.split('/')
+  const normalizedPath = stripLocaleFromPath(pathname)
+
+  if (normalizedPath.startsWith('/s/')) {
+    const pathParts = normalizedPath.split('/')
     const code = pathParts[2]
 
     if (code) {
@@ -39,7 +41,9 @@ const middleware = async (request: NextRequest) => {
           const data = await apiResponse.json()
 
           if (data?.url) {
-            return NextResponse.redirect(new URL(data.url, request.url))
+            return NextResponse.redirect(new URL(data.url, request.url), {
+              status: 308,
+            })
           }
         }
       } catch (error) {
@@ -70,7 +74,6 @@ const middleware = async (request: NextRequest) => {
   }
 
   const currentLocale = localeInPath
-  const normalizedPath = stripLocaleFromPath(pathname)
   const loggedIn = isAuthenticated(request)
 
   const isProtectedRoute = ROUTES.PROTECTED.some((path) =>
