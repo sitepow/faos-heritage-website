@@ -1,0 +1,93 @@
+{
+  "affiliate": {
+    "banner": {
+      "tagline": "Program Afiliasi FAOS",
+      "title": "Jana <highlight>pendapatan bulanan</highlight> <br></br> dengan mengesyorkan produk <br></br> tanpa modal",
+      "description": "Nikmati komisen <highlight>sehingga 10%</highlight> bagi setiap pesanan yang anda syorkan. Tanpa pelaburan, tanpa stok, dan tanpa penghantaran. Daftar sekali, bina pendapatan jangka panjang.",
+      "partnerStatus": "Ramai rakan kongsi sedang menjana pendapatan dengan FAOS sekarang.",
+      "features": {
+        "noInvestment": "Tanpa Modal Permulaan",
+        "freeSignup": "Daftar Percuma, Mula Serta-merta"
+      },
+      "buttons": {
+        "gotoAffiliate": "Mula Jana Pendapatan Sekarang",
+        "register": "Daftar Percuma Sekarang",
+        "about": "Lihat Butiran Lanjut"
+      }
+    },
+    "steps": {
+      "items": [
+        {
+          "number": "01.",
+          "title": "Daftar Sebagai Rakan Kongsi Percuma",
+          "description": "Pendaftaran mengambil masa kurang dari 1 minit tanpa sebarang kos permulaan."
+        },
+        {
+          "number": "02.",
+          "title": "Terima Pautan Syor Peribadi",
+          "description": "Dapatkan pautan khas anda untuk mengesyorkan produk dan menjejak pendapatan."
+        },
+        {
+          "number": "03.",
+          "title": "Kongsi & Mula Jana Pendapatan",
+          "description": "Setiap kali terdapat pesanan melalui pautan anda, anda akan menerima komisen serta-merta."
+        },
+        {
+          "number": "04.",
+          "title": "Terima Bayaran Ke Akaun",
+          "description": "Pendapatan akan dirumuskan dan dipindahkan terus ke akaun anda setiap bulan."
+        }
+      ]
+    },
+    "rewards": {
+      "title": "Lebih Daripada Sekadar Komisen <br></br> Ianya <highlight>Peluang Perniagaan Yang Berkembang</highlight>",
+      "description": "Semakin banyak anda syorkan, semakin tinggi peluang pendapatan anda beserta ganjaran eksklusif bagi rakan kongsi kami.",
+      "rankingSystem": "Manfaat Rakan Kongsi",
+      "items": [
+        "Bonus Prestasi: Terima bonus tambahan apabila mencapai sasaran syor.",
+        "Naik Taraf Tahap Rakan Kongsi: Tingkatkan tahap anda untuk kadar komisen yang lebih tinggi.",
+        "Ganjaran Eksklusif: Terima hadiah istimewa dan keistimewaan daripada jenama."
+      ]
+    },
+    "tiers": {
+      "title": "Pendapatan yang meningkat mengikut <highlight>kejayaan anda</highlight>",
+      "description": "Semakin banyak pesanan melalui pautan anda, semakin tinggi peratusan komisen yang anda terima.",
+      "label": "Kadar Komisen",
+      "targetLabel": "Jumlah Jualan Terkumpul",
+      "items": [
+        {
+          "salesRange": "Kurang daripada 1,300 MYR",
+          "percentage": "5%"
+        },
+        {
+          "salesRange": "1,300 MYR ke atas",
+          "percentage": "10%",
+          "isHighlight": true
+        }
+      ]
+    },
+    "cta": {
+      "title": "Mula <highlight>Jana Pendapatan Dengan FAOS</highlight> Hari Ini",
+      "description": "Sertai sebagai rakan kongsi percuma dan mula jana pendapatan dengan mengesyorkan produk berkualiti bersama kami.",
+      "buttons": {
+        "register": "Daftar Percuma & Mula Jana Pendapatan",
+        "inquiry": "Hubungi Kami Untuk Pertanyaan Lanjut"
+      }
+    },
+    "remarks": {
+      "defaultTitle": "Nota:",
+      "docTitle": "Dokumen Yang Diperlukan:",
+      "generalItems": [
+        "Komisen dikira berdasarkan pesanan yang telah dibayar dengan berjaya sahaja.",
+        "Pendapatan akan dirumuskan mengikut kitaran bulanan.",
+        "Syarikat berhak untuk melaraskan terma dan syarat mengikut kesesuaian."
+      ],
+      "docItems": [
+        "Salinan Kad Pengenalan (IC)",
+        "Salinan muka depan buku akaun bank",
+        "Saluran media sosial yang digunakan untuk promosi",
+        "Nombor telefon yang boleh dihubungi"
+      ]
+    }
+  }
+}

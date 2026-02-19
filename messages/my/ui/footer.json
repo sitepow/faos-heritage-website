@@ -7,6 +7,7 @@
         "title": "Mengenai FAOS",
         "items": [
           { "label": "Mengenai Kami", "href": "/about" },
+          { "label": "Pendaftaran Gabungan", "href": "/affiliate" },
           { "label": "Kaedah Pembayaran", "href": "/payment-methods" },
           {
             "label": "Dasar Privasi FAOS",

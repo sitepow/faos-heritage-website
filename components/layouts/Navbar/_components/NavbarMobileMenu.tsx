@@ -24,7 +24,7 @@ const NavbarMobileMenu = () => {
 
       <div
         className={cn(
-          'bg-background fixed inset-0 z-60 p-5',
+          'bg-background fixed inset-0 z-60 h-dvh p-5',
           isMenuOpen
             ? 't-x-0 opacity-100'
             : 't-x-full pointer-events-none opacity-0',

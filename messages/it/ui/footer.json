@@ -7,6 +7,7 @@
         "title": "About FAOS",
         "items": [
           { "label": "About Us", "href": "/about" },
+          { "label": "Registrazione Affiliati", "href": "/affiliate" },
           { "label": "Payment Methods", "href": "/payment-methods" },
           {
             "label": "FAOS Privacy Policy",

@@ -10,6 +10,7 @@ import { ProductSimilar } from './_components/ProductSectionSemilar'
 import { ProductTabs } from './_components/ProductTabs'
 
 import { AppSection } from '@/components/layouts/AppSection'
+import { AffiliateBanner } from '@/components/ui/AffiliateBanner/AffiliateBanner'
 import { DynamicBreadcrumb } from '@/components/ui/DynamicBreadcrumb'
 import { useProductDetailStore } from '@/features/product/product.store'
 import { useProduct } from '@/features/product/useProduct'
@@ -59,6 +60,7 @@ const ProductClient = ({ initialData, productId }: ProductClientProps) => {
       <DynamicBreadcrumb items={breadcrumbItems} />
       <ProductPreview />
       <ProductTabs />
+      <AffiliateBanner />
       <ProductSimilar />
     </AppSection>
   )

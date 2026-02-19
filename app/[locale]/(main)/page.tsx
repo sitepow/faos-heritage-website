@@ -6,6 +6,7 @@ import { ProductExploreSection } from './_components/ProductExploreSection'
 
 import { AppSection } from '@/components/layouts/AppSection'
 import { AdvertiseBanner } from '@/components/ui/Advertise/AdvertiseBanner'
+import { AffiliateBanner } from '@/components/ui/AffiliateBanner/AffiliateBanner'
 import { CategoryLists } from '@/components/ui/CategoryLists'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { PAGINATION } from '@/constants'
@@ -41,12 +42,12 @@ const HomePage = async () => {
         <SectionHeader description={t('description')} title={t('title')} />
         <CategoryLists />
       </div>
-
       <ProductExploreSection
         initialData={products}
         itemsPerPage={PAGINATION.ITEMS_PER_PAGE}
       />
       <AdvertiseBanner />
+      <AffiliateBanner />
     </AppSection>
   )
 }

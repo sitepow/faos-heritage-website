@@ -7,6 +7,7 @@
         "title": "关于 FAOS",
         "items": [
           { "label": "关于我们", "href": "/about" },
+          { "label": "分销商注册", "href": "/affiliate" },
           { "label": "支付方式", "href": "/payment-methods" },
           {
             "label": "FAOS 隐私政策",

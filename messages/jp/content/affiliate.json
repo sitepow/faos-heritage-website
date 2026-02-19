@@ -1,0 +1,93 @@
+{
+  "affiliate": {
+    "banner": {
+      "tagline": "FAOS アフィリエイトプログラム",
+      "title": "<highlight>毎月の収入</highlight>を得る <br></br> 商品を紹介するだけ <br></br> 投資資金は不要",
+      "description": "紹介した注文ごとに <highlight>最大10％</highlight> の報酬。初期投資、在庫、配送の手間は一切なし。一度の登録で長期的な収入源を築けます。",
+      "partnerStatus": "現在、多くのパートナーが FAOS で収益を上げています。",
+      "features": {
+        "noInvestment": "初期投資不要",
+        "freeSignup": "登録無料、即開始可能"
+      },
+      "buttons": {
+        "gotoAffiliate": "今すぐ収益化を始める",
+        "register": "無料で登録する",
+        "about": "詳細を見る"
+      }
+    },
+    "steps": {
+      "items": [
+        {
+          "number": "01.",
+          "title": "パートナーに無料登録",
+          "description": "登録は1分以内に完了します。初期費用は一切かかりません。"
+        },
+        {
+          "number": "02.",
+          "title": "専用紹介リンクを取得",
+          "description": "商品紹介と報酬管理のための、あなた専用のリンクを発行します。"
+        },
+        {
+          "number": "03.",
+          "title": "シェアして報酬発生",
+          "description": "あなたのリンク経由で注文が発生するたびに、即座に報酬が計上されます。"
+        },
+        {
+          "number": "04.",
+          "title": "銀行口座で報酬受取",
+          "description": "収益は毎月集計され、ご指定の口座に直接振り込まれます。"
+        }
+      ]
+    },
+    "rewards": {
+      "title": "単なる報酬以上の <br></br> <highlight>成長できるビジネスチャンス</highlight>",
+      "description": "紹介実績に応じて収益が拡大。パートナー限定の特典や特別ボーナスもご用意しています。",
+      "rankingSystem": "パートナー特典",
+      "items": [
+        "パフォーマンスボーナス：目標達成時に追加ボーナスを支給",
+        "ランクアップ制度：実績に応じて報酬率がアップ",
+        "限定リワード：ブランドからの特別ギフトや優待"
+      ]
+    },
+    "tiers": {
+      "title": "<highlight>あなたの成功</highlight>に応じて増える報酬",
+      "description": "紹介による売上金額が増えるほど、獲得できる報酬率も上がります。",
+      "label": "報酬率",
+      "targetLabel": "累計売上額",
+      "items": [
+        {
+          "salesRange": "45,000円未満",
+          "percentage": "5%"
+        },
+        {
+          "salesRange": "45,000円以上",
+          "percentage": "10%",
+          "isHighlight": true
+        }
+      ]
+    },
+    "cta": {
+      "title": "今日から <highlight>FAOS で収益化</highlight> を始めましょう",
+      "description": "無料でパートナー登録をして、高品質な商品の紹介から収益を生み出しませんか。",
+      "buttons": {
+        "register": "無料登録して始める",
+        "inquiry": "お問い合わせ"
+      }
+    },
+    "remarks": {
+      "defaultTitle": "備考：",
+      "docTitle": "登録に必要な書類：",
+      "generalItems": [
+        "報酬は決済が完了した注文のみが対象となります。",
+        "収益は月単位で集計されます。",
+        "当社は適宜、規約を変更する権利を留保します。"
+      ],
+      "docItems": [
+        "身分証明書の写し（マイナンバーカード、免許証など）",
+        "振込先口座情報の控え",
+        "紹介に使用するSNSアカウントまたはメディア",
+        "連絡可能な電話番号"
+      ]
+    }
+  }
+}

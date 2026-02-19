@@ -67,6 +67,12 @@ const config = {
             page: '#f1f1f1',
             primary: '#ba8c25',
             secondary: '#ffffff',
+            faos: {
+              dark: '#1a1f14',
+              'dark-soft': '#22281a',
+              olive: '#556B2F',
+              amber: '#f59e0b',
+            },
           },
         },
         dark: {
@@ -74,6 +80,12 @@ const config = {
             page: '#131314',
             primary: '#ba8c25',
             secondary: '#ffffff',
+            faos: {
+              dark: '#1a1f14',
+              'dark-soft': '#22281a',
+              olive: '#556B2F',
+              amber: '#f59e0b',
+            },
           },
         },
       },

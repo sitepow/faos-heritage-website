@@ -7,6 +7,7 @@
         "title": "Over FAOS",
         "items": [
           { "label": "Over ons", "href": "/about" },
+          { "label": "Affiliate Registratie", "href": "/affiliate" },
           { "label": "Betaalmethoden", "href": "/payment-methods" },
           {
             "label": "FAOS Privacybeleid",

@@ -1,0 +1,93 @@
+{
+  "affiliate": {
+    "banner": {
+      "tagline": "FAOS Affiliateprogramma",
+      "title": "Verdien een <highlight>maandelijks inkomen</highlight> <br></br> door producten aan te bevelen <br></br> zonder investering",
+      "description": "Verdien tot <highlight>10% commissie</highlight> op elke bestelling die u aanbeveelt. Geen investering, geen voorraad en geen verzending nodig. Meld u eenmalig aan en bouw een inkomen op de lange termijn op.",
+      "partnerStatus": "Veel partners genereren op dit moment al inkomsten met FAOS.",
+      "features": {
+        "noInvestment": "Geen startinvestering nodig",
+        "freeSignup": "Gratis aanmelden, direct beginnen"
+      },
+      "buttons": {
+        "gotoAffiliate": "Begin nu met verdienen",
+        "register": "Gratis registreren",
+        "about": "Bekijk details"
+      }
+    },
+    "steps": {
+      "items": [
+        {
+          "number": "01.",
+          "title": "Gratis partner worden",
+          "description": "Registratie duurt minder dan 1 minuut en er zijn geen opstartkosten."
+        },
+        {
+          "number": "02.",
+          "title": "Ontvang uw persoonlijke link",
+          "description": "Ontvang uw unieke referentielink om producten te promoten en inkomsten bij te houden."
+        },
+        {
+          "number": "03.",
+          "title": "Deel en begin met verdienen",
+          "description": "Elke keer dat er een bestelling wordt geplaatst via uw link, ontvangt u direct commissie."
+        },
+        {
+          "number": "04.",
+          "title": "Uitbetaling op uw rekening",
+          "description": "Uw inkomsten worden maandelijks samengevat en direct naar uw rekening overgemaakt."
+        }
+      ]
+    },
+    "rewards": {
+      "title": "Meer dan alleen commissie <br></br> maar een <highlight>kans op groei</highlight>",
+      "description": "Hoe meer u aanbeveelt, hoe groter de kans op hogere inkomsten met exclusieve voordelen voor onze partners.",
+      "rankingSystem": "Partner voordelen",
+      "items": [
+        "Prestatiebonus: Ontvang extra bonussen wanneer u uw referentiedoelen behaalt.",
+        "Partner Level Upgrade: Verhoog uw niveau voor hogere commissiepercentages.",
+        "Exclusieve beloningen: Ontvang speciale geschenken en privileges van het merk."
+      ]
+    },
+    "tiers": {
+      "title": "Inkomen dat groeit met <highlight>jouw succes</highlight>",
+      "description": "Hoe meer bestellingen via uw link, hoe hoger het commissiepercentage dat u ontvangt.",
+      "label": "Commissiepercentage",
+      "targetLabel": "Gecumuleerde omzet",
+      "items": [
+        {
+          "salesRange": "Minder dan 300 EUR",
+          "percentage": "5%"
+        },
+        {
+          "salesRange": "300 EUR or meer",
+          "percentage": "10%",
+          "isHighlight": true
+        }
+      ]
+    },
+    "cta": {
+      "title": "Begin vandaag nog met <highlight>verdienen bij FAOS</highlight>",
+      "description": "Word gratis partner en begin met het genereren van inkomsten door kwaliteitsproducten bij ons aan te bevelen.",
+      "buttons": {
+        "register": "Gratis aanmelden en beginnen",
+        "inquiry": "Neem contact op voor meer info"
+      }
+    },
+    "remarks": {
+      "defaultTitle": "Opmerkingen:",
+      "docTitle": "Benodigde documenten voor aanmelding:",
+      "generalItems": [
+        "Commissies worden alleen berekend over succesvol betaalde bestellingen.",
+        "Inkomsten worden per maandelijkse cyclus samengevat.",
+        "Het bedrijf behoudt zich het recht voor om de voorwaarden naar eigen inzicht aan te passen."
+      ],
+      "docItems": [
+        "Kopie van identiteitsbewijs of paspoort",
+        "Bankrekeninggegevens (IBAN) voor uitbetaling",
+        "Social media kanalen die worden gebruikt voor promotie",
+        "Bereikbaar telefoonnummer"
+      ]
+    }
+  }
+}

@@ -15,6 +15,11 @@ const useAppNavigation = () => {
       ADDRESS: () => router.push(`/profile?tab=${PROFILE_TABS.ADDRESS}`),
       DASHBOARD: () => router.push('/dashboard'),
       LOGIN: () => router.push('/login'),
+      ABOUT: () => router.push('/about'),
+      AFFILIATE: () => router.push('/affiliate'),
+      REGISTER_AFFILIATE: () => router.push('/affiliate/register'),
+      AFFILIATE_CONTRACT: () =>
+        router.push('https://web.facebook.com/FAOShertitagefood'),
     }
   }, [router])
 

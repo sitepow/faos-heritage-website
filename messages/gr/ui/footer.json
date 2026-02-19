@@ -7,6 +7,7 @@
         "title": "Σχετικά με τη FAOS",
         "items": [
           { "label": "Ποιοι Είμαστε", "href": "/about" },
+          { "label": "Εγγραφή Συνεργατών", "href": "/affiliate" },
           { "label": "Τρόποι Πληρωμής", "href": "/payment-methods" },
           {
             "label": "Πολιτική Απορρήτου FAOS",

@@ -7,6 +7,7 @@
         "title": "FAOSについて",
         "items": [
           { "label": "私たちについて", "href": "/about" },
+          { "label": "アフィリエイト登録", "href": "/affiliate" },
           { "label": "お支払い方法", "href": "/payment-methods" },
           {
             "label": "FAOS プライバシーポリシー",

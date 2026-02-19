@@ -1,0 +1,93 @@
+{
+  "affiliate": {
+    "banner": {
+      "tagline": "FAOS Affiliate Program",
+      "title": "Earn <highlight>monthly income</highlight> <br></br> by recommending products <br></br> with zero investment",
+      "description": "Earn up to <highlight>10% Commission</highlight> on every referral. No investment, no stock, and no shipping required. Join once and build long-term wealth.",
+      "partnerStatus": "Join thousands of partners already earning with FAOS.",
+      "features": {
+        "noInvestment": "Zero Initial Investment",
+        "freeSignup": "Free Sign-up, Start Instantly"
+      },
+      "buttons": {
+        "gotoAffiliate": "Start Earning Now",
+        "register": "Register for Free",
+        "about": "Learn More"
+      }
+    },
+    "steps": {
+      "items": [
+        {
+          "number": "01.",
+          "title": "Join as a Partner for Free",
+          "description": "Register in under 1 minute with no upfront costs."
+        },
+        {
+          "number": "02.",
+          "title": "Get Your Unique Link",
+          "description": "Receive a personal referral link to track your sales and earnings."
+        },
+        {
+          "number": "03.",
+          "title": "Share & Start Earning",
+          "description": "Earn commission instantly every time someone buys through your link."
+        },
+        {
+          "number": "04.",
+          "title": "Receive Direct Payouts",
+          "description": "Your earnings are summarized and transferred directly to your account monthly."
+        }
+      ]
+    },
+    "rewards": {
+      "title": "More Than Just Commission <br></br> It's a <highlight>Scalable Business Opportunity</highlight>",
+      "description": "The more you refer, the more you earn. Unlock exclusive perks and rewards designed for our partners.",
+      "rankingSystem": "Partner Benefits",
+      "items": [
+        "Performance Bonus: Extra bonuses when hitting referral targets.",
+        "Partner Level Upgrade: Level up to unlock higher commission rates.",
+        "Exclusive Rewards: Get special gifts and brand perks."
+      ]
+    },
+    "tiers": {
+      "title": "Income that grows with <highlight>your success</highlight>",
+      "description": "The higher your sales volume, the higher your commission percentage.",
+      "label": "Commission Rate",
+      "targetLabel": "Accumulated Sales",
+      "items": [
+        {
+          "salesRange": "Less than 300 USD",
+          "percentage": "5%"
+        },
+        {
+          "salesRange": "300 USD and above",
+          "percentage": "10%",
+          "isHighlight": true
+        }
+      ]
+    },
+    "cta": {
+      "title": "Start <highlight>Earning with FAOS</highlight> Today",
+      "description": "Become a partner for free and start earning by sharing high-quality products.",
+      "buttons": {
+        "register": "Sign Up & Start Earning",
+        "inquiry": "Contact Us for More Info"
+      }
+    },
+    "remarks": {
+      "defaultTitle": "Remarks:",
+      "docTitle": "Required Documents:",
+      "generalItems": [
+        "Commissions are calculated only from successful payments.",
+        "Earnings are summarized on a monthly cycle.",
+        "The company reserves the right to adjust terms as appropriate."
+      ],
+      "docItems": [
+        "Copy of National ID / Passport",
+        "Bank account details for payout",
+        "Social media channels used for promotion",
+        "Valid contact phone number"
+      ]
+    }
+  }
+}

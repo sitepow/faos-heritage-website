@@ -1,0 +1,93 @@
+{
+  "affiliate": {
+    "banner": {
+      "tagline": "Chương Trình Đối Tác FAOS",
+      "title": "Kiếm <highlight>thu nhập hàng tháng</highlight> <br></br> từ việc giới thiệu sản phẩm <br></br> không cần vốn đầu tư",
+      "description": "Nhận hoa hồng <highlight>lên đến 10%</highlight> trên mỗi đơn hàng thành công. Không cần vốn, không cần kho bãi, không cần vận chuyển. Đăng ký một lần, tạo thu nhập bền vững.",
+      "partnerStatus": "Hàng ngàn đối tác đang tạo ra thu nhập cùng FAOS ngay lúc này.",
+      "features": {
+        "noInvestment": "Không cần vốn đầu tư",
+        "freeSignup": "Đăng ký miễn phí, bắt đầu ngay"
+      },
+      "buttons": {
+        "gotoAffiliate": "Bắt đầu kiếm tiền ngay",
+        "register": "Đăng ký miễn phí ngay",
+        "about": "Xem thêm chi tiết"
+      }
+    },
+    "steps": {
+      "items": [
+        {
+          "number": "01.",
+          "title": "Đăng ký đối tác miễn phí",
+          "description": "Hoàn tất đăng ký trong chưa đầy 1 phút, không mất chi phí bắt đầu."
+        },
+        {
+          "number": "02.",
+          "title": "Nhận link giới thiệu riêng",
+          "description": "Nhận đường dẫn riêng biệt để giới thiệu sản phẩm và theo dõi doanh thu."
+        },
+        {
+          "number": "03.",
+          "title": "Chia sẻ và bắt đầu kiếm tiền",
+          "description": "Mỗi khi có đơn hàng thông qua link của bạn, bạn sẽ nhận được hoa hồng ngay lập tức."
+        },
+        {
+          "number": "04.",
+          "title": "Nhận tiền về tài khoản",
+          "description": "Thu nhập sẽ được tổng kết và chuyển trực tiếp vào tài khoản của bạn hàng tháng."
+        }
+      ]
+    },
+    "rewards": {
+      "title": "Không chỉ là hoa hồng <br></br> mà là <highlight>cơ hội phát triển kinh doanh</highlight>",
+      "description": "Càng giới thiệu nhiều, thu nhập càng cao cùng các đặc quyền và phần thưởng hấp dẫn cho đối tác.",
+      "rankingSystem": "Quyền lợi cho đối tác",
+      "items": [
+        "Thưởng hiệu suất: Nhận thêm bonus khi đạt chỉ tiêu giới thiệu.",
+        "Nâng cấp bậc đối tác: Tăng cấp bậc để hưởng mức hoa hồng cao hơn.",
+        "Phần thưởng độc quyền: Nhận quà tặng và ưu đãi đặc biệt từ thương hiệu."
+      ]
+    },
+    "tiers": {
+      "title": "Thu nhập tăng trưởng theo <highlight>thành công của bạn</highlight>",
+      "description": "Số lượng đơn hàng qua link càng nhiều, tỷ lệ hoa hồng bạn nhận được càng lớn.",
+      "label": "Tỷ lệ hoa hồng",
+      "targetLabel": "Doanh số tích lũy",
+      "items": [
+        {
+          "salesRange": "Dưới 7.000.000 VND",
+          "percentage": "5%"
+        },
+        {
+          "salesRange": "Từ 7.000.000 VND trở lên",
+          "percentage": "10%",
+          "isHighlight": true
+        }
+      ]
+    },
+    "cta": {
+      "title": "Bắt đầu <highlight>kiếm tiền cùng FAOS</highlight> ngay hôm nay",
+      "description": "Trở thành đối tác miễn phí và bắt đầu lan tỏa những sản phẩm chất lượng cùng chúng tôi.",
+      "buttons": {
+        "register": "Đăng ký và bắt đầu kiếm tiền",
+        "inquiry": "Liên hệ để được tư vấn"
+      }
+    },
+    "remarks": {
+      "defaultTitle": "Ghi chú:",
+      "docTitle": "Hồ sơ đăng ký bao gồm:",
+      "generalItems": [
+        "Hoa hồng chỉ được tính trên các đơn hàng đã thanh toán thành công.",
+        "Thu nhập được tổng kết theo chu kỳ hàng tháng.",
+        "Công ty có quyền điều chỉnh các điều khoản cho phù hợp với tình hình thực tế."
+      ],
+      "docItems": [
+        "Bản sao CCCD/CMND",
+        "Thông tin tài khoản ngân hàng",
+        "Các kênh mạng xã hội dùng để quảng bá",
+        "Số điện thoại liên lạc"
+      ]
+    }
+  }
+}
