@@ -79,6 +79,19 @@ enum Currency {
   IDR
 }
 
+model ShortLink {
+  id        String   @id @default(cuid())
+  code      String   @unique 
+  url       String   @db.Text
+  
+  clicks    Int      @default(0)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([code])
+}
+
 model ProductLocalization {
   id           String  @id @default(cuid())
   productId    String

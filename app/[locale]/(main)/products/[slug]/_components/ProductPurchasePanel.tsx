@@ -1,6 +1,6 @@
 'use client'
 
-import { Card, CardBody, Button, Input } from '@heroui/react' // เพิ่ม Input
+import { Card, CardBody, Button, Input } from '@heroui/react'
 import { HeartIcon, ShoppingCartIcon, Share2Icon } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 import { useState, useMemo, useEffect } from 'react'
@@ -14,6 +14,7 @@ import { VariantSelect } from '@/components/ui/VariantSelect'
 import { useCartMutation } from '@/features/cart/cart.mutation'
 import { useFavoriteMutation } from '@/features/favorite/favorite.mutation'
 import { useProductDetailStore } from '@/features/product/product.store'
+import { useShortenMutation } from '@/features/shorten/shorten.mutation'
 import { generateSlugWithId } from '@/utils'
 
 const ProductPurchasePanel = () => {
@@ -27,7 +28,10 @@ const ProductPurchasePanel = () => {
   const { addToCart, isAdding: isAddingToCart } = useCartMutation()
   const { addToFav, isAdding: isAddingToFav } = useFavoriteMutation()
 
+  const { mutate: shorten } = useShortenMutation()
+
   const [affiliateCode, setAffiliateCode] = useState('')
+  const [shortUrl, setShortUrl] = useState('')
 
   const [selectedVariantId, setSelectedVariantId] = useState<string | null>(
     product?.variants?.[0]?.id ?? null,
@@ -38,6 +42,10 @@ const ProductPurchasePanel = () => {
       setSelectedVariantId(product.variants[0].id)
     }
   }, [product])
+
+  useEffect(() => {
+    setShortUrl('')
+  }, [product?.id, affiliateCode])
 
   const selectedVariant = useMemo(() => {
     if (!selectedVariantId || !product?.variants) {
@@ -52,7 +60,7 @@ const ProductPurchasePanel = () => {
   const hasVariants = Boolean(product?.variants?.length)
   const hasFavorite = Boolean(product?.wishlist?.length)
 
-  const shareUrl = useMemo(() => {
+  const originalShareUrl = useMemo(() => {
     if (!product) {
       return ''
     }
@@ -63,6 +71,20 @@ const ProductPurchasePanel = () => {
       ? `${baseUrl}?ref=${affiliateCode}`
       : baseUrl
   }, [product, locale, affiliateCode])
+
+  const handleGenerateShortLink = () => {
+    shorten(originalShareUrl, {
+      onSuccess: (data) => {
+        if (data.shortUrl) {
+          setShortUrl(data.shortUrl)
+
+          if (navigator.clipboard) {
+            navigator.clipboard.writeText(data.shortUrl)
+          }
+        }
+      },
+    })
+  }
 
   if (!product) {
     return null
@@ -171,7 +193,8 @@ const ProductPurchasePanel = () => {
               <ProductShare
                 label={tActions('share')}
                 title={product.name}
-                url={shareUrl}
+                url={shortUrl || originalShareUrl}
+                onClick={!shortUrl ? handleGenerateShortLink : undefined}
               />
             </div>
           </div>

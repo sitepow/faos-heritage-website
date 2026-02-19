@@ -22,8 +22,31 @@ const isAuthenticated = (request: NextRequest): boolean => {
   )
 }
 
-export default function middleware(request: NextRequest) {
+const middleware = async (request: NextRequest) => {
   const { pathname } = request.nextUrl
+
+  if (pathname.startsWith('/s/')) {
+    const pathParts = pathname.split('/')
+    const code = pathParts[2]
+
+    if (code) {
+      try {
+        const apiResponse = await fetch(
+          `${request.nextUrl.origin}/api/shorten/${code}`,
+        )
+
+        if (apiResponse.ok) {
+          const data = await apiResponse.json()
+
+          if (data?.url) {
+            return NextResponse.redirect(new URL(data.url, request.url))
+          }
+        }
+      } catch (error) {
+        console.error('Short Link Proxy Error:', error)
+      }
+    }
+  }
 
   const pathParts = pathname.split('/')
   const localeInPath = pathParts[1]
@@ -73,3 +96,5 @@ export default function middleware(request: NextRequest) {
 export const config = {
   matcher: ['/((?!api|trpc|_next|_vercel|favicon.ico|.*\\..*).*)'],
 }
+
+export default middleware
