@@ -30,7 +30,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "types/**/*.d.ts"
+    "types/**/*.d.ts",
+    "components/AffiliateTracker.tsx"
   ],
   "exclude": ["node_modules"]
 }

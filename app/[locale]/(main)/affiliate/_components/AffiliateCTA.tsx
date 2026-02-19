@@ -24,7 +24,7 @@ const AffiliateCTA = () => {
             namespace='affiliate.cta'
           />
 
-          <div className='flex flex-col flex-wrap items-center justify-center gap-4'>
+          <div className='flex flex-col flex-wrap items-center justify-center gap-4 lg:flex-row'>
             <AffiliateButton
               className='group flex flex-wrap items-center justify-center gap-2'
               onClick={navigation.REGISTER_AFFILIATE}

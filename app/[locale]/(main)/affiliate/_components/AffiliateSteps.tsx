@@ -15,8 +15,8 @@ const AffiliateSteps = () => {
   return (
     <section className='mx-auto w-full'>
       <div className='relative grid grid-cols-1 rounded-[2rem] bg-white py-10 md:grid-cols-2'>
-        <div className='bg-default-100 absolute inset-y-0 left-1/2 hidden w-[1px] -translate-x-1/2 md:block' />
-        <div className='bg-default-100 absolute inset-x-0 top-1/2 hidden h-[1px] -translate-y-1/2 md:block' />
+        <div className='absolute inset-y-0 left-1/2 hidden w-[1px] -translate-x-1/2 bg-gray-100 md:block' />
+        <div className='absolute inset-x-0 top-1/2 hidden h-[1px] -translate-y-1/2 bg-gray-100 md:block' />
 
         {steps.map((step, idx) => (
           <div
@@ -24,7 +24,7 @@ const AffiliateSteps = () => {
             className={cn(
               'relative py-5',
               idx !== steps.length - 1 &&
-                'border-default-100 border-b md:border-b-0',
+                'border-b border-gray-100 md:border-b-0',
             )}
           >
             <StepCard {...step} />

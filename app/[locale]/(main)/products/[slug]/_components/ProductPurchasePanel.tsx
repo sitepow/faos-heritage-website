@@ -125,7 +125,7 @@ const ProductPurchasePanel = () => {
         <ProductShare
           label={tActions('share')}
           title={product.name}
-          url={`${process.env.NEXT_PUBLIC_APP_URL}/${locale}/products/${generateSlugWithId(product.name, product.id)}`}
+          url={`${process.env.NEXT_PUBLIC_APP_URL}/${locale}/products/${generateSlugWithId(product.name, product.id)}?ref=0001`}
         />
       </CardBody>
     </Card>

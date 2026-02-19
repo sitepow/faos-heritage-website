@@ -12,7 +12,7 @@ import {
 } from '@heroui/react'
 import { Currency } from '@prisma/client'
 import { useLocale, useTranslations } from 'next-intl'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import type { ComponentProps } from 'react'
 
@@ -24,6 +24,7 @@ import { useCarts } from '@/features/cart/hooks/useCart'
 import { useExchangeRate } from '@/features/exchangeRate/useExchangeRate'
 import { useOrderMutation } from '@/features/order/order.mutation'
 import { useShipping } from '@/features/shipping/useShipping'
+import { useAffiliate } from '@/hooks/useAffiliate'
 import { useAppNavigation } from '@/hooks/useAppNavigation'
 import { useAuth } from '@/hooks/useAuth'
 import { formatFullAddress } from '@/utils'
@@ -41,7 +42,14 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
   const locale = useLocale()
   const { userId } = useAuth()
 
+  const { referralNo } = useAffiliate()
   const [referrerCode, setReferrerCode] = useState('')
+
+  useEffect(() => {
+    if (referralNo) {
+      setReferrerCode(referralNo)
+    }
+  }, [referralNo])
 
   const {
     data: carts = [],
@@ -126,19 +134,29 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
           {tCheckout('referrerTitle') || 'Refer No. (Optional)'}
         </span>
         <Input
+          autoFocus
           classNames={{
-            input: 'text-center',
+            input:
+              'text-center font-mono text-lg font-semibold tracking-widest',
             inputWrapper:
-              'p-0 h-10 overflow-hidden shadow-none border-1 border-default-100 data-[hover=true]:border-default-200 focus-within:!border-default-300',
+              'p-0 h-12 overflow-hidden shadow-none border-1 border-default-200 focus-within:!border-primary transition-colors',
           }}
+          inputMode='numeric'
+          pattern='[0-9]*'
           placeholder={
             tCheckout('referrerPlaceholder') || 'Enter Sale Code (e.g. 0001)'
           }
           radius='none'
           size='lg'
+          type='text'
           value={referrerCode}
           variant='bordered'
-          onValueChange={setReferrerCode}
+          onValueChange={(value) => {
+            const numericValue = value.replace(/[^0-9]/g, '')
+            if (numericValue.length <= 4) {
+              setReferrerCode(numericValue)
+            }
+          }}
         />
       </div>
     )

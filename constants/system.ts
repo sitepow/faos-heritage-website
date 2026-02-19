@@ -7,6 +7,9 @@ const HOUR = 60 * MINUTE
 const QUERY_STALE_TIME = 5 * MINUTE
 const QUERY_GC_TIME = 30 * MINUTE
 
+const AFFILIATE_COOKIE_KEY = 'referral_no'
+const COOKIE_EXPIRE_DAYS = 30
+
 const DEFALUT_APP_PATH = `${process.env.NEXT_PUBLIC_APP_URL}`
 const PUBLIC_DIR = path.join(process.cwd(), 'public')
 const UPLOAD_DIR = path.join(PUBLIC_DIR, 'uploads')
@@ -28,6 +31,8 @@ export {
   HOUR,
   QUERY_STALE_TIME,
   QUERY_GC_TIME,
+  AFFILIATE_COOKIE_KEY,
+  COOKIE_EXPIRE_DAYS,
   DEFALUT_APP_PATH,
   PUBLIC_DIR,
   UPLOAD_DIR,
