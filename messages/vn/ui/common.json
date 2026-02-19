@@ -9,7 +9,8 @@
     "back": "Quay lại",
     "confirm": "Xác nhận",
     "share": "Chia sẻ",
-    "more": "Xem thêm"
+    "more": "Xem thêm",
+    "shareTitle": "Tạo liên kết giới thiệu sản phẩm"
   },
   "status": {
     "loading": "Đang tải...",
@@ -46,7 +47,8 @@
     "orderId": "Mã đơn hàng",
     "cartId": "Mã giỏ hàng",
     "trackingNo": "Mã vận đơn",
-    "role": "Vai trò"
+    "role": "Vai trò",
+    "affiliateCode": "Mã tiếp thị liên kết (4 chữ số)"
   },
   "global": {
     "country": {

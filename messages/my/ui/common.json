@@ -9,7 +9,8 @@
     "back": "Kembali",
     "confirm": "Sahkan",
     "share": "Kongsi",
-    "more": "Lihat Lagi"
+    "more": "Lihat Lagi",
+    "shareTitle": "Cipta Pautan Rujukan Produk"
   },
   "status": {
     "loading": "Memuatkan...",
@@ -46,7 +47,8 @@
     "orderId": "ID Pesanan",
     "cartId": "ID Troli",
     "trackingNo": "Nombor Penjejakan",
-    "role": "Peranan"
+    "role": "Peranan",
+    "affiliateCode": "Kod Gabungan (4 digit)"
   },
   "global": {
     "country": {

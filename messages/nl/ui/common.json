@@ -9,7 +9,8 @@
     "back": "Terug",
     "confirm": "Bevestigen",
     "share": "Delen",
-    "more": "Bekijk meer"
+    "more": "Bekijk meer",
+    "shareTitle": "Productreferentielink maken"
   },
   "status": {
     "loading": "Laden...",
@@ -46,7 +47,8 @@
     "orderId": "Bestel-ID",
     "cartId": "Winkelwagen-ID",
     "trackingNo": "Trackingnummer",
-    "role": "Rol"
+    "role": "Rol",
+    "affiliateCode": "Affiliatecode (4 cijfers)"
   },
   "global": {
     "country": {

@@ -9,7 +9,8 @@
     "back": "Indietro",
     "confirm": "Conferma",
     "share": "Condividi",
-    "more": "Vedi Altro"
+    "more": "Vedi Altro",
+    "shareTitle": "Crea Link di Riferimento Prodotto"
   },
   "status": {
     "loading": "Caricamento...",
@@ -46,7 +47,8 @@
     "orderId": "ID Ordine",
     "cartId": "ID Carrello",
     "trackingNo": "Numero di Tracciamento",
-    "role": "Ruolo"
+    "role": "Ruolo",
+    "affiliateCode": "Codice Affiliato (4 cifre)"
   },
   "global": {
     "country": {

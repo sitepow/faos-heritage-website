@@ -9,7 +9,8 @@
     "back": "戻る",
     "confirm": "確定",
     "share": "共有",
-    "more": "詳細を見る"
+    "more": "詳細を見る",
+    "shareTitle": "商品紹介リンクを作成"
   },
   "status": {
     "loading": "読み込み中...",
@@ -46,7 +47,8 @@
     "orderId": "注文ID",
     "cartId": "カートID",
     "trackingNo": "追跡番号",
-    "role": "役割"
+    "role": "役割",
+    "affiliateCode": "アフィリエイトコード (4桁)"
   },
   "global": {
     "country": {

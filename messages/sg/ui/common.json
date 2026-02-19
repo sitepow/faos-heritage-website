@@ -9,7 +9,8 @@
     "back": "Back",
     "confirm": "Confirm",
     "share": "Share",
-    "more": "View More"
+    "more": "View More",
+    "shareTitle": "Create Product Referral Link"
   },
   "status": {
     "loading": "Loading...",
@@ -46,7 +47,8 @@
     "orderId": "Order ID",
     "cartId": "Cart ID",
     "trackingNo": "Tracking Number",
-    "role": "Role"
+    "role": "Role",
+    "affiliateCode": "Affiliate Code (4 digits)"
   },
   "global": {
     "country": {

@@ -9,7 +9,8 @@
     "back": "返回",
     "confirm": "确认",
     "share": "分享",
-    "more": "查看更多"
+    "more": "查看更多",
+    "shareTitle": "生成商品推荐链接"
   },
   "status": {
     "loading": "加载中...",
@@ -46,7 +47,8 @@
     "orderId": "订单 ID",
     "cartId": "购物车 ID",
     "trackingNo": "快递单号",
-    "role": "角色"
+    "role": "角色",
+    "affiliateCode": "分销商代码 (4位数字)"
   },
   "global": {
     "country": {

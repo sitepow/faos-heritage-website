@@ -9,7 +9,8 @@
     "back": "Kembali",
     "confirm": "Konfirmasi",
     "share": "Bagikan",
-    "more": "Lihat Lebih Banyak"
+    "more": "Lihat Lebih Banyak",
+    "shareTitle": "Buat Tautan Referensi Produk"
   },
   "status": {
     "loading": "Memuat...",
@@ -46,7 +47,8 @@
     "orderId": "ID Pesanan",
     "cartId": "ID Keranjang",
     "trackingNo": "Nomor Resi",
-    "role": "Peran"
+    "role": "Peran",
+    "affiliateCode": "Kode Afiliasi (4 digit)"
   },
   "global": {
     "country": {

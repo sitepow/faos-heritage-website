@@ -9,7 +9,8 @@
     "back": "Til baka",
     "confirm": "Staðfesta",
     "share": "Deila",
-    "more": "Sjá meira"
+    "more": "Sjá meira",
+    "shareTitle": "Búa til tilvísunartengi vöru"
   },
   "status": {
     "loading": "Hleður...",
@@ -46,7 +47,8 @@
     "orderId": "Pöntunarnúmer",
     "cartId": "Körfunúmer",
     "trackingNo": "Sendingarnúmer",
-    "role": "Hlutverk"
+    "role": "Hlutverk",
+    "affiliateCode": "Affiliate kóði (4 tölustafir)"
   },
   "global": {
     "country": {
