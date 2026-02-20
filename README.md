@@ -3,8 +3,6 @@
 Modern full-stack web platform built with Next.js, Prisma, and TailwindCSS.  
 Designed for scalable SaaS, internal tools, and production-ready deployments.
 
----
-
 ## Features
 
 - Next.js 16 (App Router)
@@ -15,8 +13,6 @@ Designed for scalable SaaS, internal tools, and production-ready deployments.
 - TailwindCSS UI
 - Internationalization support
 - Production-ready architecture
-
----
 
 ## Project Structure
 
@@ -32,15 +28,11 @@ zentracore/
 └─ README.md
 ```
 
----
-
 ## Requirements
 
 - Node.js 20+
 - PostgreSQL
 - npm
-
----
 
 ## Installation
 
@@ -63,8 +55,6 @@ npx prisma migrate dev
 npx prisma db seed
 ```
 
----
-
 ## Development
 
 Start dev server:
@@ -79,16 +69,12 @@ Open:
 http://localhost:3000
 ```
 
----
-
 ## Production Build
 
 ```sh
 npm run build
 npm run start
 ```
-
----
 
 ## Useful Commands
 
@@ -110,8 +96,6 @@ Format:
 npm run format
 ```
 
----
-
 ## Tech Stack
 
 - Next.js
@@ -122,9 +106,3 @@ npm run format
 - Resend
 - React Query
 - Zustand
-
----
-
-## License
-
-Private project – ZentraCore
