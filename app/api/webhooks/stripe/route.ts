@@ -4,6 +4,7 @@ import Stripe from 'stripe'
 
 import type { NextRequest } from 'next/server'
 
+import { sendOrderEmail } from '@/features/order/order.action'
 import { prisma } from '@/lib/prisma'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -21,7 +22,6 @@ export async function POST(req: NextRequest) {
 
   try {
     const body = await req.text()
-
     event = stripe.webhooks.constructEvent(
       body,
       signature,
@@ -57,8 +57,7 @@ export async function POST(req: NextRequest) {
           })
 
           if (!order) {
-            console.error('Order not found', orderId)
-            return
+            throw new Error(`Order not found: ${orderId}`)
           }
 
           if (order.paymentStatus === PaymentStatus.PAID) {
@@ -74,6 +73,15 @@ export async function POST(req: NextRequest) {
             },
           })
         })
+
+        try {
+          const emailResult = await sendOrderEmail(orderId)
+          if (emailResult.success) {
+            console.log(`Email sent for Paid Order: ${orderId}`)
+          }
+        } catch (emailErr) {
+          console.error(`Email delivery failed for Order ${orderId}:`, emailErr)
+        }
 
         break
       }
