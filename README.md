@@ -1,7 +1,7 @@
 # ZentraCore
 
-Modern full-stack web platform built with Next.js, Prisma, and TailwindCSS.  
-Designed for scalable SaaS, internal tools, and production-ready deployments.
+Modern full-stack e-commerce platform built with Next.js, Prisma, and TailwindCSS.
+Designed for scalable online stores, secure payments, and production-ready deployments.
 
 ## Features
 
