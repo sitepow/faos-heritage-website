@@ -8,12 +8,12 @@ import {
 } from '@prisma/client'
 
 import { MINUTE } from '../constants'
+import { sendOrderEmail } from '../features/order/order.action'
 
 const prisma = new PrismaClient()
-
 const ORDER_EXPIRY_MS = 20 * MINUTE
 
-async function main() {
+const main = async () => {
   const now = new Date()
   const expiryTime = new Date(now.getTime() - ORDER_EXPIRY_MS)
 
@@ -75,7 +75,16 @@ async function main() {
           })
         }
       })
+
       console.log(`Order ${order.id}: Cancelled and stock restored.`)
+
+      const emailResult = await sendOrderEmail(order.id)
+
+      if (emailResult.success) {
+        console.log(`Order ${order.id}: Cancellation email sent.`)
+      } else {
+        console.warn(`Order ${order.id}: Failed to send email.`)
+      }
     } catch (err) {
       console.error(`Order ${order.id}: Failed to process.`, err)
     }

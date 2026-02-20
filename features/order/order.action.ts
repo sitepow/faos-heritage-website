@@ -7,6 +7,7 @@ import type { Prisma, Currency } from '@prisma/client'
 import { buildStatusUpdateData } from './order.helper'
 import { calculateShippingCost } from '../shipping/shipping.action'
 
+import { getOrderContent, OrderTemplate } from '@/emails/OrderTemplate'
 import { ERROR_CODES, fail, ok } from '@/lib/errors'
 import { prisma } from '@/lib/prisma'
 import { getServerUser, withAuth } from '@/lib/session'
@@ -15,6 +16,7 @@ import {
   formatFullAddress,
   formatStat,
 } from '@/utils'
+import { sendEmail } from '@/utils/emailSender'
 import { decimalToNumber } from '@/utils/number'
 import { getProductPriceInfo } from '@/utils/productPrice'
 
@@ -47,6 +49,45 @@ const CANCEL_OR_REFUND_STATUSES = new Set<OrderStatus>([
   OrderStatus.CANCELLED,
   OrderStatus.REFUNDED,
 ])
+
+const sendOrderEmail = async (orderId: string) => {
+  try {
+    const order = await prisma.order.findUnique({
+      where: { id: orderId },
+      include: {
+        items: true,
+        user: { select: { email: true } },
+      },
+    })
+
+    if (!order) {
+      return fail(ERROR_CODES.DATA_NOT_FOUND)
+    }
+
+    const emailTo = order.user?.email
+    if (!emailTo) {
+      return fail(ERROR_CODES.BAD_REQUEST)
+    }
+
+    const { subject } = getOrderContent(order.status, order.id)
+
+    const result = await sendEmail({
+      to: emailTo,
+      subject,
+      react: OrderTemplate({
+        order,
+      }),
+    })
+
+    if (!result.success) {
+      return fail(ERROR_CODES.BAD_REQUEST)
+    }
+
+    return ok()
+  } catch {
+    return fail(ERROR_CODES.SYSTEM_ERROR)
+  }
+}
 
 const processStockMovement = async (
   tx: TransactionClient,
@@ -365,6 +406,7 @@ const updateOrder = async (input: UpdateOrderInput) =>
   })
 
 export {
+  sendOrderEmail,
   getOrders,
   getOrderById,
   getOrderStats,

@@ -80,25 +80,18 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
       return
     }
 
-    await createOrder(
-      {
-        addressId: address.id,
-        currency,
-        exchangeRate,
-        exchangeLocale: appLocale.locale,
-        referrerId: referrerCode || undefined,
-        items: carts.map(({ productId, variantId, quantity }) => ({
-          productId,
-          variantId,
-          quantity,
-        })),
-      },
-      {
-        onSuccess: () => {
-          navigation.ORDER()
-        },
-      },
-    )
+    await createOrder({
+      addressId: address.id,
+      currency,
+      exchangeRate,
+      exchangeLocale: appLocale.locale,
+      referrerId: referrerCode || undefined,
+      items: carts.map(({ productId, variantId, quantity }) => ({
+        productId,
+        variantId,
+        quantity,
+      })),
+    })
   }
 
   const renderAddressSection = () => {
