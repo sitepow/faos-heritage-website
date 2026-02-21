@@ -13,7 +13,8 @@
     },
     "breadcrumb": {
       "home": "Αρχική",
-      "products": "Όλα τα Προϊόντα"
+      "products": "Όλα τα Προϊόντα",
+      "blog": "Blogs"
     }
   }
 }

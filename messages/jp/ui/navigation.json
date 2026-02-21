@@ -13,7 +13,8 @@
     },
     "breadcrumb": {
       "home": "ホーム",
-      "products": "全商品"
+      "products": "全商品",
+      "blog": "ブログ"
     }
   }
 }

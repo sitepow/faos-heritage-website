@@ -30,6 +30,14 @@
     "about": {
       "title": "Chi Siamo FAOS - Un'Eredità di Purezza dalla Natura",
       "description": "FAOS è specialista in olio d'oliva e miele biologici premium, creati meticolosamente da fonti 100% naturali e sostenibili."
+    },
+    "blog": {
+      "title": "Blog Cibo Greco e Salute Bio - FAOS HERITAGE GREEK FOOD",
+      "description": "Scopri i benefici per la salute dell'olio extravergine di oliva, del miele greco grezzo al 100% e delle sane ricette mediterranee. Resta informato con FAOS HERITAGE GREEK FOOD."
+    },
+    "blogDetail": {
+      "title": "{title} - Blog Salute e Retaggio - FAOS HERITAGE GREEK FOOD",
+      "description": "{summary}"
     }
   }
 }

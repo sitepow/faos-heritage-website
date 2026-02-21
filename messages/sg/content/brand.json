@@ -16,6 +16,10 @@
     "relatedProducts": {
       "title": "Related Products",
       "description": "Other exceptional products in this category that you might be interested in."
+    },
+    "blogDiscovery": {
+      "title": "Health & Heritage Blog",
+      "description": "Dive into the wisdom of the Mediterranean diet and the secrets of organic living."
     }
   }
 }

@@ -1,22 +1,22 @@
 'use client'
 
 import { MenuIcon, XIcon } from 'lucide-react'
-import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { useState } from 'react'
 
 import { MenuItem } from './MenuItem'
 
 import { CustomIcon } from '@/components/ui/CustomIcon'
+import { NAV_LINKS } from '@/constants/navigation'
 import { useCategories } from '@/features/category/useCategory'
 import { cn, generateSlugWithId } from '@/utils'
 
 const NavbarMobileMenu = () => {
-  const router = useRouter()
-
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { data: categories } = useCategories()
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
+  const closeMenu = () => setIsMenuOpen(false)
 
   return (
     <div className='block lg:hidden'>
@@ -24,27 +24,41 @@ const NavbarMobileMenu = () => {
 
       <div
         className={cn(
-          'bg-background fixed inset-0 z-60 h-dvh p-5',
+          'bg-background fixed inset-0 z-60 flex h-dvh flex-col p-5 transition-transform duration-300 ease-in-out',
           isMenuOpen
-            ? 't-x-0 opacity-100'
-            : 't-x-full pointer-events-none opacity-0',
+            ? 'translate-x-0 opacity-100'
+            : 'pointer-events-none translate-x-full opacity-0',
         )}
       >
         <div className='flex justify-end'>
           <CustomIcon icon={XIcon} onClick={toggleMenu} />
         </div>
 
-        <div className='flex flex-col items-center gap-2.5'>
+        <div className='mt-10 flex flex-col items-center gap-4'>
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              className='w-full text-center'
+              href={link.href}
+              onClick={closeMenu}
+            >
+              <MenuItem label={link.label} />
+            </Link>
+          ))}
+
+          <hr className='border-default-100 w-full' />
+
           {categories?.map(({ name, id }) => {
+            const slug = generateSlugWithId(name!, id!)
             return (
-              <MenuItem
-                key={name}
-                label={name}
-                onClick={() => {
-                  toggleMenu()
-                  router.push(`/categories/${generateSlugWithId(name!, id!)}`)
-                }}
-              />
+              <Link
+                key={id}
+                className='w-full text-center'
+                href={`/categories/${slug}`}
+                onClick={closeMenu}
+              >
+                <MenuItem label={name!} />
+              </Link>
             )
           })}
         </div>

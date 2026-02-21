@@ -74,6 +74,14 @@
     "about": {
       "title": "关于 FAOS HERITAGE GREEK FOOD - 源自自然的纯净传承",
       "description": "FAOS HERITAGE GREEK FOOD 是优质有机橄榄油与蜂蜜的专家，致力于从 100% 天然且可持续的来源中，为您精心打造每一份纯净。"
+    },
+    "blog": {
+      "title": "希腊美食与有机健康博客 - FAOS HERITAGE GREEK FOOD",
+      "description": "了解特级初榨橄榄油、100% 纯天然希腊蜂蜜以及健康地中海食谱对健康的益处。通过 FAOS HERITAGE GREEK FOOD 随时获取最新动态。"
+    },
+    "blogDetail": {
+      "title": "{title} - 健康与传承博客 - FAOS HERITAGE GREEK FOOD",
+      "description": "{summary}"
     }
   }
 }

@@ -30,6 +30,14 @@
     "about": {
       "title": "Mengenai FAOS - Warisan Ketulenan daripada Alam Semulajadi",
       "description": "FAOS adalah pakar dalam minyak zaitun dan madu organik premium, dihasilkan dengan teliti daripada sumber 100% semulajadi dan mampan."
+    },
+    "blog": {
+      "title": "Blog Makanan Greek & Kesihatan Organik - FAOS HERITAGE GREEK FOOD",
+      "description": "Ketahui tentang manfaat kesihatan Minyak Zaitun Extra Virgin, Madu Greek Mentah 100%, dan resipi sihat Mediterranean. Ikuti perkembangan dengan FAOS HERITAGE GREEK FOOD."
+    },
+    "blogDetail": {
+      "title": "{title} - Blog Kesihatan & Warisan - FAOS HERITAGE GREEK FOOD",
+      "description": "{summary}"
     }
   }
 }

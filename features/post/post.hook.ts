@@ -2,6 +2,7 @@
 
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 
+import type { GetPostsInfiniteResult } from './post.action'
 import type { PostStatus } from '@prisma/client'
 
 import { getPost, getPostsInfinite } from './post.action'
@@ -15,14 +16,34 @@ const usePost = (id: string) => {
   })
 }
 
-const usePostsInfinite = ({
+const usePosts = ({
   categoryId,
   status,
   limit = 10,
+  initialData,
 }: {
   categoryId?: string | null
   status?: PostStatus
   limit?: number
+  initialData?: GetPostsInfiniteResult
+}) => {
+  return useQuery({
+    queryKey: postQueryKeys.lists.filtered({ categoryId, status, limit }),
+    queryFn: () => getPostsInfinite({ categoryId, status, limit }),
+    initialData,
+  })
+}
+
+const usePostsInfinite = ({
+  categoryId,
+  status,
+  limit = 10,
+  initialData,
+}: {
+  categoryId?: string | null
+  status?: PostStatus
+  limit?: number
+  initialData?: GetPostsInfiniteResult
 }) => {
   return useInfiniteQuery({
     queryKey: postQueryKeys.lists.filtered({ categoryId, status, limit }),
@@ -35,7 +56,10 @@ const usePostsInfinite = ({
       }),
     initialPageParam: null as string | null,
     getNextPageParam: (lastPage) => lastPage.nextCursor,
+    initialData: initialData
+      ? { pages: [initialData], pageParams: [null] }
+      : undefined,
   })
 }
 
-export { usePost, usePostsInfinite }
+export { usePost, usePosts, usePostsInfinite }

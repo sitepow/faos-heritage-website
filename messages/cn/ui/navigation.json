@@ -13,7 +13,8 @@
     },
     "breadcrumb": {
       "home": "首页",
-      "products": "全部产品"
+      "products": "全部产品",
+      "blog": "博客"
     }
   }
 }

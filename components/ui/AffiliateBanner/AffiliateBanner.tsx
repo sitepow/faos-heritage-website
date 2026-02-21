@@ -34,7 +34,7 @@ const AffiliateBanner = () => {
             {t('buttons.gotoAffiliate')}
           </AffiliateButton>
 
-          <div className='flex items-center gap-2 text-sm text-white/80'>
+          <div className='flex flex-col flex-wrap items-center justify-center gap-2 text-sm text-white/80 sm:flex-row sm:flex-nowrap sm:justify-start'>
             <span>{t('features.noInvestment')}</span>
             <span className='size-1 rounded-full bg-white/80' />
             <span>{t('features.freeSignup')}</span>

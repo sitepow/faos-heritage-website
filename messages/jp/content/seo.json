@@ -82,6 +82,14 @@
     "about": {
       "title": "FAOSについて - 自然から受け継いだ純粋な伝統",
       "description": "FAOSはプレミアム・オーガニック・オリーブオイルと蜂蜜のスペシャリストです。100%天然で持続可能な供給源から、細心の注意を払って作られています。"
+    },
+    "blog": {
+      "title": "ギリシャ料理とオーガニック健康ブログ - FAOS HERITAGE GREEK FOOD",
+      "description": "エクストラバージンオリーブオイル、100%純粋なギリシャ産生はちみつ、そして健康的な地中海料理のレシピについて学びましょう。FAOS HERITAGE GREEK FOODで最新情報をチェック。"
+    },
+    "blogDetail": {
+      "title": "{title} - ヘルス＆ヘリテージ ブログ - FAOS HERITAGE GREEK FOOD",
+      "description": "{summary}"
     }
   }
 }

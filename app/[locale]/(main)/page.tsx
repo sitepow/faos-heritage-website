@@ -2,7 +2,7 @@ import { getLocale, getTranslations } from 'next-intl/server'
 
 import type { Metadata } from 'next'
 
-// import { PostExploreSection } from './_components/PostExploreSection'
+import { PostExploreSection } from './_components/PostExploreSection'
 import { ProductExploreSection } from './_components/ProductExploreSection'
 
 import { AppSection } from '@/components/layouts/AppSection'
@@ -47,7 +47,7 @@ const HomePage = async () => {
         initialData={products}
         itemsPerPage={PAGINATION.ITEMS_PER_PAGE}
       />
-      {/* <PostExploreSection /> */}
+      <PostExploreSection itemsPerPage={PAGINATION.ITEMS_PER_PAGE} />
       <AdvertiseBanner />
       <AffiliateBanner />
     </AppSection>

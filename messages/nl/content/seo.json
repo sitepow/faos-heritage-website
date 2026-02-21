@@ -30,6 +30,14 @@
     "about": {
       "title": "Over FAOS - Een Erfgoed van Zuiverheid uit de Natuur",
       "description": "FAOS is een specialist in premium biologische olijfolie en honing, nauwgezet vervaardigd uit 100% natuurlijke en duurzame bronnen."
+    },
+    "blog": {
+      "title": "Griekse Voeding & Biologische Gezondheid Blog - FAOS HERITAGE GREEK FOOD",
+      "description": "Leer meer over de gezondheidsvoordelen van extra vierge olijfolie, 100% rauwe Griekse honing en gezonde mediterrane recepten. Blijf op de hoogte met FAOS HERITAGE GREEK FOOD."
+    },
+    "blogDetail": {
+      "title": "{title} - Gezondheid & Erfgoed Blog - FAOS HERITAGE GREEK FOOD",
+      "description": "{summary}"
     }
   }
 }

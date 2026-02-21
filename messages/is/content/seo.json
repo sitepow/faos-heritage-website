@@ -30,6 +30,14 @@
     "about": {
       "title": "Um FAOS - Arfleifð hreinleika úr náttúrunni",
       "description": "FAOS er sérfræðingur í úrvals lífrænni ólífuolíu og hunangi, unnið af kostgæfni úr 100% náttúrulegum og sjálfbærum uppsprettum."
+    },
+    "blog": {
+      "title": "Griskur matur og lífræn heilsa blogg - FAOS HERITAGE GREEK FOOD",
+      "description": "Lærðu um heilsuávinninginn af extra virgin ólífuolíu, 100% hráu grísku hunangi og heilsumiklum Miðjarðarhafsuppskriftum. Vertu upplýst(ur) með FAOS HERITAGE GREEK FOOD."
+    },
+    "blogDetail": {
+      "title": "{title} - Heilsa og Arfleifð Blogg - FAOS HERITAGE GREEK FOOD",
+      "description": "{summary}"
     }
   }
 }

@@ -30,6 +30,14 @@
     "about": {
       "title": "Về FAOS - Di sản Tinh khiết từ Thiên nhiên",
       "description": "FAOS chuyên gia về dầu ô liu và mật ong hữu cơ thượng hạng, được chế tác tỉ mỉ từ nguồn nguyên liệu 100% tự nhiên và bền vững."
+    },
+    "blog": {
+      "title": "Blog Ẩm thực Hy Lạp & Sức khỏe Hữu cơ - FAOS HERITAGE GREEK FOOD",
+      "description": "Tìm hiểu về lợi ích sức khỏe của Dầu Ô-liu Nguyên chất, Mật ong Hy Lạp Thô 100% và các công thức nấu ăn Địa Trung Hải lành mạnh. Cập nhật thông tin cùng FAOS HERITAGE GREEK FOOD."
+    },
+    "blogDetail": {
+      "title": "{title} - Blog Sức khỏe & Di sản - FAOS HERITAGE GREEK FOOD",
+      "description": "{summary}"
     }
   }
 }

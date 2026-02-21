@@ -14,6 +14,8 @@ import { prisma } from '@/lib/prisma'
 import { getServerUser, withRole } from '@/lib/session'
 import { omitEmptyFields } from '@/utils'
 
+type GetPostsInfiniteResult = Awaited<ReturnType<typeof getPostsInfinite>>
+
 const createPost = async (data: PostInput) =>
   withRole([Role.ADMIN], async () => {
     const validated = postSchema.safeParse(data)
@@ -168,3 +170,4 @@ export {
   getPostsInfinite,
   getPostStats,
 }
+export type { GetPostsInfiniteResult }
