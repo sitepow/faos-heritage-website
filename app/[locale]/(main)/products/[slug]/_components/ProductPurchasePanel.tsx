@@ -14,7 +14,7 @@ import { VariantSelect } from '@/components/ui/VariantSelect'
 import { useCartMutation } from '@/features/cart/cart.mutation'
 import { useFavoriteMutation } from '@/features/favorite/favorite.mutation'
 import { useProductDetailStore } from '@/features/product/product.store'
-import { useShortenMutation } from '@/features/shorten/shorten.mutation'
+import { useShortenMutation } from '@/features/shorten/shorten.hook'
 import { generateSlugWithId } from '@/utils'
 
 const ProductPurchasePanel = () => {

@@ -11,7 +11,7 @@ import {
 import { DiscountBadge } from '@/components/ui/Product/DiscountBadge'
 import { ProductImage } from '@/components/ui/Product/ProductImage'
 import { IMAGE_FALLBACK } from '@/constants'
-import { useProductPrice } from '@/features/product/useProduct'
+import { useProductPrice } from '@/features/product/product.hook'
 import { cn } from '@/utils'
 
 type Props = {

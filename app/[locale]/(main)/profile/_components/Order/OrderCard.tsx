@@ -11,7 +11,7 @@ import { BorderedCard } from '@/components/ui/BorderedCard'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { PaginationWrapper } from '@/components/ui/PaginationWrapper'
 import { PAGINATION } from '@/constants'
-import { useOrders } from '@/features/order/useOrder'
+import { useOrders } from '@/features/order/order.hook'
 import { useAuth } from '@/hooks/useAuth'
 
 const OrderCard = () => {

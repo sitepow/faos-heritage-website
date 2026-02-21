@@ -7,7 +7,7 @@ import { ProfileHeader } from './ProfileHeader'
 
 import { FormInput } from '@/components/ui/FormInput'
 import { ImageDropzone } from '@/components/ui/ImageDropzone'
-import { useProfileForm } from '@/features/user/useProfileForm'
+import { useProfileForm } from '@/features/user/user.form'
 import { useAuth } from '@/hooks/useAuth'
 
 const ProfileCard = () => {

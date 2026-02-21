@@ -2,7 +2,7 @@
 
 import { Package } from 'lucide-react'
 
-import type { Order } from '@/features/order/useOrder'
+import type { Order } from '@/features/order/order.hook'
 
 import { PriceDisplay } from '../Product/PriceDisplay'
 import { ProductImage } from '../Product/ProductImage'

@@ -9,7 +9,7 @@ import { ProductSection } from '@/components/ui/Product/ProductSection'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { THRESHOLD_SCROLL_FETCH } from '@/constants'
 import { useCategory } from '@/features/category/useCategory'
-import { useProductsInfinite } from '@/features/product/useProduct'
+import { useProductsInfinite } from '@/features/product/product.hook'
 import { useWindowInfiniteScroll } from '@/hooks/useWindowInfiniteScroll'
 
 interface Props {

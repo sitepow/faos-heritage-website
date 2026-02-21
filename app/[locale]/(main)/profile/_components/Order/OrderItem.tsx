@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useMemo } from 'react'
 
-import type { Order } from '@/features/order/useOrder'
+import type { Order } from '@/features/order/order.hook'
 
 import { createStripeCheckout } from '@/app/actions/stripe'
 import { AvatarGroupWrapper } from '@/components/ui/AvatarGroupWrapper'

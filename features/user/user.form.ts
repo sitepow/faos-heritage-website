@@ -9,8 +9,8 @@ import type { ImageWithPreview } from '@/components/ui/ImageDropzone'
 
 import { userQueryKeys } from './user.query-key'
 
-import { useUser } from '@/features/user/useUser'
 import { updateUser } from '@/features/user/user.action'
+import { useUser } from '@/features/user/user.hook'
 import {
   userUpdateSchema,
   type UserUpdateInput,

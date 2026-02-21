@@ -7,7 +7,7 @@ import { InfoItem } from './InfoItem'
 import { ProfileHeader } from './Profile/ProfileHeader'
 
 import { BorderedCard } from '@/components/ui/BorderedCard'
-import { useUser } from '@/features/user/useUser'
+import { useUser } from '@/features/user/user.hook'
 import { useAppNavigation } from '@/hooks/useAppNavigation'
 import { useAuth } from '@/hooks/useAuth'
 import { useRoleLabel } from '@/hooks/useRoleLabel'

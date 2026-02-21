@@ -12,7 +12,7 @@ import { Container } from '@/components/layouts/Container'
 import { ProductSection } from '@/components/ui/Product/ProductSection'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { PAGINATION } from '@/constants'
-import { useProducts } from '@/features/product/useProduct'
+import { useProducts } from '@/features/product/product.hook'
 
 interface Props {
   initialData: GetProductsInfiniteResult

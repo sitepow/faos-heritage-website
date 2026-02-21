@@ -7,7 +7,7 @@ import { FavoriteItem } from './FavoriteItem'
 import { ProfileHeader } from '../Profile/ProfileHeader'
 
 import { EmptyState } from '@/components/ui/EmptyState'
-import { useFavorites } from '@/features/favorite/useFavorite'
+import { useFavorites } from '@/features/favorite/favorite.hook'
 
 const FavoriteCard = () => {
   const t = useTranslations('profile')

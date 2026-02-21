@@ -11,7 +11,7 @@ import {
 import { MapPin, CreditCard } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
-import type { Order } from '@/features/order/useOrder'
+import type { Order } from '@/features/order/order.hook'
 
 import { OrderItems } from './OrderItems'
 import { OrderSummary } from './OrderSummary'

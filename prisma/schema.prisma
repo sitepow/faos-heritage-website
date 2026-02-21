@@ -79,6 +79,72 @@ enum Currency {
   IDR
 }
 
+enum PostStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+model BlogCategory {
+  id        String  @id @default(cuid())
+  slug      String  @unique
+  name      String
+  image     String?
+  isActive  Boolean @default(true)
+
+  posts         Post[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([isActive])
+}
+
+model Post {
+  id      String @id @default(cuid())
+  slug    String @unique
+  authorId String
+
+  title           String
+  summary         String? @db.Text
+  content         String? @db.Text 
+  featuredImage   String?
+
+  viewCount       Int     @default(0)
+  isFeatured      Boolean @default(false)
+  
+  metaTitle       String? @db.Text
+  metaDescription String? @db.Text
+  
+  status          PostStatus @default(DRAFT)
+  publishedAt     DateTime?
+  
+  categoryId      String?
+  category        BlogCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  author          User          @relation(fields: [authorId], references: [id])
+  
+  tags            Tag[]         @relation("PostToTag")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([authorId])
+  @@index([categoryId])
+  @@index([status])
+  @@index([publishedAt])
+  @@index([isFeatured])
+}
+
+model Tag {
+  id    String @id @default(cuid())
+  name  String @unique
+  slug  String @unique
+  posts Post[] @relation("PostToTag")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model ShortLink {
   id        String   @id @default(cuid())
   code      String   @unique 
@@ -127,6 +193,7 @@ model User {
   reviews   Review[]
   cart      Cart[]
   wishlist  Wishlist[]
+  posts Post[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

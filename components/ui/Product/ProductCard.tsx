@@ -11,7 +11,7 @@ import { DiscountBadge } from './DiscountBadge'
 import { ProductImage } from './ProductImage'
 import { VariantTable } from './VariantTable'
 
-import { useProductPrice } from '@/features/product/useProduct'
+import { useProductPrice } from '@/features/product/product.hook'
 import { resolveProductImages, generateSlugWithId } from '@/utils'
 
 type ProductItem = GetProductsInfiniteResult['items'][number]
