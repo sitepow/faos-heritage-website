@@ -112,7 +112,7 @@ const OrderItem = ({ order, hideButton }: Props) => {
   }
 
   return (
-    <div className='border-default-100 flex flex-col gap-4 rounded-xl border p-4'>
+    <div className='border-default-100 flex flex-col gap-5 rounded-xl border p-4'>
       {isPending && (
         <Alert
           color='warning'
@@ -121,8 +121,8 @@ const OrderItem = ({ order, hideButton }: Props) => {
         />
       )}
 
-      <div className='flex flex-wrap items-center justify-between gap-4'>
-        <div className='flex flex-1 flex-wrap gap-4'>
+      <div className='flex flex-col flex-wrap gap-5 sm:flex-row sm:items-center sm:justify-between'>
+        <div className='flex flex-1 flex-wrap items-center gap-5'>
           <AvatarGroupWrapper images={productImages} max={3} />
 
           <div className='flex flex-col gap-0.5'>

@@ -10,7 +10,7 @@ const ProductTabs = () => {
   const tProductDetail = useTranslations('productDetail')
 
   return (
-    <Tabs className='mx-auto' variant='light'>
+    <Tabs className='mx-auto' variant='bordered'>
       <Tab title={tProductDetail('tabs.description')}>
         <ProductDescription />
       </Tab>

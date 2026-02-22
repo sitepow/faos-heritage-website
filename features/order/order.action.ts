@@ -2,11 +2,13 @@
 
 import { OrderStatus, StockMovementType } from '@prisma/client'
 
+import type { AffiliateFilter, GetAffiliateOrdersOptions } from './order.types'
 import type { Prisma, Currency } from '@prisma/client'
 
 import { buildStatusUpdateData } from './order.helper'
 import { calculateShippingCost } from '../shipping/shipping.action'
 
+import { AFFILIATE_CONFIG } from '@/constants'
 import { getOrderContent, OrderTemplate } from '@/emails/OrderTemplate'
 import { ERROR_CODES, fail, ok } from '@/lib/errors'
 import { prisma } from '@/lib/prisma'
@@ -49,6 +51,122 @@ const CANCEL_OR_REFUND_STATUSES = new Set<OrderStatus>([
   OrderStatus.CANCELLED,
   OrderStatus.REFUNDED,
 ])
+
+const getAffiliateOrders = async (options: GetAffiliateOrdersOptions = {}) =>
+  withAuth(async () => {
+    const { userId } = await getServerUser()
+    const { page = 1, limit = 10, startDate, endDate } = options
+    const skip = (page - 1) * limit
+
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { referrerCode: true },
+    })
+
+    if (!user?.referrerCode) {
+      return ok({ items: [], total: 0, totalPages: 0 })
+    }
+
+    const where: Prisma.OrderWhereInput = {
+      referrerCode: user.referrerCode,
+    }
+
+    if (startDate || endDate) {
+      where.createdAt = {
+        ...(startDate && { gte: new Date(startDate) }),
+        ...(endDate && { lte: new Date(endDate) }),
+      }
+    }
+
+    const [items, total] = await prisma.$transaction([
+      prisma.order.findMany({
+        where,
+        skip,
+        take: limit,
+        orderBy: { createdAt: 'desc' },
+      }),
+      prisma.order.count({ where }),
+    ])
+
+    const formattedItems = items.map((item) => {
+      const amount = Number(item.baseTotal)
+      const commissionRate =
+        amount > AFFILIATE_CONFIG.THRESHOLD_AMOUNT
+          ? AFFILIATE_CONFIG.HIGH_COMMISSION_RATE
+          : AFFILIATE_CONFIG.LOW_COMMISSION_RATE
+
+      return {
+        ...decimalToNumber(item),
+        commissionRate,
+        estimatedEarnings: Number((amount * commissionRate).toFixed(2)),
+      }
+    })
+
+    return ok({
+      items: formattedItems,
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
+    })
+  })
+
+const getAffiliateStats = async (filter?: AffiliateFilter) =>
+  withAuth(async () => {
+    const { userId } = await getServerUser()
+
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { referrerCode: true },
+    })
+
+    if (!user?.referrerCode) {
+      return ok({
+        totalOrders: 0,
+        totalRevenue: 0,
+        totalCommission: 0,
+      })
+    }
+
+    const whereClause: Prisma.OrderWhereInput = {
+      referrerCode: user.referrerCode,
+      status: OrderStatus.DELIVERED,
+    }
+
+    if (filter?.startDate || filter?.endDate) {
+      whereClause.createdAt = {
+        ...(filter.startDate && { gte: new Date(filter.startDate) }),
+        ...(filter.endDate && { lte: new Date(filter.endDate) }),
+      }
+    }
+
+    const orders = await prisma.order.findMany({
+      where: whereClause,
+      select: {
+        baseTotal: true,
+      },
+    })
+
+    let totalRevenue = 0
+    let totalCommission = 0
+
+    orders.forEach((order) => {
+      const amount = Number(order.baseTotal)
+      totalRevenue += amount
+
+      const commissionRate =
+        amount > AFFILIATE_CONFIG.THRESHOLD_AMOUNT
+          ? AFFILIATE_CONFIG.HIGH_COMMISSION_RATE
+          : AFFILIATE_CONFIG.LOW_COMMISSION_RATE
+      totalCommission += amount * commissionRate
+    })
+
+    return ok({
+      totalOrders: orders.length,
+      totalRevenue: Number(totalRevenue.toFixed(2)),
+      totalCommission: Number(totalCommission.toFixed(2)),
+    })
+  })
 
 const sendOrderEmail = async (orderId: string) => {
   try {
@@ -406,6 +524,8 @@ const updateOrder = async (input: UpdateOrderInput) =>
   })
 
 export {
+  getAffiliateOrders,
+  getAffiliateStats,
   sendOrderEmail,
   getOrders,
   getOrderById,

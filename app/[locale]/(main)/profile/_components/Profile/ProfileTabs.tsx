@@ -2,10 +2,11 @@
 
 import { Tab, Tabs } from '@heroui/react'
 import { useTranslations } from 'next-intl'
-import React, { useMemo } from 'react'
+import React from 'react'
 
 import { ProfileCard } from './ProfileCard'
 import { AccountCard } from '../AccountCard'
+import { tabStyles } from './Profile.styles'
 import { AddressCard } from '../Address/AddressCard'
 import { FavoriteCard } from '../Favorite/FavoriteCard'
 import { OrderCard } from '../Order/OrderCard'
@@ -35,20 +36,6 @@ const ProfileTabs = () => {
   const onTabChange = (key: React.Key) => {
     setQueryParam('tab', key.toString())
   }
-
-  const tabStyles = useMemo(
-    () => ({
-      base: 'w-full flex flex-col lg:flex-row lg:w-fit lg:items-start lg:gap-5',
-      tabList: `
-      flex overflow-x-auto p-2 
-      lg:bg-background/70 lg:backdrop-blur-md lg:z-20 
-      lg:sticky lg:top-55
-      lg:flex-col lg:w-[240px] 
-    `,
-      panel: 'w-full',
-    }),
-    [],
-  )
 
   if (!isMounted) {
     return

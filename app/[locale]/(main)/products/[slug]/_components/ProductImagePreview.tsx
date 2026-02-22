@@ -38,6 +38,8 @@ const ProductImagePreview = ({ product, images = [] }: Props) => {
   return (
     <div className='flex flex-col gap-5'>
       <div className='relative'>
+        <DiscountBadge percentage={maxDiscountPercentage} />
+
         <Carousel
           ref={mainCarouselRef}
           slidesToScroll
@@ -52,8 +54,6 @@ const ProductImagePreview = ({ product, images = [] }: Props) => {
             />
           ))}
         </Carousel>
-
-        <DiscountBadge className='' percentage={maxDiscountPercentage} />
       </div>
 
       <Carousel slidesToScroll autoPlay={false}>

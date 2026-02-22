@@ -2,6 +2,8 @@
 
 import { useTranslations } from 'next-intl'
 
+import type { ComponentProps } from 'react'
+
 import { AffiliateHeading } from '../AffiliateHeading'
 import { AffiliatePartnerAvatars } from '../AffiliatePartnerAvatars'
 import { BackgroundBlobs } from './_components/BackgroundBlobs'
@@ -9,16 +11,18 @@ import { FadingBackgroundImage } from './_components/FadingBackgroundImage'
 
 import { AffiliateButton } from '@/components/ui/AffiliateButton'
 import { useAppNavigation } from '@/hooks/useAppNavigation'
+import { cn } from '@/utils'
 
-const AffiliateBanner = () => {
+const AffiliateBanner = ({ className }: ComponentProps<'div'>) => {
   const t = useTranslations('affiliate.banner')
   const navigation = useAppNavigation()
 
   return (
     <div
-      className={
-        'bg-faos-dark relative isolate overflow-hidden rounded-lg px-8 py-12 md:px-16 md:py-20'
-      }
+      className={cn(
+        'bg-faos-dark relative isolate overflow-hidden rounded-lg px-8 py-12 md:px-16 md:py-20',
+        className,
+      )}
     >
       <BackgroundBlobs />
       <FadingBackgroundImage />

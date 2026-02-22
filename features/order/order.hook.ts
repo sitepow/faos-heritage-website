@@ -1,6 +1,10 @@
 import { useQuery } from '@tanstack/react-query'
 
+import type { AffiliateFilter, GetAffiliateOrdersOptions } from './order.types'
+
 import {
+  getAffiliateOrders,
+  getAffiliateStats,
   getOrderById,
   getOrders,
   getOrderStats,
@@ -10,6 +14,20 @@ import { orderQueryKeys, type OrderListFilters } from './order.query-key'
 
 type Orders = Awaited<ReturnType<typeof getOrders>>
 type Order = NonNullable<Awaited<ReturnType<typeof getOrders>>['items']>[number]
+
+const useAffiliateOrders = (filters: GetAffiliateOrdersOptions) => {
+  return useQuery({
+    queryKey: [...orderQueryKeys.affiliate.all, 'list', filters],
+    queryFn: () => getAffiliateOrders(filters),
+  })
+}
+
+const useAffiliateStats = (filter?: AffiliateFilter) => {
+  return useQuery({
+    queryKey: [...orderQueryKeys.affiliate.stats(), filter],
+    queryFn: () => getAffiliateStats(filter),
+  })
+}
 
 const useOrders = (filters: OrderListFilters) => {
   return useQuery({
@@ -40,5 +58,12 @@ const useRevenueStats = () => {
   })
 }
 
-export { useOrders, useOrder, useOrderStats, useRevenueStats }
+export {
+  useAffiliateOrders,
+  useAffiliateStats,
+  useOrders,
+  useOrder,
+  useOrderStats,
+  useRevenueStats,
+}
 export type { Orders, Order }

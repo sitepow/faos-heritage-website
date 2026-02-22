@@ -48,8 +48,10 @@ const HomePage = async () => {
         itemsPerPage={PAGINATION.ITEMS_PER_PAGE}
       />
       <PostExploreSection itemsPerPage={PAGINATION.ITEMS_PER_PAGE} />
-      <AdvertiseBanner />
-      <AffiliateBanner />
+      <div className='flex flex-col gap-0'>
+        <AdvertiseBanner />
+        <AffiliateBanner className='rounded-none' />
+      </div>
     </AppSection>
   )
 }

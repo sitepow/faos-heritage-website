@@ -30,6 +30,11 @@ const orderQueryKeys = {
 
     revenue: () => [...orderQueryKeys.stats.all(), 'revenue'] as const,
   },
+
+  affiliate: {
+    all: ['orders', 'affiliate'] as const,
+    stats: () => [...orderQueryKeys.affiliate.all, 'stats'] as const,
+  },
 }
 
 export { orderQueryKeys }

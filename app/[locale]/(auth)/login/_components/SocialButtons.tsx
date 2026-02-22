@@ -5,7 +5,7 @@ import { signIn } from 'next-auth/react'
 const SocialButtons = ({ dividerText }: { dividerText: string }) => {
   const providers = [
     { id: 'google', name: 'Google', icon: '/images/social/google.png' },
-    { id: 'facebook', name: 'Facebook', icon: '/images/social/facebook.png' },
+    // { id: 'facebook', name: 'Facebook', icon: '/images/social/facebook.png' },
   ]
 
   return (
@@ -18,7 +18,7 @@ const SocialButtons = ({ dividerText }: { dividerText: string }) => {
         <div className='border-divider flex-grow border-t' />
       </div>
 
-      <div className='grid w-full gap-2 sm:grid-cols-2'>
+      <div className='grid w-full gap-2'>
         {providers.map((p) => (
           <Card
             key={p.id}

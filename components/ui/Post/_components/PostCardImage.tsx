@@ -13,10 +13,11 @@ const PostCardImage = memo(
   ({ src, className, ...props }: ComponentProps<typeof Image>) => {
     return (
       <>
-        <PostBrandBadge />
+        <PostBrandBadge hasImage={!!src} />
         <Image
           className={cn('z-0 size-full object-cover', className)}
           radius='none'
+          shadow='none'
           src={src || '/images/placeholder-post.jpg'}
           width='100%'
           {...props}

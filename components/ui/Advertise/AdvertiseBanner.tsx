@@ -21,7 +21,7 @@ const AdvertiseBanner = () => {
   }
 
   return (
-    <AppSection>
+    <AppSection className='gap-0'>
       {tAdvertise.map((item) => (
         <AdvertiseCard key={item?.title} {...item} />
       ))}

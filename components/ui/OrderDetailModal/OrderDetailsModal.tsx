@@ -45,30 +45,14 @@ const OrderDetailsModal = ({ isOpen, onClose, order }: Props) => {
 
           <Divider className='bg-default-100 my-4' />
 
-          <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
-            <div className='space-y-2'>
-              <div className='flex items-center gap-2 text-sm font-semibold'>
-                <MapPin size={22} />
-                <span>{t('view.shipping')}</span>
-              </div>
-              <div className='text-default-600 border-default-100 rounded-lg border p-3 text-sm'>
-                <p className='font-bold'>{order.shippingName}</p>
-                <p>{order.shippingPhone}</p>
-                <p className='mt-1 leading-relaxed'>
-                  {order.shippingAddressText}
-                </p>
-              </div>
-            </div>
-
-            {/* <div className='space-y-2'>
-              <div className='flex items-center gap-2 text-sm font-semibold'>
-                <CreditCard size={16} />
-                <span>{t('view.preparing')}</span>
-              </div>
-              <div className='text-default-600 border-default-100 rounded-lg border p-3 text-sm'>
-                -
-              </div>
-            </div> */}
+          <div className='flex items-center gap-2 text-sm font-semibold'>
+            <MapPin size={22} />
+            <span>{t('view.shipping')}</span>
+          </div>
+          <div className='text-default-600 rounded-lg p-3 text-sm'>
+            <p className='font-bold'>{order.shippingName}</p>
+            <p>{order.shippingPhone}</p>
+            <p className='mt-1 leading-relaxed'>{order.shippingAddressText}</p>
           </div>
 
           <Divider className='bg-default-100 my-4' />

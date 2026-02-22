@@ -1,7 +1,5 @@
 import '@/styles/globals.css'
 
-import { Anuphan } from 'next/font/google'
-
 import type { Viewport } from 'next'
 import type { PropsWithChildren } from 'react'
 
@@ -15,25 +13,14 @@ export const viewport: Viewport = {
   ],
 }
 
-const anuphan = Anuphan({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-anuphan',
-})
-
-export default function RootLayout({ children }: PropsWithChildren) {
+const RootLayout = ({ children }: PropsWithChildren) => {
   return (
     <html suppressHydrationWarning>
-      <body
-        className={[
-          'text-foreground min-h-screen antialiased',
-          'relative flex h-dvh flex-col',
-          'font-sans',
-          anuphan.className,
-        ].join(' ')}
-      >
+      <body className='text-foreground relative flex h-dvh min-h-screen flex-col antialiased'>
         <Providers>{children}</Providers>
       </body>
     </html>
   )
 }
+
+export default RootLayout

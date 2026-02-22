@@ -1,5 +1,6 @@
 'use client'
 
+import { CalendarIcon, EyeIcon } from 'lucide-react'
 import { memo } from 'react'
 
 import { PostAuthorAvatar } from '../PostAuthorAvatar'
@@ -14,7 +15,7 @@ interface Props {
 
 const PostCardMeta = memo(({ publishedAt, viewCount = 0, author }: Props) => {
   return (
-    <div className='flex flex-wrap items-center gap-3 text-white/90'>
+    <div className='flex flex-wrap items-center gap-3 border-t border-white/10 pt-4 text-white/90'>
       <div className='flex items-center gap-2'>
         <PostAuthorAvatar
           author={author}
@@ -29,12 +30,14 @@ const PostCardMeta = memo(({ publishedAt, viewCount = 0, author }: Props) => {
       <span className='text-white/50'>·</span>
 
       <div className='flex flex-wrap items-center gap-3 text-[13px] text-white/70'>
+        <CalendarIcon size={22} />
         <span>{formatDate(publishedAt)}</span>
 
         {viewCount !== 0 && (
           <>
             <span className='text-white/50'>·</span>
             <div className='flex items-center gap-1'>
+              <EyeIcon size={22} />
               <span>{viewCount.toLocaleString()} views</span>
             </div>
           </>

@@ -39,9 +39,10 @@ const PostCard = memo(({ post }: Props) => {
   return (
     <Card
       as={Link}
-      className='group relative w-full overflow-hidden border-none shadow-lg'
+      className='group border-default-100 relative w-full overflow-hidden border'
       href={`/posts/${generateSlugWithId(title!, id!)}`}
       radius='sm'
+      shadow='none'
     >
       <CardBody className='relative size-full p-0'>
         <PostCardImage
@@ -63,7 +64,7 @@ const PostCard = memo(({ post }: Props) => {
             </div>
           )}
 
-          <h3 className='mb-3 line-clamp-3 text-xl leading-tight font-bold text-white md:text-2xl'>
+          <h3 className='mb-4 line-clamp-2 text-2xl leading-tight font-bold tracking-tight text-white md:text-3xl'>
             {title}
           </h3>
 

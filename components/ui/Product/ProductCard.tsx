@@ -38,18 +38,23 @@ const ProductCard = ({ className, product }: Props) => {
 
   return (
     <Card
-      className={cn('flex w-full flex-col gap-4 bg-transparent', className)}
-      radius='lg'
+      className={cn(
+        'relative flex w-full flex-col gap-4 bg-transparent',
+        className,
+      )}
+      radius='none'
       shadow='none'
     >
       <Link href={productHref}>
-        <div className='relative overflow-hidden rounded-lg'>
+        <div className='relative overflow-hidden'>
+          <DiscountBadge percentage={maxDiscountPercentage} />
+
           <ProductImage
-            className='h-[300px] w-full transition-transform duration-300'
+            className={
+              'h-[300px] w-full rounded-lg transition-transform duration-300'
+            }
             image={primarySrc}
           />
-
-          <DiscountBadge percentage={maxDiscountPercentage} />
         </div>
       </Link>
 

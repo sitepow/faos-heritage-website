@@ -1,7 +1,13 @@
-import type { PropsWithChildren } from 'react'
+import type { ComponentProps } from 'react'
 
-const AppSection = ({ children }: PropsWithChildren) => {
-  return <section className='flex flex-col gap-5'>{children}</section>
+import { cn } from '@/utils'
+
+const AppSection = ({ children, className }: ComponentProps<'section'>) => {
+  return (
+    <section className={cn('flex flex-col gap-5', className)}>
+      {children}
+    </section>
+  )
 }
 
 export { AppSection }

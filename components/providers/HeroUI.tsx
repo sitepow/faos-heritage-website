@@ -16,7 +16,12 @@ const HeroUIProviders = ({ children, themeProps }: HeroUIProvidersProps) => {
   const router = useRouter()
 
   return (
-    <HeroUIProvider navigate={router.push}>
+    <HeroUIProvider
+      disableAnimation
+      disableRipple
+      skipFramerMotionAnimations
+      navigate={router.push}
+    >
       <NextThemesProvider {...themeProps} enableSystem defaultTheme='dark'>
         {children}
       </NextThemesProvider>

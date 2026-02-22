@@ -49,7 +49,7 @@ const LoginPage = () => {
             </Button>
           </div>
 
-          <Tabs fullWidth aria-label='Auth options' variant='solid'>
+          <Tabs fullWidth aria-label='Auth options' variant='bordered'>
             <Tab key='login' title={t('tabs.login')}>
               <div className='pt-4'>
                 <FormProvider {...loginMethods}>
