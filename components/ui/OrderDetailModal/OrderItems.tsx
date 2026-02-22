@@ -19,7 +19,7 @@ const OrderItems = ({ items, title }: Props) => {
   return (
     <div className='space-y-4'>
       <div className='flex items-center gap-2 font-semibold'>
-        <Package size={16} />
+        <Package size={22} />
         <span>{title}</span>
       </div>
 

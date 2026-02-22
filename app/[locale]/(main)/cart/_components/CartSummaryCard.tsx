@@ -130,7 +130,7 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
           autoFocus
           classNames={{
             input:
-              'text-center font-mono text-lg font-semibold tracking-widest',
+              'text-center text-xs sm:text-lg font-semibold tracking-widest',
             inputWrapper:
               'p-0 h-12 overflow-hidden shadow-none border-1 border-default-200 focus-within:!border-primary transition-colors',
           }}

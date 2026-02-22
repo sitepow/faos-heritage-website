@@ -8,7 +8,7 @@ interface Props {
 
 const PostAuthor = ({ author }: Props) => {
   return (
-    <footer className='bg-default-50 flex flex-col items-center gap-8 rounded-3xl p-10 text-center sm:flex-row sm:items-start sm:text-start lg:p-12'>
+    <footer className='bg-default-100 flex flex-col items-center gap-5 rounded-3xl p-7 text-center sm:flex-row sm:items-start sm:gap-8 sm:p-10 sm:text-start lg:p-12'>
       <PostAuthorAvatar
         author={author}
         className='size-24 shrink-0 shadow-sm sm:size-28'

@@ -8,7 +8,7 @@ import {
   Divider,
   ModalFooter,
 } from '@heroui/react'
-import { MapPin, CreditCard } from 'lucide-react'
+import { MapPin } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
 import type { Order } from '@/features/order/order.hook'
@@ -48,7 +48,7 @@ const OrderDetailsModal = ({ isOpen, onClose, order }: Props) => {
           <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
             <div className='space-y-2'>
               <div className='flex items-center gap-2 text-sm font-semibold'>
-                <MapPin size={16} />
+                <MapPin size={22} />
                 <span>{t('view.shipping')}</span>
               </div>
               <div className='text-default-600 border-default-100 rounded-lg border p-3 text-sm'>
@@ -60,7 +60,7 @@ const OrderDetailsModal = ({ isOpen, onClose, order }: Props) => {
               </div>
             </div>
 
-            <div className='space-y-2'>
+            {/* <div className='space-y-2'>
               <div className='flex items-center gap-2 text-sm font-semibold'>
                 <CreditCard size={16} />
                 <span>{t('view.preparing')}</span>
@@ -68,7 +68,7 @@ const OrderDetailsModal = ({ isOpen, onClose, order }: Props) => {
               <div className='text-default-600 border-default-100 rounded-lg border p-3 text-sm'>
                 -
               </div>
-            </div>
+            </div> */}
           </div>
 
           <Divider className='bg-default-100 my-4' />
