@@ -8,9 +8,9 @@ import { AffiliateTiers } from './_components/AffiliateTiers'
 
 const AffiliatePage = () => {
   return (
-    <div className='bg-faos-dark flex flex-col gap-10 p-5 antialiased sm:p-0 sm:pb-5'>
+    <div className='bg-faos-dark flex flex-col gap-10 antialiased'>
       <AffiliateHero />
-      <div className='mx-auto flex max-w-6xl flex-col gap-10'>
+      <div className='mx-auto flex max-w-6xl flex-col gap-10 p-5'>
         <AffiliateSteps />
         <AffiliateRewards />
         <AffiliateTiers />
