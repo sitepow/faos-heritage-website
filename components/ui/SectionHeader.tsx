@@ -30,7 +30,9 @@ const SectionHeader = ({
       </h2>
 
       {description ? (
-        <p className='mx-auto max-w-[75%] sm:text-lg'>{description}</p>
+        <p className='mx-auto max-w-[75%] sm:text-lg lg:max-w-[45%] xl:max-w-[75%]'>
+          {description}
+        </p>
       ) : null}
     </div>
   )

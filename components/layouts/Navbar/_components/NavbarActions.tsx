@@ -17,7 +17,7 @@ const NavbarActions = () => {
 
   return (
     <div className='flex flex-1 items-center justify-end gap-5'>
-      <div className='flex items-center gap-4'>
+      <div className='flex flex-wrap items-center gap-4'>
         <Button isIconOnly className='lg:hidden' variant='light'>
           <CustomIcon icon={SearchIcon} />
         </Button>
