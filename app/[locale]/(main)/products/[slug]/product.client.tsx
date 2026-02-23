@@ -53,6 +53,7 @@ const ProductClient = ({ initialData, productId }: ProductClientProps) => {
       label: categoryName!,
       href: `/categories/${generateSlugWithId(categoryId!, categoryName!)}`,
     },
+    { label: product?.name!, href: '#' },
   ]
 
   return (

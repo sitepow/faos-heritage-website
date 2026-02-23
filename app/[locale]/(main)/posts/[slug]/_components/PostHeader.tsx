@@ -24,10 +24,17 @@ const PostHeader = ({
   author,
 }: Props) => {
   return (
-    <header className='border-default-100 relative h-[400px] w-full overflow-hidden rounded-lg border md:h-[550px]'>
-      <PostCardImage alt={title} src={featuredImage || IMAGE_FALLBACK.EMPTY} />
+    <header className='border-default-100 relative w-full overflow-hidden rounded-lg border'>
+      <div className='absolute inset-0 z-0'>
+        <PostCardImage
+          alt={title}
+          className='h-full w-full object-cover'
+          src={featuredImage || IMAGE_FALLBACK.EMPTY}
+        />
+        <div className='absolute inset-0 bg-black/40' />
+      </div>
 
-      <div className='absolute inset-0 z-20 flex flex-col justify-end p-6 md:p-10'>
+      <div className='relative z-20 flex flex-col justify-end p-6 pt-32 md:p-10 md:pt-52'>
         {category?.name && (
           <div className='mb-3'>
             <Chip

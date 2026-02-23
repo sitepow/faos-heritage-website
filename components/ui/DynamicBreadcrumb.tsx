@@ -1,3 +1,5 @@
+'use client'
+
 import { Breadcrumbs, BreadcrumbItem } from '@heroui/react'
 import React from 'react'
 
@@ -16,11 +18,23 @@ interface Props {
 const DynamicBreadcrumb = ({ items, className }: Props) => {
   return (
     <Breadcrumbs className={cn('font-semibold', className)}>
-      {items.map((item) => (
-        <BreadcrumbItem key={item.href || item.label} href={item.href}>
-          {item.label}
-        </BreadcrumbItem>
-      ))}
+      {items.map((item, index) => {
+        const isLast = index === items.length - 1
+
+        return (
+          <BreadcrumbItem
+            key={item.href || item.label}
+            classNames={{
+              item: cn(
+                isLast && 'block max-w-[200px] truncate md:max-w-[400px]',
+              ),
+            }}
+            href={item.href}
+          >
+            {item.label}
+          </BreadcrumbItem>
+        )
+      })}
     </Breadcrumbs>
   )
 }
