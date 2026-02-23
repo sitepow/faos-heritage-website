@@ -39,7 +39,7 @@ const HomePage = async () => {
 
   return (
     <AppSection>
-      <div className='flex flex-col gap-5'>
+      <div className='flex flex-col gap-10'>
         <SectionHeader description={t('description')} title={t('title')} />
         <CategoryLists />
       </div>
@@ -48,7 +48,7 @@ const HomePage = async () => {
         itemsPerPage={PAGINATION.ITEMS_PER_PAGE}
       />
       <PostExploreSection itemsPerPage={PAGINATION.ITEMS_PER_PAGE} />
-      <div className='flex flex-col gap-0'>
+      <div className='flex flex-col'>
         <AdvertiseBanner />
         <AffiliateBanner className='rounded-none' />
       </div>

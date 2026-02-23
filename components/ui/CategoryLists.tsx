@@ -18,28 +18,20 @@ const CategoryLists = () => {
   }
 
   return (
-    <Container className='flex h-auto w-full flex-wrap overflow-hidden lg:h-[550px] lg:flex-nowrap'>
+    <Container className='flex flex-wrap justify-center gap-5'>
       {categories?.map(({ name, id, image }) => (
         <div
-          key={id}
-          className='group border-default-100 relative h-[300px] w-full cursor-pointer overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] lg:h-full lg:flex-[1] lg:hover:flex-[4]'
+          key={name}
+          className='flex cursor-pointer flex-col items-center gap-5'
           onClick={() =>
             router.push(`/categories/${generateSlugWithId(name!, id!)}`)
           }
         >
           <img
-            alt={name}
-            className='size-full object-cover transition-transform duration-700 group-hover:scale-110'
+            className='size-32 rounded-full object-cover'
             src={image ?? IMAGE_FALLBACK.EMPTY}
           />
-
-          <div className='absolute inset-0 bg-gradient-to-t from-black/40 to-transparent' />
-
-          <div className='group-hover:bg-primary/20 absolute bottom-0 left-0 flex w-full items-center justify-center bg-white/10 py-4 backdrop-blur-md transition-all duration-300'>
-            <span className='text-sm font-medium tracking-wider text-white uppercase transition-all duration-300 group-hover:scale-110 sm:text-lg'>
-              {name}
-            </span>
-          </div>
+          <span>{name}</span>
         </div>
       ))}
     </Container>

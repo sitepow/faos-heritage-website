@@ -27,7 +27,7 @@ const PriceDisplay = ({
     >
       <span
         className={cn(
-          'text-lg font-bold',
+          'text-lg',
           hasDiscount ? 'text-danger' : 'text-default-700',
         )}
       >

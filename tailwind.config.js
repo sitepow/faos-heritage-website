@@ -10,9 +10,6 @@ const config = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        sans: ['var(--font-sukhumvit)'],
-      },
       typography: () => ({
         DEFAULT: {
           css: {
@@ -23,8 +20,7 @@ const config = {
               tableLayout: 'fixed',
               borderCollapse: 'separate',
               borderSpacing: 0,
-              border: '1px solid hsl(var(--heroui-default-300))',
-              borderRadius: '12px',
+              border: '1px solid hsl(var(--heroui-default-100))',
               overflow: 'hidden',
             },
 
@@ -37,14 +33,14 @@ const config = {
               fontWeight: '600',
               textAlign: 'left',
               color: 'hsl(var(--heroui-default-900))',
-              borderRight: '1px solid hsl(var(--heroui-default-300))',
-              borderBottom: '1px solid hsl(var(--heroui-default-300))',
+              borderRight: '1px solid hsl(var(--heroui-default-100))',
+              borderBottom: '1px solid hsl(var(--heroui-default-100))',
             },
 
             td: {
               padding: '0.75rem 1rem',
-              borderRight: '1px solid hsl(var(--heroui-default-300))',
-              borderBottom: '1px solid hsl(var(--heroui-default-300))',
+              borderRight: '1px solid hsl(var(--heroui-default-100))',
+              borderBottom: '1px solid hsl(var(--heroui-default-100))',
             },
 
             'th:last-child, td:last-child': {

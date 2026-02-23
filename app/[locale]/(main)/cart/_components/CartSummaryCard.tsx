@@ -127,12 +127,8 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
           {tCheckout('referrerTitle') || 'Refer No. (Optional)'}
         </span>
         <Input
-          autoFocus
           classNames={{
-            input:
-              'text-center text-xs sm:text-lg font-semibold tracking-widest',
-            inputWrapper:
-              'p-0 h-12 overflow-hidden shadow-none border-1 border-default-200 focus-within:!border-primary transition-colors',
+            input: 'text-center text-default-500',
           }}
           inputMode='numeric'
           pattern='[0-9]*'
