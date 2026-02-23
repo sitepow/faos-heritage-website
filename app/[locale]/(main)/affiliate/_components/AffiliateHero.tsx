@@ -14,7 +14,7 @@ const AffiliateHero = () => {
   const navigation = useAppNavigation()
 
   return (
-    <section className='relative flex flex-col items-center justify-center gap-10 overflow-hidden pb-5 text-center text-white'>
+    <section className='relative flex flex-col items-center justify-center gap-10 overflow-hidden py-5 text-center text-white'>
       <BackgroundBlobs />
       <AffiliateHeading isHero align='center' icon={CoinsIcon} />
 
