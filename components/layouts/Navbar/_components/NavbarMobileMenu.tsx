@@ -88,7 +88,7 @@ const NavbarMobileMenu = () => {
   )
 
   return (
-    <div className='block lg:hidden'>
+    <div className='block xl:hidden'>
       <CustomIcon icon={MenuIcon} onClick={toggleMenu} />
       {mounted && createPortal(menuContent, document.body)}
     </div>

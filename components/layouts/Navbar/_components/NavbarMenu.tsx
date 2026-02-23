@@ -15,7 +15,7 @@ const NavbarMenu = () => {
   const { data: blogCategories } = useBlogCategories({ isActive: true })
 
   return (
-    <Container className='hidden flex-wrap justify-center gap-5 lg:flex'>
+    <Container className='hidden flex-wrap justify-center gap-5 xl:flex'>
       {NAV_LINKS.map((link) => (
         <Link key={link.href} href={link.href}>
           <MenuItem label={link.label} />
