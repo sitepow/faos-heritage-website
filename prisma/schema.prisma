@@ -93,11 +93,26 @@ model BlogCategory {
   isActive  Boolean @default(true)
 
   posts         Post[]
+  localizations BlogCategoryLocalization[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([isActive])
+}
+
+model BlogCategoryLocalization {
+  id             String @id @default(cuid())
+  blogCategoryId String
+  languageCode   String
+
+  name           String
+
+  blogCategory   BlogCategory @relation(fields: [blogCategoryId], references: [id], onDelete: Cascade)
+
+  @@unique([blogCategoryId, languageCode])
+  @@index([blogCategoryId])
+  @@index([languageCode])
 }
 
 model Post {
@@ -124,6 +139,7 @@ model Post {
   author          User          @relation(fields: [authorId], references: [id])
   
   tags            Tag[]         @relation("PostToTag")
+  localizations   PostLocalization[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -135,14 +151,47 @@ model Post {
   @@index([isFeatured])
 }
 
+model PostLocalization {
+  id              String  @id @default(cuid())
+  postId          String
+  languageCode    String
+
+  title           String
+  summary         String? @db.Text
+  content         String? @db.Text
+  metaTitle       String? @db.Text
+  metaDescription String? @db.Text
+
+  post            Post    @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, languageCode])
+  @@index([postId])
+  @@index([languageCode])
+}
+
 model Tag {
   id    String @id @default(cuid())
   name  String @unique
   slug  String @unique
+
   posts Post[] @relation("PostToTag")
+  localizations TagLocalization[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model TagLocalization {
+  id           String @id @default(cuid())
+  tagId        String
+  languageCode String
+  name         String
+
+  tag Tag @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@unique([tagId, languageCode])
+  @@index([tagId])
+  @@index([languageCode])
 }
 
 model ShortLink {
@@ -241,12 +290,27 @@ model Category {
   children Category[] @relation("CategoryToCategory")
 
   products Product[]
+  localizations CategoryLocalization[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([parentId])
   @@index([isActive])
+}
+
+model CategoryLocalization {
+  id           String @id @default(cuid())
+  categoryId   String
+  languageCode String
+
+  name         String
+
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@unique([categoryId, languageCode])
+  @@index([categoryId])
+  @@index([languageCode])
 }
 
 model Product {
@@ -315,12 +379,27 @@ model ProductVariant {
   isActive      Boolean @default(true)
   options       Json?
 
+  localizations ProductVariantLocalization[]
+
   product      Product        @relation(fields: [productId], references: [id], onDelete: Cascade)
   stockHistory StockHistory[]
   cart         Cart[] 
 
   @@index([productId])
   @@index([productId, isActive])
+}
+
+model ProductVariantLocalization {
+  id               String         @id @default(cuid())
+  productVariantId String
+  languageCode     String
+  name             String
+
+  productVariant ProductVariant @relation(fields: [productVariantId], references: [id], onDelete: Cascade)
+
+  @@unique([productVariantId, languageCode])
+  @@index([productVariantId])
+  @@index([languageCode])
 }
 
 model Cart {

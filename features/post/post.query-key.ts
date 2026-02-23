@@ -3,20 +3,27 @@ type PostListFilters = {
   categoryId?: string | null
   isFeatured?: boolean
   limit?: number
+  locale?: string
 }
 
 const postQueryKeys = {
   all: ['posts'] as const,
+
   lists: {
-    all: () => [...postQueryKeys.all, 'list'] as const,
-    filtered: (filters: PostListFilters) =>
-      [...postQueryKeys.lists.all(), filters] as const,
+    all: () => [...postQueryKeys.all, 'list'],
+    filtered: (filters: PostListFilters) => [
+      ...postQueryKeys.lists.all(),
+      filters,
+    ],
   },
+
   details: {
-    all: () => [...postQueryKeys.all, 'detail'] as const,
-    byId: (id: string) => [...postQueryKeys.details.all(), id] as const,
+    all: () => [...postQueryKeys.all, 'detail'],
+    byId: (id: string, metadata?: { locale?: string }) =>
+      [...postQueryKeys.details.all(), id, metadata].filter(Boolean),
   },
-  stats: () => [...postQueryKeys.all, 'stats'] as const,
+
+  stats: () => [...postQueryKeys.all, 'stats'],
 }
 
 export { postQueryKeys }

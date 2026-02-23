@@ -51,14 +51,14 @@ const NavbarMobileMenu = () => {
           {blogCategories && blogCategories.length > 0 && (
             <>
               <hr className='border-default-100 w-full' />
-              {blogCategories.map(({ name, id, slug }) => (
+              {blogCategories.filter(Boolean).map((category) => (
                 <Link
-                  key={id}
+                  key={category?.id!}
                   className='w-full text-center'
-                  href={`/posts/category/${slug}`}
+                  href={`/posts/category/${category?.slug!}`}
                   onClick={closeMenu}
                 >
-                  <MenuItem label={name} />
+                  <MenuItem label={category?.name!} />
                 </Link>
               ))}
             </>

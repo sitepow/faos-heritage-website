@@ -1,7 +1,9 @@
 'use client'
 
 import { PostStatus } from '@prisma/client'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
+
+import type { GetPostsInfiniteResult } from '@/features/post/post.action'
 
 import { AppSection } from '@/components/layouts/AppSection'
 import { Container } from '@/components/layouts/Container'
@@ -17,9 +19,14 @@ interface PostsByCategoryClientProps {
     id: string
     name: string
   }
+  initialData: GetPostsInfiniteResult
 }
 
-const PostsByCategoryClient = ({ category }: PostsByCategoryClientProps) => {
+const PostsByCategoryClient = ({
+  category,
+  initialData,
+}: PostsByCategoryClientProps) => {
+  const locale = useLocale()
   const t = useTranslations('shared')
   const tStatus = useTranslations('status')
 
@@ -28,6 +35,8 @@ const PostsByCategoryClient = ({ category }: PostsByCategoryClientProps) => {
       status: PostStatus.PUBLISHED,
       categoryId: category.id,
       limit: 12,
+      locale,
+      initialData,
     })
 
   useWindowInfiniteScroll({

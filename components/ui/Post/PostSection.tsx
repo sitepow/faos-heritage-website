@@ -7,6 +7,8 @@ import { PostCard, PostCardSkeleton } from './PostCard'
 import { Container } from '@/components/layouts/Container'
 import { PAGINATION } from '@/constants'
 
+type PostItem = NonNullable<GetPostsInfiniteResult['items'][number]>
+
 interface Props {
   items: GetPostsInfiniteResult['items']
   isLoading?: boolean
@@ -29,7 +31,9 @@ const PostSection = ({
   return (
     <Container className='grid gap-5 lg:grid-cols-2'>
       {!isLoading &&
-        items.map((post) => <PostCard key={post.id} post={post} />)}
+        items
+          .filter((item): item is PostItem => item !== null)
+          .map((post) => <PostCard key={post.id} post={post} />)}
 
       {shouldShowSkeleton &&
         skeletonKeys.map((key) => <PostCardSkeleton key={key} />)}

@@ -13,15 +13,15 @@ interface PostProps {
   params: Promise<{ slug: string; locale: string }>
 }
 
-export async function generateMetadata({
+export const generateMetadata = async ({
   params,
-}: PostProps): Promise<Metadata> {
+}: PostProps): Promise<Metadata> => {
   const { slug, locale } = await params
   const postId = parseSlug(slug)
 
   const t = await getTranslations({ locale, namespace: 'meta.blogDetail' })
 
-  const post = await getPost(postId)
+  const post = await getPost(postId, locale)
 
   if (!post) {
     return constructMetadata({
@@ -37,15 +37,15 @@ export async function generateMetadata({
     description: post.summary || t('description', { summary: post?.summary! }),
     ogImage,
     canonicalPath: `/posts/${slug}`,
-    keywords: [post.title, post?.category?.name!],
+    keywords: [post.title, post?.category?.name || ''],
   })
 }
 
 const PostPage = async ({ params }: PostProps) => {
-  const { slug } = await params
+  const { slug, locale } = await params
   const postId = parseSlug(slug)
 
-  const post = await getPost(postId)
+  const post = await getPost(postId, locale)
 
   return <PostClient initialData={post} postId={postId} />
 }

@@ -4,7 +4,7 @@ import { Button } from '@heroui/react'
 import { PostStatus } from '@prisma/client'
 import { ArrowRightIcon } from 'lucide-react'
 import Link from 'next/link'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 
 import type { GetPostsInfiniteResult } from '@/features/post/post.action'
 
@@ -20,10 +20,13 @@ interface Props {
 }
 
 const PostExploreSection = ({ initialData, itemsPerPage }: Props) => {
+  const locale = useLocale()
+
   const tShared = useTranslations('shared')
   const tActions = useTranslations('actions')
 
   const { data: postsData, isLoading: isPostsLoading } = usePosts({
+    locale,
     status: PostStatus.PUBLISHED,
     limit: itemsPerPage,
     initialData,

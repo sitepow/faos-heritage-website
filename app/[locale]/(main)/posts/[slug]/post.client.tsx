@@ -1,9 +1,9 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useEffect, useRef } from 'react'
 
-import type { getPost } from '@/features/post/post.action'
+import type { GetPostResult } from '@/features/post/post.action'
 
 import { PostAuthor } from './_components/PostAuthor'
 import { PostHeader } from './_components/PostHeader'
@@ -15,20 +15,24 @@ import { MarkdownRenderer } from '@/components/ui/Markdown/MarkdownRenderer'
 import { usePost } from '@/features/post/post.hook'
 import { usePostMutation } from '@/features/post/post.mutation'
 
-type PostResult = Awaited<ReturnType<typeof getPost>>
-
 interface Props {
-  initialData: PostResult
+  initialData: GetPostResult
   postId: string
 }
 
 const PostClient = ({ initialData, postId }: Props) => {
+  const locale = useLocale()
   const tBreadcrumb = useTranslations('navigation.breadcrumb')
 
   const { increaseView } = usePostMutation()
   const isIncreased = useRef(false)
 
-  const { data: post } = usePost(postId)
+  const { data: post } = usePost({
+    id: postId,
+    locale,
+    initialData,
+  })
+
   const currentPost = post || initialData
 
   useEffect(() => {

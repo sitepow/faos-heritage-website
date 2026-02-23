@@ -1,7 +1,9 @@
 'use client'
 
 import { PostStatus } from '@prisma/client'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
+
+import type { GetPostsInfiniteResult } from '@/features/post/post.action'
 
 import { AppSection } from '@/components/layouts/AppSection'
 import { Container } from '@/components/layouts/Container'
@@ -12,7 +14,13 @@ import { THRESHOLD_SCROLL_FETCH } from '@/constants'
 import { usePostsInfinite } from '@/features/post/post.hook'
 import { useWindowInfiniteScroll } from '@/hooks/useWindowInfiniteScroll'
 
-const PostsClient = () => {
+interface Props {
+  initialData: GetPostsInfiniteResult
+}
+
+const PostsClient = ({ initialData }: Props) => {
+  const locale = useLocale()
+
   const t = useTranslations('shared')
   const tStatus = useTranslations('status')
 
@@ -20,6 +28,8 @@ const PostsClient = () => {
     usePostsInfinite({
       status: PostStatus.PUBLISHED,
       limit: 12,
+      locale,
+      initialData,
     })
 
   useWindowInfiniteScroll({

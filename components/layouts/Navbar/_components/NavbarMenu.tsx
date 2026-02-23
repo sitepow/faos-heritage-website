@@ -22,9 +22,9 @@ const NavbarMenu = () => {
         </Link>
       ))}
 
-      {blogCategories?.map(({ name, id, slug }) => (
-        <Link key={id} href={`/posts/category/${slug}`}>
-          <MenuItem label={name} />
+      {blogCategories?.filter(Boolean).map((category) => (
+        <Link key={category?.id!} href={`/posts/category/${category?.slug!}`}>
+          <MenuItem label={category?.name!} />
         </Link>
       ))}
 

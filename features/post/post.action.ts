@@ -5,6 +5,7 @@ import { unstable_noStore as noStore } from 'next/cache'
 
 import type { PostStatus } from '@prisma/client'
 
+import { transformPost } from './post.helper'
 import { postSchema, type PostInput } from './post.schema'
 
 import { deleteFile } from '@/app/actions/file'
@@ -14,6 +15,7 @@ import { prisma } from '@/lib/prisma'
 import { getServerUser, withRole } from '@/lib/session'
 import { omitEmptyFields } from '@/utils'
 
+type GetPostResult = Awaited<ReturnType<typeof getPost>>
 type GetPostsInfiniteResult = Awaited<ReturnType<typeof getPostsInfinite>>
 
 const createPost = async (data: PostInput) =>
@@ -96,16 +98,37 @@ const deletePost = async (postIds: string | string[]) =>
     }
   })
 
-const getPost = async (id: string) => {
+const getPost = async (id: string, locale?: string) => {
+  const languageCode = locale?.toUpperCase()
+
   const post = await prisma.post.findUnique({
     where: { id },
     include: {
-      category: true,
-      tags: true,
+      category: {
+        include: {
+          localizations: {
+            where: { languageCode },
+            take: 1,
+          },
+        },
+      },
+      tags: {
+        include: {
+          localizations: {
+            where: { languageCode },
+            take: 1,
+          },
+        },
+      },
       author: { select: { name: true, image: true } },
+      localizations: {
+        where: { languageCode },
+        take: 1,
+      },
     },
   })
-  return post
+
+  return transformPost(post)
 }
 
 const getPostsInfinite = async ({
@@ -113,13 +136,17 @@ const getPostsInfinite = async ({
   limit = 10,
   categoryId,
   status,
+  locale,
 }: {
   cursor?: string | null
   limit?: number
   categoryId?: string | null
   status?: PostStatus
+  locale?: string
 }) => {
   noStore()
+  const languageCode = locale?.toUpperCase()
+
   const where: Prisma.PostWhereInput = {
     ...(status && { status }),
     ...(categoryId && { categoryId }),
@@ -131,15 +158,41 @@ const getPostsInfinite = async ({
     cursor: cursor ? { id: cursor } : undefined,
     where,
     include: {
-      category: { select: { name: true, slug: true } },
-      tags: true,
+      category: {
+        select: {
+          id: true,
+          name: true,
+          slug: true,
+          localizations: {
+            where: { languageCode },
+            take: 1,
+            select: { name: true },
+          },
+        },
+      },
+      tags: {
+        include: {
+          localizations: {
+            where: { languageCode },
+            take: 1,
+            select: { name: true },
+          },
+        },
+      },
       author: { select: { name: true, image: true } },
+      localizations: {
+        where: { languageCode },
+        take: 1,
+        select: { title: true, summary: true },
+      },
     },
     orderBy: { createdAt: 'desc' },
   })
 
   const hasNextPage = items.length > limit
-  const resultItems = hasNextPage ? items.slice(0, limit) : items
+  const resultItems = (hasNextPage ? items.slice(0, limit) : items).map(
+    transformPost,
+  )
   const nextCursor = hasNextPage
     ? resultItems[resultItems.length - 1]?.id
     : null
@@ -192,4 +245,5 @@ export {
   getPostStats,
   increaseViewCount,
 }
-export type { GetPostsInfiniteResult }
+
+export type { GetPostResult, GetPostsInfiniteResult }
