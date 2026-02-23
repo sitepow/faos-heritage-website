@@ -8,6 +8,10 @@ body {
   letter-spacing: -0.01em;
 }
 
+.Toastify__toast {
+  font-family: var(--font-anuphan), sans-serif !important;
+}
+
 .mdxeditor.dark-editor {
   --accentBase: var(--tomato-1);
   --accentBgSubtle: var(--tomato-2);

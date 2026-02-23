@@ -10,6 +10,9 @@ const config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-anuphan)'],
+      },
       typography: () => ({
         DEFAULT: {
           css: {
