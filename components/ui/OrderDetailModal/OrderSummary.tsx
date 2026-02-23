@@ -31,7 +31,7 @@ const OrderSummary = ({
     formatCurrency(value, { ...currencyOptions, skipCalculation: true })
 
   return (
-    <div className='bg-default-50 space-y-2 rounded-xl p-4'>
+    <div className='border-default-100 space-y-2 rounded-xl border p-4'>
       <div className='flex justify-between text-sm'>
         <span className='text-default-500'>{labels.total}</span>
         <span className={cn(discount > 0 && 'text-default-400 line-through')}>
@@ -40,7 +40,7 @@ const OrderSummary = ({
       </div>
 
       {discount > 0 && (
-        <div className='text-danger flex justify-between text-sm font-medium italic'>
+        <div className='text-danger flex justify-between text-sm font-medium'>
           <span>{labels.discount}</span>
           <span>-{format(discount)}</span>
         </div>
