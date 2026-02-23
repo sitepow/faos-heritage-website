@@ -7,7 +7,7 @@ interface Props extends ComponentProps<'span'> {
 const MenuItem = ({ label, ...props }: Props) => {
   return (
     <span
-      className='text-default-500 hover:text-foreground cursor-pointer text-lg'
+      className={`rounded-medium flex w-full cursor-pointer items-center gap-2 px-3 py-2 text-lg transition-colors duration-200 select-none`}
       {...props}
     >
       {label}
