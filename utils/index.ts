@@ -1,6 +1,6 @@
 export * from './auth'
 export * from './date'
-export * from './exchangeRate'
+export * from './exchange-rate'
 export * from './image'
 export * from './number'
 export * from './style'

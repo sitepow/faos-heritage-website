@@ -18,9 +18,9 @@ import {
   formatFullAddress,
   formatStat,
 } from '@/utils'
-import { sendEmail } from '@/utils/emailSender'
+import { sendEmail } from '@/utils/email-sender'
 import { decimalToNumber } from '@/utils/number'
-import { getProductPriceInfo } from '@/utils/productPrice'
+import { getProductPriceInfo } from '@/utils/product-price'
 
 interface GetOrdersOptions {
   page?: number

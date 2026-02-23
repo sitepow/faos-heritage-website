@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { Container } from '../layouts/Container'
 
 import { IMAGE_FALLBACK } from '@/constants'
-import { useCategories } from '@/features/category/useCategory'
+import { useCategories } from '@/features/category/category.hook'
 import { generateSlugWithId } from '@/utils'
 
 const CategoryLists = () => {

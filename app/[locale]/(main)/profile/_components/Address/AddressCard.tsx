@@ -10,10 +10,10 @@ import { AddressItem } from './AddressItem'
 import { ProfileHeader } from '../Profile/ProfileHeader'
 
 import { ConfirmDeleteModal } from '@/components/ui/ConfirmDeleteModal'
+import { useAddresses } from '@/features/address/address.hook'
+import { useDeleteAddress } from '@/features/address/address.mutation'
 import { useAddressStore } from '@/features/address/address.store'
 import { AddressForm } from '@/features/address/ui/AddressForm'
-import { useAddresses } from '@/features/address/useAddress'
-import { useDeleteAddress } from '@/features/address/useDeleteAddress'
 import { useAppNavigation } from '@/hooks/useAppNavigation'
 import { useAuth } from '@/hooks/useAuth'
 

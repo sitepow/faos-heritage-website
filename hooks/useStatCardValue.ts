@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 
 import { useAppStore } from '@/app/store'
-import { getExchangeRates } from '@/utils/exchangeRate'
+import { getExchangeRates } from '@/utils/exchange-rate'
 import { formatCurrency, formatNumber } from '@/utils/number'
 
 interface Params {

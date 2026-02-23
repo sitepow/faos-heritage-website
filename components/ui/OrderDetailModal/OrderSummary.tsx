@@ -1,6 +1,6 @@
 import { Divider } from '@heroui/react'
 
-import { useExchangeRate } from '@/features/exchangeRate/useExchangeRate'
+import { useExchangeRate } from '@/features/exchange-rate/exchange-rate.hook'
 import { formatCurrency } from '@/utils/number'
 import { cn } from '@/utils/style'
 

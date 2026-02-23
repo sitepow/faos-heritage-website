@@ -4,7 +4,7 @@
 import type { PriceInfo } from '@/features/product/product.types'
 import type { ComponentProps } from 'react'
 
-import { useExchangeRate } from '@/features/exchangeRate/useExchangeRate'
+import { useExchangeRate } from '@/features/exchange-rate/exchange-rate.hook'
 import { cn, formatCurrency } from '@/utils'
 
 interface Props extends ComponentProps<'div'>, Partial<PriceInfo> {}

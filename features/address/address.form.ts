@@ -4,10 +4,10 @@ import { useEffect, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { createAddress, updateAddress } from './address.action'
+import { useAddress } from './address.hook'
 import { addressQueryKeys } from './address.query-key'
 import { addressSchema, type AddressInput } from './address.schema'
 import { useAddressStore } from './address.store'
-import { useAddress } from './useAddress'
 
 const DEFAULT_VALUES: AddressInput = {
   name: '',

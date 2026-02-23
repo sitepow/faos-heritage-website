@@ -2,7 +2,7 @@
 
 import { Role, type Prisma } from '@prisma/client'
 
-import { variantSchema, type VariantInput } from './productVariant.schema'
+import { variantSchema, type VariantInput } from './product-variant.schema'
 
 import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'

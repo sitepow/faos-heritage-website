@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react'
 
 import { NavbarLocaleSwitcher } from '@/components/layouts/Navbar/_components/NavbarLocaleSwitcher'
 import { ThemeSwitch } from '@/components/ui/ThemeSwitch'
-import { useCategories } from '@/features/category/useCategory'
+import { useCategories } from '@/features/category/category.hook'
 import { getBackgroundStyle } from '@/utils'
 
 const AuthSidebar = () => {

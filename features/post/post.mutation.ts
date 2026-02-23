@@ -1,6 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-import { createPost, updatePost, deletePost } from './post.action'
+import {
+  createPost,
+  updatePost,
+  deletePost,
+  increaseViewCount,
+} from './post.action'
 import { postQueryKeys } from './post.query-key'
 
 const usePostMutation = () => {
@@ -23,6 +28,15 @@ const usePostMutation = () => {
     },
   })
 
+  const increaseView = useMutation({
+    mutationFn: (id: string) => increaseViewCount(id),
+    onSuccess: (_, id) => {
+      queryClient.invalidateQueries({
+        queryKey: postQueryKeys.details.byId(id),
+      })
+    },
+  })
+
   const remove = useMutation({
     mutationFn: deletePost,
     onSuccess: () => {
@@ -37,6 +51,8 @@ const usePostMutation = () => {
     isUpdating: update.isPending,
     remove: remove.mutateAsync,
     isDeleting: remove.isPending,
+    increaseView: increaseView.mutate,
+    isIncreasingView: increaseView.isPending,
   }
 }
 

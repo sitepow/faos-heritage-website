@@ -5,7 +5,7 @@ import { Role, type Prisma } from '@prisma/client'
 import {
   productLocalizationSchema,
   type ProductLocalizationInput,
-} from './productLocalization.schema'
+} from './product-localization.schema'
 
 import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'

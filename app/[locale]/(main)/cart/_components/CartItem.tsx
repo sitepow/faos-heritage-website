@@ -11,7 +11,7 @@ import { ProductImage } from '@/components/ui/Product/ProductImage'
 import { ProductQty } from '@/components/ui/Product/ProductQty'
 import { VariantSelect } from '@/components/ui/VariantSelect'
 import { useCartItem } from '@/features/cart/hooks/useCartItem'
-import { useExchangeRate } from '@/features/exchangeRate/useExchangeRate'
+import { useExchangeRate } from '@/features/exchange-rate/exchange-rate.hook'
 import {
   calculateTotalPrice,
   formatCurrency,

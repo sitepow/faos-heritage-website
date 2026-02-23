@@ -6,7 +6,7 @@ import type { GetCartsResult } from '../cart.action'
 import { useCartMutation } from '../cart.mutation'
 
 import { useDebouncedChange } from '@/hooks/useDebouncedChange'
-import { getProductPriceInfo } from '@/utils/productPrice'
+import { getProductPriceInfo } from '@/utils/product-price'
 
 type CartItemData = NonNullable<GetCartsResult>[number]
 

@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl'
 import type { ProductVariant } from '@/features/product/product.types'
 
 import { PriceDisplay } from '@/components/ui/Product/PriceDisplay'
-import { getProductPriceInfo } from '@/utils/productPrice'
+import { getProductPriceInfo } from '@/utils/product-price'
 
 interface Props {
   variants: ProductVariant[]

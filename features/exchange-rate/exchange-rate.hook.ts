@@ -5,11 +5,11 @@ import { useMemo } from 'react'
 
 import type { CurrencyFormatOptions } from '@/utils'
 
-import { exchangeRateQueryKeys } from './exchangeRate.query-key'
+import { exchangeRateQueryKeys } from './exchange-rate.query-key'
 
 import { useAppStore } from '@/app/store'
 import { CURRENCY } from '@/constants'
-import { getExchangeRates } from '@/utils/exchangeRate'
+import { getExchangeRates } from '@/utils/exchange-rate'
 
 interface Props {
   currency?: string

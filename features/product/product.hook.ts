@@ -12,11 +12,11 @@ import type {
 
 import { getProduct, getProductsInfinite } from './product.action'
 import { productQueryKeys } from './product.query-key'
-import { useExchangeRate } from '../exchangeRate/useExchangeRate'
+import { useExchangeRate } from '../exchange-rate/exchange-rate.hook'
 
 import { PAGINATION } from '@/constants'
 import { formatCurrency, formatCurrencyRange } from '@/utils/number'
-import { getProductPriceInfo } from '@/utils/productPrice'
+import { getProductPriceInfo } from '@/utils/product-price'
 
 const useProduct = ({
   locale,

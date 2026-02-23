@@ -162,6 +162,27 @@ const getPostStats = async () =>
     ]
   })
 
+const increaseViewCount = async (id: string) => {
+  if (!id) {
+    return fail(ERROR_CODES.BAD_REQUEST)
+  }
+
+  try {
+    await prisma.post.update({
+      where: { id },
+      data: {
+        viewCount: {
+          increment: 1,
+        },
+      },
+    })
+
+    return ok()
+  } catch {
+    return fail(ERROR_CODES.SYSTEM_ERROR)
+  }
+}
+
 export {
   createPost,
   updatePost,
@@ -169,5 +190,6 @@ export {
   getPost,
   getPostsInfinite,
   getPostStats,
+  increaseViewCount,
 }
 export type { GetPostsInfiniteResult }

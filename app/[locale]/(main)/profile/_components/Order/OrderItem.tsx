@@ -15,7 +15,7 @@ import { AvatarGroupWrapper } from '@/components/ui/AvatarGroupWrapper'
 import { OrderDetailsModal } from '@/components/ui/OrderDetailModal/OrderDetailsModal'
 import { OrderStepper } from '@/components/ui/OrderStepper/OrderStepper'
 import { IMAGE_FALLBACK } from '@/constants'
-import { useExchangeRate } from '@/features/exchangeRate/useExchangeRate'
+import { useExchangeRate } from '@/features/exchange-rate/exchange-rate.hook'
 import { formatDate } from '@/utils/date'
 import { formatCurrency, formatNumber } from '@/utils/number'
 

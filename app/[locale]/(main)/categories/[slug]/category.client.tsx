@@ -8,7 +8,7 @@ import { EmptyState } from '@/components/ui/EmptyState'
 import { ProductSection } from '@/components/ui/Product/ProductSection'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { THRESHOLD_SCROLL_FETCH } from '@/constants'
-import { useCategory } from '@/features/category/useCategory'
+import { useCategory } from '@/features/category/category.hook'
 import { useProductsInfinite } from '@/features/product/product.hook'
 import { useWindowInfiniteScroll } from '@/hooks/useWindowInfiniteScroll'
 

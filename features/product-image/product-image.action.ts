@@ -2,7 +2,7 @@
 
 import { Role, type Prisma } from '@prisma/client'
 
-import { imageSchema, type ImageInput } from './productImage.schema'
+import { imageSchema, type ImageInput } from './product-image.schema'
 
 import { deleteFile } from '@/app/actions/file'
 import { fail, ok } from '@/lib/errors'

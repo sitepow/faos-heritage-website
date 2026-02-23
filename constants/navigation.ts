@@ -7,10 +7,6 @@ const NAV_LINKS = [
     label: 'Products',
     href: '/products',
   },
-  {
-    label: 'Blogs',
-    href: '/posts',
-  },
 ] as const
 
 type NavLink = (typeof NAV_LINKS)[number]

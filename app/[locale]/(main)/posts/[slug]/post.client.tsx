@@ -1,6 +1,7 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
+import { useEffect, useRef } from 'react'
 
 import type { getPost } from '@/features/post/post.action'
 
@@ -12,6 +13,7 @@ import { Container } from '@/components/layouts/Container'
 import { DynamicBreadcrumb } from '@/components/ui/DynamicBreadcrumb'
 import { MarkdownRenderer } from '@/components/ui/Markdown/MarkdownRenderer'
 import { usePost } from '@/features/post/post.hook'
+import { usePostMutation } from '@/features/post/post.mutation'
 
 type PostResult = Awaited<ReturnType<typeof getPost>>
 
@@ -23,8 +25,18 @@ interface Props {
 const PostClient = ({ initialData, postId }: Props) => {
   const tBreadcrumb = useTranslations('navigation.breadcrumb')
 
+  const { increaseView } = usePostMutation()
+  const isIncreased = useRef(false)
+
   const { data: post } = usePost(postId)
   const currentPost = post || initialData
+
+  useEffect(() => {
+    if (!isIncreased.current && postId) {
+      increaseView(postId)
+      isIncreased.current = true
+    }
+  }, [postId, increaseView])
 
   if (!currentPost) {
     return null
@@ -48,7 +60,7 @@ const PostClient = ({ initialData, postId }: Props) => {
       ? [
           {
             label: category.name,
-            href: `/posts?categoryId=${category.id}`,
+            href: `/posts/category/${category.slug}`,
           },
         ]
       : []),

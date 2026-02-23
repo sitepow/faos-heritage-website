@@ -8,12 +8,14 @@ import { MenuItem } from './MenuItem'
 
 import { CustomIcon } from '@/components/ui/CustomIcon'
 import { NAV_LINKS } from '@/constants/navigation'
-import { useCategories } from '@/features/category/useCategory'
+import { useBlogCategories } from '@/features/blog-category/blog-category.hook'
+import { useCategories } from '@/features/category/category.hook'
 import { cn, generateSlugWithId } from '@/utils'
 
 const NavbarMobileMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { data: categories } = useCategories()
+  const { data: blogCategories } = useBlogCategories({ isActive: true })
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
   const closeMenu = () => setIsMenuOpen(false)
@@ -45,6 +47,22 @@ const NavbarMobileMenu = () => {
               <MenuItem label={link.label} />
             </Link>
           ))}
+
+          {blogCategories && blogCategories.length > 0 && (
+            <>
+              <hr className='border-default-100 w-full' />
+              {blogCategories.map(({ name, id, slug }) => (
+                <Link
+                  key={id}
+                  className='w-full text-center'
+                  href={`/posts/category/${slug}`}
+                  onClick={closeMenu}
+                >
+                  <MenuItem label={name} />
+                </Link>
+              ))}
+            </>
+          )}
 
           <hr className='border-default-100 w-full' />
 

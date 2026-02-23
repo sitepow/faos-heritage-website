@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 import { getCarts, getCartStat } from '../cart.action'
 import { cartQueryKeys } from '../cart.query-key'
 
-import { getProductPriceInfo } from '@/utils/productPrice'
+import { getProductPriceInfo } from '@/utils/product-price'
 
 interface useCartsProps {
   userId?: string
