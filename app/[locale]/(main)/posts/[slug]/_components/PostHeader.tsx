@@ -47,7 +47,7 @@ const PostHeader = ({
           </div>
         )}
 
-        <h1 className='mb-4 text-3xl leading-tight font-bold text-white md:text-5xl lg:max-w-4xl'>
+        <h1 className='mb-4 py-5 text-3xl leading-tight font-bold text-white md:text-5xl lg:max-w-4xl'>
           {title}
         </h1>
 

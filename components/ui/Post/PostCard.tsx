@@ -64,7 +64,7 @@ const PostCard = memo(({ post }: Props) => {
             </div>
           )}
 
-          <h3 className='mb-4 line-clamp-2 text-2xl leading-tight font-bold tracking-tight text-white md:text-3xl'>
+          <h3 className='mb-4 line-clamp-2 py-5 text-2xl leading-tight font-bold tracking-tight text-white md:text-3xl'>
             {title}
           </h3>
 
