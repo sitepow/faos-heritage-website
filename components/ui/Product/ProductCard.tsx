@@ -10,6 +10,7 @@ import { CategoryChip } from '../CategoryChip'
 import { DiscountBadge } from './DiscountBadge'
 import { ProductImage } from './ProductImage'
 import { VariantTable } from './VariantTable'
+import { CommentCount } from '../CommentCount'
 import { ViewCount } from '../ViewCount'
 
 import { useProductPrice } from '@/features/product/product.hook'
@@ -63,6 +64,7 @@ const ProductCard = ({ className, product }: Props) => {
         <div className='flex flex-wrap items-center gap-2'>
           <CategoryChip categoryName={product?.category?.name} />
           <ViewCount viewCount={product?.viewCount!} />
+          <CommentCount commentCount={product?._count?.comments || 0} />
         </div>
 
         <div className='flex w-full flex-col gap-4'>

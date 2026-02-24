@@ -8,12 +8,14 @@ import { CommentItem } from './CommentItem'
 import { useComments } from '@/features/comment/comment.hook'
 
 interface Props {
-  postId: string
+  postId?: string
+  productId?: string
 }
 
-const PostComments = ({ postId }: Props) => {
+const CommentSection = ({ postId, productId }: Props) => {
   const t = useTranslations('comment')
-  const { data: comments } = useComments({ postId })
+
+  const { data: comments } = useComments({ postId, productId })
 
   return (
     <section className='mx-auto flex w-full max-w-4xl flex-col gap-8 py-10'>
@@ -22,14 +24,19 @@ const PostComments = ({ postId }: Props) => {
         <p className='text-default-500'>{t('description')}</p>
       </div>
 
-      <CommentForm postId={postId} />
+      <CommentForm postId={postId} productId={productId} />
 
       <div className='mt-5 flex flex-col gap-6'>
         {comments?.length === 0 ? (
           <p className='text-default-400 py-10 text-center'>{t('empty')}</p>
         ) : (
           comments?.map((comment) => (
-            <CommentItem key={comment.id} comment={comment} postId={postId} />
+            <CommentItem
+              key={comment.id}
+              comment={comment}
+              postId={postId}
+              productId={productId}
+            />
           ))
         )}
       </div>
@@ -37,4 +44,4 @@ const PostComments = ({ postId }: Props) => {
   )
 }
 
-export { PostComments }
+export { CommentSection }

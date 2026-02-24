@@ -11,9 +11,17 @@ const useCommentMutation = () => {
   const create = useMutation({
     mutationFn: createComment,
     onSuccess: (_, variables) => {
-      queryClient.invalidateQueries({
-        queryKey: commentQueryKeys.lists.byPost(variables.postId),
-      })
+      if (variables.postId) {
+        queryClient.invalidateQueries({
+          queryKey: commentQueryKeys.lists.byPost(variables.postId),
+        })
+      }
+
+      if (variables.productId) {
+        queryClient.invalidateQueries({
+          queryKey: commentQueryKeys.lists.byProduct(variables.productId),
+        })
+      }
     },
   })
 

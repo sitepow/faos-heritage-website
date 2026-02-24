@@ -3,7 +3,8 @@ import { z } from 'zod'
 const commentSchema = z.object({
   id: z.string().optional(),
   content: z.string().min(1, 'nameRequired'),
-  postId: z.string().min(1),
+  productId: z.string().optional(),
+  postId: z.string().optional(),
   parentId: z.string().optional().nullable(),
 })
 

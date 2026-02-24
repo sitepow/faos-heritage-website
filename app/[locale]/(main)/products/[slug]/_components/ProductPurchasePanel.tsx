@@ -8,6 +8,7 @@ import { useState, useMemo, useEffect } from 'react'
 import { ProductShare } from './ProductShare'
 
 import { CategoryChip } from '@/components/ui/CategoryChip'
+import { CommentCount } from '@/components/ui/CommentCount'
 import { MarkdownRenderer } from '@/components/ui/Markdown/MarkdownRenderer'
 import { VariantTable } from '@/components/ui/Product/VariantTable'
 import { VariantSelect } from '@/components/ui/VariantSelect'
@@ -103,6 +104,7 @@ const ProductPurchasePanel = () => {
         <div className='flex flex-wrap items-center gap-2'>
           <CategoryChip categoryName={product.category?.name} />
           <ViewCount viewCount={product?.viewCount || 0} />
+          <CommentCount commentCount={product?._count?.comments || 0} />
         </div>
 
         <VariantTable variants={product?.variants || []} />

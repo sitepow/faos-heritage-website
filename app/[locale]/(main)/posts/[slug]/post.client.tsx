@@ -8,12 +8,12 @@ import type { GetPostResult } from '@/features/post/post.action'
 import { PostAuthor } from './_components/PostAuthor'
 import { PostHeader } from './_components/PostHeader'
 import { RelatedPosts } from './_components/RelatedPosts'
-import { PostComments } from './_components/comment/PostComments'
 
 import { AppSection } from '@/components/layouts/AppSection'
 import { Container } from '@/components/layouts/Container'
 import { DynamicBreadcrumb } from '@/components/ui/DynamicBreadcrumb'
 import { MarkdownRenderer } from '@/components/ui/Markdown/MarkdownRenderer'
+import { CommentSection } from '@/features/comment/ui/CommentSection'
 import { usePost } from '@/features/post/post.hook'
 import { usePostMutation } from '@/features/post/post.mutation'
 
@@ -105,7 +105,7 @@ const PostClient = ({ initialData, postId }: Props) => {
             excludeId={postId}
           />
 
-          <PostComments postId={postId} />
+          <CommentSection postId={postId} />
         </article>
       </AppSection>
     </Container>

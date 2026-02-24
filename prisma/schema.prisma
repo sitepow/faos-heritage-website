@@ -118,13 +118,15 @@ model BlogCategoryLocalization {
 model Comment {
   id        String   @id @default(cuid())
   content   String   @db.Text
-  
   status    ReviewStatus @default(APPROVED) 
 
-  postId    String
+  postId    String?
+  productId String?
   userId    String
-  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  post      Post?     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  product   Product?  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   parentId  String?
   parent    Comment?  @relation("CommentToComment", fields: [parentId], references: [id], onDelete: Cascade)
@@ -134,6 +136,7 @@ model Comment {
   updatedAt DateTime @updatedAt
 
   @@index([postId])
+  @@index([productId])
   @@index([userId])
   @@index([parentId])
 }
@@ -366,6 +369,7 @@ model Product {
   wishlist     Wishlist[]
   stockHistory StockHistory[]
   localizations    ProductLocalization[]
+  comments Comment[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

@@ -2,10 +2,10 @@
 
 import { Avatar, Button, useDisclosure } from '@heroui/react'
 import { ReplyIcon, XIcon } from 'lucide-react'
-import { useTranslations } from 'next-intl' // นำเข้าสำหรับแปลภาษา
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
-import type { getCommentsByPost } from '@/features/comment/comment.action'
+import type { getComments } from '@/features/comment/comment.action'
 
 import { CommentForm } from './CommentForm'
 
@@ -14,15 +14,16 @@ import { useCommentMutation } from '@/features/comment/comment.mutation'
 import { useAuth } from '@/hooks/useAuth'
 import { formatDate } from '@/utils/date'
 
-type CommentWithUser = Awaited<ReturnType<typeof getCommentsByPost>>[number]
+type CommentWithUser = Awaited<ReturnType<typeof getComments>>[number]
 
 interface Props {
   comment: CommentWithUser
-  postId: string
+  postId?: string
+  productId?: string
   parentUserName?: string | null
 }
 
-const CommentItem = ({ comment, postId, parentUserName }: Props) => {
+const CommentItem = ({ comment, postId, productId, parentUserName }: Props) => {
   const t = useTranslations('comment')
   const tActions = useTranslations('actions')
 
@@ -33,14 +34,11 @@ const CommentItem = ({ comment, postId, parentUserName }: Props) => {
   const [isReplying, setIsReplying] = useState(false)
 
   const canDelete = isAdmin || userId === comment.userId
-
   const toggleReply = () => setIsReplying(!isReplying)
 
   const handleConfirmDelete = async () => {
     const result = await remove(comment.id)
-    if (result.success) {
-      onOpenChange()
-    }
+    if (result.success) onOpenChange()
   }
 
   return (
@@ -70,7 +68,7 @@ const CommentItem = ({ comment, postId, parentUserName }: Props) => {
             <Button
               color='primary'
               size='sm'
-              startContent={<ReplyIcon />}
+              startContent={<ReplyIcon size={14} />}
               variant='light'
               onPress={toggleReply}
             >
@@ -81,7 +79,7 @@ const CommentItem = ({ comment, postId, parentUserName }: Props) => {
               <Button
                 color='danger'
                 size='sm'
-                startContent={<XIcon />}
+                startContent={<XIcon size={14} />}
                 variant='light'
                 onPress={onOpen}
               >
@@ -98,24 +96,25 @@ const CommentItem = ({ comment, postId, parentUserName }: Props) => {
             isReply
             parentId={comment.id}
             postId={postId}
+            productId={productId}
             onSuccess={() => setIsReplying(false)}
           />
         </div>
       )}
 
-      {'replies' in comment &&
-        (comment.replies as CommentWithUser[])?.length > 0 && (
-          <div className='border-default-100 ml-14 flex flex-col gap-4 border-l-2 pl-4'>
-            {(comment.replies as CommentWithUser[]).map((reply) => (
-              <CommentItem
-                key={reply.id}
-                comment={reply}
-                parentUserName={comment.user?.name}
-                postId={postId}
-              />
-            ))}
-          </div>
-        )}
+      {comment.replies && comment.replies.length > 0 && (
+        <div className='border-default-100 ml-14 flex flex-col gap-4 border-l-2 pl-4'>
+          {comment.replies.map((reply) => (
+            <CommentItem
+              key={reply.id}
+              comment={reply as CommentWithUser}
+              parentUserName={comment.user?.name}
+              postId={postId}
+              productId={productId}
+            />
+          ))}
+        </div>
+      )}
 
       <ConfirmDeleteModal
         isOpen={isOpen}

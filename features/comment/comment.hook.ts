@@ -1,18 +1,27 @@
+/* eslint-disable no-nested-ternary */
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
 
-import { getCommentsByPost } from './comment.action'
+import { getComments } from './comment.action'
 import { commentQueryKeys } from './comment.query-key'
 
 interface UseCommentsParams {
-  postId: string
+  postId?: string
+  productId?: string
 }
-const useComments = ({ postId }: UseCommentsParams) => {
+
+const useComments = ({ postId, productId }: UseCommentsParams) => {
+  const queryKey = postId
+    ? commentQueryKeys.lists.byPost(postId)
+    : productId
+      ? commentQueryKeys.lists.byProduct(productId)
+      : commentQueryKeys.lists.all()
+
   return useQuery({
-    queryKey: commentQueryKeys.lists.byPost(postId),
-    queryFn: () => getCommentsByPost(postId),
-    enabled: !!postId,
+    queryKey,
+    queryFn: () => getComments({ postId, productId }),
+    enabled: !!(postId || productId),
   })
 }
 

@@ -8,7 +8,8 @@ import { useCommentMutation } from '@/features/comment/comment.mutation'
 import { cn } from '@/utils'
 
 interface Props {
-  postId: string
+  postId?: string
+  productId?: string
   parentId?: string | null
   onSuccess?: () => void
   isReply?: boolean
@@ -16,42 +17,36 @@ interface Props {
 
 const CommentForm = ({
   postId,
+  productId,
   parentId = null,
   onSuccess,
   isReply = false,
 }: Props) => {
   const t = useTranslations('comment')
   const tActions = useTranslations('actions')
-
   const [content, setContent] = useState('')
-
   const { create, isCreating } = useCommentMutation()
 
   const handleSubmit = async () => {
-    if (!content.trim()) {
-      return
-    }
+    if (!content.trim()) return
 
     const result = await create({
       content,
       postId,
+      productId,
       parentId,
     })
 
     if (result.success) {
       setContent('')
-      if (onSuccess) {
-        onSuccess()
-      }
+      onSuccess?.()
     }
   }
 
   return (
     <div className={cn('flex flex-col gap-3', isReply && 'mt-2')}>
       <Textarea
-        classNames={{
-          inputWrapper: 'bg-background',
-        }}
+        classNames={{ inputWrapper: 'bg-background' }}
         minRows={isReply ? 1 : 3}
         placeholder={isReply ? t('reply_placeholder') : t('placeholder')}
         value={content}

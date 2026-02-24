@@ -12,6 +12,7 @@ import { ProductTabs } from './_components/ProductTabs'
 import { AppSection } from '@/components/layouts/AppSection'
 import { AffiliateBanner } from '@/components/ui/AffiliateBanner/AffiliateBanner'
 import { DynamicBreadcrumb } from '@/components/ui/DynamicBreadcrumb'
+import { CommentSection } from '@/features/comment/ui/CommentSection'
 import { useProduct } from '@/features/product/product.hook'
 import { useProductMutation } from '@/features/product/product.mutation'
 import { useProductDetailStore } from '@/features/product/product.store'
@@ -74,6 +75,7 @@ const ProductClient = ({ initialData, productId }: Props) => {
       <ProductTabs />
       <AffiliateBanner />
       <ProductSimilar />
+      <CommentSection productId={productId} />
     </AppSection>
   )
 }

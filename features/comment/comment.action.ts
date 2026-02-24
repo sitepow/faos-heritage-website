@@ -10,11 +10,23 @@ import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { prisma } from '@/lib/prisma'
 import { getServerUser, withRole } from '@/lib/session'
 
-const getCommentsByPost = async (postId: string) => {
+const getComments = async ({
+  postId,
+  productId,
+}: {
+  postId?: string
+  productId?: string
+}) => {
   noStore()
+
+  if (!postId && !productId) {
+    return []
+  }
+
   const comments = await prisma.comment.findMany({
     where: {
-      postId,
+      postId: postId ?? undefined,
+      productId: productId ?? undefined,
       parentId: null,
       status: ReviewStatus.APPROVED,
     },
@@ -62,6 +74,7 @@ const createComment = async (data: CommentInput) => {
       data: {
         content: validated.data.content,
         postId: validated.data.postId,
+        productId: validated.data.productId,
         parentId: finalParentId,
         userId,
         status: ReviewStatus.APPROVED,
@@ -84,4 +97,4 @@ const deleteComment = async (commentId: string) =>
     }
   })
 
-export { getCommentsByPost, createComment, deleteComment }
+export { getComments, createComment, deleteComment }

@@ -1,6 +1,6 @@
 'use server'
 
-import { Role, type Prisma } from '@prisma/client'
+import { ReviewStatus, Role, type Prisma } from '@prisma/client'
 import { unstable_noStore as noStore } from 'next/cache'
 
 import { transformProduct } from './product.helper'
@@ -110,6 +110,11 @@ const getProduct = async (productId: string, locale?: string) => {
         cart: { where: { userId }, select: { variantId: true } },
         wishlist: { where: { userId }, select: { id: true } },
       }),
+      _count: {
+        select: {
+          comments: { where: { status: ReviewStatus.APPROVED } },
+        },
+      },
     },
   })
 
@@ -140,6 +145,11 @@ const getProducts = async (page = 1, limit = 10, locale?: string) => {
         localizations: {
           where: { languageCode },
           take: 1,
+        },
+        _count: {
+          select: {
+            comments: { where: { status: ReviewStatus.APPROVED } },
+          },
         },
       },
       orderBy: { createdAt: 'desc' },
@@ -203,6 +213,11 @@ const getProductsInfinite = async ({
         localizations: {
           where: { languageCode },
           take: 1,
+        },
+        _count: {
+          select: {
+            comments: { where: { status: ReviewStatus.APPROVED } },
+          },
         },
       },
       orderBy: { createdAt: 'desc' },

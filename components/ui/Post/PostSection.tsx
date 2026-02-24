@@ -29,7 +29,7 @@ const PostSection = ({
   const skeletonKeys = createSkeletonKeys(itemPerPage)
 
   return (
-    <Container className='grid gap-5 lg:grid-cols-2'>
+    <Container className='grid gap-5 sm:grid-cols-2 xl:grid-cols-3'>
       {!isLoading &&
         items
           .filter((item): item is PostItem => item !== null)
