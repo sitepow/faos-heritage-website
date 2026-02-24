@@ -27,9 +27,9 @@ const config = {
               overflow: 'hidden',
             },
 
-            thead: {
-              backgroundColor: 'hsl(var(--heroui-default-100))',
-            },
+            // thead: {
+            //   backgroundColor: 'hsl(var(--heroui-default-100))',
+            // },
 
             th: {
               padding: '0.75rem 1rem',

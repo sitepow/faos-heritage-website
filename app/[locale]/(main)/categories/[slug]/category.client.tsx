@@ -17,12 +17,14 @@ interface Props {
 }
 
 const CategoryClient = ({ categoryId }: Props) => {
+  const locale = useLocale()
   const t = useTranslations('products')
   const tShared = useTranslations('shared')
 
-  const locale = useLocale()
-
-  const { data: category } = useCategory(categoryId)
+  const { data: category } = useCategory({
+    categoryId,
+    locale,
+  })
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
     useProductsInfinite({

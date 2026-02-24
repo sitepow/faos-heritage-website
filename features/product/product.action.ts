@@ -13,11 +13,6 @@ import { prisma } from '@/lib/prisma'
 import { getServerUser, withRole } from '@/lib/session'
 import { omitEmptyFields, decimalToNumber } from '@/utils'
 
-type ProductWithPayload = Awaited<ReturnType<typeof getProduct>>
-type ProductListItem = NonNullable<
-  Awaited<ReturnType<typeof getProducts>>['items']
->[number]
-
 const createProduct = async (data: ProductInput) =>
   withRole([Role.ADMIN], async () => {
     const validated = productSchema.safeParse(data)
@@ -217,6 +212,11 @@ const getProductStat = async () =>
     const labels = ['สินค้าทั้งหมด', 'สินค้าพร้อมจำหน่าย', 'สินค้าหมดสต็อก']
     return stats.map((value, idx) => ({ name: labels[idx], value }))
   })
+
+type ProductWithPayload = Awaited<ReturnType<typeof getProduct>>
+type ProductListItem = NonNullable<
+  Awaited<ReturnType<typeof getProducts>>['items']
+>[number]
 
 export {
   createProduct,

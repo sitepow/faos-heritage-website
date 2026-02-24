@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
 
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useState, useEffect } from 'react'
 
 import { NavbarLocaleSwitcher } from '@/components/layouts/Navbar/_components/NavbarLocaleSwitcher'
@@ -10,10 +10,12 @@ import { useCategories } from '@/features/category/category.hook'
 import { getBackgroundStyle } from '@/utils'
 
 const AuthSidebar = () => {
+  const locale = useLocale()
+
   const t = useTranslations('brand')
   const [currentIndex, setCurrentIndex] = useState(0)
 
-  const { data: categories } = useCategories()
+  const { data: categories } = useCategories({ locale })
 
   useEffect(() => {
     if (!categories || categories.length === 0) {

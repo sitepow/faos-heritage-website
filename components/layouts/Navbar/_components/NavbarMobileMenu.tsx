@@ -2,23 +2,31 @@
 
 import { MenuIcon, XIcon } from 'lucide-react'
 import Link from 'next/link'
+import { useLocale } from 'next-intl'
 import { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 
 import { MenuItem } from './MenuItem'
 
 import { CustomIcon } from '@/components/ui/CustomIcon'
-import { NAV_LINKS } from '@/constants/navigation'
 import { useBlogCategories } from '@/features/blog-category/blog-category.hook'
 import { useCategories } from '@/features/category/category.hook'
+import { useStaticNavLinks } from '@/hooks/useStaticNavLinks'
 import { cn, generateSlugWithId } from '@/utils'
 
 const NavbarMobileMenu = () => {
+  const locale = useLocale()
+
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
 
-  const { data: categories } = useCategories()
-  const { data: blogCategories } = useBlogCategories({ isActive: true })
+  const { staticLinks } = useStaticNavLinks()
+
+  const { data: categories } = useCategories({ locale })
+  const { data: blogCategories } = useBlogCategories({
+    filters: { isActive: true },
+    locale,
+  })
 
   useEffect(() => {
     setMounted(true)
@@ -41,9 +49,9 @@ const NavbarMobileMenu = () => {
       </div>
 
       <div className='mt-10 flex flex-col items-center gap-4 overflow-y-auto'>
-        {NAV_LINKS.map((link) => (
+        {staticLinks.map((link) => (
           <Link
-            key={link.href}
+            key={link.key}
             className='w-full text-center'
             href={link.href}
             onClick={closeMenu}
@@ -70,16 +78,17 @@ const NavbarMobileMenu = () => {
 
         <hr className='border-default-100 w-full' />
 
-        {categories?.map(({ name, id }) => {
-          const slug = generateSlugWithId(name!, id!)
+        {categories?.map((category) => {
+          const slug = generateSlugWithId(category?.name!, category?.id!)
+
           return (
             <Link
-              key={id}
+              key={category?.id}
               className='w-full text-center'
               href={`/categories/${slug}`}
               onClick={closeMenu}
             >
-              <MenuItem label={name!} />
+              <MenuItem label={category?.name!} />
             </Link>
           )
         })}

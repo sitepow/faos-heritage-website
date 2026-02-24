@@ -1,11 +1,8 @@
 'use server'
 
-import { Role, type Prisma } from '@prisma/client'
+import { Role, type Prisma, type PostStatus } from '@prisma/client'
 import { unstable_noStore as noStore } from 'next/cache'
 
-import type { PostStatus } from '@prisma/client'
-
-import { transformPost } from './post.helper'
 import { postSchema, type PostInput } from './post.schema'
 
 import { deleteFile } from '@/app/actions/file'
@@ -14,9 +11,7 @@ import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { prisma } from '@/lib/prisma'
 import { getServerUser, withRole } from '@/lib/session'
 import { omitEmptyFields } from '@/utils'
-
-type GetPostResult = Awaited<ReturnType<typeof getPost>>
-type GetPostsInfiniteResult = Awaited<ReturnType<typeof getPostsInfinite>>
+import { applyLocalization } from '@/utils/localization'
 
 const createPost = async (data: PostInput) =>
   withRole([Role.ADMIN], async () => {
@@ -49,7 +44,6 @@ const createPost = async (data: PostInput) =>
 const updatePost = async (data: PostInput) =>
   withRole(['ADMIN'], async () => {
     const validated = postSchema.safeParse(data)
-
     if (!validated.success) {
       return fail(ERROR_CODES.VALIDATION_ERROR)
     }
@@ -106,29 +100,20 @@ const getPost = async (id: string, locale?: string) => {
     include: {
       category: {
         include: {
-          localizations: {
-            where: { languageCode },
-            take: 1,
-          },
+          localizations: { where: { languageCode }, take: 1 },
         },
       },
       tags: {
         include: {
-          localizations: {
-            where: { languageCode },
-            take: 1,
-          },
+          localizations: { where: { languageCode }, take: 1 },
         },
       },
       author: { select: { name: true, image: true } },
-      localizations: {
-        where: { languageCode },
-        take: 1,
-      },
+      localizations: { where: { languageCode }, take: 1 },
     },
   })
 
-  return transformPost(post)
+  return applyLocalization(post)
 }
 
 const getPostsInfinite = async ({
@@ -190,9 +175,10 @@ const getPostsInfinite = async ({
   })
 
   const hasNextPage = items.length > limit
-  const resultItems = (hasNextPage ? items.slice(0, limit) : items).map(
-    transformPost,
-  )
+  const pagedItems = hasNextPage ? items.slice(0, limit) : items
+
+  const resultItems = pagedItems.map((item) => applyLocalization(item))
+
   const nextCursor = hasNextPage
     ? resultItems[resultItems.length - 1]?.id
     : null
@@ -216,25 +202,21 @@ const getPostStats = async () =>
   })
 
 const increaseViewCount = async (id: string) => {
-  if (!id) {
-    return fail(ERROR_CODES.BAD_REQUEST)
-  }
+  if (!id) return fail(ERROR_CODES.BAD_REQUEST)
 
   try {
     await prisma.post.update({
       where: { id },
-      data: {
-        viewCount: {
-          increment: 1,
-        },
-      },
+      data: { viewCount: { increment: 1 } },
     })
-
     return ok()
   } catch {
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
 }
+
+type GetPostResult = Awaited<ReturnType<typeof getPost>>
+type GetPostsInfiniteResult = Awaited<ReturnType<typeof getPostsInfinite>>
 
 export {
   createPost,

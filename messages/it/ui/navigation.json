@@ -1,6 +1,10 @@
 {
   "navigation": {
     "navbar": {
+      "links": {
+        "home": "Home",
+        "products": "Tutti i prodotti"
+      },
       "search": "Cerca prodotti o categorie...",
       "slogan": "L'eccellenza dell'olio d'oliva e del miele biologici per il tuo benessere",
       "userPanel": {

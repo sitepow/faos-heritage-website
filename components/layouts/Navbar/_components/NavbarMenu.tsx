@@ -1,23 +1,31 @@
 'use client'
 
 import Link from 'next/link'
+import { useLocale } from 'next-intl'
 
 import { MenuItem } from './MenuItem'
 import { Container } from '../../Container'
 
-import { NAV_LINKS } from '@/constants/navigation'
 import { useBlogCategories } from '@/features/blog-category/blog-category.hook'
 import { useCategories } from '@/features/category/category.hook'
+import { useStaticNavLinks } from '@/hooks/useStaticNavLinks'
 import { generateSlugWithId } from '@/utils'
 
 const NavbarMenu = () => {
-  const { data: categories } = useCategories()
-  const { data: blogCategories } = useBlogCategories({ isActive: true })
+  const locale = useLocale()
+
+  const { staticLinks } = useStaticNavLinks()
+
+  const { data: categories } = useCategories({ locale })
+  const { data: blogCategories } = useBlogCategories({
+    filters: { isActive: true },
+    locale,
+  })
 
   return (
     <Container className='hidden flex-wrap justify-center gap-5 xl:flex'>
-      {NAV_LINKS.map((link) => (
-        <Link key={link.href} href={link.href}>
+      {staticLinks.map((link) => (
+        <Link key={link.key} href={link.href}>
           <MenuItem label={link.label} />
         </Link>
       ))}
@@ -28,11 +36,12 @@ const NavbarMenu = () => {
         </Link>
       ))}
 
-      {categories?.map(({ name, id }) => {
-        const slug = generateSlugWithId(name!, id!)
+      {categories?.map((category) => {
+        const slug = generateSlugWithId(category?.name!, category?.id!)
+
         return (
-          <Link key={id} href={`/categories/${slug}`}>
-            <MenuItem label={name!} />
+          <Link key={category?.id} href={`/categories/${slug}`}>
+            <MenuItem label={category?.name!} />
           </Link>
         )
       })}

@@ -1,6 +1,10 @@
 {
   "navigation": {
     "navbar": {
+      "links": {
+        "home": "Home",
+        "products": "Alle producten"
+      },
       "search": "Zoek naar producten of categorieën...",
       "slogan": "Het summum van biologische olijfolie en honing voor uw welzijnsreis",
       "userPanel": {

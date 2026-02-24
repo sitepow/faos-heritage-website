@@ -1,6 +1,10 @@
 {
   "navigation": {
     "navbar": {
+      "links": {
+        "home": "首页",
+        "products": "全部产品"
+      },
       "search": "搜索产品或类别...",
       "slogan": "为您健康之旅打造的有机橄榄油与蜂蜜之巅峰",
       "userPanel": {

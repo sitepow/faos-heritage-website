@@ -17,7 +17,7 @@ export async function generateMetadata({
   const categoryId = parseSlug(slug)
 
   const t = await getTranslations({ locale, namespace: 'meta' })
-  const category = await getCategory(categoryId!)
+  const category = await getCategory(categoryId!, locale!)
 
   return constructMetadata({
     title: t('category.title', { categoryName: category?.name! }),

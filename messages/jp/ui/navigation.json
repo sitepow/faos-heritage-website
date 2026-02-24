@@ -1,6 +1,10 @@
 {
   "navigation": {
     "navbar": {
+      "links": {
+        "home": "ホーム",
+        "products": "すべての商品"
+      },
       "search": "商品やカテゴリーを検索...",
       "slogan": "ウェルビーイングへの旅路に、オーガニックオリーブオイルと蜂蜜の最高峰を。",
       "userPanel": {

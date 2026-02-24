@@ -1,15 +1,6 @@
-const NAV_LINKS = [
-  {
-    label: 'Home',
-    href: '/',
-  },
-  {
-    label: 'Products',
-    href: '/products',
-  },
-] as const
+const NAV_PATH_MAP: Record<string, string> = {
+  home: '/',
+  products: '/products',
+} as const
 
-type NavLink = (typeof NAV_LINKS)[number]
-
-export { NAV_LINKS }
-export type { NavLink }
+export { NAV_PATH_MAP }

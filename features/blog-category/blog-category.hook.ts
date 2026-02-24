@@ -8,18 +8,31 @@ import {
   type BlogCategoryListFilters,
 } from './blog-category.query-key'
 
-const useBlogCategory = (id: string) => {
+interface UseBlogCategoryParams {
+  id: string
+  locale?: string
+}
+
+interface UseBlogCategoriesParams {
+  filters?: BlogCategoryListFilters
+  locale?: string
+}
+
+const useBlogCategory = ({ id, locale }: UseBlogCategoryParams) => {
   return useQuery({
-    queryKey: blogCategoryQueryKeys.details.byId(id),
-    queryFn: () => getBlogCategory(id),
+    queryKey: [...blogCategoryQueryKeys.details.byId(id), locale],
+    queryFn: () => getBlogCategory(id, locale),
     enabled: !!id,
   })
 }
 
-const useBlogCategories = (filters: BlogCategoryListFilters = {}) => {
+const useBlogCategories = ({
+  filters = {},
+  locale,
+}: UseBlogCategoriesParams) => {
   return useQuery({
-    queryKey: blogCategoryQueryKeys.lists.filtered(filters),
-    queryFn: () => getBlogCategories(filters),
+    queryKey: [...blogCategoryQueryKeys.lists.filtered(filters), locale],
+    queryFn: () => getBlogCategories(filters, locale),
   })
 }
 

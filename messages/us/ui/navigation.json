@@ -1,6 +1,10 @@
 {
   "navigation": {
     "navbar": {
+      "links": {
+        "home": "Home",
+        "products": "All Products"
+      },
       "search": "Search for products or categories...",
       "slogan": "The pinnacle of organic olive oil and honey for your wellness journey",
       "userPanel": {

@@ -1,6 +1,10 @@
 {
   "navigation": {
     "navbar": {
+      "links": {
+        "home": "Heim",
+        "products": "Allar vörur"
+      },
       "search": "Leita að vörum eða vöruflokkum...",
       "slogan": "Hápunktur lífrænnar ólífuolíu og hunangs fyrir þína heilsuvegferð",
       "userPanel": {

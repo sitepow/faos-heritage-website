@@ -1,6 +1,7 @@
 'use server'
 
 import { Role, type Prisma } from '@prisma/client'
+import { unstable_noStore as noStore } from 'next/cache'
 
 import { categorySchema, type CategoryInput } from './category.schema'
 
@@ -10,9 +11,7 @@ import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { prisma } from '@/lib/prisma'
 import { withRole } from '@/lib/session'
 import { omitEmptyFields } from '@/utils'
-
-type GetCategoryResult = Awaited<ReturnType<typeof getCategory>>
-type GetCategoriesResult = Awaited<ReturnType<typeof getCategories>>
+import { applyLocalization } from '@/utils/localization'
 
 const createCategory = async (data: CategoryInput) =>
   withRole([Role.ADMIN], async () => {
@@ -82,6 +81,7 @@ const deleteCategory = async (categoryIds: string | string[]) =>
       const imagesToDelete = categories
         .map((c) => c.image)
         .filter(Boolean) as string[]
+
       if (imagesToDelete.length > 0) {
         await Promise.all(imagesToDelete.map((url) => deleteFile(url)))
       }
@@ -96,38 +96,54 @@ const deleteCategory = async (categoryIds: string | string[]) =>
     }
   })
 
-const getCategories = async () => {
-  return await prisma.category.findMany({
-    select: {
-      id: true,
-      name: true,
-      isActive: true,
-      image: true,
+const getCategories = async (locale?: string) => {
+  noStore()
+  const languageCode = locale?.toUpperCase()
+
+  const categories = await prisma.category.findMany({
+    include: {
+      localizations: {
+        where: { languageCode },
+        take: 1,
+      },
+      _count: {
+        select: { products: true },
+      },
     },
     orderBy: { name: 'asc' },
   })
+
+  return categories.map((cat) => applyLocalization(cat))
 }
 
-const getCategory = async (categoryId: string) => {
+const getCategory = async (categoryId: string, locale?: string) => {
+  const languageCode = locale?.toUpperCase()
+
   const category = await prisma.category.findUnique({
     where: { id: categoryId },
-    select: {
-      id: true,
-      name: true,
-      isActive: true,
-      image: true,
+    include: {
+      localizations: {
+        where: { languageCode },
+        take: 1,
+      },
+      _count: {
+        select: { products: true },
+      },
     },
   })
 
-  return category || null
+  return applyLocalization(category)
 }
+
+type GetCategoryResult = Awaited<ReturnType<typeof getCategory>>
+type GetCategoriesResult = Awaited<ReturnType<typeof getCategories>>
 
 export {
   createCategory,
-  getCategories,
-  getCategory,
   updateCategory,
   deleteCategory,
+  getCategories,
+  getCategory,
 }
 
 export type { GetCategoryResult, GetCategoriesResult }

@@ -2,6 +2,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import { useLocale } from 'next-intl'
 
 import { Container } from '../layouts/Container'
 
@@ -11,7 +12,9 @@ import { generateSlugWithId } from '@/utils'
 
 const CategoryLists = () => {
   const router = useRouter()
-  const { data: categories } = useCategories()
+  const locale = useLocale()
+
+  const { data: categories } = useCategories({ locale })
 
   if (categories?.length === 0) {
     return
@@ -19,19 +22,21 @@ const CategoryLists = () => {
 
   return (
     <Container className='flex flex-wrap justify-center gap-5'>
-      {categories?.map(({ name, id, image }) => (
+      {categories?.map((category) => (
         <div
-          key={name}
+          key={category?.name!}
           className='flex cursor-pointer flex-col items-center gap-5'
           onClick={() =>
-            router.push(`/categories/${generateSlugWithId(name!, id!)}`)
+            router.push(
+              `/categories/${generateSlugWithId(category?.name!, category?.id!)}`,
+            )
           }
         >
           <img
-            className='size-32 rounded-full object-cover'
-            src={image ?? IMAGE_FALLBACK.EMPTY}
+            className='size-18 rounded-full object-cover sm:size-32'
+            src={category?.image ?? IMAGE_FALLBACK.EMPTY}
           />
-          <span>{name}</span>
+          <span>{category?.name!}</span>
         </div>
       ))}
     </Container>
