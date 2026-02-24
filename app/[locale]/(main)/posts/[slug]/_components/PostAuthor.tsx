@@ -8,7 +8,7 @@ interface Props {
 
 const PostAuthor = ({ author }: Props) => {
   return (
-    <footer className='border-default-100 flex flex-col items-center gap-5 rounded-lg border p-7 text-center sm:flex-row sm:items-start sm:gap-8 sm:p-10 sm:text-start lg:p-12'>
+    <footer className='border-default-100 mx-auto flex flex-col items-center gap-5 rounded-lg border p-7 text-center sm:flex-row sm:items-start sm:gap-8 sm:p-10 sm:text-start lg:max-w-3/4 lg:p-12 xl:max-w-1/2'>
       <PostAuthorAvatar
         author={author}
         className='size-24 shrink-0 shadow-sm sm:size-28'
@@ -16,7 +16,7 @@ const PostAuthor = ({ author }: Props) => {
       />
 
       <div className='flex flex-col gap-3'>
-        <h4 className='text-default-900 text-2xl font-bold sm:text-3xl'>
+        <h4 className='text-default-900 text-2xl font-bold'>
           Written by {author?.name!}
         </h4>
 
