@@ -16,7 +16,6 @@ import { omitEmptyFields, decimalToNumber } from '@/utils'
 const createProduct = async (data: ProductInput) =>
   withRole([Role.ADMIN], async () => {
     const validated = productSchema.safeParse(data)
-
     if (!validated.success) {
       return fail(ERROR_CODES.VALIDATION_ERROR)
     }
@@ -27,7 +26,6 @@ const createProduct = async (data: ProductInput) =>
       ) as Prisma.ProductUncheckedCreateInput
 
       await prisma.product.create({ data: payload })
-
       return ok()
     } catch {
       return fail(ERROR_CODES.SYSTEM_ERROR)
@@ -37,13 +35,11 @@ const createProduct = async (data: ProductInput) =>
 const updateProduct = async (data: ProductInput) =>
   withRole(['ADMIN'], async () => {
     const validated = productSchema.safeParse(data)
-
     if (!validated.success) {
       return fail(ERROR_CODES.VALIDATION_ERROR)
     }
 
     const { id, ...payload } = validated.data
-
     if (!id) {
       return fail(ERROR_CODES.DATA_NOT_FOUND)
     }
@@ -53,7 +49,6 @@ const updateProduct = async (data: ProductInput) =>
         where: { id },
         data: payload as Prisma.ProductUncheckedUpdateInput,
       })
-
       return ok()
     } catch {
       return fail(ERROR_CODES.SYSTEM_ERROR)
@@ -63,7 +58,6 @@ const updateProduct = async (data: ProductInput) =>
 const deleteProduct = async (productIds: string | string[]) =>
   withRole(['ADMIN'], async () => {
     const ids = Array.isArray(productIds) ? productIds : [productIds]
-
     if (!ids.length) {
       return fail(ERROR_CODES.BAD_REQUEST)
     }
@@ -78,7 +72,6 @@ const deleteProduct = async (productIds: string | string[]) =>
       await Promise.all(imageUrls.map((url) => deleteFile(url)))
 
       await prisma.product.deleteMany({ where: { id: { in: ids } } })
-
       return ok()
     } catch {
       return fail(ERROR_CODES.SYSTEM_ERROR)
@@ -87,15 +80,30 @@ const deleteProduct = async (productIds: string | string[]) =>
 
 const getProduct = async (productId: string, locale?: string) => {
   const { userId } = await getServerUser()
+  const languageCode = locale?.toUpperCase()
 
   const product = await prisma.product.findUnique({
     where: { id: productId },
     include: {
-      category: { select: { id: true, name: true } },
+      category: {
+        include: {
+          localizations: {
+            where: { languageCode },
+            take: 1,
+          },
+        },
+      },
       images: { orderBy: { isPrimary: 'desc' } },
-      variants: true,
+      variants: {
+        include: {
+          localizations: {
+            where: { languageCode },
+            take: 1,
+          },
+        },
+      },
       localizations: {
-        where: { languageCode: locale?.toUpperCase() },
+        where: { languageCode },
         take: 1,
       },
       ...(userId && {
@@ -117,7 +125,14 @@ const getProducts = async (page = 1, limit = 10, locale?: string) => {
       skip,
       take: limit,
       include: {
-        category: { select: { name: true } },
+        category: {
+          include: {
+            localizations: {
+              where: { languageCode },
+              take: 1,
+            },
+          },
+        },
         images: { select: { url: true, isPrimary: true } },
         variants: {
           select: { price: true, salePrice: true, stockQuantity: true },
@@ -125,7 +140,6 @@ const getProducts = async (page = 1, limit = 10, locale?: string) => {
         localizations: {
           where: { languageCode },
           take: 1,
-          select: { name: true },
         },
       },
       orderBy: { createdAt: 'desc' },
@@ -167,7 +181,14 @@ const getProductsInfinite = async ({
       cursor: cursor ? { id: cursor } : undefined,
       where,
       include: {
-        category: { select: { name: true } },
+        category: {
+          include: {
+            localizations: {
+              where: { languageCode },
+              take: 1,
+            },
+          },
+        },
         images: { select: { url: true, isPrimary: true } },
         variants: {
           select: {
@@ -182,7 +203,6 @@ const getProductsInfinite = async ({
         localizations: {
           where: { languageCode },
           take: 1,
-          select: { name: true },
         },
       },
       orderBy: { createdAt: 'desc' },
@@ -191,9 +211,9 @@ const getProductsInfinite = async ({
   ])
 
   const hasNextPage = items.length > limit
-  const resultItems = decimalToNumber(
-    hasNextPage ? items.slice(0, limit) : items,
-  ).map(transformProduct)
+  const pagedItems = hasNextPage ? items.slice(0, limit) : items
+  const resultItems = decimalToNumber(pagedItems).map(transformProduct)
+
   const nextCursor = hasNextPage
     ? resultItems[resultItems.length - 1]?.id
     : null
