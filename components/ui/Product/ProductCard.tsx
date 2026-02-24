@@ -9,6 +9,7 @@ import type { GetProductsInfiniteResult } from '@/features/product/product.types
 import { CategoryChip } from '../CategoryChip'
 import { DiscountBadge } from './DiscountBadge'
 import { ProductImage } from './ProductImage'
+import { ProductRating } from './ProductRating'
 import { VariantTable } from './VariantTable'
 import { CommentCount } from '../CommentCount'
 import { ViewCount } from '../ViewCount'
@@ -27,7 +28,6 @@ interface Props {
 
 const ProductCard = ({ className, product }: Props) => {
   const { primarySrc } = resolveProductImages({ images: product?.images })
-
   const { maxDiscountPercentage } = useProductPrice(product)
 
   const productHref = useMemo(
@@ -63,6 +63,12 @@ const ProductCard = ({ className, product }: Props) => {
       <CardBody className='flex flex-col items-start gap-4 overflow-hidden p-1'>
         <div className='flex flex-wrap items-center gap-2'>
           <CategoryChip categoryName={product?.category?.name} />
+
+          <ProductRating
+            reviews={product?.reviews}
+            totalReviews={product?._count?.reviews || 0}
+          />
+
           <ViewCount viewCount={product?.viewCount!} />
           <CommentCount commentCount={product?._count?.comments || 0} />
         </div>

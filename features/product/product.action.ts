@@ -113,7 +113,12 @@ const getProduct = async (productId: string, locale?: string) => {
       _count: {
         select: {
           comments: { where: { status: ReviewStatus.APPROVED } },
+          reviews: { where: { status: ReviewStatus.APPROVED } },
         },
+      },
+      reviews: {
+        where: { status: ReviewStatus.APPROVED },
+        select: { rating: true },
       },
     },
   })
@@ -149,7 +154,12 @@ const getProducts = async (page = 1, limit = 10, locale?: string) => {
         _count: {
           select: {
             comments: { where: { status: ReviewStatus.APPROVED } },
+            reviews: { where: { status: ReviewStatus.APPROVED } },
           },
+        },
+        reviews: {
+          where: { status: ReviewStatus.APPROVED },
+          select: { rating: true },
         },
       },
       orderBy: { createdAt: 'desc' },
@@ -217,7 +227,12 @@ const getProductsInfinite = async ({
         _count: {
           select: {
             comments: { where: { status: ReviewStatus.APPROVED } },
+            reviews: { where: { status: ReviewStatus.APPROVED } },
           },
+        },
+        reviews: {
+          where: { status: ReviewStatus.APPROVED },
+          select: { rating: true },
         },
       },
       orderBy: { createdAt: 'desc' },

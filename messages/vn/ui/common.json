@@ -12,6 +12,17 @@
     "more": "Xem thêm",
     "shareTitle": "Tạo liên kết giới thiệu sản phẩm"
   },
+  "review": {
+    "title": "Đánh giá sản phẩm",
+    "empty": "Chưa có đánh giá nào cho sản phẩm này. Hãy là người đầu tiên chia sẻ trải nghiệm của bạn!",
+    "form_title": "Đánh giá sản phẩm này",
+    "satisfaction_label": "Mức độ hài lòng",
+    "comment_label": "Đánh giá của bạn",
+    "comment_placeholder": "Viết cảm nhận của bạn tại đây...",
+    "submit": "Gửi đánh giá",
+    "verified_purchase": "Đã mua hàng",
+    "external_purchase": "Mua từ nguồn khác"
+  },
   "comment": {
     "title": "Bình luận",
     "description": "Chia sẻ ý kiến của bạn về bài viết này",

@@ -12,6 +12,17 @@
     "more": "View More",
     "shareTitle": "Create Product Referral Link"
   },
+  "review": {
+    "title": "Product Reviews",
+    "empty": "There are no reviews for this product yet. Be the first to share your experience!",
+    "form_title": "Rate this product",
+    "satisfaction_label": "Satisfaction Score",
+    "comment_label": "Your Review",
+    "comment_placeholder": "Write your impression here...",
+    "submit": "Submit Review",
+    "verified_purchase": "Verified Purchase",
+    "external_purchase": "External Purchase"
+  },
   "comment": {
     "title": "Comments",
     "description": "Share your thoughts on this article",

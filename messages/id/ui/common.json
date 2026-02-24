@@ -12,6 +12,17 @@
     "more": "Lihat Lebih Banyak",
     "shareTitle": "Buat Tautan Referensi Produk"
   },
+  "review": {
+    "title": "Ulasan Produk",
+    "empty": "Belum ada ulasan untuk produk ini. Jadilah yang pertama membagikan pengalaman Anda!",
+    "form_title": "Berikan nilai untuk produk ini",
+    "satisfaction_label": "Skor Kepuasan",
+    "comment_label": "Ulasan Anda",
+    "comment_placeholder": "Tulis kesan Anda di sini...",
+    "submit": "Kirim Ulasan",
+    "verified_purchase": "Pembelian Terverifikasi",
+    "external_purchase": "Pembelian Eksternal"
+  },
   "comment": {
     "title": "Komentar",
     "description": "Bagikan pemikiran Anda tentang artikel ini",

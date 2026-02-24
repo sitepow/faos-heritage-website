@@ -12,6 +12,17 @@
     "more": "詳細を見る",
     "shareTitle": "商品紹介リンクを作成"
   },
+  "review": {
+    "title": "カスタマーレビュー",
+    "empty": "この商品のレビューはまだありません。最初のレビューを投稿しませんか？",
+    "form_title": "この商品を評価する",
+    "satisfaction_label": "満足度スコア",
+    "comment_label": "あなたのレビュー",
+    "comment_placeholder": "感想をここに入力してください...",
+    "submit": "レビューを送信",
+    "verified_purchase": "認証済みの購入",
+    "external_purchase": "外部チャネルでの購入"
+  },
   "comment": {
     "title": "コメント",
     "description": "この記事についてあなたの意見を共有しましょう",

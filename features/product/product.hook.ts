@@ -127,10 +127,27 @@ const useSimilarProducts = ({
   })
 }
 
+const useProductRating = (reviews: { rating: number }[] = []) => {
+  const averageRating = useMemo(() => {
+    if (!reviews || reviews.length === 0) {
+      return 0
+    }
+
+    const sum = reviews.reduce((acc, curr) => acc + (curr.rating || 0), 0)
+    return sum / reviews.length
+  }, [reviews])
+
+  return {
+    averageRating,
+    hasReviews: reviews.length > 0,
+  }
+}
+
 export {
   useProduct,
   useProducts,
   useProductsInfinite,
   useProductPrice,
   useSimilarProducts,
+  useProductRating,
 }

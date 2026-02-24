@@ -12,6 +12,17 @@
     "more": "查看更多",
     "shareTitle": "生成商品推荐链接"
   },
+  "review": {
+    "title": "产品评价",
+    "empty": "该产品暂无评价。成为第一个分享体验的人吧！",
+    "form_title": "评价该产品",
+    "satisfaction_label": "满意度评分",
+    "comment_label": "您的评价",
+    "comment_placeholder": "在这里写下您的印象...",
+    "submit": "提交评价",
+    "verified_purchase": "已认证购买",
+    "external_purchase": "外部渠道购买"
+  },
   "comment": {
     "title": "评论",
     "description": "分享你对本文的看法",

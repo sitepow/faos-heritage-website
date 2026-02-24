@@ -12,6 +12,17 @@
     "more": "Sjá meira",
     "shareTitle": "Búa til tilvísunartengi vöru"
   },
+  "review": {
+    "title": "Vöruumsagnir",
+    "empty": "Engar umsagnir hafa borist um þessa vöru ennþá. Vertu fyrstur til að deila reynslu þinni!",
+    "form_title": "Gefa þessari vöru einkunn",
+    "satisfaction_label": "Ánægja",
+    "comment_label": "Þín umsögn",
+    "comment_placeholder": "Skrifaðu upplifun þína hér...",
+    "submit": "Senda umsögn",
+    "verified_purchase": "Staðfest kaup",
+    "external_purchase": "Keypt annars staðar"
+  },
   "comment": {
     "title": "Athugasemdir",
     "description": "Deildu þínum skoðunum á þessari grein",

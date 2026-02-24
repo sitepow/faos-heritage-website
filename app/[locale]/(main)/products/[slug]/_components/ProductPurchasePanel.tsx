@@ -5,6 +5,7 @@ import { HeartIcon, ShoppingCartIcon, Share2Icon } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 import { useState, useMemo, useEffect } from 'react'
 
+import { ProductRating } from './ProductRating'
 import { ProductShare } from './ProductShare'
 
 import { CategoryChip } from '@/components/ui/CategoryChip'
@@ -103,6 +104,11 @@ const ProductPurchasePanel = () => {
 
         <div className='flex flex-wrap items-center gap-2'>
           <CategoryChip categoryName={product.category?.name} />
+          <ProductRating
+            reviews={product.reviews}
+            size={16}
+            totalReviews={product._count?.reviews || 0}
+          />
           <ViewCount viewCount={product?.viewCount || 0} />
           <CommentCount commentCount={product?._count?.comments || 0} />
         </div>

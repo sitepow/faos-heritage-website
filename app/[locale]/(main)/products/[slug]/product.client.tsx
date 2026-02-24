@@ -16,6 +16,7 @@ import { CommentSection } from '@/features/comment/ui/CommentSection'
 import { useProduct } from '@/features/product/product.hook'
 import { useProductMutation } from '@/features/product/product.mutation'
 import { useProductDetailStore } from '@/features/product/product.store'
+import { ReviewSection } from '@/features/review/ui/ReviewSection'
 import { useAuth } from '@/hooks/useAuth'
 import { generateSlugWithId } from '@/utils'
 
@@ -75,6 +76,7 @@ const ProductClient = ({ initialData, productId }: Props) => {
       <ProductTabs />
       <AffiliateBanner />
       <ProductSimilar />
+      <ReviewSection productId={productId} />
       <CommentSection productId={productId} />
     </AppSection>
   )

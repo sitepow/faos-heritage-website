@@ -12,6 +12,17 @@
     "more": "Vedi Altro",
     "shareTitle": "Crea Link di Riferimento Prodotto"
   },
+  "review": {
+    "title": "Recensioni del Prodotto",
+    "empty": "Non ci sono ancora recensioni per questo prodotto. Sii il primo a condividere la tua esperienza!",
+    "form_title": "Valuta questo prodotto",
+    "satisfaction_label": "Punteggio di Soddisfazione",
+    "comment_label": "La tua recensione",
+    "comment_placeholder": "Scrivi le tue impressioni qui...",
+    "submit": "Invia Recensione",
+    "verified_purchase": "Acquisto verificato",
+    "external_purchase": "Acquisto esterno"
+  },
   "comment": {
     "title": "Commenti",
     "description": "Condividi i tuoi pensieri su questo articolo",

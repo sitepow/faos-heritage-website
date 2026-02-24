@@ -12,6 +12,17 @@
     "more": "Bekijk meer",
     "shareTitle": "Productreferentielink maken"
   },
+  "review": {
+    "title": "Productbeoordelingen",
+    "empty": "Er zijn nog geen beoordelingen voor dit product. Deel als eerste je ervaring!",
+    "form_title": "Beoordeel dit product",
+    "satisfaction_label": "Tevredenheidsscore",
+    "comment_label": "Je beoordeling",
+    "comment_placeholder": "Schrijf hier je indruk...",
+    "submit": "Beoordeling indienen",
+    "verified_purchase": "Geverifieerde aankoop",
+    "external_purchase": "Externe aankoop"
+  },
   "comment": {
     "title": "Reacties",
     "description": "Deel je gedachten over dit artikel",

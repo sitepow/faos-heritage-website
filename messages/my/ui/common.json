@@ -12,6 +12,17 @@
     "more": "Lihat Lagi",
     "shareTitle": "Cipta Pautan Rujukan Produk"
   },
+  "review": {
+    "title": "Ulasan Produk",
+    "empty": "Belum ada ulasan untuk produk ini. Jadi yang pertama untuk berkongsi pengalaman anda!",
+    "form_title": "Nilaikan produk ini",
+    "satisfaction_label": "Skor Kepuasan",
+    "comment_label": "Ulasan Anda",
+    "comment_placeholder": "Tulis kesan anda di sini...",
+    "submit": "Hantar Ulasan",
+    "verified_purchase": "Pembelian Sah",
+    "external_purchase": "Pembelian Luar"
+  },
   "comment": {
     "title": "Komen",
     "description": "Kongsi pendapat anda tentang artikel ini",

@@ -18,7 +18,7 @@ const CommentSection = ({ postId, productId }: Props) => {
   const { data: comments } = useComments({ postId, productId })
 
   return (
-    <section className='mx-auto flex w-full max-w-4xl flex-col gap-8 py-10'>
+    <section className='mx-auto flex w-full max-w-7xl flex-col gap-8 py-10'>
       <div className='flex flex-col gap-2'>
         <h3 className='text-2xl font-bold'>{t('title')}</h3>
         <p className='text-default-500'>{t('description')}</p>
