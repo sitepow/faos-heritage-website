@@ -10,6 +10,7 @@ import { CategoryChip } from '../CategoryChip'
 import { DiscountBadge } from './DiscountBadge'
 import { ProductImage } from './ProductImage'
 import { VariantTable } from './VariantTable'
+import { ViewCount } from '../ViewCount'
 
 import { useProductPrice } from '@/features/product/product.hook'
 import { resolveProductImages, generateSlugWithId } from '@/utils'
@@ -59,7 +60,10 @@ const ProductCard = ({ className, product }: Props) => {
       </Link>
 
       <CardBody className='flex flex-col items-start gap-4 overflow-hidden p-1'>
-        <CategoryChip categoryName={product?.category?.name} />
+        <div className='flex flex-wrap items-center gap-2'>
+          <CategoryChip categoryName={product?.category?.name} />
+          <ViewCount viewCount={product?.viewCount!} />
+        </div>
 
         <div className='flex w-full flex-col gap-4'>
           <h4 className='line-clamp-2 text-xl font-medium'>{product?.name}</h4>

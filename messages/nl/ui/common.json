@@ -1,4 +1,5 @@
 {
+  "common": { "views": "weergaven" },
   "actions": {
     "save": "Opslaan",
     "cancel": "Annuleren",

@@ -1,4 +1,5 @@
 {
+  "common": { "views": "tontonan" },
   "actions": {
     "save": "Simpan",
     "cancel": "Batal",

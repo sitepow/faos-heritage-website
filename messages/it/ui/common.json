@@ -1,4 +1,5 @@
 {
+  "common": { "views": "visualizzazioni" },
   "actions": {
     "save": "Salva",
     "cancel": "Annulla",

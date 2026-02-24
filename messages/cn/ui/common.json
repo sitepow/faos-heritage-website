@@ -1,4 +1,5 @@
 {
+  "common": { "views": "观看次数" },
   "actions": {
     "save": "保存",
     "cancel": "取消",

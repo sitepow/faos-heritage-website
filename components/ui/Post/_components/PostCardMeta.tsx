@@ -1,8 +1,9 @@
 'use client'
 
-import { CalendarIcon, EyeIcon } from 'lucide-react'
+import { CalendarIcon } from 'lucide-react'
 import { memo } from 'react'
 
+import { ViewCount } from '../../ViewCount'
 import { PostAuthorAvatar } from '../PostAuthorAvatar'
 
 import { formatDate } from '@/utils'
@@ -36,10 +37,7 @@ const PostCardMeta = memo(({ publishedAt, viewCount = 0, author }: Props) => {
         {viewCount !== 0 && (
           <>
             <span className='text-white/50'>·</span>
-            <div className='flex items-center gap-1'>
-              <EyeIcon size={22} />
-              <span>{viewCount.toLocaleString()} views</span>
-            </div>
+            <ViewCount viewCount={viewCount} />
           </>
         )}
       </div>

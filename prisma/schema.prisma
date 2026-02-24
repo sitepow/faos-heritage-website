@@ -330,6 +330,7 @@ model Product {
   categoryId String?
   category   Category? @relation(fields: [categoryId], references: [id])
 
+  viewCount            Int @default(0)
   isActive             Boolean @default(true)
 
   images       ProductImage[]
@@ -348,6 +349,7 @@ model Product {
   @@index([isActive])
   @@index([createdAt])
   @@index([categoryId, isActive])
+  @@index([viewCount])
 }
 
 model ProductImage {

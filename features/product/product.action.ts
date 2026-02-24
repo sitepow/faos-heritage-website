@@ -233,6 +233,27 @@ const getProductStat = async () =>
     return stats.map((value, idx) => ({ name: labels[idx], value }))
   })
 
+const increaseProductView = async (id: string) => {
+  if (!id) {
+    return fail(ERROR_CODES.BAD_REQUEST)
+  }
+
+  try {
+    await prisma.product.update({
+      where: { id },
+      data: {
+        viewCount: {
+          increment: 1,
+        },
+      },
+    })
+
+    return ok()
+  } catch {
+    return fail(ERROR_CODES.SYSTEM_ERROR)
+  }
+}
+
 type ProductWithPayload = Awaited<ReturnType<typeof getProduct>>
 type ProductListItem = NonNullable<
   Awaited<ReturnType<typeof getProducts>>['items']
@@ -246,6 +267,7 @@ export {
   getProducts,
   getProductsInfinite,
   getProductStat,
+  increaseProductView,
 }
 
 export type { ProductWithPayload, ProductListItem }

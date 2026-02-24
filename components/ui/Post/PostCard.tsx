@@ -1,11 +1,12 @@
 'use client'
 
-import { Card, CardBody, Chip, Skeleton } from '@heroui/react'
+import { Card, CardBody, Skeleton } from '@heroui/react'
 import Link from 'next/link'
 import { memo } from 'react'
 
 import type { Prisma } from '@prisma/client'
 
+import { CategoryChip } from '../CategoryChip'
 import { PostCardImage } from './_components/PostCardImage'
 import { PostCardMeta } from './_components/PostCardMeta'
 
@@ -52,17 +53,7 @@ const PostCard = memo(({ post }: Props) => {
         />
 
         <div className='absolute inset-0 z-20 flex flex-col justify-end p-5'>
-          {category?.name && (
-            <div className='mb-2'>
-              <Chip
-                className='bg-primary text-tiny h-6 border-none font-bold text-white uppercase'
-                size='sm'
-                variant='flat'
-              >
-                {category.name}
-              </Chip>
-            </div>
-          )}
+          {category?.name && <CategoryChip categoryName={category?.name!} />}
 
           <h3 className='mb-4 line-clamp-2 py-5 text-2xl leading-tight font-bold tracking-tight text-white md:text-3xl'>
             {title}

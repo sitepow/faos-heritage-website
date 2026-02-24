@@ -11,6 +11,7 @@ import { CategoryChip } from '@/components/ui/CategoryChip'
 import { MarkdownRenderer } from '@/components/ui/Markdown/MarkdownRenderer'
 import { VariantTable } from '@/components/ui/Product/VariantTable'
 import { VariantSelect } from '@/components/ui/VariantSelect'
+import { ViewCount } from '@/components/ui/ViewCount'
 import { useCartMutation } from '@/features/cart/cart.mutation'
 import { useFavoriteMutation } from '@/features/favorite/favorite.mutation'
 import { useProductDetailStore } from '@/features/product/product.store'
@@ -99,7 +100,10 @@ const ProductPurchasePanel = () => {
           {product.name}
         </h1>
 
-        <CategoryChip categoryName={product.category?.name} />
+        <div className='flex flex-wrap items-center gap-2'>
+          <CategoryChip categoryName={product.category?.name} />
+          <ViewCount viewCount={product?.viewCount || 0} />
+        </div>
 
         <VariantTable variants={product?.variants || []} />
 

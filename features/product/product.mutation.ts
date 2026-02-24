@@ -1,6 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-import { createProduct, updateProduct, deleteProduct } from './product.action'
+import {
+  createProduct,
+  updateProduct,
+  deleteProduct,
+  increaseProductView,
+} from './product.action'
 import { productQueryKeys } from './product.query-key'
 import { categoryQueryKeys } from '../category/category.query-key'
 
@@ -29,6 +34,15 @@ const useProductMutation = () => {
     },
   })
 
+  const increaseView = useMutation({
+    mutationFn: (id: string) => increaseProductView(id),
+    onSuccess: (_, id) => {
+      queryClient.invalidateQueries({
+        queryKey: productQueryKeys.details.byId(id),
+      })
+    },
+  })
+
   const remove = useMutation({
     mutationFn: deleteProduct,
     onSuccess: () => {
@@ -44,6 +58,8 @@ const useProductMutation = () => {
     isUpdating: update.isPending,
     remove: remove.mutateAsync,
     isDeleting: remove.isPending,
+    increaseView: increaseView.mutate,
+    isIncreasingView: increaseView.isPending,
   }
 }
 

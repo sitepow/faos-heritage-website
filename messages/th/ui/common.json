@@ -1,4 +1,5 @@
 {
+  "common": { "views": "การเข้าชม" },
   "actions": {
     "save": "บันทึก",
     "cancel": "ยกเลิก",
