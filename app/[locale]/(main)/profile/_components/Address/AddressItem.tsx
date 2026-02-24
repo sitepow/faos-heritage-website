@@ -42,13 +42,13 @@ const AddressItem = ({ address, onEdit, onDelete }: Props) => {
         <Dropdown placement='bottom-end'>
           <DropdownTrigger>
             <Button isIconOnly radius='full' size='sm' variant='light'>
-              <EllipsisVerticalIcon className='text-default-500 size-4' />
+              <EllipsisVerticalIcon className='text-default-500' />
             </Button>
           </DropdownTrigger>
           <DropdownMenu aria-label='Manage address' variant='flat'>
             <DropdownItem
               key='edit'
-              startContent={<EditIcon className='size-4' />}
+              startContent={<EditIcon />}
               onPress={onEdit}
             >
               {tActions('edit')}
