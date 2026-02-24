@@ -8,6 +8,7 @@ import type { ComponentProps, ReactNode } from 'react'
 import { AppSection } from './AppSection'
 import { Container } from './Container'
 
+import { useScrollRestoration } from '@/hooks/useScrollRestoration'
 import { cn } from '@/utils'
 
 interface AppMainProps extends ComponentProps<'div'> {
@@ -16,6 +17,8 @@ interface AppMainProps extends ComponentProps<'div'> {
 }
 
 const AppMain = ({ className, children, ...props }: AppMainProps) => {
+  useScrollRestoration()
+
   // const t = useTranslations('alert')
 
   return (
