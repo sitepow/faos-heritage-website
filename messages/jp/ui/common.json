@@ -77,6 +77,7 @@
       "VN": "ベトナム",
       "ID": "インドネシア"
     },
+    "post": { "related_title": "関連記事" },
     "productUnit": {
       "PIECE": "個",
       "ITEM": "点",

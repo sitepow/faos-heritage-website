@@ -4,6 +4,7 @@ type PostListFilters = {
   isFeatured?: boolean
   limit?: number
   locale?: string
+  excludeId?: string
 }
 
 const postQueryKeys = {

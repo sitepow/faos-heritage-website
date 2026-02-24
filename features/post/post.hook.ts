@@ -20,6 +20,7 @@ interface UsePostsParams {
   limit?: number
   locale?: string
   initialData?: GetPostsInfiniteResult
+  excludeId?: string
 }
 
 const usePost = ({ id, locale, initialData }: UsePostParams) => {
@@ -37,6 +38,7 @@ const usePosts = ({
   limit = 10,
   locale,
   initialData,
+  excludeId,
 }: UsePostsParams) => {
   return useQuery({
     queryKey: postQueryKeys.lists.filtered({
@@ -44,8 +46,10 @@ const usePosts = ({
       status,
       limit,
       locale,
+      excludeId,
     }),
-    queryFn: () => getPostsInfinite({ categoryId, status, limit, locale }),
+    queryFn: () =>
+      getPostsInfinite({ categoryId, status, limit, locale, excludeId }),
     initialData,
   })
 }

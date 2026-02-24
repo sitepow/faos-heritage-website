@@ -130,12 +130,14 @@ const getPostsInfinite = async ({
   categoryId,
   status,
   locale,
+  excludeId,
 }: {
   cursor?: string | null
   limit?: number
   categoryId?: string | null
   status?: PostStatus
   locale?: string
+  excludeId?: string
 }) => {
   noStore()
   const languageCode = locale?.toUpperCase()
@@ -143,6 +145,7 @@ const getPostsInfinite = async ({
   const where: Prisma.PostWhereInput = {
     ...(status && { status }),
     ...(categoryId && { categoryId }),
+    ...(excludeId && { NOT: { id: excludeId } }),
   }
 
   const items = await prisma.post.findMany({

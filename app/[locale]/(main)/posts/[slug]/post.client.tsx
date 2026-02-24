@@ -7,6 +7,7 @@ import type { GetPostResult } from '@/features/post/post.action'
 
 import { PostAuthor } from './_components/PostAuthor'
 import { PostHeader } from './_components/PostHeader'
+import { RelatedPosts } from './_components/RelatedPosts'
 import { PostComments } from './_components/comment/PostComments'
 
 import { AppSection } from '@/components/layouts/AppSection'
@@ -24,7 +25,6 @@ interface Props {
 const PostClient = ({ initialData, postId }: Props) => {
   const locale = useLocale()
   const tBreadcrumb = useTranslations('navigation.breadcrumb')
-
   const { increaseView } = usePostMutation()
   const isIncreased = useRef(false)
 
@@ -63,12 +63,7 @@ const PostClient = ({ initialData, postId }: Props) => {
     { label: tBreadcrumb('home'), href: '/' },
     { label: tBreadcrumb('blog'), href: '/posts' },
     ...(category
-      ? [
-          {
-            label: category.name,
-            href: `/posts/category/${category.slug}`,
-          },
-        ]
+      ? [{ label: category.name, href: `/posts/category/${category.slug}` }]
       : []),
     { label: title, href: '#' },
   ]
@@ -104,6 +99,12 @@ const PostClient = ({ initialData, postId }: Props) => {
           />
 
           <PostAuthor author={author} />
+
+          <RelatedPosts
+            categoryId={currentPost.categoryId}
+            excludeId={postId}
+          />
+
           <PostComments postId={postId} />
         </article>
       </AppSection>

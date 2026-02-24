@@ -77,6 +77,7 @@
       "VN": "Vietnam",
       "ID": "Indonesia"
     },
+    "post": { "related_title": "Related Posts" },
     "productUnit": {
       "PIECE": "Piece",
       "ITEM": "Item",
