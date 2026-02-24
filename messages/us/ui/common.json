@@ -1,5 +1,4 @@
 {
-  "common": { "views": "views" },
   "actions": {
     "save": "Save",
     "cancel": "Cancel",
@@ -13,6 +12,18 @@
     "more": "View More",
     "shareTitle": "Create Product Referral Link"
   },
+  "comment": {
+    "title": "Comments",
+    "description": "Share your thoughts on this article",
+    "empty": "No comments yet. Be the first to start the conversation!",
+    "placeholder": "Write your comment here...",
+    "reply_placeholder": "Write your reply...",
+    "submit": "Post Comment",
+    "reply_submit": "Reply",
+    "reply": "Reply",
+    "delete": "Delete"
+  },
+  "common": { "views": "views", "comments": "comments" },
   "status": {
     "loading": "Loading...",
     "saving": "Saving...",

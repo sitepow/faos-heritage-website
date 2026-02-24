@@ -1,5 +1,4 @@
 {
-  "common": { "views": "tontonan" },
   "actions": {
     "save": "Simpan",
     "cancel": "Batal",
@@ -13,6 +12,18 @@
     "more": "Lihat Lagi",
     "shareTitle": "Cipta Pautan Rujukan Produk"
   },
+  "comment": {
+    "title": "Komen",
+    "description": "Kongsi pendapat anda tentang artikel ini",
+    "empty": "Belum ada komen. Jadi yang pertama untuk memulakan perbualan!",
+    "placeholder": "Tulis komen anda di sini...",
+    "reply_placeholder": "Tulis jawapan anda...",
+    "submit": "Hantar Komen",
+    "reply_submit": "Balas",
+    "reply": "Balas",
+    "delete": "Padam"
+  },
+  "common": { "views": "tontonan", "comments": "komen" },
   "status": {
     "loading": "Memuatkan...",
     "saving": "Menyimpan...",

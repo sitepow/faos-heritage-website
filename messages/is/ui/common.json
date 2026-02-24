@@ -1,5 +1,4 @@
 {
-  "common": { "views": "flettingar" },
   "actions": {
     "save": "Vista",
     "cancel": "Hætta við",
@@ -13,6 +12,18 @@
     "more": "Sjá meira",
     "shareTitle": "Búa til tilvísunartengi vöru"
   },
+  "comment": {
+    "title": "Athugasemdir",
+    "description": "Deildu þínum skoðunum á þessari grein",
+    "empty": "Engar athugasemdir ennþá. Vertu fyrst(ur) til að byrja umræðuna!",
+    "placeholder": "Skrifaðu athugasemd þína hér...",
+    "reply_placeholder": "Skrifaðu svar þitt...",
+    "submit": "Senda athugasemd",
+    "reply_submit": "Svara",
+    "reply": "Svara",
+    "delete": "Eyða"
+  },
+  "common": { "views": "flettingar", "comments": "athugasemdir" },
   "status": {
     "loading": "Hleður...",
     "saving": "Vistar...",

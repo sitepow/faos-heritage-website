@@ -5,19 +5,13 @@ import { useLocale, useTranslations } from 'next-intl'
 
 import type { ComponentProps } from 'react'
 
-import { cn } from '@/utils'
+import { cn, formatCompactNumber } from '@/utils'
 
 interface Props extends ComponentProps<'div'> {
   viewCount: number
-  iconSize?: number
 }
 
-const ViewCount = ({
-  viewCount,
-  className,
-  iconSize = 22,
-  ...props
-}: Props) => {
+const ViewCount = ({ viewCount, className, ...props }: Props) => {
   const locale = useLocale()
   const t = useTranslations('common')
 
@@ -25,18 +19,12 @@ const ViewCount = ({
     return null
   }
 
-  const formattedCount = new Intl.NumberFormat(locale, {
-    notation: 'compact',
-    compactDisplay: 'short',
-    maximumFractionDigits: 1,
-  }).format(viewCount)
-
   return (
     <div className={cn('flex items-center gap-2', className)} {...props}>
       <div className='flex items-center gap-1'>
-        <EyeIcon size={iconSize} />
+        <EyeIcon />
         <span className='whitespace-nowrap'>
-          {formattedCount} {t('views')}
+          {formatCompactNumber(viewCount, locale)} {t('views')}
         </span>
       </div>
     </div>

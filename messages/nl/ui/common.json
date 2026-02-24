@@ -1,5 +1,4 @@
 {
-  "common": { "views": "weergaven" },
   "actions": {
     "save": "Opslaan",
     "cancel": "Annuleren",
@@ -13,6 +12,18 @@
     "more": "Bekijk meer",
     "shareTitle": "Productreferentielink maken"
   },
+  "comment": {
+    "title": "Reacties",
+    "description": "Deel je gedachten over dit artikel",
+    "empty": "Nog geen reacties. Wees de eerste om het gesprek te beginnen!",
+    "placeholder": "Schrijf hier je reactie...",
+    "reply_placeholder": "Schrijf je antwoord...",
+    "submit": "Reactie plaatsen",
+    "reply_submit": "Beantwoorden",
+    "reply": "Beantwoorden",
+    "delete": "Verwijderen"
+  },
+  "common": { "views": "weergaven", "comments": "reacties" },
   "status": {
     "loading": "Laden...",
     "saving": "Opslaan...",

@@ -1,5 +1,4 @@
 {
-  "common": { "views": "lượt xem" },
   "actions": {
     "save": "Lưu",
     "cancel": "Hủy",
@@ -13,6 +12,18 @@
     "more": "Xem thêm",
     "shareTitle": "Tạo liên kết giới thiệu sản phẩm"
   },
+  "comment": {
+    "title": "Bình luận",
+    "description": "Chia sẻ ý kiến của bạn về bài viết này",
+    "empty": "Chưa có bình luận nào. Hãy là người đầu tiên bắt đầu cuộc trò chuyện!",
+    "placeholder": "Viết bình luận của bạn tại đây...",
+    "reply_placeholder": "Viết câu trả lời của bạn...",
+    "submit": "Gửi bình luận",
+    "reply_submit": "Trả lời",
+    "reply": "Trả lời",
+    "delete": "Xóa"
+  },
+  "common": { "views": "lượt xem", "comments": "bình luận" },
   "status": {
     "loading": "Đang tải...",
     "saving": "Đang lưu...",

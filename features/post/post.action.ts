@@ -1,6 +1,11 @@
 'use server'
 
-import { Role, type Prisma, type PostStatus } from '@prisma/client'
+import {
+  Role,
+  type Prisma,
+  type PostStatus,
+  ReviewStatus,
+} from '@prisma/client'
 import { unstable_noStore as noStore } from 'next/cache'
 
 import { postSchema, type PostInput } from './post.schema'
@@ -110,6 +115,9 @@ const getPost = async (id: string, locale?: string) => {
       },
       author: { select: { name: true, image: true } },
       localizations: { where: { languageCode }, take: 1 },
+      _count: {
+        select: { comments: { where: { status: ReviewStatus.APPROVED } } },
+      },
     },
   })
 
@@ -169,6 +177,9 @@ const getPostsInfinite = async ({
         where: { languageCode },
         take: 1,
         select: { title: true, summary: true },
+      },
+      _count: {
+        select: { comments: { where: { status: ReviewStatus.APPROVED } } },
       },
     },
     orderBy: { createdAt: 'desc' },

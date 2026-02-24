@@ -115,6 +115,29 @@ model BlogCategoryLocalization {
   @@index([languageCode])
 }
 
+model Comment {
+  id        String   @id @default(cuid())
+  content   String   @db.Text
+  
+  status    ReviewStatus @default(APPROVED) 
+
+  postId    String
+  userId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  parentId  String?
+  parent    Comment?  @relation("CommentToComment", fields: [parentId], references: [id], onDelete: Cascade)
+  replies   Comment[] @relation("CommentToComment")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([postId])
+  @@index([userId])
+  @@index([parentId])
+}
+
 model Post {
   id      String @id @default(cuid())
   slug    String @unique
@@ -140,6 +163,7 @@ model Post {
   
   tags            Tag[]         @relation("PostToTag")
   localizations   PostLocalization[]
+  comments Comment[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -243,6 +267,7 @@ model User {
   cart      Cart[]
   wishlist  Wishlist[]
   posts Post[]
+  comments Comment[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

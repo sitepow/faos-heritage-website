@@ -13,6 +13,7 @@ interface Props {
   publishedAt?: Date | null
   viewCount?: number
   author?: { name: string | null; image: string | null } | null
+  commentCount?: number
 }
 
 const PostHeader = ({
@@ -22,6 +23,7 @@ const PostHeader = ({
   publishedAt,
   viewCount = 0,
   author,
+  commentCount = 0,
 }: Props) => {
   return (
     <header className='border-default-100 relative w-full overflow-hidden rounded-lg border'>
@@ -53,6 +55,7 @@ const PostHeader = ({
 
         <PostCardMeta
           author={author!}
+          commentCount={commentCount}
           publishedAt={publishedAt!}
           viewCount={viewCount}
         />

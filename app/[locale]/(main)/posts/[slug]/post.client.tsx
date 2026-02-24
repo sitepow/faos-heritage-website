@@ -7,6 +7,7 @@ import type { GetPostResult } from '@/features/post/post.action'
 
 import { PostAuthor } from './_components/PostAuthor'
 import { PostHeader } from './_components/PostHeader'
+import { PostComments } from './_components/comment/PostComments'
 
 import { AppSection } from '@/components/layouts/AppSection'
 import { Container } from '@/components/layouts/Container'
@@ -55,6 +56,7 @@ const PostClient = ({ initialData, postId }: Props) => {
     publishedAt,
     viewCount = 0,
     summary,
+    _count: { comments },
   } = currentPost
 
   const breadcrumbItems = [
@@ -80,6 +82,7 @@ const PostClient = ({ initialData, postId }: Props) => {
           <PostHeader
             author={author}
             category={category}
+            commentCount={comments}
             featuredImage={featuredImage}
             publishedAt={publishedAt}
             title={title}
@@ -101,6 +104,7 @@ const PostClient = ({ initialData, postId }: Props) => {
           />
 
           <PostAuthor author={author} />
+          <PostComments postId={postId} />
         </article>
       </AppSection>
     </Container>

@@ -1,5 +1,4 @@
 {
-  "common": { "views": "tayangan" },
   "actions": {
     "save": "Simpan",
     "cancel": "Batal",
@@ -13,6 +12,18 @@
     "more": "Lihat Lebih Banyak",
     "shareTitle": "Buat Tautan Referensi Produk"
   },
+  "comment": {
+    "title": "Komentar",
+    "description": "Bagikan pemikiran Anda tentang artikel ini",
+    "empty": "Belum ada komentar. Jadilah yang pertama memulai percakapan!",
+    "placeholder": "Tulis komentar Anda di sini...",
+    "reply_placeholder": "Tulis balasan Anda...",
+    "submit": "Kirim Komentar",
+    "reply_submit": "Balas",
+    "reply": "Balas",
+    "delete": "Hapus"
+  },
+  "common": { "views": "tayangan", "comments": "komentar" },
   "status": {
     "loading": "Memuat...",
     "saving": "Menyimpan...",

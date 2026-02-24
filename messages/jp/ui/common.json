@@ -1,5 +1,4 @@
 {
-  "common": { "views": "視聴回数" },
   "actions": {
     "save": "保存",
     "cancel": "キャンセル",
@@ -13,6 +12,18 @@
     "more": "詳細を見る",
     "shareTitle": "商品紹介リンクを作成"
   },
+  "comment": {
+    "title": "コメント",
+    "description": "この記事についてあなたの意見を共有しましょう",
+    "empty": "まだコメントはありません。最初のコメントを投稿しましょう！",
+    "placeholder": "ここにコメントを書く...",
+    "reply_placeholder": "返信を書く...",
+    "submit": "コメントを送信",
+    "reply_submit": "返信",
+    "reply": "返信",
+    "delete": "削除"
+  },
+  "common": { "views": "視聴回数", "comments": "コメント" },
   "status": {
     "loading": "読み込み中...",
     "saving": "保存中...",

@@ -1,5 +1,4 @@
 {
-  "common": { "views": "visualizzazioni" },
   "actions": {
     "save": "Salva",
     "cancel": "Annulla",
@@ -13,6 +12,18 @@
     "more": "Vedi Altro",
     "shareTitle": "Crea Link di Riferimento Prodotto"
   },
+  "comment": {
+    "title": "Commenti",
+    "description": "Condividi i tuoi pensieri su questo articolo",
+    "empty": "Non ci sono ancora commenti. Sii il primo a iniziare la conversazione!",
+    "placeholder": "Scrivi il tuo commento qui...",
+    "reply_placeholder": "Scrivi la tua risposta...",
+    "submit": "Invia commento",
+    "reply_submit": "Rispondi",
+    "reply": "Rispondi",
+    "delete": "Elimina"
+  },
+  "common": { "views": "visualizzazioni", "comments": "commenti" },
   "status": {
     "loading": "Caricamento...",
     "saving": "Salvataggio...",

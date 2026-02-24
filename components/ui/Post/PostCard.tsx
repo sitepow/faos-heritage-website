@@ -17,6 +17,9 @@ type PostListItem = Prisma.PostGetPayload<{
   include: {
     category: { select: { name: true } }
     author: { select: { name: true; image: true } }
+    _count: {
+      select: { comments: true }
+    }
   }
 }>
 
@@ -35,6 +38,7 @@ const PostCard = memo(({ post }: Props) => {
     publishedAt,
     viewCount = 0,
     author,
+    _count,
   } = post
 
   return (
@@ -61,6 +65,7 @@ const PostCard = memo(({ post }: Props) => {
 
           <PostCardMeta
             author={author}
+            commentCount={_count?.comments || 0}
             publishedAt={publishedAt!}
             viewCount={viewCount}
           />

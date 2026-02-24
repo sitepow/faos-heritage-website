@@ -1,5 +1,4 @@
 {
-  "common": { "views": "观看次数" },
   "actions": {
     "save": "保存",
     "cancel": "取消",
@@ -13,6 +12,18 @@
     "more": "查看更多",
     "shareTitle": "生成商品推荐链接"
   },
+  "comment": {
+    "title": "评论",
+    "description": "分享你对本文的看法",
+    "empty": "暂无评论。快来成为第一个发表评论的人吧！",
+    "placeholder": "在此写下你的评论...",
+    "reply_placeholder": "写下你的回复...",
+    "submit": "发表评论",
+    "reply_submit": "回复",
+    "reply": "回复",
+    "delete": "删除"
+  },
+  "common": { "views": "观看次数", "comments": "评论" },
   "status": {
     "loading": "加载中...",
     "saving": "保存中...",
