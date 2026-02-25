@@ -1,5 +1,6 @@
 import { PostStatus } from '@prisma/client'
 import { notFound } from 'next/navigation'
+import { getTranslations } from 'next-intl/server'
 
 import type { Metadata } from 'next'
 
@@ -17,6 +18,7 @@ export const generateMetadata = async ({
   params,
 }: Props): Promise<Metadata> => {
   const { slug, locale } = await params
+  const t = await getTranslations({ locale, namespace: 'meta' })
   const category = await getBlogCategoryBySlug(slug, locale)
 
   if (!category) {
@@ -24,7 +26,8 @@ export const generateMetadata = async ({
   }
 
   return constructMetadata({
-    title: category.name,
+    title: t('category.title', { categoryName: category?.name! }),
+    description: t('category.description', { categoryName: category?.name! }),
   })
 }
 
