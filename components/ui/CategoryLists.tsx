@@ -31,7 +31,9 @@ const CategoryLists = () => {
             className='size-18 rounded-full object-cover sm:size-32'
             src={category?.image ?? IMAGE_FALLBACK.EMPTY}
           />
-          <span className='font-medium'>{category?.name!}</span>
+          <span className='max-w-3/4 text-center font-medium'>
+            {category?.name!}
+          </span>
         </Link>
       ))}
     </Container>
