@@ -59,7 +59,7 @@ const PostCard = memo(({ post }: Props) => {
         <div className='absolute inset-0 z-20 flex flex-col justify-end p-5'>
           {category?.name && <CategoryChip categoryName={category?.name!} />}
 
-          <h3 className='mb-4 line-clamp-2 py-5 text-2xl leading-tight font-bold tracking-tight text-white md:text-3xl'>
+          <h3 className='my-4 line-clamp-3 text-2xl leading-tight font-bold tracking-tight text-white md:text-3xl'>
             {title}
           </h3>
 

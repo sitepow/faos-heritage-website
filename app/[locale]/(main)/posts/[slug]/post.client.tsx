@@ -85,7 +85,7 @@ const PostClient = ({ initialData, postId }: Props) => {
           />
 
           {summary && (
-            <div className='mx-auto w-full max-w-4xl'>
+            <div className='mx-auto my-5 w-full max-w-4xl'>
               <p className='text-default-600 border-primary border-l-4 pl-4 text-xl leading-relaxed italic'>
                 {summary}
               </p>
