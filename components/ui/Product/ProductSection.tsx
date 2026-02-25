@@ -4,7 +4,6 @@ import type { GetProductsInfiniteResult } from '@/features/product/product.types
 
 import { ProductCard, ProductCardSkeleton } from './ProductCard'
 
-import { Container } from '@/components/layouts/Container'
 import { PAGINATION } from '@/constants'
 
 interface Props {
@@ -27,19 +26,21 @@ const ProductSection = ({
   const skeletonKeys = createSkeletonKeys(itemPerPage)
 
   return (
-    <Container className='grid gap-5 sm:grid-cols-2 xl:grid-cols-3'>
+    <ul className='container mx-auto grid gap-5 sm:grid-cols-2 xl:grid-cols-3'>
       {!isLoading &&
         items.map((product) => (
-          <ProductCard
-            key={product?.name}
-            className='size-full'
-            product={product}
-          />
+          <li key={product?.id!} className='min-w-0 list-none'>
+            <ProductCard className='size-full' product={product} />
+          </li>
         ))}
 
       {shouldShowSkeleton &&
-        skeletonKeys.map((key) => <ProductCardSkeleton key={key} />)}
-    </Container>
+        skeletonKeys.map((key) => (
+          <li key={key} className='min-w-0 list-none'>
+            <ProductCardSkeleton />
+          </li>
+        ))}
+    </ul>
   )
 }
 

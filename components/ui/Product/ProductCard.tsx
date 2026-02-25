@@ -15,7 +15,7 @@ import { CommentCount } from '../CommentCount'
 import { ViewCount } from '../ViewCount'
 
 import { useProductPrice } from '@/features/product/product.hook'
-import { resolveProductImages, generateSlugWithId } from '@/utils'
+import { resolveProductImages } from '@/utils'
 
 type ProductItem = GetProductsInfiniteResult['items'][number]
 
@@ -31,15 +31,13 @@ const ProductCard = ({ className, product }: Props) => {
   const { maxDiscountPercentage } = useProductPrice(product)
 
   const productHref = useMemo(
-    () =>
-      product
-        ? `/products/${generateSlugWithId(product.name, product.id)}`
-        : '#',
-    [product],
+    () => (product?.slug ? `/products/${product.slug}` : '#'),
+    [product?.slug],
   )
 
   return (
     <Card
+      as='article'
       className={cn(
         'relative flex w-full flex-col gap-4 bg-transparent',
         className,
@@ -74,7 +72,14 @@ const ProductCard = ({ className, product }: Props) => {
         </div>
 
         <div className='flex w-full flex-col gap-4'>
-          <h4 className='line-clamp-2 text-xl font-medium'>{product?.name}</h4>
+          <h3 className='line-clamp-2 text-xl font-medium'>
+            <Link
+              className='hover:text-primary transition-colors'
+              href={productHref}
+            >
+              {product?.name}
+            </Link>
+          </h3>
 
           <VariantTable variants={product?.variants || []} />
         </div>

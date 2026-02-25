@@ -1,25 +1,25 @@
 {
   "brand": {
-    "name": "FAOS",
-    "slogan": "Olio d'Oliva e Miele Biologici Premium — 100% Natura Pura",
-    "mission": "Il punto di riferimento per olio d'oliva e miele autentici di alta qualità, dedicati al tuo benessere ottimale."
+    "name": "FAOS HERITAGE GREEK FOOD",
+    "slogan": "Assapora l'Eredità della Grecia — Olio Extra Vergine di Oliva & Miele Puro al 100%",
+    "mission": "Offrire salute sostenibile e sapori autentici attraverso prodotti biologici premium provenienti dalle migliori origini della Grecia."
   },
   "shared": {
     "productDiscovery": {
-      "title": "Consigliati Premium",
-      "description": "Scopri l'artigianalità meticolosa attraverso la nostra selezione di prodotti della migliore qualità."
+      "title": "Selezione Biologica Premium Curata",
+      "description": "Scopri la purezza dell'olio d'oliva spremuto a freddo e del miele naturale, selezionati per il tuo massimo benessere."
     },
     "categoryDiscovery": {
-      "title": "Categorie di Prodotti",
-      "description": "Esplora le nostre collezioni accuratamente selezionate per ogni tua esigenza."
+      "title": "Esplora le Nostre Categorie Naturali",
+      "description": "Sfoglia gruppi di prodotti di alta qualità, dagli oli d'oliva premium al miele selvatico, direttamente dalle fattorie greche."
     },
     "blogDiscovery": {
-      "title": "Blog Salute e Retaggio",
-      "description": "Scopri la saggezza della dieta mediterranea e i segreti del vivere biologico."
+      "title": "Consigli di Salute e Stile di Vita Mediterraneo",
+      "description": "Approfondisci i benefici della dieta tradizionale greca con ricette e articoli per una vita sostenibile."
     },
     "relatedProducts": {
-      "title": "Prodotti Correlati",
-      "description": "Altri prodotti eccezionali in questa categoria che potrebbero interessarti."
+      "title": "Potrebbe Interessarti Anche",
+      "description": "Completa la tua esperienza di salute con altri prodotti curati di questa categoria."
     }
   }
 }

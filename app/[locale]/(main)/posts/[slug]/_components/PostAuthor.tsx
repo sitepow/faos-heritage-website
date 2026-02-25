@@ -37,11 +37,13 @@ const PostAuthor = ({ author }: Props) => {
 
   return (
     <footer className='border-default-100 mx-auto flex flex-col items-center gap-5 rounded-lg border p-7 text-center sm:flex-row sm:items-start sm:gap-8 sm:p-10 sm:text-start lg:max-w-3/4 lg:p-12 xl:max-w-1/2'>
-      <PostAuthorAvatar
-        author={author}
-        className='size-24 shrink-0 shadow-sm sm:size-28'
-        iconSize={48}
-      />
+      <div className='shrink-0'>
+        <PostAuthorAvatar
+          author={author}
+          className='size-24 shadow-sm sm:size-28'
+          iconSize={48}
+        />
+      </div>
 
       <div className='flex flex-col gap-3'>
         <div className='flex flex-col gap-1'>
@@ -49,7 +51,10 @@ const PostAuthor = ({ author }: Props) => {
             {author?.name!}
           </h4>
 
-          <div className='flex items-center justify-center gap-3 sm:justify-start'>
+          <nav
+            aria-label='Author socials'
+            className='flex items-center justify-center gap-3 sm:justify-start'
+          >
             {SOCIAL_MAP.map(({ id, Icon }) => {
               const href = socials[id as keyof SocialLinks]
               if (!href) {
@@ -61,13 +66,14 @@ const PostAuthor = ({ author }: Props) => {
                   key={id}
                   className='text-default-400 hover:text-primary transition-colors'
                   href={href}
+                  rel='noopener noreferrer'
                   target='_blank'
                 >
                   <Icon size={18} />
                 </Link>
               )
             })}
-          </div>
+          </nav>
         </div>
 
         <p className='text-default-600 max-w-2xl text-base leading-relaxed sm:text-lg'>

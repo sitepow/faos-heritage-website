@@ -45,6 +45,7 @@ const PostsClient = ({ initialData }: Props) => {
     <Container>
       <AppSection>
         <SectionHeader
+          as='h1'
           description={t('blogDiscovery.description')}
           title={t('blogDiscovery.title')}
         />

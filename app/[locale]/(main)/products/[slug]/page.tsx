@@ -5,23 +5,19 @@ import type { Metadata } from 'next'
 import { ProductClient } from './product.client'
 
 import { DEFALUT_APP_PATH } from '@/constants'
-import { getProduct } from '@/features/product/product.action'
+import { getProductBySlug } from '@/features/product/product.action'
 import { constructMetadata } from '@/lib/metadata'
 import { getServerUser } from '@/lib/session'
-import { parseSlug } from '@/lib/slug'
 
-interface ProductProps {
+interface Props {
   params: Promise<{ slug: string; locale: string }>
 }
 
-export async function generateMetadata({
-  params,
-}: ProductProps): Promise<Metadata> {
+const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
   const { slug, locale } = await params
-  const productId = parseSlug(slug)
   const t = await getTranslations({ locale, namespace: 'meta.productDetail' })
 
-  const product = await getProduct(productId, locale)
+  const product = await getProductBySlug(slug, locale)
 
   if (!product) {
     return constructMetadata({
@@ -34,29 +30,39 @@ export async function generateMetadata({
     product.images?.find((img) => img.isPrimary)?.url ||
     product.images?.[0]?.url
 
+  const pageTitle = product.metaTitle || product.name
+  const pageDescription =
+    product.metaDescription ||
+    product.summary ||
+    t('description', { name: product.name })
+
+  const baseKeywords = t.raw('keywords') || []
+  const productKeywords = product.keywords || []
+
+  const dynamicKeywords = [product.name, product.category?.name || ''].filter(
+    Boolean,
+  )
+
+  const allKeywords = [...dynamicKeywords, ...productKeywords, ...baseKeywords]
+  const finalKeywords = Array.from(new Set(allKeywords))
+
   return constructMetadata({
-    title: t('title', { name: product?.name! }),
-    description: product.summary || t('description', { name: product?.name! }),
-    ogImage: `${DEFALUT_APP_PATH}/${ogImage}`,
+    title: pageTitle,
+    description: pageDescription,
+    ogImage: ogImage ? `${DEFALUT_APP_PATH}/${ogImage}` : undefined,
     canonicalPath: `/products/${slug}`,
-    keywords: [product.name, product.category?.name || ''],
+    keywords: finalKeywords,
   })
 }
 
-const ProductPage = async ({ params }: ProductProps) => {
+const ProductPage = async ({ params }: Props) => {
   const { slug, locale } = await params
   const { userId } = await getServerUser()
-  const productId = parseSlug(slug)
 
-  const product = await getProduct(productId, locale)
+  const product = await getProductBySlug(slug, locale)
 
-  return (
-    <ProductClient
-      initialData={product}
-      productId={productId}
-      userId={userId!}
-    />
-  )
+  return <ProductClient initialData={product} slug={slug} userId={userId!} />
 }
 
+export { generateMetadata }
 export default ProductPage

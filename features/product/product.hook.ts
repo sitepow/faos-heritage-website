@@ -10,7 +10,7 @@ import type {
   UseSimilarProductsParams,
 } from './product.types'
 
-import { getProduct, getProductsInfinite } from './product.action'
+import { getProductBySlug, getProductsInfinite } from './product.action'
 import { productQueryKeys } from './product.query-key'
 import { useExchangeRate } from '../exchange-rate/exchange-rate.hook'
 
@@ -20,16 +20,16 @@ import { getProductPriceInfo } from '@/utils/product-price'
 
 const useProduct = ({
   locale,
-  productId,
+  slug,
   userId,
   initialData,
 }: UseProductParams) => {
   return useQuery({
-    queryKey: productQueryKeys.details.byId(productId, { locale, userId }),
-    queryFn: () => getProduct(productId, locale),
+    queryKey: productQueryKeys.details.bySlug(slug, { locale, userId }),
+    queryFn: () => getProductBySlug(slug, locale),
     initialData,
     staleTime: 0,
-    enabled: !!productId,
+    enabled: !!slug,
   })
 }
 

@@ -18,15 +18,14 @@ import { useProductMutation } from '@/features/product/product.mutation'
 import { useProductDetailStore } from '@/features/product/product.store'
 import { ReviewSection } from '@/features/review/ui/ReviewSection'
 import { useAuth } from '@/hooks/useAuth'
-import { generateSlugWithId } from '@/utils'
 
 interface Props {
   initialData: GetProductResult
-  productId: string
+  slug: string
   userId: string
 }
 
-const ProductClient = ({ initialData, productId }: Props) => {
+const ProductClient = ({ initialData, slug }: Props) => {
   const { userId } = useAuth()
 
   const locale = useLocale()
@@ -38,7 +37,7 @@ const ProductClient = ({ initialData, productId }: Props) => {
 
   const { data: product } = useProduct({
     locale,
-    productId,
+    slug,
     userId,
     initialData,
   })
@@ -50,13 +49,13 @@ const ProductClient = ({ initialData, productId }: Props) => {
   }, [product, setProduct])
 
   useEffect(() => {
-    if (!isIncreased.current && productId) {
-      increaseView(productId)
+    if (!isIncreased.current && slug) {
+      increaseView(slug)
       isIncreased.current = true
     }
-  }, [productId, increaseView])
+  }, [slug, increaseView])
 
-  const categoryId = product?.category?.id
+  const categorySlug = product?.category?.slug
   const categoryName = product?.category?.name
 
   const breadcrumbItems = [
@@ -64,20 +63,41 @@ const ProductClient = ({ initialData, productId }: Props) => {
     { label: tBreadcrumb('products'), href: '/products' },
     {
       label: categoryName!,
-      href: `/categories/${generateSlugWithId(categoryId!, categoryName!)}`,
+      href: categorySlug ? `/categories/${categorySlug}` : '#',
     },
     { label: product?.name!, href: '#' },
   ]
 
+  const productId = product?.id || ''
+
   return (
     <AppSection>
-      <DynamicBreadcrumb items={breadcrumbItems} />
-      <ProductPreview />
-      <ProductTabs />
+      <nav aria-label='Breadcrumb'>
+        <DynamicBreadcrumb items={breadcrumbItems} />
+      </nav>
+
+      <article className='flex flex-col gap-10'>
+        <ProductPreview />
+        <ProductTabs />
+      </article>
+
       <AffiliateBanner />
-      <ProductSimilar />
-      <ReviewSection productId={productId} />
-      <CommentSection productId={productId} />
+
+      <section aria-labelledby='similar-products-title'>
+        <ProductSimilar />
+      </section>
+
+      {productId && (
+        <>
+          <section aria-labelledby='reviews-title' id='reviews'>
+            <ReviewSection productId={productId} />
+          </section>
+
+          <section aria-labelledby='comments-title' id='comments'>
+            <CommentSection productId={productId} />
+          </section>
+        </>
+      )}
     </AppSection>
   )
 }

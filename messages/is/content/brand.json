@@ -1,25 +1,25 @@
 {
   "brand": {
-    "name": "FAOS",
-    "slogan": "Úrvals lífræn ólífuolía og hunang — 100% hrein náttúra",
-    "mission": "Helsti áfangastaðurinn fyrir hágæða, ekta ólífuolíu og hunang fyrir þína hámarksvellíðan."
+    "name": "FAOS HERITAGE GREEK FOOD",
+    "slogan": "Smakkaðu arfleifð Grikklands — Hágæða Extra Virgin ólífuolía og 100% hreint hunang",
+    "mission": "Að bjóða upp á sjálfbæra heilsu og ekta bragð í gegnum hágæða lífrænar vörur sem eiga uppruna sinn á bestu svæðum Grikklands."
   },
   "shared": {
     "productDiscovery": {
-      "title": "Úrvals meðmæli",
-      "description": "Upplifðu vandvirkni í gegnum úrval okkar af bestu fáanlegu gæðavörum."
+      "title": "Úrval hágæða lífrænna vara",
+      "description": "Uppgötvaðu hreinleika kaldpressaðrar ólífuolíu og náttúrulegs hunangs, sérvalið fyrir vellíðan þína."
     },
     "categoryDiscovery": {
-      "title": "Vöruflokkar",
-      "description": "Kannaðu úrval okkar sem er valið af kostgæfni í öllum þeim flokkum sem þú þarfnast."
+      "title": "Kannaðu náttúrulega vöruflokka okkar",
+      "description": "Skoðaðu hágæða vörur, allt frá úrvals ólífuolíu til villihunangs, beint frá grískum búgörðum."
     },
     "blogDiscovery": {
-      "title": "Heilsa og Arfleifð Blogg",
-      "description": "Kafaðu ofan í visku Miðjarðarhafsmataræðisins og leyndarmál lífræns lífsstíls."
+      "title": "Heilsuráð og miðjarðarhafslífsstíll",
+      "description": "Kafaðu dýpra í kosti hefðbundins grísks mataræðis með uppskriftum og greinum fyrir sjálfbærara líf."
     },
     "relatedProducts": {
-      "title": "Tengdar vörur",
-      "description": "Aðrar framúrskarandi vörur í þessum flokki sem þú gætir haft áhuga á."
+      "title": "Vörur sem þú gætir haft áhuga á",
+      "description": "Fullkomnaðu heilsuupplifun þína með öðrum vörum í sama flokki."
     }
   }
 }

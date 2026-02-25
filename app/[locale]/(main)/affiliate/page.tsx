@@ -1,23 +1,32 @@
-'use client'
+import { getTranslations } from 'next-intl/server'
 
-import { AffiliateCTA } from './_components/AffiliateCTA'
-import { AffiliateHero } from './_components/AffiliateHero'
-import { AffiliateRewards } from './_components/AffiliateRewards'
-import { AffiliateSteps } from './_components/AffiliateSteps'
-import { AffiliateTiers } from './_components/AffiliateTiers'
+import type { Metadata } from 'next'
 
-const AffiliatePage = () => {
-  return (
-    <div className='bg-faos-dark flex flex-col gap-10 antialiased'>
-      <AffiliateHero />
-      <div className='mx-auto flex max-w-6xl flex-col gap-10 p-5'>
-        <AffiliateSteps />
-        <AffiliateRewards />
-        <AffiliateTiers />
-        <AffiliateCTA />
-      </div>
-    </div>
-  )
+import { AffiliateClient } from './affiliate.client'
+
+import { constructMetadata } from '@/lib/metadata'
+
+interface Props {
+  params: Promise<{ locale: string }>
 }
 
+const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'meta.affiliate' })
+
+  const keywords = t.raw('keywords')
+
+  return constructMetadata({
+    title: t('title'),
+    description: t('description'),
+    canonicalPath: '/affiliate',
+    keywords: keywords,
+  })
+}
+
+const AffiliatePage = async () => {
+  return <AffiliateClient />
+}
+
+export { generateMetadata }
 export default AffiliatePage

@@ -19,12 +19,18 @@ const ViewCount = ({ viewCount, className, ...props }: Props) => {
     return null
   }
 
+  const formattedCount = formatCompactNumber(viewCount, locale)
+
   return (
-    <div className={cn('flex items-center gap-2', className)} {...props}>
+    <div
+      aria-label={`${formattedCount} ${t('views')}`}
+      className={cn('flex items-center gap-2', className)}
+      {...props}
+    >
       <div className='flex items-center gap-1'>
-        <EyeIcon />
+        <EyeIcon aria-hidden='true' size={16} />{' '}
         <span className='whitespace-nowrap'>
-          {formatCompactNumber(viewCount, locale)} {t('views')}
+          {formattedCount} {t('views')}
         </span>
       </div>
     </div>

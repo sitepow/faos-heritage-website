@@ -1,3 +1,5 @@
+'use client'
+
 import { useTranslations } from 'next-intl'
 
 import type { ComponentProps } from 'react'
@@ -9,14 +11,14 @@ import { ThemeSwitch } from '@/components/ui/ThemeSwitch'
 import { cn } from '@/utils/style'
 
 const NavbarTopBar = ({ className, ...props }: ComponentProps<'div'>) => {
-  const tNavigation = useTranslations('navigation.navbar')
+  const tBrand = useTranslations('brand')
 
   return (
     <div className={cn('bg-primary text-secondary', className)} {...props}>
       <Container className='flex flex-wrap items-center justify-between px-5 py-2.5'>
-        <span>{tNavigation('slogan')}</span>
+        <p className='text-sm font-medium tracking-wide'>{tBrand('slogan')}</p>
 
-        <div className='flex flex-wrap'>
+        <div className='flex flex-wrap items-center gap-2'>
           <NavbarLocaleSwitcher />
           <ThemeSwitch />
         </div>

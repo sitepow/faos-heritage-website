@@ -1,25 +1,25 @@
 {
   "brand": {
-    "name": "FAOS",
-    "slogan": "Premium Organic Olive Oil & Honey — 100% Pure Nature",
-    "mission": "The premier destination for high-quality, authentic olive oil and honey for your optimal well-being."
+    "name": "FAOS HERITAGE GREEK FOOD",
+    "slogan": "Taste the Heritage of Greece — Premium Extra Virgin Olive Oil & 100% Pure Honey",
+    "mission": "Delivering sustainable health and authentic flavors through premium organic products sourced from Greece's finest origins."
   },
   "shared": {
     "productDiscovery": {
-      "title": "Premium Recommendations",
-      "description": "Experience meticulous craftsmanship through our selection of the finest quality products."
+      "title": "Curated Premium Organic Selection",
+      "description": "Discover the purity of cold-pressed olive oil and natural honey, handpicked for your ultimate well-being."
     },
     "categoryDiscovery": {
-      "title": "Product Categories",
-      "description": "Explore our thoughtfully curated collections across every category you need."
+      "title": "Explore Our Natural Categories",
+      "description": "Browse high-quality product groups, from premium olive oils to wild honey, sourced directly from Greek farms."
     },
     "blogDiscovery": {
-      "title": "Health & Heritage Blog",
-      "description": "Dive into the wisdom of the Mediterranean diet and the secrets of organic living."
+      "title": "Health Tips & Mediterranean Lifestyle",
+      "description": "Deep dive into the benefits of traditional Greek diet with recipes and articles for sustainable living."
     },
     "relatedProducts": {
-      "title": "Related Products",
-      "description": "Other exceptional products in this category that you might be interested in."
+      "title": "You May Also Like",
+      "description": "Complete your health experience with other curated products from this category."
     }
   }
 }

@@ -2,7 +2,11 @@
 
 import { useQuery } from '@tanstack/react-query'
 
-import { getCategories, getCategory } from './category.action'
+import {
+  getCategories,
+  getCategory,
+  getCategoryBySlug,
+} from './category.action'
 import { categoryQueryKeys } from './category.query-key'
 
 interface UseCategoryParams {
@@ -12,6 +16,20 @@ interface UseCategoryParams {
 
 interface UseCategoriesParams {
   locale?: string
+}
+
+const useCategoryBySlug = ({
+  slug,
+  locale,
+}: {
+  slug: string
+  locale?: string
+}) => {
+  return useQuery({
+    queryKey: [...categoryQueryKeys.details.bySlug(slug), locale],
+    queryFn: () => getCategoryBySlug(slug, locale),
+    enabled: !!slug,
+  })
 }
 
 const useCategory = ({ categoryId, locale }: UseCategoryParams) => {
@@ -29,4 +47,4 @@ const useCategories = ({ locale }: UseCategoriesParams) => {
   })
 }
 
-export { useCategory, useCategories }
+export { useCategoryBySlug, useCategory, useCategories }

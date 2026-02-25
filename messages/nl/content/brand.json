@@ -1,25 +1,25 @@
 {
   "brand": {
-    "name": "FAOS",
-    "slogan": "Premium Biologische Olijfolie & Honing — 100% Pure Natuur",
-    "mission": "Dé plek voor authentieke olijfolie en honing van topkwaliteit, toegewijd aan uw optimaal welzijn."
+    "name": "FAOS HERITAGE GREEK FOOD",
+    "slogan": "Proef het Erfgoed van Griekenland — Premium Extra Virgin Olijfolie & 100% Pure Honing",
+    "mission": "Het leveren van duurzame gezondheid en authentieke smaken via premium biologische producten van de beste Griekse oorsprong."
   },
   "shared": {
     "productDiscovery": {
-      "title": "Premium Aanbevelingen",
-      "description": "Ervaar nauwgezet vakmanschap via onze selectie van de allerbeste producten."
+      "title": "Gecureerde Premium Biologische Selectie",
+      "description": "Ontdek de puurheid van koudgeperste olijfolie en natuurlijke honing, met de hand geselecteerd voor uw ultieme welzijn."
     },
     "categoryDiscovery": {
-      "title": "Productcategorieën",
-      "description": "Ontdek onze zorgvuldig samengestelde collecties in elke gewenste categorie."
+      "title": "Verken Onze Natuurlijke Categorieën",
+      "description": "Bekijk hoogwaardige productgroepen, van premium olijfolie tot wilde honing, rechtstreeks van Griekse boerderijen."
     },
     "blogDiscovery": {
-      "title": "Gezondheid & Erfgoed Blog",
-      "description": "Duik in de wijsheid van het mediterrane dieet en de geheimen van biologisch leven."
+      "title": "Gezondheidstips & Mediterrane Levensstijl",
+      "description": "Duik in de voordelen van het traditionele Griekse dieet met recepten en artikelen voor een duurzaam leven."
     },
     "relatedProducts": {
-      "title": "Gerelateerde Producten",
-      "description": "Andere uitzonderlijke producten in deze categorie die wellicht interessant voor u zijn."
+      "title": "Misschien Vindt U Dit Ook Leuk",
+      "description": "Maak uw gezondheidservaring compleet met andere zorgvuldig geselecteerde producten uit deze categorie."
     }
   }
 }

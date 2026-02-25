@@ -5,11 +5,11 @@ import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 import type { GetPostResult, GetPostsInfiniteResult } from './post.action'
 import type { PostStatus } from '@prisma/client'
 
-import { getPost, getPostsInfinite } from './post.action'
+import { getPostBySlug, getPostsInfinite } from './post.action'
 import { postQueryKeys } from './post.query-key'
 
 interface UsePostParams {
-  id: string
+  slug: string
   locale?: string
   initialData?: GetPostResult
 }
@@ -23,12 +23,12 @@ interface UsePostsParams {
   excludeId?: string
 }
 
-const usePost = ({ id, locale, initialData }: UsePostParams) => {
+const usePost = ({ slug, locale, initialData }: UsePostParams) => {
   return useQuery({
-    queryKey: postQueryKeys.details.byId(id, { locale }),
-    queryFn: () => getPost(id, locale),
+    queryKey: postQueryKeys.details.bySlug(slug, { locale }),
+    queryFn: () => getPostBySlug(slug, locale),
     initialData,
-    enabled: !!id,
+    enabled: !!slug,
   })
 }
 

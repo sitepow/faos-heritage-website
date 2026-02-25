@@ -3,7 +3,6 @@
 import { PostStatus } from '@prisma/client'
 import { useLocale, useTranslations } from 'next-intl'
 
-import { AppSection } from '@/components/layouts/AppSection'
 import { PostSection } from '@/components/ui/Post/PostSection'
 import { usePosts } from '@/features/post/post.hook'
 
@@ -29,15 +28,20 @@ const RelatedPosts = ({ categoryId, excludeId }: Props) => {
   }
 
   return (
-    <AppSection>
-      <h3 className='text-2xl font-bold'>{t('related_title')}</h3>
+    <section
+      aria-labelledby='related-posts-title'
+      className='flex flex-col gap-6 py-10'
+    >
+      <h2 className='text-2xl font-bold' id='related-posts-title'>
+        {t('related_title')}
+      </h2>
 
       <PostSection
         isLoading={isLoading}
         itemPerPage={6}
         items={relatedData?.items ?? []}
       />
-    </AppSection>
+    </section>
   )
 }
 

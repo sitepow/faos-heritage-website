@@ -7,17 +7,21 @@ import { Container } from '@/components/layouts/Container'
 import { PdfViewer } from '@/components/ui/PdfViewer/PdfViewer'
 import { constructMetadata } from '@/lib/metadata'
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { locale: string }
-}): Promise<Metadata> {
+interface Props {
+  params: Promise<{ locale: string }>
+}
+
+const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'meta' })
+
+  const keywords = t.raw('about.keywords')
 
   return constructMetadata({
     title: t('about.title'),
     description: t('about.description'),
+    canonicalPath: '/about',
+    keywords: keywords,
   })
 }
 
@@ -31,11 +35,12 @@ const AboutPage = () => {
     <Container>
       <AppSection>
         {PDF_BROCHURE.map((PDF) => (
-          <PdfViewer fileUrl={PDF} />
+          <PdfViewer key={PDF} fileUrl={PDF} />
         ))}
       </AppSection>
     </Container>
   )
 }
 
+export { generateMetadata }
 export default AboutPage

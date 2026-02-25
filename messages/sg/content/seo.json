@@ -1,43 +1,118 @@
 {
   "meta": {
+    "brandName": "FAOS HERITAGE GREEK FOOD",
     "keywords": [
       "FAOS",
-      "Organic Olive Oil",
-      "Extra Virgin Olive Oil",
-      "100% Pure Natural Honey",
-      "Organic Honey",
-      "Premium Health Foods",
-      "Best brand for raw olive oil",
-      "Where to buy authentic honey",
-      "Olive oil for health"
+      "FAOS Heritage Greek Food",
+      "Organic Olive Oil Singapore",
+      "Pure Natural Honey",
+      "Premium Health Food",
+      "Mediterranean Diet SG",
+      "Patcharin Chanaphakdee"
     ],
     "home": {
-      "title": "FAOS - Premium Organic Olive Oil & 100% Pure Authentic Honey",
-      "description": "The premier source for 100% natural Extra Virgin Olive Oil and Organic Honey. Curated premium quality for your optimal health, delivered to your door with exclusive promotions."
+      "title": "Premium Organic Olive Oil & Pure Honey from Greece | FAOS Singapore",
+      "description": "Finest Greek Extra Virgin Organic Olive Oil and 100% Natural Honey. Imported from Greece to Singapore for your premium health lifestyle.",
+      "keywords": [
+        "Buy Greek Olive Oil SG",
+        "Premium Honey Singapore",
+        "Health Food Delivery SG",
+        "FAOS Heritage Food"
+      ]
     },
     "products": {
-      "title": "Shop Authentic Olive Oil & Honey - All Products | FAOS",
-      "description": "Explore our curated selection of health-focused products, featuring pure Extra Virgin Olive Oil and wild natural honey. Certified organic, safe, and free from additives."
+      "title": "Shop Organic Olive Oil and Pure Honey",
+      "description": "Pure olive oil and natural wild honey from Greece. Certified organic, safe, and free from additives.",
+      "keywords": [
+        "Best olive oil Singapore",
+        "Extra Virgin Olive Oil Price SG",
+        "Organic Honey Store",
+        "Greek Premium Products"
+      ]
     },
     "productDetail": {
-      "title": "{name} - Premium Olive Oil & Honey by FAOS",
-      "description": "Order {name}, 100% premium quality from nature. Guaranteed purity with organic standards. Easy ordering, fast shipping, and 100% authenticity assured."
+      "title": "{name}",
+      "description": "Premium quality {name}, 100% natural. Organic standards, directly sourced from Greece.",
+      "keywords": [
+        "Cold Pressed Olive Oil",
+        "High Polyphenol Content",
+        "Pure Raw Honey",
+        "Health Supplement"
+      ]
     },
     "category": {
-      "title": "Organic {categoryName} - FAOS Health & Wellness Products",
-      "description": "Discover the best products in our {categoryName} collection. Exclusively curated export-grade natural products for your healthy lifestyle."
+      "title": "{categoryName} Category",
+      "description": "Curated {categoryName} natural products from Greece for your healthy lifestyle in Singapore.",
+      "keywords": [
+        "Natural Antioxidants",
+        "Healthy Cooking Oil",
+        "Raw Honey SG",
+        "Clean Eating Singapore"
+      ]
     },
     "about": {
-      "title": "About FAOS - A Heritage of Purity from Nature",
-      "description": "FAOS is a specialist in premium organic olive oil and honey, meticulously crafted from 100% natural and sustainable sources."
+      "title": "Our Heritage",
+      "description": "FAOS specialises in premium organic olive oil and honey from World Heritage sites in Greece.",
+      "keywords": [
+        "About FAOS",
+        "Greek Olive Oil Origins",
+        "Sustainable Health Food",
+        "Organic Certification"
+      ]
     },
     "blog": {
-      "title": "GREEK Food & Organic Health Blog - FAOS HERITAGE GREEK FOOD",
-      "description": "Learn about the health benefits of Extra Virgin Olive Oil, 100% Raw Greek Honey, and healthy Mediterranean recipes. Stay informed with FAOS HERITAGE GREEK FOOD."
+      "title": "Health & Mediterranean Diet Blog",
+      "description": "Discover the benefits of Greek olive oil and honey with recipes for a healthier life.",
+      "keywords": [
+        "Olive Oil Health Benefits",
+        "Healthy Recipes SG",
+        "Olive Oil Consumption Tips",
+        "How to choose olive oil"
+      ]
     },
     "blogDetail": {
-      "title": "{title} - Health & Heritage Blog - FAOS HERITAGE GREEK FOOD",
-      "description": "{summary}"
+      "title": "{title}",
+      "description": "{summary}",
+      "keywords": []
+    },
+    "affiliate": {
+      "title": "FAOS Affiliate & Reseller Program",
+      "description": "Join our affiliate program and earn up to 10% commission on premium Greek products. Easy signup.",
+      "keywords": [
+        "Affiliate Marketing SG",
+        "Earn Side Income Singapore",
+        "Dropship Health Products",
+        "FAOS Partner"
+      ]
+    },
+    "paymentMethods": {
+      "title": "Payment & Delivery Information",
+      "description": "Secure payment options via Credit Card or QR Pay. Fast and reliable ordering process.",
+      "keywords": [
+        "Payment Methods SG",
+        "Credit Card Payment",
+        "Secure Checkout",
+        "Shipping Information"
+      ]
+    },
+    "privacyPolicy": {
+      "title": "Privacy Policy & Terms",
+      "description": "FAOS Privacy Policy. Committed to protecting your personal data and ensuring safe transactions.",
+      "keywords": [
+        "Privacy Policy SG",
+        "Terms of Service",
+        "Data Protection",
+        "Safe Shopping"
+      ]
+    },
+    "profile": {
+      "title": "My Account",
+      "keywords": []
+    },
+    "cart": {
+      "title": "My Shopping Cart",
+      "description": "Review your selected premium products and proceed to checkout.",
+      "keywords": []
     }
   }
 }

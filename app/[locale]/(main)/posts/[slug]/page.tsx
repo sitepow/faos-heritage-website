@@ -5,23 +5,18 @@ import type { Metadata } from 'next'
 import { PostClient } from './post.client'
 
 import { IMAGE_FALLBACK } from '@/constants'
-import { getPost } from '@/features/post/post.action'
+import { getPostBySlug } from '@/features/post/post.action'
 import { constructMetadata } from '@/lib/metadata'
-import { parseSlug } from '@/lib/slug'
 
-interface PostProps {
+interface Props {
   params: Promise<{ slug: string; locale: string }>
 }
 
-export const generateMetadata = async ({
-  params,
-}: PostProps): Promise<Metadata> => {
+const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
   const { slug, locale } = await params
-  const postId = parseSlug(slug)
 
   const t = await getTranslations({ locale, namespace: 'meta.blogDetail' })
-
-  const post = await getPost(postId, locale)
+  const post = await getPostBySlug(slug, locale)
 
   if (!post) {
     return constructMetadata({
@@ -30,24 +25,41 @@ export const generateMetadata = async ({
     })
   }
 
+  const pageTitle = post.metaTitle || post.title
+  const pageDescription =
+    post.metaDescription ||
+    post.summary ||
+    t('description', { summary: post.summary || post.title })
+
+  const baseKeywords = t.raw('keywords') || []
+  const postKeywords = post.keywords || []
+
+  const dynamicKeywords = [post.title, post.category?.name || ''].filter(
+    Boolean,
+  )
+
+  const finalKeywords = Array.from(
+    new Set([...dynamicKeywords, ...postKeywords, ...baseKeywords]),
+  )
+
   const ogImage = post.featuredImage || IMAGE_FALLBACK.OG
 
   return constructMetadata({
-    title: t('title', { title: post.title }),
-    description: post.summary || t('description', { summary: post?.summary! }),
+    title: pageTitle,
+    description: pageDescription,
     ogImage,
     canonicalPath: `/posts/${slug}`,
-    keywords: [post.title, post?.category?.name || ''],
+    keywords: finalKeywords,
   })
 }
 
-const PostPage = async ({ params }: PostProps) => {
+const PostPage = async ({ params }: Props) => {
   const { slug, locale } = await params
-  const postId = parseSlug(slug)
 
-  const post = await getPost(postId, locale)
+  const post = await getPostBySlug(slug, locale)
 
-  return <PostClient initialData={post} postId={postId} />
+  return <PostClient initialData={post} slug={slug} />
 }
 
+export { generateMetadata }
 export default PostPage

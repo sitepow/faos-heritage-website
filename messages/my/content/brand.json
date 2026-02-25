@@ -1,25 +1,25 @@
 {
   "brand": {
-    "name": "FAOS",
-    "slogan": "Minyak Zaitun & Madu Organik Premium — 100% Alam Semulajadi",
-    "mission": "Destinasi utama untuk minyak zaitun dan madu asli yang berkualiti tinggi demi kesejahteraan optimum anda."
+    "name": "FAOS HERITAGE GREEK FOOD",
+    "slogan": "Rasai Warisan Greece — Minyak Zaitun Extra Virgin Premium & 100% Madu Asli",
+    "mission": "Memberikan kesihatan mampan dan rasa asli melalui produk organik premium yang bersumberkan dari asal-usul terbaik di Greece."
   },
   "shared": {
     "productDiscovery": {
-      "title": "Cadangan Premium",
-      "description": "Alami ketelitian hasil tangan melalui pilihan produk kualiti terbaik kami."
+      "title": "Pilihan Organik Premium Terpilih",
+      "description": "Temui ketulenan minyak zaitun perahan sejuk dan madu semulajadi, dipilih khas untuk kesejahteraan mutlak anda."
     },
     "categoryDiscovery": {
-      "title": "Kategori Produk",
-      "description": "Terokai koleksi kami yang disusun rapi untuk setiap kategori yang anda perlukan."
+      "title": "Terokai Kategori Semulajadi Kami",
+      "description": "Layari kumpulan produk berkualiti tinggi, daripada minyak zaitun premium hingga madu hutan, terus dari ladang Greece."
     },
     "blogDiscovery": {
-      "title": "Blog Kesihatan & Warisan",
-      "description": "Terokai kebijaksanaan diet Mediterranean dan rahsia kehidupan organik."
+      "title": "Tips Kesihatan & Gaya Hidup Mediterranean",
+      "description": "Ketahui lebih mendalam tentang khasiat diet tradisional Greece dengan resipi dan artikel untuk kehidupan mampan."
     },
     "relatedProducts": {
-      "title": "Produk Berkaitan",
-      "description": "Produk luar biasa lain dalam kategori ini yang mungkin menarik minat anda."
+      "title": "Anda Mungkin Juga Suka",
+      "description": "Lengkapkan pengalaman kesihatan anda dengan produk terpilih lain daripada kategori ini."
     }
   }
 }

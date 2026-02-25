@@ -1,43 +1,119 @@
 {
   "meta": {
+    "brandName": "FAOS HERITAGE GREEK FOOD",
     "keywords": [
       "FAOS",
+      "FAOS Heritage Greek Food",
       "Biologische Olijfolie",
-      "Extra Vierge Olijfolie",
-      "100% Puur Natuurlijke Honing",
-      "Biologische Honing",
+      "100% Pure Natuurlijke Honing",
       "Premium Gezondheidsvoeding",
-      "Beste merk voor rauwe olijfolie",
-      "Waar authentieke honing te kopen",
-      "Olijfolie voor de gezondheid"
+      "Mediterraan Dieet",
+      "Patcharin Chanaphakdee"
     ],
     "home": {
-      "title": "FAOS - Premium Biologische Olijfolie & 100% Puur Authentieke Honing",
-      "description": "De belangrijkste bron voor 100% natuurlijke Extra Vierge Olijfolie en Biologische Honing. Geselecteerde premium kwaliteit voor uw optimale gezondheid, aan huis bezorgd met exclusieve promoties."
+      "title": "Premium Biologische Olijfolie en Pure Honing uit Griekenland",
+      "description": "Premium Griekse Extra Virgin Biologische Olijfolie en 100% Natuurlijke Honing. Rechtstreeks geïmporteerd uit Griekenland voor uw gezondheid.",
+      "keywords": [
+        "Geïmporteerde Griekse Olijfolie",
+        "Pure Honing Bron",
+        "Griekse Gezondheidsproducten",
+        "Greek Heritage Food"
+      ]
     },
     "products": {
-      "title": "Koop Authentieke Olijfolie & Honing - Alle Producten | FAOS",
-      "description": "Ontdek onze zorgvuldig samengestelde selectie gezondheidsproducten, met pure Extra Vierge Olijfolie en wilde natuurlijke honing. Gecertificeerd biologisch, veilig en vrij van additieven."
+      "title": "Koop Biologische Olijfolie en Pure Honing",
+      "description": "Gezonde producten, pure olijfolie en natuurlijke wilde honing uit Griekenland. Gecertificeerd biologisch, veilig en zonder toevoegingen.",
+      "keywords": [
+        "Waar koop je echte olijfolie",
+        "Extra Virgin Olijfolie Prijs",
+        "Beste Biologische Honing Merk",
+        "Premium Olijfolie te Koop"
+      ]
     },
     "productDetail": {
-      "title": "{name} - Premium Olijfolie & Honing door FAOS",
-      "description": "Bestel {name}, 100% premium kwaliteit uit de natuur. Gegarandeerde zuiverheid met biologische normen. Eenvoudig bestellen, snelle verzending en 100% gegarandeerde authenticiteit."
+      "title": "{name}",
+      "description": "Bestel {name}, 100% premium natuurlijke kwaliteit. Biologische standaarden, rechtstreeks uit Griekenland.",
+      "keywords": [
+        "Olijfolie voor directe consumptie",
+        "Hoge Polyfenolen",
+        "Koudgeperste Olijfolie",
+        "Natuurlijke Wilde Honing"
+      ]
     },
     "category": {
-      "title": "Biologische {categoryName} - FAOS Gezondheids- & Welzijnsproducten",
-      "description": "Ontdek de beste producten in onze {categoryName} collectie. Exclusief samengestelde natuurlijke producten van exportkwaliteit voor uw gezonde levensstijl."
+      "title": "Categorie {categoryName}",
+      "description": "Selecteer {categoryName} natuurlijke exportproducten uit Griekenland voor uw gezonde levensstijl.",
+      "keywords": [
+        "Natuurlijke Antioxidanten",
+        "Gezonde Olijfolie",
+        "Voedzame Honing",
+        "Premium Clean Food"
+      ]
     },
     "about": {
-      "title": "Over FAOS - Een Erfgoed van Zuiverheid uit de Natuur",
-      "description": "FAOS is een specialist in premium biologische olijfolie en honing, nauwgezet vervaardigd uit 100% natuurlijke en duurzame bronnen."
+      "title": "Over Ons",
+      "description": "FAOS is een expert in premium biologische olijfolie en honing van werelderfgoedlocaties in Griekenland, gemaakt voor duurzame gezondheid.",
+      "keywords": [
+        "FAOS Merkgeschiedenis",
+        "Werelderfgoed Olijfolie",
+        "Griekse Olijfgaarden",
+        "Internationale Biologische Normen"
+      ]
     },
     "blog": {
-      "title": "Griekse Voeding & Biologische Gezondheid Blog - FAOS HERITAGE GREEK FOOD",
-      "description": "Leer meer over de gezondheidsvoordelen van extra vierge olijfolie, 100% rauwe Griekse honing en gezonde mediterrane recepten. Blijf op de hoogte met FAOS HERITAGE GREEK FOOD."
+      "title": "Gezondheid en Griekse Voeding Blog",
+      "description": "Leer de voordelen van Griekse olijfolie en honing, met mediterrane recepten voor een betere gezondheid.",
+      "keywords": [
+        "Voordelen van Olijfolie",
+        "Mediterraanse Recepten",
+        "Wanneer olijfolie consumeren",
+        "Hoe herken je echte olijfolie"
+      ]
     },
     "blogDetail": {
-      "title": "{title} - Gezondheid & Erfgoed Blog - FAOS HERITAGE GREEK FOOD",
-      "description": "{summary}"
+      "title": "{title}",
+      "description": "{summary}",
+      "keywords": []
+    },
+    "affiliate": {
+      "title": "Affiliate en Reseller Programma",
+      "description": "Verdien met FAOS via ons affiliate programma voor premium olijfolie en honing. Tot 10% commissie. Makkelijk aanmelden.",
+      "keywords": [
+        "Olijfolie Distributeur",
+        "FAOS Affiliate",
+        "Extra Inkomen Online",
+        "Online Verkopen Zonder Voorraad"
+      ]
+    },
+    "paymentMethods": {
+      "title": "Betaalmethoden en Bestelstappen",
+      "description": "Leer handige en veilige betaalmethoden bij FAOS, inclusief QR-code overboekingen of creditcards.",
+      "keywords": [
+        "FAOS Betaalmethoden",
+        "Hoe olijfolie bestellen",
+        "Honing kopen met creditcard",
+        "QR-code Betaling",
+        "Betalingsbeveiliging"
+      ]
+    },
+    "privacyPolicy": {
+      "title": "Privacybeleid en Gebruiksvoorwaarden",
+      "description": "FAOS Privacybeleid. Details over de beschermingของ persoonlijke gegevens en gebruikersveiligheid.",
+      "keywords": [
+        "Privacybeleid",
+        "Algemene Voorwaarden",
+        "Gegevensbeveiliging",
+        "FAOS Privacy Policy"
+      ]
+    },
+    "profile": {
+      "title": "Mijn Profiel",
+      "keywords": []
+    },
+    "cart": {
+      "title": "Winkelwagen",
+      "description": "Bekijk uw geselecteerde artikelen en bereid u voor op uw bestelling van premium FAOS-producten.",
+      "keywords": []
     }
   }
 }

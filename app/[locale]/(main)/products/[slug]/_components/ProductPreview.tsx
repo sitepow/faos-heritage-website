@@ -11,15 +11,15 @@ const ProductPreview = () => {
 
   return (
     <Container className='grid items-start gap-5 lg:grid-cols-2'>
-      <div className='min-w-0 overflow-hidden'>
+      <figure className='m-0 min-w-0 overflow-hidden'>
         <ProductImagePreview
           images={product?.images?.map((image) => image.url)}
           product={product}
         />
-      </div>
-      <div className='min-w-0 lg:sticky lg:top-20'>
+      </figure>
+      <aside className='min-w-0 lg:sticky lg:top-20'>
         <ProductPurchasePanel />
-      </div>
+      </aside>
     </Container>
   )
 }

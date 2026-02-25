@@ -1,43 +1,119 @@
 {
   "meta": {
+    "brandName": "FAOS HERITAGE GREEK FOOD",
     "keywords": [
       "FAOS",
-      "Lífræn ólífuolía",
-      "Extra virgin ólífuolía",
-      "100% hreint náttúrulegt hunang",
-      "Lífrænt hunang",
-      "Úrvals heilsufæði",
-      "Besta merkið fyrir hráa ólífuolíu",
-      "Hvar á að kaupa ekta hunang",
-      "Ólífuolía fyrir heilsuna"
+      "FAOS Heritage Greek Food",
+      "Lífræn Ólífuolía",
+      "100% Hreint Náttúrulegt Hunang",
+      "Hágæða Heilsufæði",
+      "Miðjarðarhafsmataræði",
+      "Patcharin Chanaphakdee"
     ],
     "home": {
-      "title": "FAOS - Úrvals lífræn ólífuolía og 100% hreint ekta hunang",
-      "description": "Helsta uppspretta 100% náttúrulegrar extra virgin ólífuolíu og lífræns hunangs. Úrvals gæði valin fyrir þína bestu heilsu, afhent heim að dyrum með sértilboðum."
+      "title": "Hágæða Lífræn Ólífuolía og Hreint Hunang frá Grikklandi",
+      "description": "Hágæða grísk Extra Virgin lífræn ólífuolía og 100% náttúrulegt hunang. Flutt beint inn frá Grikklandi fyrir heilsuna þína.",
+      "keywords": [
+        "Grísk ólífuolía innflutningur",
+        "Hreint hunang",
+        "Grískar heilsuvörur",
+        "Greek Heritage Food"
+      ]
     },
     "products": {
-      "title": "Kaupa ekta ólífuolíu og hunang - Allar vörur | FAOS",
-      "description": "Kannaðu úrval okkar af heilsuvörum, þar á meðal hreina extra virgin ólífuolíu og villt náttúrulegt hunang. Lífrænt vottað, öruggt og án íblöndunarefna."
+      "title": "Versla Lífræna Ólífuolíu og Hreint Hunang",
+      "description": "Heilsuvörur, hrein ólífuolía og náttúrulegt hunang frá Grikklandi. Lífrænt vottað, öruggt og án íblöndunarefna.",
+      "keywords": [
+        "Hvar á að kaupa alvöru ólífuolíu",
+        "Verð á Extra Virgin ólífuolíu",
+        "Besta lífræna hunangið",
+        "Hágæða ólífuolía til sölu"
+      ]
     },
     "productDetail": {
-      "title": "{name} - Úrvals ólífuolía og hunang frá FAOS",
-      "description": "Pantaðu {name}, 100% úrvals gæði úr náttúrunni. Tryggður hreinleiki með lífrænum stöðlum. Einföld pöntun, hröð sending og 100% ábyrgð á áreiðanleika."
+      "title": "{name}",
+      "description": "Panta {name}, 100% hágæða náttúruleg vara. Lífrænar kröfur, beint frá Grikklandi.",
+      "keywords": [
+        "Ólífuolía til neyslu",
+        "Hátt pólýfenól innihald",
+        "Kaldpressuð ólífuolía",
+        "Náttúrulegt villihunang"
+      ]
     },
     "category": {
-      "title": "Lífrænt {categoryName} - FAOS heilsu- og vellíðunarvörur",
-      "description": "Uppgötvaðu bestu vörurnar í {categoryName} úrvalinu okkar. Sérvalið náttúrulegt gæðavörur fyrir þinn heilbrigða lífsstíl."
+      "title": "Flokkur {categoryName}",
+      "description": "Veldu {categoryName} náttúrulegar útflutningsvörur frá Grikklandi fyrir heilbrigðan lífsstíl.",
+      "keywords": [
+        "Náttúruleg andoxunarefni",
+        "Heilsusamleg ólífuolía",
+        "Næringarríkt hunang",
+        "Premium Clean Food"
+      ]
     },
     "about": {
-      "title": "Um FAOS - Arfleifð hreinleika úr náttúrunni",
-      "description": "FAOS er sérfræðingur í úrvals lífrænni ólífuolíu og hunangi, unnið af kostgæfni úr 100% náttúrulegum og sjálfbærum uppsprettum."
+      "title": "Um okkur",
+      "description": "FAOS er sérfræðingur í hágæða lífrænni ólífuolíu og hunangi frá heimsminjastöðum í Grikklandi.",
+      "keywords": [
+        "Saga FAOS",
+        "Heimsminja ólífuolía",
+        "Grískir ólífulundir",
+        "Alþjóðlegir lífrænir staðlar"
+      ]
     },
     "blog": {
-      "title": "Griskur matur og lífræn heilsa blogg - FAOS HERITAGE GREEK FOOD",
-      "description": "Lærðu um heilsuávinninginn af extra virgin ólífuolíu, 100% hráu grísku hunangi og heilsumiklum Miðjarðarhafsuppskriftum. Vertu upplýst(ur) með FAOS HERITAGE GREEK FOOD."
+      "title": "Heilsa og grískur matur - Blogg",
+      "description": "Lærðu um kosti grískrar ólífuolíu og hunangs, ásamt uppskriftum úr Miðjarðarhafsmataræðinu.",
+      "keywords": [
+        "Kostir ólífuolíu",
+        "Miðjarðarhafs uppskriftir",
+        "Hvenær á að neyta ólífuolíu",
+        "Hvernig á að þekkja alvöru ólífuolíu"
+      ]
     },
     "blogDetail": {
-      "title": "{title} - Heilsa og Arfleifð Blogg - FAOS HERITAGE GREEK FOOD",
-      "description": "{summary}"
+      "title": "{title}",
+      "description": "{summary}",
+      "keywords": []
+    },
+    "affiliate": {
+      "title": "Samstarfs- og endursölukerfi",
+      "description": "Græddu með FAOS í gegnum samstarfskerfið okkar. Allt að 10% þóknun. Einfalt að skrá sig.",
+      "keywords": [
+        "Ólífuolía dreifingaraðili",
+        "FAOS Affiliate",
+        "Auka tekjur á netinu",
+        "Selja á netinu án lagerstöðu"
+      ]
+    },
+    "paymentMethods": {
+      "title": "Greiðsluleiðir og pöntunarferli",
+      "description": "Lærðu um öruggar greiðsluleiðir hjá FAOS, þar á meðal QR-kóða eða greiðslukort.",
+      "keywords": [
+        "Greiðsluleiðir FAOS",
+        "Hvernig á að panta ólífuolíu",
+        "Kaupa hunang með korti",
+        "QR greiðsla",
+        "Greiðsluöryggi"
+      ]
+    },
+    "privacyPolicy": {
+      "title": "Persónuverndarstefna og notendaskilmálar",
+      "description": "Persónuverndarstefna FAOS. Upplýsingar um gagnavernd og öryggi notenda.",
+      "keywords": [
+        "Persónuvernd",
+        "Skilmálar",
+        "Gagnaöryggi",
+        "FAOS Privacy Policy"
+      ]
+    },
+    "profile": {
+      "title": "Mín síða",
+      "keywords": []
+    },
+    "cart": {
+      "title": "Karfan mín",
+      "description": "Skoðaðu vörurnar þínar og undirbúðu pöntun á hágæða FAOS vörum.",
+      "keywords": []
     }
   }
 }

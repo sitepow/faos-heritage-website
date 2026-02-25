@@ -8,7 +8,7 @@ type GetProductsInfiniteResult = Awaited<ReturnType<typeof getProductsInfinite>>
 
 interface UseProductParams {
   locale: string
-  productId: string
+  slug: string
   userId?: string
   initialData?: GetProductResult
 }

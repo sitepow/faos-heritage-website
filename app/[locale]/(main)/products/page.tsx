@@ -6,18 +6,22 @@ import { ProductsClient } from './products.client'
 
 import { constructMetadata } from '@/lib/metadata'
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string; slug: string }>
-}): Promise<Metadata> {
+interface Props {
+  params: Promise<{ locale: string }>
+}
+
+const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
   const { locale } = await params
 
   const t = await getTranslations({ locale, namespace: 'meta' })
 
+  const keywords = t.raw('products.keywords')
+
   return constructMetadata({
     title: t('products.title'),
     description: t('products.description'),
+    canonicalPath: '/products',
+    keywords: keywords,
   })
 }
 
@@ -25,4 +29,5 @@ const ProductsPage = async () => {
   return <ProductsClient />
 }
 
+export { generateMetadata }
 export default ProductsPage

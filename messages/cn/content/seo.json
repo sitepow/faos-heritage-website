@@ -1,87 +1,104 @@
 {
   "meta": {
+    "brandName": "FAOS HERITAGE GREEK FOOD",
     "keywords": [
       "FAOS",
+      "FAOS Heritage Greek Food",
       "有机橄榄油",
-      "特级初榨橄榄油",
       "100% 纯天然蜂蜜",
-      "有机蜂蜜",
-      "优质健康食品",
-      "顶级原榨橄榄油品牌",
-      "哪里买正品蜂蜜",
-      "健康 橄榄油",
-      "哪里买正品橄榄油",
-      "哪里买正品蜂蜜",
-      "来自希腊的有机橄榄油",
-      "来自希腊的纯天然蜂蜜",
-      "高品质橄榄油和蜂蜜",
-      "来自自然的健康产品",
-      "橄榄油和蜂蜜的健康益处",
-      "来自希腊的蜂蜜",
-      "橄榄油中的高多酚",
-      "清洁饮食",
-      "未加工食品",
-      "FAOS",
-      "希腊",
-      "希腊旅游",
-      "希腊美食",
+      "高端健康食品",
       "地中海饮食",
-      "用橄榄油和蜂蜜保持健康",
-      "橄榄油和蜂蜜的护肤功效",
-      "橄榄油和蜂蜜的护发功效",
-      "橄榄油和蜂蜜的整体健康益处",
-      "橄榄油和蜂蜜的烹饪用途",
-      "橄榄树",
-      "来自希腊的纯天然蜂蜜",
-      "来自希腊的纯正橄榄油",
-      "Maneki",
-      "Athonelia",
-      "高血脂症",
-      "抗氧化剂",
-      "抗炎",
-      "降低心脏病风险",
-      "降低癌症风险",
-      "改善大脑健康",
-      "改善骨骼健康",
-      "改善皮肤健康",
-      "改善头发健康",
-      "改善整体健康",
-      "橄榄油和蜂蜜的烹饪用途",
-      "橄榄油",
-      "蜂蜜",
-      "patcharin",
-      "Patcharin Chanaphukdee",
-      "พัชรินทร์ ชนะภักดี",
-      "希腊葡萄酒",
-      "Nikolaos Basoukos"
+      "Patcharin Chanaphakdee"
     ],
     "home": {
-      "title": "FAOS HERITAGE GREEK FOOD - 尽享来自希腊的 100% 纯有机橄榄油和天然蜂蜜。",
-      "description": "100% 天然特级初榨橄榄油与有机蜂蜜的权威来源。为您严选顶级品质，助力极致健康。送货上门，悦享专属优惠。"
+      "title": "来自希腊的高端有机橄榄油与纯天然蜂蜜",
+      "description": "提供希腊原装进口特级初榨有机橄榄油及100%纯天然蜂蜜，为您的健康保驾护航。",
+      "keywords": [
+        "希腊进口橄榄油",
+        "纯天然蜂蜜货源",
+        "希腊健康产品",
+        "希腊文化遗产食品"
+      ]
     },
     "products": {
-      "title": "选购正品橄榄油与蜂蜜 - 全部产品 | FAOS-HERITAGE GREEK FOOD",
-      "description": "探索我们为您精选的健康系列产品，包含纯正特级初榨橄榄油与天然野蜂蜜。有机认证，安全且无添加。"
+      "title": "选购有机橄榄油与纯天然蜂蜜",
+      "description": "来自希腊的健康产品：纯正橄榄油与天然野生蜂蜜。有机认证，安全无添加。",
+      "keywords": [
+        "哪里买正品橄榄油",
+        "特级初榨橄榄油价格",
+        "有机蜂蜜品牌推荐",
+        "高端橄榄油销售"
+      ]
     },
     "productDetail": {
-      "title": "{name} - FAOS HERITAGE GREEK FOOD 顶级橄榄油与蜂蜜系列",
-      "description": "订购 {name}，源自大自然的 100% 顶级品质。有机标准保障纯度。订购便捷，物流高效，100% 正品保障。"
+      "title": "{name}",
+      "description": "订购 {name}，100% 高端天然品质。希腊原装进口，符合有机标准。",
+      "keywords": ["可生饮橄榄油", "高多酚含量", "冷榨橄榄油", "天然野生蜂蜜"]
     },
     "category": {
-      "title": "有机 {categoryName} - FAOS HERITAGE GREEK FOOD 健康生活系列",
-      "description": "在我们的 {categoryName} 系列中发现最佳产品。专为您的健康生活方式打造，严选出口级天然产品。"
+      "title": "{categoryName} 分类",
+      "description": "为您的高品质健康生活精选来自希腊的出口级 {categoryName} 天然产品。",
+      "keywords": ["天然抗氧化成分", "健康橄榄油", "滋补蜂蜜", "高端洁净食品"]
     },
     "about": {
-      "title": "关于 FAOS HERITAGE GREEK FOOD - 源自自然的纯净传承",
-      "description": "FAOS HERITAGE GREEK FOOD 是优质有机橄榄油与蜂蜜的专家，致力于从 100% 天然且可持续的来源中，为您精心打造每一份纯净。"
+      "title": "关于我们",
+      "description": "FAOS 是来自希腊世界遗产地区的专业高端有机橄榄油与蜂蜜品牌，致力于可持续的健康生活。",
+      "keywords": [
+        "FAOS 品牌历史",
+        "世界遗产橄榄油",
+        "希腊橄榄园",
+        "国际有机标准"
+      ]
     },
     "blog": {
-      "title": "希腊美食与有机健康博客 - FAOS HERITAGE GREEK FOOD",
-      "description": "了解特级初榨橄榄油、100% 纯天然希腊蜂蜜以及健康地中海食谱对健康的益处。通过 FAOS HERITAGE GREEK FOOD 随时获取最新动态。"
+      "title": "健康与希腊美食博客",
+      "description": "探索希腊橄榄油与蜂蜜的功效，获取助力健康的地中海食谱。",
+      "keywords": [
+        "橄榄油的功效",
+        "地中海食谱",
+        "橄榄油饮用时间",
+        "如何辨别正品橄榄油"
+      ]
     },
     "blogDetail": {
-      "title": "{title} - 健康与传承博客 - FAOS HERITAGE GREEK FOOD",
-      "description": "{summary}"
+      "title": "{title}",
+      "description": "{summary}",
+      "keywords": []
+    },
+    "affiliate": {
+      "title": "分销商与加盟商计划",
+      "description": "加入 FAOS 分销计划，推广高端橄榄油与蜂蜜。佣金高达 10%，申请简单，立即开始。",
+      "keywords": [
+        "橄榄油分销商",
+        "FAOS 联盟营销",
+        "线上副业收入",
+        "一件代发无需囤货"
+      ]
+    },
+    "paymentMethods": {
+      "title": "付款方式与订购流程",
+      "description": "了解 FAOS 安全便捷的付款方式，包括二维码转账或信用卡支付。",
+      "keywords": [
+        "FAOS 付款方式",
+        "如何订购橄榄油",
+        "信用卡购买蜂蜜",
+        "扫码支付",
+        "支付安全"
+      ]
+    },
+    "privacyPolicy": {
+      "title": "隐私政策与使用条款",
+      "description": "FAOS 隐私政策。了解我们如何保护您的个人数据及交易安全。",
+      "keywords": ["隐私政策", "条款与细则", "数据安全", "FAOS 隐私条款"]
+    },
+    "profile": {
+      "title": "我的账户",
+      "keywords": []
+    },
+    "cart": {
+      "title": "我的购物车",
+      "description": "检查您的选购列表，准备下单 FAOS 高端系列产品。",
+      "keywords": []
     }
   }
 }

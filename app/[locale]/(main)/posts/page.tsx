@@ -12,15 +12,17 @@ interface Props {
   params: Promise<{ locale: string }>
 }
 
-export const generateMetadata = async ({
-  params,
-}: Props): Promise<Metadata> => {
+const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'meta' })
+
+  const keywords = t.raw('blog.keywords')
 
   return constructMetadata({
     title: t('blog.title'),
     description: t('blog.description'),
+    canonicalPath: '/blog',
+    keywords: keywords,
   })
 }
 
@@ -36,4 +38,5 @@ const PostsPage = async ({ params }: Props) => {
   return <PostsClient initialData={initialData} />
 }
 
+export { generateMetadata }
 export default PostsPage

@@ -21,7 +21,6 @@ interface Props {
 
 const PostExploreSection = ({ initialData, itemsPerPage }: Props) => {
   const locale = useLocale()
-
   const tShared = useTranslations('shared')
   const tActions = useTranslations('actions')
 
@@ -39,8 +38,8 @@ const PostExploreSection = ({ initialData, itemsPerPage }: Props) => {
   }
 
   return (
-    <Container>
-      <AppSection>
+    <AppSection>
+      <Container className='flex flex-col gap-10'>
         <SectionHeader
           description={tShared('blogDiscovery.description')}
           title={tShared('blogDiscovery.title')}
@@ -62,8 +61,8 @@ const PostExploreSection = ({ initialData, itemsPerPage }: Props) => {
             {tActions('more')}
           </Button>
         </Link>
-      </AppSection>
-    </Container>
+      </Container>
+    </AppSection>
   )
 }
 

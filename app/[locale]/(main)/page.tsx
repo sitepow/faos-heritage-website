@@ -30,7 +30,6 @@ export async function generateMetadata({
 
 const HomePage = async () => {
   const t = await getTranslations('shared.categoryDiscovery')
-
   const locale = await getLocale()
   const products = await getProductsInfinite({
     limit: PAGINATION.ITEMS_PER_PAGE,
@@ -39,19 +38,26 @@ const HomePage = async () => {
 
   return (
     <AppSection>
-      <div className='flex flex-col gap-10'>
-        <SectionHeader description={t('description')} title={t('title')} />
+      <header className='flex flex-col gap-10'>
+        <SectionHeader
+          as='h1'
+          description={t('description')}
+          title={t('title')}
+        />
         <CategoryLists />
-      </div>
+      </header>
+
       <ProductExploreSection
         initialData={products}
         itemsPerPage={PAGINATION.ITEMS_PER_PAGE}
       />
+
       <PostExploreSection itemsPerPage={PAGINATION.ITEMS_PER_PAGE} />
-      <div className='flex flex-col'>
+
+      <aside className='flex flex-col'>
         <AdvertiseBanner />
         <AffiliateBanner className='rounded-none' />
-      </div>
+      </aside>
     </AppSection>
   )
 }

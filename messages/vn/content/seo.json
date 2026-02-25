@@ -1,43 +1,119 @@
 {
   "meta": {
+    "brandName": "FAOS HERITAGE GREEK FOOD",
     "keywords": [
       "FAOS",
-      "Dầu Ô liu Hữu cơ",
-      "Dầu Ô liu Nguyên chất Thượng hạng",
-      "Mật ong Tự nhiên Nguyên chất 100%",
-      "Mật ong Hữu cơ",
-      "Thực phẩm Sức khỏe Cao cấp",
-      "Thương hiệu dầu ô liu thô tốt nhất",
-      "Mua mật ong nguyên chất ở đâu",
-      "Dầu ô liu tốt cho sức khỏe"
+      "FAOS Heritage Greek Food",
+      "Dầu Oliu Hữu Cơ",
+      "Mật Ong Tự Nhiên 100%",
+      "Thực Phẩm Sức Khỏe Cao Cấp",
+      "Chế Độ Ăn Địa Trung Hải",
+      "Patcharin Chanaphakdee"
     ],
     "home": {
-      "title": "FAOS - Dầu Ô liu Hữu cơ Thượng hạng & Mật ong Nguyên chất 100%",
-      "description": "Nguồn cung cấp hàng đầu dầu ô liu nguyên chất thượng hạng และ mật ong hữu cơ 100% tự nhiên. Sản phẩm cao cấp cho sức khỏe tối ưu, giao hàng tận nơi với nhiều ưu đãi độc quyền."
+      "title": "Dầu Oliu Hữu Cơ và Mật Ong Nguyên Chất Cao Cấp từ Hy Lạp",
+      "description": "Dầu Oliu Hữu Cơ Extra Virgin Hy Lạp và Mật Ong Tự Nhiên 100%. Nhập khẩu trực tiếp từ Hy Lạp cho sức khỏe của bạn.",
+      "keywords": [
+        "Nhập khẩu dầu oliu Hy Lạp",
+        "Nguồn mật ong nguyên chất",
+        "Sản phẩm sức khỏe Hy Lạp",
+        "Greek Heritage Food"
+      ]
     },
     "products": {
-      "title": "Mua Dầu Ô liu & Mật ong Nguyên chất - Tất cả Sản phẩm | FAOS",
-      "description": "Khám phá danh mục sản phẩm sức khỏe được tuyển chọn, gồm dầu ô liu nguyên chất thượng hạng và mật ong rừng tự nhiên. Chứng nhận hữu cơ, an toàn và không phụ gia."
+      "title": "Mua Dầu Oliu Hữu Cơ và Mật Ong Nguyên Chất",
+      "description": "Sản phẩm sức khỏe, dầu oliu tinh khiết và mật ong rừng tự nhiên từ Hy Lạp. Chứng nhận hữu cơ, an toàn không phụ gia.",
+      "keywords": [
+        "Mua dầu oliu thật ở đâu",
+        "Giá dầu oliu Extra Virgin",
+        "Thương hiệu mật ong hữu cơ tốt nhất",
+        "Bán dầu oliu cao cấp"
+      ]
     },
     "productDetail": {
-      "title": "{name} - Dầu Ô liu & Mật ong Cao cấp bởi FAOS",
-      "description": "Đặt mua {name}, chất lượng cao cấp 100% từ thiên nhiên. Đảm bảo độ tinh khiết với tiêu chuẩn hữu cơ. Đặt hàng dễ dàng, giao hàng nhanh và cam kết chính hãng."
+      "title": "{name}",
+      "description": "Đặt hàng {name}, chất lượng tự nhiên cao cấp 100%. Tiêu chuẩn hữu cơ, trực tiếp từ Hy Lạp.",
+      "keywords": [
+        "Dầu oliu uống trực tiếp",
+        "Hàm lượng Polyphenol cao",
+        "Dầu oliu ép lạnh",
+        "Mật ong rừng tự nhiên"
+      ]
     },
     "category": {
-      "title": "{categoryName} Hữu cơ - Sản phẩm Sức khỏe & Wellness FAOS",
-      "description": "Khám phá những sản phẩm tốt nhất trong bộ sưu tập {categoryName}. Sản phẩm tự nhiên tiêu chuẩn xuất khẩu dành riêng cho lối sống lành mạnh của bạn."
+      "title": "Danh mục {categoryName}",
+      "description": "Lựa chọn các sản phẩm {categoryName} tự nhiên loại xuất khẩu từ Hy Lạp cho lối sống lành mạnh của bạn.",
+      "keywords": [
+        "Chất chống oxy hóa tự nhiên",
+        "Dầu oliu tốt cho sức khỏe",
+        "Mật ong bổ dưỡng",
+        "Thực phẩm sạch cao cấp"
+      ]
     },
     "about": {
-      "title": "Về FAOS - Di sản Tinh khiết từ Thiên nhiên",
-      "description": "FAOS chuyên gia về dầu ô liu và mật ong hữu cơ thượng hạng, được chế tác tỉ mỉ từ nguồn nguyên liệu 100% tự nhiên và bền vững."
+      "title": "Về Chúng Tôi",
+      "description": "FAOS là chuyên gia về dầu oliu hữu cơ và mật ong cao cấp từ các vùng di sản thế giới tại Hy Lạp.",
+      "keywords": [
+        "Lịch sử thương hiệu FAOS",
+        "Dầu oliu di sản thế giới",
+        "Vườn oliu Hy Lạp",
+        "Tiêu chuẩn hữu cơ quốc tế"
+      ]
     },
     "blog": {
-      "title": "Blog Ẩm thực Hy Lạp & Sức khỏe Hữu cơ - FAOS HERITAGE GREEK FOOD",
-      "description": "Tìm hiểu về lợi ích sức khỏe của Dầu Ô-liu Nguyên chất, Mật ong Hy Lạp Thô 100% và các công thức nấu ăn Địa Trung Hải lành mạnh. Cập nhật thông tin cùng FAOS HERITAGE GREEK FOOD."
+      "title": "Blog Sức Khỏe và Ẩm Thực Hy Lạp",
+      "description": "Tìm hiểu lợi ích của dầu oliu và mật ong Hy Lạp, cùng các công thức nấu ăn Địa Trung Hải tốt cho sức khỏe.",
+      "keywords": [
+        "Lợi ích của dầu oliu",
+        "Công thức nấu ăn Địa Trung Hải",
+        "Khi nào nên dùng dầu oliu",
+        "Cách phân biệt dầu oliu thật"
+      ]
     },
     "blogDetail": {
-      "title": "{title} - Blog Sức khỏe & Di sản - FAOS HERITAGE GREEK FOOD",
-      "description": "{summary}"
+      "title": "{title}",
+      "description": "{summary}",
+      "keywords": []
+    },
+    "affiliate": {
+      "title": "Chương Trình Đại Lý và Affiliate",
+      "description": "Kiếm thu nhập cùng FAOS qua chương trình affiliate dầu oliu và mật ong cao cấp. Hoa hồng lên đến 10%.",
+      "keywords": [
+        "Nhà phân phối dầu oliu",
+        "Affiliate FAOS",
+        "Thu nhập thụ động online",
+        "Bán hàng online không cần kho"
+      ]
+    },
+    "paymentMethods": {
+      "title": "Phương Thức Thanh Toán và Các Bước Đặt Hàng",
+      "description": "Tìm hiểu các phương thức thanh toán an toàn tại FAOS, bao gồm chuyển khoản QR Code hoặc Thẻ tín dụng.",
+      "keywords": [
+        "Cách thanh toán FAOS",
+        "Cách đặt mua dầu oliu",
+        "Mua mật ong bằng thẻ tín dụng",
+        "Thanh toán mã QR",
+        "An toàn thanh toán"
+      ]
+    },
+    "privacyPolicy": {
+      "title": "Chính Sách Bảo Mật và Điều Khoản Sử Dụng",
+      "description": "Chính sách bảo mật FAOS. Chi tiết về bảo vệ dữ liệu cá nhân và an toàn cho người dùng.",
+      "keywords": [
+        "Chính sách bảo mật",
+        "Điều khoản và điều kiện",
+        "Bảo mật dữ liệu",
+        "FAOS Privacy Policy"
+      ]
+    },
+    "profile": {
+      "title": "Hồ Sơ Của Tôi",
+      "keywords": []
+    },
+    "cart": {
+      "title": "Giỏ Hàng Của Tôi",
+      "description": "Kiểm tra các mặt hàng đã chọn và chuẩn bị đặt hàng các sản phẩm cao cấp từ FAOS.",
+      "keywords": []
     }
   }
 }

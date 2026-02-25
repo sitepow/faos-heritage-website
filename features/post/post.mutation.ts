@@ -4,7 +4,7 @@ import {
   createPost,
   updatePost,
   deletePost,
-  increaseViewCount,
+  increasePostView,
 } from './post.action'
 import { postQueryKeys } from './post.query-key'
 
@@ -29,7 +29,7 @@ const usePostMutation = () => {
   })
 
   const increaseView = useMutation({
-    mutationFn: (id: string) => increaseViewCount(id),
+    mutationFn: (id: string) => increasePostView(id),
     onSuccess: (_, id) => {
       queryClient.invalidateQueries({
         queryKey: postQueryKeys.details.byId(id),

@@ -1,43 +1,119 @@
 {
   "meta": {
+    "brandName": "FAOS HERITAGE GREEK FOOD",
     "keywords": [
       "FAOS",
+      "FAOS Heritage Greek Food",
       "Olio d'Oliva Biologico",
-      "Olio Extra Vergine di Oliva",
-      "Miele Naturale Puro al 100%",
-      "Miele Biologico",
-      "Alimenti Salutari Premium",
-      "Migliore marca di olio d'oliva a crudo",
-      "Dove acquistare miele autentico",
-      "Olio d'oliva per la salute"
+      "Miele Naturale al 100%",
+      "Cibo Salutare Premium",
+      "Dieta Mediterranea",
+      "Patcharin Chanaphakdee"
     ],
     "home": {
-      "title": "FAOS - Olio d'Oliva Biologico Premium e Miele Autentico Puro al 100%",
-      "description": "La fonte principale di Olio Extra Vergine di Oliva e Miele Biologico 100% naturali. Qualità premium selezionata per la tua salute ottimale, consegnata a casa tua con promozioni esclusive."
+      "title": "Olio d'Oliva Biologico e Miele Puro dalla Grecia Premium",
+      "description": "Olio d'oliva biologico extra vergine greco e miele naturale al 100% direttamente dalla Grecia per la tua salute premium.",
+      "keywords": [
+        "Olio d'Oliva Greco Importato",
+        "Fonte di Miele Puro",
+        "Prodotti Greci per la Salute",
+        "Greek Heritage Food"
+      ]
     },
     "products": {
-      "title": "Acquista Olio d'Oliva e Miele Autentici - Tutti i Prodotti | FAOS",
-      "description": "Esplora la nostra selezione curata di prodotti per la salute, con puro Olio Extra Vergine di Oliva e miele naturale selvatico. Certificato biologico, sicuro e privo di additivi."
+      "title": "Acquista Olio d'Oliva Biologico e Miele Puro",
+      "description": "Prodotti salutari, olio d'oliva puro e miele naturale dalla Grecia. Certificati biologici, sicuri e senza additivi.",
+      "keywords": [
+        "Dove acquistare vero olio d'oliva",
+        "Prezzo Olio Extra Vergine",
+        "Migliore Marca Miele Bio",
+        "Vendita Olio Premium"
+      ]
     },
     "productDetail": {
-      "title": "{name} - Olio d'Oliva e Miele Premium di FAOS",
-      "description": "Ordina {name}, qualità premium al 100% dalla natura. Purezza garantita con standard biologici. Ordine facile, spedizione veloce e autenticità garantita al 100%."
+      "title": "{name}",
+      "description": "Ordina {name}, qualità naturale premium al 100%. Standard biologici, direttamente dalla Grecia.",
+      "keywords": [
+        "Olio d'oliva da consumare a crudo",
+        "Alti Polifenoli",
+        "Olio d'Oliva Spremutura a Freddo",
+        "Miele Selvatico Naturale"
+      ]
     },
     "category": {
-      "title": "{categoryName} Biologico - Prodotti per la Salute e il Benessere FAOS",
-      "description": "Scopri i migliori prodotti nella nostra collezione {categoryName}. Prodotti naturali di qualità export curati esclusivamente per il tuo stile di vita sano."
+      "title": "Categoria {categoryName}",
+      "description": "Seleziona i prodotti naturali {categoryName} dalla Grecia per il tuo stile di vita sano.",
+      "keywords": [
+        "Antiossidanti Naturali",
+        "Olio d'Oliva Salutare",
+        "Miele Nutriente",
+        "Premium Clean Food"
+      ]
     },
     "about": {
-      "title": "Chi Siamo FAOS - Un'Eredità di Purezza dalla Natura",
-      "description": "FAOS è specialista in olio d'oliva e miele biologici premium, creati meticolosamente da fonti 100% naturali e sostenibili."
+      "title": "Chi Siamo",
+      "description": "FAOS è esperto in olio d'oliva biologico e miele premium provenienti dai siti del patrimonio mondiale in Grecia.",
+      "keywords": [
+        "Storia del Marchio FAOS",
+        "Olio d'Oliva Patrimonio Mondiale",
+        "Uliveti Greci",
+        "Standard Biologici Internazionali"
+      ]
     },
     "blog": {
-      "title": "Blog Cibo Greco e Salute Bio - FAOS HERITAGE GREEK FOOD",
-      "description": "Scopri i benefici per la salute dell'olio extravergine di oliva, del miele greco grezzo al 100% e delle sane ricette mediterranee. Resta informato con FAOS HERITAGE GREEK FOOD."
+      "title": "Blog di Salute e Cucina Greca",
+      "description": "Scopri i benefici dell'olio d'oliva e del miele greco, con ricette mediterranee per una salute migliore.",
+      "keywords": [
+        "Benefici dell'Olio d'Oliva",
+        "Ricette Mediterranee",
+        "Quando consumare olio d'oliva",
+        "Come riconoscere il vero olio d'oliva"
+      ]
     },
     "blogDetail": {
-      "title": "{title} - Blog Salute e Retaggio - FAOS HERITAGE GREEK FOOD",
-      "description": "{summary}"
+      "title": "{title}",
+      "description": "{summary}",
+      "keywords": []
+    },
+    "affiliate": {
+      "title": "Programma Affiliati e Rivenditori",
+      "description": "Guadagna con FAOS attraverso il nostro programma affiliati. Commissioni fino al 10%. Facile iscrizione.",
+      "keywords": [
+        "Distributore Olio d'Oliva",
+        "Affiliato FAOS",
+        "Guadagno Online",
+        "Vendere Online senza Magazzino"
+      ]
+    },
+    "paymentMethods": {
+      "title": "Metodi di Pagamento e Passaggi per l'Ordine",
+      "description": "Scopri metodi di pagamento sicuri con FAOS, inclusi trasferimenti QR Code o Carte di Credito.",
+      "keywords": [
+        "Metodi di Pagamento FAOS",
+        "Come ordinare olio d'oliva",
+        "Acquista miele con carta",
+        "Pagamento QR Code",
+        "Sicurezza dei Pagamenti"
+      ]
+    },
+    "privacyPolicy": {
+      "title": "Privacy Policy e Termini di Utilizzo",
+      "description": "Informativa sulla Privacy FAOS. Dettagli sulla protezione dei dati personali e sicurezza dell'utente.",
+      "keywords": [
+        "Privacy Policy",
+        "Termini e Condizioni",
+        "Sicurezza dei Dati",
+        "FAOS Privacy Policy"
+      ]
+    },
+    "profile": {
+      "title": "Il Mio Profilo",
+      "keywords": []
+    },
+    "cart": {
+      "title": "Il Tuo Carrello",
+      "description": "Controlla i tuoi articoli e preparati per l'ordine dei prodotti premium FAOS.",
+      "keywords": []
     }
   }
 }

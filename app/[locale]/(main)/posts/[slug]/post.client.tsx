@@ -19,17 +19,17 @@ import { usePostMutation } from '@/features/post/post.mutation'
 
 interface Props {
   initialData: GetPostResult
-  postId: string
+  slug: string
 }
 
-const PostClient = ({ initialData, postId }: Props) => {
+const PostClient = ({ initialData, slug }: Props) => {
   const locale = useLocale()
   const tBreadcrumb = useTranslations('navigation.breadcrumb')
   const { increaseView } = usePostMutation()
   const isIncreased = useRef(false)
 
   const { data: post } = usePost({
-    id: postId,
+    slug,
     locale,
     initialData,
   })
@@ -37,17 +37,18 @@ const PostClient = ({ initialData, postId }: Props) => {
   const currentPost = post || initialData
 
   useEffect(() => {
-    if (!isIncreased.current && postId) {
-      increaseView(postId)
+    if (!isIncreased.current && slug) {
+      increaseView(slug)
       isIncreased.current = true
     }
-  }, [postId, increaseView])
+  }, [slug, increaseView])
 
   if (!currentPost) {
     return null
   }
 
   const {
+    id: postId,
     title,
     content,
     featuredImage,
@@ -56,7 +57,7 @@ const PostClient = ({ initialData, postId }: Props) => {
     publishedAt,
     viewCount = 0,
     summary,
-    _count: { comments },
+    _count,
   } = currentPost
 
   const breadcrumbItems = [
@@ -71,13 +72,15 @@ const PostClient = ({ initialData, postId }: Props) => {
   return (
     <Container>
       <AppSection>
-        <DynamicBreadcrumb items={breadcrumbItems} />
+        <nav aria-label='Breadcrumb'>
+          <DynamicBreadcrumb items={breadcrumbItems} />
+        </nav>
 
         <article className='flex flex-col gap-5'>
           <PostHeader
             author={author}
             category={category}
-            commentCount={comments}
+            commentCount={_count?.comments || 0}
             featuredImage={featuredImage}
             publishedAt={publishedAt}
             title={title}
@@ -85,27 +88,36 @@ const PostClient = ({ initialData, postId }: Props) => {
           />
 
           {summary && (
-            <div className='mx-auto my-5 w-full max-w-4xl'>
+            <section
+              aria-label='Post summary'
+              className='mx-auto my-5 w-full max-w-4xl'
+            >
               <p className='text-default-600 border-primary border-l-4 pl-4 text-xl leading-relaxed italic'>
                 {summary}
               </p>
-            </div>
+            </section>
           )}
 
-          <MarkdownRenderer
-            className='mx-auto w-full max-w-[1280px]'
-            content={content!}
-            fallbackAlt={title!}
-          />
+          <section aria-label='Post content' className='w-full'>
+            <MarkdownRenderer
+              className='mx-auto w-full max-w-[1280px]'
+              content={content!}
+              fallbackAlt={title!}
+            />
+          </section>
 
           <PostAuthor author={author} />
 
-          <RelatedPosts
-            categoryId={currentPost.categoryId}
-            excludeId={postId}
-          />
+          <aside aria-label='Related articles'>
+            <RelatedPosts
+              categoryId={currentPost.categoryId}
+              excludeId={postId}
+            />
+          </aside>
 
-          <CommentSection postId={postId} />
+          <section aria-label='Post comments' id='comments'>
+            <CommentSection postId={postId} />
+          </section>
         </article>
       </AppSection>
     </Container>

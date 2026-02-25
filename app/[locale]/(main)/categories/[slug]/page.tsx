@@ -4,32 +4,36 @@ import type { Metadata } from 'next'
 
 import { CategoryClient } from './category.client'
 
-import { getCategory } from '@/features/category/category.action'
+import { getCategoryBySlug } from '@/features/category/category.action'
 import { constructMetadata } from '@/lib/metadata'
-import { parseSlug } from '@/lib/slug'
 
-export async function generateMetadata({
-  params,
-}: {
+interface Props {
   params: Promise<{ locale: string; slug: string }>
-}): Promise<Metadata> {
+}
+
+const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
   const { slug, locale } = await params
-  const categoryId = parseSlug(slug)
 
   const t = await getTranslations({ locale, namespace: 'meta' })
-  const category = await getCategory(categoryId!, locale!)
+  const category = await getCategoryBySlug(slug, locale)
+
+  const keywords = t.raw('category.keywords')
 
   return constructMetadata({
-    title: t('category.title', { categoryName: category?.name! }),
-    description: t('category.description', { categoryName: category?.name! }),
+    title: t('category.title', { categoryName: category?.name || 'Category' }),
+    description: t('category.description', {
+      categoryName: category?.name || 'Category',
+    }),
+    canonicalPath: `/categories/${slug}`,
+    keywords: keywords,
   })
 }
 
-const CategoryPage = async ({ params }: { params: { slug: string } }) => {
+const CategoryPage = async ({ params }: Props) => {
   const { slug } = await params
-  const categoryId = parseSlug(slug)
 
-  return <CategoryClient categoryId={categoryId} />
+  return <CategoryClient slug={slug} />
 }
 
+export { generateMetadata }
 export default CategoryPage

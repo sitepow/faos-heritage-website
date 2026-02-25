@@ -18,6 +18,7 @@ const applyLocalization = <T extends Record<string, any>>(
       'metaTitle',
       'metaDescription',
       'unit',
+      'keywords',
     ]
     fieldsToLocalize.forEach((field) => {
       if (field in localization && localization[field]) {

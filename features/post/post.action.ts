@@ -18,6 +18,37 @@ import { getServerUser, withRole } from '@/lib/session'
 import { omitEmptyFields } from '@/utils'
 import { applyLocalization } from '@/utils/localization'
 
+const getPostBySlug = async (slug: string, locale?: string) => {
+  const languageCode = locale?.toUpperCase()
+
+  const post = await prisma.post.findUnique({
+    where: { slug },
+    include: {
+      category: {
+        include: {
+          localizations: { where: { languageCode }, take: 1 },
+        },
+      },
+      tags: {
+        include: {
+          localizations: { where: { languageCode }, take: 1 },
+        },
+      },
+      author: { select: { name: true, image: true } },
+      localizations: { where: { languageCode }, take: 1 },
+      _count: {
+        select: { comments: { where: { status: ReviewStatus.APPROVED } } },
+      },
+    },
+  })
+
+  if (!post) {
+    return null
+  }
+
+  return applyLocalization(post)
+}
+
 const createPost = async (data: PostInput) =>
   withRole([Role.ADMIN], async () => {
     const validated = postSchema.safeParse(data)
@@ -215,14 +246,29 @@ const getPostStats = async () =>
     ]
   })
 
-const increaseViewCount = async (id: string) => {
-  if (!id) return fail(ERROR_CODES.BAD_REQUEST)
+const increasePostView = async (identifier: string) => {
+  if (!identifier) {
+    return fail(ERROR_CODES.BAD_REQUEST)
+  }
 
   try {
+    const post = await prisma.post.findFirst({
+      where:
+        identifier.includes('-') || identifier.length < 15
+          ? { slug: identifier }
+          : { id: identifier },
+      select: { id: true },
+    })
+
+    if (!post) {
+      return fail(ERROR_CODES.DATA_NOT_FOUND)
+    }
+
     await prisma.post.update({
-      where: { id },
+      where: { id: post.id },
       data: { viewCount: { increment: 1 } },
     })
+
     return ok()
   } catch {
     return fail(ERROR_CODES.SYSTEM_ERROR)
@@ -233,13 +279,14 @@ type GetPostResult = Awaited<ReturnType<typeof getPost>>
 type GetPostsInfiniteResult = Awaited<ReturnType<typeof getPostsInfinite>>
 
 export {
+  getPostBySlug,
   createPost,
   updatePost,
   deletePost,
   getPost,
   getPostsInfinite,
   getPostStats,
-  increaseViewCount,
+  increasePostView,
 }
 
 export type { GetPostResult, GetPostsInfiniteResult }

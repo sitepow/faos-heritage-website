@@ -24,8 +24,11 @@ const productQueryKeys = {
   details: {
     all: () => [...productQueryKeys.all, 'detail'] as const,
 
-    byId: (id: string, context?: { locale?: string; userId?: string }) =>
-      [...productQueryKeys.details.all(), id, context ?? {}] as const,
+    bySlug: (slug: string, context?: { locale?: string; userId?: string }) =>
+      [...productQueryKeys.details.all(), slug, context ?? {}] as const,
+
+    byId: (id: string) =>
+      [...productQueryKeys.details.all(), 'id', id] as const,
   },
 
   stats: () => [...productQueryKeys.all, 'stats'] as const,

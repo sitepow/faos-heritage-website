@@ -14,6 +14,7 @@ interface Props {
   className?: string
   showStock?: boolean
 }
+
 const VariantTable = ({ variants, className, showStock = true }: Props) => {
   const t = useTranslations('variantTable')
   const tProductDetail = useTranslations('productDetail')
@@ -28,11 +29,13 @@ const VariantTable = ({ variants, className, showStock = true }: Props) => {
   return (
     <div
       className={cn(
-        'border-default-100 w-full overflow-x-auto border',
+        'border-default-100 w-full min-w-[400px] overflow-x-auto border',
         className,
       )}
     >
       <table className='w-full min-w-[400px] border-separate border-spacing-0 text-left text-xs'>
+        <caption className='sr-only'>Product Variants</caption>
+
         <thead>
           <tr className='border-default-100 *:border-default-100 text-default-500 border-b tracking-wider uppercase *:border-b *:px-3 *:py-2.5 *:font-semibold'>
             <th
@@ -40,13 +43,21 @@ const VariantTable = ({ variants, className, showStock = true }: Props) => {
                 'sticky left-0 z-10 backdrop-blur-md',
                 stickyBorderClass,
               )}
+              scope='col'
             >
               {t('size')}
             </th>
-            <th className='text-right'>{t('price')}</th>
-            {showStock && <th className='text-right'>{t('stock')}</th>}
+            <th className='text-right' scope='col'>
+              {t('price')}
+            </th>
+            {showStock && (
+              <th className='text-right' scope='col'>
+                {t('stock')}
+              </th>
+            )}
           </tr>
         </thead>
+
         <tbody className='divide-default-100 divide-y'>
           {variants.map((variant, idx) => {
             const stock = variant.stockQuantity ?? 0
@@ -55,14 +66,15 @@ const VariantTable = ({ variants, className, showStock = true }: Props) => {
 
             return (
               <tr key={`${variant.name}-${idx}`} className='*:px-3 *:py-2.5'>
-                <td
+                <th
                   className={cn(
-                    'text-default-700 bg-content1/50 sticky left-0 z-10 backdrop-blur-md',
+                    'text-default-700 bg-content1/50 sticky left-0 z-10 font-medium backdrop-blur-md',
                     stickyBorderClass,
                   )}
+                  scope='row'
                 >
                   {variant.name}
-                </td>
+                </th>
                 <td className='text-right'>
                   <PriceDisplay {...priceInfo} />
                 </td>

@@ -20,11 +20,16 @@ const postQueryKeys = {
 
   details: {
     all: () => [...postQueryKeys.all, 'detail'],
-    byId: (id: string, metadata?: { locale?: string }) =>
-      [...postQueryKeys.details.all(), id, metadata].filter(Boolean),
+
+    bySlug: (slug: string, metadata?: { locale?: string }) => {
+      const base = [...postQueryKeys.details.all(), slug]
+      return metadata ? [...base, metadata] : base
+    },
+
+    byId: (id: string) => [...postQueryKeys.details.all(), 'id', id],
   },
 
-  stats: () => [...postQueryKeys.all, 'stats'],
+  stats: () => [...postQueryKeys.all, 'stats'] as const,
 }
 
 export { postQueryKeys }

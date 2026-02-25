@@ -9,13 +9,10 @@ import { Container } from '../../Container'
 import { useBlogCategories } from '@/features/blog-category/blog-category.hook'
 import { useCategories } from '@/features/category/category.hook'
 import { useStaticNavLinks } from '@/hooks/useStaticNavLinks'
-import { generateSlugWithId } from '@/utils'
 
 const NavbarMenu = () => {
   const locale = useLocale()
-
   const { staticLinks } = useStaticNavLinks()
-
   const { data: categories } = useCategories({ locale })
   const { data: blogCategories } = useBlogCategories({
     filters: { isActive: true },
@@ -23,29 +20,35 @@ const NavbarMenu = () => {
   })
 
   return (
-    <Container className='hidden flex-wrap justify-center gap-5 xl:flex'>
-      {staticLinks.map((link) => (
-        <Link key={link.key} href={link.href}>
-          <MenuItem label={link.label} />
-        </Link>
-      ))}
+    <nav className='hidden xl:block'>
+      <Container className='flex flex-wrap justify-center gap-5'>
+        <ul className='flex flex-wrap justify-center gap-5'>
+          {staticLinks.map((link) => (
+            <li key={link.key}>
+              <Link href={link.href}>
+                <MenuItem label={link.label} />
+              </Link>
+            </li>
+          ))}
 
-      {blogCategories?.filter(Boolean).map((category) => (
-        <Link key={category?.id!} href={`/posts/category/${category?.slug!}`}>
-          <MenuItem label={category?.name!} />
-        </Link>
-      ))}
+          {blogCategories?.filter(Boolean).map((category) => (
+            <li key={category?.id}>
+              <Link href={`/posts/category/${category?.slug}`}>
+                <MenuItem label={category?.name!} />
+              </Link>
+            </li>
+          ))}
 
-      {categories?.map((category) => {
-        const slug = generateSlugWithId(category?.name!, category?.id!)
-
-        return (
-          <Link key={category?.id} href={`/categories/${slug}`}>
-            <MenuItem label={category?.name!} />
-          </Link>
-        )
-      })}
-    </Container>
+          {categories?.map((category) => (
+            <li key={category?.id}>
+              <Link href={`/categories/${category?.slug}`}>
+                <MenuItem label={category?.name!} />
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </Container>
+    </nav>
   )
 }
 

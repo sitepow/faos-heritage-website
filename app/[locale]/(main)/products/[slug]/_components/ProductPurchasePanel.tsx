@@ -18,7 +18,6 @@ import { useCartMutation } from '@/features/cart/cart.mutation'
 import { useFavoriteMutation } from '@/features/favorite/favorite.mutation'
 import { useProductDetailStore } from '@/features/product/product.store'
 import { useShortenMutation } from '@/features/shorten/shorten.hook'
-import { generateSlugWithId } from '@/utils'
 
 const ProductPurchasePanel = () => {
   const tActions = useTranslations('actions')
@@ -68,7 +67,7 @@ const ProductPurchasePanel = () => {
       return ''
     }
 
-    const baseUrl = `${process.env.NEXT_PUBLIC_APP_URL}/${locale}/products/${generateSlugWithId(product.name, product.id)}`
+    const baseUrl = `${process.env.NEXT_PUBLIC_APP_URL}/${locale}/products/${product?.slug!}`
 
     return affiliateCode.length > 0
       ? `${baseUrl}?ref=${affiliateCode}`
@@ -98,9 +97,11 @@ const ProductPurchasePanel = () => {
   return (
     <Card className='border-default-100 border' radius='sm' shadow='none'>
       <CardBody className='flex flex-col gap-4'>
-        <h1 className='py-3 text-xl font-semibold sm:text-2xl lg:text-4xl'>
-          {product.name}
-        </h1>
+        <header>
+          <h1 className='py-3 text-xl font-semibold sm:text-2xl lg:text-4xl'>
+            {product.name}
+          </h1>
+        </header>
 
         <div className='flex flex-wrap items-center gap-2'>
           <CategoryChip categoryName={product.category?.name} />
@@ -113,17 +114,23 @@ const ProductPurchasePanel = () => {
           <CommentCount commentCount={product?._count?.comments || 0} />
         </div>
 
-        <VariantTable variants={product?.variants || []} />
+        <section aria-label='Product variants'>
+          <VariantTable variants={product?.variants || []} />
 
-        {hasVariants && (
-          <VariantSelect
-            selectedVariantId={selectedVariantId}
-            variants={product.variants ?? []}
-            onChange={(id) => setSelectedVariantId(id)}
-          />
+          {hasVariants && (
+            <VariantSelect
+              selectedVariantId={selectedVariantId}
+              variants={product.variants ?? []}
+              onChange={(id) => setSelectedVariantId(id)}
+            />
+          )}
+        </section>
+
+        {product.summary && (
+          <section aria-label='Product summary'>
+            <MarkdownRenderer content={product.summary} />
+          </section>
         )}
-
-        {product.summary && <MarkdownRenderer content={product.summary} />}
 
         <div className='flex gap-2 pt-4'>
           <Button
@@ -170,12 +177,15 @@ const ProductPurchasePanel = () => {
           </Button>
         </div>
 
-        <div className='bg-default-50 border-default-200 mt-4 flex flex-col gap-3 rounded-md border p-4'>
+        <section
+          aria-label='Affiliate Program'
+          className='bg-default-50 border-default-200 mt-4 flex flex-col gap-3 rounded-md border p-4'
+        >
           <div className='flex flex-wrap items-center gap-2'>
             <Share2Icon className='text-default-500' size={18} />
-            <span className='text-sm font-bold'>
+            <h2 className='text-sm font-bold'>
               {tActions('shareTitle') || 'สร้างลิงก์แนะนำสินค้า'}
-            </span>
+            </h2>
           </div>
 
           <div className='mt-5 flex flex-wrap items-end gap-2'>
@@ -210,7 +220,7 @@ const ProductPurchasePanel = () => {
               />
             </div>
           </div>
-        </div>
+        </section>
       </CardBody>
     </Card>
   )

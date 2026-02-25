@@ -53,12 +53,14 @@ const PostHeader = ({
           {title}
         </h1>
 
-        <PostCardMeta
-          author={author!}
-          commentCount={commentCount}
-          publishedAt={publishedAt!}
-          viewCount={viewCount}
-        />
+        <div className='text-white'>
+          <PostCardMeta
+            author={author!}
+            commentCount={commentCount}
+            publishedAt={publishedAt!}
+            viewCount={viewCount}
+          />
+        </div>
       </div>
     </header>
   )

@@ -28,9 +28,10 @@ const ProductSimilar = () => {
   }
 
   return (
-    <>
+    <section className='flex flex-col gap-6' id='similar-products'>
       <SectionHeader
         description={tRelatedProducts('description')}
+        id='similar-products-title'
         title={tRelatedProducts('title')}
       />
       <ProductSection
@@ -38,7 +39,7 @@ const ProductSimilar = () => {
         itemPerPage={PAGINATION.ITEMS_PER_PAGE}
         items={items}
       />
-    </>
+    </section>
   )
 }
 

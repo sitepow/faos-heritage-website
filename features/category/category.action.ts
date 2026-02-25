@@ -13,6 +13,29 @@ import { withRole } from '@/lib/session'
 import { omitEmptyFields } from '@/utils'
 import { applyLocalization } from '@/utils/localization'
 
+const getCategoryBySlug = async (slug: string, locale?: string) => {
+  const languageCode = locale?.toUpperCase()
+
+  const category = await prisma.category.findUnique({
+    where: { slug },
+    include: {
+      localizations: {
+        where: { languageCode },
+        take: 1,
+      },
+      _count: {
+        select: { products: true },
+      },
+    },
+  })
+
+  if (!category) {
+    return null
+  }
+
+  return applyLocalization(category)
+}
+
 const createCategory = async (data: CategoryInput) =>
   withRole([Role.ADMIN], async () => {
     const validated = categorySchema.safeParse(data)
@@ -139,6 +162,7 @@ type GetCategoryResult = Awaited<ReturnType<typeof getCategory>>
 type GetCategoriesResult = Awaited<ReturnType<typeof getCategories>>
 
 export {
+  getCategoryBySlug,
   createCategory,
   updateCategory,
   deleteCategory,

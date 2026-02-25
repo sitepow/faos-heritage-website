@@ -2,27 +2,24 @@ import type { MetadataRoute } from 'next'
 
 import { routing } from '@/i18n/routing'
 import { prisma } from '@/lib/prisma'
-import { generateSlugWithId } from '@/utils'
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
   const baseUrl = process.env.APP_URL!
 
-  const products = await prisma.product.findMany({
-    where: { isActive: true },
-    select: {
-      id: true,
-      name: true,
-      updatedAt: true,
-    },
-  })
-
-  const categories = await prisma.category.findMany({
-    where: { isActive: true },
-    select: {
-      id: true,
-      name: true,
-    },
-  })
+  const [products, categories, posts] = await Promise.all([
+    prisma.product.findMany({
+      where: { isActive: true },
+      select: { slug: true, updatedAt: true },
+    }),
+    prisma.category.findMany({
+      where: { isActive: true },
+      select: { slug: true, updatedAt: true },
+    }),
+    prisma.post.findMany({
+      where: { status: 'PUBLISHED' },
+      select: { slug: true, updatedAt: true },
+    }),
+  ])
 
   const staticRoutes = [
     '',
@@ -31,13 +28,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/payment-methods',
     '/privacy-policy',
     '/products',
+    '/posts',
   ]
 
-  const sitemap: MetadataRoute.Sitemap = []
+  const sitemapEntries: MetadataRoute.Sitemap = []
 
   routing.locales.forEach((locale) => {
     staticRoutes.forEach((route) => {
-      sitemap.push({
+      sitemapEntries.push({
         url: `${baseUrl}/${locale}${route}`,
         lastModified: new Date(),
         changeFrequency: 'weekly',
@@ -46,37 +44,46 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })
 
     products.forEach((product) => {
-      if (!product.name) {
+      if (!product.slug) {
         return
       }
 
-      sitemap.push({
-        url: `${baseUrl}/${locale}/products/${generateSlugWithId(
-          product.name,
-          product.id,
-        )}`,
-        lastModified: product.updatedAt ?? new Date(),
+      sitemapEntries.push({
+        url: `${baseUrl}/${locale}/products/${product.slug}`,
+        lastModified: product.updatedAt,
         changeFrequency: 'weekly',
         priority: 0.7,
       })
     })
 
     categories.forEach((category) => {
-      if (!category.name) {
+      if (!category.slug) {
         return
       }
 
-      sitemap.push({
-        url: `${baseUrl}/${locale}/categories/${generateSlugWithId(
-          category.name,
-          category.id,
-        )}`,
-        lastModified: new Date(),
+      sitemapEntries.push({
+        url: `${baseUrl}/${locale}/categories/${category.slug}`,
+        lastModified: category.updatedAt,
         changeFrequency: 'weekly',
         priority: 0.75,
       })
     })
+
+    posts.forEach((post) => {
+      if (!post.slug) {
+        return
+      }
+
+      sitemapEntries.push({
+        url: `${baseUrl}/${locale}/posts/${post.slug}`,
+        lastModified: post.updatedAt,
+        changeFrequency: 'weekly',
+        priority: 0.7,
+      })
+    })
   })
 
-  return sitemap
+  return sitemapEntries
 }
+
+export default sitemap

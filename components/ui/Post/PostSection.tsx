@@ -4,7 +4,6 @@ import type { GetPostsInfiniteResult } from '@/features/post/post.action'
 
 import { PostCard, PostCardSkeleton } from './PostCard'
 
-import { Container } from '@/components/layouts/Container'
 import { PAGINATION } from '@/constants'
 
 type PostItem = NonNullable<GetPostsInfiniteResult['items'][number]>
@@ -29,15 +28,23 @@ const PostSection = ({
   const skeletonKeys = createSkeletonKeys(itemPerPage)
 
   return (
-    <Container className='grid gap-5 sm:grid-cols-2 xl:grid-cols-3'>
+    <ul className='container mx-auto grid gap-5 sm:grid-cols-2 xl:grid-cols-3'>
       {!isLoading &&
         items
           .filter((item): item is PostItem => item !== null)
-          .map((post) => <PostCard key={post.id} post={post} />)}
+          .map((post) => (
+            <li key={post.id}>
+              <PostCard post={post} />
+            </li>
+          ))}
 
       {shouldShowSkeleton &&
-        skeletonKeys.map((key) => <PostCardSkeleton key={key} />)}
-    </Container>
+        skeletonKeys.map((key) => (
+          <li key={key}>
+            <PostCardSkeleton />
+          </li>
+        ))}
+    </ul>
   )
 }
 

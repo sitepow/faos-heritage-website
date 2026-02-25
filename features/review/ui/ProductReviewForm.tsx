@@ -39,7 +39,7 @@ const ProductReviewForm = ({ productId, onSuccess }: Props) => {
   }
 
   return (
-    <div className='bg-default-50 flex flex-col gap-4 rounded-xl p-6'>
+    <div className='border-default-100 flex flex-col gap-4 rounded-xl border p-6'>
       <h4 className='text-lg font-bold'>{t('form_title')}</h4>
 
       <div className='flex flex-col gap-2'>

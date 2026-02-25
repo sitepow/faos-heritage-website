@@ -5,6 +5,7 @@ import { cn } from '@/utils/style'
 type SectionHeaderProps = ComponentPropsWithoutRef<'div'> & {
   title: ReactNode
   description?: ReactNode
+  as?: 'h1' | 'h2' | 'h3'
 }
 
 type SectionLabelProps = ComponentPropsWithoutRef<'span'> & {
@@ -15,6 +16,7 @@ const SectionHeader = ({
   title,
   description,
   className,
+  as: Tag = 'h2',
   ...props
 }: SectionHeaderProps) => {
   return (
@@ -25,9 +27,9 @@ const SectionHeader = ({
       )}
       {...props}
     >
-      <h2 className='text-xl font-semibold tracking-tight sm:text-2xl'>
+      <Tag className='text-xl font-semibold tracking-tight sm:text-2xl'>
         {title}
-      </h2>
+      </Tag>
 
       {description ? (
         <p className='mx-auto max-w-[75%] sm:max-w-[50%] sm:text-lg lg:max-w-[45%] xl:max-w-[25%]'>
@@ -37,7 +39,6 @@ const SectionHeader = ({
     </div>
   )
 }
-
 const SectionLabel = ({ children, className, ...props }: SectionLabelProps) => {
   return (
     <span

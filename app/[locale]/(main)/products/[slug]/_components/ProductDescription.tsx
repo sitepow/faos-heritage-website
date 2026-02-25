@@ -11,11 +11,13 @@ const ProductDescription = () => {
   }
 
   return (
-    <MarkdownRenderer
-      className='mx-auto w-full max-w-[1280px]'
-      content={product.description}
-      fallbackAlt={product.name}
-    />
+    <article className='w-full'>
+      <MarkdownRenderer
+        className='mx-auto w-full max-w-[1280px]'
+        content={product.description}
+        fallbackAlt={product.name}
+      />
+    </article>
   )
 }
 

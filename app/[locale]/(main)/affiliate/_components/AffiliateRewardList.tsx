@@ -18,18 +18,18 @@ const AffiliateRewardList = () => {
   const t = useTranslations('affiliate.rewards')
 
   return (
-    <div className='space-y-5 text-left'>
+    <ul className='space-y-5 text-left'>
       {REWARD_CONFIG.map(({ icon: Icon, translationKey }) => (
-        <div key={translationKey} className='flex items-center gap-4'>
+        <li key={translationKey} className='flex items-center gap-4'>
           <div className='flex size-10 flex-shrink-0 items-center justify-center rounded-full bg-stone-50'>
-            <Icon className='text-amber-500' size={20} />
+            <Icon aria-hidden='true' className='text-amber-500' size={20} />
           </div>
           <span className='font-medium text-stone-400'>
             {t(translationKey)}
           </span>
-        </div>
+        </li>
       ))}
-    </div>
+    </ul>
   )
 }
 

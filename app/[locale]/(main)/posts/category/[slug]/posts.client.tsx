@@ -52,6 +52,7 @@ const PostsByCategoryClient = ({
     <Container>
       <AppSection>
         <SectionHeader
+          as='h1'
           description={`${t('blogDiscovery.description')} (${category.name})`}
           title={category.name}
         />

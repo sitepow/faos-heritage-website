@@ -24,13 +24,13 @@ const Footer = ({ className, ...props }: ComponentProps<'footer'>) => {
     >
       <Container className='grid gap-12 p-5 text-sm sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5'>
         {menu.map((section, idx) => (
-          <div key={idx} className='flex flex-col gap-5'>
+          <section key={idx} className='flex flex-col gap-5'>
             {section.title && !section.isGroup && (
-              <span className='text-primary font-bold'>{section.title}</span>
+              <h3 className='text-primary font-bold'>{section.title}</h3>
             )}
 
             <FooterSection section={section} />
-          </div>
+          </section>
         ))}
       </Container>
       <FooterBottom />

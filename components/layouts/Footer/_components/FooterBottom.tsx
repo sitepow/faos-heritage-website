@@ -1,8 +1,11 @@
+'use client'
+
 import { useTranslations } from 'next-intl'
 
 import { Container } from '../../Container'
 
 import { CURRENCY_LOCALE_MAP } from '@/constants'
+import { Link } from '@/i18n/navigation'
 
 const FooterBottom = () => {
   const tFooter = useTranslations('footer')
@@ -13,20 +16,27 @@ const FooterBottom = () => {
 
   return (
     <Container className='border-default-100 text-default-500 flex flex-col items-center justify-between gap-5 border-t py-8 text-xs xl:flex-row'>
-      <p>{tFooter('copyright', { year, name: tBrand('name') })}</p>
+      <small className='text-xs'>
+        {tFooter('copyright', { year, name: tBrand('name') })}
+      </small>
 
-      <div className='flex flex-wrap items-center justify-center gap-1'>
-        <p>{tFooter('countryLabel')}</p>
+      <nav
+        aria-label='Country Selector'
+        className='flex flex-wrap items-center justify-center gap-1'
+      >
+        <span className='mr-1'>{tFooter('countryLabel')}</span>
 
         {CURRENCY_LOCALE_MAP.map((c) => (
-          <button
+          <Link
             key={c.country}
-            className='border-default-100 hover:bg-primary/10 hover:text-primary cursor-pointer rounded-full border px-2 py-0.5 transition'
+            className='border-default-100 hover:bg-primary/10 hover:text-primary cursor-pointer rounded-full border px-3 py-1 transition'
+            href='/'
+            locale={c.country.toLowerCase()}
           >
             {tCountry(c.country)}
-          </button>
+          </Link>
         ))}
-      </div>
+      </nav>
     </Container>
   )
 }

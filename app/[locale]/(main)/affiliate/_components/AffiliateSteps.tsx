@@ -6,6 +6,7 @@ import type { StepItem } from './affiliate.types'
 
 import { StepCard } from './StepCard'
 
+import { AffiliateHeading } from '@/components/ui/AffiliateHeading'
 import { cn } from '@/utils'
 
 const AffiliateSteps = () => {
@@ -14,12 +15,25 @@ const AffiliateSteps = () => {
 
   return (
     <section className='mx-auto w-full'>
-      <div className='relative grid grid-cols-1 rounded-[2rem] bg-white py-10 md:grid-cols-2'>
-        <div className='absolute inset-y-0 left-1/2 hidden w-[1px] -translate-x-1/2 bg-gray-100 md:block' />
-        <div className='absolute inset-x-0 top-1/2 hidden h-[1px] -translate-y-1/2 bg-gray-100 md:block' />
+      <AffiliateHeading
+        align='center'
+        as='h2'
+        className='my-5'
+        namespace='affiliate.steps'
+      />
+
+      <ul className='relative grid grid-cols-1 rounded-[2rem] bg-white py-10 md:grid-cols-2'>
+        <div
+          aria-hidden='true'
+          className='absolute inset-y-0 left-1/2 hidden w-[1px] -translate-x-1/2 bg-gray-100 md:block'
+        />
+        <div
+          aria-hidden='true'
+          className='absolute inset-x-0 top-1/2 hidden h-[1px] -translate-y-1/2 bg-gray-100 md:block'
+        />
 
         {steps.map((step, idx) => (
-          <div
+          <li
             key={step.number}
             className={cn(
               'relative py-5',
@@ -28,9 +42,9 @@ const AffiliateSteps = () => {
             )}
           >
             <StepCard {...step} />
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </section>
   )
 }

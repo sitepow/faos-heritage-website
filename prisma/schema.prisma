@@ -156,6 +156,7 @@ model Post {
   
   metaTitle       String? @db.Text
   metaDescription String? @db.Text
+  keywords        String[] @default([])
   
   status          PostStatus @default(DRAFT)
   publishedAt     DateTime?
@@ -188,6 +189,7 @@ model PostLocalization {
   content         String? @db.Text
   metaTitle       String? @db.Text
   metaDescription String? @db.Text
+  keywords        String[] @default([])
 
   post            Post    @relation(fields: [postId], references: [id], onDelete: Cascade)
 
@@ -244,6 +246,7 @@ model ProductLocalization {
   description      String? @db.Text
   metaTitle        String? @db.Text
   metaDescription  String? @db.Text
+  keywords         String[] @default([])
 
   product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
@@ -307,8 +310,8 @@ model Address {
 }
 
 model Category {
-  id String @id @default(cuid())
-
+  id          String @id @default(cuid())
+  slug        String? @unique
   name        String
   image       String?
   isActive    Boolean  @default(true)
@@ -342,8 +345,8 @@ model CategoryLocalization {
 }
 
 model Product {
-  id String @id @default(cuid())
-
+  id                String @id @default(cuid())
+  slug              String? @unique
   name              String  @unique
   summary           String? @db.Text
   description       String? @db.Text
@@ -354,6 +357,7 @@ model Product {
   weight            Decimal? @db.Decimal(10, 3)
   stockQuantity Int @default(0)
   unit              ProductUnit @default(UNIT)
+  keywords          String[] @default([])
 
   categoryId String?
   category   Category? @relation(fields: [categoryId], references: [id])

@@ -14,6 +14,7 @@ interface Props {
   isHero?: boolean
   className?: string
   icon?: LucideIcon
+  as?: 'h1' | 'h2' | 'h3'
 }
 
 const AffiliateHeading = ({
@@ -23,15 +24,18 @@ const AffiliateHeading = ({
   isHero = false,
   className,
   icon: Icon,
+  as: Tag = 'h2',
 }: Props) => {
   const t = useTranslations(namespace)
   const isCenter = align === 'center'
   const hasTagline = t.has('tagline')
 
+  const hasDescription = t.has('description')
+
   const dAlign = descriptionAlign || align
 
   return (
-    <div
+    <header
       className={cn(
         'flex flex-col',
         isHero ? 'gap-6' : 'gap-4',
@@ -45,7 +49,7 @@ const AffiliateHeading = ({
         </span>
       )}
 
-      <h2
+      <Tag
         className={cn(
           'text-3xl font-bold tracking-tight whitespace-pre-line text-white sm:w-full',
           isHero
@@ -70,24 +74,26 @@ const AffiliateHeading = ({
               />
             ) : null,
         })}
-      </h2>
+      </Tag>
 
-      <p
-        className={cn(
-          'text-lg leading-relaxed text-stone-400',
-          isHero ? 'max-w-2xl md:text-xl' : 'max-w-md',
-          dAlign === 'center' ? 'mx-auto text-center' : 'text-left',
-          dAlign === 'right' && 'ml-auto text-right',
-        )}
-      >
-        {t.rich('description', {
-          br: () => <span aria-hidden='true' className='block h-0' />,
-          highlight: (chunks) => (
-            <span className='font-medium text-white'>{chunks}</span>
-          ),
-        })}
-      </p>
-    </div>
+      {hasDescription && (
+        <p
+          className={cn(
+            'text-lg leading-relaxed text-stone-400',
+            isHero ? 'max-w-2xl md:text-xl' : 'max-w-md',
+            dAlign === 'center' ? 'mx-auto text-center' : 'text-left',
+            dAlign === 'right' && 'ml-auto text-right',
+          )}
+        >
+          {t.rich('description', {
+            br: () => <span aria-hidden='true' className='block h-0' />,
+            highlight: (chunks) => (
+              <span className='font-medium text-white'>{chunks}</span>
+            ),
+          })}
+        </p>
+      )}
+    </header>
   )
 }
 

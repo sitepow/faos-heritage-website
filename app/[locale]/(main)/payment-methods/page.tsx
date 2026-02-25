@@ -9,27 +9,24 @@ import { Container } from '@/components/layouts/Container'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { constructMetadata } from '@/lib/metadata'
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { locale: string }
-}): Promise<Metadata> {
+interface Props {
+  params: Promise<{ locale: string }>
+}
+
+const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
   const { locale } = await params
-  const tp = await getTranslations({ locale, namespace: 'paymentMethods' })
+  const t = await getTranslations({ locale, namespace: 'meta.paymentMethods' })
 
   return constructMetadata({
-    title: tp('intro.seoTitle'),
-    description: tp('intro.description'),
+    title: t('title'),
+    description: t('description'),
+    canonicalPath: '/payment-methods',
+    keywords: t.raw('keywords'),
   })
 }
 
-const PaymentMethodsPage = async ({
-  params,
-}: {
-  params: { locale: string }
-}) => {
+const PaymentMethodsPage = async ({ params }: Props) => {
   const { locale } = await params
-
   const t = await getTranslations({ locale, namespace: 'paymentMethods' })
 
   const paymentData = {
@@ -68,4 +65,5 @@ const PaymentMethodsPage = async ({
   )
 }
 
+export { generateMetadata }
 export default PaymentMethodsPage

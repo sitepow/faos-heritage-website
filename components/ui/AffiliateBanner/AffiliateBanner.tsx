@@ -13,12 +13,12 @@ import { AffiliateButton } from '@/components/ui/AffiliateButton'
 import { useAppNavigation } from '@/hooks/useAppNavigation'
 import { cn } from '@/utils'
 
-const AffiliateBanner = ({ className }: ComponentProps<'div'>) => {
+const AffiliateBanner = ({ className }: ComponentProps<'section'>) => {
   const t = useTranslations('affiliate.banner')
   const navigation = useAppNavigation()
 
   return (
-    <div
+    <section
       className={cn(
         'bg-faos-dark relative isolate overflow-hidden rounded-lg px-8 py-12 md:px-16 md:py-20',
         className,
@@ -38,14 +38,21 @@ const AffiliateBanner = ({ className }: ComponentProps<'div'>) => {
             {t('buttons.gotoAffiliate')}
           </AffiliateButton>
 
-          <div className='flex flex-col flex-wrap items-center justify-center gap-2 text-sm text-white/80 sm:flex-row sm:flex-nowrap sm:justify-start'>
-            <span>{t('features.noInvestment')}</span>
-            <span className='size-1 rounded-full bg-white/80' />
-            <span>{t('features.freeSignup')}</span>
-          </div>
+          <ul className='flex flex-col flex-wrap items-center justify-center gap-2 text-sm text-white/80 sm:flex-row sm:flex-nowrap sm:justify-start'>
+            <li className='flex items-center gap-2'>
+              <span>{t('features.noInvestment')}</span>
+              <span
+                aria-hidden='true'
+                className='size-1 rounded-full bg-white/80'
+              />
+            </li>
+            <li>
+              <span>{t('features.freeSignup')}</span>
+            </li>
+          </ul>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 

@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-import slugify from '@sindresorhus/slugify'
 
 import type { Prisma, ProductUnit } from '@prisma/client'
 
@@ -108,19 +107,6 @@ const resolveRangeDisplayValue = <T>(
   return null
 }
 
-const generateSlugWithId = (name: string, id: string | number) => {
-  if (!name || !id) {
-    return ''
-  }
-
-  return `${slugify(name, { lowercase: true })}-${id}`
-}
-
-const extractIdFromSlug = (slug: string): string => slug.split('-').pop() ?? ''
-
-const extractNameFromSlug = (slug: string): string =>
-  slug.split('-').slice(0, -1).join(' ')
-
 interface FormatStatParams {
   name: string
   value: Prisma.Decimal | Number | null
@@ -138,8 +124,5 @@ export {
   calculateVariantRange,
   checkIsOutOfStock,
   resolveRangeDisplayValue,
-  generateSlugWithId,
-  extractIdFromSlug,
-  extractNameFromSlug,
   formatStat,
 }

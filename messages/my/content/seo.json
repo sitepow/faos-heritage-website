@@ -1,43 +1,119 @@
 {
   "meta": {
+    "brandName": "FAOS HERITAGE GREEK FOOD",
     "keywords": [
       "FAOS",
+      "FAOS Heritage Greek Food",
       "Minyak Zaitun Organik",
-      "Minyak Zaitun Extra Virgin",
       "100% Madu Asli Semulajadi",
-      "Madu Organik",
       "Makanan Kesihatan Premium",
-      "Jenama minyak zaitun mentah terbaik",
-      "Mana nak beli madu asli",
-      "Minyak zaitun untuk kesihatan"
+      "Diet Mediterranean",
+      "Patcharin Chanaphakdee"
     ],
     "home": {
-      "title": "FAOS - Minyak Zaitun Organik Premium & 100% Madu Asli Tulen",
-      "description": "Sumber utama untuk Minyak Zaitun Extra Virgin 100% semulajadi dan Madu Organik. Kualiti premium yang dikurasi untuk kesihatan optimum anda, dihantar terus ke pintu rumah dengan promosi eksklusif."
+      "title": "Minyak Zaitun Organik Premium dan Madu Asli dari Greece",
+      "description": "Minyak Zaitun Organik Extra Virgin Greek Premium dan 100% Madu Asli Semulajadi. Diimport terus dari Greece untuk kesihatan anda.",
+      "keywords": [
+        "Import Minyak Zaitun Greek",
+        "Sumber Madu Asli",
+        "Produk Kesihatan Greek",
+        "Greek Heritage Food"
+      ]
     },
     "products": {
-      "title": "Beli Minyak Zaitun & Madu Asli - Semua Produk | FAOS",
-      "description": "Terokai pilihan produk fokus kesihatan kami yang disusun rapi, menampilkan Minyak Zaitun Extra Virgin tulen dan madu hutan semulajadi. Diiktiraf organik, selamat, dan bebas daripada bahan tambahan."
+      "title": "Beli Minyak Zaitun Organik dan Madu Asli",
+      "description": "Produk sihat, minyak zaitun asli, dan madu hutan semulajadi dari Greece. Diiktiraf organik, selamat, dan tanpa bahan tambahan.",
+      "keywords": [
+        "Mana nak beli minyak zaitun asli",
+        "Harga Minyak Zaitun Extra Virgin",
+        "Jenama Madu Organik Terbaik",
+        "Jualan Minyak Zaitun Premium"
+      ]
     },
     "productDetail": {
-      "title": "{name} - Minyak Zaitun & Madu Premium oleh FAOS",
-      "description": "Pesan {name}, kualiti premium 100% daripada alam semulajadi. Ketulenan terjamin dengan piawaian organik. Pesanan mudah, penghantaran pantas, dan jaminan 100% keaslian."
+      "title": "{name}",
+      "description": "Pesan {name}, kualiti semulajadi premium 100%. Piawaian organik, terus dari Greece.",
+      "keywords": [
+        "Minyak zaitun untuk diminum",
+        "Polifenol Tinggi",
+        "Minyak Zaitun Perahan Sejuk",
+        "Madu Hutan Semulajadi"
+      ]
     },
     "category": {
-      "title": "{categoryName} Organik - Produk Kesihatan & Kesejahteraan FAOS",
-      "description": "Temui produk terbaik dalam koleksi {categoryName} kami. Produk semulajadi gred eksport yang dikurasi secara eksklusif untuk gaya hidup sihat anda."
+      "title": "Kategori {categoryName}",
+      "description": "Pilih produk semulajadi gred eksport {categoryName} dari Greece untuk gaya hidup sihat anda.",
+      "keywords": [
+        "Antioksidan Semulajadi",
+        "Minyak Zaitun Sihat",
+        "Madu Berkhasiat",
+        "Premium Clean Food"
+      ]
     },
     "about": {
-      "title": "Mengenai FAOS - Warisan Ketulenan daripada Alam Semulajadi",
-      "description": "FAOS adalah pakar dalam minyak zaitun dan madu organik premium, dihasilkan dengan teliti daripada sumber 100% semulajadi dan mampan."
+      "title": "Mengenai Kami",
+      "description": "FAOS adalah pakar dalam minyak zaitun organik premium dan madu dari tapak warisan dunia di Greece.",
+      "keywords": [
+        "Sejarah Jenama FAOS",
+        "Minyak Zaitun Warisan Dunia",
+        "Ladang Zaitun Greece",
+        "Piawaian Organik Antarabangsa"
+      ]
     },
     "blog": {
-      "title": "Blog Makanan Greek & Kesihatan Organik - FAOS HERITAGE GREEK FOOD",
-      "description": "Ketahui tentang manfaat kesihatan Minyak Zaitun Extra Virgin, Madu Greek Mentah 100%, dan resipi sihat Mediterranean. Ikuti perkembangan dengan FAOS HERITAGE GREEK FOOD."
+      "title": "Blog Kesihatan dan Makanan Greek",
+      "description": "Ketahui khasiat minyak zaitun dan madu Greek, dengan resipi Mediterranean untuk kesihatan yang lebih baik.",
+      "keywords": [
+        "Khasiat Minyak Zaitun",
+        "Resipi Mediterranean",
+        "Bila patut ambil minyak zaitun",
+        "Cara kenali minyak zaitun asli"
+      ]
     },
     "blogDetail": {
-      "title": "{title} - Blog Kesihatan & Warisan - FAOS HERITAGE GREEK FOOD",
-      "description": "{summary}"
+      "title": "{title}",
+      "description": "{summary}",
+      "keywords": []
+    },
+    "affiliate": {
+      "title": "Program Affiliate dan Penjual Semula",
+      "description": "Jana pendapatan dengan FAOS melalui program affiliate kami. Komisen sehingga 10%. Pendaftaran mudah.",
+      "keywords": [
+        "Pengedar Minyak Zaitun",
+        "Affiliate FAOS",
+        "Pendapatan Sampingan Online",
+        "Jual Online Tanpa Stok"
+      ]
+    },
+    "paymentMethods": {
+      "title": "Cara Pembayaran dan Langkah Pesanan",
+      "description": "Ketahui cara pembayaran yang mudah dan selamat di FAOS, termasuk pindahan Kod QR atau Kad Kredit.",
+      "keywords": [
+        "Cara Pembayaran FAOS",
+        "Cara pesan minyak zaitun",
+        "Beli madu dengan kad kredit",
+        "Pembayaran Kod QR",
+        "Keselamatan Pembayaran"
+      ]
+    },
+    "privacyPolicy": {
+      "title": "Dasar Privasi dan Terma Penggunaan",
+      "description": "Dasar Privasi FAOS. Maklumat mengenai perlindungan data peribadi dan keselamatan pengguna.",
+      "keywords": [
+        "Dasar Privasi",
+        "Terma dan Syarat",
+        "Keselamatan Data",
+        "FAOS Privacy Policy"
+      ]
+    },
+    "profile": {
+      "title": "Profil Saya",
+      "keywords": []
+    },
+    "cart": {
+      "title": "Bakul Saya",
+      "description": "Semak barangan pilihan anda dan bersedia untuk pesanan produk premium FAOS.",
+      "keywords": []
     }
   }
 }

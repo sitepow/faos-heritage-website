@@ -1,90 +1,119 @@
 {
   "meta": {
+    "brandName": "FAOS HERITAGE GREEK FOOD",
     "keywords": [
       "FAOS",
+      "FAOS Heritage Greek Food",
       "Organic Olive Oil",
-      "Extra Virgin Olive Oil",
       "100% Pure Natural Honey",
-      "Organic Honey",
-      "Premium Health Foods",
-      "Best brand for raw olive oil",
-      "Where to buy authentic honey",
-      "Olive oil for health",
-      "Where to buy authentic olive oil",
-      "Where to buy authentic honey",
-      "Organic olive oil from Greece",
-      "Pure natural honey from Greece",
-      "High quality olive oil and honey",
-      "Health products from nature",
-      "Health benefits of olive oil and honey",
-      "Honey from Greece",
-      "High polyphenols in olive oil",
-      "Clean eating",
-      "Unprocessed foods",
-      "FAOS",
-      "Greece",
-      "Greece travel",
-      "Greek cuisine",
-      "Mediterranean diet",
-      "Stay healthy with olive oil and honey",
-      "Olive oil and honey for skin",
-      "Olive oil and honey for hair",
-      "Olive oil and honey for overall health",
-      "Olive oil and honey for cooking",
-      "Olive tree",
-      "Pure natural honey from Greece",
-      "Pure authentic olive oil from Greece",
-      "Maneki",
-      "Athonelia",
-      "Hyperlipidemia",
-      "Antioxidants",
-      "Anti-inflammatory",
-      "Lower heart disease risk",
-      "Lower cancer risk",
-      "Improve brain health",
-      "Improve bone health",
-      "Improve skin health",
-      "Improve hair health",
-      "Improve overall health",
-      "Olive oil and honey for cooking",
-      "Olive oil",
-      "Honey",
-      "patcharin",
-      "Patcharin Chanaphukdee",
-      "พัชรินทร์ ชนะภักดี",
-      "Greek wine",
-      "Nikolaos Basoukos",
-      "Bangkok",
-      "Thailand",
-      "Greek food in Thailand"
+      "Premium Health Food",
+      "Mediterranean Diet",
+      "Patcharin Chanaphakdee"
     ],
     "home": {
-      "title": "FAOS HERITAGE GREEK FOOD - GREEK Olive oil Premium Organic Olive Oil & 100% RAW GREEK Honey",
-      "description": "The premier source for 100% natural Extra Virgin Olive Oil and Organic Honey. Curated premium quality for your optimal health, delivered to your door with exclusive promotions."
+      "title": "Premium Organic Olive Oil and Pure Honey from Greece",
+      "description": "Premium Greek Extra Virgin Organic Olive Oil and 100% Natural Honey. Directly imported from Greece for your premium health.",
+      "keywords": [
+        "Imported Greek Olive Oil",
+        "Pure Honey Source",
+        "Greek Health Products",
+        "Greek Heritage Food"
+      ]
     },
     "products": {
-      "title": "Shop GREEK Olive Oil & Honey - All Products | FAOS HERITAGE GREEK FOOD",
-      "description": "Explore our curated selection of health-focused products, featuring pure Extra Virgin Olive Oil and wild natural honey. Certified organic, safe, and free from additives."
+      "title": "Shop Organic Olive Oil and Pure Honey",
+      "description": "Healthy products, pure olive oil, and natural wild honey from Greece. Certified organic, safe, and additive-free.",
+      "keywords": [
+        "Where to buy real olive oil",
+        "Extra Virgin Olive Oil Price",
+        "Best Organic Honey Brand",
+        "Premium Olive Oil for Sale"
+      ]
     },
     "productDetail": {
-      "title": "{name} - Premium Olive Oil & Honey by FAOS HERITAGE GREEK FOOD",
-      "description": "Order {name}, 100% premium quality from nature. Guaranteed purity with organic standards. Mediterranean freshness, fast shipping, and 100% authenticity assured."
+      "title": "{name}",
+      "description": "Order {name}, 100% premium natural quality. Pure, organic standards, directly from Greece.",
+      "keywords": [
+        "Fresh consumption olive oil",
+        "High Polyphenols",
+        "Cold Pressed Olive Oil",
+        "Natural Wild Honey"
+      ]
     },
     "category": {
-      "title": "Organic {categoryName} - FAOS HERITAGE GREEK FOOD Health & Wellness Products",
-      "description": "Discover the best products in our {categoryName} collection. Exclusively curated export-grade natural products for your healthy lifestyle."
+      "title": "{categoryName} Category",
+      "description": "Select {categoryName} natural export-grade products from Greece for your healthy lifestyle.",
+      "keywords": [
+        "Natural Antioxidants",
+        "Healthy Olive Oil",
+        "Nourishing Honey",
+        "Premium Clean Food"
+      ]
     },
     "about": {
-      "title": "About FAOS HERITAGE GREEK FOOD - A Heritage Food from Greece",
-      "description": "FAOS HERITAGE GREEK FOOD is a specialist in premium organic olive oil and honey, meticulously crafted from 100% natural and sustainable sources."
+      "title": "About Us",
+      "description": "FAOS is an expert in premium organic olive oil and honey from World Heritage sites in Greece, crafted for sustainable health.",
+      "keywords": [
+        "FAOS Brand History",
+        "World Heritage Olive Oil",
+        "Greek Olive Groves",
+        "International Organic Standards"
+      ]
     },
     "blog": {
-      "title": "GREEK Food & Organic Health Blog - FAOS HERITAGE GREEK FOOD",
-      "description": "Learn about the health benefits of Extra Virgin Olive Oil, 100% Raw Greek Honey, and healthy Mediterranean recipes. Stay informed with FAOS HERITAGE GREEK FOOD."
+      "title": "Health and Greek Food Blog",
+      "description": "Learn the benefits of Greek olive oil and honey, with Mediterranean recipes for better health.",
+      "keywords": [
+        "Benefits of Olive Oil",
+        "Mediterranean Recipes",
+        "When to consume olive oil",
+        "How to identify real olive oil"
+      ]
     },
     "blogDetail": {
-      "title": "{title} - Health & Heritage Blog - FAOS HERITAGE GREEK FOOD",
-      "description": "{summary}"
+      "title": "{title}",
+      "description": "{summary}",
+      "keywords": []
+    },
+    "affiliate": {
+      "title": "Affiliate and Reseller Program",
+      "description": "Earn with FAOS through our premium olive oil and honey affiliate program. Up to 10% commission. Easy to join, start immediately.",
+      "keywords": [
+        "Olive Oil Distributor",
+        "FAOS Affiliate",
+        "Side Income Online",
+        "Sell Online No Stock"
+      ]
+    },
+    "paymentMethods": {
+      "title": "Payment Methods and Ordering Steps",
+      "description": "Learn convenient and safe payment methods with FAOS, including QR Code transfers or Credit Cards, with easy ordering steps.",
+      "keywords": [
+        "FAOS Payment Methods",
+        "How to order olive oil",
+        "Buy honey with credit card",
+        "QR Code Payment",
+        "Payment Security"
+      ]
+    },
+    "privacyPolicy": {
+      "title": "Privacy Policy and Terms of Use",
+      "description": "FAOS Privacy Policy. Details on personal data protection and user security for your confidence in every purchase.",
+      "keywords": [
+        "Privacy Policy",
+        "Terms and Conditions",
+        "Data Security",
+        "FAOS Privacy Policy"
+      ]
+    },
+    "profile": {
+      "title": "My Profile",
+      "keywords": []
+    },
+    "cart": {
+      "title": "Your Cart",
+      "description": "Review your selected items and prepare for your premium organic olive oil and honey order from FAOS.",
+      "keywords": []
     }
   }
 }

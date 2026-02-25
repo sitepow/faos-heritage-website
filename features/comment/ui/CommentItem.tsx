@@ -42,16 +42,23 @@ const CommentItem = ({ comment, postId, productId, parentUserName }: Props) => {
   }
 
   return (
-    <div className='flex flex-col gap-4'>
+    <article className='flex flex-col gap-4'>
       <div className='flex gap-4'>
         <Avatar
           className='size-10 shrink-0'
           name={comment?.user?.name!}
           src={comment?.user?.image!}
         />
-        <div className='flex flex-col gap-1'>
-          <div className='bg-default-100 group relative rounded-2xl px-4 py-2'>
-            <span className='text-sm font-semibold'>{comment.user?.name}</span>
+        <div className='flex w-full max-w-96 flex-col gap-1 break-words'>
+          <div className='border-default-100 group relative rounded-2xl border px-4 py-2'>
+            <header className='mb-1 flex flex-col'>
+              <address className='not-italic'>
+                <span className='text-sm font-semibold'>
+                  {comment.user?.name}
+                </span>
+              </address>
+            </header>
+
             <p className='text-default-700 text-sm whitespace-pre-wrap'>
               {parentUserName && (
                 <span className='text-primary mr-1 font-bold'>
@@ -62,10 +69,13 @@ const CommentItem = ({ comment, postId, productId, parentUserName }: Props) => {
             </p>
           </div>
 
-          <div className='text-default-500 flex flex-wrap items-center gap-4 pl-2 text-xs'>
-            <span>{formatDate(comment.createdAt)}</span>
+          <footer className='text-default-500 flex flex-wrap items-center gap-4 pl-2 text-xs'>
+            <time dateTime={comment.createdAt.toISOString()}>
+              {formatDate(comment.createdAt)}
+            </time>
 
             <Button
+              aria-label={`Reply to ${comment.user?.name}`}
               color='primary'
               size='sm'
               startContent={<ReplyIcon size={14} />}
@@ -86,12 +96,12 @@ const CommentItem = ({ comment, postId, productId, parentUserName }: Props) => {
                 {tActions('delete')}
               </Button>
             )}
-          </div>
+          </footer>
         </div>
       </div>
 
       {isReplying && (
-        <div className='ml-14'>
+        <section aria-label='Write a reply' className='ml-14'>
           <CommentForm
             isReply
             parentId={comment.id}
@@ -99,11 +109,15 @@ const CommentItem = ({ comment, postId, productId, parentUserName }: Props) => {
             productId={productId}
             onSuccess={() => setIsReplying(false)}
           />
-        </div>
+        </section>
       )}
 
       {comment.replies && comment.replies.length > 0 && (
-        <div className='border-default-100 ml-14 flex flex-col gap-4 border-l-2 pl-4'>
+        <div
+          aria-label='Replies'
+          className='border-default-100 ml-14 flex flex-col gap-4 border-l-2 pl-4'
+          role='group'
+        >
           {comment.replies.map((reply) => (
             <CommentItem
               key={reply.id}
@@ -122,7 +136,7 @@ const CommentItem = ({ comment, postId, productId, parentUserName }: Props) => {
         onConfirm={handleConfirmDelete}
         onOpenChange={onOpenChange}
       />
-    </div>
+    </article>
   )
 }
 

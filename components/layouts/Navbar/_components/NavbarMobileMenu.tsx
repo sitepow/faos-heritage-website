@@ -12,7 +12,7 @@ import { CustomIcon } from '@/components/ui/CustomIcon'
 import { useBlogCategories } from '@/features/blog-category/blog-category.hook'
 import { useCategories } from '@/features/category/category.hook'
 import { useStaticNavLinks } from '@/hooks/useStaticNavLinks'
-import { cn, generateSlugWithId } from '@/utils'
+import { cn } from '@/utils'
 
 const NavbarMobileMenu = () => {
   const locale = useLocale()
@@ -77,9 +77,9 @@ const NavbarMobileMenu = () => {
             <hr className='border-default-100 w-full' />
             {blogCategories.filter(Boolean).map((category) => (
               <Link
-                key={category?.id!}
+                key={category?.id}
                 className='w-full text-center'
-                href={`/posts/category/${category?.slug!}`}
+                href={`/posts/category/${category?.slug}`}
                 onClick={closeMenu}
               >
                 <MenuItem label={category?.name!} />
@@ -90,20 +90,16 @@ const NavbarMobileMenu = () => {
 
         <hr className='border-default-100 w-full' />
 
-        {categories?.map((category) => {
-          const slug = generateSlugWithId(category?.name!, category?.id!)
-
-          return (
-            <Link
-              key={category?.id}
-              className='w-full text-center'
-              href={`/categories/${slug}`}
-              onClick={closeMenu}
-            >
-              <MenuItem label={category?.name!} />
-            </Link>
-          )
-        })}
+        {categories?.map((category) => (
+          <Link
+            key={category?.id}
+            className='w-full text-center'
+            href={`/categories/${category?.slug}`}
+            onClick={closeMenu}
+          >
+            <MenuItem label={category?.name!} />
+          </Link>
+        ))}
       </div>
     </div>
   )

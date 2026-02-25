@@ -15,12 +15,18 @@ const CommentCount = ({ commentCount, className, ...props }: Props) => {
   const locale = useLocale()
   const t = useTranslations('common')
 
+  const formattedCount = formatCompactNumber(commentCount, locale)
+
   return (
-    <div className={cn('flex items-center gap-2', className)} {...props}>
+    <div
+      aria-label={`${formattedCount} ${t('comments')}`}
+      className={cn('flex items-center gap-2', className)}
+      {...props}
+    >
       <div className='flex items-center gap-1'>
-        <MessageCircle />
+        <MessageCircle aria-hidden='true' size={16} />
         <span className='whitespace-nowrap'>
-          {formatCompactNumber(commentCount, locale)} {t('comments')}
+          {formattedCount} {t('comments')}
         </span>
       </div>
     </div>

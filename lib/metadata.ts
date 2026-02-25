@@ -24,10 +24,10 @@ const constructMetadata = async ({
   keywords,
 }: Props = {}): Promise<Metadata> => {
   const baseUrl = process.env.APP_URL!
-
   const url = `${baseUrl}${canonicalPath}`
 
   const t = await getTranslations('meta')
+  const brandName = t('brandName')
   const defaultKeywords = t.raw('keywords') || []
 
   const finalKeywords = Array.isArray(keywords)
@@ -41,7 +41,10 @@ const constructMetadata = async ({
   )
 
   return {
-    title,
+    title: {
+      default: title || t('home.title'),
+      template: `%s | ${brandName}`,
+    },
     description,
     keywords: finalKeywords,
     alternates: {
@@ -49,7 +52,7 @@ const constructMetadata = async ({
       languages: languageAlternates,
     },
     openGraph: {
-      title: title ?? undefined,
+      title: title ? `${title} | ${brandName}` : t('home.title'),
       description: description ?? undefined,
       url,
       type: 'website',
@@ -57,7 +60,7 @@ const constructMetadata = async ({
     },
     twitter: {
       card: 'summary_large_image',
-      title: title ?? undefined,
+      title: title ? `${title} | ${brandName}` : t('home.title'),
       description: description ?? undefined,
       images: [ogImage],
     },

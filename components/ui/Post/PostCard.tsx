@@ -7,11 +7,10 @@ import { memo } from 'react'
 import type { Prisma } from '@prisma/client'
 
 import { CategoryChip } from '../CategoryChip'
-import { PostCardImage } from './_components/PostCardImage'
-import { PostCardMeta } from './_components/PostCardMeta'
+import { PostCardImage } from '../Post/_components/PostCardImage'
+import { PostCardMeta } from '../Post/_components/PostCardMeta'
 
 import { IMAGE_FALLBACK } from '@/constants'
-import { generateSlugWithId } from '@/utils'
 
 type PostListItem = Prisma.PostGetPayload<{
   include: {
@@ -31,7 +30,7 @@ const PostCardSkeleton = () => <Skeleton className='h-[420px] w-full' />
 
 const PostCard = memo(({ post }: Props) => {
   const {
-    id,
+    slug,
     title,
     featuredImage,
     category,
@@ -41,15 +40,22 @@ const PostCard = memo(({ post }: Props) => {
     _count,
   } = post
 
+  const postHref = `/posts/${slug}`
+
   return (
     <Card
-      as={Link}
+      as='article'
       className='group border-default-100 relative w-full overflow-hidden border'
-      href={`/posts/${generateSlugWithId(title!, id!)}`}
       radius='sm'
       shadow='none'
     >
       <CardBody className='relative size-full p-0'>
+        <Link
+          aria-label={title || 'Read post'}
+          className='absolute inset-0 z-30'
+          href={postHref}
+        />
+
         <PostCardImage
           alt={title}
           className='h-[500px]'

@@ -10,9 +10,13 @@ const MainLayout = ({ children }: PropsWithChildren) => {
   return (
     <>
       <AffiliateTracker />
-      <NavbarTopBar />
-      <Navbar />
+      <header className='sticky top-0 z-50 w-full'>
+        <NavbarTopBar />
+        <Navbar />
+      </header>
+
       <AppMain>{children}</AppMain>
+
       <Footer />
     </>
   )

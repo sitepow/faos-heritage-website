@@ -13,6 +13,58 @@ import { prisma } from '@/lib/prisma'
 import { getServerUser, withRole } from '@/lib/session'
 import { omitEmptyFields, decimalToNumber } from '@/utils'
 
+const getProductBySlug = async (slug: string, locale?: string) => {
+  const { userId } = await getServerUser()
+  const languageCode = locale?.toUpperCase()
+
+  const product = await prisma.product.findUnique({
+    where: { slug },
+    include: {
+      category: {
+        include: {
+          localizations: {
+            where: { languageCode },
+            take: 1,
+          },
+        },
+      },
+      images: { orderBy: { isPrimary: 'desc' } },
+      variants: {
+        include: {
+          localizations: {
+            where: { languageCode },
+            take: 1,
+          },
+        },
+      },
+      localizations: {
+        where: { languageCode },
+        take: 1,
+      },
+      ...(userId && {
+        cart: { where: { userId }, select: { variantId: true } },
+        wishlist: { where: { userId }, select: { id: true } },
+      }),
+      _count: {
+        select: {
+          comments: { where: { status: ReviewStatus.APPROVED } },
+          reviews: { where: { status: ReviewStatus.APPROVED } },
+        },
+      },
+      reviews: {
+        where: { status: ReviewStatus.APPROVED },
+        select: { rating: true },
+      },
+    },
+  })
+
+  if (!product) {
+    return null
+  }
+
+  return transformProduct(decimalToNumber(product))
+}
+
 const createProduct = async (data: ProductInput) =>
   withRole([Role.ADMIN], async () => {
     const validated = productSchema.safeParse(data)
@@ -263,14 +315,26 @@ const getProductStat = async () =>
     return stats.map((value, idx) => ({ name: labels[idx], value }))
   })
 
-const increaseProductView = async (id: string) => {
-  if (!id) {
+const increaseProductView = async (identifier: string) => {
+  if (!identifier) {
     return fail(ERROR_CODES.BAD_REQUEST)
   }
 
   try {
+    const product = await prisma.product.findFirst({
+      where:
+        identifier.includes('-') || identifier.length < 20
+          ? { slug: identifier }
+          : { id: identifier },
+      select: { id: true },
+    })
+
+    if (!product) {
+      return fail(ERROR_CODES.DATA_NOT_FOUND)
+    }
+
     await prisma.product.update({
-      where: { id },
+      where: { id: product.id },
       data: {
         viewCount: {
           increment: 1,
@@ -290,6 +354,7 @@ type ProductListItem = NonNullable<
 >[number]
 
 export {
+  getProductBySlug,
   createProduct,
   updateProduct,
   deleteProduct,

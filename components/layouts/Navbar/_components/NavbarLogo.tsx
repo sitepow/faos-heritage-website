@@ -1,18 +1,17 @@
+'use client'
+
 /* eslint-disable @next/next/no-img-element */
-import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 const NavbarLogo = () => {
-  const router = useRouter()
-
   return (
-    <div className='flex shrink-0 items-center justify-center'>
+    <Link className='flex shrink-0 items-center justify-center' href='/'>
       <img
-        alt='Logo'
+        alt='FAOS Heritage Food'
         className='h-12 w-auto cursor-pointer transition-opacity hover:opacity-80 md:h-16'
         src='/images/logo.png'
-        onClick={() => router.push('/')}
       />
-    </div>
+    </Link>
   )
 }
 
