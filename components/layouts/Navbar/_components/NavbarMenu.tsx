@@ -1,5 +1,13 @@
 'use client'
 
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  Button,
+} from '@heroui/react'
+import { ChevronDown } from 'lucide-react'
 import Link from 'next/link'
 import { useLocale } from 'next-intl'
 
@@ -19,10 +27,22 @@ const NavbarMenu = () => {
     locale,
   })
 
+  const MAX_VISIBLE_ITEMS = 3
+
+  const allCategories = [
+    ...(blogCategories
+      ?.filter(Boolean)
+      .map((c) => ({ ...c, type: 'blog' as const })) || []),
+    ...(categories?.map((c) => ({ ...c, type: 'product' as const })) || []),
+  ]
+
+  const visibleItems = allCategories.slice(0, MAX_VISIBLE_ITEMS)
+  const moreItems = allCategories.slice(MAX_VISIBLE_ITEMS)
+
   return (
-    <nav className='hidden xl:block'>
-      <Container className='flex flex-wrap justify-center gap-5'>
-        <ul className='flex flex-wrap justify-center gap-5'>
+    <nav className='hidden py-2 xl:block'>
+      <Container>
+        <ul className='flex items-center justify-center gap-6'>
           {staticLinks.map((link) => (
             <li key={link.key}>
               <Link href={link.href}>
@@ -31,21 +51,57 @@ const NavbarMenu = () => {
             </li>
           ))}
 
-          {blogCategories?.filter(Boolean).map((category) => (
-            <li key={category?.id}>
-              <Link href={`/posts/category/${category?.slug}`}>
-                <MenuItem label={category?.name!} />
+          {visibleItems.map((category) => (
+            <li key={category.id}>
+              <Link
+                href={
+                  category.type === 'blog'
+                    ? `/posts/category/${category.slug}`
+                    : `/categories/${category.slug}`
+                }
+              >
+                <MenuItem label={category.name!} />
               </Link>
             </li>
           ))}
 
-          {categories?.map((category) => (
-            <li key={category?.id}>
-              <Link href={`/categories/${category?.slug}`}>
-                <MenuItem label={category?.name!} />
-              </Link>
+          {moreItems.length > 0 && (
+            <li>
+              <Dropdown placement='bottom-end'>
+                <DropdownTrigger>
+                  <Button
+                    disableRipple
+                    className='h-auto min-w-fit bg-transparent p-0 transition-opacity hover:opacity-70 data-[hover=true]:bg-transparent'
+                    endContent={
+                      <ChevronDown className='text-default-500' size={14} />
+                    }
+                  >
+                    <MenuItem label='...' />
+                  </Button>
+                </DropdownTrigger>
+                <DropdownMenu
+                  aria-label='More categories'
+                  className='max-h-[400px] w-[250px] overflow-y-auto'
+                  variant='flat'
+                >
+                  {moreItems.map((item) => (
+                    <DropdownItem
+                      key={item?.slug!}
+                      as={Link}
+                      className='py-3.5'
+                      href={
+                        item.type === 'blog'
+                          ? `/posts/category/${item.slug}`
+                          : `/categories/${item.slug}`
+                      }
+                    >
+                      {item.name}
+                    </DropdownItem>
+                  ))}
+                </DropdownMenu>
+              </Dropdown>
             </li>
-          ))}
+          )}
         </ul>
       </Container>
     </nav>
