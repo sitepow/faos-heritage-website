@@ -6,7 +6,6 @@ import { useTranslations } from 'next-intl'
 import { BackgroundBlobs } from '@/components/ui/AffiliateBanner/_components/BackgroundBlobs'
 import { AffiliateButton } from '@/components/ui/AffiliateButton'
 import { AffiliateHeading } from '@/components/ui/AffiliateHeading'
-import { AffiliatePartnerAvatars } from '@/components/ui/AffiliatePartnerAvatars'
 import { useAppNavigation } from '@/hooks/useAppNavigation'
 
 const AffiliateHero = () => {
@@ -28,7 +27,7 @@ const AffiliateHero = () => {
         </AffiliateButton>
       </div>
 
-      <AffiliatePartnerAvatars />
+      {/* <AffiliatePartnerAvatars /> */}
     </section>
   )
 }

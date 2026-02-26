@@ -5,7 +5,6 @@ import { useTranslations } from 'next-intl'
 import type { ComponentProps } from 'react'
 
 import { AffiliateHeading } from '../AffiliateHeading'
-import { AffiliatePartnerAvatars } from '../AffiliatePartnerAvatars'
 import { BackgroundBlobs } from './_components/BackgroundBlobs'
 import { FadingBackgroundImage } from './_components/FadingBackgroundImage'
 
@@ -30,7 +29,7 @@ const AffiliateBanner = ({ className }: ComponentProps<'section'>) => {
       <div className='relative z-10 flex flex-col items-center justify-between gap-10 xl:flex-row'>
         <div className='flex flex-col items-center xl:items-start'>
           <AffiliateHeading className='md:max-w-4xl xl:items-start xl:text-left' />
-          <AffiliatePartnerAvatars className='mt-8' />
+          {/* <AffiliatePartnerAvatars className='mt-8' /> */}
         </div>
 
         <div className='flex flex-shrink-0 flex-col items-center gap-4'>
