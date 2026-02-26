@@ -73,12 +73,7 @@ const ProductCard = ({ className, product }: Props) => {
 
         <div className='flex w-full flex-col gap-4'>
           <h3 className='line-clamp-2 text-xl font-medium'>
-            <Link
-              className='hover:text-primary transition-colors'
-              href={productHref}
-            >
-              {product?.name}
-            </Link>
+            <Link href={productHref}>{product?.name}</Link>
           </h3>
 
           <VariantTable variants={product?.variants || []} />
