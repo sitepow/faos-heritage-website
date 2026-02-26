@@ -114,7 +114,7 @@ const ProductPurchasePanel = () => {
           <CommentCount commentCount={product?._count?.comments || 0} />
         </div>
 
-        <section aria-label='Product variants'>
+        <section aria-label='Product variants' className='flex flex-col gap-5'>
           <VariantTable variants={product?.variants || []} />
 
           {hasVariants && (
@@ -128,7 +128,7 @@ const ProductPurchasePanel = () => {
 
         {product.summary && (
           <section aria-label='Product summary'>
-            <MarkdownRenderer content={product.summary} />
+            <MarkdownRenderer className='-mb-10' content={product.summary} />
           </section>
         )}
 
@@ -179,7 +179,7 @@ const ProductPurchasePanel = () => {
 
         <section
           aria-label='Affiliate Program'
-          className='bg-default-50 border-default-200 mt-4 flex flex-col gap-3 rounded-md border p-4'
+          className='mt-4 flex flex-col gap-3 p-4'
         >
           <div className='flex flex-wrap items-center gap-2'>
             <Share2Icon className='text-default-500' size={18} />
@@ -211,7 +211,7 @@ const ProductPurchasePanel = () => {
               }}
             />
 
-            <div className='flex-1'>
+            <div className='mt-5 flex-1'>
               <ProductShare
                 label={tActions('share')}
                 title={product.name}

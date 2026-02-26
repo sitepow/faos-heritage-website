@@ -11,9 +11,9 @@ const ProductDescription = () => {
   }
 
   return (
-    <article className='w-full'>
+    <article className='w-full max-w-full overflow-hidden'>
       <MarkdownRenderer
-        className='mx-auto w-full max-w-[1280px]'
+        className='mx-auto w-full max-w-[1280px] min-w-0 break-words'
         content={product.description}
         fallbackAlt={product.name}
       />

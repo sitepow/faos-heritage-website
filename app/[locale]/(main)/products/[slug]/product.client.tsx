@@ -5,9 +5,9 @@ import { useEffect, useRef } from 'react'
 
 import type { GetProductResult } from '@/features/product/product.types'
 
+import { ProductDescription } from './_components/ProductDescription'
 import { ProductPreview } from './_components/ProductPreview'
 import { ProductSimilar } from './_components/ProductSectionSemilar'
-import { ProductTabs } from './_components/ProductTabs'
 
 import { AppSection } from '@/components/layouts/AppSection'
 import { AffiliateBanner } from '@/components/ui/AffiliateBanner/AffiliateBanner'
@@ -78,7 +78,7 @@ const ProductClient = ({ initialData, slug }: Props) => {
 
       <article className='flex flex-col gap-10'>
         <ProductPreview />
-        <ProductTabs />
+        <ProductDescription />
       </article>
 
       <AffiliateBanner />

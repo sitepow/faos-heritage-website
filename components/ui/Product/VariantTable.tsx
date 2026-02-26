@@ -29,73 +29,79 @@ const VariantTable = ({ variants, className, showStock = true }: Props) => {
   return (
     <div
       className={cn(
-        'border-default-100 w-full min-w-[400px] overflow-x-auto border',
+        'border-default-100 w-full overflow-hidden rounded-md border',
         className,
       )}
     >
-      <table className='w-full min-w-[400px] border-separate border-spacing-0 text-left text-xs'>
-        <caption className='sr-only'>Product Variants</caption>
+      <div className='overflow-x-auto'>
+        <table className='w-full border-separate border-spacing-0 text-left text-xs'>
+          <caption className='sr-only'>Product Variants</caption>
 
-        <thead>
-          <tr className='border-default-100 *:border-default-100 text-default-500 border-b tracking-wider uppercase *:border-b *:px-3 *:py-2.5 *:font-semibold'>
-            <th
-              className={cn(
-                'sticky left-0 z-10 backdrop-blur-md',
-                stickyBorderClass,
-              )}
-              scope='col'
-            >
-              {t('size')}
-            </th>
-            <th className='text-right' scope='col'>
-              {t('price')}
-            </th>
-            {showStock && (
-              <th className='text-right' scope='col'>
-                {t('stock')}
-              </th>
-            )}
-          </tr>
-        </thead>
-
-        <tbody className='divide-default-100 divide-y'>
-          {variants.map((variant, idx) => {
-            const stock = variant.stockQuantity ?? 0
-            const isOutOfStock = stock <= 0
-            const priceInfo = getProductPriceInfo(variant)
-
-            return (
-              <tr key={`${variant.name}-${idx}`} className='*:px-3 *:py-2.5'>
-                <th
-                  className={cn(
-                    'text-default-700 bg-content1/50 sticky left-0 z-10 font-medium backdrop-blur-md',
-                    stickyBorderClass,
-                  )}
-                  scope='row'
-                >
-                  {variant.name}
-                </th>
-                <td className='text-right'>
-                  <PriceDisplay {...priceInfo} />
-                </td>
-                {showStock && (
-                  <td className='text-right'>
-                    <Chip
-                      color={isOutOfStock ? 'danger' : 'success'}
-                      size='sm'
-                      variant='dot'
-                    >
-                      {isOutOfStock
-                        ? tProductDetail('cartActions.outOfStock')
-                        : tProductDetail('cartActions.inStock')}
-                    </Chip>
-                  </td>
+          <thead>
+            <tr className='border-default-100 *:border-default-100 text-default-500 bg-default-50 border-b tracking-wider uppercase *:border-b *:px-3 *:py-2 *:font-semibold'>
+              <th
+                className={cn(
+                  'bg-default-50 sticky left-0 z-10 backdrop-blur-md',
+                  stickyBorderClass,
                 )}
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
+                scope='col'
+              >
+                {t('size')}
+              </th>
+              <th className='text-right' scope='col'>
+                {t('price')}
+              </th>
+              {showStock && (
+                <th className='text-right' scope='col'>
+                  {t('stock')}
+                </th>
+              )}
+            </tr>
+          </thead>
+
+          <tbody className='divide-default-100 divide-y'>
+            {variants.map((variant, idx) => {
+              const stock = variant.stockQuantity ?? 0
+              const isOutOfStock = stock <= 0
+              const priceInfo = getProductPriceInfo(variant)
+
+              return (
+                <tr
+                  key={`${variant.name}-${idx}`}
+                  className='hover:bg-default-50/50 transition-colors *:px-3 *:py-2'
+                >
+                  <th
+                    className={cn(
+                      'text-default-700 bg-content1 sticky left-0 z-10 font-medium backdrop-blur-md',
+                      stickyBorderClass,
+                    )}
+                    scope='row'
+                  >
+                    {variant.name}
+                  </th>
+                  <td className='text-right'>
+                    <PriceDisplay {...priceInfo} />
+                  </td>
+                  {showStock && (
+                    <td className='text-right'>
+                      <Chip
+                        className='h-5 text-[10px]'
+                        color={isOutOfStock ? 'danger' : 'success'}
+                        size='sm'
+                        variant='flat'
+                      >
+                        {isOutOfStock
+                          ? tProductDetail('cartActions.outOfStock')
+                          : tProductDetail('cartActions.inStock')}
+                      </Chip>
+                    </td>
+                  )}
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }

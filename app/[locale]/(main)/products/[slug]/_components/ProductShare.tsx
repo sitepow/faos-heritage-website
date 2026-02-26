@@ -8,7 +8,7 @@ import type { ComponentPropsWithoutRef } from 'react'
 import { useProductShare } from '@/hooks/useProductShare'
 import { cn } from '@/utils/style'
 
-type ProductShareProps = ComponentPropsWithoutRef<'div'> & {
+type Props = ComponentPropsWithoutRef<'div'> & {
   url: string
   title?: string
   label?: string
@@ -22,7 +22,7 @@ const ProductShare = ({
   size = 35,
   className,
   ...props
-}: ProductShareProps) => {
+}: Props) => {
   const { copied, platforms, copy } = useProductShare({ url, title })
 
   return (
