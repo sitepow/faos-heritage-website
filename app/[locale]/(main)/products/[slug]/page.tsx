@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 
 import { ProductClient } from './product.client'
 
-import { COUNTRY_CONFIG } from '@/constants'
+import { COUNTRY_CONFIG, DEFALUT_APP_PATH } from '@/constants'
 import { getProductBySlug } from '@/features/product/product.action'
 import { constructMetadata } from '@/lib/metadata'
 import { getServerUser } from '@/lib/session'
@@ -62,7 +62,7 @@ const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
   return constructMetadata({
     title: pageTitle,
     description: pageDescription,
-    ogImage: ogImage,
+    ogImage: ogImage ? `${DEFALUT_APP_PATH}/${ogImage}` : undefined,
     canonicalPath: `/products/${slug}`,
     keywords: finalKeywords,
   })
