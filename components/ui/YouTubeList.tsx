@@ -12,8 +12,8 @@ const YouTubeList = () => {
   }
 
   return (
-    <div className='container mx-auto p-4'>
-      <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
+    <div className='container mx-auto'>
+      <div className='grid grid-cols-1 gap-5 md:grid-cols-2'>
         {videoList.map((url, index) => {
           const videoId = getYouTubeId(url)
 
