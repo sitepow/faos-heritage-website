@@ -3,6 +3,10 @@
 import { Button } from '@heroui/react'
 import { SearchIcon, LogInIcon } from 'lucide-react'
 
+import type { NavLink } from './navbar.types'
+import type { GetBlogCategoriesResult } from '@/features/blog-category/blog-category.action'
+import type { GetCategoriesResult } from '@/features/category/category.action'
+
 import { NavbarCartIndicator } from './NavbarCartIndicator'
 import { NavbarMobileMenu } from './NavbarMobileMenu'
 import { NavbarUserMenu } from './NavbarUserMenu'
@@ -11,7 +15,13 @@ import { CustomIcon } from '@/components/ui/CustomIcon'
 import { useAppNavigation } from '@/hooks/useAppNavigation'
 import { useAuth } from '@/hooks/useAuth'
 
-const NavbarActions = () => {
+interface Props {
+  staticLinks: NavLink[]
+  categories: GetCategoriesResult
+  blogCategories: GetBlogCategoriesResult
+}
+
+const NavbarActions = ({ staticLinks, categories, blogCategories }: Props) => {
   const { isAuthenticated } = useAuth()
   const navigation = useAppNavigation()
 
@@ -28,7 +38,11 @@ const NavbarActions = () => {
             <CustomIcon icon={LogInIcon} />
           </Button>
         )}
-        <NavbarMobileMenu />
+        <NavbarMobileMenu
+          blogCategories={blogCategories}
+          categories={categories}
+          staticLinks={staticLinks}
+        />
         <div className='bg-divider h-4 w-[1px]' />
         <NavbarCartIndicator />
       </div>

@@ -1,3 +1,5 @@
+'use client'
+
 import { Input } from '@heroui/react'
 import { SearchIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'

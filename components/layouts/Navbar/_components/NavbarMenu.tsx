@@ -9,24 +9,21 @@ import {
 } from '@heroui/react'
 import { ChevronDown } from 'lucide-react'
 import Link from 'next/link'
-import { useLocale } from 'next-intl'
+
+import type { NavLink } from './navbar.types'
+import type { GetBlogCategoriesResult } from '@/features/blog-category/blog-category.action'
+import type { GetCategoriesResult } from '@/features/category/category.action'
 
 import { MenuItem } from './MenuItem'
 import { Container } from '../../Container'
 
-import { useBlogCategories } from '@/features/blog-category/blog-category.hook'
-import { useCategories } from '@/features/category/category.hook'
-import { useStaticNavLinks } from '@/hooks/useStaticNavLinks'
+interface Props {
+  staticLinks: NavLink[]
+  categories: GetCategoriesResult
+  blogCategories: GetBlogCategoriesResult
+}
 
-const NavbarMenu = () => {
-  const locale = useLocale()
-  const { staticLinks } = useStaticNavLinks()
-  const { data: categories } = useCategories({ locale })
-  const { data: blogCategories } = useBlogCategories({
-    filters: { isActive: true },
-    locale,
-  })
-
+const NavbarMenu = ({ staticLinks, categories, blogCategories }: Props) => {
   const MAX_VISIBLE_ITEMS = 3
 
   const allCategories = [
@@ -86,7 +83,7 @@ const NavbarMenu = () => {
                 >
                   {moreItems.map((item) => (
                     <DropdownItem
-                      key={item?.slug!}
+                      key={item?.id! || item?.slug!}
                       as={Link}
                       className='py-3.5'
                       href={

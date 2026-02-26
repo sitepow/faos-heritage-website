@@ -2,31 +2,31 @@
 
 import { MenuIcon, XIcon } from 'lucide-react'
 import Link from 'next/link'
-import { useLocale } from 'next-intl'
 import { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
+
+import type { NavLink } from './navbar.types'
+import type { GetBlogCategoriesResult } from '@/features/blog-category/blog-category.action'
+import type { GetCategoriesResult } from '@/features/category/category.action'
 
 import { MenuItem } from './MenuItem'
 
 import { CustomIcon } from '@/components/ui/CustomIcon'
-import { useBlogCategories } from '@/features/blog-category/blog-category.hook'
-import { useCategories } from '@/features/category/category.hook'
-import { useStaticNavLinks } from '@/hooks/useStaticNavLinks'
 import { cn } from '@/utils'
 
-const NavbarMobileMenu = () => {
-  const locale = useLocale()
+interface Props {
+  staticLinks: NavLink[]
+  categories: GetCategoriesResult
+  blogCategories: GetBlogCategoriesResult
+}
 
+const NavbarMobileMenu = ({
+  staticLinks,
+  categories,
+  blogCategories,
+}: Props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
-
-  const { staticLinks } = useStaticNavLinks()
-
-  const { data: categories } = useCategories({ locale })
-  const { data: blogCategories } = useBlogCategories({
-    filters: { isActive: true },
-    locale,
-  })
 
   useEffect(() => {
     setMounted(true)
