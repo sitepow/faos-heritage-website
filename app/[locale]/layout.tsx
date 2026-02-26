@@ -19,25 +19,38 @@ interface LocaleLayoutProps {
   }>
 }
 
-function assertValidLocale(locale: string) {
+const assertValidLocale = (locale: string) => {
   if (!hasLocale(routing.locales, locale)) {
     notFound()
   }
 }
 
-export async function generateMetadata({
+const generateMetadata = async ({
   params,
 }: {
-  params: { locale: string }
-}): Promise<Metadata> {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> => {
   const { locale } = await params
   assertValidLocale(locale)
 
   const t = await getTranslations({ locale, namespace: 'meta' })
+  const baseUrl = process.env.APP_URL!
+
+  const languages: Record<string, string> = {}
+  routing.locales.forEach((loc) => {
+    languages[loc] = `${baseUrl}/${loc}`
+  })
 
   return constructMetadata({
     title: t('home.title'),
     description: t('home.description'),
+    alternates: {
+      canonical: `${baseUrl}/${locale}`,
+      languages: {
+        ...languages,
+        'x-default': `${baseUrl}/th`,
+      },
+    },
   })
 }
 
@@ -56,4 +69,5 @@ const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
   )
 }
 
+export { generateMetadata }
 export default LocaleLayout

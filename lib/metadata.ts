@@ -13,6 +13,7 @@ interface Props {
   ogImage?: string
   noIndex?: boolean
   keywords?: string | Array<string>
+  alternates?: Metadata['alternates']
 }
 
 const constructMetadata = async ({
@@ -22,6 +23,7 @@ const constructMetadata = async ({
   ogImage = IMAGE_FALLBACK.OG,
   noIndex = false,
   keywords,
+  alternates,
 }: Props = {}): Promise<Metadata> => {
   const baseUrl = process.env.APP_URL!
   const url = `${baseUrl}${canonicalPath}`
@@ -36,7 +38,7 @@ const constructMetadata = async ({
       ? [keywords, ...defaultKeywords]
       : defaultKeywords
 
-  const languageAlternates = Object.fromEntries(
+  const defaultLanguageAlternates = Object.fromEntries(
     routing.locales.map((loc) => [loc, `${baseUrl}/${loc}${canonicalPath}`]),
   )
 
@@ -47,9 +49,12 @@ const constructMetadata = async ({
     },
     description,
     keywords: finalKeywords,
-    alternates: {
+    alternates: alternates || {
       canonical: url,
-      languages: languageAlternates,
+      languages: {
+        ...defaultLanguageAlternates,
+        'x-default': `${baseUrl}/us${canonicalPath}`,
+      },
     },
     openGraph: {
       title: title ? `${title} | ${brandName}` : t('home.title'),

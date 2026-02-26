@@ -33,6 +33,15 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
 
   const sitemapEntries: MetadataRoute.Sitemap = []
 
+  const getLanguages = (routePath: string) => {
+    return Object.fromEntries(
+      routing.locales.map((locale) => [
+        locale,
+        `${baseUrl}/${locale}${routePath}`,
+      ]),
+    )
+  }
+
   routing.locales.forEach((locale) => {
     staticRoutes.forEach((route) => {
       sitemapEntries.push({
@@ -40,6 +49,9 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
         lastModified: new Date(),
         changeFrequency: 'weekly',
         priority: route === '' ? 1 : 0.8,
+        alternates: {
+          languages: getLanguages(route),
+        },
       })
     })
 
@@ -48,11 +60,15 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
         return
       }
 
+      const path = `/products/${product.slug}`
       sitemapEntries.push({
-        url: `${baseUrl}/${locale}/products/${product.slug}`,
+        url: `${baseUrl}/${locale}${path}`,
         lastModified: product.updatedAt,
         changeFrequency: 'weekly',
         priority: 0.7,
+        alternates: {
+          languages: getLanguages(path),
+        },
       })
     })
 
@@ -61,11 +77,15 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
         return
       }
 
+      const path = `/categories/${category.slug}`
       sitemapEntries.push({
-        url: `${baseUrl}/${locale}/categories/${category.slug}`,
+        url: `${baseUrl}/${locale}${path}`,
         lastModified: category.updatedAt,
         changeFrequency: 'weekly',
         priority: 0.75,
+        alternates: {
+          languages: getLanguages(path),
+        },
       })
     })
 
@@ -74,11 +94,15 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
         return
       }
 
+      const path = `/posts/${post.slug}`
       sitemapEntries.push({
-        url: `${baseUrl}/${locale}/posts/${post.slug}`,
+        url: `${baseUrl}/${locale}${path}`,
         lastModified: post.updatedAt,
         changeFrequency: 'weekly',
         priority: 0.7,
+        alternates: {
+          languages: getLanguages(path),
+        },
       })
     })
   })
