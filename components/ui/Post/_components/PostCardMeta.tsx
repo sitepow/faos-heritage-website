@@ -22,11 +22,7 @@ const PostCardMeta = memo(
     return (
       <footer className='flex flex-wrap items-center gap-3 border-t border-white/10 pt-4 text-white/90'>
         <div className='flex items-center gap-2'>
-          <PostAuthorAvatar
-            author={author}
-            className='size-6 border-1 border-white/20'
-            iconSize={12}
-          />
+          <PostAuthorAvatar author={author} iconSize={12} />
           <span className='cursor-pointer text-sm font-medium transition-all hover:underline'>
             {author?.name!}
           </span>

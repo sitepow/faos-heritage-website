@@ -38,12 +38,9 @@ const VariantTable = ({ variants, className, showStock = true }: Props) => {
           <caption className='sr-only'>Product Variants</caption>
 
           <thead>
-            <tr className='border-default-100 *:border-default-100 text-default-500 bg-default-50 border-b tracking-wider uppercase *:border-b *:px-3 *:py-2 *:font-semibold'>
+            <tr className='border-default-100 *:border-default-100 text-default-500 border-b tracking-wider uppercase *:border-b *:px-3 *:py-2 *:font-semibold'>
               <th
-                className={cn(
-                  'bg-default-50 sticky left-0 z-10 backdrop-blur-md',
-                  stickyBorderClass,
-                )}
+                className={cn('sticky left-0 z-10', stickyBorderClass)}
                 scope='col'
               >
                 {t('size')}
@@ -66,13 +63,10 @@ const VariantTable = ({ variants, className, showStock = true }: Props) => {
               const priceInfo = getProductPriceInfo(variant)
 
               return (
-                <tr
-                  key={`${variant.name}-${idx}`}
-                  className='hover:bg-default-50/50 transition-colors *:px-3 *:py-2'
-                >
+                <tr key={`${variant.name}-${idx}`} className='*:px-3 *:py-2'>
                   <th
                     className={cn(
-                      'text-default-700 bg-content1 sticky left-0 z-10 font-medium backdrop-blur-md',
+                      'text-default-700 sticky left-0 z-10 font-medium backdrop-blur-md',
                       stickyBorderClass,
                     )}
                     scope='row'
@@ -88,7 +82,7 @@ const VariantTable = ({ variants, className, showStock = true }: Props) => {
                         className='h-5 text-[10px]'
                         color={isOutOfStock ? 'danger' : 'success'}
                         size='sm'
-                        variant='flat'
+                        variant='dot'
                       >
                         {isOutOfStock
                           ? tProductDetail('cartActions.outOfStock')

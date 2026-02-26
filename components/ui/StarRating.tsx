@@ -11,6 +11,8 @@ interface Props {
   readonly?: boolean
   onRatingChange?: (rating: number) => void
   size?: number
+  activeColor?: string
+  inactiveColor?: string
 }
 
 const StarRating = ({
@@ -19,6 +21,8 @@ const StarRating = ({
   readonly = true,
   onRatingChange,
   size = 20,
+  activeColor = 'text-warning',
+  inactiveColor = 'text-default-200',
 }: Props) => {
   return (
     <div className='flex items-center gap-1'>
@@ -32,7 +36,7 @@ const StarRating = ({
             className={cn(
               'transition-transform focus:outline-none',
               !readonly && 'cursor-pointer hover:scale-110 active:scale-95',
-              isActive ? 'text-warning' : 'text-default-200',
+              isActive ? activeColor : inactiveColor,
             )}
             disabled={readonly}
             type='button'
