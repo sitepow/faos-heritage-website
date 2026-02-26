@@ -1,6 +1,6 @@
 'use client'
 
-import { Card, CardBody, Button, Input } from '@heroui/react'
+import { Card, CardBody, Button, Input, Divider } from '@heroui/react'
 import { HeartIcon, ShoppingCartIcon, Share2Icon } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 import { useState, useMemo, useEffect } from 'react'
@@ -98,21 +98,28 @@ const ProductPurchasePanel = () => {
     <Card className='border-default-100 border' radius='sm' shadow='none'>
       <CardBody className='flex flex-col gap-4'>
         <header>
-          <h1 className='py-3 text-xl font-semibold sm:text-2xl lg:text-4xl'>
+          <div className='flex flex-wrap items-center gap-2'>
+            <CategoryChip categoryName={product.category?.name} />
+            <ProductRating
+              reviews={product.reviews}
+              size={16}
+              totalReviews={product._count?.reviews || 0}
+            />
+          </div>
+
+          <h1 className='text-3xl leading-tight font-bold tracking-tighter sm:text-4xl lg:text-5xl'>
             {product.name}
           </h1>
         </header>
 
+        <Divider className='bg-default-100' />
+
         <div className='flex flex-wrap items-center gap-2'>
-          <CategoryChip categoryName={product.category?.name} />
-          <ProductRating
-            reviews={product.reviews}
-            size={16}
-            totalReviews={product._count?.reviews || 0}
-          />
           <ViewCount viewCount={product?.viewCount || 0} />
           <CommentCount commentCount={product?._count?.comments || 0} />
         </div>
+
+        <Divider className='bg-default-100' />
 
         <section aria-label='Product variants' className='flex flex-col gap-5'>
           <VariantTable variants={product?.variants || []} />
@@ -132,10 +139,10 @@ const ProductPurchasePanel = () => {
           </section>
         )}
 
-        <div className='flex gap-2 pt-4'>
+        <div className='grid grid-cols-5 gap-2 pt-4'>
           <Button
             fullWidth
-            className='bg-primary/10 border-primary text-primary'
+            className='bg-primary/10 border-primary text-primary col-span-2 sm:col-span-1'
             isLoading={isAddingToFav}
             radius='none'
             size='lg'
@@ -146,13 +153,11 @@ const ProductPurchasePanel = () => {
             }
             variant='faded'
             onPress={() => addToFav(product.id)}
-          >
-            <span className='hidden md:block'>{tCart('fav')}</span>
-          </Button>
+          />
 
           <Button
             fullWidth
-            className='text-secondary'
+            className='text-secondary col-span-3 sm:col-span-4'
             color='primary'
             isDisabled={!canAddToCart}
             isLoading={isAddingToCart}
@@ -177,9 +182,11 @@ const ProductPurchasePanel = () => {
           </Button>
         </div>
 
+        <Divider className='bg-default-100' />
+
         <section
           aria-label='Affiliate Program'
-          className='mt-4 flex flex-col gap-3 p-4'
+          className='flex flex-col gap-3 p-4'
         >
           <div className='flex flex-wrap items-center gap-2'>
             <Share2Icon className='text-default-500' size={18} />
@@ -198,11 +205,10 @@ const ProductPurchasePanel = () => {
               inputMode='numeric'
               label={tField('affiliateCode')}
               labelPlacement='outside'
-              placeholder='0000'
               radius='none'
               size='sm'
               value={affiliateCode}
-              variant='bordered'
+              variant='underlined'
               onValueChange={(val) => {
                 const numeric = val.replace(/[^0-9]/g, '')
                 if (numeric.length <= 4) {
