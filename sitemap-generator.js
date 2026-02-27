@@ -34,25 +34,20 @@ async function getDynamicPaths() {
 
   const staticSlugs = [
     '',
-    'about',
-    'categories',
-    'payment-methods',
-    'privacy-policy',
-    'products',
-    'posts',
+    '/about',
+    '/categories',
+    '/payment-methods',
+    '/privacy-policy',
+    '/products',
+    '/posts',
   ]
   const countryCodes = Object.keys(COUNTRY_CONFIG).map((c) => c.toLowerCase())
   const results = []
 
   countryCodes.forEach((lang) => {
     staticSlugs.forEach((slug) => {
-      results.push({
-        lang,
-        relativeSlug: slug ? `/${slug}` : '',
-        isHome: slug === '',
-      })
+      results.push({ lang, relativeSlug: slug, isHome: slug === '' })
     })
-
     products.forEach((p) =>
       results.push({
         lang,

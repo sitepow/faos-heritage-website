@@ -28,10 +28,8 @@ module.exports = {
     const allLangs = Object.keys(COUNTRY_CONFIG).map((c) => c.toLowerCase())
 
     return data.map((item) => {
-      const mainLoc = `${config.siteUrl}/${item.lang}${item.relativeSlug}`
-
       return {
-        loc: mainLoc,
+        loc: `${config.siteUrl}/${item.lang}${item.relativeSlug}`,
         changefreq: 'weekly',
         priority: item.isHome ? 1.0 : 0.7,
         lastmod: new Date().toISOString(),
