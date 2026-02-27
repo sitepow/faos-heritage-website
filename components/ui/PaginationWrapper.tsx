@@ -13,18 +13,14 @@ interface Props {
 }
 
 const PaginationWrapper = ({ page, total, onChange, className }: Props) => {
-  if (total <= 1) {
-    return null
-  }
-
   return (
     <Pagination
       showControls
       className={cn('mx-auto my-5', className)}
       classNames={{
-        item: 'bg-default-100 text-default-400 shadow-none cursor-pointer',
+        item: 'bg-default-100 text-white shadow-none cursor-pointer',
         cursor:
-          'bg-secondary text-primary font-bold border-default-100 border ',
+          'bg-secondary text-white font-bold border-default-100 border shadow-lg',
         next: 'bg-default-100 text-default-400 cursor-pointer',
         prev: 'bg-default-100 text-default-400 cursor-pointer',
       }}

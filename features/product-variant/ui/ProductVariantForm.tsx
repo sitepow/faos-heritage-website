@@ -1,292 +1,189 @@
-// 'use client'
+'use client'
 
-// import {
-//   Button,
-//   Input,
-//   Modal,
-//   ModalBody,
-//   ModalContent,
-//   ModalFooter,
-//   ModalHeader,
-//   NumberInput,
-//   Spinner,
-//   Switch,
-// } from '@heroui/react'
-// import { zodResolver } from '@hookform/resolvers/zod'
-// import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-// import { useEffect, useState } from 'react'
-// import { Controller, useForm } from 'react-hook-form'
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  Input,
+  Switch,
+  Spinner,
+} from '@heroui/react'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useEffect } from 'react'
+import { Controller, useForm } from 'react-hook-form'
 
-// import type { VariantInput } from '../../schema/variant'
-// import type { ImageWithPreview } from '@/components/ui/ImageDropzone'
+import { useProductUIStore } from '../../product/product.store'
+import { useProductVariant } from '../product-variant.hook'
+import { useProductVariantMutation } from '../product-variant.mutation'
+import { variantSchema, type VariantInput } from '../product-variant.schema'
+import { useProductVariantUIStore } from '../product-variant.store'
 
-// import { getVariant, createVariant, updateVariant } from '../../action/variant'
-// import { variantSchema } from '../../schema/variant'
-// import { useProductStore } from '../../store'
+import { SectionLabel } from '@/components/ui/SectionHeader'
 
-// import { ImageDropzone } from '@/components/ui/ImageDropzone'
-// import { SubHeading } from '@/components/ui/SectionHeader'
-// import { DEFAULT_CURRENCY } from '@/constants/currency'
-// import { useImageUpload } from '@/hooks/useResolveImageUpload'
+const DEFAULT_VALUES: VariantInput = {
+  productId: '',
+  name: '',
+  price: 0,
+  weight: 0,
+  stockQuantity: 0,
+  isActive: true,
+  image: null,
+}
 
-// const DEFAULT_VALUES: VariantInput = {
-//   name: '',
-//   sku: '',
-//   price: 0,
-//   stockQuantity: 0,
-//   weight: 0,
-//   isActive: true,
-//   image: '',
-// }
+const ProductVariantForm = () => {
+  const { selectedVariantId, isFormOpen, closeForm } =
+    useProductVariantUIStore()
+  const { selectedProductId } = useProductUIStore()
+  const { create, update } = useProductVariantMutation()
+  const { data: variant, isLoading } = useProductVariant(selectedVariantId)
 
-// export const VariantForm = () => {
-//   const [previewFiles, setPreviewFiles] = useState<ImageWithPreview[]>([])
-//   const [oldImage, setOldImage] = useState<string | null>(null)
-//   const { resolveImagePath, isUploading } = useImageUpload({
-//     oldImage,
-//     previewFiles,
-//   })
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors, isDirty },
+  } = useForm<VariantInput>({
+    resolver: zodResolver(variantSchema),
+    defaultValues: DEFAULT_VALUES,
+  })
 
-//   const {
-//     isVariantOpen,
-//     onOpenVariantChange,
-//     onOpenVariantManagerChange,
-//     productId,
-//     variantId,
-//     setState,
-//   } = useProductStore()
-//   const queryClient = useQueryClient()
+  useEffect(() => {
+    if (isFormOpen) {
+      if (selectedVariantId && variant) reset(variant as VariantInput)
+      else reset({ ...DEFAULT_VALUES, productId: selectedProductId || '' })
+    }
+  }, [isFormOpen, selectedVariantId, variant, reset, selectedProductId])
 
-//   const QUERY_KEY = {
-//     VARIANT: ['dashboard', 'variant', 'modal', variantId],
-//     VARIANTS: ['dashboard', 'variants', 'modal'],
-//   }
+  const onSubmit = async (data: VariantInput) => {
+    selectedVariantId
+      ? await update({ ...data, id: selectedVariantId })
+      : await create(data)
+    closeForm()
+  }
 
-//   const {
-//     control,
-//     handleSubmit,
-//     setValue,
-//     reset,
-//     formState: { errors, isDirty },
-//   } = useForm<VariantInput>({
-//     resolver: zodResolver(variantSchema),
-//     defaultValues: DEFAULT_VALUES,
-//   })
+  return (
+    <Modal isOpen={isFormOpen} size='2xl' onOpenChange={closeForm}>
+      <ModalContent>
+        <ModalHeader className='text-xl font-bold'>
+          {selectedVariantId
+            ? 'แก้ไขตัวเลือกสินค้า'
+            : 'เพิ่มตัวเลือกสินค้าใหม่'}
+        </ModalHeader>
+        <ModalBody>
+          {isLoading ? (
+            <div className='flex justify-center p-8'>
+              <Spinner label='กำลังโหลดข้อมูลตัวเลือก...' />
+            </div>
+          ) : (
+            <form
+              className='space-y-6'
+              id='variant-form'
+              onSubmit={handleSubmit(onSubmit)}
+            >
+              <SectionLabel>สถานะการแสดงผล</SectionLabel>
+              <div className='flex items-center gap-4'>
+                <Controller
+                  control={control}
+                  name='isActive'
+                  render={({ field: { value, onChange } }) => (
+                    <Switch isSelected={!!value} onValueChange={onChange}>
+                      เปิดใช้งานตัวเลือกนี้
+                    </Switch>
+                  )}
+                />
+              </div>
 
-//   const { data: variant, isLoading: isLoadingVariant } = useQuery({
-//     queryKey: QUERY_KEY.VARIANT,
-//     queryFn: () => getVariant(variantId!),
-//     enabled: !!variantId && isVariantOpen,
-//   })
+              <SectionLabel>ข้อมูลตัวเลือกสินค้า</SectionLabel>
+              <Controller
+                control={control}
+                name='name'
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    errorMessage={errors.name?.message}
+                    isInvalid={!!errors.name}
+                    label='ชื่อตัวเลือก (เช่น ขนาด L, สีแดง, หรือปริมาณ 500ml)'
+                    variant='bordered'
+                  />
+                )}
+              />
 
-//   useEffect(() => {
-//     if (isVariantOpen) {
-//       if (variantId && !isLoadingVariant && variant) {
-//         reset(variant)
-//       } else if (!variantId) {
-//         reset(DEFAULT_VALUES)
-//       }
-//     }
-//   }, [isVariantOpen, variantId, variant, isLoadingVariant, reset])
+              <SectionLabel>ราคาและน้ำหนัก</SectionLabel>
+              <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+                <Controller
+                  control={control}
+                  name='price'
+                  render={({ field: { value, onChange, ...field } }) => (
+                    <Input
+                      {...field}
+                      errorMessage={errors.price?.message}
+                      isInvalid={!!errors.price}
+                      label='ราคาของตัวเลือกนี้'
+                      type='number'
+                      value={value?.toString()}
+                      variant='bordered'
+                      onValueChange={(v) => onChange(Number(v))}
+                    />
+                  )}
+                />
+                <Controller
+                  control={control}
+                  name='weight'
+                  render={({ field: { value, onChange, ...field } }) => (
+                    <Input
+                      {...field}
+                      errorMessage={errors.weight?.message}
+                      isInvalid={!!errors.weight}
+                      label='น้ำหนัก (กรัม)'
+                      type='number'
+                      value={value?.toString()}
+                      variant='bordered'
+                      onValueChange={(v) => onChange(Number(v))}
+                    />
+                  )}
+                />
+              </div>
 
-//   const { mutate: mutateCreateVariant, isPending: isPendingCreateVariant } =
-//     useMutation({
-//       mutationFn: createVariant,
-//       onSuccess: () => {
-//         queryClient.invalidateQueries({
-//           queryKey: QUERY_KEY.VARIANTS,
-//         })
-//         onClose()
-//       },
-//     })
+              <SectionLabel>การจัดการสต็อก</SectionLabel>
+              <Controller
+                control={control}
+                name='stockQuantity'
+                render={({ field: { value, onChange, ...field } }) => (
+                  <Input
+                    {...field}
+                    errorMessage={errors.stockQuantity?.message}
+                    isInvalid={!!errors.stockQuantity}
+                    label='จำนวนสต็อกคงเหลือ'
+                    type='number'
+                    value={value?.toString()}
+                    variant='bordered'
+                    onValueChange={(v) => onChange(Number(v))}
+                  />
+                )}
+              />
+            </form>
+          )}
+        </ModalBody>
+        <ModalFooter>
+          <Button variant='flat' onPress={closeForm}>
+            ยกเลิก
+          </Button>
+          <Button
+            className='text-secondary font-bold'
+            color='primary'
+            form='variant-form'
+            isDisabled={!isDirty}
+            type='submit'
+          >
+            {selectedVariantId ? 'บันทึกการแก้ไข' : 'ยืนยันเพิ่มตัวเลือก'}
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
+  )
+}
 
-//   const { mutate: mutateUpdateVariant, isPending: isPendingUpdateVariant } =
-//     useMutation({
-//       mutationFn: updateVariant,
-//       onSuccess: () => {
-//         queryClient.invalidateQueries({
-//           queryKey: QUERY_KEY.VARIANTS,
-//         })
-//         onClose()
-//       },
-//     })
-
-//   const isPending =
-//     isPendingCreateVariant ||
-//     isLoadingVariant ||
-//     isPendingUpdateVariant ||
-//     isUploading
-//   const headerLable = variantId ? 'Edit Variant' : 'Add Variant'
-
-//   const onFilesChange = (files: ImageWithPreview[]) => {
-//     setPreviewFiles(files)
-
-//     setValue(
-//       'image',
-//       files.length
-//         ? 'There have been changes to the image files.'
-//         : (oldImage ?? ''),
-//       {
-//         shouldDirty: true,
-//         shouldTouch: true,
-//       },
-//     )
-//   }
-
-//   const onSubmit = async (data: VariantInput) => {
-//     const imagePath = await resolveImagePath()
-
-//     const payload = {
-//       ...data,
-//       image: imagePath,
-//       productId,
-//     }
-
-//     if (!variantId) {
-//       mutateCreateVariant(payload)
-//     } else {
-//       mutateUpdateVariant(payload)
-//     }
-//   }
-
-//   const onClose = () => {
-//     setPreviewFiles([])
-//     setOldImage(null)
-
-//     queryClient.removeQueries({
-//       queryKey: QUERY_KEY.VARIANT,
-//     })
-//     reset(DEFAULT_VALUES)
-//     setState({ variantId: null })
-//     onOpenVariantChange()
-//     onOpenVariantManagerChange()
-//   }
-
-//   return (
-//     <Modal
-//       hideCloseButton
-//       isDismissable={false}
-//       isOpen={isVariantOpen}
-//       scrollBehavior='inside'
-//       size='xl'
-//       onOpenChange={onOpenVariantChange}
-//     >
-//       <ModalContent>
-//         <ModalHeader className='flex flex-col gap-1'>{headerLable}</ModalHeader>
-
-//         {isPending && <Spinner label='Loading...' />}
-
-//         {!isPending && (
-//           <ModalBody>
-//             <ImageDropzone onFilesChange={onFilesChange} />
-
-//             <SubHeading title='Option status' />
-//             <Controller
-//               control={control}
-//               name='isActive'
-//               render={({ field: { value, onChange, ...field } }) => (
-//                 <Switch {...field} isSelected={value} onValueChange={onChange}>
-//                   Enable this option
-//                 </Switch>
-//               )}
-//             />
-
-//             <SubHeading title='Basic information' />
-//             <Controller
-//               control={control}
-//               name='name'
-//               render={({ field }) => (
-//                 <Input
-//                   {...field}
-//                   errorMessage={errors.name?.message}
-//                   isInvalid={!!errors.name}
-//                   label='Option name'
-//                   variant='bordered'
-//                 />
-//               )}
-//             />
-
-//             <Controller
-//               control={control}
-//               name='sku'
-//               render={({ field: { value, ...field } }) => (
-//                 <Input
-//                   {...field}
-//                   errorMessage={errors.sku?.message}
-//                   isInvalid={!!errors.sku}
-//                   label='SKU'
-//                   value={value ?? ''}
-//                   variant='bordered'
-//                 />
-//               )}
-//             />
-
-//             <SubHeading title='Prices and stock availability' />
-//             <Controller
-//               control={control}
-//               name='price'
-//               render={({ field: { onChange, ...field } }) => (
-//                 <NumberInput
-//                   {...field}
-//                   errorMessage={errors.price?.message}
-//                   isInvalid={!!errors.price}
-//                   label={`Price (${DEFAULT_CURRENCY})`}
-//                   minValue={0}
-//                   variant='bordered'
-//                   onValueChange={(val) => onChange(val || 0)}
-//                 />
-//               )}
-//             />
-
-//             <Controller
-//               control={control}
-//               name='stockQuantity'
-//               render={({ field: { onChange, ...field } }) => (
-//                 <NumberInput
-//                   {...field}
-//                   errorMessage={errors.stockQuantity?.message}
-//                   isInvalid={!!errors.stockQuantity}
-//                   label='Quantity in stock'
-//                   minValue={0}
-//                   variant='bordered'
-//                   onValueChange={(val) => onChange(val || 0)}
-//                 />
-//               )}
-//             />
-
-//             <Controller
-//               control={control}
-//               name='weight'
-//               render={({ field: { value, onChange, ...field } }) => (
-//                 <NumberInput
-//                   {...field}
-//                   errorMessage={errors.weight?.message}
-//                   isInvalid={!!errors.weight}
-//                   label='Weight (grams)'
-//                   minValue={0}
-//                   value={value ?? 0}
-//                   variant='bordered'
-//                   onValueChange={(val) => onChange(val || 0)}
-//                 />
-//               )}
-//             />
-//           </ModalBody>
-//         )}
-
-//         <ModalFooter>
-//           <Button isDisabled={isPending} variant='faded' onPress={onClose}>
-//             Cancel
-//           </Button>
-//           <Button
-//             className='text-secondary'
-//             color='primary'
-//             isDisabled={isPending || !isDirty}
-//             onClick={handleSubmit(onSubmit)}
-//           >
-//             {isPending ? 'Saving...' : 'Save'}
-//           </Button>
-//         </ModalFooter>
-//       </ModalContent>
-//     </Modal>
-//   )
-// }
+export { ProductVariantForm }

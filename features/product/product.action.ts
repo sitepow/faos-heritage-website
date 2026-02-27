@@ -13,6 +13,61 @@ import { prisma } from '@/lib/prisma'
 import { getServerUser, withRole } from '@/lib/session'
 import { omitEmptyFields, decimalToNumber } from '@/utils'
 
+const getProductAdmin = async (productId: string) => {
+  return withRole([Role.ADMIN], async () => {
+    noStore()
+
+    const product = await prisma.product.findUnique({
+      where: { id: productId },
+      include: {
+        category: { select: { id: true, name: true } },
+        images: { orderBy: { isPrimary: 'desc' } },
+      },
+    })
+
+    if (!product) {
+      return null
+    }
+
+    return decimalToNumber(product)
+  })
+}
+
+const getProductsAdmin = async (page = 1, limit = 50) => {
+  return withRole([Role.ADMIN], async () => {
+    noStore()
+    const skip = (page - 1) * limit
+
+    const [items, total] = await prisma.$transaction([
+      prisma.product.findMany({
+        skip,
+        take: limit,
+        include: {
+          category: {
+            select: { name: true },
+          },
+          images: {
+            select: {
+              url: true,
+              isPrimary: true,
+            },
+          },
+        },
+        orderBy: { createdAt: 'desc' },
+      }),
+      prisma.product.count(),
+    ])
+
+    return {
+      items: decimalToNumber(items),
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
+    }
+  })
+}
+
 const getProductBySlug = async (slug: string, locale?: string) => {
   const { userId } = await getServerUser()
   const languageCode = locale?.toUpperCase()
@@ -85,7 +140,7 @@ const createProduct = async (data: ProductInput) =>
   })
 
 const updateProduct = async (data: ProductInput) =>
-  withRole(['ADMIN'], async () => {
+  withRole([Role.ADMIN], async () => {
     const validated = productSchema.safeParse(data)
     if (!validated.success) {
       return fail(ERROR_CODES.VALIDATION_ERROR)
@@ -108,7 +163,7 @@ const updateProduct = async (data: ProductInput) =>
   })
 
 const deleteProduct = async (productIds: string | string[]) =>
-  withRole(['ADMIN'], async () => {
+  withRole([Role.ADMIN], async () => {
     const ids = Array.isArray(productIds) ? productIds : [productIds]
     if (!ids.length) {
       return fail(ERROR_CODES.BAD_REQUEST)
@@ -304,7 +359,7 @@ const getProductsInfinite = async ({
 }
 
 const getProductStat = async () =>
-  withRole(['ADMIN'], async () => {
+  withRole([Role.ADMIN], async () => {
     const stats = await prisma.$transaction([
       prisma.product.count(),
       prisma.product.count({ where: { stockQuantity: { gt: 0 } } }),
@@ -354,6 +409,8 @@ type ProductListItem = NonNullable<
 >[number]
 
 export {
+  getProductAdmin,
+  getProductsAdmin,
   getProductBySlug,
   createProduct,
   updateProduct,

@@ -1,295 +1,223 @@
-// 'use client'
+'use client'
 
-// import {
-//   Button,
-//   Modal,
-//   ModalBody,
-//   ModalContent,
-//   ModalFooter,
-//   ModalHeader,
-//   Select,
-//   Spinner,
-//   Input,
-//   SelectItem,
-// } from '@heroui/react'
-// import { zodResolver } from '@hookform/resolvers/zod'
-// import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-// import { useTranslations } from 'next-intl'
-// import { useEffect, useState } from 'react'
-// import { Controller, useForm } from 'react-hook-form'
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  Input,
+  Select,
+  SelectItem,
+  ModalFooter,
+  Button,
+  Textarea,
+  Spinner,
+  Alert,
+} from '@heroui/react'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useEffect } from 'react'
+import { Controller, useForm } from 'react-hook-form'
 
-// import {
-//   createProductLocalization,
-//   getProductLocalization,
-//   updateProductLocalization,
-// } from '../../action/product-localization'
-// import {
-//   productLocalizationSchema,
-//   type ProductLocalizationInput,
-// } from '../../schema/product-localization'
-// import { useProductStore } from '../../store'
+import type { Resolver } from 'react-hook-form'
 
-// import { CountryFlag } from '@/components/ui/CountryFlagAvatar'
-// import { MdEditorCustomize } from '@/components/ui/MdEditorCustomize'
-// import { COUNTRY } from '@/constants/country'
+import { useProductUIStore } from '../../product/product.store'
+import { useProductLocale } from '../product-localization.hook'
+import { useProductLocaleMutation } from '../product-localization.mutation'
+import {
+  productLocalizationSchema,
+  type ProductLocalizationInput,
+} from '../product-localization.schema'
+import { useProductLocaleUIStore } from '../product-localization.store'
 
-// const DEFAULT_VALUES: ProductLocalizationInput = {
-//   productId: '',
-//   languageCode: '',
-//   name: '',
-//   shortDescription: '',
-//   description: '',
-//   metaTitle: '',
-//   metaDescription: '',
-// }
+import { SectionLabel } from '@/components/ui/SectionHeader'
+import localeTh from '@/messages/th/ui/common.json'
 
-// export const ProductLocalizationForm = () => {
-//   const t = useTranslations('Dashboard.ProductForm')
-//   const tCountry = useTranslations('Country')
+const DEFAULT_VALUES: ProductLocalizationInput = {
+  productId: '',
+  languageCode: '',
+  name: '',
+  summary: '',
+  description: '',
+  metaTitle: '',
+  metaDescription: '',
+}
 
-//   const [editorShortDescKey, setEditorShortDescKey] = useState(0)
-//   const [editorFullDescKey, setEditorFullDescKey] = useState(0)
+const ProductLocalizationForm = () => {
+  const countries = localeTh.global.country
+  const { selectedLocalizationId, isFormOpen, closeForm } =
+    useProductLocaleUIStore()
+  const { selectedProductId } = useProductUIStore()
+  const { create, update, isCreating, isUpdating } = useProductLocaleMutation()
 
-//   const {
-//     productId,
-//     productLocalizationId,
-//     isProductLocalizationOpen,
-//     onOpenProductLocalizationChange,
-//     onOpenProductLocalizationManagerChange,
-//     setState,
-//   } = useProductStore()
+  const { data: localization, isLoading } = useProductLocale(
+    selectedLocalizationId,
+  )
 
-//   const queryClient = useQueryClient()
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors, isDirty },
+  } = useForm<ProductLocalizationInput>({
+    resolver: zodResolver(
+      productLocalizationSchema,
+    ) as Resolver<ProductLocalizationInput>,
+    defaultValues: DEFAULT_VALUES,
+  })
 
-//   const QUERY_KEY = {
-//     PRODUCT_LOCALIZATION: ['product-localization', productLocalizationId],
-//     PRODUCT_LOCALIZATIONS: ['product-localizations', productId],
-//   }
+  useEffect(() => {
+    if (isFormOpen) {
+      if (selectedLocalizationId && localization) {
+        reset(localization as ProductLocalizationInput)
+      } else {
+        reset({ ...DEFAULT_VALUES, productId: selectedProductId || '' })
+      }
+    }
+  }, [
+    isFormOpen,
+    selectedLocalizationId,
+    localization,
+    reset,
+    selectedProductId,
+  ])
 
-//   const {
-//     control,
-//     handleSubmit,
-//     reset,
-//     formState: { isDirty },
-//   } = useForm<ProductLocalizationInput>({
-//     resolver: zodResolver(productLocalizationSchema),
-//     defaultValues: DEFAULT_VALUES,
-//   })
+  const onSubmit = async (data: ProductLocalizationInput) => {
+    if (selectedLocalizationId) {
+      await update({ ...data, id: selectedLocalizationId })
+    } else {
+      await create(data)
+    }
+    closeForm()
+  }
 
-//   const { data, isLoading } = useQuery({
-//     queryKey: QUERY_KEY.PRODUCT_LOCALIZATION,
-//     queryFn: () => getProductLocalization(productLocalizationId!),
-//     enabled: !!productLocalizationId && isProductLocalizationOpen,
-//   })
+  const isPending = isCreating || isUpdating
 
-//   useEffect(() => {
-//     if (!isProductLocalizationOpen) return
+  return (
+    <Modal
+      isOpen={isFormOpen}
+      scrollBehavior='inside'
+      size='3xl'
+      onOpenChange={closeForm}
+    >
+      <ModalContent>
+        <ModalHeader className='text-xl font-bold'>
+          {selectedLocalizationId ? 'แก้ไขการแปลภาษา' : 'เพิ่มการแปลภาษาใหม่'}
+        </ModalHeader>
+        <ModalBody>
+          {isLoading ? (
+            <div className='flex justify-center p-8'>
+              <Spinner label='กำลังโหลดข้อมูล...' />
+            </div>
+          ) : (
+            <form className='space-y-6' onSubmit={handleSubmit(onSubmit)}>
+              <SectionLabel>ข้อมูลภาษาและชื่อสินค้า</SectionLabel>
+              <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+                <Controller
+                  control={control}
+                  name='languageCode'
+                  render={({ field: { value, onChange, ...field } }) => (
+                    <Select
+                      {...field}
+                      errorMessage={errors.languageCode?.message}
+                      isInvalid={!!errors.languageCode}
+                      label='เลือกภาษา/ประเทศ'
+                      placeholder='เลือกภาษาที่ต้องการแปล'
+                      selectedKeys={value ? [value] : []}
+                      variant='bordered'
+                      onSelectionChange={(keys) =>
+                        onChange(Array.from(keys)[0] as string)
+                      }
+                    >
+                      {Object.entries(countries).map(([code, name]) => (
+                        <SelectItem key={code} textValue={name}>
+                          {name} ({code})
+                        </SelectItem>
+                      ))}
+                    </Select>
+                  )}
+                />
+                <Controller
+                  control={control}
+                  name='name'
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      errorMessage={errors.name?.message}
+                      isInvalid={!!errors.name}
+                      label='ชื่อสินค้า (ภาษาที่เลือก)'
+                      variant='bordered'
+                    />
+                  )}
+                />
+              </div>
 
-//     if (productLocalizationId && data) {
-//       reset(data)
-//     } else {
-//       reset({
-//         ...DEFAULT_VALUES,
-//         productId: productId!,
-//       })
-//     }
+              <SectionLabel>รายละเอียดโดยย่อ</SectionLabel>
+              <Controller
+                control={control}
+                name='summary'
+                render={({ field: { value, ...field } }) => (
+                  <Textarea
+                    {...field}
+                    label='คำอธิบายสั้น (Short Description)'
+                    value={value || ''}
+                    variant='bordered'
+                  />
+                )}
+              />
 
-//     setEditorShortDescKey((k) => k + 1)
-//     setEditorFullDescKey((k) => k + 1)
-//   }, [data, productLocalizationId, productId, isProductLocalizationOpen, reset])
+              <SectionLabel>SEO และ Metadata (ภาษาที่เลือก)</SectionLabel>
+              <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+                <Controller
+                  control={control}
+                  name='metaTitle'
+                  render={({ field: { value, ...field } }) => (
+                    <Input
+                      {...field}
+                      label='Meta Title'
+                      value={value || ''}
+                      variant='bordered'
+                    />
+                  )}
+                />
+                <Controller
+                  control={control}
+                  name='metaDescription'
+                  render={({ field: { value, ...field } }) => (
+                    <Input
+                      {...field}
+                      label='Meta Description'
+                      value={value || ''}
+                      variant='bordered'
+                    />
+                  )}
+                />
+              </div>
 
-//   const onRefetch = async () => {
-//     await queryClient.invalidateQueries({
-//       queryKey: QUERY_KEY.PRODUCT_LOCALIZATIONS,
-//     })
-//   }
+              <Alert>
+                * สำหรับรายละเอียดเนื้อหา (Description) แบบเต็ม
+                คุณสามารถจัดการได้ผ่านปุ่ม "แก้ไขรายละเอียดเนื้อหา"
+                ในหน้าตารางหลังจากบันทึกข้อมูลส่วนนี้แล้ว
+              </Alert>
+            </form>
+          )}
+        </ModalBody>
+        <ModalFooter>
+          <Button variant='flat' onPress={closeForm}>
+            ยกเลิก
+          </Button>
+          <Button
+            className='text-secondary font-bold'
+            color='primary'
+            isDisabled={!isDirty}
+            isLoading={isPending}
+            onPress={() => handleSubmit(onSubmit)()}
+          >
+            {selectedLocalizationId ? 'บันทึกการแก้ไข' : 'เพิ่มการแปลภาษา'}
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
+  )
+}
 
-//   const { mutate: createMutate, isPending: isCreating } = useMutation({
-//     mutationFn: createProductLocalization,
-//     onSuccess: () => {
-//       onRefetch()
-//       onClose()
-//     },
-//   })
-
-//   const { mutate: updateMutate, isPending: isUpdating } = useMutation({
-//     mutationFn: updateProductLocalization,
-//     onSuccess: () => {
-//       onRefetch()
-//       onClose()
-//     },
-//   })
-
-//   const isPending = isLoading || isCreating || isUpdating
-
-//   const onSubmit = (form: ProductLocalizationInput) => {
-//     if (productLocalizationId) {
-//       updateMutate(form)
-//     } else {
-//       createMutate(form)
-//     }
-//   }
-
-//   const onClose = async () => {
-//     reset(DEFAULT_VALUES)
-//     setState({ productLocalizationId: null })
-//     await queryClient.invalidateQueries({
-//       queryKey: QUERY_KEY.PRODUCT_LOCALIZATION,
-//     })
-//     onOpenProductLocalizationChange()
-//     onOpenProductLocalizationManagerChange()
-//   }
-
-//   return (
-//     <Modal
-//       isDismissable={false}
-//       isOpen={isProductLocalizationOpen}
-//       scrollBehavior='inside'
-//       size='4xl'
-//       onOpenChange={onOpenProductLocalizationChange}
-//     >
-//       <ModalContent>
-//         <ModalHeader>
-//           {productLocalizationId
-//             ? 'แก้ไขรายละเอียดสินค้า'
-//             : 'เพิ่มรายละเอียดสินค้าใหม่'}
-//         </ModalHeader>
-
-//         {isPending && <Spinner label='Loading...' />}
-
-//         {!isPending && (
-//           <ModalBody className='gap-4'>
-//             <Controller
-//               control={control}
-//               name='languageCode'
-//               render={({ field }) => (
-//                 <Select
-//                   disallowEmptySelection
-//                   label='ประเทศ'
-//                   renderValue={(items) =>
-//                     items.map((item) => {
-//                       const selected = COUNTRY.find(
-//                         (currency) => currency.code === item.key,
-//                       )
-
-//                       if (!selected) {
-//                         return null
-//                       }
-
-//                       return (
-//                         <span key={item.key}>{tCountry(selected.code)}</span>
-//                       )
-//                     })
-//                   }
-//                   selectedKeys={field.value ? [field.value] : []}
-//                   variant='bordered'
-//                   onSelectionChange={(keys) =>
-//                     field.onChange(Array.from(keys)[0])
-//                   }
-//                 >
-//                   {COUNTRY.map((c) => (
-//                     <SelectItem key={c.code} textValue={c.name}>
-//                       <div className='flex items-center gap-2'>
-//                         <CountryFlag countryCode={c.code} />
-//                         <span>{tCountry(c.code)}</span>
-//                       </div>
-//                     </SelectItem>
-//                   ))}
-//                 </Select>
-//               )}
-//             />
-
-//             <Controller
-//               control={control}
-//               name='name'
-//               render={({ field }) => (
-//                 <Input {...field} label='ชื่อสินค้า' variant='bordered' />
-//               )}
-//             />
-
-//             <Controller
-//               control={control}
-//               name='shortDescription'
-//               render={({ field: { value, ...field } }) => (
-//                 <MdEditorCustomize
-//                   key={editorShortDescKey}
-//                   className='col-span-1 sm:col-span-2'
-//                   placeholder={t('fields.shortDesc')}
-//                   {...field}
-//                   value={value ?? ''}
-//                 />
-//               )}
-//             />
-
-//             <Controller
-//               control={control}
-//               name='description'
-//               render={({ field: { value, ...field } }) => (
-//                 <MdEditorCustomize
-//                   key={editorFullDescKey}
-//                   className='col-span-1 sm:col-span-2'
-//                   placeholder={t('fields.fullDesc')}
-//                   {...field}
-//                   value={value ?? ''}
-//                 />
-//               )}
-//             />
-
-//             {/* <Controller
-//               control={control}
-//               name='description'
-//               render={({ field: { value, ...field } }) => (
-//                 <Textarea
-//                   {...field}
-//                   value={value ?? ''}
-//                   variant='bordered'
-//                   label='รายละเอียดสินค้า (ฉบับเต็ม)'
-//                 />
-//               )}
-//             /> */}
-
-//             {/* <Controller
-//               control={control}
-//               name='metaTitle'
-//               render={({ field: { value, ...field } }) => (
-//                 <Input
-//                   {...field}
-//                   value={value ?? ''}
-//                   variant='bordered'
-//                   label='Meta Title'
-//                 />
-//               )}
-//             />
-
-//             <Controller
-//               control={control}
-//               name='metaDescription'
-//               render={({ field: { value, ...field } }) => (
-//                 <Textarea
-//                   {...field}
-//                   value={value ?? ''}
-//                   variant='bordered'
-//                   label='Meta Description'
-//                 />
-//               )}
-//             /> */}
-//           </ModalBody>
-//         )}
-
-//         <ModalFooter>
-//           <Button variant='faded' onPress={onClose}>
-//             Cancel
-//           </Button>
-//           <Button
-//             className='text-secondary'
-//             color='primary'
-//             isDisabled={!isDirty || isPending}
-//             onClick={handleSubmit(onSubmit)}
-//           >
-//             Save
-//           </Button>
-//         </ModalFooter>
-//       </ModalContent>
-//     </Modal>
-//   )
-// }
+export { ProductLocalizationForm }

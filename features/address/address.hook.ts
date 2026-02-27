@@ -1,7 +1,19 @@
 import { useQuery } from '@tanstack/react-query'
 
-import { getAddress, getAddresses, getDefaultAddress } from './address.action'
+import {
+  getAddress,
+  getAddresses,
+  getAddressesAdmin,
+  getDefaultAddress,
+} from './address.action'
 import { addressQueryKeys } from './address.query-key'
+
+const useAddressesAdmin = () => {
+  return useQuery({
+    queryKey: addressQueryKeys.lists.admin(),
+    queryFn: () => getAddressesAdmin(),
+  })
+}
 
 const useAddresses = (userId?: string) => {
   return useQuery({
@@ -28,4 +40,4 @@ const useAddress = (addressId?: string | null) => {
   })
 }
 
-export { useAddresses, useDefaultAddress, useAddress }
+export { useAddressesAdmin, useAddresses, useDefaultAddress, useAddress }

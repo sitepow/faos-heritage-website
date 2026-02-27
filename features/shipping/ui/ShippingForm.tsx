@@ -1,273 +1,335 @@
-// 'use client'
+'use client'
 
-// import {
-//   Button,
-//   Modal,
-//   ModalBody,
-//   ModalContent,
-//   ModalFooter,
-//   ModalHeader,
-//   NumberInput,
-//   Select,
-//   SelectItem,
-//   Spinner,
-//   Switch,
-// } from '@heroui/react'
-// import { zodResolver } from '@hookform/resolvers/zod'
-// import { Currency } from '@prisma/client'
-// import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-// import { useEffect } from 'react'
-// import { Controller, useForm } from 'react-hook-form'
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  Input,
+  Select,
+  SelectItem,
+  Switch,
+  Spinner,
+  Divider,
+} from '@heroui/react'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Currency } from '@prisma/client'
+import { PlusIcon, TrashIcon } from 'lucide-react'
+import { useEffect } from 'react'
+import {
+  Controller,
+  useForm,
+  useFieldArray,
+  type Resolver,
+} from 'react-hook-form'
 
-// import type { ShippingCountryInput } from '../../schema/shipping/contry'
+import { useShippingCountry } from '../shipping.hook'
+import { useShippingMutation } from '../shipping.mutation'
+import {
+  shippingCountrySchema,
+  type ShippingCountryInput,
+} from '../shipping.schema'
+import { useShippingUIStore } from '../shipping.store'
 
-// import {
-//   getShippingCountry,
-//   createShippingCountry,
-//   updateShippingCountry,
-// } from '../../action/shipping/contry'
-// import { shippingCountrySchema } from '../../schema/shipping/contry'
-// import { useProductStore } from '../../store'
+import { SectionLabel } from '@/components/ui/SectionHeader'
+import localeTh from '@/messages/th/ui/common.json'
 
-// import { CountryFlag } from '@/components/ui/CountryFlagAvatar'
-// import { SubHeading } from '@/components/ui/SectionHeader'
-// import { COUNTRY } from '@/constants/country'
-// import { DEFAULT_CURRENCY } from '@/constants/currency'
+const DEFAULT_VALUES: ShippingCountryInput = {
+  countryCode: '',
+  countryName: '',
+  baseRate: 0,
+  pricePerKg: 0,
+  freeShippingThreshold: null,
+  weightTiers: [],
+  currency: Currency.THB,
+  isActive: true,
+}
 
-// const DEFAULT_VALUES: ShippingCountryInput = {
-//   countryCode: '',
-//   countryName: '',
-//   baseRate: 0,
-//   pricePerKg: 0,
-//   isActive: true,
-//   currency: Currency['USD'],
-// }
+const ShippingForm = () => {
+  const countries = localeTh.global.country
+  const { selectedCountryId, isFormOpen, closeForm } = useShippingUIStore()
+  const { data: country, isLoading } = useShippingCountry(selectedCountryId)
+  const { create, update, isCreating, isUpdating } = useShippingMutation()
 
-// export const ShippingForm = () => {
-//   const {
-//     isShippingCountryOpen,
-//     onOpenShippingCountryChange,
-//     onOpenShippingCountryManagerChange,
-//     shippingCountryId,
-//     setState,
-//   } = useProductStore()
-//   const queryClient = useQueryClient()
+  const {
+    control,
+    handleSubmit,
+    reset,
+    setValue,
+    formState: { errors, isDirty },
+  } = useForm<ShippingCountryInput>({
+    resolver: zodResolver(
+      shippingCountrySchema,
+    ) as Resolver<ShippingCountryInput>,
+    defaultValues: DEFAULT_VALUES,
+  })
 
-//   const QUERY_KEY = {
-//     SHIPPING_COUNTRY: [
-//       'dashboard',
-//       'shipping-country',
-//       'modal',
-//       shippingCountryId,
-//     ],
-//     SHIPPING_COUNTRIES: ['dashboard', 'shipping-country', 'modal'],
-//   }
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'weightTiers',
+  })
 
-//   const {
-//     control,
-//     handleSubmit,
-//     setValue,
-//     reset,
-//     formState: { errors, isDirty },
-//   } = useForm<ShippingCountryInput>({
-//     resolver: zodResolver(shippingCountrySchema),
-//     defaultValues: DEFAULT_VALUES,
-//   })
+  useEffect(() => {
+    if (isFormOpen) {
+      if (selectedCountryId && country) {
+        reset(country as ShippingCountryInput)
+      } else {
+        reset(DEFAULT_VALUES)
+      }
+    }
+  }, [isFormOpen, selectedCountryId, country, reset])
 
-//   const onRefetch = async () => {
-//     await Promise.all([
-//       queryClient.invalidateQueries({
-//         queryKey: QUERY_KEY.SHIPPING_COUNTRY,
-//       }),
-//       queryClient.invalidateQueries({
-//         queryKey: QUERY_KEY.SHIPPING_COUNTRIES,
-//       }),
-//     ])
-//   }
+  const onSubmit = async (values: ShippingCountryInput) => {
+    selectedCountryId
+      ? await update({ ...values, id: selectedCountryId })
+      : await create(values)
+    closeForm()
+  }
 
-//   const { data: shippingCountry, isLoading: isLoadingShippingCountry } =
-//     useQuery({
-//       queryKey: QUERY_KEY.SHIPPING_COUNTRY,
-//       queryFn: () => getShippingCountry(shippingCountryId!),
-//       enabled: !!shippingCountryId && isShippingCountryOpen,
-//     })
+  const isPending = isCreating || isUpdating
 
-//   useEffect(() => {
-//     if (isShippingCountryOpen) {
-//       if (shippingCountryId && !isLoadingShippingCountry && shippingCountry) {
-//         reset(shippingCountry)
-//       } else if (!shippingCountryId) {
-//         reset(DEFAULT_VALUES)
-//       }
-//     }
-//   }, [
-//     reset,
-//     isShippingCountryOpen,
-//     shippingCountryId,
-//     shippingCountry,
-//     isLoadingShippingCountry,
-//   ])
+  return (
+    <Modal
+      isDismissable={!isPending}
+      isOpen={isFormOpen}
+      scrollBehavior='inside'
+      size='3xl'
+      onOpenChange={closeForm}
+    >
+      <ModalContent>
+        <ModalHeader className='text-left text-xl font-bold'>
+          {selectedCountryId
+            ? 'แก้ไขข้อมูลการจัดส่ง'
+            : 'เพิ่มประเทศการจัดส่งใหม่'}
+        </ModalHeader>
+        <ModalBody className='text-left'>
+          {isLoading && selectedCountryId ? (
+            <div className='flex h-40 items-center justify-center'>
+              <Spinner label='กำลังโหลดข้อมูล...' />
+            </div>
+          ) : (
+            <form
+              className='space-y-6'
+              id='shipping-form'
+              onSubmit={handleSubmit(onSubmit)}
+            >
+              <SectionLabel>สถานะและการแสดงผล</SectionLabel>
+              <div className='flex flex-wrap gap-6'>
+                <Controller
+                  control={control}
+                  name='isActive'
+                  render={({ field: { value, onChange, ...field } }) => (
+                    <Switch
+                      {...field}
+                      isSelected={!!value}
+                      onValueChange={onChange}
+                    >
+                      เปิดใช้งานประเทศนี้ (Active)
+                    </Switch>
+                  )}
+                />
+              </div>
 
-//   const {
-//     mutate: mutateCreateShippingCountry,
-//     isPending: isPendingCreateShippingCountry,
-//   } = useMutation({
-//     mutationFn: createShippingCountry,
-//     onSuccess: () => {
-//       onRefetch()
-//       onClose()
-//     },
-//   })
+              <SectionLabel>ข้อมูลประเทศ</SectionLabel>
+              <Controller
+                control={control}
+                name='countryCode'
+                render={({ field: { value, onChange, ...field } }) => (
+                  <Select
+                    {...field}
+                    errorMessage={errors.countryCode?.message}
+                    isInvalid={!!errors.countryCode}
+                    label='เลือกประเทศ'
+                    placeholder='ค้นหาหรือเลือกประเทศ'
+                    selectedKeys={value ? [value] : []}
+                    variant='bordered'
+                    onSelectionChange={(keys) => {
+                      const selectedCode = Array.from(keys)[0] as string
+                      onChange(selectedCode)
+                      if (
+                        selectedCode &&
+                        countries[selectedCode as keyof typeof countries]
+                      ) {
+                        setValue(
+                          'countryName',
+                          countries[selectedCode as keyof typeof countries],
+                          { shouldDirty: true },
+                        )
+                      }
+                    }}
+                  >
+                    {Object.entries(countries).map(([code, name]) => (
+                      <SelectItem key={code} textValue={name}>
+                        {name} ({code})
+                      </SelectItem>
+                    ))}
+                  </Select>
+                )}
+              />
 
-//   const {
-//     mutate: mutateUpdateShippingCountry,
-//     isPending: isPendingUpdateShippingCountry,
-//   } = useMutation({
-//     mutationFn: updateShippingCountry,
-//     onSuccess: () => {
-//       onRefetch()
-//       onClose()
-//     },
-//   })
+              <SectionLabel>
+                ยอดซื้อขั้นต่ำเพื่อส่งฟรี (Free Shipping Threshold)
+              </SectionLabel>
+              <Controller
+                control={control}
+                name='freeShippingThreshold'
+                render={({ field: { value, onChange, ...field } }) => (
+                  <Input
+                    {...field}
+                    label='ซื้อครบ (ยอดเงิน)'
+                    placeholder='เว้นว่างไว้หากไม่มีโปรโมชั่นส่งฟรี'
+                    type='number'
+                    value={value?.toString() ?? ''}
+                    variant='bordered'
+                    onValueChange={(v) => onChange(v ? Number(v) : null)}
+                  />
+                )}
+              />
 
-//   const isPending =
-//     isPendingCreateShippingCountry ||
-//     isLoadingShippingCountry ||
-//     isPendingUpdateShippingCountry
-//   const headerLable = shippingCountryId ? 'Edit Shipping' : 'Add Shipping'
+              <div className='flex items-center justify-between'>
+                <SectionLabel>กำหนดช่วงน้ำหนัก (Weight Tiers)</SectionLabel>
+                <Button
+                  color='primary'
+                  size='sm'
+                  startContent={<PlusIcon size={16} />}
+                  variant='flat'
+                  onPress={() =>
+                    append({ minWeight: 0, maxWeight: 0, rate: 0 })
+                  }
+                >
+                  เพิ่มช่วงน้ำหนัก
+                </Button>
+              </div>
 
-//   const onSubmit = (data: ShippingCountryInput) => {
-//     if (!shippingCountryId) {
-//       mutateCreateShippingCountry(data)
-//     } else {
-//       mutateUpdateShippingCountry(data)
-//     }
-//   }
+              {fields.length > 0 ? (
+                <div className='space-y-3'>
+                  {fields.map((field, index) => (
+                    <div key={field.id} className='flex items-end gap-3'>
+                      <div className='grid flex-1 grid-cols-3 gap-2'>
+                        <Controller
+                          control={control}
+                          name={`weightTiers.${index}.minWeight`}
+                          render={({ field: { value, onChange } }) => (
+                            <Input
+                              label='เริ่ม (kg)'
+                              size='sm'
+                              type='number'
+                              value={value?.toString() ?? '0'} // แก้ไข toString error ตรงนี้
+                              variant='bordered'
+                              onValueChange={(v) => onChange(Number(v))}
+                            />
+                          )}
+                        />
+                        <Controller
+                          control={control}
+                          name={`weightTiers.${index}.maxWeight`}
+                          render={({ field: { value, onChange } }) => (
+                            <Input
+                              label='ถึง (kg)'
+                              size='sm'
+                              type='number'
+                              value={value?.toString() ?? '0'}
+                              variant='bordered'
+                              onValueChange={(v) => onChange(Number(v))}
+                            />
+                          )}
+                        />
+                        <Controller
+                          control={control}
+                          name={`weightTiers.${index}.rate`}
+                          render={({ field: { value, onChange } }) => (
+                            <Input
+                              label='ราคาเหมา'
+                              size='sm'
+                              type='number'
+                              value={value?.toString() ?? '0'}
+                              variant='bordered'
+                              onValueChange={(v) => onChange(Number(v))}
+                            />
+                          )}
+                        />
+                      </div>
+                      <Button
+                        isIconOnly
+                        color='danger'
+                        size='sm'
+                        variant='light'
+                        onPress={() => remove(index)}
+                      >
+                        <TrashIcon size={18} />
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className='text-default-400 bg-default-50 text-small rounded-lg py-4 text-center'>
+                  ยังไม่มีการกำหนดช่วงน้ำหนัก
+                  (จะใช้เรทพื้นฐานด้านล่างในการคำนวณ)
+                </p>
+              )}
 
-//   const onClose = () => {
-//     onRefetch()
-//     reset(DEFAULT_VALUES)
-//     setState({ shippingCountryId: null })
-//     onOpenShippingCountryChange()
-//     onOpenShippingCountryManagerChange()
-//   }
+              <Divider />
 
-//   return (
-//     <Modal
-//       hideCloseButton
-//       isDismissable={false}
-//       isOpen={isShippingCountryOpen}
-//       scrollBehavior='inside'
-//       size='xl'
-//       onOpenChange={onOpenShippingCountryChange}
-//     >
-//       <ModalContent>
-//         <ModalHeader className='flex flex-col gap-1'>{headerLable}</ModalHeader>
+              <SectionLabel>
+                เรทพื้นฐาน (กรณีไม่เข้าเงื่อนไขช่วงน้ำหนัก)
+              </SectionLabel>
+              <div className='grid grid-cols-2 gap-4'>
+                <Controller
+                  control={control}
+                  name='baseRate'
+                  render={({ field: { value, onChange, ...field } }) => (
+                    <Input
+                      {...field}
+                      errorMessage={errors.baseRate?.message}
+                      isInvalid={!!errors.baseRate}
+                      label='ค่าส่งเริ่มต้น'
+                      type='number'
+                      value={value?.toString() ?? '0'}
+                      variant='bordered'
+                      onValueChange={(v) => onChange(Number(v))}
+                    />
+                  )}
+                />
+                <Controller
+                  control={control}
+                  name='pricePerKg'
+                  render={({ field: { value, onChange, ...field } }) => (
+                    <Input
+                      {...field}
+                      errorMessage={errors.pricePerKg?.message}
+                      isInvalid={!!errors.pricePerKg}
+                      label='ราคาต่อกิโลกรัม'
+                      type='number'
+                      value={value?.toString() ?? '0'}
+                      variant='bordered'
+                      onValueChange={(v) => onChange(Number(v))}
+                    />
+                  )}
+                />
+              </div>
+            </form>
+          )}
+        </ModalBody>
+        <ModalFooter>
+          <Button isDisabled={isPending} variant='flat' onPress={closeForm}>
+            ยกเลิก
+          </Button>
+          <Button
+            className='text-secondary font-bold'
+            color='primary'
+            form='shipping-form'
+            isDisabled={!isDirty || isPending}
+            isLoading={isPending}
+            type='submit'
+          >
+            {selectedCountryId ? 'บันทึกการแก้ไข' : 'เพิ่มข้อมูล'}
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
+  )
+}
 
-//         {isPending && <Spinner label='Loading...' />}
-
-//         {!isPending && (
-//           <ModalBody>
-//             <SubHeading title='Status' />
-//             <Controller
-//               control={control}
-//               name='isActive'
-//               render={({ field: { value, onChange, ...field } }) => (
-//                 <Switch {...field} isSelected={value} onValueChange={onChange}>
-//                   Enable shipping
-//                 </Switch>
-//               )}
-//             />
-
-//             <SubHeading title='Details' />
-
-//             <Controller
-//               control={control}
-//               name='countryCode'
-//               render={({ field: { value, onChange } }) => (
-//                 <Select
-//                   errorMessage={errors.countryCode?.message}
-//                   isInvalid={!!errors.countryCode}
-//                   label='Country'
-//                   selectedKeys={value ? [value] : []}
-//                   variant='bordered'
-//                   onSelectionChange={(keys) => {
-//                     const code = Array.from(keys)[0] as string
-//                     const country = COUNTRY.find(
-//                       (country) => country.code === code,
-//                     )
-
-//                     onChange(code)
-
-//                     setValue('countryName', country?.name ?? '', {
-//                       shouldDirty: true,
-//                     })
-//                     setValue('countryCode', code, {
-//                       shouldDirty: true,
-//                     })
-//                   }}
-//                 >
-//                   {COUNTRY.map((country) => (
-//                     <SelectItem
-//                       key={country.code}
-//                       startContent={<CountryFlag countryCode={country.code} />}
-//                     >
-//                       {country.name}
-//                     </SelectItem>
-//                   ))}
-//                 </Select>
-//               )}
-//             />
-
-//             <SubHeading title='Shipping rates' />
-//             <Controller
-//               control={control}
-//               name='baseRate'
-//               render={({ field: { onChange, ...field } }) => (
-//                 <NumberInput
-//                   {...field}
-//                   errorMessage={errors.baseRate?.message}
-//                   isInvalid={!!errors.baseRate}
-//                   label={`Base rate (${DEFAULT_CURRENCY})`}
-//                   minValue={0}
-//                   variant='bordered'
-//                   onValueChange={(val) => onChange(val || 0)}
-//                 />
-//               )}
-//             />
-
-//             <Controller
-//               control={control}
-//               name='pricePerKg'
-//               render={({ field: { onChange, ...field } }) => (
-//                 <NumberInput
-//                   {...field}
-//                   errorMessage={errors.pricePerKg?.message}
-//                   isInvalid={!!errors.pricePerKg}
-//                   label={`Price / kg (${DEFAULT_CURRENCY})`}
-//                   minValue={0}
-//                   variant='bordered'
-//                   onValueChange={(val) => onChange(val || 0)}
-//                 />
-//               )}
-//             />
-//           </ModalBody>
-//         )}
-
-//         <ModalFooter>
-//           <Button isDisabled={isPending} variant='faded' onPress={onClose}>
-//             Cancel
-//           </Button>
-//           <Button
-//             className='text-secondary'
-//             color='primary'
-//             isDisabled={isPending || !isDirty}
-//             onClick={handleSubmit(onSubmit)}
-//           >
-//             {isPending ? 'Saving...' : 'Save'}
-//           </Button>
-//         </ModalFooter>
-//       </ModalContent>
-//     </Modal>
-//   )
-// }
+export { ShippingForm }

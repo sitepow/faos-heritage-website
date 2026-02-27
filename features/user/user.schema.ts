@@ -1,34 +1,34 @@
 import { Role } from '@prisma/client'
 import { z } from 'zod'
 
-const baseUserSchema = z.object({
+const baseUserAdminSchema = z.object({
   id: z.string().optional(),
-  email: z.email('The email format is incorrect.'),
-  name: z.string().min(1, 'Please specify the name.'),
+  email: z.string('รูปแบบอีเมลไม่ถูกต้อง').email('รูปแบบอีเมลไม่ถูกต้อง'),
+  name: z.string('กรุณาระบุชื่อ-นามสกุล').min(1, 'กรุณาระบุชื่อ-นามสกุล'),
   image: z.string().nullish(),
   isActive: z.boolean().default(true),
-  role: z.enum(Role).default(Role.CUSTOMER),
+  role: z.nativeEnum(Role).default(Role.CUSTOMER),
 })
 
-const userCreateSchema = baseUserSchema.extend({
+const userCreateAdminSchema = baseUserAdminSchema.extend({
   password: z
-    .string()
-    .min(6, 'The password must be at least 6 characters long.'),
+    .string('รหัสผ่านต้องเป็นข้อความ')
+    .min(6, 'รหัสผ่านต้องมีความยาวอย่างน้อย 6 ตัวอักษร'),
 })
 
-const userUpdateSchema = baseUserSchema.partial().extend({
-  id: z.string().min(1, 'ID is required for update'),
+const userUpdateAdminSchema = baseUserAdminSchema.partial().extend({
+  id: z.string('จำเป็นต้องมี ID').min(1, 'จำเป็นต้องมี ID'),
 })
 
 const userLoginSchema = z.object({
-  email: z.email('Invalid email'),
+  email: z.string().email('Invalid email format'),
   password: z.string().min(1, 'Please enter your password'),
 })
 
 const userRegisterSchema = z
   .object({
     name: z.string().min(1, 'Please enter your name'),
-    email: z.email('Invalid email format'),
+    email: z.string().email('Invalid email format'),
     password: z.string().min(6, 'Password must be at least 6 characters'),
     confirmPassword: z.string(),
   })
@@ -37,15 +37,14 @@ const userRegisterSchema = z
     path: ['confirmPassword'],
   })
 
-type UserCreateInput = z.infer<typeof userCreateSchema>
-type UserUpdateInput = z.infer<typeof userUpdateSchema>
+type UserCreateInput = z.infer<typeof userCreateAdminSchema>
+type UserUpdateInput = z.infer<typeof userUpdateAdminSchema>
 type UserLoginInput = z.infer<typeof userLoginSchema>
 type UserRegisterInput = z.infer<typeof userRegisterSchema>
 
 export {
-  baseUserSchema,
-  userCreateSchema,
-  userUpdateSchema,
+  userCreateAdminSchema,
+  userUpdateAdminSchema,
   userLoginSchema,
   userRegisterSchema,
 }

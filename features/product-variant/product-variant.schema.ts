@@ -1,24 +1,23 @@
 import { z } from 'zod'
 
-type VariantInput = z.infer<typeof variantSchema>
-
 const variantSchema = z.object({
   id: z.string().nullish(),
   productId: z.string().nullish(),
   image: z.string().nullish(),
   name: z
-    .string('The product name must be a text.')
-    .min(1, 'Please specify the product name (do not leave it blank).'),
-  sku: z.string().nullish(),
-  price: z
-    .number('The price must be the correct figure.')
-    .min(0, 'The price must be 0 or higher.'),
+    .string('ชื่อตัวเลือกสินค้าต้องเป็นข้อความ')
+    .min(1, 'กรุณาระบุชื่อตัวเลือกสินค้า (ห้ามเว้นว่าง)'),
+  price: z.number('ราคาต้องเป็นตัวเลขเท่านั้น').min(0, 'ราคาต้องไม่ต่ำกว่า 0'),
   weight: z
-    .number('The weight must be the correct figure.')
-    .min(0, 'The weight must be 0 or higher.'),
-  stockQuantity: z.number('The inventory quantity must be accurate.'),
+    .number('น้ำหนักต้องเป็นตัวเลขเท่านั้น')
+    .min(0, 'น้ำหนักต้องไม่ต่ำกว่า 0'),
+  stockQuantity: z
+    .number('จำนวนสต็อกต้องเป็นตัวเลขเท่านั้น')
+    .min(0, 'จำนวนสต็อกต้องไม่ต่ำกว่า 0'),
   isActive: z.boolean(),
 })
+
+type VariantInput = z.infer<typeof variantSchema>
 
 export { variantSchema }
 export type { VariantInput }

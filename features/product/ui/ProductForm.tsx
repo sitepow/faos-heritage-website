@@ -1,588 +1,334 @@
-// 'use client'
+'use client'
 
-// import {
-//   Modal,
-//   ModalContent,
-//   ModalHeader,
-//   ModalBody,
-//   Spinner,
-//   Switch,
-//   Input,
-//   Select,
-//   SelectItem,
-//   Textarea,
-//   NumberInput,
-//   ModalFooter,
-//   Button,
-// } from '@heroui/react'
-// import { zodResolver } from '@hookform/resolvers/zod'
-// import { ProductUnit } from '@prisma/client'
-// import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-// import { useTranslations } from 'next-intl'
-// import { useEffect, useState } from 'react'
-// import { Controller, useForm } from 'react-hook-form'
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  Switch,
+  Input,
+  Select,
+  SelectItem,
+  ModalFooter,
+  Button,
+  Textarea,
+  Alert,
+} from '@heroui/react'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { ProductUnit } from '@prisma/client'
+import { useEffect } from 'react'
+import { Controller, useForm } from 'react-hook-form'
 
-// import type { ProductInput } from '../../schema/product'
+import type { Resolver } from 'react-hook-form'
 
-// import { getCategories } from '../../action/category'
-// import { getProduct, createProduct, updateProduct } from '../../action/product'
-// import { productSchema } from '../../schema/product'
-// import { useProductStore } from '../../store'
+import { useProductAdmin } from '../product.hook'
+import { useProductMutation } from '../product.mutation'
+import { productSchema, type ProductInput } from '../product.schema'
+import { useProductUIStore } from '../product.store'
 
-// import { useAppStore } from '@/app/store'
-// import { MdEditorCustomize } from '@/components/ui/MdEditorCustomize'
-// import { SubHeading } from '@/components/ui/SectionHeader'
-// import { PRODUCT_UNITS } from '@/constants/product'
+import { SectionLabel } from '@/components/ui/SectionHeader'
+import { useCategories } from '@/features/category/category.hook'
+import localeTh from '@/messages/th/ui/common.json'
 
-// const DEFAULT_VALUES: ProductInput = {
-//   isAuthentic: true,
-//   isPremiumProduct: true,
-//   isActive: true,
-//   isDigitalProduct: false,
-//   isDemoProduct: false,
-//   useSeoFromBasicData: true,
-//   isFeatured: false,
-//   name: '',
-//   categoryId: '',
-//   sku: '',
-//   barcode: '',
-//   price: 0,
-//   compareAtPrice: 0,
-//   costPrice: 0,
-//   stockQuantity: 0,
-//   lowStockAlert: 0,
-//   weight: 0,
-//   slug: '',
-//   metaTitle: '',
-//   metaDescription: '',
-//   shortDescription: '',
-//   description: '',
-//   unit: ProductUnit?.UNIT,
-// }
+const DEFAULT_VALUES: ProductInput = {
+  name: '',
+  slug: '',
+  price: 0,
+  salePrice: null,
+  stockQuantity: 0,
+  weight: null,
+  unit: ProductUnit.UNIT,
+  isActive: true,
+  categoryId: '',
+  summary: '',
+  description: '',
+  metaTitle: '',
+  metaDescription: '',
+  keywords: [],
+}
 
-// export const ProductForm = () => {
-//   const t = useTranslations('Dashboard.ProductForm')
-//   const tc = useTranslations('Common')
-//   const { country } = useAppStore()
+const ProductForm = () => {
+  const unitTranslations = localeTh.global.productUnit
 
-//   const [editorShortDescKey, setEditorShortDescKey] = useState(0)
-//   const [editorFullDescKey, setEditorFullDescKey] = useState(0)
+  const { selectedProductId, isFormOpen, closeForm } = useProductUIStore()
+  const { create, update, isCreating, isUpdating } = useProductMutation()
 
-//   const { productId, setState, isProductOpen, onOpenProductChange } =
-//     useProductStore()
-//   const queryClient = useQueryClient()
+  const { data: categories } = useCategories({ locale: undefined })
 
-//   const QUERY_KEY = {
-//     CATEGORIES: ['dashboard', 'categories', 'modal'],
-//     PRODUCT: ['dashboard', 'product', productId],
-//     PRODUCTS: ['dashboard', 'products'],
-//     HOMEPAGE: ['products', 'homepage'],
-//     CAROUSEL: ['carousel', 'products'],
-//   }
+  const { data: product, isLoading: isLoadingProduct } = useProductAdmin(
+    selectedProductId || '',
+    isFormOpen,
+  )
 
-//   const { data: categories, isLoading: isLoadingCategories } = useQuery({
-//     queryKey: QUERY_KEY.CATEGORIES,
-//     queryFn: () => getCategories(),
-//     enabled: isProductOpen,
-//   })
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors, isDirty },
+  } = useForm<ProductInput>({
+    resolver: zodResolver(productSchema) as Resolver<ProductInput>,
+    defaultValues: DEFAULT_VALUES,
+  })
 
-//   const { data: product, isLoading: isLoadingProduct } = useQuery({
-//     queryKey: QUERY_KEY.PRODUCT,
-//     queryFn: () => getProduct(productId!),
-//     enabled: !!productId && isProductOpen,
-//   })
+  useEffect(() => {
+    if (isFormOpen) {
+      if (selectedProductId && product) {
+        reset(product as ProductInput)
+      } else {
+        reset(DEFAULT_VALUES)
+      }
+    }
+  }, [isFormOpen, selectedProductId, product, reset])
 
-//   const {
-//     control,
-//     handleSubmit,
-//     reset,
-//     watch,
-//     formState: { errors, isDirty },
-//   } = useForm<ProductInput>({
-//     resolver: zodResolver(productSchema),
-//     defaultValues: DEFAULT_VALUES,
-//   })
+  const onSubmit = async (data: ProductInput) => {
+    if (selectedProductId) {
+      await update({ ...data, id: selectedProductId })
+    } else {
+      await create(data)
+    }
+    closeForm()
+  }
 
-//   useEffect(() => {
-//     if (!isProductOpen) return
+  const isPending = isLoadingProduct || isCreating || isUpdating
 
-//     if (productId && !isLoadingProduct && product) {
-//       reset(product)
-//     } else if (!productId) {
-//       reset(DEFAULT_VALUES)
-//     }
+  return (
+    <Modal
+      isOpen={isFormOpen}
+      scrollBehavior='inside'
+      size='4xl'
+      onOpenChange={closeForm}
+    >
+      <ModalContent>
+        <ModalHeader className='text-xl font-bold'>
+          {selectedProductId ? 'แก้ไขข้อมูลสินค้า' : 'เพิ่มสินค้าใหม่'}
+        </ModalHeader>
+        <ModalBody>
+          {!isLoadingProduct && (
+            <form className='space-y-6' onSubmit={handleSubmit(onSubmit)}>
+              <SectionLabel>สถานะและการแสดงผล</SectionLabel>
+              <div className='flex flex-wrap gap-6'>
+                <Controller
+                  control={control}
+                  name='isActive'
+                  render={({ field: { value, onChange, ...field } }) => (
+                    <Switch
+                      {...field}
+                      isSelected={!!value}
+                      onValueChange={onChange}
+                    >
+                      เปิดใช้งานสินค้า (Active)
+                    </Switch>
+                  )}
+                />
+              </div>
 
-//     setEditorShortDescKey((k) => k + 1)
-//     setEditorFullDescKey((k) => k + 1)
-//   }, [isProductOpen, productId, product, isLoadingProduct, reset])
+              <SectionLabel>ข้อมูลพื้นฐาน</SectionLabel>
+              <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+                <Controller
+                  control={control}
+                  name='name'
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      errorMessage={errors.name?.message}
+                      isInvalid={!!errors.name}
+                      label='ชื่อสินค้า'
+                      variant='bordered'
+                    />
+                  )}
+                />
+                <Controller
+                  control={control}
+                  name='slug'
+                  render={({ field: { value, ...field } }) => (
+                    <Input
+                      {...field}
+                      errorMessage={errors.slug?.message}
+                      isInvalid={!!errors.slug}
+                      label='URL Slug (เช่น organic-honey)'
+                      placeholder='ระบุ slug ภาษาอังกฤษ'
+                      value={value?.toString()}
+                      variant='bordered'
+                    />
+                  )}
+                />
+                <Controller
+                  control={control}
+                  name='categoryId'
+                  render={({ field: { value, onChange, ...field } }) => (
+                    <Select
+                      {...field}
+                      errorMessage={errors.categoryId?.message}
+                      isInvalid={!!errors.categoryId}
+                      label='หมวดหมู่สินค้า'
+                      selectedKeys={value ? [value] : []}
+                      variant='bordered'
+                      onSelectionChange={(keys) =>
+                        onChange(Array.from(keys)[0] as string)
+                      }
+                    >
+                      {(categories ?? []).map((cat) => (
+                        <SelectItem key={cat?.id!}>{cat?.name!}</SelectItem>
+                      ))}
+                    </Select>
+                  )}
+                />
+              </div>
 
-//   const onRefetch = async () => {
-//     await Promise.all([
-//       queryClient.invalidateQueries({ queryKey: QUERY_KEY.PRODUCTS }),
-//       queryClient.invalidateQueries({ queryKey: QUERY_KEY.HOMEPAGE }),
-//       queryClient.invalidateQueries({ queryKey: QUERY_KEY.CAROUSEL }),
-//     ])
-//     onClose()
-//   }
+              <SectionLabel>ราคาและสต็อก</SectionLabel>
+              <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
+                <Controller
+                  control={control}
+                  name='price'
+                  render={({ field: { value, onChange, ...field } }) => (
+                    <Input
+                      {...field}
+                      label='ราคาปกติ'
+                      type='number'
+                      value={value?.toString()}
+                      variant='bordered'
+                      onValueChange={(v) => onChange(Number(v))}
+                    />
+                  )}
+                />
+                <Controller
+                  control={control}
+                  name='salePrice'
+                  render={({ field: { value, onChange, ...field } }) => (
+                    <Input
+                      {...field}
+                      label='ราคาลด (ถ้ามี)'
+                      type='number'
+                      value={value?.toString() || ''}
+                      variant='bordered'
+                      onValueChange={(v) => onChange(v ? Number(v) : null)}
+                    />
+                  )}
+                />
+                <Controller
+                  control={control}
+                  name='stockQuantity'
+                  render={({ field: { value, onChange, ...field } }) => (
+                    <Input
+                      {...field}
+                      label='จำนวนสต็อก'
+                      type='number'
+                      value={value?.toString()}
+                      variant='bordered'
+                      onValueChange={(v) => onChange(Number(v))}
+                    />
+                  )}
+                />
+              </div>
 
-//   const { mutate: mutateCreateProduct, isPending: isPendingCreateProduct } =
-//     useMutation({
-//       mutationFn: createProduct,
-//       onSuccess: onRefetch,
-//     })
+              <SectionLabel>หน่วยและน้ำหนัก</SectionLabel>
+              <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+                <Controller
+                  control={control}
+                  name='unit'
+                  render={({ field: { value, onChange, ...field } }) => (
+                    <Select
+                      {...field}
+                      label='หน่วยสินค้า'
+                      selectedKeys={[value]}
+                      variant='bordered'
+                      onSelectionChange={(keys) =>
+                        onChange(Array.from(keys)[0] as ProductUnit)
+                      }
+                    >
+                      {Object.values(ProductUnit).map((unit) => (
+                        <SelectItem key={unit}>
+                          {unitTranslations[
+                            unit as keyof typeof unitTranslations
+                          ] || unit}
+                        </SelectItem>
+                      ))}
+                    </Select>
+                  )}
+                />
+                <Controller
+                  control={control}
+                  name='weight'
+                  render={({ field: { value, onChange, ...field } }) => (
+                    <Input
+                      {...field}
+                      label='น้ำหนัก (กรัม)'
+                      type='number'
+                      value={value?.toString() || ''}
+                      variant='bordered'
+                      onValueChange={(v) => onChange(v ? Number(v) : null)}
+                    />
+                  )}
+                />
+              </div>
 
-//   const { mutate: mutateUpdateProduct, isPending: isPendingUpdateProduct } =
-//     useMutation({
-//       mutationFn: updateProduct,
-//       onSuccess: onRefetch,
-//     })
+              <SectionLabel>สรุปเนื้อหาเบื้องต้น</SectionLabel>
+              <Controller
+                control={control}
+                name='summary'
+                render={({ field: { value, ...field } }) => (
+                  <Textarea
+                    {...field}
+                    label='คำอธิบายสั้น (Summary)'
+                    value={value || ''}
+                    variant='bordered'
+                  />
+                )}
+              />
 
-//   const isPending =
-//     isLoadingProduct ||
-//     isPendingCreateProduct ||
-//     isPendingUpdateProduct ||
-//     isLoadingCategories
+              <SectionLabel>SEO และ Metadata</SectionLabel>
+              <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+                <Controller
+                  control={control}
+                  name='metaTitle'
+                  render={({ field: { value, ...field } }) => (
+                    <Input
+                      {...field}
+                      label='Meta Title'
+                      value={value || ''}
+                      variant='bordered'
+                    />
+                  )}
+                />
+                <Controller
+                  control={control}
+                  name='metaDescription'
+                  render={({ field: { value, ...field } }) => (
+                    <Input
+                      {...field}
+                      label='Meta Description'
+                      value={value || ''}
+                      variant='bordered'
+                    />
+                  )}
+                />
+              </div>
 
-//   const headerLabel = productId ? t('editTitle') : t('addTitle')
+              <Alert>
+                * สำหรับรายละเอียดเนื้อหา (Description) แบบเต็ม
+                คุณสามารถจัดการได้ผ่านปุ่ม "แก้ไขรายละเอียดเนื้อหา"
+                ในหน้าตารางหลังจากบันทึกข้อมูลส่วนนี้แล้ว
+              </Alert>
+            </form>
+          )}
+        </ModalBody>
+        <ModalFooter>
+          <Button variant='flat' onPress={closeForm}>
+            ยกเลิก
+          </Button>
+          <Button
+            className='text-secondary font-bold'
+            color='primary'
+            isDisabled={!isDirty}
+            isLoading={isPending}
+            onPress={() => handleSubmit(onSubmit)()}
+          >
+            {selectedProductId ? 'บันทึกการแก้ไข' : 'บันทึกและเพิ่มสินค้า'}
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
+  )
+}
 
-//   const onSubmit = (data: ProductInput) => {
-//     if (!productId) {
-//       mutateCreateProduct(data)
-//     } else {
-//       mutateUpdateProduct(data)
-//     }
-//   }
-
-//   const onClose = () => {
-//     queryClient.removeQueries({ queryKey: QUERY_KEY.PRODUCT })
-//     setState({ productId: null })
-//     reset(DEFAULT_VALUES)
-//     onOpenProductChange()
-//   }
-
-//   return (
-//     <Modal
-//       hideCloseButton
-//       isDismissable={false}
-//       isOpen={isProductOpen}
-//       scrollBehavior='inside'
-//       size='4xl'
-//       onOpenChange={(open) => {
-//         if (!open) onClose()
-//       }}
-//     >
-//       <ModalContent>
-//         <ModalHeader className='flex flex-col gap-1'>{headerLabel}</ModalHeader>
-//         {isPending && (
-//           <ModalBody>
-//             <Spinner label={tc('loading')} />
-//           </ModalBody>
-//         )}
-
-//         {!isPending && (
-//           <ModalBody>
-//             <SubHeading title={t('statusSection')} />
-//             <div className='flex flex-wrap gap-6'>
-//               <Controller
-//                 control={control}
-//                 name='isActive'
-//                 render={({ field: { value, onChange, ...field } }) => (
-//                   <Switch
-//                     {...field}
-//                     isSelected={value}
-//                     onValueChange={onChange}
-//                   >
-//                     {t('fields.isActive')}
-//                   </Switch>
-//                 )}
-//               />
-//               <Controller
-//                 control={control}
-//                 name='isFeatured'
-//                 render={({ field: { value, onChange, ...field } }) => (
-//                   <Switch
-//                     {...field}
-//                     isSelected={value}
-//                     onValueChange={onChange}
-//                   >
-//                     {t('fields.isFeatured')}
-//                   </Switch>
-//                 )}
-//               />
-//               <Controller
-//                 control={control}
-//                 name='isPremiumProduct'
-//                 render={({ field: { value, onChange, ...field } }) => (
-//                   <Switch
-//                     {...field}
-//                     isSelected={value}
-//                     onValueChange={onChange}
-//                   >
-//                     {t('fields.isPremium')}
-//                   </Switch>
-//                 )}
-//               />
-//               <Controller
-//                 control={control}
-//                 name='isAuthentic'
-//                 render={({ field: { value, onChange, ...field } }) => (
-//                   <Switch
-//                     {...field}
-//                     isSelected={value}
-//                     onValueChange={onChange}
-//                   >
-//                     {t('fields.isAuthentic')}
-//                   </Switch>
-//                 )}
-//               />
-//               <Controller
-//                 control={control}
-//                 name='isDigitalProduct'
-//                 render={({ field: { value, onChange, ...field } }) => (
-//                   <Switch
-//                     {...field}
-//                     isSelected={value}
-//                     onValueChange={onChange}
-//                   >
-//                     {t('fields.isDigital')}
-//                   </Switch>
-//                 )}
-//               />
-//               <Controller
-//                 control={control}
-//                 name='isDemoProduct'
-//                 render={({ field: { value, onChange, ...field } }) => (
-//                   <Switch
-//                     {...field}
-//                     isSelected={value}
-//                     onValueChange={onChange}
-//                   >
-//                     {t('fields.isDemo')}
-//                   </Switch>
-//                 )}
-//               />
-//             </div>
-
-//             <SubHeading title={t('basicSection')} />
-//             <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
-//               <Controller
-//                 control={control}
-//                 name='name'
-//                 render={({ field }) => (
-//                   <Input
-//                     {...field}
-//                     errorMessage={errors.name?.message}
-//                     isInvalid={!!errors.name}
-//                     label={t('fields.name')}
-//                     variant='bordered'
-//                   />
-//                 )}
-//               />
-//               <Controller
-//                 control={control}
-//                 name='categoryId'
-//                 render={({ field: { value, onChange, ...field } }) => (
-//                   <Select
-//                     {...field}
-//                     errorMessage={errors.categoryId?.message}
-//                     isInvalid={!!errors.categoryId}
-//                     label={t('fields.category')}
-//                     selectedKeys={value ? [value] : []}
-//                     variant='bordered'
-//                     onSelectionChange={(keys) => onChange(Array.from(keys)[0])}
-//                   >
-//                     {(categories ?? []).map((category) => (
-//                       <SelectItem key={category.id}>{category.name}</SelectItem>
-//                     ))}
-//                   </Select>
-//                 )}
-//               />
-//               <Controller
-//                 control={control}
-//                 name='unit'
-//                 render={({ field: { value, onChange, ...field } }) => (
-//                   <Select
-//                     {...field}
-//                     disallowEmptySelection
-//                     errorMessage={errors.unit?.message}
-//                     isInvalid={!!errors.unit}
-//                     label={t('fields.unit')}
-//                     selectedKeys={value ? [value] : []}
-//                     variant='bordered'
-//                     onSelectionChange={(keys) => onChange(Array.from(keys)[0])}
-//                   >
-//                     {(PRODUCT_UNITS ?? []).map(([key, label]) => (
-//                       <SelectItem key={key}>{label}</SelectItem>
-//                     ))}
-//                   </Select>
-//                 )}
-//               />
-//               <Controller
-//                 control={control}
-//                 name='sku'
-//                 render={({ field: { value, ...field } }) => (
-//                   <Input
-//                     variant='bordered'
-//                     {...field}
-//                     label={t('fields.sku')}
-//                     value={value ?? ''}
-//                   />
-//                 )}
-//               />
-//               <Controller
-//                 control={control}
-//                 name='barcode'
-//                 render={({ field: { value, ...field } }) => (
-//                   <Input
-//                     {...field}
-//                     className='sm:col-span-2'
-//                     label={t('fields.barcode')}
-//                     value={value ?? ''}
-//                     variant='bordered'
-//                   />
-//                 )}
-//               />
-//               {/* <Controller
-//                 control={control}
-//                 name='shortDescription'
-//                 render={({ field: { value, ...field } }) => (
-//                   <Textarea
-//                     {...field}
-//                     className='sm:col-span-2'
-//                     label={t('fields.shortDesc')}
-//                     minRows={3}
-//                     value={value ?? ''}
-//                     variant='bordered'
-//                   />
-//                 )}
-//               /> */}
-//               <Controller
-//                 control={control}
-//                 name='shortDescription'
-//                 render={({ field: { value, ...field } }) => (
-//                   <MdEditorCustomize
-//                     key={editorShortDescKey}
-//                     className='col-span-1 sm:col-span-2'
-//                     placeholder={t('fields.shortDesc')}
-//                     {...field}
-//                     value={value ?? ''}
-//                   />
-//                 )}
-//               />
-
-//               {/* <Controller
-//                 control={control}
-//                 name='description'
-//                 render={({ field: { value, ...field } }) => (
-//                   <Textarea
-//                     {...field}
-//                     className='sm:col-span-2'
-//                     label={t('fields.fullDesc')}
-//                     minRows={6}
-//                     value={value ?? ''}
-//                     variant='bordered'
-//                   />
-//                 )}
-//               /> */}
-//               <Controller
-//                 control={control}
-//                 name='description'
-//                 render={({ field: { value, ...field } }) => (
-//                   <MdEditorCustomize
-//                     key={editorFullDescKey}
-//                     className='col-span-1 sm:col-span-2'
-//                     placeholder={t('fields.fullDesc')}
-//                     {...field}
-//                     value={value ?? ''}
-//                   />
-//                 )}
-//               />
-//             </div>
-
-//             <SubHeading title={t('priceSection')} />
-//             <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
-//               <Controller
-//                 control={control}
-//                 name='price'
-//                 render={({ field: { onChange, ...field } }) => (
-//                   <NumberInput
-//                     {...field}
-//                     errorMessage={errors.price?.message}
-//                     isInvalid={!!errors.price}
-//                     label={`${t('fields.price')} (${country?.currency || 'USD'})`}
-//                     minValue={0}
-//                     variant='bordered'
-//                     onValueChange={(val) => onChange(val || 0)}
-//                   />
-//                 )}
-//               />
-//               <Controller
-//                 control={control}
-//                 name='compareAtPrice'
-//                 render={({ field: { value, onChange, ...field } }) => (
-//                   <NumberInput
-//                     {...field}
-//                     errorMessage={errors.compareAtPrice?.message}
-//                     isInvalid={!!errors.compareAtPrice}
-//                     label={t('fields.comparePrice')}
-//                     minValue={0}
-//                     value={value ?? 0}
-//                     variant='bordered'
-//                     onValueChange={(val) => onChange(val || 0)}
-//                   />
-//                 )}
-//               />
-//               <Controller
-//                 control={control}
-//                 name='costPrice'
-//                 render={({ field: { value, onChange, ...field } }) => (
-//                   <NumberInput
-//                     {...field}
-//                     errorMessage={errors.costPrice?.message}
-//                     isInvalid={!!errors.costPrice}
-//                     label={t('fields.costPrice')}
-//                     minValue={0}
-//                     value={value ?? 0}
-//                     variant='bordered'
-//                     onValueChange={(val) => onChange(val || 0)}
-//                   />
-//                 )}
-//               />
-//             </div>
-
-//             <SubHeading title={t('stockSection')} />
-//             <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
-//               <Controller
-//                 control={control}
-//                 name='stockQuantity'
-//                 render={({ field: { value, onChange, ...field } }) => (
-//                   <NumberInput
-//                     {...field}
-//                     errorMessage={errors.stockQuantity?.message}
-//                     isInvalid={!!errors.stockQuantity}
-//                     label={t('fields.stock')}
-//                     minValue={0}
-//                     value={value ?? 0}
-//                     variant='bordered'
-//                     onValueChange={(val) => onChange(val || 0)}
-//                   />
-//                 )}
-//               />
-//               <Controller
-//                 control={control}
-//                 name='lowStockAlert'
-//                 render={({ field: { value, onChange, ...field } }) => (
-//                   <NumberInput
-//                     {...field}
-//                     errorMessage={errors.lowStockAlert?.message}
-//                     isInvalid={!!errors.lowStockAlert}
-//                     label={t('fields.lowStock')}
-//                     minValue={0}
-//                     value={value ?? 0}
-//                     variant='bordered'
-//                     onValueChange={(val) => onChange(val || 0)}
-//                   />
-//                 )}
-//               />
-//               <Controller
-//                 control={control}
-//                 name='weight'
-//                 render={({ field: { value, onChange, ...field } }) => (
-//                   <NumberInput
-//                     {...field}
-//                     errorMessage={errors.weight?.message}
-//                     isInvalid={!!errors.weight}
-//                     label={t('fields.weight')}
-//                     minValue={0}
-//                     value={value ?? 0}
-//                     variant='bordered'
-//                     onValueChange={(val) => onChange(val || 0)}
-//                   />
-//                 )}
-//               />
-//             </div>
-
-//             <div className='flex flex-wrap gap-4'>
-//               <SubHeading title={t('seoSection')} />
-//               <Controller
-//                 control={control}
-//                 name='useSeoFromBasicData'
-//                 render={({ field: { value, onChange, ...field } }) => (
-//                   <Switch
-//                     {...field}
-//                     isSelected={value}
-//                     onValueChange={onChange}
-//                   >
-//                     {t('fields.autoSeo')}
-//                   </Switch>
-//                 )}
-//               />
-//             </div>
-//             {!watch('useSeoFromBasicData') && (
-//               <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
-//                 <Controller
-//                   control={control}
-//                   name='slug'
-//                   render={({ field: { value, ...field } }) => (
-//                     <Input
-//                       {...field}
-//                       errorMessage={errors.slug?.message}
-//                       isInvalid={!!errors.slug}
-//                       label={t('fields.slug')}
-//                       value={value ?? ''}
-//                       variant='bordered'
-//                     />
-//                   )}
-//                 />
-//                 <Controller
-//                   control={control}
-//                   name='metaTitle'
-//                   render={({ field: { value, ...field } }) => (
-//                     <Input
-//                       {...field}
-//                       errorMessage={errors.metaTitle?.message}
-//                       isInvalid={!!errors.metaTitle}
-//                       label={t('fields.metaTitle')}
-//                       value={value ?? ''}
-//                       variant='bordered'
-//                     />
-//                   )}
-//                 />
-//                 <Controller
-//                   control={control}
-//                   name='metaDescription'
-//                   render={({ field: { value, ...field } }) => (
-//                     <Textarea
-//                       {...field}
-//                       className='sm:col-span-2'
-//                       errorMessage={errors.metaDescription?.message}
-//                       isInvalid={!!errors.metaDescription}
-//                       label={t('fields.metaDesc')}
-//                       minRows={3}
-//                       value={value ?? ''}
-//                       variant='bordered'
-//                     />
-//                   )}
-//                 />
-//               </div>
-//             )}
-//           </ModalBody>
-//         )}
-
-//         <ModalFooter>
-//           <Button isDisabled={isPending} variant='faded' onPress={onClose}>
-//             {tc('cancel')}
-//           </Button>
-//           <Button
-//             className='text-secondary'
-//             color='primary'
-//             isDisabled={isPending || !isDirty}
-//             onClick={handleSubmit(onSubmit)}
-//           >
-//             {isPending ? tc('saving') : tc('save')}
-//           </Button>
-//         </ModalFooter>
-//       </ModalContent>
-//     </Modal>
-//   )
-// }
+export { ProductForm }

@@ -3,7 +3,7 @@
 import { Avatar, Chip } from '@heroui/react'
 import { useTranslations } from 'next-intl'
 
-import { ProductReviewForm } from './ProductReviewForm'
+import { ReviewForm } from './ReviewForm'
 import { useReviews } from '../review.hook'
 
 import { StarRating } from '@/components/ui/StarRating'
@@ -96,9 +96,7 @@ const ReviewSection = ({ productId }: Props) => {
 
         <div className='lg:col-span-2'>
           <div className='sticky top-52'>
-            {!isLoading && !hasReviewed && (
-              <ProductReviewForm productId={productId} />
-            )}
+            {!isLoading && !hasReviewed && <ReviewForm productId={productId} />}
           </div>
         </div>
       </div>

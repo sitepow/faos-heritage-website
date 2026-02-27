@@ -10,13 +10,41 @@ import type {
   UseSimilarProductsParams,
 } from './product.types'
 
-import { getProductBySlug, getProductsInfinite } from './product.action'
+import {
+  getProductAdmin,
+  getProductBySlug,
+  getProductsAdmin,
+  getProductsInfinite,
+  getProductStat,
+} from './product.action'
 import { productQueryKeys } from './product.query-key'
 import { useExchangeRate } from '../exchange-rate/exchange-rate.hook'
 
 import { PAGINATION } from '@/constants'
 import { formatCurrency, formatCurrencyRange } from '@/utils/number'
 import { getProductPriceInfo } from '@/utils/product-price'
+
+const useProductAdmin = (productId: string, enabled: boolean) => {
+  return useQuery({
+    queryKey: productQueryKeys.details.byId(productId),
+    queryFn: () => getProductAdmin(productId),
+    enabled: !!productId && enabled,
+  })
+}
+
+const useProductsAdmin = (page = 1, limit = 50) => {
+  return useQuery({
+    queryKey: productQueryKeys.lists.admin(page, limit),
+    queryFn: () => getProductsAdmin(page, limit),
+  })
+}
+
+const useProductStat = () => {
+  return useQuery({
+    queryKey: productQueryKeys.stats(),
+    queryFn: () => getProductStat(),
+  })
+}
 
 const useProduct = ({
   locale,
@@ -144,6 +172,9 @@ const useProductRating = (reviews: { rating: number }[] = []) => {
 }
 
 export {
+  useProductAdmin,
+  useProductsAdmin,
+  useProductStat,
   useProduct,
   useProducts,
   useProductsInfinite,

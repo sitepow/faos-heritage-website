@@ -3,13 +3,9 @@
 import { Role, type Prisma } from '@prisma/client'
 import { hash } from 'bcryptjs'
 
-import type { UserUpdateInput } from './user.schema'
+import type { UserCreateInput, UserUpdateInput } from './user.schema'
 
-import {
-  userCreateSchema,
-  userUpdateSchema,
-  type UserCreateInput,
-} from './user.schema'
+import { userCreateAdminSchema, userUpdateAdminSchema } from './user.schema'
 
 import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
@@ -20,12 +16,12 @@ import { omitEmptyFields } from '@/utils'
 const createUser = async (data: UserCreateInput & { isRegister?: boolean }) => {
   const { isRegister, ...rest } = data
 
-  const validated = userCreateSchema.safeParse(rest)
+  const validated = userCreateAdminSchema.safeParse(rest)
   if (!validated.success) {
     return fail(ERROR_CODES.VALIDATION_ERROR)
   }
 
-  const { email, password } = validated.data
+  const { email, password, name, role, isActive } = validated.data
 
   if (!password || password.trim().length < 6) {
     return fail(ERROR_CODES.PASSWORD_TOO_SHORT)
@@ -40,7 +36,6 @@ const createUser = async (data: UserCreateInput & { isRegister?: boolean }) => {
     if (!exists.password) {
       return fail(ERROR_CODES.SOCIAL_ACCOUNT_EXISTS)
     }
-
     return fail(ERROR_CODES.EMAIL_ALREADY_USED)
   }
 
@@ -49,12 +44,11 @@ const createUser = async (data: UserCreateInput & { isRegister?: boolean }) => {
   try {
     await prisma.user.create({
       data: {
-        ...omitEmptyFields(validated.data),
+        name,
         email: normalizedEmail,
         password: hashedPassword,
-        role: isRegister
-          ? Role.CUSTOMER
-          : (validated.data.role as Role) || Role.CUSTOMER,
+        isActive: isActive ?? true,
+        role: isRegister ? Role.CUSTOMER : role || Role.CUSTOMER,
       } as Prisma.UserCreateInput,
     })
 
@@ -66,7 +60,7 @@ const createUser = async (data: UserCreateInput & { isRegister?: boolean }) => {
 
 const updateUser = async (data: UserUpdateInput) =>
   withRole([Role.ADMIN, Role.CUSTOMER], async () => {
-    const validated = userUpdateSchema.safeParse(data)
+    const validated = userUpdateAdminSchema.safeParse(data)
     if (!validated.success) {
       return fail(ERROR_CODES.VALIDATION_ERROR)
     }
@@ -76,15 +70,15 @@ const updateUser = async (data: UserUpdateInput) =>
       return fail(ERROR_CODES.DATA_NOT_FOUND)
     }
 
-    const updateData: Prisma.UserUpdateInput = {
+    const updateData = {
       ...omitEmptyFields(payload),
-      role: payload?.role as Role,
+      role: payload.role as Role | undefined,
     }
 
     try {
       await prisma.user.update({
         where: { id },
-        data: updateData,
+        data: updateData as Prisma.UserUpdateInput,
       })
 
       return ok()

@@ -1,14 +1,35 @@
+'use client'
+
 import { useQuery } from '@tanstack/react-query'
 
 import type { GetCartsResult } from '../cart/cart.action'
 
-import { calculateShippingCost } from './shipping.action'
+import {
+  calculateShippingCost,
+  getShippingCountries,
+  getShippingCountry,
+} from './shipping.action'
 import { shippingQueryKeys } from './shipping.query-key'
 
 interface UseShippingParams {
   userId?: string
   address?: { countryCode: string } | null
   carts: GetCartsResult
+}
+
+const useShippingCountriesAdmin = () => {
+  return useQuery({
+    queryKey: shippingQueryKeys.lists.all(),
+    queryFn: () => getShippingCountries(),
+  })
+}
+
+const useShippingCountry = (id: string | null) => {
+  return useQuery({
+    queryKey: shippingQueryKeys.details.byId(id || ''),
+    queryFn: () => getShippingCountry(id!),
+    enabled: !!id,
+  })
 }
 
 const useShipping = ({ userId, address, carts }: UseShippingParams) => {
@@ -21,9 +42,20 @@ const useShipping = ({ userId, address, carts }: UseShippingParams) => {
 
     return {
       quantity: cart.quantity ?? 0,
-      weight: variantWeight ?? productWeight,
+      weight: Number(variantWeight ?? productWeight),
     }
   })
+
+  const totalPrice = (carts ?? []).reduce((sum, cart) => {
+    const product = cart.product
+    const variants = product?.variants ?? []
+
+    const variantPrice = variants.find((v) => v.id === cart.variantId)?.price
+    const productPrice = product?.price ?? 0
+    const price = Number(variantPrice ?? productPrice)
+
+    return sum + price * (cart.quantity ?? 0)
+  }, 0)
 
   const countryCode = address?.countryCode
 
@@ -34,6 +66,7 @@ const useShipping = ({ userId, address, carts }: UseShippingParams) => {
       calculateShippingCost({
         countryCode: countryCode!,
         items: shippingItems,
+        totalPrice: totalPrice,
       }),
 
     enabled: !!countryCode && shippingItems.length > 0 && !!userId,
@@ -45,4 +78,4 @@ const useShipping = ({ userId, address, carts }: UseShippingParams) => {
   }
 }
 
-export { useShipping }
+export { useShippingCountriesAdmin, useShippingCountry, useShipping }

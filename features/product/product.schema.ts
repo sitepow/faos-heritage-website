@@ -1,52 +1,45 @@
 import { ProductUnit } from '@prisma/client'
 import { z } from 'zod'
 
-const productSchema = z
-  .object({
-    id: z.string().nullish(),
+const productSchema = z.object({
+  id: z.string().nullish(),
 
-    name: z.string().min(1, 'nameRequired'),
-    slug: z.string().nullish(),
-    sku: z.string().nullish(),
-    barcode: z.string().nullish(),
+  name: z.string().min(1, 'กรุณาระบุชื่อสินค้า'),
+  slug: z.string().nullish(),
 
-    price: z.number('priceInvalid').min(0, 'priceMin'),
-    salePrice: z.number().nullable().optional(),
-    compareAtPrice: z.number('priceInvalid').nullish(),
-    costPrice: z.number('priceInvalid').nullish(),
+  price: z.number('กรุณาระบุราคาให้ถูกต้อง').min(0, 'ราคาต้องไม่ต่ำกว่า 0'),
+  salePrice: z
+    .number('กรุณาระบุราคาลดให้ถูกต้อง')
+    .min(0, 'ราคาลดต้องไม่ต่ำกว่า 0')
+    .nullable()
+    .optional(),
 
-    stockQuantity: z.number('stockInvalid').min(0, 'stockMin'),
-    lowStockAlert: z.number('stockInvalid').nullish(),
-    weight: z.number('weightInvalid').nullish(),
-    unit: z.enum(ProductUnit),
+  stockQuantity: z
+    .number('กรุณาระบุจำนวนสต็อกให้ถูกต้อง')
+    .min(0, 'จำนวนสต็อกต้องไม่ต่ำกว่า 0'),
+  weight: z
+    .number('กรุณาระบุน้ำหนักให้ถูกต้อง')
+    .min(0, 'น้ำหนักต้องไม่ต่ำกว่า 0')
+    .nullable()
+    .optional(),
 
-    categoryId: z.string().min(1, 'categoryRequired').nullish(),
-    shortDescription: z.string().nullish(),
-    description: z.string().nullish(),
+  unit: z
+    .enum(Object.values(ProductUnit) as [string, ...string[]])
+    .or(z.any())
+    .refine((val) => Object.values(ProductUnit).includes(val), {
+      message: 'กรุณาเลือกหน่วยสินค้าที่ถูกต้อง',
+    }),
 
-    isActive: z.boolean().default(true),
-    isFeatured: z.boolean().default(false),
-    isDigitalProduct: z.boolean().default(false),
-    isDemoProduct: z.boolean().default(false),
-    isPremiumProduct: z.boolean().default(false),
-    isAuthentic: z.boolean().default(true),
+  categoryId: z.string().min(1, 'กรุณาเลือกหมวดหมู่สินค้า').nullish(),
 
-    useSeoFromBasicData: z.boolean().default(true),
-    metaTitle: z.string().nullish(),
-    metaDescription: z.string().nullish(),
-  })
-  .refine(
-    (data) => {
-      if (data.compareAtPrice && data.compareAtPrice < data.price) {
-        return false
-      }
-      return true
-    },
-    {
-      message: 'comparePriceError',
-      path: ['compareAtPrice'],
-    },
-  )
+  summary: z.string().nullish(),
+  description: z.string().nullish(),
+
+  isActive: z.boolean().default(true),
+  metaTitle: z.string().nullish(),
+  metaDescription: z.string().nullish(),
+  keywords: z.array(z.string()).default([]),
+})
 
 type ProductInput = z.infer<typeof productSchema>
 

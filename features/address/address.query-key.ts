@@ -11,6 +11,8 @@ const addressQueryKeys = {
 
     byUserId: (userId: string, filters: AddressListFilters = {}) =>
       [...addressQueryKeys.lists.all(), userId, filters] as const,
+
+    admin: () => [...addressQueryKeys.lists.all(), 'admin'] as const,
   },
 
   details: {

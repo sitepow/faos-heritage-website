@@ -537,22 +537,36 @@ model Order {
 }
 
 model ShippingCountry {
-  id String @id @default(cuid())
-
-  countryCode String
+  id          String   @id @default(cuid())
+  countryCode String   @unique
   countryName String
+  currency    Currency @default(THB)
+  isActive    Boolean  @default(true)
 
-  baseRate   Decimal @db.Decimal(12, 2)
-  pricePerKg Decimal @db.Decimal(12, 2)
-  currency Currency @default(THB)
+  baseRate    Decimal @db.Decimal(12, 2)
+  pricePerKg  Decimal @db.Decimal(12, 2)
 
-  isActive Boolean @default(true)
+  freeShippingThreshold Decimal? @db.Decimal(12, 2)
+
+  weightTiers ShippingWeightTier[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@unique([countryCode])
   @@index([isActive])
+}
+
+model ShippingWeightTier {
+  id                String @id @default(cuid())
+  shippingCountryId String
+  
+  minWeight Decimal @db.Decimal(10, 3) 
+  maxWeight Decimal @db.Decimal(10, 3)
+  rate      Decimal @db.Decimal(12, 2)
+
+  shippingCountry ShippingCountry @relation(fields: [shippingCountryId], references: [id], onDelete: Cascade)
+
+  @@index([shippingCountryId])
 }
 
 model OrderItem {

@@ -138,6 +138,27 @@ const getAddresses = async (userIdProp?: string) => {
   })
 }
 
+const getAddressesAdmin = async () =>
+  withRole([Role.ADMIN], async () => {
+    try {
+      const items = await prisma.address.findMany({
+        include: {
+          user: {
+            select: {
+              name: true,
+              email: true,
+              image: true,
+            },
+          },
+        },
+        orderBy: { createdAt: 'desc' },
+      })
+      return items
+    } catch {
+      return []
+    }
+  })
+
 const getAddress = async (addressId: string) => {
   const { userId } = await getServerUser()
 
@@ -167,6 +188,7 @@ export {
   createAddress,
   updateAddress,
   deleteAddress,
+  getAddressesAdmin,
   getAddresses,
   getAddress,
   getDefaultAddress,

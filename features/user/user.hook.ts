@@ -1,14 +1,31 @@
+'use client'
+
 import { useQuery } from '@tanstack/react-query'
 
-import { getUser } from './user.action'
+import { getUser, getUsers, getUserStat } from './user.action'
 import { userQueryKeys } from './user.query-key'
 
-const useUser = (userId: string) => {
+const useUsers = (page = 1, limit = 10) => {
   return useQuery({
-    queryKey: userQueryKeys.details.byId(userId!),
+    queryKey: userQueryKeys.lists.filtered({ page, limit }),
+    queryFn: () => getUsers(page, limit),
+    placeholderData: (previousData) => previousData,
+  })
+}
+
+const useUser = (userId: string | null) => {
+  return useQuery({
+    queryKey: userQueryKeys.details.byId(userId || ''),
     queryFn: () => getUser(userId!),
     enabled: !!userId,
   })
 }
 
-export { useUser }
+const useUserStat = () => {
+  return useQuery({
+    queryKey: userQueryKeys.stats(),
+    queryFn: () => getUserStat(),
+  })
+}
+
+export { useUsers, useUser, useUserStat }

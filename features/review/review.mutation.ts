@@ -2,7 +2,7 @@
 
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-import { createReview } from './review.action'
+import { createReview, moderateReview } from './review.action'
 import { reviewQueryKeys } from './review.query-key'
 
 const useReviewMutation = () => {
@@ -17,9 +17,18 @@ const useReviewMutation = () => {
     },
   })
 
+  const moderate = useMutation({
+    mutationFn: moderateReview,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: reviewQueryKeys.all })
+    },
+  })
+
   return {
     submitReview: create.mutateAsync,
     isSubmitting: create.isPending,
+    moderate: moderate.mutateAsync,
+    isModerating: moderate.isPending,
   }
 }
 

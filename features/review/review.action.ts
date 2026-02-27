@@ -1,14 +1,18 @@
 'use server'
 
-import { Prisma, ReviewStatus } from '@prisma/client' // นำเข้า Prisma สำหรับ Type Guard
+import { Prisma, ReviewStatus, Role } from '@prisma/client'
 import { unstable_noStore as noStore } from 'next/cache'
+
+import type { ReviewModerationInput } from './review.schema'
+
+import { reviewModerationSchema } from './review.schema'
 
 import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { prisma } from '@/lib/prisma'
-import { getServerUser } from '@/lib/session'
+import { getServerUser, withRole } from '@/lib/session'
 
-const getProductReviews = async (productId: string) => {
+const getReviews = async (productId: string) => {
   noStore()
   const { userId } = await getServerUser()
 
@@ -72,4 +76,48 @@ const createReview = async (data: {
   }
 }
 
-export { getProductReviews, createReview }
+const getAllReviewsAdmin = async (page = 1, limit = 10) =>
+  withRole([Role.ADMIN], async () => {
+    const skip = (page - 1) * limit
+    const [items, total] = await prisma.$transaction([
+      prisma.review.findMany({
+        skip,
+        take: limit,
+        include: {
+          user: { select: { name: true, email: true, image: true } },
+          product: { select: { name: true } },
+        },
+        orderBy: { createdAt: 'desc' },
+      }),
+      prisma.review.count(),
+    ])
+
+    return {
+      items,
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
+    }
+  })
+
+const moderateReview = async (data: ReviewModerationInput) =>
+  withRole([Role.ADMIN], async () => {
+    const validated = reviewModerationSchema.safeParse(data)
+    if (!validated.success) {
+      return fail(ERROR_CODES.VALIDATION_ERROR)
+    }
+
+    const { id, ...payload } = validated.data
+    try {
+      await prisma.review.update({
+        where: { id },
+        data: payload,
+      })
+      return ok()
+    } catch {
+      return fail(ERROR_CODES.SYSTEM_ERROR)
+    }
+  })
+
+export { getAllReviewsAdmin, getReviews, createReview, moderateReview }

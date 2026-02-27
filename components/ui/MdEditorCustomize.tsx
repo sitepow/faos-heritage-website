@@ -51,7 +51,7 @@ const useEditorPlugins = () =>
       toolbarPlugin({
         toolbarContents: ToolbarContents,
       }),
-      headingsPlugin(),
+      headingsPlugin({ allowedHeadingLevels: [2, 3, 4, 5, 6] }),
       listsPlugin(),
       quotePlugin(),
       thematicBreakPlugin(),

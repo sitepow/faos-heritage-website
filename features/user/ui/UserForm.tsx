@@ -1,304 +1,272 @@
-// 'use client'
+/* eslint-disable no-unused-vars */
+'use client'
 
-// import {
-//   Modal,
-//   ModalContent,
-//   ModalHeader,
-//   Spinner,
-//   ModalBody,
-//   Switch,
-//   Select,
-//   SelectItem,
-//   Input,
-//   ModalFooter,
-//   Button,
-// } from '@heroui/react'
-// import { zodResolver } from '@hookform/resolvers/zod'
-// import { Role } from '@prisma/client'
-// import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-// import { useTranslations } from 'next-intl'
-// import { useEffect, useState } from 'react'
-// import { Controller, useForm } from 'react-hook-form'
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  Input,
+  Select,
+  SelectItem,
+  Switch,
+  Spinner,
+} from '@heroui/react'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Role } from '@prisma/client'
+import { useEffect, useState } from 'react'
+import { Controller, useForm, type Resolver } from 'react-hook-form'
 
-// import type { UserCreateInput, UserUpdateInput } from '../user.schema'
-// import type { ImageWithPreview } from '@/components/ui/ImageDropzone'
+import { useUser } from '../user.hook'
+import { useUserMutation } from '../user.mutation'
+import {
+  userCreateAdminSchema,
+  userUpdateAdminSchema,
+  type UserUpdateInput,
+  type UserCreateInput,
+} from '../user.schema'
+import { useAuthStore } from '../user.store'
 
-// import { getUser, createUser, updateUser } from '../user.action'
-// import { userUpdateSchema, userCreateSchema } from '../user.schema'
-// import { useAuthStore } from '../user.store'
+import {
+  ImageDropzone,
+  type ImageWithPreview,
+} from '@/app/(dashboard)/_components/ImageDropzone'
+import { SectionLabel } from '@/components/ui/SectionHeader'
+import { useResolveImageUpload } from '@/hooks/useResolveImageUpload'
 
-// import { ImageDropzone } from '@/components/ui/ImageDropzone'
-// import { SectionLabel } from '@/components/ui/SectionHeader'
-// import { useResolveImageUpload } from '@/hooks/useResolveImageUpload'
+type UserFormInput = UserCreateInput & UserUpdateInput
 
-// const DEFAULT_VALUES = {
-//   email: '',
-//   password: '',
-//   name: '',
-//   image: '',
-//   isActive: true,
-//   role: Role.CUSTOMER,
-// }
+const DEFAULT_VALUES: UserFormInput = {
+  id: '',
+  name: '',
+  email: '',
+  password: '',
+  role: Role.CUSTOMER,
+  isActive: true,
+  image: '',
+}
 
-// export const UserForm = () => {
-//   const t = useTranslations('Dashboard.UserForm')
-//   const tCommon = useTranslations('Common')
-//   const queryClient = useQueryClient()
-//   const { isUserOpen, onOpenUserChange, userId, setState } = useAuthStore()
+const UserForm = () => {
+  const { userId, isUserOpen, onOpenUserChange, setState } = useAuthStore()
+  const { data: user, isLoading } = useUser(userId || '')
+  const { create, update, isCreating, isUpdating } = useUserMutation()
 
-//   const [previewFiles, setPreviewFiles] = useState<ImageWithPreview[]>([])
-//   const [oldImage, setOldImage] = useState<string | null>(null)
-//   const { resolveImagePath, isUploading } = useResolveImageUpload({
-//     oldImage,
-//     previewFiles,
-//   })
+  const [previewFiles, setPreviewFiles] = useState<ImageWithPreview[]>([])
+  const [oldImage, setOldImage] = useState<string | null>(null)
+  const { resolveImagePath, isUploading } = useResolveImageUpload({
+    oldImage,
+    previewFiles,
+  })
 
-//   const QUERY_KEY = {
-//     DASHBOARD: ['dashboard', 'users', 'card'],
-//     USER: ['dashboard', 'user', userId],
-//     USERS: ['dashboard', 'users', 'pagination'],
-//   }
+  const {
+    control,
+    handleSubmit,
+    reset,
+    setValue,
+    formState: { errors, isDirty },
+  } = useForm<UserFormInput>({
+    resolver: zodResolver(
+      userId ? userUpdateAdminSchema : userCreateAdminSchema,
+    ) as Resolver<UserFormInput>,
+    defaultValues: DEFAULT_VALUES,
+  })
 
-//   type UserInput = UserCreateInput | UserUpdateInput
-//   const userSchema = userId ? userUpdateSchema : userCreateSchema
+  useEffect(() => {
+    if (isUserOpen) {
+      if (userId && user) {
+        reset({
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          role: user.role as Role,
+          isActive: user.isActive,
+          image: user.image ?? undefined,
+          password: '',
+        } as UserFormInput)
+        setOldImage(user.image || null)
+      } else {
+        reset(DEFAULT_VALUES)
+        setPreviewFiles([])
+        setOldImage(null)
+      }
+    }
+  }, [isUserOpen, userId, user, reset])
 
-//   const {
-//     control,
-//     reset,
-//     handleSubmit,
-//     setValue,
-//     formState: { errors, isDirty },
-//   } = useForm<UserInput>({
-//     resolver: zodResolver(userSchema),
-//     defaultValues: DEFAULT_VALUES,
-//   })
+  const onFilesChange = (files: ImageWithPreview[]) => {
+    setPreviewFiles(files)
+    if (files.length > 0) {
+      setValue('image', 'IMAGE_CHANGED', { shouldDirty: true })
+    }
+  }
 
-//   const { data: user, isLoading: isLoadingUser } = useQuery({
-//     queryKey: QUERY_KEY.USER,
-//     queryFn: () => getUser(userId!),
-//     enabled: !!userId && isUserOpen,
-//   })
+  const onSubmit = async (values: UserFormInput) => {
+    const imagePath = await resolveImagePath()
 
-//   useEffect(() => {
-//     if (userId && !isLoadingUser && user) {
-//       reset(
-//         { ...user, name: user?.name! },
-//         {
-//           keepDirty: false,
-//           keepTouched: false,
-//         },
-//       )
-//       setOldImage(user.image)
-//     }
-//   }, [isLoadingUser, reset, user, userId])
+    const payload = {
+      ...values,
+      image: imagePath,
+    }
 
-//   const onRefetch = async () => {
-//     Promise.all([
-//       queryClient.invalidateQueries({
-//         queryKey: QUERY_KEY.DASHBOARD,
-//       }),
-//       queryClient.invalidateQueries({
-//         queryKey: QUERY_KEY.USER,
-//       }),
-//       queryClient.invalidateQueries({
-//         queryKey: QUERY_KEY.USERS,
-//       }),
-//     ])
+    if (userId) {
+      const { password, ...updatePayload } = payload
+      await update({ ...updatePayload, id: userId } as UserUpdateInput)
+    } else {
+      await create(payload as UserCreateInput)
+    }
 
-//     onClose()
-//   }
+    handleClose()
+  }
 
-//   const { mutate: mutateCreateUser, isPending: isPendingCreateUser } =
-//     useMutation({
-//       mutationFn: createUser,
-//       onSuccess: onRefetch,
-//     })
+  const handleClose = () => {
+    onOpenUserChange(false)
+    setState({ userId: null })
+    setPreviewFiles([])
+    setOldImage(null)
+    reset(DEFAULT_VALUES)
+  }
 
-//   const { mutate: mutateUpdateUser, isPending: isPendingUpdateUser } =
-//     useMutation({
-//       mutationFn: updateUser,
-//       onSuccess: onRefetch,
-//     })
+  const isPending = isCreating || isUpdating || isUploading
 
-//   const isPending =
-//     isPendingCreateUser || isLoadingUser || isPendingUpdateUser || isUploading
-//   const headerLable = userId ? t('editTitle') : t('addTitle')
+  return (
+    <Modal
+      isDismissable={!isPending}
+      isOpen={isUserOpen}
+      scrollBehavior='inside'
+      size='xl'
+      onOpenChange={handleClose}
+    >
+      <ModalContent>
+        <ModalHeader className='text-left text-xl font-bold'>
+          {userId ? 'แก้ไขข้อมูลผู้ใช้งาน' : 'เพิ่มผู้ใช้งานใหม่'}
+        </ModalHeader>
+        <ModalBody className='text-left'>
+          {isLoading && userId ? (
+            <div className='flex h-40 items-center justify-center'>
+              <Spinner label='กำลังโหลดข้อมูลผู้ใช้...' />
+            </div>
+          ) : (
+            <form
+              className='space-y-6'
+              id='user-form'
+              onSubmit={handleSubmit(onSubmit)}
+            >
+              <SectionLabel>รูปโปรไฟล์</SectionLabel>
+              <ImageDropzone onFilesChange={onFilesChange} />
 
-//   const onFilesChange = (files: ImageWithPreview[]) => {
-//     setPreviewFiles(files)
+              <SectionLabel>สถานะและบทบาท</SectionLabel>
+              <div className='bg-default-50 flex items-center justify-between rounded-lg p-3'>
+                <Controller
+                  control={control}
+                  name='isActive'
+                  render={({ field: { value, onChange } }) => (
+                    <Switch
+                      color='success'
+                      isSelected={!!value}
+                      onValueChange={onChange}
+                    >
+                      สถานะการใช้งานบัญชี
+                    </Switch>
+                  )}
+                />
+                <Controller
+                  control={control}
+                  name='role'
+                  render={({ field: { value, onChange } }) => (
+                    <Select
+                      className='max-w-[200px]'
+                      label='บทบาท'
+                      selectedKeys={value ? [value] : [Role.CUSTOMER]}
+                      size='sm'
+                      variant='flat'
+                      onSelectionChange={(keys) =>
+                        onChange(Array.from(keys)[0] as Role)
+                      }
+                    >
+                      {Object.values(Role).map((r) => (
+                        <SelectItem key={r} textValue={r}>
+                          {r}
+                        </SelectItem>
+                      ))}
+                    </Select>
+                  )}
+                />
+              </div>
 
-//     setValue(
-//       'image',
-//       files.length ? t('imageChangedStatus') : (oldImage ?? ''),
-//       {
-//         shouldDirty: true,
-//         shouldTouch: true,
-//       },
-//     )
-//   }
+              <SectionLabel>ข้อมูลส่วนตัว</SectionLabel>
+              <Controller
+                control={control}
+                name='name'
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    errorMessage={errors.name?.message}
+                    isInvalid={!!errors.name}
+                    label='ชื่อ-นามสกุล'
+                    placeholder='กรอกชื่อและนามสกุลจริง'
+                    variant='bordered'
+                  />
+                )}
+              />
 
-//   const onSubmit = async (data: UserInput) => {
-//     const imagePath = await resolveImagePath()
+              <Controller
+                control={control}
+                name='email'
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    errorMessage={errors.email?.message}
+                    isDisabled={!!userId}
+                    isInvalid={!!errors.email}
+                    label='อีเมล (Username)'
+                    placeholder='example@faos.com'
+                    variant='bordered'
+                  />
+                )}
+              />
 
-//     const payload = {
-//       ...data,
-//       image: imagePath,
-//     }
+              {!userId && (
+                <>
+                  <SectionLabel>ความปลอดภัย</SectionLabel>
+                  <Controller
+                    control={control}
+                    name='password'
+                    render={({ field }) => (
+                      <Input
+                        {...field}
+                        errorMessage={errors.password?.message}
+                        isInvalid={!!errors.password}
+                        label='รหัสผ่าน'
+                        placeholder='กำหนดรหัสผ่านอย่างน้อย 6 ตัวอักษร'
+                        type='password'
+                        variant='bordered'
+                      />
+                    )}
+                  />
+                </>
+              )}
+            </form>
+          )}
+        </ModalBody>
+        <ModalFooter>
+          <Button isDisabled={isPending} variant='flat' onPress={handleClose}>
+            ยกเลิก
+          </Button>
+          <Button
+            className='text-secondary font-bold'
+            color='primary'
+            form='user-form'
+            isDisabled={!isDirty || isPending}
+            isLoading={isPending}
+            type='submit'
+          >
+            {userId ? 'บันทึกการแก้ไข' : 'สร้างผู้ใช้งาน'}
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
+  )
+}
 
-//     if (userId) {
-//       mutateUpdateUser(payload as UserUpdateInput)
-//     } else {
-//       mutateCreateUser(payload as UserCreateInput)
-//     }
-//   }
-
-//   const onClose = () => {
-//     setPreviewFiles([])
-//     setOldImage(null)
-
-//     queryClient.removeQueries({
-//       queryKey: QUERY_KEY.USER,
-//     })
-//     reset(DEFAULT_VALUES)
-//     setState({ userId: null })
-//     onOpenUserChange()
-//   }
-
-//   return (
-//     <Modal
-//       hideCloseButton
-//       isDismissable={false}
-//       isOpen={isUserOpen}
-//       scrollBehavior='inside'
-//       size='xl'
-//       onOpenChange={onOpenUserChange}
-//     >
-//       <ModalContent>
-//         <ModalHeader className='flex flex-col gap-1'>{headerLable}</ModalHeader>
-
-//         {isPending && <Spinner label={tCommon('loading')} />}
-
-//         {!isPending && (
-//           <ModalBody>
-//             <ImageDropzone onFilesChange={onFilesChange} />
-
-//             <SectionLabel>{t('licenseHeading')}</SectionLabel>
-//             <Controller
-//               control={control}
-//               name='isActive'
-//               render={({ field: { value, onChange, ...field } }) => (
-//                 <Switch {...field} isSelected={value} onValueChange={onChange}>
-//                   {t('activeLabel')}
-//                 </Switch>
-//               )}
-//             />
-//             <Controller
-//               control={control}
-//               name='role'
-//               render={({ field: { value, onChange, ...field } }) => (
-//                 <Select
-//                   {...field}
-//                   errorMessage={errors.role?.message}
-//                   isInvalid={!!errors.role}
-//                   label={t('roleLabel')}
-//                   selectedKeys={value ? [value] : []}
-//                   variant='bordered'
-//                   onSelectionChange={(keys) => {
-//                     const selected = Array.from(keys)[0] as Role
-
-//                     onChange(selected)
-//                   }}
-//                 >
-//                   {Object.values(Role).map((role) => (
-//                     <SelectItem key={role}>
-//                       {role === 'ADMIN'
-//                         ? t('roleAdmin')
-//                         : t('roleUser')}
-//                     </SelectItem>
-//                   ))}
-//                 </Select>
-//               )}
-//             />
-
-//             <SectionLabel>{t('infoHeading')}</SectionLabel>
-//             <Controller
-//               control={control}
-//               name='image'
-//               render={({ field: { value, ...field } }) => (
-//                 <Input
-//                   {...field}
-//                   isDisabled
-//                   errorMessage={errors.image?.message}
-//                   isInvalid={!!errors.image}
-//                   label={t('urlLabel')}
-//                   value={value ?? ''}
-//                   variant='bordered'
-//                 />
-//               )}
-//             />
-//             <Controller
-//               control={control}
-//               name='name'
-//               render={({ field: { value, ...field } }) => (
-//                 <Input
-//                   {...field}
-//                   errorMessage={errors.name?.message}
-//                   isInvalid={!!errors.name}
-//                   label={t('nameLabel')}
-//                   value={value ?? ''}
-//                   variant='bordered'
-//                 />
-//               )}
-//             />
-//             <Controller
-//               control={control}
-//               name='email'
-//               render={({ field: { value, ...field } }) => (
-//                 <Input
-//                   {...field}
-//                   errorMessage={errors.email?.message}
-//                   isInvalid={!!errors.email}
-//                   label={t('emailLabel')}
-//                   value={value ?? ''}
-//                   variant='bordered'
-//                 />
-//               )}
-//             />
-//             <Controller
-//               control={control}
-//               name='password'
-//               render={({ field: { value, ...field } }) => (
-//                 <Input
-//                   {...field}
-//                   errorMessage={errors.password?.message}
-//                   isInvalid={!!errors.password}
-//                   label={
-//                     userId
-//                       ? t('passwordChangeLabel')
-//                       : t('passwordLabel')
-//                   }
-//                   type='password'
-//                   value={value ?? ''}
-//                   variant='bordered'
-//                 />
-//               )}
-//             />
-//           </ModalBody>
-//         )}
-//         <ModalFooter>
-//           <Button isDisabled={isPending} variant='faded' onPress={onClose}>
-//             {tCommon('cancel')}
-//           </Button>
-//           <Button
-//             className='text-secondary'
-//             color='primary'
-//             isDisabled={isPending || !isDirty}
-//             onClick={handleSubmit(onSubmit)}
-//           >
-//             {isPending ? tCommon('saving') : tCommon('save')}
-//           </Button>
-//         </ModalFooter>
-//       </ModalContent>
-//     </Modal>
-//   )
-// }
+export { UserForm }

@@ -13,7 +13,7 @@ interface Props {
   onSuccess?: () => void
 }
 
-const ProductReviewForm = ({ productId, onSuccess }: Props) => {
+const ReviewForm = ({ productId, onSuccess }: Props) => {
   const t = useTranslations('review')
   const { submitReview, isSubmitting } = useReviewMutation()
 
@@ -75,4 +75,4 @@ const ProductReviewForm = ({ productId, onSuccess }: Props) => {
   )
 }
 
-export { ProductReviewForm }
+export { ReviewForm }

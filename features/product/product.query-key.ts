@@ -19,6 +19,9 @@ const productQueryKeys = {
 
     similar: (locale: string, categoryId?: string | null) =>
       [...productQueryKeys.lists.all(), 'similar', locale, categoryId] as const,
+
+    admin: (page: number, limit: number) =>
+      [...productQueryKeys.lists.all(), 'admin', { page, limit }] as const,
   },
 
   details: {

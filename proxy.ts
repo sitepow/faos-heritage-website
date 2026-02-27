@@ -25,17 +25,23 @@ const isAuthenticated = (request: NextRequest): boolean => {
 const middleware = async (request: NextRequest) => {
   const { pathname } = request.nextUrl
 
-  const excludedFiles = ['/sitemap.xml', '/robots.txt', '/favicon.ico']
-  if (excludedFiles.includes(pathname) || pathname.startsWith('/s/')) {
+  const isExcluded =
+    pathname === '/sitemap.xml' ||
+    pathname === '/robots.txt' ||
+    pathname === '/favicon.ico' ||
+    pathname.startsWith('/dashboard') ||
+    pathname.startsWith('/s/')
+
+  if (isExcluded) {
     return NextResponse.next()
   }
 
   const normalizedPath = stripLocaleFromPath(pathname)
-
   const pathParts = pathname.split('/')
   const localeInPath = pathParts[1]
   const hasValidLocale = routing.locales.includes(localeInPath)
 
+  // 2. ถ้าไม่มี Locale ใน Path (และไม่ใช่พวกที่ถูกยกเว้นข้างบน) ถึงจะ Redirect ไปเติม Locale
   if (!hasValidLocale) {
     const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value
     const finalLocale =

@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query'
 
-import { getProductReviews } from './review.action'
+import { getAllReviewsAdmin, getReviews } from './review.action'
 import { reviewQueryKeys } from './review.query-key'
 
 interface UseReviewsParams {
@@ -12,9 +12,16 @@ interface UseReviewsParams {
 const useReviews = ({ productId }: UseReviewsParams) => {
   return useQuery({
     queryKey: reviewQueryKeys.lists.byProductId(productId),
-    queryFn: () => getProductReviews(productId),
+    queryFn: () => getReviews(productId),
     enabled: !!productId,
   })
 }
 
-export { useReviews }
+const useReviewsAdmin = (page = 1, limit = 10) => {
+  return useQuery({
+    queryKey: reviewQueryKeys.lists.all(),
+    queryFn: () => getAllReviewsAdmin(page, limit),
+  })
+}
+
+export { useReviews, useReviewsAdmin }

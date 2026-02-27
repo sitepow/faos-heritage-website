@@ -1,245 +1,157 @@
-// 'use client'
+'use client'
 
-// import {
-//   Modal,
-//   ModalContent,
-//   ModalHeader,
-//   Spinner,
-//   ModalBody,
-//   Switch,
-//   Input,
-//   ModalFooter,
-//   Button,
-// } from '@heroui/react'
-// import { zodResolver } from '@hookform/resolvers/zod'
-// import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-// import { useEffect, useState } from 'react'
-// import { Controller, useForm } from 'react-hook-form'
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  Switch,
+  Input,
+  ModalFooter,
+  Button,
+} from '@heroui/react'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useEffect, useState } from 'react'
+import { Controller, useForm } from 'react-hook-form'
 
-// import type { ImageInput } from '../../schema/image'
-// import type { ImageWithPreview } from '@/components/ui/ImageDropzone'
+import { useProductUIStore } from '../../product/product.store'
+import { useProductImageDetail } from '../product-image.hook'
+import { useProductImageMutation } from '../product-image.mutation'
+import { imageSchema, type ImageInput } from '../product-image.schema'
+import { useProductImageUIStore } from '../product-image.store'
 
-// import { getImage, createImage, updateImage } from '../../action/image'
-// import { imageSchema } from '../../schema/image'
-// import { useProductStore } from '../../store'
+import {
+  ImageDropzone,
+  type ImageWithPreview,
+} from '@/app/(dashboard)/_components/ImageDropzone'
+import { SectionLabel } from '@/components/ui/SectionHeader'
+import { useResolveImageUpload } from '@/hooks/useResolveImageUpload'
 
-// import { ImageDropzone } from '@/components/ui/ImageDropzone'
-// import { SubHeading } from '@/components/ui/SectionHeader'
-// import { useImageUpload } from '@/hooks/useResolveImageUpload'
+const DEFAULT_VALUES: ImageInput = {
+  url: '',
+  alt: '',
+  isPrimary: false,
+  productId: '',
+}
 
-// const DEFAULT_VALUES: ImageInput = {
-//   url: '',
-//   alt: '',
-//   isPrimary: false,
-// }
+const ProductImageForm = () => {
+  const { selectedImageId, isFormOpen, closeForm } = useProductImageUIStore()
+  const { selectedProductId } = useProductUIStore()
+  const { create, update } = useProductImageMutation()
 
-// export const ImageForm = () => {
-//   const queryClient = useQueryClient()
+  const { data: image, isLoading: isLoadingDetail } =
+    useProductImageDetail(selectedImageId)
 
-//   const {
-//     isImageOpen,
-//     onOpenImageChange,
-//     onOpenImageManagerChange,
-//     imageId,
-//     productId,
-//     setState,
-//   } = useProductStore()
+  const [previewFiles, setPreviewFiles] = useState<ImageWithPreview[]>([])
+  const [oldImage, setOldImage] = useState<string | null>(null)
 
-//   const [previewFiles, setPreviewFiles] = useState<ImageWithPreview[]>([])
-//   const [oldImage, setOldImage] = useState<string | null>(null)
-//   const { resolveImagePath, isUploading } = useImageUpload({
-//     oldImage,
-//     previewFiles,
-//   })
+  const { resolveImagePath, isUploading } = useResolveImageUpload({
+    oldImage,
+    previewFiles,
+  })
 
-//   const QUERY_KEY = {
-//     IMAGE: ['dashboard', 'image', 'modal', imageId],
-//     IMAGES: ['dashboard', 'images', 'modal', productId],
-//     HOMEPAGE: ['products', 'homepage'],
-//     CAROUSEL: ['carousel', 'products'],
-//   }
+  const {
+    control,
+    reset,
+    handleSubmit,
+    setValue,
+    formState: { isDirty },
+  } = useForm<ImageInput>({
+    resolver: zodResolver(imageSchema),
+    defaultValues: DEFAULT_VALUES,
+  })
 
-//   const {
-//     control,
-//     reset,
-//     handleSubmit,
-//     setValue,
-//     formState: { errors, isDirty },
-//   } = useForm<ImageInput>({
-//     resolver: zodResolver(imageSchema),
-//     defaultValues: DEFAULT_VALUES,
-//   })
+  useEffect(() => {
+    if (isFormOpen) {
+      if (selectedImageId && image) {
+        reset(image as ImageInput)
+        setOldImage(image.url || null)
+      } else {
+        reset({ ...DEFAULT_VALUES, productId: selectedProductId || '' })
+        setPreviewFiles([])
+        setOldImage(null)
+      }
+    }
+  }, [isFormOpen, selectedImageId, image, reset, selectedProductId])
 
-//   const { data: image, isLoading: isLoadingImage } = useQuery({
-//     queryKey: QUERY_KEY.IMAGE,
-//     queryFn: () => getImage(imageId!),
-//     enabled: !!imageId && isImageOpen,
-//   })
+  const onFilesChange = (files: ImageWithPreview[]) => {
+    setPreviewFiles(files)
+    if (files.length > 0) {
+      setValue('url', 'IMAGE_CHANGED', { shouldDirty: true })
+    }
+  }
 
-//   useEffect(() => {
-//     if (imageId && !isLoadingImage && image) {
-//       reset(image, {
-//         keepDirty: false,
-//         keepTouched: false,
-//       })
-//       setOldImage(image.url)
-//     }
-//   }, [isLoadingImage, reset, image, imageId])
+  const onSubmit = async (data: ImageInput) => {
+    const imagePath = await resolveImagePath()
+    const payload = { ...data, url: imagePath, productId: selectedProductId }
 
-//   const onRefetch = () => {
-//     queryClient.invalidateQueries({
-//       queryKey: QUERY_KEY.IMAGE,
-//     })
-//     queryClient.invalidateQueries({
-//       queryKey: QUERY_KEY.IMAGES,
-//     })
-//     queryClient.invalidateQueries({
-//       queryKey: QUERY_KEY.HOMEPAGE,
-//     })
-//     queryClient.invalidateQueries({
-//       queryKey: QUERY_KEY.CAROUSEL,
-//     })
+    if (selectedImageId) {
+      await update({ ...payload, id: selectedImageId })
+    } else {
+      await create(payload)
+    }
+    closeForm()
+  }
 
-//     onClose()
-//   }
+  const isPending = isUploading || isLoadingDetail
 
-//   const { mutate: mutateCreateImage, isPending: isPendingCreateImage } =
-//     useMutation({
-//       mutationFn: createImage,
-//       onSuccess: onRefetch,
-//     })
+  return (
+    <Modal
+      isDismissable={!isPending}
+      isOpen={isFormOpen}
+      size='xl'
+      onOpenChange={closeForm}
+    >
+      <ModalContent>
+        <ModalHeader className='font-bold'>
+          {selectedImageId ? 'แก้ไขข้อมูลรูปภาพ' : 'เพิ่มรูปภาพสินค้า'}
+        </ModalHeader>
+        <ModalBody>
+          <ImageDropzone onFilesChange={onFilesChange} />
 
-//   const { mutate: mutateUpdateImage, isPending: isPendingUpdateImage } =
-//     useMutation({
-//       mutationFn: updateImage,
-//       onSuccess: onRefetch,
-//     })
+          <SectionLabel>สถานะรูปภาพ</SectionLabel>
+          <Controller
+            control={control}
+            name='isPrimary'
+            render={({ field: { value, onChange } }) => (
+              <Switch isSelected={!!value} onValueChange={onChange}>
+                ตั้งเป็นรูปหลัก (Primary Image)
+              </Switch>
+            )}
+          />
 
-//   const isPending =
-//     isPendingCreateImage ||
-//     isLoadingImage ||
-//     isPendingUpdateImage ||
-//     isUploading
-//   const headerLable = imageId ? 'Edit product image' : 'Add product images'
+          <SectionLabel>ข้อมูลประกอบ</SectionLabel>
+          <Controller
+            control={control}
+            name='alt'
+            render={({ field }) => (
+              <Input
+                {...field}
+                label='คำอธิบายรูปภาพ (Alt Text)'
+                placeholder='เช่น หน้าตรงของสินค้า, รายละเอียดบรรจุภัณฑ์'
+                value={field.value || ''}
+                variant='bordered'
+              />
+            )}
+          />
+        </ModalBody>
+        <ModalFooter>
+          <Button isDisabled={isPending} variant='flat' onPress={closeForm}>
+            ยกเลิก
+          </Button>
+          <Button
+            className='text-secondary font-bold'
+            color='primary'
+            isDisabled={!isDirty || isPending}
+            isLoading={isPending}
+            onPress={() => handleSubmit(onSubmit)()}
+          >
+            {selectedImageId ? 'บันทึกการแก้ไข' : 'อัปโหลดรูปภาพ'}
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
+  )
+}
 
-//   const onFilesChange = (files: ImageWithPreview[]) => {
-//     setPreviewFiles(files)
-
-//     setValue(
-//       'url',
-//       files.length
-//         ? 'There have been changes to the image files.'
-//         : (oldImage ?? ''),
-//       {
-//         shouldDirty: true,
-//         shouldTouch: true,
-//       },
-//     )
-//   }
-
-//   const onSubmit = async (data: ImageInput) => {
-//     const imagePath = await resolveImagePath()
-
-//     const payload = {
-//       ...data,
-//       url: imagePath,
-//       productId,
-//     }
-
-//     if (imageId) {
-//       mutateUpdateImage(payload)
-//     } else {
-//       mutateCreateImage(payload)
-//     }
-//   }
-
-//   const onClose = () => {
-//     setPreviewFiles([])
-//     setOldImage(null)
-
-//     queryClient.removeQueries({
-//       queryKey: QUERY_KEY.IMAGE,
-//     })
-//     reset(DEFAULT_VALUES)
-//     setState({ imageId: null })
-//     onOpenImageChange()
-//     onOpenImageManagerChange()
-//   }
-
-//   return (
-//     <Modal
-//       hideCloseButton
-//       isDismissable={false}
-//       isOpen={isImageOpen}
-//       scrollBehavior='inside'
-//       size='xl'
-//       onOpenChange={onOpenImageChange}
-//     >
-//       <ModalContent>
-//         <ModalHeader className='flex flex-col gap-1'>{headerLable}</ModalHeader>
-
-//         {isPending && <Spinner label='Loading...' />}
-
-//         {!isPending && (
-//           <ModalBody>
-//             <ImageDropzone onFilesChange={onFilesChange} />
-
-//             <SubHeading title='Option status' />
-//             <Controller
-//               control={control}
-//               name='isPrimary'
-//               render={({ field: { value, onChange, ...field } }) => (
-//                 <Switch {...field} isSelected={value} onValueChange={onChange}>
-//                   Make primary photo
-//                 </Switch>
-//               )}
-//             />
-//             <SubHeading title='Basic information' />
-//             <Controller
-//               control={control}
-//               name='url'
-//               render={({ field: { value, ...field } }) => (
-//                 <Input
-//                   {...field}
-//                   isDisabled
-//                   errorMessage={errors.url?.message}
-//                   isInvalid={!!errors.url}
-//                   label='Image URL'
-//                   value={value ?? ''}
-//                   variant='bordered'
-//                 />
-//               )}
-//             />
-//             <Controller
-//               control={control}
-//               name='alt'
-//               render={({ field: { value, ...field } }) => (
-//                 <Input
-//                   {...field}
-//                   errorMessage={errors.alt?.message}
-//                   isInvalid={!!errors.alt}
-//                   label='Image description (alt text)'
-//                   value={value ?? ''}
-//                   variant='bordered'
-//                 />
-//               )}
-//             />
-//           </ModalBody>
-//         )}
-//         <ModalFooter>
-//           <Button isDisabled={isPending} variant='faded' onPress={onClose}>
-//             Cancel
-//           </Button>
-//           <Button
-//             className='text-secondary'
-//             color='primary'
-//             isDisabled={isPending || !isDirty}
-//             onClick={handleSubmit(onSubmit)}
-//           >
-//             {isPending ? 'Saving...' : 'Save'}
-//           </Button>
-//         </ModalFooter>
-//       </ModalContent>
-//     </Modal>
-//   )
-// }
+export { ProductImageForm }

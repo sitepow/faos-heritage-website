@@ -7,13 +7,7 @@ import {
   type ShippingCountryInput,
 } from './shipping.schema'
 
-import {
-  BASE_RATE_DEFAULT,
-  GRAMS_PER_KILOGRAM,
-  KG_DEFAULT,
-  PRICE_PER_KG_DEFAULT,
-  SHIPPING_COST_DEFAULT,
-} from '@/constants'
+import { SHIPPING_COST_DEFAULT } from '@/constants'
 import { ERROR_CODES, fail, ok } from '@/lib/errors'
 import { prisma } from '@/lib/prisma'
 import { withRole } from '@/lib/session'
@@ -39,8 +33,10 @@ const createShippingCountry = async (data: ShippingCountryInput) =>
       return fail(ERROR_CODES.VALIDATION_ERROR)
     }
 
+    const { weightTiers, ...payload } = validated.data
+
     const exists = await prisma.shippingCountry.findUnique({
-      where: { countryCode: validated.data.countryCode },
+      where: { countryCode: payload.countryCode },
     })
 
     if (exists) {
@@ -49,7 +45,16 @@ const createShippingCountry = async (data: ShippingCountryInput) =>
 
     try {
       await prisma.shippingCountry.create({
-        data: validated.data as Prisma.ShippingCountryUncheckedCreateInput,
+        data: {
+          ...payload,
+          weightTiers: {
+            create: weightTiers.map((tier) => ({
+              minWeight: tier.minWeight,
+              maxWeight: tier.maxWeight,
+              rate: tier.rate,
+            })),
+          },
+        } as Prisma.ShippingCountryCreateInput,
       })
 
       return ok()
@@ -65,15 +70,30 @@ const updateShippingCountry = async (data: ShippingCountryInput) =>
       return fail(ERROR_CODES.VALIDATION_ERROR)
     }
 
-    const { id, ...payload } = validated.data
+    const { id, weightTiers, ...payload } = validated.data
     if (!id) {
       return fail(ERROR_CODES.DATA_NOT_FOUND)
     }
 
     try {
-      await prisma.shippingCountry.update({
-        where: { id },
-        data: payload,
+      await prisma.$transaction(async (tx) => {
+        await tx.shippingWeightTier.deleteMany({
+          where: { shippingCountryId: id },
+        })
+
+        await tx.shippingCountry.update({
+          where: { id },
+          data: {
+            ...payload,
+            weightTiers: {
+              create: weightTiers.map((tier) => ({
+                minWeight: tier.minWeight,
+                maxWeight: tier.maxWeight,
+                rate: tier.rate,
+              })),
+            },
+          },
+        })
       })
 
       return ok()
@@ -102,6 +122,7 @@ const deleteShippingCountry = async (shippingCountryId: string) =>
 const getShippingCountries = async () => {
   const countries = await prisma.shippingCountry.findMany({
     where: { isActive: true },
+    include: { weightTiers: true },
     orderBy: { countryName: 'asc' },
   })
 
@@ -111,6 +132,7 @@ const getShippingCountries = async () => {
 const getShippingCountry = async (shippingCountryId: string) => {
   const country = await prisma.shippingCountry.findUnique({
     where: { id: shippingCountryId },
+    include: { weightTiers: { orderBy: { minWeight: 'asc' } } },
   })
 
   return decimalToNumber(country)
@@ -119,37 +141,46 @@ const getShippingCountry = async (shippingCountryId: string) => {
 const calculateShippingCost = async ({
   items,
   countryCode,
-}: CalculateShippingCostParams): Promise<number> => {
+  totalPrice,
+}: CalculateShippingCostParams & { totalPrice: number }): Promise<number> => {
   try {
-    if (!items?.length || !countryCode) {
-      return SHIPPING_COST_DEFAULT
-    }
-
-    const totalWeightGrams = items.reduce(
-      (sum, item) => sum + item.quantity * item.weight,
-      KG_DEFAULT,
-    )
-
-    const rawWeightKg = totalWeightGrams / GRAMS_PER_KILOGRAM
-    if (rawWeightKg <= KG_DEFAULT) {
-      return KG_DEFAULT
-    }
-
-    const billableWeight = Math.ceil(rawWeightKg)
-
     const country = await prisma.shippingCountry.findUnique({
       where: { countryCode },
+      include: { weightTiers: { orderBy: { minWeight: 'asc' } } },
     })
 
     if (!country) {
       return SHIPPING_COST_DEFAULT
     }
 
-    const baseRate = Number(country.baseRate) || BASE_RATE_DEFAULT
-    const pricePerKg = Number(country.pricePerKg) || PRICE_PER_KG_DEFAULT
-    const shippingCost = baseRate + billableWeight * pricePerKg
+    if (
+      country.freeShippingThreshold &&
+      totalPrice >= Number(country.freeShippingThreshold)
+    ) {
+      return 0
+    }
 
-    return Math.ceil(shippingCost)
+    const totalWeightGrams = items.reduce(
+      (sum, item) => sum + item.quantity * item.weight,
+      0,
+    )
+    const weightKg = totalWeightGrams / 1000
+
+    const matchedTier = country.weightTiers.find(
+      (tier) =>
+        weightKg >= Number(tier.minWeight) &&
+        weightKg <= Number(tier.maxWeight),
+    )
+
+    if (matchedTier) {
+      return Math.ceil(Number(matchedTier.rate))
+    }
+
+    const billableWeight = Math.ceil(weightKg)
+    const baseRate = Number(country.baseRate)
+    const pricePerKg = Number(country.pricePerKg)
+
+    return Math.ceil(baseRate + billableWeight * pricePerKg)
   } catch {
     return SHIPPING_COST_DEFAULT
   }
