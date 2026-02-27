@@ -24,6 +24,12 @@ const isAuthenticated = (request: NextRequest): boolean => {
 
 const middleware = async (request: NextRequest) => {
   const { pathname } = request.nextUrl
+
+  const excludedFiles = ['/sitemap.xml', '/robots.txt', '/favicon.ico']
+  if (excludedFiles.includes(pathname) || pathname.startsWith('/s/')) {
+    return NextResponse.next()
+  }
+
   const normalizedPath = stripLocaleFromPath(pathname)
 
   const pathParts = pathname.split('/')
@@ -71,7 +77,9 @@ const middleware = async (request: NextRequest) => {
 }
 
 export const config = {
-  matcher: ['/((?!api|trpc|s/|_next|_vercel|favicon.ico|.*\\..*).*)'],
+  matcher: [
+    '/((?!api|trpc|s/|_next|_vercel|favicon.ico|sitemap.xml|robots.txt|.*\\..*).*)',
+  ],
 }
 
 export default middleware
