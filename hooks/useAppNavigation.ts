@@ -13,7 +13,7 @@ const useAppNavigation = () => {
       FAVORITE: () => router.push(`/profile?tab=${PROFILE_TABS.FAVORITE}`),
       PROFILE: () => router.push(`/profile?tab=${PROFILE_TABS.PROFILE}`),
       ADDRESS: () => router.push(`/profile?tab=${PROFILE_TABS.ADDRESS}`),
-      DASHBOARD: () => router.push('/dashboard'),
+      // DASHBOARD: () => router.push('/dashboard'),
       LOGIN: () => router.push('/login'),
       ABOUT: () => router.push('/about'),
       AFFILIATE: () => router.push('/affiliate'),

@@ -15,7 +15,7 @@ import {
   SettingsIcon,
   UserIcon,
 } from 'lucide-react'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { signOut } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
 import { useMemo } from 'react'
@@ -33,6 +33,7 @@ type UserMenuItem = {
 }
 
 const NavbarUserMenu = () => {
+  const router = useRouter()
   const t = useTranslations('navigation.navbar.userPanel')
   const pathname = usePathname()
   const { isAdmin } = useAuth()
@@ -66,7 +67,9 @@ const NavbarUserMenu = () => {
         key: 'dashboard',
         label: 'dashboard',
         icon: <CustomIcon icon={SettingsIcon} />,
-        action: navigation.DASHBOARD,
+        action: () => {
+          router.push('/dashboard')
+        },
       })
     }
 
@@ -82,9 +85,9 @@ const NavbarUserMenu = () => {
     isAdmin,
     isDashboard,
     navigation.ACCOUNT,
-    navigation.DASHBOARD,
     navigation.FAVORITE,
     navigation.ORDER,
+    router,
   ])
 
   return (

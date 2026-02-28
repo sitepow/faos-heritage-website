@@ -7,7 +7,6 @@ import {
   DropdownItem,
   Button,
 } from '@heroui/react'
-import { ChevronDown } from 'lucide-react'
 import Link from 'next/link'
 
 import type { NavLink } from './navbar.types'
@@ -69,9 +68,6 @@ const NavbarMenu = ({ staticLinks, categories, blogCategories }: Props) => {
                   <Button
                     disableRipple
                     className='h-auto min-w-fit bg-transparent p-0 transition-opacity hover:opacity-70 data-[hover=true]:bg-transparent'
-                    endContent={
-                      <ChevronDown className='text-default-500' size={14} />
-                    }
                   >
                     <MenuItem label='...' />
                   </Button>
