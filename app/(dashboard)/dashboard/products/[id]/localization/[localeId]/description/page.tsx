@@ -3,9 +3,11 @@
 import { Button, Spinner } from '@heroui/react'
 import { ChevronLeftIcon, SaveIcon } from 'lucide-react'
 import { useParams, useRouter } from 'next/navigation'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
 import type { ProductLocalizationInput } from '@/features/product-localization/product-localization.schema'
+
+import { TableConfigHeader } from '../../../../_components/TableConfigHeader'
 
 import { Container } from '@/components/layouts/Container'
 import { MdEditorCustomize } from '@/components/ui/MdEditorCustomize'
@@ -33,7 +35,7 @@ const ProductLocalizationDescriptionPage = () => {
     }
   }, [isLocaleData, localization])
 
-  const handleSave = async () => {
+  const handleSave = useCallback(async () => {
     if (!localeId || !isLocaleData) {
       return
     }
@@ -50,7 +52,7 @@ const ProductLocalizationDescriptionPage = () => {
         },
       },
     )
-  }
+  }, [localeId, isLocaleData, localization, content, update, router, productId])
 
   if (isLoading) {
     return (
@@ -61,33 +63,38 @@ const ProductLocalizationDescriptionPage = () => {
   }
 
   return (
-    <Container className='flex flex-col gap-5 text-left'>
-      <div className='flex items-center justify-between'>
-        <div className='flex items-center gap-3'>
-          <Button isIconOnly variant='light' onPress={() => router.back()}>
-            <ChevronLeftIcon size={24} />
+    <Container className='flex flex-col gap-6 text-left'>
+      <TableConfigHeader
+        actionContent={
+          <Button
+            className='text-secondary font-bold'
+            color='primary'
+            isLoading={isUpdating}
+            startContent={!isUpdating && <SaveIcon size={18} />}
+            onPress={handleSave}
+          >
+            บันทึกเนื้อหาภาษา {localization?.languageCode?.toUpperCase()}
           </Button>
-          <div>
-            <h1 className='text-2xl font-bold'>
-              แก้ไขรายละเอียดสินค้า ({localization?.languageCode?.toUpperCase()}
-              )
-            </h1>
-            <p className='text-small text-default-500'>
-              แปลสำหรับ: {localization?.name}
-            </p>
+        }
+        selectedCount={0}
+        title={
+          <div className='flex items-center gap-3'>
+            <Button isIconOnly variant='light' onPress={() => router.back()}>
+              <ChevronLeftIcon size={24} />
+            </Button>
+            <div>
+              <h1 className='text-2xl font-bold'>
+                แก้ไขรายละเอียดสินค้า (
+                {localization?.languageCode?.toUpperCase()})
+              </h1>
+              <p className='text-small text-default-500'>
+                แปลสำหรับ: {localization?.name}
+              </p>
+            </div>
           </div>
-        </div>
-
-        <Button
-          className='text-secondary font-bold'
-          color='primary'
-          isLoading={isUpdating}
-          startContent={!isUpdating && <SaveIcon size={18} />}
-          onPress={handleSave}
-        >
-          บันทึกเนื้อหาภาษา {localization?.languageCode?.toUpperCase()}
-        </Button>
-      </div>
+        }
+        onDeleteSelected={() => {}}
+      />
 
       <MdEditorCustomize
         key={loadCount}

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 'use client'
 
 import {
@@ -9,7 +10,6 @@ import {
   TableCell,
   Button,
   Chip,
-  useDisclosure,
   Dropdown,
   DropdownTrigger,
   DropdownMenu,
@@ -18,7 +18,6 @@ import {
 } from '@heroui/react'
 import {
   EditIcon,
-  PlusIcon,
   EllipsisVerticalIcon,
   ImageIcon,
   LayoutIcon,
@@ -27,96 +26,95 @@ import {
   FileTextIcon,
 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useMemo } from 'react'
 
-import type { StatItem } from '@/types/stat.types'
+import type { Selection } from '@heroui/react'
 
-import {
-  useProductsAdmin,
-  useProductStat,
-} from '../../../../../features/product/product.hook'
-import { useProductMutation } from '../../../../../features/product/product.mutation'
-import { useProductUIStore } from '../../../../../features/product/product.store'
-import { ProductForm } from '../../../../../features/product/ui/ProductForm'
-
-import { ConfirmDeleteModal } from '@/app/(dashboard)/_components/ConfirmDeleteModal'
 import { CategoryChip } from '@/components/ui/CategoryChip'
 import { PaginationWrapper } from '@/components/ui/PaginationWrapper'
 import { ProductImage } from '@/components/ui/Product/ProductImage'
-import { StatCard } from '@/components/ui/StatCard'
+import { useProductsAdmin } from '@/features/product/product.hook'
+import { useProductUIStore } from '@/features/product/product.store'
 import { useIsMounted } from '@/hooks/useIsMounted'
 import { formatCurrency, formatNumber, resolveProductImages } from '@/utils'
 
-const ProductTable = () => {
+interface Props {
+  selectedKeys: Selection
+  onSelectionChange: (keys: Selection) => void
+  page: number
+  onPageChange: (page: number) => void
+  onDeleteClick: (id: string) => void
+}
+
+const ProductTable = ({
+  selectedKeys,
+  onSelectionChange,
+  page,
+  onPageChange,
+  onDeleteClick,
+}: Props) => {
   const router = useRouter()
   const isMounted = useIsMounted()
   const { openForm } = useProductUIStore()
-  const { remove, isDeleting } = useProductMutation()
-  const [page, setPage] = useState(1)
-
-  const [selectedKeys, setSelectedKeys] = useState<Set<string>>(new Set([]))
-  const selectedProductIds = Array.from(selectedKeys)
-
-  const { isOpen, onOpen, onOpenChange } = useDisclosure()
-  const [targetDeleteId, setTargetDeleteId] = useState<
-    string | string[] | null
-  >(null)
 
   const { data, isLoading } = useProductsAdmin(page, 50)
-  const { data: stats } = useProductStat()
 
-  const productList = data && 'items' in data ? data.items : []
-  const statsData: StatItem[] = Array.isArray(stats) ? stats : []
+  const productList = useMemo(() => {
+    return data && 'items' in data ? data.items : []
+  }, [data])
 
-  const handleDeleteClick = (id: string | string[]) => {
-    setTargetDeleteId(id)
-    onOpen()
-  }
+  const totalPages = useMemo(() => {
+    return data && 'totalPages' in data ? data.totalPages : 1
+  }, [data])
 
-  const handleConfirmDelete = async () => {
-    if (targetDeleteId) {
-      await remove(targetDeleteId)
-      onOpenChange()
-      setTargetDeleteId(null)
-      setSelectedKeys(new Set([]))
-    }
-  }
+  const getActionItems = (productId: string) => [
+    {
+      key: 'edit',
+      label: 'แก้ไขข้อมูลพื้นฐาน',
+      icon: <EditIcon size={16} />,
+      onClick: () => openForm(productId),
+    },
+    {
+      key: 'description',
+      label: 'แก้ไขรายละเอียดเนื้อหา',
+      icon: <FileTextIcon size={16} />,
+      onClick: () =>
+        router.push(`/dashboard/products/${productId}/description`),
+    },
+    {
+      key: 'images',
+      label: 'จัดการรูปภาพ',
+      icon: <ImageIcon size={16} />,
+      onClick: () => router.push(`/dashboard/products/${productId}/images`),
+    },
+    {
+      key: 'variants',
+      label: 'จัดการตัวเลือก (Variants)',
+      icon: <LayoutIcon size={16} />,
+      onClick: () => router.push(`/dashboard/products/${productId}/variants`),
+    },
+    {
+      key: 'locale',
+      label: 'จัดการภาษา (Translation)',
+      icon: <LanguagesIcon size={16} />,
+      onClick: () =>
+        router.push(`/dashboard/products/${productId}/localization`),
+    },
+    {
+      key: 'delete',
+      label: 'ลบสินค้า',
+      icon: <TrashIcon size={16} />,
+      isDanger: true,
+      onClick: () => onDeleteClick(productId),
+    },
+  ]
 
   if (!isMounted) {
     return null
   }
 
   return (
-    <div className='flex flex-col gap-6'>
-      <div className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3'>
-        {statsData?.map((stat) => (
-          <StatCard key={stat.name} label={stat.name} value={stat.value} />
-        ))}
-      </div>
-
-      <div className='flex w-full flex-wrap items-center justify-between gap-3'>
-        <h1 className='text-2xl font-bold'>จัดการสินค้า</h1>
-        <div className='flex flex-wrap gap-2'>
-          <Button
-            color='danger'
-            isDisabled={selectedProductIds.length === 0}
-            startContent={<TrashIcon size={18} />}
-            variant='flat'
-            onPress={() => handleDeleteClick(selectedProductIds)}
-          >
-            ลบที่เลือก ({selectedProductIds.length})
-          </Button>
-          <Button
-            className='text-secondary'
-            color='primary'
-            startContent={<PlusIcon size={18} />}
-            onPress={() => openForm()}
-          >
-            เพิ่มสินค้าใหม่
-          </Button>
-        </div>
-      </div>
-
+    <div className='flex flex-col gap-4'>
       <Table
         aria-label='Product Admin Table'
         checkboxesProps={{
@@ -125,10 +123,9 @@ const ProductTable = () => {
             icon: 'text-white font-bold',
           },
         }}
-        className='border-default-100 rounded-lg border'
         selectedKeys={selectedKeys}
         selectionMode='multiple'
-        onSelectionChange={(keys) => setSelectedKeys(keys as Set<string>)}
+        onSelectionChange={onSelectionChange}
       >
         <TableHeader>
           <TableColumn>รูปภาพ</TableColumn>
@@ -148,6 +145,7 @@ const ProductTable = () => {
             const { primarySrc } = resolveProductImages({
               images: product?.images,
             })
+            const actionItems = getActionItems(product.id)
 
             return (
               <TableRow key={product.id}>
@@ -188,66 +186,17 @@ const ProductTable = () => {
                       </Button>
                     </DropdownTrigger>
                     <DropdownMenu aria-label='จัดการสินค้า' variant='flat'>
-                      <DropdownItem
-                        key='edit'
-                        startContent={<EditIcon size={16} />}
-                        onPress={() => openForm(product.id)}
-                      >
-                        แก้ไขข้อมูลพื้นฐาน
-                      </DropdownItem>
-                      <DropdownItem
-                        key='description'
-                        startContent={<FileTextIcon size={16} />}
-                        onPress={() =>
-                          router.push(
-                            `/dashboard/products/${product.id}/description`,
-                          )
-                        }
-                      >
-                        แก้ไขรายละเอียดเนื้อหา
-                      </DropdownItem>
-                      <DropdownItem
-                        key='images'
-                        startContent={<ImageIcon size={16} />}
-                        onPress={() =>
-                          router.push(
-                            `/dashboard/products/${product.id}/images`,
-                          )
-                        }
-                      >
-                        จัดการรูปภาพ
-                      </DropdownItem>
-                      <DropdownItem
-                        key='variants'
-                        startContent={<LayoutIcon size={16} />}
-                        onPress={() =>
-                          router.push(
-                            `/dashboard/products/${product.id}/variants`,
-                          )
-                        }
-                      >
-                        จัดการตัวเลือก (Variants)
-                      </DropdownItem>
-                      <DropdownItem
-                        key='locale'
-                        startContent={<LanguagesIcon size={16} />}
-                        onPress={() =>
-                          router.push(
-                            `/dashboard/products/${product.id}/localization`,
-                          )
-                        }
-                      >
-                        จัดการภาษา (Translation)
-                      </DropdownItem>
-                      <DropdownItem
-                        key='delete'
-                        className='text-danger'
-                        color='danger'
-                        startContent={<TrashIcon size={16} />}
-                        onPress={() => handleDeleteClick(product.id)}
-                      >
-                        ลบสินค้า
-                      </DropdownItem>
+                      {actionItems.map((item) => (
+                        <DropdownItem
+                          key={item.key}
+                          className={item.isDanger ? 'text-danger' : ''}
+                          color={item.isDanger ? 'danger' : 'default'}
+                          startContent={item.icon}
+                          onPress={item.onClick}
+                        >
+                          {item.label}
+                        </DropdownItem>
+                      ))}
                     </DropdownMenu>
                   </Dropdown>
                 </TableCell>
@@ -259,17 +208,8 @@ const ProductTable = () => {
 
       <PaginationWrapper
         page={page}
-        total={data && 'totalPages' in data ? data.totalPages : 1}
-        onChange={(p) => setPage(p)}
-      />
-
-      <ProductForm />
-
-      <ConfirmDeleteModal
-        isOpen={isOpen}
-        isPending={isDeleting}
-        onConfirm={handleConfirmDelete}
-        onOpenChange={onOpenChange}
+        total={totalPages}
+        onChange={onPageChange}
       />
     </div>
   )

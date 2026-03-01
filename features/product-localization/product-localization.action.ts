@@ -99,10 +99,37 @@ const getProductLocalization = async (id: string) => {
   return localization || null
 }
 
+const getProductLocaleStat = async (productId: string) =>
+  withRole([Role.ADMIN], async () => {
+    const [total, languages] = await Promise.all([
+      prisma.productLocalization.count({ where: { productId } }),
+      prisma.productLocalization.findMany({
+        where: { productId },
+        select: { languageCode: true },
+      }),
+    ])
+
+    return [
+      {
+        name: 'ภาษาที่แปลแล้ว',
+        value: total,
+      },
+      {
+        name: 'จำนวนรหัสภาษาทั้งหมด',
+        value: languages.length,
+      },
+      {
+        name: 'ความสมบูรณ์เนื้อหา (%)',
+        value: total > 0 ? 100 : 0,
+      },
+    ]
+  })
+
 export {
   createProductLocalization,
   getProductLocalizations,
   getProductLocalization,
   updateProductLocalization,
   deleteProductLocalization,
+  getProductLocaleStat,
 }

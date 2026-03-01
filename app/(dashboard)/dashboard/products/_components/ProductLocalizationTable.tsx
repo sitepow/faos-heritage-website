@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 'use client'
 
 import {
@@ -14,74 +15,61 @@ import {
   DropdownMenu,
   DropdownItem,
   Spinner,
-  useDisclosure,
 } from '@heroui/react'
-import {
-  EditIcon,
-  PlusIcon,
-  EllipsisVerticalIcon,
-  TrashIcon,
-  FileTextIcon,
-} from 'lucide-react'
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { EllipsisVerticalIcon } from 'lucide-react'
+import { useMemo } from 'react'
 
-import { ConfirmDeleteModal } from '@/app/(dashboard)/_components/ConfirmDeleteModal'
+import type { Selection } from '@heroui/react'
+import type { ReactNode } from 'react'
+
 import { useProductLocales } from '@/features/product-localization/product-localization.hook'
-import { useProductLocaleMutation } from '@/features/product-localization/product-localization.mutation'
-import { useProductLocaleUIStore } from '@/features/product-localization/product-localization.store'
-import { ProductLocalizationForm } from '@/features/product-localization/ui/ProductLocalizationForm'
 import { useIsMounted } from '@/hooks/useIsMounted'
+
+interface ActionItem {
+  key: string
+  label: string
+  icon: ReactNode
+  isDanger?: boolean
+  onClick: () => void
+}
 
 interface Props {
   productId: string
   originalName: string
+  selectedKeys: Selection
+  onSelectionChange: (keys: Selection) => void
+  getActionItems: (id: string) => ActionItem[]
 }
 
-const ProductLocalizationTable = ({ productId, originalName }: Props) => {
-  const router = useRouter()
+const ProductLocalizationTable = ({
+  productId,
+  originalName,
+  selectedKeys,
+  onSelectionChange,
+  getActionItems,
+}: Props) => {
   const isMounted = useIsMounted()
-  const { openForm } = useProductLocaleUIStore()
-  const { remove, isDeleting } = useProductLocaleMutation()
-
   const { data: localizations, isLoading } = useProductLocales(productId)
 
-  const { isOpen, onOpen, onOpenChange } = useDisclosure()
-  const [targetDeleteId, setTargetDeleteId] = useState<string | null>(null)
+  const localeList = useMemo(() => localizations || [], [localizations])
 
   if (!isMounted) {
     return null
   }
 
-  const handleDeleteClick = (id: string) => {
-    setTargetDeleteId(id)
-    onOpen()
-  }
-
-  const handleConfirmDelete = async () => {
-    if (targetDeleteId) {
-      await remove(targetDeleteId)
-      setTargetDeleteId(null)
-      onOpenChange()
-    }
-  }
-
   return (
     <div className='flex flex-col gap-4'>
-      <div className='flex justify-end'>
-        <Button
-          className='text-secondary font-bold'
-          color='primary'
-          startContent={<PlusIcon size={18} />}
-          onPress={() => openForm()}
-        >
-          เพิ่มการแปลภาษา
-        </Button>
-      </div>
-
       <Table
         aria-label='Product Localization Table'
-        className='border-default-100 rounded-lg border'
+        checkboxesProps={{
+          classNames: {
+            wrapper: 'after:bg-primary before:border-default-300',
+            icon: 'text-white font-bold',
+          },
+        }}
+        selectedKeys={selectedKeys}
+        selectionMode='multiple'
+        onSelectionChange={onSelectionChange}
       >
         <TableHeader>
           <TableColumn>รหัสภาษา</TableColumn>
@@ -94,76 +82,56 @@ const ProductLocalizationTable = ({ productId, originalName }: Props) => {
           isLoading={isLoading}
           loadingContent={<Spinner label='กำลังโหลดข้อมูลภาษา...' />}
         >
-          {(localizations || []).map((locale) => (
-            <TableRow key={locale.id}>
-              <TableCell>
-                <Chip
-                  className='font-bold'
-                  color='secondary'
-                  size='sm'
-                  variant='flat'
-                >
-                  {locale.languageCode.toUpperCase()}
-                </Chip>
-              </TableCell>
-              <TableCell>{originalName}</TableCell>
-              <TableCell className='text-primary font-medium'>
-                {locale.name}
-              </TableCell>
-              <TableCell>
-                <Dropdown placement='bottom-end'>
-                  <DropdownTrigger>
-                    <Button isIconOnly size='sm' variant='light'>
-                      <EllipsisVerticalIcon
-                        className='text-default-500'
-                        size={20}
-                      />
-                    </Button>
-                  </DropdownTrigger>
-                  <DropdownMenu aria-label='จัดการภาษา' variant='flat'>
-                    <DropdownItem
-                      key='edit'
-                      startContent={<EditIcon size={16} />}
-                      onPress={() => openForm(locale.id)}
-                    >
-                      แก้ไขการแปล
-                    </DropdownItem>
-                    <DropdownItem
-                      key='description'
-                      startContent={<FileTextIcon size={16} />}
-                      onPress={() =>
-                        router.push(
-                          `/dashboard/products/${productId}/localization/${locale.id}/description`,
-                        )
-                      }
-                    >
-                      แก้ไขรายละเอียดเนื้อหา
-                    </DropdownItem>
-                    <DropdownItem
-                      key='delete'
-                      className='text-danger'
-                      color='danger'
-                      startContent={<TrashIcon size={16} />}
-                      onPress={() => handleDeleteClick(locale.id)}
-                    >
-                      ลบข้อมูล
-                    </DropdownItem>
-                  </DropdownMenu>
-                </Dropdown>
-              </TableCell>
-            </TableRow>
-          ))}
+          {localeList.map((locale) => {
+            const actionItems = getActionItems(locale.id)
+            return (
+              <TableRow key={locale.id}>
+                <TableCell>
+                  <Chip
+                    className='font-bold'
+                    color='secondary'
+                    size='sm'
+                    variant='flat'
+                  >
+                    {locale.languageCode.toUpperCase()}
+                  </Chip>
+                </TableCell>
+                <TableCell className='text-default-500 italic'>
+                  {originalName}
+                </TableCell>
+                <TableCell className='text-primary font-medium'>
+                  {locale.name}
+                </TableCell>
+                <TableCell>
+                  <Dropdown placement='bottom-end'>
+                    <DropdownTrigger>
+                      <Button isIconOnly size='sm' variant='light'>
+                        <EllipsisVerticalIcon
+                          className='text-default-500'
+                          size={20}
+                        />
+                      </Button>
+                    </DropdownTrigger>
+                    <DropdownMenu aria-label='จัดการภาษา' variant='flat'>
+                      {actionItems.map((item) => (
+                        <DropdownItem
+                          key={item.key}
+                          className={item.isDanger ? 'text-danger' : ''}
+                          color={item.isDanger ? 'danger' : 'default'}
+                          startContent={item.icon}
+                          onPress={item.onClick}
+                        >
+                          {item.label}
+                        </DropdownItem>
+                      ))}
+                    </DropdownMenu>
+                  </Dropdown>
+                </TableCell>
+              </TableRow>
+            )
+          })}
         </TableBody>
       </Table>
-
-      <ProductLocalizationForm />
-
-      <ConfirmDeleteModal
-        isOpen={isOpen}
-        isPending={isDeleting}
-        onConfirm={handleConfirmDelete}
-        onOpenChange={onOpenChange}
-      />
     </div>
   )
 }

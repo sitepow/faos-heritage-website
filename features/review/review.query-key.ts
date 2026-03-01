@@ -11,6 +11,7 @@ const reviewQueryKeys = {
     byProductId: (productId: string, filters: ReviewFilters = {}) =>
       [...reviewQueryKeys.lists.all(), productId, filters] as const,
   },
+  stats: () => [...reviewQueryKeys.all, 'stats'] as const,
 }
 
 export { reviewQueryKeys }

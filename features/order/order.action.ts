@@ -13,11 +13,7 @@ import { getOrderContent, OrderTemplate } from '@/emails/OrderTemplate'
 import { ERROR_CODES, fail, ok } from '@/lib/errors'
 import { prisma } from '@/lib/prisma'
 import { getServerUser, withAuth } from '@/lib/session'
-import {
-  canTransitionOrderStatus,
-  formatFullAddress,
-  formatStat,
-} from '@/utils'
+import { canTransitionOrderStatus, formatFullAddress } from '@/utils'
 import { sendEmail } from '@/utils/email-sender'
 import { decimalToNumber } from '@/utils/number'
 import { getProductPriceInfo } from '@/utils/product-price'
@@ -192,16 +188,10 @@ const sendOrderEmail = async (orderId: string) => {
     const result = await sendEmail({
       to: emailTo,
       subject,
-      react: OrderTemplate({
-        order,
-      }),
+      react: OrderTemplate({ order }),
     })
 
-    if (!result.success) {
-      return fail(ERROR_CODES.BAD_REQUEST)
-    }
-
-    return ok()
+    return result.success ? ok() : fail(ERROR_CODES.BAD_REQUEST)
   } catch {
     return fail(ERROR_CODES.SYSTEM_ERROR)
   }
@@ -327,32 +317,31 @@ const getOrderStats = async () => {
   ])
 
   return [
-    formatStat({ name: 'คำสั่งซื้อทั้งหมด', value: total }),
-    formatStat({ name: 'คำสั่งซื้อที่รอชำระเงิน', value: pending }),
-    formatStat({ name: 'คำสั่งซื้อที่สำเร็จแล้ว', value: delivered }),
+    { name: 'คำสั่งซื้อทั้งหมด', value: total },
+    { name: 'รอชำระเงิน', value: pending },
+    { name: 'จัดส่งสำเร็จแล้ว', value: delivered },
   ]
 }
 
 const getRevenueStats = async () => {
-  const statuses = [
-    OrderStatus.DELIVERED,
-    OrderStatus.CANCELLED,
-    OrderStatus.PENDING,
-  ]
+  const statuses = [OrderStatus.DELIVERED, OrderStatus.PENDING]
+
   const results = await Promise.all(
     statuses.map((s) =>
-      prisma.order.aggregate({ where: { status: s }, _sum: { total: true } }),
+      prisma.order.aggregate({
+        where: { status: s },
+        _sum: { baseTotal: true },
+      }),
     ),
   )
 
-  const labels = ['จัดส่งสำเร็จ', 'ถูกยกเลิก', 'รอชำระเงิน']
-  return results.map((res, i) =>
-    formatStat({
-      name: `ยอดรวม${labels[i]}`,
-      value: res._sum.total || 0,
-      isCurrency: true,
-    }),
-  )
+  const labels = ['รายได้สำเร็จ (THB)', 'ยอดรอชำระ (THB)']
+
+  return results.map((res, i) => ({
+    name: labels[i],
+    value: Number(res._sum.baseTotal || 0),
+    isCurrency: true,
+  }))
 }
 
 const createOrder = async (input: CreateOrderInput) =>
@@ -383,6 +372,7 @@ const createOrder = async (input: CreateOrderInput) =>
       const orderItemsPayload: Prisma.OrderItemCreateManyOrderInput[] = []
       const shippingItems: { quantity: number; weight: number }[] = []
       let totalBaseProductDiscount = 0
+      let subtotalSum = 0
 
       for (const item of items) {
         const product = productMap.get(item.productId)
@@ -392,16 +382,16 @@ const createOrder = async (input: CreateOrderInput) =>
 
         const { price: effectiveBasePrice, discountAmount } =
           getProductPriceInfo(product, item.variantId)
-
         const variant = item.variantId
           ? product.variants.find((v) => v.id === item.variantId)
           : null
-
         const priceLocal = Number(
           (effectiveBasePrice * exchangeRate).toFixed(2),
         )
 
         totalBaseProductDiscount += discountAmount * item.quantity
+        const currentItemBaseSubtotal = effectiveBasePrice * item.quantity
+        subtotalSum += currentItemBaseSubtotal
 
         orderItemsPayload.push({
           productId: product.id,
@@ -410,7 +400,7 @@ const createOrder = async (input: CreateOrderInput) =>
           variantName: variant?.name,
           quantity: item.quantity,
           basePrice: effectiveBasePrice,
-          baseSubtotal: effectiveBasePrice * item.quantity,
+          baseSubtotal: currentItemBaseSubtotal,
           price: priceLocal,
           subtotal: priceLocal * item.quantity,
           currency,
@@ -422,17 +412,14 @@ const createOrder = async (input: CreateOrderInput) =>
         })
       }
 
-      const baseSubtotal = orderItemsPayload.reduce(
-        (sum, item) => sum + Number(item.baseSubtotal),
-        0,
-      )
       const baseShipping = await calculateShippingCost({
         items: shippingItems,
         countryCode: address.countryCode,
+        totalPrice: subtotalSum,
       })
 
       const exchange = (val: number) => Number((val * exchangeRate).toFixed(2))
-      const baseTotal = baseSubtotal + baseShipping
+      const baseTotal = subtotalSum + baseShipping
 
       const order = await tx.order.create({
         data: {
@@ -440,12 +427,12 @@ const createOrder = async (input: CreateOrderInput) =>
           currency,
           exchangeRate,
           exchangeLocale,
-          baseSubtotal,
+          baseSubtotal: subtotalSum,
           baseShipping,
           baseDiscount: totalBaseProductDiscount,
           baseTax: 0,
           baseTotal,
-          subtotal: exchange(baseSubtotal),
+          subtotal: exchange(subtotalSum),
           shippingCost: exchange(baseShipping),
           discount: exchange(totalBaseProductDiscount),
           tax: 0,
@@ -489,7 +476,10 @@ const updateOrder = async (input: UpdateOrderInput) =>
         return fail(ERROR_CODES.DATA_NOT_FOUND)
       }
 
-      if (!canTransitionOrderStatus(order.status, status)) {
+      if (
+        order.status !== status &&
+        !canTransitionOrderStatus(order.status, status)
+      ) {
         return fail(ERROR_CODES.BAD_REQUEST)
       }
 

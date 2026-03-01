@@ -8,6 +8,7 @@ import {
   calculateShippingCost,
   getShippingCountries,
   getShippingCountry,
+  getShippingStatAdmin,
 } from './shipping.action'
 import { shippingQueryKeys } from './shipping.query-key'
 
@@ -78,4 +79,16 @@ const useShipping = ({ userId, address, carts }: UseShippingParams) => {
   }
 }
 
-export { useShippingCountriesAdmin, useShippingCountry, useShipping }
+const useShippingStatAdmin = () => {
+  return useQuery({
+    queryKey: shippingQueryKeys.stats(),
+    queryFn: () => getShippingStatAdmin(),
+  })
+}
+
+export {
+  useShippingCountriesAdmin,
+  useShippingCountry,
+  useShipping,
+  useShippingStatAdmin,
+}

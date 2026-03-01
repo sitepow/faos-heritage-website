@@ -101,6 +101,23 @@ const getAllReviewsAdmin = async (page = 1, limit = 10) =>
     }
   })
 
+const getReviewStatAdmin = async () =>
+  withRole([Role.ADMIN], async () => {
+    const [total, pending, approved, rejected] = await Promise.all([
+      prisma.review.count(),
+      prisma.review.count({ where: { status: ReviewStatus.PENDING } }),
+      prisma.review.count({ where: { status: ReviewStatus.APPROVED } }),
+      prisma.review.count({ where: { status: ReviewStatus.REJECTED } }),
+    ])
+
+    return [
+      { name: 'รีวิวทั้งหมด', value: total },
+      { name: 'รอตรวจสอบ', value: pending },
+      { name: 'อนุมัติแล้ว', value: approved },
+      { name: 'ไม่อนุมัติ', value: rejected },
+    ]
+  })
+
 const moderateReview = async (data: ReviewModerationInput) =>
   withRole([Role.ADMIN], async () => {
     const validated = reviewModerationSchema.safeParse(data)
@@ -120,4 +137,10 @@ const moderateReview = async (data: ReviewModerationInput) =>
     }
   })
 
-export { getAllReviewsAdmin, getReviews, createReview, moderateReview }
+export {
+  getAllReviewsAdmin,
+  getReviews,
+  createReview,
+  moderateReview,
+  getReviewStatAdmin,
+}

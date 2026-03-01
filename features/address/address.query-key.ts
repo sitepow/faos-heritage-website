@@ -23,6 +23,7 @@ const addressQueryKeys = {
     defaultByUserId: (userId: string) =>
       [...addressQueryKeys.details.all(), 'default', userId] as const,
   },
+  stats: () => [...addressQueryKeys.all, 'stats'] as const,
 }
 
 export { addressQueryKeys }

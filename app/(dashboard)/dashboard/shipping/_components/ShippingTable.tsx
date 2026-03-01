@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 'use client'
 
 import {
@@ -14,54 +15,57 @@ import {
   DropdownMenu,
   DropdownItem,
   Spinner,
-  useDisclosure,
 } from '@heroui/react'
-import {
-  EditIcon,
-  PlusIcon,
-  EllipsisVerticalIcon,
-  TrashIcon,
-  GlobeIcon,
-} from 'lucide-react'
-import { useState } from 'react'
+import { EllipsisVerticalIcon, GlobeIcon } from 'lucide-react'
 
-import { ConfirmDeleteModal } from '@/app/(dashboard)/_components/ConfirmDeleteModal'
-import { useShippingCountriesAdmin } from '@/features/shipping/shipping.hook'
-import { useShippingMutation } from '@/features/shipping/shipping.mutation'
-import { useShippingUIStore } from '@/features/shipping/shipping.store'
-import { ShippingForm } from '@/features/shipping/ui/ShippingForm'
+import type { Selection } from '@heroui/react'
+import type { ReactNode } from 'react'
+
+import { useIsMounted } from '@/hooks/useIsMounted'
 import { formatCurrency } from '@/utils'
 
-const ShippingTable = () => {
-  const { openForm } = useShippingUIStore()
-  const { data: countries, isLoading } = useShippingCountriesAdmin()
-  const { remove, isDeleting } = useShippingMutation()
+interface ActionItem {
+  key: string
+  label: string
+  icon: ReactNode
+  isDanger?: boolean
+  onClick: () => void
+}
 
-  const { isOpen, onOpen, onOpenChange } = useDisclosure()
-  const [targetId, setTargetId] = useState<string | null>(null)
+interface Props {
+  shippingList: any[]
+  isLoading: boolean
+  getActionItems: (id: string) => ActionItem[]
+  selectedKeys: Selection
+  onSelectionChange: (keys: Selection) => void
+}
 
-  const handleDeleteClick = (id: string) => {
-    setTargetId(id)
-    onOpen()
+const ShippingTable = ({
+  shippingList,
+  isLoading,
+  getActionItems,
+  selectedKeys,
+  onSelectionChange,
+}: Props) => {
+  const isMounted = useIsMounted()
+
+  if (!isMounted) {
+    return null
   }
 
   return (
     <div className='flex flex-col gap-4'>
-      <div className='flex items-center justify-between'>
-        <h1 className='text-2xl font-bold'>จัดการค่าจัดส่งรายประเทศ</h1>
-        <Button
-          className='text-secondary font-bold'
-          color='primary'
-          startContent={<PlusIcon size={18} />}
-          onPress={() => openForm()}
-        >
-          เพิ่มประเทศ/เรทค่าส่ง
-        </Button>
-      </div>
-
       <Table
         aria-label='Shipping rate table'
-        className='border-default-100 rounded-lg border'
+        checkboxesProps={{
+          classNames: {
+            wrapper: 'after:bg-primary before:border-default-300',
+            icon: 'text-white font-bold',
+          },
+        }}
+        selectedKeys={selectedKeys}
+        selectionMode='multiple'
+        onSelectionChange={onSelectionChange}
       >
         <TableHeader>
           <TableColumn>ประเทศ</TableColumn>
@@ -76,87 +80,69 @@ const ShippingTable = () => {
           isLoading={isLoading}
           loadingContent={<Spinner label='กำลังโหลดข้อมูล...' />}
         >
-          {(countries || []).map((item) => (
-            <TableRow key={item.id}>
-              <TableCell>
-                <div className='flex items-center gap-2 font-bold'>
-                  <GlobeIcon className='text-default-400' size={16} />
-                  <span>
-                    {item.countryName} ({item.countryCode})
-                  </span>
-                </div>
-              </TableCell>
-              <TableCell>{formatCurrency(item.baseRate)}</TableCell>
-              <TableCell>{formatCurrency(item.pricePerKg)} / kg</TableCell>
-              <TableCell>
-                <Chip
-                  className='font-bold'
-                  color='primary'
-                  size='sm'
-                  variant='flat'
-                >
-                  {item.currency}
-                </Chip>
-              </TableCell>
-              <TableCell>
-                <Chip
-                  color={item.isActive ? 'success' : 'danger'}
-                  size='sm'
-                  variant='dot'
-                >
-                  {item.isActive ? 'เปิดใช้งาน' : 'ปิดใช้งาน'}
-                </Chip>
-              </TableCell>
-              <TableCell>
-                <Dropdown placement='bottom-end'>
-                  <DropdownTrigger>
-                    <Button isIconOnly size='sm' variant='light'>
-                      <EllipsisVerticalIcon
-                        className='text-default-500'
-                        size={20}
-                      />
-                    </Button>
-                  </DropdownTrigger>
-                  <DropdownMenu variant='flat'>
-                    <DropdownItem
-                      key='edit'
-                      startContent={<EditIcon size={16} />}
-                      onPress={() => openForm(item.id)}
-                    >
-                      แก้ไขเรทค่าส่ง
-                    </DropdownItem>
-                    <DropdownItem
-                      key='delete'
-                      className='text-danger'
-                      color='danger'
-                      startContent={<TrashIcon size={16} />}
-                      onPress={() => handleDeleteClick(item.id)}
-                    >
-                      ลบข้อมูล
-                    </DropdownItem>
-                  </DropdownMenu>
-                </Dropdown>
-              </TableCell>
-            </TableRow>
-          ))}
+          {shippingList.map((item) => {
+            const actionItems = getActionItems(item.id)
+            return (
+              <TableRow key={item.id}>
+                <TableCell>
+                  <div className='flex items-center gap-2 font-bold'>
+                    <GlobeIcon className='text-default-400' size={16} />
+                    <span>
+                      {item.countryName} ({item.countryCode})
+                    </span>
+                  </div>
+                </TableCell>
+                <TableCell>{formatCurrency(item.baseRate)}</TableCell>
+                <TableCell>{formatCurrency(item.pricePerKg)} / kg</TableCell>
+                <TableCell>
+                  <Chip
+                    className='font-bold'
+                    color='primary'
+                    size='sm'
+                    variant='flat'
+                  >
+                    {item.currency}
+                  </Chip>
+                </TableCell>
+                <TableCell>
+                  <Chip
+                    color={item.isActive ? 'success' : 'danger'}
+                    size='sm'
+                    variant='dot'
+                  >
+                    {item.isActive ? 'เปิดใช้งาน' : 'ปิดใช้งาน'}
+                  </Chip>
+                </TableCell>
+                <TableCell>
+                  <Dropdown placement='bottom-end'>
+                    <DropdownTrigger>
+                      <Button isIconOnly size='sm' variant='light'>
+                        <EllipsisVerticalIcon
+                          className='text-default-500'
+                          size={20}
+                        />
+                      </Button>
+                    </DropdownTrigger>
+                    <DropdownMenu aria-label='จัดการค่าส่ง' variant='flat'>
+                      {actionItems.map((action) => (
+                        <DropdownItem
+                          key={action.key}
+                          className={action.isDanger ? 'text-danger' : ''}
+                          color={action.isDanger ? 'danger' : 'default'}
+                          startContent={action.icon}
+                          onPress={action.onClick}
+                        >
+                          {action.label}
+                        </DropdownItem>
+                      ))}
+                    </DropdownMenu>
+                  </Dropdown>
+                </TableCell>
+              </TableRow>
+            )
+          })}
         </TableBody>
       </Table>
-
-      <ShippingForm />
-
-      <ConfirmDeleteModal
-        description='การลบข้อมูลนี้จะส่งผลให้ลูกค้าในประเทศดังกล่าวไม่สามารถสั่งซื้อสินค้าได้ชั่วคราว คุณแน่ใจหรือไม่?'
-        isOpen={isOpen}
-        isPending={isDeleting}
-        title='ยืนยันการลบค่าจัดส่ง'
-        onConfirm={async () => {
-          if (targetId) {
-            await remove(targetId)
-            onOpenChange()
-          }
-        }}
-        onOpenChange={onOpenChange}
-      />
     </div>
   )
 }

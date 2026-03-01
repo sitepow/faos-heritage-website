@@ -105,4 +105,26 @@ const getVariant = async (variantId: string) => {
   return decimalToNumber(variant)
 }
 
-export { createVariant, getVariants, getVariant, updateVariant, deleteVariant }
+const getVariantStat = async (productId: string) =>
+  withRole([Role.ADMIN], async () => {
+    const [total, active, outOfStock] = await Promise.all([
+      prisma.productVariant.count({ where: { productId } }),
+      prisma.productVariant.count({ where: { productId, isActive: true } }),
+      prisma.productVariant.count({ where: { productId, stockQuantity: 0 } }),
+    ])
+
+    return [
+      { name: 'ตัวเลือกทั้งหมด', value: total },
+      { name: 'เปิดใช้งานอยู่', value: active },
+      { name: 'สินค้าหมด (Out of Stock)', value: outOfStock },
+    ]
+  })
+
+export {
+  createVariant,
+  getVariants,
+  getVariant,
+  updateVariant,
+  deleteVariant,
+  getVariantStat,
+}

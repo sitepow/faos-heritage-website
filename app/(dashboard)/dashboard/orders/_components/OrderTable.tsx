@@ -1,0 +1,168 @@
+/* eslint-disable no-unused-vars */
+'use client'
+
+import {
+  Table,
+  TableHeader,
+  TableColumn,
+  TableBody,
+  TableRow,
+  TableCell,
+  Button,
+  Chip,
+  User,
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  Spinner,
+} from '@heroui/react'
+import { EllipsisVerticalIcon } from 'lucide-react'
+
+import type { Selection } from '@heroui/react'
+import type { OrderStatus } from '@prisma/client'
+import type { ReactNode } from 'react'
+
+import { PaginationWrapper } from '@/components/ui/PaginationWrapper'
+import { ORDER_STATUS_ICON_MAP } from '@/features/order/order.utils'
+import { useIsMounted } from '@/hooks/useIsMounted'
+import {
+  formatCurrency,
+  ORDER_STATUS_COLOR_MAP,
+  ORDER_STATUS_TH_MAP,
+} from '@/utils'
+
+interface ActionItem {
+  key: string
+  label: string
+  icon: ReactNode
+  onClick: () => void
+}
+
+interface Props {
+  orderList: any[]
+  isLoading: boolean
+  page: number
+  total: number
+  selectedKeys: Selection
+  onPageChange: (page: number) => void
+  onSelectionChange: (keys: Selection) => void
+  getActionItems: (id: string) => ActionItem[]
+}
+
+const OrderTable = ({
+  orderList,
+  isLoading,
+  page,
+  total,
+  selectedKeys,
+  onPageChange,
+  onSelectionChange,
+  getActionItems,
+}: Props) => {
+  const isMounted = useIsMounted()
+
+  if (!isMounted) {
+    return null
+  }
+
+  return (
+    <div className='flex flex-col gap-4'>
+      <Table
+        aria-label='ตารางคำสั่งซื้อ'
+        checkboxesProps={{
+          classNames: {
+            wrapper: 'after:bg-primary before:border-default-300',
+            icon: 'text-white font-bold',
+          },
+        }}
+        selectedKeys={selectedKeys}
+        selectionMode='multiple'
+        onSelectionChange={onSelectionChange}
+      >
+        <TableHeader>
+          <TableColumn>คำสั่งซื้อ</TableColumn>
+          <TableColumn>ลูกค้า</TableColumn>
+          <TableColumn>ยอดรวม (Base)</TableColumn>
+          <TableColumn>สถานะ</TableColumn>
+          <TableColumn>วันที่สั่งซื้อ</TableColumn>
+          <TableColumn align='center'>จัดการ</TableColumn>
+        </TableHeader>
+        <TableBody
+          emptyContent='ไม่พบรายการคำสั่งซื้อ'
+          isLoading={isLoading}
+          loadingContent={<Spinner label='กำลังโหลดข้อมูลออเดอร์...' />}
+        >
+          {orderList.map((order) => {
+            const actionItems = getActionItems(order.id)
+            return (
+              <TableRow key={order.id}>
+                <TableCell>
+                  <span className='text-default-500 font-mono text-xs font-bold'>
+                    #{order.id.slice(-8).toUpperCase()}
+                  </span>
+                </TableCell>
+                <TableCell>
+                  <User
+                    avatarProps={{ size: 'sm', className: 'border' }}
+                    description={order.shippingPhone}
+                    name={order.user?.name || 'ลูกค้าทั่วไป'}
+                  />
+                </TableCell>
+                <TableCell className='font-bold'>
+                  {formatCurrency(Number(order.total), {
+                    currency: order.currency,
+                    skipCalculation: true,
+                  })}
+                </TableCell>
+                <TableCell>
+                  <Chip
+                    className='font-bold'
+                    color={ORDER_STATUS_COLOR_MAP[order.status as OrderStatus]}
+                    size='sm'
+                    startContent={
+                      ORDER_STATUS_ICON_MAP[order.status as OrderStatus]
+                    }
+                    variant='flat'
+                  >
+                    {ORDER_STATUS_TH_MAP[order.status as OrderStatus]}
+                  </Chip>
+                </TableCell>
+                <TableCell className='text-default-500 text-small'>
+                  {new Date(order.createdAt).toLocaleDateString('th-TH')}
+                </TableCell>
+                <TableCell>
+                  <Dropdown placement='bottom-end'>
+                    <DropdownTrigger>
+                      <Button isIconOnly size='sm' variant='light'>
+                        <EllipsisVerticalIcon
+                          className='text-default-500'
+                          size={20}
+                        />
+                      </Button>
+                    </DropdownTrigger>
+                    <DropdownMenu aria-label='Order Actions' variant='flat'>
+                      {actionItems.map((item) => (
+                        <DropdownItem
+                          key={item.key}
+                          startContent={item.icon}
+                          onPress={item.onClick}
+                        >
+                          {item.label}
+                        </DropdownItem>
+                      ))}
+                    </DropdownMenu>
+                  </Dropdown>
+                </TableCell>
+              </TableRow>
+            )
+          })}
+        </TableBody>
+      </Table>
+
+      <PaginationWrapper page={page} total={total} onChange={onPageChange} />
+    </div>
+  )
+}
+
+export { OrderTable }

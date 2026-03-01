@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query'
 import {
   getProductLocalizations,
   getProductLocalization,
+  getProductLocaleStat,
 } from './product-localization.action'
 import { productLocaleQueryKeys } from './product-localization.query-key'
 
@@ -24,4 +25,12 @@ const useProductLocale = (id: string | null) => {
   })
 }
 
-export { useProductLocales, useProductLocale }
+const useProductLocaleStat = (productId: string) => {
+  return useQuery({
+    queryKey: productLocaleQueryKeys.stats(productId),
+    queryFn: () => getProductLocaleStat(productId),
+    enabled: !!productId,
+  })
+}
+
+export { useProductLocales, useProductLocale, useProductLocaleStat }

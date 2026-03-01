@@ -2,7 +2,11 @@
 
 import { useQuery } from '@tanstack/react-query'
 
-import { getVariants, getVariant } from './product-variant.action'
+import {
+  getVariants,
+  getVariant,
+  getVariantStat,
+} from './product-variant.action'
 import { productVariantQueryKeys } from './product-variant.query-key'
 
 const useProductVariants = (productId: string) => {
@@ -21,4 +25,12 @@ const useProductVariant = (variantId: string | null) => {
   })
 }
 
-export { useProductVariant, useProductVariants }
+const useProductVariantStat = (productId: string) => {
+  return useQuery({
+    queryKey: productVariantQueryKeys.stats(productId),
+    queryFn: () => getVariantStat(productId),
+    enabled: !!productId,
+  })
+}
+
+export { useProductVariant, useProductVariants, useProductVariantStat }

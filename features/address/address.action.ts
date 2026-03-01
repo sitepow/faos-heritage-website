@@ -184,6 +184,24 @@ const getDefaultAddress = async (userIdProp?: string) => {
   })
 }
 
+const getAddressStat = async () =>
+  withRole([Role.ADMIN], async () => {
+    const [total, defaultAddresses, uniqueUsers] = await Promise.all([
+      prisma.address.count(),
+      prisma.address.count({ where: { isDefault: true } }),
+      prisma.address.groupBy({
+        by: ['userId'],
+        _count: true,
+      }),
+    ])
+
+    return [
+      { name: 'จำนวนที่อยู่ทั้งหมด', value: total },
+      { name: 'ที่อยู่หลัก (Default)', value: defaultAddresses },
+      { name: 'ลูกค้าที่มีที่อยู่', value: uniqueUsers.length },
+    ]
+  })
+
 export {
   createAddress,
   updateAddress,
@@ -192,6 +210,7 @@ export {
   getAddresses,
   getAddress,
   getDefaultAddress,
+  getAddressStat,
 }
 
 export type { GetAddressResult }

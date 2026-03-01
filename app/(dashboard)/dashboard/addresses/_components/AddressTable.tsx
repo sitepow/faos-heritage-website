@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 'use client'
 
 import {
@@ -13,75 +14,60 @@ import {
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
-  useDisclosure,
   User as HeroUser,
   Spinner,
 } from '@heroui/react'
-import {
-  EditIcon,
-  EllipsisVerticalIcon,
-  MapPinIcon,
-  PlusIcon,
-  TrashIcon,
-} from 'lucide-react'
-import { useState } from 'react'
+import { EllipsisVerticalIcon, MapPinIcon } from 'lucide-react'
 
-import { AddressForm } from './AddressForm'
+import type { Selection } from '@heroui/react'
+import type { ReactNode } from 'react'
 
-import { ConfirmDeleteModal } from '@/app/(dashboard)/_components/ConfirmDeleteModal'
-import { useAddressesAdmin } from '@/features/address/address.hook'
-import { useDeleteAddress } from '@/features/address/address.mutation'
-import { useAddressStore } from '@/features/address/address.store'
+import { useIsMounted } from '@/hooks/useIsMounted'
 
-const AddressTable = () => {
-  const { setState, onOpenAddressChange } = useAddressStore()
-  const { data: addresses, isLoading } = useAddressesAdmin()
-  const { mutateAsync: remove, isPending: isDeleting } = useDeleteAddress()
+interface ActionItem {
+  key: string
+  label: string
+  icon: ReactNode
+  isDanger?: boolean
+  onClick: () => void
+}
 
-  const { isOpen, onOpen, onOpenChange } = useDisclosure()
-  const [targetId, setTargetId] = useState<string | null>(null)
+interface Props {
+  addressList: any[]
+  isLoading: boolean
+  selectedKeys: Selection
+  onSelectionChange: (keys: Selection) => void
+  getActionItems: (id: string) => ActionItem[]
+}
 
-  const handleAdd = () => {
-    setState({ addressId: null })
-    onOpenAddressChange(true)
-  }
+const AddressTable = ({
+  addressList,
+  isLoading,
+  selectedKeys,
+  onSelectionChange,
+  getActionItems,
+}: Props) => {
+  const isMounted = useIsMounted()
 
-  const handleEdit = (id: string) => {
-    setState({ addressId: id })
-    onOpenAddressChange(true)
-  }
-
-  const handleDeleteClick = (id: string) => {
-    setTargetId(id)
-    onOpen()
-  }
-
-  const handleConfirmDelete = async () => {
-    if (targetId) {
-      await remove(targetId)
-      onOpenChange()
-      setTargetId(null)
-    }
+  if (!isMounted) {
+    return null
   }
 
   return (
     <div className='flex flex-col gap-4'>
-      <div className='flex items-center justify-between'>
-        <h1 className='text-2xl font-bold'>จัดการที่อยู่ลูกค้า</h1>
-        <Button
-          className='text-secondary font-bold'
-          color='primary'
-          startContent={<PlusIcon size={18} />}
-          onPress={handleAdd}
-        >
-          เพิ่มที่อยู่ใหม่
-        </Button>
-      </div>
-
       <Table
         aria-label='Admin User Address Management'
+        checkboxesProps={{
+          classNames: {
+            wrapper: 'after:bg-primary before:border-default-300',
+            icon: 'text-white font-bold',
+          },
+        }}
         className='border-default-100 rounded-lg border'
+        selectedKeys={selectedKeys}
+        selectionMode='multiple'
         shadow='none'
+        onSelectionChange={onSelectionChange}
       >
         <TableHeader>
           <TableColumn>เจ้าของบัญชี</TableColumn>
@@ -95,92 +81,81 @@ const AddressTable = () => {
           isLoading={isLoading}
           loadingContent={<Spinner label='กำลังโหลดข้อมูล...' />}
         >
-          {(Array.isArray(addresses) ? addresses : []).map((addr: any) => (
-            <TableRow key={addr.id}>
-              <TableCell>
-                <HeroUser
-                  avatarProps={{ src: addr.user?.image || '', size: 'sm' }}
-                  description={addr.user?.email}
-                  name={addr.user?.name || 'ผู้ใช้ทั่วไป'}
-                />
-              </TableCell>
-              <TableCell>
-                <div className='flex flex-col'>
-                  <span className='font-bold'>{addr.name}</span>
-                  <span className='text-default-400 text-tiny'>
-                    {addr.phone}
-                  </span>
-                </div>
-              </TableCell>
-              <TableCell>
-                <div className='flex items-start gap-2'>
-                  <MapPinIcon
-                    className='text-default-400 mt-1 shrink-0'
-                    size={16}
+          {addressList.map((addr) => {
+            const actionItems = getActionItems(addr.id)
+            return (
+              <TableRow key={addr.id}>
+                <TableCell>
+                  <HeroUser
+                    avatarProps={{ src: addr.user?.image || '', size: 'sm' }}
+                    description={addr.user?.email}
+                    name={addr.user?.name || 'ผู้ใช้ทั่วไป'}
                   />
-                  <span className='text-small'>
-                    {addr.address} {addr.subDistrict} {addr.district}{' '}
-                    {addr.province} {addr.postalCode} {addr.country}
-                  </span>
-                </div>
-              </TableCell>
-              <TableCell>
-                {addr.isDefault ? (
-                  <Chip
-                    className='font-bold'
-                    color='primary'
-                    size='sm'
-                    variant='flat'
-                  >
-                    หลัก
-                  </Chip>
-                ) : (
-                  <span className='text-default-300'>-</span>
-                )}
-              </TableCell>
-              <TableCell>
-                <Dropdown placement='bottom-end'>
-                  <DropdownTrigger>
-                    <Button isIconOnly size='sm' variant='light'>
-                      <EllipsisVerticalIcon
-                        className='text-default-500'
-                        size={20}
-                      />
-                    </Button>
-                  </DropdownTrigger>
-                  <DropdownMenu variant='flat'>
-                    <DropdownItem
-                      key='edit'
-                      startContent={<EditIcon size={16} />}
-                      onPress={() => handleEdit(addr.id)}
+                </TableCell>
+                <TableCell>
+                  <div className='flex flex-col'>
+                    <span className='text-small font-bold'>{addr.name}</span>
+                    <span className='text-default-400 text-tiny'>
+                      {addr.phone}
+                    </span>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-start gap-2'>
+                    <MapPinIcon
+                      className='text-default-400 mt-1 shrink-0'
+                      size={14}
+                    />
+                    <span className='text-small'>
+                      {addr.address} {addr.subDistrict} {addr.district}{' '}
+                      {addr.province} {addr.postalCode} {addr.country}
+                    </span>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  {addr.isDefault ? (
+                    <Chip
+                      className='font-bold'
+                      color='primary'
+                      size='sm'
+                      variant='flat'
                     >
-                      แก้ไข
-                    </DropdownItem>
-                    <DropdownItem
-                      key='delete'
-                      className='text-danger'
-                      color='danger'
-                      startContent={<TrashIcon size={16} />}
-                      onPress={() => handleDeleteClick(addr.id)}
-                    >
-                      ลบ
-                    </DropdownItem>
-                  </DropdownMenu>
-                </Dropdown>
-              </TableCell>
-            </TableRow>
-          ))}
+                      หลัก
+                    </Chip>
+                  ) : (
+                    <span className='text-default-300'>-</span>
+                  )}
+                </TableCell>
+                <TableCell>
+                  <Dropdown placement='bottom-end'>
+                    <DropdownTrigger>
+                      <Button isIconOnly size='sm' variant='light'>
+                        <EllipsisVerticalIcon
+                          className='text-default-500'
+                          size={20}
+                        />
+                      </Button>
+                    </DropdownTrigger>
+                    <DropdownMenu aria-label='Address Actions' variant='flat'>
+                      {actionItems.map((item) => (
+                        <DropdownItem
+                          key={item.key}
+                          className={item.isDanger ? 'text-danger' : ''}
+                          color={item.isDanger ? 'danger' : 'default'}
+                          startContent={item.icon}
+                          onPress={item.onClick}
+                        >
+                          {item.label}
+                        </DropdownItem>
+                      ))}
+                    </DropdownMenu>
+                  </Dropdown>
+                </TableCell>
+              </TableRow>
+            )
+          })}
         </TableBody>
       </Table>
-
-      <AddressForm />
-
-      <ConfirmDeleteModal
-        isOpen={isOpen}
-        isPending={isDeleting}
-        onConfirm={handleConfirmDelete}
-        onOpenChange={onOpenChange}
-      />
     </div>
   )
 }

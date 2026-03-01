@@ -61,4 +61,36 @@ const canTransitionOrderStatus = (
   return ORDER_STATUS_FLOW[next] === ORDER_STATUS_FLOW[current] + 1
 }
 
-export { formatFullAddress, resolveOrderStatusLabel, canTransitionOrderStatus }
+const ORDER_STATUS_TH_MAP: Record<OrderStatus, string> = {
+  [OrderStatus.PENDING]: 'รอการชำระเงิน',
+  [OrderStatus.PAID]: 'ชำระเงินแล้ว',
+  [OrderStatus.PROCESSING]: 'กำลังดำเนินการ',
+  [OrderStatus.DELIVERED]: 'จัดส่งแล้ว',
+  [OrderStatus.CANCELLED]: 'ยกเลิกแล้ว',
+  [OrderStatus.REFUNDED]: 'คืนเงินแล้ว',
+}
+
+const ORDER_STATUS_COLOR_MAP: Record<
+  OrderStatus,
+  'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'
+> = {
+  [OrderStatus.PENDING]: 'warning',
+  [OrderStatus.PAID]: 'success',
+  [OrderStatus.PROCESSING]: 'warning',
+  [OrderStatus.DELIVERED]: 'success',
+  [OrderStatus.CANCELLED]: 'danger',
+  [OrderStatus.REFUNDED]: 'default',
+}
+
+const getOrderStatusColor = (status: OrderStatus) => {
+  return ORDER_STATUS_COLOR_MAP[status] ?? 'default'
+}
+
+export {
+  formatFullAddress,
+  resolveOrderStatusLabel,
+  canTransitionOrderStatus,
+  getOrderStatusColor,
+  ORDER_STATUS_TH_MAP,
+  ORDER_STATUS_COLOR_MAP,
+}

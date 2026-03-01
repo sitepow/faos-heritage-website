@@ -34,6 +34,7 @@ const shippingQueryKeys = {
 
     byId: (id: string) => [...shippingQueryKeys.details.all(), id] as const,
   },
+  stats: () => [...shippingQueryKeys.all, 'stats'] as const,
 }
 
 export { shippingQueryKeys }

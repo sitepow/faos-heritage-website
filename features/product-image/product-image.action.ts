@@ -141,10 +141,26 @@ const getProductImage = async (imageId: string) => {
   return image || null
 }
 
+const getProductImageStat = async (productId: string) =>
+  withRole([Role.ADMIN], async () => {
+    const [total, primary, secondary] = await Promise.all([
+      prisma.productImage.count({ where: { productId } }),
+      prisma.productImage.count({ where: { productId, isPrimary: true } }),
+      prisma.productImage.count({ where: { productId, isPrimary: false } }),
+    ])
+
+    return [
+      { name: 'รูปภาพทั้งหมด', value: total },
+      { name: 'รูปภาพหลัก', value: primary },
+      { name: 'รูปภาพประกอบ', value: secondary },
+    ]
+  })
+
 export {
   createProductImage,
   getProductImages,
   getProductImage,
   updateProductImage,
   deleteProductImage,
+  getProductImageStat,
 }

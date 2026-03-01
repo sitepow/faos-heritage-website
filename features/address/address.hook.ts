@@ -4,6 +4,7 @@ import {
   getAddress,
   getAddresses,
   getAddressesAdmin,
+  getAddressStat,
   getDefaultAddress,
 } from './address.action'
 import { addressQueryKeys } from './address.query-key'
@@ -40,4 +41,17 @@ const useAddress = (addressId?: string | null) => {
   })
 }
 
-export { useAddressesAdmin, useAddresses, useDefaultAddress, useAddress }
+const useAddressStat = () => {
+  return useQuery({
+    queryKey: addressQueryKeys.stats(),
+    queryFn: () => getAddressStat(),
+  })
+}
+
+export {
+  useAddressesAdmin,
+  useAddresses,
+  useDefaultAddress,
+  useAddress,
+  useAddressStat,
+}

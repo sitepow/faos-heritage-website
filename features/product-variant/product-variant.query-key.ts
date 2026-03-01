@@ -23,6 +23,8 @@ const productVariantQueryKeys = {
     byId: (id: string) =>
       [...productVariantQueryKeys.details.all(), id] as const,
   },
+  stats: (productId: string) =>
+    [...productVariantQueryKeys.all, 'stats', productId] as const,
 }
 
 export { productVariantQueryKeys }

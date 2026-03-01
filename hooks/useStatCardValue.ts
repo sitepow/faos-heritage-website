@@ -7,9 +7,10 @@ import { formatCurrency, formatNumber } from '@/utils/number'
 interface Params {
   value: number
   isCurrency?: boolean
+  currency?: string
 }
 
-const useStatCardValue = ({ value, isCurrency }: Params): string => {
+const useStatCardValue = ({ value, isCurrency, currency }: Params): string => {
   const { appLocale, hasHydrated } = useAppStore()
 
   const { data: exchangeRates } = useQuery({
@@ -25,7 +26,9 @@ const useStatCardValue = ({ value, isCurrency }: Params): string => {
 
   return formatCurrency(value, {
     ...appLocale,
+    currency: currency || appLocale.currency,
     rates: exchangeRates,
+    skipCalculation: true,
   })
 }
 

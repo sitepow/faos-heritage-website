@@ -22,6 +22,8 @@ const productImageQueryKeys = {
 
     byId: (id: string) => [...productImageQueryKeys.details.all(), id] as const,
   },
+  stats: (productId: string) =>
+    [...productImageQueryKeys.all, 'stats', productId] as const,
 }
 
 export { productImageQueryKeys }

@@ -3,15 +3,28 @@ import { Role } from '@prisma/client'
 import type { PropsWithChildren } from 'react'
 
 import { AppMain } from '@/components/layouts/AppMain'
-import { DISABLE_SEO_CONFIG } from '@/constants'
+import { AdminSidebar } from '@/components/ui/AdminSidebar'
+import { constructMetadata } from '@/lib/metadata'
 import { requireRole } from '@/utils/auth'
 
-export const metadata = DISABLE_SEO_CONFIG
+const generateMetadata = async () => {
+  return await constructMetadata({
+    title: 'แผงควบคุมผู้ดูแลระบบ',
+    canonicalPath: '/admin',
+    noIndex: true,
+  })
+}
 
 const DashboardLayout = async ({ children }: PropsWithChildren) => {
   await requireRole(Role.ADMIN)
 
-  return <AppMain>{children}</AppMain>
+  return (
+    <div className='bg-background relative flex min-h-screen'>
+      <AdminSidebar />
+      <AppMain>{children}</AppMain>
+    </div>
+  )
 }
 
+export { generateMetadata }
 export default DashboardLayout

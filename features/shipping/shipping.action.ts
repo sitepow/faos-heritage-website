@@ -186,6 +186,21 @@ const calculateShippingCost = async ({
   }
 }
 
+const getShippingStatAdmin = async () =>
+  withRole([Role.ADMIN], async () => {
+    const [total, active, inactive] = await Promise.all([
+      prisma.shippingCountry.count(),
+      prisma.shippingCountry.count({ where: { isActive: true } }),
+      prisma.shippingCountry.count({ where: { isActive: false } }),
+    ])
+
+    return [
+      { name: 'ประเทศทั้งหมด', value: total },
+      { name: 'เปิดใช้งานการส่ง', value: active },
+      { name: 'ปิดใช้งานการส่ง', value: inactive },
+    ]
+  })
+
 export {
   createShippingCountry,
   getShippingCountries,
@@ -193,6 +208,7 @@ export {
   updateShippingCountry,
   deleteShippingCountry,
   calculateShippingCost,
+  getShippingStatAdmin,
 }
 
 export type {

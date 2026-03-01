@@ -22,6 +22,8 @@ const productLocaleQueryKeys = {
     byId: (id: string) =>
       [...productLocaleQueryKeys.details.all(), id] as const,
   },
+  stats: (productId: string) =>
+    [...productLocaleQueryKeys.all, 'stats', productId] as const,
 }
 
 export { productLocaleQueryKeys }
