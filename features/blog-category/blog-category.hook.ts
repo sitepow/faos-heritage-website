@@ -3,10 +3,7 @@
 import { useQuery } from '@tanstack/react-query'
 
 import { getBlogCategories, getBlogCategory } from './blog-category.action'
-import {
-  blogCategoryQueryKeys,
-  type BlogCategoryListFilters,
-} from './blog-category.query-key'
+import { blogCategoryQueryKeys } from './blog-category.query-key'
 
 interface UseBlogCategoryParams {
   id: string
@@ -14,7 +11,8 @@ interface UseBlogCategoryParams {
 }
 
 interface UseBlogCategoriesParams {
-  filters?: BlogCategoryListFilters
+  isActive?: boolean
+  search?: string
   locale?: string
 }
 
@@ -27,12 +25,16 @@ const useBlogCategory = ({ id, locale }: UseBlogCategoryParams) => {
 }
 
 const useBlogCategories = ({
-  filters = {},
+  isActive,
+  search,
   locale,
-}: UseBlogCategoriesParams) => {
+}: UseBlogCategoriesParams = {}) => {
   return useQuery({
-    queryKey: [...blogCategoryQueryKeys.lists.filtered(filters), locale],
-    queryFn: () => getBlogCategories(filters, locale),
+    queryKey: [
+      ...blogCategoryQueryKeys.lists.filtered({ isActive, search }),
+      locale,
+    ],
+    queryFn: () => getBlogCategories({ isActive, search, locale }),
   })
 }
 

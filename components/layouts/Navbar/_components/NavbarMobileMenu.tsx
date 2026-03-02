@@ -2,7 +2,7 @@
 
 import { MenuIcon, XIcon } from 'lucide-react'
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 
 import type { NavLink } from './navbar.types'
@@ -47,6 +47,14 @@ const NavbarMobileMenu = ({
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
   const closeMenu = () => setIsMenuOpen(false)
 
+  const blogData = useMemo(() => {
+    return blogCategories?.success ? blogCategories.data : []
+  }, [blogCategories])
+
+  const productData = useMemo(() => {
+    return Array.isArray(categories) ? categories : []
+  }, [categories])
+
   const menuContent = (
     <div
       className={cn(
@@ -72,14 +80,14 @@ const NavbarMobileMenu = ({
           </Link>
         ))}
 
-        {blogCategories && blogCategories.length > 0 && (
+        {blogData.length > 0 && (
           <>
             <hr className='border-default-100 w-full' />
-            {blogCategories.filter(Boolean).map((category) => (
+            {blogData.map((category) => (
               <Link
-                key={category?.id}
+                key={category?.id!}
                 className='w-full text-center'
-                href={`/posts/category/${category?.slug}`}
+                href={`/posts/category/${category?.slug!}`}
                 onClick={closeMenu}
               >
                 <MenuItem label={category?.name!} />
@@ -88,18 +96,21 @@ const NavbarMobileMenu = ({
           </>
         )}
 
-        <hr className='border-default-100 w-full' />
-
-        {categories?.map((category) => (
-          <Link
-            key={category?.id}
-            className='w-full text-center'
-            href={`/categories/${category?.slug}`}
-            onClick={closeMenu}
-          >
-            <MenuItem label={category?.name!} />
-          </Link>
-        ))}
+        {productData.length > 0 && (
+          <>
+            <hr className='border-default-100 w-full' />
+            {productData.map((category) => (
+              <Link
+                key={category?.id!}
+                className='w-full text-center'
+                href={`/categories/${category?.slug!}`}
+                onClick={closeMenu}
+              >
+                <MenuItem label={category?.name!} />
+              </Link>
+            ))}
+          </>
+        )}
       </div>
     </div>
   )

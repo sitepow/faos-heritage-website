@@ -8,6 +8,7 @@ import {
   Button,
 } from '@heroui/react'
 import Link from 'next/link'
+import { useMemo } from 'react'
 
 import type { NavLink } from './navbar.types'
 import type { GetBlogCategoriesResult } from '@/features/blog-category/blog-category.action'
@@ -25,12 +26,19 @@ interface Props {
 const NavbarMenu = ({ staticLinks, categories, blogCategories }: Props) => {
   const MAX_VISIBLE_ITEMS = 3
 
-  const allCategories = [
-    ...(blogCategories
-      ?.filter(Boolean)
-      .map((c) => ({ ...c, type: 'blog' as const })) || []),
-    ...(categories?.map((c) => ({ ...c, type: 'product' as const })) || []),
-  ]
+  const allCategories = useMemo(() => {
+    // แกะข้อมูลจาก blogCategories (ActionSuccess)
+    const blogData = blogCategories?.success ? blogCategories.data : []
+
+    // แกะข้อมูลจาก categories (ถ้าโครงสร้างเหมือนกันให้เช็ค .success ด้วย)
+    // ในที่นี้ผมอิงตามโค้ดเดิมของคุณที่มอง categories เป็น array หรือผลลัพธ์โดยตรง
+    const productData = Array.isArray(categories) ? categories : []
+
+    return [
+      ...blogData.map((c) => ({ ...c, type: 'blog' as const })),
+      ...productData.map((c) => ({ ...c, type: 'product' as const })),
+    ]
+  }, [blogCategories, categories])
 
   const visibleItems = allCategories.slice(0, MAX_VISIBLE_ITEMS)
   const moreItems = allCategories.slice(MAX_VISIBLE_ITEMS)
@@ -79,7 +87,7 @@ const NavbarMenu = ({ staticLinks, categories, blogCategories }: Props) => {
                 >
                   {moreItems.map((item) => (
                     <DropdownItem
-                      key={item?.id! || item?.slug!}
+                      key={item?.id!}
                       as={Link}
                       className='py-3.5'
                       href={

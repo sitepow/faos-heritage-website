@@ -275,6 +275,47 @@ const increasePostView = async (identifier: string) => {
   }
 }
 
+const getPostsAdmin = async (page = 1, limit = 50) =>
+  withRole([Role.ADMIN], async () => {
+    const skip = (page - 1) * limit
+
+    const [items, total] = await prisma.$transaction([
+      prisma.post.findMany({
+        skip,
+        take: limit,
+        include: {
+          category: { select: { name: true } },
+          author: { select: { name: true } },
+          _count: { select: { comments: true } },
+        },
+        orderBy: { createdAt: 'desc' },
+      }),
+      prisma.post.count(),
+    ])
+
+    return ok({
+      items,
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
+    })
+  })
+
+const getPostAdmin = async (id: string) =>
+  withRole([Role.ADMIN], async () => {
+    const post = await prisma.post.findUnique({
+      where: { id },
+      include: {
+        category: true,
+        tags: true,
+      },
+    })
+
+    if (!post) return fail(ERROR_CODES.DATA_NOT_FOUND)
+    return ok(post)
+  })
+
 type GetPostResult = Awaited<ReturnType<typeof getPost>>
 type GetPostsInfiniteResult = Awaited<ReturnType<typeof getPostsInfinite>>
 
@@ -287,6 +328,8 @@ export {
   getPostsInfinite,
   getPostStats,
   increasePostView,
+  getPostsAdmin,
+  getPostAdmin,
 }
 
 export type { GetPostResult, GetPostsInfiniteResult }

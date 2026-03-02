@@ -12,10 +12,11 @@ const postSchema = z.object({
   isFeatured: z.boolean().default(false),
   metaTitle: z.string().optional().nullable(),
   metaDescription: z.string().optional().nullable(),
+  keywords: z.array(z.string()).default([]),
   status: z.enum(PostStatus).default(PostStatus.DRAFT),
   publishedAt: z.date().optional().nullable(),
   categoryId: z.string().optional().nullable(),
-  tagIds: z.array(z.string()).optional(),
+  tagIds: z.array(z.string()).default([]),
 })
 
 type PostInput = z.infer<typeof postSchema>

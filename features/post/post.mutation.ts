@@ -22,9 +22,12 @@ const usePostMutation = () => {
     mutationFn: updatePost,
     onSuccess: (res, variables) => {
       queryClient.invalidateQueries({ queryKey: postQueryKeys.lists.all() })
-      queryClient.invalidateQueries({
-        queryKey: postQueryKeys.details.byId(variables.id as string),
-      })
+
+      if (variables.id) {
+        queryClient.invalidateQueries({
+          queryKey: postQueryKeys.details.all(),
+        })
+      }
     },
   })
 

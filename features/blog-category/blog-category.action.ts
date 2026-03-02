@@ -3,17 +3,18 @@
 import { type Prisma } from '@prisma/client'
 import { unstable_noStore as noStore } from 'next/cache'
 
-import { type BlogCategoryListFilters } from './blog-category.query-key'
+import type { BlogCategoryListFilters } from './blog-category.query-key'
 
+import { ok } from '@/lib/errors'
 import { prisma } from '@/lib/prisma'
 import { applyLocalization } from '@/utils/localization'
 
-const getBlogCategories = async (
-  filters: BlogCategoryListFilters = {},
-  locale?: string,
-) => {
+const getBlogCategories = async ({
+  isActive,
+  search,
+  locale,
+}: BlogCategoryListFilters & { locale?: string } = {}) => {
   noStore()
-  const { isActive, search } = filters
   const languageCode = locale?.toUpperCase()
 
   const where: Prisma.BlogCategoryWhereInput = {
@@ -40,54 +41,50 @@ const getBlogCategories = async (
     orderBy: { createdAt: 'desc' },
   })
 
-  return categories.map((cat) => applyLocalization(cat))
+  return ok(categories.map((cat) => applyLocalization(cat)))
 }
 
 const getBlogCategory = async (id: string, locale?: string) => {
   const languageCode = locale?.toUpperCase()
 
-  try {
-    const category = await prisma.blogCategory.findUnique({
-      where: { id },
-      include: {
-        localizations: {
-          where: { languageCode },
-          take: 1,
-        },
-        _count: {
-          select: { posts: true },
-        },
+  const category = await prisma.blogCategory.findUnique({
+    where: { id },
+    include: {
+      localizations: {
+        where: { languageCode },
+        take: 1,
       },
-    })
+      _count: {
+        select: { posts: true },
+      },
+    },
+  })
 
-    return applyLocalization(category)
-  } catch {
-    return null
-  }
+  return ok(applyLocalization(category))
 }
 
 const getBlogCategoryBySlug = async (slug: string, locale?: string) => {
   const languageCode = locale?.toUpperCase()
 
-  try {
-    const category = await prisma.blogCategory.findUnique({
-      where: { slug },
-      include: {
-        localizations: {
-          where: { languageCode },
-          take: 1,
-        },
+  const category = await prisma.blogCategory.findUnique({
+    where: { slug },
+    include: {
+      localizations: {
+        where: { languageCode },
+        take: 1,
       },
-    })
+    },
+  })
 
-    return applyLocalization(category)
-  } catch {
-    return null
-  }
+  return applyLocalization(category)
 }
 
 type GetBlogCategoryResult = Awaited<ReturnType<typeof getBlogCategory>>
 type GetBlogCategoriesResult = Awaited<ReturnType<typeof getBlogCategories>>
 
 export { getBlogCategories, getBlogCategory, getBlogCategoryBySlug }
-export type { GetBlogCategoryResult, GetBlogCategoriesResult }
+export type {
+  GetBlogCategoryResult,
+  GetBlogCategoriesResult,
+  BlogCategoryListFilters,
+}

@@ -5,7 +5,13 @@ import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 import type { GetPostResult, GetPostsInfiniteResult } from './post.action'
 import type { PostStatus } from '@prisma/client'
 
-import { getPostBySlug, getPostsInfinite } from './post.action'
+import {
+  getPostAdmin,
+  getPostBySlug,
+  getPostsAdmin,
+  getPostsInfinite,
+  getPostStats,
+} from './post.action'
 import { postQueryKeys } from './post.query-key'
 
 interface UsePostParams {
@@ -84,4 +90,33 @@ const usePostsInfinite = ({
   })
 }
 
-export { usePost, usePosts, usePostsInfinite }
+const usePostsAdmin = (page = 1, limit = 50) => {
+  return useQuery({
+    queryKey: [...postQueryKeys.lists.all(), 'admin', { page, limit }],
+    queryFn: () => getPostsAdmin(page, limit),
+  })
+}
+
+const usePostAdmin = (id: string, enabled = true) => {
+  return useQuery({
+    queryKey: [...postQueryKeys.details.all(), 'admin', id],
+    queryFn: () => getPostAdmin(id),
+    enabled: !!id && enabled,
+  })
+}
+
+const usePostStats = () => {
+  return useQuery({
+    queryKey: postQueryKeys.stats(),
+    queryFn: () => getPostStats(),
+  })
+}
+
+export {
+  usePost,
+  usePosts,
+  usePostsInfinite,
+  usePostsAdmin,
+  usePostAdmin,
+  usePostStats,
+}

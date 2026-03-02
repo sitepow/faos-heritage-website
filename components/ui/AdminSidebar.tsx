@@ -2,15 +2,16 @@
 
 import { Listbox, ListboxItem, ScrollShadow, Divider } from '@heroui/react'
 import {
-  LayoutDashboard,
   Users,
   Settings,
-  ShoppingBag,
   LogOut,
   MapPinIcon,
   StarIcon,
   TruckIcon,
   PackageIcon,
+  NewspaperIcon,
+  ShoppingBagIcon,
+  LayoutDashboardIcon,
 } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -28,12 +29,12 @@ const AdminSidebar = () => {
     {
       href: '/dashboard',
       label: 'หน้าหลัก',
-      icon: <CustomIcon icon={LayoutDashboard} />,
+      icon: <CustomIcon icon={LayoutDashboardIcon} />,
     },
     {
       href: '/dashboard/products',
       label: 'สินค้า',
-      icon: <CustomIcon icon={ShoppingBag} />,
+      icon: <CustomIcon icon={ShoppingBagIcon} />,
     },
     {
       href: '/dashboard/users',
@@ -59,6 +60,11 @@ const AdminSidebar = () => {
       href: '/dashboard/orders',
       label: 'ออเดอร์',
       icon: <CustomIcon icon={PackageIcon} />,
+    },
+    {
+      href: '/dashboard/posts',
+      label: 'โพสต์',
+      icon: <CustomIcon icon={NewspaperIcon} />,
     },
   ]
 

@@ -23,7 +23,7 @@ const Navbar = async () => {
 
   const [categories, blogCategories] = await Promise.all([
     getCategories(locale),
-    getBlogCategories({ isActive: true }, locale),
+    getBlogCategories({ isActive: true, locale }),
   ])
 
   return (
@@ -31,7 +31,7 @@ const Navbar = async () => {
       <div className='border-default-100 border-b xl:pb-5'>
         <Container className='flex items-center justify-between gap-4 p-5'>
           <NavbarSearch />
-          <NavbarLogo />
+          <NavbarLogo href={'/'} />
           <NavbarActions
             blogCategories={blogCategories}
             categories={categories}
