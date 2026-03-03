@@ -269,7 +269,7 @@ const getOrders = async ({
       where,
       orderBy: { createdAt: 'desc' },
       include: {
-        user: { select: { name: true } },
+        user: { select: { name: true, image: true, email: true } },
         address: { select: { countryCode: true } },
         items: {
           include: {

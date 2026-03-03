@@ -6,8 +6,8 @@ import { useMemo, useCallback, useState } from 'react'
 
 import type { Selection } from '@heroui/react'
 
-import { PostForm } from './_components/PostForm'
 import { PostTable } from './_components/PostTable'
+import { PostForm } from '../../../../features/post/ui/PostForm'
 import { TableConfigHeader } from '../products/_components/TableConfigHeader'
 
 import { ConfirmDeleteModal } from '@/app/(dashboard)/_components/ConfirmDeleteModal'
@@ -16,8 +16,10 @@ import { StatCard } from '@/components/ui/StatCard'
 import { usePostStats, usePostsAdmin } from '@/features/post/post.hook'
 import { usePostMutation } from '@/features/post/post.mutation'
 import { usePostUIStore } from '@/features/post/post.store'
+import { useIsMounted } from '@/hooks/useIsMounted'
 
 const PostPage = () => {
+  const isMounted = useIsMounted()
   const { openForm } = usePostUIStore()
   const { remove, isDeleting } = usePostMutation()
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
@@ -32,7 +34,7 @@ const PostPage = () => {
   const { data: postsData } = usePostsAdmin(page, 50)
 
   const postList = useMemo(() => {
-    return postsData?.success ? postsData.data.items : []
+    return postsData?.items ?? []
   }, [postsData])
 
   const statsData = useMemo(() => {
@@ -40,12 +42,18 @@ const PostPage = () => {
   }, [stats])
 
   const selectedCount = useMemo(() => {
-    if (selectedKeys === 'all') return postList.length
+    if (selectedKeys === 'all') {
+      return postList.length
+    }
+
     return selectedKeys.size
   }, [selectedKeys, postList])
 
   const selectedPostIds = useMemo(() => {
-    if (selectedKeys === 'all') return postList.map((p) => p.id)
+    if (selectedKeys === 'all') {
+      return postList.map((p) => p.id)
+    }
+
     return Array.from(selectedKeys) as string[]
   }, [selectedKeys, postList])
 
@@ -67,6 +75,10 @@ const PostPage = () => {
     setTargetDeleteId(null)
     setSelectedKeys(new Set([]))
   }, [targetDeleteId, remove, onOpenChange])
+
+  if (!isMounted) {
+    return null
+  }
 
   return (
     <Container className='flex flex-col gap-6'>

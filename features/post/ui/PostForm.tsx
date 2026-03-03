@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 'use client'
 
 import {
@@ -12,15 +13,16 @@ import {
   ModalFooter,
   Button,
   Textarea,
-  Alert,
   Spinner,
+  Chip,
 } from '@heroui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { PostStatus } from '@prisma/client'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
 import type { PostInput } from '@/features/post/post.schema'
+import type { KeyboardEvent } from 'react'
 import type { Resolver } from 'react-hook-form'
 
 import { SectionLabel } from '@/components/ui/SectionHeader'
@@ -29,6 +31,7 @@ import { usePostAdmin } from '@/features/post/post.hook'
 import { usePostMutation } from '@/features/post/post.mutation'
 import { postSchema } from '@/features/post/post.schema'
 import { usePostUIStore } from '@/features/post/post.store'
+import { useTags } from '@/features/tag/tag.hook'
 
 const DEFAULT_VALUES: PostInput = {
   title: '',
@@ -42,16 +45,22 @@ const DEFAULT_VALUES: PostInput = {
   tagIds: [],
   viewCount: 0,
   keywords: [],
+  metaTitle: '',
+  metaDescription: '',
 }
 
 const PostForm = () => {
   const { selectedPostId, isFormOpen, closeForm } = usePostUIStore()
   const { create, update, isCreating, isUpdating } = usePostMutation()
 
+  const [inputValue, setInputValue] = useState('')
+
   const { data: categoriesRes } = useBlogCategories({})
   const categories = categoriesRes?.success ? categoriesRes.data : []
 
-  const { data: postRes, isLoading: isLoadingPost } = usePostAdmin(
+  const { data: tags } = useTags()
+
+  const { data: post, isLoading: isLoadingPost } = usePostAdmin(
     selectedPostId || '',
     isFormOpen,
   )
@@ -60,43 +69,54 @@ const PostForm = () => {
     control,
     handleSubmit,
     reset,
+    watch,
+    setValue,
     formState: { errors, isDirty },
   } = useForm<PostInput>({
     resolver: zodResolver(postSchema) as Resolver<PostInput>,
     defaultValues: DEFAULT_VALUES,
   })
 
+  const keywords = watch('keywords') || []
+
   useEffect(() => {
     if (isFormOpen) {
-      if (selectedPostId && postRes?.success && postRes.data) {
-        const rawPost = postRes.data
-
-        const formattedData: PostInput = {
-          id: rawPost.id,
-          title: rawPost.title,
-          slug: rawPost.slug,
-          summary: rawPost.summary ?? '',
-          content: rawPost.content ?? '',
-          featuredImage: rawPost.featuredImage ?? '',
-          status: rawPost.status as PostStatus,
-          isFeatured: rawPost.isFeatured,
-          viewCount: rawPost.viewCount,
-          categoryId: rawPost.categoryId || null,
-          keywords: rawPost.keywords ?? [],
-          tagIds: rawPost.tags?.map((tag: { id: string }) => tag.id) ?? [],
-          metaTitle: rawPost.metaTitle ?? '',
-          metaDescription: rawPost.metaDescription ?? '',
-          publishedAt: rawPost.publishedAt
-            ? new Date(rawPost.publishedAt)
-            : null,
-        }
-
-        reset(formattedData)
+      if (selectedPostId && post) {
+        reset({
+          ...post,
+          categoryId: post.categoryId || null,
+          tagIds: post.tags?.map((tag) => tag.id) ?? [],
+          keywords: post.keywords ?? [],
+          metaTitle: post.metaTitle || '',
+          metaDescription: post.metaDescription || '',
+        } as PostInput)
       } else if (!selectedPostId) {
         reset(DEFAULT_VALUES)
       }
     }
-  }, [isFormOpen, selectedPostId, postRes, reset])
+  }, [isFormOpen, selectedPostId, post, reset])
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === ',' || e.key === 'Enter') {
+      e.preventDefault()
+      const value = inputValue.trim()
+
+      if (value && !keywords.includes(value)) {
+        const newKeywords = [...keywords, value]
+        setValue('keywords', newKeywords, { shouldDirty: true })
+        setInputValue('')
+      }
+    } else if (e.key === 'Backspace' && !inputValue && keywords.length > 0) {
+      const newKeywords = [...keywords]
+      newKeywords.pop()
+      setValue('keywords', newKeywords, { shouldDirty: true })
+    }
+  }
+
+  const removeKeyword = (indexToRemove: number) => {
+    const newKeywords = keywords.filter((_, index) => index !== indexToRemove)
+    setValue('keywords', newKeywords, { shouldDirty: true })
+  }
 
   const onSubmit = async (data: PostInput) => {
     if (selectedPostId) {
@@ -117,7 +137,7 @@ const PostForm = () => {
       onOpenChange={closeForm}
     >
       <ModalContent>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form className='overflow-y-scroll' onSubmit={handleSubmit(onSubmit)}>
           <ModalHeader className='text-xl font-bold'>
             {selectedPostId ? 'แก้ไขข้อมูลพื้นฐานบทความ' : 'เขียนบทความใหม่'}
           </ModalHeader>
@@ -188,11 +208,27 @@ const PostForm = () => {
                         errorMessage={errors.slug?.message}
                         isInvalid={!!errors.slug}
                         label='URL Slug'
-                        placeholder='เช่น how-to-coding'
                         variant='bordered'
                       />
                     )}
                   />
+                  <Controller
+                    control={control}
+                    name='featuredImage'
+                    render={({ field }) => (
+                      <Input
+                        {...field}
+                        className='md:col-span-2'
+                        label='รูปภาพหน้าปก (URL)'
+                        value={field.value || ''}
+                        variant='bordered'
+                      />
+                    )}
+                  />
+                </div>
+
+                <SectionLabel>การจัดกลุ่มและแท็ก</SectionLabel>
+                <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
                   <Controller
                     control={control}
                     name='categoryId'
@@ -201,10 +237,9 @@ const PostForm = () => {
                         label='หมวดหมู่บทความ'
                         selectedKeys={value ? [value] : []}
                         variant='bordered'
-                        onSelectionChange={(keys) => {
-                          const val = Array.from(keys)[0] as string
-                          onChange(val || null)
-                        }}
+                        onSelectionChange={(keys) =>
+                          onChange((Array.from(keys)[0] as string) || null)
+                        }
                       >
                         {categories.map((cat) => (
                           <SelectItem key={cat?.id!}>{cat?.name!}</SelectItem>
@@ -214,16 +249,73 @@ const PostForm = () => {
                   />
                   <Controller
                     control={control}
-                    name='featuredImage'
-                    render={({ field }) => (
-                      <Input
-                        {...field}
-                        label='รูปภาพหน้าปก (URL)'
-                        value={field.value || ''}
+                    name='tagIds'
+                    render={({ field: { value, onChange } }) => (
+                      <Select
+                        label='แท็กบทความ'
+                        selectedKeys={new Set(value)}
+                        selectionMode='multiple'
                         variant='bordered'
-                      />
+                        onSelectionChange={(keys) => onChange(Array.from(keys))}
+                      >
+                        {(tags || []).map((tag) => (
+                          <SelectItem key={tag?.id!}>{tag?.name!}</SelectItem>
+                        ))}
+                      </Select>
                     )}
                   />
+                </div>
+
+                <SectionLabel>SEO และ Keywords</SectionLabel>
+                <div className='flex flex-col gap-4'>
+                  <div className='flex flex-col gap-2'>
+                    <Input
+                      label='คีย์เวิร์ด (กด , หรือ Enter เพื่อเพิ่ม)'
+                      placeholder='เช่น สุขภาพ, อาหาร'
+                      value={inputValue}
+                      variant='bordered'
+                      onChange={(e) => setInputValue(e.target.value)}
+                      onKeyDown={handleKeyDown}
+                    />
+                    <div className='flex flex-wrap gap-2 px-1'>
+                      {keywords.map((keyword, index) => (
+                        <Chip
+                          key={`${keyword}-${index}`}
+                          className='bg-primary/10 text-primary border-primary/20 border-1'
+                          onClose={() => removeKeyword(index)}
+                        >
+                          {keyword}
+                        </Chip>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+                    <Controller
+                      control={control}
+                      name='metaTitle'
+                      render={({ field }) => (
+                        <Input
+                          {...field}
+                          label='Meta Title (SEO)'
+                          value={field.value || ''}
+                          variant='bordered'
+                        />
+                      )}
+                    />
+                    <Controller
+                      control={control}
+                      name='metaDescription'
+                      render={({ field }) => (
+                        <Input
+                          {...field}
+                          label='Meta Description (SEO)'
+                          value={field.value || ''}
+                          variant='bordered'
+                        />
+                      )}
+                    />
+                  </div>
                 </div>
 
                 <SectionLabel>สรุปเนื้อหาเบื้องต้น</SectionLabel>
@@ -239,12 +331,6 @@ const PostForm = () => {
                     />
                   )}
                 />
-
-                <Alert color='primary' variant='flat'>
-                  สำหรับการเขียนเนื้อหาบทความแบบละเอียด (MDX)
-                  คุณสามารถจัดการได้ผ่านเมนู &quot;แก้ไขเนื้อหาบทความ&quot;
-                  ในหน้าตารางหลังจากบันทึกข้อมูลส่วนนี้แล้ว
-                </Alert>
               </div>
             )}
           </ModalBody>

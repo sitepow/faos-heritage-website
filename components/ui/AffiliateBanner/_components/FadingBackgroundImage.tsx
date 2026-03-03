@@ -6,7 +6,7 @@ const FadingBackgroundImage = () => {
       <img
         className='size-full object-cover object-center opacity-40 mix-blend-overlay'
         src={
-          'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+          'https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
         }
       />
     </div>

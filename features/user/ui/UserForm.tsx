@@ -156,7 +156,7 @@ const UserForm = () => {
               <ImageDropzone onFilesChange={onFilesChange} />
 
               <SectionLabel>สถานะและบทบาท</SectionLabel>
-              <div className='bg-default-50 flex items-center justify-between rounded-lg p-3'>
+              <div className='border-default-100 flex items-center justify-between rounded-lg border p-3'>
                 <Controller
                   control={control}
                   name='isActive'
@@ -179,7 +179,7 @@ const UserForm = () => {
                       label='บทบาท'
                       selectedKeys={value ? [value] : [Role.CUSTOMER]}
                       size='sm'
-                      variant='flat'
+                      variant='bordered'
                       onSelectionChange={(keys) =>
                         onChange(Array.from(keys)[0] as Role)
                       }

@@ -2,11 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query'
 
-import {
-  getAllReviewsAdmin,
-  getReviews,
-  getReviewStatAdmin,
-} from './review.action'
+import { getAllReviewsAdmin, getReviews, getReviewStats } from './review.action'
 import { reviewQueryKeys } from './review.query-key'
 
 interface UseReviewsParams {
@@ -28,11 +24,11 @@ const useReviewsAdmin = (page = 1, limit = 10) => {
   })
 }
 
-const useReviewStatAdmin = () => {
+const useReviewStats = () => {
   return useQuery({
     queryKey: reviewQueryKeys.stats(),
-    queryFn: () => getReviewStatAdmin(),
+    queryFn: () => getReviewStats(),
   })
 }
 
-export { useReviews, useReviewsAdmin, useReviewStatAdmin }
+export { useReviews, useReviewsAdmin, useReviewStats }

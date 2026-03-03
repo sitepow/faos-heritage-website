@@ -13,7 +13,7 @@ import { ConfirmDeleteModal } from '@/app/(dashboard)/_components/ConfirmDeleteM
 import { Container } from '@/components/layouts/Container'
 import { StatCard } from '@/components/ui/StatCard'
 import {
-  useProductStat,
+  useProductStats,
   useProductsAdmin,
 } from '@/features/product/product.hook'
 import { useProductMutation } from '@/features/product/product.mutation'
@@ -31,7 +31,7 @@ const ProductPage = () => {
     string | string[] | null
   >(null)
 
-  const { data: stats } = useProductStat()
+  const { data: stats } = useProductStats()
   const { data: productsData } = useProductsAdmin(page, 50)
 
   const productList = useMemo(() => {

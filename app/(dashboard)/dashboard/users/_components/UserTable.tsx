@@ -15,16 +15,20 @@ import {
   DropdownMenu,
   DropdownItem,
   Spinner,
-  User as HeroUser,
+  User,
 } from '@heroui/react'
 import { EllipsisVerticalIcon } from 'lucide-react'
 
+import type { getUsers } from '@/features/user/user.action'
 import type { Selection } from '@heroui/react'
 import type { ReactNode } from 'react'
 
 import { PaginationWrapper } from '@/components/ui/PaginationWrapper'
+import { IMAGE_FALLBACK } from '@/constants'
 import { useIsMounted } from '@/hooks/useIsMounted'
 import { formatDate } from '@/utils'
+
+type UserItemType = Awaited<ReturnType<typeof getUsers>>['items'][number]
 
 interface ActionItem {
   key: string
@@ -35,7 +39,7 @@ interface ActionItem {
 }
 
 interface Props {
-  userList: any[]
+  userList: UserItemType[]
   isLoading: boolean
   page: number
   total: number
@@ -92,16 +96,20 @@ const UserTable = ({
             return (
               <TableRow key={user.id}>
                 <TableCell>
-                  <HeroUser
-                    avatarProps={{ src: user.image || '', size: 'sm' }}
+                  <User
+                    avatarProps={{
+                      src: user.image || IMAGE_FALLBACK.EMPTY,
+                    }}
                     description={user.email}
-                    name={user.name}
-                  />
+                    name={user.name || 'ไม่ระบุชื่อ'}
+                  >
+                    {user.email}
+                  </User>
                 </TableCell>
                 <TableCell>
                   <Chip
                     className='font-bold'
-                    color={user.role === 'ADMIN' ? 'secondary' : 'default'}
+                    color={user.role === 'ADMIN' ? 'primary' : 'default'}
                     size='sm'
                     variant='flat'
                   >
@@ -130,7 +138,7 @@ const UserTable = ({
                         />
                       </Button>
                     </DropdownTrigger>
-                    <DropdownMenu variant='flat'>
+                    <DropdownMenu aria-label='User actions menu' variant='flat'>
                       {actionItems.map((item) => (
                         <DropdownItem
                           key={item.key}

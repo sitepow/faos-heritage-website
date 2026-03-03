@@ -61,13 +61,13 @@ const OrderPage = () => {
       {
         key: 'view',
         label: 'ดูรายละเอียด',
-        icon: <EyeIcon className='text-default-400' size={18} />,
+        icon: <EyeIcon size={18} />,
         onClick: () => handleViewDetails(id),
       },
       {
         key: 'update',
         label: 'อัปเดตสถานะ',
-        icon: <Edit3Icon className='text-primary' size={18} />,
+        icon: <Edit3Icon size={18} />,
         onClick: () => handleUpdateStatus(id),
       },
     ],

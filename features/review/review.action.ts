@@ -76,32 +76,32 @@ const createReview = async (data: {
   }
 }
 
-const getAllReviewsAdmin = async (page = 1, limit = 10) =>
-  withRole([Role.ADMIN], async () => {
-    const skip = (page - 1) * limit
-    const [items, total] = await prisma.$transaction([
-      prisma.review.findMany({
-        skip,
-        take: limit,
-        include: {
-          user: { select: { name: true, email: true, image: true } },
-          product: { select: { name: true } },
-        },
-        orderBy: { createdAt: 'desc' },
-      }),
-      prisma.review.count(),
-    ])
+const getAllReviewsAdmin = async (page = 1, limit = 10) => {
+  const skip = (page - 1) * limit
 
-    return {
-      items,
-      total,
-      page,
-      limit,
-      totalPages: Math.ceil(total / limit),
-    }
-  })
+  const [items, total] = await prisma.$transaction([
+    prisma.review.findMany({
+      skip,
+      take: limit,
+      include: {
+        user: { select: { name: true, email: true, image: true } },
+        product: { select: { name: true } },
+      },
+      orderBy: { createdAt: 'desc' },
+    }),
+    prisma.review.count(),
+  ])
 
-const getReviewStatAdmin = async () =>
+  return {
+    items,
+    total,
+    page,
+    limit,
+    totalPages: Math.ceil(total / limit),
+  }
+}
+
+const getReviewStats = async () =>
   withRole([Role.ADMIN], async () => {
     const [total, pending, approved, rejected] = await Promise.all([
       prisma.review.count(),
@@ -142,5 +142,5 @@ export {
   getReviews,
   createReview,
   moderateReview,
-  getReviewStatAdmin,
+  getReviewStats,
 }

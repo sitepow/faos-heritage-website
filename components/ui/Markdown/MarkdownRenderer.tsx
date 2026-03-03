@@ -1,14 +1,35 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import { useMemo } from 'react'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import rehypeSanitize, { defaultSchema } from 'rehype-sanitize'
+import remarkDirective from 'remark-directive'
 import remarkGfm from 'remark-gfm'
+import { visit } from 'unist-util-visit'
 
 import { CreateMarkdownComponents } from './CreateMarkdownComponents'
 
 import { cn } from '@/utils/style'
+
+const remarkDirectiveToRehype = () => {
+  return (tree: any) => {
+    visit(tree, (node: any) => {
+      if (
+        node.type === 'containerDirective' ||
+        node.type === 'leafDirective' ||
+        node.type === 'textDirective'
+      ) {
+        const data = node.data || (node.data = {})
+        data.hName = 'div'
+        data.hProperties = {
+          className: cn('admonition', node.name, node.attributes?.class),
+        }
+      }
+    })
+  }
+}
 
 interface Props {
   content: string
@@ -29,7 +50,18 @@ const MarkdownRenderer = ({
   const sanitizeSchema = useMemo(
     () => ({
       ...defaultSchema,
-      tagNames: [...(defaultSchema.tagNames || []), 'mark'],
+      tagNames: [
+        ...(defaultSchema.tagNames || []),
+        'mark',
+        'div',
+        'span',
+        'input',
+      ],
+      attributes: {
+        ...defaultSchema.attributes,
+        div: [...(defaultSchema.attributes?.div || []), 'className'],
+        input: ['type', 'checked', 'readOnly', 'className'],
+      },
     }),
     [],
   )
@@ -63,7 +95,7 @@ const MarkdownRenderer = ({
       <ReactMarkdown
         components={components}
         rehypePlugins={[rehypeRaw, [rehypeSanitize, sanitizeSchema]]}
-        remarkPlugins={[remarkGfm]}
+        remarkPlugins={[remarkGfm, remarkDirective, remarkDirectiveToRehype]}
       >
         {content}
       </ReactMarkdown>

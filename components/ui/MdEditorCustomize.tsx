@@ -17,12 +17,24 @@ import {
   quotePlugin,
   thematicBreakPlugin,
   toolbarPlugin,
+  markdownShortcutPlugin,
+  tablePlugin,
+  frontmatterPlugin,
+  codeBlockPlugin,
+  codeMirrorPlugin,
+  directivesPlugin,
+  AdmonitionDirectiveDescriptor,
+  diffSourcePlugin,
+  UndoRedo,
+  Separator,
+  InsertCodeBlock,
+  InsertAdmonition,
+  type MDXEditorMethods,
 } from '@mdxeditor/editor'
 import '@mdxeditor/editor/style.css'
-import { markdownShortcutPlugin, tablePlugin } from '@mdxeditor/editor'
-import { useEffect, useMemo, useState, type ComponentProps } from 'react'
+import { useTheme } from 'next-themes'
+import { useMemo, useRef, type ComponentProps } from 'react'
 
-import { useDebouncedChange } from '@/hooks/useDebouncedChange'
 import { cn } from '@/utils/style'
 
 type MdEditorProps = Omit<
@@ -35,13 +47,21 @@ type MdEditorProps = Omit<
 
 const ToolbarContents = () => (
   <>
+    <UndoRedo />
+    <Separator />
     <BlockTypeSelect />
     <BoldItalicUnderlineToggles />
+    <Separator />
     <ListsToggle />
+    <Separator />
     <CreateLink />
     <InsertImage />
+    <Separator />
     <InsertTable />
     <InsertThematicBreak />
+    <Separator />
+    <InsertCodeBlock />
+    <InsertAdmonition />
   </>
 )
 
@@ -57,7 +77,27 @@ const useEditorPlugins = () =>
       thematicBreakPlugin(),
       linkPlugin(),
       tablePlugin(),
-      imagePlugin(),
+      imagePlugin({
+        imageUploadHandler: async (image: File) => {
+          return URL.createObjectURL(image)
+        },
+      }),
+      codeBlockPlugin({ defaultCodeBlockLanguage: 'js' }),
+      codeMirrorPlugin({
+        codeBlockLanguages: {
+          js: 'JavaScript',
+          css: 'CSS',
+          html: 'HTML',
+          tsx: 'TypeScript',
+          prisma: 'Prisma',
+          sql: 'SQL',
+        },
+      }),
+      directivesPlugin({
+        directiveDescriptors: [AdmonitionDirectiveDescriptor],
+      }),
+      frontmatterPlugin(),
+      diffSourcePlugin({ viewMode: 'rich-text', diffMarkdown: 'initial' }),
       markdownShortcutPlugin(),
     ],
     [],
@@ -70,28 +110,27 @@ const MdEditorCustomize = ({
   className,
   ...props
 }: MdEditorProps) => {
-  const [localValue, setLocalValue] = useState(value)
-  const debouncedChange = useDebouncedChange(onChange, 500)
+  const { theme } = useTheme()
   const plugins = useEditorPlugins()
-
-  useEffect(() => {
-    setLocalValue(value)
-  }, [value])
+  const editorRef = useRef<MDXEditorMethods>(null)
 
   const handleChange = (markdown: string) => {
-    setLocalValue(markdown)
-    debouncedChange(markdown)
+    onChange(markdown)
   }
 
   return (
     <MDXEditor
       {...props}
+      ref={editorRef}
       className={cn(
-        'border-default-100 dark-theme dark-editor col-span-2 rounded-xl border',
+        'border-default-100 w-full rounded-xl border transition-colors',
+        theme === 'dark' ? 'dark-editor' : 'light-editor',
         className,
       )}
-      markdown={localValue}
-      placeholder={placeholder ? `(${placeholder})` : undefined}
+      markdown={value}
+      placeholder={
+        placeholder ? `(${placeholder})` : 'เริ่มเขียนเนื้อหาของคุณ...'
+      }
       plugins={plugins}
       onChange={handleChange}
     />

@@ -5,7 +5,7 @@ const productSchema = z.object({
   id: z.string().nullish(),
 
   name: z.string().min(1, 'กรุณาระบุชื่อสินค้า'),
-  slug: z.string().nullish(),
+  slug: z.string().min(1, 'กรุณาระบุ URL Slug'),
 
   price: z.number('กรุณาระบุราคาให้ถูกต้อง').min(0, 'ราคาต้องไม่ต่ำกว่า 0'),
   salePrice: z

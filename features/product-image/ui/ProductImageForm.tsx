@@ -9,10 +9,13 @@ import {
   Input,
   ModalFooter,
   Button,
+  Spinner,
 } from '@heroui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
+
+import type { Resolver } from 'react-hook-form'
 
 import { useProductUIStore } from '../../product/product.store'
 import { useProductImageDetail } from '../product-image.hook'
@@ -26,6 +29,14 @@ import {
 } from '@/app/(dashboard)/_components/ImageDropzone'
 import { SectionLabel } from '@/components/ui/SectionHeader'
 import { useResolveImageUpload } from '@/hooks/useResolveImageUpload'
+
+interface ProductImageRow {
+  id: string
+  url: string | null
+  alt: string | null
+  isPrimary: boolean
+  productId: string | null
+}
 
 const DEFAULT_VALUES: ImageInput = {
   url: '',
@@ -55,19 +66,27 @@ const ProductImageForm = () => {
     reset,
     handleSubmit,
     setValue,
-    formState: { isDirty },
+    formState: { errors, isDirty },
   } = useForm<ImageInput>({
-    resolver: zodResolver(imageSchema),
+    resolver: zodResolver(imageSchema) as Resolver<ImageInput>,
     defaultValues: DEFAULT_VALUES,
   })
 
   useEffect(() => {
     if (isFormOpen) {
       if (selectedImageId && image) {
-        reset(image as ImageInput)
-        setOldImage(image.url || null)
+        const imageData = image as ProductImageRow
+
+        reset({
+          id: imageData.id,
+          url: imageData.url ?? '',
+          alt: imageData.alt ?? '',
+          isPrimary: imageData.isPrimary,
+          productId: imageData.productId ?? selectedProductId ?? '',
+        })
+        setOldImage(imageData.url)
       } else {
-        reset({ ...DEFAULT_VALUES, productId: selectedProductId || '' })
+        reset({ ...DEFAULT_VALUES, productId: selectedProductId ?? '' })
         setPreviewFiles([])
         setOldImage(null)
       }
@@ -83,7 +102,12 @@ const ProductImageForm = () => {
 
   const onSubmit = async (data: ImageInput) => {
     const imagePath = await resolveImagePath()
-    const payload = { ...data, url: imagePath, productId: selectedProductId }
+
+    const payload: ImageInput = {
+      ...data,
+      url: imagePath || data.url,
+      productId: selectedProductId || data.productId || '',
+    }
 
     if (selectedImageId) {
       await update({ ...payload, id: selectedImageId })
@@ -103,52 +127,70 @@ const ProductImageForm = () => {
       onOpenChange={closeForm}
     >
       <ModalContent>
-        <ModalHeader className='font-bold'>
-          {selectedImageId ? 'แก้ไขข้อมูลรูปภาพ' : 'เพิ่มรูปภาพสินค้า'}
-        </ModalHeader>
-        <ModalBody>
-          <ImageDropzone onFilesChange={onFilesChange} />
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <ModalHeader className='font-bold'>
+            {selectedImageId ? 'แก้ไขข้อมูลรูปภาพ' : 'เพิ่มรูปภาพสินค้า'}
+          </ModalHeader>
+          <ModalBody>
+            {isLoadingDetail && selectedImageId ? (
+              <div className='flex justify-center p-8'>
+                <Spinner label='กำลังโหลดข้อมูล...' />
+              </div>
+            ) : (
+              <div className='space-y-4'>
+                <ImageDropzone onFilesChange={onFilesChange} />
 
-          <SectionLabel>สถานะรูปภาพ</SectionLabel>
-          <Controller
-            control={control}
-            name='isPrimary'
-            render={({ field: { value, onChange } }) => (
-              <Switch isSelected={!!value} onValueChange={onChange}>
-                ตั้งเป็นรูปหลัก (Primary Image)
-              </Switch>
-            )}
-          />
+                <SectionLabel>สถานะรูปภาพ</SectionLabel>
+                <Controller
+                  control={control}
+                  name='isPrimary'
+                  render={({ field: { value, onChange } }) => (
+                    <Switch isSelected={!!value} onValueChange={onChange}>
+                      ตั้งเป็นรูปหลัก (Primary Image)
+                    </Switch>
+                  )}
+                />
 
-          <SectionLabel>ข้อมูลประกอบ</SectionLabel>
-          <Controller
-            control={control}
-            name='alt'
-            render={({ field }) => (
-              <Input
-                {...field}
-                label='คำอธิบายรูปภาพ (Alt Text)'
-                placeholder='เช่น หน้าตรงของสินค้า, รายละเอียดบรรจุภัณฑ์'
-                value={field.value || ''}
-                variant='bordered'
-              />
+                <SectionLabel>ข้อมูลประกอบ</SectionLabel>
+                <Controller
+                  control={control}
+                  name='alt'
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      errorMessage={errors.alt?.message?.toString()}
+                      isInvalid={!!errors.alt}
+                      label='คำอธิบายรูปภาพ (Alt Text)'
+                      placeholder='เช่น หน้าตรงของสินค้า'
+                      value={field.value ?? ''}
+                      variant='bordered'
+                    />
+                  )}
+                />
+
+                {errors.url && (
+                  <p className='text-danger text-tiny px-1'>
+                    {errors.url.message?.toString()}
+                  </p>
+                )}
+              </div>
             )}
-          />
-        </ModalBody>
-        <ModalFooter>
-          <Button isDisabled={isPending} variant='flat' onPress={closeForm}>
-            ยกเลิก
-          </Button>
-          <Button
-            className='text-secondary font-bold'
-            color='primary'
-            isDisabled={!isDirty || isPending}
-            isLoading={isPending}
-            onPress={() => handleSubmit(onSubmit)()}
-          >
-            {selectedImageId ? 'บันทึกการแก้ไข' : 'อัปโหลดรูปภาพ'}
-          </Button>
-        </ModalFooter>
+          </ModalBody>
+          <ModalFooter>
+            <Button isDisabled={isPending} variant='flat' onPress={closeForm}>
+              ยกเลิก
+            </Button>
+            <Button
+              className='text-secondary font-bold'
+              color='primary'
+              isDisabled={!isDirty || isPending}
+              isLoading={isPending}
+              type='submit'
+            >
+              {selectedImageId ? 'บันทึกการแก้ไข' : 'อัปโหลดรูปภาพ'}
+            </Button>
+          </ModalFooter>
+        </form>
       </ModalContent>
     </Modal>
   )

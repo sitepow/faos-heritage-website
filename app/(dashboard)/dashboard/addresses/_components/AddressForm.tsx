@@ -156,7 +156,7 @@ const AddressForm = () => {
               />
 
               <SectionLabel>สถานะและการแสดงผล</SectionLabel>
-              <div className='bg-default-50 border-default-200 flex items-center justify-between rounded-lg border p-4'>
+              <div className='border-default-100 flex items-center justify-between rounded-lg border p-4'>
                 <div className='flex flex-col'>
                   <span className='text-small font-bold'>
                     ตั้งเป็นที่อยู่หลัก
@@ -266,7 +266,7 @@ const AddressForm = () => {
                 />
               </div>
 
-              <div className='grid grid-cols-3 gap-4'>
+              <div className='grid grid-cols-2 gap-4'>
                 <Controller
                   control={control}
                   name='district'

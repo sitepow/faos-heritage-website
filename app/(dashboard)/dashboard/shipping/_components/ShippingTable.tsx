@@ -71,7 +71,6 @@ const ShippingTable = ({
           <TableColumn>ประเทศ</TableColumn>
           <TableColumn>ค่าส่งเริ่มต้น</TableColumn>
           <TableColumn>ราคา/กก.</TableColumn>
-          <TableColumn>สกุลเงิน</TableColumn>
           <TableColumn>สถานะ</TableColumn>
           <TableColumn align='center'>จัดการ</TableColumn>
         </TableHeader>
@@ -85,7 +84,7 @@ const ShippingTable = ({
             return (
               <TableRow key={item.id}>
                 <TableCell>
-                  <div className='flex items-center gap-2 font-bold'>
+                  <div className='flex items-center gap-2'>
                     <GlobeIcon className='text-default-400' size={16} />
                     <span>
                       {item.countryName} ({item.countryCode})
@@ -94,16 +93,6 @@ const ShippingTable = ({
                 </TableCell>
                 <TableCell>{formatCurrency(item.baseRate)}</TableCell>
                 <TableCell>{formatCurrency(item.pricePerKg)} / kg</TableCell>
-                <TableCell>
-                  <Chip
-                    className='font-bold'
-                    color='primary'
-                    size='sm'
-                    variant='flat'
-                  >
-                    {item.currency}
-                  </Chip>
-                </TableCell>
                 <TableCell>
                   <Chip
                     color={item.isActive ? 'success' : 'danger'}

@@ -6,6 +6,8 @@ type CategoryListFilters = {
 const categoryQueryKeys = {
   all: ['categories'] as const,
 
+  stats: () => [...categoryQueryKeys.all, 'stats'] as const,
+
   lists: {
     all: () => [...categoryQueryKeys.all, 'list'] as const,
 

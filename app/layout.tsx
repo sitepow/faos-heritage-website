@@ -27,7 +27,7 @@ const RootLayout = ({ children }: PropsWithChildren) => {
     <html suppressHydrationWarning>
       <body
         className={cn(
-          'text-foreground relative flex h-dvh min-h-screen flex-col antialiased',
+          'text-foreground bg-background relative flex h-dvh min-h-screen flex-col antialiased',
           anuphan.className,
         )}
       >

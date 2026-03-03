@@ -150,7 +150,7 @@ const ProductTable = ({
             return (
               <TableRow key={product.id}>
                 <TableCell>
-                  <ProductImage image={primarySrc} />
+                  <ProductImage className='size-20' image={primarySrc} />
                 </TableCell>
                 <TableCell className='font-medium'>{product.name}</TableCell>
                 <TableCell>
@@ -159,12 +159,10 @@ const ProductTable = ({
                   />
                 </TableCell>
                 <TableCell>
-                  <b className='font-bold'>{formatCurrency(product.price)}</b>
+                  <span>{formatCurrency(product.price)}</span>
                 </TableCell>
                 <TableCell>
-                  <b className='font-bold'>
-                    {formatNumber(product?.stockQuantity)}
-                  </b>
+                  <span>{formatNumber(product?.stockQuantity)}</span>
                 </TableCell>
                 <TableCell>
                   <Chip

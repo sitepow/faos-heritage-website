@@ -6,13 +6,14 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
 import type { ImageWithPreview } from '@/components/ui/ImageDropzone'
+import type { Resolver } from 'react-hook-form'
 
 import { userQueryKeys } from './user.query-key'
 
 import { updateUser } from '@/features/user/user.action'
 import { useUser } from '@/features/user/user.hook'
 import {
-  userUpdateSchema,
+  userUpdateAdminSchema,
   type UserUpdateInput,
 } from '@/features/user/user.schema'
 import { useResolveImageUpload } from '@/hooks/useResolveImageUpload'
@@ -30,26 +31,29 @@ const useProfileForm = (userId: string | undefined) => {
   })
 
   const form = useForm<UserUpdateInput>({
-    resolver: zodResolver(userUpdateSchema),
+    resolver: zodResolver(userUpdateAdminSchema) as Resolver<UserUpdateInput>,
     defaultValues: {
-      id: '',
+      id: userId || '',
       name: '',
       email: '',
       image: '',
+      isActive: true,
     },
   })
 
   useEffect(() => {
-    if (user) {
+    if (user && userId) {
       form.reset({
-        id: userId!,
-        name: user?.name!,
-        email: user.email,
-        image: user?.image!,
+        id: userId,
+        name: user.name || '',
+        email: user.email || '',
+        image: user.image || '',
+        isActive: user.isActive ?? true,
+        role: user.role,
       })
       setOldImage(user.image ?? null)
     }
-  }, [user, form.reset, form, userId])
+  }, [user, form, userId])
 
   const mutation = useMutation({
     mutationFn: updateUser,
@@ -80,12 +84,16 @@ const useProfileForm = (userId: string | undefined) => {
 
   const handleReset = () => {
     setPreviewFiles([])
-    form.reset({
-      id: userId!,
-      name: user?.name!,
-      email: user?.email!,
-      image: user?.image!,
-    })
+    if (user && userId) {
+      form.reset({
+        id: userId,
+        name: user.name || '',
+        email: user.email || '',
+        image: user.image || '',
+        isActive: user.isActive ?? true,
+        role: user.role,
+      })
+    }
   }
 
   return {
@@ -95,6 +103,10 @@ const useProfileForm = (userId: string | undefined) => {
     handleReset,
     isLoading: isLoadingUser || mutation.isPending || isUploading,
     isDirty: form.formState.isDirty,
+    errors: {
+      name: form.formState.errors.name?.message?.toString(),
+      email: form.formState.errors.email?.message?.toString(),
+    },
   }
 }
 

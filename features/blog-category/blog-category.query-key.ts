@@ -6,6 +6,8 @@ type BlogCategoryListFilters = {
 const blogCategoryQueryKeys = {
   all: ['blog-categories'] as const,
 
+  stats: () => [...blogCategoryQueryKeys.all, 'stats'] as const,
+
   lists: {
     all: () => [...blogCategoryQueryKeys.all, 'list'] as const,
     filtered: (filters: BlogCategoryListFilters = {}) =>

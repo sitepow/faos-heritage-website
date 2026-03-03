@@ -11,7 +11,6 @@ import {
   TableCell,
   Button,
   Chip,
-  User,
   Pagination,
   Spinner,
   Dropdown,
@@ -25,16 +24,16 @@ import {
   Trash2Icon,
   EllipsisVerticalIcon,
   FileTextIcon,
+  LanguagesIcon,
 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useMemo } from 'react'
 
 import type { Selection } from '@heroui/react'
 
-import { PostForm } from './PostForm'
-
+import { ProductImage } from '@/components/ui/Product/ProductImage'
+import { IMAGE_FALLBACK } from '@/constants'
 import { usePostsAdmin } from '@/features/post/post.hook'
-import { usePostMutation } from '@/features/post/post.mutation'
 import { usePostUIStore } from '@/features/post/post.store'
 
 interface Props {
@@ -54,16 +53,15 @@ const PostTable = ({
 }: Props) => {
   const router = useRouter()
   const { openForm } = usePostUIStore()
-  const { isDeleting } = usePostMutation()
 
   const { data: postsData, isLoading } = usePostsAdmin(page, 50)
 
   const postList = useMemo(() => {
-    return postsData?.success ? postsData.data.items : []
+    return postsData?.items ?? []
   }, [postsData])
 
   const totalPages = useMemo(() => {
-    return postsData?.success ? postsData.data.totalPages : 1
+    return postsData?.totalPages ?? 1
   }, [postsData])
 
   const statusColorMap: Record<PostStatus, 'default' | 'success' | 'warning'> =
@@ -74,114 +72,124 @@ const PostTable = ({
     }
 
   return (
-    <div className='flex flex-col gap-4'>
-      <Table
-        aria-label='ตารางบทความ'
-        bottomContent={
-          totalPages > 1 && (
-            <div className='flex w-full justify-center'>
-              <Pagination
-                isCompact
-                showControls
-                color='primary'
-                page={page}
-                total={totalPages}
-                onChange={onPageChange}
-              />
-            </div>
-          )
-        }
-        selectedKeys={selectedKeys}
-        selectionMode='multiple'
-        onSelectionChange={onSelectionChange}
+    <Table
+      aria-label='ตารางบทความ'
+      bottomContent={
+        totalPages > 1 && (
+          <div className='flex w-full justify-center'>
+            <Pagination
+              isCompact
+              showControls
+              color='primary'
+              page={page}
+              total={totalPages}
+              onChange={onPageChange}
+            />
+          </div>
+        )
+      }
+      checkboxesProps={{
+        classNames: {
+          wrapper: 'after:bg-primary before:border-default-300',
+          icon: 'text-white font-bold',
+        },
+      }}
+      selectedKeys={selectedKeys}
+      selectionMode='multiple'
+      onSelectionChange={onSelectionChange}
+    >
+      <TableHeader>
+        <TableColumn>รูปภาพบทความ</TableColumn>
+        <TableColumn>ชื่อบทความ</TableColumn>
+        <TableColumn>หมวดหมู่</TableColumn>
+        <TableColumn>ยอดเข้าชม</TableColumn>
+        <TableColumn>สถานะ</TableColumn>
+        <TableColumn align='center'>จัดการ</TableColumn>
+      </TableHeader>
+      <TableBody
+        emptyContent='ไม่พบบทความ'
+        isLoading={isLoading}
+        loadingContent={<Spinner label='กำลังโหลดข้อมูล...' />}
       >
-        <TableHeader>
-          <TableColumn>บทความ</TableColumn>
-          <TableColumn>หมวดหมู่</TableColumn>
-          <TableColumn>ยอดเข้าชม</TableColumn>
-          <TableColumn>สถานะ</TableColumn>
-          <TableColumn align='center'>จัดการ</TableColumn>
-        </TableHeader>
-        <TableBody
-          emptyContent='ไม่พบบทความ'
-          isLoading={isLoading}
-          loadingContent={<Spinner label='กำลังโหลดข้อมูล...' />}
-        >
-          {postList.map((post) => (
-            <TableRow key={post.id}>
-              <TableCell>
-                <User
-                  avatarProps={{
-                    src: post.featuredImage || '',
-                    radius: 'sm',
-                  }}
-                  description={post.slug}
-                  name={post.title}
-                />
-              </TableCell>
-              <TableCell>{post.category?.name || '-'}</TableCell>
-              <TableCell>{post.viewCount.toLocaleString()}</TableCell>
-              <TableCell>
-                <Chip
-                  color={statusColorMap[post.status as PostStatus]}
-                  size='sm'
-                  variant='flat'
-                >
-                  {post.status === PostStatus.PUBLISHED
-                    ? 'เผยแพร่แล้ว'
-                    : post.status === PostStatus.DRAFT
-                      ? 'ฉบับร่าง'
-                      : 'เก็บถาวร'}
-                </Chip>
-              </TableCell>
-              <TableCell>
-                <div className='flex items-center justify-center gap-2'>
-                  <Dropdown placement='bottom-end'>
-                    <DropdownTrigger>
-                      <Button isIconOnly size='sm' variant='light'>
-                        <EllipsisVerticalIcon
-                          className='text-default-500'
-                          size={20}
-                        />
-                      </Button>
-                    </DropdownTrigger>
-                    <DropdownMenu aria-label='จัดการบทความ'>
-                      <DropdownItem
-                        key='edit'
-                        startContent={<EditIcon size={16} />}
-                        onPress={() => openForm(post.id)}
-                      >
-                        แก้ไขข้อมูลพื้นฐาน
-                      </DropdownItem>
-                      <DropdownItem
-                        key='content'
-                        startContent={<FileTextIcon size={16} />}
-                        onPress={() =>
-                          router.push(`/dashboard/posts/${post.id}/description`)
-                        }
-                      >
-                        แก้ไขเนื้อหาบทความ
-                      </DropdownItem>
-                      <DropdownItem
-                        key='delete'
-                        className='text-danger'
-                        color='danger'
-                        startContent={<Trash2Icon size={16} />}
-                        onPress={() => onDeleteClick(post.id)}
-                      >
-                        ลบบทความ
-                      </DropdownItem>
-                    </DropdownMenu>
-                  </Dropdown>
-                </div>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+        {postList.map((post) => (
+          <TableRow key={post.id}>
+            <TableCell>
+              <ProductImage
+                className='size-20'
+                image={post?.featuredImage ?? IMAGE_FALLBACK.EMPTY}
+              />
+            </TableCell>
+            <TableCell>{post?.title ?? '-'}</TableCell>
+            <TableCell>{post.category?.name || '-'}</TableCell>
+            <TableCell>{post.viewCount.toLocaleString()}</TableCell>
+            <TableCell>
+              <Chip
+                color={statusColorMap[post.status as PostStatus]}
+                size='sm'
+                variant='dot'
+              >
+                {post.status === PostStatus.PUBLISHED
+                  ? 'เผยแพร่แล้ว'
+                  : post.status === PostStatus.DRAFT
+                    ? 'ฉบับร่าง'
+                    : 'เก็บถาวร'}
+              </Chip>
+            </TableCell>
+            <TableCell>
+              <div className='flex items-center justify-center gap-2'>
+                <Dropdown placement='bottom-end'>
+                  <DropdownTrigger>
+                    <Button isIconOnly size='sm' variant='light'>
+                      <EllipsisVerticalIcon
+                        className='text-default-500'
+                        size={20}
+                      />
+                    </Button>
+                  </DropdownTrigger>
+                  <DropdownMenu aria-label='จัดการบทความ'>
+                    <DropdownItem
+                      key='edit'
+                      startContent={<EditIcon size={16} />}
+                      onPress={() => openForm(post.id)}
+                    >
+                      แก้ไขข้อมูลพื้นฐาน
+                    </DropdownItem>
 
-      <PostForm />
-    </div>
+                    <DropdownItem
+                      key='content'
+                      startContent={<FileTextIcon size={16} />}
+                      onPress={() =>
+                        router.push(`/dashboard/posts/${post.id}/description`)
+                      }
+                    >
+                      แก้ไขเนื้อหาบทความ
+                    </DropdownItem>
+                    <DropdownItem
+                      key='locale'
+                      startContent={<LanguagesIcon size={16} />}
+                      onPress={() =>
+                        router.push(`/dashboard/posts/${post.id}/localization`)
+                      }
+                    >
+                      จัดการภาษา (Translation)
+                    </DropdownItem>
+                    <DropdownItem
+                      key='delete'
+                      className='text-danger'
+                      color='danger'
+                      startContent={<Trash2Icon size={16} />}
+                      onPress={() => onDeleteClick(post.id)}
+                    >
+                      ลบบทความ
+                    </DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
+              </div>
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
   )
 }
 

@@ -2,7 +2,11 @@
 
 import { useQuery } from '@tanstack/react-query'
 
-import { getBlogCategories, getBlogCategory } from './blog-category.action'
+import {
+  getBlogCategories,
+  getBlogCategory,
+  getBlogCategoryStat,
+} from './blog-category.action'
 import { blogCategoryQueryKeys } from './blog-category.query-key'
 
 interface UseBlogCategoryParams {
@@ -38,4 +42,11 @@ const useBlogCategories = ({
   })
 }
 
-export { useBlogCategory, useBlogCategories }
+const useBlogCategoryStat = () => {
+  return useQuery({
+    queryKey: blogCategoryQueryKeys.stats(),
+    queryFn: () => getBlogCategoryStat(),
+  })
+}
+
+export { useBlogCategory, useBlogCategories, useBlogCategoryStat }

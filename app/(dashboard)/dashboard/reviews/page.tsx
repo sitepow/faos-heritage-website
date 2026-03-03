@@ -12,16 +12,13 @@ import { TableConfigHeader } from '../products/_components/TableConfigHeader'
 
 import { Container } from '@/components/layouts/Container'
 import { StatCard } from '@/components/ui/StatCard'
-import {
-  useReviewsAdmin,
-  useReviewStatAdmin,
-} from '@/features/review/review.hook'
+import { useReviewsAdmin, useReviewStats } from '@/features/review/review.hook'
 import { useReviewMutation } from '@/features/review/review.mutation'
 
 const ReviewPage = () => {
   const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set([]))
 
-  const { data: stats } = useReviewStatAdmin()
+  const { data: stats } = useReviewStats()
   const { data, isLoading } = useReviewsAdmin()
   const { moderate } = useReviewMutation()
 

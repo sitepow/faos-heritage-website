@@ -3,6 +3,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useEffect, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 
+import type { Resolver } from 'react-hook-form'
+
 import { createAddress, updateAddress } from './address.action'
 import { useAddress } from './address.hook'
 import { addressQueryKeys } from './address.query-key'
@@ -28,7 +30,7 @@ const useAddressForm = (userId: string | undefined) => {
     useAddressStore()
 
   const form = useForm<AddressInput>({
-    resolver: zodResolver(addressSchema),
+    resolver: zodResolver(addressSchema) as Resolver<AddressInput>,
     defaultValues: DEFAULT_VALUES,
   })
 
@@ -37,12 +39,23 @@ const useAddressForm = (userId: string | undefined) => {
   )
 
   useEffect(() => {
-    if (!isAddressOpen) {
-      return
-    }
+    if (!isAddressOpen) return
 
     if (addressId && address) {
-      form.reset(address)
+      form.reset({
+        id: address.id,
+        userId: address.userId,
+        name: address.name || '',
+        phone: address.phone || '',
+        address: address.address || '',
+        district: address.district || '',
+        subDistrict: address.subDistrict || '',
+        province: address.province || '',
+        postalCode: address.postalCode || '',
+        country: address.country || '',
+        countryCode: address.countryCode || '',
+        isDefault: address.isDefault ?? false,
+      })
     } else if (!addressId) {
       form.reset(DEFAULT_VALUES)
     }
@@ -53,10 +66,10 @@ const useAddressForm = (userId: string | undefined) => {
   }, [queryClient])
 
   const handleClose = useCallback(() => {
-    invalidateData()
     form.reset(DEFAULT_VALUES)
     setState({ addressId: null })
     if (isAddressOpen) onOpenAddressChange()
+    invalidateData()
   }, [form, invalidateData, isAddressOpen, onOpenAddressChange, setState])
 
   const createMutation = useMutation({
@@ -86,6 +99,15 @@ const useAddressForm = (userId: string | undefined) => {
       isLoading || createMutation.isPending || updateMutation.isPending,
     isAddressOpen,
     addressId,
+    errors: {
+      name: form.formState.errors.name?.message?.toString(),
+      phone: form.formState.errors.phone?.message?.toString(),
+      address: form.formState.errors.address?.message?.toString(),
+      district: form.formState.errors.district?.message?.toString(),
+      province: form.formState.errors.province?.message?.toString(),
+      postalCode: form.formState.errors.postalCode?.message?.toString(),
+      country: form.formState.errors.country?.message?.toString(),
+    },
   }
 }
 

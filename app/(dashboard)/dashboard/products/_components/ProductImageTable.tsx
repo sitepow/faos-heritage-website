@@ -15,7 +15,6 @@ import {
   DropdownMenu,
   DropdownItem,
   Spinner,
-  Image,
 } from '@heroui/react'
 import { EllipsisVerticalIcon } from 'lucide-react'
 import { useMemo } from 'react'
@@ -23,6 +22,8 @@ import { useMemo } from 'react'
 import type { Selection } from '@heroui/react'
 import type { ReactNode } from 'react'
 
+import { ProductImage } from '@/components/ui/Product/ProductImage'
+import { IMAGE_FALLBACK } from '@/constants'
 import { useProductImages } from '@/features/product-image/product-image.hook'
 import { useIsMounted } from '@/hooks/useIsMounted'
 
@@ -86,10 +87,9 @@ const ProductImageTable = ({
             return (
               <TableRow key={img.id}>
                 <TableCell>
-                  <Image
-                    alt={img.alt || 'Product image'}
-                    className='h-16 w-16 rounded-lg border object-cover'
-                    src={img.url || ''}
+                  <ProductImage
+                    className='size-20'
+                    image={img?.url ?? IMAGE_FALLBACK.EMPTY}
                   />
                 </TableCell>
                 <TableCell className='text-default-600 font-medium'>

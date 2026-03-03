@@ -19,7 +19,6 @@ import type { OrderStatus } from '@prisma/client'
 
 import { useOrder } from '@/features/order/order.hook'
 import { useOrderStore } from '@/features/order/order.store'
-import { ORDER_STATUS_ICON_MAP } from '@/features/order/order.utils'
 import {
   formatCurrency,
   ORDER_STATUS_COLOR_MAP,
@@ -34,6 +33,7 @@ const OrderDetailModal = () => {
 
   return (
     <Modal
+      hideCloseButton
       isOpen={isViewOpen}
       scrollBehavior='inside'
       size='3xl'
@@ -55,7 +55,7 @@ const OrderDetailModal = () => {
             </div>
           ) : order ? (
             <div className='space-y-6'>
-              <div className='grid grid-cols-2 gap-4 rounded-xl p-4'>
+              <div className='grid grid-cols-2 gap-4 rounded-xl'>
                 <div>
                   <p className='text-tiny text-default-500 font-bold uppercase'>
                     ข้อมูลลูกค้า
@@ -66,15 +66,12 @@ const OrderDetailModal = () => {
                   </p>
                 </div>
                 <div className='text-right'>
-                  <p className='text-tiny text-default-500 font-bold uppercase'>
+                  <p className='text-tiny text-default-500 mb-2.5 font-bold uppercase'>
                     สถานะปัจจุบัน
                   </p>
                   <Chip
                     color={ORDER_STATUS_COLOR_MAP[order.status as OrderStatus]}
-                    startContent={
-                      ORDER_STATUS_ICON_MAP[order.status as OrderStatus]
-                    }
-                    variant='flat'
+                    variant='dot'
                   >
                     {ORDER_STATUS_TH_MAP[order.status as OrderStatus]}
                   </Chip>
@@ -98,7 +95,7 @@ const OrderDetailModal = () => {
                   {order.items?.map((item: any) => (
                     <div
                       key={item.id}
-                      className='border-default-100 flex items-center gap-3 rounded-lg border-1 bg-white p-2'
+                      className='border-default-100 flex items-center gap-3 rounded-lg border-1 p-2'
                     >
                       <Image
                         alt={item.productName}
@@ -189,7 +186,7 @@ const OrderDetailModal = () => {
           )}
         </ModalBody>
         <ModalFooter>
-          <Button color='primary' variant='flat' onPress={onClose}>
+          <Button variant='flat' onPress={onClose}>
             ปิดหน้าต่าง
           </Button>
         </ModalFooter>

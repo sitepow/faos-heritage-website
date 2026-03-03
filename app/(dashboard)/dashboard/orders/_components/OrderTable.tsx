@@ -19,18 +19,22 @@ import {
 } from '@heroui/react'
 import { EllipsisVerticalIcon } from 'lucide-react'
 
+import type { getOrders } from '@/features/order/order.action'
 import type { Selection } from '@heroui/react'
 import type { OrderStatus } from '@prisma/client'
 import type { ReactNode } from 'react'
 
 import { PaginationWrapper } from '@/components/ui/PaginationWrapper'
-import { ORDER_STATUS_ICON_MAP } from '@/features/order/order.utils'
+import { IMAGE_FALLBACK } from '@/constants'
 import { useIsMounted } from '@/hooks/useIsMounted'
 import {
   formatCurrency,
+  formatDate,
   ORDER_STATUS_COLOR_MAP,
   ORDER_STATUS_TH_MAP,
 } from '@/utils'
+
+type OrderItemType = Awaited<ReturnType<typeof getOrders>>['items'][number]
 
 interface ActionItem {
   key: string
@@ -40,7 +44,7 @@ interface ActionItem {
 }
 
 interface Props {
-  orderList: any[]
+  orderList: OrderItemType[]
   isLoading: boolean
   page: number
   total: number
@@ -104,12 +108,19 @@ const OrderTable = ({
                 </TableCell>
                 <TableCell>
                   <User
-                    avatarProps={{ size: 'sm', className: 'border' }}
-                    description={order.shippingPhone}
+                    avatarProps={{
+                      src: order?.user?.image || IMAGE_FALLBACK.EMPTY,
+                    }}
+                    description={
+                      <div className='flex flex-col gap-2'>
+                        <span>{order?.user?.email ?? '-'}</span>
+                        <span>{order?.shippingPhone ?? '-'}</span>
+                      </div>
+                    }
                     name={order.user?.name || 'ลูกค้าทั่วไป'}
                   />
                 </TableCell>
-                <TableCell className='font-bold'>
+                <TableCell>
                   {formatCurrency(Number(order.total), {
                     currency: order.currency,
                     skipCalculation: true,
@@ -120,16 +131,13 @@ const OrderTable = ({
                     className='font-bold'
                     color={ORDER_STATUS_COLOR_MAP[order.status as OrderStatus]}
                     size='sm'
-                    startContent={
-                      ORDER_STATUS_ICON_MAP[order.status as OrderStatus]
-                    }
-                    variant='flat'
+                    variant='dot'
                   >
                     {ORDER_STATUS_TH_MAP[order.status as OrderStatus]}
                   </Chip>
                 </TableCell>
                 <TableCell className='text-default-500 text-small'>
-                  {new Date(order.createdAt).toLocaleDateString('th-TH')}
+                  {formatDate(order.createdAt)}
                 </TableCell>
                 <TableCell>
                   <Dropdown placement='bottom-end'>

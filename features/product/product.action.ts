@@ -14,23 +14,21 @@ import { getServerUser, withRole } from '@/lib/session'
 import { omitEmptyFields, decimalToNumber } from '@/utils'
 
 const getProductAdmin = async (productId: string) => {
-  return withRole([Role.ADMIN], async () => {
-    noStore()
+  noStore()
 
-    const product = await prisma.product.findUnique({
-      where: { id: productId },
-      include: {
-        category: { select: { id: true, name: true } },
-        images: { orderBy: { isPrimary: 'desc' } },
-      },
-    })
-
-    if (!product) {
-      return null
-    }
-
-    return decimalToNumber(product)
+  const product = await prisma.product.findUnique({
+    where: { id: productId },
+    include: {
+      category: { select: { id: true, name: true } },
+      images: { orderBy: { isPrimary: 'desc' } },
+    },
   })
+
+  if (!product) {
+    return null
+  }
+
+  return decimalToNumber(product)
 }
 
 const getProductsAdmin = async (page = 1, limit = 50) => {
@@ -358,7 +356,7 @@ const getProductsInfinite = async ({
   return { items: resultItems, nextCursor, totalCount }
 }
 
-const getProductStat = async () =>
+const getProductStats = async () =>
   withRole([Role.ADMIN], async () => {
     const stats = await prisma.$transaction([
       prisma.product.count(),
@@ -418,7 +416,7 @@ export {
   getProduct,
   getProducts,
   getProductsInfinite,
-  getProductStat,
+  getProductStats,
   increaseProductView,
 }
 

@@ -1,3 +1,5 @@
+'use client'
+
 import { Image } from '@heroui/react'
 
 import type { ComponentProps } from 'react'
@@ -6,11 +8,13 @@ import { IMAGE_FALLBACK } from '@/constants'
 import { cn } from '@/utils'
 
 interface ProductImageProps extends ComponentProps<'div'> {
-  image?: string
+  image?: string | null
   className?: string
 }
 
 const ProductImage = ({ image, className, ...props }: ProductImageProps) => {
+  const imageSrc = image && image.trim() !== '' ? image : IMAGE_FALLBACK.EMPTY
+
   return (
     <div
       className={cn(
@@ -26,7 +30,7 @@ const ProductImage = ({ image, className, ...props }: ProductImageProps) => {
           wrapper: 'absolute inset-0 !max-w-none size-full',
         }}
         radius='none'
-        src={image ?? IMAGE_FALLBACK.EMPTY}
+        src={imageSrc || undefined}
       />
     </div>
   )

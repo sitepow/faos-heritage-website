@@ -20,10 +20,15 @@ import {
 } from '@heroui/react'
 import { EllipsisVerticalIcon, StarIcon } from 'lucide-react'
 
+import type { getAllReviewsAdmin } from '@/features/review/review.action'
 import type { Selection } from '@heroui/react'
 import type { ReactNode } from 'react'
 
 import { useIsMounted } from '@/hooks/useIsMounted'
+
+type ReviewItemType = Awaited<
+  ReturnType<typeof getAllReviewsAdmin>
+>['items'][number]
 
 interface ActionItem {
   key: string
@@ -34,11 +39,11 @@ interface ActionItem {
 }
 
 interface Props {
-  reviewList: any[]
+  reviewList: ReviewItemType[]
   isLoading: boolean
   selectedKeys: Selection
   onSelectionChange: (keys: Selection) => void
-  getActionItems: (review: any) => ActionItem[]
+  getActionItems: (review: ReviewItemType) => ActionItem[]
 }
 
 const ReviewTable = ({
@@ -71,7 +76,7 @@ const ReviewTable = ({
         <TableHeader>
           <TableColumn>ผู้รีวิว / สินค้า</TableColumn>
           <TableColumn>คะแนน</TableColumn>
-          <TableColumn width={300}>ความคิดเห็น</TableColumn>
+          <TableColumn width={350}>ความคิดเห็น</TableColumn>
           <TableColumn>สถานะ</TableColumn>
           <TableColumn align='center'>จัดการ</TableColumn>
         </TableHeader>
@@ -86,21 +91,33 @@ const ReviewTable = ({
               <TableRow key={review.id}>
                 <TableCell>
                   <HeroUser
-                    avatarProps={{ src: review?.user?.image || '', size: 'sm' }}
-                    description={review.product.name}
-                    name={review.user.name}
+                    avatarProps={{
+                      src: review?.user?.image || '',
+                    }}
+                    description={
+                      <span className='text-primary text-tiny font-medium'>
+                        สินค้า: {review.product.name}
+                      </span>
+                    }
+                    name={review.user.name || 'ผู้ใช้งาน'}
                   />
                 </TableCell>
                 <TableCell>
-                  <div className='text-warning flex items-center gap-1'>
-                    <StarIcon fill='currentColor' size={14} />
+                  <div className='flex items-center gap-1'>
+                    <div className='text-warning flex items-center'>
+                      <StarIcon fill='currentColor' size={14} />
+                    </div>
                     <span className='text-small font-bold'>
-                      {review.rating}
+                      {review.rating.toFixed(1)}
                     </span>
                   </div>
                 </TableCell>
-                <TableCell className='text-default-600 text-small italic'>
-                  {review.comment ? `"${review.comment}"` : '-'}
+                <TableCell>
+                  <div className='flex flex-col gap-1'>
+                    <p className='text-default-600 text-small leading-relaxed italic'>
+                      {review.comment ? `"${review.comment}"` : '-'}
+                    </p>
+                  </div>
                 </TableCell>
                 <TableCell>
                   <Chip
@@ -115,7 +132,11 @@ const ReviewTable = ({
                     size='sm'
                     variant='flat'
                   >
-                    {review.status}
+                    {review.status === 'APPROVED'
+                      ? 'อนุมัติแล้ว'
+                      : review.status === 'REJECTED'
+                        ? 'ปฏิเสธ'
+                        : 'รอตรวจสอบ'}
                   </Chip>
                 </TableCell>
                 <TableCell>

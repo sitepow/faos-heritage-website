@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 'use client'
 
 import {
@@ -13,12 +14,15 @@ import {
   Button,
   Textarea,
   Alert,
+  Chip,
+  Spinner,
 } from '@heroui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ProductUnit } from '@prisma/client'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
+import type { KeyboardEvent } from 'react'
 import type { Resolver } from 'react-hook-form'
 
 import { useProductAdmin } from '../product.hook'
@@ -49,11 +53,13 @@ const DEFAULT_VALUES: ProductInput = {
 
 const ProductForm = () => {
   const unitTranslations = localeTh.global.productUnit
-
   const { selectedProductId, isFormOpen, closeForm } = useProductUIStore()
   const { create, update, isCreating, isUpdating } = useProductMutation()
 
-  const { data: categories } = useCategories({ locale: undefined })
+  const [keywordInput, setKeywordInput] = useState('')
+
+  const { data: categoriesRes } = useCategories({ locale: undefined })
+  const categories = categoriesRes || []
 
   const { data: product, isLoading: isLoadingProduct } = useProductAdmin(
     selectedProductId || '',
@@ -64,21 +70,53 @@ const ProductForm = () => {
     control,
     handleSubmit,
     reset,
+    watch,
+    setValue,
     formState: { errors, isDirty },
   } = useForm<ProductInput>({
     resolver: zodResolver(productSchema) as Resolver<ProductInput>,
     defaultValues: DEFAULT_VALUES,
   })
 
+  const keywords = watch('keywords') || []
+
   useEffect(() => {
     if (isFormOpen) {
       if (selectedProductId && product) {
-        reset(product as ProductInput)
+        reset({
+          ...product,
+          price: Number(product.price),
+          salePrice: product.salePrice ? Number(product.salePrice) : null,
+          weight: product.weight ? Number(product.weight) : null,
+          keywords: product.keywords ?? [],
+        } as ProductInput)
       } else {
         reset(DEFAULT_VALUES)
       }
     }
   }, [isFormOpen, selectedProductId, product, reset])
+
+  const handleKeywordKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === ',' || e.key === 'Enter') {
+      e.preventDefault()
+      const value = keywordInput.trim()
+
+      if (value && !keywords.includes(value)) {
+        const newKeywords = [...keywords, value]
+        setValue('keywords', newKeywords, { shouldDirty: true })
+        setKeywordInput('')
+      }
+    } else if (e.key === 'Backspace' && !keywordInput && keywords.length > 0) {
+      const newKeywords = [...keywords]
+      newKeywords.pop()
+      setValue('keywords', newKeywords, { shouldDirty: true })
+    }
+  }
+
+  const removeKeyword = (indexToRemove: number) => {
+    const newKeywords = keywords.filter((_, index) => index !== indexToRemove)
+    setValue('keywords', newKeywords, { shouldDirty: true })
+  }
 
   const onSubmit = async (data: ProductInput) => {
     if (selectedProductId) {
@@ -99,233 +137,271 @@ const ProductForm = () => {
       onOpenChange={closeForm}
     >
       <ModalContent>
-        <ModalHeader className='text-xl font-bold'>
-          {selectedProductId ? 'แก้ไขข้อมูลสินค้า' : 'เพิ่มสินค้าใหม่'}
-        </ModalHeader>
-        <ModalBody>
-          {!isLoadingProduct && (
-            <form className='space-y-6' onSubmit={handleSubmit(onSubmit)}>
-              <SectionLabel>สถานะและการแสดงผล</SectionLabel>
-              <div className='flex flex-wrap gap-6'>
-                <Controller
-                  control={control}
-                  name='isActive'
-                  render={({ field: { value, onChange, ...field } }) => (
-                    <Switch
-                      {...field}
-                      isSelected={!!value}
-                      onValueChange={onChange}
-                    >
-                      เปิดใช้งานสินค้า (Active)
-                    </Switch>
-                  )}
-                />
+        <form className='overflow-y-scroll' onSubmit={handleSubmit(onSubmit)}>
+          <ModalHeader className='text-xl font-bold'>
+            {selectedProductId ? 'แก้ไขข้อมูลสินค้า' : 'เพิ่มสินค้าใหม่'}
+          </ModalHeader>
+          <ModalBody>
+            {isLoadingProduct && selectedProductId ? (
+              <div className='flex justify-center p-8'>
+                <Spinner label='กำลังโหลดข้อมูลสินค้า...' />
               </div>
-
-              <SectionLabel>ข้อมูลพื้นฐาน</SectionLabel>
-              <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-                <Controller
-                  control={control}
-                  name='name'
-                  render={({ field }) => (
-                    <Input
-                      {...field}
-                      errorMessage={errors.name?.message}
-                      isInvalid={!!errors.name}
-                      label='ชื่อสินค้า'
-                      variant='bordered'
-                    />
-                  )}
-                />
-                <Controller
-                  control={control}
-                  name='slug'
-                  render={({ field: { value, ...field } }) => (
-                    <Input
-                      {...field}
-                      errorMessage={errors.slug?.message}
-                      isInvalid={!!errors.slug}
-                      label='URL Slug (เช่น organic-honey)'
-                      placeholder='ระบุ slug ภาษาอังกฤษ'
-                      value={value?.toString()}
-                      variant='bordered'
-                    />
-                  )}
-                />
-                <Controller
-                  control={control}
-                  name='categoryId'
-                  render={({ field: { value, onChange, ...field } }) => (
-                    <Select
-                      {...field}
-                      errorMessage={errors.categoryId?.message}
-                      isInvalid={!!errors.categoryId}
-                      label='หมวดหมู่สินค้า'
-                      selectedKeys={value ? [value] : []}
-                      variant='bordered'
-                      onSelectionChange={(keys) =>
-                        onChange(Array.from(keys)[0] as string)
-                      }
-                    >
-                      {(categories ?? []).map((cat) => (
-                        <SelectItem key={cat?.id!}>{cat?.name!}</SelectItem>
-                      ))}
-                    </Select>
-                  )}
-                />
-              </div>
-
-              <SectionLabel>ราคาและสต็อก</SectionLabel>
-              <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
-                <Controller
-                  control={control}
-                  name='price'
-                  render={({ field: { value, onChange, ...field } }) => (
-                    <Input
-                      {...field}
-                      label='ราคาปกติ'
-                      type='number'
-                      value={value?.toString()}
-                      variant='bordered'
-                      onValueChange={(v) => onChange(Number(v))}
-                    />
-                  )}
-                />
-                <Controller
-                  control={control}
-                  name='salePrice'
-                  render={({ field: { value, onChange, ...field } }) => (
-                    <Input
-                      {...field}
-                      label='ราคาลด (ถ้ามี)'
-                      type='number'
-                      value={value?.toString() || ''}
-                      variant='bordered'
-                      onValueChange={(v) => onChange(v ? Number(v) : null)}
-                    />
-                  )}
-                />
-                <Controller
-                  control={control}
-                  name='stockQuantity'
-                  render={({ field: { value, onChange, ...field } }) => (
-                    <Input
-                      {...field}
-                      label='จำนวนสต็อก'
-                      type='number'
-                      value={value?.toString()}
-                      variant='bordered'
-                      onValueChange={(v) => onChange(Number(v))}
-                    />
-                  )}
-                />
-              </div>
-
-              <SectionLabel>หน่วยและน้ำหนัก</SectionLabel>
-              <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-                <Controller
-                  control={control}
-                  name='unit'
-                  render={({ field: { value, onChange, ...field } }) => (
-                    <Select
-                      {...field}
-                      label='หน่วยสินค้า'
-                      selectedKeys={[value]}
-                      variant='bordered'
-                      onSelectionChange={(keys) =>
-                        onChange(Array.from(keys)[0] as ProductUnit)
-                      }
-                    >
-                      {Object.values(ProductUnit).map((unit) => (
-                        <SelectItem key={unit}>
-                          {unitTranslations[
-                            unit as keyof typeof unitTranslations
-                          ] || unit}
-                        </SelectItem>
-                      ))}
-                    </Select>
-                  )}
-                />
-                <Controller
-                  control={control}
-                  name='weight'
-                  render={({ field: { value, onChange, ...field } }) => (
-                    <Input
-                      {...field}
-                      label='น้ำหนัก (กรัม)'
-                      type='number'
-                      value={value?.toString() || ''}
-                      variant='bordered'
-                      onValueChange={(v) => onChange(v ? Number(v) : null)}
-                    />
-                  )}
-                />
-              </div>
-
-              <SectionLabel>สรุปเนื้อหาเบื้องต้น</SectionLabel>
-              <Controller
-                control={control}
-                name='summary'
-                render={({ field: { value, ...field } }) => (
-                  <Textarea
-                    {...field}
-                    label='คำอธิบายสั้น (Summary)'
-                    value={value || ''}
-                    variant='bordered'
+            ) : (
+              <div className='space-y-6'>
+                <SectionLabel>สถานะและการแสดงผล</SectionLabel>
+                <div className='flex flex-wrap gap-6'>
+                  <Controller
+                    control={control}
+                    name='isActive'
+                    render={({ field: { value, onChange } }) => (
+                      <Switch isSelected={!!value} onValueChange={onChange}>
+                        เปิดใช้งานสินค้า (Active)
+                      </Switch>
+                    )}
                   />
-                )}
-              />
+                </div>
 
-              <SectionLabel>SEO และ Metadata</SectionLabel>
-              <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+                <SectionLabel>ข้อมูลพื้นฐาน</SectionLabel>
+                <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+                  <Controller
+                    control={control}
+                    name='name'
+                    render={({ field }) => (
+                      <Input
+                        {...field}
+                        errorMessage={errors.name?.message}
+                        isInvalid={!!errors.name}
+                        label='ชื่อสินค้า'
+                        variant='bordered'
+                      />
+                    )}
+                  />
+                  <Controller
+                    control={control}
+                    name='slug'
+                    render={({ field }) => (
+                      <Input
+                        {...field}
+                        errorMessage={errors.slug?.message}
+                        isInvalid={!!errors.slug}
+                        label='URL Slug'
+                        variant='bordered'
+                      />
+                    )}
+                  />
+                  <Controller
+                    control={control}
+                    name='categoryId'
+                    render={({ field: { value, onChange } }) => (
+                      <Select
+                        errorMessage={errors.categoryId?.message}
+                        isInvalid={!!errors.categoryId}
+                        label='หมวดหมู่สินค้า'
+                        selectedKeys={value ? [value] : []}
+                        variant='bordered'
+                        onSelectionChange={(keys) =>
+                          onChange(Array.from(keys)[0] as string)
+                        }
+                      >
+                        {(categories || []).map((cat) => (
+                          <SelectItem key={cat?.id!}>{cat?.name!}</SelectItem>
+                        ))}
+                      </Select>
+                    )}
+                  />
+                </div>
+
+                <SectionLabel>ราคาและสต็อก</SectionLabel>
+                <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
+                  <Controller
+                    control={control}
+                    name='price'
+                    render={({ field: { value, onChange, ...field } }) => (
+                      <Input
+                        {...field}
+                        errorMessage={errors.price?.message}
+                        isInvalid={!!errors.price}
+                        label='ราคาปกติ'
+                        type='number'
+                        value={value?.toString()}
+                        variant='bordered'
+                        onValueChange={(v) => onChange(Number(v))}
+                      />
+                    )}
+                  />
+                  <Controller
+                    control={control}
+                    name='salePrice'
+                    render={({ field: { value, onChange, ...field } }) => (
+                      <Input
+                        {...field}
+                        errorMessage={errors.salePrice?.message}
+                        isInvalid={!!errors.salePrice}
+                        label='ราคาลด (ถ้ามี)'
+                        type='number'
+                        value={value?.toString() || ''}
+                        variant='bordered'
+                        onValueChange={(v) => onChange(v ? Number(v) : null)}
+                      />
+                    )}
+                  />
+                  <Controller
+                    control={control}
+                    name='stockQuantity'
+                    render={({ field: { value, onChange, ...field } }) => (
+                      <Input
+                        {...field}
+                        errorMessage={errors.stockQuantity?.message}
+                        isInvalid={!!errors.stockQuantity}
+                        label='จำนวนสต็อก'
+                        type='number'
+                        value={value?.toString()}
+                        variant='bordered'
+                        onValueChange={(v) => onChange(Number(v))}
+                      />
+                    )}
+                  />
+                </div>
+
+                <SectionLabel>หน่วยและน้ำหนัก</SectionLabel>
+                <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+                  <Controller
+                    control={control}
+                    name='unit'
+                    render={({ field: { value, onChange } }) => (
+                      <Select
+                        errorMessage={errors.unit?.message?.toString()}
+                        isInvalid={!!errors.unit}
+                        label='หน่วยสินค้า'
+                        selectedKeys={[value]}
+                        variant='bordered'
+                        onSelectionChange={(keys) =>
+                          onChange(Array.from(keys)[0] as ProductUnit)
+                        }
+                      >
+                        {Object.values(ProductUnit).map((unit) => (
+                          <SelectItem key={unit}>
+                            {unitTranslations[
+                              unit as keyof typeof unitTranslations
+                            ] || unit}
+                          </SelectItem>
+                        ))}
+                      </Select>
+                    )}
+                  />
+                  <Controller
+                    control={control}
+                    name='weight'
+                    render={({ field: { value, onChange, ...field } }) => (
+                      <Input
+                        {...field}
+                        errorMessage={errors.weight?.message}
+                        isInvalid={!!errors.weight}
+                        label='น้ำหนัก (กรัม)'
+                        type='number'
+                        value={value?.toString() || ''}
+                        variant='bordered'
+                        onValueChange={(v) => onChange(v ? Number(v) : null)}
+                      />
+                    )}
+                  />
+                </div>
+
+                <SectionLabel>สรุปเนื้อหาเบื้องต้น</SectionLabel>
                 <Controller
                   control={control}
-                  name='metaTitle'
-                  render={({ field: { value, ...field } }) => (
-                    <Input
+                  name='summary'
+                  render={({ field }) => (
+                    <Textarea
                       {...field}
-                      label='Meta Title'
-                      value={value || ''}
+                      errorMessage={errors.summary?.message}
+                      isInvalid={!!errors.summary}
+                      label='คำอธิบายสั้น (Summary)'
+                      value={field.value || ''}
                       variant='bordered'
                     />
                   )}
                 />
-                <Controller
-                  control={control}
-                  name='metaDescription'
-                  render={({ field: { value, ...field } }) => (
+
+                <SectionLabel>SEO และ Keywords</SectionLabel>
+                <div className='flex flex-col gap-4'>
+                  <div className='flex flex-col gap-2'>
                     <Input
-                      {...field}
-                      label='Meta Description'
-                      value={value || ''}
+                      label='คีย์เวิร์ดสินค้า (กด , หรือ Enter เพื่อเพิ่ม)'
+                      placeholder='เช่น น้ำผึ้งแท้, ออร์แกนิค'
+                      value={keywordInput}
                       variant='bordered'
+                      onChange={(e) => setKeywordInput(e.target.value)}
+                      onKeyDown={handleKeywordKeyDown}
                     />
-                  )}
-                />
+                    <div className='flex flex-wrap gap-2 px-1'>
+                      {keywords.map((keyword, index) => (
+                        <Chip
+                          key={index}
+                          color='primary'
+                          variant='flat'
+                          onClose={() => removeKeyword(index)}
+                        >
+                          {keyword}
+                        </Chip>
+                      ))}
+                    </div>
+                  </div>
+                  <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+                    <Controller
+                      control={control}
+                      name='metaTitle'
+                      render={({ field }) => (
+                        <Input
+                          {...field}
+                          errorMessage={errors.metaTitle?.message}
+                          isInvalid={!!errors.metaTitle}
+                          label='Meta Title'
+                          value={field.value || ''}
+                          variant='bordered'
+                        />
+                      )}
+                    />
+                    <Controller
+                      control={control}
+                      name='metaDescription'
+                      render={({ field }) => (
+                        <Input
+                          {...field}
+                          errorMessage={errors.metaDescription?.message}
+                          isInvalid={!!errors.metaDescription}
+                          label='Meta Description'
+                          value={field.value || ''}
+                          variant='bordered'
+                        />
+                      )}
+                    />
+                  </div>
+                </div>
+
+                <Alert>
+                  * สำหรับรายละเอียดเนื้อหา (Description) แบบเต็ม
+                  คุณสามารถจัดการได้ผ่านปุ่ม &quot;แก้ไขรายละเอียดเนื้อหา&quot;
+                  หลังบันทึกข้อมูลส่วนนี้แล้ว
+                </Alert>
               </div>
-
-              <Alert>
-                * สำหรับรายละเอียดเนื้อหา (Description) แบบเต็ม
-                คุณสามารถจัดการได้ผ่านปุ่ม "แก้ไขรายละเอียดเนื้อหา"
-                ในหน้าตารางหลังจากบันทึกข้อมูลส่วนนี้แล้ว
-              </Alert>
-            </form>
-          )}
-        </ModalBody>
-        <ModalFooter>
-          <Button variant='flat' onPress={closeForm}>
-            ยกเลิก
-          </Button>
-          <Button
-            className='text-secondary font-bold'
-            color='primary'
-            isDisabled={!isDirty}
-            isLoading={isPending}
-            onPress={() => handleSubmit(onSubmit)()}
-          >
-            {selectedProductId ? 'บันทึกการแก้ไข' : 'บันทึกและเพิ่มสินค้า'}
-          </Button>
-        </ModalFooter>
+            )}
+          </ModalBody>
+          <ModalFooter>
+            <Button variant='flat' onPress={closeForm}>
+              ยกเลิก
+            </Button>
+            <Button
+              className='text-secondary font-bold'
+              color='primary'
+              isDisabled={!isDirty}
+              isLoading={isPending}
+              type='submit'
+            >
+              {selectedProductId ? 'บันทึกการแก้ไข' : 'บันทึกและเพิ่มสินค้า'}
+            </Button>
+          </ModalFooter>
+        </form>
       </ModalContent>
     </Modal>
   )

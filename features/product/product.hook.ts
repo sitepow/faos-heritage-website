@@ -15,7 +15,7 @@ import {
   getProductBySlug,
   getProductsAdmin,
   getProductsInfinite,
-  getProductStat,
+  getProductStats,
 } from './product.action'
 import { productQueryKeys } from './product.query-key'
 import { useExchangeRate } from '../exchange-rate/exchange-rate.hook'
@@ -39,10 +39,10 @@ const useProductsAdmin = (page = 1, limit = 50) => {
   })
 }
 
-const useProductStat = () => {
+const useProductStats = () => {
   return useQuery({
     queryKey: productQueryKeys.stats(),
-    queryFn: () => getProductStat(),
+    queryFn: () => getProductStats(),
   })
 }
 
@@ -174,7 +174,7 @@ const useProductRating = (reviews: { rating: number }[] = []) => {
 export {
   useProductAdmin,
   useProductsAdmin,
-  useProductStat,
+  useProductStats,
   useProduct,
   useProducts,
   useProductsInfinite,

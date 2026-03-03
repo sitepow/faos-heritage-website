@@ -1,251 +1,180 @@
-// 'use client'
+'use client'
 
-// import {
-//   Button,
-//   Input,
-//   Modal,
-//   ModalBody,
-//   ModalContent,
-//   ModalFooter,
-//   ModalHeader,
-//   Spinner,
-//   Switch,
-// } from '@heroui/react'
-// import { zodResolver } from '@hookform/resolvers/zod'
-// import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-// import { useEffect, useState } from 'react'
-// import { Controller, useForm } from 'react-hook-form'
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  Switch,
+  Input,
+  ModalFooter,
+  Button,
+  Spinner,
+} from '@heroui/react'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useEffect } from 'react'
+import { Controller, useForm } from 'react-hook-form'
 
-// import type { CategoryInput } from '../../schema/category'
-// import type { ImageWithPreview } from '@/components/ui/ImageDropzone'
+import type { CategoryInput } from '../category.schema'
+import type { Resolver } from 'react-hook-form'
 
-// import {
-//   getCategory,
-//   createCategory,
-//   updateCategory,
-// } from '../../action/category'
-// import { categorySchema } from '../../schema/category'
-// import { useProductStore } from '../../store'
+import { useCategoryAdmin } from '../category.hook'
+import { useCategoryMutation } from '../category.mutation'
+import { categorySchema } from '../category.schema'
+import { useCategoryUIStore } from '../category.store'
 
-// import { ImageDropzone } from '@/components/ui/ImageDropzone'
-// import { SubHeading } from '@/components/ui/SectionHeader'
-// import { useImageUpload } from '@/hooks/useResolveImageUpload'
+import { SectionLabel } from '@/components/ui/SectionHeader'
 
-// const DEFAULT_VALUES: CategoryInput = {
-//   name: '',
-//   slug: '',
-//   description: '',
-//   image: '',
-//   isActive: true,
-// }
+const DEFAULT_VALUES: CategoryInput = {
+  name: '',
+  slug: '',
+  image: '',
+  isActive: true,
+}
 
-// export const CategoryForm = () => {
-//   const queryClient = useQueryClient()
-//   const {
-//     isCategoryOpen,
-//     onOpenCategoryChange,
-//     onOpenCategoryManagerChange,
-//     categoryId,
-//     setState,
-//   } = useProductStore()
+const CategoryForm = () => {
+  const { selectedCategoryId, isFormOpen, closeForm } = useCategoryUIStore()
+  const { create, update, isCreating, isUpdating } = useCategoryMutation()
 
-//   const [previewFiles, setPreviewFiles] = useState<ImageWithPreview[]>([])
-//   const [oldImage, setOldImage] = useState<string | null>(null)
-//   const { resolveImagePath, isUploading } = useImageUpload({
-//     oldImage,
-//     previewFiles,
-//   })
+  const { data: category, isLoading: isLoadingCategory } = useCategoryAdmin(
+    selectedCategoryId || '',
+  )
 
-//   const QUERY_KEY = {
-//     CATEGORY: ['dashboard', 'categories', 'modal', categoryId],
-//     CATEGORIES: ['dashboard', 'categories', 'modal'],
-//   }
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors, isDirty },
+  } = useForm<CategoryInput>({
+    resolver: zodResolver(categorySchema) as Resolver<CategoryInput>,
+    defaultValues: DEFAULT_VALUES,
+  })
 
-//   const {
-//     control,
-//     handleSubmit,
-//     reset,
-//     setValue,
-//     formState: { errors, isDirty },
-//   } = useForm<CategoryInput>({
-//     resolver: zodResolver(categorySchema),
-//     defaultValues: DEFAULT_VALUES,
-//   })
+  useEffect(() => {
+    if (isFormOpen) {
+      if (selectedCategoryId && category) {
+        reset({
+          id: category.id,
+          name: category.name,
+          slug: category.slug || '',
+          image: category.image || '',
+          isActive: category.isActive,
+        })
+      } else if (!selectedCategoryId) {
+        reset(DEFAULT_VALUES)
+      }
+    }
+  }, [isFormOpen, selectedCategoryId, category, reset])
 
-//   const { data: category, isLoading: isLoadingCategory } = useQuery({
-//     queryKey: QUERY_KEY.CATEGORY,
-//     queryFn: () => getCategory(categoryId!),
-//     enabled: !!categoryId && isCategoryOpen,
-//   })
+  const onSubmit = async (data: CategoryInput) => {
+    if (selectedCategoryId) {
+      await update({ ...data, id: selectedCategoryId })
+    } else {
+      await create(data)
+    }
+    closeForm()
+  }
 
-//   useEffect(() => {
-//     if (categoryId && !isLoadingCategory && category) {
-//       reset(category, {
-//         keepDirty: false,
-//         keepTouched: false,
-//       })
-//       setOldImage(category.image)
-//     }
-//   }, [isLoadingCategory, reset, category, categoryId])
+  const isPending = isLoadingCategory || isCreating || isUpdating
 
-//   const onRefetch = async () => {
-//     queryClient.invalidateQueries({
-//       queryKey: QUERY_KEY.CATEGORIES,
-//     })
+  return (
+    <Modal
+      isOpen={isFormOpen}
+      scrollBehavior='inside'
+      size='2xl'
+      onOpenChange={closeForm}
+    >
+      <ModalContent>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <ModalHeader className='text-xl font-bold'>
+            {selectedCategoryId ? 'แก้ไขหมวดหมู่สินค้า' : 'เพิ่มหมวดหมู่ใหม่'}
+          </ModalHeader>
+          <ModalBody>
+            {isLoadingCategory && selectedCategoryId ? (
+              <div className='flex justify-center p-8'>
+                <Spinner label='กำลังโหลดข้อมูล...' />
+              </div>
+            ) : (
+              <div className='space-y-6'>
+                <SectionLabel>สถานะการแสดงผล</SectionLabel>
+                <Controller
+                  control={control}
+                  name='isActive'
+                  render={({ field: { value, onChange } }) => (
+                    <Switch isSelected={!!value} onValueChange={onChange}>
+                      เปิดใช้งานหมวดหมู่ (Active)
+                    </Switch>
+                  )}
+                />
 
-//     onClose()
-//   }
+                <SectionLabel>ข้อมูลพื้นฐาน</SectionLabel>
+                <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+                  <Controller
+                    control={control}
+                    name='name'
+                    render={({ field }) => (
+                      <Input
+                        {...field}
+                        errorMessage={errors.name?.message?.toString()}
+                        isInvalid={!!errors.name}
+                        label='ชื่อหมวดหมู่'
+                        variant='bordered'
+                      />
+                    )}
+                  />
+                  <Controller
+                    control={control}
+                    name='slug'
+                    render={({ field }) => (
+                      <Input
+                        {...field}
+                        errorMessage={errors.slug?.message?.toString()}
+                        isInvalid={!!errors.slug}
+                        label='URL Slug'
+                        placeholder='เช่น organic-honey'
+                        value={field.value || ''}
+                        variant='bordered'
+                      />
+                    )}
+                  />
+                </div>
 
-//   const { mutate: mutateCreateCategory, isPending: isPendingCreateCategory } =
-//     useMutation({
-//       mutationFn: createCategory,
-//       onSuccess: onRefetch,
-//     })
+                <Controller
+                  control={control}
+                  name='image'
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      errorMessage={errors.image?.message?.toString()}
+                      isInvalid={!!errors.image}
+                      label='รูปภาพหมวดหมู่ (URL)'
+                      placeholder='https://example.com/image.jpg'
+                      value={field.value || ''}
+                      variant='bordered'
+                    />
+                  )}
+                />
+              </div>
+            )}
+          </ModalBody>
+          <ModalFooter>
+            <Button variant='flat' onPress={closeForm}>
+              ยกเลิก
+            </Button>
+            <Button
+              className='text-secondary font-bold'
+              color='primary'
+              isDisabled={!isDirty}
+              isLoading={isPending}
+              type='submit'
+            >
+              {selectedCategoryId ? 'บันทึกการแก้ไข' : 'สร้างหมวดหมู่'}
+            </Button>
+          </ModalFooter>
+        </form>
+      </ModalContent>
+    </Modal>
+  )
+}
 
-//   const { mutate: mutateUpdateCategory, isPending: isPendingUpdateCategory } =
-//     useMutation({
-//       mutationFn: updateCategory,
-//       onSuccess: onRefetch,
-//     })
-
-//   const isPending =
-//     isPendingCreateCategory ||
-//     isLoadingCategory ||
-//     isPendingUpdateCategory ||
-//     isUploading
-//   const headerLable = categoryId ? 'Edit Category' : 'Add Category'
-
-//   const onFilesChange = (files: ImageWithPreview[]) => {
-//     setPreviewFiles(files)
-
-//     setValue(
-//       'image',
-//       files.length
-//         ? 'There have been changes to the image files.'
-//         : (oldImage ?? ''),
-//       {
-//         shouldDirty: true,
-//         shouldTouch: true,
-//       },
-//     )
-//   }
-
-//   const onSubmit = async (data: CategoryInput) => {
-//     const imagePath = await resolveImagePath()
-
-//     const payload = {
-//       ...data,
-//       image: imagePath,
-//     }
-
-//     if (categoryId) {
-//       mutateUpdateCategory(payload)
-//     } else {
-//       mutateCreateCategory(payload)
-//     }
-//   }
-
-//   const onClose = () => {
-//     setPreviewFiles([])
-//     setOldImage(null)
-
-//     queryClient.removeQueries({
-//       queryKey: QUERY_KEY.CATEGORY,
-//     })
-//     reset(DEFAULT_VALUES)
-//     setState({ categoryId: null })
-//     onOpenCategoryChange()
-//     onOpenCategoryManagerChange()
-//   }
-
-//   return (
-//     <Modal
-//       hideCloseButton
-//       isDismissable={false}
-//       isOpen={isCategoryOpen}
-//       scrollBehavior='inside'
-//       size='xl'
-//       onOpenChange={onOpenCategoryChange}
-//     >
-//       <ModalContent>
-//         <ModalHeader className='flex flex-col gap-1'>{headerLable}</ModalHeader>
-
-//         {isPending && <Spinner label='Loading...' />}
-
-//         {!isPending && (
-//           <ModalBody>
-//             <ImageDropzone onFilesChange={onFilesChange} />
-
-//             <SubHeading title='Option status' />
-//             <Controller
-//               control={control}
-//               name='isActive'
-//               render={({ field: { value, onChange, ...field } }) => (
-//                 <Switch {...field} isSelected={value} onValueChange={onChange}>
-//                   Enable
-//                 </Switch>
-//               )}
-//             />
-//             <SubHeading title='Basic information' />
-//             <Controller
-//               control={control}
-//               name='image'
-//               render={({ field: { value, ...field } }) => (
-//                 <Input
-//                   {...field}
-//                   isDisabled
-//                   errorMessage={errors.image?.message}
-//                   isInvalid={!!errors.image}
-//                   label='Image URL'
-//                   value={value ?? ''}
-//                   variant='bordered'
-//                 />
-//               )}
-//             />
-//             <Controller
-//               control={control}
-//               name='name'
-//               render={({ field }) => (
-//                 <Input
-//                   {...field}
-//                   errorMessage={errors.name?.message}
-//                   isInvalid={!!errors.name}
-//                   label='Category Name'
-//                   variant='bordered'
-//                 />
-//               )}
-//             />
-//             <Controller
-//               control={control}
-//               name='slug'
-//               render={({ field: { value, ...field } }) => (
-//                 <Input
-//                   {...field}
-//                   errorMessage={errors.slug?.message}
-//                   isInvalid={!!errors.slug}
-//                   label='Slug'
-//                   value={value ?? ''}
-//                   variant='bordered'
-//                 />
-//               )}
-//             />
-//           </ModalBody>
-//         )}
-
-//         <ModalFooter>
-//           <Button isDisabled={isPending} variant='faded' onPress={onClose}>
-//             Cancel
-//           </Button>
-//           <Button
-//             className='text-secondary'
-//             color='primary'
-//             isDisabled={isPending || !isDirty}
-//             onClick={handleSubmit(onSubmit)}
-//           >
-//             {isPending ? 'Saving...' : 'Save'}
-//           </Button>
-//         </ModalFooter>
-//       </ModalContent>
-//     </Modal>
-//   )
-// }
+export { CategoryForm }

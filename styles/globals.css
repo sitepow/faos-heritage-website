@@ -1,3 +1,5 @@
+@import url('@radix-ui/colors/tomato.css');
+@import url('@radix-ui/colors/mauve.css');
 @import url('@radix-ui/colors/tomato-dark.css');
 @import url('@radix-ui/colors/mauve-dark.css');
 @import 'tailwindcss';
@@ -15,6 +17,8 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    background-color: #ffffff;
+    color: var(--mauve-12);
   }
 
   h1,
@@ -31,6 +35,98 @@
 
 .Toastify__toast {
   font-family: var(--font-anuphan), sans-serif !important;
+}
+
+.mdxeditor.light-editor,
+.mdxeditor.dark-editor {
+  font-family: var(--font-anuphan), sans-serif !important;
+  font-size: 1.5rem !important;
+}
+
+.mdxeditor.light-editor h1,
+.mdxeditor.dark-editor h1 {
+  font-size: 2.25rem !important;
+  margin-bottom: 1.5rem !important;
+}
+.mdxeditor.light-editor h2,
+.mdxeditor.dark-editor h2 {
+  font-size: 1.875rem !important;
+  margin-top: 1.5rem !important;
+  margin-bottom: 1rem !important;
+}
+.mdxeditor.light-editor h3,
+.mdxeditor.dark-editor h3 {
+  font-size: 1.5rem !important;
+  margin-top: 1.25rem !important;
+  margin-bottom: 0.75rem !important;
+}
+.mdxeditor.light-editor h4,
+.mdxeditor.dark-editor h4 {
+  font-size: 1.25rem !important;
+  margin-top: 1rem !important;
+  margin-bottom: 0.5rem !important;
+}
+.mdxeditor.light-editor h5,
+.mdxeditor.dark-editor h5 {
+  font-size: 1.125rem !important;
+}
+.mdxeditor.light-editor h6,
+.mdxeditor.dark-editor h6 {
+  font-size: 1rem !important;
+}
+.mdxeditor.light-editor p,
+.mdxeditor.dark-editor p {
+  margin-bottom: 1rem !important;
+}
+
+.mdxeditor.light-editor .mdxeditor-root-contenteditable,
+.mdxeditor.dark-editor .mdxeditor-root-contenteditable {
+  min-height: 250px;
+}
+
+.mdxeditor.light-editor ul,
+.mdxeditor.dark-editor ul {
+  list-style-type: disc !important;
+  padding-left: 1.5rem !important;
+  margin: 1rem 0 !important;
+}
+.mdxeditor.light-editor ol,
+.mdxeditor.dark-editor ol {
+  list-style-type: decimal !important;
+  padding-left: 1.5rem !important;
+  margin: 1rem 0 !important;
+}
+
+.mdxeditor.light-editor {
+  --accentBase: var(--tomato-1);
+  --accentBgSubtle: var(--tomato-2);
+  --accentBg: var(--tomato-3);
+  --accentBgHover: var(--tomato-4);
+  --accentBgActive: var(--tomato-5);
+  --accentLine: var(--tomato-6);
+  --accentBorder: var(--tomato-7);
+  --accentBorderHover: var(--tomato-8);
+  --accentSolid: var(--tomato-9);
+  --accentSolidHover: var(--tomato-10);
+  --accentText: var(--tomato-11);
+  --accentTextContrast: var(--tomato-12);
+
+  --baseBase: var(--mauve-1);
+  --baseBgSubtle: var(--mauve-2);
+  --baseBg: var(--mauve-3);
+  --baseBgHover: var(--mauve-4);
+  --baseBgActive: var(--mauve-5);
+  --baseLine: var(--mauve-6);
+  --baseBorder: var(--mauve-7);
+  --baseBorderHover: var(--mauve-8);
+  --baseSolid: var(--mauve-9);
+  --baseSolidHover: var(--mauve-10);
+  --baseText: var(--mauve-11);
+  --baseTextContrast: var(--mauve-12);
+
+  --basePageBg: #ffffff;
+  background: var(--basePageBg);
+  color: var(--baseText);
 }
 
 .mdxeditor.dark-editor {
@@ -60,56 +156,13 @@
   --baseText: var(--mauve-11);
   --baseTextContrast: var(--mauve-12);
 
-  --basePageBg: #000;
-  font-family: var(--font-anuphan), sans-serif !important;
+  --basePageBg: #0a0a0a;
   background: var(--basePageBg);
   color: var(--baseText);
-  font-size: 1.5rem !important;
 }
 
-.mdxeditor.dark-editor h1 {
-  font-size: 2.25rem !important;
-  margin-bottom: 1.5rem !important;
-}
-.mdxeditor.dark-editor h2 {
-  font-size: 1.875rem !important;
-  margin-top: 1.5rem !important;
-  margin-bottom: 1rem !important;
-}
-.mdxeditor.dark-editor h3 {
-  font-size: 1.5rem !important;
-  margin-top: 1.25rem !important;
-  margin-bottom: 0.75rem !important;
-}
-.mdxeditor.dark-editor h4 {
-  font-size: 1.25rem !important;
-  margin-top: 1rem !important;
-  margin-bottom: 0.5rem !important;
-}
-.mdxeditor.dark-editor h5 {
-  font-size: 1.125rem !important;
-}
-.mdxeditor.dark-editor h6 {
-  font-size: 1rem !important;
-}
-
-.mdxeditor.dark-editor p {
-  margin-bottom: 1rem !important;
-}
-
-.mdxeditor.dark-editor .mdxeditor-root-contenteditable {
-  min-height: 250px;
-}
-
-.mdxeditor.dark-editor ul {
-  list-style-type: disc !important;
-  padding-left: 1.5rem !important;
-  margin: 1rem 0 !important;
-}
-.mdxeditor.dark-editor ol {
-  list-style-type: decimal !important;
-  padding-left: 1.5rem !important;
-  margin: 1rem 0 !important;
+.dark-editor [data-radix-collection-item] {
+  color: var(--baseTextContrast);
 }
 
 article.prose h1 {
@@ -131,13 +184,6 @@ article.prose h4 {
   margin-top: 1rem !important;
   margin-bottom: 0.5rem !important;
 }
-article.prose h5 {
-  font-size: 1.125rem !important;
-}
-article.prose h6 {
-  font-size: 1rem !important;
-}
-
 article.prose ul {
   list-style-type: disc !important;
   padding-left: 1.5rem !important;

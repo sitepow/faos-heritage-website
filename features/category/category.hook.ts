@@ -4,8 +4,11 @@ import { useQuery } from '@tanstack/react-query'
 
 import {
   getCategories,
+  getCategoriesAdmin,
   getCategory,
+  getCategoryAdmin,
   getCategoryBySlug,
+  getCategoryStat,
 } from './category.action'
 import { categoryQueryKeys } from './category.query-key'
 
@@ -47,4 +50,33 @@ const useCategories = ({ locale }: UseCategoriesParams) => {
   })
 }
 
-export { useCategoryBySlug, useCategory, useCategories }
+const useCategoriesAdmin = () => {
+  return useQuery({
+    queryKey: categoryQueryKeys.lists.all(),
+    queryFn: () => getCategoriesAdmin(),
+  })
+}
+
+const useCategoryAdmin = (id: string) => {
+  return useQuery({
+    queryKey: categoryQueryKeys.details.byId(id),
+    queryFn: () => getCategoryAdmin(id),
+    enabled: !!id,
+  })
+}
+
+const useCategoryStat = () => {
+  return useQuery({
+    queryKey: categoryQueryKeys.stats(),
+    queryFn: () => getCategoryStat(),
+  })
+}
+
+export {
+  useCategoryBySlug,
+  useCategory,
+  useCategories,
+  useCategoriesAdmin,
+  useCategoryAdmin,
+  useCategoryStat,
+}

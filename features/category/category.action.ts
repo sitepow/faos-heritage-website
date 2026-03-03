@@ -81,7 +81,6 @@ const updateCategory = async (data: CategoryInput) =>
         where: { id },
         data: omitEmptyFields(payload) as Prisma.CategoryUncheckedUpdateInput,
       })
-
       return ok()
     } catch {
       return fail(ERROR_CODES.SYSTEM_ERROR)
@@ -109,15 +108,30 @@ const deleteCategory = async (categoryIds: string | string[]) =>
         await Promise.all(imagesToDelete.map((url) => deleteFile(url)))
       }
 
-      await prisma.category.deleteMany({
-        where: { id: { in: ids } },
-      })
-
+      await prisma.category.deleteMany({ where: { id: { in: ids } } })
       return ok()
     } catch {
       return fail(ERROR_CODES.SYSTEM_ERROR)
     }
   })
+
+const getCategoriesAdmin = async () => {
+  noStore()
+  const items = await prisma.category.findMany({
+    include: {
+      _count: { select: { products: true } },
+    },
+    orderBy: { createdAt: 'desc' },
+  })
+  return items
+}
+
+const getCategoryAdmin = async (id: string) => {
+  const item = await prisma.category.findUnique({
+    where: { id },
+  })
+  return item
+}
 
 const getCategories = async (locale?: string) => {
   noStore()
@@ -158,16 +172,34 @@ const getCategory = async (categoryId: string, locale?: string) => {
   return applyLocalization(category)
 }
 
+const getCategoryStat = async () =>
+  withRole([Role.ADMIN], async () => {
+    noStore()
+    const [total, active, inactive] = await prisma.$transaction([
+      prisma.category.count(),
+      prisma.category.count({ where: { isActive: true } }),
+      prisma.category.count({ where: { isActive: false } }),
+    ])
+
+    const labels = ['หมวดหมู่ทั้งหมด', 'เปิดใช้งานอยู่', 'ปิดใช้งานอยู่']
+    const stats = [total, active, inactive]
+
+    return stats.map((value, idx) => ({ name: labels[idx], value }))
+  })
+
 type GetCategoryResult = Awaited<ReturnType<typeof getCategory>>
 type GetCategoriesResult = Awaited<ReturnType<typeof getCategories>>
 
 export {
-  getCategoryBySlug,
   createCategory,
   updateCategory,
   deleteCategory,
-  getCategories,
+  getCategoriesAdmin,
+  getCategoryAdmin,
   getCategory,
+  getCategories,
+  getCategoryBySlug,
+  getCategoryStat,
 }
 
 export type { GetCategoryResult, GetCategoriesResult }

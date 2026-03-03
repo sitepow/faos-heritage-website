@@ -7,6 +7,7 @@ import {
   type ProductLocalizationInput,
 } from './product-localization.schema'
 
+import { SUPPORTED_APP_LOCALES } from '@/constants'
 import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { prisma } from '@/lib/prisma'
@@ -99,31 +100,22 @@ const getProductLocalization = async (id: string) => {
   return localization || null
 }
 
-const getProductLocaleStat = async (productId: string) =>
-  withRole([Role.ADMIN], async () => {
-    const [total, languages] = await Promise.all([
-      prisma.productLocalization.count({ where: { productId } }),
-      prisma.productLocalization.findMany({
-        where: { productId },
-        select: { languageCode: true },
-      }),
-    ])
-
-    return [
-      {
-        name: 'ภาษาที่แปลแล้ว',
-        value: total,
-      },
-      {
-        name: 'จำนวนรหัสภาษาทั้งหมด',
-        value: languages.length,
-      },
-      {
-        name: 'ความสมบูรณ์เนื้อหา (%)',
-        value: total > 0 ? 100 : 0,
-      },
-    ]
+const getProductLocaleStat = async (productId: string) => {
+  const translatedCount = await prisma.productLocalization.count({
+    where: { productId },
   })
+
+  const totalSystemLanguages = SUPPORTED_APP_LOCALES.length
+  const pendingCount = Math.max(0, totalSystemLanguages - translatedCount)
+
+  const labels = ['ภาษาที่แปลแล้ว', 'รอการแปล', 'รวมเป้าหมาย']
+  const values = [translatedCount, pendingCount, totalSystemLanguages]
+
+  return labels.map((label, idx) => ({
+    name: label,
+    value: values[idx],
+  }))
+}
 
 export {
   createProductLocalization,

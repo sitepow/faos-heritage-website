@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 
 import { Button, Spinner } from '@heroui/react'
@@ -16,9 +15,8 @@ import { usePostAdmin } from '@/features/post/post.hook'
 import { usePostMutation } from '@/features/post/post.mutation'
 
 const PostDescriptionPage = () => {
-  const params = useParams()
+  const { id: postId } = useParams<{ id: string }>()
   const router = useRouter()
-  const postId = params.id as string
 
   const [content, setContent] = useState<string>('')
   const [loadCount, setLoadCount] = useState(0)
@@ -27,42 +25,31 @@ const PostDescriptionPage = () => {
   const { update, isUpdating } = usePostMutation()
 
   useEffect(() => {
-    if (post?.success && post.data?.id === postId) {
-      setContent(post.data.content || '')
+    if (post && post.id === postId) {
+      setContent(post.content || '')
       setLoadCount((prev) => prev + 1)
     }
-  }, [post?.success, postId])
+  }, [post, postId])
 
   const handleSave = useCallback(async () => {
-    if (!postId || !post?.success || !post.data) {
+    if (!postId || !post) {
       return
     }
 
-    const postData = post.data
-
-    const payload: PostInput = {
-      id: postId,
-      title: postData.title,
-      slug: postData.slug,
-      content: content,
-      summary: postData.summary ?? '',
-      featuredImage: postData.featuredImage ?? '',
-      status: postData.status,
-      isFeatured: postData.isFeatured,
-      viewCount: postData.viewCount,
-      categoryId: postData.categoryId || null,
-      tagIds: postData.tags?.map((tag: { id: string }) => tag.id) ?? [],
-      keywords: postData.keywords ?? [],
-      metaTitle: postData.metaTitle ?? '',
-      metaDescription: postData.metaDescription ?? '',
-      publishedAt: postData.publishedAt ? new Date(postData.publishedAt) : null,
-    }
-
-    await update(payload, {
-      onSuccess: () => {
-        router.push('/dashboard/posts')
+    await update(
+      {
+        ...post,
+        id: postId,
+        content: content,
+        tagIds: post.tags?.map((tag: { id: string }) => tag.id) ?? [],
+        categoryId: post.categoryId || null,
+      } as PostInput,
+      {
+        onSuccess: () => {
+          router.push('/dashboard/posts')
+        },
       },
-    })
+    )
   }, [postId, post, content, update, router])
 
   if (isLoading) {
@@ -96,7 +83,7 @@ const PostDescriptionPage = () => {
             <div>
               <h1 className='text-2xl font-bold'>แก้ไขเนื้อหาบทความ</h1>
               <p className='text-small text-default-500'>
-                {post?.success ? post.data.title : 'ไม่พบข้อมูลบทความ'}
+                {post ? post.title : 'ไม่พบข้อมูลบทความ'}
               </p>
             </div>
           </div>

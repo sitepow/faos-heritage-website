@@ -19,10 +19,13 @@ import {
 } from '@heroui/react'
 import { EllipsisVerticalIcon, MapPinIcon } from 'lucide-react'
 
+import type { getAddressesAdmin } from '@/features/address/address.action'
 import type { Selection } from '@heroui/react'
 import type { ReactNode } from 'react'
 
 import { useIsMounted } from '@/hooks/useIsMounted'
+
+type AddressItemType = Awaited<ReturnType<typeof getAddressesAdmin>>[number]
 
 interface ActionItem {
   key: string
@@ -33,7 +36,7 @@ interface ActionItem {
 }
 
 interface Props {
-  addressList: any[]
+  addressList: AddressItemType[]
   isLoading: boolean
   selectedKeys: Selection
   onSelectionChange: (keys: Selection) => void
@@ -87,7 +90,7 @@ const AddressTable = ({
               <TableRow key={addr.id}>
                 <TableCell>
                   <HeroUser
-                    avatarProps={{ src: addr.user?.image || '', size: 'sm' }}
+                    avatarProps={{ src: addr.user?.image || '' }}
                     description={addr.user?.email}
                     name={addr.user?.name || 'ผู้ใช้ทั่วไป'}
                   />
