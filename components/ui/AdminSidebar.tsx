@@ -15,6 +15,7 @@ import {
   LayersIcon,
   FoldersIcon,
   ArrowUpLeft,
+  Share2Icon,
 } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -85,6 +86,11 @@ const AdminSidebar = () => {
       href: '/dashboard/shipping',
       label: 'ค่าจัดส่ง',
       icon: TruckIcon,
+    },
+    {
+      href: '/dashboard/affiliates',
+      label: 'แอฟฟิลิเอต',
+      icon: Share2Icon,
     },
   ]
 

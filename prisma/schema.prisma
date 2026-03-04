@@ -11,6 +11,19 @@ enum Role {
   ADMIN
 }
 
+enum AffiliateStatus {
+  PENDING  
+  APPROVED 
+  REJECTED 
+  SUSPENDED
+}
+
+enum PayoutStatus {
+  PENDING
+  COMPLETED
+  REJECTED
+}
+
 enum ProductUnit {
   PIECE
   ITEM
@@ -84,6 +97,75 @@ enum PostStatus {
   PUBLISHED
   ARCHIVED
 }
+
+model AffiliateCommission {
+  id              String   @id @default(cuid())
+  affiliateId     String
+  orderId         String   @unique
+  
+  orderAmount     Decimal  @db.Decimal(12, 2)
+  
+  appliedRate     Decimal  @db.Decimal(5, 2)
+  
+  commissionAmount Decimal  @db.Decimal(12, 2)
+  
+  status          PayoutStatus @default(PENDING)
+  
+  affiliate       AffiliateProfile @relation(fields: [affiliateId], references: [id], onDelete: Cascade)
+  order           Order            @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([affiliateId])
+  @@index([status])
+}
+
+model AffiliatePayout {
+  id               String       @id @default(cuid())
+  affiliateId      String
+  affiliate        AffiliateProfile @relation(fields: [affiliateId], references: [id], onDelete: Cascade)
+
+  amount           Decimal      @db.Decimal(12, 2)
+  payoutProofImage String?
+  status           PayoutStatus @default(PENDING)
+  notes            String?      @db.Text
+
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+
+  @@index([affiliateId])
+  @@index([status])
+}
+
+model AffiliateProfile {
+  id             String          @id @default(cuid())
+  userId         String          @unique
+  user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  idCardImage    String?
+  bankAccountImage String?
+  bankName       String?
+  bankAccountNo  String?
+  socialMedia    String?         @db.Text
+  phoneNumber    String?
+
+  status         AffiliateStatus @default(PENDING)
+
+  baseRate         Decimal         @default(5.00) @db.Decimal(5, 2) 
+  highValueRate    Decimal         @default(10.00) @db.Decimal(5, 2)
+  thresholdAmount  Decimal         @default(10000.00) @db.Decimal(12, 2)
+
+  commissions      AffiliateCommission[]
+  payouts          AffiliatePayout[]
+
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  @@index([userId])
+  @@index([status])
+}
+
 
 model BlogCategory {
   id        String  @id @default(cuid())
@@ -277,6 +359,8 @@ model User {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  affiliate AffiliateProfile?
 
   @@index([role])
   @@index([isActive])
@@ -528,6 +612,8 @@ model Order {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  affiliateCommission AffiliateCommission?
 
   @@index([userId])
   @@index([status])

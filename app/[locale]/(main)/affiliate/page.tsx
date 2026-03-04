@@ -2,7 +2,7 @@ import { getTranslations } from 'next-intl/server'
 
 import type { Metadata } from 'next'
 
-import { AffiliateClient } from './affiliate.client'
+import { AffiliateClient } from './_components/AffiliateClient'
 
 import { constructMetadata } from '@/lib/metadata'
 

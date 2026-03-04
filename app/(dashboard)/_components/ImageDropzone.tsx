@@ -13,7 +13,7 @@ import { cn } from '@/utils'
 
 type ImageWithPreview = File & { preview: string }
 
-interface ImageDropzoneProps {
+interface Props {
   multiple?: boolean
   onFilesChange?: (files: ImageWithPreview[]) => void
 }
@@ -26,10 +26,7 @@ const createPreviewFiles = (files: File[]): ImageWithPreview[] =>
       }) as ImageWithPreview,
   )
 
-const ImageDropzone = ({
-  multiple = false,
-  onFilesChange,
-}: ImageDropzoneProps) => {
+const ImageDropzone = ({ multiple = false, onFilesChange }: Props) => {
   const [files, setFiles] = useState<ImageWithPreview[]>([])
 
   useEffect(() => {
@@ -63,7 +60,6 @@ const ImageDropzone = ({
 
   return (
     <div className='flex flex-col gap-4 text-left'>
-      {/* ส่วนแสดงผลพรีวิวรูปภาพ */}
       {files.length > 0 && (
         <div
           className={cn('grid gap-4', multiple ? 'grid-cols-2' : 'grid-cols-1')}
@@ -101,14 +97,13 @@ const ImageDropzone = ({
         </div>
       )}
 
-      {/* พื้นที่สำหรับ Drop ไฟล์ */}
       <div
         {...getRootProps()}
         className={cn(
           'relative flex min-h-48 cursor-pointer items-center justify-center rounded-xl border-2 border-dashed transition-all duration-200',
           isDragActive
             ? 'border-primary bg-primary/5'
-            : 'border-default-200 hover:border-primary/50 hover:bg-default-50',
+            : 'border-default-200 hover:border-primary/50',
         )}
       >
         <input {...getInputProps()} />

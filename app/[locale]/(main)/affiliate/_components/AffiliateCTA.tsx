@@ -8,7 +8,11 @@ import { AffiliateButton } from '@/components/ui/AffiliateButton'
 import { AffiliateHeading } from '@/components/ui/AffiliateHeading'
 import { useAppNavigation } from '@/hooks/useAppNavigation'
 
-const AffiliateCTA = () => {
+interface Props {
+  onRegisterClick: () => void
+}
+
+const AffiliateCTA = ({ onRegisterClick }: Props) => {
   const t = useTranslations('affiliate.cta')
   const navigation = useAppNavigation()
 
@@ -27,7 +31,7 @@ const AffiliateCTA = () => {
           <div className='flex flex-col flex-wrap items-center justify-center gap-4 lg:flex-row'>
             <AffiliateButton
               className='group flex flex-wrap items-center justify-center gap-2'
-              onClick={navigation.REGISTER_AFFILIATE}
+              onClick={onRegisterClick}
             >
               {t('buttons.register')}
               <ArrowRight className='hidden size-5 shrink-0 transition-transform group-hover:translate-x-1 sm:block' />

@@ -1,0 +1,136 @@
+'use client'
+
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  Image,
+} from '@heroui/react'
+import { AffiliateStatus } from '@prisma/client'
+import { CheckIcon, XIcon } from 'lucide-react'
+
+import { SectionLabel } from '@/components/ui/SectionHeader'
+import { useAffiliateMutation } from '@/features/affiliate/affiliate.mutation'
+import { useAffiliateStore } from '@/features/affiliate/affiliate.store'
+
+const AffiliateDetailModal = () => {
+  const { selectedAffiliate, isDetailOpen, closeDetail } = useAffiliateStore()
+  const { updateStatus, isUpdating } = useAffiliateMutation()
+
+  if (!selectedAffiliate) {
+    return null
+  }
+
+  const handleUpdateStatus = async (status: AffiliateStatus) => {
+    await updateStatus({ id: selectedAffiliate.id, status })
+    return closeDetail()
+  }
+
+  return (
+    <Modal
+      hideCloseButton
+      isOpen={isDetailOpen}
+      scrollBehavior='inside'
+      size='3xl'
+      onClose={closeDetail}
+    >
+      <ModalContent>
+        <ModalHeader className='flex flex-col gap-1'>
+          รายละเอียดผู้สมัคร Affiliate
+          <span className='text-small text-default-500 font-normal'>
+            {selectedAffiliate.user.name ?? 'ไม่ระบุชื่อ'} (
+            {selectedAffiliate.user.email})
+          </span>
+        </ModalHeader>
+        <ModalBody className='gap-6'>
+          <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+            <div>
+              <SectionLabel>สำเนาบัตรประชาชน</SectionLabel>
+              <Image
+                alt='ID Card'
+                className='mt-2 h-48 w-full rounded-xl object-cover shadow-sm'
+                src={selectedAffiliate.idCardImage ?? '/images/no-image.png'}
+              />
+            </div>
+            <div>
+              <SectionLabel>สำเนาสมุดบัญชี</SectionLabel>
+              <Image
+                alt='Bank Account'
+                className='mt-2 h-48 w-full rounded-xl object-cover shadow-sm'
+                src={
+                  selectedAffiliate.bankAccountImage ?? '/images/no-image.png'
+                }
+              />
+            </div>
+          </div>
+
+          <div className='space-y-3'>
+            <SectionLabel>ข้อมูลธนาคารและการติดต่อ</SectionLabel>
+            <div className='grid grid-cols-1 gap-2 md:grid-cols-2'>
+              <p className='text-small'>
+                ธนาคาร:{' '}
+                <span className='font-bold'>
+                  {selectedAffiliate.bankName ?? '-'}
+                </span>
+              </p>
+              <p className='text-small'>
+                เลขที่บัญชี:{' '}
+                <span className='font-bold'>
+                  {selectedAffiliate.bankAccountNo ?? '-'}
+                </span>
+              </p>
+              <p className='text-small'>
+                เบอร์ติดต่อ:{' '}
+                <span className='font-bold'>
+                  {selectedAffiliate.phoneNumber ?? '-'}
+                </span>
+              </p>
+            </div>
+          </div>
+
+          <div className='space-y-2'>
+            <SectionLabel>ช่องทางโซเชียลมีเดีย</SectionLabel>
+            <div className='bg-default-100 text-small min-h-[60px] rounded-lg p-3 whitespace-pre-wrap'>
+              {selectedAffiliate.socialMedia ?? 'ไม่ได้ระบุข้อมูล'}
+            </div>
+          </div>
+        </ModalBody>
+        <ModalFooter>
+          <Button variant='flat' onPress={closeDetail}>
+            ปิด
+          </Button>
+          {selectedAffiliate.status === AffiliateStatus.PENDING && (
+            <>
+              <Button
+                color='danger'
+                isDisabled={isUpdating}
+                startContent={<XIcon />}
+                onPress={() => {
+                  return handleUpdateStatus(AffiliateStatus.REJECTED)
+                }}
+              >
+                ปฏิเสธการสมัคร
+              </Button>
+              <Button
+                className='text-secondary'
+                color='primary'
+                isDisabled={isUpdating}
+                startContent={<CheckIcon />}
+                onPress={() => {
+                  return handleUpdateStatus(AffiliateStatus.APPROVED)
+                }}
+              >
+                อนุมัติพาร์ทเนอร์
+              </Button>
+            </>
+          )}
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
+  )
+}
+
+export { AffiliateDetailModal }

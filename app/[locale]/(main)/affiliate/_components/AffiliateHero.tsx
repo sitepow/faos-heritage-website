@@ -8,7 +8,11 @@ import { AffiliateButton } from '@/components/ui/AffiliateButton'
 import { AffiliateHeading } from '@/components/ui/AffiliateHeading'
 import { useAppNavigation } from '@/hooks/useAppNavigation'
 
-const AffiliateHero = () => {
+interface Props {
+  onRegisterClick: () => void
+}
+
+const AffiliateHero = ({ onRegisterClick }: Props) => {
   const t = useTranslations('affiliate.banner')
   const navigation = useAppNavigation()
 
@@ -18,7 +22,7 @@ const AffiliateHero = () => {
       <AffiliateHeading isHero align='center' as='h1' icon={CoinsIcon} />
 
       <div className='flex flex-wrap items-center justify-center gap-2.5'>
-        <AffiliateButton onClick={navigation.REGISTER_AFFILIATE}>
+        <AffiliateButton onClick={onRegisterClick}>
           {t('buttons.register')}
         </AffiliateButton>
 
@@ -26,8 +30,6 @@ const AffiliateHero = () => {
           {t('buttons.about')}
         </AffiliateButton>
       </div>
-
-      {/* <AffiliatePartnerAvatars /> */}
     </section>
   )
 }
