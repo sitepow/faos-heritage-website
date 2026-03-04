@@ -78,9 +78,7 @@ const ProductVariantPage = () => {
   )
 
   const handleConfirmDelete = useCallback(async () => {
-    if (!targetDeleteId) {
-      return
-    }
+    if (!targetDeleteId) return
 
     if (Array.isArray(targetDeleteId)) {
       await Promise.all(targetDeleteId.map((id) => remove(id)))
@@ -146,6 +144,7 @@ const ProductVariantPage = () => {
       <ProductVariantTable
         productId={productId}
         selectedKeys={selectedKeys}
+        onDelete={handleDeleteTrigger}
         onSelectionChange={setSelectedKeys}
       />
 

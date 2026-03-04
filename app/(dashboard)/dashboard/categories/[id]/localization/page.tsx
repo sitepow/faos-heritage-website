@@ -143,11 +143,9 @@ const CategoryLocalizationPage = () => {
               <ChevronLeftIcon size={24} />
             </Button>
             <div>
-              <h1 className='text-2xl font-bold'>
-                จัดการภาษา: {category?.name}
-              </h1>
+              <h1 className='text-2xl font-bold'>จัดการภาษา (Localization)</h1>
               <p className='text-small text-default-500'>
-                จัดการคำแปลชื่อหมวดหมู่สำหรับภาษาต่างๆ
+                ต้นฉบับ: {category?.name}
               </p>
             </div>
           </div>

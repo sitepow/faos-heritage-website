@@ -49,12 +49,18 @@ const BlogCategoryLocalizationPage = () => {
   )
 
   const selectedCount = useMemo(() => {
-    if (selectedKeys === 'all') return localeList.length
+    if (selectedKeys === 'all') {
+      return localeList.length
+    }
+
     return selectedKeys.size
   }, [selectedKeys, localeList])
 
   const selectedLocaleIds = useMemo(() => {
-    if (selectedKeys === 'all') return localeList.map((l) => l.id)
+    if (selectedKeys === 'all') {
+      return localeList.map((l) => l.id)
+    }
+
     return Array.from(selectedKeys) as string[]
   }, [selectedKeys, localeList])
 
@@ -67,7 +73,10 @@ const BlogCategoryLocalizationPage = () => {
   )
 
   const handleConfirmDelete = useCallback(async () => {
-    if (!targetDeleteId) return
+    if (!targetDeleteId) {
+      return
+    }
+
     const ids = Array.isArray(targetDeleteId)
       ? targetDeleteId
       : [targetDeleteId]
@@ -135,12 +144,8 @@ const BlogCategoryLocalizationPage = () => {
               <ChevronLeftIcon size={24} />
             </Button>
             <div>
-              <h1 className='text-2xl font-bold'>
-                จัดการภาษา (Blog): {category?.name}
-              </h1>
-              <p className='text-small text-default-500'>
-                จัดการคำแปลชื่อหมวดหมู่บทความ
-              </p>
+              <h1 className='text-2xl font-bold'>จัดการภาษา (Localization)</h1>
+              <p>ต้นฉบับ: {category?.name}</p>
             </div>
           </div>
         }

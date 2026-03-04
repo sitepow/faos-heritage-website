@@ -71,6 +71,7 @@ const CategoryTable = ({
       onSelectionChange={onSelectionChange}
     >
       <TableHeader>
+        <TableColumn>รหัสหมวดหมู่</TableColumn>
         <TableColumn>ชื่อหมวดหมู่</TableColumn>
         <TableColumn>URL Slug</TableColumn>
         <TableColumn>จำนวนสินค้า</TableColumn>
@@ -84,6 +85,11 @@ const CategoryTable = ({
       >
         {categoryList.map((cat) => (
           <TableRow key={cat.id}>
+            <TableCell>
+              <span className='text-default-500 font-mono text-xs font-bold'>
+                #{cat.id.slice(-8).toUpperCase()}
+              </span>
+            </TableCell>
             <TableCell className='font-medium'>{cat.name}</TableCell>
             <TableCell>{cat.slug}</TableCell>
             <TableCell>

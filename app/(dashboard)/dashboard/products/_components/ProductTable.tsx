@@ -128,6 +128,7 @@ const ProductTable = ({
         onSelectionChange={onSelectionChange}
       >
         <TableHeader>
+          <TableColumn>รหัสสินค้า</TableColumn>
           <TableColumn>รูปภาพ</TableColumn>
           <TableColumn>ชื่อสินค้า (ต้นฉบับ)</TableColumn>
           <TableColumn>หมวดหมู่</TableColumn>
@@ -149,6 +150,11 @@ const ProductTable = ({
 
             return (
               <TableRow key={product.id}>
+                <TableCell>
+                  <span className='text-default-500 font-mono text-xs font-bold'>
+                    #{product.id.slice(-8).toUpperCase()}
+                  </span>
+                </TableCell>
                 <TableCell>
                   <ProductImage className='size-20' image={primarySrc} />
                 </TableCell>

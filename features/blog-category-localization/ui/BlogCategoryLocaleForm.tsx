@@ -89,7 +89,12 @@ const BlogCategoryLocaleForm = ({ blogCategoryId }: Props) => {
   }
 
   return (
-    <Modal isOpen={isFormOpen} size='md' onOpenChange={closeForm}>
+    <Modal
+      hideCloseButton
+      isOpen={isFormOpen}
+      size='md'
+      onOpenChange={closeForm}
+    >
       <ModalContent>
         <form onSubmit={handleSubmit(onSubmit)}>
           <ModalHeader className='text-xl font-bold'>

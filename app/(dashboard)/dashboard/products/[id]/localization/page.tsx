@@ -63,6 +63,7 @@ const ProductLocalizationPage = () => {
     if (selectedKeys === 'all') {
       return localeList.map((l) => l.id)
     }
+
     return Array.from(selectedKeys) as string[]
   }, [selectedKeys, localeList])
 

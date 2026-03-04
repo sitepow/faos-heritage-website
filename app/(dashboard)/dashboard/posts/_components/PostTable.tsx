@@ -99,6 +99,7 @@ const PostTable = ({
       onSelectionChange={onSelectionChange}
     >
       <TableHeader>
+        <TableColumn>รหัสบทความ</TableColumn>
         <TableColumn>รูปภาพบทความ</TableColumn>
         <TableColumn>ชื่อบทความ</TableColumn>
         <TableColumn>หมวดหมู่</TableColumn>
@@ -113,6 +114,11 @@ const PostTable = ({
       >
         {postList.map((post) => (
           <TableRow key={post.id}>
+            <TableCell>
+              <span className='text-default-500 font-mono text-xs font-bold'>
+                #{post.id.slice(-8).toUpperCase()}
+              </span>
+            </TableCell>
             <TableCell>
               <ProductImage
                 className='size-20'

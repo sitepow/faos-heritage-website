@@ -72,6 +72,7 @@ const ProductLocalizationTable = ({
         onSelectionChange={onSelectionChange}
       >
         <TableHeader>
+          <TableColumn>รหัสแปลภาษา</TableColumn>
           <TableColumn>รหัสภาษา</TableColumn>
           <TableColumn>ชื่อสินค้า (ต้นฉบับ)</TableColumn>
           <TableColumn>ชื่อสินค้า (ที่แปลแล้ว)</TableColumn>
@@ -87,6 +88,11 @@ const ProductLocalizationTable = ({
             return (
               <TableRow key={locale.id}>
                 <TableCell>
+                  <span className='text-default-500 font-mono text-xs font-bold'>
+                    #{locale.id.slice(-8).toUpperCase()}
+                  </span>
+                </TableCell>
+                <TableCell>
                   <Chip
                     className='font-bold'
                     color='secondary'
@@ -96,7 +102,7 @@ const ProductLocalizationTable = ({
                     {locale.languageCode.toUpperCase()}
                   </Chip>
                 </TableCell>
-                <TableCell className='text-default-500 italic'>
+                <TableCell className='text-default-500'>
                   {originalName}
                 </TableCell>
                 <TableCell className='text-primary font-medium'>

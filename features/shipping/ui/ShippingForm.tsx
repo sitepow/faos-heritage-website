@@ -92,6 +92,7 @@ const ShippingForm = () => {
 
   return (
     <Modal
+      hideCloseButton
       isDismissable={!isPending}
       isOpen={isFormOpen}
       scrollBehavior='inside'

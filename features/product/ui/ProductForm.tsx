@@ -19,7 +19,7 @@ import {
 } from '@heroui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ProductUnit } from '@prisma/client'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
 import type { KeyboardEvent } from 'react'
@@ -28,7 +28,7 @@ import type { Resolver } from 'react-hook-form'
 import { useProductAdmin } from '../product.hook'
 import { useProductMutation } from '../product.mutation'
 import { productSchema, type ProductInput } from '../product.schema'
-import { useProductUIStore } from '../product.store'
+import { useProductUIStore, useProductDetailStore } from '../product.store'
 
 import { SectionLabel } from '@/components/ui/SectionHeader'
 import { useCategories } from '@/features/category/category.hook'
@@ -54,6 +54,7 @@ const DEFAULT_VALUES: ProductInput = {
 const ProductForm = () => {
   const unitTranslations = localeTh.global.productUnit
   const { selectedProductId, isFormOpen, closeForm } = useProductUIStore()
+  const { reset: resetDetailStore } = useProductDetailStore()
   const { create, update, isCreating, isUpdating } = useProductMutation()
 
   const [keywordInput, setKeywordInput] = useState('')
@@ -69,7 +70,7 @@ const ProductForm = () => {
   const {
     control,
     handleSubmit,
-    reset,
+    reset: resetForm,
     watch,
     setValue,
     formState: { errors, isDirty },
@@ -80,10 +81,17 @@ const ProductForm = () => {
 
   const keywords = watch('keywords') || []
 
+  const handleClose = useCallback(() => {
+    closeForm()
+    resetDetailStore()
+    resetForm(DEFAULT_VALUES)
+    setKeywordInput('')
+  }, [closeForm, resetDetailStore, resetForm])
+
   useEffect(() => {
     if (isFormOpen) {
       if (selectedProductId && product) {
-        reset({
+        resetForm({
           ...product,
           price: Number(product.price),
           salePrice: product.salePrice ? Number(product.salePrice) : null,
@@ -91,16 +99,15 @@ const ProductForm = () => {
           keywords: product.keywords ?? [],
         } as ProductInput)
       } else {
-        reset(DEFAULT_VALUES)
+        resetForm(DEFAULT_VALUES)
       }
     }
-  }, [isFormOpen, selectedProductId, product, reset])
+  }, [isFormOpen, selectedProductId, product, resetForm])
 
   const handleKeywordKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === ',' || e.key === 'Enter') {
       e.preventDefault()
       const value = keywordInput.trim()
-
       if (value && !keywords.includes(value)) {
         const newKeywords = [...keywords, value]
         setValue('keywords', newKeywords, { shouldDirty: true })
@@ -124,17 +131,18 @@ const ProductForm = () => {
     } else {
       await create(data)
     }
-    closeForm()
+    handleClose()
   }
 
   const isPending = isLoadingProduct || isCreating || isUpdating
 
   return (
     <Modal
+      hideCloseButton
       isOpen={isFormOpen}
       scrollBehavior='inside'
       size='4xl'
-      onOpenChange={closeForm}
+      onOpenChange={handleClose}
     >
       <ModalContent>
         <form className='overflow-y-scroll' onSubmit={handleSubmit(onSubmit)}>
@@ -169,7 +177,7 @@ const ProductForm = () => {
                     render={({ field }) => (
                       <Input
                         {...field}
-                        errorMessage={errors.name?.message}
+                        errorMessage={errors.name?.message?.toString()}
                         isInvalid={!!errors.name}
                         label='ชื่อสินค้า'
                         variant='bordered'
@@ -182,9 +190,10 @@ const ProductForm = () => {
                     render={({ field }) => (
                       <Input
                         {...field}
-                        errorMessage={errors.slug?.message}
+                        errorMessage={errors.slug?.message?.toString()}
                         isInvalid={!!errors.slug}
                         label='URL Slug'
+                        value={field.value ?? ''}
                         variant='bordered'
                       />
                     )}
@@ -194,7 +203,7 @@ const ProductForm = () => {
                     name='categoryId'
                     render={({ field: { value, onChange } }) => (
                       <Select
-                        errorMessage={errors.categoryId?.message}
+                        errorMessage={errors.categoryId?.message?.toString()}
                         isInvalid={!!errors.categoryId}
                         label='หมวดหมู่สินค้า'
                         selectedKeys={value ? [value] : []}
@@ -219,7 +228,7 @@ const ProductForm = () => {
                     render={({ field: { value, onChange, ...field } }) => (
                       <Input
                         {...field}
-                        errorMessage={errors.price?.message}
+                        errorMessage={errors.price?.message?.toString()}
                         isInvalid={!!errors.price}
                         label='ราคาปกติ'
                         type='number'
@@ -235,7 +244,7 @@ const ProductForm = () => {
                     render={({ field: { value, onChange, ...field } }) => (
                       <Input
                         {...field}
-                        errorMessage={errors.salePrice?.message}
+                        errorMessage={errors.salePrice?.message?.toString()}
                         isInvalid={!!errors.salePrice}
                         label='ราคาลด (ถ้ามี)'
                         type='number'
@@ -251,7 +260,7 @@ const ProductForm = () => {
                     render={({ field: { value, onChange, ...field } }) => (
                       <Input
                         {...field}
-                        errorMessage={errors.stockQuantity?.message}
+                        errorMessage={errors.stockQuantity?.message?.toString()}
                         isInvalid={!!errors.stockQuantity}
                         label='จำนวนสต็อก'
                         type='number'
@@ -262,6 +271,12 @@ const ProductForm = () => {
                     )}
                   />
                 </div>
+
+                <Alert>
+                  หากไม่มีตัวเลือกสินค้า ให้ระบุราคาและสต็อกที่นี่
+                  หากมีตัวเลือกสินค้า (Variants) ให้ไประบุที่เมนู
+                  จัดการตัวเลือกสินค้า
+                </Alert>
 
                 <SectionLabel>หน่วยและน้ำหนัก</SectionLabel>
                 <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
@@ -295,7 +310,7 @@ const ProductForm = () => {
                     render={({ field: { value, onChange, ...field } }) => (
                       <Input
                         {...field}
-                        errorMessage={errors.weight?.message}
+                        errorMessage={errors.weight?.message?.toString()}
                         isInvalid={!!errors.weight}
                         label='น้ำหนัก (กรัม)'
                         type='number'
@@ -314,7 +329,7 @@ const ProductForm = () => {
                   render={({ field }) => (
                     <Textarea
                       {...field}
-                      errorMessage={errors.summary?.message}
+                      errorMessage={errors.summary?.message?.toString()}
                       isInvalid={!!errors.summary}
                       label='คำอธิบายสั้น (Summary)'
                       value={field.value || ''}
@@ -354,7 +369,7 @@ const ProductForm = () => {
                       render={({ field }) => (
                         <Input
                           {...field}
-                          errorMessage={errors.metaTitle?.message}
+                          errorMessage={errors.metaTitle?.message?.toString()}
                           isInvalid={!!errors.metaTitle}
                           label='Meta Title'
                           value={field.value || ''}
@@ -368,7 +383,7 @@ const ProductForm = () => {
                       render={({ field }) => (
                         <Input
                           {...field}
-                          errorMessage={errors.metaDescription?.message}
+                          errorMessage={errors.metaDescription?.message?.toString()}
                           isInvalid={!!errors.metaDescription}
                           label='Meta Description'
                           value={field.value || ''}
@@ -378,7 +393,6 @@ const ProductForm = () => {
                     />
                   </div>
                 </div>
-
                 <Alert>
                   * สำหรับรายละเอียดเนื้อหา (Description) แบบเต็ม
                   คุณสามารถจัดการได้ผ่านปุ่ม &quot;แก้ไขรายละเอียดเนื้อหา&quot;
@@ -388,7 +402,7 @@ const ProductForm = () => {
             )}
           </ModalBody>
           <ModalFooter>
-            <Button variant='flat' onPress={closeForm}>
+            <Button variant='flat' onPress={handleClose}>
               ยกเลิก
             </Button>
             <Button

@@ -79,6 +79,7 @@ const CategoryForm = () => {
 
   return (
     <Modal
+      hideCloseButton
       isOpen={isFormOpen}
       scrollBehavior='inside'
       size='2xl'

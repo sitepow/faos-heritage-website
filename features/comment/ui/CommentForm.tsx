@@ -28,7 +28,9 @@ const CommentForm = ({
   const { create, isCreating } = useCommentMutation()
 
   const handleSubmit = async () => {
-    if (!content.trim()) return
+    if (!content.trim()) {
+      return
+    }
 
     const result = await create({
       content,

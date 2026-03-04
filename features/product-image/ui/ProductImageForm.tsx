@@ -121,6 +121,7 @@ const ProductImageForm = () => {
 
   return (
     <Modal
+      hideCloseButton
       isDismissable={!isPending}
       isOpen={isFormOpen}
       size='xl'

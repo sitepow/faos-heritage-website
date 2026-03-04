@@ -72,6 +72,7 @@ const ProductImageTable = ({
         onSelectionChange={onSelectionChange}
       >
         <TableHeader>
+          <TableColumn>รหัสรูปภาพ</TableColumn>
           <TableColumn width={120}>รูปภาพ</TableColumn>
           <TableColumn>คำอธิบาย (Alt Text)</TableColumn>
           <TableColumn>สถานะ</TableColumn>
@@ -87,17 +88,18 @@ const ProductImageTable = ({
             return (
               <TableRow key={img.id}>
                 <TableCell>
+                  <span className='text-default-500 font-mono text-xs font-bold'>
+                    #{img.id.slice(-8).toUpperCase()}
+                  </span>
+                </TableCell>
+                <TableCell>
                   <ProductImage
                     className='size-20'
                     image={img?.url ?? IMAGE_FALLBACK.EMPTY}
                   />
                 </TableCell>
                 <TableCell className='text-default-600 font-medium'>
-                  {img.alt || (
-                    <span className='text-default-400 italic'>
-                      ไม่มีคำอธิบาย
-                    </span>
-                  )}
+                  {img?.alt ?? '-'}
                 </TableCell>
                 <TableCell>
                   <Chip

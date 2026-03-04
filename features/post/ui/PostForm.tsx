@@ -18,13 +18,17 @@ import {
 } from '@heroui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { PostStatus } from '@prisma/client'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
 import type { PostInput } from '@/features/post/post.schema'
 import type { KeyboardEvent } from 'react'
 import type { Resolver } from 'react-hook-form'
 
+import {
+  ImageDropzone,
+  type ImageWithPreview,
+} from '@/app/(dashboard)/_components/ImageDropzone'
 import { SectionLabel } from '@/components/ui/SectionHeader'
 import { useBlogCategories } from '@/features/blog-category/blog-category.hook'
 import { usePostAdmin } from '@/features/post/post.hook'
@@ -32,6 +36,7 @@ import { usePostMutation } from '@/features/post/post.mutation'
 import { postSchema } from '@/features/post/post.schema'
 import { usePostUIStore } from '@/features/post/post.store'
 import { useTags } from '@/features/tag/tag.hook'
+import { useResolveImageUpload } from '@/hooks/useResolveImageUpload'
 
 const DEFAULT_VALUES: PostInput = {
   title: '',
@@ -50,10 +55,23 @@ const DEFAULT_VALUES: PostInput = {
 }
 
 const PostForm = () => {
-  const { selectedPostId, isFormOpen, closeForm } = usePostUIStore()
+  const {
+    selectedPostId,
+    isFormOpen,
+    closeForm,
+    reset: resetUIStore,
+  } = usePostUIStore()
   const { create, update, isCreating, isUpdating } = usePostMutation()
 
   const [inputValue, setInputValue] = useState('')
+
+  const [previewFiles, setPreviewFiles] = useState<ImageWithPreview[]>([])
+  const [oldImage, setOldImage] = useState<string | null>(null)
+
+  const { resolveImagePath, isUploading } = useResolveImageUpload({
+    oldImage,
+    previewFiles,
+  })
 
   const { data: categoriesRes } = useBlogCategories({})
   const categories = categoriesRes?.success ? categoriesRes.data : []
@@ -68,7 +86,7 @@ const PostForm = () => {
   const {
     control,
     handleSubmit,
-    reset,
+    reset: resetForm,
     watch,
     setValue,
     formState: { errors, isDirty },
@@ -79,31 +97,50 @@ const PostForm = () => {
 
   const keywords = watch('keywords') || []
 
+  const handleClose = useCallback(() => {
+    closeForm()
+    resetUIStore()
+    setPreviewFiles([])
+    setOldImage(null)
+    setInputValue('')
+    resetForm(DEFAULT_VALUES)
+  }, [closeForm, resetUIStore, resetForm])
+
   useEffect(() => {
     if (isFormOpen) {
       if (selectedPostId && post) {
-        reset({
+        resetForm({
           ...post,
           categoryId: post.categoryId || null,
           tagIds: post.tags?.map((tag) => tag.id) ?? [],
           keywords: post.keywords ?? [],
           metaTitle: post.metaTitle || '',
           metaDescription: post.metaDescription || '',
+          featuredImage: post.featuredImage || '',
         } as PostInput)
+        setOldImage(post.featuredImage || null)
       } else if (!selectedPostId) {
-        reset(DEFAULT_VALUES)
+        resetForm(DEFAULT_VALUES)
+        setPreviewFiles([])
+        setOldImage(null)
       }
     }
-  }, [isFormOpen, selectedPostId, post, reset])
+  }, [isFormOpen, selectedPostId, post, resetForm])
+
+  const onFilesChange = (files: ImageWithPreview[]) => {
+    setPreviewFiles(files)
+
+    if (files.length > 0) {
+      setValue('featuredImage', 'IMAGE_CHANGED', { shouldDirty: true })
+    }
+  }
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === ',' || e.key === 'Enter') {
       e.preventDefault()
       const value = inputValue.trim()
-
       if (value && !keywords.includes(value)) {
-        const newKeywords = [...keywords, value]
-        setValue('keywords', newKeywords, { shouldDirty: true })
+        setValue('keywords', [...keywords, value], { shouldDirty: true })
         setInputValue('')
       }
     } else if (e.key === 'Backspace' && !inputValue && keywords.length > 0) {
@@ -114,27 +151,34 @@ const PostForm = () => {
   }
 
   const removeKeyword = (indexToRemove: number) => {
-    const newKeywords = keywords.filter((_, index) => index !== indexToRemove)
-    setValue('keywords', newKeywords, { shouldDirty: true })
+    setValue(
+      'keywords',
+      keywords.filter((_, i) => i !== indexToRemove),
+      { shouldDirty: true },
+    )
   }
 
   const onSubmit = async (data: PostInput) => {
+    const imagePath = await resolveImagePath()
+    const finalData = { ...data, featuredImage: imagePath }
+
     if (selectedPostId) {
-      await update({ ...data, id: selectedPostId })
+      await update({ ...finalData, id: selectedPostId })
     } else {
-      await create(data)
+      await create(finalData)
     }
-    closeForm()
+    handleClose()
   }
 
-  const isPending = isLoadingPost || isCreating || isUpdating
+  const isPending = isLoadingPost || isCreating || isUpdating || isUploading
 
   return (
     <Modal
+      hideCloseButton
       isOpen={isFormOpen}
       scrollBehavior='inside'
       size='3xl'
-      onOpenChange={closeForm}
+      onOpenChange={(open) => !open && handleClose()}
     >
       <ModalContent>
         <form className='overflow-y-scroll' onSubmit={handleSubmit(onSubmit)}>
@@ -148,6 +192,9 @@ const PostForm = () => {
               </div>
             ) : (
               <div className='space-y-6'>
+                <SectionLabel>รูปหน้าปกบทความ</SectionLabel>
+                <ImageDropzone onFilesChange={onFilesChange} />
+
                 <SectionLabel>สถานะและการแสดงผล</SectionLabel>
                 <div className='flex flex-wrap gap-6'>
                   <Controller
@@ -192,7 +239,7 @@ const PostForm = () => {
                     render={({ field }) => (
                       <Input
                         {...field}
-                        errorMessage={errors.title?.message}
+                        errorMessage={errors.title?.message?.toString()}
                         isInvalid={!!errors.title}
                         label='หัวข้อบทความ'
                         variant='bordered'
@@ -205,22 +252,9 @@ const PostForm = () => {
                     render={({ field }) => (
                       <Input
                         {...field}
-                        errorMessage={errors.slug?.message}
+                        errorMessage={errors.slug?.message?.toString()}
                         isInvalid={!!errors.slug}
                         label='URL Slug'
-                        variant='bordered'
-                      />
-                    )}
-                  />
-                  <Controller
-                    control={control}
-                    name='featuredImage'
-                    render={({ field }) => (
-                      <Input
-                        {...field}
-                        className='md:col-span-2'
-                        label='รูปภาพหน้าปก (URL)'
-                        value={field.value || ''}
                         variant='bordered'
                       />
                     )}
@@ -280,8 +314,9 @@ const PostForm = () => {
                     <div className='flex flex-wrap gap-2 px-1'>
                       {keywords.map((keyword, index) => (
                         <Chip
-                          key={`${keyword}-${index}`}
-                          className='bg-primary/10 text-primary border-primary/20 border-1'
+                          key={index}
+                          color='primary'
+                          variant='flat'
                           onClose={() => removeKeyword(index)}
                         >
                           {keyword}
@@ -289,7 +324,6 @@ const PostForm = () => {
                       ))}
                     </div>
                   </div>
-
                   <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
                     <Controller
                       control={control}
@@ -297,7 +331,9 @@ const PostForm = () => {
                       render={({ field }) => (
                         <Input
                           {...field}
-                          label='Meta Title (SEO)'
+                          errorMessage={errors.metaTitle?.message?.toString()}
+                          isInvalid={!!errors.metaTitle}
+                          label='Meta Title'
                           value={field.value || ''}
                           variant='bordered'
                         />
@@ -309,7 +345,9 @@ const PostForm = () => {
                       render={({ field }) => (
                         <Input
                           {...field}
-                          label='Meta Description (SEO)'
+                          errorMessage={errors.metaDescription?.message?.toString()}
+                          isInvalid={!!errors.metaDescription}
+                          label='Meta Description'
                           value={field.value || ''}
                           variant='bordered'
                         />
@@ -325,6 +363,8 @@ const PostForm = () => {
                   render={({ field }) => (
                     <Textarea
                       {...field}
+                      errorMessage={errors.summary?.message?.toString()}
+                      isInvalid={!!errors.summary}
                       label='คำอธิบายสั้น (Summary)'
                       value={field.value || ''}
                       variant='bordered'
@@ -335,7 +375,7 @@ const PostForm = () => {
             )}
           </ModalBody>
           <ModalFooter>
-            <Button variant='flat' onPress={closeForm}>
+            <Button variant='flat' onPress={handleClose}>
               ยกเลิก
             </Button>
             <Button

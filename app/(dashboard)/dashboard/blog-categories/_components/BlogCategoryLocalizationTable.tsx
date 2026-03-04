@@ -54,7 +54,9 @@ const BlogCategoryLocalizationTable = ({
 
   const localeList = useMemo(() => localizations || [], [localizations])
 
-  if (!isMounted) return null
+  if (!isMounted) {
+    return null
+  }
 
   return (
     <div className='flex flex-col gap-4'>
@@ -71,6 +73,7 @@ const BlogCategoryLocalizationTable = ({
         onSelectionChange={onSelectionChange}
       >
         <TableHeader>
+          <TableColumn>รหัสแปลภาษา</TableColumn>
           <TableColumn>รหัสภาษา</TableColumn>
           <TableColumn>ชื่อหมวดหมู่บทความ (ต้นฉบับ)</TableColumn>
           <TableColumn>ชื่อที่แปลแล้ว</TableColumn>
@@ -86,6 +89,11 @@ const BlogCategoryLocalizationTable = ({
             return (
               <TableRow key={locale.id}>
                 <TableCell>
+                  <span className='text-default-500 font-mono text-xs font-bold'>
+                    #{locale.id.slice(-8).toUpperCase()}
+                  </span>
+                </TableCell>
+                <TableCell>
                   <Chip
                     className='font-bold'
                     color='secondary'
@@ -95,7 +103,7 @@ const BlogCategoryLocalizationTable = ({
                     {locale.languageCode.toUpperCase()}
                   </Chip>
                 </TableCell>
-                <TableCell className='text-default-500 italic'>
+                <TableCell className='text-default-500'>
                   {originalName}
                 </TableCell>
                 <TableCell className='text-primary font-medium'>

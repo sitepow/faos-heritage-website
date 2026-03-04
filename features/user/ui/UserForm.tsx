@@ -131,6 +131,7 @@ const UserForm = () => {
 
   return (
     <Modal
+      hideCloseButton
       isDismissable={!isPending}
       isOpen={isUserOpen}
       scrollBehavior='inside'

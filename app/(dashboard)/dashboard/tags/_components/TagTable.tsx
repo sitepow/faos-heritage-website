@@ -66,6 +66,7 @@ const TagTable = ({
       onSelectionChange={onSelectionChange}
     >
       <TableHeader>
+        <TableColumn>รหัสแท็ก</TableColumn>
         <TableColumn>ชื่อแท็ก</TableColumn>
         <TableColumn>Slug</TableColumn>
         <TableColumn align='center'>จัดการ</TableColumn>
@@ -77,6 +78,11 @@ const TagTable = ({
       >
         {tagList.map((tag) => (
           <TableRow key={tag?.id!}>
+            <TableCell>
+              <span className='text-default-500 font-mono text-xs font-bold'>
+                #{tag?.id?.slice(-8).toUpperCase()}
+              </span>
+            </TableCell>
             <TableCell className='font-medium'>{tag?.name!}</TableCell>
             <TableCell>{tag?.slug!}</TableCell>
             <TableCell>

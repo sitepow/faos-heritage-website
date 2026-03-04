@@ -74,6 +74,7 @@ const ReviewTable = ({
         onSelectionChange={onSelectionChange}
       >
         <TableHeader>
+          <TableColumn>รหัสรีวิว</TableColumn>
           <TableColumn>ผู้รีวิว / สินค้า</TableColumn>
           <TableColumn>คะแนน</TableColumn>
           <TableColumn width={350}>ความคิดเห็น</TableColumn>
@@ -89,6 +90,11 @@ const ReviewTable = ({
             const actionItems = getActionItems(review)
             return (
               <TableRow key={review.id}>
+                <TableCell>
+                  <span className='text-default-500 font-mono text-xs font-bold'>
+                    #{review.id.slice(-8).toUpperCase()}
+                  </span>
+                </TableCell>
                 <TableCell>
                   <HeroUser
                     avatarProps={{

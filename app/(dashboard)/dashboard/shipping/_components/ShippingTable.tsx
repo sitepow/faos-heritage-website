@@ -68,6 +68,7 @@ const ShippingTable = ({
         onSelectionChange={onSelectionChange}
       >
         <TableHeader>
+          <TableColumn>รหัสค่าส่ง</TableColumn>
           <TableColumn>ประเทศ</TableColumn>
           <TableColumn>ค่าส่งเริ่มต้น</TableColumn>
           <TableColumn>ราคา/กก.</TableColumn>
@@ -83,6 +84,11 @@ const ShippingTable = ({
             const actionItems = getActionItems(item.id)
             return (
               <TableRow key={item.id}>
+                <TableCell>
+                  <span className='text-default-500 font-mono text-xs font-bold'>
+                    #{item.id.slice(-8).toUpperCase()}
+                  </span>
+                </TableCell>
                 <TableCell>
                   <div className='flex items-center gap-2'>
                     <GlobeIcon className='text-default-400' size={16} />

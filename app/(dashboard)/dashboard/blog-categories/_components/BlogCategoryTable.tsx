@@ -69,6 +69,7 @@ const BlogCategoryTable = ({
       onSelectionChange={onSelectionChange}
     >
       <TableHeader>
+        <TableColumn>รหัสหมวดหมู่</TableColumn>
         <TableColumn>หมวดหมู่บทความ</TableColumn>
         <TableColumn>URL Slug</TableColumn>
         <TableColumn>จำนวนโพสต์</TableColumn>
@@ -82,6 +83,11 @@ const BlogCategoryTable = ({
       >
         {categoryList.map((cat) => (
           <TableRow key={cat?.id!}>
+            <TableCell>
+              <span className='text-default-500 font-mono text-xs font-bold'>
+                #{cat?.id.slice(-8).toUpperCase()}
+              </span>
+            </TableCell>
             <TableCell className='font-medium'>{cat?.name!}</TableCell>
             <TableCell className='text-default-500'>{cat?.slug!}</TableCell>
             <TableCell>

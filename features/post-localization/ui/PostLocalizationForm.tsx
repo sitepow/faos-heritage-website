@@ -92,6 +92,7 @@ const PostLocalizationForm = ({ postId }: Props) => {
 
   return (
     <Modal
+      hideCloseButton
       isOpen={isOpen}
       scrollBehavior='inside'
       size='3xl'

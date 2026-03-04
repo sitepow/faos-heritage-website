@@ -94,6 +94,7 @@ const ProductLocalizationForm = () => {
 
   return (
     <Modal
+      hideCloseButton
       isOpen={isFormOpen}
       scrollBehavior='inside'
       size='3xl'

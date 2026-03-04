@@ -10,12 +10,19 @@ import {
   TableCell,
   Chip,
   Spinner,
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  Button,
 } from '@heroui/react'
+import { MoreVerticalIcon, Edit3Icon, Trash2Icon } from 'lucide-react'
 import { useMemo } from 'react'
 
 import type { Selection } from '@heroui/react'
 
 import { useProductVariants } from '@/features/product-variant/product-variant.hook'
+import { useProductVariantUIStore } from '@/features/product-variant/product-variant.store'
 import { useIsMounted } from '@/hooks/useIsMounted'
 import { formatCurrency, formatNumber } from '@/utils'
 
@@ -23,19 +30,20 @@ interface Props {
   productId: string
   selectedKeys: Selection
   onSelectionChange: (keys: Selection) => void
+  onDelete: (id: string) => void
 }
 
 const ProductVariantTable = ({
   productId,
   selectedKeys,
   onSelectionChange,
+  onDelete,
 }: Props) => {
   const isMounted = useIsMounted()
+  const { openForm } = useProductVariantUIStore()
   const { data: variants, isLoading } = useProductVariants(productId)
 
-  const variantList = useMemo(() => {
-    return variants || []
-  }, [variants])
+  const variantList = useMemo(() => variants || [], [variants])
 
   if (!isMounted) {
     return null
@@ -57,9 +65,13 @@ const ProductVariantTable = ({
       >
         <TableHeader>
           <TableColumn>ชื่อตัวเลือก</TableColumn>
-          <TableColumn>ราคา</TableColumn>
+          <TableColumn>ราคาปกติ</TableColumn>
+          <TableColumn>ราคาลด</TableColumn>
           <TableColumn>คงเหลือ</TableColumn>
           <TableColumn align='center'>สถานะ</TableColumn>
+          <TableColumn align='center' width={80}>
+            จัดการ
+          </TableColumn>
         </TableHeader>
         <TableBody
           emptyContent='ยังไม่มีข้อมูลตัวเลือกสำหรับสินค้านี้'
@@ -68,14 +80,36 @@ const ProductVariantTable = ({
         >
           {variantList.map((variant) => (
             <TableRow key={variant.id}>
-              <TableCell className='font-medium'>{variant.name}</TableCell>
               <TableCell>
-                <b className='font-bold'>{formatCurrency(variant.price)}</b>
+                <div className='flex flex-col'>
+                  <span className='font-medium'>{variant.name}</span>
+                  <span className='text-default-400 font-mono text-[10px]'>
+                    #{variant.id.slice(-6).toUpperCase()}
+                  </span>
+                </div>
               </TableCell>
               <TableCell>
-                <b className='font-bold'>
-                  {formatNumber(variant.stockQuantity)}
-                </b>
+                <span
+                  className={
+                    variant.salePrice
+                      ? 'text-default-400 text-xs line-through'
+                      : ''
+                  }
+                >
+                  {formatCurrency(variant.price)}
+                </span>
+              </TableCell>
+              <TableCell>
+                {variant.salePrice ? (
+                  <span className='text-danger'>
+                    {formatCurrency(variant.salePrice)}
+                  </span>
+                ) : (
+                  <span className='text-default-300'>-</span>
+                )}
+              </TableCell>
+              <TableCell>
+                <span>{formatNumber(variant.stockQuantity)}</span>
               </TableCell>
               <TableCell>
                 <Chip
@@ -85,6 +119,36 @@ const ProductVariantTable = ({
                 >
                   {variant.isActive ? 'เปิดใช้งาน' : 'ปิดใช้งาน'}
                 </Chip>
+              </TableCell>
+              <TableCell>
+                <Dropdown>
+                  <DropdownTrigger>
+                    <Button isIconOnly size='sm' variant='light'>
+                      <MoreVerticalIcon
+                        className='text-default-400'
+                        size={20}
+                      />
+                    </Button>
+                  </DropdownTrigger>
+                  <DropdownMenu aria-label='จัดการตัวเลือก'>
+                    <DropdownItem
+                      key='edit'
+                      startContent={<Edit3Icon size={16} />}
+                      onPress={() => openForm(variant.id)}
+                    >
+                      แก้ไขข้อมูล
+                    </DropdownItem>
+                    <DropdownItem
+                      key='delete'
+                      className='text-danger'
+                      color='danger'
+                      startContent={<Trash2Icon size={16} />}
+                      onPress={() => onDelete(variant.id)}
+                    >
+                      ลบตัวเลือก
+                    </DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
               </TableCell>
             </TableRow>
           ))}

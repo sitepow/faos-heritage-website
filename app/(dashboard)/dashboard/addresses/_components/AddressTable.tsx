@@ -23,6 +23,7 @@ import type { getAddressesAdmin } from '@/features/address/address.action'
 import type { Selection } from '@heroui/react'
 import type { ReactNode } from 'react'
 
+import { IMAGE_FALLBACK } from '@/constants'
 import { useIsMounted } from '@/hooks/useIsMounted'
 
 type AddressItemType = Awaited<ReturnType<typeof getAddressesAdmin>>[number]
@@ -73,6 +74,7 @@ const AddressTable = ({
         onSelectionChange={onSelectionChange}
       >
         <TableHeader>
+          <TableColumn>รหัสที่อยู่</TableColumn>
           <TableColumn>เจ้าของบัญชี</TableColumn>
           <TableColumn>ผู้รับ / เบอร์โทร</TableColumn>
           <TableColumn width={350}>ที่อยู่</TableColumn>
@@ -86,18 +88,26 @@ const AddressTable = ({
         >
           {addressList.map((addr) => {
             const actionItems = getActionItems(addr.id)
+
             return (
               <TableRow key={addr.id}>
                 <TableCell>
+                  <span className='text-default-500 font-mono text-xs font-bold'>
+                    #{addr.id.slice(-8).toUpperCase()}
+                  </span>
+                </TableCell>
+                <TableCell>
                   <HeroUser
-                    avatarProps={{ src: addr.user?.image || '' }}
-                    description={addr.user?.email}
-                    name={addr.user?.name || 'ผู้ใช้ทั่วไป'}
+                    avatarProps={{
+                      src: addr?.user?.image ?? IMAGE_FALLBACK.EMPTY,
+                    }}
+                    description={addr?.user?.email}
+                    name={addr?.user?.name || 'ผู้ใช้ทั่วไป'}
                   />
                 </TableCell>
                 <TableCell>
                   <div className='flex flex-col'>
-                    <span className='text-small font-bold'>{addr.name}</span>
+                    <span className='text-small'>{addr.name}</span>
                     <span className='text-default-400 text-tiny'>
                       {addr.phone}
                     </span>

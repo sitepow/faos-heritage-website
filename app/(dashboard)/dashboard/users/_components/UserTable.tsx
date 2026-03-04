@@ -80,6 +80,7 @@ const UserTable = ({
         onSelectionChange={onSelectionChange}
       >
         <TableHeader>
+          <TableColumn>รหัสผู้ใช้งาน</TableColumn>
           <TableColumn>ผู้ใช้งาน</TableColumn>
           <TableColumn>บทบาท</TableColumn>
           <TableColumn>สถานะ</TableColumn>
@@ -95,6 +96,11 @@ const UserTable = ({
             const actionItems = getActionItems(user.id)
             return (
               <TableRow key={user.id}>
+                <TableCell>
+                  <span className='text-default-500 font-mono text-xs font-bold'>
+                    #{user.id.slice(-8).toUpperCase()}
+                  </span>
+                </TableCell>
                 <TableCell>
                   <User
                     avatarProps={{
