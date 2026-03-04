@@ -64,6 +64,7 @@ const ProductVariantTable = ({
         onSelectionChange={onSelectionChange}
       >
         <TableHeader>
+          <TableColumn>รหัสตัวเลือก</TableColumn>
           <TableColumn>ชื่อตัวเลือก</TableColumn>
           <TableColumn>ราคาปกติ</TableColumn>
           <TableColumn>ราคาลด</TableColumn>
@@ -82,11 +83,13 @@ const ProductVariantTable = ({
             <TableRow key={variant.id}>
               <TableCell>
                 <div className='flex flex-col'>
-                  <span className='font-medium'>{variant.name}</span>
                   <span className='text-default-400 font-mono text-[10px]'>
                     #{variant.id.slice(-6).toUpperCase()}
                   </span>
                 </div>
+              </TableCell>
+              <TableCell>
+                <span className='font-medium'>{variant.name}</span>
               </TableCell>
               <TableCell>
                 <span
