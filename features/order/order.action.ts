@@ -369,6 +369,27 @@ const createOrder = async (input: CreateOrderInput) =>
         return fail(ERROR_CODES.BAD_REQUEST)
       }
 
+      let validAffiliate = null
+      let finalReferrerCode = null
+
+      if (referrerId) {
+        const affiliate = await tx.affiliateProfile.findUnique({
+          where: { affiliateCode: referrerId },
+          select: {
+            id: true,
+            status: true,
+            baseRate: true,
+            highValueRate: true,
+            thresholdAmount: true,
+          },
+        })
+
+        if (affiliate && affiliate.status === AffiliateStatus.APPROVED) {
+          validAffiliate = affiliate
+          finalReferrerCode = referrerId
+        }
+      }
+
       const products = await tx.product.findMany({
         where: { id: { in: items.map((i) => i.productId) } },
         include: { variants: true },
@@ -448,41 +469,28 @@ const createOrder = async (input: CreateOrderInput) =>
           shippingPhone: address.phone,
           shippingAddressText: formatFullAddress(address),
           items: { createMany: { data: orderItemsPayload } },
-          referrerCode: referrerId || null,
+          referrerCode: finalReferrerCode,
         },
       })
 
-      if (referrerId) {
-        const affiliate = await tx.affiliateProfile.findUnique({
-          where: { affiliateCode: referrerId },
-          select: {
-            id: true,
-            baseRate: true,
-            highValueRate: true,
-            thresholdAmount: true,
+      if (validAffiliate) {
+        const isHighValue =
+          Number(baseTotal) >= Number(validAffiliate.thresholdAmount)
+        const appliedRate = isHighValue
+          ? validAffiliate.highValueRate
+          : validAffiliate.baseRate
+        const commissionAmount = (Number(baseTotal) * Number(appliedRate)) / 100
+
+        await tx.affiliateCommission.create({
+          data: {
+            affiliateId: validAffiliate.id,
+            orderId: order.id,
+            orderAmount: baseTotal,
+            appliedRate: appliedRate,
+            commissionAmount: commissionAmount,
+            status: PayoutStatus.PENDING,
           },
         })
-
-        if (affiliate) {
-          const isHighValue =
-            Number(baseTotal) >= Number(affiliate.thresholdAmount)
-          const appliedRate = isHighValue
-            ? affiliate.highValueRate
-            : affiliate.baseRate
-          const commissionAmount =
-            (Number(baseTotal) * Number(appliedRate)) / 100
-
-          await tx.affiliateCommission.create({
-            data: {
-              affiliateId: affiliate.id,
-              orderId: order.id,
-              orderAmount: baseTotal,
-              appliedRate: appliedRate,
-              commissionAmount: commissionAmount,
-              status: AffiliateStatus.PENDING,
-            },
-          })
-        }
       }
 
       await Promise.all([
