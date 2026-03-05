@@ -51,7 +51,6 @@ const THAI_BANKS = [
 const AffiliateRegistrationForm = () => {
   const router = useRouter()
   const { isAuthenticated, isLoading: isAuthLoading } = useAuth()
-
   const isMobile = useIsBelowBreakpoint('640px')
 
   useEffect(() => {
@@ -127,8 +126,6 @@ const AffiliateRegistrationForm = () => {
         >
           ขออภัย
           ขณะนี้ระบบพาร์ทเนอร์เปิดรับลงทะเบียนเฉพาะบุคคลสัญชาติไทยที่มีบัญชีธนาคารภายในประเทศไทยเท่านั้น
-          (Currently, our affiliate program is only available for Thai nationals
-          with a domestic bank account.)
         </Alert>
 
         <Alert

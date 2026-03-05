@@ -86,7 +86,6 @@ const PayoutForm = ({ affiliateId, pendingAmount, selectedIds }: Props) => {
         setSlipPreview([])
         setNotes('')
         setDateRange(null)
-        return
       },
     })
   }
@@ -114,10 +113,10 @@ const PayoutForm = ({ affiliateId, pendingAmount, selectedIds }: Props) => {
             ดำเนินการจ่ายค่าคอมมิชชัน
           </ModalHeader>
           <ModalBody className='gap-4'>
-            <div className='bg-primary-50 border-default-100 rounded-xl border p-4'>
+            <div className='border-default-100 bg-primary-50 rounded-xl border p-4'>
               <div className='mb-3 flex items-center gap-2'>
                 <CreditCardIcon size={18} />
-                <span className='text-sm'>ข้อมูลบัญชีรับเงิน</span>
+                <span className='text-sm font-bold'>ข้อมูลบัญชีรับเงิน</span>
               </div>
               <div className='grid grid-cols-2 gap-4 sm:grid-cols-3'>
                 <p className='text-small'>
@@ -126,7 +125,7 @@ const PayoutForm = ({ affiliateId, pendingAmount, selectedIds }: Props) => {
                 </p>
 
                 <p className='text-small'>
-                  ชื่อบัญชีธนาคาร:{' '}
+                  ชื่อบัญชี:{' '}
                   <span className='underline'>
                     {bankInfo?.bankAccountName ?? '-'}
                   </span>
@@ -167,7 +166,7 @@ const PayoutForm = ({ affiliateId, pendingAmount, selectedIds }: Props) => {
                 </Alert>
               )}
 
-            <div className='bg-default-100 border-default-200 rounded-xl border p-4'>
+            <div className='border-default-200 bg-default-100 rounded-xl border p-4'>
               <div className='flex items-center justify-between'>
                 <p className='text-tiny text-default-500 font-medium'>
                   {selectedIds

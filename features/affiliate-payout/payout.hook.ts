@@ -1,6 +1,8 @@
 'use client'
 
+import { PayoutStatus } from '@prisma/client'
 import { useQuery } from '@tanstack/react-query'
+import { useMemo } from 'react'
 
 import {
   getPendingPayouts,
@@ -9,8 +11,10 @@ import {
   getAffiliatePayouts,
 } from './payout.action'
 import { payoutQueryKeys } from './payout.query-key'
+import { calculateCommissionByStatus } from './payout.util'
 
 interface UsePendingPayoutsParams {
+  affiliateId?: string
   startDate?: string
   endDate?: string
 }
@@ -22,11 +26,15 @@ interface UseWithdrawableParams {
   selectedIds?: string[]
 }
 
-const usePendingPayouts = ({ startDate, endDate }: UsePendingPayoutsParams) => {
+const usePendingPayouts = ({
+  affiliateId,
+  startDate,
+  endDate,
+}: UsePendingPayoutsParams = {}) => {
   return useQuery({
-    queryKey: payoutQueryKeys.pending(startDate, endDate),
+    queryKey: [...payoutQueryKeys.pending(startDate, endDate), affiliateId],
     queryFn: () => {
-      return getPendingPayouts(startDate, endDate)
+      return getPendingPayouts({ affiliateId, startDate, endDate })
     },
   })
 }
@@ -78,9 +86,30 @@ const useAffiliatePayouts = (affiliateId: string) => {
   })
 }
 
+const useAffiliateSummary = (affiliateId?: string) => {
+  const { data, isLoading } = usePendingPayouts({ affiliateId })
+
+  const stats = useMemo(() => {
+    return {
+      pendingAmount: calculateCommissionByStatus(data, PayoutStatus.PENDING),
+      withdrawableAmount: calculateCommissionByStatus(
+        data,
+        PayoutStatus.COMPLETED,
+      ),
+      paidAmount: calculateCommissionByStatus(data, PayoutStatus.PAID),
+    }
+  }, [data])
+
+  return {
+    ...stats,
+    isLoading,
+  }
+}
+
 export {
   usePendingPayouts,
   useAffiliateCommissions,
   useWithdrawableAmount,
   useAffiliatePayouts,
+  useAffiliateSummary,
 }

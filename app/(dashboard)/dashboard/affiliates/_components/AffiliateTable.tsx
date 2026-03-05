@@ -32,6 +32,7 @@ import type { GetPendingPayoutsResult } from '@/features/affiliate-payout/payout
 
 import { IMAGE_FALLBACK } from '@/constants'
 import { useAffiliateStore } from '@/features/affiliate/affiliate.store'
+import { calculateCommissionByStatus } from '@/features/affiliate-payout/payout.util'
 import { PayoutForm } from '@/features/affiliate-payout/ui/PayoutForm'
 import { useTranslateStatus } from '@/hooks/useTranslateStatus'
 import { formatCurrency } from '@/utils'
@@ -103,20 +104,20 @@ const AffiliateTable = ({ affiliates, pendingPayouts, isLoading }: Props) => {
             return p.affiliateId === item.id
           })
 
-          const pendingAmount =
-            partnerSummary?.find((s) => {
-              return s.status === PayoutStatus.PENDING
-            })?._sum.commissionAmount || 0
+          const pendingAmount = calculateCommissionByStatus(
+            partnerSummary,
+            PayoutStatus.PENDING,
+          )
 
-          const withdrawableAmount =
-            partnerSummary?.find((s) => {
-              return s.status === PayoutStatus.COMPLETED
-            })?._sum.commissionAmount || 0
+          const withdrawableAmount = calculateCommissionByStatus(
+            partnerSummary,
+            PayoutStatus.COMPLETED,
+          )
 
-          const paidAmount =
-            partnerSummary?.find((s) => {
-              return s.status === PayoutStatus.PAID
-            })?._sum.commissionAmount || 0
+          const paidAmount = calculateCommissionByStatus(
+            partnerSummary,
+            PayoutStatus.PAID,
+          )
 
           const statusProps = getAffiliateStatusProps(item.status)
 

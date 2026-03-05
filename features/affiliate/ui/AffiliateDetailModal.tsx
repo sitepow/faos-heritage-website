@@ -13,6 +13,7 @@ import { AffiliateStatus } from '@prisma/client'
 import { CheckIcon, XIcon } from 'lucide-react'
 
 import { SectionLabel } from '@/components/ui/SectionHeader'
+import { IMAGE_FALLBACK } from '@/constants'
 import { useAffiliateMutation } from '@/features/affiliate/affiliate.mutation'
 import { useAffiliateStore } from '@/features/affiliate/affiliate.store'
 
@@ -41,8 +42,8 @@ const AffiliateDetailModal = () => {
         <ModalHeader className='flex flex-col gap-1'>
           รายละเอียดผู้สมัคร Affiliate
           <span className='text-small text-default-500 font-normal'>
-            {selectedAffiliate.user.name ?? 'ไม่ระบุชื่อ'} (
-            {selectedAffiliate.user.email})
+            {selectedAffiliate.user?.name ?? 'ไม่ระบุชื่อ'} (
+            {selectedAffiliate.user?.email ?? '-'})
           </span>
         </ModalHeader>
         <ModalBody className='gap-6'>
@@ -52,7 +53,7 @@ const AffiliateDetailModal = () => {
               <Image
                 alt='ID Card'
                 className='mt-2 h-48 w-full rounded-xl object-cover shadow-sm'
-                src={selectedAffiliate.idCardImage ?? '/images/no-image.png'}
+                src={selectedAffiliate.idCardImage ?? IMAGE_FALLBACK.EMPTY}
               />
             </div>
             <div>
@@ -60,9 +61,7 @@ const AffiliateDetailModal = () => {
               <Image
                 alt='Bank Account'
                 className='mt-2 h-48 w-full rounded-xl object-cover shadow-sm'
-                src={
-                  selectedAffiliate.bankAccountImage ?? '/images/no-image.png'
-                }
+                src={selectedAffiliate.bankAccountImage ?? IMAGE_FALLBACK.EMPTY}
               />
             </div>
           </div>
@@ -113,7 +112,7 @@ const AffiliateDetailModal = () => {
               <Button
                 color='danger'
                 isDisabled={isUpdating}
-                startContent={<XIcon />}
+                startContent={<XIcon size={18} />}
                 onPress={() => {
                   return handleUpdateStatus(AffiliateStatus.REJECTED)
                 }}
@@ -124,7 +123,7 @@ const AffiliateDetailModal = () => {
                 className='text-secondary'
                 color='primary'
                 isDisabled={isUpdating}
-                startContent={<CheckIcon />}
+                startContent={<CheckIcon size={18} />}
                 onPress={() => {
                   return handleUpdateStatus(AffiliateStatus.APPROVED)
                 }}

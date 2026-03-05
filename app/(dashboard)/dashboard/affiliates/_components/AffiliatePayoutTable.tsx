@@ -104,7 +104,7 @@ const AffiliatePayoutTable = ({ payouts, isLoading }: Props) => {
                             </div>
                             <div className='flex items-center gap-1'>
                               <span className='text-success text-[11px] font-bold'>
-                                {formatCurrency(Number(comm.commissionAmount))}
+                                {formatCurrency(comm.commissionAmount)}
                               </span>
                             </div>
                           </div>
@@ -116,7 +116,7 @@ const AffiliatePayoutTable = ({ payouts, isLoading }: Props) => {
               </TableCell>
               <TableCell>{formatDate(item.createdAt)}</TableCell>
               <TableCell className='text-primary font-bold'>
-                {formatCurrency(Number(item.amount))}
+                {formatCurrency(item.amount)}
               </TableCell>
               <TableCell>
                 {item.payoutProofImage ? (

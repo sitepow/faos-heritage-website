@@ -1,49 +1,33 @@
 'use client'
 
-import { PayoutStatus } from '@prisma/client'
-import { useMemo } from 'react'
-
 import { AffiliateTable } from './_components/AffiliateTable'
 
 import { Container } from '@/components/layouts/Container'
 import { StatCard } from '@/components/ui/StatCard'
 import { useAffiliates } from '@/features/affiliate/affiliate.hook'
 import { AffiliateDetailModal } from '@/features/affiliate/ui/AffiliateDetailModal'
-import { usePendingPayouts } from '@/features/affiliate-payout/payout.hook'
+import {
+  useAffiliateSummary,
+  usePendingPayouts,
+} from '@/features/affiliate-payout/payout.hook'
 import { useIsMounted } from '@/hooks/useIsMounted'
 
 const AffiliateAdminPage = () => {
   const isMounted = useIsMounted()
 
   const { data: affiliates, isLoading: isAffiliateLoading } = useAffiliates()
+
+  const {
+    pendingAmount: totalPendingAmount,
+    withdrawableAmount: totalWithdrawableAmount,
+    paidAmount: totalPaidAmount,
+    isLoading: isSummaryLoading,
+  } = useAffiliateSummary()
+
   const { data: pendingPayouts, isLoading: isPayoutLoading } =
-    usePendingPayouts({})
+    usePendingPayouts()
 
-  const isLoading = isAffiliateLoading || isPayoutLoading
-
-  const totalPendingAmount = useMemo(() => {
-    return (
-      pendingPayouts
-        ?.filter((p) => p.status === PayoutStatus.PENDING)
-        .reduce((acc, curr) => acc + (curr._sum.commissionAmount || 0), 0) || 0
-    )
-  }, [pendingPayouts])
-
-  const totalWithdrawableAmount = useMemo(() => {
-    return (
-      pendingPayouts
-        ?.filter((p) => p.status === PayoutStatus.COMPLETED)
-        .reduce((acc, curr) => acc + (curr._sum.commissionAmount || 0), 0) || 0
-    )
-  }, [pendingPayouts])
-
-  const totalPaidAmount = useMemo(() => {
-    return (
-      pendingPayouts
-        ?.filter((p) => p.status === PayoutStatus.PAID)
-        .reduce((acc, curr) => acc + (curr._sum.commissionAmount || 0), 0) || 0
-    )
-  }, [pendingPayouts])
+  const isLoading = isAffiliateLoading || isPayoutLoading || isSummaryLoading
 
   if (!isMounted) {
     return null

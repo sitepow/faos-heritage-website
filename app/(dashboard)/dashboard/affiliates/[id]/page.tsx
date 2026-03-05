@@ -1,5 +1,4 @@
 /* eslint-disable react/no-array-index-key */
-
 'use client'
 
 import {
@@ -10,7 +9,6 @@ import {
   TableRow,
   TableCell,
   Chip,
-  Button,
   Accordion,
   AccordionItem,
   Spinner,
@@ -33,6 +31,7 @@ import {
   useAffiliateCommissions,
   useAffiliatePayouts,
 } from '@/features/affiliate-payout/payout.hook'
+import { calculateCommissionByStatus } from '@/features/affiliate-payout/payout.util'
 import { PayoutForm } from '@/features/affiliate-payout/ui/PayoutForm'
 import { useTranslateStatus } from '@/hooks/useTranslateStatus'
 import { formatCurrency, formatDate } from '@/utils'
@@ -57,23 +56,15 @@ const AffiliateHistoryPage = () => {
     }
 
     if (selectedKeys === 'all') {
-      return commissions
-        .filter((c) => {
-          return c.status === PayoutStatus.COMPLETED
-        })
-        .reduce((sum, c) => {
-          return sum + Number(c.commissionAmount)
-        }, 0)
+      return calculateCommissionByStatus(commissions, PayoutStatus.COMPLETED)
     }
 
     const selectedIds = Array.from(selectedKeys)
-    return commissions
-      .filter((c) => {
-        return selectedIds.includes(c.id) && c.status === PayoutStatus.COMPLETED
-      })
-      .reduce((sum, c) => {
-        return sum + Number(c.commissionAmount)
-      }, 0)
+    const selectedItems = commissions.filter((c) => {
+      return selectedIds.includes(c.id)
+    })
+
+    return calculateCommissionByStatus(selectedItems, PayoutStatus.COMPLETED)
   }, [selectedKeys, commissions])
 
   const disabledKeys = useMemo(() => {
@@ -94,17 +85,14 @@ const AffiliateHistoryPage = () => {
     <Container className='flex flex-col gap-6 py-8'>
       <div className='flex items-center justify-between'>
         <div className='flex items-center gap-4'>
-          <Button
-            isIconOnly
-            radius='full'
-            size='sm'
-            variant='light'
-            onPress={() => {
+          <button
+            className='hover:bg-default-100 flex h-8 w-8 items-center justify-center rounded-full transition-colors'
+            onClick={() => {
               return router.push('/dashboard/affiliates')
             }}
           >
             <ChevronLeftIcon size={18} />
-          </Button>
+          </button>
 
           <div className='flex flex-col gap-1'>
             <h1 className='text-2xl font-bold'>ประวัติค่าคอมมิชชัน</h1>
@@ -215,7 +203,7 @@ const AffiliateHistoryPage = () => {
                                     return (
                                       <div
                                         key={idx}
-                                        className='text-default-500 border-default-50 flex justify-between border-b pb-1 text-[10px]'
+                                        className='border-default-50 text-default-500 flex justify-between border-b pb-1 text-[10px]'
                                       >
                                         <span className='line-clamp-1 flex-1'>
                                           {orderItem.productName}{' '}
@@ -234,10 +222,10 @@ const AffiliateHistoryPage = () => {
                           </Accordion>
                         </TableCell>
                         <TableCell>
-                          {formatCurrency(Number(item.orderAmount))}
+                          {formatCurrency(item.orderAmount)}
                         </TableCell>
                         <TableCell className='text-success font-bold'>
-                          {formatCurrency(Number(item.commissionAmount))}
+                          {formatCurrency(item.commissionAmount)}
                         </TableCell>
                         <TableCell>
                           <Chip

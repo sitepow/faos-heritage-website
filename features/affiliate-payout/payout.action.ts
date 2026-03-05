@@ -48,8 +48,19 @@ const getAffiliateCommissions = async (affiliateId: string) => {
   return decimalToNumber(items)
 }
 
-const getPendingPayouts = async (startDate?: string, endDate?: string) => {
+const getPendingPayouts = async (
+  params: {
+    affiliateId?: string
+    startDate?: string
+    endDate?: string
+  } = {},
+) => {
+  const { affiliateId, startDate, endDate } = params
   const where: Prisma.AffiliateCommissionWhereInput = {}
+
+  if (affiliateId) {
+    where.affiliateId = affiliateId
+  }
 
   if (startDate && endDate) {
     where.createdAt = {
