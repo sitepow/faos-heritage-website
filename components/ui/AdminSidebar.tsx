@@ -187,7 +187,6 @@ const AdminSidebar = () => {
 
   return (
     <>
-      {/* Mobile Toggle Bar */}
       <div className='bg-background border-default-100 sticky top-0 z-50 flex items-center justify-between border-b px-4 py-3 lg:hidden'>
         <NavbarLogo href={'/'} />
         <Button isIconOnly variant='light' onPress={toggleSidebar}>
@@ -195,19 +194,17 @@ const AdminSidebar = () => {
         </Button>
       </div>
 
-      {/* Desktop Sidebar */}
       <aside className='border-default-100 bg-background sticky top-0 hidden h-screen w-64 border-r lg:flex lg:flex-col'>
         {SidebarContent}
       </aside>
 
-      {/* Mobile Backdrop & Drawer */}
       {isOpen && (
         <div className='fixed inset-0 z-[60] flex lg:hidden'>
           <div
             className='absolute inset-0 bg-black/50 transition-opacity'
             onClick={toggleSidebar}
           />
-          <aside className='bg-background animate-in slide-in-from-left relative h-screen w-[280px] border-r shadow-2xl duration-300'>
+          <aside className='bg-background animate-in slide-in-from-left border-default-100 relative h-screen w-[280px] border-r shadow-2xl duration-300'>
             {SidebarContent}
           </aside>
         </div>
