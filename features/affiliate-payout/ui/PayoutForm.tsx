@@ -107,7 +107,13 @@ const PayoutForm = ({ affiliateId, pendingAmount, selectedIds }: Props) => {
           : 'จ่ายเงินตัดยอด'}
       </Button>
 
-      <Modal hideCloseButton isOpen={isOpen} size='xl' onClose={onClose}>
+      <Modal
+        hideCloseButton
+        isOpen={isOpen}
+        scrollBehavior='inside'
+        size='xl'
+        onClose={onClose}
+      >
         <ModalContent>
           <ModalHeader className='flex flex-col gap-1'>
             ดำเนินการจ่ายค่าคอมมิชชัน
@@ -166,7 +172,7 @@ const PayoutForm = ({ affiliateId, pendingAmount, selectedIds }: Props) => {
                 </Alert>
               )}
 
-            <div className='border-default-200 bg-default-100 rounded-xl border p-4'>
+            <div className='border-default-100 rounded-xl border p-4'>
               <div className='flex items-center justify-between'>
                 <p className='text-tiny text-default-500 font-medium'>
                   {selectedIds
