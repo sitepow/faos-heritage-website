@@ -48,10 +48,10 @@ const AffiliateCommissionTable = ({ commissions, isLoading }: Props) => {
 
           return (
             <TableRow key={item.id}>
-              <TableCell className='min-w-32'>
+              <TableCell className='min-w-64'>
                 {formatDate(item.createdAt)}
               </TableCell>
-              <TableCell>
+              <TableCell className='min-w-64'>
                 <Accordion isCompact className='px-0' variant='light'>
                   <AccordionItem
                     key='1'
@@ -87,8 +87,12 @@ const AffiliateCommissionTable = ({ commissions, isLoading }: Props) => {
                   </AccordionItem>
                 </Accordion>
               </TableCell>
-              <TableCell>{formatCurrency(Number(item.orderAmount))}</TableCell>
-              <TableCell>{Number(item.appliedRate)}%</TableCell>
+              <TableCell className='min-w-32'>
+                {formatCurrency(Number(item.orderAmount))}
+              </TableCell>
+              <TableCell className='min-w-32'>
+                {Number(item.appliedRate)}%
+              </TableCell>
               <TableCell className='text-success font-bold'>
                 {formatCurrency(Number(item.commissionAmount))}
               </TableCell>
