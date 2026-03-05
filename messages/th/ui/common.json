@@ -116,6 +116,18 @@
       "DELIVERED": "จัดส่งแล้ว",
       "CANCELLED": "ยกเลิกแล้ว",
       "REFUNDED": "คืนเงินแล้ว"
+    },
+    "affiliateStatus": {
+      "PENDING": "รอการตรวจสอบ",
+      "APPROVED": "อนุมัติแล้ว",
+      "REJECTED": "ปฏิเสธการสมัคร",
+      "SUSPENDED": "ระงับการใช้งาน"
+    },
+    "payoutStatus": {
+      "PENDING": "รอการดำเนินการ",
+      "COMPLETED": "ดำเนินการเสร็จสิ้น/รอถอนเงิน",
+      "REJECTED": "ปฏิเสธการจ่าย",
+      "PAID": "ชำระเงินสำเร็จแล้ว"
     }
   },
   "alert": {

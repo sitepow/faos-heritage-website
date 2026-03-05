@@ -13,11 +13,11 @@ import {
   Accordion,
   AccordionItem,
 } from '@heroui/react'
-import { PayoutStatus } from '@prisma/client'
 import { PackageIcon } from 'lucide-react'
 
 import type { AffiliateDashboardData } from '@/features/affiliate/affiliate.action'
 
+import { useTranslateStatus } from '@/hooks/useTranslateStatus'
 import { formatCurrency, formatDate } from '@/utils'
 
 interface Props {
@@ -26,6 +26,8 @@ interface Props {
 }
 
 const AffiliateCommissionTable = ({ commissions, isLoading }: Props) => {
+  const { getPayoutStatusProps } = useTranslateStatus()
+
   return (
     <Table aria-label='Commission History Table'>
       <TableHeader>
@@ -42,6 +44,8 @@ const AffiliateCommissionTable = ({ commissions, isLoading }: Props) => {
         loadingContent={<Spinner label='กำลังโหลดข้อมูล...' />}
       >
         {commissions.map((item) => {
+          const statusProps = getPayoutStatusProps(item.status)
+
           return (
             <TableRow key={item.id}>
               <TableCell className='min-w-32'>
@@ -89,16 +93,8 @@ const AffiliateCommissionTable = ({ commissions, isLoading }: Props) => {
                 {formatCurrency(Number(item.commissionAmount))}
               </TableCell>
               <TableCell>
-                <Chip
-                  color={
-                    item.status === PayoutStatus.COMPLETED
-                      ? 'success'
-                      : 'warning'
-                  }
-                  size='sm'
-                  variant='dot'
-                >
-                  {item.status}
+                <Chip color={statusProps.color} size='sm' variant='dot'>
+                  {statusProps.label}
                 </Chip>
               </TableCell>
             </TableRow>

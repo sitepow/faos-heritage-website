@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 'use client'
 
 import {
@@ -34,6 +33,7 @@ import type { GetPendingPayoutsResult } from '@/features/affiliate-payout/payout
 import { IMAGE_FALLBACK } from '@/constants'
 import { useAffiliateStore } from '@/features/affiliate/affiliate.store'
 import { PayoutForm } from '@/features/affiliate-payout/ui/PayoutForm'
+import { useTranslateStatus } from '@/hooks/useTranslateStatus'
 import { formatCurrency } from '@/utils'
 
 type AffiliateItem = GetAffiliatesResult[number]
@@ -46,6 +46,7 @@ interface Props {
 
 const AffiliateTable = ({ affiliates, pendingPayouts, isLoading }: Props) => {
   const router = useRouter()
+  const { getAffiliateStatusProps } = useTranslateStatus()
   const openDetail = useAffiliateStore((state) => {
     return state.openDetail
   })
@@ -117,6 +118,8 @@ const AffiliateTable = ({ affiliates, pendingPayouts, isLoading }: Props) => {
               return s.status === PayoutStatus.PAID
             })?._sum.commissionAmount || 0
 
+          const statusProps = getAffiliateStatusProps(item.status)
+
           return (
             <TableRow key={item.id}>
               <TableCell>
@@ -139,18 +142,8 @@ const AffiliateTable = ({ affiliates, pendingPayouts, isLoading }: Props) => {
                 />
               </TableCell>
               <TableCell>
-                <Chip
-                  color={
-                    item.status === AffiliateStatus.APPROVED
-                      ? 'success'
-                      : item.status === AffiliateStatus.PENDING
-                        ? 'warning'
-                        : 'danger'
-                  }
-                  size='sm'
-                  variant='dot'
-                >
-                  {item.status}
+                <Chip color={statusProps.color} size='sm' variant='dot'>
+                  {statusProps.label}
                 </Chip>
               </TableCell>
               <TableCell className='text-default-500'>

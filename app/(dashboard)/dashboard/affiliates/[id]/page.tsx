@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-/* eslint-disable no-nested-ternary */
+
 'use client'
 
 import {
@@ -34,11 +34,13 @@ import {
   useAffiliatePayouts,
 } from '@/features/affiliate-payout/payout.hook'
 import { PayoutForm } from '@/features/affiliate-payout/ui/PayoutForm'
+import { useTranslateStatus } from '@/hooks/useTranslateStatus'
 import { formatCurrency, formatDate } from '@/utils'
 
 const AffiliateHistoryPage = () => {
   const router = useRouter()
   const { id } = useParams<{ id: string }>()
+  const { getPayoutStatusProps } = useTranslateStatus()
 
   const { data: profile, isLoading: isProfileLoading } = useAffiliateById(id)
   const { data: commissions, isLoading: isCommissionsLoading } =
@@ -173,6 +175,8 @@ const AffiliateHistoryPage = () => {
               >
                 {(commissions ?? []).map(
                   (item: GetAffiliateCommissionsResult[number]) => {
+                    const statusProps = getPayoutStatusProps(item.status)
+
                     return (
                       <TableRow
                         key={item.id}
@@ -237,19 +241,11 @@ const AffiliateHistoryPage = () => {
                         </TableCell>
                         <TableCell>
                           <Chip
-                            color={
-                              item.status === PayoutStatus.PAID
-                                ? 'primary'
-                                : item.status === PayoutStatus.COMPLETED
-                                  ? 'success'
-                                  : item.status === PayoutStatus.REJECTED
-                                    ? 'danger'
-                                    : 'warning'
-                            }
+                            color={statusProps.color}
                             size='sm'
                             variant='dot'
                           >
-                            {item.status}
+                            {statusProps.label}
                           </Chip>
                         </TableCell>
                       </TableRow>

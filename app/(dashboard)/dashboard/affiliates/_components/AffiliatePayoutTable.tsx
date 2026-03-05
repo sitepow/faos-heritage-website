@@ -22,6 +22,7 @@ import { EyeIcon, PackageIcon } from 'lucide-react'
 
 import type { GetAffiliatePayoutsResult } from '@/features/affiliate-payout/payout.action'
 
+import { useTranslateStatus } from '@/hooks/useTranslateStatus'
 import { formatCurrency, formatDate } from '@/utils'
 
 interface Props {
@@ -30,6 +31,8 @@ interface Props {
 }
 
 const AffiliatePayoutTable = ({ payouts, isLoading }: Props) => {
+  const { getPayoutStatusProps } = useTranslateStatus()
+
   return (
     <Table aria-label='Payout History Table'>
       <TableHeader>
@@ -46,6 +49,8 @@ const AffiliatePayoutTable = ({ payouts, isLoading }: Props) => {
         loadingContent={<Spinner label='กำลังโหลดข้อมูล...' />}
       >
         {payouts.map((item) => {
+          const statusProps = getPayoutStatusProps(item.status)
+
           return (
             <TableRow key={item.id}>
               <TableCell>
@@ -142,8 +147,8 @@ const AffiliatePayoutTable = ({ payouts, isLoading }: Props) => {
                 {item.notes || '-'}
               </TableCell>
               <TableCell>
-                <Chip color='primary' size='sm' variant='dot'>
-                  {item.status}
+                <Chip color={statusProps.color} size='sm' variant='dot'>
+                  {statusProps.label}
                 </Chip>
               </TableCell>
             </TableRow>
