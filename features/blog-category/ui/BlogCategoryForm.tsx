@@ -142,7 +142,7 @@ const BlogCategoryForm = () => {
                 />
               </div>
 
-              <Controller
+              {/* <Controller
                 control={control}
                 name='image'
                 render={({ field }) => (
@@ -156,7 +156,7 @@ const BlogCategoryForm = () => {
                     variant='bordered'
                   />
                 )}
-              />
+              /> */}
             </div>
           )}
         </ModalBody>
