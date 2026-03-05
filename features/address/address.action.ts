@@ -44,68 +44,90 @@ const createAddress = async (data: AddressInput) =>
   })
 
 const updateAddress = async (data: AddressInput) =>
-  withRole([Role.ADMIN, Role.CUSTOMER], async (userId) => {
+  withRole([Role.ADMIN, Role.CUSTOMER], async (currentUserId) => {
+    const { role: currentUserRole } = await getServerUser()
     const validated = addressSchema.safeParse(data)
+
     if (!validated.success) {
       return fail(ERROR_CODES.VALIDATION_ERROR)
     }
 
     const { id, isDefault, ...payload } = validated.data
+
     if (!id) {
       return fail(ERROR_CODES.DATA_NOT_FOUND)
     }
 
     try {
-      await prisma.$transaction(async (tx) => {
+      return await prisma.$transaction(async (tx) => {
         const existing = await tx.address.findUnique({
-          where: { id, userId },
+          where: { id },
         })
 
         if (!existing) {
+          throw new Error('NOT_FOUND')
+        }
+
+        const isAdmin = currentUserRole === Role.ADMIN
+
+        if (!isAdmin && existing.userId !== currentUserId) {
           throw new Error('NOT_OWNER')
         }
 
+        const targetUserId = existing.userId
+
         if (isDefault) {
           await tx.address.updateMany({
-            where: { userId, NOT: { id }, isDefault: true },
+            where: { userId: targetUserId, NOT: { id }, isDefault: true },
             data: { isDefault: false },
           })
         }
 
         await tx.address.update({
           where: { id },
-          data: { ...payload, isDefault },
+          data: {
+            ...omitEmptyFields(payload),
+            isDefault,
+          },
         })
-      })
 
-      return ok()
+        return ok()
+      })
     } catch {
       return fail(ERROR_CODES.SYSTEM_ERROR)
     }
   })
 
 const deleteAddress = async (addressId: string) =>
-  withRole([Role.ADMIN, Role.CUSTOMER], async (userId) => {
+  withRole([Role.ADMIN, Role.CUSTOMER], async (currentUserId) => {
+    const { role: currentUserRole } = await getServerUser()
     if (!addressId) {
       return fail(ERROR_CODES.BAD_REQUEST)
     }
 
     try {
-      await prisma.$transaction(async (tx) => {
+      return await prisma.$transaction(async (tx) => {
         const address = await tx.address.findUnique({
-          where: { id: addressId, userId },
-          select: { isDefault: true },
+          where: { id: addressId },
+          select: { isDefault: true, userId: true },
         })
 
         if (!address) {
           throw new Error('NOT_FOUND')
         }
 
+        const isAdmin = currentUserRole === Role.ADMIN
+        if (!isAdmin && address.userId !== currentUserId) {
+          throw new Error('NOT_OWNER')
+        }
+
+        const targetUserId = address.userId
+
         await tx.address.delete({ where: { id: addressId } })
 
         if (address.isDefault) {
           const nextDefault = await tx.address.findFirst({
-            where: { userId },
+            where: { userId: targetUserId },
             orderBy: { createdAt: 'desc' },
           })
 
@@ -116,9 +138,9 @@ const deleteAddress = async (addressId: string) =>
             })
           }
         }
-      })
 
-      return ok()
+        return ok()
+      })
     } catch {
       return fail(ERROR_CODES.SYSTEM_ERROR)
     }
@@ -156,10 +178,16 @@ const getAddressesAdmin = async () => {
 }
 
 const getAddress = async (addressId: string) => {
-  const { userId } = await getServerUser()
+  const { userId, role } = await getServerUser()
 
   if (!userId) {
     return null
+  }
+
+  if (role === Role.ADMIN) {
+    return await prisma.address.findUnique({
+      where: { id: addressId },
+    })
   }
 
   return await prisma.address.findFirst({

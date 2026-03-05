@@ -15,6 +15,7 @@ const getServerUser = async () => {
   const session = await getServerSession(NEXT_AUTH_OPTIONS)
 
   return {
+    role: session?.user?.role,
     userId: session?.user?.id,
     user: session?.user,
     isAuthenticated: !!session,

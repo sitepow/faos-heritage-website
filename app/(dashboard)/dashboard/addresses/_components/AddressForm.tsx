@@ -68,10 +68,15 @@ const AddressForm = () => {
 
   useEffect(() => {
     if (isAddressOpen) {
-      if (addressId && address) {
-        reset(address as AddressInput)
+      if (addressId) {
+        if (address) {
+          return reset({
+            ...address,
+            subDistrict: address.subDistrict ?? '',
+          } as AddressInput)
+        }
       } else {
-        reset(DEFAULT_VALUES)
+        return reset(DEFAULT_VALUES)
       }
     }
   }, [isAddressOpen, addressId, address, reset])
@@ -79,12 +84,12 @@ const AddressForm = () => {
   const handleClose = () => {
     onOpenAddressChange(false)
     setState({ addressId: null })
-    reset(DEFAULT_VALUES)
+    return reset(DEFAULT_VALUES)
   }
 
   const onSubmit = async (data: AddressInput) => {
     addressId ? await update(data) : await create(data)
-    handleClose()
+    return handleClose()
   }
 
   const isPending = isCreating || isUpdating
@@ -126,9 +131,9 @@ const AddressForm = () => {
                     label='เลือกสมาชิกที่ต้องการผูกที่อยู่'
                     selectedKeys={value ? [value] : []}
                     variant='bordered'
-                    onSelectionChange={(keys) =>
-                      onChange(Array.from(keys)[0] as string)
-                    }
+                    onSelectionChange={(keys) => {
+                      return onChange(Array.from(keys)[0] as string)
+                    }}
                   >
                     {(usersData?.items || []).map((user) => (
                       <SelectItem
@@ -236,12 +241,14 @@ const AddressForm = () => {
                       onSelectionChange={(keys) => {
                         const code = Array.from(keys)[0] as string
                         onChange(code)
-                        if (code)
-                          setValue(
+                        if (code) {
+                          return setValue(
                             'country',
                             countries[code as keyof typeof countries] || '',
                             { shouldDirty: true },
                           )
+                        }
+                        return
                       }}
                     >
                       {Object.entries(countries).map(([code, name]) => (
