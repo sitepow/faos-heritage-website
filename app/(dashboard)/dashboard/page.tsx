@@ -13,10 +13,6 @@ import {
   PieChart,
   Pie,
   Cell,
-  BarChart,
-  Bar,
-  Line,
-  LineChart,
 } from 'recharts'
 
 import { Container } from '@/components/layouts/Container'
@@ -43,6 +39,16 @@ const STATUS_COLORS: Record<string, string> = {
   PROCESSING: '#9353d3',
   REFUNDED: '#71717a',
 }
+
+// ชุดสีสำหรับกราฟหมวดหมู่และสินค้าขายดี
+const CHART_COLORS = [
+  '#006fee',
+  '#17c964',
+  '#f5a524',
+  '#f31260',
+  '#9353d3',
+  '#71717a',
+]
 
 const DashboardPage = () => {
   const statusTranslations = localeTh.global.orderStatus
@@ -148,6 +154,62 @@ const DashboardPage = () => {
       </section>
 
       <section className='grid grid-cols-1 gap-6 lg:grid-cols-3'>
+        <Card className='bg-default-50/50 border-none p-4 shadow-sm'>
+          <CardBody className='flex flex-col gap-4'>
+            <h3 className='text-lg font-bold'>สัดส่วนสถานะออเดอร์</h3>
+            <div className='flex h-[350px] w-full items-center justify-center'>
+              {isChartLoading ? (
+                <Skeleton className='h-[250px] w-[250px] rounded-full' />
+              ) : (
+                <ResponsiveContainer height='100%' width='100%'>
+                  <PieChart>
+                    <Pie
+                      data={statusData}
+                      dataKey='value'
+                      innerRadius={70}
+                      outerRadius={100}
+                      paddingAngle={5}
+                    >
+                      {statusData.map((entry, index: number) => (
+                        <Cell
+                          key={`cell-${index}`}
+                          fill={STATUS_COLORS[entry.name] || '#8884d8'}
+                        />
+                      ))}
+                    </Pie>
+                    <Tooltip
+                      contentStyle={{
+                        borderRadius: '12px',
+                        border: 'none',
+                        boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)',
+                      }}
+                      formatter={(value, name) => [
+                        value,
+                        getStatusLabel(name as string),
+                      ]}
+                    />
+                  </PieChart>
+                </ResponsiveContainer>
+              )}
+            </div>
+            <div className='grid grid-cols-2 gap-2'>
+              {statusData.map((item) => (
+                <div key={item.name} className='flex items-center gap-2'>
+                  <div
+                    className='size-2 rounded-full'
+                    style={{
+                      backgroundColor: STATUS_COLORS[item.name] || '#8884d8',
+                    }}
+                  />
+                  <span className='text-tiny text-default-600 leading-none font-medium'>
+                    {getStatusLabel(item.name)}: {item.value}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </CardBody>
+        </Card>
+
         <Card className='bg-default-50/50 border-none p-4 shadow-sm lg:col-span-2'>
           <CardBody className='flex flex-col gap-4'>
             <h3 className='text-lg font-bold'>แนวโน้มรายได้ (7 วันล่าสุด)</h3>
@@ -214,68 +276,12 @@ const DashboardPage = () => {
             </div>
           </CardBody>
         </Card>
-
-        <Card className='bg-default-50/50 border-none p-4 shadow-sm'>
-          <CardBody className='flex flex-col gap-4'>
-            <h3 className='text-lg font-bold'>สัดส่วนสถานะออเดอร์</h3>
-            <div className='flex h-[350px] w-full items-center justify-center'>
-              {isChartLoading ? (
-                <Skeleton className='h-[250px] w-[250px] rounded-full' />
-              ) : (
-                <ResponsiveContainer height='100%' width='100%'>
-                  <PieChart>
-                    <Pie
-                      data={statusData}
-                      dataKey='value'
-                      innerRadius={70}
-                      outerRadius={100}
-                      paddingAngle={5}
-                    >
-                      {statusData.map((entry, index: number) => (
-                        <Cell
-                          key={`cell-${index}`}
-                          fill={STATUS_COLORS[entry.name] || '#8884d8'}
-                        />
-                      ))}
-                    </Pie>
-                    <Tooltip
-                      contentStyle={{
-                        borderRadius: '12px',
-                        border: 'none',
-                        boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)',
-                      }}
-                      formatter={(value, name) => [
-                        value,
-                        getStatusLabel(name as string),
-                      ]}
-                    />
-                  </PieChart>
-                </ResponsiveContainer>
-              )}
-            </div>
-            <div className='grid grid-cols-2 gap-2'>
-              {statusData.map((item) => (
-                <div key={item.name} className='flex items-center gap-2'>
-                  <div
-                    className='size-2 rounded-full'
-                    style={{
-                      backgroundColor: STATUS_COLORS[item.name] || '#8884d8',
-                    }}
-                  />
-                  <span className='text-tiny text-default-600 leading-none font-medium'>
-                    {getStatusLabel(item.name)}: {item.value}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </CardBody>
-        </Card>
       </section>
 
       <section className='grid grid-cols-1 gap-6'>
         <Card className='bg-default-50/50 border-none p-4 shadow-sm'>
           <CardBody className='flex flex-col gap-4'>
-            <h3 className='text-primary text-lg font-bold'>
+            <h3 className='text-lg font-bold'>
               ยอดขาย Aff เทียบยอดปกติ (7 วันล่าสุด)
             </h3>
             <div className='h-[350px] w-full'>
@@ -283,7 +289,39 @@ const DashboardPage = () => {
                 <Skeleton className='h-full w-full rounded-xl' />
               ) : (
                 <ResponsiveContainer height='100%' width='100%'>
-                  <LineChart data={affiliatePerformanceData}>
+                  <AreaChart data={affiliatePerformanceData}>
+                    <defs>
+                      <linearGradient
+                        id='colorNormal'
+                        x1='0'
+                        x2='0'
+                        y1='0'
+                        y2='1'
+                      >
+                        <stop
+                          offset='5%'
+                          stopColor='#e4e4e7'
+                          stopOpacity={0.3}
+                        />
+                        <stop
+                          offset='95%'
+                          stopColor='#e4e4e7'
+                          stopOpacity={0}
+                        />
+                      </linearGradient>
+                      <linearGradient id='colorAff' x1='0' x2='0' y1='0' y2='1'>
+                        <stop
+                          offset='5%'
+                          stopColor='#17c964'
+                          stopOpacity={0.3}
+                        />
+                        <stop
+                          offset='95%'
+                          stopColor='#17c964'
+                          stopOpacity={0}
+                        />
+                      </linearGradient>
+                    </defs>
                     <CartesianGrid
                       stroke='#e4e4e7'
                       strokeDasharray='3 3'
@@ -303,29 +341,25 @@ const DashboardPage = () => {
                         boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)',
                       }}
                     />
-                    <Line
+                    <Area
                       dataKey='ยอดขายทั่วไป'
-                      dot={false}
+                      fill='url(#colorNormal)'
+                      fillOpacity={1}
                       name='ยอดขายทั่วไป'
                       stroke='#e4e4e7'
                       strokeWidth={2}
                       type='monotone'
                     />
-                    <Line
-                      activeDot={{ r: 6, strokeWidth: 0 }}
+                    <Area
                       dataKey='ยอดขาย Aff'
-                      dot={{
-                        r: 4,
-                        fill: '#17c964',
-                        strokeWidth: 2,
-                        stroke: '#fff',
-                      }}
+                      fill='url(#colorAff)'
+                      fillOpacity={1}
                       name='ยอดขาย Aff'
                       stroke='#17c964'
-                      strokeWidth={3}
+                      strokeWidth={2}
                       type='monotone'
                     />
-                  </LineChart>
+                  </AreaChart>
                 </ResponsiveContainer>
               )}
             </div>
@@ -337,73 +371,105 @@ const DashboardPage = () => {
         <Card className='bg-default-50/50 border-none p-4 shadow-sm'>
           <CardBody className='flex flex-col gap-4'>
             <h3 className='text-lg font-bold'>ยอดขายแยกตามหมวดหมู่</h3>
-            <div className='h-[300px] w-full'>
+            <div className='flex h-[350px] w-full items-center justify-center'>
               {isChartLoading ? (
-                <Skeleton className='h-full w-full rounded-xl' />
+                <Skeleton className='h-[250px] w-[250px] rounded-full' />
               ) : (
                 <ResponsiveContainer height='100%' width='100%'>
-                  <BarChart data={salesByCategoryData} layout='vertical'>
-                    <CartesianGrid
-                      horizontal={true}
-                      stroke='#e4e4e7'
-                      strokeDasharray='3 3'
-                      vertical={false}
-                    />
-                    <XAxis hide type='number' />
-                    <YAxis
-                      axisLine={false}
-                      dataKey='name'
-                      tick={{ fontSize: 12 }}
-                      tickLine={false}
-                      type='category'
-                      width={100}
-                    />
-                    <Tooltip
-                      contentStyle={{ borderRadius: '12px', border: 'none' }}
-                      cursor={{ fill: 'transparent' }}
-                    />
-                    <Bar
+                  <PieChart>
+                    <Pie
+                      data={salesByCategoryData}
                       dataKey='ยอดขาย'
-                      fill='#17c964'
-                      radius={[0, 4, 4, 0]}
+                      innerRadius={70}
+                      outerRadius={100}
+                      paddingAngle={5}
+                    >
+                      {salesByCategoryData.map((_, index) => (
+                        <Cell
+                          key={`cell-${index}`}
+                          fill={CHART_COLORS[index % CHART_COLORS.length]}
+                        />
+                      ))}
+                    </Pie>
+                    <Tooltip
+                      contentStyle={{
+                        borderRadius: '12px',
+                        border: 'none',
+                        boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)',
+                      }}
                     />
-                  </BarChart>
+                  </PieChart>
                 </ResponsiveContainer>
               )}
+            </div>
+            <div className='grid grid-cols-2 gap-2'>
+              {salesByCategoryData.map((item, index) => (
+                <div key={item.name} className='flex items-center gap-2'>
+                  <div
+                    className='size-2 rounded-full'
+                    style={{
+                      backgroundColor:
+                        CHART_COLORS[index % CHART_COLORS.length],
+                    }}
+                  />
+                  <span className='text-tiny text-default-600 truncate leading-none font-medium'>
+                    {item.name}: {item.ยอดขาย.toLocaleString()}
+                  </span>
+                </div>
+              ))}
             </div>
           </CardBody>
         </Card>
 
         <Card className='bg-default-50/50 border-none p-4 shadow-sm'>
           <CardBody className='flex flex-col gap-4'>
-            <h3 className='text-lg font-bold'>
-              5 อันดับสินค้าขายดี (จำนวนชิ้น)
-            </h3>
-            <div className='h-[300px] w-full'>
+            <h3 className='text-lg font-bold'>5 อันดับสินค้าขายดี (ชิ้น)</h3>
+            <div className='flex h-[350px] w-full items-center justify-center'>
               {isChartLoading ? (
-                <Skeleton className='h-full w-full rounded-xl' />
+                <Skeleton className='h-[250px] w-[250px] rounded-full' />
               ) : (
                 <ResponsiveContainer height='100%' width='100%'>
-                  <BarChart data={topProductsData}>
-                    <CartesianGrid
-                      stroke='#e4e4e7'
-                      strokeDasharray='3 3'
-                      vertical={false}
-                    />
-                    <XAxis
-                      axisLine={false}
-                      dataKey='name'
-                      tick={{ fontSize: 10 }}
-                      tickLine={false}
-                    />
-                    <YAxis axisLine={false} tickLine={false} />
+                  <PieChart>
+                    <Pie
+                      data={topProductsData}
+                      dataKey='จำนวน'
+                      innerRadius={70}
+                      outerRadius={100}
+                      paddingAngle={5}
+                    >
+                      {topProductsData.map((_, index) => (
+                        <Cell
+                          key={`cell-${index}`}
+                          fill={CHART_COLORS[index % CHART_COLORS.length]}
+                        />
+                      ))}
+                    </Pie>
                     <Tooltip
-                      contentStyle={{ borderRadius: '12px', border: 'none' }}
+                      contentStyle={{
+                        borderRadius: '12px',
+                        border: 'none',
+                        boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)',
+                      }}
                     />
-                    <Bar dataKey='จำนวน' fill='#f5a524' radius={[4, 4, 0, 0]} />
-                  </BarChart>
+                  </PieChart>
                 </ResponsiveContainer>
               )}
+            </div>
+            <div className='flex flex-col gap-2'>
+              {topProductsData.map((item, index) => (
+                <div key={item.name} className='flex items-center gap-2'>
+                  <div
+                    className='size-2 shrink-0 rounded-full'
+                    style={{
+                      backgroundColor:
+                        CHART_COLORS[index % CHART_COLORS.length],
+                    }}
+                  />
+                  <span className='text-tiny text-default-600 line-clamp-1 leading-none font-medium'>
+                    {item.name}: {item.จำนวน}
+                  </span>
+                </div>
+              ))}
             </div>
           </CardBody>
         </Card>
