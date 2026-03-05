@@ -1,6 +1,6 @@
 'use client'
 
-import { Listbox, ListboxItem, ScrollShadow, Divider } from '@heroui/react'
+import { Listbox, ListboxItem, ScrollShadow, Button } from '@heroui/react'
 import {
   UsersIcon,
   LogOutIcon,
@@ -16,10 +16,13 @@ import {
   FoldersIcon,
   ArrowUpLeft,
   Share2Icon,
+  MenuIcon,
+  XIcon,
 } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { signOut } from 'next-auth/react'
+import { useState } from 'react'
 
 import { CustomIcon } from './CustomIcon'
 import { NavbarLogo } from '../layouts/Navbar/_components/NavbarLogo'
@@ -30,71 +33,54 @@ import { useIsMounted } from '@/hooks/useIsMounted'
 const AdminSidebar = () => {
   const pathname = usePathname()
   const isMounted = useIsMounted()
+  const [isOpen, setIsOpen] = useState(false)
 
-  const menuItems = [
+  const menuGroups = [
     {
-      href: '/dashboard',
-      label: 'หน้าหลัก',
-      icon: LayoutDashboardIcon,
+      title: 'Dashboard',
+      items: [
+        { href: '/dashboard', label: 'หน้าหลัก', icon: LayoutDashboardIcon },
+        { href: '/dashboard/orders', label: 'ออเดอร์', icon: PackageIcon },
+        {
+          href: '/dashboard/affiliates',
+          label: 'แอฟฟิลิเอต',
+          icon: Share2Icon,
+        },
+      ],
     },
     {
-      href: '/dashboard/products',
-      label: 'สินค้า',
-      icon: ShoppingBagIcon,
+      title: 'จัดการสินค้า',
+      items: [
+        { href: '/dashboard/products', label: 'สินค้า', icon: ShoppingBagIcon },
+        { href: '/dashboard/categories', label: 'หมวดหมู่', icon: LayersIcon },
+        { href: '/dashboard/tags', label: 'แท็ก', icon: TagIcon },
+      ],
     },
     {
-      href: '/dashboard/categories',
-      label: 'หมวดหมู่',
-      icon: LayersIcon,
+      title: 'เนื้อหา & ผู้ใช้',
+      items: [
+        { href: '/dashboard/posts', label: 'โพสต์', icon: NewspaperIcon },
+        {
+          href: '/dashboard/blog-categories',
+          label: 'หมวดหมู่บทความ',
+          icon: FoldersIcon,
+        },
+        { href: '/dashboard/users', label: 'ผู้ใช้งาน', icon: UsersIcon },
+        { href: '/dashboard/reviews', label: 'รีวิว', icon: StarIcon },
+      ],
     },
     {
-      href: '/dashboard/tags',
-      label: 'แท็ก',
-      icon: TagIcon,
-    },
-    {
-      href: '/dashboard/orders',
-      label: 'ออเดอร์',
-      icon: PackageIcon,
-    },
-    {
-      href: '/dashboard/users',
-      label: 'ผู้ใช้งาน',
-      icon: UsersIcon,
-    },
-    {
-      href: '/dashboard/posts',
-      label: 'โพสต์',
-      icon: NewspaperIcon,
-    },
-    {
-      href: '/dashboard/blog-categories',
-      label: 'หมวดหมู่บทความ',
-      icon: FoldersIcon,
-    },
-    {
-      href: '/dashboard/addresses',
-      label: 'ที่อยู่',
-      icon: MapPinIcon,
-    },
-    {
-      href: '/dashboard/reviews',
-      label: 'รีวิว',
-      icon: StarIcon,
-    },
-    {
-      href: '/dashboard/shipping',
-      label: 'ค่าจัดส่ง',
-      icon: TruckIcon,
-    },
-    {
-      href: '/dashboard/affiliates',
-      label: 'แอฟฟิลิเอต',
-      icon: Share2Icon,
+      title: 'ระบบ',
+      items: [
+        { href: '/dashboard/shipping', label: 'ค่าจัดส่ง', icon: TruckIcon },
+        { href: '/dashboard/addresses', label: 'ที่อยู่', icon: MapPinIcon },
+      ],
     },
   ]
 
-  const handleLogout = () => signOut({ callbackUrl: '/' })
+  const handleLogout = () => {
+    return signOut({ callbackUrl: '/' })
+  }
 
   const isActive = (href: string) => {
     if (href === '/dashboard') {
@@ -103,72 +89,130 @@ const AdminSidebar = () => {
     return pathname.startsWith(href)
   }
 
+  const toggleSidebar = () => {
+    return setIsOpen(!isOpen)
+  }
+
   if (!isMounted) {
     return null
   }
 
-  return (
-    <aside className='border-default-100 bg-background sticky top-0 z-40 flex h-screen w-64 flex-col border-r'>
-      <div className='flex flex-col justify-center gap-2 p-5 text-center'>
+  const SidebarContent = (
+    <div className='flex h-full flex-col'>
+      <div className='flex items-center justify-between p-6'>
         <NavbarLogo href={'/'} />
+        <Button
+          isIconOnly
+          className='lg:hidden'
+          size='sm'
+          variant='light'
+          onPress={toggleSidebar}
+        >
+          <XIcon size={20} />
+        </Button>
       </div>
 
-      <Divider className='bg-default-100' />
-
-      <ScrollShadow className='flex-1 p-4'>
-        <Listbox aria-label='Admin Navigation' variant='flat'>
-          {menuItems.map((item) => {
-            const active = isActive(item.href)
-
-            return (
-              <ListboxItem
-                key={item.href}
-                as={Link}
-                className={`h-12 ${
-                  active ? 'bg-primary/10 text-primary font-semibold' : ''
-                }`}
-                href={item.href}
-                startContent={
-                  <CustomIcon
-                    className={active ? 'text-primary' : 'text-default-400'}
-                    icon={item.icon}
-                  />
-                }
-              >
-                {item.label}
-              </ListboxItem>
-            )
-          })}
-        </Listbox>
+      <ScrollShadow className='flex-1 px-4 py-2'>
+        <div className='flex flex-col gap-6'>
+          {menuGroups.map((group, idx) => (
+            <div key={idx} className='flex flex-col gap-2'>
+              <p className='text-default-400 px-2 text-[10px] font-bold tracking-wider uppercase'>
+                {group.title}
+              </p>
+              <Listbox aria-label={group.title} variant='flat'>
+                {group.items.map((item) => {
+                  const active = isActive(item.href)
+                  return (
+                    <ListboxItem
+                      key={item.href}
+                      as={Link}
+                      className={`h-10 transition-all ${
+                        active
+                          ? 'bg-primary/10 text-primary font-bold shadow-sm'
+                          : 'text-default-500 hover:text-default-900'
+                      }`}
+                      href={item.href}
+                      startContent={
+                        <CustomIcon
+                          className={
+                            active ? 'text-primary' : 'text-default-400'
+                          }
+                          icon={item.icon}
+                        />
+                      }
+                      onPress={() => {
+                        return setIsOpen(false)
+                      }}
+                    >
+                      <span className='text-sm'>{item.label}</span>
+                    </ListboxItem>
+                  )
+                })}
+              </Listbox>
+            </div>
+          ))}
+        </div>
       </ScrollShadow>
 
-      <Divider className='bg-default-100' />
-
-      <div className='p-4'>
-        <ThemeSwitch />
-        <Listbox aria-label='Settings and Logout' variant='flat'>
+      <div className='bg-default-50/50 flex flex-col gap-2 p-4'>
+        <div className='mb-2 flex items-center justify-between px-2'>
+          <span className='text-tiny text-default-400'>โหมดการแสดงผล</span>
+          <ThemeSwitch />
+        </div>
+        <Listbox aria-label='Account Settings' variant='flat'>
           <ListboxItem
             key='home'
             as={Link}
+            className='text-default-500 h-10'
             href='/'
             startContent={
               <CustomIcon className='text-default-400' icon={ArrowUpLeft} />
             }
           >
-            ไปที่หน้าร้าน
+            <span className='text-sm'>ไปที่หน้าร้าน</span>
           </ListboxItem>
           <ListboxItem
             key='logout'
-            className='text-danger h-12'
+            className='text-danger h-10'
             color='danger'
             startContent={<CustomIcon icon={LogOutIcon} />}
             onPress={handleLogout}
           >
-            ออกจากระบบ
+            <span className='text-sm'>ออกจากระบบ</span>
           </ListboxItem>
         </Listbox>
       </div>
-    </aside>
+    </div>
+  )
+
+  return (
+    <>
+      {/* Mobile Toggle Bar */}
+      <div className='bg-background border-default-100 sticky top-0 z-50 flex items-center justify-between border-b px-4 py-3 lg:hidden'>
+        <NavbarLogo href={'/'} />
+        <Button isIconOnly variant='light' onPress={toggleSidebar}>
+          <MenuIcon size={24} />
+        </Button>
+      </div>
+
+      {/* Desktop Sidebar */}
+      <aside className='border-default-100 bg-background sticky top-0 hidden h-screen w-64 border-r lg:flex lg:flex-col'>
+        {SidebarContent}
+      </aside>
+
+      {/* Mobile Backdrop & Drawer */}
+      {isOpen && (
+        <div className='fixed inset-0 z-[60] flex lg:hidden'>
+          <div
+            className='absolute inset-0 bg-black/50 transition-opacity'
+            onClick={toggleSidebar}
+          />
+          <aside className='bg-background animate-in slide-in-from-left relative h-screen w-[280px] border-r shadow-2xl duration-300'>
+            {SidebarContent}
+          </aside>
+        </div>
+      )}
+    </>
   )
 }
 

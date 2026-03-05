@@ -17,7 +17,7 @@ const ThemeSwitch = ({ className }: Props) => {
   const isDark = theme === 'dark'
 
   const toggleTheme = () => {
-    setTheme(isDark ? 'light' : 'dark')
+    return setTheme(isDark ? 'light' : 'dark')
   }
 
   if (!isMounted) {
@@ -25,31 +25,31 @@ const ThemeSwitch = ({ className }: Props) => {
   }
 
   return (
-    <div className={cn('flex w-full items-center px-2 py-1', className)}>
+    <div className={cn('flex w-full items-center', className)}>
       <Switch
         classNames={{
           base: cn(
             'inline-flex w-full max-w-full flex-row-reverse items-center',
-            'h-12 cursor-pointer justify-between gap-2 rounded-lg border-2 border-transparent px-4',
-            'hover:bg-default-100 transition-colors',
+            'h-10 cursor-pointer justify-between gap-2 rounded-xl px-2',
+            'hover:bg-default-100 transition-all duration-200',
           ),
-          wrapper: 'p-0 h-4 overflow-visible',
+          wrapper: 'p-0 h-5 w-10 overflow-visible bg-default-200',
           thumb: cn(
-            'h-6 w-6 border-2 shadow-lg',
-            'group-data-[selected=true]:ml-6',
-            'group-data-[selected=true]:border-primary',
+            'h-5 w-5 border-2 shadow-sm',
+            'group-data-[selected=true]:ml-5',
+            'group-data-[selected=true]:border-primary bg-background',
             'group-data-[selected=false]:border-default',
           ),
         }}
         color='primary'
-        endContent={<MoonIcon size={16} />}
+        endContent={<MoonIcon className='text-default-500' size={12} />}
         isSelected={isDark}
-        size='lg'
-        startContent={<SunIcon size={16} />}
+        size='md'
+        startContent={<SunIcon className='text-warning' size={12} />}
         onValueChange={toggleTheme}
       >
         <div className='flex flex-col'>
-          <p className='text-medium font-medium'>
+          <p className='text-tiny text-default-600 font-bold tracking-tight uppercase'>
             {isDark ? 'โหมดมืด' : 'โหมดสว่าง'}
           </p>
         </div>
