@@ -72,63 +72,61 @@ const TagForm = () => {
       onOpenChange={closeForm}
     >
       <ModalContent>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <ModalHeader className='text-xl font-bold'>
-            {selectedTagId ? 'แก้ไขแท็ก' : 'เพิ่มแท็กใหม่'}
-          </ModalHeader>
-          <ModalBody>
-            {isLoadingTag && selectedTagId ? (
-              <div className='flex justify-center p-8'>
-                <Spinner label='กำลังโหลดข้อมูล...' />
-              </div>
-            ) : (
-              <div className='space-y-4'>
-                <Controller
-                  control={control}
-                  name='name'
-                  render={({ field }) => (
-                    <Input
-                      {...field}
-                      errorMessage={errors.name?.message}
-                      isInvalid={!!errors.name}
-                      label='ชื่อแท็ก'
-                      placeholder='เช่น โปรโมชั่น, สินค้าใหม่'
-                      variant='bordered'
-                    />
-                  )}
-                />
-                <Controller
-                  control={control}
-                  name='slug'
-                  render={({ field }) => (
-                    <Input
-                      {...field}
-                      errorMessage={errors.slug?.message}
-                      isInvalid={!!errors.slug}
-                      label='URL Slug'
-                      placeholder='เช่น promotion'
-                      variant='bordered'
-                    />
-                  )}
-                />
-              </div>
-            )}
-          </ModalBody>
-          <ModalFooter>
-            <Button variant='flat' onPress={closeForm}>
-              ยกเลิก
-            </Button>
-            <Button
-              className='text-secondary font-bold'
-              color='primary'
-              isDisabled={!isDirty}
-              isLoading={isPending}
-              type='submit'
-            >
-              {selectedTagId ? 'บันทึกการแก้ไข' : 'สร้างแท็ก'}
-            </Button>
-          </ModalFooter>
-        </form>
+        <ModalHeader className='text-xl font-bold'>
+          {selectedTagId ? 'แก้ไขแท็ก' : 'เพิ่มแท็กใหม่'}
+        </ModalHeader>
+        <ModalBody>
+          {isLoadingTag && selectedTagId ? (
+            <div className='flex justify-center p-8'>
+              <Spinner label='กำลังโหลดข้อมูล...' />
+            </div>
+          ) : (
+            <div className='space-y-4'>
+              <Controller
+                control={control}
+                name='name'
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    errorMessage={errors.name?.message}
+                    isInvalid={!!errors.name}
+                    label='ชื่อแท็ก'
+                    placeholder='เช่น โปรโมชั่น, สินค้าใหม่'
+                    variant='bordered'
+                  />
+                )}
+              />
+              <Controller
+                control={control}
+                name='slug'
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    errorMessage={errors.slug?.message}
+                    isInvalid={!!errors.slug}
+                    label='URL Slug'
+                    placeholder='เช่น promotion'
+                    variant='bordered'
+                  />
+                )}
+              />
+            </div>
+          )}
+        </ModalBody>
+        <ModalFooter>
+          <Button variant='flat' onPress={closeForm}>
+            ยกเลิก
+          </Button>
+          <Button
+            className='text-secondary font-bold'
+            color='primary'
+            isDisabled={!isDirty}
+            isLoading={isPending}
+            onClick={handleSubmit(onSubmit)}
+          >
+            {selectedTagId ? 'บันทึกการแก้ไข' : 'สร้างแท็ก'}
+          </Button>
+        </ModalFooter>
       </ModalContent>
     </Modal>
   )

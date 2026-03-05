@@ -1,7 +1,7 @@
 'use client'
 
-import { Card, CardBody, Button, Input, Divider } from '@heroui/react'
-import { HeartIcon, ShoppingCartIcon, Share2Icon } from 'lucide-react'
+import { Card, CardBody, Button, Divider, Chip } from '@heroui/react'
+import { HeartIcon, ShoppingCartIcon } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 import { useState, useMemo, useEffect } from 'react'
 
@@ -14,6 +14,7 @@ import { MarkdownRenderer } from '@/components/ui/Markdown/MarkdownRenderer'
 import { VariantTable } from '@/components/ui/Product/VariantTable'
 import { VariantSelect } from '@/components/ui/VariantSelect'
 import { ViewCount } from '@/components/ui/ViewCount'
+import { useAffiliateProfile } from '@/features/affiliate/affiliate.hook'
 import { useCartMutation } from '@/features/cart/cart.mutation'
 import { useFavoriteMutation } from '@/features/favorite/favorite.mutation'
 import { useProductDetailStore } from '@/features/product/product.store'
@@ -21,23 +22,24 @@ import { useShortenMutation } from '@/features/shorten/shorten.hook'
 
 const ProductPurchasePanel = () => {
   const tActions = useTranslations('actions')
-  const tField = useTranslations('fields')
   const tCart = useTranslations('productDetail.cartActions')
   const locale = useLocale()
 
-  const product = useProductDetailStore((state) => state.product)
+  const product = useProductDetailStore((state) => {
+    return state.product
+  })
 
+  const { data: profile } = useAffiliateProfile()
   const { addToCart, isAdding: isAddingToCart } = useCartMutation()
   const { addToFav, isAdding: isAddingToFav } = useFavoriteMutation()
-
   const { mutate: shorten } = useShortenMutation()
 
-  const [affiliateCode, setAffiliateCode] = useState('')
   const [shortUrl, setShortUrl] = useState('')
-
   const [selectedVariantId, setSelectedVariantId] = useState<string | null>(
     product?.variants?.[0]?.id ?? null,
   )
+
+  const affiliateCode = profile?.affiliateCode ?? ''
 
   useEffect(() => {
     if (product?.variants?.[0]?.id) {
@@ -53,7 +55,9 @@ const ProductPurchasePanel = () => {
     if (!selectedVariantId || !product?.variants) {
       return null
     }
-    return product.variants.find((v) => v.id === selectedVariantId)
+    return product.variants.find((v) => {
+      return v.id === selectedVariantId
+    })
   }, [product?.variants, selectedVariantId])
 
   const currentStock =
@@ -79,7 +83,6 @@ const ProductPurchasePanel = () => {
       onSuccess: (data) => {
         if (data.shortUrl) {
           setShortUrl(data.shortUrl)
-
           if (navigator.clipboard) {
             navigator.clipboard.writeText(data.shortUrl)
           }
@@ -107,7 +110,7 @@ const ProductPurchasePanel = () => {
             />
           </div>
 
-          <h1 className='text-3xl leading-tight font-bold tracking-tighter sm:text-4xl lg:text-5xl'>
+          <h1 className='mt-5 text-3xl leading-tight font-bold tracking-tighter sm:text-4xl lg:text-5xl'>
             {product.name}
           </h1>
         </header>
@@ -128,7 +131,9 @@ const ProductPurchasePanel = () => {
             <VariantSelect
               selectedVariantId={selectedVariantId}
               variants={product.variants ?? []}
-              onChange={(id) => setSelectedVariantId(id)}
+              onChange={(id) => {
+                return setSelectedVariantId(id)
+              }}
             />
           )}
         </section>
@@ -152,7 +157,9 @@ const ProductPurchasePanel = () => {
               )
             }
             variant='faded'
-            onPress={() => addToFav(product.id)}
+            onPress={() => {
+              return addToFav(product.id)
+            }}
           />
 
           <Button
@@ -164,13 +171,13 @@ const ProductPurchasePanel = () => {
             radius='none'
             size='lg'
             startContent={!isAddingToCart && <ShoppingCartIcon />}
-            onPress={() =>
-              addToCart({
+            onPress={() => {
+              return addToCart({
                 productId: product.id,
                 variantId: selectedVariantId,
                 quantity: 1,
               })
-            }
+            }}
           >
             <span className='hidden sm:block'>
               {hasVariants && !selectedVariantId ? (
@@ -185,46 +192,29 @@ const ProductPurchasePanel = () => {
         <Divider className='bg-default-100' />
 
         <section
-          aria-label='Affiliate Program'
-          className='flex flex-col gap-3 p-4'
+          aria-label='Share Product'
+          className='bg-default-50 flex flex-col gap-3 rounded-lg p-4'
         >
-          <div className='flex flex-wrap items-center gap-2'>
-            <Share2Icon className='text-default-500' size={18} />
-            <h2 className='text-sm font-bold'>
-              {tActions('shareTitle') || 'สร้างลิงก์แนะนำสินค้า'}
-            </h2>
-          </div>
-
-          <div className='mt-5 flex flex-wrap items-end gap-2'>
-            <Input
-              className='max-w-[250px]'
-              classNames={{
-                label: 'text-xs font-medium',
-                input: 'text-center font-mono tracking-widest',
-              }}
-              inputMode='numeric'
-              label={tField('affiliateCode')}
-              labelPlacement='outside'
-              radius='none'
-              size='sm'
-              value={affiliateCode}
-              variant='underlined'
-              onValueChange={(val) => {
-                const numeric = val.replace(/[^0-9]/g, '')
-                if (numeric.length <= 4) {
-                  setAffiliateCode(numeric)
-                }
-              }}
-            />
-
-            <div className='mt-5 flex-1'>
-              <ProductShare
-                label={tActions('share')}
-                title={product.name}
-                url={shortUrl || originalShareUrl}
-                onClick={!shortUrl ? handleGenerateShortLink : undefined}
-              />
+          {affiliateCode && (
+            <div className='flex items-center justify-end'>
+              <Chip
+                className='uppercase'
+                color='primary'
+                radius='none'
+                variant='dot'
+              >
+                Ref: {affiliateCode}
+              </Chip>
             </div>
+          )}
+
+          <div className='flex-1'>
+            <ProductShare
+              label={tActions('share')}
+              title={product.name}
+              url={shortUrl || originalShareUrl}
+              onClick={!shortUrl ? handleGenerateShortLink : undefined}
+            />
           </div>
         </section>
       </CardBody>

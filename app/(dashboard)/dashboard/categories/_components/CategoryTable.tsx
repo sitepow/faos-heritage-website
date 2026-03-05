@@ -27,6 +27,8 @@ import { useMemo } from 'react'
 
 import type { Selection } from '@heroui/react'
 
+import { ProductImage } from '@/components/ui/Product/ProductImage'
+import { IMAGE_FALLBACK } from '@/constants'
 import { useCategoriesAdmin } from '@/features/category/category.hook'
 import { useCategoryUIStore } from '@/features/category/category.store'
 import { useIsMounted } from '@/hooks/useIsMounted'
@@ -72,6 +74,7 @@ const CategoryTable = ({
     >
       <TableHeader>
         <TableColumn>รหัสหมวดหมู่</TableColumn>
+        <TableColumn>รูปภาพหมวดหมู่</TableColumn>
         <TableColumn>ชื่อหมวดหมู่</TableColumn>
         <TableColumn>URL Slug</TableColumn>
         <TableColumn>จำนวนสินค้า</TableColumn>
@@ -89,6 +92,12 @@ const CategoryTable = ({
               <span className='text-default-500 font-mono text-xs font-bold'>
                 #{cat.id.slice(-8).toUpperCase()}
               </span>
+            </TableCell>
+            <TableCell>
+              <ProductImage
+                className='size-20'
+                image={cat?.image ?? IMAGE_FALLBACK.EMPTY}
+              />
             </TableCell>
             <TableCell className='font-medium'>{cat.name}</TableCell>
             <TableCell>{cat.slug}</TableCell>

@@ -15,6 +15,8 @@ import {
   Cell,
   BarChart,
   Bar,
+  Line,
+  LineChart,
 } from 'recharts'
 
 import { Container } from '@/components/layouts/Container'
@@ -56,6 +58,8 @@ const DashboardPage = () => {
     statusData,
     salesByCategoryData,
     topProductsData,
+    affiliateStats,
+    affiliatePerformanceData,
     isLoading: isChartLoading,
   } = useDashboardCharts()
 
@@ -65,7 +69,8 @@ const DashboardPage = () => {
     isProductLoading ||
     isUserLoading ||
     isPostLoading ||
-    isReviewLoading
+    isReviewLoading ||
+    isChartLoading
 
   const isStatArray = (data: unknown): data is StatItem[] => Array.isArray(data)
 
@@ -103,6 +108,17 @@ const DashboardPage = () => {
                   value={stat.value}
                 />
               ))}
+
+            {isStatArray(affiliateStats) &&
+              affiliateStats.map((stat) => (
+                <StatCard
+                  key={stat.name}
+                  isCurrency={stat.isCurrency}
+                  label={stat.name}
+                  value={stat.value}
+                />
+              ))}
+
             {isStatArray(orderStats) &&
               orderStats.map((stat) => (
                 <StatCard
@@ -251,6 +267,67 @@ const DashboardPage = () => {
                   </span>
                 </div>
               ))}
+            </div>
+          </CardBody>
+        </Card>
+      </section>
+
+      <section className='grid grid-cols-1 gap-6'>
+        <Card className='bg-default-50/50 border-none p-4 shadow-sm'>
+          <CardBody className='flex flex-col gap-4'>
+            <h3 className='text-primary text-lg font-bold'>
+              ยอดขาย Aff เทียบยอดปกติ (7 วันล่าสุด)
+            </h3>
+            <div className='h-[350px] w-full'>
+              {isChartLoading ? (
+                <Skeleton className='h-full w-full rounded-xl' />
+              ) : (
+                <ResponsiveContainer height='100%' width='100%'>
+                  <LineChart data={affiliatePerformanceData}>
+                    <CartesianGrid
+                      stroke='#e4e4e7'
+                      strokeDasharray='3 3'
+                      vertical={false}
+                    />
+                    <XAxis
+                      axisLine={false}
+                      dataKey='date'
+                      tick={{ fontSize: 10 }}
+                      tickLine={false}
+                    />
+                    <YAxis axisLine={false} tickLine={false} />
+                    <Tooltip
+                      contentStyle={{
+                        borderRadius: '12px',
+                        border: 'none',
+                        boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)',
+                      }}
+                    />
+                    <Line
+                      dataKey='ยอดขายทั่วไป'
+                      dot={false}
+                      name='ยอดขายทั่วไป'
+                      stroke='#e4e4e7'
+                      strokeWidth={2}
+                      type='monotone'
+                    />
+                    <Line
+                      activeDot={{ r: 6, strokeWidth: 0 }}
+                      dataKey='ยอดขาย Aff'
+                      dot={{
+                        r: 4,
+                        fill: '#17c964',
+                        strokeWidth: 2,
+                        stroke: '#fff',
+                      }}
+                      name='ยอดขาย Aff'
+                      stroke='#17c964'
+                      strokeWidth={3}
+                      type='monotone'
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
+              )}
             </div>
           </CardBody>
         </Card>

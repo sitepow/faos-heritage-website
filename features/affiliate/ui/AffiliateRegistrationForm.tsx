@@ -16,8 +16,10 @@ import {
   Share2Icon,
   InfoIcon,
   ShieldCheckIcon,
+  UserIcon,
 } from 'lucide-react'
-import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 
 import { useAffiliateMutation } from '../affiliate.mutation'
@@ -31,6 +33,8 @@ import {
   type ImageWithPreview,
 } from '@/app/(dashboard)/_components/ImageDropzone'
 import { SectionLabel } from '@/components/ui/SectionHeader'
+import { useAuth } from '@/hooks/useAuth'
+import { useIsBelowBreakpoint } from '@/hooks/useIsBelowBreakpoint'
 import { useResolveImageUpload } from '@/hooks/useResolveImageUpload'
 
 const THAI_BANKS = [
@@ -45,6 +49,17 @@ const THAI_BANKS = [
 ] as const
 
 const AffiliateRegistrationForm = () => {
+  const router = useRouter()
+  const { isAuthenticated, isLoading: isAuthLoading } = useAuth()
+
+  const isMobile = useIsBelowBreakpoint('640px')
+
+  useEffect(() => {
+    if (!isAuthLoading && !isAuthenticated) {
+      return router.push('/login')
+    }
+  }, [isAuthenticated, isAuthLoading, router])
+
   const {
     register,
     handleSubmit,
@@ -101,10 +116,11 @@ const AffiliateRegistrationForm = () => {
   const isPending = isRegistering || isUploadingId || isUploadingBank
 
   return (
-    <Card className='mx-auto w-full max-w-3xl'>
-      <CardBody className='gap-8 p-5 sm:p-10'>
+    <Card className='bg-background mx-auto w-full max-w-3xl' shadow='none'>
+      <CardBody className='gap-8'>
         <Alert
           color='warning'
+          hideIcon={isMobile}
           icon={<InfoIcon size={20} />}
           title='เฉพาะผู้สมัครสัญชาติไทยเท่านั้น'
           variant='flat'
@@ -117,14 +133,15 @@ const AffiliateRegistrationForm = () => {
 
         <Alert
           color='success'
+          hideIcon={isMobile}
           icon={<ShieldCheckIcon size={20} />}
           title='การส่งเอกสารอย่างปลอดภัย'
           variant='flat'
         >
           เพื่อความปลอดภัย โปรดขีดคร่อมสำเนาเอกสารและระบุข้อความ
-          <strong className='mx-1 underline'>
+          <span className='mx-1 underline'>
             "ใช้สำหรับสมัคร Affiliate ในเว็บไซต์ faos.asia เท่านั้น"
-          </strong>
+          </span>
           ลงบนรูปภาพก่อนทำการอัปโหลด
         </Alert>
 
@@ -194,6 +211,15 @@ const AffiliateRegistrationForm = () => {
                     ))}
                   </Select>
                 )}
+              />
+              <Input
+                {...register('bankAccountName')}
+                errorMessage={errors.bankAccountName?.message}
+                isInvalid={!!errors?.bankAccountName}
+                label='ชื่อบัญชีธนาคาร'
+                placeholder='ชื่อ-นามสกุล (ภาษาไทย)'
+                startContent={<UserIcon className='text-stone-400' size={18} />}
+                variant='bordered'
               />
               <Input
                 {...register('bankAccountNo')}

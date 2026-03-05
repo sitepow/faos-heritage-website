@@ -7,6 +7,7 @@ import {
   Card,
   CardBody,
   CardFooter,
+  Chip,
   Divider,
   Input,
 } from '@heroui/react'
@@ -121,30 +122,42 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
   }
 
   const renderReferrerSection = () => {
+    if (referralNo) {
+      return (
+        <div className='bg-primary/5 border-primary/10 flex flex-col gap-2 rounded-lg border p-3'>
+          <div className='flex items-center justify-between'>
+            <span className='text-sm font-medium'>
+              {tCheckout('referrerTitle')}:
+            </span>
+            <Chip
+              className='font-mono font-bold'
+              color='primary'
+              radius='none'
+              variant='dot'
+            >
+              {referralNo}
+            </Chip>
+          </div>
+        </div>
+      )
+    }
+
     return (
       <div className='flex flex-col gap-2'>
-        <span className='w-fit text-sm font-semibold'>
-          {tCheckout('referrerTitle') || 'Refer No. (Optional)'}
+        <span className='text-default-600 w-fit text-sm font-semibold'>
+          {tCheckout('referrerTitle')}
         </span>
         <Input
           classNames={{
-            input: 'text-center text-default-500',
+            input: 'text-center text-default-500 font-mono',
           }}
-          inputMode='numeric'
-          pattern='[0-9]*'
-          placeholder={
-            tCheckout('referrerPlaceholder') || 'Enter Sale Code (e.g. 0001)'
-          }
+          placeholder={tCheckout('referrerPlaceholder')}
           radius='none'
-          size='lg'
-          type='text'
+          size='md'
           value={referrerCode}
           variant='bordered'
           onValueChange={(value) => {
-            const numericValue = value.replace(/[^0-9]/g, '')
-            if (numericValue.length <= 4) {
-              setReferrerCode(numericValue)
-            }
+            return setReferrerCode(value.toUpperCase())
           }}
         />
       </div>

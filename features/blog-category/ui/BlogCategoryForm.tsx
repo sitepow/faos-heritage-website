@@ -87,95 +87,93 @@ const BlogCategoryForm = () => {
       onOpenChange={closeForm}
     >
       <ModalContent>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <ModalHeader className='text-xl font-bold'>
-            {selectedCategoryId
-              ? 'แก้ไขหมวดหมู่บทความ'
-              : 'เพิ่มหมวดหมู่บทความใหม่'}
-          </ModalHeader>
-          <ModalBody>
-            {isLoadingCategory && selectedCategoryId ? (
-              <div className='flex justify-center p-8'>
-                <Spinner label='กำลังโหลดข้อมูล...' />
-              </div>
-            ) : (
-              <div className='space-y-6'>
-                <SectionLabel>สถานะการแสดงผล</SectionLabel>
+        <ModalHeader className='text-xl font-bold'>
+          {selectedCategoryId
+            ? 'แก้ไขหมวดหมู่บทความ'
+            : 'เพิ่มหมวดหมู่บทความใหม่'}
+        </ModalHeader>
+        <ModalBody>
+          {isLoadingCategory && selectedCategoryId ? (
+            <div className='flex justify-center p-8'>
+              <Spinner label='กำลังโหลดข้อมูล...' />
+            </div>
+          ) : (
+            <div className='space-y-6'>
+              <SectionLabel>สถานะการแสดงผล</SectionLabel>
+              <Controller
+                control={control}
+                name='isActive'
+                render={({ field: { value, onChange } }) => (
+                  <Switch isSelected={!!value} onValueChange={onChange}>
+                    เปิดใช้งานหมวดหมู่บทความ (Active)
+                  </Switch>
+                )}
+              />
+
+              <SectionLabel>ข้อมูลพื้นฐานบทความ</SectionLabel>
+              <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
                 <Controller
                   control={control}
-                  name='isActive'
-                  render={({ field: { value, onChange } }) => (
-                    <Switch isSelected={!!value} onValueChange={onChange}>
-                      เปิดใช้งานหมวดหมู่บทความ (Active)
-                    </Switch>
-                  )}
-                />
-
-                <SectionLabel>ข้อมูลพื้นฐานบทความ</SectionLabel>
-                <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-                  <Controller
-                    control={control}
-                    name='name'
-                    render={({ field }) => (
-                      <Input
-                        {...field}
-                        errorMessage={errors.name?.message?.toString()}
-                        isInvalid={!!errors.name}
-                        label='ชื่อหมวดหมู่บทความ'
-                        variant='bordered'
-                      />
-                    )}
-                  />
-                  <Controller
-                    control={control}
-                    name='slug'
-                    render={({ field }) => (
-                      <Input
-                        {...field}
-                        errorMessage={errors.slug?.message?.toString()}
-                        isInvalid={!!errors.slug}
-                        label='URL Slug'
-                        placeholder='เช่น news-and-updates'
-                        value={field.value || ''}
-                        variant='bordered'
-                      />
-                    )}
-                  />
-                </div>
-
-                <Controller
-                  control={control}
-                  name='image'
+                  name='name'
                   render={({ field }) => (
                     <Input
                       {...field}
-                      errorMessage={errors.image?.message?.toString()}
-                      isInvalid={!!errors.image}
-                      label='รูปภาพหน้าปกหมวดหมู่ (URL)'
-                      placeholder='https://example.com/blog-category.jpg'
+                      errorMessage={errors.name?.message?.toString()}
+                      isInvalid={!!errors.name}
+                      label='ชื่อหมวดหมู่บทความ'
+                      variant='bordered'
+                    />
+                  )}
+                />
+                <Controller
+                  control={control}
+                  name='slug'
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      errorMessage={errors.slug?.message?.toString()}
+                      isInvalid={!!errors.slug}
+                      label='URL Slug'
+                      placeholder='เช่น news-and-updates'
                       value={field.value || ''}
                       variant='bordered'
                     />
                   )}
                 />
               </div>
-            )}
-          </ModalBody>
-          <ModalFooter>
-            <Button variant='flat' onPress={closeForm}>
-              ยกเลิก
-            </Button>
-            <Button
-              className='text-secondary font-bold'
-              color='primary'
-              isDisabled={!isDirty}
-              isLoading={isPending}
-              type='submit'
-            >
-              {selectedCategoryId ? 'บันทึกการแก้ไข' : 'สร้างหมวดหมู่บทความ'}
-            </Button>
-          </ModalFooter>
-        </form>
+
+              <Controller
+                control={control}
+                name='image'
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    errorMessage={errors.image?.message?.toString()}
+                    isInvalid={!!errors.image}
+                    label='รูปภาพหน้าปกหมวดหมู่ (URL)'
+                    placeholder='https://example.com/blog-category.jpg'
+                    value={field.value || ''}
+                    variant='bordered'
+                  />
+                )}
+              />
+            </div>
+          )}
+        </ModalBody>
+        <ModalFooter>
+          <Button variant='flat' onPress={closeForm}>
+            ยกเลิก
+          </Button>
+          <Button
+            className='text-secondary font-bold'
+            color='primary'
+            isDisabled={!isDirty}
+            isLoading={isPending}
+            onClick={handleSubmit(onSubmit)}
+          >
+            {selectedCategoryId ? 'บันทึกการแก้ไข' : 'สร้างหมวดหมู่บทความ'}
+          </Button>
+        </ModalFooter>
       </ModalContent>
     </Modal>
   )

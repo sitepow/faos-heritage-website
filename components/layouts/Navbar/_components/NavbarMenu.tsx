@@ -27,11 +27,8 @@ const NavbarMenu = ({ staticLinks, categories, blogCategories }: Props) => {
   const MAX_VISIBLE_ITEMS = 3
 
   const allCategories = useMemo(() => {
-    // แกะข้อมูลจาก blogCategories (ActionSuccess)
     const blogData = blogCategories?.success ? blogCategories.data : []
 
-    // แกะข้อมูลจาก categories (ถ้าโครงสร้างเหมือนกันให้เช็ค .success ด้วย)
-    // ในที่นี้ผมอิงตามโค้ดเดิมของคุณที่มอง categories เป็น array หรือผลลัพธ์โดยตรง
     const productData = Array.isArray(categories) ? categories : []
 
     return [

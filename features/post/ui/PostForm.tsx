@@ -181,214 +181,212 @@ const PostForm = () => {
       onOpenChange={(open) => !open && handleClose()}
     >
       <ModalContent>
-        <form className='overflow-y-scroll' onSubmit={handleSubmit(onSubmit)}>
-          <ModalHeader className='text-xl font-bold'>
-            {selectedPostId ? 'แก้ไขข้อมูลพื้นฐานบทความ' : 'เขียนบทความใหม่'}
-          </ModalHeader>
-          <ModalBody>
-            {isLoadingPost && selectedPostId ? (
-              <div className='flex justify-center p-8'>
-                <Spinner label='กำลังโหลดข้อมูล...' />
-              </div>
-            ) : (
-              <div className='space-y-6'>
-                <SectionLabel>รูปหน้าปกบทความ</SectionLabel>
-                <ImageDropzone onFilesChange={onFilesChange} />
+        <ModalHeader className='text-xl font-bold'>
+          {selectedPostId ? 'แก้ไขข้อมูลพื้นฐานบทความ' : 'เขียนบทความใหม่'}
+        </ModalHeader>
+        <ModalBody>
+          {isLoadingPost && selectedPostId ? (
+            <div className='flex justify-center p-8'>
+              <Spinner label='กำลังโหลดข้อมูล...' />
+            </div>
+          ) : (
+            <div className='space-y-6'>
+              <SectionLabel>รูปหน้าปกบทความ</SectionLabel>
+              <ImageDropzone onFilesChange={onFilesChange} />
 
-                <SectionLabel>สถานะและการแสดงผล</SectionLabel>
-                <div className='flex flex-wrap gap-6'>
-                  <Controller
-                    control={control}
-                    name='status'
-                    render={({ field: { value, onChange } }) => (
-                      <Select
-                        className='max-w-xs'
-                        label='สถานะบทความ'
-                        selectedKeys={value ? [value] : []}
-                        variant='bordered'
-                        onSelectionChange={(keys) =>
-                          onChange(Array.from(keys)[0] as PostStatus)
-                        }
-                      >
-                        <SelectItem key={PostStatus.DRAFT}>ฉบับร่าง</SelectItem>
-                        <SelectItem key={PostStatus.PUBLISHED}>
-                          เผยแพร่
-                        </SelectItem>
-                        <SelectItem key={PostStatus.ARCHIVED}>
-                          เก็บถาวร
-                        </SelectItem>
-                      </Select>
-                    )}
-                  />
-                  <Controller
-                    control={control}
-                    name='isFeatured'
-                    render={({ field: { value, onChange } }) => (
-                      <Switch isSelected={!!value} onValueChange={onChange}>
-                        บทความแนะนำ (Featured)
-                      </Switch>
-                    )}
-                  />
-                </div>
-
-                <SectionLabel>ข้อมูลเนื้อหา</SectionLabel>
-                <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-                  <Controller
-                    control={control}
-                    name='title'
-                    render={({ field }) => (
-                      <Input
-                        {...field}
-                        errorMessage={errors.title?.message?.toString()}
-                        isInvalid={!!errors.title}
-                        label='หัวข้อบทความ'
-                        variant='bordered'
-                      />
-                    )}
-                  />
-                  <Controller
-                    control={control}
-                    name='slug'
-                    render={({ field }) => (
-                      <Input
-                        {...field}
-                        errorMessage={errors.slug?.message?.toString()}
-                        isInvalid={!!errors.slug}
-                        label='URL Slug'
-                        variant='bordered'
-                      />
-                    )}
-                  />
-                </div>
-
-                <SectionLabel>การจัดกลุ่มและแท็ก</SectionLabel>
-                <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-                  <Controller
-                    control={control}
-                    name='categoryId'
-                    render={({ field: { value, onChange } }) => (
-                      <Select
-                        label='หมวดหมู่บทความ'
-                        selectedKeys={value ? [value] : []}
-                        variant='bordered'
-                        onSelectionChange={(keys) =>
-                          onChange((Array.from(keys)[0] as string) || null)
-                        }
-                      >
-                        {categories.map((cat) => (
-                          <SelectItem key={cat?.id!}>{cat?.name!}</SelectItem>
-                        ))}
-                      </Select>
-                    )}
-                  />
-                  <Controller
-                    control={control}
-                    name='tagIds'
-                    render={({ field: { value, onChange } }) => (
-                      <Select
-                        label='แท็กบทความ'
-                        selectedKeys={new Set(value)}
-                        selectionMode='multiple'
-                        variant='bordered'
-                        onSelectionChange={(keys) => onChange(Array.from(keys))}
-                      >
-                        {(tags || []).map((tag) => (
-                          <SelectItem key={tag?.id!}>{tag?.name!}</SelectItem>
-                        ))}
-                      </Select>
-                    )}
-                  />
-                </div>
-
-                <SectionLabel>SEO และ Keywords</SectionLabel>
-                <div className='flex flex-col gap-4'>
-                  <div className='flex flex-col gap-2'>
-                    <Input
-                      label='คีย์เวิร์ด (กด , หรือ Enter เพื่อเพิ่ม)'
-                      placeholder='เช่น สุขภาพ, อาหาร'
-                      value={inputValue}
-                      variant='bordered'
-                      onChange={(e) => setInputValue(e.target.value)}
-                      onKeyDown={handleKeyDown}
-                    />
-                    <div className='flex flex-wrap gap-2 px-1'>
-                      {keywords.map((keyword, index) => (
-                        <Chip
-                          key={index}
-                          color='primary'
-                          variant='flat'
-                          onClose={() => removeKeyword(index)}
-                        >
-                          {keyword}
-                        </Chip>
-                      ))}
-                    </div>
-                  </div>
-                  <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-                    <Controller
-                      control={control}
-                      name='metaTitle'
-                      render={({ field }) => (
-                        <Input
-                          {...field}
-                          errorMessage={errors.metaTitle?.message?.toString()}
-                          isInvalid={!!errors.metaTitle}
-                          label='Meta Title'
-                          value={field.value || ''}
-                          variant='bordered'
-                        />
-                      )}
-                    />
-                    <Controller
-                      control={control}
-                      name='metaDescription'
-                      render={({ field }) => (
-                        <Input
-                          {...field}
-                          errorMessage={errors.metaDescription?.message?.toString()}
-                          isInvalid={!!errors.metaDescription}
-                          label='Meta Description'
-                          value={field.value || ''}
-                          variant='bordered'
-                        />
-                      )}
-                    />
-                  </div>
-                </div>
-
-                <SectionLabel>สรุปเนื้อหาเบื้องต้น</SectionLabel>
+              <SectionLabel>สถานะและการแสดงผล</SectionLabel>
+              <div className='flex flex-wrap gap-6'>
                 <Controller
                   control={control}
-                  name='summary'
+                  name='status'
+                  render={({ field: { value, onChange } }) => (
+                    <Select
+                      className='max-w-xs'
+                      label='สถานะบทความ'
+                      selectedKeys={value ? [value] : []}
+                      variant='bordered'
+                      onSelectionChange={(keys) =>
+                        onChange(Array.from(keys)[0] as PostStatus)
+                      }
+                    >
+                      <SelectItem key={PostStatus.DRAFT}>ฉบับร่าง</SelectItem>
+                      <SelectItem key={PostStatus.PUBLISHED}>
+                        เผยแพร่
+                      </SelectItem>
+                      <SelectItem key={PostStatus.ARCHIVED}>
+                        เก็บถาวร
+                      </SelectItem>
+                    </Select>
+                  )}
+                />
+                <Controller
+                  control={control}
+                  name='isFeatured'
+                  render={({ field: { value, onChange } }) => (
+                    <Switch isSelected={!!value} onValueChange={onChange}>
+                      บทความแนะนำ (Featured)
+                    </Switch>
+                  )}
+                />
+              </div>
+
+              <SectionLabel>ข้อมูลเนื้อหา</SectionLabel>
+              <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+                <Controller
+                  control={control}
+                  name='title'
                   render={({ field }) => (
-                    <Textarea
+                    <Input
                       {...field}
-                      errorMessage={errors.summary?.message?.toString()}
-                      isInvalid={!!errors.summary}
-                      label='คำอธิบายสั้น (Summary)'
-                      value={field.value || ''}
+                      errorMessage={errors.title?.message?.toString()}
+                      isInvalid={!!errors.title}
+                      label='หัวข้อบทความ'
+                      variant='bordered'
+                    />
+                  )}
+                />
+                <Controller
+                  control={control}
+                  name='slug'
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      errorMessage={errors.slug?.message?.toString()}
+                      isInvalid={!!errors.slug}
+                      label='URL Slug'
                       variant='bordered'
                     />
                   )}
                 />
               </div>
-            )}
-          </ModalBody>
-          <ModalFooter>
-            <Button variant='flat' onPress={handleClose}>
-              ยกเลิก
-            </Button>
-            <Button
-              className='text-secondary font-bold'
-              color='primary'
-              isDisabled={!isDirty}
-              isLoading={isPending}
-              type='submit'
-            >
-              {selectedPostId ? 'บันทึกการแก้ไข' : 'สร้างบทความ'}
-            </Button>
-          </ModalFooter>
-        </form>
+
+              <SectionLabel>การจัดกลุ่มและแท็ก</SectionLabel>
+              <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+                <Controller
+                  control={control}
+                  name='categoryId'
+                  render={({ field: { value, onChange } }) => (
+                    <Select
+                      label='หมวดหมู่บทความ'
+                      selectedKeys={value ? [value] : []}
+                      variant='bordered'
+                      onSelectionChange={(keys) =>
+                        onChange((Array.from(keys)[0] as string) || null)
+                      }
+                    >
+                      {categories.map((cat) => (
+                        <SelectItem key={cat?.id!}>{cat?.name!}</SelectItem>
+                      ))}
+                    </Select>
+                  )}
+                />
+                <Controller
+                  control={control}
+                  name='tagIds'
+                  render={({ field: { value, onChange } }) => (
+                    <Select
+                      label='แท็กบทความ'
+                      selectedKeys={new Set(value)}
+                      selectionMode='multiple'
+                      variant='bordered'
+                      onSelectionChange={(keys) => onChange(Array.from(keys))}
+                    >
+                      {(tags || []).map((tag) => (
+                        <SelectItem key={tag?.id!}>{tag?.name!}</SelectItem>
+                      ))}
+                    </Select>
+                  )}
+                />
+              </div>
+
+              <SectionLabel>SEO และ Keywords</SectionLabel>
+              <div className='flex flex-col gap-4'>
+                <div className='flex flex-col gap-2'>
+                  <Input
+                    label='คีย์เวิร์ด (กด , หรือ Enter เพื่อเพิ่ม)'
+                    placeholder='เช่น สุขภาพ, อาหาร'
+                    value={inputValue}
+                    variant='bordered'
+                    onChange={(e) => setInputValue(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                  />
+                  <div className='flex flex-wrap gap-2 px-1'>
+                    {keywords.map((keyword, index) => (
+                      <Chip
+                        key={index}
+                        color='primary'
+                        variant='flat'
+                        onClose={() => removeKeyword(index)}
+                      >
+                        {keyword}
+                      </Chip>
+                    ))}
+                  </div>
+                </div>
+                <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+                  <Controller
+                    control={control}
+                    name='metaTitle'
+                    render={({ field }) => (
+                      <Input
+                        {...field}
+                        errorMessage={errors.metaTitle?.message?.toString()}
+                        isInvalid={!!errors.metaTitle}
+                        label='Meta Title'
+                        value={field.value || ''}
+                        variant='bordered'
+                      />
+                    )}
+                  />
+                  <Controller
+                    control={control}
+                    name='metaDescription'
+                    render={({ field }) => (
+                      <Input
+                        {...field}
+                        errorMessage={errors.metaDescription?.message?.toString()}
+                        isInvalid={!!errors.metaDescription}
+                        label='Meta Description'
+                        value={field.value || ''}
+                        variant='bordered'
+                      />
+                    )}
+                  />
+                </div>
+              </div>
+
+              <SectionLabel>สรุปเนื้อหาเบื้องต้น</SectionLabel>
+              <Controller
+                control={control}
+                name='summary'
+                render={({ field }) => (
+                  <Textarea
+                    {...field}
+                    errorMessage={errors.summary?.message?.toString()}
+                    isInvalid={!!errors.summary}
+                    label='คำอธิบายสั้น (Summary)'
+                    value={field.value || ''}
+                    variant='bordered'
+                  />
+                )}
+              />
+            </div>
+          )}
+        </ModalBody>
+        <ModalFooter>
+          <Button variant='flat' onPress={handleClose}>
+            ยกเลิก
+          </Button>
+          <Button
+            className='text-secondary font-bold'
+            color='primary'
+            isDisabled={!isDirty}
+            isLoading={isPending}
+            onClick={handleSubmit(onSubmit)}
+          >
+            {selectedPostId ? 'บันทึกการแก้ไข' : 'สร้างบทความ'}
+          </Button>
+        </ModalFooter>
       </ModalContent>
     </Modal>
   )

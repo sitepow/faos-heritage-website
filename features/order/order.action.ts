@@ -1,6 +1,12 @@
 'use server'
 
-import { OrderStatus, StockMovementType } from '@prisma/client'
+import {
+  AffiliateStatus,
+  OrderStatus,
+  PayoutStatus,
+  StockMovementType,
+} from '@prisma/client'
+import { revalidatePath } from 'next/cache'
 
 import type { AffiliateFilter, GetAffiliateOrdersOptions } from './order.types'
 import type { Prisma, Currency } from '@prisma/client'
@@ -446,6 +452,39 @@ const createOrder = async (input: CreateOrderInput) =>
         },
       })
 
+      if (referrerId) {
+        const affiliate = await tx.affiliateProfile.findUnique({
+          where: { affiliateCode: referrerId },
+          select: {
+            id: true,
+            baseRate: true,
+            highValueRate: true,
+            thresholdAmount: true,
+          },
+        })
+
+        if (affiliate) {
+          const isHighValue =
+            Number(baseTotal) >= Number(affiliate.thresholdAmount)
+          const appliedRate = isHighValue
+            ? affiliate.highValueRate
+            : affiliate.baseRate
+          const commissionAmount =
+            (Number(baseTotal) * Number(appliedRate)) / 100
+
+          await tx.affiliateCommission.create({
+            data: {
+              affiliateId: affiliate.id,
+              orderId: order.id,
+              orderAmount: baseTotal,
+              appliedRate: appliedRate,
+              commissionAmount: commissionAmount,
+              status: AffiliateStatus.PENDING,
+            },
+          })
+        }
+      }
+
       await Promise.all([
         ...items.map((item) =>
           processStockMovement(tx, {
@@ -488,17 +527,37 @@ const updateOrder = async (input: UpdateOrderInput) =>
         !CANCEL_OR_REFUND_STATUSES.has(order.status)
       ) {
         await Promise.all(
-          order.items.map((item) =>
-            processStockMovement(tx, {
+          order.items.map((item) => {
+            return processStockMovement(tx, {
               productId: item.productId!,
               variantId: item.variantId,
               quantity: item.quantity,
               type: StockMovementType.RESTOCK,
               orderId: order.id,
               direction: 'increment',
-            }),
-          ),
+            })
+          }),
         )
+      }
+
+      if (CANCEL_OR_REFUND_STATUSES.has(status)) {
+        await tx.affiliateCommission.updateMany({
+          where: {
+            orderId: orderId,
+            status: PayoutStatus.PENDING,
+          },
+          data: { status: PayoutStatus.REJECTED },
+        })
+      }
+
+      if (status === OrderStatus.DELIVERED) {
+        await tx.affiliateCommission.updateMany({
+          where: {
+            orderId: orderId,
+            status: PayoutStatus.PENDING,
+          },
+          data: { status: PayoutStatus.COMPLETED },
+        })
       }
 
       await tx.order.update({
@@ -509,6 +568,7 @@ const updateOrder = async (input: UpdateOrderInput) =>
         },
       })
 
+      revalidatePath('/dashboard/orders')
       return ok()
     })
   })

@@ -128,70 +128,68 @@ const ProductImageForm = () => {
       onOpenChange={closeForm}
     >
       <ModalContent>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <ModalHeader className='font-bold'>
-            {selectedImageId ? 'แก้ไขข้อมูลรูปภาพ' : 'เพิ่มรูปภาพสินค้า'}
-          </ModalHeader>
-          <ModalBody>
-            {isLoadingDetail && selectedImageId ? (
-              <div className='flex justify-center p-8'>
-                <Spinner label='กำลังโหลดข้อมูล...' />
-              </div>
-            ) : (
-              <div className='space-y-4'>
-                <ImageDropzone onFilesChange={onFilesChange} />
+        <ModalHeader className='font-bold'>
+          {selectedImageId ? 'แก้ไขข้อมูลรูปภาพ' : 'เพิ่มรูปภาพสินค้า'}
+        </ModalHeader>
+        <ModalBody>
+          {isLoadingDetail && selectedImageId ? (
+            <div className='flex justify-center p-8'>
+              <Spinner label='กำลังโหลดข้อมูล...' />
+            </div>
+          ) : (
+            <div className='space-y-4'>
+              <ImageDropzone onFilesChange={onFilesChange} />
 
-                <SectionLabel>สถานะรูปภาพ</SectionLabel>
-                <Controller
-                  control={control}
-                  name='isPrimary'
-                  render={({ field: { value, onChange } }) => (
-                    <Switch isSelected={!!value} onValueChange={onChange}>
-                      ตั้งเป็นรูปหลัก (Primary Image)
-                    </Switch>
-                  )}
-                />
-
-                <SectionLabel>ข้อมูลประกอบ</SectionLabel>
-                <Controller
-                  control={control}
-                  name='alt'
-                  render={({ field }) => (
-                    <Input
-                      {...field}
-                      errorMessage={errors.alt?.message?.toString()}
-                      isInvalid={!!errors.alt}
-                      label='คำอธิบายรูปภาพ (Alt Text)'
-                      placeholder='เช่น หน้าตรงของสินค้า'
-                      value={field.value ?? ''}
-                      variant='bordered'
-                    />
-                  )}
-                />
-
-                {errors.url && (
-                  <p className='text-danger text-tiny px-1'>
-                    {errors.url.message?.toString()}
-                  </p>
+              <SectionLabel>สถานะรูปภาพ</SectionLabel>
+              <Controller
+                control={control}
+                name='isPrimary'
+                render={({ field: { value, onChange } }) => (
+                  <Switch isSelected={!!value} onValueChange={onChange}>
+                    ตั้งเป็นรูปหลัก (Primary Image)
+                  </Switch>
                 )}
-              </div>
-            )}
-          </ModalBody>
-          <ModalFooter>
-            <Button isDisabled={isPending} variant='flat' onPress={closeForm}>
-              ยกเลิก
-            </Button>
-            <Button
-              className='text-secondary font-bold'
-              color='primary'
-              isDisabled={!isDirty || isPending}
-              isLoading={isPending}
-              type='submit'
-            >
-              {selectedImageId ? 'บันทึกการแก้ไข' : 'อัปโหลดรูปภาพ'}
-            </Button>
-          </ModalFooter>
-        </form>
+              />
+
+              <SectionLabel>ข้อมูลประกอบ</SectionLabel>
+              <Controller
+                control={control}
+                name='alt'
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    errorMessage={errors.alt?.message?.toString()}
+                    isInvalid={!!errors.alt}
+                    label='คำอธิบายรูปภาพ (Alt Text)'
+                    placeholder='เช่น หน้าตรงของสินค้า'
+                    value={field.value ?? ''}
+                    variant='bordered'
+                  />
+                )}
+              />
+
+              {errors.url && (
+                <p className='text-danger text-tiny px-1'>
+                  {errors.url.message?.toString()}
+                </p>
+              )}
+            </div>
+          )}
+        </ModalBody>
+        <ModalFooter>
+          <Button isDisabled={isPending} variant='flat' onPress={closeForm}>
+            ยกเลิก
+          </Button>
+          <Button
+            className='text-secondary font-bold'
+            color='primary'
+            isDisabled={!isDirty || isPending}
+            isLoading={isPending}
+            onClick={handleSubmit(onSubmit)}
+          >
+            {selectedImageId ? 'บันทึกการแก้ไข' : 'อัปโหลดรูปภาพ'}
+          </Button>
+        </ModalFooter>
       </ModalContent>
     </Modal>
   )

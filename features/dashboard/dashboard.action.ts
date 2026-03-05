@@ -4,8 +4,8 @@ import { OrderStatus } from '@prisma/client'
 
 import { prisma } from '@/lib/prisma'
 
-const getRevenueChartData = async () => {
-  const last7Days = new Array(7)
+const getLast7Days = () => {
+  return new Array(7)
     .fill(0)
     .map((_, i) => {
       const d = new Date()
@@ -13,23 +13,72 @@ const getRevenueChartData = async () => {
       return d.toISOString().split('T')[0]
     })
     .reverse()
+}
 
-  const revenue = await prisma.order.groupBy({
-    by: ['createdAt'],
+const getAffiliatePerformanceData = async () => {
+  const last7Days = getLast7Days()
+  const sevenDaysAgo = new Date()
+  sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7)
+  sevenDaysAgo.setHours(0, 0, 0, 0)
+
+  const orders = await prisma.order.findMany({
     where: {
       status: OrderStatus.DELIVERED,
-      createdAt: { gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) },
+      createdAt: { gte: sevenDaysAgo },
     },
-    _sum: { baseTotal: true },
+    select: {
+      baseTotal: true,
+      createdAt: true,
+      referrerCode: true,
+    },
   })
 
   return last7Days.map((date) => {
-    const found = revenue.find(
-      (r) => r.createdAt.toISOString().split('T')[0] === date,
+    const dayOrders = orders.filter(
+      (o) => o.createdAt.toISOString().split('T')[0] === date,
     )
+
+    const affiliateSales = dayOrders
+      .filter((o) => !!o.referrerCode)
+      .reduce((sum, o) => sum + Number(o.baseTotal), 0)
+
+    const directSales = dayOrders
+      .filter((o) => !o.referrerCode)
+      .reduce((sum, o) => sum + Number(o.baseTotal), 0)
+
     return {
       date,
-      ยอดเงิน: Number(found?._sum.baseTotal || 0),
+      ยอดขายทั่วไป: directSales,
+      'ยอดขาย Aff': affiliateSales,
+    }
+  })
+}
+
+const getRevenueChartData = async () => {
+  const last7Days = getLast7Days()
+  const sevenDaysAgo = new Date()
+  sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7)
+  sevenDaysAgo.setHours(0, 0, 0, 0)
+
+  const orders = await prisma.order.findMany({
+    where: {
+      status: OrderStatus.DELIVERED,
+      createdAt: { gte: sevenDaysAgo },
+    },
+    select: {
+      baseTotal: true,
+      createdAt: true,
+    },
+  })
+
+  return last7Days.map((date) => {
+    const dailyTotal = orders
+      .filter((o) => o.createdAt.toISOString().split('T')[0] === date)
+      .reduce((sum, o) => sum + Number(o.baseTotal), 0)
+
+    return {
+      date,
+      ยอดเงิน: dailyTotal,
     }
   })
 }
@@ -120,9 +169,39 @@ const getTopProductsData = async () => {
   })
 }
 
+const getAffiliateStats = async () => {
+  const [affiliateCount, commissionStats] = await Promise.all([
+    prisma.affiliateProfile.count(),
+    prisma.affiliateCommission.groupBy({
+      by: ['status'],
+      _sum: {
+        commissionAmount: true,
+      },
+    }),
+  ])
+
+  const pending =
+    commissionStats.find((s) => s.status === 'PENDING')?._sum
+      .commissionAmount || 0
+  const completed =
+    commissionStats.find((s) => s.status === 'COMPLETED')?._sum
+      .commissionAmount || 0
+  const paid =
+    commissionStats.find((s) => s.status === 'PAID')?._sum.commissionAmount || 0
+
+  return [
+    { name: 'พาร์ทเนอร์ทั้งหมด', value: affiliateCount },
+    { name: 'ยอดรอคอนเฟิร์ม (Aff)', value: Number(pending), isCurrency: true },
+    { name: 'ยอดรอถอน (Aff)', value: Number(completed), isCurrency: true },
+    { name: 'จ่ายแล้ว (Aff)', value: Number(paid), isCurrency: true },
+  ]
+}
+
 export {
+  getAffiliatePerformanceData,
   getRevenueChartData,
   getOrderStatusData,
   getSalesByCategoryData,
   getTopProductsData,
+  getAffiliateStats,
 }

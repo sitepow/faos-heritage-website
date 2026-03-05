@@ -84,107 +84,87 @@ const ProductVariantForm = () => {
       onOpenChange={closeForm}
     >
       <ModalContent>
-        <form id='variant-form' onSubmit={handleSubmit(onSubmit)}>
-          <ModalHeader className='text-xl font-bold'>
-            {selectedVariantId
-              ? 'แก้ไขตัวเลือกสินค้า'
-              : 'เพิ่มตัวเลือกสินค้าใหม่'}
-          </ModalHeader>
-          <ModalBody>
-            {isLoading && selectedVariantId ? (
-              <div className='flex justify-center p-8'>
-                <Spinner label='กำลังโหลดข้อมูลตัวเลือก...' />
-              </div>
-            ) : (
-              <div className='space-y-6'>
-                <SectionLabel>สถานะการแสดงผล</SectionLabel>
+        <ModalHeader className='text-xl font-bold'>
+          {selectedVariantId
+            ? 'แก้ไขตัวเลือกสินค้า'
+            : 'เพิ่มตัวเลือกสินค้าใหม่'}
+        </ModalHeader>
+        <ModalBody>
+          {isLoading && selectedVariantId ? (
+            <div className='flex justify-center p-8'>
+              <Spinner label='กำลังโหลดข้อมูลตัวเลือก...' />
+            </div>
+          ) : (
+            <div className='space-y-6'>
+              <SectionLabel>สถานะการแสดงผล</SectionLabel>
+              <Controller
+                control={control}
+                name='isActive'
+                render={({ field: { value, onChange } }) => (
+                  <Switch isSelected={!!value} onValueChange={onChange}>
+                    เปิดใช้งานตัวเลือกนี้
+                  </Switch>
+                )}
+              />
+
+              <SectionLabel>ข้อมูลตัวเลือกสินค้า</SectionLabel>
+              <Controller
+                control={control}
+                name='name'
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    errorMessage={errors.name?.message?.toString()}
+                    isInvalid={!!errors.name}
+                    label='ชื่อตัวเลือก (เช่น ขนาด L, สีแดง)'
+                    variant='bordered'
+                  />
+                )}
+              />
+
+              <SectionLabel>ราคาและน้ำหนัก</SectionLabel>
+              <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
                 <Controller
                   control={control}
-                  name='isActive'
-                  render={({ field: { value, onChange } }) => (
-                    <Switch isSelected={!!value} onValueChange={onChange}>
-                      เปิดใช้งานตัวเลือกนี้
-                    </Switch>
-                  )}
-                />
-
-                <SectionLabel>ข้อมูลตัวเลือกสินค้า</SectionLabel>
-                <Controller
-                  control={control}
-                  name='name'
-                  render={({ field }) => (
-                    <Input
-                      {...field}
-                      errorMessage={errors.name?.message?.toString()}
-                      isInvalid={!!errors.name}
-                      label='ชื่อตัวเลือก (เช่น ขนาด L, สีแดง)'
-                      variant='bordered'
-                    />
-                  )}
-                />
-
-                <SectionLabel>ราคาและน้ำหนัก</SectionLabel>
-                <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
-                  <Controller
-                    control={control}
-                    name='price'
-                    render={({ field: { value, onChange, ...field } }) => (
-                      <Input
-                        {...field}
-                        errorMessage={errors.price?.message?.toString()}
-                        isInvalid={!!errors.price}
-                        label='ราคาปกติ'
-                        type='number'
-                        value={value?.toString()}
-                        variant='bordered'
-                        onValueChange={(v) => onChange(Number(v))}
-                      />
-                    )}
-                  />
-                  <Controller
-                    control={control}
-                    name='salePrice'
-                    render={({ field: { value, onChange, ...field } }) => (
-                      <Input
-                        {...field}
-                        errorMessage={errors.salePrice?.message?.toString()}
-                        isInvalid={!!errors.salePrice}
-                        label='ราคาลด (ถ้ามี)'
-                        type='number'
-                        value={value?.toString() || ''}
-                        variant='bordered'
-                        onValueChange={(v) => onChange(v ? Number(v) : null)}
-                      />
-                    )}
-                  />
-                  <Controller
-                    control={control}
-                    name='weight'
-                    render={({ field: { value, onChange, ...field } }) => (
-                      <Input
-                        {...field}
-                        errorMessage={errors.weight?.message?.toString()}
-                        isInvalid={!!errors.weight}
-                        label='น้ำหนัก (กรัม)'
-                        type='number'
-                        value={value?.toString()}
-                        variant='bordered'
-                        onValueChange={(v) => onChange(Number(v))}
-                      />
-                    )}
-                  />
-                </div>
-
-                <SectionLabel>การจัดการสต็อก</SectionLabel>
-                <Controller
-                  control={control}
-                  name='stockQuantity'
+                  name='price'
                   render={({ field: { value, onChange, ...field } }) => (
                     <Input
                       {...field}
-                      errorMessage={errors.stockQuantity?.message?.toString()}
-                      isInvalid={!!errors.stockQuantity}
-                      label='จำนวนสต็อกคงเหลือ'
+                      errorMessage={errors.price?.message?.toString()}
+                      isInvalid={!!errors.price}
+                      label='ราคาปกติ'
+                      type='number'
+                      value={value?.toString()}
+                      variant='bordered'
+                      onValueChange={(v) => onChange(Number(v))}
+                    />
+                  )}
+                />
+                <Controller
+                  control={control}
+                  name='salePrice'
+                  render={({ field: { value, onChange, ...field } }) => (
+                    <Input
+                      {...field}
+                      errorMessage={errors.salePrice?.message?.toString()}
+                      isInvalid={!!errors.salePrice}
+                      label='ราคาลด (ถ้ามี)'
+                      type='number'
+                      value={value?.toString() || ''}
+                      variant='bordered'
+                      onValueChange={(v) => onChange(v ? Number(v) : null)}
+                    />
+                  )}
+                />
+                <Controller
+                  control={control}
+                  name='weight'
+                  render={({ field: { value, onChange, ...field } }) => (
+                    <Input
+                      {...field}
+                      errorMessage={errors.weight?.message?.toString()}
+                      isInvalid={!!errors.weight}
+                      label='น้ำหนัก (กรัม)'
                       type='number'
                       value={value?.toString()}
                       variant='bordered'
@@ -193,22 +173,40 @@ const ProductVariantForm = () => {
                   )}
                 />
               </div>
-            )}
-          </ModalBody>
-          <ModalFooter>
-            <Button variant='flat' onPress={closeForm}>
-              ยกเลิก
-            </Button>
-            <Button
-              className='text-secondary font-bold'
-              color='primary'
-              isDisabled={!isDirty}
-              type='submit'
-            >
-              {selectedVariantId ? 'บันทึกการแก้ไข' : 'ยืนยันเพิ่มตัวเลือก'}
-            </Button>
-          </ModalFooter>
-        </form>
+
+              <SectionLabel>การจัดการสต็อก</SectionLabel>
+              <Controller
+                control={control}
+                name='stockQuantity'
+                render={({ field: { value, onChange, ...field } }) => (
+                  <Input
+                    {...field}
+                    errorMessage={errors.stockQuantity?.message?.toString()}
+                    isInvalid={!!errors.stockQuantity}
+                    label='จำนวนสต็อกคงเหลือ'
+                    type='number'
+                    value={value?.toString()}
+                    variant='bordered'
+                    onValueChange={(v) => onChange(Number(v))}
+                  />
+                )}
+              />
+            </div>
+          )}
+        </ModalBody>
+        <ModalFooter>
+          <Button variant='flat' onPress={closeForm}>
+            ยกเลิก
+          </Button>
+          <Button
+            className='text-secondary font-bold'
+            color='primary'
+            isDisabled={!isDirty}
+            onClick={handleSubmit(onSubmit)}
+          >
+            {selectedVariantId ? 'บันทึกการแก้ไข' : 'ยืนยันเพิ่มตัวเลือก'}
+          </Button>
+        </ModalFooter>
       </ModalContent>
     </Modal>
   )

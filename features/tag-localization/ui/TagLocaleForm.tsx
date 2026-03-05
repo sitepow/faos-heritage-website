@@ -98,75 +98,73 @@ const TagLocaleForm = ({ tagId }: Props) => {
       onOpenChange={closeForm}
     >
       <ModalContent>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <ModalHeader className='text-xl font-bold'>
-            {selectedLocaleId ? 'แก้ไขการแปลภาษาแท็ก' : 'เพิ่มการแปลภาษาใหม่'}
-          </ModalHeader>
-          <ModalBody>
-            {isLoadingLocale && selectedLocaleId ? (
-              <div className='flex justify-center p-8'>
-                <Spinner label='กำลังโหลดข้อมูลการแปล...' />
-              </div>
-            ) : (
-              <div className='space-y-4'>
-                <Controller
-                  control={control}
-                  name='languageCode'
-                  render={({ field: { value, onChange, ...field } }) => (
-                    <Select
-                      {...field}
-                      errorMessage={errors.languageCode?.message}
-                      isDisabled={!!selectedLocaleId}
-                      isInvalid={!!errors.languageCode}
-                      label='เลือกภาษา/ประเทศ'
-                      placeholder='เลือกภาษาที่ต้องการแปล'
-                      selectedKeys={value ? [value] : []}
-                      variant='bordered'
-                      onSelectionChange={(keys) => {
-                        onChange(Array.from(keys)[0] as string)
-                      }}
-                    >
-                      {Object.entries(countries).map(([code, name]) => (
-                        <SelectItem key={code} textValue={name}>
-                          {name} ({code})
-                        </SelectItem>
-                      ))}
-                    </Select>
-                  )}
-                />
+        <ModalHeader className='text-xl font-bold'>
+          {selectedLocaleId ? 'แก้ไขการแปลภาษาแท็ก' : 'เพิ่มการแปลภาษาใหม่'}
+        </ModalHeader>
+        <ModalBody>
+          {isLoadingLocale && selectedLocaleId ? (
+            <div className='flex justify-center p-8'>
+              <Spinner label='กำลังโหลดข้อมูลการแปล...' />
+            </div>
+          ) : (
+            <div className='space-y-4'>
+              <Controller
+                control={control}
+                name='languageCode'
+                render={({ field: { value, onChange, ...field } }) => (
+                  <Select
+                    {...field}
+                    errorMessage={errors.languageCode?.message}
+                    isDisabled={!!selectedLocaleId}
+                    isInvalid={!!errors.languageCode}
+                    label='เลือกภาษา/ประเทศ'
+                    placeholder='เลือกภาษาที่ต้องการแปล'
+                    selectedKeys={value ? [value] : []}
+                    variant='bordered'
+                    onSelectionChange={(keys) => {
+                      onChange(Array.from(keys)[0] as string)
+                    }}
+                  >
+                    {Object.entries(countries).map(([code, name]) => (
+                      <SelectItem key={code} textValue={name}>
+                        {name} ({code})
+                      </SelectItem>
+                    ))}
+                  </Select>
+                )}
+              />
 
-                <Controller
-                  control={control}
-                  name='name'
-                  render={({ field }) => (
-                    <Input
-                      {...field}
-                      errorMessage={errors.name?.message}
-                      isInvalid={!!errors.name}
-                      label='ชื่อแท็ก (ภาษาที่เลือก)'
-                      placeholder='ระบุชื่อแท็กในภาษานั้นๆ'
-                      variant='bordered'
-                    />
-                  )}
-                />
-              </div>
-            )}
-          </ModalBody>
-          <ModalFooter>
-            <Button variant='flat' onPress={closeForm}>
-              ยกเลิก
-            </Button>
-            <Button
-              className='text-secondary font-bold'
-              color='primary'
-              isDisabled={!isDirty}
-              isLoading={isPending}
-              type='submit'
-            >
-              {selectedLocaleId ? 'บันทึกการแก้ไข' : 'เพิ่มการแปลภาษา'}
-            </Button>
-          </ModalFooter>
-        </form>
+              <Controller
+                control={control}
+                name='name'
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    errorMessage={errors.name?.message}
+                    isInvalid={!!errors.name}
+                    label='ชื่อแท็ก (ภาษาที่เลือก)'
+                    placeholder='ระบุชื่อแท็กในภาษานั้นๆ'
+                    variant='bordered'
+                  />
+                )}
+              />
+            </div>
+          )}
+        </ModalBody>
+        <ModalFooter>
+          <Button variant='flat' onPress={closeForm}>
+            ยกเลิก
+          </Button>
+          <Button
+            className='text-secondary font-bold'
+            color='primary'
+            isDisabled={!isDirty}
+            isLoading={isPending}
+            onClick={handleSubmit(onSubmit)}
+          >
+            {selectedLocaleId ? 'บันทึกการแก้ไข' : 'เพิ่มการแปลภาษา'}
+          </Button>
+        </ModalFooter>
       </ModalContent>
     </Modal>
   )

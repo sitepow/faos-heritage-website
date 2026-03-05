@@ -1,0 +1,277 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable no-nested-ternary */
+'use client'
+
+import {
+  Table,
+  TableHeader,
+  TableColumn,
+  TableBody,
+  TableRow,
+  TableCell,
+  Chip,
+  Button,
+  Accordion,
+  AccordionItem,
+  Spinner,
+  Tabs,
+  Tab,
+} from '@heroui/react'
+import { PayoutStatus } from '@prisma/client'
+import { ChevronLeftIcon, PackageIcon } from 'lucide-react'
+import { useParams, useRouter } from 'next/navigation'
+import { useMemo, useState } from 'react'
+
+import type { GetAffiliateCommissionsResult } from '@/features/affiliate-payout/payout.action'
+import type { Selection } from '@heroui/react'
+
+import { AffiliatePayoutTable } from '../_components/AffiliatePayoutTable'
+
+import { Container } from '@/components/layouts/Container'
+import { useAffiliateById } from '@/features/affiliate/affiliate.hook'
+import {
+  useAffiliateCommissions,
+  useAffiliatePayouts,
+} from '@/features/affiliate-payout/payout.hook'
+import { PayoutForm } from '@/features/affiliate-payout/ui/PayoutForm'
+import { formatCurrency, formatDate } from '@/utils'
+
+const AffiliateHistoryPage = () => {
+  const router = useRouter()
+  const { id } = useParams<{ id: string }>()
+
+  const { data: profile, isLoading: isProfileLoading } = useAffiliateById(id)
+  const { data: commissions, isLoading: isCommissionsLoading } =
+    useAffiliateCommissions(id)
+  const { data: payouts, isLoading: isPayoutsLoading } = useAffiliatePayouts(id)
+
+  const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set([]))
+
+  const isLoading = isProfileLoading || isCommissionsLoading
+
+  const selectedAmount = useMemo(() => {
+    if (!commissions) {
+      return 0
+    }
+
+    if (selectedKeys === 'all') {
+      return commissions
+        .filter((c) => {
+          return c.status === PayoutStatus.COMPLETED
+        })
+        .reduce((sum, c) => {
+          return sum + Number(c.commissionAmount)
+        }, 0)
+    }
+
+    const selectedIds = Array.from(selectedKeys)
+    return commissions
+      .filter((c) => {
+        return selectedIds.includes(c.id) && c.status === PayoutStatus.COMPLETED
+      })
+      .reduce((sum, c) => {
+        return sum + Number(c.commissionAmount)
+      }, 0)
+  }, [selectedKeys, commissions])
+
+  const disabledKeys = useMemo(() => {
+    if (!commissions) {
+      return new Set([])
+    }
+    const nonWithdrawableIds = commissions
+      .filter((c) => {
+        return c.status !== PayoutStatus.COMPLETED
+      })
+      .map((c) => {
+        return c.id
+      })
+    return new Set(nonWithdrawableIds)
+  }, [commissions])
+
+  return (
+    <Container className='flex flex-col gap-6 py-8'>
+      <div className='flex items-center justify-between'>
+        <div className='flex items-center gap-4'>
+          <Button
+            isIconOnly
+            radius='full'
+            size='sm'
+            variant='light'
+            onPress={() => {
+              return router.push('/dashboard/affiliates')
+            }}
+          >
+            <ChevronLeftIcon size={18} />
+          </Button>
+
+          <div className='flex flex-col gap-1'>
+            <h1 className='text-2xl font-bold'>ประวัติค่าคอมมิชชัน</h1>
+            <span>บัญชี: {profile?.user?.name ?? '-'}</span>
+            <p className='text-default-500 text-sm'>
+              เลือกรายการที่จัดส่งสำเร็จเพื่อดำเนินการจ่ายเงินให้พาร์ทเนอร์
+            </p>
+          </div>
+        </div>
+
+        {selectedAmount > 0 && (
+          <PayoutForm
+            affiliateId={id}
+            pendingAmount={selectedAmount}
+            selectedIds={
+              selectedKeys === 'all'
+                ? (commissions ?? [])
+                    .filter((c) => {
+                      return c.status === PayoutStatus.COMPLETED
+                    })
+                    .map((c) => {
+                      return c.id
+                    })
+                : (Array.from(selectedKeys) as string[])
+            }
+          />
+        )}
+      </div>
+
+      <Tabs
+        aria-label='Affiliate History Options'
+        classNames={{
+          tabList: 'gap-6',
+          cursor: 'w-full bg-primary',
+          tab: 'max-w-fit px-0 h-12',
+          tabContent: 'group-data-[selected=true]:text-primary font-bold',
+        }}
+        color='primary'
+        variant='underlined'
+      >
+        <Tab key='commissions' title='ยอดค่าคอมมิชชันรอจ่าย'>
+          <div className='pt-4'>
+            <Table
+              aria-label='Commission History'
+              checkboxesProps={{
+                classNames: {
+                  wrapper: 'after:bg-primary before:border-default-300',
+                  icon: 'text-white font-bold',
+                },
+              }}
+              disabledKeys={disabledKeys}
+              selectedKeys={selectedKeys}
+              selectionMode='multiple'
+              onSelectionChange={setSelectedKeys}
+            >
+              <TableHeader>
+                <TableColumn>รหัสรายการ</TableColumn>
+                <TableColumn>วันที่</TableColumn>
+                <TableColumn width={250}>รายการสินค้า / ออเดอร์</TableColumn>
+                <TableColumn>ยอดขาย (THB)</TableColumn>
+                <TableColumn>ค่าตอบแทน (THB)</TableColumn>
+                <TableColumn align='center'>สถานะ</TableColumn>
+              </TableHeader>
+              <TableBody
+                emptyContent='ไม่พบรายการ'
+                isLoading={isLoading}
+                loadingContent={<Spinner label='กำลังโหลดข้อมูล...' />}
+              >
+                {(commissions ?? []).map(
+                  (item: GetAffiliateCommissionsResult[number]) => {
+                    return (
+                      <TableRow
+                        key={item.id}
+                        className={
+                          item.status !== PayoutStatus.COMPLETED
+                            ? 'opacity-50'
+                            : ''
+                        }
+                      >
+                        <TableCell>
+                          <span className='text-default-500 font-mono text-xs font-bold'>
+                            #{item.id.slice(-8).toUpperCase()}
+                          </span>
+                        </TableCell>
+                        <TableCell>{formatDate(item.createdAt)}</TableCell>
+                        <TableCell>
+                          <Accordion isCompact className='px-0' variant='light'>
+                            <AccordionItem
+                              key='1'
+                              aria-label='View Items'
+                              startContent={
+                                <PackageIcon
+                                  className='text-default-400'
+                                  size={14}
+                                />
+                              }
+                              title={
+                                <span className='text-tiny font-mono font-bold'>
+                                  #{item.orderId.slice(-8).toUpperCase()}
+                                </span>
+                              }
+                            >
+                              <div className='flex flex-col gap-2 pb-2'>
+                                {item.order?.items?.map(
+                                  (orderItem, idx: number) => {
+                                    return (
+                                      <div
+                                        key={idx}
+                                        className='text-default-500 border-default-50 flex justify-between border-b pb-1 text-[10px]'
+                                      >
+                                        <span className='line-clamp-1 flex-1'>
+                                          {orderItem.productName}{' '}
+                                          {orderItem.variantName &&
+                                            `(${orderItem.variantName})`}
+                                        </span>
+                                        <span className='ml-2 font-bold'>
+                                          x{orderItem.quantity}
+                                        </span>
+                                      </div>
+                                    )
+                                  },
+                                )}
+                              </div>
+                            </AccordionItem>
+                          </Accordion>
+                        </TableCell>
+                        <TableCell>
+                          {formatCurrency(Number(item.orderAmount))}
+                        </TableCell>
+                        <TableCell className='text-success font-bold'>
+                          {formatCurrency(Number(item.commissionAmount))}
+                        </TableCell>
+                        <TableCell>
+                          <Chip
+                            color={
+                              item.status === PayoutStatus.PAID
+                                ? 'primary'
+                                : item.status === PayoutStatus.COMPLETED
+                                  ? 'success'
+                                  : item.status === PayoutStatus.REJECTED
+                                    ? 'danger'
+                                    : 'warning'
+                            }
+                            size='sm'
+                            variant='dot'
+                          >
+                            {item.status}
+                          </Chip>
+                        </TableCell>
+                      </TableRow>
+                    )
+                  },
+                )}
+              </TableBody>
+            </Table>
+          </div>
+        </Tab>
+
+        <Tab key='payouts' title='ประวัติการโอนเงินแล้ว'>
+          <div className='pt-4'>
+            <AffiliatePayoutTable
+              isLoading={isPayoutsLoading}
+              payouts={payouts ?? []}
+            />
+          </div>
+        </Tab>
+      </Tabs>
+    </Container>
+  )
+}
+
+export default AffiliateHistoryPage

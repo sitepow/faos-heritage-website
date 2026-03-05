@@ -217,7 +217,7 @@ const ShippingForm = () => {
                               label='เริ่ม (kg)'
                               size='sm'
                               type='number'
-                              value={value?.toString() ?? '0'} // แก้ไข toString error ตรงนี้
+                              value={value?.toString() ?? '0'}
                               variant='bordered'
                               onValueChange={(v) => onChange(Number(v))}
                             />

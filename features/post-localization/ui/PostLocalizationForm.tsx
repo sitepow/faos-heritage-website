@@ -99,93 +99,91 @@ const PostLocalizationForm = ({ postId }: Props) => {
       onOpenChange={closeForm}
     >
       <ModalContent>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <ModalHeader className='text-xl font-bold'>
-            {selectedId ? 'แก้ไขข้อมูลการแปลบทความ' : 'เพิ่มการแปลภาษาใหม่'}
-          </ModalHeader>
-          <ModalBody>
-            {isLoadingLocale && selectedId ? (
-              <div className='flex justify-center p-8'>
-                <Spinner label='กำลังโหลดข้อมูลภาษา...' />
-              </div>
-            ) : (
-              <div className='space-y-6'>
-                <SectionLabel>ตั้งค่าภาษา</SectionLabel>
+        <ModalHeader className='text-xl font-bold'>
+          {selectedId ? 'แก้ไขข้อมูลการแปลบทความ' : 'เพิ่มการแปลภาษาใหม่'}
+        </ModalHeader>
+        <ModalBody>
+          {isLoadingLocale && selectedId ? (
+            <div className='flex justify-center p-8'>
+              <Spinner label='กำลังโหลดข้อมูลภาษา...' />
+            </div>
+          ) : (
+            <div className='space-y-6'>
+              <SectionLabel>ตั้งค่าภาษา</SectionLabel>
+              <Controller
+                control={control}
+                name='languageCode'
+                render={({ field: { value, onChange } }) => (
+                  <Select
+                    errorMessage={errors.languageCode?.message}
+                    isDisabled={!!selectedId}
+                    isInvalid={!!errors.languageCode}
+                    label='ภาษาที่ต้องการแปล'
+                    placeholder='เลือกภาษา'
+                    selectedKeys={value ? [value] : []}
+                    variant='bordered'
+                    onSelectionChange={(keys) =>
+                      onChange(Array.from(keys)[0] as string)
+                    }
+                  >
+                    {languages.map((lang) => (
+                      <SelectItem key={lang.value}>{lang.label}</SelectItem>
+                    ))}
+                  </Select>
+                )}
+              />
+
+              <SectionLabel>เนื้อหาบทความ (ภาษาท้องถิ่น)</SectionLabel>
+              <div className='grid grid-cols-1 gap-4'>
                 <Controller
                   control={control}
-                  name='languageCode'
-                  render={({ field: { value, onChange } }) => (
-                    <Select
-                      errorMessage={errors.languageCode?.message}
-                      isDisabled={!!selectedId}
-                      isInvalid={!!errors.languageCode}
-                      label='ภาษาที่ต้องการแปล'
-                      placeholder='เลือกภาษา'
-                      selectedKeys={value ? [value] : []}
+                  name='title'
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      errorMessage={errors.title?.message}
+                      isInvalid={!!errors.title}
+                      label='หัวข้อบทความ (แปล)'
                       variant='bordered'
-                      onSelectionChange={(keys) =>
-                        onChange(Array.from(keys)[0] as string)
-                      }
-                    >
-                      {languages.map((lang) => (
-                        <SelectItem key={lang.value}>{lang.label}</SelectItem>
-                      ))}
-                    </Select>
+                    />
                   )}
                 />
-
-                <SectionLabel>เนื้อหาบทความ (ภาษาท้องถิ่น)</SectionLabel>
-                <div className='grid grid-cols-1 gap-4'>
-                  <Controller
-                    control={control}
-                    name='title'
-                    render={({ field }) => (
-                      <Input
-                        {...field}
-                        errorMessage={errors.title?.message}
-                        isInvalid={!!errors.title}
-                        label='หัวข้อบทความ (แปล)'
-                        variant='bordered'
-                      />
-                    )}
-                  />
-                  <Controller
-                    control={control}
-                    name='summary'
-                    render={({ field }) => (
-                      <Textarea
-                        {...field}
-                        label='สรุปเนื้อหาเบื้องต้น (แปล)'
-                        value={field.value || ''}
-                        variant='bordered'
-                      />
-                    )}
-                  />
-                </div>
-
-                <Alert>
-                  สำหรับการแปลเนื้อหาบทความแบบละเอียด (Content)
-                  คุณสามารถจัดการได้ผ่านเมนู &quot;แก้ไขเนื้อหาบทความ&quot;
-                  ในหน้าตารางจัดการภาษาหลังจากบันทึกส่วนหัวข้อนี้แล้ว
-                </Alert>
+                <Controller
+                  control={control}
+                  name='summary'
+                  render={({ field }) => (
+                    <Textarea
+                      {...field}
+                      label='สรุปเนื้อหาเบื้องต้น (แปล)'
+                      value={field.value || ''}
+                      variant='bordered'
+                    />
+                  )}
+                />
               </div>
-            )}
-          </ModalBody>
-          <ModalFooter>
-            <Button variant='flat' onPress={closeForm}>
-              ยกเลิก
-            </Button>
-            <Button
-              className='text-secondary font-bold'
-              color='primary'
-              isDisabled={!isDirty}
-              isLoading={isUpserting}
-              type='submit'
-            >
-              {selectedId ? 'บันทึกการแก้ไข' : 'เพิ่มการแปลภาษา'}
-            </Button>
-          </ModalFooter>
-        </form>
+
+              <Alert>
+                สำหรับการแปลเนื้อหาบทความแบบละเอียด (Content)
+                คุณสามารถจัดการได้ผ่านเมนู &quot;แก้ไขเนื้อหาบทความ&quot;
+                ในหน้าตารางจัดการภาษาหลังจากบันทึกส่วนหัวข้อนี้แล้ว
+              </Alert>
+            </div>
+          )}
+        </ModalBody>
+        <ModalFooter>
+          <Button variant='flat' onPress={closeForm}>
+            ยกเลิก
+          </Button>
+          <Button
+            className='text-secondary font-bold'
+            color='primary'
+            isDisabled={!isDirty}
+            isLoading={isUpserting}
+            onClick={handleSubmit(onSubmit)}
+          >
+            {selectedId ? 'บันทึกการแก้ไข' : 'เพิ่มการแปลภาษา'}
+          </Button>
+        </ModalFooter>
       </ModalContent>
     </Modal>
   )

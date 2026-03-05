@@ -8,8 +8,17 @@ const affiliateStatusSchema = z.object({
 
 const affiliateProfileSchema = z.object({
   bankName: z.string().min(1, 'กรุณาระบุชื่อธนาคาร'),
-  bankAccountNo: z.string().min(1, 'กรุณาระบุเลขที่บัญชี'),
-  phoneNumber: z.string().min(1, 'กรุณาระบุเบอร์โทรศัพท์ที่ติดต่อได้'),
+  bankAccountNo: z
+    .string()
+    .min(1, 'กรุณาระบุเลขที่บัญชี')
+    .regex(/^\d{10}$/, 'เลขที่บัญชีต้องเป็นตัวเลข 10 หลัก'),
+  bankAccountName: z
+    .string()
+    .min(1, 'กรุณาระบุชื่อบัญชีธนาคาร (ตามหน้าสมุดบัญชี)'),
+  phoneNumber: z
+    .string()
+    .min(1, 'กรุณาระบุเบอร์โทรศัพท์ที่ติดต่อได้')
+    .regex(/^0\d{9}$/, 'กรุณาระบุเบอร์โทรศัพท์ 10 หลักให้ถูกต้อง'),
   socialMedia: z.string().min(1, 'กรุณาระบุช่องทางโซเชียลมีเดีย'),
   idCardImage: z.string().min(1, 'กรุณาอัปโหลดสำเนาบัตรประชาชน'),
   bankAccountImage: z.string().min(1, 'กรุณาอัปโหลดสำเนาหน้าสมุดบัญชี'),

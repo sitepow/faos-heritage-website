@@ -5,6 +5,8 @@ import {
   getOrderStatusData,
   getSalesByCategoryData,
   getTopProductsData,
+  getAffiliateStats,
+  getAffiliatePerformanceData,
 } from './dashboard.action'
 import { dashboardQueryKeys } from './dashboard.query-key'
 
@@ -29,16 +31,30 @@ const useDashboardCharts = () => {
     queryFn: () => getTopProductsData(),
   })
 
+  const affiliateStatsQuery = useQuery({
+    queryKey: dashboardQueryKeys.affiliateStats(),
+    queryFn: () => getAffiliateStats(),
+  })
+
+  const affiliatePerformanceQuery = useQuery({
+    queryKey: dashboardQueryKeys.affiliatePerformance(),
+    queryFn: () => getAffiliatePerformanceData(),
+  })
+
   return {
     revenueData: revenueQuery.data || [],
     statusData: statusQuery.data || [],
     salesByCategoryData: salesByCategoryQuery.data || [],
     topProductsData: topProductsQuery.data || [],
+    affiliateStats: affiliateStatsQuery.data || [],
+    affiliatePerformanceData: affiliatePerformanceQuery.data || [],
     isLoading:
       revenueQuery.isLoading ||
       statusQuery.isLoading ||
       salesByCategoryQuery.isLoading ||
-      topProductsQuery.isLoading,
+      topProductsQuery.isLoading ||
+      affiliateStatsQuery.isLoading ||
+      affiliatePerformanceQuery.isLoading,
   }
 }
 

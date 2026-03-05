@@ -72,19 +72,25 @@ const AffiliateDetailModal = () => {
             <div className='grid grid-cols-1 gap-2 md:grid-cols-2'>
               <p className='text-small'>
                 ธนาคาร:{' '}
-                <span className='font-bold'>
+                <span className='underline'>
                   {selectedAffiliate.bankName ?? '-'}
                 </span>
               </p>
               <p className='text-small'>
+                ชื่อบัญชีธนาคาร:{' '}
+                <span className='underline'>
+                  {selectedAffiliate.bankAccountName ?? '-'}
+                </span>
+              </p>
+              <p className='text-small'>
                 เลขที่บัญชี:{' '}
-                <span className='font-bold'>
+                <span className='underline'>
                   {selectedAffiliate.bankAccountNo ?? '-'}
                 </span>
               </p>
               <p className='text-small'>
                 เบอร์ติดต่อ:{' '}
-                <span className='font-bold'>
+                <span className='underline'>
                   {selectedAffiliate.phoneNumber ?? '-'}
                 </span>
               </p>

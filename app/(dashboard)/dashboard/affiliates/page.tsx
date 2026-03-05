@@ -1,5 +1,6 @@
 'use client'
 
+import { PayoutStatus } from '@prisma/client'
 import { useMemo } from 'react'
 
 import { AffiliateTable } from './_components/AffiliateTable'
@@ -9,7 +10,6 @@ import { StatCard } from '@/components/ui/StatCard'
 import { useAffiliates } from '@/features/affiliate/affiliate.hook'
 import { AffiliateDetailModal } from '@/features/affiliate/ui/AffiliateDetailModal'
 import { usePendingPayouts } from '@/features/affiliate-payout/payout.hook'
-import { PayoutSummaryCard } from '@/features/affiliate-payout/ui/PayoutSummaryCard'
 import { useIsMounted } from '@/hooks/useIsMounted'
 
 const AffiliateAdminPage = () => {
@@ -23,9 +23,25 @@ const AffiliateAdminPage = () => {
 
   const totalPendingAmount = useMemo(() => {
     return (
-      pendingPayouts?.reduce((acc, curr) => {
-        return acc + (curr._sum.commissionAmount || 0)
-      }, 0) || 0
+      pendingPayouts
+        ?.filter((p) => p.status === PayoutStatus.PENDING)
+        .reduce((acc, curr) => acc + (curr._sum.commissionAmount || 0), 0) || 0
+    )
+  }, [pendingPayouts])
+
+  const totalWithdrawableAmount = useMemo(() => {
+    return (
+      pendingPayouts
+        ?.filter((p) => p.status === PayoutStatus.COMPLETED)
+        .reduce((acc, curr) => acc + (curr._sum.commissionAmount || 0), 0) || 0
+    )
+  }, [pendingPayouts])
+
+  const totalPaidAmount = useMemo(() => {
+    return (
+      pendingPayouts
+        ?.filter((p) => p.status === PayoutStatus.PAID)
+        .reduce((acc, curr) => acc + (curr._sum.commissionAmount || 0), 0) || 0
     )
   }, [pendingPayouts])
 
@@ -34,22 +50,30 @@ const AffiliateAdminPage = () => {
   }
 
   return (
-    <Container className='flex flex-col gap-8'>
-      <section className='grid grid-cols-1 gap-6 md:grid-cols-3'>
-        <PayoutSummaryCard />
+    <Container className='flex flex-col gap-8 py-8'>
+      <section className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4'>
+        <StatCard label='จำนวนพาร์ทเนอร์' value={affiliates?.length || 0} />
         <StatCard
-          label='จำนวนพาร์ทเนอร์ทั้งหมด'
-          value={affiliates?.length || 0}
+          isCurrency
+          label='ยอดรอคอนเฟิร์ม (THB)'
+          value={totalPendingAmount}
         />
         <StatCard
           isCurrency
-          label='ยอดค้างจ่ายรวม (THB)'
-          value={totalPendingAmount}
+          label='ยอดค้างจ่าย/พร้อมถอน (THB)'
+          value={totalWithdrawableAmount}
+        />
+        <StatCard
+          isCurrency
+          label='ยอดที่จ่ายแล้วทั้งหมด (THB)'
+          value={totalPaidAmount}
         />
       </section>
 
       <section className='flex flex-col gap-4'>
-        <h2 className='text-xl font-bold'>รายชื่อพาร์ทเนอร์</h2>
+        <div className='flex items-center justify-between'>
+          <h2 className='text-xl font-bold'>รายชื่อพาร์ทเนอร์</h2>
+        </div>
         <AffiliateTable
           affiliates={affiliates || []}
           isLoading={isLoading}

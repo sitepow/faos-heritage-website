@@ -9,6 +9,9 @@ const affiliateQueryKeys = {
   profile: () => {
     return [...affiliateQueryKeys.all, 'profile'] as const
   },
+  dashboard: () => {
+    return [...affiliateQueryKeys.all, 'dashboard'] as const
+  },
 }
 
 export { affiliateQueryKeys }

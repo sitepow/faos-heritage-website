@@ -7,6 +7,7 @@ import { AffiliateLanding } from './AffiliateLanding'
 import { AffiliateWaitingStatus } from './AffiliateWaitingStatus'
 
 import { useAffiliateProfile } from '@/features/affiliate/affiliate.hook'
+import { AffiliateDashboardView } from '@/features/affiliate/ui/AffiliateDashboardView'
 
 const AffiliateClient = () => {
   const { data: profile, isLoading } = useAffiliateProfile()
@@ -31,7 +32,7 @@ const AffiliateClient = () => {
   }
 
   if (profile.status === AffiliateStatus.APPROVED) {
-    return <div />
+    return <AffiliateDashboardView />
   }
 
   return null
