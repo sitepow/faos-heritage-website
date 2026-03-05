@@ -95,10 +95,11 @@ const ReviewTable = ({
                     #{review.id.slice(-8).toUpperCase()}
                   </span>
                 </TableCell>
-                <TableCell>
+                <TableCell className='min-w-96'>
                   <HeroUser
                     avatarProps={{
                       src: review?.user?.image || '',
+                      className: 'shrink-0',
                     }}
                     description={
                       <span className='text-primary text-tiny font-medium'>

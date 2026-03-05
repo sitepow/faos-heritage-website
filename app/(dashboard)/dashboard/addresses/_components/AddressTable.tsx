@@ -105,7 +105,7 @@ const AddressTable = ({
                     name={addr?.user?.name || 'ผู้ใช้ทั่วไป'}
                   />
                 </TableCell>
-                <TableCell>
+                <TableCell className='min-w-32'>
                   <div className='flex flex-col'>
                     <span className='text-small'>{addr.name}</span>
                     <span className='text-default-400 text-tiny'>
@@ -113,7 +113,7 @@ const AddressTable = ({
                     </span>
                   </div>
                 </TableCell>
-                <TableCell>
+                <TableCell className='min-w-64'>
                   <div className='flex items-start gap-2'>
                     <MapPinIcon
                       className='text-default-400 mt-1 shrink-0'

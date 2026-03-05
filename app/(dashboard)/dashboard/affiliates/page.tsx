@@ -35,7 +35,7 @@ const AffiliateAdminPage = () => {
 
   return (
     <Container className='flex flex-col gap-8 py-8'>
-      <section className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4'>
+      <section className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5'>
         <StatCard label='จำนวนพาร์ทเนอร์' value={affiliates?.length || 0} />
         <StatCard
           isCurrency

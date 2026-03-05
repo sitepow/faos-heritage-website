@@ -91,6 +91,7 @@ const AddressForm = () => {
 
   return (
     <Modal
+      hideCloseButton
       isDismissable={!isPending}
       isOpen={isAddressOpen}
       scrollBehavior='inside'

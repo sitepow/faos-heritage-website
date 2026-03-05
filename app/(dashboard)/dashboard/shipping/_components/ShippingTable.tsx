@@ -89,7 +89,7 @@ const ShippingTable = ({
                     #{item.id.slice(-8).toUpperCase()}
                   </span>
                 </TableCell>
-                <TableCell>
+                <TableCell className='min-w-40'>
                   <div className='flex items-center gap-2'>
                     <GlobeIcon className='text-default-400' size={16} />
                     <span>
@@ -97,8 +97,12 @@ const ShippingTable = ({
                     </span>
                   </div>
                 </TableCell>
-                <TableCell>{formatCurrency(item.baseRate)}</TableCell>
-                <TableCell>{formatCurrency(item.pricePerKg)} / kg</TableCell>
+                <TableCell className='min-w-32'>
+                  {formatCurrency(item.baseRate)}
+                </TableCell>
+                <TableCell className='min-w-32'>
+                  {formatCurrency(item.pricePerKg)} / kg
+                </TableCell>
                 <TableCell>
                   <Chip
                     color={item.isActive ? 'success' : 'danger'}

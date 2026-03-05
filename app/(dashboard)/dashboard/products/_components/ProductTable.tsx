@@ -30,7 +30,6 @@ import { useMemo } from 'react'
 
 import type { Selection } from '@heroui/react'
 
-import { CategoryChip } from '@/components/ui/CategoryChip'
 import { PaginationWrapper } from '@/components/ui/PaginationWrapper'
 import { ProductImage } from '@/components/ui/Product/ProductImage'
 import { useProductsAdmin } from '@/features/product/product.hook'
@@ -158,11 +157,13 @@ const ProductTable = ({
                 <TableCell>
                   <ProductImage className='size-20' image={primarySrc} />
                 </TableCell>
-                <TableCell className='font-medium'>{product.name}</TableCell>
+                <TableCell className='min-w-52 font-medium'>
+                  {product.name}
+                </TableCell>
                 <TableCell>
-                  <CategoryChip
-                    categoryName={product.category?.name || 'ไม่มีหมวดหมู่'}
-                  />
+                  <Chip size='sm' variant='dot'>
+                    {product?.category?.name ?? 'ไม่มีหมวดหมู่'}
+                  </Chip>
                 </TableCell>
                 <TableCell>
                   <span>{formatCurrency(product.price)}</span>

@@ -15,7 +15,7 @@ const CategoryChip = ({ categoryName, className }: Props) => {
         className,
       )}
       size='sm'
-      variant='flat'
+      variant='dot'
     >
       {categoryName}
     </Chip>

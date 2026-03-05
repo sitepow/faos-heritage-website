@@ -179,8 +179,10 @@ const AffiliateHistoryPage = () => {
                             #{item.id.slice(-8).toUpperCase()}
                           </span>
                         </TableCell>
-                        <TableCell>{formatDate(item.createdAt)}</TableCell>
-                        <TableCell>
+                        <TableCell className='min-w-64'>
+                          {formatDate(item.createdAt)}
+                        </TableCell>
+                        <TableCell className='min-w-64'>
                           <Accordion isCompact className='px-0' variant='light'>
                             <AccordionItem
                               key='1'

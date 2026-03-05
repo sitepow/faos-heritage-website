@@ -117,7 +117,7 @@ const UserTable = ({
                     className='font-bold'
                     color={user.role === 'ADMIN' ? 'primary' : 'default'}
                     size='sm'
-                    variant='flat'
+                    variant='dot'
                   >
                     {user.role}
                   </Chip>
@@ -131,7 +131,7 @@ const UserTable = ({
                     {user.isActive ? 'ปกติ' : 'ถูกระงับ'}
                   </Chip>
                 </TableCell>
-                <TableCell className='text-default-400 text-xs'>
+                <TableCell className='text-default-400 min-w-52 text-xs'>
                   {formatDate(user.createdAt)}
                 </TableCell>
                 <TableCell>
