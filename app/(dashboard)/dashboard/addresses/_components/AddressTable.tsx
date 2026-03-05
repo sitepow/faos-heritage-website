@@ -131,7 +131,7 @@ const AddressTable = ({
                       className='font-bold'
                       color='primary'
                       size='sm'
-                      variant='flat'
+                      variant='dot'
                     >
                       หลัก
                     </Chip>

@@ -88,8 +88,10 @@ const BlogCategoryTable = ({
                 #{cat?.id.slice(-8).toUpperCase()}
               </span>
             </TableCell>
-            <TableCell className='font-medium'>{cat?.name!}</TableCell>
-            <TableCell className='text-default-500'>{cat?.slug!}</TableCell>
+            <TableCell className='min-w-40 font-medium'>{cat?.name!}</TableCell>
+            <TableCell className='text-default-500 min-w-40'>
+              {cat?.slug!}
+            </TableCell>
             <TableCell>
               <Chip
                 className='font-bold'

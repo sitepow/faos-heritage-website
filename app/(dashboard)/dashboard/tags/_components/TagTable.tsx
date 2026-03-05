@@ -83,8 +83,8 @@ const TagTable = ({
                 #{tag?.id?.slice(-8).toUpperCase()}
               </span>
             </TableCell>
-            <TableCell className='font-medium'>{tag?.name!}</TableCell>
-            <TableCell>{tag?.slug!}</TableCell>
+            <TableCell className='min-w-40 font-medium'>{tag?.name!}</TableCell>
+            <TableCell className='min-w-40'>{tag?.slug!}</TableCell>
             <TableCell>
               <Dropdown placement='bottom-end'>
                 <DropdownTrigger>

@@ -94,6 +94,7 @@ const ProductImageTable = ({
                 </TableCell>
                 <TableCell>
                   <ProductImage
+                    fill
                     className='size-20'
                     image={img?.url ?? IMAGE_FALLBACK.EMPTY}
                   />

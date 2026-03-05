@@ -17,7 +17,6 @@ import {
   ArrowUpLeft,
   Share2Icon,
   MenuIcon,
-  XIcon,
 } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -37,7 +36,7 @@ const AdminSidebar = () => {
 
   const menuGroups = [
     {
-      title: 'Dashboard',
+      title: 'แดชบอร์ด',
       items: [
         { href: '/dashboard', label: 'หน้าหลัก', icon: LayoutDashboardIcon },
         { href: '/dashboard/orders', label: 'ออเดอร์', icon: PackageIcon },
@@ -101,15 +100,6 @@ const AdminSidebar = () => {
     <div className='flex h-full flex-col'>
       <div className='flex items-center justify-between p-6'>
         <NavbarLogo href={'/'} />
-        <Button
-          isIconOnly
-          className='lg:hidden'
-          size='sm'
-          variant='light'
-          onPress={toggleSidebar}
-        >
-          <XIcon size={20} />
-        </Button>
       </div>
 
       <ScrollShadow className='flex-1 px-4 py-2'>
@@ -128,7 +118,7 @@ const AdminSidebar = () => {
                       as={Link}
                       className={`h-10 transition-all ${
                         active
-                          ? 'bg-primary/10 text-primary font-bold shadow-sm'
+                          ? 'bg-primary/10 text-primary font-bold'
                           : 'text-default-500 hover:text-default-900'
                       }`}
                       href={item.href}

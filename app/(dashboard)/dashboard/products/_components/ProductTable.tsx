@@ -155,7 +155,7 @@ const ProductTable = ({
                   </span>
                 </TableCell>
                 <TableCell>
-                  <ProductImage className='size-20' image={primarySrc} />
+                  <ProductImage fill className='size-20' image={primarySrc} />
                 </TableCell>
                 <TableCell className='min-w-52 font-medium'>
                   {product.name}

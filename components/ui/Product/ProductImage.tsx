@@ -7,12 +7,13 @@ import type { ComponentProps } from 'react'
 import { IMAGE_FALLBACK } from '@/constants'
 import { cn } from '@/utils'
 
-interface ProductImageProps extends ComponentProps<'div'> {
+interface Props extends ComponentProps<'div'> {
   image?: string | null
   className?: string
+  fill?: boolean
 }
 
-const ProductImage = ({ image, className, ...props }: ProductImageProps) => {
+const ProductImage = ({ image, className, fill, ...props }: Props) => {
   const imageSrc = image && image.trim() !== '' ? image : IMAGE_FALLBACK.EMPTY
 
   return (
@@ -25,7 +26,9 @@ const ProductImage = ({ image, className, ...props }: ProductImageProps) => {
     >
       <Image
         alt='product-image'
-        className='size-full object-contain p-2'
+        className={cn('size-full object-contain p-2', {
+          'object-cover p-0': fill,
+        })}
         classNames={{
           wrapper: 'absolute inset-0 !max-w-none size-full',
         }}

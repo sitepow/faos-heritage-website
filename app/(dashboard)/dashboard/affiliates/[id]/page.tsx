@@ -82,7 +82,7 @@ const AffiliateHistoryPage = () => {
   }, [commissions])
 
   return (
-    <Container className='flex flex-col gap-6 py-8'>
+    <Container className='flex flex-col gap-6'>
       <div className='flex items-center justify-between'>
         <div className='flex items-center gap-4'>
           <button
@@ -134,126 +134,116 @@ const AffiliateHistoryPage = () => {
         variant='underlined'
       >
         <Tab key='commissions' title='ยอดค่าคอมมิชชันรอจ่าย'>
-          <div className='pt-4'>
-            <Table
-              aria-label='Commission History'
-              checkboxesProps={{
-                classNames: {
-                  wrapper: 'after:bg-primary before:border-default-300',
-                  icon: 'text-white font-bold',
-                },
-              }}
-              disabledKeys={disabledKeys}
-              selectedKeys={selectedKeys}
-              selectionMode='multiple'
-              onSelectionChange={setSelectedKeys}
+          <Table
+            aria-label='Commission History'
+            checkboxesProps={{
+              classNames: {
+                wrapper: 'after:bg-primary before:border-default-300',
+                icon: 'text-white font-bold',
+              },
+            }}
+            disabledKeys={disabledKeys}
+            selectedKeys={selectedKeys}
+            selectionMode='multiple'
+            onSelectionChange={setSelectedKeys}
+          >
+            <TableHeader>
+              <TableColumn>รหัสรายการ</TableColumn>
+              <TableColumn>วันที่</TableColumn>
+              <TableColumn width={250}>รายการสินค้า / ออเดอร์</TableColumn>
+              <TableColumn>ยอดขาย (THB)</TableColumn>
+              <TableColumn>ค่าตอบแทน (THB)</TableColumn>
+              <TableColumn align='center'>สถานะ</TableColumn>
+            </TableHeader>
+            <TableBody
+              emptyContent='ไม่พบรายการ'
+              isLoading={isLoading}
+              loadingContent={<Spinner label='กำลังโหลดข้อมูล...' />}
             >
-              <TableHeader>
-                <TableColumn>รหัสรายการ</TableColumn>
-                <TableColumn>วันที่</TableColumn>
-                <TableColumn width={250}>รายการสินค้า / ออเดอร์</TableColumn>
-                <TableColumn>ยอดขาย (THB)</TableColumn>
-                <TableColumn>ค่าตอบแทน (THB)</TableColumn>
-                <TableColumn align='center'>สถานะ</TableColumn>
-              </TableHeader>
-              <TableBody
-                emptyContent='ไม่พบรายการ'
-                isLoading={isLoading}
-                loadingContent={<Spinner label='กำลังโหลดข้อมูล...' />}
-              >
-                {(commissions ?? []).map(
-                  (item: GetAffiliateCommissionsResult[number]) => {
-                    const statusProps = getPayoutStatusProps(item.status)
+              {(commissions ?? []).map(
+                (item: GetAffiliateCommissionsResult[number]) => {
+                  const statusProps = getPayoutStatusProps(item.status)
 
-                    return (
-                      <TableRow
-                        key={item.id}
-                        className={
-                          item.status !== PayoutStatus.COMPLETED
-                            ? 'opacity-50'
-                            : ''
-                        }
-                      >
-                        <TableCell>
-                          <span className='text-default-500 font-mono text-xs font-bold'>
-                            #{item.id.slice(-8).toUpperCase()}
-                          </span>
-                        </TableCell>
-                        <TableCell className='min-w-64'>
-                          {formatDate(item.createdAt)}
-                        </TableCell>
-                        <TableCell className='min-w-64'>
-                          <Accordion isCompact className='px-0' variant='light'>
-                            <AccordionItem
-                              key='1'
-                              aria-label='View Items'
-                              startContent={
-                                <PackageIcon
-                                  className='text-default-400'
-                                  size={14}
-                                />
-                              }
-                              title={
-                                <span className='text-tiny font-mono font-bold'>
-                                  #{item.orderId.slice(-8).toUpperCase()}
-                                </span>
-                              }
-                            >
-                              <div className='flex flex-col gap-2 pb-2'>
-                                {item.order?.items?.map(
-                                  (orderItem, idx: number) => {
-                                    return (
-                                      <div
-                                        key={idx}
-                                        className='border-default-50 text-default-500 flex justify-between border-b pb-1 text-[10px]'
-                                      >
-                                        <span className='line-clamp-1 flex-1'>
-                                          {orderItem.productName}{' '}
-                                          {orderItem.variantName &&
-                                            `(${orderItem.variantName})`}
-                                        </span>
-                                        <span className='ml-2 font-bold'>
-                                          x{orderItem.quantity}
-                                        </span>
-                                      </div>
-                                    )
-                                  },
-                                )}
-                              </div>
-                            </AccordionItem>
-                          </Accordion>
-                        </TableCell>
-                        <TableCell>
-                          {formatCurrency(item.orderAmount)}
-                        </TableCell>
-                        <TableCell className='text-success font-bold'>
-                          {formatCurrency(item.commissionAmount)}
-                        </TableCell>
-                        <TableCell>
-                          <Chip
-                            color={statusProps.color}
-                            size='sm'
-                            variant='dot'
+                  return (
+                    <TableRow
+                      key={item.id}
+                      className={
+                        item.status !== PayoutStatus.COMPLETED
+                          ? 'opacity-50'
+                          : ''
+                      }
+                    >
+                      <TableCell>
+                        <span className='text-default-500 font-mono text-xs font-bold'>
+                          #{item.id.slice(-8).toUpperCase()}
+                        </span>
+                      </TableCell>
+                      <TableCell className='min-w-64'>
+                        {formatDate(item.createdAt)}
+                      </TableCell>
+                      <TableCell className='min-w-64'>
+                        <Accordion isCompact className='px-0' variant='light'>
+                          <AccordionItem
+                            key='1'
+                            aria-label='View Items'
+                            startContent={
+                              <PackageIcon
+                                className='text-default-400'
+                                size={14}
+                              />
+                            }
+                            title={
+                              <span className='text-tiny font-mono font-bold'>
+                                #{item.orderId.slice(-8).toUpperCase()}
+                              </span>
+                            }
                           >
-                            {statusProps.label}
-                          </Chip>
-                        </TableCell>
-                      </TableRow>
-                    )
-                  },
-                )}
-              </TableBody>
-            </Table>
-          </div>
+                            <div className='flex flex-col gap-2 pb-2'>
+                              {item.order?.items?.map(
+                                (orderItem, idx: number) => {
+                                  return (
+                                    <div
+                                      key={idx}
+                                      className='border-default-50 text-default-500 flex justify-between border-b pb-1 text-[10px]'
+                                    >
+                                      <span className='line-clamp-1 flex-1'>
+                                        {orderItem.productName}{' '}
+                                        {orderItem.variantName &&
+                                          `(${orderItem.variantName})`}
+                                      </span>
+                                      <span className='ml-2 font-bold'>
+                                        x{orderItem.quantity}
+                                      </span>
+                                    </div>
+                                  )
+                                },
+                              )}
+                            </div>
+                          </AccordionItem>
+                        </Accordion>
+                      </TableCell>
+                      <TableCell>{formatCurrency(item.orderAmount)}</TableCell>
+                      <TableCell className='text-success font-bold'>
+                        {formatCurrency(item.commissionAmount)}
+                      </TableCell>
+                      <TableCell>
+                        <Chip color={statusProps.color} size='sm' variant='dot'>
+                          {statusProps.label}
+                        </Chip>
+                      </TableCell>
+                    </TableRow>
+                  )
+                },
+              )}
+            </TableBody>
+          </Table>
         </Tab>
 
         <Tab key='payouts' title='ประวัติการโอนเงินแล้ว'>
-          <div className='pt-4'>
-            <AffiliatePayoutTable
-              isLoading={isPayoutsLoading}
-              payouts={payouts ?? []}
-            />
-          </div>
+          <AffiliatePayoutTable
+            isLoading={isPayoutsLoading}
+            payouts={payouts ?? []}
+          />
         </Tab>
       </Tabs>
     </Container>

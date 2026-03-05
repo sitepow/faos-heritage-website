@@ -95,14 +95,15 @@ const CategoryTable = ({
             </TableCell>
             <TableCell>
               <ProductImage
+                fill
                 className='size-20'
                 image={cat?.image ?? IMAGE_FALLBACK.EMPTY}
               />
             </TableCell>
-            <TableCell className='font-medium'>{cat.name}</TableCell>
-            <TableCell>{cat.slug}</TableCell>
+            <TableCell className='min-w-40 font-medium'>{cat.name}</TableCell>
+            <TableCell className='min-w-40'>{cat.slug}</TableCell>
             <TableCell>
-              <Chip color='secondary' size='sm' variant='flat'>
+              <Chip color='secondary' size='sm' variant='dot'>
                 {cat._count?.products || 0} รายการ
               </Chip>
             </TableCell>

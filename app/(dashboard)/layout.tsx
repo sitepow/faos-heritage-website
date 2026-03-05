@@ -24,7 +24,7 @@ const DashboardLayout = async ({ children }: PropsWithChildren) => {
 
       <div className='flex flex-1 flex-col'>
         <AppMain>
-          <div className='px-4 py-4 md:px-8 md:py-6'>{children}</div>
+          <div className='p-2 md:px-8 md:py-6'>{children}</div>
         </AppMain>
       </div>
     </div>

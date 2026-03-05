@@ -40,7 +40,6 @@ const STATUS_COLORS: Record<string, string> = {
   REFUNDED: '#71717a',
 }
 
-// ชุดสีสำหรับกราฟหมวดหมู่และสินค้าขายดี
 const CHART_COLORS = [
   '#006fee',
   '#17c964',
@@ -95,7 +94,7 @@ const DashboardPage = () => {
         </p>
       </div>
 
-      <section className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4'>
+      <section className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3'>
         {isLoading ? (
           Array.from({ length: 8 }).map((_, i) => (
             <Skeleton
