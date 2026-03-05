@@ -64,7 +64,7 @@ const ProductCard = memo(({ className, product }: Props) => {
             image={primarySrc}
           />
 
-          <div className='from-primary/90 via-primary/40 absolute inset-0 z-10 bg-gradient-to-t to-transparent' />
+          <div className='absolute inset-0 z-10 bg-gradient-to-t from-white/90 via-white/40 to-transparent dark:from-black/90 dark:via-black/40' />
         </div>
 
         <div className='absolute inset-0 z-20 flex flex-col justify-end p-5'>
@@ -81,12 +81,12 @@ const ProductCard = memo(({ className, product }: Props) => {
             />
           </div>
 
-          <h3 className='my-4 line-clamp-2 text-2xl leading-tight font-bold tracking-tight text-white md:text-3xl'>
+          <h3 className='text-foreground my-4 line-clamp-2 text-2xl leading-tight font-bold tracking-tight md:text-3xl'>
             {product?.name}
           </h3>
 
-          <footer className='flex flex-col gap-4 border-t border-white/10 pt-4'>
-            <div className='flex flex-wrap items-center gap-3 text-[13px] text-white/70'>
+          <footer className='border-foreground/20 flex flex-col gap-4 border-t pt-4'>
+            <div className='text-foreground flex flex-wrap items-center gap-3 text-[13px]'>
               <ViewCount viewCount={product?.viewCount!} />
               <Dot />
               <CommentCount commentCount={product?._count?.comments || 0} />
