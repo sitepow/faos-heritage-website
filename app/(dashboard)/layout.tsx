@@ -19,9 +19,14 @@ const DashboardLayout = async ({ children }: PropsWithChildren) => {
   await requireRole(Role.ADMIN)
 
   return (
-    <div className='bg-background relative flex min-h-screen'>
+    <div className='bg-background relative flex min-h-screen flex-col lg:flex-row'>
       <AdminSidebar />
-      <AppMain>{children}</AppMain>
+
+      <div className='flex flex-1 flex-col'>
+        <AppMain>
+          <div className='px-4 py-4 md:px-8 md:py-6'>{children}</div>
+        </AppMain>
+      </div>
     </div>
   )
 }
