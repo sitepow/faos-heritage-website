@@ -50,6 +50,7 @@ enum OrderStatus {
   PENDING
   PAID
   PROCESSING
+  READY_FOR_PICKUP
   DELIVERED
   CANCELLED
   REFUNDED
@@ -97,6 +98,11 @@ enum PostStatus {
   DRAFT
   PUBLISHED
   ARCHIVED
+}
+
+enum DeliveryType {
+  SHIPPING
+  PICKUP
 }
 
 model AffiliateCommission {
@@ -573,6 +579,8 @@ model Order {
   couponId            String?
   referrerCode        String?
 
+  deliveryType        DeliveryType @default(SHIPPING)
+
   status        OrderStatus   @default(PENDING)
   paymentStatus PaymentStatus @default(PENDING)
   // สกุลเงินที่ลูกค้าใช้ชำระเงิน
@@ -603,6 +611,9 @@ model Order {
   shippedAt           DateTime?
   deliveredAt         DateTime?
 
+  pickupDate          DateTime? 
+  pickupStoreLocation String?
+
   paymentMethod String?
   paidAt        DateTime?
 
@@ -629,6 +640,7 @@ model Order {
   @@index([paymentStatus])
   @@index([createdAt])
   @@index([userId, createdAt])
+  @@index([deliveryType])
 }
 
 model ShippingCountry {
