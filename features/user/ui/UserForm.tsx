@@ -157,7 +157,7 @@ const UserForm = () => {
               <ImageDropzone onFilesChange={onFilesChange} />
 
               <SectionLabel>สถานะและบทบาท</SectionLabel>
-              <div className='border-default-100 flex items-center justify-between rounded-lg border p-3'>
+              <div className='border-default-100 flex flex-wrap items-center justify-between gap-5 rounded-lg border p-3'>
                 <Controller
                   control={control}
                   name='isActive'
