@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 'use client'
 
 import {
@@ -13,10 +14,14 @@ import {
   Textarea,
   Alert,
   Spinner,
+  Chip,
 } from '@heroui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
+
+import type { KeyboardEvent } from 'react'
+import type { Resolver } from 'react-hook-form'
 
 import { usePostLocale } from '../post-localization.hook'
 import { usePostLocaleMutation } from '../post-localization.mutation'
@@ -35,6 +40,8 @@ interface Props {
 
 const PostLocalizationForm = ({ postId }: Props) => {
   const { isOpen, selectedId, closeForm } = usePostLocaleUIStore()
+  const [inputValue, setInputValue] = useState('')
+
   const { data: localization, isLoading: isLoadingLocale } = usePostLocale(
     selectedId!,
   )
@@ -44,44 +51,86 @@ const PostLocalizationForm = ({ postId }: Props) => {
     control,
     handleSubmit,
     reset,
+    watch,
+    setValue,
     formState: { errors, isDirty },
   } = useForm<PostLocalizationInput>({
-    resolver: zodResolver(postLocalizationSchema),
+    resolver: zodResolver(
+      postLocalizationSchema,
+    ) as Resolver<PostLocalizationInput>,
     defaultValues: {
       postId,
       languageCode: '',
       title: '',
       summary: '',
       content: '',
+      metaTitle: '',
+      metaDescription: '',
+      keywords: [],
     },
   })
+
+  const keywords = watch('keywords') || []
 
   useEffect(() => {
     if (isOpen) {
       if (selectedId && localization) {
-        reset({
+        return reset({
           id: localization.id,
           postId: localization.postId,
-          languageCode: localization?.languageCode?.toUpperCase(),
+          languageCode: localization.languageCode?.toUpperCase() || '',
           title: localization.title,
           summary: localization.summary || '',
           content: localization.content || '',
-        })
-      } else if (!selectedId) {
-        reset({
-          postId,
-          languageCode: '',
-          title: '',
-          summary: '',
-          content: '',
+          metaTitle: localization.metaTitle || '',
+          metaDescription: localization.metaDescription || '',
+          keywords: Array.isArray(localization.keywords)
+            ? localization.keywords
+            : [],
         })
       }
+
+      return reset({
+        postId,
+        languageCode: '',
+        title: '',
+        summary: '',
+        content: '',
+        metaTitle: '',
+        metaDescription: '',
+        keywords: [],
+      })
     }
   }, [isOpen, selectedId, localization, reset, postId])
 
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === ',' || e.key === 'Enter') {
+      e.preventDefault()
+      const value = inputValue.trim()
+      if (value && !keywords.includes(value)) {
+        setValue('keywords', [...keywords, value], { shouldDirty: true })
+        return setInputValue('')
+      }
+    } else if (e.key === 'Backspace' && !inputValue && keywords.length > 0) {
+      const newKeywords = [...keywords]
+      newKeywords.pop()
+      return setValue('keywords', newKeywords, { shouldDirty: true })
+    }
+  }
+
+  const removeKeyword = (indexToRemove: number) => {
+    return setValue(
+      'keywords',
+      keywords.filter((_, i) => i !== indexToRemove),
+      { shouldDirty: true },
+    )
+  }
+
   const onSubmit = async (data: PostLocalizationInput) => {
-    await upsert(data, {
-      onSuccess: () => closeForm(),
+    return await upsert(data, {
+      onSuccess: () => {
+        return closeForm()
+      },
     })
   }
 
@@ -122,9 +171,9 @@ const PostLocalizationForm = ({ postId }: Props) => {
                     placeholder='เลือกภาษา'
                     selectedKeys={value ? [value] : []}
                     variant='bordered'
-                    onSelectionChange={(keys) =>
-                      onChange(Array.from(keys)[0] as string)
-                    }
+                    onSelectionChange={(keys) => {
+                      return onChange(Array.from(keys)[0] as string)
+                    }}
                   >
                     {languages.map((lang) => (
                       <SelectItem key={lang.value}>{lang.label}</SelectItem>
@@ -160,6 +209,63 @@ const PostLocalizationForm = ({ postId }: Props) => {
                     />
                   )}
                 />
+              </div>
+
+              <SectionLabel>SEO และ Keywords (ภาษาท้องถิ่น)</SectionLabel>
+              <div className='flex flex-col gap-4'>
+                <div className='flex flex-col gap-2'>
+                  <Input
+                    label='คีย์เวิร์ด (กด , หรือ Enter เพื่อเพิ่ม)'
+                    placeholder='เช่น สุขภาพ, อาหาร'
+                    value={inputValue}
+                    variant='bordered'
+                    onChange={(e) => {
+                      return setInputValue(e.target.value)
+                    }}
+                    onKeyDown={handleKeyDown}
+                  />
+                  <div className='flex flex-wrap gap-2 px-1'>
+                    {keywords.map((keyword, index) => (
+                      <Chip
+                        key={index}
+                        color='primary'
+                        variant='flat'
+                        onClose={() => {
+                          return removeKeyword(index)
+                        }}
+                      >
+                        {keyword}
+                      </Chip>
+                    ))}
+                  </div>
+                </div>
+
+                <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+                  <Controller
+                    control={control}
+                    name='metaTitle'
+                    render={({ field }) => (
+                      <Input
+                        {...field}
+                        label='Meta Title'
+                        value={field.value || ''}
+                        variant='bordered'
+                      />
+                    )}
+                  />
+                  <Controller
+                    control={control}
+                    name='metaDescription'
+                    render={({ field }) => (
+                      <Input
+                        {...field}
+                        label='Meta Description'
+                        value={field.value || ''}
+                        variant='bordered'
+                      />
+                    )}
+                  />
+                </div>
               </div>
 
               <Alert>

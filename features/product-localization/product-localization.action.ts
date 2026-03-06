@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 'use server'
 
 import { Role, type Prisma } from '@prisma/client'
@@ -12,6 +13,7 @@ import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { prisma } from '@/lib/prisma'
 import { withRole } from '@/lib/session'
+import { omitEmptyFields } from '@/utils'
 
 const createProductLocalization = async (data: ProductLocalizationInput) =>
   withRole([Role.ADMIN], async () => {
@@ -20,7 +22,7 @@ const createProductLocalization = async (data: ProductLocalizationInput) =>
       return fail(ERROR_CODES.VALIDATION_ERROR)
     }
 
-    const { productId, languageCode } = validated.data
+    const { productId, languageCode, name, ...rest } = validated.data
 
     try {
       const exists = await prisma.productLocalization.findUnique({
@@ -33,8 +35,18 @@ const createProductLocalization = async (data: ProductLocalizationInput) =>
         return fail(ERROR_CODES.BAD_REQUEST)
       }
 
+      const payload = omitEmptyFields({
+        ...rest,
+        name,
+        keywords: rest.keywords || [],
+      })
+
       await prisma.productLocalization.create({
-        data: validated.data as Prisma.ProductLocalizationUncheckedCreateInput,
+        data: {
+          ...payload,
+          productId,
+          languageCode,
+        } as Prisma.ProductLocalizationUncheckedCreateInput,
       })
 
       return ok()
@@ -50,12 +62,18 @@ const updateProductLocalization = async (data: ProductLocalizationInput) =>
       return fail(ERROR_CODES.VALIDATION_ERROR)
     }
 
-    const { id, ...payload } = validated.data
+    const { id, productId, languageCode, name, ...rest } = validated.data
     if (!id) {
       return fail(ERROR_CODES.DATA_NOT_FOUND)
     }
 
     try {
+      const payload = omitEmptyFields({
+        ...rest,
+        name,
+        keywords: rest.keywords || [],
+      })
+
       await prisma.productLocalization.update({
         where: { id },
         data: payload as Prisma.ProductLocalizationUpdateInput,

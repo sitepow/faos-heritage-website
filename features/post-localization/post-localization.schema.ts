@@ -7,6 +7,9 @@ const postLocalizationSchema = z.object({
   title: z.string().min(1, 'ต้องระบุชื่อบทความ'),
   summary: z.string().nullish().or(z.literal('')),
   content: z.string().nullish().or(z.literal('')),
+  metaTitle: z.string().nullish().or(z.literal('')),
+  metaDescription: z.string().nullish().or(z.literal('')),
+  keywords: z.array(z.string()),
 })
 
 type PostLocalizationInput = z.infer<typeof postLocalizationSchema>

@@ -3,6 +3,7 @@
 import { Role } from '@prisma/client'
 
 import type { PostLocalizationInput } from './post-localization.schema'
+import type { Prisma } from '@prisma/client'
 
 import { postLocalizationSchema } from './post-localization.schema'
 
@@ -11,6 +12,7 @@ import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { prisma } from '@/lib/prisma'
 import { withRole } from '@/lib/session'
+import { omitEmptyFields } from '@/utils'
 
 const upsertPostLocale = async (data: PostLocalizationInput) =>
   withRole([Role.ADMIN], async () => {
@@ -20,14 +22,13 @@ const upsertPostLocale = async (data: PostLocalizationInput) =>
       return fail(ERROR_CODES.VALIDATION_ERROR)
     }
 
-    const { id, postId, languageCode, title, summary, content } = validated.data
+    const { id, postId, languageCode, ...rest } = validated.data
 
     try {
-      const payload = {
-        title,
-        content: content ?? '',
-        summary: summary ?? '',
-      }
+      const payload = omitEmptyFields({
+        ...rest,
+        keywords: rest.keywords || [],
+      })
 
       if (id) {
         await prisma.postLocalization.update({
@@ -40,7 +41,7 @@ const upsertPostLocale = async (data: PostLocalizationInput) =>
             ...payload,
             postId,
             languageCode,
-          },
+          } as Prisma.PostLocalizationUncheckedCreateInput,
         })
       }
       return ok()
