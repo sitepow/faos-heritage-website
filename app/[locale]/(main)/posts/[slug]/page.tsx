@@ -50,6 +50,7 @@ const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
     ogImage,
     canonicalPath: `/posts/${slug}`,
     keywords: finalKeywords,
+    locale: locale,
   })
 }
 

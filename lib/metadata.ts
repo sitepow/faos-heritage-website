@@ -14,6 +14,7 @@ interface Props {
   noIndex?: boolean
   keywords?: string | Array<string>
   alternates?: Metadata['alternates']
+  locale?: string
 }
 
 const constructMetadata = async ({
@@ -24,11 +25,13 @@ const constructMetadata = async ({
   noIndex = false,
   keywords,
   alternates,
+  locale = 'en',
 }: Props = {}): Promise<Metadata> => {
   const baseUrl = process.env.APP_URL!
-  const url = `${baseUrl}${canonicalPath}`
 
-  const t = await getTranslations('meta')
+  const currentUrl = `${baseUrl}/${locale}${canonicalPath}`
+
+  const t = await getTranslations({ locale, namespace: 'meta' })
   const brandName = t('brandName')
   const defaultKeywords = t.raw('keywords') || []
 
@@ -50,16 +53,16 @@ const constructMetadata = async ({
     description,
     keywords: finalKeywords,
     alternates: alternates || {
-      canonical: url,
+      canonical: currentUrl,
       languages: {
         ...defaultLanguageAlternates,
-        'x-default': `${baseUrl}/us${canonicalPath}`,
+        'x-default': `${baseUrl}/en${canonicalPath}`,
       },
     },
     openGraph: {
       title: title ? `${title} | ${brandName}` : t('home.title'),
       description: description ?? undefined,
-      url,
+      url: currentUrl,
       type: 'website',
       images: [{ url: ogImage, width: 1200, height: 630 }],
     },
