@@ -24,7 +24,7 @@ const PostCardImage = memo(
           width='100%'
           {...props}
         />
-        <div className='absolute inset-0 z-10 bg-gradient-to-t from-white/90 via-white/40 to-transparent dark:from-black/90 dark:via-black/40' />
+        <div className='from-primary/90 via-primary/40 absolute inset-0 z-10 bg-gradient-to-t to-transparent' />
       </figure>
     )
   },

@@ -20,7 +20,7 @@ interface Props {
 const PostCardMeta = memo(
   ({ publishedAt, viewCount = 0, commentCount = 0, author }: Props) => {
     return (
-      <footer className='text-foreground/90 border-foreground/20 flex flex-wrap items-center gap-3 border-t pt-4'>
+      <footer className='flex flex-wrap items-center gap-3 border-t border-white/10 pt-4 text-white/90'>
         <div className='flex items-center gap-2'>
           <PostAuthorAvatar author={author} iconSize={12} />
           <span className='cursor-pointer text-sm font-medium transition-all hover:underline'>
@@ -30,7 +30,7 @@ const PostCardMeta = memo(
 
         <Dot />
 
-        <div className='text-foreground/70 flex flex-wrap items-center gap-3 text-[13px]'>
+        <div className='flex flex-wrap items-center gap-3 text-[13px] text-white/70'>
           <CalendarIcon size={22} />
           <time dateTime={new Date(publishedAt).toISOString()}>
             {formatDate(publishedAt)}
