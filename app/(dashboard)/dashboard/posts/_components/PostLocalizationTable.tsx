@@ -100,10 +100,10 @@ const PostLocalizationTable = ({
                   {locale.languageCode.toUpperCase()}
                 </Chip>
               </TableCell>
-              <TableCell className='text-default-500'>
+              <TableCell className='text-default-500 max-w-64 min-w-64'>
                 {originalTitle}
               </TableCell>
-              <TableCell className='text-primary font-medium'>
+              <TableCell className='text-primary max-w-64 min-w-64 font-medium'>
                 {locale.title}
               </TableCell>
               <TableCell>

@@ -103,10 +103,10 @@ const BlogCategoryLocalizationTable = ({
                     {locale.languageCode.toUpperCase()}
                   </Chip>
                 </TableCell>
-                <TableCell className='text-default-500'>
+                <TableCell className='text-default-500 max-w-40 min-w-40'>
                   {originalName}
                 </TableCell>
-                <TableCell className='text-primary font-medium'>
+                <TableCell className='text-primary max-w-40 min-w-40 font-medium'>
                   {locale.name}
                 </TableCell>
                 <TableCell>
