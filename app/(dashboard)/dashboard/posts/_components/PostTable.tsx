@@ -126,8 +126,12 @@ const PostTable = ({
                 image={post?.featuredImage ?? IMAGE_FALLBACK.EMPTY}
               />
             </TableCell>
-            <TableCell>{post?.title ?? '-'}</TableCell>
-            <TableCell>{post.category?.name || '-'}</TableCell>
+            <TableCell className='max-w-64 min-w-64'>
+              {post?.title ?? '-'}
+            </TableCell>
+            <TableCell className='max-w-64 min-w-64'>
+              {post.category?.name || '-'}
+            </TableCell>
             <TableCell>{post.viewCount.toLocaleString()}</TableCell>
             <TableCell>
               <Chip

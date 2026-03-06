@@ -131,7 +131,7 @@ const UserTable = ({
                     {user.isActive ? 'ปกติ' : 'ถูกระงับ'}
                   </Chip>
                 </TableCell>
-                <TableCell className='text-default-400 min-w-52 text-xs'>
+                <TableCell className='text-default-400 max-w-52 min-w-52 text-xs'>
                   {formatDate(user.createdAt)}
                 </TableCell>
                 <TableCell>

@@ -106,7 +106,7 @@ const OrderTable = ({
                     #{order.id.slice(-8).toUpperCase()}
                   </span>
                 </TableCell>
-                <TableCell className='min-w-64'>
+                <TableCell className='max-w-64 min-w-64'>
                   <User
                     avatarProps={{
                       src: order?.user?.image || IMAGE_FALLBACK.EMPTY,
@@ -136,7 +136,7 @@ const OrderTable = ({
                     {ORDER_STATUS_TH_MAP[order.status as OrderStatus]}
                   </Chip>
                 </TableCell>
-                <TableCell className='text-default-500 text-small min-w-64'>
+                <TableCell className='text-default-500 text-small max-w-64 min-w-64'>
                   {formatDate(order.createdAt)}
                 </TableCell>
                 <TableCell>

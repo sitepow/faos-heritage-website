@@ -53,7 +53,7 @@ const AffiliatePayoutTable = ({ payouts, isLoading }: Props) => {
 
           return (
             <TableRow key={item.id}>
-              <TableCell className='min-w-64'>
+              <TableCell className='max-w-64 min-w-64'>
                 <Accordion isCompact className='px-0' variant='light'>
                   <AccordionItem
                     key='1'
@@ -114,7 +114,7 @@ const AffiliatePayoutTable = ({ payouts, isLoading }: Props) => {
                   </AccordionItem>
                 </Accordion>
               </TableCell>
-              <TableCell className='min-w-64'>
+              <TableCell className='max-w-64 min-w-64'>
                 {formatDate(item.createdAt)}
               </TableCell>
               <TableCell className='text-primary font-bold'>
@@ -145,7 +145,7 @@ const AffiliatePayoutTable = ({ payouts, isLoading }: Props) => {
                   <span className='text-default-400 text-[10px]'>ไม่มีรูป</span>
                 )}
               </TableCell>
-              <TableCell className='text-tiny text-default-500 max-w-[150px] min-w-64 truncate'>
+              <TableCell className='text-tiny text-default-500 max-w-64 min-w-64 truncate'>
                 {item.notes || '-'}
               </TableCell>
               <TableCell>

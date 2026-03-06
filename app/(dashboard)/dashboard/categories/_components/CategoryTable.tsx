@@ -100,8 +100,10 @@ const CategoryTable = ({
                 image={cat?.image ?? IMAGE_FALLBACK.EMPTY}
               />
             </TableCell>
-            <TableCell className='min-w-40 font-medium'>{cat.name}</TableCell>
-            <TableCell className='min-w-40'>{cat.slug}</TableCell>
+            <TableCell className='max-w-40 min-w-40 font-medium'>
+              {cat.name}
+            </TableCell>
+            <TableCell className='max-w-40 min-w-40'>{cat.slug}</TableCell>
             <TableCell>
               <Chip color='secondary' size='sm' variant='dot'>
                 {cat._count?.products || 0} รายการ

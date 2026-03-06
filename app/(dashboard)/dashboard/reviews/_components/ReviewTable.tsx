@@ -95,7 +95,7 @@ const ReviewTable = ({
                     #{review.id.slice(-8).toUpperCase()}
                   </span>
                 </TableCell>
-                <TableCell className='min-w-96'>
+                <TableCell className='max-w-96 min-w-96'>
                   <HeroUser
                     avatarProps={{
                       src: review?.user?.image || '',
