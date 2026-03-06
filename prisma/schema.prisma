@@ -571,6 +571,30 @@ model Wishlist {
   @@index([userId])
 }
 
+model Storefront {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?  @db.Text
+  image       String?
+  
+  phone       String?
+  address     String   @db.Text
+  googleMapUrl String? @db.Text
+  latitude    Float?
+  longitude   Float?
+
+  businessHours Json? 
+  
+  isActive    Boolean  @default(true)
+  
+  orders      Order[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([isActive])
+}
+
 model Order {
   id String @id @default(cuid())
 
@@ -581,30 +605,31 @@ model Order {
 
   deliveryType        DeliveryType @default(SHIPPING)
 
-  status        OrderStatus   @default(PENDING)
-  paymentStatus PaymentStatus @default(PENDING)
+  status              OrderStatus   @default(PENDING)
+  paymentStatus       PaymentStatus @default(PENDING)
+
   // สกุลเงินที่ลูกค้าใช้ชำระเงิน
-  currency      Currency @default(THB)
-  exchangeRate Decimal @default(1) @db.Decimal(18, 8)
-  exchangeLocale String?
+  currency            Currency      @default(THB)
+  exchangeRate        Decimal       @default(1) @db.Decimal(18, 8)
+  exchangeLocale      String?
 
   // ยอดเงินในสกุลเงินหลักของระบบ (Base Currency = THB)
-  baseSubtotal    Decimal @db.Decimal(14, 2)
-  baseDiscount    Decimal @db.Decimal(14, 2)
-  baseTax         Decimal @db.Decimal(14, 2)
-  baseShipping    Decimal @db.Decimal(14, 2)
-  baseTotal       Decimal @db.Decimal(14, 2)
+  baseSubtotal        Decimal       @db.Decimal(14, 2)
+  baseDiscount        Decimal       @db.Decimal(14, 2)
+  baseTax             Decimal       @db.Decimal(14, 2)
+  baseShipping        Decimal       @db.Decimal(14, 2)
+  baseTotal           Decimal       @db.Decimal(14, 2)
 
   // ยอดเงินในสกุลเงินที่ลูกค้าเลือก (ตามฟิลด์ currency)
-  subtotal     Decimal @db.Decimal(14, 2)
-  discount     Decimal @db.Decimal(14, 2)
-  tax          Decimal @db.Decimal(14, 2)
-  shippingCost Decimal @db.Decimal(14, 2)
-  total        Decimal @db.Decimal(14, 2)
+  subtotal            Decimal       @db.Decimal(14, 2)
+  discount            Decimal       @db.Decimal(14, 2)
+  tax                 Decimal       @db.Decimal(14, 2)
+  shippingCost        Decimal       @db.Decimal(14, 2)
+  total               Decimal       @db.Decimal(14, 2)
 
   shippingName        String?
   shippingPhone       String?
-  shippingAddressText String? @db.Text
+  shippingAddressText String?       @db.Text
   shippingMethod      String?
   trackingWebsite     String?
   trackingNumber      String?
@@ -613,25 +638,27 @@ model Order {
 
   pickupDate          DateTime? 
   pickupStoreLocation String?
+  storefrontId        String?
+  storefront          Storefront?   @relation(fields: [storefrontId], references: [id], onDelete: SetNull)
 
-  paymentMethod String?
-  paidAt        DateTime?
+  paymentMethod       String?
+  paidAt              DateTime?
 
-  cancelledAt  DateTime?
-  cancelReason String? @db.Text
-  refundedAt   DateTime?
+  cancelledAt         DateTime?
+  cancelReason        String?       @db.Text
+  refundedAt          DateTime?
 
-  couponCode String?
-  coupon     Coupon? @relation(fields: [couponId], references: [id], onDelete: SetNull)
+  couponCode          String?
+  coupon              Coupon?       @relation(fields: [couponId], references: [id], onDelete: SetNull)
 
-  user    User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
-  address Address?    @relation(fields: [shippingAddressId], references: [id], onDelete: SetNull)
-  items   OrderItem[]
+  user                User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
+  address             Address?      @relation(fields: [shippingAddressId], references: [id], onDelete: SetNull)
+  items               OrderItem[]
 
-  notes String? @db.Text
+  notes               String?       @db.Text
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
 
   affiliateCommission AffiliateCommission?
 
@@ -641,6 +668,7 @@ model Order {
   @@index([createdAt])
   @@index([userId, createdAt])
   @@index([deliveryType])
+  @@index([storefrontId])
 }
 
 model ShippingCountry {
