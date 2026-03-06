@@ -1,8 +1,8 @@
 'use client'
 
-import { OrderStatus } from '@prisma/client'
+import { OrderStatus, DeliveryType } from '@prisma/client'
 import { useTranslations } from 'next-intl'
-import React from 'react'
+import React, { useMemo } from 'react'
 
 import type { ComponentProps } from 'react'
 
@@ -10,24 +10,28 @@ import { OrderStep } from './OrderStep'
 import { StepConnector } from './StepConnector'
 import { getOrderStatusDate, ORDER_STATUS_ICONS } from './stepConfig'
 
-import { ORDER_STEPS } from '@/constants'
+import { SHIPPING_STEPS, PICKUP_STEPS } from '@/constants'
 import { cn } from '@/utils/style'
 
 interface Props extends ComponentProps<'div'> {
   status: OrderStatus
+  deliveryType: DeliveryType
   createdAt: Date
   paidAt?: Date | null
   shippedAt?: Date | null
   deliveredAt?: Date | null
+  updatedAt?: Date | null
 }
 
 const OrderStepper = ({
   className,
   status,
+  deliveryType,
   createdAt,
   paidAt,
   shippedAt,
   deliveredAt,
+  updatedAt,
   ...props
 }: Props) => {
   const t = useTranslations('global.orderStatus')
@@ -35,7 +39,11 @@ const OrderStepper = ({
   const isCancelled =
     status === OrderStatus.CANCELLED || status === OrderStatus.REFUNDED
 
-  const currentStepIndex = ORDER_STEPS.findIndex(([key]) => key === status)
+  const steps = useMemo(() => {
+    return deliveryType === DeliveryType.PICKUP ? PICKUP_STEPS : SHIPPING_STEPS
+  }, [deliveryType])
+
+  const currentStepIndex = steps.findIndex((key) => key === status)
 
   if (isCancelled) {
     const Icon = ORDER_STATUS_ICONS[status]
@@ -58,7 +66,7 @@ const OrderStepper = ({
   return (
     <div className={cn('mx-auto w-full max-w-3xl', className)} {...props}>
       <div className='flex flex-col items-center md:flex-row'>
-        {ORDER_STEPS.map(([stepStatus], index) => {
+        {steps.map((stepStatus, index) => {
           const isCompleted = index < currentStepIndex
           const isCurrent = index === currentStepIndex
 
@@ -67,6 +75,7 @@ const OrderStepper = ({
             paidAt,
             shippedAt,
             deliveredAt,
+            updatedAt,
           })
 
           return (
@@ -80,7 +89,7 @@ const OrderStepper = ({
                 status={stepStatus}
               />
 
-              {index < ORDER_STEPS.length - 1 && (
+              {index < steps.length - 1 && (
                 <StepConnector isActive={index < currentStepIndex} />
               )}
             </React.Fragment>

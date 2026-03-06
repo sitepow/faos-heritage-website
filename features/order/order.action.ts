@@ -6,6 +6,7 @@ import {
   PayoutStatus,
   StockMovementType,
 } from '@prisma/client'
+import { DeliveryType } from '@prisma/client'
 import { revalidatePath } from 'next/cache'
 
 import type { AffiliateFilter, GetAffiliateOrdersOptions } from './order.types'
@@ -40,7 +41,10 @@ interface UpdateOrderInput {
 
 interface CreateOrderInput {
   items: { productId: string; variantId?: string | null; quantity: number }[]
-  addressId: string
+  deliveryType: DeliveryType
+  addressId?: string
+  storefrontId?: string
+  pickupDate?: string | Date
   currency: Currency
   exchangeRate: number
   exchangeLocale: string
@@ -277,6 +281,7 @@ const getOrders = async ({
       include: {
         user: { select: { name: true, image: true, email: true } },
         address: { select: { countryCode: true } },
+        storefront: { select: { name: true } },
         items: {
           include: {
             product: {
@@ -302,6 +307,8 @@ const getOrderById = async (orderId: string) => {
   const order = await prisma.order.findUnique({
     where: { id: orderId },
     include: {
+      address: true,
+      storefront: true,
       items: {
         include: {
           product: {
@@ -358,15 +365,40 @@ const createOrder = async (input: CreateOrderInput) =>
       const {
         items,
         addressId,
+        storefrontId,
+        deliveryType,
+        pickupDate,
         currency,
         exchangeRate,
         exchangeLocale,
         referrerId,
       } = input
 
-      const address = await tx.address.findUnique({ where: { id: addressId } })
-      if (!address || items.length === 0) {
-        return fail(ERROR_CODES.BAD_REQUEST)
+      let address = null
+      let storefront = null
+
+      if (deliveryType === 'SHIPPING') {
+        if (!addressId) {
+          return fail(ERROR_CODES.BAD_REQUEST)
+        }
+
+        address = await tx.address.findUnique({ where: { id: addressId } })
+
+        if (!address || items.length === 0) {
+          return fail(ERROR_CODES.BAD_REQUEST)
+        }
+      } else {
+        if (!storefrontId) {
+          return fail(ERROR_CODES.BAD_REQUEST)
+        }
+
+        storefront = await tx.storefront.findUnique({
+          where: { id: storefrontId },
+        })
+
+        if (!storefront || items.length === 0) {
+          return fail(ERROR_CODES.BAD_REQUEST)
+        }
       }
 
       let validAffiliate = null
@@ -403,6 +435,7 @@ const createOrder = async (input: CreateOrderInput) =>
 
       for (const item of items) {
         const product = productMap.get(item.productId)
+
         if (!product) {
           return fail(ERROR_CODES.DATA_NOT_FOUND)
         }
@@ -439,11 +472,14 @@ const createOrder = async (input: CreateOrderInput) =>
         })
       }
 
-      const baseShipping = await calculateShippingCost({
-        items: shippingItems,
-        countryCode: address.countryCode,
-        totalPrice: subtotalSum,
-      })
+      let baseShipping = 0
+      if (deliveryType === DeliveryType.SHIPPING && address) {
+        baseShipping = await calculateShippingCost({
+          items: shippingItems,
+          countryCode: address.countryCode,
+          totalPrice: subtotalSum,
+        })
+      }
 
       const exchange = (val: number) => Number((val * exchangeRate).toFixed(2))
       const baseTotal = subtotalSum + baseShipping
@@ -451,6 +487,7 @@ const createOrder = async (input: CreateOrderInput) =>
       const order = await tx.order.create({
         data: {
           user: { connect: { id: userId } },
+          deliveryType,
           currency,
           exchangeRate,
           exchangeLocale,
@@ -464,12 +501,25 @@ const createOrder = async (input: CreateOrderInput) =>
           discount: exchange(totalBaseProductDiscount),
           tax: 0,
           total: exchange(baseTotal),
-          address: { connect: { id: addressId } },
-          shippingName: address.name,
-          shippingPhone: address.phone,
-          shippingAddressText: formatFullAddress(address),
-          items: { createMany: { data: orderItemsPayload } },
           referrerCode: finalReferrerCode,
+          items: { createMany: { data: orderItemsPayload } },
+
+          ...(deliveryType === 'SHIPPING' && address
+            ? {
+                address: { connect: { id: addressId } },
+                shippingName: address.name,
+                shippingPhone: address.phone,
+                shippingAddressText: formatFullAddress(address),
+              }
+            : {}),
+
+          ...(deliveryType === 'PICKUP' && storefront
+            ? {
+                storefront: { connect: { id: storefrontId } },
+                pickupDate: pickupDate ? new Date(pickupDate) : null,
+                pickupStoreLocation: storefront.name,
+              }
+            : {}),
         },
       })
 

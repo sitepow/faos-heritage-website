@@ -6,12 +6,14 @@ import {
   PackageOpenIcon,
   PackageIcon,
   PackageCheckIcon,
+  StoreIcon,
 } from 'lucide-react'
 
 const ORDER_STATUS_ICONS: Record<OrderStatus, React.ElementType> = {
   PENDING: PackageOpenIcon,
   PAID: CreditCardIcon,
   PROCESSING: PackageIcon,
+  READY_FOR_PICKUP: StoreIcon,
   DELIVERED: PackageCheckIcon,
   CANCELLED: XIcon,
   REFUNDED: XIcon,
@@ -24,6 +26,7 @@ const getOrderStatusDate = (
     paidAt?: Date | null
     shippedAt?: Date | null
     deliveredAt?: Date | null
+    updatedAt?: Date | null
   },
 ) => {
   switch (status) {
@@ -33,6 +36,8 @@ const getOrderStatusDate = (
       return dates.paidAt
     case OrderStatus.PROCESSING:
       return dates.shippedAt
+    case OrderStatus.READY_FOR_PICKUP:
+      return dates.updatedAt
     case OrderStatus.DELIVERED:
       return dates.deliveredAt
     default:

@@ -7,7 +7,7 @@ interface StepConnectorProps {
 const StepConnector = ({ isActive }: StepConnectorProps) => {
   return (
     <>
-      <div className='relative mx-4 hidden h-1 flex-1 md:block'>
+      <div className='relative mx-4 hidden h-0.5 flex-1 md:block'>
         <div className='bg-divider absolute inset-0 rounded' />
         <div
           className={cn(
@@ -17,7 +17,7 @@ const StepConnector = ({ isActive }: StepConnectorProps) => {
         />
       </div>
 
-      <div className='relative my-4 block h-8 w-1 md:hidden'>
+      <div className='relative my-4 block h-8 w-0.5 md:hidden'>
         <div className='bg-divider absolute inset-0 rounded' />
         <div
           className={cn(

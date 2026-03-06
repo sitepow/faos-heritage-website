@@ -10,6 +10,11 @@ const buildStatusUpdateData = (
   const mapping: Partial<Record<OrderStatus, Prisma.OrderUpdateInput>> = {
     [OrderStatus.PAID]: { paymentStatus: PaymentStatus.PAID, paidAt: now },
     [OrderStatus.PROCESSING]: { shippedAt: now },
+
+    [OrderStatus.READY_FOR_PICKUP]: {
+      updatedAt: now,
+    },
+
     [OrderStatus.DELIVERED]: {
       deliveredAt: now,
       trackingWebsite: meta.trackingWebsite,

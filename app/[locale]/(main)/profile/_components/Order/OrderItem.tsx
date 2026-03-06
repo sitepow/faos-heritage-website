@@ -166,6 +166,7 @@ const OrderItem = ({ order, hideButton }: Props) => {
           className='py-5'
           createdAt={order?.createdAt!}
           deliveredAt={order?.deliveredAt!}
+          deliveryType={order.deliveryType}
           paidAt={order?.paidAt!}
           shippedAt={order?.shippedAt!}
           status={order.status}

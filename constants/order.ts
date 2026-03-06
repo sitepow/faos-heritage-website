@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import type { OrderStatus } from '@prisma/client'
+import { OrderStatus } from '@prisma/client'
 
 const UNKNOWN_ADDRESS_MESSAGE = 'The shipping address is unknown.'
 
@@ -15,6 +15,7 @@ const ORDER_STATUS_LABELS: Record<OrderStatus, string> = {
   PENDING: 'Order Created',
   PAID: 'Payment Completed',
   PROCESSING: 'Preparing Order',
+  READY_FOR_PICKUP: 'Ready for Pickup',
   DELIVERED: 'Shipped',
   CANCELLED: 'Order Cancelled',
   REFUNDED: 'Refunded / Order Cancelled',
@@ -31,10 +32,26 @@ const ORDER_STATUS_FLOW: Record<OrderStatus, number> = {
   PENDING: 1,
   PAID: 2,
   PROCESSING: 3,
-  DELIVERED: 4,
+  READY_FOR_PICKUP: 4,
+  DELIVERED: 5,
   CANCELLED: 99,
   REFUNDED: 100,
 }
+
+const SHIPPING_STEPS: OrderStatus[] = [
+  OrderStatus.PENDING,
+  OrderStatus.PAID,
+  OrderStatus.PROCESSING,
+  OrderStatus.DELIVERED,
+]
+
+const PICKUP_STEPS: OrderStatus[] = [
+  OrderStatus.PENDING,
+  OrderStatus.PAID,
+  OrderStatus.PROCESSING,
+  OrderStatus.READY_FOR_PICKUP,
+  OrderStatus.DELIVERED,
+]
 
 const ORDER_STEPS = Object.entries(ACTIVE_ORDER_STATUS) as [
   OrderStatus,
@@ -190,4 +207,6 @@ export {
   ORDER_STEPS_ALL,
   SHIPPING_PROVIDERS,
   AFFILIATE_CONFIG,
+  SHIPPING_STEPS,
+  PICKUP_STEPS,
 }

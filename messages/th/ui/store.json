@@ -20,6 +20,13 @@
     "empty": "ไม่มีสินค้าในตะกร้าของคุณ",
     "header": "รายการสินค้า",
     "checkout": {
+      "deliveryMethodTitle": "วิธีการรับสินค้า",
+      "shippingOption": "จัดส่งตามที่อยู่",
+      "pickupOption": "รับหน้าร้าน",
+      "selectStoreLabel": "เลือกสาขาที่ต้องการเข้ารับสินค้า",
+      "pickupAlert": "กรุณาเลือกสาขาที่สะดวกเพื่อดำเนินการต่อ",
+      "storeAddress": "ที่อยู่สาขา: {address}",
+      "pickupDate": "วันที่คาดว่าจะเข้ารับ",
       "referrerTitle": "เลขผู้อ้างอิง (ไม่บังคับ)",
       "referrerPlaceholder": "ระบุรหัสพนักงานขาย (เช่น 0001)",
       "addressTitle": "ที่อยู่จัดส่ง",
