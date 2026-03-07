@@ -23,6 +23,13 @@
     "empty": "カートに商品が入っていません。",
     "header": "カート内の商品",
     "checkout": {
+      "deliveryMethodTitle": "受取方法",
+      "shippingOption": "指定住所に配送",
+      "pickupOption": "店舗受取",
+      "selectStoreLabel": "受取希望の店舗を選択してください",
+      "pickupAlert": "次へ進むには店舗を選択してください",
+      "storeAddress": "店舗住所: {address}",
+      "pickupDate": "受取予定日",
       "referrerTitle": "紹介番号（任意）",
       "referrerPlaceholder": "販売コードを入力してください（例：0001）",
       "addressTitle": "お届け先住所",

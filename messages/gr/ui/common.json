@@ -108,12 +108,13 @@
       "UNIT": "Μονάδα"
     },
     "orderStatus": {
-      "PENDING": "Εκκρεμής Πληρωμή",
+      "PENDING": "Εκκρεμεί πληρωμή",
       "PAID": "Πληρώθηκε",
       "PROCESSING": "Σε επεξεργασία",
-      "DELIVERED": "Απεστάλη",
+      "READY_FOR_PICKUP": "Έτοιμο για παραλαβή",
+      "DELIVERED": "Παραδόθηκε",
       "CANCELLED": "Ακυρώθηκε",
-      "REFUNDED": "Επιστροφή Χρημάτων"
+      "REFUNDED": "Επιστράφηκαν χρήματα"
     }
   },
   "alert": {

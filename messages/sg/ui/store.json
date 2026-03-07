@@ -23,6 +23,13 @@
     "empty": "Your cart is currently empty.",
     "header": "Items in Cart",
     "checkout": {
+      "deliveryMethodTitle": "Delivery Method",
+      "shippingOption": "Ship to Address",
+      "pickupOption": "Store Pickup",
+      "selectStoreLabel": "Select a store for pickup",
+      "pickupAlert": "Please select a store to proceed",
+      "storeAddress": "Store Address: {address}",
+      "pickupDate": "Estimated Pickup Date",
       "referrerTitle": "Refer No. (Optional)",
       "referrerPlaceholder": "Enter Sale Code (e.g. 0001)",
       "addressTitle": "Shipping Address",

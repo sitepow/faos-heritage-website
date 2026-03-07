@@ -23,6 +23,13 @@
     "empty": "Il tuo carrello è attualmente vuoto.",
     "header": "Articoli nel carrello",
     "checkout": {
+      "deliveryMethodTitle": "Metodo di Consegna",
+      "shippingOption": "Spedizione all'Indirizzo",
+      "pickupOption": "Ritiro in Negozio",
+      "selectStoreLabel": "Seleziona un negozio per il ritiro",
+      "pickupAlert": "Seleziona un negozio comodo per continuare",
+      "storeAddress": "Indirizzo del Negozio: {address}",
+      "pickupDate": "Data di Ritiro Prevista",
       "referrerTitle": "N. Riferimento (Opzionale)",
       "referrerPlaceholder": "Inserisci codice vendita (es. 0001)",
       "addressTitle": "Indirizzo di spedizione",

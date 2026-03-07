@@ -109,11 +109,12 @@
     },
     "orderStatus": {
       "PENDING": "Menunggu Pembayaran",
-      "PAID": "Dibayar",
-      "PROCESSING": "Diproses",
-      "DELIVERED": "Dikirim",
+      "PAID": "Sudah Dibayar",
+      "PROCESSING": "Sedang Diproses",
+      "READY_FOR_PICKUP": "Siap Diambil",
+      "DELIVERED": "Sudah Terkirim",
       "CANCELLED": "Dibatalkan",
-      "REFUNDED": "Dikembalikan (Refund)"
+      "REFUNDED": "Sudah Dikembalikan"
     }
   },
   "alert": {

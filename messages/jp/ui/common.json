@@ -111,7 +111,8 @@
       "PENDING": "支払い待ち",
       "PAID": "支払い済み",
       "PROCESSING": "処理中",
-      "DELIVERED": "発送済み",
+      "READY_FOR_PICKUP": "受取可能",
+      "DELIVERED": "配達済み",
       "CANCELLED": "キャンセル済み",
       "REFUNDED": "返金済み"
     }

@@ -23,6 +23,13 @@
     "empty": "Karfan þín er tóm eins og er.",
     "header": "Vörur í körfu",
     "checkout": {
+      "deliveryMethodTitle": "Afhendingaraðferð",
+      "shippingOption": "Sent á heimilisfang",
+      "pickupOption": "Sótt í verslun",
+      "selectStoreLabel": "Veldu verslun til að sækja í",
+      "pickupAlert": "Vinsamlegast veldu verslun til að halda áfram",
+      "storeAddress": "Heimilisfang verslunar: {address}",
+      "pickupDate": "Áætlaður afhendingartími",
       "referrerTitle": "Tilvísunarnúmer (Valkvætt)",
       "referrerPlaceholder": "Sláðu inn sölukóða (t.d. 0001)",
       "addressTitle": "Sendingarheimilisfang",

@@ -108,10 +108,11 @@
       "UNIT": "Unità"
     },
     "orderStatus": {
-      "PENDING": "Pagamento Pendente",
+      "PENDING": "In attesa di pagamento",
       "PAID": "Pagato",
-      "PROCESSING": "In elaborazione",
-      "DELIVERED": "Spedito",
+      "PROCESSING": "In lavorazione",
+      "READY_FOR_PICKUP": "Pronto per il ritiro",
+      "DELIVERED": "Consegnato",
       "CANCELLED": "Annullato",
       "REFUNDED": "Rimborsato"
     }

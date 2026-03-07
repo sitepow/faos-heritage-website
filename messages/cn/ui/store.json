@@ -23,6 +23,13 @@
     "empty": "您的购物车目前是空的。",
     "header": "购物车商品",
     "checkout": {
+      "deliveryMethodTitle": "配送方式",
+      "shippingOption": "邮寄到家",
+      "pickupOption": "门店自提",
+      "selectStoreLabel": "选择自提门店",
+      "pickupAlert": "请选择方便的门店以继续",
+      "storeAddress": "门店地址: {address}",
+      "pickupDate": "预计自提日期",
       "referrerTitle": "推荐编号 (选填)",
       "referrerPlaceholder": "请输入销售代码 (例如 0001)",
       "addressTitle": "收货地址",

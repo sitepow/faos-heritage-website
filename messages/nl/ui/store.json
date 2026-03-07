@@ -23,6 +23,13 @@
     "empty": "Uw winkelwagen is momenteel leeg.",
     "header": "Artikelen in winkelwagen",
     "checkout": {
+      "deliveryMethodTitle": "Leveringsmethode",
+      "shippingOption": "Verzenden naar Adres",
+      "pickupOption": "Ophalen in de Winkel",
+      "selectStoreLabel": "Selecteer een winkel om op te halen",
+      "pickupAlert": "Selecteer een winkel om door te gaan",
+      "storeAddress": "Winkeladres: {address}",
+      "pickupDate": "Verwachte Ophaaldatum",
       "referrerTitle": "Referentienummer (Optioneel)",
       "referrerPlaceholder": "Voer verkoopcode in (bijv. 0001)",
       "addressTitle": "Verzendadres",

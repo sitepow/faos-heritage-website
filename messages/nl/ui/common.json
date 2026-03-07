@@ -108,10 +108,11 @@
       "UNIT": "Eenheid"
     },
     "orderStatus": {
-      "PENDING": "Wacht op betaling",
+      "PENDING": "Wachtend op betaling",
       "PAID": "Betaald",
-      "PROCESSING": "In behandeling",
-      "DELIVERED": "Verzonden",
+      "PROCESSING": "In verwerking",
+      "READY_FOR_PICKUP": "Klaarเพื่อ ophalen",
+      "DELIVERED": "Geleverd",
       "CANCELLED": "Geannuleerd",
       "REFUNDED": "Terugbetaald"
     }

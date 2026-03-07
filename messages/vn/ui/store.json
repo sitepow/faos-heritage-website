@@ -23,6 +23,13 @@
     "empty": "Giỏ hàng của bạn hiện đang trống.",
     "header": "Sản phẩm trong giỏ hàng",
     "checkout": {
+      "deliveryMethodTitle": "Phương thức nhận hàng",
+      "shippingOption": "Giao hàng tận nơi",
+      "pickupOption": "Nhận tại cửa hàng",
+      "selectStoreLabel": "Chọn cửa hàng để nhận hàng",
+      "pickupAlert": "Vui lòng chọn cửa hàng thuận tiện để tiếp tục",
+      "storeAddress": "Địa chỉ cửa hàng: {address}",
+      "pickupDate": "Ngày dự kiến nhận hàng",
       "referrerTitle": "Số tham chiếu (Tùy chọn)",
       "referrerPlaceholder": "Nhập mã bán hàng (VD: 0001)",
       "addressTitle": "Địa chỉ giao hàng",

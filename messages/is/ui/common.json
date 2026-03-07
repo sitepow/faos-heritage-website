@@ -111,7 +111,8 @@
       "PENDING": "Bíður greiðslu",
       "PAID": "Greitt",
       "PROCESSING": "Í vinnslu",
-      "DELIVERED": "Sent",
+      "READY_FOR_PICKUP": "Tilbúið til afhendingar",
+      "DELIVERED": "Afhent",
       "CANCELLED": "Hætt við",
       "REFUNDED": "Endurgreitt"
     }

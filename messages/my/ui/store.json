@@ -23,6 +23,13 @@
     "empty": "Troli anda pada masa ini kosong.",
     "header": "Barangan dalam Troli",
     "checkout": {
+      "deliveryMethodTitle": "Kaedah Penghantaran",
+      "shippingOption": "Hantar ke Alamat",
+      "pickupOption": "Ambil di Kedai",
+      "selectStoreLabel": "Pilih cawangan untuk diambil",
+      "pickupAlert": "Sila pilih cawanganที่ sesuai untuk meneruskan",
+      "storeAddress": "Alamat Cawangan: {address}",
+      "pickupDate": "Tarikh Jangkaan Pengambilan",
       "referrerTitle": "No. Rujukan (Opsional)",
       "referrerPlaceholder": "Masukkan Kod Jualan (cth. 0001)",
       "addressTitle": "Alamat Penghantaran",

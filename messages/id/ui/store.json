@@ -23,6 +23,13 @@
     "empty": "Keranjang Anda saat ini kosong.",
     "header": "Produk dalam Keranjang",
     "checkout": {
+      "deliveryMethodTitle": "Metode Pengiriman",
+      "shippingOption": "Kirim ke Alamat",
+      "pickupOption": "Ambil di Toko",
+      "selectStoreLabel": "Pilih toko untuk pengambilan",
+      "pickupAlert": "Silakan pilih toko untuk melanjutkan",
+      "storeAddress": "Alamat Toko: {address}",
+      "pickupDate": "Tanggal Perkiraan Pengambilan",
       "referrerTitle": "No. Referensi (Opsional)",
       "referrerPlaceholder": "Masukkan Kode Sales (msl. 0001)",
       "addressTitle": "Alamat Pengiriman",

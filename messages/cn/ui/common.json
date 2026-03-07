@@ -111,7 +111,8 @@
       "PENDING": "待付款",
       "PAID": "已付款",
       "PROCESSING": "处理中",
-      "DELIVERED": "已发货",
+      "READY_FOR_PICKUP": "待自提",
+      "DELIVERED": "已送达",
       "CANCELLED": "已取消",
       "REFUNDED": "已退款"
     }

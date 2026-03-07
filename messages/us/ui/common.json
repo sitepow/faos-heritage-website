@@ -111,7 +111,8 @@
       "PENDING": "Pending Payment",
       "PAID": "Paid",
       "PROCESSING": "Processing",
-      "DELIVERED": "Shipped",
+      "READY_FOR_PICKUP": "Ready for Pickup",
+      "DELIVERED": "Delivered",
       "CANCELLED": "Cancelled",
       "REFUNDED": "Refunded"
     }
