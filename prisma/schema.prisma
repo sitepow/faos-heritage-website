@@ -68,6 +68,7 @@ enum StockMovementType {
   RESTOCK
   ADJUSTMENT
   RETURN
+  WITHDRAWAL
 }
 
 enum ReviewStatus {
@@ -737,6 +738,8 @@ model StockHistory {
 
   quantity  Int
   type      StockMovementType
+  location  String?  @db.Text
+  note      String?  @db.Text
   reference String?
 
   product Product?        @relation(fields: [productId], references: [id], onDelete: Cascade)
@@ -747,6 +750,7 @@ model StockHistory {
   @@index([productId])
   @@index([variantId])
   @@index([createdAt])
+  @@index([type])
 }
 
 model Review {
