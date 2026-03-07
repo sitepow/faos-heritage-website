@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 'use client'
 
 import { Listbox, ListboxItem, ScrollShadow, Button } from '@heroui/react'
@@ -17,6 +18,7 @@ import {
   ArrowUpLeft,
   Share2Icon,
   MenuIcon,
+  StoreIcon,
 } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -73,6 +75,7 @@ const AdminSidebar = () => {
       items: [
         { href: '/dashboard/shipping', label: 'ค่าจัดส่ง', icon: TruckIcon },
         { href: '/dashboard/addresses', label: 'ที่อยู่', icon: MapPinIcon },
+        { href: '/dashboard/storefronts', label: 'หน้าร้าน', icon: StoreIcon },
       ],
     },
   ]

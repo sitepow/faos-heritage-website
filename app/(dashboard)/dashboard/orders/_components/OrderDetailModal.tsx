@@ -1,5 +1,4 @@
 /* eslint-disable no-nested-ternary */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import {
@@ -7,189 +6,143 @@ import {
   ModalContent,
   ModalHeader,
   ModalBody,
-  ModalFooter,
-  Button,
-  Spinner,
   Divider,
-  Image,
-  Chip,
+  ModalFooter,
+  Spinner,
 } from '@heroui/react'
+import { DeliveryType } from '@prisma/client'
+import { MapPin, Truck, Store, Phone, User } from 'lucide-react'
 
-import type { OrderStatus } from '@prisma/client'
-
+import { OrderItems } from '@/components/ui/OrderDetailModal/OrderItems'
+import { OrderSummary } from '@/components/ui/OrderDetailModal/OrderSummary'
 import { useOrder } from '@/features/order/order.hook'
 import { useOrderStore } from '@/features/order/order.store'
-import {
-  formatCurrency,
-  ORDER_STATUS_COLOR_MAP,
-  ORDER_STATUS_TH_MAP,
-} from '@/utils'
 
 const OrderDetailModal = () => {
   const { orderId, isViewOpen, setState } = useOrderStore()
   const { data: order, isLoading } = useOrder(orderId!)
 
-  const onClose = () => setState({ isViewOpen: false, orderId: null })
+  const onClose = () => {
+    return setState({ isViewOpen: false, orderId: null })
+  }
+
+  const isPickup = order?.deliveryType === DeliveryType.PICKUP
 
   return (
     <Modal
-      hideCloseButton
       isOpen={isViewOpen}
       scrollBehavior='inside'
-      size='3xl'
-      onOpenChange={onClose}
+      size='2xl'
+      onClose={onClose}
     >
       <ModalContent>
-        <ModalHeader className='flex flex-col gap-1'>
-          <div className='flex items-center gap-2'>
-            <span>รายละเอียดคำสั่งซื้อ</span>
-            <span className='text-default-400 font-mono text-sm'>
-              #{order?.id}
-            </span>
+        {isLoading ? (
+          <div className='flex h-64 items-center justify-center'>
+            <Spinner label='กำลังโหลด...' />
           </div>
-        </ModalHeader>
-        <ModalBody>
-          {isLoading ? (
-            <div className='flex justify-center p-12'>
-              <Spinner label='กำลังโหลดรายละเอียด...' />
-            </div>
-          ) : order ? (
-            <div className='space-y-6'>
-              <div className='grid grid-cols-2 gap-4 rounded-xl'>
-                <div>
-                  <p className='text-tiny text-default-500 font-bold uppercase'>
-                    ข้อมูลลูกค้า
-                  </p>
-                  <p className='font-semibold'>{order.shippingName}</p>
-                  <p className='text-small text-default-600'>
-                    {order.shippingPhone}
-                  </p>
-                </div>
-                <div className='text-right'>
-                  <p className='text-tiny text-default-500 mb-2.5 font-bold uppercase'>
-                    สถานะปัจจุบัน
-                  </p>
-                  <Chip
-                    color={ORDER_STATUS_COLOR_MAP[order.status as OrderStatus]}
-                    variant='dot'
-                  >
-                    {ORDER_STATUS_TH_MAP[order.status as OrderStatus]}
-                  </Chip>
-                </div>
+        ) : order ? (
+          <>
+            <ModalHeader className='flex flex-col gap-1'>
+              <div className='flex items-center justify-between pr-6 text-left'>
+                <span className='text-lg font-bold uppercase'>
+                  รหัสคำสั่งซื้อ #{order.id.slice(-8).toUpperCase()}
+                </span>
               </div>
+              <p className='text-default-500 text-left text-sm font-normal'>
+                {new Date(order.createdAt).toLocaleString('th-TH')}
+              </p>
+            </ModalHeader>
 
-              <div>
-                <p className='text-small mb-1 font-bold'>ที่อยู่จัดส่ง</p>
-                <p className='text-small text-default-600 border-default-100 rounded-lg border-1 p-3'>
-                  {order.shippingAddressText}
-                </p>
-              </div>
+            <ModalBody>
+              <OrderItems items={order.items} title='รายการสินค้า' />
 
-              <Divider className='bg-default-100' />
+              <Divider className='bg-default-100 my-4' />
 
-              <div>
-                <p className='text-small mb-3 font-bold'>
-                  รายการสินค้า ({order.items?.length || 0} รายการ)
-                </p>
-                <div className='space-y-3'>
-                  {order.items?.map((item: any) => (
-                    <div
-                      key={item.id}
-                      className='border-default-100 flex items-center gap-3 rounded-lg border-1 p-2'
-                    >
-                      <Image
-                        alt={item.productName}
-                        className='rounded-md object-cover'
-                        height={60}
-                        src={
-                          item.product?.images?.[0]?.url ||
-                          '/images/placeholder.png'
-                        }
-                        width={60}
-                      />
-                      <div className='flex-1'>
-                        <p className='text-small font-medium'>
-                          {item.productName}
-                        </p>
-                        {item.variantName && (
-                          <p className='text-tiny text-default-400'>
-                            ตัวเลือก: {item.variantName}
-                          </p>
-                        )}
-                        <p className='text-tiny text-default-500'>
-                          {item.quantity} {item.product?.unit || 'ชิ้น'} x{' '}
-                          {formatCurrency(Number(item.price), {
-                            currency: order.currency,
-                            skipCalculation: true,
-                          })}
+              <div className='flex flex-col gap-3'>
+                <div className='flex items-center gap-2 text-sm font-semibold'>
+                  {isPickup ? (
+                    <>
+                      <Store size={20} />
+                      <span>รับหน้าร้าน</span>
+                    </>
+                  ) : (
+                    <>
+                      <Truck size={20} />
+                      <span>จัดส่งไปยังที่อยู่</span>
+                    </>
+                  )}
+                </div>
+
+                <div className='bg-default-50 text-default-600 border-default-100 rounded-xl border p-4 text-sm'>
+                  {isPickup ? (
+                    <div className='flex flex-col gap-2 text-left'>
+                      <div className='text-default-900 flex items-center gap-2 font-bold'>
+                        <span>
+                          {order.storefront?.name || order.shippingName}
+                        </span>
+                      </div>
+                      <div className='flex items-start gap-2'>
+                        <MapPin
+                          className='text-default-400 mt-0.5 shrink-0'
+                          size={16}
+                        />
+                        <p className='leading-relaxed'>
+                          {order.shippingAddressText ||
+                            'ข้อมูลที่อยู่สาขาไม่ครบถ้วน'}
                         </p>
                       </div>
-                      <div className='text-small text-right font-semibold'>
-                        {formatCurrency(Number(item.subtotal), {
-                          currency: order.currency,
-                          skipCalculation: true,
-                        })}
+                      <div className='flex items-center gap-2'>
+                        <Phone
+                          className='text-default-400 shrink-0'
+                          size={16}
+                        />
+                        <p>{order.shippingPhone || '-'}</p>
                       </div>
                     </div>
-                  ))}
+                  ) : (
+                    <div className='flex flex-col gap-2 text-left'>
+                      <div className='text-default-900 flex items-center gap-2 font-bold'>
+                        <User className='text-default-400' size={16} />
+                        <span>{order.shippingName}</span>
+                      </div>
+                      <div className='flex items-center gap-2'>
+                        <Phone className='text-default-400' size={16} />
+                        <p>{order.shippingPhone}</p>
+                      </div>
+                      <div className='flex items-start gap-2 pt-1'>
+                        <MapPin
+                          className='text-default-400 mt-0.5 shrink-0'
+                          size={16}
+                        />
+                        <p className='leading-relaxed'>
+                          {order.shippingAddressText}
+                        </p>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
 
-              <Divider className='bg-default-100' />
+              <Divider className='bg-default-100 my-4' />
 
-              <div className='flex flex-col items-end gap-1 px-2 pb-4'>
-                <div className='text-small flex w-48 justify-between'>
-                  <span className='text-default-500'>รวมค่าสินค้า:</span>
-                  <span>
-                    {formatCurrency(Number(order.subtotal), {
-                      currency: order.currency,
-                      skipCalculation: true,
-                    })}
-                  </span>
-                </div>
-                <div className='text-small flex w-48 justify-between'>
-                  <span className='text-default-500'>ค่าจัดส่ง:</span>
-                  <span>
-                    {formatCurrency(Number(order.shippingCost), {
-                      currency: order.currency,
-                      skipCalculation: true,
-                    })}
-                  </span>
-                </div>
-                {Number(order.discount) > 0 && (
-                  <div className='text-small text-danger flex w-48 justify-between'>
-                    <span>ส่วนลด:</span>
-                    <span>
-                      -
-                      {formatCurrency(Number(order.discount), {
-                        currency: order.currency,
-                        skipCalculation: true,
-                      })}
-                    </span>
-                  </div>
-                )}
-                <div className='border-default-100 mt-2 flex w-48 justify-between border-t-1 pt-2 text-lg font-bold'>
-                  <span>ยอดสุทธิ:</span>
-                  <span className='text-primary'>
-                    {formatCurrency(Number(order.total), {
-                      currency: order.currency,
-                      skipCalculation: true,
-                    })}
-                  </span>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className='text-default-400 p-8 text-center'>
-              ไม่พบข้อมูลคำสั่งซื้อ
-            </div>
-          )}
-        </ModalBody>
-        <ModalFooter>
-          <Button variant='flat' onPress={onClose}>
-            ปิดหน้าต่าง
-          </Button>
-        </ModalFooter>
+              <OrderSummary
+                discount={order.discount}
+                labels={{
+                  total: 'รวมค่าสินค้า',
+                  discount: 'ส่วนลด',
+                  shipping: 'ค่าจัดส่ง',
+                  net: 'ยอดสุทธิ',
+                }}
+                shippingCost={order.shippingCost}
+                subtotal={order.subtotal}
+                total={order.total}
+              />
+            </ModalBody>
+          </>
+        ) : (
+          <div className='p-8 text-center'>ไม่พบข้อมูล</div>
+        )}
+        <ModalFooter />
       </ModalContent>
     </Modal>
   )

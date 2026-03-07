@@ -39,8 +39,9 @@ const formatFullAddress = (address?: GetAddressResult | null): string => {
   return phone ? `${formatted}. Phone: ${phone}` : formatted
 }
 
-const resolveOrderStatusLabel = (status: OrderStatus): string =>
-  ORDER_STATUS_LABELS[status] ?? status
+const resolveOrderStatusLabel = (status: OrderStatus): string => {
+  return ORDER_STATUS_LABELS[status] ?? status
+}
 
 const canTransitionOrderStatus = (
   current: OrderStatus,
@@ -51,11 +52,18 @@ const canTransitionOrderStatus = (
   }
 
   if (next === OrderStatus.CANCELLED) {
-    return current === OrderStatus.PENDING
+    return (
+      current === OrderStatus.PENDING ||
+      current === OrderStatus.PAID ||
+      current === OrderStatus.PROCESSING
+    )
   }
 
   if (next === OrderStatus.REFUNDED) {
-    return current === OrderStatus.DELIVERED
+    return (
+      current === OrderStatus.DELIVERED ||
+      current === OrderStatus.READY_FOR_PICKUP
+    )
   }
 
   return ORDER_STATUS_FLOW[next] === ORDER_STATUS_FLOW[current] + 1
@@ -65,7 +73,8 @@ const ORDER_STATUS_TH_MAP: Record<OrderStatus, string> = {
   [OrderStatus.PENDING]: 'รอการชำระเงิน',
   [OrderStatus.PAID]: 'ชำระเงินแล้ว',
   [OrderStatus.PROCESSING]: 'กำลังดำเนินการ',
-  [OrderStatus.DELIVERED]: 'จัดส่งแล้ว',
+  [OrderStatus.READY_FOR_PICKUP]: 'พร้อมให้มารับสินค้า',
+  [OrderStatus.DELIVERED]: 'สำเร็จแล้ว',
   [OrderStatus.CANCELLED]: 'ยกเลิกแล้ว',
   [OrderStatus.REFUNDED]: 'คืนเงินแล้ว',
 }
@@ -77,6 +86,7 @@ const ORDER_STATUS_COLOR_MAP: Record<
   [OrderStatus.PENDING]: 'warning',
   [OrderStatus.PAID]: 'success',
   [OrderStatus.PROCESSING]: 'warning',
+  [OrderStatus.READY_FOR_PICKUP]: 'warning',
   [OrderStatus.DELIVERED]: 'success',
   [OrderStatus.CANCELLED]: 'danger',
   [OrderStatus.REFUNDED]: 'default',

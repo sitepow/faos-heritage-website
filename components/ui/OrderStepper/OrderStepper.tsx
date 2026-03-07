@@ -21,6 +21,7 @@ interface Props extends ComponentProps<'div'> {
   shippedAt?: Date | null
   deliveredAt?: Date | null
   updatedAt?: Date | null
+  pickupDate?: Date | null
 }
 
 const OrderStepper = ({
@@ -32,6 +33,7 @@ const OrderStepper = ({
   shippedAt,
   deliveredAt,
   updatedAt,
+  pickupDate,
   ...props
 }: Props) => {
   const t = useTranslations('global.orderStatus')
@@ -43,7 +45,9 @@ const OrderStepper = ({
     return deliveryType === DeliveryType.PICKUP ? PICKUP_STEPS : SHIPPING_STEPS
   }, [deliveryType])
 
-  const currentStepIndex = steps.findIndex((key) => key === status)
+  const currentStepIndex = steps.findIndex((key) => {
+    return key === status
+  })
 
   if (isCancelled) {
     const Icon = ORDER_STATUS_ICONS[status]
@@ -76,6 +80,7 @@ const OrderStepper = ({
             shippedAt,
             deliveredAt,
             updatedAt,
+            pickupDate,
           })
 
           return (

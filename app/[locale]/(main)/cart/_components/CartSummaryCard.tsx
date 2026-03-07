@@ -18,7 +18,7 @@ import {
 import { Currency, DeliveryType } from '@prisma/client'
 import { TruckIcon, StoreIcon } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
-import { useEffect, useState, useMemo } from 'react'
+import { useEffect, useState } from 'react'
 
 import type { ComponentProps } from 'react'
 
@@ -34,12 +34,15 @@ import { useActiveStorefronts } from '@/features/storefront/storefront.hook'
 import { useAffiliate } from '@/hooks/useAffiliate'
 import { useAppNavigation } from '@/hooks/useAppNavigation'
 import { useAuth } from '@/hooks/useAuth'
+import { useIsBelowBreakpoint } from '@/hooks/useIsBelowBreakpoint'
 import { formatFullAddress } from '@/utils'
 import { cn } from '@/utils/style'
 
 type Props = ComponentProps<typeof Card>
 
 const CartSummaryCard = ({ className, ...props }: Props) => {
+  const isMobile = useIsBelowBreakpoint('640px')
+
   const tCheckout = useTranslations('cart.checkout')
   const tAction = useTranslations('cart.checkout.action')
   const tSummary = useTranslations('cart.checkout.summary')
@@ -57,12 +60,9 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
   )
   const [selectedStoreId, setSelectedStoreId] = useState<string>('')
 
-  const { data: storefrontsResult, isLoading: isLoadingStores } =
+  const { data: storefronts = [], isLoading: isLoadingStores } =
     useActiveStorefronts()
-  const storefronts = useMemo(
-    () => storefrontsResult?.data ?? [],
-    [storefrontsResult],
-  )
+
   const hasStorefronts = storefronts.length > 0
 
   useEffect(() => {
@@ -111,7 +111,7 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
       return
     }
 
-    await createOrder({
+    return await createOrder({
       deliveryType,
       addressId:
         deliveryType === DeliveryType.SHIPPING ? address?.id : undefined,
@@ -121,75 +121,100 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
       exchangeRate,
       exchangeLocale: appLocale.locale,
       referrerId: referrerCode || undefined,
-      items: carts.map(({ productId, variantId, quantity }) => ({
-        productId,
-        variantId,
-        quantity,
-      })),
+      items: carts.map(({ productId, variantId, quantity }) => {
+        return {
+          productId,
+          variantId,
+          quantity,
+        }
+      }),
     })
   }
 
-  const renderDeliverySelector = () => (
-    <div className='flex flex-col gap-3'>
-      <span className='font-semibold'>
-        {tCheckout('deliveryMethodTitle') || 'วิธีการรับสินค้า'}
-      </span>
-      <RadioGroup
-        orientation='horizontal'
-        value={deliveryType}
-        onValueChange={(val) => setDeliveryType(val as DeliveryType)}
-      >
-        <div className='flex w-full flex-wrap gap-5'>
-          <Radio
-            classNames={{
-              base: 'max-w-full flex-1 border-2 border-transparent data-[selected=true]:border-primary p-2 rounded-lg bg-default-50 transition-all',
-            }}
-            value={DeliveryType.SHIPPING}
-          >
-            <div className='flex items-center gap-2 text-sm'>
-              <TruckIcon size={16} />
-              <span>{tCheckout('shippingOption') || 'จัดส่ง'}</span>
-            </div>
-          </Radio>
-          <Radio
-            classNames={{
-              base: 'max-w-full flex-1 border-2 border-transparent data-[selected=true]:border-primary p-2 rounded-lg bg-default-50 transition-all',
-            }}
-            isDisabled={!hasStorefronts || isLoadingStores}
-            value={DeliveryType.PICKUP}
-          >
-            <div className='flex items-center gap-2 text-sm'>
-              <StoreIcon size={16} />
-              <span>{tCheckout('pickupOption') || 'รับหน้าร้าน'}</span>
-            </div>
-          </Radio>
-        </div>
-      </RadioGroup>
-
-      {deliveryType === DeliveryType.PICKUP && hasStorefronts && (
-        <Select
-          className='mt-1'
-          label={tCheckout('selectStoreLabel') || 'เลือกสาขา'}
-          radius='none'
-          selectedKeys={selectedStoreId ? [selectedStoreId] : []}
-          size='sm'
-          variant='bordered'
-          onChange={(e) => setSelectedStoreId(e.target.value)}
+  const renderDeliverySelector = () => {
+    return (
+      <div className='flex flex-col gap-3'>
+        <span className='font-semibold'>
+          {tCheckout('deliveryMethodTitle') || 'วิธีการรับสินค้า'}
+        </span>
+        <RadioGroup
+          className='gap-5'
+          orientation={isMobile ? 'vertical' : 'horizontal'}
+          value={deliveryType}
+          onValueChange={(val) => {
+            return setDeliveryType(val as DeliveryType)
+          }}
         >
-          {storefronts.map((store) => (
-            <SelectItem key={store.id} textValue={store.name}>
-              <div className='flex flex-col'>
-                <span className='text-sm'>{store.name}</span>
-                <span className='text-tiny text-default-400'>
-                  {store.address}
-                </span>
+          <div
+            className={cn(
+              'flex w-full gap-3',
+              isMobile ? 'flex-col' : 'flex-row flex-wrap',
+            )}
+          >
+            <Radio
+              classNames={{
+                base: cn(
+                  'data-[selected=true]:border-primary bg-default-50 m-0 max-w-full rounded-lg border-2 border-transparent p-2 transition-all',
+                  isMobile ? 'w-full' : 'min-w-[140px] flex-1',
+                ),
+              }}
+              value={DeliveryType.SHIPPING}
+            >
+              <div className='flex items-center gap-2 text-left text-sm'>
+                <TruckIcon size={16} />
+                <span>{tCheckout('shippingOption') || 'จัดส่ง'}</span>
               </div>
-            </SelectItem>
-          ))}
-        </Select>
-      )}
-    </div>
-  )
+            </Radio>
+
+            <Radio
+              classNames={{
+                base: cn(
+                  'data-[selected=true]:border-primary bg-default-50 m-0 max-w-full rounded-lg border-2 border-transparent p-2 transition-all',
+                  isMobile ? 'w-full' : 'min-w-[140px] flex-1',
+                ),
+              }}
+              isDisabled={!hasStorefronts || isLoadingStores}
+              value={DeliveryType.PICKUP}
+            >
+              <div className='flex items-center gap-2 text-left text-sm'>
+                <StoreIcon size={16} />
+                <span>{tCheckout('pickupOption') || 'รับหน้าร้าน'}</span>
+              </div>
+            </Radio>
+          </div>
+        </RadioGroup>
+
+        {deliveryType === DeliveryType.PICKUP && hasStorefronts && (
+          <Select
+            className='mt-1 w-full'
+            label={tCheckout('selectStoreLabel') || 'เลือกสาขา'}
+            radius='none'
+            selectedKeys={selectedStoreId ? [selectedStoreId] : []}
+            size='sm'
+            variant='bordered'
+            onChange={(e) => {
+              return setSelectedStoreId(e.target.value)
+            }}
+          >
+            {storefronts.map((store) => {
+              return (
+                <SelectItem key={store.id} textValue={store.name}>
+                  <div className='flex flex-col overflow-hidden text-left'>
+                    <span className='truncate text-sm font-bold'>
+                      {store.name}
+                    </span>
+                    <span className='text-tiny text-default-400 line-clamp-1'>
+                      {store.address}
+                    </span>
+                  </div>
+                </SelectItem>
+              )
+            })}
+          </Select>
+        )}
+      </div>
+    )
+  }
 
   const renderAddressSection = () => {
     if (isLoadingAddress || !address) {
@@ -197,18 +222,22 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
     }
 
     return (
-      <div className='flex flex-col gap-2'>
-        <span className='w-fit font-semibold'>{tCheckout('addressTitle')}</span>
+      <div className='flex flex-col gap-2 overflow-hidden'>
+        <span className='w-fit text-left font-semibold'>
+          {tCheckout('addressTitle')}
+        </span>
         <Alert
           className='text-start'
           description={tCheckout('currencyAlert')}
           variant='bordered'
         />
-        <div className='text-default-500 text-sm'>
+        <div className='text-default-500 text-left text-sm break-words'>
           {formatFullAddress(address)}{' '}
           <button
-            className='text-primary hover:text-primary-600 font-medium underline transition-colors'
-            onClick={navigation.ADDRESS}
+            className='text-primary hover:text-primary-600 inline-block font-medium underline transition-colors'
+            onClick={() => {
+              return navigation.ADDRESS()
+            }}
           >
             {tAction('editAddress')}
           </button>
@@ -220,13 +249,13 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
   const renderReferrerSection = () => {
     if (referralNo) {
       return (
-        <div className='bg-primary/5 border-primary/10 flex flex-col gap-2 rounded-lg border p-3'>
-          <div className='flex items-center justify-between'>
-            <span className='text-sm font-medium'>
+        <div className='bg-primary/5 border-primary/10 flex flex-col gap-2 overflow-hidden rounded-lg border p-3'>
+          <div className='flex items-center justify-between gap-2'>
+            <span className='truncate text-sm font-medium'>
               {tCheckout('referrerTitle')}:
             </span>
             <Chip
-              className='font-mono font-bold'
+              className='font-bold'
               color='primary'
               radius='none'
               variant='dot'
@@ -240,12 +269,12 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
 
     return (
       <div className='flex flex-col gap-2'>
-        <span className='text-default-600 w-fit text-sm font-semibold'>
+        <span className='text-default-600 w-fit text-left text-sm font-semibold'>
           {tCheckout('referrerTitle')}
         </span>
         <Input
           classNames={{
-            input: 'text-center text-default-500 font-mono',
+            input: 'text-center text-default-500',
           }}
           placeholder={tCheckout('referrerPlaceholder')}
           radius='none'
@@ -263,14 +292,14 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
   return (
     <Card
       className={cn(
-        'border-default-100 mx-auto border p-2.5 sm:w-xl sm:p-5',
+        'border-default-100 mx-auto w-full overflow-hidden border p-2.5 sm:w-xl sm:p-5',
         className,
       )}
       radius='sm'
       shadow='none'
       {...props}
     >
-      <CardBody className='gap-4'>
+      <CardBody className='gap-4 overflow-hidden'>
         {renderDeliverySelector()}
 
         <Divider className='bg-default-100/50' />
@@ -286,8 +315,8 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
 
         <Divider className='bg-default-100/50' />
 
-        <div className='flex flex-col gap-3'>
-          <span className='w-fit font-semibold'>
+        <div className='flex flex-col gap-3 overflow-hidden'>
+          <span className='w-fit text-left font-semibold'>
             {tCheckout('summaryTitle')}
           </span>
 
@@ -315,7 +344,7 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
         </div>
       </CardBody>
 
-      <CardFooter className='flex-col gap-3'>
+      <CardFooter className='flex-col gap-3 overflow-hidden'>
         {deliveryType === DeliveryType.SHIPPING &&
           !isLoadingAddress &&
           !address && (
@@ -323,16 +352,20 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
               className='text-start'
               color='warning'
               description={
-                <span>
+                <span className='break-words'>
                   {tCheckout.rich('emptyAddressAlert', {
-                    button: (chunks) => (
-                      <button
-                        className='cursor-pointer font-bold underline'
-                        onClick={navigation.ADDRESS}
-                      >
-                        {chunks}
-                      </button>
-                    ),
+                    button: (chunks) => {
+                      return (
+                        <button
+                          className='cursor-pointer font-bold underline'
+                          onClick={() => {
+                            return navigation.ADDRESS()
+                          }}
+                        >
+                          {chunks}
+                        </button>
+                      )
+                    },
                   })}
                 </span>
               }
@@ -358,7 +391,9 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
           isLoading={isCreating}
           radius='none'
           size='lg'
-          onPress={handleOrder}
+          onPress={() => {
+            return handleOrder()
+          }}
         >
           {tAction('order')}
         </Button>

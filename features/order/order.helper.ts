@@ -7,11 +7,19 @@ const buildStatusUpdateData = (
   meta: { trackingWebsite?: string; trackingNumber?: string; reason?: string },
 ): Prisma.OrderUpdateInput => {
   const now = new Date()
+
   const mapping: Partial<Record<OrderStatus, Prisma.OrderUpdateInput>> = {
-    [OrderStatus.PAID]: { paymentStatus: PaymentStatus.PAID, paidAt: now },
-    [OrderStatus.PROCESSING]: { shippedAt: now },
+    [OrderStatus.PAID]: {
+      paymentStatus: PaymentStatus.PAID,
+      paidAt: now,
+    },
+
+    [OrderStatus.PROCESSING]: {
+      updatedAt: now,
+    },
 
     [OrderStatus.READY_FOR_PICKUP]: {
+      pickupDate: now,
       updatedAt: now,
     },
 
@@ -20,18 +28,21 @@ const buildStatusUpdateData = (
       trackingWebsite: meta.trackingWebsite,
       trackingNumber: meta.trackingNumber,
     },
+
     [OrderStatus.CANCELLED]: {
       cancelledAt: now,
       paymentStatus: PaymentStatus.FAILED,
       cancelReason: meta.reason,
     },
+
     [OrderStatus.REFUNDED]: {
       refundedAt: now,
       paymentStatus: PaymentStatus.REFUNDED,
       cancelReason: meta.reason,
     },
   }
-  return mapping[status] ?? {}
+
+  return mapping[status] ?? { updatedAt: now }
 }
 
 export { buildStatusUpdateData }

@@ -13,9 +13,10 @@ import {
   Textarea,
   Spinner,
   Avatar,
+  Alert,
 } from '@heroui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { OrderStatus } from '@prisma/client'
+import { OrderStatus, DeliveryType } from '@prisma/client'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { useForm, Controller } from 'react-hook-form'
@@ -57,13 +58,17 @@ const OrderUpdateModal = () => {
 
   const { status, tempStatus } = watch()
 
-  const checkIsCancelled = (s: OrderStatus) =>
-    s === OrderStatus.CANCELLED || s === OrderStatus.REFUNDED
+  const isPickup = order?.deliveryType === DeliveryType.PICKUP
+
+  const checkIsCancelled = (s: OrderStatus) => {
+    return s === OrderStatus.CANCELLED || s === OrderStatus.REFUNDED
+  }
 
   const isCancelledState = checkIsCancelled(tempStatus)
 
   const isDeliveredState =
-    status === OrderStatus.DELIVERED || tempStatus === OrderStatus.DELIVERED
+    !isPickup &&
+    (status === OrderStatus.DELIVERED || tempStatus === OrderStatus.DELIVERED)
 
   useEffect(() => {
     if (order) {
@@ -81,23 +86,28 @@ const OrderUpdateModal = () => {
     mutationFn: updateOrder,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: orderQueryKeys.all })
-      onClose()
+      return onClose()
     },
   })
 
-  const onClose = () => setState({ isOrderOpen: false, orderId: null })
+  const onClose = () => {
+    return setState({ isOrderOpen: false, orderId: null })
+  }
 
   const onSubmit = (data: OrderInput) => {
-    if (!orderId) return
+    if (!orderId) {
+      return
+    }
 
-    mutation.mutate({
+    return mutation.mutate({
       orderId,
       status: data.tempStatus,
       ...(isCancelledState && { reason: data.reason }),
-      ...(isDeliveredState && {
-        trackingWebsite: data.trackingWebsite,
-        trackingNumber: data.trackingNumber,
-      }),
+      ...(!isPickup &&
+        isDeliveredState && {
+          trackingWebsite: data.trackingWebsite,
+          trackingNumber: data.trackingNumber,
+        }),
     })
   }
 
@@ -111,108 +121,140 @@ const OrderUpdateModal = () => {
     >
       <ModalContent>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <ModalHeader className='border-default-100 border-b text-xl font-bold'>
-            อัปเดตสถานะคำสั่งซื้อ
+          <ModalHeader className='border-default-100 flex items-center border-b text-xl font-bold'>
+            อัปเดตสถานะคำสั่งซื้อ{' '}
+            {isPickup && (
+              <span className='text-primary text-small ml-2'>
+                (รับหน้าร้าน)
+              </span>
+            )}
           </ModalHeader>
           <ModalBody className='py-6'>
             {isOrderLoading ? (
-              <div className='flex justify-center py-8'>
+              <div className='flex justify-center py-8 text-left'>
                 <Spinner label='กำลังโหลดข้อมูลออเดอร์...' />
               </div>
             ) : (
-              <div className='flex flex-col gap-5'>
+              <div className='flex flex-col gap-5 text-left'>
                 <Controller
                   control={control}
                   name='tempStatus'
-                  render={({ field: { value, onChange } }) => (
-                    <Select
-                      label='เลือกสถานะที่ต้องการเปลี่ยน'
-                      selectedKeys={value ? [value] : []}
-                      variant='bordered'
-                      onSelectionChange={(keys) =>
-                        onChange(Array.from(keys)[0])
-                      }
-                    >
-                      {ORDER_STEPS_ALL.map(([key, label]) => (
-                        <SelectItem
-                          key={key}
-                          isDisabled={
-                            status !== OrderStatus.DELIVERED &&
-                            !canTransitionOrderStatus(
-                              status,
-                              key as OrderStatus,
-                            )
-                          }
-                        >
-                          {ORDER_STATUS_TH_MAP[key as OrderStatus] || label}
-                        </SelectItem>
-                      ))}
-                    </Select>
-                  )}
+                  render={({ field: { value, onChange } }) => {
+                    return (
+                      <Select
+                        label='เลือกสถานะที่ต้องการเปลี่ยน'
+                        selectedKeys={value ? [value] : []}
+                        variant='bordered'
+                        onSelectionChange={(keys) => {
+                          return onChange(Array.from(keys)[0])
+                        }}
+                      >
+                        {ORDER_STEPS_ALL.map(([key, label]) => {
+                          return (
+                            <SelectItem
+                              key={key}
+                              isDisabled={
+                                status !== OrderStatus.DELIVERED &&
+                                !canTransitionOrderStatus(
+                                  status,
+                                  key as OrderStatus,
+                                )
+                              }
+                            >
+                              {ORDER_STATUS_TH_MAP[key as OrderStatus] || label}
+                            </SelectItem>
+                          )
+                        })}
+                      </Select>
+                    )
+                  }}
                 />
 
                 {isCancelledState && (
                   <Controller
                     control={control}
                     name='reason'
-                    render={({ field }) => (
-                      <Textarea
-                        {...field}
-                        errorMessage={errors.reason?.message}
-                        isInvalid={!!errors.reason}
-                        label='ระบุเหตุผลในการยกเลิก'
-                        placeholder='เช่น สินค้าหมดสต็อก, ลูกค้าขอยกเลิก...'
-                        variant='bordered'
-                      />
-                    )}
+                    render={({ field }) => {
+                      return (
+                        <Textarea
+                          {...field}
+                          errorMessage={errors.reason?.message}
+                          isInvalid={!!errors.reason}
+                          label='ระบุเหตุผลในการยกเลิก'
+                          placeholder='เช่น สินค้าหมดสต็อก, ลูกค้าขอยกเลิก...'
+                          variant='bordered'
+                        />
+                      )
+                    }}
                   />
                 )}
 
                 {isDeliveredState && (
                   <div className='flex flex-col gap-4'>
+                    <div className='bg-primary-50 border-primary-100 mb-2 rounded-lg border p-3'>
+                      <p className='text-tiny text-primary font-bold'>
+                        ข้อมูลการจัดส่งพัสดุ
+                      </p>
+                    </div>
                     <Controller
                       control={control}
                       name='trackingWebsite'
-                      render={({ field: { value, onChange } }) => (
-                        <Select
-                          label='บริษัทขนส่ง'
-                          selectedKeys={value ? [value] : []}
-                          variant='bordered'
-                          onSelectionChange={(keys) =>
-                            onChange(Array.from(keys)[0])
-                          }
-                        >
-                          {SHIPPING_PROVIDERS.map((provider) => (
-                            <SelectItem
-                              key={provider.key}
-                              startContent={
-                                <Avatar
-                                  size='sm'
-                                  src={provider.image || IMAGE_FALLBACK.EMPTY}
-                                />
-                              }
-                            >
-                              {provider.label}
-                            </SelectItem>
-                          ))}
-                        </Select>
-                      )}
+                      render={({ field: { value, onChange } }) => {
+                        return (
+                          <Select
+                            label='บริษัทขนส่ง'
+                            selectedKeys={value ? [value] : []}
+                            variant='bordered'
+                            onSelectionChange={(keys) => {
+                              return onChange(Array.from(keys)[0])
+                            }}
+                          >
+                            {SHIPPING_PROVIDERS.map((provider) => {
+                              return (
+                                <SelectItem
+                                  key={provider.key}
+                                  startContent={
+                                    <Avatar
+                                      size='sm'
+                                      src={
+                                        provider.image || IMAGE_FALLBACK.EMPTY
+                                      }
+                                    />
+                                  }
+                                >
+                                  {provider.label}
+                                </SelectItem>
+                              )
+                            })}
+                          </Select>
+                        )
+                      }}
                     />
                     <Controller
                       control={control}
                       name='trackingNumber'
-                      render={({ field }) => (
-                        <Input
-                          {...field}
-                          errorMessage={errors.trackingNumber?.message}
-                          isInvalid={!!errors.trackingNumber}
-                          label='หมายเลขพัสดุ (Tracking Number)'
-                          placeholder='กรอกเลขพัสดุ...'
-                          variant='bordered'
-                        />
-                      )}
+                      render={({ field }) => {
+                        return (
+                          <Input
+                            {...field}
+                            errorMessage={errors.trackingNumber?.message}
+                            isInvalid={!!errors.trackingNumber}
+                            label='หมายเลขพัสดุ (Tracking Number)'
+                            placeholder='กรอกเลขพัสดุ...'
+                            variant='bordered'
+                          />
+                        )
+                      }}
                     />
                   </div>
+                )}
+
+                {isPickup && tempStatus === OrderStatus.DELIVERED && (
+                  <Alert
+                    description='เมื่อกดยืนยัน
+                      ระบบจะเปลี่ยนสถานะเป็นสำเร็จโดยไม่ต้องใช้เลขพัสดุ'
+                    title='รายการนี้เป็นการรับหน้าร้าน'
+                  />
                 )}
               </div>
             )}
@@ -221,16 +263,18 @@ const OrderUpdateModal = () => {
             <Button
               isDisabled={mutation.isPending}
               variant='flat'
-              onPress={onClose}
+              onPress={() => {
+                return onClose()
+              }}
             >
               ยกเลิก
             </Button>
             <Button
-              className='text-secondary'
+              className='text-secondary font-bold'
               color='primary'
               isDisabled={!isDirty || isOrderLoading}
               isLoading={mutation.isPending}
-              onPress={() => handleSubmit(onSubmit)()}
+              type='submit'
             >
               บันทึกการเปลี่ยนแปลง
             </Button>

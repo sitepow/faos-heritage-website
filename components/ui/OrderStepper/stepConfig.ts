@@ -27,6 +27,7 @@ const getOrderStatusDate = (
     shippedAt?: Date | null
     deliveredAt?: Date | null
     updatedAt?: Date | null
+    pickupDate?: Date | null
   },
 ) => {
   switch (status) {
@@ -35,9 +36,9 @@ const getOrderStatusDate = (
     case OrderStatus.PAID:
       return dates.paidAt
     case OrderStatus.PROCESSING:
-      return dates.shippedAt
+      return dates.paidAt
     case OrderStatus.READY_FOR_PICKUP:
-      return dates.updatedAt
+      return dates.pickupDate
     case OrderStatus.DELIVERED:
       return dates.deliveredAt
     default:

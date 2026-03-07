@@ -167,7 +167,8 @@ const OrderItem = ({ order, hideButton }: Props) => {
           createdAt={order?.createdAt!}
           deliveredAt={order?.deliveredAt!}
           deliveryType={order.deliveryType}
-          paidAt={order?.paidAt!}
+          paidAt={order.paidAt}
+          pickupDate={order.pickupDate}
           shippedAt={order?.shippedAt!}
           status={order.status}
         />
