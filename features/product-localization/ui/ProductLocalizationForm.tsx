@@ -32,6 +32,7 @@ import {
 } from '../product-localization.schema'
 import { useProductLocaleUIStore } from '../product-localization.store'
 
+import { AlertSeoBestPractice } from '@/components/ui/AlertSeoBestPractice'
 import { SectionLabel } from '@/components/ui/SectionHeader'
 import localeTh from '@/messages/th/ui/common.json'
 
@@ -274,6 +275,7 @@ const ProductLocalizationForm = () => {
                 คุณสามารถจัดการได้ผ่านปุ่ม "แก้ไขรายละเอียดเนื้อหา"
                 ในหน้าตารางหลังจากบันทึกข้อมูลส่วนนี้แล้ว
               </Alert>
+              <AlertSeoBestPractice />
             </div>
           )}
         </ModalBody>

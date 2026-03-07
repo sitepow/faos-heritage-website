@@ -15,6 +15,7 @@ import {
   Textarea,
   Spinner,
   Chip,
+  Alert,
 } from '@heroui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { PostStatus } from '@prisma/client'
@@ -29,6 +30,7 @@ import {
   ImageDropzone,
   type ImageWithPreview,
 } from '@/app/(dashboard)/_components/ImageDropzone'
+import { AlertSeoBestPractice } from '@/components/ui/AlertSeoBestPractice'
 import { SectionLabel } from '@/components/ui/SectionHeader'
 import { useBlogCategories } from '@/features/blog-category/blog-category.hook'
 import { usePostAdmin } from '@/features/post/post.hook'
@@ -370,6 +372,12 @@ const PostForm = () => {
                   />
                 )}
               />
+              <Alert>
+                สำหรับการแปลเนื้อหาบทความแบบละเอียด (Content)
+                คุณสามารถจัดการได้ผ่านเมนู &quot;แก้ไขเนื้อหาบทความ&quot;
+                ในหน้าตารางจัดการภาษาหลังจากบันทึกส่วนหัวข้อนี้แล้ว
+              </Alert>
+              <AlertSeoBestPractice />
             </div>
           )}
         </ModalBody>

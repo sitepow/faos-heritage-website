@@ -31,6 +31,7 @@ import {
 } from '../post-localization.schema'
 import { usePostLocaleUIStore } from '../post-localization.store'
 
+import { AlertSeoBestPractice } from '@/components/ui/AlertSeoBestPractice'
 import { SectionLabel } from '@/components/ui/SectionHeader'
 import { COUNTRY_CONFIG } from '@/constants'
 
@@ -273,6 +274,7 @@ const PostLocalizationForm = ({ postId }: Props) => {
                 คุณสามารถจัดการได้ผ่านเมนู &quot;แก้ไขเนื้อหาบทความ&quot;
                 ในหน้าตารางจัดการภาษาหลังจากบันทึกส่วนหัวข้อนี้แล้ว
               </Alert>
+              <AlertSeoBestPractice />
             </div>
           )}
         </ModalBody>

@@ -1,7 +1,7 @@
 'use client'
 
-import { useDisclosure, Button } from '@heroui/react'
-import { PlusIcon, EditIcon, TrashIcon } from 'lucide-react'
+import { useDisclosure, Button, Alert } from '@heroui/react'
+import { PlusIcon, EditIcon, TrashIcon, InfoIcon } from 'lucide-react'
 import { useState, useCallback, useMemo } from 'react'
 
 import type { Selection } from '@heroui/react'
@@ -111,6 +111,12 @@ const StorefrontPage = () => {
 
   return (
     <Container className='flex flex-col gap-6 text-left'>
+      <Alert
+        description='ระบบสาขาหน้าร้านมีไว้เพื่อเป็นตัวเลือกเสริมให้กับลูกค้าในการสั่งซื้อออนไลน์แล้วเลือก "เข้ารับสินค้าด้วยตัวเอง" ณ จุดบริการที่กำหนด การจัดการข้อมูลสาขาที่ถูกต้องจะช่วยให้ลูกค้าสามารถตัดสินใจเลือกสาขาที่ใกล้ที่สุดเพื่อประหยัดค่าจัดส่ง (Zero Shipping Fee) และได้รับสินค้าทันทีที่สถานะออเดอร์พร้อมรับ โดยไม่ต้องรอรอบการขนส่งปกติ'
+        icon={<InfoIcon />}
+        title='ข้อมูลสำคัญเกี่ยวกับระบบจัดการสาขาหน้าร้าน'
+      />
+
       <div className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3'>
         {statsData.map((stat) => {
           return (

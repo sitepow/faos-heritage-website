@@ -8,16 +8,17 @@ import {
   ModalFooter,
   Button,
   Image,
+  Alert,
 } from '@heroui/react'
 import { AffiliateStatus } from '@prisma/client'
-import { CheckIcon, XIcon } from 'lucide-react'
+import { CheckIcon, ShieldCheckIcon, XIcon } from 'lucide-react'
 
 import { SectionLabel } from '@/components/ui/SectionHeader'
 import { IMAGE_FALLBACK } from '@/constants'
 import { useAffiliateMutation } from '@/features/affiliate/affiliate.mutation'
 import { useAffiliateStore } from '@/features/affiliate/affiliate.store'
 
-const AffiliateDetailModal = () => {
+const AffiliateDetailsModal = () => {
   const { selectedAffiliate, isDetailOpen, closeDetail } = useAffiliateStore()
   const { updateStatus, isUpdating } = useAffiliateMutation()
 
@@ -47,6 +48,30 @@ const AffiliateDetailModal = () => {
           </span>
         </ModalHeader>
         <ModalBody className='gap-6'>
+          <Alert
+            description={
+              <div className='text-tiny mt-1 flex flex-col gap-1'>
+                <p>
+                  • <strong>ความถูกต้อง:</strong>{' '}
+                  ตรวจสอบชื่อบัญชีธนาคารและสำเนาบัตรประชาชนให้ตรงกันเพื่อป้องกันปัญหาการโอนเงิน
+                </p>
+                <p>
+                  • <strong>ระบบอัตโนมัติ:</strong> หลังการอนุมัติ
+                  ระบบจะเปิดใช้งานเมนู Affiliate ให้ฝั่งผู้ใช้งานทันที
+                  โดยพาร์ทเนอร์สามารถเลือกแชร์สินค้าได้เอง และระบบจะทำการ{' '}
+                  <strong>Generated Affiliate Link</strong> ให้โดยอัตโนมัติ
+                </p>
+                <p>
+                  • <strong>เงื่อนไขรายได้:</strong>{' '}
+                  พาร์ทเนอร์จะได้รับค่าคอมมิชชันเฉพาะออเดอร์ที่สถานะเป็น{' '}
+                  <strong>"จัดส่งสำเร็จ (DELIVERED)"</strong> เท่านั้น
+                </p>
+              </div>
+            }
+            icon={<ShieldCheckIcon />}
+            title='ตรวจสอบข้อมูลผู้สมัครก่อนทำการอนุมัติ'
+          />
+
           <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
             <div>
               <SectionLabel>สำเนาบัตรประชาชน</SectionLabel>
@@ -138,4 +163,4 @@ const AffiliateDetailModal = () => {
   )
 }
 
-export { AffiliateDetailModal }
+export { AffiliateDetailsModal }

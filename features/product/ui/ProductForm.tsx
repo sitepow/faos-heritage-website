@@ -30,6 +30,7 @@ import { useProductMutation } from '../product.mutation'
 import { productSchema, type ProductInput } from '../product.schema'
 import { useProductUIStore, useProductDetailStore } from '../product.store'
 
+import { AlertSeoBestPractice } from '@/components/ui/AlertSeoBestPractice'
 import { SectionLabel } from '@/components/ui/SectionHeader'
 import { useCategories } from '@/features/category/category.hook'
 import localeTh from '@/messages/th/ui/common.json'
@@ -397,6 +398,7 @@ const ProductForm = () => {
                 คุณสามารถจัดการได้ผ่านปุ่ม &quot;แก้ไขรายละเอียดเนื้อหา&quot;
                 หลังบันทึกข้อมูลส่วนนี้แล้ว
               </Alert>
+              <AlertSeoBestPractice />
             </div>
           )}
         </ModalBody>

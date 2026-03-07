@@ -12,6 +12,7 @@ import { TableConfigHeader } from '../products/_components/TableConfigHeader'
 
 import { ConfirmDeleteModal } from '@/app/(dashboard)/_components/ConfirmDeleteModal'
 import { Container } from '@/components/layouts/Container'
+import { AlertSeoBestPractice } from '@/components/ui/AlertSeoBestPractice'
 import { StatCard } from '@/components/ui/StatCard'
 import { usePostStats, usePostsAdmin } from '@/features/post/post.hook'
 import { usePostMutation } from '@/features/post/post.mutation'
@@ -82,6 +83,8 @@ const PostPage = () => {
 
   return (
     <Container className='flex flex-col gap-6'>
+      <AlertSeoBestPractice />
+
       <div className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3'>
         {statsData.map((stat: { name: string; value: number }) => (
           <StatCard key={stat.name} label={stat.name} value={stat.value} />

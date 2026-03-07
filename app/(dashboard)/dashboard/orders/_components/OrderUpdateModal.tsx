@@ -18,6 +18,7 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 import { OrderStatus, DeliveryType } from '@prisma/client'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { ClipboardListIcon } from 'lucide-react'
 import { useEffect } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 
@@ -136,6 +137,38 @@ const OrderUpdateModal = () => {
               </div>
             ) : (
               <div className='flex flex-col gap-5 text-left'>
+                <Alert
+                  color='primary'
+                  description={
+                    <div className='text-tiny mt-1 flex flex-col gap-1'>
+                      <p>
+                        • <strong>กำลังดำเนินการ (Processing):</strong>{' '}
+                        ใช้เมื่อตรวจสอบยอดเงินเรียบร้อยและเริ่มเตรียมสินค้า
+                      </p>
+                      <p>
+                        •{' '}
+                        <strong>
+                          {isPickup
+                            ? 'พร้อมรับสินค้า (Ready for Pickup)'
+                            : 'จัดส่งแล้ว (Delivered)'}
+                          :
+                        </strong>{' '}
+                        {isPickup
+                          ? 'ใช้แจ้งลูกค้าให้มารับของที่สาขา'
+                          : 'ต้องกรอกเลข Tracking เพื่อให้ลูกค้าตรวจสอบสถานะได้'}
+                      </p>
+                      <p>
+                        • <strong>ยกเลิก/คืนเงิน:</strong>{' '}
+                        ระบบจะคืนสต็อกสินค้าให้โดยอัตโนมัติ
+                        (กรุณาระบุเหตุผลให้ชัดเจน)
+                      </p>
+                    </div>
+                  }
+                  icon={<ClipboardListIcon />}
+                  title='คู่มือการอัปเดตสถานะออเดอร์'
+                  variant='flat'
+                />
+
                 <Controller
                   control={control}
                   name='tempStatus'
@@ -190,12 +223,7 @@ const OrderUpdateModal = () => {
                 )}
 
                 {isDeliveredState && (
-                  <div className='flex flex-col gap-4'>
-                    <div className='bg-primary-50 border-primary-100 mb-2 rounded-lg border p-3'>
-                      <p className='text-tiny text-primary font-bold'>
-                        ข้อมูลการจัดส่งพัสดุ
-                      </p>
-                    </div>
+                  <>
                     <Controller
                       control={control}
                       name='trackingWebsite'
@@ -246,13 +274,12 @@ const OrderUpdateModal = () => {
                         )
                       }}
                     />
-                  </div>
+                  </>
                 )}
 
                 {isPickup && tempStatus === OrderStatus.DELIVERED && (
                   <Alert
-                    description='เมื่อกดยืนยัน
-                      ระบบจะเปลี่ยนสถานะเป็นสำเร็จโดยไม่ต้องใช้เลขพัสดุ'
+                    description='เมื่อกดยืนยัน ระบบจะเปลี่ยนสถานะเป็นสำเร็จโดยไม่ต้องใช้เลขพัสดุ ลูกค้าจะได้รับแจ้งเตือนว่าได้รับสินค้าเรียบร้อยแล้ว'
                     title='รายการนี้เป็นการรับหน้าร้าน'
                   />
                 )}
