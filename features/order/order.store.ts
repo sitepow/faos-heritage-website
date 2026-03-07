@@ -12,7 +12,7 @@ interface OrderStore {
   setState: (state: Partial<OrderStore>) => void
 }
 
-export const useOrderStore = create<OrderStore>()((set) => ({
+const useOrderStore = create<OrderStore>()((set) => ({
   orderId: null,
   isOrderOpen: false,
   isViewOpen: false,
@@ -31,3 +31,5 @@ export const useOrderStore = create<OrderStore>()((set) => ({
     })),
   setState: (state) => set(state),
 }))
+
+export { useOrderStore }

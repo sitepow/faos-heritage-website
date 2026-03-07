@@ -5,7 +5,7 @@ import { useState, useCallback, useMemo } from 'react'
 
 import type { Selection } from '@heroui/react'
 
-import { OrderDetailModal } from './_components/OrderDetailModal'
+import { OrderDetailModal } from './_components/OrderDetailsModal'
 import { OrderTable } from './_components/OrderTable'
 import { OrderUpdateModal } from './_components/OrderUpdateModal'
 import { TableConfigHeader } from '../products/_components/TableConfigHeader'

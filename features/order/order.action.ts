@@ -307,12 +307,17 @@ const getOrderById = async (orderId: string) => {
   const order = await prisma.order.findUnique({
     where: { id: orderId },
     include: {
-      address: true,
-      storefront: true,
+      user: { select: { name: true, image: true, email: true } },
+      address: { select: { countryCode: true } },
+      storefront: { select: { name: true } },
       items: {
         include: {
           product: {
-            select: { unit: true, images: { select: { url: true } } },
+            select: {
+              name: true,
+              unit: true,
+              images: { select: { url: true } },
+            },
           },
         },
       },
