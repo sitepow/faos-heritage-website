@@ -93,110 +93,76 @@ const StorefrontForm = () => {
       }}
     >
       <ModalContent>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <ModalHeader className='text-left font-bold'>
-            {selectedId ? 'แก้ไขข้อมูลสาขา' : 'เพิ่มสาขาใหม่'}
-          </ModalHeader>
-          <ModalBody>
-            {isLoading && selectedId ? (
-              <div className='flex h-40 items-center justify-center'>
-                <Spinner label='กำลังโหลดข้อมูลสาขา...' />
-              </div>
-            ) : (
-              <div className='space-y-4 text-left'>
-                <SectionLabel>สถานะการแสดงผล</SectionLabel>
-                <Controller
-                  control={control}
-                  name='isActive'
-                  render={({ field: { value, onChange, ...field } }) => {
-                    return (
-                      <Switch
-                        {...field}
-                        isSelected={value}
-                        onValueChange={onChange}
-                      >
-                        เปิดให้บริการสาขานี้ (Active)
-                      </Switch>
-                    )
-                  }}
-                />
+        <ModalHeader className='text-left font-bold'>
+          {selectedId ? 'แก้ไขข้อมูลสาขา' : 'เพิ่มสาขาใหม่'}
+        </ModalHeader>
+        <ModalBody>
+          {isLoading && selectedId ? (
+            <div className='flex h-40 items-center justify-center'>
+              <Spinner label='กำลังโหลดข้อมูลสาขา...' />
+            </div>
+          ) : (
+            <div className='space-y-4 text-left'>
+              <SectionLabel>สถานะการแสดงผล</SectionLabel>
+              <Controller
+                control={control}
+                name='isActive'
+                render={({ field: { value, onChange, ...field } }) => {
+                  return (
+                    <Switch
+                      {...field}
+                      isSelected={value}
+                      onValueChange={onChange}
+                    >
+                      เปิดให้บริการสาขานี้ (Active)
+                    </Switch>
+                  )
+                }}
+              />
 
-                <SectionLabel>ข้อมูลทั่วไป</SectionLabel>
+              <SectionLabel>ข้อมูลทั่วไป</SectionLabel>
+              <Controller
+                control={control}
+                name='name'
+                render={({ field }) => {
+                  return (
+                    <Input
+                      {...field}
+                      errorMessage={errors.name?.message}
+                      isInvalid={!!errors.name}
+                      label='ชื่อสาขา'
+                      variant='bordered'
+                    />
+                  )
+                }}
+              />
+
+              <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
                 <Controller
                   control={control}
-                  name='name'
-                  render={({ field }) => {
+                  name='phone'
+                  render={({ field: { value, ...field } }) => {
                     return (
                       <Input
                         {...field}
-                        errorMessage={errors.name?.message}
-                        isInvalid={!!errors.name}
-                        label='ชื่อสาขา'
+                        errorMessage={errors.phone?.message}
+                        isInvalid={!!errors.phone}
+                        label='เบอร์โทรศัพท์'
+                        value={value ?? ''}
                         variant='bordered'
                       />
                     )
                   }}
                 />
-
-                <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
-                  <Controller
-                    control={control}
-                    name='phone'
-                    render={({ field: { value, ...field } }) => {
-                      return (
-                        <Input
-                          {...field}
-                          errorMessage={errors.phone?.message}
-                          isInvalid={!!errors.phone}
-                          label='เบอร์โทรศัพท์'
-                          value={value ?? ''}
-                          variant='bordered'
-                        />
-                      )
-                    }}
-                  />
-                  <Controller
-                    control={control}
-                    name='googleMapUrl'
-                    render={({ field: { value, ...field } }) => {
-                      return (
-                        <Input
-                          {...field}
-                          label='Google Map URL'
-                          placeholder='https://goo.gl/maps/...'
-                          value={value ?? ''}
-                          variant='bordered'
-                        />
-                      )
-                    }}
-                  />
-                </div>
-
                 <Controller
                   control={control}
-                  name='address'
-                  render={({ field }) => {
-                    return (
-                      <Textarea
-                        {...field}
-                        errorMessage={errors.address?.message}
-                        isInvalid={!!errors.address}
-                        label='ที่อยู่โดยละเอียด'
-                        variant='bordered'
-                      />
-                    )
-                  }}
-                />
-
-                <Controller
-                  control={control}
-                  name='description'
+                  name='googleMapUrl'
                   render={({ field: { value, ...field } }) => {
                     return (
-                      <Textarea
+                      <Input
                         {...field}
-                        label='รายละเอียดเพิ่มเติม (ไม่บังคับ)'
-                        placeholder='เช่น จุดสังเกต หรือเวลาเปิด-ปิดพิเศษ'
+                        label='Google Map URL'
+                        placeholder='https://goo.gl/maps/...'
                         value={value ?? ''}
                         variant='bordered'
                       />
@@ -204,29 +170,61 @@ const StorefrontForm = () => {
                   }}
                 />
               </div>
-            )}
-          </ModalBody>
-          <ModalFooter>
-            <Button
-              isDisabled={isPending}
-              variant='flat'
-              onPress={() => {
-                return closeForm()
-              }}
-            >
-              ยกเลิก
-            </Button>
-            <Button
-              className='text-secondary font-bold'
-              color='primary'
-              isDisabled={!isDirty || isPending}
-              isLoading={isPending}
-              type='submit'
-            >
-              {selectedId ? 'บันทึกการแก้ไข' : 'เพิ่มข้อมูล'}
-            </Button>
-          </ModalFooter>
-        </form>
+
+              <Controller
+                control={control}
+                name='address'
+                render={({ field }) => {
+                  return (
+                    <Textarea
+                      {...field}
+                      errorMessage={errors.address?.message}
+                      isInvalid={!!errors.address}
+                      label='ที่อยู่โดยละเอียด'
+                      variant='bordered'
+                    />
+                  )
+                }}
+              />
+
+              <Controller
+                control={control}
+                name='description'
+                render={({ field: { value, ...field } }) => {
+                  return (
+                    <Textarea
+                      {...field}
+                      label='รายละเอียดเพิ่มเติม (ไม่บังคับ)'
+                      placeholder='เช่น จุดสังเกต หรือเวลาเปิด-ปิดพิเศษ'
+                      value={value ?? ''}
+                      variant='bordered'
+                    />
+                  )
+                }}
+              />
+            </div>
+          )}
+        </ModalBody>
+        <ModalFooter>
+          <Button
+            isDisabled={isPending}
+            variant='flat'
+            onPress={() => {
+              return closeForm()
+            }}
+          >
+            ยกเลิก
+          </Button>
+          <Button
+            className='text-secondary font-bold'
+            color='primary'
+            isDisabled={!isDirty || isPending}
+            isLoading={isPending}
+            onClick={handleSubmit(onSubmit)}
+          >
+            {selectedId ? 'บันทึกการแก้ไข' : 'เพิ่มข้อมูล'}
+          </Button>
+        </ModalFooter>
       </ModalContent>
     </Modal>
   )
