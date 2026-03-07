@@ -128,7 +128,7 @@ const AffiliateTable = ({ affiliates, pendingPayouts, isLoading }: Props) => {
                   #{item.id.slice(-8).toUpperCase()}
                 </span>
               </TableCell>
-              <TableCell>
+              <TableCell className='max-w-32 min-w-32'>
                 <span className='text-default-500 font-mono text-xs font-bold'>
                   #{item?.affiliateCode?.toUpperCase() || '-'}
                 </span>
