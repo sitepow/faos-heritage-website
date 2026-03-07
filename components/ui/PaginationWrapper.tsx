@@ -18,9 +18,8 @@ const PaginationWrapper = ({ page, total, onChange, className }: Props) => {
       showControls
       className={cn('mx-auto my-5', className)}
       classNames={{
-        item: 'bg-default-100 text-white shadow-none cursor-pointer',
-        cursor:
-          'bg-secondary text-white font-bold border-default-100 border shadow-lg',
+        item: 'bg-default-100 text-default-400 shadow-none cursor-pointer data-[active=true]:text-secondary',
+        cursor: 'bg-secondary font-bold border-default-100 border shadow-lg',
         next: 'bg-default-100 text-default-400 cursor-pointer',
         prev: 'bg-default-100 text-default-400 cursor-pointer',
       }}
