@@ -1,4 +1,5 @@
-import { OrderStatus } from '@prisma/client'
+/* eslint-disable react/no-array-index-key */
+import { OrderStatus, DeliveryType } from '@prisma/client'
 import {
   Body,
   Container,
@@ -17,7 +18,7 @@ import {
 import type { Prisma } from '@prisma/client'
 
 type OrderWithItems = Prisma.OrderGetPayload<{
-  include: { items: true }
+  include: { items: true; storefront: true }
 }>
 
 interface Props {
@@ -25,7 +26,10 @@ interface Props {
 }
 
 const getOrderContent = (status: OrderStatus, id: string) => {
-  const contents = {
+  const contents: Record<
+    OrderStatus,
+    { subject: string; preview: string; heading: string; message: string }
+  > = {
     [OrderStatus.PENDING]: {
       subject: `ยืนยันการสั่งซื้อ #${id} (รอชำระเงิน)`,
       preview:
@@ -37,19 +41,25 @@ const getOrderContent = (status: OrderStatus, id: string) => {
       subject: `ได้รับยอดชำระเงินสำหรับคำสั่งซื้อ #${id} เรียบร้อยแล้ว`,
       preview: 'เราได้รับยอดชำระเงินของคุณแล้ว',
       heading: 'ชำระเงินเรียบร้อยแล้ว',
-      message: `ได้รับยอดชำระเงินสำหรับคำสั่งซื้อ #${id} เรียบร้อยแล้ว ขณะนี้เรากำลังเตรียมข้อมูลเพื่อดำเนินการจัดส่งสินค้าให้คุณโดยเร็วที่สุด`,
+      message: `ได้รับยอดชำระเงินสำหรับคำสั่งซื้อ #${id} เรียบร้อยแล้ว ขณะนี้เรากำลังเตรียมข้อมูลเพื่อดำเนินการให้คุณโดยเร็วที่สุด`,
     },
     [OrderStatus.PROCESSING]: {
       subject: `คำสั่งซื้อ #${id} กำลังอยู่ระหว่างการจัดเตรียม`,
-      preview: 'สินค้าของคุณกำลังถูกจัดเตรียมเพื่อจัดส่ง',
-      heading: 'กำลังเตรียมการจัดส่ง',
-      message: `เรากำลังจัดเตรียมสินค้าสำหรับคำสั่งซื้อ #${id} และจะแจ้งให้ทราบทันทีเมื่อสินค้าถูกส่งมอบให้กับบริษัทขนส่ง`,
+      preview: 'สินค้าของคุณกำลังถูกจัดเตรียม',
+      heading: 'กำลังเตรียมรายการสินค้า',
+      message: `เรากำลังจัดเตรียมสินค้าสำหรับคำสั่งซื้อ #${id} และจะแจ้งให้ทราบทันทีเมื่อสินค้าพร้อมสำหรับการดำเนินการขั้นถัดไป`,
+    },
+    [OrderStatus.READY_FOR_PICKUP]: {
+      subject: `คำสั่งซื้อ #${id} พร้อมสำหรับการรับสินค้าแล้ว`,
+      preview: 'คุณสามารถมารับสินค้าได้ตามสาขาที่ระบุ',
+      heading: 'สินค้าพร้อมสำหรับการรับแล้ว',
+      message: `สินค้าสำหรับคำสั่งซื้อ #${id} ได้ถูกจัดเตรียมเรียบร้อยแล้ว คุณสามารถเดินทางมารับสินค้าได้ที่สาขาตามข้อมูลด้านล่างนี้`,
     },
     [OrderStatus.DELIVERED]: {
-      subject: `คำสั่งซื้อ #${id} จัดส่งเรียบร้อยแล้ว`,
-      preview: 'สินค้าของคุณถูกจัดส่งเรียบร้อยแล้ว',
-      heading: 'สินค้าจัดส่งเรียบร้อยแล้ว',
-      message: `คำสั่งซื้อ #${id} ได้ถูกจัดส่งออกจากคลังสินค้าเรียบร้อยแล้ว คุณสามารถตรวจสอบสถานะการจัดส่งได้จากข้อมูลด้านล่าง`,
+      subject: `คำสั่งซื้อ #${id} สำเร็จเรียบร้อยแล้ว`,
+      preview: 'ขอบคุณที่ไว้วางใจเลือกซื้อสินค้ากับเรา',
+      heading: 'คำสั่งซื้อสำเร็จเรียบร้อยแล้ว',
+      message: `คำสั่งซื้อ #${id} ได้ดำเนินการเสร็จสิ้นเรียบร้อยแล้ว ขอบคุณที่คุณไว้วางใจเลือกซื้อสินค้าจาก FAOS เราหวังว่าจะได้ให้บริการคุณอีกในครั้งถัดไป`,
     },
     [OrderStatus.CANCELLED]: {
       subject: `แจ้งยกเลิกคำสั่งซื้อ #${id}`,
@@ -80,9 +90,14 @@ const OrderTemplate = ({ order }: Props) => {
     items,
     trackingNumber,
     trackingWebsite,
+    deliveryType,
+    storefront,
+    shippingAddressText,
+    shippingPhone,
   } = order
 
-  const config = getOrderContent(status, id)
+  const config = getOrderContent(status, id.slice(-8).toUpperCase())
+  const isPickup = deliveryType === DeliveryType.PICKUP
 
   return (
     <Html>
@@ -94,7 +109,23 @@ const OrderTemplate = ({ order }: Props) => {
           <Text style={text}>สวัสดีคุณ {shippingName || 'ลูกค้า'},</Text>
           <Text style={text}>{config.message}</Text>
 
-          {status === OrderStatus.DELIVERED && trackingNumber && (
+          {status === OrderStatus.READY_FOR_PICKUP && isPickup && (
+            <Section style={infoBlock}>
+              <Text style={infoTitle}>ข้อมูลการรับสินค้า</Text>
+              <Text style={text}>
+                <strong>สถานที่รับ:</strong>{' '}
+                {storefront?.name || 'หน้าร้านตามที่ระบุ'}
+              </Text>
+              <Text style={text}>
+                <strong>ที่อยู่สาขา:</strong> {shippingAddressText}
+              </Text>
+              <Text style={text}>
+                <strong>เบอร์โทรติดต่อสาขา:</strong> {shippingPhone}
+              </Text>
+            </Section>
+          )}
+
+          {status === OrderStatus.DELIVERED && !isPickup && trackingNumber && (
             <Section style={infoBlock}>
               <Text style={infoTitle}>ข้อมูลการจัดส่ง</Text>
               <Text style={text}>
@@ -110,32 +141,36 @@ const OrderTemplate = ({ order }: Props) => {
 
           <Section style={orderSummary}>
             <Text style={infoTitle}>สรุปรายการสั่งซื้อ</Text>
-            {items.map((item, index) => (
-              <Row key={index} style={itemRow}>
-                <Column>
-                  <Text style={itemText}>
-                    <strong>{item.productName}</strong>
-                    {item.variantName && (
-                      <span style={variantText}> ({item.variantName})</span>
-                    )}
-                    <br />
-                    <span style={quantityText}>จำนวน: {item.quantity}</span>
-                  </Text>
-                </Column>
-                <Column align='right'>
-                  <Text style={itemText}>
-                    {Number(item.subtotal).toLocaleString()} {currency}
-                  </Text>
-                </Column>
-              </Row>
-            ))}
+            {items.map((item, index) => {
+              return (
+                <Row key={index} style={itemRow}>
+                  <Column>
+                    <Text style={itemText}>
+                      <strong>{item.productName}</strong>
+                      {item.variantName && (
+                        <span style={variantText}> ({item.variantName})</span>
+                      )}
+                      <br />
+                      <span style={quantityText}>จำนวน: {item.quantity}</span>
+                    </Text>
+                  </Column>
+                  <Column align='right'>
+                    <Text style={itemText}>
+                      {Number(item.subtotal).toLocaleString()} {currency}
+                    </Text>
+                  </Column>
+                </Row>
+              )
+            })}
 
             <Hr style={hr} />
 
             <Row>
               <Column align='right'>
                 <Text style={summaryText}>ยอดรวมสินค้า:</Text>
-                <Text style={summaryText}>ค่าจัดส่ง:</Text>
+                <Text style={summaryText}>
+                  {isPickup ? 'ค่าธรรมเนียมการรับ:' : 'ค่าจัดส่ง:'}
+                </Text>
                 {Number(discount) > 0 && (
                   <Text style={summaryText}>ส่วนลด:</Text>
                 )}
@@ -146,7 +181,9 @@ const OrderTemplate = ({ order }: Props) => {
                   {Number(subtotal).toLocaleString()} {currency}
                 </Text>
                 <Text style={summaryText}>
-                  {Number(shippingCost).toLocaleString()} {currency}
+                  {isPickup
+                    ? 'ฟรี'
+                    : `${Number(shippingCost).toLocaleString()} ${currency}`}
                 </Text>
                 {Number(discount) > 0 && (
                   <Text style={summaryText}>

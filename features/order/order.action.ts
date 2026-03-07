@@ -180,6 +180,7 @@ const sendOrderEmail = async (orderId: string) => {
       where: { id: orderId },
       include: {
         items: true,
+        storefront: true,
         user: { select: { email: true } },
       },
     })
