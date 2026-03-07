@@ -85,15 +85,6 @@ const DashboardPage = () => {
 
   return (
     <Container className='flex flex-col gap-8'>
-      <div className='flex flex-col gap-2'>
-        <h1 className='text-3xl font-bold tracking-tight'>
-          Dashboard Overview
-        </h1>
-        <p className='text-default-500'>
-          สรุปสถิติและข้อมูลสำคัญของระบบในที่เดียว
-        </p>
-      </div>
-
       <section className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3'>
         {isLoading ? (
           Array.from({ length: 8 }).map((_, i) => (
