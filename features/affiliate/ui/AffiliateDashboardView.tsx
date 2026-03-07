@@ -17,16 +17,13 @@ import { AffiliateCommissionTable } from '@/app/[locale]/(main)/affiliate/_compo
 import { Container } from '@/components/layouts/Container'
 import { StatCard } from '@/components/ui/StatCard'
 import { useAffiliateDashboard } from '@/features/affiliate/affiliate.hook'
-import { useIsBelowBreakpoint } from '@/hooks/useIsBelowBreakpoint'
 
 const AffiliateDashboardView = () => {
   const { data, chartData, isLoading } = useAffiliateDashboard()
-  const isMobile = useIsBelowBreakpoint('640px')
 
   return (
-    <Container className='flex flex-col gap-8 py-8'>
+    <Container className='flex flex-col gap-8'>
       <Alert
-        color='success'
         description={
           <div className='flex flex-col gap-3 pt-2'>
             <p className='text-sm'>
@@ -65,9 +62,8 @@ const AffiliateDashboardView = () => {
             </ul>
           </div>
         }
-        hideIcon={isMobile}
+        // hideIcon={isMobile}
         title='บัญชีของคุณพร้อมใช้งานแล้ว!'
-        variant='flat'
       />
 
       <section className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3'>

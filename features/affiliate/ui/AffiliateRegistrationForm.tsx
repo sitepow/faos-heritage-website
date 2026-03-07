@@ -34,7 +34,6 @@ import {
 } from '@/app/(dashboard)/_components/ImageDropzone'
 import { SectionLabel } from '@/components/ui/SectionHeader'
 import { useAuth } from '@/hooks/useAuth'
-import { useIsBelowBreakpoint } from '@/hooks/useIsBelowBreakpoint'
 import { useResolveImageUpload } from '@/hooks/useResolveImageUpload'
 
 const THAI_BANKS = [
@@ -51,7 +50,6 @@ const THAI_BANKS = [
 const AffiliateRegistrationForm = () => {
   const router = useRouter()
   const { isAuthenticated, isLoading: isAuthLoading } = useAuth()
-  const isMobile = useIsBelowBreakpoint('640px')
 
   useEffect(() => {
     if (!isAuthLoading && !isAuthenticated) {
@@ -118,8 +116,6 @@ const AffiliateRegistrationForm = () => {
     <Card className='bg-background mx-auto w-full max-w-3xl' shadow='none'>
       <CardBody className='gap-8'>
         <Alert
-          color='warning'
-          hideIcon={isMobile}
           icon={<InfoIcon size={20} />}
           title='เฉพาะผู้สมัครสัญชาติไทยเท่านั้น'
           variant='flat'
@@ -129,11 +125,8 @@ const AffiliateRegistrationForm = () => {
         </Alert>
 
         <Alert
-          color='success'
-          hideIcon={isMobile}
           icon={<ShieldCheckIcon size={20} />}
           title='การส่งเอกสารอย่างปลอดภัย'
-          variant='flat'
         >
           เพื่อความปลอดภัย โปรดขีดคร่อมสำเนาเอกสารและระบุข้อความ
           <span className='mx-1 underline'>
