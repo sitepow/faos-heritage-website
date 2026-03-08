@@ -83,6 +83,11 @@ const getVariants = async (productId: string) => {
       stockQuantity: true,
       isActive: true,
       image: true,
+      product: {
+        select: {
+          unit: true,
+        },
+      },
     },
     orderBy: { name: 'asc' },
   })
