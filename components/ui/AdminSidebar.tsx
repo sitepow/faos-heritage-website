@@ -125,7 +125,7 @@ const AdminSidebar = () => {
                     <ListboxItem
                       key={item.href}
                       as={Link}
-                      className={`h-10 transition-all ${
+                      className={`h-10 ${
                         active
                           ? 'bg-primary/10 text-primary font-bold'
                           : 'text-default-500 hover:text-default-900'
@@ -154,10 +154,7 @@ const AdminSidebar = () => {
       </ScrollShadow>
 
       <div className='bg-default-50/50 flex flex-col gap-2 p-4'>
-        <div className='mb-2 flex items-center justify-between px-2'>
-          <span className='text-tiny text-default-400'>โหมดการแสดงผล</span>
-          <ThemeSwitch />
-        </div>
+        <ThemeSwitch />
         <Listbox aria-label='Account Settings' variant='flat'>
           <ListboxItem
             key='home'
@@ -200,7 +197,7 @@ const AdminSidebar = () => {
       {isOpen && (
         <div className='fixed inset-0 z-[60] flex lg:hidden'>
           <div
-            className='absolute inset-0 bg-black/50 transition-opacity'
+            className='absolute inset-0 bg-black/50'
             onClick={toggleSidebar}
           />
           <aside className='bg-background animate-in slide-in-from-left border-default-100 relative h-screen w-[280px] border-r shadow-2xl duration-300'>
