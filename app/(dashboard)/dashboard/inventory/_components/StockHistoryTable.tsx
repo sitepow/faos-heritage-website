@@ -118,7 +118,7 @@ const StockHistoryTable = ({ productId, page, onPageChange }: Props) => {
                     {STOCK_MOVEMENT_LABELS[log.type]}
                   </Chip>
                 </TableCell>
-                <TableCell className='text-small font-bold'>
+                <TableCell className='text-small max-w-48 min-w-48 font-bold'>
                   <span
                     className={isIncrement ? 'text-success' : 'text-danger'}
                   >
