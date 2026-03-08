@@ -107,7 +107,7 @@ const ProductImageTable = ({
                     className='font-bold'
                     color={img.isPrimary ? 'warning' : 'default'}
                     size='sm'
-                    variant='flat'
+                    variant='dot'
                   >
                     {img.isPrimary ? 'รูปหลัก' : 'รูปประกอบ'}
                   </Chip>

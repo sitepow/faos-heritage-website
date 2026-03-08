@@ -97,7 +97,7 @@ const TagLocalizationTable = ({
                     className='font-bold'
                     color='secondary'
                     size='sm'
-                    variant='flat'
+                    variant='dot'
                   >
                     {locale.languageCode.toUpperCase()}
                   </Chip>
