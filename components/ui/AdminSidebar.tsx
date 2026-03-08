@@ -19,6 +19,7 @@ import {
   Share2Icon,
   MenuIcon,
   StoreIcon,
+  WarehouseIcon,
 } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -76,6 +77,11 @@ const AdminSidebar = () => {
         { href: '/dashboard/shipping', label: 'ค่าจัดส่ง', icon: TruckIcon },
         { href: '/dashboard/addresses', label: 'ที่อยู่', icon: MapPinIcon },
         { href: '/dashboard/storefronts', label: 'หน้าร้าน', icon: StoreIcon },
+        {
+          href: '/dashboard/inventory',
+          label: 'สต็อกสินค้า',
+          icon: WarehouseIcon,
+        },
       ],
     },
   ]

@@ -11,7 +11,11 @@ import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { prisma } from '@/lib/prisma'
 import { getServerUser, withRole } from '@/lib/session'
-import { omitEmptyFields, decimalToNumber } from '@/utils'
+import {
+  omitEmptyFields,
+  decimalToNumber,
+  calculateProductTotalStock,
+} from '@/utils'
 
 const getProductAdmin = async (productId: string) => {
   noStore()
@@ -32,7 +36,7 @@ const getProductAdmin = async (productId: string) => {
 }
 
 const getProductsAdmin = async (page = 1, limit = 50) => {
-  return withRole([Role.ADMIN], async () => {
+  return await withRole([Role.ADMIN], async () => {
     noStore()
     const skip = (page - 1) * limit
 
@@ -50,14 +54,26 @@ const getProductsAdmin = async (page = 1, limit = 50) => {
               isPrimary: true,
             },
           },
+          variants: {
+            select: {
+              stockQuantity: true,
+            },
+          },
         },
         orderBy: { createdAt: 'desc' },
       }),
       prisma.product.count(),
     ])
 
+    const processedItems = items.map((product) => {
+      return {
+        ...product,
+        stockQuantity: calculateProductTotalStock(product),
+      }
+    })
+
     return {
-      items: decimalToNumber(items),
+      items: decimalToNumber(processedItems),
       total,
       page,
       limit,

@@ -1,6 +1,11 @@
 /* eslint-disable no-unused-vars */
 
-import type { Prisma, ProductUnit } from '@prisma/client'
+import type {
+  Prisma,
+  Product,
+  ProductUnit,
+  ProductVariant,
+} from '@prisma/client'
 
 import { decimalToNumber } from './number'
 
@@ -119,10 +124,28 @@ const formatStat = ({ name, value, isCurrency = false }: FormatStatParams) => ({
   isCurrency,
 })
 
+const calculateProductTotalStock = (
+  product: Pick<Product, 'stockQuantity'> & {
+    variants?: Pick<ProductVariant, 'stockQuantity'>[]
+  },
+) => {
+  const variants = product.variants || []
+  const hasVariants = variants.length > 0
+
+  if (hasVariants) {
+    return variants.reduce((sum, v) => {
+      return sum + v.stockQuantity
+    }, 0)
+  }
+
+  return product.stockQuantity
+}
+
 export {
   resolveProductUnitLabel,
   calculateVariantRange,
   checkIsOutOfStock,
   resolveRangeDisplayValue,
   formatStat,
+  calculateProductTotalStock,
 }

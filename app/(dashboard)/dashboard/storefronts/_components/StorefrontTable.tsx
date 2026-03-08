@@ -16,7 +16,7 @@ import {
   DropdownItem,
   Spinner,
 } from '@heroui/react'
-import { EllipsisVerticalIcon, MapPinIcon, PhoneIcon } from 'lucide-react'
+import { EllipsisVerticalIcon, PhoneIcon } from 'lucide-react'
 
 import type { GetStorefrontsResult } from '@/features/storefront/storefront.action'
 import type { Selection } from '@heroui/react'
@@ -98,23 +98,7 @@ const StorefrontTable = ({
                     </div>
                   </div>
                 </TableCell>
-                <TableCell>
-                  {item.googleMapUrl ? (
-                    <Button
-                      isIconOnly
-                      as='a'
-                      color='primary'
-                      href={item.googleMapUrl}
-                      size='sm'
-                      target='_blank'
-                      variant='flat'
-                    >
-                      <MapPinIcon size={16} />
-                    </Button>
-                  ) : (
-                    <span className='text-default-300'>-</span>
-                  )}
-                </TableCell>
+                <TableCell>{item?.googleMapUrl ?? '-'}</TableCell>
                 <TableCell>
                   <Chip
                     color={item.isActive ? 'success' : 'danger'}

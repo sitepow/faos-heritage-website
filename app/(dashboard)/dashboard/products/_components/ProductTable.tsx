@@ -32,6 +32,7 @@ import type { Selection } from '@heroui/react'
 
 import { PaginationWrapper } from '@/components/ui/PaginationWrapper'
 import { ProductImage } from '@/components/ui/Product/ProductImage'
+import { PRODUCT_UNIT_TH_LABELS } from '@/features/product/product.constant'
 import { useProductsAdmin } from '@/features/product/product.hook'
 import { useProductUIStore } from '@/features/product/product.store'
 import { useIsMounted } from '@/hooks/useIsMounted'
@@ -146,6 +147,7 @@ const ProductTable = ({
               images: product?.images,
             })
             const actionItems = getActionItems(product.id)
+            const isOutOfStock = Number(product.stockQuantity) <= 0
 
             return (
               <TableRow key={product.id}>
@@ -168,8 +170,13 @@ const ProductTable = ({
                 <TableCell>
                   <span>{formatCurrency(product.price)}</span>
                 </TableCell>
-                <TableCell>
-                  <span>{formatNumber(product?.stockQuantity)}</span>
+                <TableCell className='text-small font-bold'>
+                  <span
+                    className={isOutOfStock ? 'text-danger' : 'text-success'}
+                  >
+                    {formatNumber(product?.stockQuantity)}{' '}
+                    {PRODUCT_UNIT_TH_LABELS[product?.unit]}
+                  </span>
                 </TableCell>
                 <TableCell>
                   <Chip

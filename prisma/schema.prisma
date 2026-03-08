@@ -373,6 +373,8 @@ model User {
   posts Post[]
   comments Comment[]
 
+  stockHistory StockHistory[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -736,6 +738,9 @@ model StockHistory {
   productId String?
   variantId String?
 
+  userId    String?  
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
   quantity  Int
   type      StockMovementType
   location  String?  @db.Text
@@ -749,6 +754,7 @@ model StockHistory {
 
   @@index([productId])
   @@index([variantId])
+  @@index([userId])
   @@index([createdAt])
   @@index([type])
 }
