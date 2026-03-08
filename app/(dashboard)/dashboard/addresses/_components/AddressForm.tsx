@@ -164,7 +164,7 @@ const AddressForm = () => {
               <SectionLabel>สถานะและการแสดงผล</SectionLabel>
               <div className='border-default-100 flex items-center justify-between rounded-lg border p-4'>
                 <div className='flex flex-col'>
-                  <span className='text-small font-bold'>
+                  <span className='text-small mb-2.5 font-bold'>
                     ตั้งเป็นที่อยู่หลัก
                   </span>
                   <span className='text-tiny text-default-400'>

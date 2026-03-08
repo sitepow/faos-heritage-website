@@ -372,17 +372,41 @@ const getProductsInfinite = async ({
   return { items: resultItems, nextCursor, totalCount }
 }
 
-const getProductStats = async () =>
-  withRole([Role.ADMIN], async () => {
-    const stats = await prisma.$transaction([
-      prisma.product.count(),
-      prisma.product.count({ where: { stockQuantity: { gt: 0 } } }),
-      prisma.product.count({ where: { stockQuantity: 0 } }),
-    ])
+const getProductStats = async () => {
+  return await withRole([Role.ADMIN], async () => {
+    const allProducts = await prisma.product.findMany({
+      select: {
+        stockQuantity: true,
+        variants: {
+          select: {
+            stockQuantity: true,
+          },
+        },
+      },
+    })
 
+    let totalProducts = allProducts.length
+    let inStock = 0
+    let outOfStock = 0
+
+    allProducts.forEach((product) => {
+      const actualStock = calculateProductTotalStock(product)
+
+      if (actualStock > 0) {
+        inStock++
+      } else {
+        outOfStock++
+      }
+    })
+
+    const stats = [totalProducts, inStock, outOfStock]
     const labels = ['สินค้าทั้งหมด', 'สินค้าพร้อมจำหน่าย', 'สินค้าหมดสต็อก']
-    return stats.map((value, idx) => ({ name: labels[idx], value }))
+
+    return stats.map((value, idx) => {
+      return { name: labels[idx], value }
+    })
   })
+}
 
 const increaseProductView = async (identifier: string) => {
   if (!identifier) {

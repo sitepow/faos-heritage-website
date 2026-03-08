@@ -162,11 +162,7 @@ const UserForm = () => {
                   control={control}
                   name='isActive'
                   render={({ field: { value, onChange } }) => (
-                    <Switch
-                      color='success'
-                      isSelected={!!value}
-                      onValueChange={onChange}
-                    >
+                    <Switch isSelected={!!value} onValueChange={onChange}>
                       สถานะการใช้งานบัญชี
                     </Switch>
                   )}
@@ -180,7 +176,7 @@ const UserForm = () => {
                       label='บทบาท'
                       selectedKeys={value ? [value] : [Role.CUSTOMER]}
                       size='sm'
-                      variant='bordered'
+                      variant='underlined'
                       onSelectionChange={(keys) =>
                         onChange(Array.from(keys)[0] as Role)
                       }
