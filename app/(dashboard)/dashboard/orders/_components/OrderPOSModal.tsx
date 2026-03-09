@@ -211,13 +211,12 @@ const OrderPOSModal = ({
     >
       <ModalContent>
         <ModalHeader className='border-default-100 flex items-center gap-2 border-b'>
-          <ShoppingCartIcon size={20} />
           สร้างรายการสั่งซื้อใหม่ (POS)
         </ModalHeader>
 
-        <ModalBody className='p-0'>
-          <div className='flex h-full flex-col overflow-hidden lg:flex-row'>
-            <div className='border-default-100 flex-1 overflow-y-auto border-b p-4 lg:border-r lg:border-b-0 lg:p-6'>
+        <ModalBody className='overflow-y-auto p-0'>
+          <div className='flex h-full flex-col lg:flex-row lg:overflow-hidden'>
+            <div className='border-default-100 flex-1 p-4 lg:overflow-y-auto lg:border-r lg:p-6'>
               <div className='grid grid-cols-1 gap-3 sm:grid-cols-2'>
                 {productList.map((item: POSProductItem) => {
                   return (
@@ -256,19 +255,19 @@ const OrderPOSModal = ({
               </div>
             </div>
 
-            <div className='bg-default-50/50 flex w-full flex-col gap-4 p-4 lg:w-[380px] lg:p-6 xl:w-[420px]'>
+            <div className='bg-default-50/50 flex w-full flex-col gap-4 p-4 lg:w-[380px] lg:overflow-y-auto lg:p-6 xl:w-[420px]'>
               <h3 className='flex items-center gap-2 text-lg font-bold'>
                 รายการในตะกร้า ({cartItems.length})
               </h3>
 
               <Divider className='bg-default-200' />
 
-              <div className='flex min-h-[200px] flex-1 flex-col gap-3 overflow-y-auto pr-2 lg:min-h-0'>
+              <div className='flex flex-col gap-3'>
                 {cartItems.map((item: CartItem) => {
                   return (
                     <div
                       key={item.cartKey}
-                      className='border-default-100 flex items-center justify-between gap-3 rounded-lg border bg-white p-2'
+                      className='border-default-100 bg-default-50 flex items-center justify-between gap-3 rounded-lg border p-2'
                     >
                       <div className='flex flex-1 flex-col'>
                         <span className='text-sm font-medium'>{item.name}</span>
@@ -296,7 +295,7 @@ const OrderPOSModal = ({
                   )
                 })}
                 {cartItems.length === 0 && (
-                  <div className='text-default-400 flex h-full flex-col items-center justify-center gap-2 italic'>
+                  <div className='text-default-400 flex flex-col items-center justify-center gap-2 py-8 italic'>
                     <ShoppingCartIcon className='opacity-20' size={32} />
                     ยังไม่มีสินค้าในตะกร้า
                   </div>
@@ -377,7 +376,7 @@ const OrderPOSModal = ({
                 </Select>
               </div>
 
-              <div className='bg-default-50 mt-auto rounded-lg p-4 shadow-sm'>
+              <div className='bg-default-50 mt-4 rounded-lg p-4 shadow-sm'>
                 <div className='flex items-center justify-between text-lg font-bold'>
                   <span>ยอดรวม:</span>
                   <span className='text-primary'>
@@ -403,7 +402,7 @@ const OrderPOSModal = ({
             ยกเลิก
           </Button>
           <Button
-            className='text-secondary px-8 font-bold'
+            className='text-secondary flex-1 font-bold sm:px-8'
             color='primary'
             isLoading={isCreating}
             size='lg'
