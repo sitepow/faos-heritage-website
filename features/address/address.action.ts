@@ -13,7 +13,7 @@ import { omitEmptyFields } from '@/utils'
 type GetAddressResult = Awaited<ReturnType<typeof getAddress>>
 
 const createAddress = async (data: AddressInput) =>
-  withRole([Role.ADMIN, Role.CUSTOMER], async (userId) => {
+  withRole([Role.ADMIN, Role.CUSTOMER], async (userId: string) => {
     const validated = addressSchema.safeParse(data)
 
     if (!validated.success) {
@@ -44,8 +44,8 @@ const createAddress = async (data: AddressInput) =>
   })
 
 const updateAddress = async (data: AddressInput) =>
-  withRole([Role.ADMIN, Role.CUSTOMER], async (currentUserId) => {
-    const { role: currentUserRole } = await getServerUser()
+  withRole([Role.ADMIN, Role.CUSTOMER], async (currentUserId: string) => {
+    const { roles: currentUserRoles } = await getServerUser()
     const validated = addressSchema.safeParse(data)
 
     if (!validated.success) {
@@ -68,7 +68,7 @@ const updateAddress = async (data: AddressInput) =>
           throw new Error('NOT_FOUND')
         }
 
-        const isAdmin = currentUserRole === Role.ADMIN
+        const isAdmin = currentUserRoles.includes(Role.ADMIN)
 
         if (!isAdmin && existing.userId !== currentUserId) {
           throw new Error('NOT_OWNER')
@@ -99,8 +99,8 @@ const updateAddress = async (data: AddressInput) =>
   })
 
 const deleteAddress = async (addressId: string) =>
-  withRole([Role.ADMIN, Role.CUSTOMER], async (currentUserId) => {
-    const { role: currentUserRole } = await getServerUser()
+  withRole([Role.ADMIN, Role.CUSTOMER], async (currentUserId: string) => {
+    const { roles: currentUserRoles } = await getServerUser()
     if (!addressId) {
       return fail(ERROR_CODES.BAD_REQUEST)
     }
@@ -116,7 +116,7 @@ const deleteAddress = async (addressId: string) =>
           throw new Error('NOT_FOUND')
         }
 
-        const isAdmin = currentUserRole === Role.ADMIN
+        const isAdmin = currentUserRoles.includes(Role.ADMIN)
         if (!isAdmin && address.userId !== currentUserId) {
           throw new Error('NOT_OWNER')
         }
@@ -178,13 +178,13 @@ const getAddressesAdmin = async () => {
 }
 
 const getAddress = async (addressId: string) => {
-  const { userId, role } = await getServerUser()
+  const { userId, roles } = await getServerUser()
 
   if (!userId) {
     return null
   }
 
-  if (role === Role.ADMIN) {
+  if (roles.includes(Role.ADMIN)) {
     return await prisma.address.findUnique({
       where: { id: addressId },
     })

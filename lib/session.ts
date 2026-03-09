@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 import { getServerSession } from 'next-auth/next'
 
+import type { Role } from '@prisma/client'
+
 import { ERROR_CODES, fail } from './errors'
 
 import { NEXT_AUTH_OPTIONS } from '@/app/api/auth/[...nextauth]/route'
@@ -8,14 +10,14 @@ import { getAuthSession } from '@/utils'
 
 interface AuthUser {
   id: string
-  role: string
+  roles: Role[]
 }
 
 const getServerUser = async () => {
   const session = await getServerSession(NEXT_AUTH_OPTIONS)
 
   return {
-    role: session?.user?.role,
+    roles: session?.user?.roles || [],
     userId: session?.user?.id,
     user: session?.user,
     isAuthenticated: !!session,
@@ -24,7 +26,7 @@ const getServerUser = async () => {
 }
 
 const withRole = async <T>(
-  roles: string[],
+  allowedRoles: Role[],
   action: (userId: string) => Promise<T>,
 ) => {
   const session = await getAuthSession()
@@ -33,7 +35,11 @@ const withRole = async <T>(
     return fail(ERROR_CODES.UNAUTHORIZED)
   }
 
-  if (!roles.includes(session.user.role)) {
+  const hasPermission = session.user.roles.some((role: Role) => {
+    return allowedRoles.includes(role)
+  })
+
+  if (!hasPermission) {
     return fail(ERROR_CODES.FORBIDDEN)
   }
 

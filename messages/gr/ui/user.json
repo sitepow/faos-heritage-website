@@ -13,7 +13,8 @@
     },
     "roles": {
       "admin": "Διαχειριστής",
-      "customer": "Πελάτης"
+      "customer": "Πελάτης",
+      "stock_manager": "Υπεύθυνος Αποเหม็น"
     }
   },
   "orders": {

@@ -17,25 +17,49 @@ const useAuthForm = (callbackUrl: string) => {
 
   const loginMutation = useMutation({
     mutationFn: async (form: UserLoginInput): Promise<ActionResult<void>> => {
-      const res = await signIn('credentials', { ...form, redirect: false })
-      if (res?.error) return { success: false, code: res.error as ErrorCode }
-      return { success: true, data: undefined }
+      const res = await signIn('credentials', {
+        ...form,
+        redirect: false,
+      })
+
+      if (res?.error) {
+        return {
+          success: false,
+          code: res.error as ErrorCode,
+        }
+      }
+
+      return {
+        success: true,
+        data: undefined,
+      }
     },
     onSuccess: (result) => {
-      if (result.success) router.push(callbackUrl)
+      if (result.success) {
+        router.push(callbackUrl)
+      }
     },
   })
 
   const registerMutation = useMutation({
-    mutationFn: (data: UserRegisterInput) =>
-      createUser({ ...data, isActive: true, role: Role.CUSTOMER }),
+    mutationFn: (data: UserRegisterInput) => {
+      return createUser({
+        ...data,
+        isActive: true,
+        roles: [Role.CUSTOMER],
+      })
+    },
     onSuccess: async (result, form) => {
-      if (!result.success) return
+      if (!result.success) {
+        return
+      }
+
       await signIn('credentials', {
         email: form.email,
         password: form.password,
         redirect: false,
       })
+
       router.push(callbackUrl)
     },
   })

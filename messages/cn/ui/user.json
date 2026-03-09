@@ -13,7 +13,8 @@
     },
     "roles": {
       "admin": "管理员",
-      "customer": "客户"
+      "customer": "客户",
+      "stock_manager": "库存管理员"
     }
   },
   "orders": {

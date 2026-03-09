@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable no-unused-vars */
 'use client'
 
@@ -21,6 +22,7 @@ import { EllipsisVerticalIcon } from 'lucide-react'
 
 import type { getUsers } from '@/features/user/user.action'
 import type { Selection } from '@heroui/react'
+import type { Role } from '@prisma/client'
 import type { ReactNode } from 'react'
 
 import { PaginationWrapper } from '@/components/ui/PaginationWrapper'
@@ -113,14 +115,25 @@ const UserTable = ({
                   </User>
                 </TableCell>
                 <TableCell>
-                  <Chip
-                    className='font-bold'
-                    color={user.role === 'ADMIN' ? 'primary' : 'default'}
-                    size='sm'
-                    variant='dot'
-                  >
-                    {user.role}
-                  </Chip>
+                  <div className='flex flex-wrap gap-2'>
+                    {user.roles.map((role: Role) => (
+                      <Chip
+                        key={role}
+                        className='font-bold'
+                        color={
+                          role === 'ADMIN'
+                            ? 'primary'
+                            : role === 'STOCK_MANAGER'
+                              ? 'warning'
+                              : 'default'
+                        }
+                        size='sm'
+                        variant='dot'
+                      >
+                        {role}
+                      </Chip>
+                    ))}
+                  </div>
                 </TableCell>
                 <TableCell>
                   <Chip

@@ -43,7 +43,7 @@ const DEFAULT_VALUES: UserFormInput = {
   name: '',
   email: '',
   password: '',
-  role: Role.CUSTOMER,
+  roles: [Role.CUSTOMER],
   isActive: true,
   image: '',
 }
@@ -80,7 +80,7 @@ const UserForm = () => {
           id: user.id,
           name: user.name,
           email: user.email,
-          role: user.role as Role,
+          roles: user.roles as Role[],
           isActive: user.isActive,
           image: user.image ?? undefined,
           password: '',
@@ -169,17 +169,18 @@ const UserForm = () => {
                 />
                 <Controller
                   control={control}
-                  name='role'
+                  name='roles'
                   render={({ field: { value, onChange } }) => (
                     <Select
-                      className='max-w-[200px]'
+                      className='max-w-[250px]'
                       label='บทบาท'
-                      selectedKeys={value ? [value] : [Role.CUSTOMER]}
+                      selectedKeys={new Set(value)}
+                      selectionMode='multiple'
                       size='sm'
                       variant='underlined'
-                      onSelectionChange={(keys) =>
-                        onChange(Array.from(keys)[0] as Role)
-                      }
+                      onSelectionChange={(keys) => {
+                        onChange(Array.from(keys) as Role[])
+                      }}
                     >
                       {Object.values(Role).map((r) => (
                         <SelectItem key={r} textValue={r}>

@@ -34,7 +34,10 @@ const AccountCard = () => {
         <div className='border-default-100 flex flex-col gap-3 rounded-lg border p-2.5 sm:max-w-1/2'>
           <InfoItem label={tField('fullName')} value={user?.name} />
           <InfoItem label={tField('email')} value={user?.email} />
-          <InfoItem label={tField('role')} value={getRoleLabel(user?.role!)} />
+          <InfoItem
+            label={tField('role')}
+            value={getRoleLabel(user?.roles || [])}
+          />
 
           <div className='mt-5 flex flex-wrap gap-2'>
             <Button

@@ -13,7 +13,8 @@
     },
     "roles": {
       "admin": "ผู้ดูแลระบบ",
-      "customer": "ลูกค้า"
+      "customer": "ลูกค้า",
+      "stock_manager": "ผู้ดูแลสต็อก"
     }
   },
   "orders": {

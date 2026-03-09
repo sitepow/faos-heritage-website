@@ -13,7 +13,8 @@
     },
     "roles": {
       "admin": "Beheerder",
-      "customer": "Klant"
+      "customer": "Klant",
+      "stock_manager": "Voorraadbeheerder"
     }
   },
   "orders": {

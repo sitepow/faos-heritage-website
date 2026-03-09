@@ -7,7 +7,9 @@ const baseUserAdminSchema = z.object({
   name: z.string('กรุณาระบุชื่อ-นามสกุล').min(1, 'กรุณาระบุชื่อ-นามสกุล'),
   image: z.string().nullish(),
   isActive: z.boolean().default(true),
-  role: z.nativeEnum(Role).default(Role.CUSTOMER),
+  roles: z
+    .array(z.enum(Role), { message: 'รูปแบบบทบาทไม่ถูกต้อง' })
+    .default([Role.CUSTOMER]),
 })
 
 const userCreateAdminSchema = baseUserAdminSchema.extend({

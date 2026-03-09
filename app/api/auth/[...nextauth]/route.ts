@@ -14,6 +14,11 @@ export const NEXT_AUTH_OPTIONS: NextAuthOptions = {
     strategy: 'jwt',
   },
 
+  pages: {
+    signIn: '/login',
+    error: '/login',
+  },
+
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -91,7 +96,7 @@ export const NEXT_AUTH_OPTIONS: NextAuthOptions = {
             email,
             name: user.name ?? '',
             image: user.image ?? null,
-            role: Role.CUSTOMER,
+            roles: [Role.CUSTOMER],
             password: null,
             isActive: true,
           },
@@ -115,7 +120,7 @@ export const NEXT_AUTH_OPTIONS: NextAuthOptions = {
         where: { email },
         select: {
           id: true,
-          role: true,
+          roles: true,
           name: true,
           image: true,
         },
@@ -123,7 +128,7 @@ export const NEXT_AUTH_OPTIONS: NextAuthOptions = {
 
       if (user) {
         token.id = user.id
-        token.role = user.role
+        token.roles = user.roles
         token.name = user.name
         token.picture = user.image
       }
@@ -134,7 +139,7 @@ export const NEXT_AUTH_OPTIONS: NextAuthOptions = {
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string
-        session.user.role = token.role as Role
+        session.user.roles = token.roles as Role[]
       }
 
       return session

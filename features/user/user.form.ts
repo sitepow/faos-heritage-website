@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Role } from '@prisma/client'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useTranslations } from 'next-intl'
 import { useState, useEffect, useCallback } from 'react'
@@ -38,6 +39,7 @@ const useProfileForm = (userId: string | undefined) => {
       email: '',
       image: '',
       isActive: true,
+      roles: [Role.CUSTOMER],
     },
   })
 
@@ -49,7 +51,7 @@ const useProfileForm = (userId: string | undefined) => {
         email: user.email || '',
         image: user.image || '',
         isActive: user.isActive ?? true,
-        role: user.role,
+        roles: user.roles || [Role.CUSTOMER],
       })
       setOldImage(user.image ?? null)
     }
@@ -91,7 +93,7 @@ const useProfileForm = (userId: string | undefined) => {
         email: user.email || '',
         image: user.image || '',
         isActive: user.isActive ?? true,
-        role: user.role,
+        roles: user.roles || [Role.CUSTOMER],
       })
     }
   }

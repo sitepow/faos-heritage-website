@@ -21,7 +21,7 @@ const createUser = async (data: UserCreateInput & { isRegister?: boolean }) => {
     return fail(ERROR_CODES.VALIDATION_ERROR)
   }
 
-  const { email, password, name, role, isActive } = validated.data
+  const { email, password, name, roles, isActive } = validated.data
 
   if (!password || password.trim().length < 6) {
     return fail(ERROR_CODES.PASSWORD_TOO_SHORT)
@@ -48,8 +48,8 @@ const createUser = async (data: UserCreateInput & { isRegister?: boolean }) => {
         email: normalizedEmail,
         password: hashedPassword,
         isActive: isActive ?? true,
-        role: isRegister ? Role.CUSTOMER : role || Role.CUSTOMER,
-      } as Prisma.UserCreateInput,
+        roles: isRegister ? [Role.CUSTOMER] : roles || [Role.CUSTOMER],
+      } satisfies Prisma.UserCreateInput,
     })
 
     return ok()
@@ -72,13 +72,13 @@ const updateUser = async (data: UserUpdateInput) =>
 
     const updateData = {
       ...omitEmptyFields(payload),
-      role: payload.role as Role | undefined,
+      roles: payload.roles as Role[] | undefined,
     }
 
     try {
       await prisma.user.update({
         where: { id },
-        data: updateData as Prisma.UserUpdateInput,
+        data: updateData satisfies Prisma.UserUpdateInput,
       })
 
       return ok()
@@ -118,7 +118,7 @@ const getUsers = async (page = 1, limit = 10) => {
         email: true,
         name: true,
         image: true,
-        role: true,
+        roles: true,
         isActive: true,
         createdAt: true,
       },
@@ -144,10 +144,11 @@ const getUser = async (userId: string) => {
       email: true,
       name: true,
       image: true,
-      role: true,
+      roles: true,
       isActive: true,
     },
   })
+
   return user || null
 }
 
