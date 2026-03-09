@@ -60,7 +60,7 @@ const AffiliateAdminPage = () => {
           </div>
         }
         icon={<WalletIcon />}
-        title='ระบบจัดการพาร์ทเนอร์และยอดจ่ายเงิน (Affiliate Payout Control)'
+        title='ระบบจัดการพาร์ทเนอร์และยอดจ่ายเงิน'
       />
 
       <section className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3'>
