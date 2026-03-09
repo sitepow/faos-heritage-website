@@ -4,9 +4,11 @@ import {
   AffiliateStatus,
   OrderStatus,
   PayoutStatus,
+  Role,
   StockMovementType,
 } from '@prisma/client'
 import { DeliveryType } from '@prisma/client'
+import { PaymentStatus } from '@prisma/client'
 import { revalidatePath } from 'next/cache'
 
 import type { AffiliateFilter, GetAffiliateOrdersOptions } from './order.types'
@@ -19,7 +21,7 @@ import { AFFILIATE_CONFIG } from '@/constants'
 import { getOrderContent, OrderTemplate } from '@/emails/OrderTemplate'
 import { ERROR_CODES, fail, ok } from '@/lib/errors'
 import { prisma } from '@/lib/prisma'
-import { getServerUser, withAuth } from '@/lib/session'
+import { getServerUser, withAuth, withRole } from '@/lib/session'
 import { canTransitionOrderStatus, formatFullAddress } from '@/utils'
 import { sendEmail } from '@/utils/email-sender'
 import { decimalToNumber } from '@/utils/number'
@@ -565,6 +567,161 @@ const createOrder = async (input: CreateOrderInput) =>
     })
   })
 
+const createAdminOrder = async (input: CreateOrderInput) =>
+  withRole([Role.ADMIN], async () => {
+    const { userId } = await getServerUser()
+
+    return prisma.$transaction(async (tx) => {
+      const {
+        items,
+        storefrontId,
+        deliveryType,
+        currency,
+        exchangeRate,
+        exchangeLocale,
+        referrerId,
+      } = input
+
+      if (deliveryType !== DeliveryType.PICKUP || !storefrontId) {
+        return fail(ERROR_CODES.BAD_REQUEST)
+      }
+
+      const storefront = await tx.storefront.findUnique({
+        where: { id: storefrontId },
+      })
+
+      if (!storefront || items.length === 0) {
+        return fail(ERROR_CODES.BAD_REQUEST)
+      }
+
+      let validAffiliate = null
+      let finalReferrerCode = null
+      if (referrerId) {
+        const affiliate = await tx.affiliateProfile.findUnique({
+          where: { affiliateCode: referrerId },
+          select: {
+            id: true,
+            status: true,
+            baseRate: true,
+            highValueRate: true,
+            thresholdAmount: true,
+          },
+        })
+        if (affiliate && affiliate.status === AffiliateStatus.APPROVED) {
+          validAffiliate = affiliate
+          finalReferrerCode = referrerId
+        }
+      }
+
+      const products = await tx.product.findMany({
+        where: { id: { in: items.map((i) => i.productId) } },
+        include: { variants: true },
+      })
+
+      const productMap = new Map(products.map((p) => [p.id, p]))
+      const orderItemsPayload: Prisma.OrderItemCreateManyOrderInput[] = []
+      let totalBaseProductDiscount = 0
+      let subtotalSum = 0
+
+      for (const item of items) {
+        const product = productMap.get(item.productId)
+        if (!product) return fail(ERROR_CODES.DATA_NOT_FOUND)
+
+        const { price: effectiveBasePrice, discountAmount } =
+          getProductPriceInfo(product, item.variantId)
+        const variant = item.variantId
+          ? product.variants.find((v) => v.id === item.variantId)
+          : null
+
+        const priceLocal = Number(
+          (effectiveBasePrice * exchangeRate).toFixed(2),
+        )
+        totalBaseProductDiscount += discountAmount * item.quantity
+        const currentItemBaseSubtotal = effectiveBasePrice * item.quantity
+        subtotalSum += currentItemBaseSubtotal
+
+        orderItemsPayload.push({
+          productId: product.id,
+          variantId: item.variantId,
+          productName: product.name,
+          variantName: variant?.name,
+          quantity: item.quantity,
+          basePrice: effectiveBasePrice,
+          baseSubtotal: currentItemBaseSubtotal,
+          price: priceLocal,
+          subtotal: priceLocal * item.quantity,
+          currency,
+        })
+      }
+
+      const exchange = (val: number) => Number((val * exchangeRate).toFixed(2))
+      const baseTotal = subtotalSum
+      const now = new Date()
+
+      const order = await tx.order.create({
+        data: {
+          user: { connect: { id: userId } },
+          deliveryType: DeliveryType.PICKUP,
+          status: OrderStatus.DELIVERED,
+          paymentStatus: PaymentStatus.PAID,
+          currency,
+          exchangeRate,
+          exchangeLocale,
+          baseSubtotal: subtotalSum,
+          baseShipping: 0,
+          baseDiscount: totalBaseProductDiscount,
+          baseTax: 0,
+          baseTotal,
+          subtotal: exchange(subtotalSum),
+          shippingCost: 0,
+          discount: exchange(totalBaseProductDiscount),
+          tax: 0,
+          total: exchange(baseTotal),
+          referrerCode: finalReferrerCode,
+          paidAt: now,
+          deliveredAt: now,
+          pickupDate: now,
+          pickupStoreLocation: storefront.name,
+          storefront: { connect: { id: storefrontId } },
+          items: { createMany: { data: orderItemsPayload } },
+        },
+      })
+
+      if (validAffiliate) {
+        const isHighValue =
+          Number(baseTotal) >= Number(validAffiliate.thresholdAmount)
+        const appliedRate = isHighValue
+          ? validAffiliate.highValueRate
+          : validAffiliate.baseRate
+        const commissionAmount = (Number(baseTotal) * Number(appliedRate)) / 100
+
+        await tx.affiliateCommission.create({
+          data: {
+            affiliateId: validAffiliate.id,
+            orderId: order.id,
+            orderAmount: baseTotal,
+            appliedRate: appliedRate,
+            commissionAmount: commissionAmount,
+            status: PayoutStatus.COMPLETED,
+          },
+        })
+      }
+
+      await Promise.all(
+        items.map((item) =>
+          processStockMovement(tx, {
+            ...item,
+            type: StockMovementType.SALE,
+            orderId: order.id,
+            direction: 'decrement',
+          }),
+        ),
+      )
+
+      return ok(order.id)
+    })
+  })
+
 const updateOrder = async (input: UpdateOrderInput) =>
   withAuth(async () => {
     return prisma.$transaction(async (tx) => {
@@ -646,6 +803,7 @@ export {
   getOrderStats,
   getRevenueStats,
   createOrder,
+  createAdminOrder,
   updateOrder,
 }
 

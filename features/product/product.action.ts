@@ -56,6 +56,10 @@ const getProductsAdmin = async (page = 1, limit = 50) => {
           },
           variants: {
             select: {
+              id: true,
+              name: true,
+              price: true,
+              salePrice: true,
               stockQuantity: true,
             },
           },

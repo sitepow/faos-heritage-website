@@ -1,10 +1,39 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+'use client'
 
-import { createOrder, sendOrderEmail } from './order.action'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useRouter } from 'next/navigation'
+
+import { createAdminOrder, createOrder, sendOrderEmail } from './order.action'
 import { orderQueryKeys } from './order.query-key'
 import { cartQueryKeys } from '../cart/cart.query-key'
 
 import { useAppNavigation } from '@/hooks/useAppNavigation'
+
+const useAdminOrderMutation = () => {
+  const queryClient = useQueryClient()
+  const router = useRouter()
+
+  const create = useMutation({
+    mutationFn: createAdminOrder,
+    onSuccess: async (result) => {
+      if (result.success) {
+        await Promise.all([
+          queryClient.invalidateQueries({ queryKey: cartQueryKeys.all }),
+          queryClient.invalidateQueries({ queryKey: orderQueryKeys.all }),
+          sendOrderEmail(result.data),
+        ])
+
+        return router.refresh()
+      }
+    },
+  })
+
+  return {
+    createAdminOrder: create.mutateAsync,
+    isCreating: create.isPending,
+    orderData: create.data,
+  }
+}
 
 const useOrderMutation = () => {
   const queryClient = useQueryClient()
@@ -20,7 +49,7 @@ const useOrderMutation = () => {
           sendOrderEmail(result.data),
         ])
 
-        navigation.ORDER()
+        return navigation.ORDER()
       }
     },
   })
@@ -32,4 +61,4 @@ const useOrderMutation = () => {
   }
 }
 
-export { useOrderMutation }
+export { useOrderMutation, useAdminOrderMutation }
