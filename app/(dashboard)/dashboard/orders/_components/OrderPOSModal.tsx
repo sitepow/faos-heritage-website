@@ -295,7 +295,7 @@ const OrderPOSModal = ({
                   )
                 })}
                 {cartItems.length === 0 && (
-                  <div className='text-default-400 flex flex-col items-center justify-center gap-2 py-8 italic'>
+                  <div className='text-default-400 flex flex-col items-center justify-center gap-2 py-8'>
                     <ShoppingCartIcon className='opacity-20' size={32} />
                     ยังไม่มีสินค้าในตะกร้า
                   </div>
