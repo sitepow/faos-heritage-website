@@ -42,7 +42,6 @@ const TableConfigHeader = ({
               : onDeleteSelected && (
                   <Button
                     color='danger'
-                    radius='none'
                     startContent={<TrashIcon size={18} />}
                     variant='flat'
                     onPress={onDeleteSelected}
