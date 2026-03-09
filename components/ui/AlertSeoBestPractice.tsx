@@ -15,8 +15,9 @@ const AlertSeoBestPractice = () => {
           </p>
           <p>
             • <strong>Meta Description:</strong> เขียนเน้นการขายให้กระชับ
-            สำคัญที่สุดคือความยาวควรอยู่ที่ <strong>120-150 ตัวอักษร</strong>{' '}
-            เพื่อให้แสดงผลบน Google ได้ครบถ้วนและจูงใจให้คนคลิก
+            สำคัญที่สุดคือความยาวควรอยู่ที่{' '}
+            <span className='underline'>120-150 ตัวอักษร</span> เพื่อให้แสดงผลบน
+            Google ได้ครบถ้วนและจูงใจให้คนคลิก
           </p>
           <p>
             • <strong>รูปภาพปก (Cover Image):</strong>{' '}

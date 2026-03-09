@@ -34,7 +34,7 @@ const AffiliateDashboardView = () => {
               <li className='text-tiny flex items-start gap-2'>
                 <LinkIcon className='mt-0.5 shrink-0' size={14} />
                 <span>
-                  <span className='underline'>การสร้างลิงก์:</span>{' '}
+                  <strong>การสร้างลิงก์:</strong>{' '}
                   ไปที่หน้าสินค้าที่ต้องการโปรโมท แล้วกดปุ่ม
                   <span className='mx-1 underline'>"คัดลอกลิงก์"</span>{' '}
                   จากเมนูแชร์เท่านั้น เพื่อให้ระบบแนบรหัสพาร์ทเนอร์ของคุณไปกับ
@@ -44,8 +44,8 @@ const AffiliateDashboardView = () => {
               <li className='text-tiny flex items-start gap-2'>
                 <TimerIcon className='mt-0.5 shrink-0' size={14} />
                 <span>
-                  <span className='underline'>ระบบติดตาม (Cookie):</span>{' '}
-                  เมื่อลูกค้ากดลิงก์ของคุณ รหัส
+                  <strong>ระบบติดตาม (Cookie):</strong> เมื่อลูกค้ากดลิงก์ของคุณ
+                  รหัส
                   <span className='mx-1 underline'>Refer No.</span>{' '}
                   จะถูกบันทึกไว้ในเครื่องลูกค้าเป็นเวลา
                   <span className='mx-1 underline'>30 วัน</span>{' '}
@@ -55,7 +55,7 @@ const AffiliateDashboardView = () => {
               <li className='text-tiny flex items-start gap-2'>
                 <InfoIcon className='mt-0.5 shrink-0' size={14} />
                 <span>
-                  <span className='underline'>คำแนะนำ:</span> หากพ้นกำหนด 30 วัน
+                  <strong>คำแนะนำ:</strong> หากพ้นกำหนด 30 วัน
                   แนะนำให้ส่งลิงก์ใหม่ให้ลูกค้าอีกครั้งเพื่อให้ระบบติดตามทำงานต่อเนื่อง
                 </span>
               </li>

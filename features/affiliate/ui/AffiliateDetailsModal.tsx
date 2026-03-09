@@ -59,12 +59,14 @@ const AffiliateDetailsModal = () => {
                   • <strong>ระบบอัตโนมัติ:</strong> หลังการอนุมัติ
                   ระบบจะเปิดใช้งานเมนู Affiliate ให้ฝั่งผู้ใช้งานทันที
                   โดยพาร์ทเนอร์สามารถเลือกแชร์สินค้าได้เอง และระบบจะทำการ{' '}
-                  <strong>Generated Affiliate Link</strong> ให้โดยอัตโนมัติ
+                  <span className='underline'>Generated Affiliate Link</span>{' '}
+                  ให้โดยอัตโนมัติ
                 </p>
                 <p>
                   • <strong>เงื่อนไขรายได้:</strong>{' '}
                   พาร์ทเนอร์จะได้รับค่าคอมมิชชันเฉพาะออเดอร์ที่สถานะเป็น{' '}
-                  <strong>"จัดส่งสำเร็จ (DELIVERED)"</strong> เท่านั้น
+                  <span className='underline'>"จัดส่งสำเร็จ (DELIVERED)"</span>{' '}
+                  เท่านั้น
                 </p>
               </div>
             }
