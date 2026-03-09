@@ -9,6 +9,7 @@ datasource db {
 enum Role {
   CUSTOMER
   ADMIN
+  STOCK_MANAGER
 }
 
 enum AffiliateStatus {
@@ -362,7 +363,7 @@ model User {
   password      String?
   image         String?
   emailVerified DateTime?
-  role          Role     @default(CUSTOMER)
+  roles         Role[] @default([CUSTOMER])
   isActive      Boolean  @default(true)
 
   addresses Address[]
@@ -380,7 +381,7 @@ model User {
 
   affiliate AffiliateProfile?
 
-  @@index([role])
+  @@index([roles])
   @@index([isActive])
   @@index([createdAt])
   @@index([referrerCode])
