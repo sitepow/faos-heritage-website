@@ -138,7 +138,7 @@ const AffiliateHistoryPage = () => {
             aria-label='Commission History'
             checkboxesProps={{
               classNames: {
-                wrapper: 'after:bg-primary before:border-default-300',
+                wrapper: 'after:bg-primary before:border-default-100',
                 icon: 'text-white font-bold',
               },
             }}
@@ -204,9 +204,9 @@ const AffiliateHistoryPage = () => {
                                   return (
                                     <div
                                       key={idx}
-                                      className='border-default-50 text-default-500 flex justify-between border-b pb-1 text-[10px]'
+                                      className='border-default-100 text-default-500 flex justify-between border-b pb-1 text-[10px]'
                                     >
-                                      <span className='line-clamp-1 flex-1'>
+                                      <span className='flex-1'>
                                         {orderItem.productName}{' '}
                                         {orderItem.variantName &&
                                           `(${orderItem.variantName})`}

@@ -57,7 +57,7 @@ const AffiliateTable = ({ affiliates, pendingPayouts, isLoading }: Props) => {
       aria-label='Affiliate Management Table'
       checkboxesProps={{
         classNames: {
-          wrapper: 'after:bg-primary before:border-default-300',
+          wrapper: 'after:bg-primary before:border-default-100',
           icon: 'text-white font-bold',
         },
       }}
