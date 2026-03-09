@@ -8,7 +8,8 @@ const baseUserAdminSchema = z.object({
   image: z.string().nullish(),
   isActive: z.boolean().default(true),
   roles: z
-    .array(z.enum(Role), { message: 'รูปแบบบทบาทไม่ถูกต้อง' })
+    .array(z.enum(Role))
+    .min(1, 'กรุณาเลือกอย่างน้อย 1 บทบาท')
     .default([Role.CUSTOMER]),
 })
 

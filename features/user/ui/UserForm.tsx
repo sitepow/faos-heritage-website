@@ -172,7 +172,10 @@ const UserForm = () => {
                   name='roles'
                   render={({ field: { value, onChange } }) => (
                     <Select
+                      disallowEmptySelection
                       className='max-w-[250px]'
+                      errorMessage={errors.roles?.message}
+                      isInvalid={!!errors.roles}
                       label='บทบาท'
                       selectedKeys={new Set(value)}
                       selectionMode='multiple'
