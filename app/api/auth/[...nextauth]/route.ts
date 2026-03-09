@@ -78,7 +78,9 @@ export const NEXT_AUTH_OPTIONS: NextAuthOptions = {
 
   callbacks: {
     async signIn({ user, account }) {
-      if (account?.provider === 'credentials') return true
+      if (account?.provider === 'credentials') {
+        return true
+      }
 
       const email = normalizeEmail(user.email)
       if (!email) {
@@ -106,31 +108,29 @@ export const NEXT_AUTH_OPTIONS: NextAuthOptions = {
       return true
     },
 
-    async jwt({ token }) {
-      if (!token.email) {
-        return token
-      }
-
-      const email = normalizeEmail(token.email)
-      if (!email) {
-        return token
-      }
-
-      const user = await prisma.user.findUnique({
-        where: { email },
-        select: {
-          id: true,
-          roles: true,
-          name: true,
-          image: true,
-        },
-      })
-
+    async jwt({ token, user }) {
       if (user) {
         token.id = user.id
-        token.roles = user.roles
-        token.name = user.name
-        token.picture = user.image
+        token.roles = user.roles as Role[]
+      }
+
+      if (token.email) {
+        const dbUser = await prisma.user.findUnique({
+          where: { email: token.email },
+          select: {
+            id: true,
+            roles: true,
+            name: true,
+            image: true,
+          },
+        })
+
+        if (dbUser) {
+          token.id = dbUser.id
+          token.roles = dbUser.roles
+          token.name = dbUser.name
+          token.picture = dbUser.image
+        }
       }
 
       return token

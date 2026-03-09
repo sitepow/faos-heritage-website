@@ -36,7 +36,9 @@ const NavbarUserMenu = () => {
   const router = useRouter()
   const t = useTranslations('navigation.navbar.userPanel')
   const pathname = usePathname()
-  const { isAdmin } = useAuth()
+
+  const { canManageStock } = useAuth()
+
   const isDashboard = pathname.startsWith('/dashboard')
   const navigation = useAppNavigation()
 
@@ -62,13 +64,13 @@ const NavbarUserMenu = () => {
       },
     ]
 
-    if (isAdmin && !isDashboard) {
+    if (canManageStock && !isDashboard) {
       items.push({
         key: 'dashboard',
         label: 'dashboard',
         icon: <CustomIcon icon={SettingsIcon} />,
         action: () => {
-          router.push('/dashboard')
+          router.push('/dashboard/inventory')
         },
       })
     }
@@ -77,12 +79,14 @@ const NavbarUserMenu = () => {
       key: 'logout',
       label: 'logout',
       icon: <CustomIcon icon={LogOutIcon} />,
-      action: () => signOut({ callbackUrl: '/' }),
+      action: () => {
+        return signOut({ callbackUrl: '/' })
+      },
     })
 
     return items
   }, [
-    isAdmin,
+    canManageStock,
     isDashboard,
     navigation.ACCOUNT,
     navigation.FAVORITE,
@@ -101,7 +105,9 @@ const NavbarUserMenu = () => {
       <DropdownMenu
         aria-label='User menu'
         onAction={(key) => {
-          const item = menuItems.find((i) => i.key === key)
+          const item = menuItems.find((i) => {
+            return i.key === key
+          })
           item?.action()
         }}
       >

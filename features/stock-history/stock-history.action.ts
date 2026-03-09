@@ -13,7 +13,7 @@ const getStockHistoryByProductId = async (
   page = 1,
   limit = 20,
 ) => {
-  return await withRole([Role.ADMIN], async () => {
+  return await withRole([Role.ADMIN, Role.STOCK_MANAGER], async () => {
     noStore()
     const skip = (page - 1) * limit
 

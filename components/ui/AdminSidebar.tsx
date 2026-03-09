@@ -24,67 +24,135 @@ import {
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { signOut } from 'next-auth/react'
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
+
+import type { ElementType } from 'react'
 
 import { CustomIcon } from './CustomIcon'
 import { NavbarLogo } from '../layouts/Navbar/_components/NavbarLogo'
 
 import { ThemeSwitch } from '@/app/(dashboard)/_components/ThemeSwitch'
+import { useAuth } from '@/hooks/useAuth'
 import { useIsMounted } from '@/hooks/useIsMounted'
+
+interface SidebarItem {
+  href: string
+  label: string
+  icon: ElementType
+  adminOnly?: boolean
+}
+
+interface SidebarGroup {
+  title: string
+  adminOnly?: boolean
+  items: SidebarItem[]
+}
 
 const AdminSidebar = () => {
   const pathname = usePathname()
   const isMounted = useIsMounted()
   const [isOpen, setIsOpen] = useState(false)
 
-  const menuGroups = [
-    {
-      title: 'แดชบอร์ด',
-      items: [
-        { href: '/dashboard', label: 'หน้าหลัก', icon: LayoutDashboardIcon },
-        { href: '/dashboard/orders', label: 'ออเดอร์', icon: PackageIcon },
-        {
-          href: '/dashboard/affiliates',
-          label: 'แอฟฟิลิเอต',
-          icon: Share2Icon,
-        },
-      ],
-    },
-    {
-      title: 'จัดการสินค้า',
-      items: [
-        { href: '/dashboard/products', label: 'สินค้า', icon: ShoppingBagIcon },
-        { href: '/dashboard/categories', label: 'หมวดหมู่', icon: LayersIcon },
-        { href: '/dashboard/tags', label: 'แท็ก', icon: TagIcon },
-      ],
-    },
-    {
-      title: 'เนื้อหา & ผู้ใช้',
-      items: [
-        { href: '/dashboard/posts', label: 'โพสต์', icon: NewspaperIcon },
-        {
-          href: '/dashboard/blog-categories',
-          label: 'หมวดหมู่บทความ',
-          icon: FoldersIcon,
-        },
-        { href: '/dashboard/users', label: 'ผู้ใช้งาน', icon: UsersIcon },
-        { href: '/dashboard/reviews', label: 'รีวิว', icon: StarIcon },
-      ],
-    },
-    {
-      title: 'ระบบ',
-      items: [
-        { href: '/dashboard/shipping', label: 'ค่าจัดส่ง', icon: TruckIcon },
-        { href: '/dashboard/addresses', label: 'ที่อยู่', icon: MapPinIcon },
-        { href: '/dashboard/storefronts', label: 'หน้าร้าน', icon: StoreIcon },
-        {
-          href: '/dashboard/inventory',
-          label: 'สต็อกสินค้า',
-          icon: WarehouseIcon,
-        },
-      ],
-    },
-  ]
+  const { isAdmin } = useAuth()
+
+  const menuGroups = useMemo<SidebarGroup[]>(() => {
+    const groups: SidebarGroup[] = [
+      {
+        title: 'แดชบอร์ด',
+        items: [
+          {
+            href: '/dashboard',
+            label: 'หน้าหลัก',
+            icon: LayoutDashboardIcon,
+            adminOnly: true,
+          },
+          { href: '/dashboard/orders', label: 'ออเดอร์', icon: PackageIcon },
+          {
+            href: '/dashboard/affiliates',
+            label: 'แอฟฟิลิเอต',
+            icon: Share2Icon,
+            adminOnly: true,
+          },
+        ],
+      },
+      {
+        title: 'จัดการสินค้า',
+        adminOnly: true,
+        items: [
+          {
+            href: '/dashboard/products',
+            label: 'สินค้า',
+            icon: ShoppingBagIcon,
+          },
+          {
+            href: '/dashboard/categories',
+            label: 'หมวดหมู่',
+            icon: LayersIcon,
+          },
+          { href: '/dashboard/tags', label: 'แท็ก', icon: TagIcon },
+        ],
+      },
+      {
+        title: 'เนื้อหา & ผู้ใช้',
+        adminOnly: true,
+        items: [
+          { href: '/dashboard/posts', label: 'โพสต์', icon: NewspaperIcon },
+          {
+            href: '/dashboard/blog-categories',
+            label: 'หมวดหมู่บทความ',
+            icon: FoldersIcon,
+          },
+          { href: '/dashboard/users', label: 'ผู้ใช้งาน', icon: UsersIcon },
+          { href: '/dashboard/reviews', label: 'รีวิว', icon: StarIcon },
+        ],
+      },
+      {
+        title: 'ระบบ',
+        items: [
+          {
+            href: '/dashboard/shipping',
+            label: 'ค่าจัดส่ง',
+            icon: TruckIcon,
+            adminOnly: true,
+          },
+          {
+            href: '/dashboard/addresses',
+            label: 'ที่อยู่',
+            icon: MapPinIcon,
+            adminOnly: true,
+          },
+          {
+            href: '/dashboard/storefronts',
+            label: 'หน้าร้าน',
+            icon: StoreIcon,
+            adminOnly: true,
+          },
+          {
+            href: '/dashboard/inventory',
+            label: 'สต็อกสินค้า',
+            icon: WarehouseIcon,
+          },
+        ],
+      },
+    ]
+
+    if (isAdmin) {
+      return groups
+    }
+
+    return groups
+      .filter((group: SidebarGroup) => {
+        return !group.adminOnly
+      })
+      .map((group: SidebarGroup) => {
+        return {
+          ...group,
+          items: group.items.filter((item: SidebarItem) => {
+            return !item.adminOnly
+          }),
+        }
+      })
+  }, [isAdmin])
 
   const handleLogout = () => {
     return signOut({ callbackUrl: '/' })

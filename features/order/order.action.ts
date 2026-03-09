@@ -568,7 +568,7 @@ const createOrder = async (input: CreateOrderInput) =>
   })
 
 const createAdminOrder = async (input: CreateOrderInput) =>
-  withRole([Role.ADMIN], async () => {
+  withRole([Role.ADMIN, Role.STOCK_MANAGER], async () => {
     const { userId } = await getServerUser()
 
     return prisma.$transaction(async (tx) => {

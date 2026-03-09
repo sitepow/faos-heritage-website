@@ -1,4 +1,6 @@
+import { Role } from '@prisma/client'
 import { NextResponse } from 'next/server'
+import { getToken } from 'next-auth/jwt'
 import createIntlMiddleware from 'next-intl/middleware'
 
 import type { NextRequest } from 'next/server'
@@ -15,21 +17,54 @@ const stripLocaleFromPath = (pathname: string): string => {
   return pathWithoutLocale || '/'
 }
 
-const isAuthenticated = (request: NextRequest): boolean => {
-  return Boolean(
-    request.cookies.get('next-auth.session-token') ||
-    request.cookies.get('__Secure-next-auth.session-token'),
-  )
-}
-
 const middleware = async (request: NextRequest) => {
   const { pathname } = request.nextUrl
+
+  const token = await getToken({
+    req: request,
+    secret: process.env.NEXTAUTH_SECRET,
+  })
+  const roles = (token?.roles as Role[]) || []
+  const loggedIn = !!token
+
+  if (pathname.startsWith('/dashboard')) {
+    if (!loggedIn) {
+      const cookieLocale =
+        request.cookies.get('NEXT_LOCALE')?.value || routing.defaultLocale
+      const loginUrl = new URL(`/${cookieLocale}/login`, request.url)
+      loginUrl.searchParams.set('callbackUrl', pathname)
+      return NextResponse.redirect(loginUrl)
+    }
+
+    const isAdmin = roles.includes(Role.ADMIN)
+    const isStockManager = roles.includes(Role.STOCK_MANAGER)
+
+    if (isStockManager && !isAdmin) {
+      const allowedPaths = ['/dashboard/inventory', '/dashboard/orders']
+      const isAccessingAllowed = allowedPaths.some((path: string) => {
+        return pathname.startsWith(path)
+      })
+
+      if (!isAccessingAllowed) {
+        return NextResponse.redirect(
+          new URL('/dashboard/inventory', request.url),
+        )
+      }
+    }
+
+    if (!isAdmin && !isStockManager) {
+      const cookieLocale =
+        request.cookies.get('NEXT_LOCALE')?.value || routing.defaultLocale
+      return NextResponse.redirect(new URL(`/${cookieLocale}`, request.url))
+    }
+
+    return NextResponse.next()
+  }
 
   const isExcluded =
     pathname === '/sitemap.xml' ||
     pathname === '/robots.txt' ||
     pathname === '/favicon.ico' ||
-    pathname.startsWith('/dashboard') ||
     pathname.startsWith('/s/')
 
   if (isExcluded) {
@@ -41,7 +76,6 @@ const middleware = async (request: NextRequest) => {
   const localeInPath = pathParts[1]
   const hasValidLocale = routing.locales.includes(localeInPath)
 
-  // 2. ถ้าไม่มี Locale ใน Path (และไม่ใช่พวกที่ถูกยกเว้นข้างบน) ถึงจะ Redirect ไปเติม Locale
   if (!hasValidLocale) {
     const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value
     const finalLocale =
@@ -59,24 +93,21 @@ const middleware = async (request: NextRequest) => {
     return response
   }
 
-  const currentLocale = localeInPath
-  const loggedIn = isAuthenticated(request)
-
-  const isProtectedRoute = ROUTES.PROTECTED.some((path) =>
-    normalizedPath.startsWith(path),
-  )
-  const isAuthRoute = ROUTES.AUTH.some((path) =>
-    normalizedPath.startsWith(path),
-  )
+  const isProtectedRoute = ROUTES.PROTECTED.some((path: string) => {
+    return normalizedPath.startsWith(path)
+  })
+  const isAuthRoute = ROUTES.AUTH.some((path: string) => {
+    return normalizedPath.startsWith(path)
+  })
 
   if (isProtectedRoute && !loggedIn) {
-    const loginUrl = new URL(`/${currentLocale}/login`, request.url)
+    const loginUrl = new URL(`/${localeInPath}/login`, request.url)
     loginUrl.searchParams.set('callbackUrl', pathname)
     return NextResponse.redirect(loginUrl)
   }
 
   if (isAuthRoute && loggedIn) {
-    return NextResponse.redirect(new URL(`/${currentLocale}`, request.url))
+    return NextResponse.redirect(new URL(`/${localeInPath}`, request.url))
   }
 
   return intlMiddleware(request)

@@ -5,7 +5,7 @@ import type { PropsWithChildren } from 'react'
 import { AppMain } from '@/components/layouts/AppMain'
 import { AdminSidebar } from '@/components/ui/AdminSidebar'
 import { constructMetadata } from '@/lib/metadata'
-import { requireRole } from '@/utils/auth'
+import { requireAnyRole } from '@/utils'
 
 const generateMetadata = async () => {
   return await constructMetadata({
@@ -16,7 +16,7 @@ const generateMetadata = async () => {
 }
 
 const DashboardLayout = async ({ children }: PropsWithChildren) => {
-  await requireRole(Role.ADMIN)
+  await requireAnyRole([Role.ADMIN, Role.STOCK_MANAGER] as const)
 
   return (
     <div className='bg-background relative flex min-h-screen flex-col lg:flex-row'>
