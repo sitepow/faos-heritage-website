@@ -126,7 +126,15 @@ const ProductPurchasePanel = () => {
 
         <section aria-label='Product variants' className='flex flex-col gap-5'>
           <VariantTable variants={product?.variants || []} />
+        </section>
 
+        {product.summary && (
+          <section aria-label='Product summary'>
+            <MarkdownRenderer className='-mb-10' content={product.summary} />
+          </section>
+        )}
+
+        <div className='mt-5 flex flex-col gap-2'>
           {hasVariants && (
             <VariantSelect
               selectedVariantId={selectedVariantId}
@@ -136,57 +144,53 @@ const ProductPurchasePanel = () => {
               }}
             />
           )}
-        </section>
 
-        {product.summary && (
-          <section aria-label='Product summary'>
-            <MarkdownRenderer className='-mb-10' content={product.summary} />
-          </section>
-        )}
+          <div className='grid grid-cols-5 gap-2 pt-4'>
+            <Button
+              fullWidth
+              className='bg-primary/10 border-primary text-primary col-span-2 sm:col-span-1'
+              isLoading={isAddingToFav}
+              radius='none'
+              size='lg'
+              startContent={
+                !isAddingToFav && (
+                  <HeartIcon className={hasFavorite ? 'fill-current' : ''} />
+                )
+              }
+              variant='faded'
+              onPress={() => {
+                return addToFav(product.id)
+              }}
+            />
 
-        <div className='grid grid-cols-5 gap-2 pt-4'>
-          <Button
-            fullWidth
-            className='bg-primary/10 border-primary text-primary col-span-2 sm:col-span-1'
-            isLoading={isAddingToFav}
-            radius='none'
-            size='lg'
-            startContent={
-              !isAddingToFav && (
-                <HeartIcon className={hasFavorite ? 'fill-current' : ''} />
-              )
-            }
-            variant='faded'
-            onPress={() => {
-              return addToFav(product.id)
-            }}
-          />
-
-          <Button
-            fullWidth
-            className='text-secondary col-span-3 sm:col-span-4'
-            color='primary'
-            isDisabled={!canAddToCart}
-            isLoading={isAddingToCart}
-            radius='none'
-            size='lg'
-            startContent={!isAddingToCart && <ShoppingCartIcon />}
-            onPress={() => {
-              return addToCart({
-                productId: product.id,
-                variantId: selectedVariantId,
-                quantity: 1,
-              })
-            }}
-          >
-            <span className='hidden sm:block'>
-              {hasVariants && !selectedVariantId ? (
-                <span>{tCart('require')}</span>
-              ) : (
-                <span>{isOutOfStock ? tCart('outOfStock') : tCart('add')}</span>
-              )}
-            </span>
-          </Button>
+            <Button
+              fullWidth
+              className='text-secondary col-span-3 sm:col-span-4'
+              color='primary'
+              isDisabled={!canAddToCart}
+              isLoading={isAddingToCart}
+              radius='none'
+              size='lg'
+              startContent={!isAddingToCart && <ShoppingCartIcon />}
+              onPress={() => {
+                return addToCart({
+                  productId: product.id,
+                  variantId: selectedVariantId,
+                  quantity: 1,
+                })
+              }}
+            >
+              <span className='hidden sm:block'>
+                {hasVariants && !selectedVariantId ? (
+                  <span>{tCart('require')}</span>
+                ) : (
+                  <span>
+                    {isOutOfStock ? tCart('outOfStock') : tCart('add')}
+                  </span>
+                )}
+              </span>
+            </Button>
+          </div>
         </div>
 
         <Divider className='bg-default-100' />

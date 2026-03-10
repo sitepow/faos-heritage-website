@@ -67,7 +67,7 @@ const ProductImagePreview = ({ product, images = [] }: Props) => {
                 'size-20 cursor-pointer border-2 transition-all',
                 isActive
                   ? 'border-primary'
-                  : 'border-transparent opacity-60 hover:opacity-100',
+                  : 'border-default-300 opacity-60 hover:opacity-100',
               )}
               image={image}
               onClick={() => handleSelectImage(index)}

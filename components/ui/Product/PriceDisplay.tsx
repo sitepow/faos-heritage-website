@@ -25,12 +25,7 @@ const PriceDisplay = ({
       className={cn('flex flex-col items-end gap-0.5', className)}
       {...props}
     >
-      <span
-        className={cn(
-          'text-lg',
-          hasDiscount ? 'text-danger' : 'text-default-700',
-        )}
-      >
+      <span className={cn('text-danger text-lg')}>
         {formatCurrency(price, currencyOptions)}
       </span>
 
