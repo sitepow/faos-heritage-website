@@ -19,6 +19,31 @@ const stripLocaleFromPath = (pathname: string): string => {
 
 const middleware = async (request: NextRequest) => {
   const { pathname } = request.nextUrl
+  const userAgent = request.headers.get('user-agent') || ''
+
+  const isBot =
+    /facebookexternalhit|Facebot|Twitterbot|Pinterest|Googlebot|bingbot|DuckDuckBot/i.test(
+      userAgent,
+    )
+
+  const isExcluded =
+    pathname === '/sitemap.xml' ||
+    pathname === '/robots.txt' ||
+    pathname === '/favicon.ico' ||
+    pathname.startsWith('/s/') ||
+    pathname.startsWith('/uploads/')
+
+  if (isExcluded) {
+    return NextResponse.next()
+  }
+
+  const pathParts = pathname.split('/')
+  const localeInPath = pathParts[1]
+  const hasValidLocale = routing.locales.includes(localeInPath)
+
+  if (isBot && !hasValidLocale) {
+    return intlMiddleware(request)
+  }
 
   const token = await getToken({
     req: request,
@@ -61,20 +86,7 @@ const middleware = async (request: NextRequest) => {
     return NextResponse.next()
   }
 
-  const isExcluded =
-    pathname === '/sitemap.xml' ||
-    pathname === '/robots.txt' ||
-    pathname === '/favicon.ico' ||
-    pathname.startsWith('/s/')
-
-  if (isExcluded) {
-    return NextResponse.next()
-  }
-
   const normalizedPath = stripLocaleFromPath(pathname)
-  const pathParts = pathname.split('/')
-  const localeInPath = pathParts[1]
-  const hasValidLocale = routing.locales.includes(localeInPath)
 
   if (!hasValidLocale) {
     const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value
@@ -115,7 +127,7 @@ const middleware = async (request: NextRequest) => {
 
 export const config = {
   matcher: [
-    '/((?!api|trpc|s/|_next|_vercel|favicon.ico|sitemap.xml|robots.txt|.*\\..*).*)',
+    '/((?!api|trpc|s/|uploads/|_next|_vercel|favicon.ico|sitemap.xml|robots.txt|.*\\..*).*)',
   ],
 }
 
