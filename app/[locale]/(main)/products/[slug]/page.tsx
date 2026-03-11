@@ -59,10 +59,14 @@ const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
     new Set([...dynamicKeywords, ...productKeywords, ...baseKeywords]),
   )
 
+  const finalOgImage = ogImage
+    ? `${DEFALUT_APP_PATH}${ogImage.startsWith('/') ? '' : '/'}${ogImage}`
+    : undefined
+
   return constructMetadata({
     title: pageTitle,
     description: pageDescription,
-    ogImage: ogImage ? `${DEFALUT_APP_PATH}/${ogImage}` : undefined,
+    ogImage: finalOgImage,
     canonicalPath: `/products/${slug}`,
     keywords: finalKeywords,
     locale: locale,
