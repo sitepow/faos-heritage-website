@@ -45,6 +45,10 @@ const constructMetadata = async ({
     routing.locales.map((loc) => [loc, `${baseUrl}/${loc}${canonicalPath}`]),
   )
 
+  const ogImageWithCacheBuster = ogImage
+    ? `${ogImage}?v=${Date.now()}`
+    : ogImage
+
   return {
     title: {
       default: title || t('home.title'),
@@ -64,13 +68,13 @@ const constructMetadata = async ({
       description: description ?? undefined,
       url: currentUrl,
       type: 'website',
-      images: [{ url: ogImage, width: 1200, height: 630 }],
+      images: [{ url: ogImageWithCacheBuster, width: 1200, height: 630 }],
     },
     twitter: {
       card: 'summary_large_image',
       title: title ? `${title} | ${brandName}` : t('home.title'),
       description: description ?? undefined,
-      images: [ogImage],
+      images: [ogImageWithCacheBuster],
     },
     ...(noIndex && {
       robots: { index: false, follow: false },
