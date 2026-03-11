@@ -9,20 +9,24 @@ import { fail, ok, type ActionResult } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
 import { ImageOptimizeServer } from '@/utils/image.server'
 
-const ensureUploadDirExists = async () => {
+const ensureUploadDirExists = async (): Promise<void> => {
   await fs.mkdir(UPLOAD_DIR, { recursive: true })
+  return
 }
 
-const generateFileName = () => `${crypto.randomUUID()}.webp`
-
 const saveOptimizedImage = async (file: File): Promise<string> => {
-  const filename = generateFileName()
+  const { buffer, format } = await ImageOptimizeServer(await file.arrayBuffer())
+
+  const filename = `${crypto.randomUUID()}.${format}`
   const absolutePath = path.join(UPLOAD_DIR, filename)
-  const relativePath = `${UPLOAD_URL_PREFIX}/${filename}`
 
-  const optimizedBuffer = await ImageOptimizeServer(await file.arrayBuffer())
+  const cleanPrefix = UPLOAD_URL_PREFIX.endsWith('/')
+    ? UPLOAD_URL_PREFIX.slice(0, -1)
+    : UPLOAD_URL_PREFIX
 
-  await fs.writeFile(absolutePath, new Uint8Array(optimizedBuffer))
+  const relativePath = `${cleanPrefix}/${filename}`
+
+  await fs.writeFile(absolutePath, new Uint8Array(buffer))
 
   return relativePath
 }
@@ -32,7 +36,7 @@ const uploadFiles = async (
 ): Promise<ActionResult<{ urls: string[] }>> => {
   const files = formData.getAll('files') as File[]
 
-  if (!files.length) {
+  if (files.length === 0) {
     return fail(ERROR_CODES.VALIDATION_ERROR)
   }
 
