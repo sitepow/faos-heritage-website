@@ -62,7 +62,9 @@ const ProductCard = memo(({ className, product }: Props) => {
       </CardBody>
 
       <CardFooter className='justify-end'>
-        <Button variant='bordered'> {tActions('more')}</Button>
+        <Link aria-label={product?.name || 'View product'} href={productHref}>
+          <Button variant='bordered'> {tActions('more')}</Button>
+        </Link>
       </CardFooter>
     </Card>
   )
