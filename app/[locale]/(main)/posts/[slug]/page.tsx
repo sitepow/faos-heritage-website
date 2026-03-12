@@ -6,7 +6,7 @@ import { PostClient } from './post.client'
 
 import { IMAGE_FALLBACK } from '@/constants'
 import { getPostBySlug } from '@/features/post/post.action'
-import { constructMetadata } from '@/lib/metadata'
+import { constructMetadata, getSafeOgImage } from '@/lib/metadata'
 
 interface Props {
   params: Promise<{ slug: string; locale: string }>
@@ -43,11 +43,12 @@ const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
   )
 
   const ogImage = post.featuredImage || IMAGE_FALLBACK.OG
+  const finalOgImage = getSafeOgImage(ogImage, post.updatedAt)
 
   return constructMetadata({
     title: pageTitle,
     description: pageDescription,
-    ogImage,
+    ogImage: finalOgImage,
     canonicalPath: `/posts/${slug}`,
     keywords: finalKeywords,
     locale: locale,

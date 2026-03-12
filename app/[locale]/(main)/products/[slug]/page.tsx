@@ -4,9 +4,9 @@ import type { Metadata } from 'next'
 
 import { ProductClient } from './product.client'
 
-import { COUNTRY_CONFIG, DEFALUT_APP_PATH } from '@/constants'
+import { COUNTRY_CONFIG } from '@/constants'
 import { getProductBySlug } from '@/features/product/product.action'
-import { constructMetadata } from '@/lib/metadata'
+import { constructMetadata, getSafeOgImage } from '@/lib/metadata'
 import { getServerUser } from '@/lib/session'
 import { formatCurrencyRange, getExchangeRates } from '@/utils'
 
@@ -42,6 +42,7 @@ const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
   const ogImage =
     product.images?.find((img) => img.isPrimary)?.url ||
     product.images?.[0]?.url
+  const finalOgImage = getSafeOgImage(ogImage, product.updatedAt)
   const pageTitle = product.metaTitle || product.name
 
   const baseDescription =
@@ -58,12 +59,6 @@ const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
   const finalKeywords = Array.from(
     new Set([...dynamicKeywords, ...productKeywords, ...baseKeywords]),
   )
-
-  const rawOgImage = ogImage
-    ? `${DEFALUT_APP_PATH}${ogImage.startsWith('/') ? '' : '/'}${ogImage}`
-    : undefined
-
-  const finalOgImage = rawOgImage?.replace(/([^:]\/)\/+/g, '$1')
 
   return constructMetadata({
     title: pageTitle,

@@ -6,7 +6,7 @@ import type { Metadata } from 'next'
 import { IMAGE_FALLBACK } from '@/constants'
 import { routing } from '@/i18n/routing'
 
-interface Props {
+interface MetadataConfig {
   title?: string
   description?: string
   canonicalPath?: string
@@ -26,9 +26,8 @@ const constructMetadata = async ({
   keywords,
   alternates,
   locale = 'en',
-}: Props = {}): Promise<Metadata> => {
+}: MetadataConfig = {}): Promise<Metadata> => {
   const baseUrl = process.env.APP_URL!
-
   const currentUrl = `${baseUrl}/${locale}${canonicalPath}`
 
   const t = await getTranslations({ locale, namespace: 'meta' })
@@ -81,4 +80,20 @@ const constructMetadata = async ({
   }
 }
 
-export { constructMetadata }
+const getSafeOgImage = (
+  ogImage?: string | null,
+  updatedAt?: Date | string | null,
+): string | undefined => {
+  if (!ogImage) {
+    return undefined
+  }
+
+  const imageVersion = updatedAt ? new Date(updatedAt).getTime() : 'v1'
+
+  const rawOgImage = `${process.env.APP_URL}${ogImage.startsWith('/') ? '' : '/'}${ogImage}?v=${imageVersion}`
+
+  return rawOgImage.replace(/([^:]\/)\/+/g, '$1')
+}
+
+export { constructMetadata, getSafeOgImage }
+export type { MetadataConfig }
