@@ -1,17 +1,44 @@
 type FormatDateValue = Date | string | number | null | undefined
+type FormatType = 'full' | 'date' | 'dateTime' | 'short' | 'time'
 
-const DEFAULT_DATE_OPTIONS: Intl.DateTimeFormatOptions = {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-  hour: '2-digit',
-  minute: '2-digit',
+const DATE_CONFIGS: Record<FormatType, Intl.DateTimeFormatOptions> = {
+  full: {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  },
+  date: {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  },
+  dateTime: {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  },
+  short: {
+    year: '2-digit',
+    month: 'short',
+    day: 'numeric',
+  },
+  time: {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  },
 }
 
 const formatDate = (
   value: FormatDateValue,
-  locale: string = 'en-US',
-  options: Intl.DateTimeFormatOptions = DEFAULT_DATE_OPTIONS,
+  locale: string = 'th',
+  formatType: FormatType = 'full',
+  customOptions?: Intl.DateTimeFormatOptions,
 ): string | null => {
   if (!value) {
     return null
@@ -24,14 +51,12 @@ const formatDate = (
   }
 
   const targetLocale = locale === 'th' ? 'th-TH' : locale
+  const options = customOptions || DATE_CONFIGS[formatType]
 
   return new Intl.DateTimeFormat(targetLocale, options).format(date)
 }
 
-const formatCompactNumber = (
-  number: number,
-  locale: string = 'en-US',
-): string => {
+const formatCompactNumber = (number: number, locale: string = 'th'): string => {
   const targetLocale = locale === 'th' ? 'th-TH' : locale
 
   return new Intl.NumberFormat(targetLocale, {
@@ -42,3 +67,4 @@ const formatCompactNumber = (
 }
 
 export { formatDate, formatCompactNumber }
+export type { FormatDateValue, FormatType }
