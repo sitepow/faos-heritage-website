@@ -21,6 +21,7 @@ const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
     description: t('description'),
     canonicalPath: '/affiliate',
     keywords: keywords,
+    ogImage: '/images/banner/affiliate.avif',
   })
 }
 
