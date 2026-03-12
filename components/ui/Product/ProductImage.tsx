@@ -19,7 +19,7 @@ const ProductImage = ({ image, className, fill, ...props }: Props) => {
   return (
     <div
       className={cn(
-        'border-default-100 relative aspect-square size-full shrink-0 overflow-hidden rounded-lg border bg-white transition-all duration-1000 ease-in-out',
+        'border-default-100 dark:bg-default-50 relative aspect-square size-full shrink-0 overflow-hidden rounded-lg border transition-all duration-1000 ease-in-out',
         className,
       )}
       {...props}
