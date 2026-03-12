@@ -101,7 +101,7 @@ const ProductPurchasePanel = () => {
     <Card className='border-default-100 border' radius='sm' shadow='none'>
       <CardBody className='flex flex-col gap-4'>
         <header>
-          <div className='flex flex-wrap items-center gap-2'>
+          <div className='flex flex-col gap-2'>
             <CategoryChip categoryName={product.category?.name} />
             <ProductRating
               reviews={product.reviews}
