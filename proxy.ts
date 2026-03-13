@@ -17,12 +17,12 @@ const stripLocaleFromPath = (pathname: string): string => {
   return pathWithoutLocale || '/'
 }
 
-const middleware = async (request: NextRequest) => {
+const middleware = async (request: NextRequest): Promise<NextResponse> => {
   const { pathname } = request.nextUrl
   const userAgent = request.headers.get('user-agent') || ''
 
   const isBot =
-    /facebookexternalhit|Facebot|Twitterbot|Pinterest|Googlebot|bingbot|DuckDuckBot/i.test(
+    /facebookexternalhit|Facebot|Twitterbot|Pinterest|Googlebot|bingbot|DuckDuckBot|Lighthouse/i.test(
       userAgent,
     )
 
@@ -41,7 +41,7 @@ const middleware = async (request: NextRequest) => {
   const localeInPath = pathParts[1]
   const hasValidLocale = routing.locales.includes(localeInPath)
 
-  if (isBot && !hasValidLocale) {
+  if (isBot) {
     return intlMiddleware(request)
   }
 
@@ -49,6 +49,7 @@ const middleware = async (request: NextRequest) => {
     req: request,
     secret: process.env.NEXTAUTH_SECRET,
   })
+
   const roles = (token?.roles as Role[]) || []
   const loggedIn = !!token
 
@@ -125,10 +126,11 @@ const middleware = async (request: NextRequest) => {
   return intlMiddleware(request)
 }
 
-export const config = {
+const config = {
   matcher: [
     '/((?!api|trpc|s/|uploads/|_next|_vercel|favicon.ico|sitemap.xml|robots.txt|.*\\..*).*)',
   ],
 }
 
+export { middleware, config }
 export default middleware
