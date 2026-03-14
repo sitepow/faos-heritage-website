@@ -65,6 +65,7 @@ const DashboardPage = () => {
     topProductsData,
     affiliateStats,
     affiliatePerformanceData,
+    inventoryValue,
     isLoading: isChartLoading,
   } = useDashboardCharts()
 
@@ -77,7 +78,9 @@ const DashboardPage = () => {
     isReviewLoading ||
     isChartLoading
 
-  const isStatArray = (data: unknown): data is StatItem[] => Array.isArray(data)
+  const isStatArray = (data: unknown): data is StatItem[] => {
+    return Array.isArray(data)
+  }
 
   const getStatusLabel = (key: string) => {
     return statusTranslations[key as keyof typeof statusTranslations] || key
@@ -87,7 +90,7 @@ const DashboardPage = () => {
     <Container className='flex flex-col gap-8'>
       <section className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3'>
         {isLoading ? (
-          Array.from({ length: 8 }).map((_, i) => (
+          Array.from({ length: 9 }).map((_, i) => (
             <Skeleton
               key={i}
               className='border-default-100 h-[120px] rounded-xl border'
@@ -104,6 +107,14 @@ const DashboardPage = () => {
                   value={stat.value}
                 />
               ))}
+
+            {inventoryValue && (
+              <StatCard
+                isCurrency={inventoryValue.isCurrency}
+                label={inventoryValue.name}
+                value={inventoryValue.value}
+              />
+            )}
 
             {isStatArray(affiliateStats) &&
               affiliateStats.map((stat) => (

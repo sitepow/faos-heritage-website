@@ -197,6 +197,44 @@ const getAffiliateStats = async () => {
   ]
 }
 
+const getTotalInventoryValue = async () => {
+  const products = await prisma.product.findMany({
+    where: {
+      isActive: true,
+    },
+    select: {
+      price: true,
+      stockQuantity: true,
+      variants: {
+        where: {
+          isActive: true,
+        },
+        select: {
+          price: true,
+          stockQuantity: true,
+        },
+      },
+    },
+  })
+
+  const totalValue = products.reduce((acc, product) => {
+    if (product.variants.length > 0) {
+      const variantValue = product.variants.reduce((vAcc, variant) => {
+        return vAcc + Number(variant.price) * variant.stockQuantity
+      }, 0)
+      return acc + variantValue
+    }
+
+    return acc + Number(product.price) * product.stockQuantity
+  }, 0)
+
+  return {
+    name: 'มูลค่าสินค้าทั้งหมดในคลัง',
+    value: totalValue,
+    isCurrency: true,
+  }
+}
+
 export {
   getAffiliatePerformanceData,
   getRevenueChartData,
@@ -204,4 +242,5 @@ export {
   getSalesByCategoryData,
   getTopProductsData,
   getAffiliateStats,
+  getTotalInventoryValue,
 }
