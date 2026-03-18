@@ -3,7 +3,7 @@ import { Input, Button, Form } from '@heroui/react'
 import { useTranslations } from 'next-intl'
 import { useFormContext } from 'react-hook-form'
 
-import type { UserLoginInput } from '@/features/user/user.schema'
+import type { UserLoginInput } from '@/features/user/schema'
 
 const LoginForm = ({
   isPending,

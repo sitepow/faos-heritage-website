@@ -29,8 +29,8 @@ import type { Selection } from '@heroui/react'
 
 import { ProductImage } from '@/components/ui/Product/ProductImage'
 import { IMAGE_FALLBACK } from '@/constants'
-import { useCategoriesAdmin } from '@/features/category/category.hook'
-import { useCategoryUIStore } from '@/features/category/category.store'
+import { useCategoriesAdmin } from '@/features/category/hook'
+import { useCategoryUIStore } from '@/features/category/store'
 import { useIsMounted } from '@/hooks/useIsMounted'
 
 interface Props {

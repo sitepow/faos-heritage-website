@@ -5,7 +5,7 @@ import { PlusIcon, DownloadIcon } from 'lucide-react'
 import { useState, useMemo } from 'react'
 import * as XLSX from 'xlsx'
 
-import type { ProductWithPayload } from '@/features/product/product.action'
+import type { ProductWithPayload } from '@/features/product/action'
 import type { Selection } from '@heroui/react'
 
 import { InventoryTable } from './_components/InventoryTable'
@@ -13,13 +13,10 @@ import { TableConfigHeader } from '../products/_components/TableConfigHeader'
 
 import { Container } from '@/components/layouts/Container'
 import { StatCard } from '@/components/ui/StatCard'
-import {
-  useProductsAdmin,
-  useProductStats,
-} from '@/features/product/product.hook'
-import { useStockStore } from '@/features/stock/stock.store'
+import { useProductsAdmin, useProductStats } from '@/features/product/hook'
+import { useStockStore } from '@/features/stock/store'
 import { StockAdjustmentForm } from '@/features/stock/ui/StockAdjustmentForm'
-import { exportStockHistoryAction } from '@/features/stock-history/stock-history.report'
+import { exportStockHistoryAction } from '@/features/stock-history/report'
 import { formatDate } from '@/utils'
 
 const InventoryPage = () => {

@@ -18,8 +18,8 @@ import {
   useOrders,
   useOrderStats,
   useRevenueStats,
-} from '@/features/order/order.hook'
-import { useOrderStore } from '@/features/order/order.store'
+} from '@/features/order/hook'
+import { useOrderStore } from '@/features/order/store'
 
 const OrderPage = () => {
   const [page, setPage] = useState(1)

@@ -23,14 +23,14 @@ import { Controller, useForm } from 'react-hook-form'
 import type { KeyboardEvent } from 'react'
 import type { Resolver } from 'react-hook-form'
 
-import { useProductUIStore } from '../../product/product.store'
-import { useProductLocale } from '../product-localization.hook'
-import { useProductLocaleMutation } from '../product-localization.mutation'
+import { useProductUIStore } from '../../product/store'
+import { useProductLocale } from '../hook'
+import { useProductLocaleMutation } from '../mutation'
 import {
   productLocalizationSchema,
   type ProductLocalizationInput,
-} from '../product-localization.schema'
-import { useProductLocaleUIStore } from '../product-localization.store'
+} from '../schema'
+import { useProductLocaleUIStore } from '../store'
 
 import { AlertSeoBestPractice } from '@/components/ui/AlertSeoBestPractice'
 import { SectionLabel } from '@/components/ui/SectionHeader'

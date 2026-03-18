@@ -13,9 +13,9 @@ import { ConfirmDeleteModal } from '@/app/(dashboard)/_components/ConfirmDeleteM
 import { TableConfigHeader } from '@/app/(dashboard)/dashboard/products/_components/TableConfigHeader'
 import { Container } from '@/components/layouts/Container'
 import { StatCard } from '@/components/ui/StatCard'
-import { useTags, useTagStat } from '@/features/tag/tag.hook'
-import { useTagMutation } from '@/features/tag/tag.mutation'
-import { useTagUIStore } from '@/features/tag/tag.store'
+import { useTags, useTagStat } from '@/features/tag/hook'
+import { useTagMutation } from '@/features/tag/mutation'
+import { useTagUIStore } from '@/features/tag/store'
 import { TagForm } from '@/features/tag/ui/TagForm'
 
 const TagPage = () => {

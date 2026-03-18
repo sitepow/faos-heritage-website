@@ -5,14 +5,14 @@ import { ArrowRightIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useLocale, useTranslations } from 'next-intl'
 
-import type { GetProductsInfiniteResult } from '@/features/product/product.types'
+import type { GetProductsInfiniteResult } from '@/features/product/types'
 
 import { AppSection } from '@/components/layouts/AppSection'
 import { Container } from '@/components/layouts/Container'
 import { ProductSection } from '@/components/ui/Product/ProductSection'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { PAGINATION } from '@/constants'
-import { useProducts } from '@/features/product/product.hook'
+import { useProducts } from '@/features/product/hook'
 
 interface Props {
   initialData: GetProductsInfiniteResult

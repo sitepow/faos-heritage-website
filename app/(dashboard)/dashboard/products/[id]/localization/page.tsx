@@ -20,14 +20,14 @@ import { ConfirmDeleteModal } from '@/app/(dashboard)/_components/ConfirmDeleteM
 import { Container } from '@/components/layouts/Container'
 import { AlertSeoBestPractice } from '@/components/ui/AlertSeoBestPractice'
 import { StatCard } from '@/components/ui/StatCard'
-import { useProductAdmin } from '@/features/product/product.hook'
-import { useProductUIStore } from '@/features/product/product.store'
+import { useProductAdmin } from '@/features/product/hook'
+import { useProductUIStore } from '@/features/product/store'
 import {
   useProductLocales,
   useProductLocaleStat,
-} from '@/features/product-localization/product-localization.hook'
-import { useProductLocaleMutation } from '@/features/product-localization/product-localization.mutation'
-import { useProductLocaleUIStore } from '@/features/product-localization/product-localization.store'
+} from '@/features/product-localization/hook'
+import { useProductLocaleMutation } from '@/features/product-localization/mutation'
+import { useProductLocaleUIStore } from '@/features/product-localization/store'
 import { ProductLocalizationForm } from '@/features/product-localization/ui/ProductLocalizationForm'
 
 const ProductLocalizationPage = () => {

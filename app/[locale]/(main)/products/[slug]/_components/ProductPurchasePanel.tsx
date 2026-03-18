@@ -14,11 +14,11 @@ import { MarkdownRenderer } from '@/components/ui/Markdown/MarkdownRenderer'
 import { VariantTable } from '@/components/ui/Product/VariantTable'
 import { VariantSelect } from '@/components/ui/VariantSelect'
 import { ViewCount } from '@/components/ui/ViewCount'
-import { useAffiliateProfile } from '@/features/affiliate/affiliate.hook'
-import { useCartMutation } from '@/features/cart/cart.mutation'
-import { useFavoriteMutation } from '@/features/favorite/favorite.mutation'
-import { useProductDetailStore } from '@/features/product/product.store'
-import { useShortenMutation } from '@/features/shorten/shorten.hook'
+import { useAffiliateProfile } from '@/features/affiliate/hook'
+import { useCartMutation } from '@/features/cart/mutation'
+import { useFavoriteMutation } from '@/features/favorite/mutation'
+import { useProductDetailStore } from '@/features/product/store'
+import { useShortenMutation } from '@/features/shorten/hook'
 
 const ProductPurchasePanel = () => {
   const tActions = useTranslations('actions')

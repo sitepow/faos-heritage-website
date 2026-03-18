@@ -1,7 +1,7 @@
 'use client'
 
 import { StarRating } from '@/components/ui/StarRating'
-import { useProductRating } from '@/features/product/product.hook'
+import { useProductRating } from '@/features/product/hook'
 
 interface Props {
   reviews?: { rating: number }[]

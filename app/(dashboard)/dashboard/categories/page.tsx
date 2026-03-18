@@ -13,12 +13,9 @@ import { ConfirmDeleteModal } from '@/app/(dashboard)/_components/ConfirmDeleteM
 import { TableConfigHeader } from '@/app/(dashboard)/dashboard/products/_components/TableConfigHeader'
 import { Container } from '@/components/layouts/Container'
 import { StatCard } from '@/components/ui/StatCard'
-import {
-  useCategoriesAdmin,
-  useCategoryStat,
-} from '@/features/category/category.hook'
-import { useCategoryMutation } from '@/features/category/category.mutation'
-import { useCategoryUIStore } from '@/features/category/category.store'
+import { useCategoriesAdmin, useCategoryStat } from '@/features/category/hook'
+import { useCategoryMutation } from '@/features/category/mutation'
+import { useCategoryUIStore } from '@/features/category/store'
 import { CategoryForm } from '@/features/category/ui/CategoryForm'
 
 const CategoryPage = () => {

@@ -25,13 +25,10 @@ import {
   type Resolver,
 } from 'react-hook-form'
 
-import { useShippingCountry } from '../shipping.hook'
-import { useShippingMutation } from '../shipping.mutation'
-import {
-  shippingCountrySchema,
-  type ShippingCountryInput,
-} from '../shipping.schema'
-import { useShippingUIStore } from '../shipping.store'
+import { useShippingCountry } from '../hook'
+import { useShippingMutation } from '../mutation'
+import { shippingCountrySchema, type ShippingCountryInput } from '../schema'
+import { useShippingUIStore } from '../store'
 
 import { SectionLabel } from '@/components/ui/SectionHeader'
 import localeTh from '@/messages/th/ui/common.json'

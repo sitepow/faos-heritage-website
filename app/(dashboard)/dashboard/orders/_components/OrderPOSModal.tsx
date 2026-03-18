@@ -21,12 +21,12 @@ import {
 import { useMemo, useState } from 'react'
 import { toast } from 'react-toastify'
 
-import type { CreateOrderInput } from '@/features/order/order.action'
+import type { CreateOrderInput } from '@/features/order/action'
 
-import { useAffiliates } from '@/features/affiliate/affiliate.hook'
-import { useAdminOrderMutation } from '@/features/order/order.mutation'
-import { useProductsAdmin } from '@/features/product/product.hook'
-import { useActiveStorefronts } from '@/features/storefront/storefront.hook'
+import { useAffiliates } from '@/features/affiliate/hook'
+import { useAdminOrderMutation } from '@/features/order/mutation'
+import { useProductsAdmin } from '@/features/product/hook'
+import { useActiveStorefronts } from '@/features/storefront/hook'
 import { formatCurrency } from '@/utils'
 
 interface ProductVariant {

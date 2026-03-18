@@ -1,6 +1,6 @@
 'use client'
 
-import type { GetPostsInfiniteResult } from '@/features/post/post.action'
+import type { GetPostsInfiniteResult } from '@/features/post/action'
 
 import { PostCard, PostCardSkeleton } from './PostCard'
 

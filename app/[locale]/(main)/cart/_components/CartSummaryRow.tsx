@@ -1,4 +1,4 @@
-import { useExchangeRate } from '@/features/exchange-rate/exchange-rate.hook'
+import { useExchangeRate } from '@/features/exchange-rate/hook'
 import { cn, formatCurrency } from '@/utils'
 
 type Props = {

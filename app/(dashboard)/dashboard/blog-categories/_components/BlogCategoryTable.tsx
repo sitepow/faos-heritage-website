@@ -24,7 +24,7 @@ import {
 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
-import type { GetBlogCategoriesResult } from '@/features/blog-category/blog-category.action'
+import type { GetBlogCategoriesResult } from '@/features/blog-category/action'
 import type { Selection } from '@heroui/react'
 
 import { useIsMounted } from '@/hooks/useIsMounted'

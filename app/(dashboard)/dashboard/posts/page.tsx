@@ -14,9 +14,9 @@ import { ConfirmDeleteModal } from '@/app/(dashboard)/_components/ConfirmDeleteM
 import { Container } from '@/components/layouts/Container'
 import { AlertSeoBestPractice } from '@/components/ui/AlertSeoBestPractice'
 import { StatCard } from '@/components/ui/StatCard'
-import { usePostStats, usePostsAdmin } from '@/features/post/post.hook'
-import { usePostMutation } from '@/features/post/post.mutation'
-import { usePostUIStore } from '@/features/post/post.store'
+import { usePostStats, usePostsAdmin } from '@/features/post/hook'
+import { usePostMutation } from '@/features/post/mutation'
+import { usePostUIStore } from '@/features/post/store'
 import { useIsMounted } from '@/hooks/useIsMounted'
 
 const PostPage = () => {

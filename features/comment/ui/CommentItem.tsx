@@ -5,12 +5,12 @@ import { ReplyIcon, XIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
-import type { getComments } from '@/features/comment/comment.action'
+import type { getComments } from '@/features/comment/action'
 
 import { CommentForm } from './CommentForm'
 
 import { ConfirmDeleteModal } from '@/components/ui/ConfirmDeleteModal'
-import { useCommentMutation } from '@/features/comment/comment.mutation'
+import { useCommentMutation } from '@/features/comment/mutation'
 import { useAuth } from '@/hooks/useAuth'
 import { formatDate } from '@/utils/date'
 

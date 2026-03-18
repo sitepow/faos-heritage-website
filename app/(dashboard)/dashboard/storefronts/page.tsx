@@ -19,9 +19,9 @@ import { TableConfigHeader } from '../products/_components/TableConfigHeader'
 import { ConfirmDeleteModal } from '@/app/(dashboard)/_components/ConfirmDeleteModal'
 import { Container } from '@/components/layouts/Container'
 import { StatCard } from '@/components/ui/StatCard'
-import { useStorefronts } from '@/features/storefront/storefront.hook'
-import { useStorefrontMutation } from '@/features/storefront/storefront.mutation'
-import { useStorefrontStore } from '@/features/storefront/storefront.store'
+import { useStorefronts } from '@/features/storefront/hook'
+import { useStorefrontMutation } from '@/features/storefront/mutation'
+import { useStorefrontStore } from '@/features/storefront/store'
 import { StorefrontForm } from '@/features/storefront/ui/StorefrontForm'
 
 const StorefrontPage = () => {

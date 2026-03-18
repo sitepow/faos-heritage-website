@@ -14,13 +14,13 @@ import {
 } from '@heroui/react'
 import { useMemo } from 'react'
 
-import type { StockHistoryListItem } from '@/features/stock-history/stock-history.action'
+import type { StockHistoryListItem } from '@/features/stock-history/action'
 
 import { PaginationWrapper } from '@/components/ui/PaginationWrapper'
 import { IMAGE_FALLBACK } from '@/constants'
-import { PRODUCT_UNIT_TH_LABELS } from '@/features/product/product.constant'
-import { STOCK_MOVEMENT_LABELS } from '@/features/stock-history/stock-history.constant'
-import { useStockHistory } from '@/features/stock-history/stock-history.hook'
+import { PRODUCT_UNIT_TH_LABELS } from '@/features/product/constant'
+import { STOCK_MOVEMENT_LABELS } from '@/features/stock-history/constant'
+import { useStockHistory } from '@/features/stock-history/hook'
 import { useIsMounted } from '@/hooks/useIsMounted'
 import { formatDate, formatNumber } from '@/utils'
 

@@ -3,7 +3,7 @@
 import { PostStatus } from '@prisma/client'
 import { useLocale, useTranslations } from 'next-intl'
 
-import type { GetPostsInfiniteResult } from '@/features/post/post.action'
+import type { GetPostsInfiniteResult } from '@/features/post/action'
 
 import { AppSection } from '@/components/layouts/AppSection'
 import { Container } from '@/components/layouts/Container'
@@ -11,7 +11,7 @@ import { EmptyState } from '@/components/ui/EmptyState'
 import { PostSection } from '@/components/ui/Post/PostSection'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { THRESHOLD_SCROLL_FETCH } from '@/constants'
-import { usePostsInfinite } from '@/features/post/post.hook'
+import { usePostsInfinite } from '@/features/post/hook'
 import { useWindowInfiniteScroll } from '@/hooks/useWindowInfiniteScroll'
 
 interface Props {

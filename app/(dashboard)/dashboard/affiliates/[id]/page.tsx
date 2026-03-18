@@ -20,18 +20,18 @@ import { ChevronLeftIcon, PackageIcon } from 'lucide-react'
 import { useParams, useRouter } from 'next/navigation'
 import { useMemo, useState } from 'react'
 
-import type { GetAffiliateCommissionsResult } from '@/features/affiliate-payout/payout.action'
+import type { GetAffiliateCommissionsResult } from '@/features/affiliate-payout/action'
 import type { Selection } from '@heroui/react'
 
 import { AffiliatePayoutTable } from '../_components/AffiliatePayoutTable'
 
 import { Container } from '@/components/layouts/Container'
-import { useAffiliateById } from '@/features/affiliate/affiliate.hook'
+import { useAffiliateById } from '@/features/affiliate/hook'
 import {
   useAffiliateCommissions,
   useAffiliatePayouts,
-} from '@/features/affiliate-payout/payout.hook'
-import { calculateCommissionByStatus } from '@/features/affiliate-payout/payout.util'
+} from '@/features/affiliate-payout/hook'
+import { calculateCommissionByStatus } from '@/features/affiliate-payout/util'
 import { PayoutForm } from '@/features/affiliate-payout/ui/PayoutForm'
 import { useTranslateStatus } from '@/hooks/useTranslateStatus'
 import { formatCurrency, formatDate } from '@/utils'

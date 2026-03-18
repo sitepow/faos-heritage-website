@@ -7,7 +7,7 @@ import { useLocale } from 'next-intl'
 import { Container } from '../layouts/Container'
 
 import { IMAGE_FALLBACK } from '@/constants'
-import { useCategories } from '@/features/category/category.hook'
+import { useCategories } from '@/features/category/hook'
 
 const CategoryLists = () => {
   const locale = useLocale()

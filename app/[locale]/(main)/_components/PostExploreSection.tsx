@@ -6,13 +6,13 @@ import { ArrowRightIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useLocale, useTranslations } from 'next-intl'
 
-import type { GetPostsInfiniteResult } from '@/features/post/post.action'
+import type { GetPostsInfiniteResult } from '@/features/post/action'
 
 import { AppSection } from '@/components/layouts/AppSection'
 import { Container } from '@/components/layouts/Container'
 import { PostSection } from '@/components/ui/Post/PostSection'
 import { SectionHeader } from '@/components/ui/SectionHeader'
-import { usePosts } from '@/features/post/post.hook'
+import { usePosts } from '@/features/post/hook'
 
 interface Props {
   initialData?: GetPostsInfiniteResult

@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 
 import { CategoryClient } from './category.client'
 
-import { getCategoryBySlug } from '@/features/category/category.action'
+import { getCategoryBySlug } from '@/features/category/action'
 import { constructMetadata } from '@/lib/metadata'
 
 interface Props {

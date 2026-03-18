@@ -12,7 +12,7 @@ import { CategoryLists } from '@/components/ui/CategoryLists'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { YouTubeList } from '@/components/ui/YouTubeList'
 import { PAGINATION } from '@/constants'
-import { getProductsInfinite } from '@/features/product/product.action'
+import { getProductsInfinite } from '@/features/product/action'
 import { constructMetadata } from '@/lib/metadata'
 
 export async function generateMetadata({

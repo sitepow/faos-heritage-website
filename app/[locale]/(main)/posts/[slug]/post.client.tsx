@@ -3,7 +3,7 @@
 import { useLocale, useTranslations } from 'next-intl'
 import { useEffect, useRef } from 'react'
 
-import type { GetPostResult } from '@/features/post/post.action'
+import type { GetPostResult } from '@/features/post/action'
 
 import { PostAuthor } from './_components/PostAuthor'
 import { PostHeader } from './_components/PostHeader'
@@ -14,8 +14,8 @@ import { Container } from '@/components/layouts/Container'
 import { DynamicBreadcrumb } from '@/components/ui/DynamicBreadcrumb'
 import { MarkdownRenderer } from '@/components/ui/Markdown/MarkdownRenderer'
 import { CommentSection } from '@/features/comment/ui/CommentSection'
-import { usePost } from '@/features/post/post.hook'
-import { usePostMutation } from '@/features/post/post.mutation'
+import { usePost } from '@/features/post/hook'
+import { usePostMutation } from '@/features/post/mutation'
 
 interface Props {
   initialData: GetPostResult

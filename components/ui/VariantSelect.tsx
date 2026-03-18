@@ -4,7 +4,7 @@
 import { Avatar, Select, SelectItem } from '@heroui/react'
 import { useTranslations } from 'next-intl'
 
-import type { GetCartsResult } from '@/features/cart/cart.action'
+import type { GetCartsResult } from '@/features/cart/action'
 
 type VariantData = NonNullable<
   NonNullable<GetCartsResult>[number]['product']

@@ -4,7 +4,7 @@ import { Avatar, Chip } from '@heroui/react'
 import { useTranslations } from 'next-intl'
 
 import { ReviewForm } from './ReviewForm'
-import { useReviews } from '../review.hook'
+import { useReviews } from '../hook'
 
 import { StarRating } from '@/components/ui/StarRating'
 import { formatDate } from '@/utils/date'

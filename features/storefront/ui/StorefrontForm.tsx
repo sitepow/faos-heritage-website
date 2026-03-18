@@ -19,10 +19,10 @@ import { Controller, useForm } from 'react-hook-form'
 
 import type { Resolver } from 'react-hook-form'
 
-import { useStorefronts } from '../storefront.hook'
-import { useStorefrontMutation } from '../storefront.mutation'
-import { storefrontSchema, type StorefrontInput } from '../storefront.schema'
-import { useStorefrontStore } from '../storefront.store'
+import { useStorefronts } from '../hook'
+import { useStorefrontMutation } from '../mutation'
+import { storefrontSchema, type StorefrontInput } from '../schema'
+import { useStorefrontStore } from '../store'
 
 import { SectionLabel } from '@/components/ui/SectionHeader'
 

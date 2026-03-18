@@ -20,7 +20,7 @@ import {
 } from '@heroui/react'
 import { EllipsisVerticalIcon, StarIcon } from 'lucide-react'
 
-import type { getAllReviewsAdmin } from '@/features/review/review.action'
+import type { getAllReviewsAdmin } from '@/features/review/action'
 import type { Selection } from '@heroui/react'
 import type { ReactNode } from 'react'
 

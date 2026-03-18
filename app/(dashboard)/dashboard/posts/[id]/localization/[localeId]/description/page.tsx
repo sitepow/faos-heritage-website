@@ -5,13 +5,13 @@ import { ChevronLeftIcon, SaveIcon } from 'lucide-react'
 import { useParams, useRouter } from 'next/navigation'
 import { useState, useEffect, useCallback } from 'react'
 
-import type { PostLocalizationInput } from '@/features/post-localization/post-localization.schema'
+import type { PostLocalizationInput } from '@/features/post-localization/schema'
 
 import { TableConfigHeader } from '@/app/(dashboard)/dashboard/products/_components/TableConfigHeader'
 import { Container } from '@/components/layouts/Container'
 import { MdEditorCustomize } from '@/components/ui/MdEditorCustomize'
-import { usePostLocale } from '@/features/post-localization/post-localization.hook'
-import { usePostLocaleMutation } from '@/features/post-localization/post-localization.mutation'
+import { usePostLocale } from '@/features/post-localization/hook'
+import { usePostLocaleMutation } from '@/features/post-localization/mutation'
 
 const PostLocalizationDescriptionPage = () => {
   const params = useParams()

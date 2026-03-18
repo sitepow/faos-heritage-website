@@ -7,7 +7,7 @@ import { ProfileTabs } from './_components/Profile/ProfileTabs'
 
 import { AppSection } from '@/components/layouts/AppSection'
 import { Container } from '@/components/layouts/Container'
-import { useUser } from '@/features/user/user.hook'
+import { useUser } from '@/features/user/hook'
 import { useAuth } from '@/hooks/useAuth'
 
 const ProfileClient = () => {

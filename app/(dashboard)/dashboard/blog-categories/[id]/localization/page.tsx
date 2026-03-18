@@ -13,13 +13,13 @@ import { ConfirmDeleteModal } from '@/app/(dashboard)/_components/ConfirmDeleteM
 import { TableConfigHeader } from '@/app/(dashboard)/dashboard/products/_components/TableConfigHeader'
 import { Container } from '@/components/layouts/Container'
 import { StatCard } from '@/components/ui/StatCard'
-import { useBlogCategory } from '@/features/blog-category/blog-category.hook'
-import { useBlogCategoryUIStore } from '@/features/blog-category/blog-category.store'
+import { useBlogCategory } from '@/features/blog-category/hook'
+import { useBlogCategoryUIStore } from '@/features/blog-category/store'
 import {
   useBlogCategoryLocales,
   useBlogCategoryLocaleStat,
-} from '@/features/blog-category-localization/blog-category-localization.hook'
-import { useBlogCategoryLocaleMutation } from '@/features/blog-category-localization/blog-category-localization.mutation'
+} from '@/features/blog-category-localization/hook'
+import { useBlogCategoryLocaleMutation } from '@/features/blog-category-localization/mutation'
 import { BlogCategoryLocaleForm } from '@/features/blog-category-localization/ui/BlogCategoryLocaleForm'
 
 const BlogCategoryLocalizationPage = () => {

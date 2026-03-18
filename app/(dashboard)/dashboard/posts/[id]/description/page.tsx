@@ -5,14 +5,14 @@ import { ChevronLeftIcon, SaveIcon } from 'lucide-react'
 import { useParams, useRouter } from 'next/navigation'
 import { useState, useEffect, useCallback } from 'react'
 
-import type { PostInput } from '@/features/post/post.schema'
+import type { PostInput } from '@/features/post/schema'
 
 import { TableConfigHeader } from '../../../products/_components/TableConfigHeader'
 
 import { Container } from '@/components/layouts/Container'
 import { MdEditorCustomize } from '@/components/ui/MdEditorCustomize'
-import { usePostAdmin } from '@/features/post/post.hook'
-import { usePostMutation } from '@/features/post/post.mutation'
+import { usePostAdmin } from '@/features/post/hook'
+import { usePostMutation } from '@/features/post/mutation'
 
 const PostDescriptionPage = () => {
   const { id: postId } = useParams<{ id: string }>()

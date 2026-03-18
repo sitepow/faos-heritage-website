@@ -13,14 +13,10 @@ import { ConfirmDeleteModal } from '@/app/(dashboard)/_components/ConfirmDeleteM
 import { Container } from '@/components/layouts/Container'
 import { AlertSeoBestPractice } from '@/components/ui/AlertSeoBestPractice'
 import { StatCard } from '@/components/ui/StatCard'
-import {
-  useProductStats,
-  useProductsAdmin,
-} from '@/features/product/product.hook'
-import { useProductMutation } from '@/features/product/product.mutation'
-import { useProductUIStore } from '@/features/product/product.store'
+import { useProductStats, useProductsAdmin } from '@/features/product/hook'
+import { useProductMutation } from '@/features/product/mutation'
+import { useProductUIStore } from '@/features/product/store'
 import { ProductForm } from '@/features/product/ui/ProductForm'
-
 const ProductPage = () => {
   const { openForm } = useProductUIStore()
   const { remove, isDeleting } = useProductMutation()

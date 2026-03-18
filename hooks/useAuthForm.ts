@@ -3,14 +3,11 @@ import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 
-import type {
-  UserLoginInput,
-  UserRegisterInput,
-} from '@/features/user/user.schema'
+import type { UserLoginInput, UserRegisterInput } from '@/features/user/schema'
 import type { ActionResult } from '@/lib/errors'
 import type { ErrorCode } from '@/lib/errors/error-codes'
 
-import { createUser } from '@/features/user/user.action'
+import { createUser } from '@/features/user/action'
 
 const useAuthForm = (callbackUrl: string) => {
   const router = useRouter()

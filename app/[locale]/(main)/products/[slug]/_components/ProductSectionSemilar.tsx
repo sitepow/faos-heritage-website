@@ -5,8 +5,8 @@ import { useLocale, useTranslations } from 'next-intl'
 import { ProductSection } from '@/components/ui/Product/ProductSection'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { PAGINATION } from '@/constants'
-import { useSimilarProducts } from '@/features/product/product.hook'
-import { useProductDetailStore } from '@/features/product/product.store'
+import { useSimilarProducts } from '@/features/product/hook'
+import { useProductDetailStore } from '@/features/product/store'
 
 const ProductSimilar = () => {
   const locale = useLocale()

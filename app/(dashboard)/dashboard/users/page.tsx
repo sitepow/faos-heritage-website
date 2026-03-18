@@ -13,9 +13,9 @@ import { ConfirmDeleteModal } from '@/app/(dashboard)/_components/ConfirmDeleteM
 import { Container } from '@/components/layouts/Container'
 import { StatCard } from '@/components/ui/StatCard'
 import { UserForm } from '@/features/user/ui/UserForm'
-import { useUsers, useUserStat } from '@/features/user/user.hook'
-import { useUserMutation } from '@/features/user/user.mutation'
-import { useAuthStore } from '@/features/user/user.store'
+import { useUsers, useUserStat } from '@/features/user/hook'
+import { useUserMutation } from '@/features/user/mutation'
+import { useAuthStore } from '@/features/user/store'
 
 const UserPage = () => {
   const [page, setPage] = useState(1)

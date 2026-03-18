@@ -6,7 +6,7 @@ import { AffiliateStatus } from '@prisma/client'
 import { AffiliateLanding } from './AffiliateLanding'
 import { AffiliateWaitingStatus } from './AffiliateWaitingStatus'
 
-import { useAffiliateProfile } from '@/features/affiliate/affiliate.hook'
+import { useAffiliateProfile } from '@/features/affiliate/hook'
 import { AffiliateDashboardView } from '@/features/affiliate/ui/AffiliateDashboardView'
 
 const AffiliateClient = () => {

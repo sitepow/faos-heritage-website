@@ -20,7 +20,7 @@ import {
 } from '@heroui/react'
 import { EllipsisVerticalIcon } from 'lucide-react'
 
-import type { getUsers } from '@/features/user/user.action'
+import type { getUsers } from '@/features/user/action'
 import type { Selection } from '@heroui/react'
 import type { Role } from '@prisma/client'
 import type { ReactNode } from 'react'

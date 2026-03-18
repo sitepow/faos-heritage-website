@@ -9,8 +9,8 @@ import type { ComponentProps } from 'react'
 import { ConfirmDeleteModal } from '@/components/ui/ConfirmDeleteModal'
 import { ProductPrice } from '@/components/ui/Product/ProductPrice'
 import { IMAGE_FALLBACK } from '@/constants'
-import { type FavoriteListItem } from '@/features/favorite/favorite.action'
-import { useFavoriteMutation } from '@/features/favorite/favorite.mutation'
+import { type FavoriteListItem } from '@/features/favorite/action'
+import { useFavoriteMutation } from '@/features/favorite/mutation'
 import { resolveProductUnitLabel } from '@/utils'
 
 type Props = ComponentProps<typeof Card> & {

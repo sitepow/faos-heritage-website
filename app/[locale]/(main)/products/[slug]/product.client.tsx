@@ -3,7 +3,7 @@
 import { useLocale, useTranslations } from 'next-intl'
 import { useEffect, useRef } from 'react'
 
-import type { GetProductResult } from '@/features/product/product.types'
+import type { GetProductResult } from '@/features/product/types'
 
 import { ProductDescription } from './_components/ProductDescription'
 import { ProductPreview } from './_components/ProductPreview'
@@ -13,9 +13,9 @@ import { AppSection } from '@/components/layouts/AppSection'
 import { AffiliateBanner } from '@/components/ui/AffiliateBanner/AffiliateBanner'
 import { DynamicBreadcrumb } from '@/components/ui/DynamicBreadcrumb'
 import { CommentSection } from '@/features/comment/ui/CommentSection'
-import { useProduct } from '@/features/product/product.hook'
-import { useProductMutation } from '@/features/product/product.mutation'
-import { useProductDetailStore } from '@/features/product/product.store'
+import { useProduct } from '@/features/product/hook'
+import { useProductMutation } from '@/features/product/mutation'
+import { useProductDetailStore } from '@/features/product/store'
 import { ReviewSection } from '@/features/review/ui/ReviewSection'
 import { useAuth } from '@/hooks/useAuth'
 

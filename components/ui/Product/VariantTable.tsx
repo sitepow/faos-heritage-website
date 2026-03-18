@@ -3,7 +3,7 @@
 
 import { cn } from '@heroui/react'
 
-import type { ProductVariant } from '@/features/product/product.types'
+import type { ProductVariant } from '@/features/product/types'
 
 import { PriceDisplay } from './PriceDisplay'
 

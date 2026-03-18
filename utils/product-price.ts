@@ -1,9 +1,6 @@
-import type { ProductWithVariants } from '@/features/product/product.types'
+import type { ProductWithVariants } from '@/features/product/types'
 
-import {
-  type PriceInfo,
-  type ProductVariant,
-} from '@/features/product/product.types'
+import { type PriceInfo, type ProductVariant } from '@/features/product/types'
 
 const getProductPriceInfo = (
   product: ProductWithVariants | ProductVariant | null | undefined,

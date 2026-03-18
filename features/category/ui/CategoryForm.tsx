@@ -15,13 +15,13 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect, useState, useCallback } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
-import type { CategoryInput } from '../category.schema'
+import type { CategoryInput } from '../schema'
 import type { Resolver } from 'react-hook-form'
 
-import { useCategoryAdmin } from '../category.hook'
-import { useCategoryMutation } from '../category.mutation'
-import { categorySchema } from '../category.schema'
-import { useCategoryUIStore } from '../category.store'
+import { useCategoryAdmin } from '../hook'
+import { useCategoryMutation } from '../mutation'
+import { categorySchema } from '../schema'
+import { useCategoryUIStore } from '../store'
 
 import {
   ImageDropzone,

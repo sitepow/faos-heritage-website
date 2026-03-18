@@ -2,7 +2,7 @@
 
 import { useCallback, useMemo, useRef, useState } from 'react'
 
-import type { GetProductResult } from '@/features/product/product.types'
+import type { GetProductResult } from '@/features/product/types'
 
 import {
   Carousel,
@@ -11,7 +11,7 @@ import {
 import { DiscountBadge } from '@/components/ui/Product/DiscountBadge'
 import { ProductImage } from '@/components/ui/Product/ProductImage'
 import { IMAGE_FALLBACK } from '@/constants'
-import { useProductPrice } from '@/features/product/product.hook'
+import { useProductPrice } from '@/features/product/hook'
 import { cn } from '@/utils'
 
 type Props = {

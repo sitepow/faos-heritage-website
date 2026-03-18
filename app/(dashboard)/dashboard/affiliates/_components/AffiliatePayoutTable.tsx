@@ -20,7 +20,7 @@ import {
 } from '@heroui/react'
 import { EyeIcon, PackageIcon } from 'lucide-react'
 
-import type { GetAffiliatePayoutsResult } from '@/features/affiliate-payout/payout.action'
+import type { GetAffiliatePayoutsResult } from '@/features/affiliate-payout/action'
 
 import { useTranslateStatus } from '@/hooks/useTranslateStatus'
 import { formatCurrency, formatDate } from '@/utils'

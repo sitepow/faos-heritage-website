@@ -17,11 +17,11 @@ import { Controller, useForm } from 'react-hook-form'
 
 import type { Resolver } from 'react-hook-form'
 
-import { useProductUIStore } from '../../product/product.store'
-import { useProductVariant } from '../product-variant.hook'
-import { useProductVariantMutation } from '../product-variant.mutation'
-import { variantSchema, type VariantInput } from '../product-variant.schema'
-import { useProductVariantUIStore } from '../product-variant.store'
+import { useProductUIStore } from '../../product/store'
+import { useProductVariant } from '../hook'
+import { useProductVariantMutation } from '../mutation'
+import { variantSchema, type VariantInput } from '../schema'
+import { useProductVariantUIStore } from '../store'
 
 import { SectionLabel } from '@/components/ui/SectionHeader'
 

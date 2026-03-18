@@ -4,11 +4,11 @@ import Stripe from 'stripe'
 
 import type { NextRequest } from 'next/server'
 
-import { sendOrderEmail } from '@/features/order/order.action'
+import { sendOrderEmail } from '@/features/order/action'
 import { prisma } from '@/lib/prisma'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2026-01-28.clover',
+  apiVersion: '2026-02-25.clover',
 })
 
 export async function POST(req: NextRequest) {

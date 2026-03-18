@@ -10,7 +10,7 @@ import {
 } from '@heroui/react'
 import { useTranslations } from 'next-intl'
 
-import { useAddressForm } from '../address.form'
+import { useAddressForm } from '../form'
 
 import { FormInput } from '@/components/ui/FormInput'
 import { FormSelect } from '@/components/ui/FormSelect'

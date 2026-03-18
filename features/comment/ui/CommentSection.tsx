@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl'
 import { CommentForm } from './CommentForm'
 import { CommentItem } from './CommentItem'
 
-import { useComments } from '@/features/comment/comment.hook'
+import { useComments } from '@/features/comment/hook'
 
 interface Props {
   postId?: string

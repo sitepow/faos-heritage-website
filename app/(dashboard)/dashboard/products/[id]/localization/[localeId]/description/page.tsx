@@ -5,14 +5,14 @@ import { ChevronLeftIcon, SaveIcon } from 'lucide-react'
 import { useParams, useRouter } from 'next/navigation'
 import { useState, useEffect, useCallback } from 'react'
 
-import type { ProductLocalizationInput } from '@/features/product-localization/product-localization.schema'
+import type { ProductLocalizationInput } from '@/features/product-localization/schema'
 
 import { TableConfigHeader } from '../../../../_components/TableConfigHeader'
 
 import { Container } from '@/components/layouts/Container'
 import { MdEditorCustomize } from '@/components/ui/MdEditorCustomize'
-import { useProductLocale } from '@/features/product-localization/product-localization.hook'
-import { useProductLocaleMutation } from '@/features/product-localization/product-localization.mutation'
+import { useProductLocale } from '@/features/product-localization/hook'
+import { useProductLocaleMutation } from '@/features/product-localization/mutation'
 
 const ProductLocalizationDescriptionPage = () => {
   const params = useParams()

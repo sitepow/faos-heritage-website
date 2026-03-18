@@ -8,7 +8,7 @@ import {
 } from '@prisma/client'
 
 import { MINUTE } from '../constants'
-import { sendOrderEmail } from '../features/order/order.action'
+import { sendOrderEmail } from '../features/order/action'
 
 const prisma = new PrismaClient()
 const ORDER_EXPIRY_MS = 20 * MINUTE

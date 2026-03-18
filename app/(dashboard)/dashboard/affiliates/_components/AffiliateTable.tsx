@@ -27,12 +27,12 @@ import {
 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
-import type { GetAffiliatesResult } from '@/features/affiliate/affiliate.action'
-import type { GetPendingPayoutsResult } from '@/features/affiliate-payout/payout.action'
+import type { GetAffiliatesResult } from '@/features/affiliate/action'
+import type { GetPendingPayoutsResult } from '@/features/affiliate-payout/action'
 
 import { IMAGE_FALLBACK } from '@/constants'
-import { useAffiliateStore } from '@/features/affiliate/affiliate.store'
-import { calculateCommissionByStatus } from '@/features/affiliate-payout/payout.util'
+import { useAffiliateStore } from '@/features/affiliate/store'
+import { calculateCommissionByStatus } from '@/features/affiliate-payout/util'
 import { PayoutForm } from '@/features/affiliate-payout/ui/PayoutForm'
 import { useTranslateStatus } from '@/hooks/useTranslateStatus'
 import { formatCurrency } from '@/utils'

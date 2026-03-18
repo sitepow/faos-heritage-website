@@ -22,7 +22,7 @@ import { PostStatus } from '@prisma/client'
 import { useEffect, useState, useCallback } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
-import type { PostInput } from '@/features/post/post.schema'
+import type { PostInput } from '@/features/post/schema'
 import type { KeyboardEvent } from 'react'
 import type { Resolver } from 'react-hook-form'
 
@@ -32,12 +32,12 @@ import {
 } from '@/app/(dashboard)/_components/ImageDropzone'
 import { AlertSeoBestPractice } from '@/components/ui/AlertSeoBestPractice'
 import { SectionLabel } from '@/components/ui/SectionHeader'
-import { useBlogCategories } from '@/features/blog-category/blog-category.hook'
-import { usePostAdmin } from '@/features/post/post.hook'
-import { usePostMutation } from '@/features/post/post.mutation'
-import { postSchema } from '@/features/post/post.schema'
-import { usePostUIStore } from '@/features/post/post.store'
-import { useTags } from '@/features/tag/tag.hook'
+import { useBlogCategories } from '@/features/blog-category/hook'
+import { usePostAdmin } from '@/features/post/hook'
+import { usePostMutation } from '@/features/post/mutation'
+import { postSchema } from '@/features/post/schema'
+import { usePostUIStore } from '@/features/post/store'
+import { useTags } from '@/features/tag/hook'
 import { useResolveImageUpload } from '@/hooks/useResolveImageUpload'
 
 const DEFAULT_VALUES: PostInput = {

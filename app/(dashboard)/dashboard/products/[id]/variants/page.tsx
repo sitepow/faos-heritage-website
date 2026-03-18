@@ -13,14 +13,14 @@ import { TableConfigHeader } from '../../_components/TableConfigHeader'
 import { ConfirmDeleteModal } from '@/app/(dashboard)/_components/ConfirmDeleteModal'
 import { Container } from '@/components/layouts/Container'
 import { StatCard } from '@/components/ui/StatCard'
-import { useProductAdmin } from '@/features/product/product.hook'
-import { useProductUIStore } from '@/features/product/product.store'
+import { useProductAdmin } from '@/features/product/hook'
+import { useProductUIStore } from '@/features/product/store'
 import {
   useProductVariants,
   useProductVariantStat,
-} from '@/features/product-variant/product-variant.hook'
-import { useProductVariantMutation } from '@/features/product-variant/product-variant.mutation'
-import { useProductVariantUIStore } from '@/features/product-variant/product-variant.store'
+} from '@/features/product-variant/hook'
+import { useProductVariantMutation } from '@/features/product-variant/mutation'
+import { useProductVariantUIStore } from '@/features/product-variant/store'
 import { ProductVariantForm } from '@/features/product-variant/ui/ProductVariantForm'
 
 const ProductVariantPage = () => {

@@ -13,13 +13,13 @@ import { ConfirmDeleteModal } from '@/app/(dashboard)/_components/ConfirmDeleteM
 import { TableConfigHeader } from '@/app/(dashboard)/dashboard/products/_components/TableConfigHeader'
 import { Container } from '@/components/layouts/Container'
 import { StatCard } from '@/components/ui/StatCard'
-import { useCategory } from '@/features/category/category.hook'
-import { useCategoryUIStore } from '@/features/category/category.store'
+import { useCategory } from '@/features/category/hook'
+import { useCategoryUIStore } from '@/features/category/store'
 import {
   useCategoryLocales,
   useCategoryLocaleStat,
-} from '@/features/category-localization/category-localization.hook'
-import { useCategoryLocaleMutation } from '@/features/category-localization/category-localization.mutation'
+} from '@/features/category-localization/hook'
+import { useCategoryLocaleMutation } from '@/features/category-localization/mutation'
 import { CategoryLocaleForm } from '@/features/category-localization/ui/CategoryLocaleForm'
 
 const CategoryLocalizationPage = () => {

@@ -2,10 +2,10 @@
 
 import { useTranslations } from 'next-intl'
 
-import type { ProductWithVariants } from '@/features/product/product.types'
+import type { ProductWithVariants } from '@/features/product/types'
 import type { ComponentProps } from 'react'
 
-import { useProductPrice } from '@/features/product/product.hook'
+import { useProductPrice } from '@/features/product/hook'
 import { cn } from '@/utils/style'
 
 type Props = ComponentProps<'div'> & {

@@ -4,7 +4,7 @@ import { Button, Textarea } from '@heroui/react'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
-import { useCommentMutation } from '@/features/comment/comment.mutation'
+import { useCommentMutation } from '@/features/comment/mutation'
 import { cn } from '@/utils'
 
 interface Props {

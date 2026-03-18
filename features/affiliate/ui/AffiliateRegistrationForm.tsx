@@ -22,11 +22,8 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 
-import { useAffiliateMutation } from '../affiliate.mutation'
-import {
-  affiliateProfileSchema,
-  type AffiliateProfileInput,
-} from '../affiliate.schema'
+import { useAffiliateMutation } from '../mutation'
+import { affiliateProfileSchema, type AffiliateProfileInput } from '../schema'
 
 import {
   ImageDropzone,

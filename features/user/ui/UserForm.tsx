@@ -19,15 +19,15 @@ import { Role } from '@prisma/client'
 import { useEffect, useState } from 'react'
 import { Controller, useForm, type Resolver } from 'react-hook-form'
 
-import { useUser } from '../user.hook'
-import { useUserMutation } from '../user.mutation'
+import { useUser } from '../hook'
+import { useUserMutation } from '../mutation'
 import {
   userCreateAdminSchema,
   userUpdateAdminSchema,
   type UserUpdateInput,
   type UserCreateInput,
-} from '../user.schema'
-import { useAuthStore } from '../user.store'
+} from '../schema'
+import { useAuthStore } from '../store'
 
 import {
   ImageDropzone,

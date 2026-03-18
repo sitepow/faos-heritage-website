@@ -8,14 +8,14 @@ import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useMemo } from 'react'
 
-import type { Order } from '@/features/order/order.hook'
+import type { Order } from '@/features/order/hook'
 
 import { createStripeCheckout } from '@/app/actions/stripe'
 import { AvatarGroupWrapper } from '@/components/ui/AvatarGroupWrapper'
 import { OrderDetailsModal } from '@/components/ui/OrderDetailsModal/OrderDetailsModal'
 import { OrderStepper } from '@/components/ui/OrderStepper/OrderStepper'
 import { IMAGE_FALLBACK } from '@/constants'
-import { useExchangeRate } from '@/features/exchange-rate/exchange-rate.hook'
+import { useExchangeRate } from '@/features/exchange-rate/hook'
 import { formatDate } from '@/utils/date'
 import { formatCurrency, formatNumber } from '@/utils/number'
 

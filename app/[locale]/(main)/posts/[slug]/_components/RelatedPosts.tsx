@@ -4,7 +4,7 @@ import { PostStatus } from '@prisma/client'
 import { useLocale, useTranslations } from 'next-intl'
 
 import { PostSection } from '@/components/ui/Post/PostSection'
-import { usePosts } from '@/features/post/post.hook'
+import { usePosts } from '@/features/post/hook'
 
 interface Props {
   categoryId?: string | null

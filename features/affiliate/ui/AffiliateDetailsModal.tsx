@@ -15,8 +15,8 @@ import { CheckIcon, ShieldCheckIcon, XIcon } from 'lucide-react'
 
 import { SectionLabel } from '@/components/ui/SectionHeader'
 import { IMAGE_FALLBACK } from '@/constants'
-import { useAffiliateMutation } from '@/features/affiliate/affiliate.mutation'
-import { useAffiliateStore } from '@/features/affiliate/affiliate.store'
+import { useAffiliateMutation } from '@/features/affiliate/mutation'
+import { useAffiliateStore } from '@/features/affiliate/store'
 
 const AffiliateDetailsModal = () => {
   const { selectedAffiliate, isDetailOpen, closeDetail } = useAffiliateStore()

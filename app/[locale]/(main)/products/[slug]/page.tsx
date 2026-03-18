@@ -5,7 +5,7 @@ import type { Metadata } from 'next'
 import { ProductClient } from './product.client'
 
 import { COUNTRY_CONFIG } from '@/constants'
-import { getProductBySlug } from '@/features/product/product.action'
+import { getProductBySlug } from '@/features/product/action'
 import { constructMetadata, getSafeOgImage } from '@/lib/metadata'
 import { getServerUser } from '@/lib/session'
 import { formatCurrencyRange, getExchangeRates } from '@/utils'

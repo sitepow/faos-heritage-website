@@ -9,7 +9,7 @@ import { TableConfigHeader } from '../../../products/_components/TableConfigHead
 import { StockHistoryTable } from '../../_components/StockHistoryTable'
 
 import { Container } from '@/components/layouts/Container'
-import { useProductAdmin } from '@/features/product/product.hook'
+import { useProductAdmin } from '@/features/product/hook'
 
 const StockHistoryDetailPage = () => {
   const params = useParams()

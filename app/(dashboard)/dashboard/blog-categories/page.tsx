@@ -16,9 +16,9 @@ import { StatCard } from '@/components/ui/StatCard'
 import {
   useBlogCategories,
   useBlogCategoryStat,
-} from '@/features/blog-category/blog-category.hook'
-import { useBlogCategoryMutation } from '@/features/blog-category/blog-category.mutation'
-import { useBlogCategoryUIStore } from '@/features/blog-category/blog-category.store'
+} from '@/features/blog-category/hook'
+import { useBlogCategoryMutation } from '@/features/blog-category/mutation'
+import { useBlogCategoryUIStore } from '@/features/blog-category/store'
 import { BlogCategoryForm } from '@/features/blog-category/ui/BlogCategoryForm'
 
 const BlogCategoryPage = () => {

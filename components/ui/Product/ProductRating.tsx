@@ -2,7 +2,7 @@
 
 import { StarRating } from '../StarRating'
 
-import { useProductRating } from '@/features/product/product.hook'
+import { useProductRating } from '@/features/product/hook'
 import { cn } from '@/utils'
 
 interface Props {

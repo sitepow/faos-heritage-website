@@ -13,13 +13,13 @@ import { ConfirmDeleteModal } from '@/app/(dashboard)/_components/ConfirmDeleteM
 import { TableConfigHeader } from '@/app/(dashboard)/dashboard/products/_components/TableConfigHeader'
 import { Container } from '@/components/layouts/Container'
 import { StatCard } from '@/components/ui/StatCard'
-import { useTag } from '@/features/tag/tag.hook'
-import { useTagUIStore } from '@/features/tag/tag.store'
+import { useTag } from '@/features/tag/hook'
+import { useTagUIStore } from '@/features/tag/store'
 import {
   useTagLocales,
   useTagLocaleStat,
-} from '@/features/tag-localization/tag-localization.hook'
-import { useTagLocaleMutation } from '@/features/tag-localization/tag-localization.mutation'
+} from '@/features/tag-localization/hook'
+import { useTagLocaleMutation } from '@/features/tag-localization/mutation'
 import { TagLocaleForm } from '@/features/tag-localization/ui/TagLocaleForm'
 
 const TagLocalizationPage = () => {

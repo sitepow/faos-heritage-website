@@ -4,7 +4,7 @@ import { ProductImagePreview } from './ProductImagePreview'
 import { ProductPurchasePanel } from './ProductPurchasePanel'
 
 import { Container } from '@/components/layouts/Container'
-import { useProductDetailStore } from '@/features/product/product.store'
+import { useProductDetailStore } from '@/features/product/store'
 
 const ProductPreview = () => {
   const { product } = useProductDetailStore()

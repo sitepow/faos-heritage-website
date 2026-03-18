@@ -20,14 +20,14 @@ import { ConfirmDeleteModal } from '@/app/(dashboard)/_components/ConfirmDeleteM
 import { Container } from '@/components/layouts/Container'
 import { AlertSeoBestPractice } from '@/components/ui/AlertSeoBestPractice'
 import { StatCard } from '@/components/ui/StatCard'
-import { usePostAdmin } from '@/features/post/post.hook'
-import { usePostUIStore } from '@/features/post/post.store'
+import { usePostAdmin } from '@/features/post/hook'
+import { usePostUIStore } from '@/features/post/store'
 import {
   usePostLocales,
   usePostLocaleStat,
-} from '@/features/post-localization/post-localization.hook'
-import { usePostLocaleMutation } from '@/features/post-localization/post-localization.mutation'
-import { usePostLocaleUIStore } from '@/features/post-localization/post-localization.store'
+} from '@/features/post-localization/hook'
+import { usePostLocaleMutation } from '@/features/post-localization/mutation'
+import { usePostLocaleUIStore } from '@/features/post-localization/store'
 import { PostLocalizationForm } from '@/features/post-localization/ui/PostLocalizationForm'
 
 const PostLocalizationPage = () => {

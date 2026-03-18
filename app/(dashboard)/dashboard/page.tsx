@@ -17,12 +17,12 @@ import {
 
 import { Container } from '@/components/layouts/Container'
 import { StatCard } from '@/components/ui/StatCard'
-import { useDashboardCharts } from '@/features/dashboard/dashboard.hook'
-import { useOrderStats, useRevenueStats } from '@/features/order/order.hook'
-import { usePostStats } from '@/features/post/post.hook'
-import { useProductStats } from '@/features/product/product.hook'
-import { useReviewStats } from '@/features/review/review.hook'
-import { useUserStat } from '@/features/user/user.hook'
+import { useDashboardCharts } from '@/features/dashboard/hook'
+import { useOrderStats, useRevenueStats } from '@/features/order/hook'
+import { usePostStats } from '@/features/post/hook'
+import { useProductStats } from '@/features/product/hook'
+import { useReviewStats } from '@/features/review/hook'
+import { useUserStat } from '@/features/user/hook'
 import localeTh from '@/messages/th/ui/common.json'
 
 interface StatItem {

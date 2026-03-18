@@ -6,8 +6,8 @@ import type { Metadata } from 'next'
 
 import { PostsByCategoryClient } from './posts.client'
 
-import { getBlogCategoryBySlug } from '@/features/blog-category/blog-category.action'
-import { getPostsInfinite } from '@/features/post/post.action'
+import { getBlogCategoryBySlug } from '@/features/blog-category/action'
+import { getPostsInfinite } from '@/features/post/action'
 import { constructMetadata } from '@/lib/metadata'
 
 interface Props {

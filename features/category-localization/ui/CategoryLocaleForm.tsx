@@ -16,14 +16,14 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
-import type { CategoryLocalizationInput } from '../category-localization.schema'
+import type { CategoryLocalizationInput } from '../schema'
 import type { Resolver } from 'react-hook-form'
 
-import { useCategoryLocales } from '../category-localization.hook'
-import { useCategoryLocaleMutation } from '../category-localization.mutation'
-import { categoryLocalizationSchema } from '../category-localization.schema'
+import { useCategoryLocales } from '../hook'
+import { useCategoryLocaleMutation } from '../mutation'
+import { categoryLocalizationSchema } from '../schema'
 
-import { useCategoryUIStore } from '@/features/category/category.store'
+import { useCategoryUIStore } from '@/features/category/store'
 import localeTh from '@/messages/th/ui/common.json'
 
 interface Props {

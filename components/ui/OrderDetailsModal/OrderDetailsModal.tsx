@@ -9,7 +9,7 @@ import {
 } from '@heroui/react'
 import { useTranslations } from 'next-intl'
 
-import type { Order } from '@/features/order/order.hook'
+import type { Order } from '@/features/order/hook'
 
 import { OrderContent } from './OrderContent'
 

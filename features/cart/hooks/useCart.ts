@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
 
-import { getCarts, getCartStat } from '../cart.action'
-import { cartQueryKeys } from '../cart.query-key'
+import { getCarts, getCartStat } from '../action'
+import { cartQueryKeys } from '../query-key'
 
 import { getProductPriceInfo } from '@/utils/product-price'
 

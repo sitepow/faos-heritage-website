@@ -33,8 +33,8 @@ import type { Selection } from '@heroui/react'
 
 import { ProductImage } from '@/components/ui/Product/ProductImage'
 import { IMAGE_FALLBACK } from '@/constants'
-import { usePostsAdmin } from '@/features/post/post.hook'
-import { usePostUIStore } from '@/features/post/post.store'
+import { usePostsAdmin } from '@/features/post/hook'
+import { usePostUIStore } from '@/features/post/store'
 
 interface Props {
   selectedKeys: Selection

@@ -9,8 +9,8 @@ import { StorefrontInventoryTable } from '../_components/StorefrontInventoryTabl
 
 import { Container } from '@/components/layouts/Container'
 import { StatCard } from '@/components/ui/StatCard'
-import { useStorefronts } from '@/features/storefront/storefront.hook'
-import { useStorefrontInventories } from '@/features/storefront-inventory/storefront-inventory.hook'
+import { useStorefronts } from '@/features/storefront/hook'
+import { useStorefrontInventories } from '@/features/storefront-inventory/hook'
 
 const StorefrontDetailPage = () => {
   const params = useParams()

@@ -20,15 +20,15 @@ import { useState } from 'react'
 import type { DateValue } from '@heroui/react'
 import type { RangeValue } from '@react-types/shared'
 
-import { useWithdrawableAmount } from '../payout.hook'
-import { usePayoutMutation } from '../payout.mutation'
+import { useWithdrawableAmount } from '../hook'
+import { usePayoutMutation } from '../mutation'
 
 import {
   ImageDropzone,
   type ImageWithPreview,
 } from '@/app/(dashboard)/_components/ImageDropzone'
 import { SectionLabel } from '@/components/ui/SectionHeader'
-import { useAffiliateById } from '@/features/affiliate/affiliate.hook'
+import { useAffiliateById } from '@/features/affiliate/hook'
 import { useResolveImageUpload } from '@/hooks/useResolveImageUpload'
 import { formatNumber } from '@/utils'
 

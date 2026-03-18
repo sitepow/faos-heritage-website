@@ -21,9 +21,9 @@ import { useMemo } from 'react'
 
 import type { Selection } from '@heroui/react'
 
-import { PRODUCT_UNIT_TH_LABELS } from '@/features/product/product.constant'
-import { useProductVariants } from '@/features/product-variant/product-variant.hook'
-import { useProductVariantUIStore } from '@/features/product-variant/product-variant.store'
+import { PRODUCT_UNIT_TH_LABELS } from '@/features/product/constant'
+import { useProductVariants } from '@/features/product-variant/hook'
+import { useProductVariantUIStore } from '@/features/product-variant/store'
 import { useIsMounted } from '@/hooks/useIsMounted'
 import { formatCurrency, formatNumber } from '@/utils'
 

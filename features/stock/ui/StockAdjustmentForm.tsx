@@ -22,17 +22,14 @@ import { Controller, useForm } from 'react-hook-form'
 
 import type { Resolver } from 'react-hook-form'
 
-import { useStockMutation } from '../stock.mutation'
-import {
-  stockAdjustmentSchema,
-  type StockAdjustmentInput,
-} from '../stock.schema'
-import { useStockStore } from '../stock.store'
+import { useStockMutation } from '../mutation'
+import { stockAdjustmentSchema, type StockAdjustmentInput } from '../schema'
+import { useStockStore } from '../store'
 
 import { SectionLabel } from '@/components/ui/SectionHeader'
-import { useProductsAdmin } from '@/features/product/product.hook'
-import { useProductVariants } from '@/features/product-variant/product-variant.hook'
-import { STOCK_MOVEMENT_LABELS } from '@/features/stock-history/stock-history.constant'
+import { useProductsAdmin } from '@/features/product/hook'
+import { useProductVariants } from '@/features/product-variant/hook'
+import { STOCK_MOVEMENT_LABELS } from '@/features/stock-history/constant'
 
 const DEFAULT_VALUES: StockAdjustmentInput = {
   productId: '',

@@ -5,8 +5,8 @@ import { SearchIcon, LogInIcon } from 'lucide-react'
 import Link from 'next/link'
 
 import type { NavLink } from './navbar.types'
-import type { GetBlogCategoriesResult } from '@/features/blog-category/blog-category.action'
-import type { GetCategoriesResult } from '@/features/category/category.action'
+import type { GetBlogCategoriesResult } from '@/features/blog-category/action'
+import type { GetCategoriesResult } from '@/features/category/action'
 
 import { AffiliateStatsTicker } from './AffiliateStatsTicker'
 import { NavbarCartIndicator } from './NavbarCartIndicator'

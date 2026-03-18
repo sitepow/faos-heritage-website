@@ -15,13 +15,13 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
-import type { BlogCategoryInput } from '../blog-category.schema'
+import type { BlogCategoryInput } from '../schema'
 import type { Resolver } from 'react-hook-form'
 
-import { useBlogCategory } from '../blog-category.hook'
-import { useBlogCategoryMutation } from '../blog-category.mutation'
-import { blogCategorySchema } from '../blog-category.schema'
-import { useBlogCategoryUIStore } from '../blog-category.store'
+import { useBlogCategory } from '../hook'
+import { useBlogCategoryMutation } from '../mutation'
+import { blogCategorySchema } from '../schema'
+import { useBlogCategoryUIStore } from '../store'
 
 import { SectionLabel } from '@/components/ui/SectionHeader'
 

@@ -11,8 +11,8 @@ import {
 } from '@heroui/react'
 
 import { OrderContent } from '@/components/ui/OrderDetailsModal/OrderContent'
-import { useOrder } from '@/features/order/order.hook'
-import { useOrderStore } from '@/features/order/order.store'
+import { useOrder } from '@/features/order/hook'
+import { useOrderStore } from '@/features/order/store'
 
 const OrderDetailModal = () => {
   const { orderId, isViewOpen, setState } = useOrderStore()

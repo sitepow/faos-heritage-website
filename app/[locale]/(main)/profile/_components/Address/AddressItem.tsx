@@ -11,7 +11,7 @@ import {
 import { EditIcon, EllipsisVerticalIcon, TrashIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
-import type { GetAddressResult } from '@/features/address/address.action'
+import type { GetAddressResult } from '@/features/address/action'
 
 import { formatFullAddress } from '@/utils'
 

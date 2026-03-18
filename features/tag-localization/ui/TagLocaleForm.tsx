@@ -16,14 +16,14 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
-import type { TagLocalizationInput } from '@/features/tag-localization/tag-localization.schema'
+import type { TagLocalizationInput } from '@/features/tag-localization/schema'
 import type { Resolver } from 'react-hook-form'
 
-import { useTagLocale } from '../tag-localization.hook'
-import { useTagLocaleMutation } from '../tag-localization.mutation'
+import { useTagLocale } from '../hook'
+import { useTagLocaleMutation } from '../mutation'
 
-import { useTagUIStore } from '@/features/tag/tag.store'
-import { tagLocalizationSchema } from '@/features/tag-localization/tag-localization.schema'
+import { useTagUIStore } from '@/features/tag/store'
+import { tagLocalizationSchema } from '@/features/tag-localization/schema'
 import localeTh from '@/messages/th/ui/common.json'
 
 interface Props {

@@ -4,7 +4,7 @@ import { Divider } from '@heroui/react'
 import { DeliveryType } from '@prisma/client'
 import { MapPin, Truck, Store, Phone, User } from 'lucide-react'
 
-import type { Order } from '@/features/order/order.hook'
+import type { Order } from '@/features/order/hook'
 
 import { OrderItems } from './OrderItems'
 import { OrderSummary } from './OrderSummary'

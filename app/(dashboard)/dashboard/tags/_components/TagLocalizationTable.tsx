@@ -22,7 +22,7 @@ import { useMemo } from 'react'
 import type { Selection } from '@heroui/react'
 import type { ReactNode } from 'react'
 
-import { useTagLocales } from '@/features/tag-localization/tag-localization.hook'
+import { useTagLocales } from '@/features/tag-localization/hook'
 import { useIsMounted } from '@/hooks/useIsMounted'
 
 interface ActionItem {

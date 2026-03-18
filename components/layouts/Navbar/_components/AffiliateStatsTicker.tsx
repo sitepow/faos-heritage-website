@@ -1,6 +1,6 @@
 'use client'
 
-import { useAffiliateDashboard } from '@/features/affiliate/affiliate.hook'
+import { useAffiliateDashboard } from '@/features/affiliate/hook'
 import { formatCurrency } from '@/utils'
 
 const AffiliateStatsTicker = () => {

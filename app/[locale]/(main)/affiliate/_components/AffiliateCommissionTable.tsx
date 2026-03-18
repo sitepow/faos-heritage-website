@@ -15,7 +15,7 @@ import {
 } from '@heroui/react'
 import { PackageIcon } from 'lucide-react'
 
-import type { AffiliateDashboardData } from '@/features/affiliate/affiliate.action'
+import type { AffiliateDashboardData } from '@/features/affiliate/action'
 
 import { useTranslateStatus } from '@/hooks/useTranslateStatus'
 import { formatCurrency, formatDate } from '@/utils'

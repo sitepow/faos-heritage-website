@@ -13,12 +13,9 @@ import { TableConfigHeader } from '../products/_components/TableConfigHeader'
 import { ConfirmDeleteModal } from '@/app/(dashboard)/_components/ConfirmDeleteModal'
 import { Container } from '@/components/layouts/Container'
 import { StatCard } from '@/components/ui/StatCard'
-import {
-  useAddressesAdmin,
-  useAddressStat,
-} from '@/features/address/address.hook'
-import { useDeleteAddress } from '@/features/address/address.mutation'
-import { useAddressStore } from '@/features/address/address.store'
+import { useAddressesAdmin, useAddressStat } from '@/features/address/hook'
+import { useDeleteAddress } from '@/features/address/mutation'
+import { useAddressStore } from '@/features/address/store'
 
 const AddressesPage = () => {
   const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set([]))

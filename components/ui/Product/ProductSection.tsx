@@ -1,6 +1,6 @@
 'use client'
 
-import type { GetProductsInfiniteResult } from '@/features/product/product.types'
+import type { GetProductsInfiniteResult } from '@/features/product/types'
 
 import { ProductCard, ProductCardSkeleton } from './ProductCard'
 

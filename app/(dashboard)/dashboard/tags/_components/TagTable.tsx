@@ -26,8 +26,8 @@ import { useMemo } from 'react'
 
 import type { Selection } from '@heroui/react'
 
-import { useTags } from '@/features/tag/tag.hook'
-import { useTagUIStore } from '@/features/tag/tag.store'
+import { useTags } from '@/features/tag/hook'
+import { useTagUIStore } from '@/features/tag/store'
 import { useIsMounted } from '@/hooks/useIsMounted'
 
 interface Props {

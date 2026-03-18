@@ -27,11 +27,11 @@ import {
   ORDER_STEPS_ALL,
   IMAGE_FALLBACK,
 } from '@/constants'
-import { updateOrder } from '@/features/order/order.action'
-import { useOrder } from '@/features/order/order.hook'
-import { orderQueryKeys } from '@/features/order/order.query-key'
-import { orderSchema, type OrderInput } from '@/features/order/order.schema'
-import { useOrderStore } from '@/features/order/order.store'
+import { updateOrder } from '@/features/order/action'
+import { useOrder } from '@/features/order/hook'
+import { orderQueryKeys } from '@/features/order/query-key'
+import { orderSchema, type OrderInput } from '@/features/order/schema'
+import { useOrderStore } from '@/features/order/store'
 import { canTransitionOrderStatus, ORDER_STATUS_TH_MAP } from '@/utils'
 
 const OrderUpdateModal = () => {

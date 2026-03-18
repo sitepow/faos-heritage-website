@@ -21,14 +21,14 @@ import { ArrowDownIcon, ArrowUpIcon } from 'lucide-react'
 import { useState, useMemo, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { useStorefrontInventoryMutation } from '../storefront-inventory.mutation'
+import { useStorefrontInventoryMutation } from '../mutation'
 import {
   storefrontInventorySchema,
   type StorefrontInventoryInput,
-} from '../storefront-inventory.schema'
-import { useStorefrontInventoryStore } from '../storefront-inventory.store'
+} from '../schema'
+import { useStorefrontInventoryStore } from '../store'
 
-import { useProductsAdmin } from '@/features/product/product.hook'
+import { useProductsAdmin } from '@/features/product/hook'
 
 const StorefrontInventoryForm = ({
   storefrontId,

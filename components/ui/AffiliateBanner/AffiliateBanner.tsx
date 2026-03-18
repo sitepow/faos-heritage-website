@@ -11,7 +11,7 @@ import { BackgroundBlobs } from './_components/BackgroundBlobs'
 import { FadingBackgroundImage } from './_components/FadingBackgroundImage'
 
 import { AffiliateButton } from '@/components/ui/AffiliateButton'
-import { useAffiliateProfile } from '@/features/affiliate/affiliate.hook'
+import { useAffiliateProfile } from '@/features/affiliate/hook'
 import { useAppNavigation } from '@/hooks/useAppNavigation'
 import { cn } from '@/utils'
 

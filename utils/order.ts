@@ -1,6 +1,6 @@
 import { OrderStatus } from '@prisma/client'
 
-import type { GetAddressResult } from '@/features/address/address.action'
+import type { GetAddressResult } from '@/features/address/action'
 
 import {
   UNKNOWN_ADDRESS_MESSAGE,

@@ -14,13 +14,13 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
-import type { TagInput } from '../tag.schema'
+import type { TagInput } from '../schema'
 import type { Resolver } from 'react-hook-form'
 
-import { useTag } from '../tag.hook'
-import { useTagMutation } from '../tag.mutation'
-import { tagSchema } from '../tag.schema'
-import { useTagUIStore } from '../tag.store'
+import { useTag } from '../hook'
+import { useTagMutation } from '../mutation'
+import { tagSchema } from '../schema'
+import { useTagUIStore } from '../store'
 
 const DEFAULT_VALUES: TagInput = {
   name: '',

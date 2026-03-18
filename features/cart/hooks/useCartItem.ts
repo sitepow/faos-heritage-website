@@ -1,9 +1,9 @@
 import { useDisclosure } from '@heroui/react'
 import { useState, useMemo, useEffect } from 'react'
 
-import type { GetCartsResult } from '../cart.action'
+import type { GetCartsResult } from '../action'
 
-import { useCartMutation } from '../cart.mutation'
+import { useCartMutation } from '../mutation'
 
 import { useDebouncedChange } from '@/hooks/useDebouncedChange'
 import { getProductPriceInfo } from '@/utils/product-price'

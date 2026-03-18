@@ -20,14 +20,11 @@ import { useEffect } from 'react'
 import { Controller, useForm, type Resolver } from 'react-hook-form'
 
 import { SectionLabel } from '@/components/ui/SectionHeader'
-import { useAddress } from '@/features/address/address.hook'
-import { useAddressMutation } from '@/features/address/address.mutation'
-import {
-  addressSchema,
-  type AddressInput,
-} from '@/features/address/address.schema'
-import { useAddressStore } from '@/features/address/address.store'
-import { useUsers } from '@/features/user/user.hook'
+import { useAddress } from '@/features/address/hook'
+import { useAddressMutation } from '@/features/address/mutation'
+import { addressSchema, type AddressInput } from '@/features/address/schema'
+import { useAddressStore } from '@/features/address/store'
+import { useUsers } from '@/features/user/hook'
 import localeTh from '@/messages/th/ui/common.json'
 
 const DEFAULT_VALUES: AddressInput = {

@@ -20,13 +20,13 @@ import { EllipsisVerticalIcon, HistoryIcon, PlusIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useMemo } from 'react'
 
-import type { ProductWithPayload } from '@/features/product/product.action'
+import type { ProductWithPayload } from '@/features/product/action'
 import type { Selection } from '@heroui/react'
 
 import { PaginationWrapper } from '@/components/ui/PaginationWrapper'
 import { ProductImage } from '@/components/ui/Product/ProductImage'
-import { PRODUCT_UNIT_TH_LABELS } from '@/features/product/product.constant'
-import { useStockStore } from '@/features/stock/stock.store'
+import { PRODUCT_UNIT_TH_LABELS } from '@/features/product/constant'
+import { useStockStore } from '@/features/stock/store'
 import { useIsMounted } from '@/hooks/useIsMounted'
 import { formatNumber, resolveProductImages } from '@/utils'
 

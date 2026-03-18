@@ -1,7 +1,7 @@
 'use client'
 
 import { MarkdownRenderer } from '@/components/ui/Markdown/MarkdownRenderer'
-import { useProductDetailStore } from '@/features/product/product.store'
+import { useProductDetailStore } from '@/features/product/store'
 
 const ProductDescription = () => {
   const { product } = useProductDetailStore()

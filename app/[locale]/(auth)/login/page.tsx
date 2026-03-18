@@ -17,7 +17,7 @@ import {
   userRegisterSchema,
   type UserLoginInput,
   type UserRegisterInput,
-} from '@/features/user/user.schema'
+} from '@/features/user/schema'
 import { useAuthForm } from '@/hooks/useAuthForm'
 import { useUrlQuery } from '@/hooks/useUrlQuery'
 

@@ -19,7 +19,7 @@ import {
 } from '@heroui/react'
 import { EllipsisVerticalIcon } from 'lucide-react'
 
-import type { getOrders } from '@/features/order/order.action'
+import type { getOrders } from '@/features/order/action'
 import type { Selection } from '@heroui/react'
 import type { OrderStatus } from '@prisma/client'
 import type { ReactNode } from 'react'

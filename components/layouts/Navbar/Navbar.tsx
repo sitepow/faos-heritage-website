@@ -7,8 +7,8 @@ import { NavbarMenu } from './_components/NavbarMenu'
 import { NavbarSearch } from './_components/NavbarSearch'
 
 import { NAV_PATH_MAP } from '@/constants/navigation'
-import { getBlogCategories } from '@/features/blog-category/blog-category.action'
-import { getCategories } from '@/features/category/category.action'
+import { getBlogCategories } from '@/features/blog-category/action'
+import { getCategories } from '@/features/category/action'
 
 const Navbar = async () => {
   const locale = await getLocale()

@@ -15,9 +15,9 @@ import { StatCard } from '@/components/ui/StatCard'
 import {
   useShippingCountriesAdmin,
   useShippingStatAdmin,
-} from '@/features/shipping/shipping.hook'
-import { useShippingMutation } from '@/features/shipping/shipping.mutation'
-import { useShippingUIStore } from '@/features/shipping/shipping.store'
+} from '@/features/shipping/hook'
+import { useShippingMutation } from '@/features/shipping/mutation'
+import { useShippingUIStore } from '@/features/shipping/store'
 import { ShippingForm } from '@/features/shipping/ui/ShippingForm'
 
 const ShippingPage = () => {

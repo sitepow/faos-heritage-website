@@ -5,14 +5,14 @@ import { ChevronLeftIcon, SaveIcon } from 'lucide-react'
 import { useParams, useRouter } from 'next/navigation'
 import { useState, useEffect, useCallback } from 'react'
 
-import type { ProductInput } from '@/features/product/product.schema'
+import type { ProductInput } from '@/features/product/schema'
 
 import { TableConfigHeader } from '../../_components/TableConfigHeader'
 
 import { Container } from '@/components/layouts/Container'
 import { MdEditorCustomize } from '@/components/ui/MdEditorCustomize'
-import { useProductAdmin } from '@/features/product/product.hook'
-import { useProductMutation } from '@/features/product/product.mutation'
+import { useProductAdmin } from '@/features/product/hook'
+import { useProductMutation } from '@/features/product/mutation'
 
 const ProductDescriptionPage = () => {
   const params = useParams()

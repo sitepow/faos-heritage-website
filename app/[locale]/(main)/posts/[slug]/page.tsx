@@ -5,7 +5,7 @@ import type { Metadata } from 'next'
 import { PostClient } from './post.client'
 
 import { IMAGE_FALLBACK } from '@/constants'
-import { getPostBySlug } from '@/features/post/post.action'
+import { getPostBySlug } from '@/features/post/action'
 import { constructMetadata, getSafeOgImage } from '@/lib/metadata'
 
 interface Props {

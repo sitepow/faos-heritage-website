@@ -23,13 +23,10 @@ import { Controller, useForm } from 'react-hook-form'
 import type { KeyboardEvent } from 'react'
 import type { Resolver } from 'react-hook-form'
 
-import { usePostLocale } from '../post-localization.hook'
-import { usePostLocaleMutation } from '../post-localization.mutation'
-import {
-  postLocalizationSchema,
-  type PostLocalizationInput,
-} from '../post-localization.schema'
-import { usePostLocaleUIStore } from '../post-localization.store'
+import { usePostLocale } from '../hook'
+import { usePostLocaleMutation } from '../mutation'
+import { postLocalizationSchema, type PostLocalizationInput } from '../schema'
+import { usePostLocaleUIStore } from '../store'
 
 import { AlertSeoBestPractice } from '@/components/ui/AlertSeoBestPractice'
 import { SectionLabel } from '@/components/ui/SectionHeader'

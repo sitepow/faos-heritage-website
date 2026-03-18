@@ -4,7 +4,7 @@ import { Button, Textarea } from '@heroui/react'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
-import { useReviewMutation } from '../review.mutation'
+import { useReviewMutation } from '../mutation'
 
 import { StarRating } from '@/components/ui/StarRating'
 

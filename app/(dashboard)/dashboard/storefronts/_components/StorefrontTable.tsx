@@ -18,7 +18,7 @@ import {
 } from '@heroui/react'
 import { EllipsisVerticalIcon, PhoneIcon } from 'lucide-react'
 
-import type { GetStorefrontsResult } from '@/features/storefront/storefront.action'
+import type { GetStorefrontsResult } from '@/features/storefront/action'
 import type { Selection } from '@heroui/react'
 import type { ReactNode } from 'react'
 

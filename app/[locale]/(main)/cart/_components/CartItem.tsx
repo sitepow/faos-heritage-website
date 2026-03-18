@@ -4,14 +4,14 @@ import { Button } from '@heroui/react'
 import { XIcon } from 'lucide-react'
 import { useMemo } from 'react'
 
-import type { GetCartsResult } from '@/features/cart/cart.action'
+import type { GetCartsResult } from '@/features/cart/action'
 
 import { PriceDisplay } from '@/components/ui/Product/PriceDisplay'
 import { ProductImage } from '@/components/ui/Product/ProductImage'
 import { ProductQty } from '@/components/ui/Product/ProductQty'
 import { VariantSelect } from '@/components/ui/VariantSelect'
 import { useCartItem } from '@/features/cart/hooks/useCartItem'
-import { useExchangeRate } from '@/features/exchange-rate/exchange-rate.hook'
+import { useExchangeRate } from '@/features/exchange-rate/hook'
 import {
   calculateTotalPrice,
   formatCurrency,

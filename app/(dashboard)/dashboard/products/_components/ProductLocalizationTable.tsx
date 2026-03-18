@@ -22,7 +22,7 @@ import { useMemo } from 'react'
 import type { Selection } from '@heroui/react'
 import type { ReactNode } from 'react'
 
-import { useProductLocales } from '@/features/product-localization/product-localization.hook'
+import { useProductLocales } from '@/features/product-localization/hook'
 import { useIsMounted } from '@/hooks/useIsMounted'
 
 interface ActionItem {

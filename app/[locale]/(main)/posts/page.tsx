@@ -5,7 +5,7 @@ import type { Metadata } from 'next'
 
 import { PostsClient } from './posts.client'
 
-import { getPostsInfinite } from '@/features/post/post.action'
+import { getPostsInfinite } from '@/features/post/action'
 import { constructMetadata } from '@/lib/metadata'
 
 interface Props {

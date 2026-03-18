@@ -17,11 +17,11 @@ import { Controller, useForm } from 'react-hook-form'
 
 import type { Resolver } from 'react-hook-form'
 
-import { useProductUIStore } from '../../product/product.store'
-import { useProductImageDetail } from '../product-image.hook'
-import { useProductImageMutation } from '../product-image.mutation'
-import { imageSchema, type ImageInput } from '../product-image.schema'
-import { useProductImageUIStore } from '../product-image.store'
+import { useProductUIStore } from '../../product/store'
+import { useProductImageDetail } from '../hook'
+import { useProductImageMutation } from '../mutation'
+import { imageSchema, type ImageInput } from '../schema'
+import { useProductImageUIStore } from '../store'
 
 import {
   ImageDropzone,

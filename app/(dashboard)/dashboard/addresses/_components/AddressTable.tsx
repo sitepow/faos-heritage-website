@@ -19,7 +19,7 @@ import {
 } from '@heroui/react'
 import { EllipsisVerticalIcon, MapPinIcon } from 'lucide-react'
 
-import type { getAddressesAdmin } from '@/features/address/address.action'
+import type { getAddressesAdmin } from '@/features/address/action'
 import type { Selection } from '@heroui/react'
 import type { ReactNode } from 'react'
 

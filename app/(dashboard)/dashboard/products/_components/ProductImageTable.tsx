@@ -24,7 +24,7 @@ import type { ReactNode } from 'react'
 
 import { ProductImage } from '@/components/ui/Product/ProductImage'
 import { IMAGE_FALLBACK } from '@/constants'
-import { useProductImages } from '@/features/product-image/product-image.hook'
+import { useProductImages } from '@/features/product-image/hook'
 import { useIsMounted } from '@/hooks/useIsMounted'
 
 interface ActionItem {

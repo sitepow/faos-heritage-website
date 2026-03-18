@@ -16,7 +16,7 @@ import {
 import { AffiliateCommissionTable } from '@/app/[locale]/(main)/affiliate/_components/AffiliateCommissionTable'
 import { Container } from '@/components/layouts/Container'
 import { StatCard } from '@/components/ui/StatCard'
-import { useAffiliateDashboard } from '@/features/affiliate/affiliate.hook'
+import { useAffiliateDashboard } from '@/features/affiliate/hook'
 
 const AffiliateDashboardView = () => {
   const { data, chartData, isLoading } = useAffiliateDashboard()

@@ -25,14 +25,14 @@ import { Controller, useForm } from 'react-hook-form'
 import type { KeyboardEvent } from 'react'
 import type { Resolver } from 'react-hook-form'
 
-import { useProductAdmin } from '../product.hook'
-import { useProductMutation } from '../product.mutation'
-import { productSchema, type ProductInput } from '../product.schema'
-import { useProductUIStore, useProductDetailStore } from '../product.store'
+import { useProductAdmin } from '../hook'
+import { useProductMutation } from '../mutation'
+import { productSchema, type ProductInput } from '../schema'
+import { useProductUIStore, useProductDetailStore } from '../store'
 
 import { AlertSeoBestPractice } from '@/components/ui/AlertSeoBestPractice'
 import { SectionLabel } from '@/components/ui/SectionHeader'
-import { useCategories } from '@/features/category/category.hook'
+import { useCategories } from '@/features/category/hook'
 import localeTh from '@/messages/th/ui/common.json'
 
 const DEFAULT_VALUES: ProductInput = {

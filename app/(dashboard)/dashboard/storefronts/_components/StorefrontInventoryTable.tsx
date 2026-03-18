@@ -16,7 +16,7 @@ import { EditIcon, PlusIcon } from 'lucide-react'
 
 import { TableConfigHeader } from '../../products/_components/TableConfigHeader'
 
-import { useStorefrontInventoryStore } from '@/features/storefront-inventory/storefront-inventory.store'
+import { useStorefrontInventoryStore } from '@/features/storefront-inventory/store'
 import { StorefrontInventoryForm } from '@/features/storefront-inventory/ui/StorefrontInventoryForm'
 
 interface Props {

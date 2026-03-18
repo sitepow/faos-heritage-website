@@ -7,12 +7,12 @@ import { AffiliateTable } from './_components/AffiliateTable'
 
 import { Container } from '@/components/layouts/Container'
 import { StatCard } from '@/components/ui/StatCard'
-import { useAffiliates } from '@/features/affiliate/affiliate.hook'
+import { useAffiliates } from '@/features/affiliate/hook'
 import { AffiliateDetailsModal } from '@/features/affiliate/ui/AffiliateDetailsModal'
 import {
   useAffiliateSummary,
   usePendingPayouts,
-} from '@/features/affiliate-payout/payout.hook'
+} from '@/features/affiliate-payout/hook'
 import { useIsMounted } from '@/hooks/useIsMounted'
 
 const AffiliateAdminPage = () => {

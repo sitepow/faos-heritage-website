@@ -6,8 +6,8 @@ import { useState, useEffect, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 
 import type { NavLink } from './navbar.types'
-import type { GetBlogCategoriesResult } from '@/features/blog-category/blog-category.action'
-import type { GetCategoriesResult } from '@/features/category/category.action'
+import type { GetBlogCategoriesResult } from '@/features/blog-category/action'
+import type { GetCategoriesResult } from '@/features/category/action'
 
 import { MenuItem } from './MenuItem'
 

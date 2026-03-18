@@ -31,7 +31,8 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "types/**/*.d.ts",
-    "components/AffiliateTracker.tsx"
+    "components/AffiliateTracker.tsx",
+    "features/storefront-inventory/hook.ts"
   ],
   "exclude": ["node_modules"]
 }

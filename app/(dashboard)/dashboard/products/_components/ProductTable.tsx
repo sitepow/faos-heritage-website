@@ -32,9 +32,9 @@ import type { Selection } from '@heroui/react'
 
 import { PaginationWrapper } from '@/components/ui/PaginationWrapper'
 import { ProductImage } from '@/components/ui/Product/ProductImage'
-import { PRODUCT_UNIT_TH_LABELS } from '@/features/product/product.constant'
-import { useProductsAdmin } from '@/features/product/product.hook'
-import { useProductUIStore } from '@/features/product/product.store'
+import { PRODUCT_UNIT_TH_LABELS } from '@/features/product/constant'
+import { useProductsAdmin } from '@/features/product/hook'
+import { useProductUIStore } from '@/features/product/store'
 import { useIsMounted } from '@/hooks/useIsMounted'
 import { formatCurrency, formatNumber, resolveProductImages } from '@/utils'
 

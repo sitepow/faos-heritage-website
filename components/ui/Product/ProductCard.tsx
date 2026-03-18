@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { memo, useMemo } from 'react'
 
-import type { GetProductsInfiniteResult } from '@/features/product/product.types'
+import type { GetProductsInfiniteResult } from '@/features/product/types'
 
 import { ProductImage } from './ProductImage'
 import { VariantTable } from './VariantTable'
