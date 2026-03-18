@@ -593,6 +593,7 @@ model Storefront {
   businessHours Json? 
   
   isActive    Boolean  @default(true)
+  isMain    Boolean  @default(false)
   
   orders      Order[]
   inventories StorefrontInventory[]

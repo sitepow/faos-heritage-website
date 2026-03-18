@@ -30,7 +30,7 @@ import { useCarts } from '@/features/cart/hooks/useCart'
 import { useExchangeRate } from '@/features/exchange-rate/hook'
 import { useOrderMutation } from '@/features/order/mutation'
 import { useShipping } from '@/features/shipping/hook'
-import { useActiveStorefronts } from '@/features/storefront/hook'
+import { useMainStorefronts } from '@/features/storefront/hook'
 import { useAffiliate } from '@/hooks/useAffiliate'
 import { useAppNavigation } from '@/hooks/useAppNavigation'
 import { useAuth } from '@/hooks/useAuth'
@@ -61,7 +61,7 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
   const [selectedStoreId, setSelectedStoreId] = useState<string>('')
 
   const { data: storefronts = [], isLoading: isLoadingStores } =
-    useActiveStorefronts()
+    useMainStorefronts()
 
   const hasStorefronts = storefronts.length > 0
 

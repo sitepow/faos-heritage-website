@@ -594,6 +594,75 @@ const createAdminOrder = async (input: CreateOrderInput) =>
         return fail(ERROR_CODES.BAD_REQUEST)
       }
 
+      const storeInventories = await tx.storefrontInventory.findMany({
+        where: {
+          storefrontId,
+          productId: {
+            in: items.map((i) => {
+              return i.productId
+            }),
+          },
+        },
+        include: { product: true, variant: true },
+      })
+
+      const inventoryMap = new Map(
+        storeInventories.map((inv) => {
+          return [`${inv.productId}-${inv.variantId || 'none'}`, inv]
+        }),
+      )
+
+      const orderItemsPayload: Prisma.OrderItemCreateManyOrderInput[] = []
+      let subtotalSum = 0
+
+      for (const item of items) {
+        const inventory = inventoryMap.get(
+          `${item.productId}-${item.variantId || 'none'}`,
+        )
+
+        if (!inventory || inventory.stockQuantity < item.quantity) {
+          throw new Error('INSUFFICIENT_STOREFRONT_STOCK')
+        }
+
+        const effectiveBasePrice = Number(inventory.netPrice)
+        const priceLocal = Number(
+          (effectiveBasePrice * exchangeRate).toFixed(2),
+        )
+
+        const currentItemBaseSubtotal = effectiveBasePrice * item.quantity
+        subtotalSum += currentItemBaseSubtotal
+
+        orderItemsPayload.push({
+          productId: item.productId,
+          variantId: item.variantId,
+          productName: inventory.product.name,
+          variantName: inventory.variant?.name,
+          quantity: item.quantity,
+          basePrice: effectiveBasePrice,
+          baseSubtotal: currentItemBaseSubtotal,
+          price: priceLocal,
+          subtotal: priceLocal * item.quantity,
+          currency,
+        })
+
+        await tx.storefrontInventory.update({
+          where: { id: inventory.id },
+          data: { stockQuantity: { decrement: item.quantity } },
+        })
+
+        await tx.stockHistory.create({
+          data: {
+            productId: item.productId,
+            variantId: item.variantId ?? null,
+            userId: userId,
+            quantity: -item.quantity,
+            type: StockMovementType.SALE,
+            fromStorefrontId: storefrontId,
+            note: `ขายปลีกหน้าร้าน (POS) - Order ID: ${storefrontId}`,
+          },
+        })
+      }
+
       let validAffiliate = null
       let finalReferrerCode = null
       if (referrerId) {
@@ -613,48 +682,9 @@ const createAdminOrder = async (input: CreateOrderInput) =>
         }
       }
 
-      const products = await tx.product.findMany({
-        where: { id: { in: items.map((i) => i.productId) } },
-        include: { variants: true },
-      })
-
-      const productMap = new Map(products.map((p) => [p.id, p]))
-      const orderItemsPayload: Prisma.OrderItemCreateManyOrderInput[] = []
-      let totalBaseProductDiscount = 0
-      let subtotalSum = 0
-
-      for (const item of items) {
-        const product = productMap.get(item.productId)
-        if (!product) return fail(ERROR_CODES.DATA_NOT_FOUND)
-
-        const { price: effectiveBasePrice, discountAmount } =
-          getProductPriceInfo(product, item.variantId)
-        const variant = item.variantId
-          ? product.variants.find((v) => v.id === item.variantId)
-          : null
-
-        const priceLocal = Number(
-          (effectiveBasePrice * exchangeRate).toFixed(2),
-        )
-        totalBaseProductDiscount += discountAmount * item.quantity
-        const currentItemBaseSubtotal = effectiveBasePrice * item.quantity
-        subtotalSum += currentItemBaseSubtotal
-
-        orderItemsPayload.push({
-          productId: product.id,
-          variantId: item.variantId,
-          productName: product.name,
-          variantName: variant?.name,
-          quantity: item.quantity,
-          basePrice: effectiveBasePrice,
-          baseSubtotal: currentItemBaseSubtotal,
-          price: priceLocal,
-          subtotal: priceLocal * item.quantity,
-          currency,
-        })
+      const exchange = (val: number) => {
+        return Number((val * exchangeRate).toFixed(2))
       }
-
-      const exchange = (val: number) => Number((val * exchangeRate).toFixed(2))
       const baseTotal = subtotalSum
       const now = new Date()
 
@@ -669,12 +699,12 @@ const createAdminOrder = async (input: CreateOrderInput) =>
           exchangeLocale,
           baseSubtotal: subtotalSum,
           baseShipping: 0,
-          baseDiscount: totalBaseProductDiscount,
+          baseDiscount: 0,
           baseTax: 0,
           baseTotal,
           subtotal: exchange(subtotalSum),
           shippingCost: 0,
-          discount: exchange(totalBaseProductDiscount),
+          discount: 0,
           tax: 0,
           total: exchange(baseTotal),
           referrerCode: finalReferrerCode,
@@ -707,17 +737,6 @@ const createAdminOrder = async (input: CreateOrderInput) =>
         })
       }
 
-      await Promise.all(
-        items.map((item) =>
-          processStockMovement(tx, {
-            ...item,
-            type: StockMovementType.SALE,
-            orderId: order.id,
-            direction: 'decrement',
-          }),
-        ),
-      )
-
       return ok(order.id)
     })
   })
@@ -748,7 +767,32 @@ const updateOrder = async (input: UpdateOrderInput) =>
         !CANCEL_OR_REFUND_STATUSES.has(order.status)
       ) {
         await Promise.all(
-          order.items.map((item) => {
+          order.items.map(async (item) => {
+            if (order.storefrontId) {
+              await tx.storefrontInventory.update({
+                where: {
+                  storefrontId_productId_variantId: {
+                    storefrontId: order.storefrontId,
+                    productId: item.productId!,
+                    variantId: item.variantId!,
+                  },
+                },
+                data: { stockQuantity: { increment: item.quantity } },
+              })
+
+              return tx.stockHistory.create({
+                data: {
+                  productId: item.productId!,
+                  variantId: item.variantId,
+                  quantity: item.quantity,
+                  type: StockMovementType.RESTOCK,
+                  toStorefrontId: order.storefrontId,
+                  reference: order.id,
+                  note: `คืนสินค้าจากการยกเลิกออเดอร์ (POS) #${order.id}`,
+                },
+              })
+            }
+
             return processStockMovement(tx, {
               productId: item.productId!,
               variantId: item.variantId,
@@ -790,6 +834,10 @@ const updateOrder = async (input: UpdateOrderInput) =>
       })
 
       revalidatePath('/dashboard/orders')
+      if (order.storefrontId) {
+        revalidatePath(`/dashboard/storefronts/${order.storefrontId}`)
+      }
+
       return ok()
     })
   })

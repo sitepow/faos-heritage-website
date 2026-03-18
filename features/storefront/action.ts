@@ -18,6 +18,18 @@ export type GetStorefrontStatResult = Awaited<
   ReturnType<typeof getStorefrontStatAdmin>
 >
 
+const getMainStorefronts = async () => {
+  const storefronts = await prisma.storefront.findMany({
+    where: {
+      isActive: true,
+      isMain: true,
+    },
+    orderBy: { name: 'asc' },
+  })
+
+  return decimalToNumber(storefronts)
+}
+
 const createStorefront = async (data: StorefrontInput) =>
   withRole([Role.ADMIN], async () => {
     const validated = storefrontSchema.safeParse(data)
@@ -95,6 +107,7 @@ const getStorefrontStatAdmin = async () => {
 }
 
 export {
+  getMainStorefronts,
   createStorefront,
   updateStorefront,
   deleteStorefront,

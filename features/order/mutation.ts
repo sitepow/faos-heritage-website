@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { createAdminOrder, createOrder, sendOrderEmail } from './action'
 import { orderQueryKeys } from './query-key'
 import { cartQueryKeys } from '../cart/query-key'
+import { storefrontInventoryKeys } from '../storefront-inventory/query-key'
 
 import { useAppNavigation } from '@/hooks/useAppNavigation'
 
@@ -20,6 +21,9 @@ const useAdminOrderMutation = () => {
         await Promise.all([
           queryClient.invalidateQueries({ queryKey: cartQueryKeys.all }),
           queryClient.invalidateQueries({ queryKey: orderQueryKeys.all }),
+          queryClient.invalidateQueries({
+            queryKey: storefrontInventoryKeys.all,
+          }),
           sendOrderEmail(result.data),
         ])
 
@@ -46,6 +50,9 @@ const useOrderMutation = () => {
         await Promise.all([
           queryClient.invalidateQueries({ queryKey: cartQueryKeys.all }),
           queryClient.invalidateQueries({ queryKey: orderQueryKeys.all }),
+          queryClient.invalidateQueries({
+            queryKey: storefrontInventoryKeys.all,
+          }),
           sendOrderEmail(result.data),
         ])
 

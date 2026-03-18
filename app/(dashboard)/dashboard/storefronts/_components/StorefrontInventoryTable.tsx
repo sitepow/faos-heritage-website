@@ -14,13 +14,19 @@ import {
 } from '@heroui/react'
 import { EditIcon, PlusIcon } from 'lucide-react'
 
+import type { getStorefrontInventories } from '@/features/storefront-inventory/action'
+
 import { TableConfigHeader } from '../../products/_components/TableConfigHeader'
 
 import { useStorefrontInventoryStore } from '@/features/storefront-inventory/store'
 import { StorefrontInventoryForm } from '@/features/storefront-inventory/ui/StorefrontInventoryForm'
 
+type StorefrontInventoryList = Awaited<
+  ReturnType<typeof getStorefrontInventories>
+>
+
 interface Props {
-  inventoryList: any[]
+  inventoryList: StorefrontInventoryList
   isLoading: boolean
   storefrontId: string
 }
@@ -44,7 +50,7 @@ const StorefrontInventoryTable = ({
               return onOpen()
             }}
           >
-            เพิ่มสินค้าเข้าสาขา selec edCount={0} t{' '}
+            เพิ่มสินค้าเข้าสาขา
           </Button>
         }
         title='รายการสินค้าและสต็อกในสาขา'
@@ -105,7 +111,7 @@ const StorefrontInventoryTable = ({
                         stockQuantity: item.stockQuantity,
                         retailPrice: Number(item.retailPrice),
                         netPrice: Number(item.netPrice),
-                        direction: 'IN', // default เป็น IN เมื่อกดแก้ไข
+                        direction: 'IN',
                       })
                     }}
                   >

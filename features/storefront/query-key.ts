@@ -5,4 +5,9 @@ const storefrontQueryKeys = {
   detail: (id: string) => [...storefrontQueryKeys.all, 'detail', id] as const,
 }
 
-export { storefrontQueryKeys }
+const storefrontMainKeys = {
+  all: ['storefront-main'] as const,
+  active: () => [...storefrontMainKeys.all, 'active'] as const,
+}
+
+export { storefrontMainKeys, storefrontQueryKeys }

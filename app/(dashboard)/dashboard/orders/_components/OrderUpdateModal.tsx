@@ -32,6 +32,7 @@ import { useOrder } from '@/features/order/hook'
 import { orderQueryKeys } from '@/features/order/query-key'
 import { orderSchema, type OrderInput } from '@/features/order/schema'
 import { useOrderStore } from '@/features/order/store'
+import { storefrontInventoryKeys } from '@/features/storefront-inventory/query-key'
 import { canTransitionOrderStatus, ORDER_STATUS_TH_MAP } from '@/utils'
 
 const OrderUpdateModal = () => {
@@ -87,6 +88,7 @@ const OrderUpdateModal = () => {
     mutationFn: updateOrder,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: orderQueryKeys.all })
+      queryClient.invalidateQueries({ queryKey: storefrontInventoryKeys.all })
       return onClose()
     },
   })

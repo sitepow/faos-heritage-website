@@ -1,7 +1,20 @@
 import { useQuery } from '@tanstack/react-query'
 
-import { getActiveStorefronts, getStorefronts } from './action'
-import { storefrontQueryKeys } from './query-key'
+import {
+  getActiveStorefronts,
+  getMainStorefronts,
+  getStorefronts,
+} from './action'
+import { storefrontMainKeys, storefrontQueryKeys } from './query-key'
+
+const useMainStorefronts = () => {
+  return useQuery({
+    queryKey: storefrontMainKeys.active(),
+    queryFn: () => {
+      return getMainStorefronts()
+    },
+  })
+}
 
 const useStorefronts = () => {
   return useQuery({
@@ -17,4 +30,4 @@ const useActiveStorefronts = () => {
   })
 }
 
-export { useStorefronts, useActiveStorefronts }
+export { useMainStorefronts, useStorefronts, useActiveStorefronts }

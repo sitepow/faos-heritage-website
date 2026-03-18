@@ -8,6 +8,7 @@ import type { StorefrontInventoryInput } from './schema'
 import { ERROR_CODES, fail, ok } from '@/lib/errors'
 import { prisma } from '@/lib/prisma'
 import { getServerUser } from '@/lib/session'
+import { decimalToNumber } from '@/utils'
 
 const transferStorefrontStock = async (input: StorefrontInventoryInput) => {
   const { userId } = await getServerUser()
@@ -122,24 +123,40 @@ const transferStorefrontStock = async (input: StorefrontInventoryInput) => {
 }
 
 const getStorefrontInventories = async (storefrontId: string) => {
-  return await prisma.storefrontInventory.findMany({
+  const data = await prisma.storefrontInventory.findMany({
     where: { storefrontId },
     include: {
-      product: true,
+      product: {
+        include: {
+          images: {
+            orderBy: { isPrimary: 'desc' },
+          },
+        },
+      },
       variant: true,
     },
     orderBy: { updatedAt: 'desc' },
   })
+
+  return decimalToNumber(data)
 }
 
 const getStorefrontInventoryDetail = async (id: string) => {
-  return await prisma.storefrontInventory.findUnique({
+  const data = await prisma.storefrontInventory.findUnique({
     where: { id },
     include: {
-      product: true,
+      product: {
+        include: {
+          images: {
+            orderBy: { isPrimary: 'desc' },
+          },
+        },
+      },
       variant: true,
     },
   })
+
+  return decimalToNumber(data)
 }
 
 const saveStorefrontInventory = async (input: StorefrontInventoryInput) => {

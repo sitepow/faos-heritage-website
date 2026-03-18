@@ -72,6 +72,7 @@ const StorefrontInventoryForm = ({
   useEffect(() => {
     if (editingData) {
       setSelectedProductId(editingData.productId)
+
       return reset(editingData)
     }
   }, [editingData, reset])
@@ -87,118 +88,123 @@ const StorefrontInventoryForm = ({
   return (
     <Modal isOpen={isOpen} scrollBehavior='inside' size='xl' onClose={onClose}>
       <ModalContent>
-        <form onSubmit={handleSubmit(handleSave)}>
-          <ModalHeader className='flex flex-col gap-1'>
-            {editingData
-              ? 'แก้ไขข้อมูลสต็อก/ราคา'
-              : 'เพิ่มสินค้าและโอนสต็อกเข้าสาขา'}
-          </ModalHeader>
-          <ModalBody className='flex flex-col gap-4'>
-            <RadioGroup
-              label='ทิศทางการโอนสินค้า'
-              orientation='horizontal'
-              value={currentDirection}
-              onValueChange={(val) => {
-                return setValue('direction', val as 'IN' | 'OUT')
-              }}
-            >
-              <Radio color='success' value='IN'>
-                <div className='flex items-center gap-2'>
-                  <ArrowDownIcon size={16} /> โอนเข้าสาขา
-                </div>
-              </Radio>
-              <Radio color='danger' value='OUT'>
-                <div className='flex items-center gap-2'>
-                  <ArrowUpIcon size={16} /> โอนคืนคลังหลัก
-                </div>
-              </Radio>
-            </RadioGroup>
+        <ModalHeader className='flex flex-col gap-1'>
+          {editingData
+            ? 'แก้ไขข้อมูลสต็อก/ราคา'
+            : 'เพิ่มสินค้าและโอนสต็อกเข้าสาขา'}
+        </ModalHeader>
+        <ModalBody className='flex flex-col gap-4'>
+          <RadioGroup
+            label='ทิศทางการโอนสินค้า'
+            orientation='horizontal'
+            value={currentDirection}
+            onValueChange={(val) => {
+              return setValue('direction', val as 'IN' | 'OUT')
+            }}
+          >
+            <Radio color='success' value='IN'>
+              <div className='flex items-center gap-2'>
+                <ArrowDownIcon size={16} /> โอนเข้าสาขา
+              </div>
+            </Radio>
+            <Radio color='danger' value='OUT'>
+              <div className='flex items-center gap-2'>
+                <ArrowUpIcon size={16} /> โอนคืนคลังหลัก
+              </div>
+            </Radio>
+          </RadioGroup>
 
-            <Autocomplete
-              defaultItems={productList}
-              label='เลือกสินค้า'
-              placeholder='ค้นหาชื่อสินค้า...'
-              selectedKey={selectedProductId}
-              onSelectionChange={(key) => {
-                const id = key as string
-                setSelectedProductId(id)
-                return setValue('productId', id)
+          <Autocomplete
+            defaultItems={productList}
+            label='เลือกสินค้า'
+            placeholder='ค้นหาชื่อสินค้า...'
+            selectedKey={selectedProductId}
+            onSelectionChange={(key) => {
+              const id = key as string
+              setSelectedProductId(id)
+              return setValue('productId', id)
+            }}
+          >
+            {(item) => {
+              return (
+                <AutocompleteItem key={item.id} textValue={item.name}>
+                  <User
+                    avatarProps={{
+                      src: item.images?.[0]?.url,
+                      radius: 'sm',
+                      size: 'sm',
+                    }}
+                    description={`สต็อกคลังหลัก: ${item.stockQuantity}`}
+                    name={item.name}
+                  />
+                </AutocompleteItem>
+              )
+            }}
+          </Autocomplete>
+
+          {selectedProduct && selectedProduct.variants.length > 0 && (
+            <Select
+              label='เลือกตัวเลือกสินค้า (Variant)'
+              placeholder='ระบุตัวเลือก...'
+              onSelectionChange={(keys) => {
+                return setValue('variantId', Array.from(keys)[0] as string)
               }}
             >
-              {(item) => {
+              {selectedProduct.variants.map((v) => {
                 return (
-                  <AutocompleteItem key={item.id} textValue={item.name}>
-                    <User
-                      avatarProps={{
-                        src: item.images?.[0]?.url,
-                        radius: 'sm',
-                        size: 'sm',
-                      }}
-                      description={`สต็อกคลังหลัก: ${item.stockQuantity}`}
-                      name={item.name}
-                    />
-                  </AutocompleteItem>
+                  <SelectItem key={v.id} textValue={v.name}>
+                    {v.name} (คงเหลือ: {v.stockQuantity})
+                  </SelectItem>
                 )
-              }}
-            </Autocomplete>
+              })}
+            </Select>
+          )}
 
-            {selectedProduct && selectedProduct.variants.length > 0 && (
-              <Select
-                label='เลือกตัวเลือกสินค้า (Variant)'
-                placeholder='ระบุตัวเลือก...'
-                onSelectionChange={(keys) => {
-                  return setValue('variantId', Array.from(keys)[0] as string)
-                }}
-              >
-                {selectedProduct.variants.map((v: any) => {
-                  return (
-                    <SelectItem key={v.id} textValue={v.name}>
-                      {v.name} (คงเหลือ: {v.stockQuantity})
-                    </SelectItem>
-                  )
-                })}
-              </Select>
-            )}
-
-            <div className='grid grid-cols-2 gap-4'>
-              <Input
-                {...register('stockQuantity', { valueAsNumber: true })}
-                errorMessage={errors.stockQuantity?.message}
-                isInvalid={!!errors.stockQuantity}
-                label='จำนวนสินค้า'
-                type='number'
-              />
-              <Input
-                {...register('retailPrice', { valueAsNumber: true })}
-                errorMessage={errors.retailPrice?.message}
-                isInvalid={!!errors.retailPrice}
-                label='ราคาขายหน้าร้าน (Retail)'
-                placeholder='0.00'
-                startContent={
-                  <span className='text-default-400 text-small'>฿</span>
-                }
-              />
-            </div>
-
+          <div className='grid grid-cols-2 gap-4'>
             <Input
-              {...register('netPrice', { valueAsNumber: true })}
-              className='bg-primary-50 rounded-xl'
-              errorMessage={errors.netPrice?.message}
-              isInvalid={!!errors.netPrice}
-              label='ราคาที่คุณได้รับจริง (Net Price)'
-              placeholder='ราคา 90 บาท'
-              startContent={<span className='text-primary text-small'>฿</span>}
+              {...register('stockQuantity', { valueAsNumber: true })}
+              errorMessage={errors.stockQuantity?.message}
+              isInvalid={!!errors.stockQuantity}
+              label='จำนวนสินค้า'
+              type='number'
             />
-          </ModalBody>
-          <ModalFooter>
-            <Button variant='flat' onPress={onClose}>
-              ยกเลิก
-            </Button>
-            <Button color='primary' isLoading={isPending} type='submit'>
-              ยืนยันการทำรายการ
-            </Button>
-          </ModalFooter>
-        </form>
+            <Input
+              {...register('retailPrice', { valueAsNumber: true })}
+              errorMessage={errors.retailPrice?.message}
+              isInvalid={!!errors.retailPrice}
+              label='ราคาขายหน้าร้าน (Retail)'
+              placeholder='0.00'
+              startContent={
+                <span className='text-default-400 text-small'>฿</span>
+              }
+            />
+          </div>
+
+          <Input
+            {...register('netPrice', { valueAsNumber: true })}
+            className='bg-primary-50 rounded-xl'
+            errorMessage={errors.netPrice?.message}
+            isInvalid={!!errors.netPrice}
+            label='ราคาที่คุณได้รับจริง (Net Price)'
+            placeholder='0.00'
+            startContent={
+              <span className='text-default-400 text-small'>฿</span>
+            }
+          />
+        </ModalBody>
+        <ModalFooter>
+          <Button variant='flat' onPress={onClose}>
+            ยกเลิก
+          </Button>
+          <Button
+            color='primary'
+            isLoading={isPending}
+            type='submit'
+            onClick={handleSubmit(handleSave)}
+          >
+            ยืนยันการทำรายการ
+          </Button>
+        </ModalFooter>
       </ModalContent>
     </Modal>
   )

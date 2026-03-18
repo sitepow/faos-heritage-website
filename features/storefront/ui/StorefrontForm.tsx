@@ -33,6 +33,7 @@ const DEFAULT_VALUES: StorefrontInput = {
   address: '',
   googleMapUrl: '',
   isActive: true,
+  isMain: false,
 }
 
 const StorefrontForm = () => {
@@ -104,21 +105,39 @@ const StorefrontForm = () => {
           ) : (
             <div className='space-y-4 text-left'>
               <SectionLabel>สถานะการแสดงผล</SectionLabel>
-              <Controller
-                control={control}
-                name='isActive'
-                render={({ field: { value, onChange, ...field } }) => {
-                  return (
-                    <Switch
-                      {...field}
-                      isSelected={value}
-                      onValueChange={onChange}
-                    >
-                      เปิดให้บริการสาขานี้ (Active)
-                    </Switch>
-                  )
-                }}
-              />
+              <div className='flex flex-wrap gap-5'>
+                <Controller
+                  control={control}
+                  name='isActive'
+                  render={({ field: { value, onChange, ...field } }) => {
+                    return (
+                      <Switch
+                        {...field}
+                        isSelected={value}
+                        onValueChange={onChange}
+                      >
+                        เปิดให้บริการสาขานี้ (Active)
+                      </Switch>
+                    )
+                  }}
+                />
+
+                <Controller
+                  control={control}
+                  name='isMain'
+                  render={({ field: { value, onChange, ...field } }) => {
+                    return (
+                      <Switch
+                        {...field}
+                        isSelected={value}
+                        onValueChange={onChange}
+                      >
+                        เปิดให้สาขานี้ใช้สต็อกจากคลังหลัก
+                      </Switch>
+                    )
+                  }}
+                />
+              </div>
 
               <SectionLabel>ข้อมูลทั่วไป</SectionLabel>
               <Controller
@@ -162,7 +181,6 @@ const StorefrontForm = () => {
                       <Input
                         {...field}
                         label='Google Map URL'
-                        placeholder='https://goo.gl/maps/...'
                         value={value ?? ''}
                         variant='bordered'
                       />

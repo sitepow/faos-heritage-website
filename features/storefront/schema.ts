@@ -17,6 +17,7 @@ const storefrontSchema = z.object({
   businessHours: z.any().nullable().optional(),
 
   isActive: z.boolean().default(true),
+  isMain: z.boolean().default(false),
 })
 
 type StorefrontInput = z.infer<typeof storefrontSchema>
