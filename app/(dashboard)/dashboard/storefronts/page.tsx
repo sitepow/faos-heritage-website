@@ -1,7 +1,14 @@
 'use client'
 
 import { useDisclosure, Button, Alert } from '@heroui/react'
-import { PlusIcon, EditIcon, TrashIcon, InfoIcon } from 'lucide-react'
+import {
+  PlusIcon,
+  EditIcon,
+  TrashIcon,
+  InfoIcon,
+  LayoutGridIcon,
+} from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useState, useCallback, useMemo } from 'react'
 
 import type { Selection } from '@heroui/react'
@@ -18,6 +25,7 @@ import { useStorefrontStore } from '@/features/storefront/storefront.store'
 import { StorefrontForm } from '@/features/storefront/ui/StorefrontForm'
 
 const StorefrontPage = () => {
+  const router = useRouter()
   const { openForm } = useStorefrontStore()
   const { deleteStorefront, isDeleting } = useStorefrontMutation()
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
@@ -96,6 +104,12 @@ const StorefrontPage = () => {
           },
         },
         {
+          key: 'stock',
+          label: 'จัดการสต็อกและราคา',
+          icon: <LayoutGridIcon size={16} />,
+          onClick: () => router.push(`/dashboard/storefronts/${id}`),
+        },
+        {
           key: 'delete',
           label: 'ลบสาขา',
           icon: <TrashIcon size={16} />,
@@ -106,7 +120,7 @@ const StorefrontPage = () => {
         },
       ]
     },
-    [openForm, handleDeleteTrigger],
+    [openForm, router, handleDeleteTrigger],
   )
 
   return (
