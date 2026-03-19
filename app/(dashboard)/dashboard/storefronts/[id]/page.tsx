@@ -1,7 +1,7 @@
 'use client'
 
 import { Button, Link } from '@heroui/react'
-import { ArrowLeftIcon } from 'lucide-react'
+import { ChevronLeft } from 'lucide-react'
 import { useParams } from 'next/navigation'
 import { useMemo } from 'react'
 
@@ -46,9 +46,9 @@ const StorefrontDetailPage = () => {
           isIconOnly
           as={Link}
           href='/dashboard/storefronts'
-          variant='flat'
+          variant='light'
         >
-          <ArrowLeftIcon size={18} />
+          <ChevronLeft />
         </Button>
         <div>
           <h1 className='text-2xl font-bold'>
