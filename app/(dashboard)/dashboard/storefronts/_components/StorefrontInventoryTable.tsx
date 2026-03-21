@@ -9,7 +9,6 @@ import {
   TableCell,
   Button,
   Spinner,
-  User,
   Dropdown,
   DropdownTrigger,
   DropdownMenu,
@@ -21,6 +20,8 @@ import type { getStorefrontInventories } from '@/features/storefront-inventory/a
 
 import { TableConfigHeader } from '../../products/_components/TableConfigHeader'
 
+import { ProductImage } from '@/components/ui/Product/ProductImage'
+import { IMAGE_FALLBACK } from '@/constants'
 import { useStorefrontInventoryStore } from '@/features/storefront-inventory/store'
 import { StorefrontInventoryForm } from '@/features/storefront-inventory/ui/StorefrontInventoryForm'
 
@@ -62,7 +63,9 @@ const StorefrontInventoryTable = ({
 
       <Table aria-label='Storefront inventory table'>
         <TableHeader>
-          <TableColumn>สินค้า</TableColumn>
+          <TableColumn>รหัสรายการ</TableColumn>
+          <TableColumn>รูปภาพ</TableColumn>
+          <TableColumn>ชื่อสินค้า</TableColumn>
           <TableColumn>ตัวเลือก (Variant)</TableColumn>
           <TableColumn align='center'>สต็อกสาขา</TableColumn>
           <TableColumn align='end'>ราคาหน้าร้าน</TableColumn>
@@ -80,15 +83,21 @@ const StorefrontInventoryTable = ({
             return (
               <TableRow key={item.id}>
                 <TableCell>
-                  <User
-                    avatarProps={{
-                      src: item.product.images?.[0]?.url,
-                      radius: 'sm',
-                      size: 'sm',
-                    }}
-                    description={item.product.slug}
-                    name={item.product.name}
+                  <span className='text-default-500 font-mono text-xs font-bold'>
+                    #{item.id.slice(-8).toUpperCase()}
+                  </span>
+                </TableCell>
+                <TableCell>
+                  <ProductImage
+                    fill
+                    className='size-20'
+                    image={
+                      item.product.images?.[0]?.url ?? IMAGE_FALLBACK.EMPTY
+                    }
                   />
+                </TableCell>
+                <TableCell className='max-w-52 min-w-52 font-medium'>
+                  {item.product.name}
                 </TableCell>
                 <TableCell>{item.variant?.name ?? '-'}</TableCell>
                 <TableCell className='text-center font-bold'>
