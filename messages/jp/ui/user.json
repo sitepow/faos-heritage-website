@@ -14,7 +14,8 @@
     "roles": {
       "admin": "管理者",
       "customer": "顧客",
-      "stock_manager": "在庫管理者"
+      "stock_manager": "在庫管理者",
+      "pos": "店長"
     }
   },
   "orders": {

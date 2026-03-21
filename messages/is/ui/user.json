@@ -14,7 +14,8 @@
     "roles": {
       "admin": "Stjórnandi",
       "customer": "Viðskiptavinur",
-      "stock_manager": "Birgðastjóri"
+      "stock_manager": "Birgðastjóri",
+      "pos": "Verslunarstjóri"
     }
   },
   "orders": {

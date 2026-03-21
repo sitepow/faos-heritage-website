@@ -14,7 +14,8 @@
     "roles": {
       "admin": "ผู้ดูแลระบบ",
       "customer": "ลูกค้า",
-      "stock_manager": "ผู้ดูแลสต็อก"
+      "stock_manager": "ผู้ดูแลสต็อก",
+      "pos": "ผู้จัดการร้านค้า"
     }
   },
   "orders": {

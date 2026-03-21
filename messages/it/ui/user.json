@@ -14,7 +14,8 @@
     "roles": {
       "admin": "Amministratore",
       "customer": "Cliente",
-      "stock_manager": "Gestore del Magazzino"
+      "stock_manager": "Responsabile Magazzino",
+      "pos": "Gestore del Negozio"
     }
   },
   "orders": {

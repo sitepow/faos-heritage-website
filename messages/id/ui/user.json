@@ -14,7 +14,8 @@
     "roles": {
       "admin": "Administrator",
       "customer": "Pelanggan",
-      "stock_manager": "Manajer Stok"
+      "stock_manager": "Manajer Stok",
+      "pos": "Manajer Toko"
     }
   },
   "orders": {

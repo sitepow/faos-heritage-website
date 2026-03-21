@@ -14,7 +14,8 @@
     "roles": {
       "admin": "Administrator",
       "customer": "Customer",
-      "stock_manager": "Stock Manager"
+      "stock_manager": "Stock Manager",
+      "pos": "Store Manager"
     }
   },
   "orders": {

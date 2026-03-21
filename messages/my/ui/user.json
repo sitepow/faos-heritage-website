@@ -14,7 +14,8 @@
     "roles": {
       "admin": "Pentadbir",
       "customer": "Pelanggan",
-      "stock_manager": "Pengจัดการ Stok"
+      "stock_manager": "Pengurus Stok",
+      "pos": "Pengurus Kedai"
     }
   },
   "orders": {

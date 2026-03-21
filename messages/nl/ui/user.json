@@ -14,7 +14,8 @@
     "roles": {
       "admin": "Beheerder",
       "customer": "Klant",
-      "stock_manager": "Voorraadbeheerder"
+      "stock_manager": "Voorraadbeheerder",
+      "pos": "Winkelmanager"
     }
   },
   "orders": {

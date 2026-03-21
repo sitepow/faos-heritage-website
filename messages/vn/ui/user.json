@@ -14,7 +14,8 @@
     "roles": {
       "admin": "Quản trị viên",
       "customer": "Khách hàng",
-      "stock_manager": "Quản lý kho"
+      "stock_manager": "Quản lý kho",
+      "pos": "Quản lý cửa hàng"
     }
   },
   "orders": {
