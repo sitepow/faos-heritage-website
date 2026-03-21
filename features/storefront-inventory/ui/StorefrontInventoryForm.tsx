@@ -197,6 +197,7 @@ const StorefrontInventoryForm = ({
             ยกเลิก
           </Button>
           <Button
+            className='text-secondary'
             color='primary'
             isLoading={isPending}
             type='submit'
