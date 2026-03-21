@@ -9,22 +9,27 @@ const useAuth = () => {
   const isAuthenticated = status === 'authenticated'
   const isLoading = status === 'loading'
 
-  const isAdmin = user?.roles?.includes(Role.ADMIN) ?? false
+  const roles = user?.roles || []
 
-  const isStockManager = user?.roles?.includes(Role.STOCK_MANAGER) ?? false
+  const isAdmin = roles.includes(Role.ADMIN)
 
-  const canManageStock =
-    user?.roles?.some((role: Role) => {
-      return role === Role.ADMIN || role === Role.STOCK_MANAGER
-    }) ?? false
+  const isStockManager = roles.includes(Role.STOCK_MANAGER)
+
+  const isPOS = roles.includes(Role.POS)
+
+  const canManageStock = roles.some((role: Role) => {
+    return role === Role.ADMIN || role === Role.STOCK_MANAGER
+  })
 
   return {
     userId,
     user,
+    roles,
     isAuthenticated,
     isLoading,
     isAdmin,
     isStockManager,
+    isPOS,
     canManageStock,
     session,
   }

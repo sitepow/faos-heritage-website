@@ -10,6 +10,7 @@ enum Role {
   CUSTOMER
   ADMIN
   STOCK_MANAGER
+  POS
 }
 
 enum AffiliateStatus {

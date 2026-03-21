@@ -63,6 +63,15 @@ const middleware = async (request: NextRequest) => {
 
     const isAdmin = roles.includes(Role.ADMIN)
     const isStockManager = roles.includes(Role.STOCK_MANAGER)
+    const isPOS = roles.includes(Role.POS)
+
+    if (isPOS && !isAdmin && !isStockManager) {
+      const isAccessingAllowed = pathname.startsWith('/dashboard/orders')
+
+      if (!isAccessingAllowed) {
+        return NextResponse.redirect(new URL('/dashboard/orders', request.url))
+      }
+    }
 
     if (isStockManager && !isAdmin) {
       const allowedPaths = ['/dashboard/inventory', '/dashboard/orders']
@@ -77,7 +86,7 @@ const middleware = async (request: NextRequest) => {
       }
     }
 
-    if (!isAdmin && !isStockManager) {
+    if (!isAdmin && !isStockManager && !isPOS) {
       const cookieLocale =
         request.cookies.get('NEXT_LOCALE')?.value || routing.defaultLocale
       return NextResponse.redirect(new URL(`/${cookieLocale}`, request.url))

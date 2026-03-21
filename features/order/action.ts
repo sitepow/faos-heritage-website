@@ -272,10 +272,22 @@ const processStockMovement = async (
 const getOrders = async ({
   page = 1,
   limit = 10,
-  userId,
+  userId: filterUserId,
 }: GetOrdersOptions = {}) => {
   const skip = (page - 1) * limit
-  const where: Prisma.OrderWhereInput = userId ? { userId } : {}
+
+  const { userId: currentUserId, roles } = await getServerUser()
+  const isAdmin = roles.includes(Role.ADMIN)
+  const isStockManager = roles.includes(Role.STOCK_MANAGER)
+  const isPOS = roles.includes(Role.POS)
+
+  let where: Prisma.OrderWhereInput = {}
+
+  if (filterUserId) {
+    where.userId = filterUserId
+  } else if (isPOS && !isAdmin && !isStockManager) {
+    where.userId = currentUserId
+  }
 
   const [items, total] = await prisma.$transaction([
     prisma.order.findMany({
@@ -333,10 +345,18 @@ const getOrderById = async (orderId: string) => {
 }
 
 const getOrderStats = async () => {
+  const { userId, roles } = await getServerUser()
+  const isAdmin = roles.includes(Role.ADMIN)
+  const isStockManager = roles.includes(Role.STOCK_MANAGER)
+  const isPOS = roles.includes(Role.POS)
+
+  const where: Prisma.OrderWhereInput =
+    isPOS && !isAdmin && !isStockManager ? { userId } : {}
+
   const [total, pending, delivered] = await Promise.all([
-    prisma.order.count(),
-    prisma.order.count({ where: { status: OrderStatus.PENDING } }),
-    prisma.order.count({ where: { status: OrderStatus.DELIVERED } }),
+    prisma.order.count({ where }),
+    prisma.order.count({ where: { ...where, status: OrderStatus.PENDING } }),
+    prisma.order.count({ where: { ...where, status: OrderStatus.DELIVERED } }),
   ])
 
   return [
@@ -347,12 +367,23 @@ const getOrderStats = async () => {
 }
 
 const getRevenueStats = async () => {
+  const { userId, roles } = await getServerUser()
+  const isAdmin = roles.includes(Role.ADMIN)
+  const isStockManager = roles.includes(Role.STOCK_MANAGER)
+  const isPOS = roles.includes(Role.POS)
+
+  const baseWhere: Prisma.OrderWhereInput =
+    isPOS && !isAdmin && !isStockManager ? { userId } : {}
+
   const statuses = [OrderStatus.DELIVERED, OrderStatus.PENDING]
 
   const results = await Promise.all(
     statuses.map((s) =>
       prisma.order.aggregate({
-        where: { status: s },
+        where: {
+          ...baseWhere,
+          status: s,
+        },
         _sum: { baseTotal: true },
       }),
     ),

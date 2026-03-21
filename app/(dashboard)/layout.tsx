@@ -16,7 +16,7 @@ const generateMetadata = async () => {
 }
 
 const DashboardLayout = async ({ children }: PropsWithChildren) => {
-  await requireAnyRole([Role.ADMIN, Role.STOCK_MANAGER] as const)
+  await requireAnyRole([Role.ADMIN, Role.STOCK_MANAGER, Role.POS] as const)
 
   return (
     <div className='bg-background relative flex min-h-screen flex-col lg:flex-row'>

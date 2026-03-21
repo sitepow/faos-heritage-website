@@ -37,7 +37,7 @@ const NavbarUserMenu = () => {
   const t = useTranslations('navigation.navbar.userPanel')
   const pathname = usePathname()
 
-  const { canManageStock } = useAuth()
+  const { canManageStock, isPOS, isAdmin } = useAuth()
 
   const isDashboard = pathname.startsWith('/dashboard')
   const navigation = useAppNavigation()
@@ -64,13 +64,16 @@ const NavbarUserMenu = () => {
       },
     ]
 
-    if (canManageStock && !isDashboard) {
+    if ((canManageStock || isPOS) && !isDashboard) {
       items.push({
         key: 'dashboard',
         label: 'dashboard',
         icon: <CustomIcon icon={SettingsIcon} />,
         action: () => {
-          router.push('/dashboard/inventory')
+          if (isPOS && !isAdmin && !canManageStock) {
+            return router.push('/dashboard/orders')
+          }
+          return router.push('/dashboard/inventory')
         },
       })
     }
@@ -87,6 +90,8 @@ const NavbarUserMenu = () => {
     return items
   }, [
     canManageStock,
+    isPOS,
+    isAdmin,
     isDashboard,
     navigation.ACCOUNT,
     navigation.FAVORITE,

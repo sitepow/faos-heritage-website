@@ -53,7 +53,9 @@ const AdminSidebar = () => {
   const isMounted = useIsMounted()
   const [isOpen, setIsOpen] = useState(false)
 
-  const { isAdmin } = useAuth()
+  const { isAdmin, roles } = useAuth()
+  const isPOS = roles.includes('POS')
+  const isStockManager = roles.includes('STOCK_MANAGER')
 
   const menuGroups = useMemo<SidebarGroup[]>(() => {
     const groups: SidebarGroup[] = [
@@ -141,18 +143,28 @@ const AdminSidebar = () => {
     }
 
     return groups
-      .filter((group: SidebarGroup) => {
-        return !group.adminOnly
-      })
-      .map((group: SidebarGroup) => {
+      .map((group) => {
+        const filteredItems = group.items.filter((item) => {
+          if (item.adminOnly) {
+            return false
+          }
+
+          if (isPOS && !isStockManager) {
+            return item.href === '/dashboard/orders'
+          }
+
+          return true
+        })
+
         return {
           ...group,
-          items: group.items.filter((item: SidebarItem) => {
-            return !item.adminOnly
-          }),
+          items: filteredItems,
         }
       })
-  }, [isAdmin])
+      .filter((group) => {
+        return group.items.length > 0 && !group.adminOnly
+      })
+  }, [isAdmin, isPOS, isStockManager])
 
   const handleLogout = () => {
     return signOut({ callbackUrl: '/' })
