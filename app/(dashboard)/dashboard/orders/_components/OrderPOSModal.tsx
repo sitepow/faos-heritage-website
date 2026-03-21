@@ -28,7 +28,7 @@ import {
   PercentIcon,
   ReceiptIcon,
 } from 'lucide-react'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { toast } from 'react-toastify'
 
 import type { CreateOrderInput } from '@/features/order/action'
@@ -85,6 +85,12 @@ const OrderPOSModal = ({
     useStorefrontInventories({
       storefrontId: selectedStorefrontId,
     })
+
+  useEffect(() => {
+    if (storefronts?.length === 1 && !selectedStorefrontId) {
+      setSelectedStorefrontId(storefronts[0].id)
+    }
+  }, [storefronts, selectedStorefrontId])
 
   const productList = useMemo<POSProductItem[]>(() => {
     if (!selectedStorefrontId || !storeInventory) {

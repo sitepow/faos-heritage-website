@@ -16,13 +16,7 @@ import {
   DropdownItem,
   Spinner,
 } from '@heroui/react'
-import {
-  EllipsisVerticalIcon,
-  PackageIcon,
-  PhoneIcon,
-  DatabaseIcon,
-  StoreIcon,
-} from 'lucide-react'
+import { EllipsisVerticalIcon, PackageIcon, PhoneIcon } from 'lucide-react'
 
 import type { GetStorefrontsResult } from '@/features/storefront/action'
 import type { Selection } from '@heroui/react'
@@ -77,9 +71,10 @@ const StorefrontTable = ({
       >
         <TableHeader>
           <TableColumn>ชื่อสาขา</TableColumn>
+          <TableColumn>ผู้ดูแลสาขา</TableColumn>
           <TableColumn>ที่อยู่ / ติดต่อ</TableColumn>
-          <TableColumn>ประเภทสต็อก</TableColumn>
           <TableColumn>พิกัด</TableColumn>
+          <TableColumn>ประเภทสต็อก</TableColumn>
           <TableColumn>สถานะ</TableColumn>
           <TableColumn align='center'>สต็อกรวม (ชิ้น)</TableColumn>
           <TableColumn align='center'>จัดการ</TableColumn>
@@ -96,6 +91,19 @@ const StorefrontTable = ({
                 <TableCell className='max-w-64 min-w-64 font-bold break-words whitespace-normal'>
                   {item.name}
                 </TableCell>
+                <TableCell>
+                  <div className='flex flex-wrap gap-1'>
+                    {item.managers && item.managers.length > 0 ? (
+                      item.managers.map((manager) => (
+                        <Chip key={manager.id} variant='bordered'>
+                          {manager.name}
+                        </Chip>
+                      ))
+                    ) : (
+                      <span className='text-default-400 text-tiny'>-</span>
+                    )}
+                  </div>
+                </TableCell>
                 <TableCell className='max-w-64 min-w-64 break-words whitespace-normal'>
                   <div className='flex flex-col gap-1'>
                     <span className='text-default-500 text-xs'>
@@ -106,36 +114,17 @@ const StorefrontTable = ({
                     </div>
                   </div>
                 </TableCell>
+
+                <TableCell>{item?.googleMapUrl ?? '-'}</TableCell>
                 <TableCell>
                   <Chip
                     className='gap-1'
                     color={item.isMain ? 'primary' : 'default'}
                     size='sm'
-                    startContent={
-                      item.isMain ? (
-                        <DatabaseIcon size={12} />
-                      ) : (
-                        <StoreIcon size={12} />
-                      )
-                    }
-                    variant='bordered'
+                    variant='dot'
                   >
                     {item.isMain ? 'คลังหลัก' : 'สต็อกแยกสาขา'}
                   </Chip>
-                </TableCell>
-                <TableCell className='text-default-400 text-xs'>
-                  {item?.googleMapUrl ? (
-                    <a
-                      className='text-primary hover:underline'
-                      href={item.googleMapUrl}
-                      rel='noopener noreferrer'
-                      target='_blank'
-                    >
-                      ดูแผนที่
-                    </a>
-                  ) : (
-                    '-'
-                  )}
                 </TableCell>
                 <TableCell>
                   <Chip

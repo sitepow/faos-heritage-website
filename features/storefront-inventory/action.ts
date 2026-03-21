@@ -158,16 +158,25 @@ const saveStorefrontInventory = async (input: StorefrontInventoryInput) => {
 }
 
 const getStorefrontInventories = async (storefrontId: string) => {
+  const { userId, roles } = await getServerUser()
+
+  if (!roles.includes('ADMIN')) {
+    const isManager = await prisma.storefront.findFirst({
+      where: {
+        id: storefrontId,
+        managers: { some: { id: userId } },
+      },
+    })
+
+    if (!isManager) {
+      return []
+    }
+  }
+
   const data = await prisma.storefrontInventory.findMany({
     where: { storefrontId },
     include: {
-      product: {
-        include: {
-          images: {
-            orderBy: { isPrimary: 'desc' },
-          },
-        },
-      },
+      product: { include: { images: { orderBy: { isPrimary: 'desc' } } } },
       variant: true,
     },
     orderBy: { updatedAt: 'desc' },

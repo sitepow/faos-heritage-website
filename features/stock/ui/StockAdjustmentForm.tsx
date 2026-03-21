@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client'
 
 import {
@@ -13,6 +14,8 @@ import {
   Textarea,
   Spinner,
   Alert,
+  Autocomplete,
+  AutocompleteItem,
 } from '@heroui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { StockMovementType } from '@prisma/client'
@@ -27,6 +30,7 @@ import { stockAdjustmentSchema, type StockAdjustmentInput } from '../schema'
 import { useStockStore } from '../store'
 
 import { SectionLabel } from '@/components/ui/SectionHeader'
+import { IMAGE_FALLBACK } from '@/constants'
 import { useProductsAdmin } from '@/features/product/hook'
 import { useProductVariants } from '@/features/product-variant/hook'
 import { STOCK_MOVEMENT_LABELS } from '@/features/stock-history/constant'
@@ -177,27 +181,53 @@ const StockAdjustmentForm = () => {
                 <Controller
                   control={control}
                   name='productId'
-                  render={({ field: { value, onChange, ...field } }) => {
+                  render={({ field }) => {
                     return (
-                      <Select
-                        {...field}
+                      <Autocomplete
+                        defaultItems={products}
                         errorMessage={errors.productId?.message?.toString()}
                         isInvalid={!!errors.productId}
                         label='เลือกสินค้า'
-                        selectedKeys={value ? [value] : []}
+                        placeholder='พิมพ์ค้นหาชื่อสินค้า...'
+                        selectedKey={field.value}
                         variant='bordered'
-                        onSelectionChange={(keys) => {
-                          return onChange(Array.from(keys)[0] as string)
+                        onSelectionChange={(key) => {
+                          const id = key as string
+                          field.onChange(id)
+                          return setValue('variantId', undefined)
                         }}
                       >
-                        {products.map((p) => {
+                        {(item) => {
                           return (
-                            <SelectItem key={p.id} textValue={p.name}>
-                              {p.name}
-                            </SelectItem>
+                            <AutocompleteItem
+                              key={item.id}
+                              className='py-2'
+                              textValue={item.name}
+                            >
+                              <div className='flex w-full items-center gap-3'>
+                                <div className='flex-shrink-0'>
+                                  <img
+                                    alt={item.name}
+                                    className='size-12 rounded-md object-cover'
+                                    src={
+                                      item.images?.[0]?.url ||
+                                      IMAGE_FALLBACK.EMPTY
+                                    }
+                                  />
+                                </div>
+                                <div className='flex min-w-0 flex-1 flex-col'>
+                                  <span className='text-small leading-tight font-bold break-words whitespace-normal'>
+                                    {item.name}
+                                  </span>
+                                  <span className='text-tiny text-default-400'>
+                                    คงเหลือรวม: {item.stockQuantity}
+                                  </span>
+                                </div>
+                              </div>
+                            </AutocompleteItem>
                           )
-                        })}
-                      </Select>
+                        }}
+                      </Autocomplete>
                     )
                   }}
                 />

@@ -18,6 +18,8 @@ const storefrontSchema = z.object({
 
   isActive: z.boolean().default(true),
   isMain: z.boolean().default(false),
+
+  managerIds: z.array(z.string()).default([]),
 })
 
 type StorefrontInput = z.infer<typeof storefrontSchema>

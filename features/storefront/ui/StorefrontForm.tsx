@@ -12,9 +12,12 @@ import {
   Switch,
   Textarea,
   Spinner,
+  Select,
+  SelectItem,
+  User,
 } from '@heroui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
 import type { Resolver } from 'react-hook-form'
@@ -25,6 +28,7 @@ import { storefrontSchema, type StorefrontInput } from '../schema'
 import { useStorefrontStore } from '../store'
 
 import { SectionLabel } from '@/components/ui/SectionHeader'
+import { useUsers } from '@/features/user/hook'
 
 const DEFAULT_VALUES: StorefrontInput = {
   name: '',
@@ -34,6 +38,7 @@ const DEFAULT_VALUES: StorefrontInput = {
   googleMapUrl: '',
   isActive: true,
   isMain: false,
+  managerIds: [],
 }
 
 const StorefrontForm = () => {
@@ -41,11 +46,16 @@ const StorefrontForm = () => {
   const { createStorefront, updateStorefront, isCreating, isUpdating } =
     useStorefrontMutation()
 
-  const { data: storefronts, isLoading } = useStorefronts()
+  const { data: usersData, isLoading: isLoadingUsers } = useUsers(1, 100)
+  const { data: storefronts, isLoading: isLoadingStore } = useStorefronts()
 
   const storefront = storefronts?.find((s) => {
     return s.id === selectedId
   })
+
+  const userList = useMemo(() => {
+    return usersData && 'items' in usersData ? usersData.items : []
+  }, [usersData])
 
   const {
     control,
@@ -60,7 +70,11 @@ const StorefrontForm = () => {
   useEffect(() => {
     if (isFormOpen) {
       if (selectedId && storefront) {
-        reset(storefront as StorefrontInput)
+        const managerIds = storefront.managers?.map((m) => m.id) || []
+        reset({
+          ...storefront,
+          managerIds,
+        })
       } else {
         reset(DEFAULT_VALUES)
       }
@@ -81,6 +95,7 @@ const StorefrontForm = () => {
   }
 
   const isPending = isCreating || isUpdating
+  const isLoading = isLoadingStore || isLoadingUsers
 
   return (
     <Modal
@@ -100,7 +115,7 @@ const StorefrontForm = () => {
         <ModalBody>
           {isLoading && selectedId ? (
             <div className='flex h-40 items-center justify-center'>
-              <Spinner label='กำลังโหลดข้อมูลสาขา...' />
+              <Spinner label='กำลังโหลดข้อมูล...' />
             </div>
           ) : (
             <div className='space-y-4 text-left'>
@@ -138,6 +153,53 @@ const StorefrontForm = () => {
                   }}
                 />
               </div>
+
+              <SectionLabel>ผู้รับผิดชอบสาขา</SectionLabel>
+              <Controller
+                control={control}
+                name='managerIds'
+                render={({ field }) => (
+                  <Select
+                    ref={field.ref}
+                    isMultiline={true}
+                    label='เลือกผู้ดูแลสาขา'
+                    name={field.name}
+                    placeholder='คลิกเพื่อเลือกรายชื่อ...'
+                    renderValue={(items) => (
+                      <div className='flex flex-wrap gap-2'>
+                        {items.map((item) => (
+                          <div
+                            key={item.key}
+                            className='bg-primary/10 text-primary rounded-md px-2 py-1 text-xs font-bold'
+                          >
+                            {item.textValue}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    selectedKeys={new Set(field.value || [])}
+                    selectionMode='multiple'
+                    variant='bordered'
+                    onBlur={field.onBlur}
+                    onSelectionChange={(keys) => {
+                      field.onChange(Array.from(keys))
+                    }}
+                  >
+                    {userList.map((user) => (
+                      <SelectItem key={user.id} textValue={user.name || ''}>
+                        <User
+                          avatarProps={{
+                            size: 'sm',
+                            src: user.image || undefined,
+                          }}
+                          description={user.email}
+                          name={user.name}
+                        />
+                      </SelectItem>
+                    ))}
+                  </Select>
+                )}
+              />
 
               <SectionLabel>ข้อมูลทั่วไป</SectionLabel>
               <Controller

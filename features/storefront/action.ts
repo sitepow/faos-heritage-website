@@ -7,7 +7,7 @@ import { storefrontSchema, type StorefrontInput } from './schema'
 
 import { ERROR_CODES, fail, ok } from '@/lib/errors'
 import { prisma } from '@/lib/prisma'
-import { withRole } from '@/lib/session'
+import { getServerUser, withRole } from '@/lib/session'
 import { decimalToNumber } from '@/utils/number'
 
 export type GetStorefrontsResult = Awaited<ReturnType<typeof getStorefronts>>
@@ -33,13 +33,21 @@ const getMainStorefronts = async () => {
 const createStorefront = async (data: StorefrontInput) =>
   withRole([Role.ADMIN], async () => {
     const validated = storefrontSchema.safeParse(data)
+
     if (!validated.success) {
       return fail(ERROR_CODES.VALIDATION_ERROR)
     }
 
     try {
+      const { managerIds, ...rest } = validated.data
+
       const storefront = await prisma.storefront.create({
-        data: validated.data,
+        data: {
+          ...rest,
+          managers: {
+            connect: managerIds?.map((id) => ({ id })) || [],
+          },
+        },
       })
       revalidatePath('/dashboard/storefront')
       return ok(storefront.id)
@@ -51,9 +59,16 @@ const createStorefront = async (data: StorefrontInput) =>
 const updateStorefront = async (id: string, data: Partial<StorefrontInput>) =>
   withRole([Role.ADMIN], async () => {
     try {
+      const { managerIds = [], ...rest } = data
+
       await prisma.storefront.update({
         where: { id },
-        data,
+        data: {
+          ...rest,
+          managers: {
+            set: managerIds.map((userId: string) => ({ id: userId })),
+          },
+        },
       })
       revalidatePath('/dashboard/storefront')
       return ok()
@@ -78,6 +93,9 @@ const deleteStorefront = async (id: string) =>
 const getStorefronts = async () => {
   const [storefronts, stockStats] = await Promise.all([
     prisma.storefront.findMany({
+      include: {
+        managers: true,
+      },
       orderBy: { createdAt: 'desc' },
     }),
     prisma.storefrontInventory.groupBy({
@@ -105,8 +123,17 @@ const getStorefronts = async () => {
 }
 
 const getActiveStorefronts = async () => {
+  const { userId, roles } = await getServerUser()
+
   const storefronts = await prisma.storefront.findMany({
-    where: { isActive: true },
+    where: {
+      isActive: true,
+      ...(!roles.includes('ADMIN') && {
+        managers: {
+          some: { id: userId },
+        },
+      }),
+    },
     orderBy: { name: 'asc' },
   })
 
