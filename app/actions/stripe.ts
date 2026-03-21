@@ -19,6 +19,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 interface CreateStripeCheckoutParams {
   orderId: string
+  callbackUrl?: string
 }
 
 const PROFILE_ORDER_PATH = `${DEFALUT_APP_PATH}/profile?tab=${PROFILE_TABS.ORDER}`
@@ -64,6 +65,7 @@ const buildLineItems = (
 
 const createStripeCheckout = async ({
   orderId,
+  callbackUrl,
 }: CreateStripeCheckoutParams): Promise<
   ActionResult<{ checkoutUrl: string }>
 > => {
@@ -103,6 +105,7 @@ const createStripeCheckout = async ({
     return fail(ERROR_CODES.ORDER_STATUS_INVALID)
   }
 
+  const targetUrl = callbackUrl || PROFILE_ORDER_PATH
   let session: Stripe.Checkout.Session
 
   try {
@@ -122,8 +125,8 @@ const createStripeCheckout = async ({
         orderId: order.id,
       },
 
-      success_url: PROFILE_ORDER_PATH,
-      cancel_url: PROFILE_ORDER_PATH,
+      success_url: targetUrl,
+      cancel_url: targetUrl,
     })
   } catch (error) {
     console.error('[STRIPE_CHECKOUT_ERROR]', error)

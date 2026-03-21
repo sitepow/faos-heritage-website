@@ -601,7 +601,7 @@ const createOrder = async (input: CreateOrderInput) =>
   })
 
 const createAdminOrder = async (input: CreateOrderInput) =>
-  withRole([Role.ADMIN, Role.STOCK_MANAGER], async () => {
+  withRole([Role.ADMIN, Role.STOCK_MANAGER, Role.POS], async () => {
     const { userId } = await getServerUser()
 
     return prisma.$transaction(async (tx) => {
@@ -692,7 +692,7 @@ const createAdminOrder = async (input: CreateOrderInput) =>
             quantity: -item.quantity,
             type: StockMovementType.SALE,
             fromStorefrontId: storefrontId,
-            note: `ขายปลีกหน้าร้าน (POS) - สาขา: ${storefront.name}`,
+            note: `รายการสั่งซื้อหน้าร้าน (POS) - รอชำระเงิน - สาขา: ${storefront.name}`,
           },
         })
       }
@@ -703,14 +703,13 @@ const createAdminOrder = async (input: CreateOrderInput) =>
       const baseTotal = Math.max(0, baseSubtotal - baseDiscount + baseTax)
 
       const exchange = (val: number) => Number((val * exchangeRate).toFixed(2))
-      const now = new Date()
 
       const order = await tx.order.create({
         data: {
           user: { connect: { id: userId } },
           deliveryType: DeliveryType.PICKUP,
-          status: OrderStatus.DELIVERED,
-          paymentStatus: PaymentStatus.PAID,
+          status: OrderStatus.PENDING,
+          paymentStatus: PaymentStatus.PENDING,
           currency,
           exchangeRate,
           exchangeLocale,
@@ -724,10 +723,6 @@ const createAdminOrder = async (input: CreateOrderInput) =>
           tax: exchange(baseTax),
           shippingCost: 0,
           total: exchange(baseTotal),
-
-          paidAt: now,
-          deliveredAt: now,
-          pickupDate: now,
           pickupStoreLocation: storefront.name,
           storefront: { connect: { id: storefrontId } },
           items: { createMany: { data: orderItemsPayload } },
@@ -762,7 +757,7 @@ const createAdminOrder = async (input: CreateOrderInput) =>
               orderAmount: baseTotal,
               appliedRate: appliedRate,
               commissionAmount: commissionAmount,
-              status: PayoutStatus.COMPLETED,
+              status: PayoutStatus.PENDING,
             },
           })
 

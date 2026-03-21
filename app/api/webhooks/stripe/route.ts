@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import { OrderStatus, PaymentStatus } from '@prisma/client'
+import { revalidatePath } from 'next/cache'
 import Stripe from 'stripe'
 
 import type { NextRequest } from 'next/server'
@@ -73,6 +74,14 @@ export async function POST(req: NextRequest) {
             },
           })
         })
+
+        try {
+          revalidatePath('/dashboard/orders')
+          revalidatePath('/profile')
+          console.log(`Revalidated /dashboard/orders for Order: ${orderId}`)
+        } catch (revalidateErr) {
+          console.error('Revalidation failed:', revalidateErr)
+        }
 
         try {
           const emailResult = await sendOrderEmail(orderId)

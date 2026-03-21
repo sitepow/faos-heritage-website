@@ -17,13 +17,17 @@ import {
   DropdownItem,
   Spinner,
 } from '@heroui/react'
-import { EllipsisVerticalIcon } from 'lucide-react'
+import { Role, OrderStatus } from '@prisma/client'
+import { useMutation } from '@tanstack/react-query'
+import { EllipsisVerticalIcon, CreditCardIcon } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
 
 import type { getOrders } from '@/features/order/action'
 import type { Selection } from '@heroui/react'
-import type { OrderStatus } from '@prisma/client'
 import type { ReactNode } from 'react'
 
+import { createStripeCheckout } from '@/app/actions/stripe'
 import { PaginationWrapper } from '@/components/ui/PaginationWrapper'
 import { IMAGE_FALLBACK } from '@/constants'
 import { useIsMounted } from '@/hooks/useIsMounted'
@@ -65,6 +69,22 @@ const OrderTable = ({
   getActionItems,
 }: Props) => {
   const isMounted = useIsMounted()
+  const { data: session } = useSession()
+  const router = useRouter()
+
+  const userRoles = session?.user?.roles || []
+  const isPOSOnly =
+    userRoles.includes(Role.POS) && !userRoles.includes(Role.ADMIN)
+
+  const { mutate: mutateCheckout, isPending: isPendingCheckout } = useMutation({
+    mutationFn: (orderId: string) =>
+      createStripeCheckout({ orderId, callbackUrl: window.location.href }),
+    onSuccess: (result) => {
+      if (result.success && result.data?.checkoutUrl) {
+        router.push(result.data.checkoutUrl)
+      }
+    },
+  })
 
   if (!isMounted) {
     return null
@@ -98,7 +118,16 @@ const OrderTable = ({
           loadingContent={<Spinner label='กำลังโหลดข้อมูลออเดอร์...' />}
         >
           {orderList.map((order) => {
-            const actionItems = getActionItems(order.id)
+            let actionItems = getActionItems(order.id)
+
+            if (isPOSOnly) {
+              actionItems = actionItems.filter(
+                (item) =>
+                  !item.key.toLowerCase().includes('status') &&
+                  !item.key.toLowerCase().includes('update'),
+              )
+            }
+
             return (
               <TableRow key={order.id}>
                 <TableCell>
@@ -142,7 +171,12 @@ const OrderTable = ({
                 <TableCell>
                   <Dropdown placement='bottom-end'>
                     <DropdownTrigger>
-                      <Button isIconOnly size='sm' variant='light'>
+                      <Button
+                        isIconOnly
+                        isLoading={isPendingCheckout}
+                        size='sm'
+                        variant='light'
+                      >
                         <EllipsisVerticalIcon
                           className='text-default-500'
                           size={20}
@@ -150,9 +184,31 @@ const OrderTable = ({
                       </Button>
                     </DropdownTrigger>
                     <DropdownMenu aria-label='Order Actions' variant='flat'>
-                      {actionItems.map((item) => (
+                      {[
+                        ...(order.status === OrderStatus.PENDING
+                          ? [
+                              {
+                                key: 'stripe-payment',
+                                label: 'ชำระเงินผ่าน Stripe',
+                                icon: (
+                                  <CreditCardIcon
+                                    className='text-primary'
+                                    size={16}
+                                  />
+                                ),
+                                onClick: () => mutateCheckout(order.id),
+                              },
+                            ]
+                          : []),
+                        ...actionItems,
+                      ].map((item) => (
                         <DropdownItem
                           key={item.key}
+                          className={
+                            item.key === 'stripe-payment'
+                              ? 'text-primary font-bold'
+                              : ''
+                          }
                           startContent={item.icon}
                           onPress={item.onClick}
                         >
