@@ -12,6 +12,8 @@ import {
   SelectItem,
   Divider,
   Spinner,
+  Input,
+  Image,
 } from '@heroui/react'
 import { DeliveryType } from '@prisma/client'
 import {
@@ -22,12 +24,14 @@ import {
   StoreIcon,
   PlusIcon,
   MinusIcon,
+  SearchIcon,
 } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { toast } from 'react-toastify'
 
 import type { CreateOrderInput } from '@/features/order/action'
 
+import { IMAGE_FALLBACK } from '@/constants'
 import { useAffiliates } from '@/features/affiliate/hook'
 import { useAdminOrderMutation } from '@/features/order/mutation'
 import { useActiveStorefronts } from '@/features/storefront/hook'
@@ -41,6 +45,7 @@ interface POSProductItem {
   displayName: string
   effectivePrice: number
   stock: number
+  image: string | null
 }
 
 interface CartItem {
@@ -51,6 +56,7 @@ interface CartItem {
   price: number
   quantity: number
   maxStock: number
+  image: string
 }
 
 const OrderPOSModal = ({
@@ -63,6 +69,7 @@ const OrderPOSModal = ({
   const [cartItems, setCartItems] = useState<CartItem[]>([])
   const [selectedAffiliateCode, setSelectedAffiliateCode] = useState<string>('')
   const [selectedStorefrontId, setSelectedStorefrontId] = useState<string>('')
+  const [searchQuery, setSearchQuery] = useState<string>('')
 
   const { data: affiliates } = useAffiliates()
   const { data: storefronts, isLoading: isLoadingStores } =
@@ -79,9 +86,20 @@ const OrderPOSModal = ({
       return []
     }
 
-    return storeInventory.map((item) => {
+    const filtered = storeInventory.filter((item) => {
+      const name = item.product?.name || ''
+      return name.toLowerCase().includes(searchQuery.toLowerCase())
+    })
+
+    return filtered.map((item) => {
       const productName = item.product?.name || 'Unknown Product'
       const variantName = item.variant?.name ? ` (${item.variant.name})` : ''
+
+      const productImage =
+        item.variant?.image ||
+        item.product?.images?.find((img) => img.isPrimary)?.url ||
+        item.product?.images?.[0]?.url ||
+        IMAGE_FALLBACK.EMPTY
 
       return {
         productId: item.productId,
@@ -92,9 +110,10 @@ const OrderPOSModal = ({
         displayName: `${productName}${variantName}`,
         effectivePrice: Number(item.netPrice),
         stock: item.stockQuantity || 0,
+        image: productImage,
       }
     })
-  }, [selectedStorefrontId, storeInventory])
+  }, [selectedStorefrontId, storeInventory, searchQuery])
 
   const handleAddToCart = (item: POSProductItem): void => {
     return setCartItems((prev: CartItem[]) => {
@@ -124,6 +143,7 @@ const OrderPOSModal = ({
           price: item.effectivePrice,
           quantity: 1,
           maxStock: item.stock,
+          image: item.image ?? '',
         },
       ]
     })
@@ -192,6 +212,7 @@ const OrderPOSModal = ({
         setCartItems([])
         setSelectedAffiliateCode('')
         setSelectedStorefrontId('')
+        setSearchQuery('')
         return onClose()
       }
     } catch {
@@ -210,8 +231,23 @@ const OrderPOSModal = ({
       onClose={onClose}
     >
       <ModalContent>
-        <ModalHeader className='border-default-100 flex items-center gap-2 border-b'>
-          สร้างรายการสั่งซื้อใหม่ (POS)
+        <ModalHeader className='border-default-100 flex flex-wrap items-center justify-between gap-2 border-b px-6 py-4'>
+          <span className='font-bold'>สร้างรายการสั่งซื้อใหม่ (POS)</span>
+          {selectedStorefrontId && (
+            <div className='w-72'>
+              <Input
+                isClearable
+                placeholder='ค้นหาชื่อสินค้า...'
+                size='sm'
+                startContent={
+                  <SearchIcon className='text-default-400' size={18} />
+                }
+                value={searchQuery}
+                onClear={() => setSearchQuery('')}
+                onValueChange={setSearchQuery}
+              />
+            </div>
+          )}
         </ModalHeader>
 
         <ModalBody className='overflow-y-auto p-0'>
@@ -239,14 +275,21 @@ const OrderPOSModal = ({
                     return (
                       <div
                         key={item.cartKey}
-                        className='hover:bg-default-50 border-default-100 flex flex-col justify-between gap-3 rounded-md border p-3 transition-colors'
+                        className='hover:bg-default-50 border-default-100 flex flex-col gap-3 rounded-md border p-3 transition-colors'
                       >
-                        <div>
-                          <p className='min-h-[40px] text-sm font-bold'>
-                            {item.displayName}
-                          </p>
-                          <div className='mt-1 flex items-center justify-between'>
-                            <p className='text-primary font-bold'>
+                        <div className='flex gap-3'>
+                          <div className='bg-default-100 flex size-16 shrink-0 items-center justify-center overflow-hidden rounded-md'>
+                            <Image
+                              alt={item.displayName}
+                              className='size-full object-cover'
+                              src={item.image!}
+                            />
+                          </div>
+                          <div className='flex-1 overflow-hidden'>
+                            <p className='text-sm font-bold'>
+                              {item.displayName}
+                            </p>
+                            <p className='text-primary text-sm font-bold'>
                               {formatCurrency(item.effectivePrice)}
                             </p>
                             <p
@@ -271,6 +314,11 @@ const OrderPOSModal = ({
                       </div>
                     )
                   })}
+                  {productList.length === 0 && searchQuery && (
+                    <div className='text-default-400 col-span-full py-20 text-center'>
+                      ไม่พบสินค้าที่ตรงกับ &quot;{searchQuery}&quot;
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -300,6 +348,7 @@ const OrderPOSModal = ({
                     const newId = Array.from(keys)[0] as string
                     if (newId !== selectedStorefrontId) {
                       setCartItems([])
+                      setSearchQuery('')
                       return setSelectedStorefrontId(newId)
                     }
                   }}
@@ -327,6 +376,14 @@ const OrderPOSModal = ({
                     >
                       <div className='flex items-start justify-between gap-2'>
                         <div className='flex flex-col'>
+                          <div className='bg-default-100 size-12 shrink-0 overflow-hidden rounded-md'>
+                            <Image
+                              alt={item.name}
+                              className='size-full object-cover'
+                              src={item.image}
+                            />
+                          </div>
+
                           <span className='text-sm font-bold'>{item.name}</span>
                           <span className='text-primary text-xs font-semibold'>
                             {formatCurrency(item.price)}
@@ -451,6 +508,7 @@ const OrderPOSModal = ({
             onPress={() => {
               setCartItems([])
               setSelectedStorefrontId('')
+              setSearchQuery('')
               return onClose()
             }}
           >
