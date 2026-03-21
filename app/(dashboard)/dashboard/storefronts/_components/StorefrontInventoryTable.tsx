@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-sort-props */
 'use client'
 
 import {
@@ -11,8 +10,12 @@ import {
   Button,
   Spinner,
   User,
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
 } from '@heroui/react'
-import { EditIcon, PlusIcon } from 'lucide-react'
+import { PlusIcon, PackageIcon, TagIcon, MoreVerticalIcon } from 'lucide-react'
 
 import type { getStorefrontInventories } from '@/features/storefront-inventory/action'
 
@@ -53,8 +56,8 @@ const StorefrontInventoryTable = ({
             เพิ่มสินค้าเข้าสาขา
           </Button>
         }
-        title='รายการสินค้าและสต็อกในสาขา'
         selectedCount={0}
+        title='รายการสินค้าและสต็อกในสาขา'
       />
 
       <Table aria-label='Storefront inventory table'>
@@ -98,25 +101,51 @@ const StorefrontInventoryTable = ({
                   ฿{Number(item.netPrice).toLocaleString()}
                 </TableCell>
                 <TableCell className='text-center'>
-                  <Button
-                    isIconOnly
-                    color='primary'
-                    size='sm'
-                    variant='light'
-                    onPress={() => {
-                      return onOpen({
-                        storefrontId: item.storefrontId,
-                        productId: item.productId,
-                        variantId: item.variantId,
-                        stockQuantity: item.stockQuantity,
-                        retailPrice: Number(item.retailPrice),
-                        netPrice: Number(item.netPrice),
-                        direction: 'IN',
-                      })
-                    }}
-                  >
-                    <EditIcon size={18} />
-                  </Button>
+                  <Dropdown>
+                    <DropdownTrigger>
+                      <Button isIconOnly size='sm' variant='light'>
+                        <MoreVerticalIcon size={18} />
+                      </Button>
+                    </DropdownTrigger>
+                    <DropdownMenu aria-label='Static Actions'>
+                      <DropdownItem
+                        key='stock'
+                        startContent={<PackageIcon size={18} />}
+                        onPress={() => {
+                          return onOpen({
+                            storefrontId: item.storefrontId,
+                            productId: item.productId,
+                            variantId: item.variantId,
+                            stockQuantity: 0,
+                            retailPrice: Number(item.retailPrice),
+                            netPrice: Number(item.netPrice),
+                            direction: 'IN',
+                            mode: 'stock',
+                          })
+                        }}
+                      >
+                        จัดการสต็อก
+                      </DropdownItem>
+                      <DropdownItem
+                        key='price'
+                        startContent={<TagIcon size={18} />}
+                        onPress={() => {
+                          return onOpen({
+                            storefrontId: item.storefrontId,
+                            productId: item.productId,
+                            variantId: item.variantId,
+                            stockQuantity: item.stockQuantity,
+                            retailPrice: Number(item.retailPrice),
+                            netPrice: Number(item.netPrice),
+                            direction: 'IN',
+                            mode: 'price',
+                          })
+                        }}
+                      >
+                        แก้ไขราคา
+                      </DropdownItem>
+                    </DropdownMenu>
+                  </Dropdown>
                 </TableCell>
               </TableRow>
             )

@@ -6,9 +6,11 @@ import type { StorefrontInventoryInput } from './schema'
 interface StorefrontInventoryStore {
   isOpen: boolean
   isEditing: boolean
-  data: StorefrontInventoryInput | null
+  data: (StorefrontInventoryInput & { mode?: 'stock' | 'price' }) | null
 
-  onOpen: (data?: StorefrontInventoryInput) => void
+  onOpen: (
+    data?: StorefrontInventoryInput & { mode?: 'stock' | 'price' },
+  ) => void
   onClose: () => void
 }
 

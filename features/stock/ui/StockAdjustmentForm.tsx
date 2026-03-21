@@ -127,6 +127,7 @@ const StockAdjustmentForm = () => {
   return (
     <Modal
       hideCloseButton
+      isDismissable={false}
       isOpen={isAdjustmentOpen}
       scrollBehavior='inside'
       size='2xl'

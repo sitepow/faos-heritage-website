@@ -18,11 +18,16 @@ const transferStorefrontStock = async (input: StorefrontInventoryInput) => {
       storefrontId,
       productId,
       variantId,
-      stockQuantity,
+      stockQuantity = 0,
       direction,
       retailPrice,
       netPrice,
     } = input
+
+    if (!direction || stockQuantity <= 0) {
+      return fail(ERROR_CODES.BAD_REQUEST)
+    }
+
     const isVariant = !!variantId
     const targetId = variantId || productId
 
@@ -39,18 +44,6 @@ const transferStorefrontStock = async (input: StorefrontInventoryInput) => {
 
       if (!mainStock || mainStock.stockQuantity < stockQuantity)
         return fail(ERROR_CODES.BAD_REQUEST)
-
-      if (isVariant) {
-        await tx.productVariant.update({
-          where: { id: targetId },
-          data: { stockQuantity: { decrement: stockQuantity } },
-        })
-      } else {
-        await tx.product.update({
-          where: { id: targetId },
-          data: { stockQuantity: { decrement: stockQuantity } },
-        })
-      }
     } else {
       const storeStock = await tx.storefrontInventory.findUnique({
         where: {
@@ -66,7 +59,20 @@ const transferStorefrontStock = async (input: StorefrontInventoryInput) => {
         return fail(ERROR_CODES.BAD_REQUEST)
     }
 
-    const amount = direction === 'IN' ? stockQuantity : -stockQuantity
+    const mainAmount = direction === 'IN' ? -stockQuantity : stockQuantity
+    if (isVariant) {
+      await tx.productVariant.update({
+        where: { id: targetId },
+        data: { stockQuantity: { increment: mainAmount } },
+      })
+    } else {
+      await tx.product.update({
+        where: { id: targetId },
+        data: { stockQuantity: { increment: mainAmount } },
+      })
+    }
+
+    const storeAmount = direction === 'IN' ? stockQuantity : -stockQuantity
     await tx.storefrontInventory.upsert({
       where: {
         storefrontId_productId_variantId: {
@@ -76,49 +82,78 @@ const transferStorefrontStock = async (input: StorefrontInventoryInput) => {
         },
       },
       update: {
-        stockQuantity: { increment: amount },
-        retailPrice,
-        netPrice,
+        stockQuantity: { increment: storeAmount },
+        ...(retailPrice !== undefined && { retailPrice }),
+        ...(netPrice !== undefined && { netPrice }),
       },
       create: {
         storefrontId,
         productId,
         variantId: variantId ?? null,
-        stockQuantity: amount,
+        stockQuantity: storeAmount,
+        retailPrice: retailPrice ?? 0,
+        netPrice: netPrice ?? 0,
+      },
+    })
+
+    await tx.stockHistory.create({
+      data: {
+        productId,
+        variantId: variantId ?? null,
+        userId: userId!,
+        quantity: storeAmount,
+        type: StockMovementType.TRANSFER,
+        fromStorefrontId: direction === 'OUT' ? storefrontId : null,
+        toStorefrontId: direction === 'IN' ? storefrontId : null,
+        note: `${direction === 'IN' ? 'โอนเข้า' : 'โอนคืน'} หน้าร้าน`,
+      },
+    })
+
+    revalidatePath(`/dashboard/storefronts/${storefrontId}`)
+    return ok()
+  })
+}
+
+const saveStorefrontInventory = async (input: StorefrontInventoryInput) => {
+  const { userId } = await getServerUser()
+
+  return await prisma.$transaction(async (tx) => {
+    const {
+      storefrontId,
+      productId,
+      variantId,
+      retailPrice = 0,
+      netPrice = 0,
+    } = input
+
+    const inventory = await tx.storefrontInventory.update({
+      where: {
+        storefrontId_productId_variantId: {
+          storefrontId,
+          productId,
+          variantId: variantId ?? '',
+        },
+      },
+      data: {
         retailPrice,
         netPrice,
       },
     })
-
-    if (direction === 'OUT') {
-      if (isVariant) {
-        await tx.productVariant.update({
-          where: { id: targetId },
-          data: { stockQuantity: { increment: stockQuantity } },
-        })
-      } else {
-        await tx.product.update({
-          where: { id: targetId },
-          data: { stockQuantity: { increment: stockQuantity } },
-        })
-      }
-    }
 
     await tx.stockHistory.create({
       data: {
         productId,
         variantId: variantId!,
         userId: userId!,
-        quantity: amount,
+        quantity: 0,
         type: StockMovementType.TRANSFER,
-        fromStorefrontId: direction === 'OUT' ? storefrontId : null,
-        toStorefrontId: direction === 'IN' ? storefrontId : null,
-        note: `${direction === 'IN' ? 'โอนเข้า' : 'โอนคืน'} หน้าร้าน (Net: ${netPrice})`,
+        toStorefrontId: storefrontId,
+        note: `อัปเดตราคาหน้าร้านใหม่ (Retail: ${retailPrice}, Net: ${netPrice})`,
       },
     })
 
     revalidatePath(`/dashboard/storefronts/${storefrontId}`)
-    return ok()
+    return ok({ id: inventory.id })
   })
 }
 
@@ -157,59 +192,6 @@ const getStorefrontInventoryDetail = async (id: string) => {
   })
 
   return decimalToNumber(data)
-}
-
-const saveStorefrontInventory = async (input: StorefrontInventoryInput) => {
-  const { userId } = await getServerUser()
-
-  return await prisma.$transaction(async (tx) => {
-    const {
-      storefrontId,
-      productId,
-      variantId,
-      stockQuantity,
-      retailPrice,
-      netPrice,
-    } = input
-
-    const inventory = await tx.storefrontInventory.upsert({
-      where: {
-        storefrontId_productId_variantId: {
-          storefrontId,
-          productId,
-          variantId: variantId!,
-        },
-      },
-      update: {
-        stockQuantity,
-        retailPrice,
-        netPrice,
-      },
-      create: {
-        storefrontId,
-        productId,
-        variantId: variantId!,
-        stockQuantity,
-        retailPrice,
-        netPrice,
-      },
-    })
-
-    await tx.stockHistory.create({
-      data: {
-        productId,
-        variantId: variantId!,
-        userId: userId!,
-        quantity: stockQuantity,
-        type: StockMovementType.TRANSFER,
-        toStorefrontId: storefrontId,
-        note: `อัปเดตสต็อกหน้าร้าน (Net: ${netPrice})`,
-      },
-    })
-
-    revalidatePath('/dashboard/storefronts')
-    return ok({ id: inventory.id })
-  })
 }
 
 export {
