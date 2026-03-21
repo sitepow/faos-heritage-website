@@ -108,13 +108,15 @@ const DashboardPage = () => {
                 />
               ))}
 
-            {inventoryValue && (
-              <StatCard
-                isCurrency={inventoryValue.isCurrency}
-                label={inventoryValue.name}
-                value={inventoryValue.value}
-              />
-            )}
+            {isStatArray(inventoryValue) &&
+              inventoryValue.map((stat) => (
+                <StatCard
+                  key={stat.name}
+                  isCurrency={stat.isCurrency}
+                  label={stat.name}
+                  value={stat.value}
+                />
+              ))}
 
             {isStatArray(affiliateStats) &&
               affiliateStats.map((stat) => (

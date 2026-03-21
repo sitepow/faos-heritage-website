@@ -197,42 +197,56 @@ const getAffiliateStats = async () => {
   ]
 }
 
-const getTotalInventoryValue = async () => {
-  const products = await prisma.product.findMany({
-    where: {
-      isActive: true,
-    },
-    select: {
-      price: true,
-      stockQuantity: true,
-      variants: {
-        where: {
-          isActive: true,
-        },
-        select: {
-          price: true,
-          stockQuantity: true,
+const getInventoryValueData = async () => {
+  const [products, storefrontInventories] = await Promise.all([
+    prisma.product.findMany({
+      where: { isActive: true },
+      select: {
+        price: true,
+        stockQuantity: true,
+        variants: {
+          where: { isActive: true },
+          select: {
+            price: true,
+            stockQuantity: true,
+          },
         },
       },
-    },
-  })
+    }),
+    prisma.storefrontInventory.findMany({
+      select: {
+        stockQuantity: true,
+        netPrice: true,
+      },
+    }),
+  ])
 
-  const totalValue = products.reduce((acc, product) => {
+  const mainStockValue = products.reduce((acc, product) => {
     if (product.variants.length > 0) {
       const variantValue = product.variants.reduce((vAcc, variant) => {
         return vAcc + Number(variant.price) * variant.stockQuantity
       }, 0)
       return acc + variantValue
     }
-
     return acc + Number(product.price) * product.stockQuantity
   }, 0)
 
-  return {
-    name: 'มูลค่าสินค้าทั้งหมดในคลัง',
-    value: totalValue,
-    isCurrency: true,
-  }
+  const storefrontStockValue = storefrontInventories.reduce((acc, item) => {
+    return acc + Number(item.netPrice) * item.stockQuantity
+  }, 0)
+
+  return [
+    {
+      name: 'มูลค่าสต็อกหลัก (Global)',
+      value: mainStockValue,
+      isCurrency: true,
+    },
+    {
+      name: 'มูลค่าสต็อกสาขา (Storefront)',
+      value: storefrontStockValue,
+      isCurrency: true,
+    },
+  ]
 }
 
 export {
@@ -242,5 +256,5 @@ export {
   getSalesByCategoryData,
   getTopProductsData,
   getAffiliateStats,
-  getTotalInventoryValue,
+  getInventoryValueData,
 }

@@ -7,7 +7,7 @@ import {
   getTopProductsData,
   getAffiliateStats,
   getAffiliatePerformanceData,
-  getTotalInventoryValue,
+  getInventoryValueData,
 } from './action'
 import { dashboardQueryKeys } from './query-key'
 
@@ -45,7 +45,7 @@ const useDashboardCharts = () => {
   const inventoryValueQuery = useQuery({
     queryKey: dashboardQueryKeys.inventoryValue(),
     queryFn: () => {
-      return getTotalInventoryValue()
+      return getInventoryValueData()
     },
   })
 
