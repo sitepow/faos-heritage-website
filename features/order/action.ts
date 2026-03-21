@@ -51,6 +51,8 @@ interface CreateOrderInput {
   exchangeRate: number
   exchangeLocale: string
   referrerId?: string
+  discount?: number
+  tax?: number
 }
 
 type TransactionClient = Prisma.TransactionClient
@@ -580,6 +582,8 @@ const createAdminOrder = async (input: CreateOrderInput) =>
         exchangeRate,
         exchangeLocale,
         referrerId,
+        discount = 0,
+        tax = 0,
       } = input
 
       if (deliveryType !== DeliveryType.PICKUP || !storefrontId) {
@@ -597,19 +601,19 @@ const createAdminOrder = async (input: CreateOrderInput) =>
       const storeInventories = await tx.storefrontInventory.findMany({
         where: {
           storefrontId,
-          productId: {
-            in: items.map((i) => {
-              return i.productId
-            }),
-          },
+          OR: items.map((i) => ({
+            productId: i.productId,
+            variantId: i.variantId ?? null,
+          })),
         },
         include: { product: true, variant: true },
       })
 
       const inventoryMap = new Map(
-        storeInventories.map((inv) => {
-          return [`${inv.productId}-${inv.variantId || 'none'}`, inv]
-        }),
+        storeInventories.map((inv) => [
+          `${inv.productId}-${inv.variantId || 'none'}`,
+          inv,
+        ]),
       )
 
       const orderItemsPayload: Prisma.OrderItemCreateManyOrderInput[] = []
@@ -628,7 +632,6 @@ const createAdminOrder = async (input: CreateOrderInput) =>
         const priceLocal = Number(
           (effectiveBasePrice * exchangeRate).toFixed(2),
         )
-
         const currentItemBaseSubtotal = effectiveBasePrice * item.quantity
         subtotalSum += currentItemBaseSubtotal
 
@@ -658,34 +661,17 @@ const createAdminOrder = async (input: CreateOrderInput) =>
             quantity: -item.quantity,
             type: StockMovementType.SALE,
             fromStorefrontId: storefrontId,
-            note: `ขายปลีกหน้าร้าน (POS) - Order ID: ${storefrontId}`,
+            note: `ขายปลีกหน้าร้าน (POS) - สาขา: ${storefront.name}`,
           },
         })
       }
 
-      let validAffiliate = null
-      let finalReferrerCode = null
-      if (referrerId) {
-        const affiliate = await tx.affiliateProfile.findUnique({
-          where: { affiliateCode: referrerId },
-          select: {
-            id: true,
-            status: true,
-            baseRate: true,
-            highValueRate: true,
-            thresholdAmount: true,
-          },
-        })
-        if (affiliate && affiliate.status === AffiliateStatus.APPROVED) {
-          validAffiliate = affiliate
-          finalReferrerCode = referrerId
-        }
-      }
+      const baseSubtotal = subtotalSum
+      const baseDiscount = discount
+      const baseTax = tax
+      const baseTotal = Math.max(0, baseSubtotal - baseDiscount + baseTax)
 
-      const exchange = (val: number) => {
-        return Number((val * exchangeRate).toFixed(2))
-      }
-      const baseTotal = subtotalSum
+      const exchange = (val: number) => Number((val * exchangeRate).toFixed(2))
       const now = new Date()
 
       const order = await tx.order.create({
@@ -697,17 +683,17 @@ const createAdminOrder = async (input: CreateOrderInput) =>
           currency,
           exchangeRate,
           exchangeLocale,
-          baseSubtotal: subtotalSum,
+          baseSubtotal,
+          baseDiscount,
+          baseTax,
           baseShipping: 0,
-          baseDiscount: 0,
-          baseTax: 0,
           baseTotal,
-          subtotal: exchange(subtotalSum),
+          subtotal: exchange(baseSubtotal),
+          discount: exchange(baseDiscount),
+          tax: exchange(baseTax),
           shippingCost: 0,
-          discount: 0,
-          tax: 0,
           total: exchange(baseTotal),
-          referrerCode: finalReferrerCode,
+
           paidAt: now,
           deliveredAt: now,
           pickupDate: now,
@@ -717,24 +703,43 @@ const createAdminOrder = async (input: CreateOrderInput) =>
         },
       })
 
-      if (validAffiliate) {
-        const isHighValue =
-          Number(baseTotal) >= Number(validAffiliate.thresholdAmount)
-        const appliedRate = isHighValue
-          ? validAffiliate.highValueRate
-          : validAffiliate.baseRate
-        const commissionAmount = (Number(baseTotal) * Number(appliedRate)) / 100
-
-        await tx.affiliateCommission.create({
-          data: {
-            affiliateId: validAffiliate.id,
-            orderId: order.id,
-            orderAmount: baseTotal,
-            appliedRate: appliedRate,
-            commissionAmount: commissionAmount,
-            status: PayoutStatus.COMPLETED,
+      if (referrerId) {
+        const affiliate = await tx.affiliateProfile.findUnique({
+          where: { affiliateCode: referrerId },
+          select: {
+            id: true,
+            status: true,
+            baseRate: true,
+            highValueRate: true,
+            thresholdAmount: true,
           },
         })
+
+        if (affiliate && affiliate.status === AffiliateStatus.APPROVED) {
+          const isHighValue =
+            Number(baseTotal) >= Number(affiliate.thresholdAmount)
+          const appliedRate = isHighValue
+            ? affiliate.highValueRate
+            : affiliate.baseRate
+          const commissionAmount =
+            (Number(baseTotal) * Number(appliedRate)) / 100
+
+          await tx.affiliateCommission.create({
+            data: {
+              affiliateId: affiliate.id,
+              orderId: order.id,
+              orderAmount: baseTotal,
+              appliedRate: appliedRate,
+              commissionAmount: commissionAmount,
+              status: PayoutStatus.COMPLETED,
+            },
+          })
+
+          await tx.order.update({
+            where: { id: order.id },
+            data: { referrerCode: referrerId },
+          })
+        }
       }
 
       return ok(order.id)

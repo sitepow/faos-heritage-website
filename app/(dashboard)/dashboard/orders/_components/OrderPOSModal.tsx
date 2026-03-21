@@ -25,6 +25,8 @@ import {
   PlusIcon,
   MinusIcon,
   SearchIcon,
+  PercentIcon,
+  ReceiptIcon,
 } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { toast } from 'react-toastify'
@@ -45,7 +47,7 @@ interface POSProductItem {
   displayName: string
   effectivePrice: number
   stock: number
-  image: string | null
+  image: string
 }
 
 interface CartItem {
@@ -70,6 +72,9 @@ const OrderPOSModal = ({
   const [selectedAffiliateCode, setSelectedAffiliateCode] = useState<string>('')
   const [selectedStorefrontId, setSelectedStorefrontId] = useState<string>('')
   const [searchQuery, setSearchQuery] = useState<string>('')
+
+  const [discountValue, setDiscountValue] = useState<number>(0)
+  const [taxPercentage, setTaxPercentage] = useState<number>(0)
 
   const { data: affiliates } = useAffiliates()
   const { data: storefronts, isLoading: isLoadingStores } =
@@ -97,7 +102,9 @@ const OrderPOSModal = ({
 
       const productImage =
         item.variant?.image ||
-        item.product?.images?.find((img) => img.isPrimary)?.url ||
+        item.product?.images?.find((img) => {
+          return img.isPrimary
+        })?.url ||
         item.product?.images?.[0]?.url ||
         IMAGE_FALLBACK.EMPTY
 
@@ -114,6 +121,18 @@ const OrderPOSModal = ({
       }
     })
   }, [selectedStorefrontId, storeInventory, searchQuery])
+
+  const totals = useMemo(() => {
+    const subtotal = cartItems.reduce((acc, item) => {
+      return acc + item.price * item.quantity
+    }, 0)
+    const discount = discountValue
+    const beforeTax = Math.max(0, subtotal - discount)
+    const tax = (beforeTax * taxPercentage) / 100
+    const total = beforeTax + tax
+
+    return { subtotal, discount, tax, total }
+  }, [cartItems, discountValue, taxPercentage])
 
   const handleAddToCart = (item: POSProductItem): void => {
     return setCartItems((prev: CartItem[]) => {
@@ -143,7 +162,7 @@ const OrderPOSModal = ({
           price: item.effectivePrice,
           quantity: 1,
           maxStock: item.stock,
-          image: item.image ?? '',
+          image: item.image,
         },
       ]
     })
@@ -203,6 +222,8 @@ const OrderPOSModal = ({
       exchangeRate: 1,
       exchangeLocale: 'th-TH',
       referrerId: selectedAffiliateCode || undefined,
+      discount: totals?.discount || 0,
+      tax: totals?.tax || 0,
     }
 
     try {
@@ -213,6 +234,8 @@ const OrderPOSModal = ({
         setSelectedAffiliateCode('')
         setSelectedStorefrontId('')
         setSearchQuery('')
+        setDiscountValue(0)
+        setTaxPercentage(0)
         return onClose()
       }
     } catch {
@@ -243,7 +266,9 @@ const OrderPOSModal = ({
                   <SearchIcon className='text-default-400' size={18} />
                 }
                 value={searchQuery}
-                onClear={() => setSearchQuery('')}
+                onClear={() => {
+                  return setSearchQuery('')
+                }}
                 onValueChange={setSearchQuery}
               />
             </div>
@@ -282,7 +307,7 @@ const OrderPOSModal = ({
                             <Image
                               alt={item.displayName}
                               className='size-full object-cover'
-                              src={item.image!}
+                              src={item.image}
                             />
                           </div>
                           <div className='flex-1 overflow-hidden'>
@@ -374,32 +399,35 @@ const OrderPOSModal = ({
                       key={item.cartKey}
                       className='border-default-100 bg-default-50 flex flex-col gap-2 rounded-lg border p-3'
                     >
-                      <div className='flex items-start justify-between gap-2'>
-                        <div className='flex flex-col'>
-                          <div className='bg-default-100 size-12 shrink-0 overflow-hidden rounded-md'>
-                            <Image
-                              alt={item.name}
-                              className='size-full object-cover'
-                              src={item.image}
-                            />
+                      <div className='flex items-start gap-3'>
+                        <div className='bg-default-100 size-12 shrink-0 overflow-hidden rounded-md'>
+                          <Image
+                            alt={item.name}
+                            className='size-full object-cover'
+                            src={item.image}
+                          />
+                        </div>
+                        <div className='flex flex-1 flex-col overflow-hidden'>
+                          <div className='flex items-start justify-between gap-2'>
+                            <span className='text-sm font-bold'>
+                              {item.name}
+                            </span>
+                            <Button
+                              isIconOnly
+                              color='danger'
+                              size='sm'
+                              variant='light'
+                              onPress={() => {
+                                return handleRemoveFromCart(item.cartKey)
+                              }}
+                            >
+                              <Trash2Icon size={14} />
+                            </Button>
                           </div>
-
-                          <span className='text-sm font-bold'>{item.name}</span>
                           <span className='text-primary text-xs font-semibold'>
                             {formatCurrency(item.price)}
                           </span>
                         </div>
-                        <Button
-                          isIconOnly
-                          color='danger'
-                          size='sm'
-                          variant='light'
-                          onPress={() => {
-                            return handleRemoveFromCart(item.cartKey)
-                          }}
-                        >
-                          <Trash2Icon size={14} />
-                        </Button>
                       </div>
 
                       <div className='flex items-center justify-between'>
@@ -445,6 +473,37 @@ const OrderPOSModal = ({
 
               <Divider className='bg-default-200' />
 
+              <div className='grid grid-cols-2 gap-3'>
+                <Input
+                  label='ส่วนลด (บาท)'
+                  placeholder='0'
+                  size='sm'
+                  startContent={
+                    <PercentIcon className='text-default-400' size={14} />
+                  }
+                  type='number'
+                  value={discountValue.toString()}
+                  variant='bordered'
+                  onValueChange={(val) => {
+                    return setDiscountValue(Number(val) || 0)
+                  }}
+                />
+                <Input
+                  label='ภาษี (%)'
+                  placeholder='0'
+                  size='sm'
+                  startContent={
+                    <ReceiptIcon className='text-default-400' size={14} />
+                  }
+                  type='number'
+                  value={taxPercentage.toString()}
+                  variant='bordered'
+                  onValueChange={(val) => {
+                    return setTaxPercentage(Number(val) || 0)
+                  }}
+                />
+              </div>
+
               <div className='flex flex-col gap-3'>
                 <h3 className='flex items-center gap-2 text-sm font-bold'>
                   <UserIcon size={16} />
@@ -486,15 +545,28 @@ const OrderPOSModal = ({
                 </Select>
               </div>
 
-              <div className='bg-primary/5 border-primary/10 mt-auto rounded-lg border p-4'>
+              <div className='bg-primary/5 border-primary/10 mt-auto flex flex-col gap-2 rounded-lg border p-4'>
+                <div className='text-default-600 flex items-center justify-between text-sm'>
+                  <span>ยอดรวมสินค้า:</span>
+                  <span>{formatCurrency(totals.subtotal)}</span>
+                </div>
+                {totals.discount > 0 && (
+                  <div className='text-danger flex items-center justify-between text-sm'>
+                    <span>ส่วนลด:</span>
+                    <span>-{formatCurrency(totals.discount)}</span>
+                  </div>
+                )}
+                {totals.tax > 0 && (
+                  <div className='text-default-600 flex items-center justify-between text-sm'>
+                    <span>ภาษี ({taxPercentage}%):</span>
+                    <span>{formatCurrency(totals.tax)}</span>
+                  </div>
+                )}
+                <Divider className='my-1 opacity-50' />
                 <div className='flex items-center justify-between text-lg font-bold'>
-                  <span>ยอดรวม:</span>
+                  <span>ยอดสุทธิ:</span>
                   <span className='text-primary'>
-                    {formatCurrency(
-                      cartItems.reduce((acc: number, item: CartItem) => {
-                        return acc + item.price * item.quantity
-                      }, 0),
-                    )}
+                    {formatCurrency(totals.total)}
                   </span>
                 </div>
               </div>
@@ -509,6 +581,8 @@ const OrderPOSModal = ({
               setCartItems([])
               setSelectedStorefrontId('')
               setSearchQuery('')
+              setDiscountValue(0)
+              setTaxPercentage(0)
               return onClose()
             }}
           >
