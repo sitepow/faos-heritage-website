@@ -76,11 +76,32 @@ const deleteStorefront = async (id: string) =>
   })
 
 const getStorefronts = async () => {
-  const storefronts = await prisma.storefront.findMany({
-    orderBy: { createdAt: 'desc' },
+  const [storefronts, stockStats] = await Promise.all([
+    prisma.storefront.findMany({
+      orderBy: { createdAt: 'desc' },
+    }),
+    prisma.storefrontInventory.groupBy({
+      by: ['storefrontId'],
+      _sum: {
+        stockQuantity: true,
+      },
+    }),
+  ])
+
+  const stockMap = new Map(
+    stockStats.map((stat) => {
+      return [stat.storefrontId, stat._sum.stockQuantity || 0]
+    }),
+  )
+
+  const result = storefronts.map((s) => {
+    return {
+      ...s,
+      totalStock: stockMap.get(s.id) || 0,
+    }
   })
 
-  return decimalToNumber(storefronts)
+  return decimalToNumber(result)
 }
 
 const getActiveStorefronts = async () => {

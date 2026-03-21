@@ -16,7 +16,13 @@ import {
   DropdownItem,
   Spinner,
 } from '@heroui/react'
-import { EllipsisVerticalIcon, PhoneIcon } from 'lucide-react'
+import {
+  EllipsisVerticalIcon,
+  PackageIcon,
+  PhoneIcon,
+  DatabaseIcon,
+  StoreIcon,
+} from 'lucide-react'
 
 import type { GetStorefrontsResult } from '@/features/storefront/action'
 import type { Selection } from '@heroui/react'
@@ -32,7 +38,7 @@ interface ActionItem {
   onClick: () => void
 }
 
-type StorefrontData = GetStorefrontsResult[number]
+type StorefrontData = GetStorefrontsResult[number] & { totalStock?: number }
 
 interface Props {
   storefrontList: StorefrontData[]
@@ -72,8 +78,10 @@ const StorefrontTable = ({
         <TableHeader>
           <TableColumn>ชื่อสาขา</TableColumn>
           <TableColumn>ที่อยู่ / ติดต่อ</TableColumn>
+          <TableColumn>ประเภทสต็อก</TableColumn>
           <TableColumn>พิกัด</TableColumn>
           <TableColumn>สถานะ</TableColumn>
+          <TableColumn align='center'>สต็อกรวม (ชิ้น)</TableColumn>
           <TableColumn align='center'>จัดการ</TableColumn>
         </TableHeader>
         <TableBody
@@ -98,7 +106,37 @@ const StorefrontTable = ({
                     </div>
                   </div>
                 </TableCell>
-                <TableCell>{item?.googleMapUrl ?? '-'}</TableCell>
+                <TableCell>
+                  <Chip
+                    className='gap-1'
+                    color={item.isMain ? 'primary' : 'default'}
+                    size='sm'
+                    startContent={
+                      item.isMain ? (
+                        <DatabaseIcon size={12} />
+                      ) : (
+                        <StoreIcon size={12} />
+                      )
+                    }
+                    variant='bordered'
+                  >
+                    {item.isMain ? 'คลังหลัก' : 'สต็อกแยกสาขา'}
+                  </Chip>
+                </TableCell>
+                <TableCell className='text-default-400 text-xs'>
+                  {item?.googleMapUrl ? (
+                    <a
+                      className='text-primary hover:underline'
+                      href={item.googleMapUrl}
+                      rel='noopener noreferrer'
+                      target='_blank'
+                    >
+                      ดูแผนที่
+                    </a>
+                  ) : (
+                    '-'
+                  )}
+                </TableCell>
                 <TableCell>
                   <Chip
                     color={item.isActive ? 'success' : 'danger'}
@@ -107,6 +145,14 @@ const StorefrontTable = ({
                   >
                     {item.isActive ? 'เปิดให้บริการ' : 'ปิดชั่วคราว'}
                   </Chip>
+                </TableCell>
+                <TableCell align='center'>
+                  <div className='flex flex-col items-center justify-center gap-1'>
+                    <div className='text-primary flex items-center gap-1 font-bold'>
+                      <PackageIcon size={14} />
+                      {item.totalStock?.toLocaleString() ?? 0}
+                    </div>
+                  </div>
                 </TableCell>
                 <TableCell>
                   <Dropdown placement='bottom-end'>
