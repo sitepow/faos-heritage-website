@@ -18,7 +18,7 @@ const CategoryLists = () => {
   }
 
   return (
-    <Container className='grid grid-cols-3 gap-6 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8'>
+    <Container className='flex flex-wrap items-center justify-center gap-6'>
       {categories.map((category) => (
         <Link
           key={category?.id!}
