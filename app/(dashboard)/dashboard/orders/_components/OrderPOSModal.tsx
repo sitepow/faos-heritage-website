@@ -332,7 +332,6 @@ const OrderPOSModal = ({
                         </div>
                         <Button
                           fullWidth
-                          color='primary'
                           isDisabled={item.stock <= 0}
                           size='sm'
                           variant='flat'
