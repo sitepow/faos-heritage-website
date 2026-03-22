@@ -14,6 +14,7 @@ import {
   AccordionItem,
 } from '@heroui/react'
 import { PackageIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 import type { AffiliateDashboardData } from '@/features/affiliate/action'
 
@@ -23,25 +24,31 @@ import { formatCurrency, formatDate } from '@/utils'
 interface Props {
   commissions: AffiliateDashboardData['recentCommissions']
   isLoading: boolean
+  currency?: string
 }
 
-const AffiliateCommissionTable = ({ commissions, isLoading }: Props) => {
+const AffiliateCommissionTable = ({
+  commissions,
+  isLoading,
+  currency = 'THB',
+}: Props) => {
+  const t = useTranslations('AffiliateCommissionTable')
   const { getPayoutStatusProps } = useTranslateStatus()
 
   return (
     <Table aria-label='Commission History Table'>
       <TableHeader>
-        <TableColumn>วันที่</TableColumn>
-        <TableColumn width={250}>รายการสินค้า / ออเดอร์</TableColumn>
-        <TableColumn>ยอดขาย (THB)</TableColumn>
-        <TableColumn>เรทคอมมิชชัน</TableColumn>
-        <TableColumn>ค่าตอบแทน (THB)</TableColumn>
-        <TableColumn align='center'>สถานะ</TableColumn>
+        <TableColumn>{t('columns.date')}</TableColumn>
+        <TableColumn width={250}>{t('columns.itemsOrder')}</TableColumn>
+        <TableColumn>{t('columns.sales', { currency })}</TableColumn>
+        <TableColumn>{t('columns.rate')}</TableColumn>
+        <TableColumn>{t('columns.commission', { currency })}</TableColumn>
+        <TableColumn align='center'>{t('columns.status')}</TableColumn>
       </TableHeader>
       <TableBody
-        emptyContent='ยังไม่มีรายการค่าคอมมิชชัน'
+        emptyContent={t('emptyContent')}
         isLoading={isLoading}
-        loadingContent={<Spinner label='กำลังโหลดข้อมูล...' />}
+        loadingContent={<Spinner label={t('loadingContent')} />}
       >
         {commissions.map((item) => {
           const statusProps = getPayoutStatusProps(item.status)
@@ -55,7 +62,7 @@ const AffiliateCommissionTable = ({ commissions, isLoading }: Props) => {
                 <Accordion isCompact className='px-0' variant='light'>
                   <AccordionItem
                     key='1'
-                    aria-label='View Items'
+                    aria-label={t('viewItems')}
                     startContent={
                       <PackageIcon className='text-default-400' size={14} />
                     }

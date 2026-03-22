@@ -10,7 +10,7 @@ import {
   Image,
   Alert,
 } from '@heroui/react'
-import { AffiliateStatus } from '@prisma/client'
+import { AffiliateStatus, PayoutMethod } from '@prisma/client'
 import { CheckIcon, ShieldCheckIcon, XIcon } from 'lucide-react'
 
 import { SectionLabel } from '@/components/ui/SectionHeader'
@@ -53,14 +53,11 @@ const AffiliateDetailsModal = () => {
               <div className='text-tiny mt-1 flex flex-col gap-1'>
                 <p>
                   • <strong>ความถูกต้อง:</strong>{' '}
-                  ตรวจสอบชื่อบัญชีธนาคารและสำเนาบัตรประชาชนให้ตรงกันเพื่อป้องกันปัญหาการโอนเงิน
+                  ตรวจสอบข้อมูลการรับเงินและรูปถ่ายเอกสารให้ตรงกันเพื่อป้องกันปัญหาการโอนเงิน
                 </p>
                 <p>
                   • <strong>ระบบอัตโนมัติ:</strong> หลังการอนุมัติ
                   ระบบจะเปิดใช้งานเมนู Affiliate ให้ฝั่งผู้ใช้งานทันที
-                  โดยพาร์ทเนอร์สามารถเลือกแชร์สินค้าได้เอง และระบบจะทำการ{' '}
-                  <span className='underline'>Generated Affiliate Link</span>{' '}
-                  ให้โดยอัตโนมัติ
                 </p>
                 <p>
                   • <strong>เงื่อนไขรายได้:</strong>{' '}
@@ -76,44 +73,83 @@ const AffiliateDetailsModal = () => {
 
           <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
             <div>
-              <SectionLabel>สำเนาบัตรประชาชน</SectionLabel>
+              <SectionLabel>สำเนาบัตรประชาชน / Passport</SectionLabel>
               <Image
                 alt='ID Card'
                 className='mt-2 h-48 w-full rounded-xl object-cover shadow-sm'
                 src={selectedAffiliate.idCardImage ?? IMAGE_FALLBACK.EMPTY}
               />
             </div>
-            <div>
-              <SectionLabel>สำเนาสมุดบัญชี</SectionLabel>
-              <Image
-                alt='Bank Account'
-                className='mt-2 h-48 w-full rounded-xl object-cover shadow-sm'
-                src={selectedAffiliate.bankAccountImage ?? IMAGE_FALLBACK.EMPTY}
-              />
-            </div>
+            {/* แสดงรูปสมุดบัญชีเฉพาะเมื่อเลือก THAI_BANK เท่านั้น */}
+            {selectedAffiliate.payoutMethod === PayoutMethod.THAI_BANK && (
+              <div>
+                <SectionLabel>สำเนาสมุดบัญชี</SectionLabel>
+                <Image
+                  alt='Bank Account'
+                  className='mt-2 h-48 w-full rounded-xl object-cover shadow-sm'
+                  src={
+                    selectedAffiliate.bankAccountImage ?? IMAGE_FALLBACK.EMPTY
+                  }
+                />
+              </div>
+            )}
           </div>
 
           <div className='space-y-3'>
-            <SectionLabel>ข้อมูลธนาคารและการติดต่อ</SectionLabel>
+            <SectionLabel>ข้อมูลช่องทางการรับเงินและการติดต่อ</SectionLabel>
             <div className='grid grid-cols-1 gap-2 md:grid-cols-2'>
-              <p className='text-small'>
-                ธนาคาร:{' '}
-                <span className='underline'>
-                  {selectedAffiliate.bankName ?? '-'}
-                </span>
-              </p>
-              <p className='text-small'>
-                ชื่อบัญชีธนาคาร:{' '}
-                <span className='underline'>
-                  {selectedAffiliate.bankAccountName ?? '-'}
-                </span>
-              </p>
-              <p className='text-small'>
-                เลขที่บัญชี:{' '}
-                <span className='underline'>
-                  {selectedAffiliate.bankAccountNo ?? '-'}
-                </span>
-              </p>
+              {/* ส่วนที่ 1: แสดงตาม Payout Method */}
+              {selectedAffiliate.payoutMethod === PayoutMethod.THAI_BANK && (
+                <>
+                  <p className='text-small'>
+                    ธนาคาร:{' '}
+                    <span className='underline'>
+                      {selectedAffiliate.bankName ?? '-'}
+                    </span>
+                  </p>
+                  <p className='text-small'>
+                    ชื่อบัญชีธนาคาร:{' '}
+                    <span className='underline'>
+                      {selectedAffiliate.bankAccountName ?? '-'}
+                    </span>
+                  </p>
+                  <p className='text-small'>
+                    เลขที่บัญชี:{' '}
+                    <span className='underline'>
+                      {selectedAffiliate.bankAccountNo ?? '-'}
+                    </span>
+                  </p>
+                </>
+              )}
+
+              {selectedAffiliate.payoutMethod ===
+                PayoutMethod.DIGITAL_WALLET && (
+                <>
+                  <p className='text-small'>
+                    Network:{' '}
+                    <span className='underline'>
+                      {selectedAffiliate.walletNetwork ?? '-'}
+                    </span>
+                  </p>
+                  <p className='text-small'>
+                    Wallet Address:{' '}
+                    <span className='break-all underline'>
+                      {selectedAffiliate.walletAddress ?? '-'}
+                    </span>
+                  </p>
+                </>
+              )}
+
+              {selectedAffiliate.payoutMethod === PayoutMethod.PAYPAL && (
+                <p className='text-small'>
+                  PayPal Email:{' '}
+                  <span className='underline'>
+                    {selectedAffiliate.payoutEmail ?? '-'}
+                  </span>
+                </p>
+              )}
+
+              {/* ส่วนที่ 2: ข้อมูลติดต่อ (แสดงเสมอ) */}
               <p className='text-small'>
                 เบอร์ติดต่อ:{' '}
                 <span className='underline'>

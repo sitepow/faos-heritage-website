@@ -10,9 +10,15 @@
         "freeSignup": "Daftar Percuma, Mula Serta-merta"
       },
       "buttons": {
-        "gotoAffiliate": "Mula Jana Pendapatan Sekarang",
+        "gotoDashboard": "Ke Papan Pemuka",
+        "checkStatus": "Semak Status Permohonan",
+        "gotoAffiliate": "Mula Menjana Pendapatan",
         "register": "Daftar Percuma Sekarang",
-        "about": "Lihat Butiran Lanjut"
+        "about": "Lihat Butiran"
+      },
+      "status": {
+        "pending": "Maklumat anda sedang dalam proses semakan",
+        "approved": "Akaun rakan kongsi anda telah diluluskan"
       }
     },
     "steps": {

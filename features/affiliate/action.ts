@@ -3,7 +3,7 @@
 import { AffiliateStatus, PayoutStatus, Role } from '@prisma/client'
 import { revalidatePath } from 'next/cache'
 
-import { affiliateProfileSchema, type AffiliateProfileInput } from './schema'
+import { getAffiliateProfileSchema, type AffiliateProfileInput } from './schema'
 
 import { fail, ok } from '@/lib/errors'
 import { ERROR_CODES } from '@/lib/errors/error-codes'
@@ -94,7 +94,11 @@ const registerAffiliate = async (data: AffiliateProfileInput) => {
     return fail(ERROR_CODES.UNAUTHORIZED)
   }
 
-  const validated = affiliateProfileSchema.safeParse(data)
+  const t = (key: string) => key
+  const schema = getAffiliateProfileSchema(t)
+
+  const validated = schema.safeParse(data)
+
   if (!validated.success) {
     return fail(ERROR_CODES.VALIDATION_ERROR)
   }

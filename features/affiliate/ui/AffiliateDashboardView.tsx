@@ -3,6 +3,7 @@
 
 import { Skeleton, Card, CardBody, Alert } from '@heroui/react'
 import { InfoIcon, LinkIcon, TimerIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import {
   AreaChart,
   Area,
@@ -19,6 +20,7 @@ import { StatCard } from '@/components/ui/StatCard'
 import { useAffiliateDashboard } from '@/features/affiliate/hook'
 
 const AffiliateDashboardView = () => {
+  const t = useTranslations('affiliate_dashboard')
   const { data, chartData, isLoading } = useAffiliateDashboard()
 
   return (
@@ -26,44 +28,45 @@ const AffiliateDashboardView = () => {
       <Alert
         description={
           <div className='flex flex-col gap-3 pt-2'>
-            <p className='text-sm'>
-              บัญชีพาร์ทเนอร์ของคุณได้รับการอนุมัติเรียบร้อยแล้ว
-              คุณสามารถเริ่มต้นสร้างรายได้ตามขั้นตอนดังนี้:
-            </p>
+            <p className='text-sm'>{t('alert.description')}</p>
             <ul className='flex flex-col gap-2'>
               <li className='text-tiny flex items-start gap-2'>
                 <LinkIcon className='mt-0.5 shrink-0' size={14} />
                 <span>
-                  <strong>การสร้างลิงก์:</strong>{' '}
-                  ไปที่หน้าสินค้าที่ต้องการโปรโมท แล้วกดปุ่ม
-                  <span className='mx-1 underline'>"คัดลอกลิงก์"</span>{' '}
-                  จากเมนูแชร์เท่านั้น เพื่อให้ระบบแนบรหัสพาร์ทเนอร์ของคุณไปกับ
-                  URL
+                  <strong>{t('alert.steps.link.title')}:</strong>{' '}
+                  {t('alert.steps.link.text1')}
+                  <span className='mx-1 underline'>
+                    "{t('alert.steps.link.highlight')}"
+                  </span>{' '}
+                  {t('alert.steps.link.text2')}
                 </span>
               </li>
               <li className='text-tiny flex items-start gap-2'>
                 <TimerIcon className='mt-0.5 shrink-0' size={14} />
                 <span>
-                  <strong>ระบบติดตาม (Cookie):</strong> เมื่อลูกค้ากดลิงก์ของคุณ
-                  รหัส
-                  <span className='mx-1 underline'>Refer No.</span>{' '}
-                  จะถูกบันทึกไว้ในเครื่องลูกค้าเป็นเวลา
-                  <span className='mx-1 underline'>30 วัน</span>{' '}
-                  หากลูกค้าสั่งซื้อภายในระยะเวลานี้ คุณจะได้รับค่าคอมมิชชันทันที
+                  <strong>{t('alert.steps.cookie.title')}:</strong>{' '}
+                  {t('alert.steps.cookie.text1')}
+                  <span className='mx-1 underline'>
+                    {t('alert.steps.cookie.highlight1')}
+                  </span>{' '}
+                  {t('alert.steps.cookie.text2')}
+                  <span className='mx-1 underline'>
+                    {t('alert.steps.cookie.highlight2')}
+                  </span>{' '}
+                  {t('alert.steps.cookie.text3')}
                 </span>
               </li>
               <li className='text-tiny flex items-start gap-2'>
                 <InfoIcon className='mt-0.5 shrink-0' size={14} />
                 <span>
-                  <strong>คำแนะนำ:</strong> หากพ้นกำหนด 30 วัน
-                  แนะนำให้ส่งลิงก์ใหม่ให้ลูกค้าอีกครั้งเพื่อให้ระบบติดตามทำงานต่อเนื่อง
+                  <strong>{t('alert.steps.tip.title')}:</strong>{' '}
+                  {t('alert.steps.tip.text')}
                 </span>
               </li>
             </ul>
           </div>
         }
-        // hideIcon={isMobile}
-        title='บัญชีของคุณพร้อมใช้งานแล้ว!'
+        title={t('alert.title')}
       />
 
       <section className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3'>
@@ -80,15 +83,18 @@ const AffiliateDashboardView = () => {
           <>
             <StatCard
               isCurrency
-              label='รายได้รวมทั้งหมด'
+              label={t('stats.totalEarnings')}
               value={data?.totalEarnings || 0}
             />
             <StatCard
               isCurrency
-              label='ยอดเงินรอถอน'
+              label={t('stats.pendingAmount')}
               value={data?.pendingAmount || 0}
             />
-            <StatCard label='จำนวนคำสั่งซื้อ' value={data?.totalOrders || 0} />
+            <StatCard
+              label={t('stats.totalOrders')}
+              value={data?.totalOrders || 0}
+            />
           </>
         )}
       </section>
@@ -96,7 +102,7 @@ const AffiliateDashboardView = () => {
       <section className='grid grid-cols-1 gap-6'>
         <Card className='bg-default-50/50 border-none p-4 shadow-sm'>
           <CardBody className='flex flex-col gap-4'>
-            <h3 className='text-lg font-bold'>แนวโน้มค่าคอมมิชชัน</h3>
+            <h3 className='text-lg font-bold'>{t('chart.title')}</h3>
             <div className='h-[350px] w-full'>
               {isLoading ? (
                 <Skeleton className='h-full w-full rounded-xl' />
@@ -163,7 +169,7 @@ const AffiliateDashboardView = () => {
       </section>
 
       <section className='flex flex-col gap-4'>
-        <h2 className='text-xl font-bold'>รายการค่าคอมมิชชันล่าสุด</h2>
+        <h2 className='text-xl font-bold'>{t('table.title')}</h2>
         <AffiliateCommissionTable
           commissions={data?.recentCommissions || []}
           isLoading={isLoading}

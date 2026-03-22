@@ -133,5 +133,128 @@
     "delete_success": "Deleted successfully",
     "error": "Operation failed, please try again",
     "system_error": "A system error has occurred"
+  },
+  "affiliate_register": {
+    "form": {
+      "title": "Become a Partner",
+      "description": "Please fill in your personal details and select your preferred payout method.",
+      "sections": {
+        "contact": "Contact & Social Media",
+        "payout": "Payout Information",
+        "identity": "Identity Verification (Passport / ID Card)"
+      },
+      "fields": {
+        "phone": {
+          "label": "Phone Number",
+          "placeholder": "+1 234 567 890"
+        },
+        "social": {
+          "label": "Social Media (URL / ID)",
+          "placeholder": "facebook.com/username"
+        },
+        "payoutMethod": {
+          "label": "Select Payout Method",
+          "thaiBank": "Thai Bank",
+          "digitalWallet": "Digital Wallet",
+          "paypal": "PayPal"
+        },
+        "bank": {
+          "name": "Bank Name",
+          "select": "Select Bank",
+          "accountName": "Account Name",
+          "accountNo": "Account Number",
+          "uploadBook": "Bank Book / Statement Copy"
+        },
+        "crypto": {
+          "network": "Network",
+          "select": "Select Network",
+          "address": "Wallet Address (USDT)",
+          "placeholderT": "Starts with T...",
+          "placeholder0x": "Starts with 0x..."
+        },
+        "paypal": {
+          "email": "PayPal Email",
+          "placeholder": "example@mail.com"
+        }
+      },
+      "button": {
+        "submit": "Submit Application",
+        "pending": "Processing..."
+      }
+    },
+    "validation": {
+      "phoneRequired": "Phone number is required",
+      "phoneInvalid": "Please enter a valid phone number",
+      "socialRequired": "Social media contact is required",
+      "bankRequired": "Please select a bank",
+      "accountNoRequired": "Account number is required",
+      "accountNoDigits": "Account number must be 10-12 digits",
+      "accountNameRequired": "Account name is required",
+      "bankImageRequired": "Please upload a copy of your bank book",
+      "networkRequired": "Please select a network",
+      "walletRequired": "Wallet address is required",
+      "walletShort": "Wallet address is too short, please check again",
+      "walletPrefixT": "TRC20 Address must start with 'T'",
+      "walletPrefix0x": "Address must start with '0x'",
+      "walletInvalidEVM": "Invalid EVM Address format",
+      "paypalRequired": "PayPal email is required",
+      "emailInvalid": "Invalid email format",
+      "idCardRequired": "Identity document is required"
+    },
+    "waiting": {
+      "title": "Application Received",
+      "description": "Thank you for your interest in our partner program. Our team is currently reviewing your information. Please allow 1-3 business days for approval.",
+      "backToHome": "Back to Home"
+    }
+  },
+  "affiliate_dashboard": {
+    "alert": {
+      "title": "Your account is ready!",
+      "description": "Your partner account has been approved. Start earning by following these steps:",
+      "steps": {
+        "link": {
+          "title": "Link Creation",
+          "text1": "Visit the product page you wish to promote and click",
+          "highlight": "Copy Link",
+          "text2": "from the share menu only, to ensure your partner ID is included in the URL."
+        },
+        "cookie": {
+          "title": "Tracking (Cookie)",
+          "text1": "When a customer clicks your link, a",
+          "highlight1": "Refer No.",
+          "text2": "is stored on their device for",
+          "highlight2": "30 days.",
+          "text3": "If a purchase is made during this time, you'll earn commission instantly."
+        },
+        "tip": {
+          "title": "Recommendation",
+          "text": "After 30 days, we suggest sending a new link to the customer to maintain the tracking."
+        }
+      }
+    },
+    "stats": {
+      "totalEarnings": "Total Earnings",
+      "pendingAmount": "Pending Payout",
+      "totalOrders": "Total Orders"
+    },
+    "chart": {
+      "title": "Commission Trends"
+    },
+    "table": {
+      "title": "Latest Commissions"
+    }
+  },
+  "AffiliateCommissionTable": {
+    "columns": {
+      "date": "Date",
+      "itemsOrder": "Product Items / Order",
+      "sales": "Sales ({currency})",
+      "rate": "Commission Rate",
+      "commission": "Commission ({currency})",
+      "status": "Status"
+    },
+    "viewItems": "View Items",
+    "emptyContent": "No commission records found",
+    "loadingContent": "Loading data..."
   }
 }

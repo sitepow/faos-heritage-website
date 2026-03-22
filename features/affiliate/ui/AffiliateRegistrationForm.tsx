@@ -7,44 +7,60 @@ import {
   CardBody,
   Select,
   SelectItem,
-  Alert,
+  RadioGroup,
+  Radio,
 } from '@heroui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
-import {
-  LandmarkIcon,
-  PhoneIcon,
-  Share2Icon,
-  InfoIcon,
-  ShieldCheckIcon,
-  UserIcon,
-} from 'lucide-react'
+import { PhoneIcon, Share2Icon, WalletIcon, MailIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 
-import { useAffiliateMutation } from '../mutation'
-import { affiliateProfileSchema, type AffiliateProfileInput } from '../schema'
+import type { ImageWithPreview } from '@/components/ui/ImageDropzone'
 
+import { useAffiliateMutation } from '../mutation'
 import {
-  ImageDropzone,
-  type ImageWithPreview,
-} from '@/app/(dashboard)/_components/ImageDropzone'
+  getAffiliateProfileSchema,
+  type AffiliateProfileInput,
+} from '../schema'
+
+import { ImageDropzone } from '@/components/ui/ImageDropzone'
 import { SectionLabel } from '@/components/ui/SectionHeader'
 import { useAuth } from '@/hooks/useAuth'
 import { useResolveImageUpload } from '@/hooks/useResolveImageUpload'
 
 const THAI_BANKS = [
-  { label: 'ธนาคารกสิกรไทย', value: 'K-Bank' },
-  { label: 'ธนาคารไทยพาณิชย์', value: 'SCB' },
-  { label: 'ธนาคารกรุงเทพ', value: 'Bangkok Bank' },
-  { label: 'ธนาคารกรุงไทย', value: 'Krungthai Bank' },
-  { label: 'ธนาคารกรุงศรีอยุธยา', value: 'Krungsri' },
-  { label: 'ธนาคารทหารไทยธนชาต', value: 'ttb' },
-  { label: 'ธนาคารออมสิน', value: 'GSB' },
-  { label: 'ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร', value: 'BAAC' },
+  { label: 'ธนาคารกสิกรไทย (Kasikorn Bank)', value: 'K-Bank' },
+  { label: 'ธนาคารไทยพาณิชย์ (Siam Commercial Bank)', value: 'SCB' },
+  { label: 'ธนาคารกรุงเทพ (Bangkok Bank)', value: 'Bangkok Bank' },
+  { label: 'ธนาคารกรุงไทย (Krungthai Bank)', value: 'Krungthai Bank' },
+  { label: 'ธนาคารกรุงศรีอยุธยา (Bank of Ayudhya)', value: 'Krungsri' },
+  { label: 'ธนาคารทหารไทยธนชาต (TMBThanachart Bank)', value: 'ttb' },
+  { label: 'ธนาคารออมสิน (Government Savings Bank)', value: 'GSB' },
+  {
+    label:
+      'ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร (Bank for Agriculture and Agricultural Cooperatives)',
+    value: 'BAAC',
+  },
+] as const
+
+const CRYPTO_NETWORKS = [
+  { label: 'USDT (TRC20)', value: 'TRC20', hint: 'Address starts with "T..."' },
+  {
+    label: 'USDT (ERC20)',
+    value: 'ERC20',
+    hint: 'Address starts with "0x..."',
+  },
+  {
+    label: 'USDT (BEP20)',
+    value: 'BEP20',
+    hint: 'Address starts with "0x..."',
+  },
 ] as const
 
 const AffiliateRegistrationForm = () => {
+  const t = useTranslations('affiliate_register')
   const router = useRouter()
   const { isAuthenticated, isLoading: isAuthLoading } = useAuth()
 
@@ -59,52 +75,49 @@ const AffiliateRegistrationForm = () => {
     handleSubmit,
     setValue,
     control,
+    watch,
     formState: { errors },
   } = useForm<AffiliateProfileInput>({
-    resolver: zodResolver(affiliateProfileSchema),
+    resolver: zodResolver(getAffiliateProfileSchema(t)),
+    defaultValues: { payoutMethod: 'THAI_BANK' },
   })
 
-  const { register: submitRegister, isRegistering } = useAffiliateMutation()
+  const selectedPayoutMethod = watch('payoutMethod')
+  const selectedNetwork = watch('walletNetwork')
 
+  const { register: submitRegister, isRegistering } = useAffiliateMutation()
   const [idCardPreview, setIdCardPreview] = useState<ImageWithPreview[]>([])
   const { resolveImagePath: resolveIdCard, isUploading: isUploadingId } =
-    useResolveImageUpload({
-      oldImage: null,
-      previewFiles: idCardPreview,
-    })
-
+    useResolveImageUpload({ oldImage: null, previewFiles: idCardPreview })
   const [bankPreview, setBankPreview] = useState<ImageWithPreview[]>([])
   const { resolveImagePath: resolveBank, isUploading: isUploadingBank } =
-    useResolveImageUpload({
-      oldImage: null,
-      previewFiles: bankPreview,
-    })
+    useResolveImageUpload({ oldImage: null, previewFiles: bankPreview })
 
   const onIdCardChange = (files: ImageWithPreview[]) => {
     setIdCardPreview(files)
     if (files.length > 0) {
-      setValue('idCardImage', 'IMAGE_CHANGED', { shouldDirty: true })
+      setValue('idCardImage', 'IMAGE_CHANGED')
     }
+    return {}
   }
 
   const onBankChange = (files: ImageWithPreview[]) => {
     setBankPreview(files)
     if (files.length > 0) {
-      setValue('bankAccountImage', 'IMAGE_CHANGED', { shouldDirty: true })
+      setValue('bankAccountImage', 'IMAGE_CHANGED')
     }
+    return {}
   }
 
   const onSubmit = async (data: AffiliateProfileInput) => {
     const idCardPath = await resolveIdCard()
-    const bankPath = await resolveBank()
-
-    const payload = {
+    const bankPath =
+      data.payoutMethod === 'THAI_BANK' ? await resolveBank() : null
+    return submitRegister({
       ...data,
       idCardImage: idCardPath || '',
       bankAccountImage: bankPath || '',
-    }
-
-    return submitRegister(payload)
+    })
   }
 
   const isPending = isRegistering || isUploadingId || isUploadingBank
@@ -112,42 +125,21 @@ const AffiliateRegistrationForm = () => {
   return (
     <Card className='bg-background mx-auto w-full max-w-3xl' shadow='none'>
       <CardBody className='gap-8'>
-        <Alert
-          icon={<InfoIcon size={20} />}
-          title='เฉพาะผู้สมัครสัญชาติไทยเท่านั้น'
-        >
-          ขออภัย
-          ขณะนี้ระบบพาร์ทเนอร์เปิดรับลงทะเบียนเฉพาะบุคคลสัญชาติไทยที่มีบัญชีธนาคารภายในประเทศไทยเท่านั้น
-        </Alert>
-
-        <Alert
-          icon={<ShieldCheckIcon size={20} />}
-          title='การส่งเอกสารอย่างปลอดภัย'
-        >
-          เพื่อความปลอดภัย โปรดขีดคร่อมสำเนาเอกสารและระบุข้อความ
-          <span className='mx-1 underline'>
-            "ใช้สำหรับสมัคร Affiliate ในเว็บไซต์ faos.asia เท่านั้น"
-          </span>
-          ลงบนรูปภาพก่อนทำการอัปโหลด
-        </Alert>
-
         <div className='flex flex-col gap-1'>
-          <h1 className='text-2xl font-bold'>สมัครร่วมเป็นพาร์ทเนอร์</h1>
-          <p className='text-foreground/70'>
-            กรุณากรอกข้อมูลให้ครบถ้วนเพื่อประกอบการพิจารณาอนุมัติ
-          </p>
+          <h1 className='text-2xl font-bold'>{t('form.title')}</h1>
+          <p className='text-foreground/70'>{t('form.description')}</p>
         </div>
 
         <form className='flex flex-col gap-8' onSubmit={handleSubmit(onSubmit)}>
           <div className='flex flex-col gap-4'>
-            <SectionLabel>ข้อมูลการติดต่อและโซเชียลมีเดีย</SectionLabel>
+            <SectionLabel>{t('form.sections.contact')}</SectionLabel>
             <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
               <Input
                 {...register('phoneNumber')}
                 errorMessage={errors.phoneNumber?.message}
                 isInvalid={!!errors.phoneNumber}
-                label='เบอร์โทรศัพท์'
-                placeholder='081-234-5678'
+                label={t('form.fields.phone.label')}
+                placeholder={t('form.fields.phone.placeholder')}
                 startContent={
                   <PhoneIcon className='text-stone-400' size={18} />
                 }
@@ -157,8 +149,8 @@ const AffiliateRegistrationForm = () => {
                 {...register('socialMedia')}
                 errorMessage={errors.socialMedia?.message}
                 isInvalid={!!errors.socialMedia}
-                label='ช่องทางโซเชียลมีเดีย (URL หรือ ID)'
-                placeholder='FB: MyPage / Line: @id'
+                label={t('form.fields.social.label')}
+                placeholder={t('form.fields.social.placeholder')}
                 startContent={
                   <Share2Icon className='text-stone-400' size={18} />
                 }
@@ -167,90 +159,153 @@ const AffiliateRegistrationForm = () => {
             </div>
           </div>
 
-          <div className='flex flex-col gap-4'>
-            <SectionLabel>
-              ข้อมูลบัญชีธนาคาร (สำหรับรับค่าคอมมิชชัน)
-            </SectionLabel>
-            <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-              <Controller
-                control={control}
-                name='bankName'
-                render={({ field: { onChange, value } }) => (
-                  <Select
-                    errorMessage={errors.bankName?.message}
-                    isInvalid={!!errors.bankName}
-                    label='ชื่อธนาคาร'
-                    placeholder='เลือกธนาคาร'
-                    selectedKeys={value ? [value] : []}
-                    startContent={
-                      <LandmarkIcon className='text-stone-400' size={18} />
-                    }
+          <div className='border-divider bg-content1/50 flex flex-col gap-6 rounded-xl border p-6'>
+            <Controller
+              control={control}
+              name='payoutMethod'
+              render={({ field: { onChange, value } }) => (
+                <RadioGroup
+                  errorMessage={errors.payoutMethod?.message}
+                  label={
+                    <span className='text-foreground text-base font-bold'>
+                      {t('form.fields.payoutMethod.label')}
+                    </span>
+                  }
+                  value={value}
+                  onValueChange={onChange}
+                >
+                  <div className='mt-2 grid grid-cols-1 gap-4 md:grid-cols-3'>
+                    <Radio value='THAI_BANK'>
+                      {t('form.fields.payoutMethod.thaiBank')}
+                    </Radio>
+                    <Radio value='DIGITAL_WALLET'>
+                      {t('form.fields.payoutMethod.digitalWallet')}
+                    </Radio>
+                    <Radio value='PAYPAL'>
+                      {t('form.fields.payoutMethod.paypal')}
+                    </Radio>
+                  </div>
+                </RadioGroup>
+              )}
+            />
+
+            <div className='pt-2'>
+              {selectedPayoutMethod === 'THAI_BANK' && (
+                <div className='animate-in fade-in slide-in-from-top-1 grid grid-cols-1 gap-4 md:grid-cols-2'>
+                  <Controller
+                    control={control}
+                    name='bankName'
+                    render={({ field: { onChange, value } }) => (
+                      <Select
+                        errorMessage={errors.bankName?.message}
+                        isInvalid={!!errors.bankName}
+                        label={t('form.fields.bank.name')}
+                        placeholder={t('form.fields.bank.select')}
+                        selectedKeys={value ? [value] : []}
+                        variant='bordered'
+                        onSelectionChange={(keys) => {
+                          return onChange(Array.from(keys)[0])
+                        }}
+                      >
+                        {THAI_BANKS.map((bank) => (
+                          <SelectItem key={bank.value}>{bank.label}</SelectItem>
+                        ))}
+                      </Select>
+                    )}
+                  />
+                  <Input
+                    {...register('bankAccountName')}
+                    errorMessage={errors.bankAccountName?.message}
+                    isInvalid={!!errors.bankAccountName}
+                    label={t('form.fields.bank.accountName')}
                     variant='bordered'
-                    onSelectionChange={(keys) => {
-                      return onChange(Array.from(keys)[0])
-                    }}
-                  >
-                    {THAI_BANKS.map((bank) => (
-                      <SelectItem key={bank.value} textValue={bank.label}>
-                        {bank.label}
-                      </SelectItem>
-                    ))}
-                  </Select>
-                )}
-              />
-              <Input
-                {...register('bankAccountName')}
-                errorMessage={errors.bankAccountName?.message}
-                isInvalid={!!errors?.bankAccountName}
-                label='ชื่อบัญชีธนาคาร'
-                placeholder='ชื่อ-นามสกุล (ภาษาไทย)'
-                startContent={<UserIcon className='text-stone-400' size={18} />}
-                variant='bordered'
-              />
-              <Input
-                {...register('bankAccountNo')}
-                errorMessage={errors.bankAccountNo?.message}
-                isInvalid={!!errors.bankAccountNo}
-                label='เลขที่บัญชี'
-                placeholder='123-4-56789-0'
-                variant='bordered'
-              />
-            </div>
-          </div>
+                  />
+                  <Input
+                    {...register('bankAccountNo')}
+                    className='md:col-span-2'
+                    errorMessage={errors.bankAccountNo?.message}
+                    isInvalid={!!errors.bankAccountNo}
+                    label={t('form.fields.bank.accountNo')}
+                    variant='bordered'
+                  />
+                  <div className='space-y-4 md:col-span-2'>
+                    <SectionLabel>
+                      {t('form.fields.bank.uploadBook')}
+                    </SectionLabel>
+                    <ImageDropzone onFilesChange={onBankChange} />
+                  </div>
+                </div>
+              )}
 
-          <div className='flex flex-col gap-6'>
-            <div className='space-y-4'>
-              <SectionLabel>สำเนาบัตรประชาชน</SectionLabel>
-              <ImageDropzone onFilesChange={onIdCardChange} />
-              {errors.idCardImage && (
-                <p className='text-tiny text-danger'>
-                  {errors.idCardImage.message}
-                </p>
+              {selectedPayoutMethod === 'DIGITAL_WALLET' && (
+                <div className='animate-in fade-in slide-in-from-top-1 grid grid-cols-1 gap-4'>
+                  <Controller
+                    control={control}
+                    name='walletNetwork'
+                    render={({ field: { onChange, value } }) => (
+                      <Select
+                        errorMessage={errors.walletNetwork?.message}
+                        isInvalid={!!errors.walletNetwork}
+                        label={t('form.fields.crypto.network')}
+                        placeholder={t('form.fields.crypto.select')}
+                        selectedKeys={value ? [value] : []}
+                        variant='bordered'
+                        onSelectionChange={(keys) => {
+                          return onChange(Array.from(keys)[0])
+                        }}
+                      >
+                        {CRYPTO_NETWORKS.map((net) => (
+                          <SelectItem key={net.value} description={net.hint}>
+                            {net.label}
+                          </SelectItem>
+                        ))}
+                      </Select>
+                    )}
+                  />
+                  <Input
+                    {...register('walletAddress')}
+                    errorMessage={errors.walletAddress?.message}
+                    isInvalid={!!errors.walletAddress}
+                    label={t('form.fields.crypto.address')}
+                    placeholder={
+                      selectedNetwork === 'TRC20'
+                        ? t('form.fields.crypto.placeholderT')
+                        : t('form.fields.crypto.placeholder0x')
+                    }
+                    startContent={<WalletIcon size={18} />}
+                    variant='bordered'
+                  />
+                </div>
+              )}
+
+              {selectedPayoutMethod === 'PAYPAL' && (
+                <Input
+                  {...register('payoutEmail')}
+                  errorMessage={errors.payoutEmail?.message}
+                  isInvalid={!!errors.payoutEmail}
+                  label={t('form.fields.paypal.email')}
+                  placeholder={t('form.fields.paypal.placeholder')}
+                  startContent={<MailIcon size={18} />}
+                  variant='bordered'
+                />
               )}
             </div>
-
-            <div className='space-y-4'>
-              <SectionLabel>สำเนาหน้าสมุดบัญชี</SectionLabel>
-              <ImageDropzone onFilesChange={onBankChange} />
-              {errors.bankAccountImage && (
-                <p className='text-tiny text-danger'>
-                  {errors.bankAccountImage.message}
-                </p>
-              )}
-            </div>
           </div>
 
-          <div className='flex gap-3 pt-4'>
-            <Button
-              className='text-secondary h-14 flex-1 text-lg font-bold'
-              color='primary'
-              isDisabled={isPending}
-              isLoading={isPending}
-              type='submit'
-            >
-              สมัครพาร์ทเนอร์
-            </Button>
+          <div className='flex flex-col gap-4'>
+            <SectionLabel>{t('form.sections.identity')}</SectionLabel>
+            <ImageDropzone onFilesChange={onIdCardChange} />
           </div>
+
+          <Button
+            className='text-secondary h-14 w-full text-lg font-bold'
+            color='primary'
+            isDisabled={isPending}
+            isLoading={isPending}
+            type='submit'
+          >
+            {isPending ? t('form.button.pending') : t('form.button.submit')}
+          </Button>
         </form>
       </CardBody>
     </Card>

@@ -10,9 +10,15 @@
         "freeSignup": "Gratis aanmelden, direct beginnen"
       },
       "buttons": {
-        "gotoAffiliate": "Begin nu met verdienen",
-        "register": "Gratis registreren",
-        "about": "Bekijk details"
+        "gotoDashboard": "Ga naar Dashboard",
+        "checkStatus": "Controleer de Status",
+        "gotoAffiliate": "Begin Nu met Verdienen",
+        "register": "Gratis Registreren",
+        "about": "Bekijk Details"
+      },
+      "status": {
+        "pending": "We beoordelen momenteel uw gegevens",
+        "approved": "Uw partneraccount is goedgekeurd"
       }
     },
     "steps": {

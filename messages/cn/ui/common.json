@@ -133,5 +133,122 @@
     "delete_success": "删除成功",
     "error": "操作失败，请重试",
     "system_error": "系统发生错误"
+  },
+  "affiliate_register": {
+    "form": {
+      "title": "成为合作伙伴",
+      "description": "请填写您的个人信息并选择付款方式。",
+      "sections": {
+        "contact": "联系方式与社交媒体",
+        "payout": "付款方式",
+        "identity": "身份验证 (护照 / 身份证)"
+      },
+      "fields": {
+        "phone": { "label": "电话号码", "placeholder": "+86 138 1234 5678" },
+        "social": {
+          "label": "社交媒体 (URL / ID)",
+          "placeholder": "facebook.com/username"
+        },
+        "payoutMethod": {
+          "label": "选择付款方式",
+          "thaiBank": "泰国銀行",
+          "digitalWallet": "数字钱包",
+          "paypal": "PayPal"
+        },
+        "bank": {
+          "name": "银行名称",
+          "select": "选择银行",
+          "accountName": "账户姓名",
+          "accountNo": "账号",
+          "uploadBook": "银行存折/账单副本"
+        },
+        "crypto": {
+          "network": "网络",
+          "select": "选择网络",
+          "address": "钱包地址 (USDT)",
+          "placeholderT": "以 T 开头...",
+          "placeholder0x": "以 0x 开头..."
+        },
+        "paypal": {
+          "email": "PayPal 电子邮箱",
+          "placeholder": "example@mail.com"
+        }
+      },
+      "button": { "submit": "提交申请", "pending": "处理中..." }
+    },
+    "validation": {
+      "phoneRequired": "电话号码必填",
+      "phoneInvalid": "请输入有效的电话号码",
+      "socialRequired": "社交媒体联系方式必填",
+      "bankRequired": "请选择银行",
+      "accountNoRequired": "账号必填",
+      "accountNoDigits": "账号必须为 10-12 位数字",
+      "accountNameRequired": "账户姓名必填",
+      "bankImageRequired": "请上传银行存折副本",
+      "networkRequired": "请选择网络",
+      "walletRequired": "钱包地址必填",
+      "walletShort": "钱包地址太短，请重新检查",
+      "walletPrefixT": "TRC20 地址必须以 'T' 开头",
+      "walletPrefix0x": "地址必须以 '0x' 开头",
+      "walletInvalidEVM": "无效的 EVM 地址格式",
+      "paypalRequired": "PayPal 电子邮箱必填",
+      "emailInvalid": "电子邮箱格式无效",
+      "idCardRequired": "必须上传身份证明文件"
+    },
+    "waiting": {
+      "title": "申请已收到",
+      "description": "感谢您对我们合作伙伴计划的关注。我们的团队目前正在审核您的信息。请等待 1-3 个工作日以获得批准。",
+      "backToHome": "返回首页"
+    }
+  },
+  "affiliate_dashboard": {
+    "alert": {
+      "title": "您的账户已准备就绪！",
+      "description": "您的合作伙伴账户已获批准。您可以按照以下步骤开始赚取收益：",
+      "steps": {
+        "link": {
+          "title": "创建链接",
+          "text1": "前往您想推广的产品页面，并仅通过分享菜单点击",
+          "highlight": "复制链接",
+          "text2": "，以确保您的合作伙伴代码已附加到 URL。"
+        },
+        "cookie": {
+          "title": "追踪系统 (Cookie)",
+          "text1": "当客户点击您的链接时，",
+          "highlight1": "推荐编号",
+          "text2": "将在其设备中保存",
+          "highlight2": "30 天",
+          "text3": "。如果客户在此期间购买，您将立即获得佣金。"
+        },
+        "tip": {
+          "title": "建议",
+          "text": "如果超过 30 天，建议再次向客户发送新链接，以确保追踪系统持续工作。"
+        }
+      }
+    },
+    "stats": {
+      "totalEarnings": "总收入",
+      "pendingAmount": "待提现金额",
+      "totalOrders": "总订单数"
+    },
+    "chart": {
+      "title": "佣金趋势"
+    },
+    "table": {
+      "title": "最近佣金明细"
+    }
+  },
+  "AffiliateCommissionTable": {
+    "columns": {
+      "date": "日期",
+      "itemsOrder": "商品 / 订单",
+      "sales": "销售额 ({currency})",
+      "rate": "佣金比例",
+      "commission": "佣金 ({currency})",
+      "status": "状态"
+    },
+    "viewItems": "查看详情",
+    "emptyContent": "暂无佣金记录",
+    "loadingContent": "正在加载数据..."
   }
 }

@@ -10,9 +10,15 @@
         "freeSignup": "登録無料、即開始可能"
       },
       "buttons": {
-        "gotoAffiliate": "今すぐ収益化を始める",
-        "register": "無料で登録する",
+        "gotoDashboard": "ダッシュボードへ",
+        "checkStatus": "申請状況を確認する",
+        "gotoAffiliate": "今すぐ収益化を開始",
+        "register": "今すぐ無料で登録",
         "about": "詳細を見る"
+      },
+      "status": {
+        "pending": "情報の確認を行っています",
+        "approved": "パートナーとして承認されました"
       }
     },
     "steps": {

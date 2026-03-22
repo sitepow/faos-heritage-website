@@ -10,9 +10,15 @@
         "freeSignup": "Iscrizione Gratuita, Inizia Subito"
       },
       "buttons": {
+        "gotoDashboard": "Vai alla Dashboard",
+        "checkStatus": "Controlla lo Stato della Domanda",
         "gotoAffiliate": "Inizia a Guadagnare Ora",
-        "register": "Iscriviti Gratuitamente",
-        "about": "Scopri di Più"
+        "register": "Registrati Gratis",
+        "about": "Visualizza Dettagli"
+      },
+      "status": {
+        "pending": "Stiamo esaminando le tue informazioni",
+        "approved": "Il tuo account partner è stato approvato"
       }
     },
     "steps": {

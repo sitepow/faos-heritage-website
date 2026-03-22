@@ -133,5 +133,125 @@
     "delete_success": "Berjaya dipadam",
     "error": "Operasi gagal, sila cuba lagi",
     "system_error": "Ralat sistem telah berlaku"
+  },
+  "affiliate_register": {
+    "form": {
+      "title": "Menjadi Rakan Kongsi",
+      "description": "Sila isi butiran peribadi anda dan pilih kaedah pembayaran.",
+      "sections": {
+        "contact": "Maklumat Perhubungan & Media Sosial",
+        "payout": "Kaedah Pembayaran",
+        "identity": "Pengesahan Identiti (Pasport / Kad Pengenalan)"
+      },
+      "fields": {
+        "phone": {
+          "label": "Nombor Telefon",
+          "placeholder": "+60 12-345 6789"
+        },
+        "social": {
+          "label": "Media Sosial (URL / ID)",
+          "placeholder": "facebook.com/username"
+        },
+        "payoutMethod": {
+          "label": "Pilih Kaedah Pembayaran",
+          "thaiBank": "Bank Thailand",
+          "digitalWallet": "Dompet Digital",
+          "paypal": "PayPal"
+        },
+        "bank": {
+          "name": "Nama Bank",
+          "select": "Pilih Bank",
+          "accountName": "Nama Pemegang Akaun",
+          "accountNo": "Nombor Akaun",
+          "uploadBook": "Salinan Buku Bank / Penyata"
+        },
+        "crypto": {
+          "network": "Rangkaian (Network)",
+          "select": "Pilih Rangkaian",
+          "address": "Alamat Dompet (USDT)",
+          "placeholderT": "Bermula dengan T...",
+          "placeholder0x": "Bermula dengan 0x..."
+        },
+        "paypal": { "email": "E-mel PayPal", "placeholder": "contoh@mail.com" }
+      },
+      "button": {
+        "submit": "Hantar Permohonan",
+        "pending": "Sedang diproses..."
+      }
+    },
+    "validation": {
+      "phoneRequired": "Nombor telefon wajib diisi",
+      "phoneInvalid": "Sila masukkan nombor telefon yang sah",
+      "socialRequired": "Maklumat media sosial wajib diisi",
+      "bankRequired": "Sila pilih bank",
+      "accountNoRequired": "Nombor akaun wajib diisi",
+      "accountNoDigits": "Nombor akaun mestilah 10-12 digit",
+      "accountNameRequired": "Nama pemegang akaun wajib diisi",
+      "bankImageRequired": "Sila muat naik salinan buku bank",
+      "networkRequired": "Sila pilih rangkaian",
+      "walletRequired": "Alamat dompet wajib diisi",
+      "walletShort": "Alamat dompet terlalu pendek, sila semak semula",
+      "walletPrefixT": "Alamat TRC20 mestilah bermula dengan 'T'",
+      "walletPrefix0x": "Alamat mestilah bermula dengan '0x'",
+      "walletInvalidEVM": "Format alamat EVM tidak sah",
+      "paypalRequired": "E-mel PayPal wajib diisi",
+      "emailInvalid": "Format e-mel tidak sah",
+      "idCardRequired": "Dokumen identiti wajib diisi"
+    },
+    "waiting": {
+      "title": "Permohonan Diterima",
+      "description": "Terima kasih atas minat anda terhadap program rakan kongsi kami. Pasukan kami sedang menyemak maklumat anda. Sila tunggu 1-3 hari bekerja untuk kelulusan.",
+      "backToHome": "Kembali ke Laman Utama"
+    }
+  },
+  "affiliate_dashboard": {
+    "alert": {
+      "title": "Akaun anda telah sedia!",
+      "description": "Akaun rakan kongsi anda telah diluluskan. Anda boleh mula menjana pendapatan melalui langkah berikut:",
+      "steps": {
+        "link": {
+          "title": "Penyediaan Pautan",
+          "text1": "Pergi ke halaman produk yang ingin dipromosikan dan klik butang",
+          "highlight": "Salin Pautan",
+          "text2": "dari menu kongsi sahaja, supaya sistem menyertakan kod rakan kongsi anda ke URL."
+        },
+        "cookie": {
+          "title": "Sistem Penjejakan (Kuki)",
+          "text1": "Apabila pelanggan mengklik pautan anda, kod",
+          "highlight1": "Refer No.",
+          "text2": "akan disimpan dalam peranti pelanggan selama",
+          "highlight2": "30 hari.",
+          "text3": "Jika mereka membuat pembelian dalam tempoh ini, anda akan menerima komisen serta-merta."
+        },
+        "tip": {
+          "title": "Nasihat",
+          "text": "Jika tempoh 30 hari telah tamat, disyorkan untuk menghantar pautan baru kepada pelanggan supaya penjejakan sistem berterusan."
+        }
+      }
+    },
+    "stats": {
+      "totalEarnings": "Jumlah Pendapatan",
+      "pendingAmount": "Baki Menunggu Pengeluaran",
+      "totalOrders": "Jumlah Pesanan"
+    },
+    "chart": {
+      "title": "Trend Komisen"
+    },
+    "table": {
+      "title": "Senarai Komisen Terkini"
+    }
+  },
+  "AffiliateCommissionTable": {
+    "columns": {
+      "date": "Tarikh",
+      "itemsOrder": "Item Produk / Pesanan",
+      "sales": "Jualan ({currency})",
+      "rate": "Kadar Komisen",
+      "commission": "Komisen ({currency})",
+      "status": "Status"
+    },
+    "viewItems": "Lihat Item",
+    "emptyContent": "Tiada rekod komisen ditemui",
+    "loadingContent": "Memuatkan data..."
   }
 }

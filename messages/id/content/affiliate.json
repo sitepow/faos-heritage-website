@@ -10,9 +10,15 @@
         "freeSignup": "Daftar Gratis, Mulai Sekarang"
       },
       "buttons": {
-        "gotoAffiliate": "Mulai Menghasilkan Sekarang",
+        "gotoDashboard": "Ke Dashboard",
+        "checkStatus": "Cek Status Pendaftaran",
+        "gotoAffiliate": "Mulai Hasilkan Sekarang",
         "register": "Daftar Gratis Sekarang",
-        "about": "Lihat Detail Selengkapnya"
+        "about": "Lihat Detail"
+      },
+      "status": {
+        "pending": "Informasi Anda sedang kami tinjau",
+        "approved": "Akun mitra Anda telah disetujui"
       }
     },
     "steps": {

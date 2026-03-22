@@ -133,5 +133,122 @@
     "delete_success": "Eliminato con successo",
     "error": "Operazione fallita, riprova",
     "system_error": "Si è verificato un errore di sistema"
+  },
+  "affiliate_register": {
+    "form": {
+      "title": "Diventa un Partner",
+      "description": "Inserisci i tuoi dati personali e seleziona un metodo di pagamento.",
+      "sections": {
+        "contact": "Contatti & Social Media",
+        "payout": "Metodo di Pagamento",
+        "identity": "Verifica Identità (Passaporto / Carta d'Identità)"
+      },
+      "fields": {
+        "phone": {
+          "label": "Numero di Telefono",
+          "placeholder": "+39 012 345 6789"
+        },
+        "social": {
+          "label": "Social Media (URL / ID)",
+          "placeholder": "facebook.com/username"
+        },
+        "payoutMethod": {
+          "label": "Seleziona Metodo di Pagamento",
+          "thaiBank": "Banca Thailandese",
+          "digitalWallet": "Portafoglio Digitale",
+          "paypal": "PayPal"
+        },
+        "bank": {
+          "name": "Nome della Banca",
+          "select": "Seleziona Banca",
+          "accountName": "Intestatario del Conto",
+          "accountNo": "Numero di Conto",
+          "uploadBook": "Copia del Libretto Bancario / Estratto Conto"
+        },
+        "crypto": {
+          "network": "Rete (Network)",
+          "select": "Seleziona Rete",
+          "address": "Indirizzo Portafoglio (USDT)",
+          "placeholderT": "Inizia con T...",
+          "placeholder0x": "Inizia con 0x..."
+        },
+        "paypal": { "email": "Email PayPal", "placeholder": "esempio@mail.com" }
+      },
+      "button": { "submit": "Invia Candidatura", "pending": "In corso..." }
+    },
+    "validation": {
+      "phoneRequired": "Il numero di telefono è obbligatorio",
+      "phoneInvalid": "Inserisci un numero di telefono valido",
+      "socialRequired": "Il contatto social è obbligatorio",
+      "bankRequired": "Seleziona una banca",
+      "accountNoRequired": "Il numero di conto è obbligatorio",
+      "accountNoDigits": "Il numero di conto deve essere di 10-12 cifre",
+      "accountNameRequired": "Il nome dell'intestatario è obbligatorio",
+      "bankImageRequired": "Carica una copia del libretto bancario",
+      "networkRequired": "Seleziona una rete",
+      "walletRequired": "L'indirizzo del portafoglio è obbligatorio",
+      "walletShort": "L'indirizzo è troppo breve, riprova",
+      "walletPrefixT": "L'indirizzo TRC20 deve iniziare con 'T'",
+      "walletPrefix0x": "L'indirizzo deve iniziare con '0x'",
+      "walletInvalidEVM": "Formato indirizzo EVM non valido",
+      "paypalRequired": "L'email PayPal è obbligatoria",
+      "emailInvalid": "Formato email non valido",
+      "idCardRequired": "Il documento d'identità è obbligatorio"
+    },
+    "waiting": {
+      "title": "Candidatura Ricevuta",
+      "description": "Grazie per l'interesse verso il nostro programma partner. Il nostro team sta attualmente revisionando le tue informazioni. Ti preghiamo di attendere 1-3 giorni lavorativi per l'approvazione.",
+      "backToHome": "Torna alla Home"
+    }
+  },
+  "affiliate_dashboard": {
+    "alert": {
+      "title": "Il tuo account è pronto!",
+      "description": "Il tuo account partner è stato approvato. Puoi iniziare a guadagnare seguendo questi passaggi:",
+      "steps": {
+        "link": {
+          "title": "Creazione Link",
+          "text1": "Vai alla pagina del prodotto che vuoi promuovere e clicca su",
+          "highlight": "Copia Link",
+          "text2": "solo dal menu di condivisione, per assicurarti che il tuo ID partner sia allegato all'URL."
+        },
+        "cookie": {
+          "title": "Sistema di Tracciamento (Cookie)",
+          "text1": "Quando un cliente clicca sul tuo link, il",
+          "highlight1": "N. Riferimento",
+          "text2": "verrà salvato sul suo dispositivo per",
+          "highlight2": "30 giorni.",
+          "text3": "Se acquista entro questo periodo, riceverai immediatamente la commissione."
+        },
+        "tip": {
+          "title": "Suggerimento",
+          "text": "Se il periodo di 30 giorni scade, ti consigliamo di inviare un nuovo link al cliente per mantenere attivo il tracciamento."
+        }
+      }
+    },
+    "stats": {
+      "totalEarnings": "Guadagni Totali",
+      "pendingAmount": "In attesa di Prelievo",
+      "totalOrders": "Ordini Totali"
+    },
+    "chart": {
+      "title": "Andamento Commissioni"
+    },
+    "table": {
+      "title": "Commissioni Recenti"
+    }
+  },
+  "AffiliateCommissionTable": {
+    "columns": {
+      "date": "Data",
+      "itemsOrder": "Articoli / Ordine",
+      "sales": "Vendite ({currency})",
+      "rate": "Tasso di Commissione",
+      "commission": "Commissione ({currency})",
+      "status": "Stato"
+    },
+    "viewItems": "Visualizza Articoli",
+    "emptyContent": "Nessun dato di commissione trovato",
+    "loadingContent": "Caricamento dati..."
   }
 }

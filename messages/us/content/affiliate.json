@@ -10,9 +10,15 @@
         "freeSignup": "Free Sign-up, Start Instantly"
       },
       "buttons": {
+        "gotoDashboard": "Go to Dashboard",
+        "checkStatus": "Check Application Status",
         "gotoAffiliate": "Start Earning Now",
         "register": "Register for Free",
-        "about": "Learn More"
+        "about": "View Details"
+      },
+      "status": {
+        "pending": "We are currently reviewing your information",
+        "approved": "Your partner account has been approved"
       }
     },
     "steps": {

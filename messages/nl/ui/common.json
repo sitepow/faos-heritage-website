@@ -133,5 +133,122 @@
     "delete_success": "Succesvol verwijderd",
     "error": "Bewerking mislukt, probeer het opnieuw",
     "system_error": "Er is een systeemfout opgetreden"
+  },
+  "affiliate_register": {
+    "form": {
+      "title": "Word een Partner",
+      "description": "Vul uw persoonlijke gegevens in en selecteer een uitbetalingsmethode.",
+      "sections": {
+        "contact": "Contact & Social Media",
+        "payout": "Uitbetalingsmethode",
+        "identity": "Identiteitsverificatie (Paspoort / ID-kaart)"
+      },
+      "fields": {
+        "phone": { "label": "Telefoonnummer", "placeholder": "+31 6 12345678" },
+        "social": {
+          "label": "Social Media (URL / ID)",
+          "placeholder": "facebook.com/username"
+        },
+        "payoutMethod": {
+          "label": "Selecteer Uitbetalingsmethode",
+          "thaiBank": "Thaise Bank",
+          "digitalWallet": "Digitale Portemonnee",
+          "paypal": "PayPal"
+        },
+        "bank": {
+          "name": "Naam van de Bank",
+          "select": "Selecteer Bank",
+          "accountName": "Naam Rekeninghouder",
+          "accountNo": "Rekeningnummer",
+          "uploadBook": "Kopie Bankafschrift / Bankboekje"
+        },
+        "crypto": {
+          "network": "Netwerk",
+          "select": "Selecteer Netwerk",
+          "address": "Portemonnee-adres (USDT)",
+          "placeholderT": "Begint met T...",
+          "placeholder0x": "Begint met 0x..."
+        },
+        "paypal": {
+          "email": "PayPal E-mail",
+          "placeholder": "voorbeeld@mail.com"
+        }
+      },
+      "button": { "submit": "Aanmelding Indienen", "pending": "Verwerken..." }
+    },
+    "validation": {
+      "phoneRequired": "Telefoonnummer is verplicht",
+      "phoneInvalid": "Voer een geldig telefoonnummer in",
+      "socialRequired": "Social media contact is verplicht",
+      "bankRequired": "Selecteer een bank",
+      "accountNoRequired": "Rekeningnummer is verplicht",
+      "accountNoDigits": "Rekeningnummer moet 10-12 cijfers bevatten",
+      "accountNameRequired": "Naam rekeninghouder is verplicht",
+      "bankImageRequired": "Upload een kopie van uw bankboekje",
+      "networkRequired": "Selecteer een netwerk",
+      "walletRequired": "Portemonnee-adres is verplicht",
+      "walletShort": "Portemonnee-adres is te kort, controleer opnieuw",
+      "walletPrefixT": "TRC20-adres moet beginnen met 'T'",
+      "walletPrefix0x": "Adres moet beginnen met '0x'",
+      "walletInvalidEVM": "Ongeldig EVM-adresformaat",
+      "paypalRequired": "PayPal e-mail is verplicht",
+      "emailInvalid": "Ongeldig e-mailformaat",
+      "idCardRequired": "Identiteitsbewijs is verplicht"
+    },
+    "waiting": {
+      "title": "Aanmelding Ontvangen",
+      "description": "Bedankt voor uw interesse in ons partnerprogramma. Ons team beoordeelt momenteel uw informatie. Houd rekening met 1-3 werkdagen voor goedkeuring.",
+      "backToHome": "Terug naar Home"
+    }
+  },
+  "affiliate_dashboard": {
+    "alert": {
+      "title": "Je account is klaar!",
+      "description": "Je partneraccount is goedgekeurd. Je kunt beginnen met verdienen door deze stappen te volgen:",
+      "steps": {
+        "link": {
+          "title": "Link maken",
+          "text1": "Ga naar de productpagina die je wilt promoten en klik op",
+          "highlight": "Link kopiëren",
+          "text2": "alleen via het deelmenu, om er zeker van te zijn कि je partner-ID aan de URL wordt toegevoegd."
+        },
+        "cookie": {
+          "title": "Trackingsysteem (Cookie)",
+          "text1": "Wanneer een klant op je link klikt, wordt het",
+          "highlight1": "Referentienummer",
+          "text2": "gedurende",
+          "highlight2": "30 dagen",
+          "text3": "op hun apparaat opgeslagen. Als ze binnen deze periode kopen, ontvang je direct commissie."
+        },
+        "tip": {
+          "title": "Tip",
+          "text": "Als de periode von 30 dagen is verstreken, raden we aan om een nieuwe link naar de klant te sturen om de tracking actief te houden."
+        }
+      }
+    },
+    "stats": {
+      "totalEarnings": "Totale inkomsten",
+      "pendingAmount": "In afwachting van opname",
+      "totalOrders": "Totaal aantal bestellingen"
+    },
+    "chart": {
+      "title": "Commissietrends"
+    },
+    "table": {
+      "title": "Recente commissies"
+    }
+  },
+  "AffiliateCommissionTable": {
+    "columns": {
+      "date": "Datum",
+      "itemsOrder": "Producten / Bestelling",
+      "sales": "Verkopen ({currency})",
+      "rate": "Commissiepercentage",
+      "commission": "Commissie ({currency})",
+      "status": "Status"
+    },
+    "viewItems": "Bekijk artikelen",
+    "emptyContent": "Geen commissiegegevens gevonden",
+    "loadingContent": "Gegevens laden..."
   }
 }

@@ -133,5 +133,122 @@
     "delete_success": "正常に削除されました",
     "error": "操作に失敗しました。もう一度お試しください",
     "system_error": "システムエラーが発生しました"
+  },
+  "affiliate_register": {
+    "form": {
+      "title": "パートナー登録",
+      "description": "個人情報を入力し、支払い方法を選択してください。",
+      "sections": {
+        "contact": "連絡先 & ソーシャルメディア",
+        "payout": "支払い方法",
+        "identity": "本人確認 (パスポート / 身分証明書)"
+      },
+      "fields": {
+        "phone": { "label": "電話番号", "placeholder": "+81 90-1234-5678" },
+        "social": {
+          "label": "ソーシャルメディア (URL / ID)",
+          "placeholder": "facebook.com/username"
+        },
+        "payoutMethod": {
+          "label": "支払い方法を選択",
+          "thaiBank": "タイの銀行",
+          "digitalWallet": "デジタルウォレット",
+          "paypal": "PayPal"
+        },
+        "bank": {
+          "name": "銀行名",
+          "select": "銀行を選択",
+          "accountName": "口座名義",
+          "accountNo": "口座番号",
+          "uploadBook": "通帳 / 取引明細書の写し"
+        },
+        "crypto": {
+          "network": "ネットワーク",
+          "select": "ネットワークを選択",
+          "address": "ウォレットアドレス (USDT)",
+          "placeholderT": "Tで始まる...",
+          "placeholder0x": "0xで始まる..."
+        },
+        "paypal": {
+          "email": "PayPalメールアドレス",
+          "placeholder": "example@mail.com"
+        }
+      },
+      "button": { "submit": "登録を申請する", "pending": "処理中..." }
+    },
+    "validation": {
+      "phoneRequired": "電話番号は必須です",
+      "phoneInvalid": "有効な電話番号を入力してください",
+      "socialRequired": "ソーシャルメディアの連絡先は必須です",
+      "bankRequired": "銀行を選択してください",
+      "accountNoRequired": "口座番号は必須です",
+      "accountNoDigits": "口座番号は10〜12桁である必要があります",
+      "accountNameRequired": "口座名義は必須です",
+      "bankImageRequired": "通帳の写しをアップロードしてください",
+      "networkRequired": "ネットワークを選択してください",
+      "walletRequired": "ウォレットアドレスは必須です",
+      "walletShort": "アドレスが短すぎます。もう一度確認してください",
+      "walletPrefixT": "TRC20アドレスは'T'で始まる必要があります",
+      "walletPrefix0x": "アドレスは'0x'で始まる必要があります",
+      "walletInvalidEVM": "無効なEVMアドレス形式です",
+      "paypalRequired": "PayPalメールアドレスは必須です",
+      "emailInvalid": "メールアドレスの形式が無効です",
+      "idCardRequired": "本人確認書類は必須です"
+    },
+    "waiting": {
+      "title": "申請を受け付けました",
+      "description": "パートナープログラムへのご関心、ありがとうございます。現在、担当者が情報を確認しております。承認まで1〜3営業日ほどお待ちください。",
+      "backToHome": "ホームに戻る"
+    }
+  },
+  "affiliate_dashboard": {
+    "alert": {
+      "title": "アカウントの準備が完了しました！",
+      "description": "パートナーアカウントが承認されました。次の手順で収益化を開始できます：",
+      "steps": {
+        "link": {
+          "title": "リンクの作成",
+          "text1": "プロモーションしたい商品ページに移動し、共有メニューから",
+          "highlight": "リンクをコピー",
+          "text2": "をクリックしてください。これによりパートナーIDがURLに付加されます。"
+        },
+        "cookie": {
+          "title": "追跡システム (Cookie)",
+          "text1": "顧客がリンクをクリックすると、",
+          "highlight1": "参照番号",
+          "text2": "が顧客のデバイスに",
+          "highlight2": "30日間",
+          "text3": "保存されます。この期間内に購入があれば、すぐに報酬が発生します。"
+        },
+        "tip": {
+          "title": "アドバイス",
+          "text": "30日が経過した場合は、追跡を継続させるために新しいリンクを再度送信することをお勧めします。"
+        }
+      }
+    },
+    "stats": {
+      "totalEarnings": "総収益",
+      "pendingAmount": "出金待ち金額",
+      "totalOrders": "総注文数"
+    },
+    "chart": {
+      "title": "報酬推移"
+    },
+    "table": {
+      "title": "最近の報酬履歴"
+    }
+  },
+  "AffiliateCommissionTable": {
+    "columns": {
+      "date": "日付",
+      "itemsOrder": "商品 / 注文",
+      "sales": "売上高 ({currency})",
+      "rate": "コミッション率",
+      "commission": "報酬額 ({currency})",
+      "status": "ステータス"
+    },
+    "viewItems": "商品を見る",
+    "emptyContent": "コミッション履歴はありません",
+    "loadingContent": "データを読み込み中..."
   }
 }

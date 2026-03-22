@@ -2,6 +2,7 @@
 
 import { Button } from '@heroui/react'
 import { ArrowLeft } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
 import { AffiliateCTA } from './AffiliateCTA'
@@ -13,6 +14,7 @@ import { AffiliateTiers } from './AffiliateTiers'
 import { AffiliateRegistrationForm } from '@/features/affiliate/ui/AffiliateRegistrationForm'
 
 const AffiliateLanding = () => {
+  const t = useTranslations('actions')
   const [showForm, setShowForm] = useState(false)
 
   const handleShowForm = () => {
@@ -31,7 +33,7 @@ const AffiliateLanding = () => {
             return setShowForm(false)
           }}
         >
-          ย้อนกลับ
+          {t('back')}
         </Button>
       </div>
     )

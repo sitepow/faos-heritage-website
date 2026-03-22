@@ -2,6 +2,7 @@
 
 import { Spinner } from '@heroui/react'
 import { AffiliateStatus } from '@prisma/client'
+import { useTranslations } from 'next-intl'
 
 import { AffiliateLanding } from './AffiliateLanding'
 import { AffiliateWaitingStatus } from './AffiliateWaitingStatus'
@@ -10,6 +11,7 @@ import { useAffiliateProfile } from '@/features/affiliate/hook'
 import { AffiliateDashboardView } from '@/features/affiliate/ui/AffiliateDashboardView'
 
 const AffiliateClient = () => {
+  const t = useTranslations('status')
   const { data: profile, isLoading } = useAffiliateProfile()
 
   if (isLoading) {
@@ -17,7 +19,7 @@ const AffiliateClient = () => {
       <div className='bg-faos-dark flex min-h-screen items-center justify-center'>
         <Spinner
           classNames={{ label: 'text-white' }}
-          label='กำลังตรวจสอบสถานะ...'
+          label={`${t('loading')}...`}
         />
       </div>
     )

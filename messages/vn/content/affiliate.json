@@ -10,9 +10,15 @@
         "freeSignup": "Đăng ký miễn phí, bắt đầu ngay"
       },
       "buttons": {
+        "gotoDashboard": "Đến Bảng điều khiển",
+        "checkStatus": "Kiểm tra trạng thái",
         "gotoAffiliate": "Bắt đầu kiếm tiền ngay",
         "register": "Đăng ký miễn phí ngay",
-        "about": "Xem thêm chi tiết"
+        "about": "Xem chi tiết"
+      },
+      "status": {
+        "pending": "Chúng tôi đang kiểm tra thông tin của bạn",
+        "approved": "Tài khoản đối tác của bạn đã được duyệt"
       }
     },
     "steps": {

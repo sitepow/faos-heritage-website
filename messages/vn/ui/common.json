@@ -133,5 +133,119 @@
     "delete_success": "Xóa thành công",
     "error": "Thao tác thất bại, vui lòng thử lại",
     "system_error": "Đã xảy ra lỗi hệ thống"
+  },
+  "affiliate_register": {
+    "form": {
+      "title": "Trở thành Đối tác",
+      "description": "Vui lòng điền thông tin cá nhân và chọn phương thức thanh toán.",
+      "sections": {
+        "contact": "Thông tin liên hệ & Mạng xã hội",
+        "payout": "Phương thức thanh toán",
+        "identity": "Xác minh danh tính (Hộ chiếu / CCCD)"
+      },
+      "fields": {
+        "phone": { "label": "Số điện thoại", "placeholder": "+84 912 345 678" },
+        "social": {
+          "label": "Mạng xã hội (URL / ID)",
+          "placeholder": "facebook.com/username"
+        },
+        "payoutMethod": {
+          "label": "Chọn phương thức thanh toán",
+          "thaiBank": "Ngân hàng Thái Lan",
+          "digitalWallet": "Ví điện tử",
+          "paypal": "PayPal"
+        },
+        "bank": {
+          "name": "Tên ngân hàng",
+          "select": "Chọn ngân hàng",
+          "accountName": "Tên chủ tài khoản",
+          "accountNo": "Số tài khoản",
+          "uploadBook": "Bản sao sổ ngân hàng / Sao kê"
+        },
+        "crypto": {
+          "network": "Mạng lưới",
+          "select": "Chọn mạng lưới",
+          "address": "Địa chỉ ví (USDT)",
+          "placeholderT": "Bắt đầu bằng T...",
+          "placeholder0x": "Bắt đầu bằng 0x..."
+        },
+        "paypal": { "email": "Email PayPal", "placeholder": "vidu@mail.com" }
+      },
+      "button": { "submit": "Gửi đơn đăng ký", "pending": "Đang xử lý..." }
+    },
+    "validation": {
+      "phoneRequired": "Vui lòng nhập số điện thoại",
+      "phoneInvalid": "Số điện thoại không hợp lệ",
+      "socialRequired": "Vui lòng nhập thông tin mạng xã hội",
+      "bankRequired": "Vui lòng chọn ngân hàng",
+      "accountNoRequired": "Vui lòng nhập số tài khoản",
+      "accountNoDigits": "Số tài khoản phải từ 10-12 số",
+      "accountNameRequired": "Vui lòng nhập tên chủ tài khoản",
+      "bankImageRequired": "Vui lòng tải lên bản sao sổ ngân hàng",
+      "networkRequired": "Vui lòng chọn mạng lưới",
+      "walletRequired": "Vui lòng nhập địa chỉ ví",
+      "walletShort": "Địa chỉ ví quá ngắn, vui lòng kiểm tra lại",
+      "walletPrefixT": "Địa chỉ TRC20 phải bắt đầu bằng chữ 'T'",
+      "walletPrefix0x": "Địa chỉ phải bắt đầu bằng '0x'",
+      "walletInvalidEVM": "Định dạng địa chỉ EVM không hợp lệ",
+      "paypalRequired": "Vui lòng nhập email PayPal",
+      "emailInvalid": "Định dạng email không hợp lệ",
+      "idCardRequired": "Vui lòng tải lên tài liệu định danh"
+    },
+    "waiting": {
+      "title": "Đã nhận đơn đăng ký",
+      "description": "Cảm ơn bạn đã quan tâm đến chương trình đối tác của chúng tôi. Đội ngũ của chúng tôi hiện đang xem xét thông tin của bạn. Vui lòng chờ 1-3 ngày làm việc để được phê duyệt.",
+      "backToHome": "Quay lại Trang chủ"
+    }
+  },
+  "affiliate_dashboard": {
+    "alert": {
+      "title": "Tài khoản của bạn đã sẵn sàng!",
+      "description": "Tài khoản đối tác của bạn đã được phê duyệt. Bạn có thể bắt đầu kiếm thu nhập theo các bước sau:",
+      "steps": {
+        "link": {
+          "title": "Tạo liên kết",
+          "text1": "Truy cập trang sản phẩm bạn muốn quảng bá và nhấn nút",
+          "highlight": "Sao chép liên kết",
+          "text2": "từ menu chia sẻ để hệ thống gắn mã đối tác của bạn vào URL."
+        },
+        "cookie": {
+          "title": "Hệ thống theo dõi (Cookie)",
+          "text1": "Khi khách hàng nhấn vào liên kết, mã",
+          "highlight1": "Refer No.",
+          "text2": "sẽ được lưu trên thiết bị của khách trong",
+          "highlight2": "30 ngày.",
+          "text3": "Nếu khách mua hàng trong thời gian này, bạn sẽ nhận được hoa hồng ngay lập tức."
+        },
+        "tip": {
+          "title": "Lời khuyên",
+          "text": "Nếu quá 30 ngày, bạn nên gửi lại liên kết mới cho khách hàng để hệ thống theo dõi tiếp tục hoạt động."
+        }
+      }
+    },
+    "stats": {
+      "totalEarnings": "Tổng thu nhập",
+      "pendingAmount": "Số dư chờ rút",
+      "totalOrders": "Tổng số đơn hàng"
+    },
+    "chart": {
+      "title": "Xu hướng hoa hồng"
+    },
+    "table": {
+      "title": "Danh sách hoa hồng gần đây"
+    }
+  },
+  "AffiliateCommissionTable": {
+    "columns": {
+      "date": "Ngày",
+      "itemsOrder": "Sản phẩm / Đơn hàng",
+      "sales": "Doanh số ({currency})",
+      "rate": "Tỷ lệ hoa hồng",
+      "commission": "Hoa hồng ({currency})",
+      "status": "Trạng thái"
+    },
+    "viewItems": "Xem chi tiết",
+    "emptyContent": "Chưa có dữ liệu hoa hồng",
+    "loadingContent": "Đang tải dữ liệu..."
   }
 }

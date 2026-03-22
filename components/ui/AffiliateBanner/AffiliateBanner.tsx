@@ -41,9 +41,9 @@ const AffiliateBanner = ({ className }: ComponentProps<'section'>) => {
         <div className='flex flex-shrink-0 flex-col items-center gap-4'>
           <AffiliateButton onClick={navigation.AFFILIATE}>
             {isPending
-              ? 'ตรวจสอบสถานะการสมัคร'
+              ? t('buttons.checkStatus')
               : isApproved
-                ? 'ไปที่หน้าแดชบอร์ด'
+                ? t('buttons.gotoDashboard')
                 : t('buttons.gotoAffiliate')}
           </AffiliateButton>
 
@@ -51,12 +51,12 @@ const AffiliateBanner = ({ className }: ComponentProps<'section'>) => {
             {isPending ? (
               <li className='flex items-center gap-2'>
                 <span className='size-2 animate-pulse rounded-full bg-amber-400' />
-                <span>กำลังดำเนินการตรวจสอบข้อมูลของคุณ</span>
+                <span>{t('status.pending')}</span>
               </li>
             ) : isApproved ? (
               <li className='flex items-center gap-2'>
                 <span className='bg-success size-2 rounded-full' />
-                <span>คุณได้รับการอนุมัติเป็นพาร์ทเนอร์แล้ว</span>
+                <span>{t('status.approved')}</span>
               </li>
             ) : (
               <>

@@ -10,9 +10,15 @@
         "freeSignup": "免费注册，立即开启"
       },
       "buttons": {
-        "gotoAffiliate": "立即开启赚钱之旅",
+        "gotoDashboard": "前往控制台",
+        "checkStatus": "查询申请状态",
+        "gotoAffiliate": "立即开启收益",
         "register": "立即免费注册",
-        "about": "查看更多详情"
+        "about": "查看详情"
+      },
+      "status": {
+        "pending": "我们正在审核您的信息",
+        "approved": "您的合作伙伴账户已获批准"
       }
     },
     "steps": {

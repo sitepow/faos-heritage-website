@@ -147,5 +147,128 @@
     "delete_success": "ลบข้อมูลเรียบร้อยแล้ว",
     "error": "ดำเนินการไม่สำเร็จ กรุณาลองใหม่",
     "system_error": "เกิดข้อผิดพลาดทางระบบ"
+  },
+  "affiliate_register": {
+    "form": {
+      "title": "สมัครร่วมเป็นพาร์ทเนอร์",
+      "description": "กรุณากรอกข้อมูลส่วนตัวและเลือกช่องทางการรับเงิน",
+      "sections": {
+        "contact": "ข้อมูลการติดต่อและโซเชียลมีเดีย",
+        "payout": "ช่องทางการรับเงิน",
+        "identity": "เอกสารยืนยันตัวตน (Passport / ID Card)"
+      },
+      "fields": {
+        "phone": {
+          "label": "เบอร์โทรศัพท์",
+          "placeholder": "+66 812345678"
+        },
+        "social": {
+          "label": "โซเชียลมีเดีย (URL / ID)",
+          "placeholder": "facebook.com/username"
+        },
+        "payoutMethod": {
+          "label": "เลือกช่องทางการรับเงิน",
+          "thaiBank": "ธนาคารไทย",
+          "digitalWallet": "Digital Wallet",
+          "paypal": "PayPal"
+        },
+        "bank": {
+          "name": "ธนาคาร",
+          "select": "เลือกธนาคาร",
+          "accountName": "ชื่อบัญชี",
+          "accountNo": "เลขที่บัญชี",
+          "uploadBook": "สำเนาหน้าสมุดบัญชี"
+        },
+        "crypto": {
+          "network": "เครือข่าย (Network)",
+          "select": "เลือก Network",
+          "address": "Wallet Address (USDT)",
+          "placeholderT": "ขึ้นต้นด้วย T...",
+          "placeholder0x": "ขึ้นต้นด้วย 0x..."
+        },
+        "paypal": {
+          "email": "PayPal Email",
+          "placeholder": "example@mail.com"
+        }
+      },
+      "button": {
+        "submit": "ส่งข้อมูลสมัครพาร์ทเนอร์",
+        "pending": "กำลังดำเนินการ..."
+      }
+    },
+    "validation": {
+      "phoneRequired": "กรุณาระบุเบอร์โทรศัพท์",
+      "phoneInvalid": "กรุณาระบุเบอร์โทรศัพท์ให้ถูกต้อง",
+      "socialRequired": "กรุณาระบุช่องทางโซเชียลมีเดีย",
+      "bankRequired": "กรุณาเลือกธนาคาร",
+      "accountNoRequired": "กรุณาระบุเลขที่บัญชี",
+      "accountNoDigits": "เลขที่บัญชีต้องเป็นตัวเลข 10-12 หลัก",
+      "accountNameRequired": "กรุณาระบุชื่อบัญชี",
+      "bankImageRequired": "กรุณาอัปโหลดหน้าสมุดบัญชี",
+      "networkRequired": "กรุณาเลือก Network",
+      "walletRequired": "กรุณาระบุ Wallet Address",
+      "walletShort": "Wallet Address สั้นเกินไป โปรดตรวจสอบอีกครั้ง",
+      "walletPrefixT": "TRC20 Address ต้องขึ้นต้นด้วยตัว T เท่านั้น",
+      "walletPrefix0x": "Address ต้องขึ้นต้นด้วย 0x เท่านั้น",
+      "walletInvalidEVM": "รูปแบบ Address ของ EVM Network ไม่ถูกต้อง",
+      "paypalRequired": "กรุณาระบุ PayPal Email",
+      "emailInvalid": "รูปแบบอีเมลไม่ถูกต้อง",
+      "idCardRequired": "กรุณาอัปโหลดเอกสารยืนยันตัวตน"
+    },
+    "waiting": {
+      "title": "ได้รับข้อมูลการสมัครแล้ว",
+      "description": "ขอบคุณที่สนใจร่วมเป็นพาร์ทเนอร์กับเรา ขณะนี้เจ้าหน้าที่กำลังตรวจสอบข้อมูลของท่าน กรุณารอการอนุมัติภายใน 1-3 วันทำการ",
+      "backToHome": "กลับหน้าหลัก"
+    }
+  },
+  "affiliate_dashboard": {
+    "alert": {
+      "title": "บัญชีของคุณพร้อมใช้งานแล้ว!",
+      "description": "บัญชีพาร์ทเนอร์ของคุณได้รับการอนุมัติเรียบร้อยแล้ว คุณสามารถเริ่มต้นสร้างรายได้ตามขั้นตอนดังนี้:",
+      "steps": {
+        "link": {
+          "title": "การสร้างลิงก์",
+          "text1": "ไปที่หน้าสินค้าที่ต้องการโปรโมท แล้วกดปุ่ม",
+          "highlight": "คัดลอกลิงก์",
+          "text2": "จากเมนูแชร์เท่านั้น เพื่อให้ระบบแนบรหัสพาร์ทเนอร์ของคุณไปกับ URL"
+        },
+        "cookie": {
+          "title": "ระบบติดตาม (Cookie)",
+          "text1": "เมื่อลูกค้ากดลิงก์ของคุณ รหัส",
+          "highlight1": "Refer No.",
+          "text2": "จะถูกบันทึกไว้ในเครื่องลูกค้าเป็นเวลา",
+          "highlight2": "30 วัน",
+          "text3": "หากลูกค้าสั่งซื้อภายในระยะเวลานี้ คุณจะได้รับค่าคอมมิชชันทันที"
+        },
+        "tip": {
+          "title": "คำแนะนำ",
+          "text": "หากพ้นกำหนด 30 วัน แนะนำให้ส่งลิงก์ใหม่ให้ลูกค้าอีกครั้งเพื่อให้ระบบติดตามทำงานต่อเนื่อง"
+        }
+      }
+    },
+    "stats": {
+      "totalEarnings": "รายได้รวมทั้งหมด",
+      "pendingAmount": "ยอดเงินรอถอน",
+      "totalOrders": "จำนวนคำสั่งซื้อ"
+    },
+    "chart": {
+      "title": "แนวโน้มค่าคอมมิชชัน"
+    },
+    "table": {
+      "title": "รายการค่าคอมมิชชันล่าสุด"
+    }
+  },
+  "AffiliateCommissionTable": {
+    "columns": {
+      "date": "วันที่",
+      "itemsOrder": "รายการสินค้า / ออเดอร์",
+      "sales": "ยอดขาย ({currency})",
+      "rate": "เรทคอมมิชชัน",
+      "commission": "ค่าตอบแทน ({currency})",
+      "status": "สถานะ"
+    },
+    "viewItems": "ดูรายการสินค้า",
+    "emptyContent": "ยังไม่มีรายการค่าคอมมิชชัน",
+    "loadingContent": "กำลังโหลดข้อมูล..."
   }
 }

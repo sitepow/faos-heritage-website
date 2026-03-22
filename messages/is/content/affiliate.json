@@ -10,9 +10,15 @@
         "freeSignup": "Ókeypis Skráning, Byrjaðu Strax"
       },
       "buttons": {
-        "gotoAffiliate": "Byrjaðu að vinna sér inn núna",
-        "register": "Skráðu þig ókeypis",
-        "about": "Sjá nánari upplýsingar"
+        "gotoDashboard": "Fara á stjórnborð",
+        "checkStatus": "Athuga stöðu umsóknar",
+        "gotoAffiliate": "Byrja að vinna sér inn núna",
+        "register": "Skrá sig ókeypis",
+        "about": "Skoða nánar"
+      },
+      "status": {
+        "pending": "Við erum að fara yfir upplýsingarnar þínar",
+        "approved": "Samstarfsaðgangur þinn hefur verið samþykktur"
       }
     },
     "steps": {

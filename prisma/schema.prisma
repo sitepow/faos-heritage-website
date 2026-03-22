@@ -6,6 +6,12 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
+enum PayoutMethod {
+  THAI_BANK
+  DIGITAL_WALLET
+  PAYPAL
+}
+
 enum Role {
   CUSTOMER
   ADMIN
@@ -156,30 +162,39 @@ model AffiliatePayout {
 }
 
 model AffiliateProfile {
-  id             String          @id @default(cuid())
-  userId         String          @unique
-  user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id               String           @id @default(cuid())
+  userId           String           @unique
+  user             User             @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   affiliateCode    String?          @unique 
-  idCardImage    String?
-  bankAccountImage String?
-  bankName       String?
-  bankAccountNo  String?
+  status           AffiliateStatus  @default(PENDING)
+  
+  phoneNumber      String?
+  socialMedia      String?          @db.Text
+  
+  idCardImage      String?
+
+  payoutMethod     PayoutMethod     @default(THAI_BANK)
+  
+  bankName         String? 
+  bankAccountNo    String?
   bankAccountName  String?
-  socialMedia    String?         @db.Text
-  phoneNumber    String?
+  bankAccountImage String? 
+  
+  walletNetwork    String?  
+  walletAddress    String?
+  
+  payoutEmail      String?
 
-  status         AffiliateStatus @default(PENDING)
-
-  baseRate         Decimal         @default(5.00) @db.Decimal(5, 2) 
-  highValueRate    Decimal         @default(10.00) @db.Decimal(5, 2)
-  thresholdAmount  Decimal         @default(10000.00) @db.Decimal(12, 2)
+  baseRate         Decimal          @default(5.00) @db.Decimal(5, 2) 
+  highValueRate    Decimal          @default(10.00) @db.Decimal(5, 2)
+  thresholdAmount  Decimal          @default(10000.00) @db.Decimal(12, 2)
 
   commissions      AffiliateCommission[]
   payouts          AffiliatePayout[]
 
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
 
   @@index([userId])
   @@index([status])
