@@ -9,6 +9,7 @@ import { AppSection } from '@/components/layouts/AppSection'
 import { AdvertiseBanner } from '@/components/ui/Advertise/AdvertiseBanner'
 import { AffiliateBanner } from '@/components/ui/AffiliateBanner/AffiliateBanner'
 import { CategoryLists } from '@/components/ui/CategoryLists'
+import PartnerSection from '@/components/ui/PartnerSection'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { YouTubeList } from '@/components/ui/YouTubeList'
 import { PAGINATION } from '@/constants'
@@ -61,6 +62,7 @@ const HomePage = async () => {
       </aside>
 
       <YouTubeList />
+      <PartnerSection />
     </AppSection>
   )
 }
