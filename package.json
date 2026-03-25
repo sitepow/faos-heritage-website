@@ -12,7 +12,8 @@
     "format": "prettier --write .",
     "prepare": "husky install",
     "postinstall": "prisma generate",
-    "order:cleanup": "npx tsx scripts/cleanup-orders.ts"
+    "order:cleanup": "npx tsx scripts/cleanup-orders.ts",
+    "contract:cleanup": "npx tsx scripts/cleanup-contracts.ts"
   },
   "dependencies": {
     "@codemirror/lang-css": "^6.3.1",
