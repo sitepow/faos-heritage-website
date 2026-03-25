@@ -192,12 +192,17 @@ const ContractApproveModal = ({ isOpen, onClose, contractId }: Props) => {
         retailTotal: 0,
         agreedTotal: 0,
         potentialProfit: 0,
+        isAdjustmentOnly: true,
       }
     }
 
-    const retailTotal = contract.items.reduce((acc: number, item) => {
+    const items = contract.items
+    const hasTransfer = items.some((item) => item.quantity > 0)
+
+    const retailTotal = items.reduce((acc: number, item) => {
       const basePrice = Number(item.variant?.price ?? item.product?.price ?? 0)
-      return acc + basePrice * (item.quantity || 1)
+      const qty = hasTransfer ? item.quantity : 1
+      return acc + basePrice * qty
     }, 0)
 
     const agreedTotal = Number(contract.totalAmount || 0)
@@ -206,6 +211,7 @@ const ContractApproveModal = ({ isOpen, onClose, contractId }: Props) => {
       retailTotal: Number(retailTotal.toFixed(2)),
       agreedTotal: Number(agreedTotal.toFixed(2)),
       potentialProfit: Number((retailTotal - agreedTotal).toFixed(2)),
+      isAdjustmentOnly: !hasTransfer,
     }
   }, [contract])
 
@@ -262,6 +268,14 @@ const ContractApproveModal = ({ isOpen, onClose, contractId }: Props) => {
                           <strong>4. การส่งมอบและการรับประกัน:</strong>{' '}
                           เจ้าของแบรนด์รับรองคุณภาพสินค้าตามมาตรฐาน
                           และยินดีเปลี่ยนคืนสินค้าในกรณีที่เกิดความเสียหายจากการผลิตหรือการขนส่งต้นทาง
+                        </p>
+                        <p>
+                          <strong>5. การสิ้นสุดข้อตกลงและต่อสัญญา:</strong>{' '}
+                          เมื่อสัญญาหมดอายุ
+                          ระบบจะปรับราคาสินค้ากลับสู่ราคาปกติของเว็บไซต์ทันที
+                          โดยการพิจารณาต่อสัญญาหรือปรับปรุงเงื่อนไขราคาใหม่ให้เป็นไปตามการตกลงร่วมกันของทั้งสองฝ่าย
+                          รวมถึงการบริหารจัดการสต็อกสินค้าคงเหลือ (ถ้ามี)
+                          ให้เป็นไปตามเงื่อนไขที่ระบุไว้ในรายละเอียดเพิ่มเติมของสัญญานี้
                         </p>
                         <div className='bg-primary/5 border-primary/20 text-primary-600 flex items-start gap-2 rounded-lg border p-3'>
                           <InfoIcon className='shrink-0' size={14} />
@@ -420,23 +434,39 @@ const ContractApproveModal = ({ isOpen, onClose, contractId }: Props) => {
                 </div>
 
                 <div className='bg-primary/5 border-primary/10 mt-auto flex flex-col gap-2 rounded-lg border p-4'>
-                  <div className='text-default-600 flex items-center justify-between text-sm'>
-                    <span>มูลค่าตลาดรวม:</span>
-                    <span className='text-default-400 line-through'>
-                      {formatCurrency(totals.retailTotal)}
-                    </span>
-                  </div>
-                  <Divider className='my-1 opacity-50' />
-                  <div className='flex items-center justify-between text-lg font-bold'>
-                    <span>ยอดสุทธิสัญญา:</span>
-                    <span className='text-primary'>
-                      {formatCurrency(totals.agreedTotal)}
-                    </span>
-                  </div>
-                  <div className='text-success flex items-center justify-between text-sm font-bold'>
-                    <span>ประมาณการกำไร (Margin):</span>
-                    <span>{formatCurrency(totals.potentialProfit)}</span>
-                  </div>
+                  {totals.isAdjustmentOnly ? (
+                    <div className='flex flex-col items-center gap-1 py-1'>
+                      <div className='text-primary flex items-center gap-2 font-bold uppercase'>
+                        <TagIcon size={16} />
+                        <span>รายการปรับปรุงราคาขาย</span>
+                      </div>
+                      <p className='text-default-500 text-center text-[10px]'>
+                        สัญญานี้เน้นการปรับปรุงราคาต้นทุนเดิมที่มีอยู่ในร้าน{' '}
+                        <br />
+                        กรุณาตรวจสอบราคาส่งใหม่ในรายการสินค้าด้านบน
+                      </p>
+                    </div>
+                  ) : (
+                    <>
+                      <div className='text-default-600 flex items-center justify-between text-sm'>
+                        <span>ราคาปลีกรวม:</span>
+                        <span className='text-default-400 line-through'>
+                          {formatCurrency(totals.retailTotal)}
+                        </span>
+                      </div>
+                      <Divider className='my-1 opacity-50' />
+                      <div className='flex items-center justify-between text-lg font-bold'>
+                        <span>ยอดสุทธิสัญญา:</span>
+                        <span className='text-primary'>
+                          {formatCurrency(totals.agreedTotal)}
+                        </span>
+                      </div>
+                      <div className='text-success flex items-center justify-between text-sm font-bold'>
+                        <span>ประมาณการกำไร (Margin):</span>
+                        <span>{formatCurrency(totals.potentialProfit)}</span>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -454,7 +484,7 @@ const ContractApproveModal = ({ isOpen, onClose, contractId }: Props) => {
               variant='flat'
               onPress={() => askConfirmation(ContractStatus.TERMINATED)}
             >
-              ปฏิเสธสัญญา
+              ปฏิเสธสัญญา/ขอให้ปรับราคาใหม่อีกครั้ง
             </Button>
             <Button
               className='text-secondary flex-1 font-bold'

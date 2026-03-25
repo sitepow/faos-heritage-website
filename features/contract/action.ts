@@ -125,30 +125,33 @@ const getContractsAdmin = async () => {
     where: !isAdmin
       ? {
           storefront: {
-            managers: {
-              some: { id: userId },
-            },
+            managers: { some: { id: userId } },
           },
         }
       : {},
     include: {
       storefront: {
-        select: {
-          name: true,
-        },
+        select: { name: true },
       },
-      _count: {
-        select: {
-          items: true,
-        },
+      items: {
+        select: { quantity: true },
       },
     },
-    orderBy: {
-      createdAt: 'desc',
-    },
+    orderBy: { createdAt: 'desc' },
   })
 
-  return decimalToNumber(contracts)
+  const formattedContracts = contracts.map((contract) => {
+    const isAdjustment =
+      contract.items.length > 0 &&
+      contract.items.every((item) => item.quantity === 0)
+
+    return {
+      ...contract,
+      isAdjustment,
+    }
+  })
+
+  return decimalToNumber(formattedContracts)
 }
 
 const getContractDetails = async (id: string) => {

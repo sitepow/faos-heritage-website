@@ -73,6 +73,7 @@ interface SelectedItem {
   agreedPrice: number
   quantity: number
   maxStock: number
+  currentStoreStock: number
   image: string
 }
 
@@ -124,9 +125,7 @@ const ContractPOSModal = ({
 
   const productList = useMemo(() => {
     if (sourceMode === CONTRACT_SOURCE.STOREFRONT) {
-      if (!selectedStorefrontId) {
-        return []
-      }
+      if (!selectedStorefrontId) return []
 
       const items = (storeInventory as StoreInventoryItem[]) || []
       return items
@@ -167,14 +166,12 @@ const ContractPOSModal = ({
     const filtered = warehouseItems.filter((p) =>
       p?.name.toLowerCase().includes(searchQuery.toLowerCase()),
     )
-
     const flatList: POSContractProduct[] = []
     filtered.forEach((p) => {
       const productImage =
         p?.images?.find((img) => img.isPrimary)?.url ||
         p?.images?.[0]?.url ||
         IMAGE_FALLBACK.EMPTY
-
       if (p?.variants && p.variants.length > 0) {
         p.variants.forEach((v) => {
           flatList.push({
@@ -209,18 +206,25 @@ const ContractPOSModal = ({
   ])
 
   const totals = useMemo(() => {
-    const retailTotal = selectedItems.reduce(
-      (acc, item) => acc + item.retailPrice * (item.quantity || 1),
-      0,
-    )
-    const agreedTotal = selectedItems.reduce(
-      (acc, item) => acc + item.agreedPrice * (item.quantity || 1),
-      0,
-    )
+    const hasTransfer = selectedItems.some((item) => item.quantity > 0)
+
+    const retailTotal = selectedItems.reduce((acc, item) => {
+      const totalQty = item.quantity + (item.currentStoreStock || 0)
+      const finalQty = totalQty || 1
+      return acc + item.retailPrice * finalQty
+    }, 0)
+
+    const agreedTotal = selectedItems.reduce((acc, item) => {
+      const totalQty = item.quantity + (item.currentStoreStock || 0)
+      const finalQty = totalQty || 1
+      return acc + item.agreedPrice * finalQty
+    }, 0)
+
     return {
       retailTotal: Number(retailTotal.toFixed(2)),
       agreedTotal: Number(agreedTotal.toFixed(2)),
       potentialProfit: Number((retailTotal - agreedTotal).toFixed(2)),
+      isAdjustmentOnly: !hasTransfer,
     }
   }, [selectedItems])
 
@@ -238,22 +242,21 @@ const ContractPOSModal = ({
   const handleAddItem = (product: POSContractProduct): void => {
     return setSelectedItems((prev: SelectedItem[]) => {
       const isExist = prev.find(
-        (i: SelectedItem) =>
+        (i) =>
           i.productId === product.productId &&
           i.variantId === product.variantId,
       )
-
       if (isExist) {
         toast.warn('สินค้านี้อยู่ในรายการแล้ว')
         return prev
       }
 
-      let initialPrice = product.existingAgreedPrice ?? product.basePrice
-
-      if (profitPercentage > 0) {
-        const calculated = product.basePrice * (1 - profitPercentage / 100)
-        initialPrice = Math.ceil(calculated * 100) / 100
-      }
+      const initialPrice = product.existingAgreedPrice ?? product.basePrice
+      const calculatedPrice =
+        profitPercentage > 0
+          ? Math.ceil(product.basePrice * (1 - profitPercentage / 100) * 100) /
+            100
+          : initialPrice
 
       return [
         ...prev,
@@ -263,12 +266,14 @@ const ContractPOSModal = ({
           variantId: product.variantId,
           name: product.displayName,
           retailPrice: product.basePrice,
-          agreedPrice: initialPrice,
+          agreedPrice: calculatedPrice,
           quantity: sourceMode === CONTRACT_SOURCE.STOREFRONT ? 0 : 1,
           maxStock:
             sourceMode === CONTRACT_SOURCE.STOREFRONT
               ? (product.warehouseStock ?? 0)
               : product.stock,
+          currentStoreStock:
+            sourceMode === CONTRACT_SOURCE.STOREFRONT ? product.stock : 0,
           image: product.image,
         },
       ]
@@ -286,8 +291,8 @@ const ContractPOSModal = ({
   }
 
   const handleRemoveFromCart = (cartKey: string): void => {
-    return setSelectedItems((prev: SelectedItem[]) =>
-      prev.filter((item: SelectedItem) => item.cartKey !== cartKey),
+    return setSelectedItems((prev) =>
+      prev.filter((item) => item.cartKey !== cartKey),
     )
   }
 
@@ -319,7 +324,6 @@ const ContractPOSModal = ({
       }
 
       const result = await create(payload)
-
       if (result.success) {
         toast.success('ร่างสัญญาสำเร็จ')
         router.push('/dashboard/contracts')
@@ -351,11 +355,6 @@ const ContractPOSModal = ({
               <FileSignatureIcon size={20} />
               สร้างรายการสัญญาใหม่ (B2B)
             </span>
-            <p className='text-default-400 text-[10px] font-normal uppercase'>
-              {sourceMode === 'WAREHOUSE'
-                ? 'โหมด: โอนสินค้าใหม่จากคลังหลัก'
-                : 'โหมด: ปรับราคา/เติมสต็อกสินค้าเดิมในร้าน'}
-            </p>
           </div>
           <div className='w-72'>
             <Input
@@ -440,10 +439,10 @@ const ContractPOSModal = ({
                             <p className='text-primary text-sm font-bold'>
                               {formatCurrency(item.basePrice)}
                             </p>
-                            {sourceMode === CONTRACT_SOURCE.STOREFRONT ? (
-                              <div className='flex flex-col'>
+                            {sourceMode === 'STOREFRONT' ? (
+                              <div className='flex flex-col gap-0.5'>
                                 <p className='text-default-400 text-[10px]'>
-                                  สต็อกเดิมที่ร้าน: {item.stock}
+                                  สต็อกที่ร้าน: {item.stock}
                                 </p>
                                 <p
                                   className={`text-[10px] font-bold ${item.warehouseStock! <= 0 ? 'text-danger' : 'text-primary'}`}
@@ -479,15 +478,13 @@ const ContractPOSModal = ({
 
             <div className='bg-default-50/50 flex w-full flex-col gap-4 p-4 lg:w-[380px] lg:overflow-y-auto lg:p-6 xl:w-[420px]'>
               <h3 className='flex items-center gap-2 text-lg font-bold'>
-                <ReceiptIcon size={20} />
-                รายการในสัญญา ({selectedItems.length})
+                <ReceiptIcon size={20} /> รายการในสัญญา ({selectedItems.length})
               </h3>
               <Divider className='bg-default-200' />
 
               <div className='flex flex-col gap-3'>
                 <h3 className='flex items-center gap-2 text-sm font-bold'>
-                  <StoreIcon size={16} />
-                  สาขาคู่สัญญา
+                  <StoreIcon size={16} /> สาขาคู่สัญญา
                 </h3>
                 <Select
                   label='สาขาหน้าร้าน'
@@ -513,35 +510,16 @@ const ContractPOSModal = ({
 
               <div className='flex flex-col gap-3'>
                 <h3 className='text-default-700 flex items-center gap-2 text-sm font-bold'>
-                  <CalendarIcon size={16} />
-                  ระยะเวลาสัญญา
+                  <CalendarIcon size={16} /> ระยะเวลาสัญญา
                 </h3>
                 <div className='grid grid-cols-2 gap-2'>
                   <DatePicker
-                    calendarProps={{
-                      classNames: {
-                        content: 'bg-background',
-                        gridBody:
-                          '[&_td[data-selected=true]_span]:bg-primary [&_td[data-selected=true]_span]:text-secondary',
-                        cellButton:
-                          'data-[selected=true]:bg-primary data-[selected=true]:text-secondary',
-                      },
-                    }}
                     label='วันที่เริ่ม'
                     value={startDate}
                     variant='bordered'
                     onChange={setStartDate}
                   />
                   <DatePicker
-                    calendarProps={{
-                      classNames: {
-                        content: 'bg-background',
-                        gridBody:
-                          '[&_td[data-selected=true]_span]:bg-primary [&_td[data-selected=true]_span]:text-secondary',
-                        cellButton:
-                          'data-[selected=true]:bg-primary data-[selected=true]:text-secondary',
-                      },
-                    }}
                     label='วันที่สิ้นสุด'
                     value={endDate}
                     variant='bordered'
@@ -554,8 +532,7 @@ const ContractPOSModal = ({
 
               <div className='flex flex-col gap-3'>
                 <h3 className='flex items-center gap-2 text-sm font-bold'>
-                  <PercentIcon size={16} />
-                  กำหนดกำไรภาพรวม
+                  <PercentIcon size={16} /> กำหนดกำไรภาพรวม
                 </h3>
                 <Input
                   label='ส่วนลดจากราคาปลีก (%)'
@@ -611,7 +588,7 @@ const ContractPOSModal = ({
                       <Input
                         label='ราคาเสนอใหม่'
                         size='sm'
-                        type='text'
+                        type='number'
                         value={item.agreedPrice.toFixed(2)}
                         variant='bordered'
                         onValueChange={(val) =>
@@ -621,9 +598,7 @@ const ContractPOSModal = ({
                       <div className='w-32 shrink-0'>
                         <Input
                           label={
-                            sourceMode === CONTRACT_SOURCE.STOREFRONT
-                              ? 'โอนเพิ่ม'
-                              : 'จำนวน'
+                            sourceMode === 'STOREFRONT' ? 'โอนเพิ่ม' : 'จำนวน'
                           }
                           max={item.maxStock}
                           min={0}
@@ -635,13 +610,12 @@ const ContractPOSModal = ({
                             const qty = Number(val) || 0
                             if (qty > item.maxStock) {
                               toast.warn(
-                                `สต็อกคลังมีจำกัด โอนได้สูงสุด ${item.maxStock} ชิ้น`,
+                                `สต็อกคลังจำกัดที่ ${item.maxStock} ชิ้น`,
                               )
-                              const safeQty = item.maxStock
                               setSelectedItems((prev) =>
                                 prev.map((i) =>
                                   i.cartKey === item.cartKey
-                                    ? { ...i, quantity: safeQty }
+                                    ? { ...i, quantity: item.maxStock }
                                     : i,
                                 ),
                               )
@@ -664,20 +638,39 @@ const ContractPOSModal = ({
 
               <div className='bg-primary/5 border-primary/10 mt-auto flex flex-col gap-2 rounded-lg border p-4'>
                 <div className='text-default-600 flex items-center justify-between text-sm'>
-                  <span>มูลค่าตลาดรวม:</span>
+                  <span>
+                    {totals.isAdjustmentOnly
+                      ? 'มูลค่าตลาดของสต็อกเดิม:'
+                      : 'มูลค่าตลาดรวม:'}
+                  </span>
                   <span className='text-default-400 line-through'>
                     {formatCurrency(totals.retailTotal)}
                   </span>
                 </div>
                 <Divider className='my-1 opacity-50' />
                 <div className='flex items-center justify-between text-lg font-bold'>
-                  <span>ยอดสุทธิสัญญา:</span>
+                  <span>
+                    {totals.isAdjustmentOnly
+                      ? 'มูลค่าต้นทุนใหม่:'
+                      : 'ยอดสุทธิสัญญา:'}
+                  </span>
                   <span className='text-primary'>
                     {formatCurrency(totals.agreedTotal)}
                   </span>
                 </div>
                 <div className='text-success flex items-center justify-between text-sm font-bold'>
-                  <span>ประมาณการกำไร (Margin):</span>
+                  <div className='flex flex-col'>
+                    <span>
+                      {totals.isAdjustmentOnly
+                        ? 'ส่วนต่างกำไรที่จะได้รับ:'
+                        : 'ประมาณการกำไร (Margin):'}
+                    </span>
+                    {totals.isAdjustmentOnly && (
+                      <span className='text-default-400 text-[10px] font-normal'>
+                        * คำนวณจากสินค้าคงเหลือในร้าน
+                      </span>
+                    )}
+                  </div>
                   <span>{formatCurrency(totals.potentialProfit)}</span>
                 </div>
               </div>

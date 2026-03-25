@@ -43,25 +43,30 @@ const ContractDetailModal = ({ isOpen, onClose, contractId }: Props) => {
 
   const totals = useMemo(() => {
     if (!contract?.items) {
-      return { retailTotal: 0, agreedTotal: 0, potentialProfit: 0 }
+      return null
     }
 
-    const retailTotal = (contract.items as ContractItemPayload[]).reduce(
-      (acc: number, item: ContractItemPayload) => {
-        const basePrice = Number(
-          item.variant?.price ?? item.product?.price ?? 0,
-        )
-        return acc + basePrice * (item.quantity || 1)
-      },
-      0,
-    )
+    const items = contract.items as ContractItemPayload[]
+    const hasTransfer = items.some((item) => item.quantity > 0)
+
+    if (!hasTransfer) {
+      return { isAdjustmentOnly: true }
+    }
+
+    const retailTotal = items.reduce((acc, item) => {
+      return (
+        acc +
+        Number(item.variant?.price ?? item.product?.price ?? 0) * item.quantity
+      )
+    }, 0)
 
     const agreedTotal = Number(contract.totalAmount || 0)
 
     return {
-      retailTotal: Number(retailTotal.toFixed(2)),
-      agreedTotal: Number(agreedTotal.toFixed(2)),
-      potentialProfit: Number((retailTotal - agreedTotal).toFixed(2)),
+      retailTotal,
+      agreedTotal,
+      potentialProfit: retailTotal - agreedTotal,
+      isAdjustmentOnly: false,
     }
   }, [contract])
 
@@ -216,23 +221,40 @@ const ContractDetailModal = ({ isOpen, onClose, contractId }: Props) => {
               </div>
 
               <div className='bg-primary/5 border-primary/10 mt-auto flex flex-col gap-2 rounded-lg border p-4'>
-                <div className='text-default-600 flex items-center justify-between text-sm'>
-                  <span>มูลค่าตลาดรวม:</span>
-                  <span className='text-default-400 line-through'>
-                    {formatCurrency(totals.retailTotal)}
-                  </span>
-                </div>
-                <div className='text-success flex items-center justify-between text-sm font-bold'>
-                  <span>ประมาณการกำไร (Margin):</span>
-                  <span>{formatCurrency(totals.potentialProfit)}</span>
-                </div>
-                <Divider className='my-1 opacity-50' />
-                <div className='flex items-center justify-between text-lg font-bold'>
-                  <span>ยอดสุทธิสัญญา:</span>
-                  <span className='text-primary text-xl font-black'>
-                    {formatCurrency(totals.agreedTotal)}
-                  </span>
-                </div>
+                {totals?.isAdjustmentOnly ? (
+                  <div className='flex flex-col items-center gap-1 py-1'>
+                    <div className='text-primary flex items-center gap-2 font-bold uppercase'>
+                      <TagIcon size={16} />
+                      <span>รายการปรับปรุงราคาขาย</span>
+                    </div>
+                    <p className='text-default-500 text-[10px]'>
+                      สัญญานี้มีผลเพื่อปรับปรุงราคาต้นทุนสินค้าเดิมในร้าน
+                      ไม่มีการโอนสต็อกเพิ่ม
+                    </p>
+                  </div>
+                ) : (
+                  <>
+                    <div className='text-default-600 flex items-center justify-between text-sm'>
+                      <span>มูลค่าปลีกรวม (รายการโอน):</span>
+                      <span className='text-default-400 line-through'>
+                        {formatCurrency(totals?.retailTotal || 0)}
+                      </span>
+                    </div>
+                    <div className='text-success flex items-center justify-between text-sm font-bold'>
+                      <span>ส่วนต่างกำไร (Margin):</span>
+                      <span>
+                        {formatCurrency(totals?.potentialProfit || 0)}
+                      </span>
+                    </div>
+                    <Divider className='my-1 opacity-50' />
+                    <div className='flex items-center justify-between text-lg font-bold'>
+                      <span>ยอดสุทธิสัญญา:</span>
+                      <span className='text-primary text-xl font-black'>
+                        {formatCurrency(totals?.agreedTotal || 0)}
+                      </span>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>

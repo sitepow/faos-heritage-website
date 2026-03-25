@@ -18,7 +18,13 @@ import {
   useDisclosure,
 } from '@heroui/react'
 import { ContractStatus } from '@prisma/client'
-import { FileSignatureIcon, EllipsisVerticalIcon, EyeIcon } from 'lucide-react'
+import {
+  FileSignatureIcon,
+  EllipsisVerticalIcon,
+  EyeIcon,
+  TagIcon,
+  BanIcon,
+} from 'lucide-react'
 import { useState } from 'react'
 
 import type { Selection } from '@heroui/react'
@@ -26,7 +32,10 @@ import type { Selection } from '@heroui/react'
 import { ContractApproveModal } from './ContractApproveModal'
 import { ContractDetailModal } from './ContractDetailModal'
 
+import { ConfirmDeleteModal } from '@/app/(dashboard)/_components/ConfirmDeleteModal'
 import { useContractsAdmin } from '@/features/contract/hook'
+import { useContractMutation } from '@/features/contract/mutation'
+import { useAuth } from '@/hooks/useAuth'
 import { formatCurrency } from '@/utils'
 import { formatDate } from '@/utils/date'
 
@@ -36,7 +45,9 @@ interface Props {
 }
 
 const ContractTable = ({ selectedKeys, onSelectionChange }: Props) => {
+  const { isAdmin } = useAuth()
   const { data: contracts, isLoading } = useContractsAdmin()
+  const { updateStatus, isUpdatingStatus } = useContractMutation()
 
   const {
     isOpen: isDetailOpen,
@@ -50,6 +61,12 @@ const ContractTable = ({ selectedKeys, onSelectionChange }: Props) => {
     onOpenChange: onApproveOpenChange,
   } = useDisclosure()
 
+  const {
+    isOpen: isTerminateOpen,
+    onOpen: onTerminateOpen,
+    onOpenChange: onTerminateOpenChange,
+  } = useDisclosure()
+
   const [selectedId, setSelectedId] = useState<string | null>(null)
 
   const handleViewDetails = (id: string) => {
@@ -60,6 +77,25 @@ const ContractTable = ({ selectedKeys, onSelectionChange }: Props) => {
   const handleApproveClick = (id: string) => {
     setSelectedId(id)
     onApproveOpen()
+  }
+
+  const handleTerminateClick = (id: string) => {
+    setSelectedId(id)
+    onTerminateOpen()
+  }
+
+  const handleConfirmTerminate = async () => {
+    if (!selectedId) {
+      return
+    }
+
+    await updateStatus({
+      id: selectedId,
+      status: ContractStatus.TERMINATED,
+    })
+
+    onTerminateOpenChange()
+    setSelectedId(null)
   }
 
   const statusColorMap: Record<
@@ -110,94 +146,137 @@ const ContractTable = ({ selectedKeys, onSelectionChange }: Props) => {
           isLoading={isLoading}
           loadingContent={<Spinner label='กำลังโหลดข้อมูลสัญญา...' />}
         >
-          {(contracts || [])?.map((contract) => (
-            <TableRow key={contract.id}>
-              <TableCell>
-                <span className='text-default-500 font-mono text-xs font-bold'>
-                  #{contract.id.slice(-8).toUpperCase()}
-                </span>
-              </TableCell>
-              <TableCell className='max-w-48 min-w-48 font-bold'>
-                {contract.storefront?.name || 'ไม่ระบุชื่อร้าน'}
-              </TableCell>
-              <TableCell>
-                <span className='text-primary font-semibold'>
-                  {formatCurrency(contract.totalAmount)}
-                </span>
-              </TableCell>
-              <TableCell className='max-w-48 min-w-48'>
-                <div className='flex flex-col gap-1 text-xs'>
-                  <div className='flex items-center gap-1'>
-                    <span className='text-default-400'>เริ่ม:</span>
-                    <span>
-                      {formatDate(contract.startDate, 'th', 'date') || '-'}
-                    </span>
-                  </div>
-                  <div className='flex items-center gap-1'>
-                    <span className='text-default-400'>สิ้นสุด:</span>
-                    <span>
-                      {contract.endDate
-                        ? formatDate(contract.endDate, 'th', 'date')
-                        : '-'}
-                    </span>
-                  </div>
-                </div>
-              </TableCell>
-              <TableCell>
-                <Chip
-                  color={statusColorMap[contract.status as ContractStatus]}
-                  size='sm'
-                  variant='dot'
-                >
-                  {statusLabelMap[contract.status as ContractStatus]}
-                </Chip>
-              </TableCell>
-              <TableCell>
-                <div className='flex items-center justify-center gap-2'>
-                  <Dropdown placement='bottom-end'>
-                    <DropdownTrigger>
-                      <Button isIconOnly size='sm' variant='light'>
-                        <EllipsisVerticalIcon
-                          className='text-default-500'
-                          size={20}
-                        />
-                      </Button>
-                    </DropdownTrigger>
-                    <DropdownMenu aria-label='จัดการสัญญา'>
-                      <DropdownItem
-                        key='view'
-                        startContent={<EyeIcon size={16} />}
-                        onPress={() => {
-                          return handleViewDetails(contract.id)
-                        }}
-                      >
-                        ดูรายละเอียด
-                      </DropdownItem>
+          {(contracts || [])?.map((contract) => {
+            const isDeletable =
+              isAdmin &&
+              (
+                [
+                  ContractStatus.DRAFT,
+                  ContractStatus.PENDING,
+                ] as ContractStatus[]
+              ).includes(contract.status as ContractStatus)
 
-                      {contract.status === ContractStatus.DRAFT ? (
+            return (
+              <TableRow key={contract.id}>
+                <TableCell>
+                  <span className='text-default-500 font-mono text-xs font-bold'>
+                    #{contract.id.slice(-8).toUpperCase()}
+                  </span>
+                </TableCell>
+                <TableCell className='max-w-48 min-w-48 font-bold'>
+                  {contract.storefront?.name || 'ไม่ระบุชื่อร้าน'}
+                </TableCell>
+                <TableCell>
+                  {contract?.isAdjustment ? (
+                    <Chip
+                      className='bg-primary-50 text-primary h-6 border-none font-bold'
+                      color='primary'
+                      startContent={<TagIcon className='ml-1' size={12} />}
+                      variant='flat'
+                    >
+                      ปรับปรุงราคา
+                    </Chip>
+                  ) : (
+                    <span className='text-primary font-semibold'>
+                      {formatCurrency(contract.totalAmount)}
+                    </span>
+                  )}
+                </TableCell>
+                <TableCell className='max-w-48 min-w-48'>
+                  <div className='flex flex-col gap-1 text-xs'>
+                    <div className='flex items-center gap-1'>
+                      <span className='text-default-400'>เริ่ม:</span>
+                      <span>
+                        {formatDate(contract.startDate, 'th', 'date') || '-'}
+                      </span>
+                    </div>
+                    <div className='flex items-center gap-1'>
+                      <span className='text-default-400'>สิ้นสุด:</span>
+                      <span>
+                        {contract.endDate
+                          ? formatDate(contract.endDate, 'th', 'date')
+                          : '-'}
+                      </span>
+                    </div>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <Chip
+                    color={statusColorMap[contract.status as ContractStatus]}
+                    size='sm'
+                    variant='dot'
+                  >
+                    {statusLabelMap[contract.status as ContractStatus]}
+                  </Chip>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center gap-2'>
+                    <Dropdown placement='bottom-end'>
+                      <DropdownTrigger>
+                        <Button isIconOnly size='sm' variant='light'>
+                          <EllipsisVerticalIcon
+                            className='text-default-500'
+                            size={20}
+                          />
+                        </Button>
+                      </DropdownTrigger>
+                      <DropdownMenu aria-label='จัดการสัญญา'>
                         <DropdownItem
-                          key='approve'
-                          description='ตรวจสอบเงื่อนไขและลงนาม'
-                          startContent={<FileSignatureIcon size={16} />}
+                          key='view'
+                          startContent={<EyeIcon size={16} />}
                           onPress={() => {
-                            return handleApproveClick(contract.id)
+                            return handleViewDetails(contract.id)
                           }}
                         >
-                          ลงนามสัญญา
+                          ดูรายละเอียด
                         </DropdownItem>
-                      ) : (
-                        <DropdownItem
-                          key='empty'
-                          aria-hidden='true'
-                          className='hidden'
-                        />
-                      )}
-                    </DropdownMenu>
-                  </Dropdown>
-                </div>
-              </TableCell>
-            </TableRow>
-          ))}
+
+                        {contract.status === ContractStatus.DRAFT ? (
+                          <DropdownItem
+                            key='approve'
+                            description='ตรวจสอบเงื่อนไขและลงนาม'
+                            startContent={<FileSignatureIcon size={16} />}
+                            onPress={() => {
+                              return handleApproveClick(contract.id)
+                            }}
+                          >
+                            ลงนามสัญญา
+                          </DropdownItem>
+                        ) : (
+                          <DropdownItem
+                            key='empty-approve'
+                            aria-hidden='true'
+                            className='hidden'
+                          />
+                        )}
+
+                        {isDeletable ? (
+                          <DropdownItem
+                            key='terminate'
+                            className='text-danger'
+                            color='danger'
+                            description='เปลี่ยนสถานะเป็นยกเลิกสัญญา'
+                            startContent={<BanIcon size={16} />}
+                            onPress={() => {
+                              return handleTerminateClick(contract.id)
+                            }}
+                          >
+                            ยกเลิกสัญญา
+                          </DropdownItem>
+                        ) : (
+                          <DropdownItem
+                            key='empty-terminate'
+                            aria-hidden='true'
+                            className='hidden'
+                          />
+                        )}
+                      </DropdownMenu>
+                    </Dropdown>
+                  </div>
+                </TableCell>
+              </TableRow>
+            )
+          })}
         </TableBody>
       </Table>
 
@@ -217,6 +296,17 @@ const ContractTable = ({ selectedKeys, onSelectionChange }: Props) => {
           setSelectedId(null)
           onApproveOpenChange()
         }}
+      />
+
+      <ConfirmDeleteModal
+        cancelText='กลับ'
+        confirmText='ยืนยันยกเลิก'
+        description='คุณต้องการยกเลิกสัญญานี้ใช่หรือไม่? ระบบจะเปลี่ยนสถานะเป็น "ยกเลิกแล้ว" และสัญญาจะไม่มีผลบังคับใช้'
+        isOpen={isTerminateOpen}
+        isPending={isUpdatingStatus}
+        title='ยืนยันการยกเลิกสัญญา'
+        onConfirm={handleConfirmTerminate}
+        onOpenChange={onTerminateOpenChange}
       />
     </>
   )
