@@ -3,6 +3,8 @@ const storefrontQueryKeys = {
   lists: () => [...storefrontQueryKeys.all, 'list'] as const,
   active: () => [...storefrontQueryKeys.all, 'active'] as const,
   detail: (id: string) => [...storefrontQueryKeys.all, 'detail', id] as const,
+  inventory: (id: string) =>
+    [...storefrontQueryKeys.all, 'inventory', id] as const,
 }
 
 const storefrontMainKeys = {

@@ -17,10 +17,6 @@ const main = async () => {
   const now = new Date()
   const expiryTime = new Date(now.getTime() - ORDER_EXPIRY_MS)
 
-  console.log(
-    `[${now.toLocaleString()}] Checking orders created before ${expiryTime.toLocaleString()}...`,
-  )
-
   const expiredOrders = await prisma.order.findMany({
     where: {
       status: OrderStatus.PENDING,
@@ -29,15 +25,13 @@ const main = async () => {
     },
     include: {
       items: true,
+      storefront: true,
     },
   })
 
   if (expiredOrders.length === 0) {
-    console.log('No expired orders found.')
     return
   }
-
-  console.log(`Found ${expiredOrders.length} expired orders. Processing...`)
 
   for (const order of expiredOrders) {
     try {
@@ -47,21 +41,34 @@ const main = async () => {
           data: {
             status: OrderStatus.CANCELLED,
             cancelledAt: new Date(),
-            cancelReason: `Auto-cancelled: Unpaid for more than 20 minutes`,
+            cancelReason: `ยกเลิกอัตโนมัติ: ไม่มีการชำระเงินภายใน 20 นาที`,
           },
         })
 
         for (const item of order.items) {
-          if (item.variantId) {
-            await tx.productVariant.update({
-              where: { id: item.variantId },
+          if (order.storefrontId) {
+            await tx.storefrontInventory.update({
+              where: {
+                storefrontId_productId_variantId: {
+                  storefrontId: order.storefrontId,
+                  productId: item?.productId!,
+                  variantId: item?.variantId!,
+                },
+              },
               data: { stockQuantity: { increment: item.quantity } },
             })
-          } else if (item.productId) {
-            await tx.product.update({
-              where: { id: item.productId },
-              data: { stockQuantity: { increment: item.quantity } },
-            })
+          } else {
+            if (item.variantId) {
+              await tx.productVariant.update({
+                where: { id: item.variantId },
+                data: { stockQuantity: { increment: item.quantity } },
+              })
+            } else if (item.productId) {
+              await tx.product.update({
+                where: { id: item.productId },
+                data: { stockQuantity: { increment: item.quantity } },
+              })
+            }
           }
 
           await tx.stockHistory.create({
@@ -70,23 +77,22 @@ const main = async () => {
               variantId: item.variantId,
               quantity: item.quantity,
               type: StockMovementType.RETURN,
-              reference: `Auto-refund stock from cancelled order: ${order.id}`,
+              toStorefrontId: order.storefrontId || null,
+              reference: order.id,
+              note: order.storefrontId
+                ? `คืนสต็อกอัตโนมัติเข้าสาขา [${order.storefront?.name}] จากออเดอร์ #${order.id.slice(-8).toUpperCase()}`
+                : `คืนสต็อกอัตโนมัติเข้าคลังหลัก จากออเดอร์ #${order.id.slice(-8).toUpperCase()}`,
             },
           })
         }
       })
 
-      console.log(`Order ${order.id}: Cancelled and stock restored.`)
-
       const emailResult = await sendOrderEmail(order.id)
-
-      if (emailResult.success) {
-        console.log(`Order ${order.id}: Cancellation email sent.`)
-      } else {
-        console.warn(`Order ${order.id}: Failed to send email.`)
+      if (!emailResult.success) {
+        console.warn(`ออเดอร์ ${order.id}: ส่งอีเมลแจ้งเตือนไม่สำเร็จ`)
       }
     } catch (err) {
-      console.error(`Order ${order.id}: Failed to process.`, err)
+      console.error(`ออเดอร์ ${order.id}: เกิดข้อผิดพลาดในการประมวลผล`, err)
     }
   }
 }

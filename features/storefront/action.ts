@@ -18,6 +18,32 @@ export type GetStorefrontStatResult = Awaited<
   ReturnType<typeof getStorefrontStatAdmin>
 >
 
+const getStorefrontInventory = async (storefrontId: string) => {
+  if (!storefrontId) {
+    return []
+  }
+
+  const inventory = await prisma.storefrontInventory.findMany({
+    where: { storefrontId },
+    include: {
+      product: {
+        select: {
+          name: true,
+          images: true,
+        },
+      },
+      variant: {
+        select: {
+          name: true,
+          price: true,
+        },
+      },
+    },
+  })
+
+  return decimalToNumber(inventory)
+}
+
 const getMainStorefronts = async () => {
   const storefronts = await prisma.storefront.findMany({
     where: {
@@ -155,6 +181,7 @@ const getStorefrontStatAdmin = async () => {
 }
 
 export {
+  getStorefrontInventory,
   getMainStorefronts,
   createStorefront,
   updateStorefront,

@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import {
   getActiveStorefronts,
   getMainStorefronts,
+  getStorefrontInventory,
   getStorefronts,
 } from './action'
 import { storefrontMainKeys, storefrontQueryKeys } from './query-key'
@@ -13,6 +14,17 @@ const useMainStorefronts = () => {
     queryFn: () => {
       return getMainStorefronts()
     },
+  })
+}
+
+const useStorefrontInventory = (storefrontId: string | null) => {
+  return useQuery({
+    queryKey: storefrontQueryKeys.inventory(storefrontId!),
+    queryFn: () => {
+      if (!storefrontId) return []
+      return getStorefrontInventory(storefrontId)
+    },
+    enabled: !!storefrontId,
   })
 }
 
@@ -30,4 +42,9 @@ const useActiveStorefronts = () => {
   })
 }
 
-export { useMainStorefronts, useStorefronts, useActiveStorefronts }
+export {
+  useStorefrontInventory,
+  useMainStorefronts,
+  useStorefronts,
+  useActiveStorefronts,
+}

@@ -13,7 +13,6 @@ import {
   Divider,
   Spinner,
   Input,
-  Image,
 } from '@heroui/react'
 import { DeliveryType } from '@prisma/client'
 import {
@@ -27,14 +26,17 @@ import {
   SearchIcon,
   PercentIcon,
   ReceiptIcon,
+  FileWarningIcon,
 } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { toast } from 'react-toastify'
 
 import type { CreateOrderInput } from '@/features/order/action'
 
+import { ProductImage } from '@/components/ui/Product/ProductImage'
 import { IMAGE_FALLBACK } from '@/constants'
 import { useAffiliates } from '@/features/affiliate/hook'
+import { useActiveContract } from '@/features/contract/hook'
 import { useAdminOrderMutation } from '@/features/order/mutation'
 import { useActiveStorefronts } from '@/features/storefront/hook'
 import { useStorefrontInventories } from '@/features/storefront-inventory/hook'
@@ -81,6 +83,9 @@ const OrderPOSModal = ({
     useActiveStorefronts()
   const { createAdminOrder, isCreating } = useAdminOrderMutation()
 
+  const { data: activeContract, isLoading: isLoadingContract } =
+    useActiveContract(selectedStorefrontId)
+
   const { data: storeInventory, isLoading: isLoadingInventory } =
     useStorefrontInventories({
       storefrontId: selectedStorefrontId,
@@ -93,7 +98,7 @@ const OrderPOSModal = ({
   }, [storefronts, selectedStorefrontId])
 
   const productList = useMemo<POSProductItem[]>(() => {
-    if (!selectedStorefrontId || !storeInventory) {
+    if (!selectedStorefrontId || !storeInventory || !activeContract) {
       return []
     }
 
@@ -126,7 +131,7 @@ const OrderPOSModal = ({
         image: productImage,
       }
     })
-  }, [selectedStorefrontId, storeInventory, searchQuery])
+  }, [selectedStorefrontId, storeInventory, searchQuery, activeContract])
 
   const totals = useMemo(() => {
     const subtotal = cartItems.reduce((acc, item) => {
@@ -213,6 +218,13 @@ const OrderPOSModal = ({
       return
     }
 
+    if (!activeContract) {
+      toast.error(
+        'ไม่สามารถทำรายการได้เนื่องจากสัญญายังไม่เปิดใช้งานหรือหมดอายุ',
+      )
+      return
+    }
+
     const payload: CreateOrderInput = {
       items: cartItems.map((item: CartItem) => {
         return {
@@ -262,7 +274,7 @@ const OrderPOSModal = ({
       <ModalContent>
         <ModalHeader className='border-default-100 flex flex-wrap items-center justify-between gap-2 border-b px-6 py-4'>
           <span className='font-bold'>สร้างรายการสั่งซื้อใหม่ (POS)</span>
-          {selectedStorefrontId && (
+          {selectedStorefrontId && activeContract && (
             <div className='w-72'>
               <Input
                 isClearable
@@ -296,9 +308,25 @@ const OrderPOSModal = ({
                     </p>
                   </div>
                 </div>
-              ) : isLoadingInventory ? (
+              ) : isLoadingContract || isLoadingInventory ? (
                 <div className='flex h-full items-center justify-center py-20'>
-                  <Spinner label='กำลังโหลดสินค้าในสาขา...' />
+                  <Spinner label='กำลังตรวจสอบสถานะสัญญาและข้อมูลสต็อก...' />
+                </div>
+              ) : !activeContract ? (
+                <div className='flex h-full flex-col items-center justify-center gap-4 py-20 text-center'>
+                  <div className='bg-danger/10 text-danger rounded-full p-6'>
+                    <FileWarningIcon size={48} />
+                  </div>
+                  <div>
+                    <h4 className='text-danger text-lg font-bold'>
+                      ไม่พบสัญญาที่ใช้งานได้
+                    </h4>
+                    <p className='text-default-500 max-w-md'>
+                      สาขานี้ยังไม่มีสัญญาที่ผ่านการอนุมัติ
+                      หรือสัญญาสิ้นสุดระยะเวลาแล้ว
+                      กรุณาตรวจสอบสถานะสัญญาในระบบก่อนทำรายการ
+                    </p>
+                  </div>
                 </div>
               ) : (
                 <div className='grid grid-cols-1 gap-3 sm:grid-cols-2'>
@@ -310,11 +338,7 @@ const OrderPOSModal = ({
                       >
                         <div className='flex gap-3'>
                           <div className='bg-default-100 flex size-16 shrink-0 items-center justify-center overflow-hidden rounded-md'>
-                            <Image
-                              alt={item.displayName}
-                              className='size-full object-cover'
-                              src={item.image}
-                            />
+                            <ProductImage fill image={item.image} />
                           </div>
                           <div className='flex-1 overflow-hidden'>
                             <p className='text-sm font-bold'>
@@ -406,11 +430,7 @@ const OrderPOSModal = ({
                     >
                       <div className='flex items-start gap-3'>
                         <div className='bg-default-100 size-12 shrink-0 overflow-hidden rounded-md'>
-                          <Image
-                            alt={item.name}
-                            className='size-full object-cover'
-                            src={item.image}
-                          />
+                          <ProductImage fill image={item.image} />
                         </div>
                         <div className='flex flex-1 flex-col overflow-hidden'>
                           <div className='flex items-start justify-between gap-2'>
@@ -596,7 +616,9 @@ const OrderPOSModal = ({
           <Button
             className='text-secondary flex-1 font-bold sm:px-8'
             color='primary'
-            isDisabled={cartItems.length === 0 || !selectedStorefrontId}
+            isDisabled={
+              cartItems.length === 0 || !selectedStorefrontId || !activeContract
+            }
             isLoading={isCreating}
             size='lg'
             onPress={() => {

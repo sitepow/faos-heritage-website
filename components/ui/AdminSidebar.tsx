@@ -20,6 +20,7 @@ import {
   MenuIcon,
   StoreIcon,
   WarehouseIcon,
+  FileSignatureIcon,
 } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -67,6 +68,11 @@ const AdminSidebar = () => {
             label: 'หน้าหลัก',
             icon: LayoutDashboardIcon,
             adminOnly: true,
+          },
+          {
+            href: '/dashboard/contracts',
+            label: 'สัญญาคู่ค้า',
+            icon: FileSignatureIcon,
           },
           { href: '/dashboard/orders', label: 'ออเดอร์', icon: PackageIcon },
           {
@@ -150,7 +156,10 @@ const AdminSidebar = () => {
           }
 
           if (isPOS && !isStockManager) {
-            return item.href === '/dashboard/orders'
+            return (
+              item.href === '/dashboard/orders' ||
+              item.href === '/dashboard/contracts'
+            )
           }
 
           return true
@@ -234,7 +243,9 @@ const AdminSidebar = () => {
       </ScrollShadow>
 
       <div className='bg-default-50/50 flex flex-col gap-2 p-4'>
-        <ThemeSwitch />
+        <div className='mx-auto'>
+          <ThemeSwitch />
+        </div>
         <Listbox aria-label='Account Settings' variant='flat'>
           <ListboxItem
             key='home'
@@ -270,7 +281,7 @@ const AdminSidebar = () => {
         </Button>
       </div>
 
-      <aside className='border-default-100 bg-background sticky top-0 hidden h-screen w-64 border-r lg:flex lg:flex-col'>
+      <aside className='border-default-100 bg-background sticky top-0 hidden h-screen w-64 shrink-0 border-r lg:flex lg:flex-col'>
         {SidebarContent}
       </aside>
 

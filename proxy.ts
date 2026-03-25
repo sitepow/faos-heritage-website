@@ -66,7 +66,10 @@ const middleware = async (request: NextRequest) => {
     const isPOS = roles.includes(Role.POS)
 
     if (isPOS && !isAdmin && !isStockManager) {
-      const isAccessingAllowed = pathname.startsWith('/dashboard/orders')
+      const allowedPaths = ['/dashboard/orders', '/dashboard/contracts']
+      const isAccessingAllowed = allowedPaths.some((path) => {
+        return pathname.startsWith(path)
+      })
 
       if (!isAccessingAllowed) {
         return NextResponse.redirect(new URL('/dashboard/orders', request.url))

@@ -32,8 +32,8 @@ import type { GetPendingPayoutsResult } from '@/features/affiliate-payout/action
 
 import { IMAGE_FALLBACK } from '@/constants'
 import { useAffiliateStore } from '@/features/affiliate/store'
-import { calculateCommissionByStatus } from '@/features/affiliate-payout/util'
 import { PayoutForm } from '@/features/affiliate-payout/ui/PayoutForm'
+import { calculateCommissionByStatus } from '@/features/affiliate-payout/util'
 import { useTranslateStatus } from '@/hooks/useTranslateStatus'
 import { formatCurrency } from '@/utils'
 
