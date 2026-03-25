@@ -8,7 +8,6 @@ import { useState, useMemo, useEffect } from 'react'
 import { ProductRating } from './ProductRating'
 import { ProductShare } from './ProductShare'
 
-import { CategoryChip } from '@/components/ui/CategoryChip'
 import { CommentCount } from '@/components/ui/CommentCount'
 import { MarkdownRenderer } from '@/components/ui/Markdown/MarkdownRenderer'
 import { VariantTable } from '@/components/ui/Product/VariantTable'
@@ -101,14 +100,11 @@ const ProductPurchasePanel = () => {
     <Card className='border-default-100 border' radius='sm' shadow='none'>
       <CardBody className='flex flex-col gap-4'>
         <header>
-          <div className='flex flex-col gap-2'>
-            <CategoryChip categoryName={product.category?.name} />
-            <ProductRating
-              reviews={product.reviews}
-              size={16}
-              totalReviews={product._count?.reviews || 0}
-            />
-          </div>
+          <ProductRating
+            reviews={product.reviews}
+            size={16}
+            totalReviews={product._count?.reviews || 0}
+          />
 
           <h1 className='mt-5 text-3xl leading-tight font-bold tracking-tighter sm:text-4xl lg:text-5xl'>
             {product.name}

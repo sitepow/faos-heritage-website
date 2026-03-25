@@ -25,12 +25,12 @@ const PriceDisplay = ({
       className={cn('flex flex-col items-end gap-0.5', className)}
       {...props}
     >
-      <span className={cn('text-danger text-lg')}>
+      <span className={cn('text-danger text-2xl')}>
         {formatCurrency(price, currencyOptions)}
       </span>
 
       {hasDiscount && originalPrice > 0 && (
-        <span className='text-default-400 text-lg font-normal line-through'>
+        <span className='text-default-400 text-2xl font-normal line-through'>
           {formatCurrency(originalPrice, currencyOptions)}
         </span>
       )}

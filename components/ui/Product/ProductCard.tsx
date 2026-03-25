@@ -1,8 +1,7 @@
 'use client'
 
-import { Card, CardBody, CardFooter, cn, Skeleton, Button } from '@heroui/react'
+import { Card, CardBody, cn, Skeleton } from '@heroui/react'
 import Link from 'next/link'
-import { useTranslations } from 'next-intl'
 import { memo, useMemo } from 'react'
 
 import type { GetProductsInfiniteResult } from '@/features/product/types'
@@ -24,7 +23,6 @@ interface Props {
 }
 
 const ProductCard = memo(({ className, product }: Props) => {
-  const tActions = useTranslations('actions')
   const { primarySrc } = resolveProductImages({ images: product?.images })
 
   const productHref = useMemo(
@@ -33,41 +31,39 @@ const ProductCard = memo(({ className, product }: Props) => {
   )
 
   return (
-    <Card
-      as='article'
-      className={cn(
-        'border-default-200 group relative w-full overflow-hidden border',
-        className,
-      )}
-      radius='lg'
-      shadow='none'
-    >
-      <CardBody className='flex flex-col gap-0 p-0'>
-        <div className='relative aspect-square w-full p-4'>
-          <ProductImage className='size-full border-none' image={primarySrc} />
-          <Link
-            aria-label={product?.name || 'View product'}
-            className='absolute inset-0 z-10'
-            href={productHref}
-          />
-        </div>
+    <div className={cn('group flex flex-col gap-2', className)}>
+      <div className='bg-default-100 relative aspect-square w-full overflow-hidden rounded-2xl'>
+        <ProductImage
+          fill
+          className='size-full object-cover transition-transform duration-500 group-hover:scale-105'
+          image={primarySrc}
+        />
+        <Link
+          aria-label={product?.name || 'View product'}
+          className='absolute inset-0 z-10'
+          href={productHref}
+        />
+      </div>
 
-        <div className='flex flex-col gap-3 px-4 pb-4'>
-          <h3 className='text-foreground line-clamp-2 min-h-[3rem] text-lg font-bold'>
-            {product?.name}
-          </h3>
+      <Card
+        as='article'
+        className='border-default-100 border bg-transparent'
+        shadow='none'
+      >
+        <CardBody className='flex flex-col gap-0 p-4'>
+          <div className='flex flex-col gap-4'>
+            <h3 className='text-foreground min-h-[3rem] text-2xl leading-tight font-semibold'>
+              {product?.name}
+            </h3>
 
-          <VariantTable variants={product?.variants || []} />
-        </div>
-      </CardBody>
-
-      <CardFooter className='justify-end'>
-        <Link aria-label={product?.name || 'View product'} href={productHref}>
-          <Button variant='bordered'> {tActions('more')}</Button>
-        </Link>
-      </CardFooter>
-    </Card>
+            <VariantTable variants={product?.variants || []} />
+          </div>
+        </CardBody>
+      </Card>
+    </div>
   )
 })
+
+ProductCard.displayName = 'ProductCard'
 
 export { ProductCardSkeleton, ProductCard }

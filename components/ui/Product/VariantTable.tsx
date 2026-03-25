@@ -28,7 +28,7 @@ const VariantTable = ({ variants, className }: Props) => {
         return (
           <div
             key={`${variant.name}-${idx}`}
-            className='border-default-200 flex items-center justify-between rounded-xl border p-3'
+            className='border-default-100 flex items-center justify-between border-b p-3 last:border-b-0'
           >
             <span className='text-foreground text-sm font-bold'>
               {variant.name}
@@ -36,7 +36,7 @@ const VariantTable = ({ variants, className }: Props) => {
 
             <div className='flex items-center gap-2'>
               {hasDiscount && (
-                <span className='rounded-full bg-red-600 px-1.5 py-0.5 text-[10px] font-bold text-white'>
+                <span className='animate-bounce rounded-full bg-red-600 px-1.5 py-0.5 text-xl font-bold text-white'>
                   -{priceInfo.discountPercentage}%
                 </span>
               )}

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client'
 
 import { useCallback, useMemo, useRef, useState } from 'react'
@@ -9,7 +10,6 @@ import {
   type CarouselHandle,
 } from '@/components/ui/Carousel/Carousel'
 import { DiscountBadge } from '@/components/ui/Product/DiscountBadge'
-import { ProductImage } from '@/components/ui/Product/ProductImage'
 import { IMAGE_FALLBACK } from '@/constants'
 import { useProductPrice } from '@/features/product/hook'
 import { cn } from '@/utils'
@@ -47,10 +47,10 @@ const ProductImagePreview = ({ product, images = [] }: Props) => {
           onSlideChange={setActiveIndex}
         >
           {displayImages.map((image) => (
-            <ProductImage
+            <img
               key={image}
-              className='aspect-square w-full object-cover'
-              image={image}
+              className='border-default-100 aspect-square w-full rounded-xl border object-cover'
+              src={image}
             />
           ))}
         </Carousel>
@@ -61,15 +61,15 @@ const ProductImagePreview = ({ product, images = [] }: Props) => {
           const isActive = index === activeIndex
 
           return (
-            <ProductImage
+            <img
               key={image}
               className={cn(
-                'size-20 cursor-pointer border-2 transition-all',
+                'size-20 cursor-pointer border-2 object-cover transition-all',
                 isActive
                   ? 'border-primary'
                   : 'border-default-300 opacity-60 hover:opacity-100',
               )}
-              image={image}
+              src={image}
               onClick={() => handleSelectImage(index)}
             />
           )
