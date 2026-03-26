@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/no-array-index-key */
 'use client'
 
@@ -8,7 +9,6 @@ import {
   ChevronLeft,
   ChevronRight,
 } from 'lucide-react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useLocale } from 'next-intl'
 import { useState, useEffect, useCallback } from 'react'
@@ -39,7 +39,10 @@ const HeroSection = () => {
   }
 
   useEffect(() => {
-    if (products.length <= 1) return
+    if (products.length <= 1) {
+      return
+    }
+
     const timer = setInterval(nextSlide, 10000)
     return () => clearInterval(timer)
   }, [nextSlide, products.length])
@@ -116,20 +119,18 @@ const HeroSection = () => {
             </div>
           </div>
 
-          <div className='group relative order-1 size-96 flex-1 xl:order-2 xl:size-full'>
-            <div className='relative mx-auto aspect-square w-full transition-all duration-700 ease-in-out'>
+          <div className='group relative order-1 flex w-full flex-1 items-center justify-center xl:order-2'>
+            <div className='relative mx-auto aspect-square w-full max-w-[280px] transition-all duration-700 ease-in-out md:max-w-[380px] xl:max-w-[480px]'>
               <div className='absolute inset-0 animate-pulse rounded-full bg-green-100 opacity-40 blur-2xl filter md:blur-3xl dark:bg-green-900/20' />
 
               {currentProduct?.images?.[0]?.url && (
                 <div
                   key={currentProduct.id}
-                  className='animate-in fade-in zoom-in relative size-96 duration-500 xl:size-full'
+                  className='animate-in fade-in zoom-in relative h-full w-full duration-500'
                 >
-                  <Image
-                    fill
-                    priority
+                  <img
                     alt={currentProduct.name}
-                    className='relative z-10 object-cover drop-shadow-xl md:drop-shadow-2xl dark:drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)]'
+                    className='relative z-10 h-full w-full object-cover drop-shadow-xl md:drop-shadow-2xl dark:drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)]'
                     src={currentProduct.images[0].url}
                   />
                 </div>
