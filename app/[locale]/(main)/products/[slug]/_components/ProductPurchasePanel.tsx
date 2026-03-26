@@ -100,13 +100,7 @@ const ProductPurchasePanel = () => {
     <Card className='border-default-100 border' radius='sm' shadow='none'>
       <CardBody className='flex flex-col gap-4'>
         <header>
-          <ProductRating
-            reviews={product.reviews}
-            size={16}
-            totalReviews={product._count?.reviews || 0}
-          />
-
-          <h1 className='mt-5 text-3xl leading-tight font-bold tracking-tighter sm:text-4xl lg:text-5xl'>
+          <h1 className='text-3xl leading-tight font-bold tracking-tighter sm:text-4xl lg:text-5xl'>
             {product.name}
           </h1>
         </header>
@@ -116,6 +110,11 @@ const ProductPurchasePanel = () => {
         <div className='flex flex-wrap items-center gap-2'>
           <ViewCount viewCount={product?.viewCount || 0} />
           <CommentCount commentCount={product?._count?.comments || 0} />
+          <ProductRating
+            reviews={product.reviews}
+            size={16}
+            totalReviews={product._count?.reviews || 0}
+          />
         </div>
 
         <Divider className='bg-default-100' />
