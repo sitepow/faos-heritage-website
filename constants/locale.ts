@@ -26,7 +26,7 @@ const COUNTRIES: CountryItem[] = Object.entries(COUNTRY_CONFIG).map(
   ([code, { name }]) => ({ code, name }),
 )
 
-const DEFAULT_APP_LOCALE = 'us'
+const DEFAULT_APP_LOCALE = 'th'
 const DEFAULT_CURRENCY_CODE = 'THB' as const
 
 const CURRENCY = {
