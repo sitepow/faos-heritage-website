@@ -180,7 +180,16 @@ const getContractDetails = async (id: string) => {
       }),
     },
     include: {
-      storefront: true,
+      storefront: {
+        include: {
+          managers: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
+        },
+      },
       items: {
         include: {
           product: {
@@ -191,6 +200,7 @@ const getContractDetails = async (id: string) => {
           },
           variant: {
             select: {
+              name: true,
               price: true,
             },
           },

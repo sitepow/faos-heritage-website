@@ -1,5 +1,5 @@
 type FormatDateValue = Date | string | number | null | undefined
-type FormatType = 'full' | 'date' | 'dateTime' | 'short' | 'time'
+type FormatType = 'full' | 'date' | 'dateTime' | 'short' | 'time' | 'numeric'
 
 const DATE_CONFIGS: Record<FormatType, Intl.DateTimeFormatOptions> = {
   full: {
@@ -31,6 +31,11 @@ const DATE_CONFIGS: Record<FormatType, Intl.DateTimeFormatOptions> = {
     hour: '2-digit',
     minute: '2-digit',
     hour12: false,
+  },
+  numeric: {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
   },
 }
 

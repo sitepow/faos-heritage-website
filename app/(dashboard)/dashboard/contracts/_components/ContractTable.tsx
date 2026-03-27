@@ -22,7 +22,6 @@ import {
   FileSignatureIcon,
   EllipsisVerticalIcon,
   EyeIcon,
-  TagIcon,
   BanIcon,
 } from 'lucide-react'
 import { useState } from 'react'
@@ -36,7 +35,6 @@ import { ConfirmDeleteModal } from '@/app/(dashboard)/_components/ConfirmDeleteM
 import { useContractsAdmin } from '@/features/contract/hook'
 import { useContractMutation } from '@/features/contract/mutation'
 import { useAuth } from '@/hooks/useAuth'
-import { formatCurrency } from '@/utils'
 import { formatDate } from '@/utils/date'
 
 interface Props {
@@ -136,7 +134,7 @@ const ContractTable = ({ selectedKeys, onSelectionChange }: Props) => {
         <TableHeader>
           <TableColumn>รหัสสัญญา</TableColumn>
           <TableColumn>ชื่อหน้าร้าน</TableColumn>
-          <TableColumn>ยอดเงินรวม</TableColumn>
+          <TableColumn>ประเภทสัญญา</TableColumn>
           <TableColumn>ระยะเวลาสัญญา</TableColumn>
           <TableColumn>สถานะ</TableColumn>
           <TableColumn align='center'>จัดการ</TableColumn>
@@ -167,38 +165,13 @@ const ContractTable = ({ selectedKeys, onSelectionChange }: Props) => {
                   {contract.storefront?.name || 'ไม่ระบุชื่อร้าน'}
                 </TableCell>
                 <TableCell>
-                  {contract?.isAdjustment ? (
-                    <Chip
-                      className='bg-primary-50 text-primary h-6 border-none font-bold'
-                      color='primary'
-                      startContent={<TagIcon className='ml-1' size={12} />}
-                      variant='flat'
-                    >
-                      ปรับปรุงราคา
-                    </Chip>
-                  ) : (
-                    <span className='text-primary font-semibold'>
-                      {formatCurrency(contract.totalAmount)}
-                    </span>
-                  )}
+                  {contract?.isAdjustment ? 'ปรับราคา' : 'โอนสต็อกและปรับราคา'}
                 </TableCell>
                 <TableCell className='max-w-48 min-w-48'>
-                  <div className='flex flex-col gap-1 text-xs'>
-                    <div className='flex items-center gap-1'>
-                      <span className='text-default-400'>เริ่ม:</span>
-                      <span>
-                        {formatDate(contract.startDate, 'th', 'date') || '-'}
-                      </span>
-                    </div>
-                    <div className='flex items-center gap-1'>
-                      <span className='text-default-400'>สิ้นสุด:</span>
-                      <span>
-                        {contract.endDate
-                          ? formatDate(contract.endDate, 'th', 'date')
-                          : '-'}
-                      </span>
-                    </div>
-                  </div>
+                  {formatDate(contract.startDate, 'th', 'numeric') || '-'}
+                  {contract.endDate
+                    ? ` - ${formatDate(contract.endDate, 'th', 'numeric')}`
+                    : ' - ไม่มีระยะเวลาสิ้นสุด'}
                 </TableCell>
                 <TableCell>
                   <Chip

@@ -7,32 +7,19 @@ import {
   ModalBody,
   ModalFooter,
   Button,
-  Divider,
-  Spinner,
-  Chip,
 } from '@heroui/react'
 import { ContractStatus } from '@prisma/client'
-import {
-  StoreIcon,
-  EraserIcon,
-  PenToolIcon,
-  InfoIcon,
-  TagIcon,
-  PackagePlusIcon,
-} from 'lucide-react'
-import { useMemo, useRef, useEffect, useState } from 'react'
-import SignatureCanvas from 'react-signature-canvas'
+import { useRef, useEffect, useState, useMemo } from 'react'
+import { SignatureCanvas } from 'react-signature-canvas'
 import { toast } from 'react-toastify'
 
 import type { RefObject } from 'react'
 
 import { ConfirmDeleteModal } from '@/app/(dashboard)/_components/ConfirmDeleteModal'
-import { ProductImage } from '@/components/ui/Product/ProductImage'
 import { BRAND_SIGNATURE } from '@/constants'
 import { useContractDetails } from '@/features/contract/hook'
 import { useContractMutation } from '@/features/contract/mutation'
-import { formatCurrency } from '@/utils'
-import { formatDate } from '@/utils/date'
+import { formatDate, formatNumber } from '@/utils'
 
 interface Props {
   isOpen: boolean
@@ -218,6 +205,7 @@ const ContractApproveModal = ({ isOpen, onClose, contractId }: Props) => {
   return (
     <>
       <Modal
+        hideCloseButton
         className='max-h-[95vh]'
         isDismissable={false}
         isOpen={isOpen}
@@ -231,263 +219,339 @@ const ContractApproveModal = ({ isOpen, onClose, contractId }: Props) => {
           </ModalHeader>
 
           <ModalBody className='overflow-y-auto p-0'>
-            <div className='flex h-full flex-col lg:flex-row lg:overflow-hidden'>
-              <div className='border-default-100 flex-1 p-4 lg:overflow-y-auto lg:border-r lg:p-6'>
-                {isLoading ? (
-                  <div className='flex h-full items-center justify-center py-20'>
-                    <Spinner label='กำลังโหลดข้อมูลสัญญา...' />
-                  </div>
-                ) : (
-                  <div className='flex flex-col gap-8'>
-                    <section className='bg-default-50 border-default-100 flex flex-col gap-4 rounded-xl border p-5'>
-                      <div className='flex items-center gap-2'>
-                        <h3 className='text-base font-bold'>
-                          ข้อตกลงและเงื่อนไขการค้า
-                        </h3>
-                      </div>
-                      <div className='text-default-600 flex flex-col gap-3 text-sm leading-relaxed'>
-                        <p>
-                          <strong>1. วัตถุประสงค์:</strong> ผู้เสนอ
-                          (เจ้าของแบรนด์)
-                          ตกลงจัดส่งสินค้าในราคาส่งตามรายการที่ระบุ
-                          เพื่อให้ผู้รับเสนอ (ร้านค้า)
-                          นำไปจำหน่ายต่อในราคาปลีกที่กำหนด
-                        </p>
-                        <p>
-                          <strong>2. ส่วนต่างกำไร:</strong>{' '}
-                          ร้านค้าจะได้รับกำไรจากส่วนต่างระหว่างราคาส่งและราคาปลีก
-                          (Margin)
-                          โดยประมาณการกำไรสุทธิจะปรากฏในสรุปยอดด้านขวาของสัญญานี้
-                        </p>
-                        <p>
-                          <strong>3. การรักษาราคาจำหน่าย:</strong>{' '}
-                          ร้านค้าตกลงจำหน่ายสินค้าในราคาไม่ต่ำกว่าราคาปลีกที่เจ้าของแบรนด์กำหนด
-                          เพื่อรักษามาตรฐานและโครงสร้างราคาสินค้า
-                        </p>
-                        <p>
-                          <strong>4. การส่งมอบและการรับประกัน:</strong>{' '}
-                          เจ้าของแบรนด์รับรองคุณภาพสินค้าตามมาตรฐาน
-                          และยินดีเปลี่ยนคืนสินค้าในกรณีที่เกิดความเสียหายจากการผลิตหรือการขนส่งต้นทาง
-                        </p>
-                        <p>
-                          <strong>5. การสิ้นสุดข้อตกลงและต่อสัญญา:</strong>{' '}
-                          เมื่อสัญญาหมดอายุ
-                          ระบบจะปรับราคาสินค้ากลับสู่ราคาปกติของเว็บไซต์ทันที
-                          โดยการพิจารณาต่อสัญญาหรือปรับปรุงเงื่อนไขราคาใหม่ให้เป็นไปตามการตกลงร่วมกันของทั้งสองฝ่าย
-                          รวมถึงการบริหารจัดการสต็อกสินค้าคงเหลือ (ถ้ามี)
-                          ให้เป็นไปตามเงื่อนไขที่ระบุไว้ในรายละเอียดเพิ่มเติมของสัญญานี้
-                        </p>
-                        <div className='bg-primary/5 border-primary/20 text-primary-600 flex items-start gap-2 rounded-lg border p-3'>
-                          <InfoIcon className='shrink-0' size={14} />
-                          <p>
-                            การลงนามในสัญญานี้
-                            ถือว่าทั้งสองฝ่ายยอมรับเงื่อนไขและราคาที่ระบุไว้ข้างต้น
-                            และมีผลผูกพันตามระยะเวลาที่กำหนดในระบบ
-                          </p>
-                        </div>
-                      </div>
-                    </section>
+            <div className='mx-auto w-[210mm] bg-white p-[20mm] font-sans text-[14px] leading-relaxed text-black shadow-lg'>
+              <h1 className='mb-6 text-center text-xl font-bold'>
+                Consignment Agreement
+              </h1>
 
-                    <section className='flex flex-col gap-3'>
-                      <div className='flex items-center gap-2'>
-                        <PenToolIcon className='text-default-400' size={18} />
-                        <h3 className='text-sm font-bold'>
-                          ลงชื่อ: เจ้าของแบรนด์ (ผู้เสนอ)
-                        </h3>
-                      </div>
-                      <div className='border-default-200 relative h-48 overflow-hidden rounded-md border bg-white'>
-                        <SignatureCanvas
-                          ref={brandSigRef}
-                          canvasProps={{
-                            className:
-                              'sigCanvas w-full h-full block pointer-events-none',
-                          }}
-                        />
-                      </div>
-                    </section>
+              <section className='mb-4'>
+                <h2 className='mb-2 border-b border-black pb-1 font-bold'>
+                  Parties
+                </h2>
+                <p className='text-justify'>
+                  This Consignment Agreement (the “Agreement”), is made and
+                  entered into on{' '}
+                  {formatDate(contract?.startDate, 'en', 'date')} by and
+                  between:
+                </p>
+                <p className='mt-2'>
+                  <strong>FOAS ASIA</strong> a corporation duly organized and
+                  existing under the laws of Thailand having its principal place
+                  of business at 333/253 Chalongkrung Soi 44 Ladkrabang
+                  Lamplatiew, Ladkrabang, Bangkok 10520 Thailand. (hereinafter
+                  referred to as <strong>“Consignor”</strong>), and
+                </p>
+                <p className='mt-2'>
+                  <strong>{contract?.storefront?.name}</strong> a corporation
+                  duly organized and existing under the laws of Thailand, having
+                  its principal place of business{' '}
+                  {contract?.storefront?.address} (hereinafter referred to as{' '}
+                  <strong>“Consignee”</strong>).
+                </p>
+              </section>
 
-                    <Divider className='bg-default-100' />
+              <section className='mb-4'>
+                <p className='mb-2'>
+                  WHEREAS, the Consignor owns the property rights of the
+                  commodities on consignment, which will described in detail
+                  below;
+                </p>
+                <p className='mb-2'>
+                  WHEREAS, the Consignee desires to take possession of the
+                  consigned commodities with the intention of selling on behalf
+                  of the Consignor;
+                </p>
+                <p>
+                  NOW, THEREFORE, in consideration of the mutual covenants and
+                  promises made by the parties hereto, the Consignor and the
+                  Consignee (individually, each a “Party” and collectively, the
+                  “Parties”) agree and undertake as follows:
+                </p>
+              </section>
 
-                    <section className='flex flex-col gap-3'>
-                      <div className='flex items-center justify-between'>
-                        <div className='flex items-center gap-2'>
-                          <StoreIcon className='text-default-400' size={18} />
-                          <h3 className='text-sm font-bold'>
-                            ลงชื่อ: ร้านค้าสาขา (ผู้รับเสนอ)
-                          </h3>
-                        </div>
-                        <Button
-                          isIconOnly
-                          color='danger'
-                          size='sm'
-                          variant='light'
-                          onPress={() => storeSigRef.current?.clear()}
+              <section className='mb-4'>
+                <h3 className='mb-1 font-bold uppercase'>
+                  a) Consigned Commodities
+                </h3>
+                <p>
+                  The list and price information of the consigned commodities
+                  (or shall be referred as the “goods”) subject to the
+                  consignment are presented in <strong>TABLE 1</strong> below;
+                </p>
+              </section>
+
+              <section className='mb-4'>
+                <h3 className='mb-1 font-bold uppercase'>
+                  b) Product Availability and Limited Production
+                </h3>
+                <ul className='list-disc pl-5'>
+                  <li>
+                    The Consignee acknowledges that certain products supplied
+                    under this Agreement are of limited production and, as such,
+                    may be subject to shortages or temporary unavailability.
+                  </li>
+                  <li>
+                    The Consignor does not guarantee continuous availability of
+                    all products listed in this Agreement.
+                  </li>
+                  <li>
+                    On the 15th day of each month, the Consignor shall inform
+                    the Consignee in writing of the current availability status
+                    of each product, including any anticipated shortages or
+                    discontinuations.
+                  </li>
+                  <li>
+                    The Consignor shall use reasonable efforts to fulfill
+                    replenishment orders subject to product availability.
+                  </li>
+                </ul>
+              </section>
+
+              <section className='mb-4'>
+                <h3 className='mb-1 font-bold uppercase'>
+                  c) Delivery Inspection and Acceptance
+                </h3>
+                <p className='text-justify'>
+                  Upon each delivery, replenishment, renewal, or top-up of any
+                  honey and olive oil products supplied under this Agreement, a
+                  joint inspection shall be conducted by authorized
+                  representatives of both the Supplier and Rallis Group. This
+                  inspection shall apply to every box and unit delivered or
+                  brought into Rallis Group’s premises.
+                </p>
+                <p className='mt-2 text-justify'>
+                  The joint inspection shall verify, at minimum, the quantity,
+                  packaging integrity, labeling, batch numbers, expiration
+                  dates, storage condition, and overall product quality,
+                  ensuring full compliance with the specifications and standards
+                  agreed upon in this Agreement. Only products that successfully
+                  pass the joint inspection shall be accepted into consignment
+                  stock, displayed, stored, or made available for sale by Rallis
+                  Group.
+                </p>
+              </section>
+
+              <div className='mb-6 overflow-x-auto'>
+                <p className='mb-1 font-bold'>TABLE 1</p>
+                <table className='w-full border-collapse border border-black text-[11px]'>
+                  <thead>
+                    <tr className='bg-gray-100'>
+                      <th className='border border-black p-1 text-left'>
+                        Product
+                      </th>
+                      <th className='border border-black p-1'>Size</th>
+                      {!totals.isAdjustmentOnly && (
+                        <th className='border border-black p-1'>Qty</th>
+                      )}
+                      <th className='border border-black p-1'>Web Price</th>
+                      <th className='border border-black p-1'>Store Price</th>
+                      {!totals.isAdjustmentOnly && (
+                        <th className='border border-black p-1'>
+                          Total Amount
+                        </th>
+                      )}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {contract?.items?.map((item) => {
+                      const retailPrice =
+                        item.variant?.price ?? item.product?.price ?? 0
+
+                      return (
+                        <tr key={item.id}>
+                          <td className='border border-black p-1'>
+                            {item?.productName}
+                          </td>
+                          <td className='border border-black p-1 text-center uppercase'>
+                            {item?.variant?.name ?? '-'}
+                          </td>
+                          {!totals.isAdjustmentOnly && (
+                            <td className='border border-black p-1 text-center'>
+                              {item?.quantity
+                                ? formatNumber(item?.quantity)
+                                : '-'}
+                            </td>
+                          )}
+                          <td className='border border-black p-1 text-right'>
+                            {formatNumber(retailPrice)}
+                          </td>
+                          <td className='border border-black p-1 text-right'>
+                            {formatNumber(item?.agreedPrice)}
+                          </td>
+                          {!totals.isAdjustmentOnly && (
+                            <td className='border border-black p-1 text-right'>
+                              {formatNumber(item?.subtotal)}
+                            </td>
+                          )}
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                  <tfoot>
+                    {totals.isAdjustmentOnly && (
+                      <tr className='font-bold'>
+                        <td
+                          className='border border-black p-1 text-right uppercase'
+                          colSpan={6}
                         >
-                          <EraserIcon size={14} />
-                        </Button>
-                      </div>
-                      <div className='border-default-200 relative h-48 overflow-hidden rounded-md border bg-white'>
-                        <SignatureCanvas
-                          ref={storeSigRef}
-                          canvasProps={{
-                            className:
-                              'sigCanvas w-full h-full cursor-crosshair block',
-                          }}
-                          maxWidth={3}
-                          minWidth={1.5}
-                          penColor='black'
-                        />
-                      </div>
-                    </section>
-                  </div>
-                )}
+                          This contract is for price adjustment of existing
+                          store items. Please review the product prices listed
+                          above.
+                        </td>
+                      </tr>
+                    )}
+
+                    {!totals.isAdjustmentOnly && (
+                      <tr className='font-bold'>
+                        <td
+                          className='border border-black p-1 text-right uppercase'
+                          colSpan={5}
+                        >
+                          Grand Total
+                        </td>
+                        <td className='border border-black p-1 text-right'>
+                          {formatNumber(totals.agreedTotal)}
+                        </td>
+                      </tr>
+                    )}
+                  </tfoot>
+                </table>
               </div>
 
-              <div className='bg-default-50/50 flex w-full flex-col gap-4 p-4 lg:w-[380px] lg:overflow-y-auto lg:p-6 xl:w-[420px]'>
-                <h3 className='flex items-center gap-2 text-lg font-bold'>
-                  รายการตรวจสอบสินค้า
+              <div className='grid grid-cols-2 gap-4 text-justify'>
+                <div className='space-y-4'>
+                  <section>
+                    <h3 className='font-bold uppercase underline'>
+                      d) Property Rights
+                    </h3>
+                    <p>
+                      The ownership of the goods subject to the consignment
+                      belongs to the consignor until these goods are sold and
+                      the ownership passes to the third party. The Consignee
+                      agrees and undertakes that it only has possession on the
+                      consigned commodities.
+                    </p>
+                  </section>
+                  <section>
+                    <h3 className='font-bold uppercase underline'>
+                      Price and Payment
+                    </h3>
+                    <p>
+                      The Consignee may freely determine the selling price of
+                      the consigned commodities under this Agreement. However,
+                      the suggested selling prices for the consigned commodities
+                      are indicated in the chart (Table 1) above.
+                    </p>
+                    <p className='mt-1'>
+                      The Consignee shall remit payment to the Consignor for all
+                      goods sold on or before the 15th day of each month.
+                    </p>
+                  </section>
+                </div>
+                <div className='space-y-4'>
+                  <section>
+                    <h3 className='font-bold uppercase underline'>Insurance</h3>
+                    <p>
+                      Consignee shall maintain insurance coverage that shall be
+                      sufficient to compensate the Consignor in the event of
+                      fire, damage, robbery, theft, or otherwise.
+                    </p>
+                  </section>
+                  <section>
+                    <h3 className='font-bold uppercase underline'>
+                      Warranty of Goods
+                    </h3>
+                    <p>
+                      The Consignor warrants that all goods supplied under this
+                      Agreement conform to the specifications requested by the
+                      Consignee, are fit for their intended purpose, are of good
+                      material and workmanship, and are free from defects.
+                    </p>
+                  </section>
+                </div>
+              </div>
+
+              <section className='mt-4'>
+                <h3 className='font-bold uppercase underline'>
+                  Termination of the Agreement
                 </h3>
-                <Divider className='bg-default-200' />
+                <p>
+                  This Agreement has been concluded for an indefinite period and
+                  can be terminated without penalty by a written notice of 30
+                  days by either party. If one of the parties fails to fulfill
+                  its obligations under this Agreement, the other party may
+                  terminate the contract with 30 days for Notification.
+                </p>
+              </section>
 
-                <div className='flex flex-col gap-3'>
-                  <div className='border-default-100 bg-default-50 flex flex-col gap-1 rounded-lg border p-3'>
-                    <span className='text-sm font-bold'>
-                      {contract?.storefront?.name}
-                    </span>
-                    <span className='text-default-500 text-xs'>
-                      วันที่เสนอ:{' '}
-                      {formatDate(contract?.createdAt, 'th', 'date')}
-                    </span>
-                  </div>
+              <div className='mt-12 grid grid-cols-2 gap-10'>
+                <div className='text-center'>
+                  <p className='mb-8 font-bold'>Consignor Signature</p>
+                  <SignatureCanvas
+                    ref={brandSigRef}
+                    canvasProps={{
+                      className: 'sigCanvas block pointer-events-none',
+                    }}
+                  />
+                  <p className='text-left text-[12px]'>
+                    Ms. Patcharin Chanaphukdee
+                  </p>
+                  <p className='text-left text-[12px]'>Title: Owner</p>
+                  <p className='text-left text-[12px]'>
+                    Date: {formatDate(new Date(), 'th', 'numeric')}
+                  </p>
                 </div>
-
-                <Divider className='bg-default-200' />
-
-                <div className='flex min-h-[300px] flex-col gap-3 overflow-y-auto'>
-                  {contract?.items?.map((item) => {
-                    const retailPrice = Number(
-                      item.variant?.price ?? item.product?.price ?? 0,
-                    )
-                    const imageUrl =
-                      item.product?.images?.find((img) => img.isPrimary)?.url ??
-                      item.product?.images?.[0]?.url ??
-                      ''
-                    const isAdjustment = item.quantity === 0
-
-                    return (
-                      <div
-                        key={item.id}
-                        className='border-default-100 bg-default-50 flex flex-col gap-2 rounded-lg border p-3'
-                      >
-                        <div className='flex items-start gap-3'>
-                          <div className='bg-default-100 size-12 shrink-0 overflow-hidden rounded-md'>
-                            <ProductImage fill image={imageUrl} />
-                          </div>
-                          <div className='flex-1 overflow-hidden'>
-                            <div className='flex items-start justify-between gap-1'>
-                              <p className='text-sm font-bold'>
-                                {item.productName}
-                              </p>
-                              <Chip
-                                className='h-5 shrink-0 text-[10px] font-bold uppercase'
-                                color={isAdjustment ? 'primary' : 'success'}
-                                size='sm'
-                                startContent={
-                                  isAdjustment ? (
-                                    <TagIcon size={12} />
-                                  ) : (
-                                    <PackagePlusIcon size={12} />
-                                  )
-                                }
-                                variant='flat'
-                              >
-                                {isAdjustment ? 'ปรับราคา' : 'โอนสต็อก'}
-                              </Chip>
-                            </div>
-                            <div className='mt-1 flex items-center gap-2'>
-                              <span className='text-default-400 text-[10px] line-through'>
-                                {formatCurrency(retailPrice)}
-                              </span>
-                              <span className='text-primary text-[10px] font-semibold'>
-                                {formatCurrency(Number(item.agreedPrice))}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                        <div className='border-default-100 flex items-center justify-between border-t pt-1'>
-                          <span className='text-default-500 text-[10px] font-bold'>
-                            {isAdjustment
-                              ? 'ประเภท: ปรับราคาต้นทุนเดิม'
-                              : `จำนวนโอน: ${item.quantity}`}
-                          </span>
-                          {!isAdjustment && (
-                            <span className='text-sm font-bold'>
-                              {formatCurrency(
-                                Number(item.agreedPrice) * item.quantity,
-                              )}
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    )
-                  })}
-                </div>
-
-                <div className='bg-primary/5 border-primary/10 mt-auto flex flex-col gap-2 rounded-lg border p-4'>
-                  {totals.isAdjustmentOnly ? (
-                    <div className='flex flex-col items-center gap-1 py-1'>
-                      <div className='text-primary flex items-center gap-2 font-bold uppercase'>
-                        <TagIcon size={16} />
-                        <span>รายการปรับปรุงราคาขาย</span>
-                      </div>
-                      <p className='text-default-500 text-center text-[10px]'>
-                        สัญญานี้เน้นการปรับปรุงราคาต้นทุนเดิมที่มีอยู่ในร้าน{' '}
-                        <br />
-                        กรุณาตรวจสอบราคาส่งใหม่ในรายการสินค้าด้านบน
-                      </p>
-                    </div>
-                  ) : (
-                    <>
-                      <div className='text-default-600 flex items-center justify-between text-sm'>
-                        <span>ราคาปลีกรวม:</span>
-                        <span className='text-default-400 line-through'>
-                          {formatCurrency(totals.retailTotal)}
-                        </span>
-                      </div>
-                      <Divider className='my-1 opacity-50' />
-                      <div className='flex items-center justify-between text-lg font-bold'>
-                        <span>ยอดสุทธิสัญญา:</span>
-                        <span className='text-primary'>
-                          {formatCurrency(totals.agreedTotal)}
-                        </span>
-                      </div>
-                      <div className='text-success flex items-center justify-between text-sm font-bold'>
-                        <span>ประมาณการกำไร (Margin):</span>
-                        <span>{formatCurrency(totals.potentialProfit)}</span>
-                      </div>
-                    </>
-                  )}
+                <div className='text-center'>
+                  <p className='mb-8 font-bold'>Consignee Signature</p>
+                  <SignatureCanvas
+                    ref={storeSigRef}
+                    canvasProps={{
+                      className: 'sigCanvas  cursor-crosshair block',
+                    }}
+                    maxWidth={3}
+                    minWidth={1.5}
+                    penColor='black'
+                  />
+                  <p className='text-left text-[12px]'>
+                    Printed Name:{' '}
+                    {contract?.storefront?.managers
+                      ?.map((item) => item?.name)
+                      .filter(Boolean)
+                      .join(', ')}
+                  </p>
+                  <p className='text-left text-[12px]'>Title: Director</p>
+                  <p className='text-left text-[12px]'>
+                    Date: {formatDate(new Date(), 'th', 'numeric')}
+                  </p>
                 </div>
               </div>
             </div>
           </ModalBody>
 
           <ModalFooter className='border-default-100 flex items-center border-t p-4'>
+            <Button size='lg' variant='faded' onPress={onClose}>
+              ปิดหน้าต่าง
+            </Button>
             <Button
-              className='text-secondary flex-1 font-bold'
-              color='danger'
+              size='lg'
+              variant='faded'
+              onPress={() => storeSigRef.current?.clear()}
+            >
+              ล้างค่าลายเซ็นต์
+            </Button>
+            <Button
               isDisabled={isLoading || !contract}
               isLoading={
                 isUpdatingStatus && pendingStatus === ContractStatus.TERMINATED
               }
               size='lg'
-              variant='flat'
+              variant='faded'
               onPress={() => askConfirmation(ContractStatus.TERMINATED)}
             >
               ปฏิเสธสัญญา/ขอให้ปรับราคาใหม่อีกครั้ง
             </Button>
             <Button
-              className='text-secondary flex-1 font-bold'
+              className='text-secondary font-bold'
               color='primary'
               isDisabled={isLoading || !contract}
               isLoading={
