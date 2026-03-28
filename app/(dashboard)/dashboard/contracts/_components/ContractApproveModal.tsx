@@ -1203,7 +1203,7 @@ const ContractApproveModal = ({ isOpen, onClose, contractId }: Props) => {
             </div>
           </ModalBody>
 
-          <ModalFooter className='border-default-100 flex items-center border-t p-4'>
+          <ModalFooter className='border-default-100 flex flex-wrap items-center border-t p-4'>
             <Button size='lg' variant='faded' onPress={onClose}>
               ปิดหน้าต่าง
             </Button>
