@@ -498,7 +498,7 @@ const ContractApproveModal = ({ isOpen, onClose, contractId }: Props) => {
                         Total Retail Value (Web Price)
                       </td>
                       <td className='border border-black p-1 text-right'>
-                        {formatNumber(totals.retailTotal)}
+                        {formatCurrency(totals.retailTotal)}
                       </td>
                     </tr>
                     <tr>
@@ -511,7 +511,7 @@ const ContractApproveModal = ({ isOpen, onClose, contractId }: Props) => {
                           : 'Grand Total (Store Price)'}
                       </td>
                       <td className='border border-black p-1 text-right'>
-                        {formatNumber(totals.agreedTotal)}
+                        {formatCurrency(totals.agreedTotal)}
                       </td>
                     </tr>
                     <tr>
@@ -522,7 +522,7 @@ const ContractApproveModal = ({ isOpen, onClose, contractId }: Props) => {
                         Consignee Potential Profit (Margin)
                       </td>
                       <td className='border border-black p-1 text-right'>
-                        {formatNumber(totals.potentialProfit)}
+                        {formatCurrency(totals.potentialProfit)}
                       </td>
                     </tr>
                     {totals.isAdjustmentOnly && (
@@ -959,7 +959,7 @@ const ContractApproveModal = ({ isOpen, onClose, contractId }: Props) => {
                         มูลค่ารวมตามราคาหน้าเว็บ (Web Price)
                       </td>
                       <td className='border border-black p-1 text-right'>
-                        {formatNumber(totals.retailTotal)}
+                        {formatCurrency(totals.retailTotal)}
                       </td>
                     </tr>
                     <tr>
@@ -999,34 +999,6 @@ const ContractApproveModal = ({ isOpen, onClose, contractId }: Props) => {
                       </tr>
                     )}
                   </tfoot>
-                  {/* <tfoot>
-                    <tr className='bg-gray-50 font-bold'>
-                      <td
-                        className='border border-black p-1 text-right uppercase'
-                        colSpan={5}
-                      >
-                        {totals.isAdjustmentOnly
-                          ? 'มูลค่ารวมสต็อกคงเหลือปัจจุบัน'
-                          : 'ยอดรวมสุทธิ'}
-                      </td>
-                      <td className='border border-black p-1 text-right'>
-                        {formatNumber(totals.agreedTotal)}
-                      </td>
-                    </tr>
-
-                    {totals.isAdjustmentOnly && (
-                      <tr className='text-[10px]'>
-                        <td
-                          className='border border-black p-1 text-center'
-                          colSpan={6}
-                        >
-                          * This contract is for price adjustment of existing
-                          store items based on current stock levels. /
-                          สัญญานี้ใช้สำหรับการปรับราคาขายของสินค้าคงเหลือในร้านตามจำนวนสต็อกปัจจุบัน
-                        </td>
-                      </tr>
-                    )}
-                  </tfoot> */}
                 </table>
               </div>
 
