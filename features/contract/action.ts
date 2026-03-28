@@ -168,6 +168,15 @@ const getContractDetails = async (id: string) => {
     return null
   }
 
+  const baseContract = await prisma.contract.findUnique({
+    where: { id },
+    select: { storefrontId: true },
+  })
+
+  if (!baseContract) {
+    return null
+  }
+
   const contract = await prisma.contract.findFirst({
     where: {
       id,
@@ -196,12 +205,28 @@ const getContractDetails = async (id: string) => {
             select: {
               price: true,
               images: true,
+              storefrontInventories: {
+                where: {
+                  storefrontId: baseContract.storefrontId,
+                },
+                select: {
+                  stockQuantity: true,
+                },
+              },
             },
           },
           variant: {
             select: {
               name: true,
               price: true,
+              storefrontInventories: {
+                where: {
+                  storefrontId: baseContract.storefrontId,
+                },
+                select: {
+                  stockQuantity: true,
+                },
+              },
             },
           },
         },

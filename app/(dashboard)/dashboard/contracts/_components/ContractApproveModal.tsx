@@ -19,7 +19,7 @@ import { ConfirmDeleteModal } from '@/app/(dashboard)/_components/ConfirmDeleteM
 import { BRAND_SIGNATURE } from '@/constants'
 import { useContractDetails } from '@/features/contract/hook'
 import { useContractMutation } from '@/features/contract/mutation'
-import { cn, formatDate, formatNumber } from '@/utils'
+import { cn, formatCurrency, formatDate, formatNumber } from '@/utils'
 
 interface Props {
   isOpen: boolean
@@ -260,11 +260,26 @@ const ContractApproveModal = ({ isOpen, onClose, contractId }: Props) => {
 
     const retailTotal = items.reduce((acc: number, item) => {
       const basePrice = Number(item.variant?.price ?? item.product?.price ?? 0)
-      const qty = hasTransfer ? item.quantity : 1
+
+      const inventory =
+        item.variant?.storefrontInventories?.[0] ??
+        item.product?.storefrontInventories?.[0]
+      const currentStock = inventory?.stockQuantity ?? 0
+
+      const qty = hasTransfer ? item.quantity : currentStock
       return acc + basePrice * qty
     }, 0)
 
-    const agreedTotal = Number(contract.totalAmount || 0)
+    const agreedTotal = items.reduce((acc: number, item) => {
+      const agreedPrice = Number(item.agreedPrice || 0)
+      const inventory =
+        item.variant?.storefrontInventories?.[0] ??
+        item.product?.storefrontInventories?.[0]
+      const currentStock = inventory?.stockQuantity ?? 0
+
+      const qty = hasTransfer ? item.quantity : currentStock
+      return acc + agreedPrice * qty
+    }, 0)
 
     return {
       retailTotal: Number(retailTotal.toFixed(2)),
@@ -425,22 +440,30 @@ const ContractApproveModal = ({ isOpen, onClose, contractId }: Props) => {
                         Product
                       </th>
                       <th className='border border-black p-1'>Size</th>
-                      {!totals.isAdjustmentOnly && (
-                        <th className='border border-black p-1'>Qty</th>
-                      )}
+                      <th className='border border-black p-1'>
+                        {totals.isAdjustmentOnly
+                          ? 'Current Stock'
+                          : 'Transfer Qty'}
+                      </th>
                       <th className='border border-black p-1'>Web Price</th>
                       <th className='border border-black p-1'>Store Price</th>
-                      {!totals.isAdjustmentOnly && (
-                        <th className='border border-black p-1'>
-                          Total Amount
-                        </th>
-                      )}
+                      <th className='border border-black p-1'>Total Amount</th>
                     </tr>
                   </thead>
                   <tbody>
                     {contract?.items?.map((item) => {
                       const retailPrice =
                         item.variant?.price ?? item.product?.price ?? 0
+
+                      const inventory =
+                        item.variant?.storefrontInventories?.[0] ??
+                        item.product?.storefrontInventories?.[0]
+                      const currentStock = inventory?.stockQuantity ?? 0
+                      const displayQty = totals.isAdjustmentOnly
+                        ? currentStock
+                        : item.quantity
+
+                      const itemSubtotal = Number(item.agreedPrice) * displayQty
 
                       return (
                         <tr key={item.id}>
@@ -450,52 +473,67 @@ const ContractApproveModal = ({ isOpen, onClose, contractId }: Props) => {
                           <td className='border border-black p-1 text-center uppercase'>
                             {item?.variant?.name ?? '-'}
                           </td>
-                          {!totals.isAdjustmentOnly && (
-                            <td className='border border-black p-1 text-center'>
-                              {item?.quantity
-                                ? formatNumber(item?.quantity)
-                                : '-'}
-                            </td>
-                          )}
-                          <td className='border border-black p-1 text-right'>
+                          <td className='border border-black p-1 text-center'>
+                            {formatNumber(displayQty)}
+                          </td>
+                          <td className='border border-black p-1 text-right line-through'>
                             {formatNumber(retailPrice)}
                           </td>
                           <td className='border border-black p-1 text-right'>
                             {formatNumber(item?.agreedPrice)}
                           </td>
-                          {!totals.isAdjustmentOnly && (
-                            <td className='border border-black p-1 text-right'>
-                              {formatNumber(item?.subtotal)}
-                            </td>
-                          )}
+                          <td className='border border-black p-1 text-right'>
+                            {formatNumber(itemSubtotal)}
+                          </td>
                         </tr>
                       )
                     })}
                   </tbody>
-                  <tfoot>
+                  <tfoot className='font-bold'>
+                    <tr>
+                      <td
+                        className='border border-black p-1 text-right uppercase'
+                        colSpan={5}
+                      >
+                        Total Retail Value (Web Price)
+                      </td>
+                      <td className='border border-black p-1 text-right'>
+                        {formatNumber(totals.retailTotal)}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        className='border border-black p-1 text-right uppercase'
+                        colSpan={5}
+                      >
+                        {totals.isAdjustmentOnly
+                          ? 'Total Consignment Value'
+                          : 'Grand Total (Store Price)'}
+                      </td>
+                      <td className='border border-black p-1 text-right'>
+                        {formatNumber(totals.agreedTotal)}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        className='border border-black p-1 text-right uppercase'
+                        colSpan={5}
+                      >
+                        Consignee Potential Profit (Margin)
+                      </td>
+                      <td className='border border-black p-1 text-right'>
+                        {formatNumber(totals.potentialProfit)}
+                      </td>
+                    </tr>
                     {totals.isAdjustmentOnly && (
-                      <tr className='font-bold'>
+                      <tr className='text-[10px]'>
                         <td
-                          className='border border-black p-1 text-right uppercase'
+                          className='border border-black p-1 text-center text-red-500'
                           colSpan={6}
                         >
-                          This contract is for price adjustment of existing
-                          store items. Please review the product prices listed
-                          above.
-                        </td>
-                      </tr>
-                    )}
-
-                    {!totals.isAdjustmentOnly && (
-                      <tr className='font-bold'>
-                        <td
-                          className='border border-black p-1 text-right uppercase'
-                          colSpan={5}
-                        >
-                          Grand Total
-                        </td>
-                        <td className='border border-black p-1 text-right'>
-                          {formatNumber(totals.agreedTotal)}
+                          * This contract is for price adjustment of existing
+                          store items based on current stock levels. /
+                          สัญญานี้ใช้สำหรับการปรับราคาขายของสินค้าคงเหลือในร้านตามจำนวนสต็อกปัจจุบัน
                         </td>
                       </tr>
                     )}
@@ -862,20 +900,31 @@ const ContractApproveModal = ({ isOpen, onClose, contractId }: Props) => {
                         สินค้า
                       </th>
                       <th className='border border-black p-1'>ขนาด</th>
-                      {!totals.isAdjustmentOnly && (
-                        <th className='border border-black p-1'>จำนวน</th>
-                      )}
+                      <th className='border border-black p-1'>
+                        {totals.isAdjustmentOnly
+                          ? 'จำนวนสต็อกปัจจุบัน'
+                          : 'จำนวนที่โอน'}
+                      </th>
                       <th className='border border-black p-1'>ราคาหน้าเว็บ</th>
                       <th className='border border-black p-1'>ราคาหน้าร้าน</th>
-                      {!totals.isAdjustmentOnly && (
-                        <th className='border border-black p-1'>ยอดรวม</th>
-                      )}
+                      <th className='border border-black p-1'>ยอดรวม</th>
                     </tr>
                   </thead>
                   <tbody>
                     {contract?.items?.map((item) => {
-                      const retailPrice =
-                        item.variant?.price ?? item.product?.price ?? 0
+                      const retailPrice = Number(
+                        item.variant?.price ?? item.product?.price ?? 0,
+                      )
+
+                      const inventory =
+                        item.variant?.storefrontInventories?.[0] ??
+                        item.product?.storefrontInventories?.[0]
+                      const currentStock = inventory?.stockQuantity ?? 0
+
+                      const displayQty = totals.isAdjustmentOnly
+                        ? currentStock
+                        : item.quantity
+                      const lineTotal = Number(item.agreedPrice) * displayQty
 
                       return (
                         <tr key={item.id}>
@@ -885,66 +934,100 @@ const ContractApproveModal = ({ isOpen, onClose, contractId }: Props) => {
                           <td className='border border-black p-1 text-center uppercase'>
                             {item?.variant?.name ?? '-'}
                           </td>
-                          {!totals.isAdjustmentOnly && (
-                            <td className='border border-black p-1 text-center'>
-                              {item?.quantity
-                                ? formatNumber(item?.quantity)
-                                : '-'}
-                            </td>
-                          )}
-                          <td className='border border-black p-1 text-right'>
+                          <td className='border border-black p-1 text-center'>
+                            {formatNumber(displayQty)}
+                          </td>
+                          <td className='border border-black p-1 text-right line-through'>
                             {formatNumber(retailPrice)}
                           </td>
                           <td className='border border-black p-1 text-right'>
                             {formatNumber(item?.agreedPrice)}
                           </td>
-                          {!totals.isAdjustmentOnly && (
-                            <td className='border border-black p-1 text-right'>
-                              {formatNumber(item?.subtotal)}
-                            </td>
-                          )}
+                          <td className='border border-black p-1 text-right'>
+                            {formatNumber(lineTotal)}
+                          </td>
                         </tr>
                       )
                     })}
                   </tbody>
-                  <tfoot>
+                  <tfoot className='font-bold'>
+                    <tr>
+                      <td
+                        className='border border-black p-1 text-right'
+                        colSpan={5}
+                      >
+                        มูลค่ารวมตามราคาหน้าเว็บ (Web Price)
+                      </td>
+                      <td className='border border-black p-1 text-right'>
+                        {formatNumber(totals.retailTotal)}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        className='border border-black p-1 text-right'
+                        colSpan={5}
+                      >
+                        {totals.isAdjustmentOnly
+                          ? 'มูลค่ารวมราคาส่งฝากขาย'
+                          : 'ยอดรวมสุทธิ (ราคาหน้าร้าน)'}
+                      </td>
+                      <td className='border border-black p-1 text-right'>
+                        {formatCurrency(totals.agreedTotal)}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        className='border border-black p-1 text-right'
+                        colSpan={5}
+                      >
+                        กำไรส่วนต่างประมาณการของร้าน (Margin)
+                      </td>
+                      <td className='border border-black p-1 text-right'>
+                        {formatCurrency(totals.potentialProfit)}
+                      </td>
+                    </tr>
                     {totals.isAdjustmentOnly && (
-                      <tr className='font-bold'>
+                      <tr className='text-[10px]'>
                         <td
-                          className='border border-black p-1 text-right uppercase'
+                          className='border border-black p-1 text-center text-red-500'
                           colSpan={6}
                         >
-                          สัญญานี้จัดทำขึ้นเพื่อการปรับราคาของสินค้าเดิมที่มีอยู่ในร้าน
-                          โปรดตรวจสอบราคาสินค้าที่ระบุไว้ด้านบน
-                        </td>
-                      </tr>
-                    )}
-
-                    {!totals.isAdjustmentOnly && (
-                      <tr className='font-bold'>
-                        <td
-                          className='border border-black p-1 text-right uppercase'
-                          colSpan={5}
-                        >
-                          ยอดรวมสุทธิ
-                        </td>
-                        <td className='border border-black p-1 text-right'>
-                          {formatNumber(totals.agreedTotal)}
+                          * This contract is for price adjustment of existing
+                          store items based on current stock levels. /
+                          สัญญานี้ใช้สำหรับการปรับราคาขายของสินค้าคงเหลือในร้านตามจำนวนสต็อกปัจจุบัน
                         </td>
                       </tr>
                     )}
                   </tfoot>
-                </table>
+                  {/* <tfoot>
+                    <tr className='bg-gray-50 font-bold'>
+                      <td
+                        className='border border-black p-1 text-right uppercase'
+                        colSpan={5}
+                      >
+                        {totals.isAdjustmentOnly
+                          ? 'มูลค่ารวมสต็อกคงเหลือปัจจุบัน'
+                          : 'ยอดรวมสุทธิ'}
+                      </td>
+                      <td className='border border-black p-1 text-right'>
+                        {formatNumber(totals.agreedTotal)}
+                      </td>
+                    </tr>
 
-                <section className='mb-4'>
-                  <p className='text-justify'>
-                    กรรมสิทธิ์ในสินค้าฝากขายยังคงเป็นของผู้ฝากขายจนกว่าสินค้าเหล่านั้นจะถูกจำหน่ายและกรรมสิทธิ์โอนไปยังบุคคลที่สาม
-                    ผู้รับฝากขายตกลงและยินยอมว่าตนมีเพียงสิทธิในการครอบครองสินค้าฝากขายเท่านั้น
-                    ผู้ฝากขายมอบอำนาจให้ผู้รับฝากขายมีสิทธิในการจำหน่ายสินค้าฝากขายในนามของผู้ฝากขาย
-                    นอกจากนี้ผู้รับฝากขายยังมีสิทธิในการจัดแสดงและจำหน่ายสินค้าฝากขายในวิธีการที่ผู้รับฝากขายเห็นสมควรเพื่อให้เกิดโอกาสในการขายสูงสุด
-                    แต่อย่างไรก็ตามต้องเป็นไปตามข้อกำหนดและเงื่อนไขที่ระบุไว้ในสัญญานี้
-                  </p>
-                </section>
+                    {totals.isAdjustmentOnly && (
+                      <tr className='text-[10px]'>
+                        <td
+                          className='border border-black p-1 text-center'
+                          colSpan={6}
+                        >
+                          * This contract is for price adjustment of existing
+                          store items based on current stock levels. /
+                          สัญญานี้ใช้สำหรับการปรับราคาขายของสินค้าคงเหลือในร้านตามจำนวนสต็อกปัจจุบัน
+                        </td>
+                      </tr>
+                    )}
+                  </tfoot> */}
+                </table>
               </div>
 
               <section className='mb-4'>
