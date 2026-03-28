@@ -2,19 +2,19 @@ import '@/styles/globals.css'
 
 import { IBM_Plex_Sans_Thai } from 'next/font/google'
 
-import type { Viewport } from 'next'
+// import type { Viewport } from 'next'
 import type { PropsWithChildren } from 'react'
 
 import { Providers } from '@/components/providers/Providers'
-import { BRAND_COLORS } from '@/constants'
+// import { BRAND_COLORS } from '@/constants'
 import { cn } from '@/utils'
 
-export const viewport: Viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: BRAND_COLORS.primary },
-    { media: '(prefers-color-scheme: dark)', color: BRAND_COLORS.primary },
-  ],
-}
+// export const viewport: Viewport = {
+//   themeColor: [
+//     { media: '(prefers-color-scheme: light)', color: BRAND_COLORS.primary },
+//     { media: '(prefers-color-scheme: dark)', color: BRAND_COLORS.primary },
+//   ],
+// }
 
 const anuphan = IBM_Plex_Sans_Thai({
   subsets: ['latin'],
