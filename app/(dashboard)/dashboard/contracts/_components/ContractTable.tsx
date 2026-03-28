@@ -29,7 +29,6 @@ import { useState } from 'react'
 import type { Selection } from '@heroui/react'
 
 import { ContractApproveModal } from './ContractApproveModal'
-import { ContractDetailModal } from './ContractDetailModal'
 
 import { ConfirmDeleteModal } from '@/app/(dashboard)/_components/ConfirmDeleteModal'
 import { useContractsAdmin } from '@/features/contract/hook'
@@ -48,12 +47,6 @@ const ContractTable = ({ selectedKeys, onSelectionChange }: Props) => {
   const { updateStatus, isUpdatingStatus } = useContractMutation()
 
   const {
-    isOpen: isDetailOpen,
-    onOpen: onDetailOpen,
-    onOpenChange: onDetailOpenChange,
-  } = useDisclosure()
-
-  const {
     isOpen: isApproveOpen,
     onOpen: onApproveOpen,
     onOpenChange: onApproveOpenChange,
@@ -69,7 +62,7 @@ const ContractTable = ({ selectedKeys, onSelectionChange }: Props) => {
 
   const handleViewDetails = (id: string) => {
     setSelectedId(id)
-    onDetailOpen()
+    onApproveOpen()
   }
 
   const handleApproveClick = (id: string) => {
@@ -252,15 +245,6 @@ const ContractTable = ({ selectedKeys, onSelectionChange }: Props) => {
           })}
         </TableBody>
       </Table>
-
-      <ContractDetailModal
-        contractId={selectedId}
-        isOpen={isDetailOpen}
-        onClose={() => {
-          setSelectedId(null)
-          onDetailOpenChange()
-        }}
-      />
 
       <ContractApproveModal
         contractId={selectedId}
