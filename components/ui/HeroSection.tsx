@@ -3,12 +3,7 @@
 'use client'
 
 import { Button } from '@heroui/react'
-import {
-  ShoppingCart,
-  ChevronLeft,
-  ChevronRight,
-  ArrowRight,
-} from 'lucide-react'
+import { ChevronLeft, ChevronRight, ChevronRightIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useLocale } from 'next-intl'
 import { useState, useEffect, useCallback } from 'react'
@@ -60,82 +55,67 @@ const HeroSection = () => {
   }
 
   return (
-    <section className='relative w-full transition-colors duration-300'>
-      <div className='flex w-full flex-col gap-8 xl:flex-row xl:items-center xl:gap-12'>
-        <div className='order-2 flex-1 space-y-4 px-4 text-center transition-all duration-500 md:space-y-6 md:px-0 md:text-left xl:order-1'>
+    <section className='relative w-full py-10 transition-colors duration-300'>
+      <div className='flex w-full flex-col gap-8 md:flex-row xl:items-center xl:gap-12'>
+        <div className='flex-1 space-y-4 px-4 text-center transition-all duration-500 md:space-y-6 md:px-0 md:text-left'>
           <div className='min-h-[140px] md:min-h-[180px]'>
-            <h1 className='text-3xl leading-tight font-bold text-neutral-900 md:text-6xl dark:text-neutral-50'>
-              {currentProduct?.name.split(' ').map((word, i) => {
-                return i === 0 ? (
-                  <span key={i}>
-                    {word} <br className='hidden md:block' />
-                  </span>
-                ) : (
-                  <span key={i} className='text-green-600 dark:text-green-500'>
-                    {word}{' '}
-                  </span>
-                )
-              })}
+            <h1 className='text-3xl leading-tight font-bold sm:text-4xl'>
+              {currentProduct?.name}
             </h1>
 
-            <p className='mt-3 w-full text-base text-neutral-900 opacity-50 md:mt-4 md:text-lg dark:text-neutral-50'>
+            <p className='mt-3 w-full text-base md:mt-4 md:text-lg'>
               {currentProduct?.summary ||
                 'Selecting the best for your health with premium olive oil and honey.'}
             </p>
           </div>
 
-          <div className='flex flex-col items-center gap-3 pt-2 md:gap-4 md:pt-4 xl:flex-row'>
-            <Button
-              as={Link}
-              className='flex w-full items-center justify-center gap-2 rounded-xl border border-neutral-200 bg-white px-6 py-3.5 font-semibold text-neutral-700 transition-all md:px-8 md:py-4 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300'
-              href={`/products/${currentProduct?.slug}`}
-              size='lg'
-              startContent={<ShoppingCart size={18} />}
-            >
-              Shop Now - {displayPrice}
-            </Button>
-            <Button
-              as={Link}
-              className='flex w-full items-center justify-center gap-2 rounded-xl border border-neutral-200 bg-white px-6 py-3.5 font-semibold text-neutral-700 transition-all md:px-8 md:py-4 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300'
-              endContent={<ArrowRight size={18} />}
-              href='/products'
-              size='lg'
-            >
-              View All Products
-            </Button>
-          </div>
+          <div className='flex flex-col gap-2.5'>
+            <Link href={`/products/${currentProduct?.slug}`}>
+              <div className='flex items-center gap-2.5 opacity-50 hover:underline hover:opacity-100'>
+                <span>Shop Now - {displayPrice}</span>
+                <ChevronRightIcon />
+              </div>
+            </Link>
 
-          <div className='flex items-center justify-center gap-2 pt-4 md:justify-start'>
-            {products.map((_, index) => {
-              return (
-                <Button
-                  key={index}
-                  className={`h-1.5 min-w-0 rounded-full p-0 transition-all md:h-2 ${
-                    currentIndex === index
-                      ? 'w-6 bg-green-600 md:w-8 dark:bg-green-500'
-                      : 'w-1.5 bg-neutral-300 md:w-2 dark:bg-neutral-700'
-                  }`}
-                  onClick={() => {
-                    return setCurrentIndex(index)
-                  }}
-                />
-              )
-            })}
+            <Link href='/products'>
+              <div className='flex items-center gap-2.5 opacity-50 hover:underline hover:opacity-100'>
+                <span>View All Products</span>
+                <ChevronRightIcon />
+              </div>
+            </Link>
           </div>
         </div>
 
-        <div className='group relative order-1 flex w-full flex-1 items-center justify-center xl:order-2'>
+        <div className='group relative flex w-full flex-1 items-center justify-center'>
           <div className='relative aspect-square w-full transition-all duration-700 ease-in-out md:max-w-[380px] xl:max-w-[480px]'>
             {currentProduct?.images?.[0]?.url && (
               <div
                 key={currentProduct.id}
-                className='animate-in fade-in zoom-in relative h-full w-full duration-500'
+                className='animate-in fade-in zoom-in relative flex size-full flex-col items-center justify-center duration-500'
               >
                 <img
                   alt={currentProduct.name}
-                  className='relative z-10 size-full object-contain drop-shadow-xl md:drop-shadow-2xl dark:drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)]'
+                  className='border-default-100 relative z-10 size-full rounded-xl border object-contain drop-shadow-xl md:drop-shadow-2xl dark:drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)]'
                   src={currentProduct.images[0].url}
                 />
+
+                <div className='flex items-center justify-center gap-2 pt-4 md:justify-start'>
+                  {products.map((_, index) => {
+                    return (
+                      <Button
+                        key={index}
+                        className={`h-1.5 min-w-0 rounded-full p-0 transition-all md:h-2 ${
+                          currentIndex === index
+                            ? 'w-6 bg-[#222222] md:w-8'
+                            : 'w-1.5 bg-neutral-300 md:w-2 dark:bg-neutral-700'
+                        }`}
+                        onPress={() => {
+                          return setCurrentIndex(index)
+                        }}
+                      />
+                    )
+                  })}
+                </div>
               </div>
             )}
 

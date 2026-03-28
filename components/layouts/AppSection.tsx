@@ -8,7 +8,7 @@ const AppSection = ({
   ...props
 }: ComponentProps<'section'>) => {
   return (
-    <section className={cn('flex flex-col gap-10', className)} {...props}>
+    <section className={cn('flex flex-col gap-5', className)} {...props}>
       {children}
     </section>
   )

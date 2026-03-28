@@ -26,7 +26,7 @@ const AffiliateBanner = ({ className }: ComponentProps<'section'>) => {
   return (
     <section
       className={cn(
-        'bg-faos-dark relative isolate overflow-hidden rounded-lg px-8 py-12 md:px-16 md:py-20',
+        'bg-faos-dark relative isolate overflow-hidden rounded-xl px-8 py-12 md:px-16 md:py-20',
         className,
       )}
     >

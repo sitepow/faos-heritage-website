@@ -15,7 +15,7 @@ const FooterBottom = () => {
   const year = new Date().getFullYear()
 
   return (
-    <Container className='border-default-100 text-default-500 flex flex-col items-center justify-between gap-5 border-t py-8 text-xs xl:flex-row'>
+    <Container className='border-default-100 text-default-500 flex flex-col flex-wrap items-center justify-between gap-5 border-t py-8 text-xs xl:flex-row'>
       <small className='text-xs'>
         {tFooter('copyright', { year, name: tBrand('name') })}
       </small>

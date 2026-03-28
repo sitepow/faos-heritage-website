@@ -42,7 +42,7 @@ const HomePage = async () => {
   return (
     <AppSection>
       <HeroSection />
-      <header className='flex flex-col gap-10'>
+      <header className='flex flex-col gap-10 pb-10'>
         <SectionHeader
           as='h1'
           description={t('description')}
@@ -58,10 +58,8 @@ const HomePage = async () => {
 
       <PostExploreSection itemsPerPage={PAGINATION.ITEMS_PER_PAGE} />
 
-      <aside className='flex flex-col'>
-        <AdvertiseBanner />
-        <AffiliateBanner className='rounded-none' />
-      </aside>
+      <AdvertiseBanner />
+      <AffiliateBanner />
 
       <YouTubeList />
       <PartnerSection />

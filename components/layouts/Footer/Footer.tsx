@@ -26,7 +26,7 @@ const Footer = ({ className, ...props }: ComponentProps<'footer'>) => {
         {menu.map((section, idx) => (
           <section key={idx} className='flex flex-col gap-5'>
             {section.title && !section.isGroup && (
-              <h3 className='text-primary font-bold'>{section.title}</h3>
+              <h3 className='font-bold'>{section.title}</h3>
             )}
 
             <FooterSection section={section} />

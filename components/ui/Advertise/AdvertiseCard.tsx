@@ -13,7 +13,7 @@ interface Props {
 const AdvertiseCard = ({ title, image, messages }: Props) => {
   return (
     <article
-      className='relative overflow-hidden px-6 py-16 text-white'
+      className='relative overflow-hidden rounded-xl px-6 py-16 text-white'
       style={getBackgroundStyle(image)}
     >
       <div className='relative z-10 flex flex-col items-center gap-10'>

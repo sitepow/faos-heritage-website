@@ -14,7 +14,7 @@ const NavbarTopBar = ({ className, ...props }: ComponentProps<'div'>) => {
   const tBrand = useTranslations('brand')
 
   return (
-    <div className={cn('bg-primary text-secondary', className)} {...props}>
+    <div className={cn('text-secondary bg-[#222222]', className)} {...props}>
       <Container className='flex flex-wrap items-center justify-between px-5 py-2.5'>
         <p className='text-sm font-medium tracking-wide'>{tBrand('slogan')}</p>
 

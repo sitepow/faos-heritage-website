@@ -22,7 +22,7 @@ const AdvertiseBanner = () => {
 
   return (
     <AppSection className='gap-0'>
-      <ul className='flex flex-col'>
+      <ul className='flex flex-col gap-5'>
         {tAdvertise.map((item) => (
           <li key={item?.title}>
             <AdvertiseCard {...item} />

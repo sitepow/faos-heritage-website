@@ -17,7 +17,7 @@ const FooterGroup = ({
   items,
 }: FooterGroupProps) => (
   <div className='flex flex-col gap-4'>
-    <h3 className='text-primary font-bold'>{title}</h3>
+    <h3 className='font-bold'>{title}</h3>
 
     <div className='flex flex-wrap gap-3'>
       {isShipping &&
