@@ -19,7 +19,7 @@ import { ConfirmDeleteModal } from '@/app/(dashboard)/_components/ConfirmDeleteM
 import { BRAND_SIGNATURE } from '@/constants'
 import { useContractDetails } from '@/features/contract/hook'
 import { useContractMutation } from '@/features/contract/mutation'
-import { formatDate, formatNumber } from '@/utils'
+import { cn, formatDate, formatNumber } from '@/utils'
 
 interface Props {
   isOpen: boolean
@@ -291,7 +291,7 @@ const ContractApproveModal = ({ isOpen, onClose, contractId }: Props) => {
           </ModalHeader>
 
           <ModalBody className='overflow-y-auto p-0'>
-            <div className='mx-auto w-[210mm] bg-white p-[20mm] font-sans text-[14px] leading-relaxed text-black shadow-lg'>
+            <div className='mx-auto max-w-[210mm] bg-white p-[20mm] font-sans text-[14px] leading-relaxed text-black shadow-lg'>
               <h1 className='mb-6 text-center text-xl font-bold'>
                 Consignment Agreement
               </h1>
@@ -737,7 +737,7 @@ const ContractApproveModal = ({ isOpen, onClose, contractId }: Props) => {
               </section>
             </div>
 
-            <div className='mx-auto w-[210mm] bg-white p-[20mm] font-sans text-[14px] leading-relaxed text-black shadow-lg'>
+            <div className='mx-auto max-w-[210mm] bg-white p-[20mm] font-sans text-[14px] leading-relaxed text-black shadow-lg'>
               <h1 className='mb-6 text-center text-xl font-bold'>
                 สัญญาฝากขายสินค้า
               </h1>
@@ -1142,16 +1142,19 @@ const ContractApproveModal = ({ isOpen, onClose, contractId }: Props) => {
                 </p>
               </section>
 
-              <div className='mt-12 grid grid-cols-2 gap-10'>
-                <div className='text-center'>
+              <div className='mt-12 grid grid-cols-1 gap-10 xl:grid-cols-2'>
+                <div className='w-full text-center'>
                   <p className='mb-8 font-bold'>Consignor Signature</p>
-                  <SignatureCanvas
-                    ref={brandSigRef}
-                    canvasProps={{
-                      className: 'sigCanvas block pointer-events-none',
-                    }}
-                  />
-                  <p className='text-left text-[12px]'>
+                  <div className='relative h-40 w-full border border-gray-200'>
+                    <SignatureCanvas
+                      ref={brandSigRef}
+                      canvasProps={{
+                        className:
+                          'sigCanvas block pointer-events-none w-full h-full',
+                      }}
+                    />
+                  </div>
+                  <p className='mt-2 text-left text-[12px]'>
                     Printed Name: Ms. Patcharin Chanaphukdee
                   </p>
                   <p className='text-left text-[12px]'>
@@ -1163,18 +1166,24 @@ const ContractApproveModal = ({ isOpen, onClose, contractId }: Props) => {
                     Date: {formatDate(contract?.createdAt, 'th', 'numeric')}
                   </p>
                 </div>
-                <div className='text-center'>
+
+                <div className='w-full text-center'>
                   <p className='mb-8 font-bold'>Consignee Signature</p>
-                  <SignatureCanvas
-                    ref={storeSigRef}
-                    canvasProps={{
-                      className: 'sigCanvas  cursor-crosshair block',
-                    }}
-                    maxWidth={3}
-                    minWidth={1.5}
-                    penColor='black'
-                  />
-                  <p className='text-left text-[12px]'>
+                  <div className='relative h-40 w-full border border-gray-200'>
+                    <SignatureCanvas
+                      ref={storeSigRef}
+                      canvasProps={{
+                        className: cn(
+                          `sigCanvas block size-full cursor-crosshair`,
+                          !ContractModalDraft && 'pointer-events-none',
+                        ),
+                      }}
+                      maxWidth={3}
+                      minWidth={1.5}
+                      penColor='black'
+                    />
+                  </div>
+                  <p className='mt-2 text-left text-[12px]'>
                     Printed Name:{' '}
                     {contract?.storefront?.managers
                       ?.map((item) => item?.name)
@@ -1186,7 +1195,8 @@ const ContractApproveModal = ({ isOpen, onClose, contractId }: Props) => {
                   </p>
                   <p className='text-left text-[12px]'>Title: Director</p>
                   <p className='text-left text-[12px]'>
-                    Date: {formatDate(new Date(), 'th', 'numeric')}
+                    Date:{' '}
+                    {formatDate(new Date().toISOString(), 'th', 'numeric')}
                   </p>
                 </div>
               </div>

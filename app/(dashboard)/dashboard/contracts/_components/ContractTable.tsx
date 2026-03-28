@@ -157,7 +157,7 @@ const ContractTable = ({ selectedKeys, onSelectionChange }: Props) => {
                 <TableCell className='max-w-48 min-w-48 font-bold'>
                   {contract.storefront?.name || 'ไม่ระบุชื่อร้าน'}
                 </TableCell>
-                <TableCell>
+                <TableCell className='max-w-32 min-w-32'>
                   {contract?.isAdjustment ? 'ปรับราคา' : 'โอนสต็อกและปรับราคา'}
                 </TableCell>
                 <TableCell className='max-w-48 min-w-48'>
