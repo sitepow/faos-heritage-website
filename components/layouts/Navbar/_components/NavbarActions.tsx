@@ -2,13 +2,11 @@
 
 import { Button } from '@heroui/react'
 import { SearchIcon, LogInIcon } from 'lucide-react'
-import Link from 'next/link'
 
 import type { NavLink } from './navbar.types'
 import type { GetBlogCategoriesResult } from '@/features/blog-category/action'
 import type { GetCategoriesResult } from '@/features/category/action'
 
-import { AffiliateStatsTicker } from './AffiliateStatsTicker'
 import { NavbarCartIndicator } from './NavbarCartIndicator'
 import { NavbarMobileMenu } from './NavbarMobileMenu'
 import { NavbarUserMenu } from './NavbarUserMenu'
@@ -30,13 +28,13 @@ const NavbarActions = ({ staticLinks, categories, blogCategories }: Props) => {
   return (
     <div className='flex flex-1 items-center justify-end gap-5'>
       <div className='flex flex-wrap items-center gap-4'>
-        {isAuthenticated && (
+        {/* {isAuthenticated && (
           <div className='ml-4 hidden sm:block'>
             <Link href='/affiliate'>
               <AffiliateStatsTicker />
             </Link>
           </div>
-        )}
+        )} */}
 
         <Button isIconOnly className='lg:hidden' variant='light'>
           <CustomIcon icon={SearchIcon} />

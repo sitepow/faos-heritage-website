@@ -57,7 +57,7 @@ const HeroSection = () => {
   return (
     <section className='relative w-full py-10 transition-colors duration-300'>
       <div className='flex w-full flex-col gap-8 md:flex-row xl:items-center xl:gap-12'>
-        <div className='flex-1 space-y-4 px-4 text-center transition-all duration-500 md:space-y-6 md:px-0 md:text-left'>
+        <div className='order-2 flex-1 space-y-4 px-4 text-center transition-all duration-500 md:space-y-6 md:px-0 md:text-left'>
           <div className='min-h-[140px] md:min-h-[180px]'>
             <h1 className='text-3xl leading-tight font-bold sm:text-4xl'>
               {currentProduct?.name}
@@ -69,7 +69,7 @@ const HeroSection = () => {
             </p>
           </div>
 
-          <div className='flex flex-col gap-2.5'>
+          <div className='flex flex-col items-center gap-2.5 md:items-start'>
             <Link href={`/products/${currentProduct?.slug}`}>
               <div className='flex items-center gap-2.5 opacity-50 hover:underline hover:opacity-100'>
                 <span>Shop Now - {displayPrice}</span>
@@ -86,7 +86,7 @@ const HeroSection = () => {
           </div>
         </div>
 
-        <div className='group relative flex w-full flex-1 items-center justify-center'>
+        <div className='group relative order-1 flex w-full flex-1 items-center justify-center'>
           <div className='relative aspect-square w-full transition-all duration-700 ease-in-out md:max-w-[380px] xl:max-w-[480px]'>
             {currentProduct?.images?.[0]?.url && (
               <div

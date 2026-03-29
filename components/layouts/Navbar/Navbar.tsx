@@ -4,7 +4,6 @@ import { Container } from '../Container'
 import { NavbarActions } from './_components/NavbarActions'
 import { NavbarLogo } from './_components/NavbarLogo'
 import { NavbarMenu } from './_components/NavbarMenu'
-import { NavbarSearch } from './_components/NavbarSearch'
 
 import { NAV_PATH_MAP } from '@/constants/navigation'
 import { getBlogCategories } from '@/features/blog-category/action'
@@ -27,23 +26,22 @@ const Navbar = async () => {
   ])
 
   return (
-    <div className='overflow-x-hidden bg-[#ffffffe4] backdrop-blur-md dark:bg-[#0a0a0ae4]'>
-      <div className='border-default-100 border-b xl:pb-5'>
+    <div className='overflow-x-hidden bg-[#ffffff] dark:bg-[#0a0a0a]'>
+      <div className='border-default-100 border-b'>
         <Container className='flex items-center justify-between gap-4 p-5'>
-          <NavbarSearch />
           <NavbarLogo href={'/'} />
+          <NavbarMenu
+            blogCategories={blogCategories}
+            categories={categories}
+            staticLinks={staticLinks}
+          />
+
           <NavbarActions
             blogCategories={blogCategories}
             categories={categories}
             staticLinks={staticLinks}
           />
         </Container>
-
-        <NavbarMenu
-          blogCategories={blogCategories}
-          categories={categories}
-          staticLinks={staticLinks}
-        />
       </div>
     </div>
   )

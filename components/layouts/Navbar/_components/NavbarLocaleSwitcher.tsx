@@ -82,7 +82,7 @@ const NavbarLocaleSwitcher = () => {
       <Dropdown placement='bottom-end'>
         <DropdownTrigger>
           <Button
-            className='text-secondary p-0'
+            className='text-foreground p-0'
             startContent={<GlobeIcon />}
             variant='light'
           >
@@ -124,7 +124,7 @@ const NavbarLocaleSwitcher = () => {
 
       <Dropdown placement='bottom-end'>
         <DropdownTrigger>
-          <Button className='text-secondary p-0' variant='light'>
+          <Button className='text-foreground p-0' variant='light'>
             <div className='flex items-center gap-1'>
               <span className='uppercase'>
                 {appLocale.currency || tCountry('currency')}

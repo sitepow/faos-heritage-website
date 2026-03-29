@@ -5,8 +5,6 @@ import { memo } from 'react'
 
 import type { ComponentProps } from 'react'
 
-import { PostBrandBadge } from './PostBrandBadge'
-
 import { IMAGE_FALLBACK } from '@/constants'
 import { cn } from '@/utils'
 
@@ -14,7 +12,7 @@ const PostCardImage = memo(
   ({ src, className, alt, ...props }: ComponentProps<typeof Image>) => {
     return (
       <figure className='relative size-full overflow-hidden'>
-        <PostBrandBadge hasImage={!!src} />
+        {/* <PostBrandBadge hasImage={!!src} /> */}
         <Image
           alt={alt}
           className={cn('z-0 size-full object-cover', className)}

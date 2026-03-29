@@ -40,7 +40,7 @@ const ThemeSwitch = ({ className }: ThemeSwitchProps) => {
       <Dropdown>
         <DropdownTrigger>
           <Button
-            className='text-secondary px-2'
+            className='text-foreground px-2'
             startContent={<SunMoonIcon />}
             variant='light'
           >
