@@ -32,7 +32,7 @@ const SectionHeader = ({
       </Tag>
 
       {description ? (
-        <p className='bg-red-5 mx-auto w-full text-lg opacity-60 sm:max-w-[75%] sm:text-xl lg:max-w-[60%] xl:max-w-[50%]'>
+        <p className='bg-red-5 mx-auto w-full text-lg opacity-70 sm:max-w-[75%] sm:text-xl lg:max-w-[60%] xl:max-w-[50%]'>
           {description}
         </p>
       ) : null}

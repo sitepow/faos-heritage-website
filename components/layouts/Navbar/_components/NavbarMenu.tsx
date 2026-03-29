@@ -7,6 +7,7 @@ import {
   DropdownItem,
   Button,
 } from '@heroui/react'
+import { ChevronDownIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useMemo } from 'react'
 
@@ -24,7 +25,7 @@ interface Props {
 }
 
 const NavbarMenu = ({ staticLinks, categories, blogCategories }: Props) => {
-  const MAX_VISIBLE_ITEMS = 3
+  const MAX_VISIBLE_ITEMS = 4
 
   const allCategories = useMemo(() => {
     const blogData = blogCategories?.success ? blogCategories.data : []
@@ -73,9 +74,8 @@ const NavbarMenu = ({ staticLinks, categories, blogCategories }: Props) => {
                   <Button
                     disableRipple
                     className='h-auto min-w-fit bg-transparent p-0 transition-opacity hover:opacity-70 data-[hover=true]:bg-transparent'
-                  >
-                    <MenuItem label='...' />
-                  </Button>
+                    startContent={<ChevronDownIcon className='opacity-70' />}
+                  />
                 </DropdownTrigger>
                 <DropdownMenu
                   aria-label='More categories'

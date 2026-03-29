@@ -7,7 +7,7 @@ import {
   DropdownItem,
   Button,
 } from '@heroui/react'
-import { ChevronDownIcon, GlobeIcon } from 'lucide-react'
+import { ChevronDownIcon } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 import { useEffect, useMemo } from 'react'
 
@@ -83,7 +83,7 @@ const NavbarLocaleSwitcher = () => {
         <DropdownTrigger>
           <Button
             className='text-foreground p-0'
-            startContent={<GlobeIcon />}
+            startContent={<CountryFlagAvatar countryCode={appLocale.country} />}
             variant='light'
           >
             <div className='flex items-center gap-2'>

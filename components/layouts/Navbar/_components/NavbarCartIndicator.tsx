@@ -18,7 +18,7 @@ const NavbarCartIndicator = () => {
   return (
     <Link aria-label='Cart' className='relative inline-block' href={'/cart'}>
       <Badge
-        className='bg-primary border-none font-bold text-white'
+        className='border-none bg-red-500 font-bold text-white'
         color='primary'
         content={displayCount}
         shape='circle'

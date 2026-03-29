@@ -57,13 +57,13 @@ const HeroSection = () => {
   return (
     <section className='relative w-full py-10 transition-colors duration-300'>
       <div className='flex w-full flex-col gap-8 md:flex-row xl:items-center xl:gap-12'>
-        <div className='order-2 flex-1 space-y-4 px-4 text-center transition-all duration-500 md:space-y-6 md:px-0 md:text-left'>
+        <div className='order-2 flex-1 space-y-4 text-center transition-all duration-500 md:space-y-6 md:px-0 md:text-left'>
           <div className='min-h-[140px] md:min-h-[180px]'>
             <h1 className='text-3xl leading-tight font-bold sm:text-4xl'>
               {currentProduct?.name}
             </h1>
 
-            <p className='mt-3 w-full text-base md:mt-4 md:text-lg'>
+            <p className='mt-3 w-full md:mt-4 md:text-lg'>
               {currentProduct?.summary ||
                 'Selecting the best for your health with premium olive oil and honey.'}
             </p>
@@ -71,14 +71,14 @@ const HeroSection = () => {
 
           <div className='flex flex-col items-center gap-2.5 md:items-start'>
             <Link href={`/products/${currentProduct?.slug}`}>
-              <div className='flex items-center gap-2.5 opacity-50 hover:underline hover:opacity-100'>
+              <div className='flex items-center gap-2.5 opacity-70 hover:underline hover:opacity-100'>
                 <span>Shop Now - {displayPrice}</span>
                 <ChevronRightIcon />
               </div>
             </Link>
 
             <Link href='/products'>
-              <div className='flex items-center gap-2.5 opacity-50 hover:underline hover:opacity-100'>
+              <div className='flex items-center gap-2.5 opacity-70 hover:underline hover:opacity-100'>
                 <span>View All Products</span>
                 <ChevronRightIcon />
               </div>
@@ -132,7 +132,7 @@ const HeroSection = () => {
               )}
 
               <div className='flex h-14 w-14 rotate-12 animate-bounce flex-col items-center justify-center rounded-full border-2 border-white bg-red-500 font-bold text-white shadow-lg md:h-20 md:w-20 md:border-4 dark:border-neutral-900'>
-                <span className='text-[8px] leading-none md:text-[10px]'>
+                <span className='m text-sm leading-none md:text-xl'>
                   SHOP
                   <br />
                   NOW!

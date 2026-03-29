@@ -24,12 +24,12 @@ const FooterSection = ({ section }: { section: FooterMenuSection }) => {
   if (section.isPartner) {
     return (
       <nav className='flex flex-col gap-3'>
-        <ul className='marker:text-primary list-disc pl-5'>
+        <ul className='list-disc pl-5'>
           {storefronts?.map((storefront) => {
             return (
               <li key={storefront.id} className='mb-2'>
                 <a
-                  className='hover:text-primary text-default-500 transition-all'
+                  className='opacity-70 transition-all hover:opacity-100'
                   href={storefront.googleMapUrl || '#'}
                   rel='noopener noreferrer'
                   target='_blank'
@@ -105,14 +105,14 @@ const FooterSection = ({ section }: { section: FooterMenuSection }) => {
 
   return (
     <nav className='flex flex-col gap-3'>
-      <ul className='marker:text-primary list-disc pl-5'>
+      <ul className='list-disc pl-5'>
         {section.items?.map((link, i) => {
           return (
             typeof link === 'object' &&
             'label' in link && (
               <li key={i} className='mb-2'>
                 <a
-                  className='hover:text-primary text-default-500 transition-all'
+                  className='opacity-70 transition-all hover:opacity-100'
                   href={link.href}
                 >
                   {link.label}

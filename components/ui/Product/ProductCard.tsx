@@ -9,6 +9,7 @@ import type { GetProductsInfiniteResult } from '@/features/product/types'
 import { ProductImage } from './ProductImage'
 import { VariantTable } from './VariantTable'
 
+import { useProductPrice } from '@/features/product/hook'
 import { resolveProductImages } from '@/utils'
 
 type ProductItem = GetProductsInfiniteResult['items'][number]
@@ -30,12 +31,16 @@ const ProductCard = memo(({ className, product }: Props) => {
     [product?.slug],
   )
 
+  const { maxDiscountPercentage } = useProductPrice(product)
+
   return (
     <div className={cn('group flex flex-col gap-2', className)}>
-      <div className='bg-default-100 relative aspect-square w-full overflow-hidden rounded-2xl'>
+      <div className='bg-default-100 relative aspect-square w-full rounded-2xl'>
         <ProductImage
           fill
           className='size-full object-cover transition-transform duration-500 group-hover:scale-105'
+          discount={maxDiscountPercentage}
+          hasAnyDiscount={product?.hasAnyDiscount}
           image={primarySrc}
         />
         <Link
@@ -63,7 +68,5 @@ const ProductCard = memo(({ className, product }: Props) => {
     </div>
   )
 })
-
-ProductCard.displayName = 'ProductCard'
 
 export { ProductCardSkeleton, ProductCard }

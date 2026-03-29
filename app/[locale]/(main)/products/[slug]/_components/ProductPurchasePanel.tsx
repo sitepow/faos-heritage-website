@@ -192,7 +192,7 @@ const ProductPurchasePanel = () => {
 
         <section
           aria-label='Share Product'
-          className='bg-default-50 flex flex-col gap-3 rounded-lg p-4'
+          className='flex flex-col gap-3 rounded-lg p-4'
         >
           {affiliateCode && (
             <div className='flex items-center justify-end'>

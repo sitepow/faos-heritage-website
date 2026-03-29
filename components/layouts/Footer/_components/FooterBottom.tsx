@@ -29,7 +29,7 @@ const FooterBottom = () => {
         {CURRENCY_LOCALE_MAP.map((c) => (
           <Link
             key={c.country}
-            className='border-default-100 hover:bg-primary/10 hover:text-primary cursor-pointer rounded-full border px-3 py-1 transition'
+            className='border-default-100 cursor-pointer border-b px-3 py-1 opacity-70 transition hover:opacity-100'
             href='/'
             locale={c.country.toLowerCase()}
           >

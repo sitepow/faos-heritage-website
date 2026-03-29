@@ -1,9 +1,9 @@
 import { getLocale, getTranslations } from 'next-intl/server'
 
 import { Container } from '../Container'
-import { NavbarActions } from './_components/NavbarActions'
 import { NavbarLogo } from './_components/NavbarLogo'
 import { NavbarMenu } from './_components/NavbarMenu'
+import { NavbarMobileMenu } from './_components/NavbarMobileMenu'
 
 import { NAV_PATH_MAP } from '@/constants/navigation'
 import { getBlogCategories } from '@/features/blog-category/action'
@@ -28,15 +28,14 @@ const Navbar = async () => {
   return (
     <div className='overflow-x-hidden bg-[#ffffff] dark:bg-[#0a0a0a]'>
       <div className='border-default-100 border-b'>
-        <Container className='flex items-center justify-between gap-4 p-5'>
+        <Container className='flex items-center justify-between gap-5 p-5 xl:justify-start'>
           <NavbarLogo href={'/'} />
           <NavbarMenu
             blogCategories={blogCategories}
             categories={categories}
             staticLinks={staticLinks}
           />
-
-          <NavbarActions
+          <NavbarMobileMenu
             blogCategories={blogCategories}
             categories={categories}
             staticLinks={staticLinks}

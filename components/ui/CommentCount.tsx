@@ -1,6 +1,5 @@
 'use client'
 
-import { MessageCircle } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 
 import type { ComponentProps } from 'react'
@@ -24,7 +23,6 @@ const CommentCount = ({ commentCount, className, ...props }: Props) => {
       {...props}
     >
       <div className='flex items-center gap-1'>
-        <MessageCircle aria-hidden='true' size={16} />
         <span className='whitespace-nowrap'>
           {formattedCount} {t('comments')}
         </span>

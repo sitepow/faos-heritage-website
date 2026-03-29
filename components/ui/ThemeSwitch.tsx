@@ -8,7 +8,7 @@ import {
   Button,
   cn,
 } from '@heroui/react'
-import { ChevronDownIcon, SunMoonIcon } from 'lucide-react'
+import { ChevronDownIcon, SettingsIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useTheme } from 'next-themes'
 
@@ -41,12 +41,12 @@ const ThemeSwitch = ({ className }: ThemeSwitchProps) => {
         <DropdownTrigger>
           <Button
             className='text-foreground px-2'
-            startContent={<SunMoonIcon />}
+            startContent={<SettingsIcon />}
             variant='light'
           >
             <span className='flex items-center gap-2'>
               <span className='capitalize'>{tTheme(currentTheme)}</span>
-              <ChevronDownIcon size={14} />
+              <ChevronDownIcon />
             </span>
           </Button>
         </DropdownTrigger>

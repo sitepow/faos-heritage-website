@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl'
 
 import type { ComponentProps } from 'react'
 
+import { NavbarActions } from './NavbarActions'
 import { NavbarLocaleSwitcher } from './NavbarLocaleSwitcher'
 import { Container } from '../../Container'
 
@@ -16,17 +17,18 @@ const NavbarTopBar = ({ className, ...props }: ComponentProps<'div'>) => {
   return (
     <div
       className={cn(
-        'text-foreground bg-[#f8f8f8] dark:bg-[#0e0e0e]',
+        'text-foreground border-default-100 border-b bg-[#f8f8f8] dark:bg-[#0e0e0e]',
         className,
       )}
       {...props}
     >
-      <Container className='flex flex-wrap items-center justify-between px-5 py-2.5'>
+      <Container className='flex flex-wrap items-center justify-between gap-5 px-5 py-2.5'>
         <p className='text-sm font-medium tracking-wide'>{tBrand('slogan')}</p>
 
         <div className='flex flex-wrap items-center gap-2'>
           <NavbarLocaleSwitcher />
           <ThemeSwitch />
+          <NavbarActions />
         </div>
       </Container>
     </div>
