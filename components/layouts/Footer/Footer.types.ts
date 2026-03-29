@@ -14,6 +14,7 @@ interface FooterSubSection {
 interface FooterMenuSection {
   title?: string
   isGroup?: boolean
+  isPartner?: boolean
   isMarketplace?: boolean
   isCertificate?: boolean
   subSections?: FooterSubSection[]

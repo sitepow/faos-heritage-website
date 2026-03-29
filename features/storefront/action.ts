@@ -154,6 +154,7 @@ const getActiveStorefronts = async () => {
   const storefronts = await prisma.storefront.findMany({
     where: {
       isActive: true,
+      isMain: false,
       ...(!roles.includes('ADMIN') && {
         managers: {
           some: { id: userId },
