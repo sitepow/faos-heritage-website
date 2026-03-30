@@ -92,7 +92,7 @@ const PostClient = ({ initialData, slug }: Props) => {
               aria-label='Post summary'
               className='mx-auto my-5 w-full max-w-4xl'
             >
-              <p className='text-default-600 border-primary border-l-4 pl-4 text-xl leading-relaxed italic'>
+              <p className='text-default-600 border-primary border-l-4 pl-4 text-xl leading-relaxed'>
                 {summary}
               </p>
             </section>

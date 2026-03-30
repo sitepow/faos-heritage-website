@@ -7,7 +7,6 @@ import { memo } from 'react'
 
 import type { Prisma } from '@prisma/client'
 
-import { PostAuthorAvatar } from './PostAuthorAvatar'
 import { Dot } from './_components/Dot'
 
 import { IMAGE_FALLBACK } from '@/constants'
@@ -39,19 +38,24 @@ const PostCard = memo(({ post }: Props) => {
       <div className='flex flex-col gap-5'>
         <img
           alt={title}
-          className='h-[250px] w-full rounded-xl object-cover lg:h-[350px]'
+          className='h-[250px] w-full rounded-xl object-cover'
           src={featuredImage || IMAGE_FALLBACK.EMPTY}
         />
 
-        <h3 className='text-foreground line-clamp-2 min-h-[3rem] text-2xl leading-tight font-semibold'>
+        <h3 className='text-xl font-semibold tracking-tight sm:text-2xl'>
           {title}
         </h3>
 
-        <div className='flex flex-wrap items-center gap-2.5'>
-          <PostAuthorAvatar author={author} iconSize={12} />
-          <span>{author?.name!}</span>
-          <Dot className='text-foreground/50' />
-          <span className='opacity-70'>
+        <div className='flex flex-wrap items-center gap-2.5 text-sm'>
+          <img
+            className='size-[24px] rounded-full'
+            src={author?.image ?? IMAGE_FALLBACK.EMPTY}
+          />
+          <span className='text-gray-900 dark:text-gray-400'>
+            {author?.name!}
+          </span>
+          <Dot className='text-gray-500' />
+          <span className='text-gray-500'>
             {formatDate(publishedAt, 'th', 'numeric')}
           </span>
         </div>

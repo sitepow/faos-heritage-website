@@ -121,7 +121,6 @@ const PostTable = ({
             </TableCell>
             <TableCell>
               <ProductImage
-                fill
                 className='size-20'
                 image={post?.featuredImage ?? IMAGE_FALLBACK.EMPTY}
               />

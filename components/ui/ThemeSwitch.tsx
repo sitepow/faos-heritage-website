@@ -6,24 +6,21 @@ import {
   DropdownMenu,
   DropdownItem,
   Button,
-  cn,
 } from '@heroui/react'
 import { ChevronDownIcon, SettingsIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useTheme } from 'next-themes'
 
+import type { ComponentProps } from 'react'
+
 import { useIsMounted } from '@/hooks/useIsMounted'
-import { getSingleKey } from '@/utils'
+import { cn, getSingleKey } from '@/utils'
 
 type ThemeValue = 'light' | 'dark' | 'system'
 
-interface ThemeSwitchProps {
-  className?: string
-}
-
 const THEME_OPTIONS: ThemeValue[] = ['light', 'dark', 'system']
 
-const ThemeSwitch = ({ className }: ThemeSwitchProps) => {
+const ThemeSwitch = ({ className }: ComponentProps<'span'>) => {
   const tTheme = useTranslations('theme')
 
   const { theme, setTheme } = useTheme()
@@ -36,11 +33,11 @@ const ThemeSwitch = ({ className }: ThemeSwitchProps) => {
   }
 
   return (
-    <div className={cn('flex items-center', className)}>
+    <div className='flex items-center'>
       <Dropdown>
         <DropdownTrigger>
           <Button
-            className='text-foreground px-2'
+            className={cn('text-foreground px-2', className)}
             startContent={<SettingsIcon />}
             variant='light'
           >

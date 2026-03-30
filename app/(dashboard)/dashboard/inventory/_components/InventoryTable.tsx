@@ -106,7 +106,7 @@ const InventoryTable = ({
                   </span>
                 </TableCell>
                 <TableCell>
-                  <ProductImage fill className='size-20' image={primarySrc} />
+                  <ProductImage className='size-20' image={primarySrc} />
                 </TableCell>
                 <TableCell className='max-w-52 min-w-52 font-medium'>
                   {product.name}

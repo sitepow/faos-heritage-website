@@ -55,9 +55,9 @@ const AuthSidebar = () => {
       </span>
 
       <div className='flex items-center gap-2 rounded-full bg-white/10 p-2 backdrop-blur-md dark:bg-black/20'>
-        <NavbarLocaleSwitcher />
+        <NavbarLocaleSwitcher className='text-white' />
         <div className='h-4 w-px bg-white/20' />
-        <ThemeSwitch />
+        <ThemeSwitch className='text-white' />
       </div>
     </div>
   )

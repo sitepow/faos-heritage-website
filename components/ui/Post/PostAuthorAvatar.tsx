@@ -15,7 +15,6 @@ interface Props {
 const PostAuthorAvatar = memo(({ author, className, iconSize = 16 }: Props) => {
   return (
     <Avatar
-      isBordered
       className={className}
       icon={<UserIcon size={iconSize} />}
       name={author?.name!}

@@ -37,7 +37,7 @@ const ProductCard = memo(({ className, product }: Props) => {
     <div className={cn('group flex flex-col gap-2', className)}>
       <div className='bg-default-100 relative aspect-square w-full rounded-2xl'>
         <ProductImage
-          fill
+          showBadge
           className='size-full object-cover transition-transform duration-500 group-hover:scale-105'
           discount={maxDiscountPercentage}
           hasAnyDiscount={product?.hasAnyDiscount}
@@ -57,7 +57,7 @@ const ProductCard = memo(({ className, product }: Props) => {
       >
         <CardBody className='flex flex-col gap-0 p-4'>
           <div className='flex flex-col gap-4'>
-            <h3 className='text-foreground min-h-[3rem] text-2xl leading-tight font-semibold'>
+            <h3 className='text-xl font-semibold tracking-tight sm:text-2xl'>
               {product?.name}
             </h3>
 

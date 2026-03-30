@@ -21,24 +21,27 @@ const PartnerSection = () => {
         <h2 className='mb-8 text-center text-2xl font-bold'>
           {t('menu.3.title')}
         </h2>
-        <div className='grid items-center gap-8 sm:grid-cols-2 xl:grid-cols-4'>
+
+        <div className='grid items-start gap-5 sm:grid-cols-2 xl:grid-cols-3'>
           {storefronts?.map((partner) => {
             return (
               <Link
                 key={partner.id}
-                className='flex flex-col flex-wrap items-center justify-center gap-2.5 p-4 text-center grayscale transition-all duration-300 hover:grayscale-0'
+                className='flex flex-col items-center justify-start gap-2.5 p-4 text-center grayscale transition-all duration-300 hover:grayscale-0'
                 href={partner.googleMapUrl || '#'}
                 rel='noopener noreferrer'
                 target='_blank'
               >
-                <img
-                  alt={partner.name}
-                  className='max-h-32 w-auto bg-black object-contain'
-                  height={80}
-                  src={partner.image || IMAGE_FALLBACK.EMPTY}
-                  width={160}
-                />
-                <p className='max-w-3/4 md:max-w-3/5 xl:w-full'>
+                <div className='flex h-32 w-full items-center justify-center'>
+                  <img
+                    alt={partner.name}
+                    className='max-h-32 w-auto bg-black object-contain'
+                    height={80}
+                    src={partner.image || IMAGE_FALLBACK.EMPTY}
+                    width={160}
+                  />
+                </div>
+                <p className='text-lg opacity-70 sm:max-w-[80%] sm:text-xl'>
                   {partner.name}
                 </p>
               </Link>

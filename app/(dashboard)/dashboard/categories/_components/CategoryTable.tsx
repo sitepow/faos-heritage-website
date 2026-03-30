@@ -95,7 +95,6 @@ const CategoryTable = ({
             </TableCell>
             <TableCell>
               <ProductImage
-                fill
                 className='size-20'
                 image={cat?.image ?? IMAGE_FALLBACK.EMPTY}
               />

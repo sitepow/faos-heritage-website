@@ -89,7 +89,6 @@ const StorefrontInventoryTable = ({
                 </TableCell>
                 <TableCell>
                   <ProductImage
-                    fill
                     className='size-20'
                     image={
                       item.product.images?.[0]?.url ?? IMAGE_FALLBACK.EMPTY

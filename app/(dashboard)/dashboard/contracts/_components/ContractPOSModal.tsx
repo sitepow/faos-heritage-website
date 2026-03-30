@@ -430,7 +430,7 @@ const ContractPOSModal = ({
                       >
                         <div className='flex gap-3'>
                           <div className='bg-default-100 flex size-16 shrink-0 items-center justify-center overflow-hidden rounded-md'>
-                            <ProductImage fill image={item.image} />
+                            <ProductImage image={item.image} />
                           </div>
                           <div className='flex-1 overflow-hidden'>
                             <p className='text-sm font-bold'>
@@ -558,7 +558,7 @@ const ContractPOSModal = ({
                   >
                     <div className='flex items-start gap-3'>
                       <div className='bg-default-100 size-12 shrink-0 overflow-hidden rounded-md'>
-                        <ProductImage fill image={item.image} />
+                        <ProductImage image={item.image} />
                       </div>
                       <div className='flex-1 overflow-hidden'>
                         <div className='flex items-start justify-between gap-2'>

@@ -8,6 +8,8 @@ import Link from 'next/link'
 import { useLocale } from 'next-intl'
 import { useState, useEffect, useCallback } from 'react'
 
+import { BadgeOverlay } from './Product/BadgeOverlay'
+
 import { useProductPrice, useProducts } from '@/features/product/hook'
 
 const HeroSection = () => {
@@ -119,26 +121,10 @@ const HeroSection = () => {
               </div>
             )}
 
-            <div className='absolute -top-2 -right-2 z-20 flex gap-2 md:top-8 md:right-8'>
-              {maxDiscountPercentage > 0 && (
-                <div className='flex h-14 w-14 rotate-12 animate-bounce flex-col items-center justify-center rounded-full border-2 border-white bg-red-500 font-bold text-white shadow-lg md:h-20 md:w-20 md:border-4 dark:border-neutral-900'>
-                  <span className='text-[8px] leading-none md:text-[10px]'>
-                    UP TO
-                  </span>
-                  <span className='text-sm md:text-xl'>
-                    {maxDiscountPercentage}%
-                  </span>
-                </div>
-              )}
-
-              <div className='flex h-14 w-14 rotate-12 animate-bounce flex-col items-center justify-center rounded-full border-2 border-white bg-red-500 font-bold text-white shadow-lg md:h-20 md:w-20 md:border-4 dark:border-neutral-900'>
-                <span className='m text-sm leading-none md:text-xl'>
-                  SHOP
-                  <br />
-                  NOW!
-                </span>
-              </div>
-            </div>
+            <BadgeOverlay
+              discount={maxDiscountPercentage}
+              hasAnyDiscount={currentProduct?.hasAnyDiscount}
+            />
 
             <Button
               isIconOnly

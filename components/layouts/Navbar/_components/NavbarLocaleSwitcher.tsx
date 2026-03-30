@@ -11,15 +11,17 @@ import { ChevronDownIcon } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 import { useEffect, useMemo } from 'react'
 
+import type { ComponentProps } from 'react'
+
 import { useAppStore } from '@/app/store'
 import { CountryFlagAvatar } from '@/components/ui/CountryFlagAvatar'
 import { CURRENCY_LOCALE_MAP } from '@/constants'
 import { usePathname, useRouter } from '@/i18n/navigation'
-import { getSingleKey } from '@/utils'
+import { cn, getSingleKey } from '@/utils'
 
 type CountryCode = (typeof CURRENCY_LOCALE_MAP)[number]['country']
 
-const NavbarLocaleSwitcher = () => {
+const NavbarLocaleSwitcher = ({ className }: ComponentProps<'span'>) => {
   const tCountry = useTranslations('global.country')
 
   const routeLocale = useLocale()
@@ -82,7 +84,7 @@ const NavbarLocaleSwitcher = () => {
       <Dropdown placement='bottom-end'>
         <DropdownTrigger>
           <Button
-            className='text-foreground p-0'
+            className={cn('text-foreground p-0', className)}
             startContent={<CountryFlagAvatar countryCode={appLocale.country} />}
             variant='light'
           >
@@ -124,7 +126,10 @@ const NavbarLocaleSwitcher = () => {
 
       <Dropdown placement='bottom-end'>
         <DropdownTrigger>
-          <Button className='text-foreground p-0' variant='light'>
+          <Button
+            className={cn('text-foreground p-0', className)}
+            variant='light'
+          >
             <div className='flex items-center gap-1'>
               <span className='uppercase'>
                 {appLocale.currency || tCountry('currency')}
