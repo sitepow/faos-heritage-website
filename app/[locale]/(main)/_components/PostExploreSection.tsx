@@ -2,6 +2,7 @@
 
 import { Button } from '@heroui/react'
 import { PostStatus } from '@prisma/client'
+import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { useLocale, useTranslations } from 'next-intl'
 
@@ -38,21 +39,23 @@ const PostExploreSection = ({ initialData, itemsPerPage }: Props) => {
 
   return (
     <AppSection>
-      <Container className='flex flex-col gap-10'>
+      <Container className='flex flex-col gap-5'>
         <SectionHeader
           description={tShared('blogDiscovery.description')}
           title={tShared('blogDiscovery.title')}
         />
-
-        <Link className='mx-auto' href='/posts'>
-          <Button variant='faded'>{tActions('more')}</Button>
-        </Link>
 
         <PostSection
           isLoading={isPostsLoading}
           itemPerPage={itemsPerPage}
           items={posts}
         />
+
+        <Link className='mx-auto' href='/posts'>
+          <Button endContent={<ArrowRight />} variant='faded'>
+            {tActions('more')}
+          </Button>
+        </Link>
       </Container>
     </AppSection>
   )

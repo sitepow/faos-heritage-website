@@ -9,7 +9,7 @@ import {
   Carousel,
   type CarouselHandle,
 } from '@/components/ui/Carousel/Carousel'
-import { DiscountBadge } from '@/components/ui/Product/DiscountBadge'
+import { BadgeOverlay } from '@/components/ui/Product/BadgeOverlay'
 import { IMAGE_FALLBACK } from '@/constants'
 import { useProductPrice } from '@/features/product/hook'
 import { cn } from '@/utils'
@@ -38,7 +38,10 @@ const ProductImagePreview = ({ product, images = [] }: Props) => {
   return (
     <div className='flex flex-col gap-5'>
       <div className='relative'>
-        <DiscountBadge percentage={maxDiscountPercentage} />
+        <BadgeOverlay
+          discount={maxDiscountPercentage}
+          hasAnyDiscount={product?.hasAnyDiscount}
+        />
 
         <Carousel
           ref={mainCarouselRef}

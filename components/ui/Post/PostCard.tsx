@@ -35,29 +35,31 @@ const PostCard = memo(({ post }: Props) => {
 
   return (
     <Link href={postHref}>
-      <div className='flex flex-col gap-5'>
+      <div className='border-default-100 flex flex-col gap-2.5 rounded-xl border'>
         <img
           alt={title}
           className='h-[250px] w-full rounded-xl object-cover'
           src={featuredImage || IMAGE_FALLBACK.EMPTY}
         />
 
-        <h3 className='text-xl font-semibold tracking-tight sm:text-2xl'>
-          {title}
-        </h3>
+        <div className='flex flex-col gap-5 p-2.5'>
+          <h3 className='text-xl font-semibold tracking-tight sm:text-2xl'>
+            {title}
+          </h3>
 
-        <div className='flex flex-wrap items-center gap-2.5 text-sm'>
-          <img
-            className='size-[24px] rounded-full'
-            src={author?.image ?? IMAGE_FALLBACK.EMPTY}
-          />
-          <span className='text-gray-900 dark:text-gray-400'>
-            {author?.name!}
-          </span>
-          <Dot className='text-gray-500' />
-          <span className='text-gray-500'>
-            {formatDate(publishedAt, 'th', 'numeric')}
-          </span>
+          <div className='flex flex-wrap items-center gap-2.5 text-sm'>
+            <img
+              className='size-[24px] rounded-full'
+              src={author?.image ?? IMAGE_FALLBACK.EMPTY}
+            />
+            <span className='text-gray-900 dark:text-gray-400'>
+              {author?.name!}
+            </span>
+            <Dot className='text-gray-500' />
+            <span className='text-gray-500'>
+              {formatDate(publishedAt, 'th', 'numeric')}
+            </span>
+          </div>
         </div>
       </div>
     </Link>

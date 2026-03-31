@@ -1,6 +1,6 @@
 'use client'
 
-import { Card, CardBody, cn, Skeleton } from '@heroui/react'
+import { cn, Skeleton } from '@heroui/react'
 import Link from 'next/link'
 import { memo, useMemo } from 'react'
 
@@ -34,11 +34,16 @@ const ProductCard = memo(({ className, product }: Props) => {
   const { maxDiscountPercentage } = useProductPrice(product)
 
   return (
-    <div className={cn('group flex flex-col gap-2', className)}>
-      <div className='bg-default-100 relative aspect-square w-full rounded-2xl'>
+    <div
+      className={cn(
+        'group border-default-100 flex flex-col gap-2 rounded-xl border',
+        className,
+      )}
+    >
+      <div className='relative aspect-square w-full rounded-2xl'>
         <ProductImage
           showBadge
-          className='size-full object-cover transition-transform duration-500 group-hover:scale-105'
+          className='size-full object-cover'
           discount={maxDiscountPercentage}
           hasAnyDiscount={product?.hasAnyDiscount}
           image={primarySrc}
@@ -50,21 +55,13 @@ const ProductCard = memo(({ className, product }: Props) => {
         />
       </div>
 
-      <Card
-        as='article'
-        className='border-default-100 border bg-transparent'
-        shadow='none'
-      >
-        <CardBody className='flex flex-col gap-0 p-4'>
-          <div className='flex flex-col gap-4'>
-            <h3 className='text-xl font-semibold tracking-tight sm:text-2xl'>
-              {product?.name}
-            </h3>
+      <div className='flex flex-col gap-5 p-2.5'>
+        <h3 className='text-xl font-semibold tracking-tight sm:text-2xl'>
+          {product?.name}
+        </h3>
 
-            <VariantTable variants={product?.variants || []} />
-          </div>
-        </CardBody>
-      </Card>
+        <VariantTable variants={product?.variants || []} />
+      </div>
     </div>
   )
 })
