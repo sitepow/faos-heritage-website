@@ -11,7 +11,7 @@ const ProductPreview = () => {
 
   return (
     <Container className='grid items-start gap-5 lg:grid-cols-2'>
-      <figure className='m-0 min-w-0 overflow-hidden'>
+      <figure className='m-0 min-w-0'>
         <ProductImagePreview
           images={product?.images?.map((image) => image.url)}
           product={product}
