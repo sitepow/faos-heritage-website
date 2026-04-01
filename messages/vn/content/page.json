@@ -40,5 +40,31 @@
         "note": "* Vui lòng hoàn tất giao dịch trong khung thời gian quy định trên trang thanh toán."
       }
     }
-  }
+  },
+  "activity": [
+    {
+      "images": [
+        "/images/activity/atmoz/1.jpeg",
+        "/images/activity/atmoz/2.jpeg",
+        "/images/activity/atmoz/3.jpeg",
+        "/images/activity/atmoz/4.jpeg",
+        "/images/activity/atmoz/5.jpeg",
+        "/images/activity/atmoz/6.jpeg",
+        "/images/activity/atmoz/7.jpeg",
+        "/images/activity/atmoz/8.jpeg",
+        "/images/activity/atmoz/9.jpeg",
+        "/images/activity/atmoz/10.jpeg",
+        "/images/activity/atmoz/11.jpeg",
+        "/images/activity/atmoz/12.jpeg",
+        "/images/activity/atmoz/13.jpeg",
+        "/images/activity/atmoz/14.jpeg",
+        "/images/activity/atmoz/15.jpeg",
+        "/images/activity/atmoz/16.jpeg",
+        "/images/activity/atmoz/17.jpeg",
+        "/images/activity/atmoz/18.jpeg",
+        "/images/activity/atmoz/19.jpeg"
+      ],
+      "content": "<normal>31/01/2025 — Chúng tôi đã tổ chức buổi giới thiệu sản phẩm tại căn hộ Atmoz Season Ladkrabang,</normal> với sự dẫn dắt của ông Nicholas Basoukos (CEO Greek Heritage Food, người đã bay trực tiếp từ Hy Lạp để chia sẻ kiến thức) và bà Patcharin Chanaphukdee (Giám đốc FAOS Thái Lan), cùng đội ngũ của chúng tôi. Sự kiện bao gồm các hoạt động giáo dục về lợi ích của các loại dầu ô liu và mật ong, giới thiệu hành trình từ khâu sản xuất đến thành phẩm cuối cùng. Chúng tôi cũng tổ chức buổi nấu ăn trực tiếp để mang đến cho khách hàng một 'Trải nghiệm đa giác quan' (Sensory Experience)—làm nổi bật hương thơm và hương vị độc đáo của dầu ô liu và mật ong tự nhiên. Những người tham gia cũng đã trao đổi bí quyết chọn nguyên liệu lành mạnh cho bữa ăn hàng ngày. Sự kiện đã nhận được phản hồi tích cực và sản phẩm đã được đặt hết với mức giá ưu đãi đặc biệt."
+    }
+  ]
 }

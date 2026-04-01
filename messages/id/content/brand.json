@@ -20,6 +20,10 @@
     "relatedProducts": {
       "title": "Produk Terkait",
       "description": "Lengkapi pengalaman kesehatan Anda dengan produk pilihan lainnya dari kategori ini."
+    },
+    "activity": {
+      "title": "Aktivitas & Komitmen Kami",
+      "description": "Kami bukan sekadar penjual, tetapi kami berkomitmen untuk menghadirkan kesehatan melalui produk alami. Ini adalah bagian dari aktivitas lapangan kami untuk membangun kepercayaan bagi setiap pelanggan melalui produk nyata."
     }
   }
 }

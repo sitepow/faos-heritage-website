@@ -20,6 +20,10 @@
     "relatedProducts": {
       "title": "Anda Mungkin Juga Suka",
       "description": "Lengkapkan pengalaman kesihatan anda dengan produk terpilih lain daripada kategori ini."
+    },
+    "activity": {
+      "title": "Aktiviti & Komitmen Kami",
+      "description": "Kami bukan sekadar penjual, tetapi kami bertekad untuk menyampaikan kesihatan melalui produk semula jadi. Ini adalah sebahagian daripada aktiviti lapangan kami untuk membina keyakinan pelanggan melalui produk yang sebenar."
     }
   }
 }

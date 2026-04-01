@@ -30,7 +30,7 @@ const VariantTable = ({ variants, className }: Props) => {
             key={`${variant.name}-${idx}`}
             className='border-default-100 flex items-center justify-between border-b p-3 last:border-b-0'
           >
-            <span className='text-foreground font-bold uppercase'>
+            <span className='text-foreground text-lg tracking-tight uppercase sm:text-xl'>
               {variant.name}
             </span>
 

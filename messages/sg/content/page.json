@@ -40,5 +40,31 @@
         "note": "* Please complete the transaction within the specified time frame on the payment page."
       }
     }
-  }
+  },
+  "activity": [
+    {
+      "images": [
+        "/images/activity/atmoz/1.jpeg",
+        "/images/activity/atmoz/2.jpeg",
+        "/images/activity/atmoz/3.jpeg",
+        "/images/activity/atmoz/4.jpeg",
+        "/images/activity/atmoz/5.jpeg",
+        "/images/activity/atmoz/6.jpeg",
+        "/images/activity/atmoz/7.jpeg",
+        "/images/activity/atmoz/8.jpeg",
+        "/images/activity/atmoz/9.jpeg",
+        "/images/activity/atmoz/10.jpeg",
+        "/images/activity/atmoz/11.jpeg",
+        "/images/activity/atmoz/12.jpeg",
+        "/images/activity/atmoz/13.jpeg",
+        "/images/activity/atmoz/14.jpeg",
+        "/images/activity/atmoz/15.jpeg",
+        "/images/activity/atmoz/16.jpeg",
+        "/images/activity/atmoz/17.jpeg",
+        "/images/activity/atmoz/18.jpeg",
+        "/images/activity/atmoz/19.jpeg"
+      ],
+      "content": "<normal>31/01/2025 — We hosted a product showcase at Atmoz Season Ladkrabang Condo,</normal> led by Mr. Nicholas Basoukos (CEO of Greek Heritage Food, who flew directly from Greece to provide firsthand insights) and Ms. Patcharin Chanaphukdee (MD of FAOS Thailand), along with our dedicated team. The event featured educational activities on the benefits of various olive oils and honeys, showcasing the journey from production to the final product. We also hosted a live cooking session to offer participants a true 'Sensory Experience'—highlighting the unique aromas and flavors of natural olive oil and honey. Attendees also exchanged tips on selecting healthy ingredients for their daily meals. The event received an overwhelming response, with products being fully booked at special promotional prices."
+    }
+  ]
 }

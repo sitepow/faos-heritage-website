@@ -76,7 +76,7 @@ const PostAuthor = ({ author }: Props) => {
           </nav>
         </div>
 
-        <p className='text-default-600 max-w-2xl text-base leading-relaxed sm:text-lg'>
+        <p className='max-w-2xl text-lg leading-relaxed tracking-tight antialiased opacity-70 sm:text-xl'>
           Sharing insights about premium Greek organic olive oil, natural honey,
           and the Mediterranean lifestyle to help you achieve optimal
           well-being.

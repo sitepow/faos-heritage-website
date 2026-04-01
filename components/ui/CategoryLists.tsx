@@ -32,7 +32,7 @@ const CategoryLists = () => {
               src={category?.image ?? IMAGE_FALLBACK.EMPTY}
             />
           </div>
-          <span className='group-hover:text-primary line-clamp-2 max-w-32 text-center text-sm font-medium transition-colors sm:text-base'>
+          <span className='group-hover:text-primary line-clamp-2 max-w-32 text-center text-lg tracking-tight sm:text-xl'>
             {category?.name!}
           </span>
         </Link>

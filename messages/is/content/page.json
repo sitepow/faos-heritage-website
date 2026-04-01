@@ -40,5 +40,31 @@
         "note": "* Vinsamlegast ljúktu færslunni innan þess tíma sem gefinn er upp á greiðslusíðunni."
       }
     }
-  }
+  },
+  "activity": [
+    {
+      "images": [
+        "/images/activity/atmoz/1.jpeg",
+        "/images/activity/atmoz/2.jpeg",
+        "/images/activity/atmoz/3.jpeg",
+        "/images/activity/atmoz/4.jpeg",
+        "/images/activity/atmoz/5.jpeg",
+        "/images/activity/atmoz/6.jpeg",
+        "/images/activity/atmoz/7.jpeg",
+        "/images/activity/atmoz/8.jpeg",
+        "/images/activity/atmoz/9.jpeg",
+        "/images/activity/atmoz/10.jpeg",
+        "/images/activity/atmoz/11.jpeg",
+        "/images/activity/atmoz/12.jpeg",
+        "/images/activity/atmoz/13.jpeg",
+        "/images/activity/atmoz/14.jpeg",
+        "/images/activity/atmoz/15.jpeg",
+        "/images/activity/atmoz/16.jpeg",
+        "/images/activity/atmoz/17.jpeg",
+        "/images/activity/atmoz/18.jpeg",
+        "/images/activity/atmoz/19.jpeg"
+      ],
+      "content": "<normal>31/01/2025 — Við héldum vörukynningu í Atmoz Season Ladkrabang,</normal> undir forystu Nicholas Basoukos (forstjóra Greek Heritage Food, sem flaug beint frá Grikklandi til að deila þekkingu sinni) og Patcharin Chanaphukdee (framkvæmdastjóra FAOS í Taílandi), ásamt okkar frábæra teymi. Viðburðurinn bauð upp á fræðslu um kosti ólífuolíu og hunangs, þar sem ferlið frá framleiðslu til fullbúinnar vöru var kynnt. Einnig var boðið upp á matreiðslukynningu til að veita þátttakendum sanna „skynjunarupplifun“ (Sensory Experience) – þar sem einstök ilmur og bragð náttúrulegrar ólífuolíu og hunangs fékk að njóta sín. Þátttakendur skiptust einnig á ráðum um val á heilnæmu hráefni í daglega matargerð. Viðburðurinn fékk frábærar viðtökur og ruku vörurnar út á sérstöku kynningarverði."
+    }
+  ]
 }

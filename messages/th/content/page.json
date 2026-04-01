@@ -40,5 +40,31 @@
         "note": "* กรุณาดำเนินการภายในระยะเวลาที่กำหนดบนหน้าชำระเงิน"
       }
     }
-  }
+  },
+  "activity": [
+    {
+      "images": [
+        "/images/activity/atmoz/1.jpeg",
+        "/images/activity/atmoz/2.jpeg",
+        "/images/activity/atmoz/3.jpeg",
+        "/images/activity/atmoz/4.jpeg",
+        "/images/activity/atmoz/5.jpeg",
+        "/images/activity/atmoz/6.jpeg",
+        "/images/activity/atmoz/7.jpeg",
+        "/images/activity/atmoz/8.jpeg",
+        "/images/activity/atmoz/9.jpeg",
+        "/images/activity/atmoz/10.jpeg",
+        "/images/activity/atmoz/11.jpeg",
+        "/images/activity/atmoz/12.jpeg",
+        "/images/activity/atmoz/13.jpeg",
+        "/images/activity/atmoz/14.jpeg",
+        "/images/activity/atmoz/15.jpeg",
+        "/images/activity/atmoz/16.jpeg",
+        "/images/activity/atmoz/17.jpeg",
+        "/images/activity/atmoz/18.jpeg",
+        "/images/activity/atmoz/19.jpeg"
+      ],
+      "content": "<normal>31/01/2568 — เราได้จัดงานแสดงสินค้าที่คอนโด Atmoz Season Ladkrabang</normal> นำทีมโดยคุณ Nicholas Basoukos (CEO Greek heritage food ที่บินตรงจากประเทศกรีซมาลงพื้นที่ให้ความรู้ด้วยตนเอง) และคุณ Patcharin Chanaphukdee (MD FAOS ประเทศไทย) พร้อมทีมงาน โดยจัดกิจกรรมให้ความรู้เกี่ยวกับน้ำมันมะกอกและน้ำผึ้งว่าแต่ละชนิดมีประโยชน์อย่างไรบ้าง พร้อมนำเสนอที่มาของผลิตภัณฑ์จากขั้นตอนการผลิตจนสู่สินค้าที่ขายออกให้กับผู้เข้าร่วมกิจกรรม และปรุงอาหาร เพื่อให้ผู้เข้าร่วมกิจกรรมได้สัมผัสรสชาติและกลิ่นหอม (Sensory Experience) ที่เป็นเอกลักษณ์ของน้ำมันมะกอกและน้ำผึ้งจากธรรมชาติ พร้อมทั้งแลกเปลี่ยนเคล็ดลับการเลือกใช้วัตถุดิบที่ดีต่อสุขภาพ สู่เมนูอาหารของทุกคนอย่างแท้จริง ซึ่งภายในงานได้รับกระแสตอบรับเป็นอย่างดี สินค้าถูกจับจองในราคาพิเศษ"
+    }
+  ]
 }

@@ -40,5 +40,31 @@
         "note": "※ 決済ページに表示される指定の時間内に取引を完了させてください。"
       }
     }
-  }
+  },
+  "activity": [
+    {
+      "images": [
+        "/images/activity/atmoz/1.jpeg",
+        "/images/activity/atmoz/2.jpeg",
+        "/images/activity/atmoz/3.jpeg",
+        "/images/activity/atmoz/4.jpeg",
+        "/images/activity/atmoz/5.jpeg",
+        "/images/activity/atmoz/6.jpeg",
+        "/images/activity/atmoz/7.jpeg",
+        "/images/activity/atmoz/8.jpeg",
+        "/images/activity/atmoz/9.jpeg",
+        "/images/activity/atmoz/10.jpeg",
+        "/images/activity/atmoz/11.jpeg",
+        "/images/activity/atmoz/12.jpeg",
+        "/images/activity/atmoz/13.jpeg",
+        "/images/activity/atmoz/14.jpeg",
+        "/images/activity/atmoz/15.jpeg",
+        "/images/activity/atmoz/16.jpeg",
+        "/images/activity/atmoz/17.jpeg",
+        "/images/activity/atmoz/18.jpeg",
+        "/images/activity/atmoz/19.jpeg"
+      ],
+      "content": "<normal>2025年1月31日 — Atmoz Season Ladkrabangにて、製品展示会を開催いたしました。</normal> 本イベントは、ギリシャから来日した希国ヘリテージフードCEOのニコラス・バスコス氏、およびFAOSタイ代表取締役のパチャリン・チャナプクディー氏、そして弊社の専任チームが主導いたしました。オリーブオイルや蜂蜜の種類ごとの効能、製造工程から最終製品に至るまでの背景について解説を行い、実際に調理を行うことで、天然素材ならではの豊かな香りと風味を五感で楽しんでいただく「感官体験（Sensory Experience）」を提供いたしました。また、健康的な食材選びのコツについても活発な意見交換が行われ、特別価格での先行予約も大変ご好評をいただきました。"
+    }
+  ]
 }

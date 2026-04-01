@@ -28,7 +28,7 @@ const AffiliateHeading = ({
 }: Props) => {
   const t = useTranslations(namespace)
   const isCenter = align === 'center'
-  const hasTagline = t.has('tagline')
+  // const hasTagline = t.has('tagline')
 
   const hasDescription = t.has('description')
 
@@ -43,11 +43,11 @@ const AffiliateHeading = ({
         className,
       )}
     >
-      {hasTagline && (
+      {/* {hasTagline && (
         <span className='text-faos-amber text-sm font-semibold tracking-wider uppercase'>
           {t('tagline')}
         </span>
-      )}
+      )} */}
 
       <Tag
         className={cn(
@@ -79,8 +79,8 @@ const AffiliateHeading = ({
       {hasDescription && (
         <p
           className={cn(
-            'text-lg leading-relaxed text-stone-400',
-            isHero ? 'max-w-2xl md:text-xl' : 'max-w-md',
+            'text-lg leading-relaxed tracking-tight text-stone-400 sm:text-xl',
+            isHero ? 'max-w-2xl' : 'max-w-md',
             dAlign === 'center' ? 'mx-auto text-center' : 'text-left',
             dAlign === 'right' && 'ml-auto text-right',
           )}

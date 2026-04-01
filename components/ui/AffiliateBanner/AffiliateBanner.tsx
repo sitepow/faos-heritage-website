@@ -47,7 +47,7 @@ const AffiliateBanner = ({ className }: ComponentProps<'section'>) => {
                 : t('buttons.gotoAffiliate')}
           </AffiliateButton>
 
-          <ul className='flex flex-col flex-wrap items-center justify-center gap-2 text-sm text-white/80 sm:flex-row sm:flex-nowrap sm:justify-start'>
+          <ul className='flex flex-col flex-wrap items-center justify-center gap-2 text-lg tracking-tight text-white/80 sm:flex-row sm:flex-nowrap sm:justify-start'>
             {isPending ? (
               <li className='flex items-center gap-2'>
                 <span className='size-2 animate-pulse rounded-full bg-amber-400' />

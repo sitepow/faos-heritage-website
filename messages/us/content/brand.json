@@ -20,6 +20,10 @@
     "relatedProducts": {
       "title": "You May Also Like",
       "description": "Complete your health experience with other curated products from this category."
+    },
+    "activity": {
+      "title": "Our Activities & Commitment",
+      "description": "We are more than just a seller; we are dedicated to delivering wellness through natural products. Here are some of our on-site activities where we build trust with our customers through our genuine products."
     }
   }
 }

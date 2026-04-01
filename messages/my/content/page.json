@@ -40,5 +40,31 @@
         "note": "* Sila selesaikan transaksi dalam tempoh masaที่ ditetapkan pada halaman pembayaran."
       }
     }
-  }
+  },
+  "activity": [
+    {
+      "images": [
+        "/images/activity/atmoz/1.jpeg",
+        "/images/activity/atmoz/2.jpeg",
+        "/images/activity/atmoz/3.jpeg",
+        "/images/activity/atmoz/4.jpeg",
+        "/images/activity/atmoz/5.jpeg",
+        "/images/activity/atmoz/6.jpeg",
+        "/images/activity/atmoz/7.jpeg",
+        "/images/activity/atmoz/8.jpeg",
+        "/images/activity/atmoz/9.jpeg",
+        "/images/activity/atmoz/10.jpeg",
+        "/images/activity/atmoz/11.jpeg",
+        "/images/activity/atmoz/12.jpeg",
+        "/images/activity/atmoz/13.jpeg",
+        "/images/activity/atmoz/14.jpeg",
+        "/images/activity/atmoz/15.jpeg",
+        "/images/activity/atmoz/16.jpeg",
+        "/images/activity/atmoz/17.jpeg",
+        "/images/activity/atmoz/18.jpeg",
+        "/images/activity/atmoz/19.jpeg"
+      ],
+      "content": "<normal>31/01/2025 — Kami telah menganjurkan acara pameran produk di Kondominium Atmoz Season Ladkrabang,</normal> yang diketuai oleh Encik Nicholas Basoukos (CEO Greek Heritage Food, yang terbang terus dari Greece untuk berkongsi kepakaran) dan Puan Patcharin Chanaphukdee (MD FAOS Thailand), bersama pasukan kami. Acara ini merangkumi aktiviti pendidikan mengenai khasiat pelbagai jenis minyak zaitun dan madu, serta menunjukkan proses pengeluaran dari peringkat awal sehingga menjadi produk akhir. Kami juga mengadakan sesi masakan secara langsung untuk memberikan 'Pengalaman Sensori' (Sensory Experience) kepada para peserta—menonjolkan aroma dan rasa unik minyak zaitun serta madu semula jadi. Selain itu, para peserta turut bertukar petua mengenai pemilihan bahan makanan sihat untuk menu harian. Acara ini mendapat sambutan yang sangat menggalakkan, dengan produk-produk habis ditempah pada harga promosi istimewa."
+    }
+  ]
 }

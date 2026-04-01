@@ -40,5 +40,31 @@
         "note": "* Voltooi de transactie binnen de aangegeven tijd op de betalingspagina."
       }
     }
-  }
+  },
+  "activity": [
+    {
+      "images": [
+        "/images/activity/atmoz/1.jpeg",
+        "/images/activity/atmoz/2.jpeg",
+        "/images/activity/atmoz/3.jpeg",
+        "/images/activity/atmoz/4.jpeg",
+        "/images/activity/atmoz/5.jpeg",
+        "/images/activity/atmoz/6.jpeg",
+        "/images/activity/atmoz/7.jpeg",
+        "/images/activity/atmoz/8.jpeg",
+        "/images/activity/atmoz/9.jpeg",
+        "/images/activity/atmoz/10.jpeg",
+        "/images/activity/atmoz/11.jpeg",
+        "/images/activity/atmoz/12.jpeg",
+        "/images/activity/atmoz/13.jpeg",
+        "/images/activity/atmoz/14.jpeg",
+        "/images/activity/atmoz/15.jpeg",
+        "/images/activity/atmoz/16.jpeg",
+        "/images/activity/atmoz/17.jpeg",
+        "/images/activity/atmoz/18.jpeg",
+        "/images/activity/atmoz/19.jpeg"
+      ],
+      "content": "<normal>31/01/2025 — We hebben een succesvolle productpresentatie georganiseerd in het Atmoz Season Ladkrabang Condo,</normal> onder leiding van de heer Nicholas Basoukos (CEO van Greek Heritage Food, die speciaal vanuit Griekenland overkwam om zijn expertise te delen) en mevrouw Patcharin Chanaphukdee (MD van FAOS Thailand), samen met ons team. Het evenement omvatte educatieve activiteiten over de voordelen van verschillende soorten olijfolie en honing, waarbij het volledige proces van productie tot eindproduct werd toegelicht. Daarnaast hielden we een live kooksessie om deelnemers een echte 'zintuiglijke ervaring' (Sensory Experience) te bieden, waarbij de unieke aroma's en smaken van natuurlijke olijfolie en honing centraal stonden. Deelnemers wisselden ook tips uit over het kiezen van gezonde ingrediënten voor hun dagelijkse maaltijden. Het evenement werd zeer goed ontvangen en de producten waren snel uitverkocht tegen speciale actieprijzen."
+    }
+  ]
 }

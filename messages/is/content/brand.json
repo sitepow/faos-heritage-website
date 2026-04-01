@@ -20,6 +20,10 @@
     "relatedProducts": {
       "title": "Vörur sem þú gætir haft áhuga á",
       "description": "Fullkomnaðu heilsuupplifun þína með öðrum vörum í sama flokki."
+    },
+    "activity": {
+      "title": "Starfsemi okkar og skuldbinding",
+      "description": "Við erum meira en bara söluaðilar; við leggjum metnað okkar í að stuðla að heilbrigði með náttúrulegum vörum. Hér er hluti af þeirri starfsemi þar sem við mætum á staðinn til að byggja upp traust hjá viðskiptavinum okkar með gæðavörum okkar."
     }
   }
 }

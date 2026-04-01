@@ -40,5 +40,31 @@
         "note": "* Si prega di completare la transazione entro il limite di tempo specificato nella pagina di pagamento."
       }
     }
-  }
+  },
+  "activity": [
+    {
+      "images": [
+        "/images/activity/atmoz/1.jpeg",
+        "/images/activity/atmoz/2.jpeg",
+        "/images/activity/atmoz/3.jpeg",
+        "/images/activity/atmoz/4.jpeg",
+        "/images/activity/atmoz/5.jpeg",
+        "/images/activity/atmoz/6.jpeg",
+        "/images/activity/atmoz/7.jpeg",
+        "/images/activity/atmoz/8.jpeg",
+        "/images/activity/atmoz/9.jpeg",
+        "/images/activity/atmoz/10.jpeg",
+        "/images/activity/atmoz/11.jpeg",
+        "/images/activity/atmoz/12.jpeg",
+        "/images/activity/atmoz/13.jpeg",
+        "/images/activity/atmoz/14.jpeg",
+        "/images/activity/atmoz/15.jpeg",
+        "/images/activity/atmoz/16.jpeg",
+        "/images/activity/atmoz/17.jpeg",
+        "/images/activity/atmoz/18.jpeg",
+        "/images/activity/atmoz/19.jpeg"
+      ],
+      "content": "<normal>31/01/2025 — Abbiamo organizzato una presentazione di prodotti presso l'Atmoz Season Ladkrabang Condo,</normal> guidata dal Sig. Nicholas Basoukos (CEO di Greek Heritage Food, arrivato direttamente dalla Grecia per condividere la sua esperienza) e dalla Sig.ra Patcharin Chanaphukdee (MD di FAOS Thailand), insieme al nostro team. L'evento ha incluso attività informative sui benefici dell'olio d'oliva e del miele, illustrando l'intero percorso dalla produzione al prodotto finale. Abbiamo inoltre tenuto una sessione di cucina dal vivo per offrire ai partecipanti una vera 'Esperienza Sensoriale' (Sensory Experience), esaltando gli aromi e i sapori unici dell'olio d'oliva e del miele naturali. I partecipanti hanno inoltre scambiato consigli sulla scelta di ingredienti sani per i pasti quotidiani. L'evento ha riscosso un grande successo, con i prodotti che sono andati esauriti a prezzi promozionali speciali."
+    }
+  ]
 }

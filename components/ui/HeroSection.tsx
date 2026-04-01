@@ -65,7 +65,7 @@ const HeroSection = () => {
               {currentProduct?.name}
             </h1>
 
-            <p className='mt-3 w-full md:mt-4 md:text-lg'>
+            <p className='mt-3 w-full text-lg tracking-tight opacity-70 sm:text-xl md:mt-4'>
               {currentProduct?.summary ||
                 'Selecting the best for your health with premium olive oil and honey.'}
             </p>

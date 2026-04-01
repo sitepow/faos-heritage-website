@@ -41,7 +41,7 @@ const AffiliateSteps = () => {
                 'border-b border-gray-100 md:border-b-0',
             )}
           >
-            <StepCard {...step} />
+            <StepCard {...step} number={String(idx + 1)} />
           </li>
         ))}
       </ul>

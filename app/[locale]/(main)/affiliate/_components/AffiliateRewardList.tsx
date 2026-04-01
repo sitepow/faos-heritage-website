@@ -24,7 +24,7 @@ const AffiliateRewardList = () => {
           <div className='flex size-10 flex-shrink-0 items-center justify-center rounded-full bg-stone-50'>
             <Icon aria-hidden='true' className='text-amber-500' size={20} />
           </div>
-          <span className='font-medium text-stone-400'>
+          <span className='text-lg tracking-tight text-stone-400 sm:text-xl'>
             {t(translationKey)}
           </span>
         </li>

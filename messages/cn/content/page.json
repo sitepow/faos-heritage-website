@@ -40,5 +40,31 @@
         "note": "* 请在支付页面指定的时限内完成交易。"
       }
     }
-  }
+  },
+  "activity": [
+    {
+      "images": [
+        "/images/activity/atmoz/1.jpeg",
+        "/images/activity/atmoz/2.jpeg",
+        "/images/activity/atmoz/3.jpeg",
+        "/images/activity/atmoz/4.jpeg",
+        "/images/activity/atmoz/5.jpeg",
+        "/images/activity/atmoz/6.jpeg",
+        "/images/activity/atmoz/7.jpeg",
+        "/images/activity/atmoz/8.jpeg",
+        "/images/activity/atmoz/9.jpeg",
+        "/images/activity/atmoz/10.jpeg",
+        "/images/activity/atmoz/11.jpeg",
+        "/images/activity/atmoz/12.jpeg",
+        "/images/activity/atmoz/13.jpeg",
+        "/images/activity/atmoz/14.jpeg",
+        "/images/activity/atmoz/15.jpeg",
+        "/images/activity/atmoz/16.jpeg",
+        "/images/activity/atmoz/17.jpeg",
+        "/images/activity/atmoz/18.jpeg",
+        "/images/activity/atmoz/19.jpeg"
+      ],
+      "content": "<normal>2025年1月31日 — 我们在 Atmoz Season Ladkrabang 公寓成功举办了产品展示活动。</normal> 本次活动由 Greek Heritage Food 首席执行官 Nicholas Basoukos 先生（亲自从希腊飞抵现场提供专业指导）和 FAOS 泰国区总经理 Patcharin Chanaphukdee 女士率领团队共同参与。活动深入讲解了橄榄油和蜂蜜的各类功效及其对健康的益处，展示了从生产工艺到成品交付的全过程。此外，我们还现场演示了烹饪过程，让参与者能够亲身体验（感官体验）纯天然橄榄油和蜂蜜的独特香气与风味，并分享了如何为家庭餐桌挑选健康食材的秘诀。活动反响热烈，现场产品以优惠价格被抢购一空。"
+    }
+  ]
 }

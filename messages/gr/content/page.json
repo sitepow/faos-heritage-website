@@ -40,5 +40,31 @@
         "note": "* Παρακαλούμε ολοκληρώστε τη συναλλαγή εντός του καθορισμένου χρονικού πλαισίου στη σελίδα πληρωμής."
       }
     }
-  }
+  },
+  "activity": [
+    {
+      "images": [
+        "/images/activity/atmoz/1.jpeg",
+        "/images/activity/atmoz/2.jpeg",
+        "/images/activity/atmoz/3.jpeg",
+        "/images/activity/atmoz/4.jpeg",
+        "/images/activity/atmoz/5.jpeg",
+        "/images/activity/atmoz/6.jpeg",
+        "/images/activity/atmoz/7.jpeg",
+        "/images/activity/atmoz/8.jpeg",
+        "/images/activity/atmoz/9.jpeg",
+        "/images/activity/atmoz/10.jpeg",
+        "/images/activity/atmoz/11.jpeg",
+        "/images/activity/atmoz/12.jpeg",
+        "/images/activity/atmoz/13.jpeg",
+        "/images/activity/atmoz/14.jpeg",
+        "/images/activity/atmoz/15.jpeg",
+        "/images/activity/atmoz/16.jpeg",
+        "/images/activity/atmoz/17.jpeg",
+        "/images/activity/atmoz/18.jpeg",
+        "/images/activity/atmoz/19.jpeg"
+      ],
+      "content": "<normal>31/01/2025 — Διοργανώσαμε μια παρουσίαση προϊόντων στο Atmoz Season Ladkrabang,</normal> με επικεφαλής τον κ. Νικόλαο Μπασούκο (CEO της Greek Heritage Food, ο οποίος ταξίδεψε από την Ελλάδα για να μοιραστεί τις γνώσεις του) και την κ. Patcharin Chanaphukdee (MD της FAOS Thailand), μαζί με την ομάδα μας. Η εκδήλωση περιελάμβανε ενημερωτικές δραστηριότητες σχετικά με τα οφέλη του ελαιολάδου και του μελιού, αναδεικνύοντας τη διαδρομή από την παραγωγή έως το τελικό προϊόν. Πραγματοποιήθηκε επίσης επίδειξη μαγειρικής για να προσφέρει στους συμμετέχοντες μια πραγματική «αισθητηριακή εμπειρία» (Sensory Experience), αναδεικνύοντας τα μοναδικά αρώματα και τις γεύσεις του φυσικού ελαιολάδου και του μελιού. Οι παρευρισκόμενοι αντάλλαξαν επίσης συμβουλές για την επιλογή υγιεινών υλικών για το καθημερινό τους τραπέζι. Η εκδήλωση έτυχε θερμής υποδοχής, με τα προϊόντα να γίνονται ανάρπαστα σε ειδικές τιμές προσφοράς."
+    }
+  ]
 }
