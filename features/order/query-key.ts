@@ -5,6 +5,7 @@ type OrderListFilters = {
   limit?: number
   userId?: string
   status?: OrderStatus
+  isPosStatus?: boolean
 }
 
 const orderQueryKeys = {

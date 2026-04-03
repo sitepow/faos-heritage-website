@@ -30,7 +30,7 @@ const OrderPage = () => {
 
   const { data: orderStats } = useOrderStats()
   const { data: revenueStats } = useRevenueStats()
-  const { data, isLoading } = useOrders({ page, limit: 10 })
+  const { data, isLoading } = useOrders({ page, limit: 10, isPosStatus: true })
 
   const orderList = useMemo(() => {
     return data?.items ?? []

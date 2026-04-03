@@ -242,6 +242,7 @@ const OrderPOSModal = ({
       referrerId: selectedAffiliateCode || undefined,
       discount: totals?.discount || 0,
       tax: totals?.tax || 0,
+      isPos: true,
     }
 
     try {

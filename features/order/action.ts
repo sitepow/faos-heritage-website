@@ -31,6 +31,7 @@ interface GetOrdersOptions {
   page?: number
   limit?: number
   userId?: string
+  isPosStatus?: boolean
 }
 
 interface UpdateOrderInput {
@@ -53,6 +54,7 @@ interface CreateOrderInput {
   referrerId?: string
   discount?: number
   tax?: number
+  isPos?: boolean
 }
 
 type TransactionClient = Prisma.TransactionClient
@@ -273,9 +275,9 @@ const getOrders = async ({
   page = 1,
   limit = 10,
   userId: filterUserId,
+  isPosStatus = false,
 }: GetOrdersOptions = {}) => {
   const skip = (page - 1) * limit
-
   const { userId: currentUserId, roles } = await getServerUser()
   const isAdmin = roles.includes(Role.ADMIN)
   const isStockManager = roles.includes(Role.STOCK_MANAGER)
@@ -287,6 +289,10 @@ const getOrders = async ({
     where.userId = filterUserId
   } else if (isPOS && !isAdmin && !isStockManager) {
     where.userId = currentUserId
+  }
+
+  if (typeof isPosStatus === 'boolean') {
+    where.isPos = isPosStatus
   }
 
   const [items, total] = await prisma.$transaction([
@@ -772,8 +778,8 @@ const createAdminOrder = async (input: CreateOrderInput) =>
     })
   })
 
-const updateOrder = async (input: UpdateOrderInput) =>
-  withAuth(async () => {
+const updateOrder = async (input: UpdateOrderInput) => {
+  return withAuth(async () => {
     return prisma.$transaction(async (tx) => {
       const { orderId, status } = input
 
@@ -793,10 +799,12 @@ const updateOrder = async (input: UpdateOrderInput) =>
         return fail(ERROR_CODES.BAD_REQUEST)
       }
 
-      if (
-        CANCEL_OR_REFUND_STATUSES.has(status) &&
-        !CANCEL_OR_REFUND_STATUSES.has(order.status)
-      ) {
+      const isTargetingCancelOrRefund = CANCEL_OR_REFUND_STATUSES.has(status)
+      const isCurrentlyCancelOrRefund = CANCEL_OR_REFUND_STATUSES.has(
+        order.status,
+      )
+
+      if (isTargetingCancelOrRefund && !isCurrentlyCancelOrRefund) {
         await Promise.all(
           order.items.map(async (item) => {
             if (order.storefrontId) {
@@ -834,9 +842,7 @@ const updateOrder = async (input: UpdateOrderInput) =>
             })
           }),
         )
-      }
 
-      if (CANCEL_OR_REFUND_STATUSES.has(status)) {
         await tx.affiliateCommission.updateMany({
           where: {
             orderId: orderId,
@@ -872,6 +878,7 @@ const updateOrder = async (input: UpdateOrderInput) =>
       return ok()
     })
   })
+}
 
 export {
   getAffiliateOrders,

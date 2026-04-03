@@ -726,6 +726,8 @@ model Order {
   status        OrderStatus   @default(PENDING)
   paymentStatus PaymentStatus @default(PENDING)
 
+  isPos Boolean @default(false)
+
   // สกุลเงินที่ลูกค้าใช้ชำระเงิน
   currency       Currency @default(THB)
   exchangeRate   Decimal  @default(1) @db.Decimal(18, 8)
@@ -793,6 +795,7 @@ model Order {
   @@index([deliveryType])
   @@index([storefrontId])
   @@index([contractId])
+  @@index([isPos])
 }
 
 model ShippingCountry {

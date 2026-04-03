@@ -52,18 +52,22 @@ const canTransitionOrderStatus = (
   }
 
   if (next === OrderStatus.CANCELLED) {
-    return (
-      current === OrderStatus.PENDING ||
-      current === OrderStatus.PAID ||
-      current === OrderStatus.PROCESSING
-    )
+    const allowedStatuses: OrderStatus[] = [
+      OrderStatus.PENDING,
+      OrderStatus.PAID,
+      OrderStatus.PROCESSING,
+    ]
+    return allowedStatuses.includes(current)
   }
 
   if (next === OrderStatus.REFUNDED) {
-    return (
-      current === OrderStatus.DELIVERED ||
-      current === OrderStatus.READY_FOR_PICKUP
-    )
+    const allowedStatuses: OrderStatus[] = [
+      OrderStatus.DELIVERED,
+      OrderStatus.READY_FOR_PICKUP,
+      OrderStatus.PROCESSING,
+      OrderStatus.PAID,
+    ]
+    return allowedStatuses.includes(current)
   }
 
   return ORDER_STATUS_FLOW[next] === ORDER_STATUS_FLOW[current] + 1

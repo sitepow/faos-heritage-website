@@ -50,7 +50,7 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
   const navigation = useAppNavigation()
   const { appLocale } = useAppStore()
   const locale = useLocale()
-  const { userId } = useAuth()
+  const { userId, isPOS } = useAuth()
 
   const { referralNo } = useAffiliate()
   const [referrerCode, setReferrerCode] = useState('')
@@ -226,11 +226,7 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
         <span className='w-fit text-left font-semibold'>
           {tCheckout('addressTitle')}
         </span>
-        <Alert
-          className='text-start'
-          description={tCheckout('currencyAlert')}
-          variant='bordered'
-        />
+
         <div className='text-default-500 text-left text-sm break-words'>
           {formatFullAddress(address)}{' '}
           <button
@@ -310,6 +306,23 @@ const CartSummaryCard = ({ className, ...props }: Props) => {
             <Divider className='bg-default-100/50' />
           </>
         )}
+
+        <div className='my-10 flex flex-col gap-5'>
+          <Alert
+            className='text-start'
+            color='warning'
+            description={tCheckout('currencyAlert')}
+          />
+          {isPOS && (
+            <Alert
+              className='text-start'
+              color='warning'
+              description={
+                'ตอนนี้คุณกำลังจะสั่งของผ่านออนไลน์ ที่ไม่ได้เกี่ยวกับสต็อกหน้าร้านของตัวเอง ซึ่งถ้ากดสั่งซื้อสินค้าจากหน้าจอนี้ นั่นหมายความว่าระบบจะไม่ได้ตัดสต็อกของหน้าร้านที่คุณกำลังขายอยู่ และราคาสินค้าที่ต้องจ่ายจะไม่ใช่ที่ตกลงในสัญญาของหน้าร้าน หรือสรุปง่ายคือการสั่งซื้อของออนไลน์ปกติทั่วไปเลย ดังนั้นถ้าต้องการสร้างคำสั่งซื้อ POS ให้ไปที่เมนูจัดการข้อมูลหลังบ้าน (ไอคอนรูปคน) และที่เมนูสร้างคำสั่งซื้อ'
+              }
+            />
+          )}
+        </div>
 
         {renderReferrerSection()}
 

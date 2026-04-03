@@ -7,17 +7,23 @@ interface props extends Partial<AvatarGroupProps> {
 }
 
 const AvatarGroupWrapper = ({ images, max = 3, ...props }: props) => {
+  const imageMaxMore = images?.length - max
+
   return (
-    <AvatarGroup max={max} {...props} size='lg'>
-      {images.map((src) => (
-        <Avatar
-          key={src}
-          classNames={{
-            base: 'ring-0 border-[1.5px] border-background border-default-100',
-          }}
-          radius='sm'
-          src={src}
-        />
+    <AvatarGroup
+      max={max}
+      {...props}
+      renderCount={() => {
+        return (
+          <div className='rounded-small bg-default-200 text-small text-default-600 flex size-14 items-center justify-center font-medium'>
+            +{imageMaxMore}
+          </div>
+        )
+      }}
+      size='lg'
+    >
+      {images.map((src, idx) => (
+        <Avatar key={idx} radius='sm' src={src} />
       ))}
     </AvatarGroup>
   )

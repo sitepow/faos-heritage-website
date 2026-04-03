@@ -3,7 +3,7 @@ const tabStyles = {
   tabList: `
       flex overflow-x-auto p-2 
       lg:bg-background/70 lg:backdrop-blur-md lg:z-20 
-      lg:sticky lg:top-55
+      lg:sticky lg:top-32
       lg:flex-col lg:w-[240px] 
     `,
   panel: 'w-full',
