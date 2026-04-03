@@ -46,7 +46,7 @@ const main = async () => {
         })
 
         for (const item of order.items) {
-          if (order.storefrontId) {
+          if (order.isPos && order.storefrontId) {
             await tx.storefrontInventory.update({
               where: {
                 storefrontId_productId_variantId: {
@@ -79,9 +79,10 @@ const main = async () => {
               type: StockMovementType.RETURN,
               toStorefrontId: order.storefrontId || null,
               reference: order.id,
-              note: order.storefrontId
-                ? `คืนสต็อกอัตโนมัติเข้าสาขา [${order.storefront?.name}] จากออเดอร์ #${order.id.slice(-8).toUpperCase()}`
-                : `คืนสต็อกอัตโนมัติเข้าคลังหลัก จากออเดอร์ #${order.id.slice(-8).toUpperCase()}`,
+              note:
+                order.isPos && order.storefrontId
+                  ? `คืนสต็อกอัตโนมัติเข้าสาขา [${order.storefront?.name}] จากออเดอร์ POS #${order.id.slice(-8).toUpperCase()}`
+                  : `คืนสต็อกอัตโนมัติเข้าคลังหลัก จากออเดอร์ออนไลน์ #${order.id.slice(-8).toUpperCase()}`,
             },
           })
         }

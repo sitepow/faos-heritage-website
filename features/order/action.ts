@@ -621,6 +621,7 @@ const createAdminOrder = async (input: CreateOrderInput) =>
         referrerId,
         discount = 0,
         tax = 0,
+        isPos,
       } = input
 
       if (deliveryType !== DeliveryType.PICKUP || !storefrontId) {
@@ -713,6 +714,7 @@ const createAdminOrder = async (input: CreateOrderInput) =>
       const order = await tx.order.create({
         data: {
           user: { connect: { id: userId } },
+          isPos: isPos || false,
           deliveryType: DeliveryType.PICKUP,
           status: OrderStatus.PENDING,
           paymentStatus: PaymentStatus.PENDING,
@@ -807,7 +809,7 @@ const updateOrder = async (input: UpdateOrderInput) => {
       if (isTargetingCancelOrRefund && !isCurrentlyCancelOrRefund) {
         await Promise.all(
           order.items.map(async (item) => {
-            if (order.storefrontId) {
+            if (order.isPos && order.storefrontId) {
               await tx.storefrontInventory.update({
                 where: {
                   storefrontId_productId_variantId: {
