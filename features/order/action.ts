@@ -291,7 +291,7 @@ const getOrders = async ({
     where.userId = currentUserId
   }
 
-  if (typeof isPosStatus === 'boolean') {
+  if (!isAdmin && !isStockManager) {
     where.isPos = isPosStatus
   }
 
