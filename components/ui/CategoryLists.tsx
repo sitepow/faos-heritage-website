@@ -18,23 +18,19 @@ const CategoryLists = () => {
   }
 
   return (
-    <Container className='flex flex-wrap items-center justify-center gap-6'>
+    <Container className='flex flex-wrap justify-center gap-5'>
       {categories.map((category) => (
-        <Link
-          key={category?.id!}
-          className='group flex cursor-pointer flex-col items-center gap-4 transition-transform hover:-translate-y-1'
-          href={`/categories/${category?.slug!}`}
-        >
-          <div className='group-hover:border-primary relative overflow-hidden rounded-full border-2 border-transparent transition-colors'>
+        <Link key={category?.id!} href={`/categories/${category?.slug!}`}>
+          <div className='relative flex w-48 flex-col gap-2.5'>
             <img
               alt={category?.name!}
-              className='size-20 object-cover transition-transform duration-500 group-hover:scale-110 sm:size-28'
+              className='border-default-100 size-48 rounded-xl border object-cover'
               src={category?.image ?? IMAGE_FALLBACK.EMPTY}
             />
+            <span className='line-clamp-2 text-center text-lg sm:text-xl'>
+              {category?.name!}
+            </span>
           </div>
-          <span className='group-hover:text-primary line-clamp-2 max-w-32 text-center text-lg tracking-tight sm:text-xl'>
-            {category?.name!}
-          </span>
         </Link>
       ))}
     </Container>

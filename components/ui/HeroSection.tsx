@@ -89,7 +89,7 @@ const HeroSection = () => {
         </div>
 
         <div className='group relative order-1 flex w-full flex-1 items-center justify-center'>
-          <div className='relative aspect-square w-full transition-all duration-700 ease-in-out md:max-w-[380px] xl:max-w-[480px]'>
+          <div className='relative aspect-square w-full transition-all duration-700 ease-in-out'>
             {currentProduct?.images?.[0]?.url && (
               <div
                 key={currentProduct.id}
