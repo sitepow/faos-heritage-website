@@ -78,6 +78,9 @@ const ProductClient = ({ initialData, slug }: Props) => {
 
       <article className='flex flex-col gap-10'>
         <ProductPreview />
+        <section aria-labelledby='reviews-title' id='reviews'>
+          <ReviewSection productId={productId} />
+        </section>
         <ProductDescription />
       </article>
 
@@ -88,15 +91,9 @@ const ProductClient = ({ initialData, slug }: Props) => {
       </section>
 
       {productId && (
-        <>
-          <section aria-labelledby='reviews-title' id='reviews'>
-            <ReviewSection productId={productId} />
-          </section>
-
-          <section aria-labelledby='comments-title' id='comments'>
-            <CommentSection productId={productId} />
-          </section>
-        </>
+        <section aria-labelledby='comments-title' id='comments'>
+          <CommentSection productId={productId} />
+        </section>
       )}
     </AppSection>
   )

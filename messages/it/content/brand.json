@@ -1,29 +1,33 @@
 {
   "brand": {
     "name": "FAOS HERITAGE GREEK FOOD",
-    "slogan": "Assapora l'Eredità della Grecia — Olio Extra Vergine di Oliva & Miele Puro al 100%",
-    "mission": "Offrire salute sostenibile e sapori autentici attraverso prodotti biologici premium provenienti dalle migliori origini della Grecia."
+    "slogan": "Gusto Greco Autentico — Olio d'Oliva Premium e Miele Puro al 100%",
+    "mission": "Selezioniamo i migliori prodotti biologici greci per il tuo benessere."
   },
   "shared": {
     "productDiscovery": {
-      "title": "Selezione Biologica Premium Curata",
-      "description": "Scopri la purezza dell'olio d'oliva spremuto a freddo e del miele naturale, selezionati per il tuo massimo benessere."
+      "title": "I Nostri Prodotti",
+      "description": "Qualità curata dalla produzione al confezionamento, per darti sempre il meglio."
     },
     "categoryDiscovery": {
-      "title": "Esplora le Nostre Categorie Naturali",
-      "description": "Sfoglia gruppi di prodotti di alta qualità, dagli oli d'oliva premium al miele selvatico, direttamente dalle fattorie greche."
+      "title": "Categorie",
+      "description": "Esplora i nostri prodotti per categoria e trova quello che fa per te."
     },
     "blogDiscovery": {
-      "title": "Consigli di Salute e Stile di Vita Mediterraneo",
-      "description": "Approfondisci i benefici della dieta tradizionale greca con ricette e articoli per una vita sostenibile."
+      "title": "Blog",
+      "description": "Resta aggiornato sui trend della salute e consigli per il tuo benessere."
     },
     "relatedProducts": {
-      "title": "Potrebbe Interessarti Anche",
-      "description": "Completa la tua esperienza di salute con altri prodotti curati di questa categoria."
+      "title": "Prodotti Correlati",
+      "description": "Scopri altri prodotti perfetti per il tuo stile di vida sano."
     },
     "activity": {
-      "title": "Le Nostre Attività e la Nostra Dedizione",
-      "description": "Non siamo semplici venditori, ma ci impegniamo a promuovere il benessere attraverso prodotti naturali. Ecco alcune delle nostre attività sul campo per costruire fiducia con tutti i nostri clienti attraverso prodotti autentici."
+      "title": "News ed Eventi",
+      "description": "Segui le nostre attività e i consigli per vivere in salute insieme a noi."
+    },
+    "partner": {
+      "title": "Disponibile Presso",
+      "description": "Trova i nostri prodotti nel nostro store e dai nostri partner selezionati."
     }
   }
 }

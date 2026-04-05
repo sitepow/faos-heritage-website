@@ -10,7 +10,10 @@
     "confirm": "Sahkan",
     "share": "Kongsi",
     "more": "Lihat Lagi",
-    "shareTitle": "Cipta Pautan Rujukan Produk"
+    "all": "Lihat Semua",
+    "shareTitle": "Cipta Pautan Rujukan Produk",
+    "productCategory": "Kategori Produk",
+    "blogCategory": "Kategori Blog"
   },
   "review": {
     "title": "Ulasan Produk",

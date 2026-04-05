@@ -1,29 +1,33 @@
 {
   "brand": {
     "name": "FAOS HERITAGE GREEK FOOD",
-    "slogan": "Cicipi Warisan Yunani — Minyak Zaitun Extra Virgin Premium & 100% Madu Murni",
-    "mission": "Menghadirkan kesehatan berkelanjutan dan cita rasa otentik melalui produk organik premium yang bersumber dari asal-usul terbaik di Yunani."
+    "slogan": "Cita Rasa Asli Yunani — Minyak Zaitun Premium & 100% Madu Murni",
+    "mission": "Kami menghadirkan produk organik terbaik dari sumber unggulan di Yunani untuk kesehatan Anda."
   },
   "shared": {
     "productDiscovery": {
-      "title": "Pilihan Organik Premium Terkurasi",
-      "description": "Temukan kemurnian minyak zaitun perahan dingin dan madu alami, yang dipilih secara khusus untuk kesejahteraan utama Anda."
+      "title": "Produk Kami",
+      "description": "Produk berkualitas yang diproses dengan teliti hingga pengemasan demi memberikan nilai terbaik."
     },
     "categoryDiscovery": {
-      "title": "Jelajahi Kategori Alami Kami",
-      "description": "Lihat koleksi produk berkualitas tinggi, mulai dari minyak zaitun premium hingga madu hutan, langsung dari perkebunan Yunani."
+      "title": "Kategori Produk",
+      "description": "Jelajahi produk berdasarkan kategori dan temukan yang sesuai untuk Anda dengan mudah."
     },
     "blogDiscovery": {
-      "title": "Tips Kesehatan & Gaya Hidup Mediterania",
-      "description": "Pelajari lebih dalam manfaat diet tradisional Yunani dengan resep dan artikel untuk kehidupan yang berkelanjutan."
+      "title": "Blog",
+      "description": "Dapatkan info tren kesehatan terbaru dan tips praktis untuk perawatan diri."
     },
     "relatedProducts": {
       "title": "Produk Terkait",
-      "description": "Lengkapi pengalaman kesehatan Anda dengan produk pilihan lainnya dari kategori ini."
+      "description": "Lihat produk lainnya yang sesuai dengan gaya hidup sehat Anda."
     },
     "activity": {
-      "title": "Aktivitas & Komitmen Kami",
-      "description": "Kami bukan sekadar penjual, tetapi kami berkomitmen untuk menghadirkan kesehatan melalui produk alami. Ini adalah bagian dari aktivitas lapangan kami untuk membangun kepercayaan bagi setiap pelanggan melalui produk nyata."
+      "title": "Berita & Kegiatan",
+      "description": "Ikuti kegiatan dan tips kesehatan yang kami bagikan untuk Anda semua."
+    },
+    "partner": {
+      "title": "Tersedia Di",
+      "description": "Temukan produk kami dengan mudah di toko resmi dan mitra pilihan kami."
     }
   }
 }

@@ -40,13 +40,13 @@ const PostCard = memo(({ post }: Props) => {
         <div className='relative'>
           <img
             alt={title}
-            className='h-[250px] w-full rounded-xl object-cover'
+            className='h-[400px] w-full rounded-xl object-cover'
             src={featuredImage || IMAGE_FALLBACK.EMPTY}
           />
           <PostBrandBadge hasImage={!!featuredImage} />
         </div>
 
-        <div className='flex flex-col gap-5 p-2.5'>
+        <div className='flex flex-col gap-2.5 p-5'>
           <h3 className='text-lg tracking-tight sm:text-xl'>{title}</h3>
 
           <div className='flex flex-wrap items-center gap-2.5 text-sm'>

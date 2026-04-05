@@ -9,6 +9,7 @@ import {
 } from '@heroui/react'
 import { ChevronDownIcon } from 'lucide-react'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import { useMemo } from 'react'
 
 import type { NavLink } from './navbar.types'
@@ -25,21 +26,14 @@ interface Props {
 }
 
 const NavbarMenu = ({ staticLinks, categories, blogCategories }: Props) => {
-  const MAX_VISIBLE_ITEMS = 4
+  const t = useTranslations('actions')
+  const productData = useMemo(() => {
+    return Array.isArray(categories) ? categories : []
+  }, [categories])
 
-  const allCategories = useMemo(() => {
-    const blogData = blogCategories?.success ? blogCategories.data : []
-
-    const productData = Array.isArray(categories) ? categories : []
-
-    return [
-      ...blogData.map((c) => ({ ...c, type: 'blog' as const })),
-      ...productData.map((c) => ({ ...c, type: 'product' as const })),
-    ]
-  }, [blogCategories, categories])
-
-  const visibleItems = allCategories.slice(0, MAX_VISIBLE_ITEMS)
-  const moreItems = allCategories.slice(MAX_VISIBLE_ITEMS)
+  const blogData = useMemo(() => {
+    return blogCategories?.success ? blogCategories.data : []
+  }, [blogCategories])
 
   return (
     <nav className='hidden py-2 xl:block'>
@@ -53,47 +47,67 @@ const NavbarMenu = ({ staticLinks, categories, blogCategories }: Props) => {
             </li>
           ))}
 
-          {visibleItems.map((category) => (
-            <li key={category.id}>
-              <Link
-                href={
-                  category.type === 'blog'
-                    ? `/posts/category/${category.slug}`
-                    : `/categories/${category.slug}`
-                }
-              >
-                <MenuItem label={category.name!} />
-              </Link>
-            </li>
-          ))}
-
-          {moreItems.length > 0 && (
+          {productData.length > 0 && (
             <li>
-              <Dropdown placement='bottom-end'>
+              <Dropdown placement='bottom-start'>
                 <DropdownTrigger>
                   <Button
                     disableRipple
                     className='h-auto min-w-fit bg-transparent p-0 transition-opacity hover:opacity-70 data-[hover=true]:bg-transparent'
-                    startContent={<ChevronDownIcon className='opacity-70' />}
-                  />
+                    endContent={
+                      <ChevronDownIcon className='opacity-70' size={16} />
+                    }
+                  >
+                    <MenuItem label={t('productCategory')} />
+                  </Button>
                 </DropdownTrigger>
                 <DropdownMenu
-                  aria-label='More categories'
+                  aria-label='Product categories'
                   className='max-h-[400px] w-[250px] overflow-y-auto'
                   variant='flat'
                 >
-                  {moreItems.map((item) => (
+                  {productData.map((item) => (
                     <DropdownItem
                       key={item?.id!}
                       as={Link}
                       className='py-3.5'
-                      href={
-                        item.type === 'blog'
-                          ? `/posts/category/${item.slug}`
-                          : `/categories/${item.slug}`
-                      }
+                      href={`/categories/${item?.slug!}`}
                     >
-                      {item.name}
+                      {item?.name!}
+                    </DropdownItem>
+                  ))}
+                </DropdownMenu>
+              </Dropdown>
+            </li>
+          )}
+
+          {blogData.length > 0 && (
+            <li>
+              <Dropdown placement='bottom-start'>
+                <DropdownTrigger>
+                  <Button
+                    disableRipple
+                    className='h-auto min-w-fit bg-transparent p-0 transition-opacity hover:opacity-70 data-[hover=true]:bg-transparent'
+                    endContent={
+                      <ChevronDownIcon className='opacity-70' size={16} />
+                    }
+                  >
+                    <MenuItem label={t('blogCategory')} />
+                  </Button>
+                </DropdownTrigger>
+                <DropdownMenu
+                  aria-label='Blog categories'
+                  className='max-h-[400px] w-[250px] overflow-y-auto'
+                  variant='flat'
+                >
+                  {blogData.map((item) => (
+                    <DropdownItem
+                      key={item?.id!}
+                      as={Link}
+                      className='py-3.5'
+                      href={`/posts/category/${item?.slug!}`}
+                    >
+                      {item?.name!}
                     </DropdownItem>
                   ))}
                 </DropdownMenu>

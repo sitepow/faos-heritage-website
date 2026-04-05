@@ -10,7 +10,10 @@
     "confirm": "Konfirmasi",
     "share": "Bagikan",
     "more": "Lihat Lebih Banyak",
-    "shareTitle": "Buat Tautan Referensi Produk"
+    "all": "Lihat Semua",
+    "shareTitle": "Buat Tautan Referensi Produk",
+    "productCategory": "Kategori Produk",
+    "blogCategory": "Kategori Blog"
   },
   "review": {
     "title": "Ulasan Produk",

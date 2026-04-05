@@ -1,29 +1,33 @@
 {
   "brand": {
     "name": "FAOS HERITAGE GREEK FOOD",
-    "slogan": "Rasai Warisan Greece — Minyak Zaitun Extra Virgin Premium & 100% Madu Asli",
-    "mission": "Memberikan kesihatan mampan dan rasa asli melalui produk organik premium yang bersumberkan dari asal-usul terbaik di Greece."
+    "slogan": "Rasa Autentik Greece — Minyak Zaitun Premium & 100% Madu Asli",
+    "mission": "Kami membawakan produk organik terbaik dari sumber terbaik di Greece untuk kesihatan anda."
   },
   "shared": {
     "productDiscovery": {
-      "title": "Pilihan Organik Premium Terpilih",
-      "description": "Temui ketulenan minyak zaitun perahan sejuk dan madu semulajadi, dipilih khas untuk kesejahteraan mutlak anda."
+      "title": "Produk Kami",
+      "description": "Produk berkualiti yang dijaga rapi dari pengeluaran hingga pembungkusan demi nilai terbaik."
     },
     "categoryDiscovery": {
-      "title": "Terokai Kategori Semulajadi Kami",
-      "description": "Layari kumpulan produk berkualiti tinggi, daripada minyak zaitun premium hingga madu hutan, terus dari ladang Greece."
+      "title": "Kategori",
+      "description": "Lihat produk mengikut kategori dan cari yang sesuai untuk anda dengan mudah."
     },
     "blogDiscovery": {
-      "title": "Tips Kesihatan & Gaya Hidup Mediterranean",
-      "description": "Ketahui lebih mendalam tentang khasiat diet tradisional Greece dengan resipi dan artikel untuk kehidupan mampan."
+      "title": "Blog",
+      "description": "Ikuti trend kesihatan terkini dan tips mudah untuk penjagaan diri yang lebih baik."
     },
     "relatedProducts": {
-      "title": "Anda Mungkin Juga Suka",
-      "description": "Lengkapkan pengalaman kesihatan anda dengan produk terpilih lain daripada kategori ini."
+      "title": "Produk Berkaitan",
+      "description": "Lihat produk lain yang sesuai dengan gaya hidup sihat anda."
     },
     "activity": {
-      "title": "Aktiviti & Komitmen Kami",
-      "description": "Kami bukan sekadar penjual, tetapi kami bertekad untuk menyampaikan kesihatan melalui produk semula jadi. Ini adalah sebahagian daripada aktiviti lapangan kami untuk membina keyakinan pelanggan melalui produk yang sebenar."
+      "title": "Berita & Aktiviti",
+      "description": "Ikuti aktiviti dan tips kesihatan yang kami kongsi untuk semua."
+    },
+    "partner": {
+      "title": "Boleh Didapati Di",
+      "description": "Cari produk kami di kedai fizikal dan rakan niaga terpilih kami."
     }
   }
 }

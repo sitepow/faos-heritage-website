@@ -4,11 +4,13 @@
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 
+import { SectionHeader } from './SectionHeader'
+
 import { IMAGE_FALLBACK } from '@/constants'
 import { useActiveStorefronts } from '@/features/storefront/hook'
 
 const PartnerSection = () => {
-  const t = useTranslations('footer')
+  const t = useTranslations('shared.partner')
   const { data: storefronts, isLoading } = useActiveStorefronts()
 
   if (isLoading) {
@@ -18,9 +20,7 @@ const PartnerSection = () => {
   return (
     <section className='py-12'>
       <div className='container mx-auto px-4'>
-        <h2 className='mb-8 text-center text-2xl font-bold'>
-          {t('menu.3.title')}
-        </h2>
+        <SectionHeader description={t('description')} title={t('title')} />
 
         <div className='grid items-start gap-5 sm:grid-cols-2 xl:grid-cols-3'>
           {storefronts?.map((partner, idx) => {

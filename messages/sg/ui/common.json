@@ -10,7 +10,10 @@
     "confirm": "Confirm",
     "share": "Share",
     "more": "View More",
-    "shareTitle": "Create Product Referral Link"
+    "all": "View All",
+    "shareTitle": "Create Product Referral Link",
+    "productCategory": "Product Categories",
+    "blogCategory": "Blog Categories"
   },
   "review": {
     "title": "Product Reviews",

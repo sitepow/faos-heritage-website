@@ -1,29 +1,33 @@
 {
   "brand": {
     "name": "FAOS HERITAGE GREEK FOOD",
-    "slogan": "Thưởng thức Di sản Hy Lạp — Dầu Oliu Extra Virgin Cao cấp & Mật ong Nguyên chất 100%",
-    "mission": "Mang đến sức khỏe bền vững và hương vị thuần khiết thông qua các sản phẩm hữu cơ cao cấp từ những vùng nguyên liệu tốt nhất tại Hy Lạp."
+    "slogan": "Hương vị Hy Lạp nguyên bản — Dầu ô liu cao cấp & mật ong nguyên chất 100%",
+    "mission": "Chúng tôi tận tâm tuyển chọn những sản phẩm hữu cơ cao cấp từ những vùng nguyên liệu tốt nhất Hy Lạp."
   },
   "shared": {
     "productDiscovery": {
-      "title": "Tuyển tập Sản phẩm Hữu cơ Cao cấp",
-      "description": "Khám phá sự tinh khiết của dầu oliu ép lạnh và mật ong tự nhiên, được tuyển chọn kỹ lưỡng cho sức khỏe của bạn."
+      "title": "Sản phẩm của chúng tôi",
+      "description": "Sản phẩm chất lượng được chăm chút từ khâu sản xuất đến bao bì, đảm bảo giá trị tốt nhất cho bạn."
     },
     "categoryDiscovery": {
-      "title": "Khám phá Danh mục Sản phẩm Tự nhiên",
-      "description": "Trải nghiệm các dòng sản phẩm chất lượng cao, từ dầu oliu thượng hạng đến mật ong rừng, nhập khẩu trực tiếp từ các nông trại Hy Lạp."
+      "title": "Danh mục sản phẩm",
+      "description": "Khám phá sản phẩm theo danh mục và dễ dàng tìm thấy thứ bạn cần."
     },
     "blogDiscovery": {
-      "title": "Bí quyết Sức khỏe & Lối sống Địa Trung Hải",
-      "description": "Tìm hiểu sâu hơn về lợi ích của chế độ ăn Hy Lạp truyền thống cùng các công thức nấu ăn và bài viết cho cuộc sống bền vững."
+      "title": "Blog",
+      "description": "Cập nhật xu hướng sức khỏe và những bí quyết đơn giản để chăm sóc bản thân tốt hơn."
     },
     "relatedProducts": {
-      "title": "Sản phẩm Tương tự",
-      "description": "Hoàn thiện trải nghiệm chăm sóc sức khỏe với các sản phẩm được tuyển chọn khác trong cùng danh mục."
+      "title": "Sản phẩm liên quan",
+      "description": "Xem thêm các sản phẩm khác phù hợp với phong cách sống lành mạnh của bạn."
     },
     "activity": {
-      "title": "Hoạt động & Tâm huyết của chúng tôi",
-      "description": "Chúng tôi không chỉ là người bán hàng, mà còn cam kết mang lại sức khỏe tốt thông qua các sản phẩm tự nhiên. Đây là một phần hoạt động thực tế của chúng tôi nhằm tạo dựng niềm tin với khách hàng thông qua những sản phẩm thật."
+      "title": "Tin tức & Sự kiện",
+      "description": "Theo dõi các hoạt động và kiến thức sức khỏe mà chúng tôi tâm huyết chia sẻ."
+    },
+    "partner": {
+      "title": "Điểm bán hàng",
+      "description": "Tìm mua sản phẩm dễ dàng tại cửa hàng và các đối tác được ủy quyền."
     }
   }
 }

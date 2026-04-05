@@ -10,7 +10,10 @@
     "confirm": "確定",
     "share": "共有",
     "more": "詳細を見る",
-    "shareTitle": "商品紹介リンクを作成"
+    "all": "すべて見る",
+    "shareTitle": "商品紹介リンクを作成",
+    "productCategory": "商品カテゴリー",
+    "blogCategory": "ブログカテゴリー"
   },
   "review": {
     "title": "カスタマーレビュー",

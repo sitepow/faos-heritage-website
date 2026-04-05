@@ -10,7 +10,10 @@
     "confirm": "Xác nhận",
     "share": "Chia sẻ",
     "more": "Xem thêm",
-    "shareTitle": "Tạo liên kết giới thiệu sản phẩm"
+    "all": "Xem tất cả",
+    "shareTitle": "Tạo liên kết giới thiệu sản phẩm",
+    "productCategory": "Danh mục sản phẩm",
+    "blogCategory": "Danh mục bài viết"
   },
   "review": {
     "title": "Đánh giá sản phẩm",

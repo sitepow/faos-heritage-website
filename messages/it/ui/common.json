@@ -10,7 +10,10 @@
     "confirm": "Conferma",
     "share": "Condividi",
     "more": "Vedi Altro",
-    "shareTitle": "Crea Link di Riferimento Prodotto"
+    "all": "Vedi tutto",
+    "shareTitle": "Crea Link di Riferimento Prodotto",
+    "productCategory": "Categorie Prodotti",
+    "blogCategory": "Categorie Blog"
   },
   "review": {
     "title": "Recensioni del Prodotto",

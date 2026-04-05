@@ -1,9 +1,6 @@
 'use client'
 
-import { Button } from '@heroui/react'
 import { PostStatus } from '@prisma/client'
-import { ArrowRight } from 'lucide-react'
-import Link from 'next/link'
 import { useLocale, useTranslations } from 'next-intl'
 
 import type { GetPostsInfiniteResult } from '@/features/post/action'
@@ -22,7 +19,6 @@ interface Props {
 const PostExploreSection = ({ initialData, itemsPerPage }: Props) => {
   const locale = useLocale()
   const tShared = useTranslations('shared')
-  const tActions = useTranslations('actions')
 
   const { data: postsData, isLoading: isPostsLoading } = usePosts({
     locale,
@@ -42,6 +38,7 @@ const PostExploreSection = ({ initialData, itemsPerPage }: Props) => {
       <Container className='flex flex-col gap-5'>
         <SectionHeader
           description={tShared('blogDiscovery.description')}
+          link='/posts'
           title={tShared('blogDiscovery.title')}
         />
 
@@ -50,12 +47,6 @@ const PostExploreSection = ({ initialData, itemsPerPage }: Props) => {
           itemPerPage={itemsPerPage}
           items={posts}
         />
-
-        <Link className='mx-auto' href='/posts'>
-          <Button endContent={<ArrowRight />} variant='faded'>
-            {tActions('more')}
-          </Button>
-        </Link>
       </Container>
     </AppSection>
   )

@@ -1,29 +1,33 @@
 {
   "brand": {
     "name": "FAOS HERITAGE GREEK FOOD",
-    "slogan": "Smakkaðu arfleifð Grikklands — Hágæða Extra Virgin ólífuolía og 100% hreint hunang",
-    "mission": "Að bjóða upp á sjálfbæra heilsu og ekta bragð í gegnum hágæða lífrænar vörur sem eiga uppruna sinn á bestu svæðum Grikklands."
+    "slogan": "Ekta grísk bragð — Hágæða ólífuolía og 100% hreint hunang fyrir heilsuna",
+    "mission": "Við veljum hágæða lífrænar vörur frá bestu svæðum Grikklands fyrir þína vellíðan."
   },
   "shared": {
     "productDiscovery": {
-      "title": "Úrval hágæða lífrænna vara",
-      "description": "Uppgötvaðu hreinleika kaldpressaðrar ólífuolíu og náttúrulegs hunangs, sérvalið fyrir vellíðan þína."
+      "title": "Vörurnar okkar",
+      "description": "Gæðavörur unnar með alúð frá framleiðslu til pökkunar til að tryggja þér það besta."
     },
     "categoryDiscovery": {
-      "title": "Kannaðu náttúrulega vöruflokka okkar",
-      "description": "Skoðaðu hágæða vörur, allt frá úrvals ólífuolíu til villihunangs, beint frá grískum búgörðum."
+      "title": "Vöruflokkar",
+      "description": "Skoðaðu vörur eftir flokkum og finndu það sem hentar þér á auðveldan hátt."
     },
     "blogDiscovery": {
-      "title": "Heilsuráð og miðjarðarhafslífsstíll",
-      "description": "Kafaðu dýpra í kosti hefðbundins grísks mataræðis með uppskriftum og greinum fyrir sjálfbærara líf."
+      "title": "Blogg",
+      "description": "Fylgstu með nýjustu heilsuþróun og fáðu góð ráð fyrir betri sjálfsumönnun."
     },
     "relatedProducts": {
-      "title": "Vörur sem þú gætir haft áhuga á",
-      "description": "Fullkomnaðu heilsuupplifun þína með öðrum vörum í sama flokki."
+      "title": "Tengdar vörur",
+      "description": "Kíktu á aðrar vörur sem passa við þinn heilbrigða lífsstíl."
     },
     "activity": {
-      "title": "Starfsemi okkar og skuldbinding",
-      "description": "Við erum meira en bara söluaðilar; við leggjum metnað okkar í að stuðla að heilbrigði með náttúrulegum vörum. Hér er hluti af þeirri starfsemi þar sem við mætum á staðinn til að byggja upp traust hjá viðskiptavinum okkar með gæðavörum okkar."
+      "title": "Fréttir og viðburðir",
+      "description": "Fylgstu með viðburðum og heilsumolum sem við deilum með öllum."
+    },
+    "partner": {
+      "title": "Fæst hjá",
+      "description": "Þú finnur vörurnar okkar í verslun okkar og hjá völdum samstarfsaðilum."
     }
   }
 }

@@ -10,7 +10,10 @@
     "confirm": "确认",
     "share": "分享",
     "more": "查看更多",
-    "shareTitle": "生成商品推荐链接"
+    "all": "查看全部",
+    "shareTitle": "生成商品推荐链接",
+    "productCategory": "产品分类",
+    "blogCategory": "文章分类"
   },
   "review": {
     "title": "产品评价",

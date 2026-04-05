@@ -1,29 +1,33 @@
 {
   "brand": {
     "name": "FAOS HERITAGE GREEK FOOD",
-    "slogan": "Taste the Heritage of Greece — Finest Extra Virgin Olive Oil & 100% Pure Raw Honey",
-    "mission": "Delivering sustainable wellness and authentic Greek flavours through premium organic products sourced from world-renowned origins."
+    "slogan": "Authentic Taste of Greece — Premium Olive Oil & 100% Pure Honey for Your Health",
+    "mission": "We handpick premium organic products from Greece's finest sources for your well-being."
   },
   "shared": {
     "productDiscovery": {
-      "title": "Curated Premium Organic Selection",
-      "description": "Discover the purity of cold-pressed olive oil and natural raw honey, handpicked for your ultimate well-being."
+      "title": "Our Products",
+      "description": "Quality products crafted with care from production to packaging, ensuring the best value for you."
     },
     "categoryDiscovery": {
-      "title": "Explore Our Natural Ranges",
-      "description": "Browse high-quality product categories, from premium olive oils to wild honey, sourced directly from Greek orchards to Singapore."
+      "title": "Categories",
+      "description": "Explore our products by category and easily find what fits your lifestyle."
     },
     "blogDiscovery": {
-      "title": "Health Tips & Mediterranean Lifestyle",
-      "description": "Deep dive into the benefits of the traditional Greek diet with recipes and articles for a sustainable, healthy lifestyle."
+      "title": "Blog",
+      "description": "Stay updated with health trends and simple tips for better self-care."
     },
     "relatedProducts": {
-      "title": "You May Also Like",
-      "description": "Complete your wellness experience with other curated products from this category."
+      "title": "Related Products",
+      "description": "Check out other items that match your healthy lifestyle."
     },
     "activity": {
-      "title": "Our Activities & Commitment",
-      "description": "We are more than just a seller; we are dedicated to delivering wellness through natural products. Here are some of our on-site activities where we build trust with our customers through our genuine products."
+      "title": "News & Events",
+      "description": "Follow our latest activities and health tips we're excited to share with everyone."
+    },
+    "partner": {
+      "title": "Available At",
+      "description": "Find our products easily at our storefront and selected partner locations."
     }
   }
 }

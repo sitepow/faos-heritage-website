@@ -10,7 +10,10 @@
     "confirm": "Staðfesta",
     "share": "Deila",
     "more": "Sjá meira",
-    "shareTitle": "Búa til tilvísunartengi vöru"
+    "all": "Skoða allt",
+    "shareTitle": "Búa til tilvísunartengi vöru",
+    "productCategory": "Vöruflokkar",
+    "blogCategory": "Bloggflokkar"
   },
   "review": {
     "title": "Vöruumsagnir",

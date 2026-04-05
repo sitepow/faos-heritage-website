@@ -10,7 +10,10 @@
     "confirm": "Bevestigen",
     "share": "Delen",
     "more": "Bekijk meer",
-    "shareTitle": "Productreferentielink maken"
+    "all": "Bekijk alles",
+    "shareTitle": "Productreferentielink maken",
+    "productCategory": "Productcategorieën",
+    "blogCategory": "Blogcategorieën"
   },
   "review": {
     "title": "Productbeoordelingen",

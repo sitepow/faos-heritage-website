@@ -1,8 +1,5 @@
 'use client'
 
-import { Button } from '@heroui/react'
-import { ArrowRight } from 'lucide-react'
-import Link from 'next/link'
 import { useLocale, useTranslations } from 'next-intl'
 
 import type { GetProductsInfiniteResult } from '@/features/product/types'
@@ -22,7 +19,6 @@ interface Props {
 const ProductExploreSection = ({ initialData, itemsPerPage }: Props) => {
   const locale = useLocale()
   const tShared = useTranslations('shared')
-  const tActions = useTranslations('actions')
 
   const { data: products, isLoading: isProductsLoading } = useProducts({
     locale,
@@ -39,20 +35,14 @@ const ProductExploreSection = ({ initialData, itemsPerPage }: Props) => {
       <Container className='flex flex-col gap-5'>
         <SectionHeader
           description={tShared('productDiscovery.description')}
+          link='/products'
           title={tShared('productDiscovery.title')}
         />
-
         <ProductSection
           isLoading={isProductsLoading}
           itemPerPage={itemsPerPage}
           items={products.items}
         />
-
-        <Link className='mx-auto' href='/products'>
-          <Button endContent={<ArrowRight />} variant='faded'>
-            {tActions('more')}
-          </Button>
-        </Link>
       </Container>
     </AppSection>
   )
