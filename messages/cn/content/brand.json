@@ -28,6 +28,10 @@
     "partner": {
       "title": "线下渠道",
       "description": "您可以在我们的门店或指定的合作伙伴处轻松购买。"
+    },
+    "youtubePlaylist": {
+      "title": "教程视频 / 产品介绍",
+      "description": ""
     }
   }
 }

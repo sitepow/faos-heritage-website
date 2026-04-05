@@ -28,6 +28,10 @@
     "partner": {
       "title": "Tersedia Di",
       "description": "Temukan produk kami dengan mudah di toko resmi dan mitra pilihan kami."
+    },
+    "youtubePlaylist": {
+      "title": "Video Tutorial / Pengenalan Produk",
+      "description": ""
     }
   }
 }

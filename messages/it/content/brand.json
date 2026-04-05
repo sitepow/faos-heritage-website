@@ -28,6 +28,10 @@
     "partner": {
       "title": "Disponibile Presso",
       "description": "Trova i nostri prodotti nel nostro store e dai nostri partner selezionati."
+    },
+    "youtubePlaylist": {
+      "title": "Video tutorial / Presentazione del prodotto",
+      "description": ""
     }
   }
 }

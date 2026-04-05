@@ -24,7 +24,7 @@ const CategoryLists = () => {
           <div className='relative flex w-48 flex-col gap-2.5'>
             <img
               alt={category?.name!}
-              className='border-default-100 size-48 rounded-xl border object-cover'
+              className='border-default-100 size-48 rounded-full border object-cover'
               src={category?.image ?? IMAGE_FALLBACK.EMPTY}
             />
             <span className='line-clamp-2 text-center text-lg sm:text-xl'>

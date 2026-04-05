@@ -28,6 +28,10 @@
     "partner": {
       "title": "Verkrijgbaar Bij",
       "description": "Vind onze producten eenvoudig in onze winkel en bij geselecteerde partners."
+    },
+    "youtubePlaylist": {
+      "title": "Instructievideo's / Productintroductie",
+      "description": ""
     }
   }
 }

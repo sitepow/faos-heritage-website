@@ -9,7 +9,7 @@ import { FooterIcon } from './FooterIcon'
 import { useActiveStorefronts } from '@/features/storefront/hook'
 
 const FooterSection = ({ section }: { section: FooterMenuSection }) => {
-  const { data: storefronts } = useActiveStorefronts()
+  const { data: storefronts } = useActiveStorefronts({ ignoreAdmin: true })
 
   if (section.isGroup) {
     return (

@@ -28,6 +28,10 @@
     "partner": {
       "title": "Available At",
       "description": "Find our products easily at our storefront and selected partner locations."
+    },
+    "youtubePlaylist": {
+      "title": "Tutorial Videos / Product Introduction",
+      "description": ""
     }
   }
 }

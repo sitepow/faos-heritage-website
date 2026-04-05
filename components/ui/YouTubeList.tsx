@@ -1,4 +1,11 @@
+'use client'
+
+import { useTranslations } from 'next-intl'
+
+import { SectionHeader } from './SectionHeader'
+
 const YouTubeList = () => {
+  const t = useTranslations('shared.youtubePlaylist')
   const videoList: string[] = [
     'https://www.youtube.com/watch?v=PyuUYV_t5II&feature=youtu.be',
     'https://www.youtube.com/watch?v=WJrdmNl3F8o',
@@ -14,7 +21,9 @@ const YouTubeList = () => {
   }
 
   return (
-    <div className='container mx-auto'>
+    <div className='container mx-auto flex flex-col gap-5'>
+      <SectionHeader link='/' title={t('title')} />
+
       <div className='grid grid-cols-1 gap-5 md:grid-cols-2'>
         {videoList.map((url, index) => {
           const videoId = getYouTubeId(url)

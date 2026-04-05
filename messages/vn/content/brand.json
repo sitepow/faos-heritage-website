@@ -28,6 +28,10 @@
     "partner": {
       "title": "Điểm bán hàng",
       "description": "Tìm mua sản phẩm dễ dàng tại cửa hàng và các đối tác được ủy quyền."
+    },
+    "youtubePlaylist": {
+      "title": "Video hướng dẫn / Giới thiệu sản phẩm",
+      "description": ""
     }
   }
 }

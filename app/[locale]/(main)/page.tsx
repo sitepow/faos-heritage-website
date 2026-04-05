@@ -7,7 +7,6 @@ import { ProductExploreSection } from './_components/ProductExploreSection'
 
 import { AppSection } from '@/components/layouts/AppSection'
 import { ActivitySection } from '@/components/section/ActivitySection'
-import { AdvertiseBanner } from '@/components/ui/Advertise/AdvertiseBanner'
 import { AffiliateBanner } from '@/components/ui/AffiliateBanner/AffiliateBanner'
 import { CategoryLists } from '@/components/ui/CategoryLists'
 import { HeroSection } from '@/components/ui/HeroSection'
@@ -57,7 +56,6 @@ const HomePage = async () => {
       />
       <PostExploreSection itemsPerPage={PAGINATION.ITEMS_PER_PAGE} />
       <ActivitySection />
-      <AdvertiseBanner />
       <AffiliateBanner />
       <YouTubeList />
       <PartnerSection />

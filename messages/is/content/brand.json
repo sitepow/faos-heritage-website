@@ -28,6 +28,10 @@
     "partner": {
       "title": "Fæst hjá",
       "description": "Þú finnur vörurnar okkar í verslun okkar og hjá völdum samstarfsaðilum."
+    },
+    "youtubePlaylist": {
+      "title": "Leiðbeiningamyndbönd / Vörukynning",
+      "description": ""
     }
   }
 }

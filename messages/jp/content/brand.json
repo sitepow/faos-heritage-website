@@ -28,6 +28,10 @@
     "partner": {
       "title": "取扱店",
       "description": "実店舗および厳選されたパートナーショップでご購入いただけます。"
+    },
+    "youtubePlaylist": {
+      "title": "チュートリアル動画 / 商品紹介",
+      "description": ""
     }
   }
 }

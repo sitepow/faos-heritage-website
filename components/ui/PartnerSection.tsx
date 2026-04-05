@@ -25,7 +25,7 @@ const PartnerSection = () => {
         <SectionHeader description={t('description')} title={t('title')} />
 
         <div className='grid items-start gap-5 sm:grid-cols-2 xl:grid-cols-3'>
-          {storefronts?.map((partner, idx) => {
+          {storefronts?.map((partner) => {
             return (
               <Link
                 key={partner.id}
@@ -43,8 +43,8 @@ const PartnerSection = () => {
                     width={160}
                   />
                 </div>
-                <p className='text-lg tracking-tight antialiased opacity-70 sm:max-w-[80%] sm:text-xl'>
-                  {idx + 1}. {partner.name}
+                <p className='max-w-[75%] text-lg tracking-tight antialiased opacity-70 sm:text-xl'>
+                  {partner.name}
                 </p>
               </Link>
             )

@@ -28,6 +28,7 @@ const ActivitySection = () => {
     <section className='flex flex-col gap-5'>
       <SectionHeader
         description={activityShared('description')}
+        link='/'
         title={activityShared('title')}
       />
 
