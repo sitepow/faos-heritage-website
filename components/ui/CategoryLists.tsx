@@ -21,13 +21,13 @@ const CategoryLists = () => {
     <Container className='flex flex-wrap justify-center gap-5'>
       {categories.map((category) => (
         <Link key={category?.id!} href={`/categories/${category?.slug!}`}>
-          <div className='relative flex w-48 flex-col gap-2.5'>
+          <div className='flex w-34 flex-col items-center justify-center gap-2.5 lg:w-42'>
             <img
               alt={category?.name!}
-              className='border-default-100 size-48 rounded-full border object-cover'
+              className='border-default-100 size-28 rounded-full border object-cover lg:size-42'
               src={category?.image ?? IMAGE_FALLBACK.EMPTY}
             />
-            <span className='line-clamp-2 text-center text-lg sm:text-xl'>
+            <span className='text-center text-lg sm:text-xl'>
               {category?.name!}
             </span>
           </div>
