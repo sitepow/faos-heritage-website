@@ -35,10 +35,14 @@ const useStorefronts = () => {
   })
 }
 
-const useActiveStorefronts = () => {
+const useActiveStorefronts = (
+  ...args: Parameters<typeof getActiveStorefronts>
+) => {
   return useQuery({
-    queryKey: storefrontQueryKeys.active(),
-    queryFn: () => getActiveStorefronts(),
+    queryKey: [...storefrontQueryKeys.active(), ...args],
+    queryFn: () => {
+      return getActiveStorefronts(...args)
+    },
   })
 }
 

@@ -11,7 +11,9 @@ import { useActiveStorefronts } from '@/features/storefront/hook'
 
 const PartnerSection = () => {
   const t = useTranslations('shared.partner')
-  const { data: storefronts, isLoading } = useActiveStorefronts()
+  const { data: storefronts, isLoading } = useActiveStorefronts({
+    ignoreAdmin: true,
+  })
 
   if (isLoading) {
     return null

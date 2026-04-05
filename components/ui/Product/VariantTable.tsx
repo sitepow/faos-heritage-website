@@ -19,9 +19,18 @@ const VariantTable = ({ variants, className }: Props) => {
     return null
   }
 
+  const sortedVariants = variants.toSorted((a, b) => {
+    const nameA = a?.name ?? ''
+    const nameB = b?.name ?? ''
+    return nameA.localeCompare(nameB, undefined, {
+      numeric: true,
+      sensitivity: 'base',
+    })
+  })
+
   return (
     <div className={cn('flex flex-col gap-2', className)}>
-      {variants.slice(0, 3).map((variant, idx) => {
+      {sortedVariants.map((variant, idx) => {
         const priceInfo = getProductPriceInfo(variant)
         const hasDiscount = priceInfo.discountPercentage > 0
 
