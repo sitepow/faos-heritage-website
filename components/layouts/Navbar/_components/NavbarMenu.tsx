@@ -19,6 +19,21 @@ import type { GetCategoriesResult } from '@/features/category/action'
 import { MenuItem } from './MenuItem'
 import { Container } from '../../Container'
 
+import { useActiveStorefronts } from '@/features/storefront/hook'
+
+interface FooterMenuItem {
+  label?: string
+  href?: string
+  image?: string
+}
+
+interface FooterMenuSection {
+  title?: string
+  items?: FooterMenuItem[]
+  isGroup?: boolean
+  isPartner?: string | boolean
+}
+
 interface Props {
   staticLinks: NavLink[]
   categories: GetCategoriesResult
@@ -27,6 +42,9 @@ interface Props {
 
 const NavbarMenu = ({ staticLinks, categories, blogCategories }: Props) => {
   const t = useTranslations('actions')
+  const tFooter = useTranslations('footer')
+  const { data: storefronts } = useActiveStorefronts({ ignoreAdmin: true })
+
   const productData = useMemo(() => {
     return Array.isArray(categories) ? categories : []
   }, [categories])
@@ -34,6 +52,19 @@ const NavbarMenu = ({ staticLinks, categories, blogCategories }: Props) => {
   const blogData = useMemo(() => {
     return blogCategories?.success ? blogCategories.data : []
   }, [blogCategories])
+
+  const selectedFooterSections = useMemo(() => {
+    const menu = tFooter.raw('menu') as FooterMenuSection[]
+    const targetIndices = [0, 3, 5]
+
+    return targetIndices
+      .map((index) => {
+        return menu?.[index]
+      })
+      .filter((section) => {
+        return !!section
+      })
+  }, [tFooter])
 
   return (
     <nav className='hidden py-2 xl:block'>
@@ -114,6 +145,53 @@ const NavbarMenu = ({ staticLinks, categories, blogCategories }: Props) => {
               </Dropdown>
             </li>
           )}
+
+          {selectedFooterSections.map((section, idx) => (
+            <li key={idx}>
+              <Dropdown placement='bottom-start'>
+                <DropdownTrigger>
+                  <Button
+                    disableRipple
+                    className='h-auto min-w-fit bg-transparent p-0 transition-opacity hover:opacity-70 data-[hover=true]:bg-transparent'
+                    endContent={
+                      <ChevronDownIcon className='opacity-70' size={16} />
+                    }
+                  >
+                    <MenuItem label={section.title || ''} />
+                  </Button>
+                </DropdownTrigger>
+                <DropdownMenu
+                  aria-label={section.title || 'Footer menu'}
+                  className='max-h-[400px] w-[250px] overflow-y-auto'
+                  variant='flat'
+                >
+                  {section.isPartner
+                    ? (storefronts || []).map((storefront) => (
+                        <DropdownItem
+                          key={storefront.id}
+                          as='a'
+                          className='py-3.5'
+                          href={storefront.googleMapUrl || '#'}
+                          rel='noopener noreferrer'
+                          target='_blank'
+                        >
+                          {storefront.name}
+                        </DropdownItem>
+                      ))
+                    : (section.items || []).map((item, itemIdx) => (
+                        <DropdownItem
+                          key={itemIdx}
+                          as={item.href ? Link : 'div'}
+                          className='py-3.5'
+                          href={item.href || '#'}
+                        >
+                          {item.label || ''}
+                        </DropdownItem>
+                      ))}
+                </DropdownMenu>
+              </Dropdown>
+            </li>
+          ))}
         </ul>
       </Container>
     </nav>

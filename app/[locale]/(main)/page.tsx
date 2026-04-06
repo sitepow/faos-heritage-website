@@ -7,6 +7,7 @@ import { ProductExploreSection } from './_components/ProductExploreSection'
 
 import { AppSection } from '@/components/layouts/AppSection'
 import { ActivitySection } from '@/components/section/ActivitySection'
+import { FaqSection } from '@/components/section/FaqSection'
 import { AffiliateBanner } from '@/components/ui/AffiliateBanner/AffiliateBanner'
 import { CategoryLists } from '@/components/ui/CategoryLists'
 import { HeroSection } from '@/components/ui/HeroSection'
@@ -59,6 +60,7 @@ const HomePage = async () => {
       <AffiliateBanner />
       <YouTubeList />
       <PartnerSection />
+      <FaqSection />
     </AppSection>
   )
 }

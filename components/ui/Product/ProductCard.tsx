@@ -57,7 +57,6 @@ const ProductCard = memo(({ className, product }: Props) => {
 
       <div className='flex flex-col gap-5 p-2.5'>
         <h3 className='text-lg tracking-tight sm:text-xl'>{product?.name}</h3>
-
         <VariantTable variants={product?.variants || []} />
       </div>
     </div>
