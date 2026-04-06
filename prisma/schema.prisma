@@ -16,7 +16,8 @@ enum PayoutMethod {
 enum Role {
   CUSTOMER
   ADMIN
-  STOCK_MANAGER
+  STOCK_VIEWER
+  STOCK_EDITOR
   POS
 }
 

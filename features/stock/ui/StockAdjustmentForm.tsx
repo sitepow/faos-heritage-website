@@ -34,6 +34,7 @@ import { IMAGE_FALLBACK } from '@/constants'
 import { useProductsAdmin } from '@/features/product/hook'
 import { useProductVariants } from '@/features/product-variant/hook'
 import { STOCK_MOVEMENT_LABELS } from '@/features/stock-history/constant'
+import { useAuth } from '@/hooks/useAuth'
 
 const DEFAULT_VALUES: StockAdjustmentInput = {
   productId: '',
@@ -45,6 +46,7 @@ const DEFAULT_VALUES: StockAdjustmentInput = {
 }
 
 const StockAdjustmentForm = () => {
+  const { isStockEditor } = useAuth()
   const {
     isAdjustmentOpen,
     closeAdjustment,
@@ -174,6 +176,7 @@ const StockAdjustmentForm = () => {
                 }
                 icon={<InfoIcon />}
                 title='คู่มือการจัดการสต็อกสินค้า (Inventory Control Guide)'
+                variant='bordered'
               />
 
               <SectionLabel>ข้อมูลสินค้า</SectionLabel>
@@ -399,7 +402,12 @@ const StockAdjustmentForm = () => {
           <Button
             className='text-secondary font-bold'
             color='primary'
-            isDisabled={!isDirty || isPending || isMissingRequiredVariant}
+            isDisabled={
+              !isDirty ||
+              isPending ||
+              isMissingRequiredVariant ||
+              !isStockEditor
+            }
             isLoading={isPending}
             onPress={() => {
               return handleSubmit(onSubmit)()

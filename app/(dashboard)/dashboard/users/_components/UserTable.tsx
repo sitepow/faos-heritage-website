@@ -18,11 +18,11 @@ import {
   Spinner,
   User,
 } from '@heroui/react'
+import { Role } from '@prisma/client'
 import { EllipsisVerticalIcon } from 'lucide-react'
 
 import type { getUsers } from '@/features/user/action'
 import type { Selection } from '@heroui/react'
-import type { Role } from '@prisma/client'
 import type { ReactNode } from 'react'
 
 import { PaginationWrapper } from '@/components/ui/PaginationWrapper'
@@ -121,9 +121,9 @@ const UserTable = ({
                         key={role}
                         className='font-bold'
                         color={
-                          role === 'ADMIN'
+                          role === Role.ADMIN
                             ? 'primary'
-                            : role === 'STOCK_MANAGER'
+                            : role === Role.STOCK_EDITOR || Role.STOCK_VIEWER
                               ? 'warning'
                               : 'default'
                         }

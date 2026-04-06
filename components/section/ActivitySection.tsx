@@ -5,7 +5,6 @@
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
-import { PostBrandBadge } from '../ui/Post/_components/PostBrandBadge'
 import { SectionHeader } from '../ui/SectionHeader'
 
 interface ActivityItem {
@@ -60,7 +59,6 @@ const ActivitySection = () => {
                       className='aspect-square w-full rounded-xl object-cover'
                       src={image}
                     />
-                    <PostBrandBadge hasImage />
 
                     {isLastVisibleCollapsed && (
                       <div className='absolute inset-0 flex flex-col items-center justify-center rounded-xl bg-black/60 text-white'>

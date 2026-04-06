@@ -168,7 +168,7 @@ const OrderUpdateModal = () => {
                   }
                   icon={<ClipboardListIcon />}
                   title='คู่มือการอัปเดตสถานะออเดอร์'
-                  variant='flat'
+                  variant='bordered'
                 />
 
                 <Controller
@@ -283,6 +283,7 @@ const OrderUpdateModal = () => {
                   <Alert
                     description='เมื่อกดยืนยัน ระบบจะเปลี่ยนสถานะเป็นสำเร็จโดยไม่ต้องใช้เลขพัสดุ ลูกค้าจะได้รับแจ้งเตือนว่าได้รับสินค้าเรียบร้อยแล้ว'
                     title='รายการนี้เป็นการรับหน้าร้าน'
+                    variant='bordered'
                   />
                 )}
               </div>

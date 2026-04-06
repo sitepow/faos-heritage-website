@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
+import { Role } from '@prisma/client'
 import { getServerSession } from 'next-auth/next'
-
-import type { Role } from '@prisma/client'
 
 import { ERROR_CODES, fail } from './errors'
 
@@ -16,11 +15,23 @@ interface AuthUser {
 const getServerUser = async () => {
   const session = await getServerSession(NEXT_AUTH_OPTIONS)
 
+  const roles = session?.user?.roles || []
+  const isStockViewer = roles.includes(Role.STOCK_VIEWER)
+  const isStockEditor = roles.includes(Role.STOCK_EDITOR)
+  const isStockManager = isStockViewer || isStockEditor
+  const isAdmin = roles.includes(Role.ADMIN)
+  const isPOS = roles.includes(Role.POS)
+
   return {
     roles: session?.user?.roles || [],
     userId: session?.user?.id,
     user: session?.user,
     isAuthenticated: !!session,
+    isStockViewer,
+    isStockEditor,
+    isStockManager,
+    isAdmin,
+    isPOS,
     session,
   }
 }

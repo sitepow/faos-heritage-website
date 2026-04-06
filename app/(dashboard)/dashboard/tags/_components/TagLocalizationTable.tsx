@@ -93,12 +93,7 @@ const TagLocalizationTable = ({
                   </span>
                 </TableCell>
                 <TableCell>
-                  <Chip
-                    className='font-bold'
-                    color='secondary'
-                    size='sm'
-                    variant='dot'
-                  >
+                  <Chip className='font-bold' size='sm' variant='dot'>
                     {locale.languageCode.toUpperCase()}
                   </Chip>
                 </TableCell>

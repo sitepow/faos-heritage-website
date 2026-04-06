@@ -7,7 +7,7 @@ import {
   DropdownItem,
   Button,
 } from '@heroui/react'
-import { ChevronDownIcon, SettingsIcon } from 'lucide-react'
+import { ChevronDownIcon, SunMoonIcon } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useTheme } from 'next-themes'
 
@@ -38,7 +38,7 @@ const ThemeSwitch = ({ className }: ComponentProps<'span'>) => {
         <DropdownTrigger>
           <Button
             className={cn('text-foreground px-2', className)}
-            startContent={<SettingsIcon />}
+            startContent={<SunMoonIcon />}
             variant='light'
           >
             <span className='flex items-center gap-2'>

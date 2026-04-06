@@ -28,6 +28,7 @@ const AlertSeoBestPractice = () => {
       }
       icon={<SearchIcon />}
       title='คำแนะนำการเพิ่มข้อมูลเพื่อประสิทธิภาพ SEO'
+      variant='bordered'
     />
   )
 }

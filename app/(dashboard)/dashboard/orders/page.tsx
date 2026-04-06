@@ -112,6 +112,7 @@ const OrderPage = () => {
         }
         icon={<InfoIcon />}
         title='คำแนะนำสำหรับการขายหน้าร้าน (POS)'
+        variant='bordered'
       />
 
       <div className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3'>

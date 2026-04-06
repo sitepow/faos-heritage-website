@@ -32,7 +32,6 @@ import type { ElementType } from 'react'
 import { CustomIcon } from './CustomIcon'
 import { NavbarLogo } from '../layouts/Navbar/_components/NavbarLogo'
 
-import { ThemeSwitch } from '@/app/(dashboard)/_components/ThemeSwitch'
 import { useAuth } from '@/hooks/useAuth'
 import { useIsMounted } from '@/hooks/useIsMounted'
 
@@ -54,9 +53,8 @@ const AdminSidebar = () => {
   const isMounted = useIsMounted()
   const [isOpen, setIsOpen] = useState(false)
 
-  const { isAdmin, roles } = useAuth()
+  const { isAdmin, roles, isStockManager } = useAuth()
   const isPOS = roles.includes('POS')
-  const isStockManager = roles.includes('STOCK_MANAGER')
 
   const menuGroups = useMemo<SidebarGroup[]>(() => {
     const groups: SidebarGroup[] = [
@@ -162,6 +160,13 @@ const AdminSidebar = () => {
             )
           }
 
+          if (
+            item.href === '/dashboard/orders' ||
+            item.href === '/dashboard/contracts'
+          ) {
+            return false
+          }
+
           return true
         })
 
@@ -243,9 +248,6 @@ const AdminSidebar = () => {
       </ScrollShadow>
 
       <div className='bg-default-50/50 flex flex-col gap-2 p-4'>
-        <div className='mx-auto'>
-          <ThemeSwitch />
-        </div>
         <Listbox aria-label='Account Settings' variant='flat'>
           <ListboxItem
             key='home'

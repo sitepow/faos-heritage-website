@@ -278,10 +278,12 @@ const getOrders = async ({
   isPosStatus = false,
 }: GetOrdersOptions = {}) => {
   const skip = (page - 1) * limit
-  const { userId: currentUserId, roles } = await getServerUser()
-  const isAdmin = roles.includes(Role.ADMIN)
-  const isStockManager = roles.includes(Role.STOCK_MANAGER)
-  const isPOS = roles.includes(Role.POS)
+  const {
+    userId: currentUserId,
+    isAdmin,
+    isPOS,
+    isStockManager,
+  } = await getServerUser()
 
   let where: Prisma.OrderWhereInput = {}
 
@@ -351,10 +353,7 @@ const getOrderById = async (orderId: string) => {
 }
 
 const getOrderStats = async () => {
-  const { userId, roles } = await getServerUser()
-  const isAdmin = roles.includes(Role.ADMIN)
-  const isStockManager = roles.includes(Role.STOCK_MANAGER)
-  const isPOS = roles.includes(Role.POS)
+  const { userId, isAdmin, isStockManager, isPOS } = await getServerUser()
 
   const where: Prisma.OrderWhereInput =
     isPOS && !isAdmin && !isStockManager ? { userId } : {}
@@ -373,10 +372,7 @@ const getOrderStats = async () => {
 }
 
 const getRevenueStats = async () => {
-  const { userId, roles } = await getServerUser()
-  const isAdmin = roles.includes(Role.ADMIN)
-  const isStockManager = roles.includes(Role.STOCK_MANAGER)
-  const isPOS = roles.includes(Role.POS)
+  const { userId, isPOS, isAdmin, isStockManager } = await getServerUser()
 
   const baseWhere: Prisma.OrderWhereInput =
     isPOS && !isAdmin && !isStockManager ? { userId } : {}
@@ -607,178 +603,182 @@ const createOrder = async (input: CreateOrderInput) =>
   })
 
 const createAdminOrder = async (input: CreateOrderInput) =>
-  withRole([Role.ADMIN, Role.STOCK_MANAGER, Role.POS], async () => {
-    const { userId } = await getServerUser()
+  withRole(
+    [Role.ADMIN, Role.STOCK_EDITOR, Role.STOCK_VIEWER, Role.POS],
+    async () => {
+      const { userId } = await getServerUser()
 
-    return prisma.$transaction(async (tx) => {
-      const {
-        items,
-        storefrontId,
-        deliveryType,
-        currency,
-        exchangeRate,
-        exchangeLocale,
-        referrerId,
-        discount = 0,
-        tax = 0,
-        isPos,
-      } = input
-
-      if (deliveryType !== DeliveryType.PICKUP || !storefrontId) {
-        return fail(ERROR_CODES.BAD_REQUEST)
-      }
-
-      const storefront = await tx.storefront.findUnique({
-        where: { id: storefrontId },
-      })
-
-      if (!storefront || items.length === 0) {
-        return fail(ERROR_CODES.BAD_REQUEST)
-      }
-
-      const storeInventories = await tx.storefrontInventory.findMany({
-        where: {
+      return prisma.$transaction(async (tx) => {
+        const {
+          items,
           storefrontId,
-          OR: items.map((i) => ({
-            productId: i.productId,
-            variantId: i.variantId ?? null,
-          })),
-        },
-        include: { product: true, variant: true },
-      })
-
-      const inventoryMap = new Map(
-        storeInventories.map((inv) => [
-          `${inv.productId}-${inv.variantId || 'none'}`,
-          inv,
-        ]),
-      )
-
-      const orderItemsPayload: Prisma.OrderItemCreateManyOrderInput[] = []
-      let subtotalSum = 0
-
-      for (const item of items) {
-        const inventory = inventoryMap.get(
-          `${item.productId}-${item.variantId || 'none'}`,
-        )
-
-        if (!inventory || inventory.stockQuantity < item.quantity) {
-          throw new Error('INSUFFICIENT_STOREFRONT_STOCK')
-        }
-
-        const effectiveBasePrice = Number(inventory.netPrice)
-        const priceLocal = Number(
-          (effectiveBasePrice * exchangeRate).toFixed(2),
-        )
-        const currentItemBaseSubtotal = effectiveBasePrice * item.quantity
-        subtotalSum += currentItemBaseSubtotal
-
-        orderItemsPayload.push({
-          productId: item.productId,
-          variantId: item.variantId,
-          productName: inventory.product.name,
-          variantName: inventory.variant?.name,
-          quantity: item.quantity,
-          basePrice: effectiveBasePrice,
-          baseSubtotal: currentItemBaseSubtotal,
-          price: priceLocal,
-          subtotal: priceLocal * item.quantity,
-          currency,
-        })
-
-        await tx.storefrontInventory.update({
-          where: { id: inventory.id },
-          data: { stockQuantity: { decrement: item.quantity } },
-        })
-
-        await tx.stockHistory.create({
-          data: {
-            productId: item.productId,
-            variantId: item.variantId ?? null,
-            userId: userId,
-            quantity: -item.quantity,
-            type: StockMovementType.SALE,
-            fromStorefrontId: storefrontId,
-            note: `รายการสั่งซื้อหน้าร้าน (POS) - รอชำระเงิน - สาขา: ${storefront.name}`,
-          },
-        })
-      }
-
-      const baseSubtotal = subtotalSum
-      const baseDiscount = discount
-      const baseTax = tax
-      const baseTotal = Math.max(0, baseSubtotal - baseDiscount + baseTax)
-
-      const exchange = (val: number) => Number((val * exchangeRate).toFixed(2))
-
-      const order = await tx.order.create({
-        data: {
-          user: { connect: { id: userId } },
-          isPos: isPos || false,
-          deliveryType: DeliveryType.PICKUP,
-          status: OrderStatus.PENDING,
-          paymentStatus: PaymentStatus.PENDING,
+          deliveryType,
           currency,
           exchangeRate,
           exchangeLocale,
-          baseSubtotal,
-          baseDiscount,
-          baseTax,
-          baseShipping: 0,
-          baseTotal,
-          subtotal: exchange(baseSubtotal),
-          discount: exchange(baseDiscount),
-          tax: exchange(baseTax),
-          shippingCost: 0,
-          total: exchange(baseTotal),
-          pickupStoreLocation: storefront.name,
-          storefront: { connect: { id: storefrontId } },
-          items: { createMany: { data: orderItemsPayload } },
-        },
-      })
+          referrerId,
+          discount = 0,
+          tax = 0,
+          isPos,
+        } = input
 
-      if (referrerId) {
-        const affiliate = await tx.affiliateProfile.findUnique({
-          where: { affiliateCode: referrerId },
-          select: {
-            id: true,
-            status: true,
-            baseRate: true,
-            highValueRate: true,
-            thresholdAmount: true,
+        if (deliveryType !== DeliveryType.PICKUP || !storefrontId) {
+          return fail(ERROR_CODES.BAD_REQUEST)
+        }
+
+        const storefront = await tx.storefront.findUnique({
+          where: { id: storefrontId },
+        })
+
+        if (!storefront || items.length === 0) {
+          return fail(ERROR_CODES.BAD_REQUEST)
+        }
+
+        const storeInventories = await tx.storefrontInventory.findMany({
+          where: {
+            storefrontId,
+            OR: items.map((i) => ({
+              productId: i.productId,
+              variantId: i.variantId ?? null,
+            })),
+          },
+          include: { product: true, variant: true },
+        })
+
+        const inventoryMap = new Map(
+          storeInventories.map((inv) => [
+            `${inv.productId}-${inv.variantId || 'none'}`,
+            inv,
+          ]),
+        )
+
+        const orderItemsPayload: Prisma.OrderItemCreateManyOrderInput[] = []
+        let subtotalSum = 0
+
+        for (const item of items) {
+          const inventory = inventoryMap.get(
+            `${item.productId}-${item.variantId || 'none'}`,
+          )
+
+          if (!inventory || inventory.stockQuantity < item.quantity) {
+            throw new Error('INSUFFICIENT_STOREFRONT_STOCK')
+          }
+
+          const effectiveBasePrice = Number(inventory.netPrice)
+          const priceLocal = Number(
+            (effectiveBasePrice * exchangeRate).toFixed(2),
+          )
+          const currentItemBaseSubtotal = effectiveBasePrice * item.quantity
+          subtotalSum += currentItemBaseSubtotal
+
+          orderItemsPayload.push({
+            productId: item.productId,
+            variantId: item.variantId,
+            productName: inventory.product.name,
+            variantName: inventory.variant?.name,
+            quantity: item.quantity,
+            basePrice: effectiveBasePrice,
+            baseSubtotal: currentItemBaseSubtotal,
+            price: priceLocal,
+            subtotal: priceLocal * item.quantity,
+            currency,
+          })
+
+          await tx.storefrontInventory.update({
+            where: { id: inventory.id },
+            data: { stockQuantity: { decrement: item.quantity } },
+          })
+
+          await tx.stockHistory.create({
+            data: {
+              productId: item.productId,
+              variantId: item.variantId ?? null,
+              userId: userId,
+              quantity: -item.quantity,
+              type: StockMovementType.SALE,
+              fromStorefrontId: storefrontId,
+              note: `รายการสั่งซื้อหน้าร้าน (POS) - รอชำระเงิน - สาขา: ${storefront.name}`,
+            },
+          })
+        }
+
+        const baseSubtotal = subtotalSum
+        const baseDiscount = discount
+        const baseTax = tax
+        const baseTotal = Math.max(0, baseSubtotal - baseDiscount + baseTax)
+
+        const exchange = (val: number) =>
+          Number((val * exchangeRate).toFixed(2))
+
+        const order = await tx.order.create({
+          data: {
+            user: { connect: { id: userId } },
+            isPos: isPos || false,
+            deliveryType: DeliveryType.PICKUP,
+            status: OrderStatus.PENDING,
+            paymentStatus: PaymentStatus.PENDING,
+            currency,
+            exchangeRate,
+            exchangeLocale,
+            baseSubtotal,
+            baseDiscount,
+            baseTax,
+            baseShipping: 0,
+            baseTotal,
+            subtotal: exchange(baseSubtotal),
+            discount: exchange(baseDiscount),
+            tax: exchange(baseTax),
+            shippingCost: 0,
+            total: exchange(baseTotal),
+            pickupStoreLocation: storefront.name,
+            storefront: { connect: { id: storefrontId } },
+            items: { createMany: { data: orderItemsPayload } },
           },
         })
 
-        if (affiliate && affiliate.status === AffiliateStatus.APPROVED) {
-          const isHighValue =
-            Number(baseTotal) >= Number(affiliate.thresholdAmount)
-          const appliedRate = isHighValue
-            ? affiliate.highValueRate
-            : affiliate.baseRate
-          const commissionAmount =
-            (Number(baseTotal) * Number(appliedRate)) / 100
-
-          await tx.affiliateCommission.create({
-            data: {
-              affiliateId: affiliate.id,
-              orderId: order.id,
-              orderAmount: baseTotal,
-              appliedRate: appliedRate,
-              commissionAmount: commissionAmount,
-              status: PayoutStatus.PENDING,
+        if (referrerId) {
+          const affiliate = await tx.affiliateProfile.findUnique({
+            where: { affiliateCode: referrerId },
+            select: {
+              id: true,
+              status: true,
+              baseRate: true,
+              highValueRate: true,
+              thresholdAmount: true,
             },
           })
 
-          await tx.order.update({
-            where: { id: order.id },
-            data: { referrerCode: referrerId },
-          })
-        }
-      }
+          if (affiliate && affiliate.status === AffiliateStatus.APPROVED) {
+            const isHighValue =
+              Number(baseTotal) >= Number(affiliate.thresholdAmount)
+            const appliedRate = isHighValue
+              ? affiliate.highValueRate
+              : affiliate.baseRate
+            const commissionAmount =
+              (Number(baseTotal) * Number(appliedRate)) / 100
 
-      return ok(order.id)
-    })
-  })
+            await tx.affiliateCommission.create({
+              data: {
+                affiliateId: affiliate.id,
+                orderId: order.id,
+                orderAmount: baseTotal,
+                appliedRate: appliedRate,
+                commissionAmount: commissionAmount,
+                status: PayoutStatus.PENDING,
+              },
+            })
+
+            await tx.order.update({
+              where: { id: order.id },
+              data: { referrerCode: referrerId },
+            })
+          }
+        }
+
+        return ok(order.id)
+      })
+    },
+  )
 
 const updateOrder = async (input: UpdateOrderInput) => {
   return withAuth(async () => {

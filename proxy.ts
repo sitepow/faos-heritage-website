@@ -62,7 +62,9 @@ const middleware = async (request: NextRequest) => {
     }
 
     const isAdmin = roles.includes(Role.ADMIN)
-    const isStockManager = roles.includes(Role.STOCK_MANAGER)
+    const isStockViewer = roles.includes(Role.STOCK_VIEWER)
+    const isStockEditor = roles.includes(Role.STOCK_EDITOR)
+    const isStockManager = isStockViewer || isStockEditor
     const isPOS = roles.includes(Role.POS)
 
     if (isPOS && !isAdmin && !isStockManager) {

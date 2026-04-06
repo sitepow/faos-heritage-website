@@ -36,54 +36,57 @@ const getProductAdmin = async (productId: string) => {
 }
 
 const getProductsAdmin = async (page = 1, limit = 50) => {
-  return await withRole([Role.ADMIN, Role.STOCK_MANAGER], async () => {
-    noStore()
-    const skip = (page - 1) * limit
+  return await withRole(
+    [Role.ADMIN, Role.STOCK_EDITOR, Role.STOCK_VIEWER],
+    async () => {
+      noStore()
+      const skip = (page - 1) * limit
 
-    const [items, total] = await prisma.$transaction([
-      prisma.product.findMany({
-        skip,
-        take: limit,
-        include: {
-          category: {
-            select: { name: true },
-          },
-          images: {
-            select: {
-              url: true,
-              isPrimary: true,
+      const [items, total] = await prisma.$transaction([
+        prisma.product.findMany({
+          skip,
+          take: limit,
+          include: {
+            category: {
+              select: { name: true },
+            },
+            images: {
+              select: {
+                url: true,
+                isPrimary: true,
+              },
+            },
+            variants: {
+              select: {
+                id: true,
+                name: true,
+                price: true,
+                salePrice: true,
+                stockQuantity: true,
+              },
             },
           },
-          variants: {
-            select: {
-              id: true,
-              name: true,
-              price: true,
-              salePrice: true,
-              stockQuantity: true,
-            },
-          },
-        },
-        orderBy: { createdAt: 'desc' },
-      }),
-      prisma.product.count(),
-    ])
+          orderBy: { createdAt: 'desc' },
+        }),
+        prisma.product.count(),
+      ])
 
-    const processedItems = items.map((product) => {
+      const processedItems = items.map((product) => {
+        return {
+          ...product,
+          stockQuantity: calculateProductTotalStock(product),
+        }
+      })
+
       return {
-        ...product,
-        stockQuantity: calculateProductTotalStock(product),
+        items: decimalToNumber(processedItems),
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit),
       }
-    })
-
-    return {
-      items: decimalToNumber(processedItems),
-      total,
-      page,
-      limit,
-      totalPages: Math.ceil(total / limit),
-    }
-  })
+    },
+  )
 }
 
 const getProductBySlug = async (slug: string, locale?: string) => {

@@ -12,7 +12,8 @@ const useRoleLabel = () => {
     const roleMap: Record<Role, string> = {
       [Role.ADMIN]: t('roles.admin'),
       [Role.CUSTOMER]: t('roles.customer'),
-      [Role.STOCK_MANAGER]: t('roles.stock_manager'),
+      [Role.STOCK_EDITOR]: t('roles.stock_manager'),
+      [Role.STOCK_VIEWER]: t('roles.stock_manager'),
       [Role.POS]: t('roles.pos'),
     }
 

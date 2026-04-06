@@ -270,7 +270,7 @@ const ProductLocalizationForm = () => {
                 </div>
               </div>
 
-              <Alert>
+              <Alert variant='bordered'>
                 * สำหรับรายละเอียดเนื้อหา (Description) แบบเต็ม
                 คุณสามารถจัดการได้ผ่านปุ่ม "แก้ไขรายละเอียดเนื้อหา"
                 ในหน้าตารางหลังจากบันทึกข้อมูลส่วนนี้แล้ว

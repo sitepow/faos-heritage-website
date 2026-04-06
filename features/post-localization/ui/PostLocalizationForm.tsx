@@ -266,7 +266,7 @@ const PostLocalizationForm = ({ postId }: Props) => {
                 </div>
               </div>
 
-              <Alert>
+              <Alert variant='bordered'>
                 สำหรับการแปลเนื้อหาบทความแบบละเอียด (Content)
                 คุณสามารถจัดการได้ผ่านเมนู &quot;แก้ไขเนื้อหาบทความ&quot;
                 ในหน้าตารางจัดการภาษาหลังจากบันทึกส่วนหัวข้อนี้แล้ว

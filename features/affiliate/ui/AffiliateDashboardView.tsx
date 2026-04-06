@@ -67,6 +67,7 @@ const AffiliateDashboardView = () => {
           </div>
         }
         title={t('alert.title')}
+        variant='bordered'
       />
 
       <section className='grid w-full grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3'>

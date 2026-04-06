@@ -8,7 +8,6 @@ import { memo } from 'react'
 import type { Prisma } from '@prisma/client'
 
 import { Dot } from './_components/Dot'
-import { PostBrandBadge } from './_components/PostBrandBadge'
 
 import { IMAGE_FALLBACK } from '@/constants'
 import { formatDate } from '@/utils'
@@ -36,17 +35,16 @@ const PostCard = memo(({ post }: Props) => {
 
   return (
     <Link href={postHref}>
-      <div className='border-default-100 flex flex-col gap-2.5 rounded-xl border'>
+      <div className='border-default-100 flex flex-col rounded-xl border'>
         <div className='relative'>
           <img
             alt={title}
-            className='h-[400px] w-full rounded-xl object-cover'
+            className='h-[350px] w-full rounded-xl object-cover'
             src={featuredImage || IMAGE_FALLBACK.EMPTY}
           />
-          <PostBrandBadge hasImage={!!featuredImage} />
         </div>
 
-        <div className='flex flex-col gap-2.5 p-5'>
+        <div className='flex flex-col gap-2.5 p-2.5'>
           <h3 className='text-lg tracking-tight sm:text-xl'>{title}</h3>
 
           <div className='flex flex-wrap items-center gap-2.5 text-sm'>

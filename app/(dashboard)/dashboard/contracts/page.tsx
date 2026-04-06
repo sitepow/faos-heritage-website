@@ -15,12 +15,12 @@ import { TableConfigHeader } from '../products/_components/TableConfigHeader'
 import { Container } from '@/components/layouts/Container'
 import { StatCard } from '@/components/ui/StatCard'
 import { useContractsAdmin } from '@/features/contract/hook'
-import { useAuth } from '@/hooks/useAuth' // นำเข้า useAuth
+import { useAuth } from '@/hooks/useAuth'
 import { useIsMounted } from '@/hooks/useIsMounted'
 
 const ContractPage = () => {
   const isMounted = useIsMounted()
-  const { isAdmin } = useAuth() // ดึงสถานะ isAdmin มาใช้งาน
+  const { isAdmin } = useAuth()
 
   const {
     isOpen: isPOSOpen,

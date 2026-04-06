@@ -69,6 +69,7 @@ const AffiliateDetailsModal = () => {
             }
             icon={<ShieldCheckIcon />}
             title='ตรวจสอบข้อมูลผู้สมัครก่อนทำการอนุมัติ'
+            variant='bordered'
           />
 
           <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
@@ -80,7 +81,6 @@ const AffiliateDetailsModal = () => {
                 src={selectedAffiliate.idCardImage ?? IMAGE_FALLBACK.EMPTY}
               />
             </div>
-            {/* แสดงรูปสมุดบัญชีเฉพาะเมื่อเลือก THAI_BANK เท่านั้น */}
             {selectedAffiliate.payoutMethod === PayoutMethod.THAI_BANK && (
               <div>
                 <SectionLabel>สำเนาสมุดบัญชี</SectionLabel>
@@ -98,7 +98,6 @@ const AffiliateDetailsModal = () => {
           <div className='space-y-3'>
             <SectionLabel>ข้อมูลช่องทางการรับเงินและการติดต่อ</SectionLabel>
             <div className='grid grid-cols-1 gap-2 md:grid-cols-2'>
-              {/* ส่วนที่ 1: แสดงตาม Payout Method */}
               {selectedAffiliate.payoutMethod === PayoutMethod.THAI_BANK && (
                 <>
                   <p className='text-small'>
@@ -149,7 +148,6 @@ const AffiliateDetailsModal = () => {
                 </p>
               )}
 
-              {/* ส่วนที่ 2: ข้อมูลติดต่อ (แสดงเสมอ) */}
               <p className='text-small'>
                 เบอร์ติดต่อ:{' '}
                 <span className='underline'>
