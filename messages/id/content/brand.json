@@ -32,6 +32,10 @@
     "youtubePlaylist": {
       "title": "Video Tutorial / Pengenalan Produk",
       "description": ""
+    },
+    "faq": {
+      "title": "Butuh Bantuan?",
+      "description": "Pertanyaan yang sering diajukan dan informasi dukungan."
     }
   }
 }

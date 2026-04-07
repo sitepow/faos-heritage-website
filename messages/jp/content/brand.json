@@ -32,6 +32,10 @@
     "youtubePlaylist": {
       "title": "チュートリアル動画 / 商品紹介",
       "description": ""
+    },
+    "faq": {
+      "title": "ヘルプが必要ですか？",
+      "description": "よくある質問とサポート情報。"
     }
   }
 }

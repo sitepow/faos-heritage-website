@@ -32,6 +32,10 @@
     "youtubePlaylist": {
       "title": "Leiðbeiningamyndbönd / Vörukynning",
       "description": ""
+    },
+    "faq": {
+      "title": "Vantar þig aðstoð?",
+      "description": "Algengar spurningar og upplýsingar um aðstoð."
     }
   }
 }

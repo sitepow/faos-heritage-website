@@ -32,6 +32,10 @@ const VariantSelect = ({
   return (
     <Select
       disallowEmptySelection
+      classNames={{
+        trigger:
+          'border-primary data-[hover=true]:border-primary focus-within:!border-primary text-primary',
+      }}
       isDisabled={isDisabled}
       placeholder={tForm('require')}
       radius='none'
@@ -54,7 +58,7 @@ const VariantSelect = ({
             />
           }
         >
-          {v.name}
+          {v.name.toUpperCase()}
         </SelectItem>
       ))}
     </Select>

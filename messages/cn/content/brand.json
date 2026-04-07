@@ -32,6 +32,10 @@
     "youtubePlaylist": {
       "title": "教程视频 / 产品介绍",
       "description": ""
+    },
+    "faq": {
+      "title": "需要帮助吗？",
+      "description": "常见问题解答和支持信息。"
     }
   }
 }

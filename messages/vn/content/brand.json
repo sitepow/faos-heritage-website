@@ -32,6 +32,10 @@
     "youtubePlaylist": {
       "title": "Video hướng dẫn / Giới thiệu sản phẩm",
       "description": ""
+    },
+    "faq": {
+      "title": "Cần hỗ trợ?",
+      "description": "Các câu hỏi thường gặp and thông tin hỗ trợ."
     }
   }
 }

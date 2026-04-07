@@ -32,6 +32,10 @@
     "youtubePlaylist": {
       "title": "Instructievideo's / Productintroductie",
       "description": ""
+    },
+    "faq": {
+      "title": "Hulp nodig?",
+      "description": "Veelgestelde vragen en ondersteuningsinformatie."
     }
   }
 }

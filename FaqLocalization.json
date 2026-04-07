@@ -1,0 +1,72 @@
+[
+  {
+    "id": "0c075648-b35b-49a5-8624-91a5fcfb76e1",
+    "faqId": "cb77033b-7b47-4140-aeea-647c8b1ba5b4",
+    "languageCode": "TH",
+    "title": "วิธีการชำระเงินออนไลน์/ช่องทางการชำระเงิน",
+    "content": null
+  },
+  {
+    "id": "161269fe-0a81-40e1-b772-b372a597fa1f",
+    "faqId": "16873d79-7f6f-4a9f-93d4-40eee4c56cd8",
+    "languageCode": "TH",
+    "title": "วิธีการลงสินค้าในระบบ (สำหรับ Admin)",
+    "content": null
+  },
+  {
+    "id": "351f6b41-11c0-4dfc-ac3d-c8948f5eb419",
+    "faqId": "c6208f77-8e29-4add-ae46-337763f155f5",
+    "languageCode": "TH",
+    "title": "วิธีการจัดการหมวดหมู่สินค้า/หมวดหมู่บทความในระบบ (สำหรับ Admin)",
+    "content": null
+  },
+  {
+    "id": "63758251-3e8d-4236-912c-9fb5a96c8b8f",
+    "faqId": "6dcf8fe0-68ee-48be-8bfd-41e974c79e7c",
+    "languageCode": "TH",
+    "title": "วิธีการใช้งานระบบ POS (สำหรับพาร์ทเนอร์)",
+    "content": null
+  },
+  {
+    "id": "753eca91-b0ac-4e7e-b0c4-2937d1236b77",
+    "faqId": "b772a8ae-99f3-44bf-95e4-dd6413abad99",
+    "languageCode": "TH",
+    "title": "วิธีการสั่งซื้อสินค้าออนไลน์",
+    "content": null
+  },
+  {
+    "id": "a4339c05-4e52-43f2-a835-24a3f4c12297",
+    "faqId": "c9768e87-1099-440e-9686-d2fe14072494",
+    "languageCode": "TH",
+    "title": "วิธีการเข้าสู่ระบบ/สมัครสมาชิกในเว็บไซต์",
+    "content": null
+  },
+  {
+    "id": "af152532-dd9c-4d91-9c2a-bea19d5c8cfd",
+    "faqId": "e79e5565-ad49-4bed-859c-7f08949670b8",
+    "languageCode": "TH",
+    "title": "วิธีการสมัครใช้งานระบบ Affiliate สร้างรายได้ออนไลน์จากการแชร์ลิงค์สินค้า",
+    "content": null
+  },
+  {
+    "id": "d3c0e111-271c-473a-b78f-2778356b1a57",
+    "faqId": "c536a039-a09c-401a-aaf4-f853b4df9df7",
+    "languageCode": "TH",
+    "title": "วิธีการลงบทความในระบบ (สำหรับ Admin)",
+    "content": null
+  },
+  {
+    "id": "e829436a-b525-4d61-96dc-27b3bf0f74d3",
+    "faqId": "ab1de194-1334-4478-b477-f077de0b1716",
+    "languageCode": "TH",
+    "title": "นโยบายความเป็นส่วนตัว/ข้อกำหนดการใช้งาน",
+    "content": null
+  },
+  {
+    "id": "fe19926c-7097-49c2-a6a9-b04c16808ed4",
+    "faqId": "b7b6a3ff-b9e6-49be-ad1a-ad744f0263bc",
+    "languageCode": "TH",
+    "title": "วิธีการจัดการสต็อกและจุดจำหน่ายสินค้าในระบบ (สำหรับ Admin)",
+    "content": null
+  }
+]

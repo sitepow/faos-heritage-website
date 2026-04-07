@@ -320,6 +320,26 @@ model Comment {
   @@index([parentId])
 }
 
+model Faq {
+  id           String            @id @default(cuid())
+  slug         String            @unique
+  localizations FaqLocalization[]
+}
+
+model FaqLocalization {
+  id           String   @id @default(cuid())
+  faqId        String
+  languageCode String
+  title        String?
+  content      String?  @db.Text
+
+  faq          Faq      @relation(fields: [faqId], references: [id], onDelete: Cascade)
+
+  @@unique([faqId, languageCode])
+  @@index([faqId])
+  @@index([languageCode])
+}
+
 model Post {
   id       String @id @default(cuid())
   slug     String @unique

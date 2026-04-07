@@ -32,6 +32,10 @@
     "youtubePlaylist": {
       "title": "Tutorial Videos / Product Introduction",
       "description": ""
+    },
+    "faq": {
+      "title": "Need Help?",
+      "description": "Frequently asked questions and support information."
     }
   }
 }
