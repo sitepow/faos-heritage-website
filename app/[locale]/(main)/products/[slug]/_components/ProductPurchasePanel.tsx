@@ -1,6 +1,6 @@
 'use client'
 
-import { Card, CardBody, Button, Divider, Chip } from '@heroui/react'
+import { Card, CardBody, Button, Divider } from '@heroui/react'
 import { HeartIcon, ShoppingCartIcon } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 import { useState, useMemo, useEffect } from 'react'
@@ -119,16 +119,22 @@ const ProductPurchasePanel = () => {
 
         <Divider className='bg-default-100' />
 
+        {product.summary && (
+          <section aria-label='Product summary'>
+            <MarkdownRenderer
+              className='opacity-70'
+              content={product.summary}
+            />
+          </section>
+        )}
+
+        <Divider className='bg-default-100' />
+
         <section aria-label='Product variants' className='flex flex-col gap-5'>
           <VariantTable variants={product?.variants || []} />
         </section>
 
-        {product.summary && (
-          <section aria-label='Product summary'>
-            <MarkdownRenderer className='italic' content={product.summary} />
-          </section>
-        )}
-
+        <Divider className='bg-default-100' />
         <div className='grid grid-cols-5 gap-2 pt-4'>
           <Button
             fullWidth
@@ -188,32 +194,12 @@ const ProductPurchasePanel = () => {
 
         <Divider className='bg-default-100' />
 
-        <section
-          aria-label='Share Product'
-          className='flex flex-col gap-3 rounded-lg p-4'
-        >
-          {affiliateCode && (
-            <div className='flex items-center justify-end'>
-              <Chip
-                className='uppercase'
-                color='primary'
-                radius='none'
-                variant='dot'
-              >
-                Ref: {affiliateCode}
-              </Chip>
-            </div>
-          )}
-
-          <div className='flex-1'>
-            <ProductShare
-              label={tActions('share')}
-              title={product.name}
-              url={shortUrl || originalShareUrl}
-              onClick={!shortUrl ? handleGenerateShortLink : undefined}
-            />
-          </div>
-        </section>
+        <ProductShare
+          label={tActions('share')}
+          title={product.name}
+          url={shortUrl || originalShareUrl}
+          onClick={!shortUrl ? handleGenerateShortLink : undefined}
+        />
       </CardBody>
     </Card>
   )

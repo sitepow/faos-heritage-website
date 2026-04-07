@@ -36,25 +36,38 @@ const PostAuthor = ({ author }: Props) => {
   }
 
   return (
-    <footer className='border-default-100 mx-auto flex flex-col items-center gap-5 rounded-lg border p-7 text-center sm:flex-row sm:items-start sm:gap-8 sm:p-10 sm:text-start lg:max-w-3/4 lg:p-12 xl:max-w-1/2'>
-      <div className='shrink-0'>
-        <PostAuthorAvatar
-          author={author}
-          className='size-24 shadow-sm sm:size-28'
-          iconSize={48}
-        />
+    <div className='border-default-100 bg-default-50/50 flex flex-col gap-6 rounded-2xl border p-6 transition-all hover:bg-white hover:shadow-sm dark:hover:bg-neutral-900'>
+      <div className='flex items-center gap-4'>
+        <div className='shrink-0'>
+          <PostAuthorAvatar
+            author={author}
+            className='ring-default-100 size-16 ring-2 ring-offset-2'
+            iconSize={24}
+          />
+        </div>
+
+        <div className='flex flex-col gap-1'>
+          <span className='text-default-400 text-xs font-medium tracking-wider uppercase'>
+            Written By
+          </span>
+          <h4 className='text-default-900 text-lg leading-tight font-bold'>
+            {author?.name || 'Admin'}
+          </h4>
+        </div>
       </div>
 
-      <div className='flex flex-col gap-3'>
-        <div className='flex flex-col gap-1'>
-          <h4 className='text-default-900 text-2xl font-bold'>
-            {author?.name!}
-          </h4>
+      <div className='flex flex-col gap-4'>
+        <p className='text-default-600 text-sm leading-relaxed antialiased'>
+          Sharing insights about premium Greek organic olive oil, natural honey,
+          and the Mediterranean lifestyle to help you achieve optimal
+          well-being.
+        </p>
 
-          <nav
-            aria-label='Author socials'
-            className='flex items-center justify-center gap-3 sm:justify-start'
-          >
+        <div className='border-default-100 mt-2 flex items-center justify-between border-t pt-4'>
+          <span className='text-default-500 text-xs font-medium'>
+            Follow Author
+          </span>
+          <nav aria-label='Author socials' className='flex items-center gap-3'>
             {SOCIAL_MAP.map(({ id, Icon }) => {
               const href = socials[id as keyof SocialLinks]
               if (!href) {
@@ -69,20 +82,14 @@ const PostAuthor = ({ author }: Props) => {
                   rel='noopener noreferrer'
                   target='_blank'
                 >
-                  <Icon size={18} />
+                  <Icon size={16} />
                 </Link>
               )
             })}
           </nav>
         </div>
-
-        <p className='max-w-2xl text-lg leading-relaxed tracking-tight antialiased opacity-70 sm:text-xl'>
-          Sharing insights about premium Greek organic olive oil, natural honey,
-          and the Mediterranean lifestyle to help you achieve optimal
-          well-being.
-        </p>
       </div>
-    </footer>
+    </div>
   )
 }
 

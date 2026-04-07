@@ -7,10 +7,7 @@ import { memo } from 'react'
 
 import type { Prisma } from '@prisma/client'
 
-import { Dot } from './_components/Dot'
-
 import { IMAGE_FALLBACK } from '@/constants'
-import { formatDate } from '@/utils'
 
 type PostListItem = Prisma.PostGetPayload<{
   include: {
@@ -26,12 +23,31 @@ interface Props {
   post: PostListItem
 }
 
-const PostCardSkeleton = () => <Skeleton className='h-[420px] w-full' />
+const PostCardSkeleton = () => {
+  return <Skeleton className='h-[420px] w-full' />
+}
 
 const PostCard = memo(({ post }: Props) => {
-  const { slug, title, featuredImage, publishedAt, author } = post
+  const { slug, title, featuredImage, author } = post
 
   const postHref = `/posts/${slug}`
+
+  const getInitials = () => {
+    if (!author?.name) {
+      return 'AU'
+    }
+
+    const nameParts = author.name.trim().split(' ')
+    if (nameParts.length > 1) {
+      const firstName = nameParts[0].charAt(0)
+      const lastName = nameParts[nameParts.length - 1].charAt(0)
+      return `${firstName}${lastName}`.toUpperCase()
+    }
+
+    return nameParts[0].charAt(0).toUpperCase()
+  }
+
+  const avatarUrl = `https://api.dicebear.com/7.x/initials/svg?seed=${getInitials()}`
 
   return (
     <Link href={postHref}>
@@ -49,15 +65,12 @@ const PostCard = memo(({ post }: Props) => {
 
           <div className='flex flex-wrap items-center gap-2.5 text-sm'>
             <img
+              alt={author?.name || 'author'}
               className='size-[24px] rounded-full'
-              src={author?.image ?? IMAGE_FALLBACK.EMPTY}
+              src={avatarUrl}
             />
             <span className='text-gray-900 dark:text-gray-400'>
               {author?.name!}
-            </span>
-            <Dot className='text-gray-500' />
-            <span className='text-gray-500'>
-              {formatDate(publishedAt, 'th', 'numeric')}
             </span>
           </div>
         </div>

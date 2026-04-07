@@ -98,15 +98,26 @@ const PostClient = ({ initialData, slug }: Props) => {
             </section>
           )}
 
-          <section aria-label='Post content' className='w-full'>
-            <MarkdownRenderer
-              className='mx-auto w-full max-w-[1280px]'
-              content={content!}
-              fallbackAlt={title!}
-            />
-          </section>
+          <section
+            aria-label='Post content'
+            className='relative grid w-full grid-cols-1 items-start gap-8 lg:grid-cols-12'
+          >
+            <div className='lg:col-span-8'>
+              <MarkdownRenderer
+                className='w-full'
+                content={content!}
+                fallbackAlt={title!}
+              />
+            </div>
 
-          <PostAuthor author={author} />
+            <aside className='sticky top-32 hidden lg:col-span-4 lg:block'>
+              <PostAuthor author={author} />
+            </aside>
+
+            <div className='lg:hidden'>
+              <PostAuthor author={author} />
+            </div>
+          </section>
 
           <aside aria-label='Related articles'>
             <RelatedPosts

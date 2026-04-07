@@ -6,7 +6,6 @@ import { memo } from 'react'
 import { Dot } from './Dot'
 import { CommentCount } from '../../CommentCount'
 import { ViewCount } from '../../ViewCount'
-import { PostAuthorAvatar } from '../PostAuthorAvatar'
 
 import { formatDate } from '@/utils'
 
@@ -18,18 +17,9 @@ interface Props {
 }
 
 const PostCardMeta = memo(
-  ({ publishedAt, viewCount = 0, commentCount = 0, author }: Props) => {
+  ({ publishedAt, viewCount = 0, commentCount = 0 }: Props) => {
     return (
       <footer className='flex flex-wrap items-center gap-3 border-t border-white/10 pt-4 text-white/90'>
-        <div className='flex items-center gap-2'>
-          <PostAuthorAvatar author={author} iconSize={12} />
-          <span className='cursor-pointer text-sm font-medium transition-all hover:underline'>
-            {author?.name!}
-          </span>
-        </div>
-
-        <Dot />
-
         <div className='flex flex-wrap items-center gap-3 text-[13px] text-white/70'>
           <CalendarIcon size={22} />
           <time dateTime={new Date(publishedAt).toISOString()}>

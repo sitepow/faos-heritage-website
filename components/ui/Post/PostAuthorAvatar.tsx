@@ -13,12 +13,29 @@ interface Props {
 }
 
 const PostAuthorAvatar = memo(({ author, className, iconSize = 16 }: Props) => {
+  const getInitials = () => {
+    if (!author?.name) {
+      return 'AU'
+    }
+
+    const nameParts = author.name.trim().split(' ')
+    if (nameParts.length > 1) {
+      const firstName = nameParts[0].charAt(0)
+      const lastName = nameParts[nameParts.length - 1].charAt(0)
+      return `${firstName}${lastName}`.toUpperCase()
+    }
+
+    return nameParts[0].charAt(0).toUpperCase()
+  }
+
+  const avatarUrl = `https://api.dicebear.com/7.x/initials/svg?seed=${getInitials()}`
+
   return (
     <Avatar
       className={className}
       icon={<UserIcon size={iconSize} />}
-      name={author?.name!}
-      src={author?.image ?? IMAGE_FALLBACK.EMPTY}
+      name={author?.name ?? 'Author'}
+      src={avatarUrl || IMAGE_FALLBACK.EMPTY}
     />
   )
 })

@@ -3,13 +3,14 @@
 'use client'
 
 import { Button } from '@heroui/react'
-import { ChevronLeft, ChevronRight, ChevronRightIcon } from 'lucide-react'
+import { ArrowRightIcon, ChevronLeft, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 import { useLocale } from 'next-intl'
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 
 import { BadgeOverlay } from './Product/BadgeOverlay'
 
+import { PAGINATION } from '@/constants'
 import { useProductPrice, useProducts } from '@/features/product/hook'
 
 const HeroSection = () => {
@@ -18,7 +19,7 @@ const HeroSection = () => {
 
   const { data, isLoading } = useProducts({
     locale,
-    itemsPerPage: 5,
+    itemsPerPage: PAGINATION.ITEMS_PER_PAGE,
   })
 
   const products = data?.items ?? []
@@ -50,6 +51,12 @@ const HeroSection = () => {
     }
   }, [nextSlide, products.length])
 
+  const primaryImage = useMemo(() => {
+    return currentProduct?.images?.find((img) => {
+      return img.isPrimary === true
+    })
+  }, [currentProduct])
+
   if (isLoading || products.length === 0) {
     return (
       <div className='flex h-[500px] w-full animate-pulse items-center justify-center bg-gray-50 md:h-[600px] dark:bg-neutral-900' />
@@ -73,32 +80,47 @@ const HeroSection = () => {
 
           <div className='flex flex-col items-center gap-2.5 md:items-start'>
             <Link href={`/products/${currentProduct?.slug}`}>
-              <div className='flex items-center gap-2.5 opacity-70 hover:underline hover:opacity-100'>
+              <Button
+                className='text-primary'
+                endContent={
+                  <div className='bg-primary flex size-6 shrink-0 items-center justify-center rounded-full'>
+                    <ArrowRightIcon className='text-white' size={15} />
+                  </div>
+                }
+                radius='full'
+                variant='bordered'
+              >
                 <span>Shop Now - {displayPrice}</span>
-                <ChevronRightIcon />
-              </div>
+              </Button>
             </Link>
-
             <Link href='/products'>
-              <div className='flex items-center gap-2.5 opacity-70 hover:underline hover:opacity-100'>
+              <Button
+                className='text-primary'
+                endContent={
+                  <div className='bg-primary flex size-6 shrink-0 items-center justify-center rounded-full'>
+                    <ArrowRightIcon className='text-white' size={15} />
+                  </div>
+                }
+                radius='full'
+                variant='bordered'
+              >
                 <span>View All Products</span>
-                <ChevronRightIcon />
-              </div>
+              </Button>
             </Link>
           </div>
         </div>
 
         <div className='group relative order-1 flex w-full flex-1 items-center justify-center'>
           <div className='relative aspect-square w-full transition-all duration-700 ease-in-out'>
-            {currentProduct?.images?.[0]?.url && (
+            {primaryImage?.url && (
               <div
-                key={currentProduct.id}
+                key={currentProduct?.id!}
                 className='animate-in fade-in zoom-in relative flex size-full flex-col items-center justify-center duration-500'
               >
                 <img
-                  alt={currentProduct.name}
-                  className='border-default-100 relative z-10 size-full rounded-xl border object-contain drop-shadow-xl md:drop-shadow-2xl dark:drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)]'
-                  src={currentProduct.images[0].url}
+                  alt={currentProduct?.name!}
+                  className='border-default-100 relative z-10 size-full rounded-xl border object-contain'
+                  src={primaryImage.url}
                 />
 
                 <div className='flex items-center justify-center gap-2 pt-4 md:justify-start'>
