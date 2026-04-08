@@ -21,7 +21,7 @@ const CategoryLists = () => {
     <Container className='flex flex-wrap justify-center gap-5'>
       {categories.map((category) => (
         <Link key={category?.id!} href={`/categories/${category?.slug!}`}>
-          <div className='flex w-34 flex-col items-center justify-center gap-2.5 lg:w-42'>
+          <div className='flex w-34 flex-col items-center justify-center gap-5 lg:w-42'>
             <img
               alt={category?.name!}
               className='border-default-100 size-28 rounded-full border object-cover lg:size-42'

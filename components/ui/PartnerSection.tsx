@@ -59,7 +59,7 @@ const PartnerImage = ({ name, image }: PartnerImageProps) => {
       <img
         ref={imgRef}
         alt={name}
-        className='border-default-100 size-32 rounded-full border object-contain'
+        className='border-default-100 size-32 rounded-xl border object-contain'
         crossOrigin='anonymous'
         height={80}
         src={image || IMAGE_FALLBACK.EMPTY}
@@ -86,12 +86,12 @@ const PartnerSection = () => {
       <div className='container mx-auto px-4'>
         <SectionHeader description={t('description')} title={t('title')} />
 
-        <div className='flex flex-wrap items-start justify-center gap-5'>
+        <div className='flex flex-wrap items-start justify-center'>
           {storefronts?.map((partner) => {
             return (
               <Link
                 key={partner.id}
-                className='flex w-80 flex-col items-center justify-start gap-2.5 p-4 text-center grayscale transition-all duration-300 hover:grayscale-0 lg:w-96'
+                className='flex w-80 flex-col items-center justify-start gap-5 p-4 text-center grayscale transition-all duration-300 hover:grayscale-0 lg:w-96'
                 href={partner.googleMapUrl || '#'}
                 rel='noopener noreferrer'
                 target='_blank'
@@ -100,7 +100,7 @@ const PartnerSection = () => {
                   image={partner.image || IMAGE_FALLBACK.EMPTY}
                   name={partner.name}
                 />
-                <p className='text-lg tracking-tight antialiased opacity-70 sm:text-xl'>
+                <p className='max-w-3/4 text-lg tracking-tight antialiased opacity-70 sm:text-xl'>
                   {partner.name}
                 </p>
               </Link>
