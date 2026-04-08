@@ -119,7 +119,7 @@ const HeroSection = () => {
               >
                 <img
                   alt={currentProduct?.name!}
-                  className='border-default-100 relative z-10 size-full rounded-xl border object-contain'
+                  className='border-default-100 relative z-10 size-full rounded-xl border object-cover'
                   src={primaryImage.url}
                 />
 

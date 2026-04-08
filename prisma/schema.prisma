@@ -440,7 +440,7 @@ model ProductLocalization {
   productId    String
   languageCode String
 
-  name            String
+  name            String?
   summary         String?  @db.Text
   description     String?  @db.Text
   metaTitle       String?  @db.Text

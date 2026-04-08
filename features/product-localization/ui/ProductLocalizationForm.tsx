@@ -187,12 +187,11 @@ const ProductLocalizationForm = () => {
                 <Controller
                   control={control}
                   name='name'
-                  render={({ field }) => (
+                  render={({ field: { value, ...field } }) => (
                     <Input
                       {...field}
-                      errorMessage={errors.name?.message}
-                      isInvalid={!!errors.name}
                       label='ชื่อสินค้า (ภาษาที่เลือก)'
+                      value={value || ''}
                       variant='bordered'
                     />
                   )}

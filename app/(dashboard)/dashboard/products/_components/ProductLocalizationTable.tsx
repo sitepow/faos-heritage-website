@@ -98,10 +98,10 @@ const ProductLocalizationTable = ({
                   </Chip>
                 </TableCell>
                 <TableCell className='text-default-500'>
-                  {originalName}
+                  {originalName ?? '-'}
                 </TableCell>
                 <TableCell className='text-primary font-medium'>
-                  {locale.name}
+                  {locale?.name ?? '-'}
                 </TableCell>
                 <TableCell>
                   <Dropdown placement='bottom-end'>

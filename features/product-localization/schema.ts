@@ -8,7 +8,7 @@ const productLocalizationSchema = z.object({
     .min(2, 'รหัสภาษาต้องมีอย่างน้อย 2 ตัวอักษร')
     .max(5, 'รหัสภาษาต้องไม่เกิน 5 ตัวอักษร'),
 
-  name: z.string().min(1, 'กรุณาระบุชื่อสินค้าในภาษานี้'),
+  name: z.string().nullish(),
   summary: z.string().nullish(),
   description: z.string().nullish(),
   metaTitle: z.string().nullish(),

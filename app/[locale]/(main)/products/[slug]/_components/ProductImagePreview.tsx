@@ -67,7 +67,7 @@ const ProductImagePreview = ({ product, images = [] }: Props) => {
             <img
               key={image}
               className={cn(
-                'size-20 cursor-pointer rounded-xl border-2 object-cover transition-all',
+                'size-20 shrink-0 cursor-pointer rounded-xl border-2 object-cover transition-all',
                 isActive
                   ? 'border-primary'
                   : 'border-default-300 opacity-60 hover:opacity-100',
