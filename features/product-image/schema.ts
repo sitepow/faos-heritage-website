@@ -3,6 +3,8 @@ import { z } from 'zod'
 const imageSchema = z.object({
   id: z.string().nullish(),
 
+  index: z.string().nullish().default('0'),
+
   productId: z.string().nullish(),
 
   url: z.string('กรุณาอัปโหลดรูปภาพสินค้า').min(1, 'กรุณาอัปโหลดรูปภาพสินค้า'),

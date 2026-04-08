@@ -104,7 +104,7 @@ const getProductBySlug = async (slug: string, locale?: string) => {
           },
         },
       },
-      images: { orderBy: { isPrimary: 'desc' } },
+      images: { orderBy: [{ isPrimary: 'desc' }, { index: 'asc' }] },
       variants: {
         include: {
           localizations: {

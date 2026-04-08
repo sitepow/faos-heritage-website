@@ -35,6 +35,7 @@ interface ProductImageRow {
   url: string | null
   alt: string | null
   isPrimary: boolean
+  index: string | null
   productId: string | null
 }
 
@@ -42,6 +43,7 @@ const DEFAULT_VALUES: ImageInput = {
   url: '',
   alt: '',
   isPrimary: false,
+  index: '0',
   productId: '',
 }
 
@@ -79,14 +81,15 @@ const ProductImageForm = () => {
 
         reset({
           id: imageData.id,
-          url: imageData.url ?? '',
-          alt: imageData.alt ?? '',
+          url: imageData.url!,
+          alt: imageData.alt!,
           isPrimary: imageData.isPrimary,
-          productId: imageData.productId ?? selectedProductId ?? '',
+          index: imageData.index!,
+          productId: imageData.productId ?? selectedProductId!,
         })
         setOldImage(imageData.url)
       } else {
-        reset({ ...DEFAULT_VALUES, productId: selectedProductId ?? '' })
+        reset({ ...DEFAULT_VALUES, productId: selectedProductId! })
         setPreviewFiles([])
         setOldImage(null)
       }
@@ -152,21 +155,43 @@ const ProductImageForm = () => {
               />
 
               <SectionLabel>ข้อมูลประกอบ</SectionLabel>
-              <Controller
-                control={control}
-                name='alt'
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    errorMessage={errors.alt?.message?.toString()}
-                    isInvalid={!!errors.alt}
-                    label='คำอธิบายรูปภาพ (Alt Text)'
-                    placeholder='เช่น หน้าตรงของสินค้า'
-                    value={field.value ?? ''}
-                    variant='bordered'
+              <div className='grid grid-cols-12 gap-4'>
+                <div className='col-span-8'>
+                  <Controller
+                    control={control}
+                    name='alt'
+                    render={({ field }) => (
+                      <Input
+                        {...field}
+                        errorMessage={errors.alt?.message?.toString()}
+                        isInvalid={!!errors.alt}
+                        label='คำอธิบายรูปภาพ (Alt Text)'
+                        placeholder='เช่น หน้าตรงของสินค้า'
+                        value={field.value ?? ''}
+                        variant='bordered'
+                      />
+                    )}
                   />
-                )}
-              />
+                </div>
+                <div className='col-span-4'>
+                  <Controller
+                    control={control}
+                    name='index'
+                    render={({ field }) => (
+                      <Input
+                        {...field}
+                        errorMessage={errors.index?.message?.toString()}
+                        isInvalid={!!errors.index}
+                        label='ลำดับ (Index)'
+                        placeholder='0'
+                        type='number'
+                        value={field.value ?? '0'}
+                        variant='bordered'
+                      />
+                    )}
+                  />
+                </div>
+              </div>
 
               {errors.url && (
                 <p className='text-danger text-tiny px-1'>

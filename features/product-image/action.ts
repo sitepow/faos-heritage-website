@@ -47,7 +47,9 @@ const updateProductImage = async (data: ImageInput) =>
     }
 
     const { id, ...payload } = validated.data
-    if (!id) return fail(ERROR_CODES.DATA_NOT_FOUND)
+    if (!id) {
+      return fail(ERROR_CODES.DATA_NOT_FOUND)
+    }
 
     try {
       await prisma.$transaction(async (tx) => {
@@ -122,8 +124,9 @@ const getProductImages = async (productId: string) => {
       url: true,
       alt: true,
       isPrimary: true,
+      index: true,
     },
-    orderBy: { isPrimary: 'desc' },
+    orderBy: [{ isPrimary: 'desc' }, { index: 'asc' }],
   })
   return images || []
 }
@@ -136,6 +139,7 @@ const getProductImage = async (imageId: string) => {
       url: true,
       alt: true,
       isPrimary: true,
+      index: true,
     },
   })
   return image || null

@@ -95,12 +95,7 @@ const BlogCategoryTable = ({
               {cat?.slug!}
             </TableCell>
             <TableCell>
-              <Chip
-                className='font-bold'
-                color='secondary'
-                size='sm'
-                variant='flat'
-              >
+              <Chip className='font-bold' size='sm' variant='flat'>
                 {cat?._count?.posts || 0} โพสต์
               </Chip>
             </TableCell>

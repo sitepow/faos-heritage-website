@@ -104,7 +104,7 @@ const CategoryTable = ({
             </TableCell>
             <TableCell className='max-w-40 min-w-40'>{cat.slug}</TableCell>
             <TableCell>
-              <Chip color='secondary' size='sm' variant='dot'>
+              <Chip size='sm' variant='dot'>
                 {cat._count?.products || 0} รายการ
               </Chip>
             </TableCell>

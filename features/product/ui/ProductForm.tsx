@@ -393,7 +393,7 @@ const ProductForm = () => {
                   />
                 </div>
               </div>
-              <Alert>
+              <Alert variant='bordered'>
                 * สำหรับรายละเอียดเนื้อหา (Description) แบบเต็ม
                 คุณสามารถจัดการได้ผ่านปุ่ม &quot;แก้ไขรายละเอียดเนื้อหา&quot;
                 หลังบันทึกข้อมูลส่วนนี้แล้ว
