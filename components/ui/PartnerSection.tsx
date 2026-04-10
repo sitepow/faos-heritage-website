@@ -59,7 +59,7 @@ const PartnerImage = ({ name, image }: PartnerImageProps) => {
       <img
         ref={imgRef}
         alt={name}
-        className='border-default-100 size-32 rounded-xl border object-contain'
+        className='border-default-100 size-32 rounded-full border object-contain'
         crossOrigin='anonymous'
         height={80}
         src={image || IMAGE_FALLBACK.EMPTY}
