@@ -1,4 +1,4 @@
-# ZentraCore
+# FAOS
 
 Modern full-stack e-commerce platform built with Next.js, Prisma, and TailwindCSS.
 Designed for scalable online stores, secure payments, and production-ready deployments.
