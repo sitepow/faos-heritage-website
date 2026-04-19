@@ -15,6 +15,8 @@ import {
   Tabs,
   Tab,
   DatePicker,
+  RadioGroup,
+  Radio,
 } from '@heroui/react'
 import { getLocalTimeZone, parseDate } from '@internationalized/date'
 import { ContractStatus } from '@prisma/client'
@@ -48,6 +50,8 @@ import {
 } from '@/features/storefront/hook'
 import { formatCurrency } from '@/utils'
 
+type DiscountMode = 'GLOBAL' | 'INDIVIDUAL'
+
 type StoreInventoryItem = NonNullable<
   Awaited<ReturnType<typeof getStorefrontInventory>>
 >[number]
@@ -74,6 +78,7 @@ interface SelectedItem {
   quantity: number
   maxStock: number
   currentStoreStock: number
+  discountPercent: number
   image: string
 }
 
@@ -94,6 +99,7 @@ const ContractPOSModal = ({
   const router = useRouter()
   const { create, isCreating } = useContractMutation()
 
+  const [discountMode, setDiscountMode] = useState<DiscountMode>('GLOBAL')
   const [sourceMode, setSourceMode] = useState<ContractSourceMode>(
     CONTRACT_SOURCE.WAREHOUSE,
   )
@@ -230,13 +236,16 @@ const ContractPOSModal = ({
 
   const applyProfitPercentage = (percentage: number) => {
     setProfitPercentage(percentage)
-    setSelectedItems((prev) =>
-      prev.map((item) => ({
-        ...item,
-        agreedPrice:
-          Math.ceil(item.retailPrice * (1 - percentage / 100) * 100) / 100,
-      })),
-    )
+    if (discountMode === 'GLOBAL') {
+      setSelectedItems((prev) =>
+        prev.map((item) => ({
+          ...item,
+          discountPercent: percentage,
+          agreedPrice:
+            Math.ceil(item.retailPrice * (1 - percentage / 100) * 100) / 100,
+        })),
+      )
+    }
   }
 
   const handleAddItem = (product: POSContractProduct): void => {
@@ -266,6 +275,7 @@ const ContractPOSModal = ({
           variantId: product.variantId,
           name: product.displayName,
           retailPrice: product.basePrice,
+          discountPercent: profitPercentage,
           agreedPrice: calculatedPrice,
           quantity: sourceMode === CONTRACT_SOURCE.STOREFRONT ? 0 : 1,
           maxStock:
@@ -280,13 +290,41 @@ const ContractPOSModal = ({
     })
   }
 
+  const handleUpdateDiscount = (cartKey: string, percent: number): void => {
+    setSelectedItems((prev) =>
+      prev.map((item) => {
+        if (item.cartKey === cartKey) {
+          const newAgreedPrice =
+            Math.ceil(item.retailPrice * (1 - percent / 100) * 100) / 100
+          return {
+            ...item,
+            discountPercent: percent,
+            agreedPrice: newAgreedPrice,
+          }
+        }
+        return item
+      }),
+    )
+  }
+
   const handleUpdatePrice = (cartKey: string, val: string): void => {
     const cleanValue = val.replace(/[^0-9.]/g, '')
     const price = parseFloat(cleanValue) || 0
-    return setSelectedItems((prev) =>
-      prev.map((item) =>
-        item.cartKey === cartKey ? { ...item, agreedPrice: price } : item,
-      ),
+    setSelectedItems((prev) =>
+      prev.map((item) => {
+        if (item.cartKey === cartKey) {
+          const newPercent =
+            item.retailPrice > 0
+              ? ((item.retailPrice - price) / item.retailPrice) * 100
+              : 0
+          return {
+            ...item,
+            agreedPrice: price,
+            discountPercent: Number(newPercent.toFixed(2)),
+          }
+        }
+        return item
+      }),
     )
   }
 
@@ -480,6 +518,7 @@ const ContractPOSModal = ({
               <h3 className='flex items-center gap-2 text-lg font-bold'>
                 <ReceiptIcon size={20} /> รายการในสัญญา ({selectedItems.length})
               </h3>
+
               <Divider className='bg-default-200' />
 
               <div className='flex flex-col gap-3'>
@@ -530,7 +569,7 @@ const ContractPOSModal = ({
 
               <Divider className='bg-default-200' />
 
-              <div className='flex flex-col gap-3'>
+              {/* <div className='flex flex-col gap-3'>
                 <h3 className='flex items-center gap-2 text-sm font-bold'>
                   <PercentIcon size={16} /> กำหนดกำไรภาพรวม
                 </h3>
@@ -546,6 +585,44 @@ const ContractPOSModal = ({
                     applyProfitPercentage(Number(val) || 0)
                   }
                 />
+              </div> */}
+
+              <div className='flex flex-col gap-3'>
+                <h3 className='flex items-center gap-2 text-sm font-bold'>
+                  <PercentIcon size={16} /> รูปแบบการตั้งราคา
+                </h3>
+                <RadioGroup
+                  orientation='horizontal'
+                  size='sm'
+                  value={discountMode}
+                  onValueChange={(val) => setDiscountMode(val as DiscountMode)}
+                >
+                  <Radio value='GLOBAL'>ลดภาพรวม</Radio>
+                  <Radio value='INDIVIDUAL'>ลดแยกชิ้น</Radio>
+                </RadioGroup>
+
+                <div
+                  className={`transition-opacity ${discountMode === 'INDIVIDUAL' ? 'pointer-events-none opacity-50' : 'opacity-100'}`}
+                >
+                  <Input
+                    isDisabled={discountMode === 'INDIVIDUAL'}
+                    label='ส่วนลดจากราคาปลีก (%)'
+                    min={0}
+                    placeholder='ระบุ % ส่วนลดทั้งหมด'
+                    size='sm'
+                    type='number'
+                    value={profitPercentage.toString()}
+                    variant='bordered'
+                    onValueChange={(val) =>
+                      applyProfitPercentage(Number(val) || 0)
+                    }
+                  />
+                  {discountMode === 'INDIVIDUAL' && (
+                    <p className='text-default-400 mt-1 text-[10px]'>
+                      * กำลังใช้โหมดปรับลดแยกตามรายการสินค้า
+                    </p>
+                  )}
+                </div>
               </div>
 
               <Divider className='bg-default-200' />
@@ -582,6 +659,24 @@ const ContractPOSModal = ({
                           </span>
                         </div>
                       </div>
+                    </div>
+
+                    <div className='w-24 shrink-0'>
+                      <Input
+                        endContent={
+                          <span className='text-default-400 text-xs'>%</span>
+                        }
+                        isDisabled={discountMode === 'GLOBAL'}
+                        label='ลด (%)'
+                        min={0}
+                        size='sm'
+                        type='number'
+                        value={item.discountPercent.toString()}
+                        variant='bordered'
+                        onValueChange={(val) =>
+                          handleUpdateDiscount(item.cartKey, Number(val) || 0)
+                        }
+                      />
                     </div>
 
                     <div className='flex items-center gap-2'>
