@@ -15,15 +15,17 @@ interface FaqItemProps {
 
 const FaqItem = ({ title, link }: FaqItemProps) => {
   return (
-    <div className='flex w-full flex-wrap justify-between lg:w-1/2'>
+    <Link
+      className='flex w-full flex-wrap justify-between lg:w-1/2'
+      href={link!}
+      target='_blank'
+    >
       <span className='cursor-pointer text-lg tracking-tight opacity-70 hover:opacity-100 sm:text-xl'>
         {title}
       </span>
 
-      <Link href={link!}>
-        <ArrowUpRightIcon />
-      </Link>
-    </div>
+      <ArrowUpRightIcon />
+    </Link>
   )
 }
 
