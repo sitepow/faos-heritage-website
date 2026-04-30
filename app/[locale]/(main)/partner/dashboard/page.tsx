@@ -1,6 +1,5 @@
 'use client'
 
-import { Spinner } from '@heroui/react'
 import { ApplicationStatus } from '@prisma/client'
 
 import { ActiveView } from './_components/ActiveView'
@@ -12,11 +11,7 @@ const PartnerDashboard = () => {
   const { data: application, isLoading } = useMyApplication()
 
   if (isLoading) {
-    return (
-      <div className='flex h-[70vh] items-center justify-center'>
-        <Spinner label='Loading Dashboard...' size='lg' />
-      </div>
-    )
+    return null
   }
 
   if (application?.status === ApplicationStatus.APPROVED) {
