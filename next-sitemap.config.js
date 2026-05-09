@@ -4,16 +4,9 @@ const { getDynamicPaths } = require('./sitemap-generator')
 const COUNTRY_CONFIG = {
   TH: { locale: 'th-TH' },
   US: { locale: 'en-US' },
-  GR: { locale: 'el-GR' },
-  IT: { locale: 'it-IT' },
-  NL: { locale: 'nl-NL' },
-  MY: { locale: 'ms-MY' },
-  SG: { locale: 'en-SG' },
   JP: { locale: 'ja-JP' },
-  CN: { locale: 'zh-CN' },
-  IS: { locale: 'is-IS' },
-  VN: { locale: 'vi-VN' },
-  ID: { locale: 'id-ID' },
+  //CN: { locale: 'zh-CN' },
+  //VN: { locale: 'vi-VN' },
 }
 
 module.exports = {
