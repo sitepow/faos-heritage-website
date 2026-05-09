@@ -18,7 +18,7 @@ const PAGINATION = {
 
 const IMAGE_FALLBACK = {
   OG: `${process.env.NEXT_PUBLIC_APP_URL}/images/honey.jpg`,
-  EMPTY: '/images/no-image.jpg',
+  EMPTY: '/images/honey.jpg',
 }
 
 const ROUTES = {
