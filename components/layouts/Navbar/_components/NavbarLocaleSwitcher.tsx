@@ -100,7 +100,7 @@ const NavbarLocaleSwitcher = ({ className }: ComponentProps<'span'>) => {
         </DropdownTrigger>
 
         <DropdownMenu
-          className='h-[450px] overflow-y-scroll'
+          className='h-auto overflow-y-scroll'
           selectedKeys={
             selectedByRoute ? new Set([selectedByRoute.country]) : new Set()
           }
@@ -140,7 +140,7 @@ const NavbarLocaleSwitcher = ({ className }: ComponentProps<'span'>) => {
         </DropdownTrigger>
 
         <DropdownMenu
-          className='h-[450px] overflow-y-scroll'
+          className='h-[250px] overflow-y-scroll'
           selectedKeys={new Set([appLocale.locale])}
           selectionMode='single'
           onSelectionChange={(keys) => {

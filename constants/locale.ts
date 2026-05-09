@@ -10,16 +10,16 @@ type CountryItem = {
 const COUNTRY_CONFIG = {
   TH: { name: 'Thailand', currency: 'THB', locale: 'th-TH' },
   US: { name: 'United States', currency: 'USD', locale: 'en-US' },
-  GR: { name: 'Greece', currency: 'EUR', locale: 'el-GR' },
-  IT: { name: 'Italy', currency: 'EUR', locale: 'it-IT' },
-  NL: { name: 'Netherlands', currency: 'EUR', locale: 'nl-NL' },
-  MY: { name: 'Malaysia', currency: 'MYR', locale: 'ms-MY' },
-  SG: { name: 'Singapore', currency: 'SGD', locale: 'en-SG' },
+  //GR: { name: 'Greece', currency: 'EUR', locale: 'el-GR' },
+  //IT: { name: 'Italy', currency: 'EUR', locale: 'it-IT' },
+  //NL: { name: 'Netherlands', currency: 'EUR', locale: 'nl-NL' },
+  //MY: { name: 'Malaysia', currency: 'MYR', locale: 'ms-MY' },
+  //SG: { name: 'Singapore', currency: 'SGD', locale: 'en-SG' },
   JP: { name: 'Japan', currency: 'JPY', locale: 'ja-JP' },
-  CN: { name: 'China', currency: 'CNY', locale: 'zh-CN' },
-  IS: { name: 'Iceland', currency: 'ISK', locale: 'is-IS' },
+  //CN: { name: 'China', currency: 'CNY', locale: 'zh-CN' },
+  //IS: { name: 'Iceland', currency: 'ISK', locale: 'is-IS' },
   VN: { name: 'Vietnam', currency: 'VND', locale: 'vi-VN' },
-  ID: { name: 'Indonesia', currency: 'IDR', locale: 'id-ID' },
+  //ID: { name: 'Indonesia', currency: 'IDR', locale: 'id-ID' },
 } as const
 
 const COUNTRIES: CountryItem[] = Object.entries(COUNTRY_CONFIG).map(
