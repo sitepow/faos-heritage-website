@@ -32,6 +32,7 @@ const createContract = async (data: ContractInput) =>
       const contract = await prisma.contract.create({
         data: {
           ...contractData,
+          profitType: validated.data.profitType,
           items: {
             create: items.map((item) => ({
               productId: item.productId,

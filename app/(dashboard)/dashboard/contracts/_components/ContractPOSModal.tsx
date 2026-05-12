@@ -19,7 +19,7 @@ import {
   Radio,
 } from '@heroui/react'
 import { getLocalTimeZone, parseDate } from '@internationalized/date'
-import { ContractStatus } from '@prisma/client'
+import { ContractStatus, ProfitType } from '@prisma/client'
 import {
   FileSignatureIcon,
   Trash2Icon,
@@ -113,6 +113,7 @@ const ContractPOSModal = ({
   const [selectedStorefrontId, setSelectedStorefrontId] = useState<string>('')
   const [searchQuery, setSearchQuery] = useState<string>('')
   const [profitPercentage, setProfitPercentage] = useState<number>(0)
+  const [profitType, setProfitType] = useState<ProfitType>(ProfitType.MARGIN)
 
   const { data: storefronts, isLoading: isLoadingStores } =
     useActiveStorefronts()
@@ -343,6 +344,7 @@ const ContractPOSModal = ({
     try {
       const payload: ContractInput = {
         storefrontId: selectedStorefrontId,
+        profitType: profitType,
         status: ContractStatus.DRAFT,
         currency: 'THB',
         startDate: startDate!.toDate(getLocalTimeZone()),
@@ -464,7 +466,8 @@ const ContractPOSModal = ({
                     productList.map((item) => (
                       <div
                         key={item.cartKey}
-                        className='hover:bg-default-50 border-default-100 flex flex-col gap-3 rounded-md border p-3 transition-colors'
+                        className='hover:bg-default-50 border-default-100 flex cursor-pointer flex-col gap-3 rounded-md border p-3 transition-colors'
+                        onClick={() => handleAddItem(item)}
                       >
                         <div className='flex gap-3'>
                           <div className='bg-default-100 flex size-16 shrink-0 items-center justify-center overflow-hidden rounded-md'>
@@ -497,16 +500,6 @@ const ContractPOSModal = ({
                             )}
                           </div>
                         </div>
-                        <Button
-                          fullWidth
-                          size='sm'
-                          variant='flat'
-                          onPress={() => handleAddItem(item)}
-                        >
-                          {sourceMode === 'STOREFRONT'
-                            ? 'เลือกปรับราคา/โอนเพิ่ม'
-                            : 'เลือกทำสัญญา'}
-                        </Button>
                       </div>
                     ))
                   )}
@@ -569,23 +562,17 @@ const ContractPOSModal = ({
 
               <Divider className='bg-default-200' />
 
-              {/* <div className='flex flex-col gap-3'>
-                <h3 className='flex items-center gap-2 text-sm font-bold'>
-                  <PercentIcon size={16} /> กำหนดกำไรภาพรวม
-                </h3>
-                <Input
-                  label='ส่วนลดจากราคาปลีก (%)'
-                  min={0}
-                  placeholder='0'
-                  size='sm'
-                  type='number'
-                  value={profitPercentage.toString()}
-                  variant='bordered'
-                  onValueChange={(val) =>
-                    applyProfitPercentage(Number(val) || 0)
-                  }
-                />
-              </div> */}
+              <div className='border-default-100 flex flex-col gap-2 border-t p-4'>
+                <RadioGroup
+                  label='รูปแบบการคำนวณกำไร'
+                  orientation='horizontal'
+                  value={profitType}
+                  onValueChange={(val) => setProfitType(val as ProfitType)}
+                >
+                  <Radio value={ProfitType.MARGIN}>ส่วนต่างปกติ</Radio>
+                  <Radio value={ProfitType.AFFILIATE}>ยอด Affiliate</Radio>
+                </RadioGroup>
+              </div>
 
               <div className='flex flex-col gap-3'>
                 <h3 className='flex items-center gap-2 text-sm font-bold'>
