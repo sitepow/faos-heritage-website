@@ -195,11 +195,17 @@ model PartnerSubscription {
   @@index([userId])
 }
 
+enum ProfitType {
+  MARGIN
+  AFFILIATE
+}
+
 model Contract {
   id           String     @id @default(cuid())
   storefrontId String
   storefront   Storefront @relation(fields: [storefrontId], references: [id])
 
+  profitType ProfitType @default(MARGIN)
   status ContractStatus @default(DRAFT)
 
   startDate DateTime  @default(now())

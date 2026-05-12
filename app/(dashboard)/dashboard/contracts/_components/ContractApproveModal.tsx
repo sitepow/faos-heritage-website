@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 'use client'
 
 import {
@@ -9,6 +10,7 @@ import {
   Button,
 } from '@heroui/react'
 import { ContractStatus } from '@prisma/client'
+import { ProfitType } from '@prisma/client'
 import { useRef, useEffect, useState, useMemo } from 'react'
 import { SignatureCanvas } from 'react-signature-canvas'
 import { toast } from 'react-toastify'
@@ -38,7 +40,6 @@ const ContractApproveModal = ({ isOpen, onClose, contractId }: Props) => {
 
   const { data: contract, isLoading } = useContractDetails(contractId as string)
   const { updateStatus, isUpdatingStatus } = useContractMutation()
-
   const ContractModalDraft = contract?.status === ContractStatus.DRAFT
 
   useEffect(() => {
@@ -490,39 +491,49 @@ const ContractApproveModal = ({ isOpen, onClose, contractId }: Props) => {
                     })}
                   </tbody>
                   <tfoot className='font-bold'>
+                    {contract?.profitType !== ProfitType.AFFILIATE && (
+                      <tr>
+                        <td
+                          className='border border-black p-1 text-right'
+                          colSpan={5}
+                        >
+                          Total Value (Web Price)
+                        </td>
+                        <td className='border border-black p-1 text-right'>
+                          {formatCurrency(totals.retailTotal)}
+                        </td>
+                      </tr>
+                    )}
+
                     <tr>
                       <td
-                        className='border border-black p-1 text-right uppercase'
-                        colSpan={5}
-                      >
-                        Total Retail Value (Web Price)
-                      </td>
-                      <td className='border border-black p-1 text-right'>
-                        {formatCurrency(totals.retailTotal)}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
-                        className='border border-black p-1 text-right uppercase'
+                        className='border border-black p-1 text-right'
                         colSpan={5}
                       >
                         {totals.isAdjustmentOnly
-                          ? 'Total Consignment Value'
-                          : 'Grand Total (Store Price)'}
+                          ? 'Total Consignment Wholesale Price'
+                          : 'Net Total (Retail Price)'}
                       </td>
                       <td className='border border-black p-1 text-right'>
                         {formatCurrency(totals.agreedTotal)}
                       </td>
                     </tr>
+
                     <tr>
                       <td
-                        className='border border-black p-1 text-right uppercase'
+                        className='border border-black p-1 text-right'
                         colSpan={5}
                       >
-                        Consignee Potential Profit (Margin)
+                        {contract?.profitType === ProfitType.AFFILIATE
+                          ? 'Income from Sales Agent (Commission x 15%)'
+                          : totals.isAdjustmentOnly
+                            ? 'Profit Margin to be Received:'
+                            : 'Estimated Profit (Margin):'}
                       </td>
                       <td className='border border-black p-1 text-right'>
-                        {formatCurrency(totals.potentialProfit)}
+                        {contract?.profitType !== ProfitType.AFFILIATE
+                          ? formatCurrency(totals.potentialProfit)
+                          : formatCurrency(totals.agreedTotal * 0.15)}
                       </td>
                     </tr>
 
@@ -961,17 +972,20 @@ const ContractApproveModal = ({ isOpen, onClose, contractId }: Props) => {
                     })}
                   </tbody>
                   <tfoot className='font-bold'>
-                    <tr>
-                      <td
-                        className='border border-black p-1 text-right'
-                        colSpan={5}
-                      >
-                        มูลค่ารวมตามราคาหน้าเว็บ (Web Price)
-                      </td>
-                      <td className='border border-black p-1 text-right'>
-                        {formatCurrency(totals.retailTotal)}
-                      </td>
-                    </tr>
+                    {contract?.profitType !== ProfitType.AFFILIATE && (
+                      <tr>
+                        <td
+                          className='border border-black p-1 text-right'
+                          colSpan={5}
+                        >
+                          มูลค่ารวมตามราคาหน้าเว็บ (Web Price)
+                        </td>
+                        <td className='border border-black p-1 text-right'>
+                          {formatCurrency(totals.retailTotal)}
+                        </td>
+                      </tr>
+                    )}
+
                     <tr>
                       <td
                         className='border border-black p-1 text-right'
@@ -985,17 +999,25 @@ const ContractApproveModal = ({ isOpen, onClose, contractId }: Props) => {
                         {formatCurrency(totals.agreedTotal)}
                       </td>
                     </tr>
+
                     <tr>
                       <td
                         className='border border-black p-1 text-right'
                         colSpan={5}
                       >
-                        กำไรส่วนต่างประมาณการของร้าน (Margin)
+                        {contract?.profitType === ProfitType.AFFILIATE
+                          ? 'รายได้จากตัวแทนการขาย (ค่าคอมมิชชั่น x 15%):'
+                          : totals.isAdjustmentOnly
+                            ? 'ส่วนต่างกำไรที่จะได้รับ:'
+                            : 'ประมาณการกำไร (Margin):'}
                       </td>
                       <td className='border border-black p-1 text-right'>
-                        {formatCurrency(totals.potentialProfit)}
+                        {contract?.profitType !== ProfitType.AFFILIATE
+                          ? formatCurrency(totals.potentialProfit)
+                          : formatCurrency(totals.agreedTotal * 0.15)}
                       </td>
                     </tr>
+
                     <tr className='text-[10px]'>
                       <td
                         className='border border-black p-1 text-center text-red-500'

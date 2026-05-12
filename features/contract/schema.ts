@@ -1,4 +1,4 @@
-import { ContractStatus, Currency } from '@prisma/client'
+import { ContractStatus, Currency, ProfitType } from '@prisma/client'
 import { z } from 'zod'
 
 const contractItemSchema = z.object({
@@ -14,6 +14,7 @@ const contractItemSchema = z.object({
 const contractSchema = z.object({
   id: z.string().optional(),
   storefrontId: z.string().min(1, 'กรุณาเลือกหน้าร้าน'),
+  profitType: z.enum(ProfitType).default(ProfitType.MARGIN),
   status: z
     .enum([
       ContractStatus.DRAFT,
