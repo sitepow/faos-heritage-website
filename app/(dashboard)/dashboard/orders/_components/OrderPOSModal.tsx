@@ -106,12 +106,11 @@ const OrderPOSModal = ({
   }, [isAdmin, selectedStorefrontId, storefronts, affiliates])
 
   useEffect(() => {
-    if (storefronts?.length === 1 && !selectedStorefrontId) {
-      setSelectedStorefrontId(storefronts[0].id)
+    if (!selectedStorefrontId) {
+      setSelectedAffiliateCode('')
+      return
     }
-  }, [storefronts, selectedStorefrontId])
 
-  useEffect(() => {
     if (selectedStorefrontId && storefronts && affiliateProfile) {
       const currentStore = storefronts.find(
         (s) => s.id === selectedStorefrontId,
@@ -123,7 +122,9 @@ const OrderPOSModal = ({
 
       if (isManagerInStore && affiliateProfile.affiliateCode) {
         setSelectedAffiliateCode(affiliateProfile.affiliateCode)
-      } else if (!isAdmin) {
+      } else if (isAdmin) {
+        setSelectedAffiliateCode(affiliateProfile.affiliateCode || '')
+      } else {
         setSelectedAffiliateCode('')
       }
     }
