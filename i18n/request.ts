@@ -10,16 +10,8 @@ type MessageLoader = () => Promise<{ default: Record<string, unknown> }>
 const MESSAGE_LOADERS: Record<SupportedLocale, MessageLoader> = {
   th: () => import('@/messages/th'),
   us: () => import('@/messages/us'),
-  gr: () => import('@/messages/gr'),
-  it: () => import('@/messages/it'),
-  nl: () => import('@/messages/nl'),
-  my: () => import('@/messages/my'),
-  sg: () => import('@/messages/sg'),
   jp: () => import('@/messages/jp'),
-  cn: () => import('@/messages/cn'),
-  is: () => import('@/messages/is'),
   vn: () => import('@/messages/vn'),
-  id: () => import('@/messages/id'),
 }
 
 export default getRequestConfig(async ({ requestLocale }) => {

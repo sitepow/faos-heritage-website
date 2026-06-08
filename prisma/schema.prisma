@@ -205,8 +205,8 @@ model Contract {
   storefrontId String
   storefront   Storefront @relation(fields: [storefrontId], references: [id])
 
-  profitType ProfitType @default(MARGIN)
-  status ContractStatus @default(DRAFT)
+  profitType ProfitType     @default(MARGIN)
+  status     ContractStatus @default(DRAFT)
 
   startDate DateTime  @default(now())
   endDate   DateTime?
@@ -324,8 +324,8 @@ model AffiliateProfile {
 
   payoutEmail String?
 
-  baseRate        Decimal @default(5.00) @db.Decimal(5, 2)
-  highValueRate   Decimal @default(10.00) @db.Decimal(5, 2)
+  baseRate        Decimal @default(15.00) @db.Decimal(5, 2)
+  highValueRate   Decimal @default(20.00) @db.Decimal(5, 2)
   thresholdAmount Decimal @default(10000.00) @db.Decimal(12, 2)
 
   commissions AffiliateCommission[]

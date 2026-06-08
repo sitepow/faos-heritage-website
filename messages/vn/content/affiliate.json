@@ -3,7 +3,7 @@
     "banner": {
       "tagline": "Chương Trình Đối Tác FAOS",
       "title": "Kiếm <highlight>thu nhập hàng tháng</highlight> <br></br> từ việc giới thiệu sản phẩm <br></br> không cần vốn đầu tư",
-      "description": "Nhận hoa hồng <highlight>lên đến 10%</highlight> trên mỗi đơn hàng thành công. Không cần vốn, không cần kho bãi, không cần vận chuyển. Đăng ký một lần, tạo thu nhập bền vững.",
+      "description": "Nhận hoa hồng <highlight>lên đến 20%</highlight> trên mỗi đơn hàng thành công. Không cần vốn, không cần kho bãi, không cần vận chuyển. Đăng ký một lần, tạo thu nhập bền vững.",
       "partnerStatus": "Hàng ngàn đối tác đang tạo ra thu nhập cùng FAOS ngay lúc này.",
       "features": {
         "noInvestment": "Không cần vốn đầu tư",
@@ -64,11 +64,11 @@
       "items": [
         {
           "salesRange": "Dưới 7.000.000 VND",
-          "percentage": "5%"
+          "percentage": "15%"
         },
         {
           "salesRange": "Từ 7.000.000 VND trở lên",
-          "percentage": "10%",
+          "percentage": "20%",
           "isHighlight": true
         }
       ]

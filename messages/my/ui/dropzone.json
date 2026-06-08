@@ -1,8 +1,0 @@
-{
-  "imageDropzone": {
-    "active": "Lepaskan imej anda di sini...",
-    "idle": "Tarik dan lepaskan imej di sini",
-    "hint": "Atau klik untuk memilih fail (saiz imej akan dilaraskan secara automatik untuk prestasi optimum)",
-    "limit": "Menyokong saiz fail maksimum sehingga {size}"
-  }
-}

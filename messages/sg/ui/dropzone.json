@@ -1,8 +1,0 @@
-{
-  "imageDropzone": {
-    "active": "Drop your images here...",
-    "idle": "Drag and drop images here",
-    "hint": "Or click to select files (images will be automatically resized for optimized performance)",
-    "limit": "Supports maximum file size up to {size}"
-  }
-}

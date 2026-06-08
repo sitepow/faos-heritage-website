@@ -1,8 +1,0 @@
-{
-  "imageDropzone": {
-    "active": "Zet uw afbeeldingen hier neer...",
-    "idle": "Sleep afbeeldingen hierheen en laat ze los",
-    "hint": "Of klik om bestanden te selecteren (afbeeldingen worden automatisch aangepast voor optimale prestaties)",
-    "limit": "Ondersteunt een maximale bestandsgrootte tot {size}"
-  }
-}

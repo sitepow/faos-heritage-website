@@ -1,8 +1,0 @@
-{
-  "imageDropzone": {
-    "active": "Lepaskan gambar di sini...",
-    "idle": "Tarik dan lepas gambar di sini",
-    "hint": "Atau klik untuk memilih file (gambar akan diubah ukurannya secara otomatis untuk performa optimal)",
-    "limit": "Mendukung ukuran file maksimal hingga {size}"
-  }
-}
