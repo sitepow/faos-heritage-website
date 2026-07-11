@@ -2,8 +2,13 @@
   "affiliate": {
     "banner": {
       "tagline": "FAOS Affiliate Program",
+<<<<<<< HEAD
       "title": "Join <highlight>FAOS Affiliate</highlight> <br></br> Click here",
       "description": "Earn up to <highlight>Start from 10% up 40% Commission</highlight> for Sale and Marketing.",
+=======
+      "title": "Earn <highlight>monthly income</highlight> <br></br> by recommending products <br></br> with zero investment",
+      "description": "Earn up to <highlight>20% Commission</highlight> on every referral. No investment, no stock, and no shipping required. Join once and build long-term wealth.",
+>>>>>>> 436a35b5710b39d4819c320067fb9d22d82d99da
       "partnerStatus": "Join thousands of partners already earning with FAOS.",
       "features": {
         "noInvestment": "Work with us",
