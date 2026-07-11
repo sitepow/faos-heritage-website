@@ -12,9 +12,9 @@ import React from 'react'
 export const PLANS = [
   {
     type: PlanType.STARTER,
-    title: 'Starter Partner',
+    title: 'ขนาดเล็ก',
     description:
-      'Perfect for new brands looking to test the market and start selling.',
+      'เหมาะสำหรับร้านอาหารขนาดเล็กที่ต้องการเริ่มต้นธุรกิจร่วมกับฟาวส์',
     displayPrice: 15000,
     currency: 'THB / Year',
     buttonText: 'Get Started',
@@ -39,9 +39,9 @@ export const PLANS = [
   },
   {
     type: PlanType.STANDARD,
-    title: 'Standard Partner',
+    title: 'ขนาดมาตรฐาน ',
     description:
-      'For growing brands ready to scale with better visibility and insights.',
+      'ร้านค้าที่ต้องการขยายธุรกิจและเพิ่มยอดขายด้วยฟีเจอร์ที่มากขึ้นและค่าคอมมิชชั่นที่ต่ำกว่า',
     displayPrice: 30000,
     currency: 'THB / Year',
     isPopular: true,
@@ -67,9 +67,9 @@ export const PLANS = [
   },
   {
     type: PlanType.PREMIUM,
-    title: 'Premium Partner',
+    title: 'พรีเมียม',
     description:
-      'The ultimate brand experience with zero commission and top-tier features.',
+      'สำหรับนักลงทุนสายธุรกิจที่ต้องการขยายธุรกิจอย่างเต็มรูปแบบและเข้าถึงฟีเจอร์พิเศษทั้งหมด',
     displayPrice: 50000,
     currency: 'THB / Year',
     buttonText: 'Upgrade to Premium',

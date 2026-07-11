@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 @import url('@radix-ui/colors/tomato.css');
 @import url('@radix-ui/colors/mauve.css');
 @import url('@radix-ui/colors/tomato-dark.css');
@@ -7,10 +8,12 @@
 
 @layer base {
   :root {
+    --font-anuphan: 'Anuphan';
+    --font-montserrat: 'Montserrat';
+
     --thai-line-height: 1.6;
     --thai-heading-line-height: 1.4;
   }
-
   html,
   body {
     line-height: var(--thai-line-height);
@@ -39,7 +42,9 @@
 
 .mdxeditor.light-editor,
 .mdxeditor.dark-editor {
-  font-family: var(--font-anuphan), sans-serif !important;
+  /* ใส่ Montserrat นำหน้า เพื่อให้เป็นฟอนต์หลัก */
+  font-family:
+    var(--font-montserrat), var(--font-anuphan), sans-serif !important;
   font-size: 1.5rem !important;
 }
 
@@ -198,4 +203,21 @@ article.prose ol {
 }
 article.prose li {
   display: list-item !important;
+}
+
+/* วางบล็อกนี้ไว้บรรทัดล่างสุดของไฟล์ครับ */
+.mdxeditor.light-editor h1,
+.mdxeditor.dark-editor h1,
+.mdxeditor.light-editor h2,
+.mdxeditor.dark-editor h2,
+.mdxeditor.light-editor h3,
+.mdxeditor.dark-editor h3,
+.mdxeditor.light-editor h4,
+.mdxeditor.dark-editor h4,
+.mdxeditor.light-editor h5,
+.mdxeditor.dark-editor h5,
+.mdxeditor.light-editor h6,
+.mdxeditor.dark-editor h6 {
+  font-family:
+    var(--font-montserrat), var(--font-anuphan), sans-serif !important;
 }

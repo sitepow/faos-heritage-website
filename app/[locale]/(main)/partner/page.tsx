@@ -52,8 +52,8 @@ const Partner = () => {
   return (
     <div className='space-y-10'>
       <SectionHeader
-        description='Select the partnership model that aligns with your business goals. Our flexible packages are designed to scale with your clinical success.'
-        title='Choose Your Growth Path'
+        description='ร่วมจำหน่ายสินค้าฟาวนส์ตามขนาดร้านของคุณ'
+        title='ร่วมลงทุนธุรกิจอาหารเพื่อสุขภาพกับเรา Food wellness  '
       />
 
       <div className='mx-auto grid grid-cols-1 gap-8 md:grid-cols-3'>

@@ -11,7 +11,10 @@ const config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-anuphan)'],
+        // ใส่ตรงนี้ครับ
+        sans: ['var(--font-anuphan)', 'sans-serif'],
+        anuphan: ['var(--font-anuphan)', 'sans-serif'],
+        montserrat: ['var(--font-montserrat)', 'sans-serif'],
       },
       typography: () => ({
         DEFAULT: {
