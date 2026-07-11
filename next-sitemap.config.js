@@ -9,10 +9,10 @@ const COUNTRY_CONFIG = {
   //NL: { locale: 'nl-NL' },
   //MY: { locale: 'ms-MY' },
   //SG: { locale: 'en-SG' },
-  JP: { locale: 'ja-JP' },
-  CN: { locale: 'zh-CN' },
+  //JP: { locale: 'ja-JP' },
+  //CN: { locale: 'zh-CN' },
   //IS: { locale: 'is-IS' },
-  VN: { locale: 'vi-VN' },
+  //VN: { locale: 'vi-VN' },
   //ID: { locale: 'id-ID' },
 }
 
