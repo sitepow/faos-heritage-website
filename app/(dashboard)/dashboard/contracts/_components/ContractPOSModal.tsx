@@ -547,15 +547,15 @@ const ContractPOSModal = ({
                 <div className='grid grid-cols-2 gap-2'>
                   <DatePicker
                     label='วันที่เริ่ม'
-                    value={startDate}
+                    value={startDate as any}
                     variant='bordered'
-                    onChange={setStartDate}
+                    onChange={(date) => setEndDate(date as any)}
                   />
                   <DatePicker
                     label='วันที่สิ้นสุด'
                     value={endDate}
                     variant='bordered'
-                    onChange={setEndDate}
+                    onChange={(val) => setStartDate(val as any)}
                   />
                 </div>
               </div>

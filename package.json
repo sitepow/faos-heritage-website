@@ -1,6 +1,7 @@
 {
   "name": "zentracore",
   "version": "0.0.1",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "next dev --turbo",
@@ -121,6 +122,6 @@
     ]
   },
   "overrides": {
-    "@internationalized/date": "3.10.1"
+    "@internationalized/date": "^3.10.1"
   }
 }

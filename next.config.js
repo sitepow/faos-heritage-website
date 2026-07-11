@@ -10,9 +10,6 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: false,
   },
-  eslint: {
-    ignoreDuringBuilds: false,
-  },
 }
 
 const withNextIntl = createNextIntlPlugin()
