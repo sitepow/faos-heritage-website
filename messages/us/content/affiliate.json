@@ -64,11 +64,11 @@
       "items": [
         {
           "salesRange": "Less than 300 USD",
-          "percentage": "5%"
+          "percentage": "15%"
         },
         {
           "salesRange": "300 USD and above",
-          "percentage": "10%",
+          "percentage": "20%",
           "isHighlight": true
         }
       ]

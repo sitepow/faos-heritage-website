@@ -3,7 +3,7 @@
     "banner": {
       "tagline": "FAOS アフィリエイトプログラム",
       "title": "<highlight>毎月の収入</highlight>を得る <br></br> 商品を紹介するだけ <br></br> 投資資金は不要",
-      "description": "紹介した注文ごとに <highlight>最大10％</highlight> の報酬。初期投資、在庫、配送の手間は一切なし。一度の登録で長期的な収入源を築けます。",
+      "description": "紹介した注文ごとに <highlight>最大20％</highlight> の報酬。初期投資、在庫、配送の手間は一切なし。一度の登録で長期的な収入源を築けます。",
       "partnerStatus": "現在、多くのパートナーが FAOS で収益を上げています。",
       "features": {
         "noInvestment": "初期投資不要",
@@ -64,11 +64,11 @@
       "items": [
         {
           "salesRange": "45,000円未満",
-          "percentage": "5%"
+          "percentage": "15%"
         },
         {
           "salesRange": "45,000円以上",
-          "percentage": "10%",
+          "percentage": "20%",
           "isHighlight": true
         }
       ]

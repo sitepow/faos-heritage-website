@@ -35,11 +35,12 @@ import type { CreateOrderInput } from '@/features/order/action'
 
 import { ProductImage } from '@/components/ui/Product/ProductImage'
 import { IMAGE_FALLBACK } from '@/constants'
-import { useAffiliates } from '@/features/affiliate/hook'
+import { useAffiliateProfile, useAffiliates } from '@/features/affiliate/hook'
 import { useActiveContract } from '@/features/contract/hook'
 import { useAdminOrderMutation } from '@/features/order/mutation'
 import { useActiveStorefronts } from '@/features/storefront/hook'
 import { useStorefrontInventories } from '@/features/storefront-inventory/hook'
+import { useAuth } from '@/hooks/useAuth'
 import { formatCurrency } from '@/utils'
 
 interface POSProductItem {
@@ -70,6 +71,7 @@ const OrderPOSModal = ({
   isOpen: boolean
   onClose: () => void
 }) => {
+  const { isAdmin } = useAuth()
   const [cartItems, setCartItems] = useState<CartItem[]>([])
   const [selectedAffiliateCode, setSelectedAffiliateCode] = useState<string>('')
   const [selectedStorefrontId, setSelectedStorefrontId] = useState<string>('')
@@ -81,6 +83,53 @@ const OrderPOSModal = ({
   const { data: affiliates } = useAffiliates()
   const { data: storefronts, isLoading: isLoadingStores } =
     useActiveStorefronts()
+
+  const { data: affiliateProfile } = useAffiliateProfile()
+
+  const filteredAffiliates = useMemo(() => {
+    if (isAdmin) {
+      return affiliates || []
+    }
+
+    if (!selectedStorefrontId || !storefronts || !affiliates) {
+      return []
+    }
+
+    const currentStore = storefronts.find((s) => s.id === selectedStorefrontId)
+    if (!currentStore || !currentStore.managers) {
+      return []
+    }
+
+    const managerIds = currentStore.managers.map((m) => m.id)
+
+    return (affiliates || []).filter((aff) => managerIds.includes(aff.userId))
+  }, [isAdmin, selectedStorefrontId, storefronts, affiliates])
+
+  useEffect(() => {
+    if (!selectedStorefrontId) {
+      setSelectedAffiliateCode('')
+      return
+    }
+
+    if (selectedStorefrontId && storefronts && affiliateProfile) {
+      const currentStore = storefronts.find(
+        (s) => s.id === selectedStorefrontId,
+      )
+
+      const isManagerInStore = currentStore?.managers?.some(
+        (m) => m.id === affiliateProfile.userId,
+      )
+
+      if (isManagerInStore && affiliateProfile.affiliateCode) {
+        setSelectedAffiliateCode(affiliateProfile.affiliateCode)
+      } else if (isAdmin) {
+        setSelectedAffiliateCode(affiliateProfile.affiliateCode || '')
+      } else {
+        setSelectedAffiliateCode('')
+      }
+    }
+  }, [selectedStorefrontId, storefronts, affiliateProfile, isAdmin])
+
   const { createAdminOrder, isCreating } = useAdminOrderMutation()
 
   const { data: activeContract, isLoading: isLoadingContract } =
@@ -150,6 +199,11 @@ const OrderPOSModal = ({
       const isExist = prev.find((i: CartItem) => {
         return i.cartKey === item.cartKey
       })
+
+      if (item.stock === 0) {
+        toast.warn('สินค้าในสต็อกไม่พอ')
+        return prev
+      }
 
       if (isExist) {
         if (isExist.quantity >= item.stock) {
@@ -335,7 +389,10 @@ const OrderPOSModal = ({
                     return (
                       <div
                         key={item.cartKey}
-                        className='hover:bg-default-50 border-default-100 flex flex-col gap-3 rounded-md border p-3 transition-colors'
+                        className='hover:bg-default-50 border-default-100 flex cursor-pointer flex-col gap-3 rounded-md border p-3 transition-colors'
+                        onClick={() => {
+                          return handleAddToCart(item)
+                        }}
                       >
                         <div className='flex gap-3'>
                           <div className='bg-default-100 flex size-16 shrink-0 items-center justify-center overflow-hidden rounded-md'>
@@ -355,17 +412,6 @@ const OrderPOSModal = ({
                             </p>
                           </div>
                         </div>
-                        <Button
-                          fullWidth
-                          isDisabled={item.stock <= 0}
-                          size='sm'
-                          variant='flat'
-                          onPress={() => {
-                            return handleAddToCart(item)
-                          }}
-                        >
-                          {item.stock > 0 ? 'เพิ่มลงตะกร้า' : 'สินค้าหมด'}
-                        </Button>
                       </div>
                     )
                   })}
@@ -535,40 +581,45 @@ const OrderPOSModal = ({
                   <UserIcon size={16} />
                   ระบุตัวแทนจำหน่าย
                 </h3>
-                <Select
-                  label='เลือก Affiliate (ถ้ามี)'
-                  placeholder='ค้นหาชื่อ Affiliate'
-                  selectedKeys={
-                    selectedAffiliateCode ? [selectedAffiliateCode] : []
-                  }
-                  size='sm'
-                  variant='bordered'
-                  onSelectionChange={(keys) => {
-                    return setSelectedAffiliateCode(
-                      Array.from(keys)[0] as string,
-                    )
-                  }}
-                >
-                  {(Array.isArray(affiliates) ? affiliates : []).map(
-                    (affiliate) => {
-                      return (
-                        <SelectItem
-                          key={affiliate.affiliateCode}
-                          textValue={`${affiliate.user?.name} (${affiliate.affiliateCode})`}
-                        >
-                          <div className='flex flex-col'>
-                            <span className='text-small'>
-                              {affiliate.user?.name}
-                            </span>
-                            <span className='text-tiny text-default-400'>
-                              Code: {affiliate.affiliateCode}
-                            </span>
-                          </div>
-                        </SelectItem>
+
+                {!isAdmin && filteredAffiliates.length === 0 ? (
+                  <div className='border-warning/50 bg-warning/10 text-tiny text-warning-600 flex items-center gap-2 rounded-md border p-3'>
+                    <FileWarningIcon size={14} />
+                    ไม่พบข้อมูลตัวแทนจำหน่ายในสาขานี้
+                  </div>
+                ) : (
+                  <Select
+                    isDisabled={!isAdmin && !!affiliateProfile?.affiliateCode}
+                    label='เลือก Affiliate (ถ้ามี)'
+                    placeholder='ค้นหาชื่อ Affiliate'
+                    selectedKeys={
+                      selectedAffiliateCode ? [selectedAffiliateCode] : []
+                    }
+                    size='sm'
+                    variant='bordered'
+                    onSelectionChange={(keys) => {
+                      return setSelectedAffiliateCode(
+                        Array.from(keys)[0] as string,
                       )
-                    },
-                  )}
-                </Select>
+                    }}
+                  >
+                    {filteredAffiliates.map((affiliate) => (
+                      <SelectItem
+                        key={affiliate.affiliateCode}
+                        textValue={`${affiliate.user?.name} (${affiliate.affiliateCode})`}
+                      >
+                        <div className='flex flex-col'>
+                          <span className='text-small'>
+                            {affiliate.user?.name}
+                          </span>
+                          <span className='text-tiny text-default-400'>
+                            Code: {affiliate.affiliateCode}
+                          </span>
+                        </div>
+                      </SelectItem>
+                    ))}
+                  </Select>
+                )}
               </div>
 
               <div className='bg-primary/5 border-primary/10 mt-auto flex flex-col gap-2 rounded-lg border p-4'>

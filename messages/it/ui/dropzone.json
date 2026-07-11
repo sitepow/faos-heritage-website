@@ -1,8 +1,0 @@
-{
-  "imageDropzone": {
-    "active": "Rilascia le tue immagini qui...",
-    "idle": "Trascina e rilascia le immagini qui",
-    "hint": "Oppure clicca per selezionare i file (le immagini verranno ridimensionate automaticamente per ottimizzare le prestazioni)",
-    "limit": "Supporta file di dimensioni massime fino a {size}"
-  }
-}

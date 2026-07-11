@@ -5,6 +5,7 @@ import {
   OrderStatus,
   PaymentStatus,
   StockMovementType,
+  PayoutStatus,
 } from '@prisma/client'
 
 import { MINUTE } from '../constants'
@@ -13,7 +14,37 @@ import { sendOrderEmail } from '../features/order/action'
 const prisma = new PrismaClient()
 const ORDER_EXPIRY_MS = 20 * MINUTE
 
+const cleanupPastAffiliates = async () => {
+  const cancelledOrders = await prisma.order.findMany({
+    where: {
+      status: OrderStatus.CANCELLED,
+      affiliateCommission: {
+        status: PayoutStatus.PENDING,
+      },
+    },
+    select: { id: true },
+  })
+
+  if (cancelledOrders.length === 0) {
+    return
+  }
+
+  const orderIds = cancelledOrders.map((order) => order.id)
+
+  await prisma.affiliateCommission.updateMany({
+    where: {
+      orderId: { in: orderIds },
+      status: PayoutStatus.PENDING,
+    },
+    data: {
+      status: PayoutStatus.REJECTED,
+    },
+  })
+}
+
 const main = async () => {
+  await cleanupPastAffiliates()
+
   const now = new Date()
   const expiryTime = new Date(now.getTime() - ORDER_EXPIRY_MS)
 
@@ -42,6 +73,16 @@ const main = async () => {
             status: OrderStatus.CANCELLED,
             cancelledAt: new Date(),
             cancelReason: `ยกเลิกอัตโนมัติ: ไม่มีการชำระเงินภายใน 20 นาที`,
+          },
+        })
+
+        await tx.affiliateCommission.updateMany({
+          where: {
+            orderId: order.id,
+            status: PayoutStatus.PENDING,
+          },
+          data: {
+            status: PayoutStatus.REJECTED,
           },
         })
 
@@ -88,13 +129,9 @@ const main = async () => {
         }
       })
 
-      const emailResult = await sendOrderEmail(order.id)
-      if (!emailResult.success) {
-        console.warn(`ออเดอร์ ${order.id}: ส่งอีเมลแจ้งเตือนไม่สำเร็จ`)
-      }
-    } catch (err) {
-      console.error(`ออเดอร์ ${order.id}: เกิดข้อผิดพลาดในการประมวลผล`, err)
-    }
+      await sendOrderEmail(order.id)
+      /* eslint-disable-next-line no-empty */
+    } catch {}
   }
 }
 

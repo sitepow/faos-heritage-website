@@ -168,6 +168,9 @@ const getActiveStorefronts = async ({
           },
         }),
     },
+    include: {
+      managers: true,
+    },
     orderBy: { name: 'asc' },
   })
 
