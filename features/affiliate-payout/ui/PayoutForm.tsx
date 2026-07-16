@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-nested-ternary */
 'use client'
 
@@ -157,7 +158,7 @@ const PayoutForm = ({ affiliateId, pendingAmount, selectedIds }: Props) => {
               <DateRangePicker
                 className='w-full'
                 label='เลือกช่วงเวลาที่ต้องการเคลียร์ยอด'
-                value={dateRange}
+                value={dateRange as any}
                 variant='bordered'
                 onChange={setDateRange}
               />

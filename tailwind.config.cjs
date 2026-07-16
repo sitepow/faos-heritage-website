@@ -1,4 +1,4 @@
-import { heroui } from '@heroui/react'
+const { heroui } = require('@heroui/react')
 
 /** @type {import('tailwindcss').Config} */
 
@@ -11,10 +11,7 @@ const config = {
   theme: {
     extend: {
       fontFamily: {
-        // ใส่ตรงนี้ครับ
-        sans: ['var(--font-anuphan)', 'sans-serif'],
-        anuphan: ['var(--font-anuphan)', 'sans-serif'],
-        montserrat: ['var(--font-montserrat)', 'sans-serif'],
+        sans: ['var(--font-anuphan)'],
       },
       typography: () => ({
         DEFAULT: {

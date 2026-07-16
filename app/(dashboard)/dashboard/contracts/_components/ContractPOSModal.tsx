@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import {
@@ -37,7 +38,7 @@ import { toast } from 'react-toastify'
 
 import type { ProductWithPayload } from '@/features/product/action'
 import type { getStorefrontInventory } from '@/features/storefront/action'
-import type { CalendarDate } from '@internationalized/date'
+import type { DateValue } from '@internationalized/date'
 
 import { ProductImage } from '@/components/ui/Product/ProductImage'
 import { IMAGE_FALLBACK } from '@/constants'
@@ -104,10 +105,10 @@ const ContractPOSModal = ({
     CONTRACT_SOURCE.WAREHOUSE,
   )
 
-  const [startDate, setStartDate] = useState<CalendarDate | null>(
+  const [startDate, setStartDate] = useState<DateValue | null>(
     parseDate(new Date().toISOString().split('T')[0]),
   )
-  const [endDate, setEndDate] = useState<CalendarDate | null>(null)
+  const [endDate, setEndDate] = useState<DateValue | null>(null)
 
   const [selectedItems, setSelectedItems] = useState<SelectedItem[]>([])
   const [selectedStorefrontId, setSelectedStorefrontId] = useState<string>('')
@@ -549,13 +550,13 @@ const ContractPOSModal = ({
                     label='วันที่เริ่ม'
                     value={startDate as any}
                     variant='bordered'
-                    onChange={(date) => setEndDate(date as any)}
+                    onChange={(date: any) => setStartDate(date)}
                   />
                   <DatePicker
                     label='วันที่สิ้นสุด'
-                    value={endDate}
+                    value={endDate as any}
                     variant='bordered'
-                    onChange={(val) => setStartDate(val as any)}
+                    onChange={(date: any) => setEndDate(date)}
                   />
                 </div>
               </div>

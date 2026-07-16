@@ -4,7 +4,7 @@
 @import url('@radix-ui/colors/tomato-dark.css');
 @import url('@radix-ui/colors/mauve-dark.css');
 @import 'tailwindcss';
-@config '../tailwind.config.js';
+@config '../tailwind.config.cjs';
 
 @layer base {
   :root {
