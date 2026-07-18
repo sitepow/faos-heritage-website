@@ -46,7 +46,7 @@ const DEFAULT_VALUES: StockAdjustmentInput = {
 }
 
 const StockAdjustmentForm = () => {
-  const { isStockEditor } = useAuth()
+  const { isStockEditor, isAdmin } = useAuth()
   const {
     isAdjustmentOpen,
     closeAdjustment,
@@ -406,7 +406,7 @@ const StockAdjustmentForm = () => {
               !isDirty ||
               isPending ||
               isMissingRequiredVariant ||
-              !isStockEditor
+              (!isStockEditor && !isAdmin)
             }
             isLoading={isPending}
             onPress={() => {
