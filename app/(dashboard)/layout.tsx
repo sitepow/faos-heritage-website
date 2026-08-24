@@ -9,7 +9,7 @@ import { requireAnyRole } from '@/utils'
 
 const generateMetadata = async () => {
   return await constructMetadata({
-    title: 'แผงควบคุมผู้ดูแลระบบ',
+    title: 'Administrator control panel',
     canonicalPath: '/admin',
     noIndex: true,
   })
