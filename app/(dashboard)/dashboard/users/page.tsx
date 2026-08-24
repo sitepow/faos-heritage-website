@@ -121,6 +121,17 @@ const UserPage = () => {
             เพิ่มผู้ใช้งานใหม่
           </Button>
         }
+         <TableConfigHeader
+        actionContent={
+          <Button
+            className='text-secondary font-bold'
+            color='primary'
+            startContent={<PlusIcon size={18} />}
+            onPress={() => onOpenUserChange(true)}
+          >
+            ดาวน์โหลด Userlist
+          </Button>
+        }
         selectedCount={selectedCount}
         title='จัดการผู้ใช้งาน'
         onDeleteSelected={() => handleDeleteTrigger(selectedUserIds)}
