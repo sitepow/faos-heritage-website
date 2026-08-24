@@ -1,8 +1,9 @@
 'use client'
 
 import { useDisclosure, Button } from '@heroui/react'
-import { PlusIcon, EditIcon, ShieldAlertIcon } from 'lucide-react'
+import { PlusIcon, EditIcon, ShieldAlertIcon, DownloadIcon } from 'lucide-react'
 import { useState, useCallback, useMemo } from 'react'
+import * as XLSX from 'xlsx'
 
 import type { Selection } from '@heroui/react'
 
@@ -16,6 +17,7 @@ import { UserForm } from '@/features/user/ui/UserForm'
 import { useUsers, useUserStat } from '@/features/user/hook'
 import { useUserMutation } from '@/features/user/mutation'
 import { useAuthStore } from '@/features/user/store'
+import { formatDate } from '@/utils'
 
 const UserPage = () => {
   const [page, setPage] = useState(1)
@@ -50,6 +52,26 @@ const UserPage = () => {
     }
     return Array.from(selectedKeys) as string[]
   }, [selectedKeys, userList])
+
+  // ฟังก์ชันดาวน์โหลดข้อมูล userList เป็นไฟล์ Excel
+  const handleExportExcel = useCallback(() => {
+    if (!userList.length) return
+
+    const exportData = userList.map((user) => ({
+      'รหัสผู้ใช้งาน': `#${user.id.slice(-8).toUpperCase()}`,
+      'ชื่อ-นามสกุล': user.name || 'ไม่ระบุชื่อ',
+      'อีเมล': user.email,
+      'บทบาท': user.roles.join(', '),
+      'สถานะ': user.isActive ? 'ปกติ' : 'ถูกระงับ',
+      'วันที่ลงทะเบียน': formatDate(user.createdAt),
+    }))
+
+    const worksheet = XLSX.utils.json_to_sheet(exportData)
+    const workbook = XLSX.utils.book_new()
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Users')
+
+    XLSX.writeFile(workbook, 'Userlist.xlsx')
+  }, [userList])
 
   const handleEdit = useCallback(
     (id: string) => {
@@ -112,25 +134,26 @@ const UserPage = () => {
 
       <TableConfigHeader
         actionContent={
-          <Button
-            className='text-secondary font-bold'
-            color='primary'
-            startContent={<PlusIcon size={18} />}
-            onPress={() => onOpenUserChange(true)}
-          >
-            เพิ่มผู้ใช้งานใหม่
-          </Button>
-        }
-         <TableConfigHeader
-        actionContent={
-          <Button
-            className='text-secondary font-bold'
-            color='primary'
-            startContent={<PlusIcon size={18} />}
-            onPress={() => onOpenUserChange(true)}
-          >
-            ดาวน์โหลด Userlist
-          </Button>
+          <div className='flex gap-2'>
+            <Button
+              className='font-bold'
+              color='default'
+              variant='flat'
+              startContent={<DownloadIcon size={18} />}
+              onPress={handleExportExcel}
+              isDisabled={userList.length === 0}
+            >
+              ดาวน์โหลด Userlist
+            </Button>
+            <Button
+              className='text-secondary font-bold'
+              color='primary'
+              startContent={<PlusIcon size={18} />}
+              onPress={() => onOpenUserChange(true)}
+            >
+              เพิ่มผู้ใช้งานใหม่
+            </Button>
+          </div>
         }
         selectedCount={selectedCount}
         title='จัดการผู้ใช้งาน'
