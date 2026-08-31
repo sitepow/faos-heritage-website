@@ -31,35 +31,35 @@ const getOrderContent = (status: OrderStatus, id: string) => {
     { subject: string; preview: string; heading: string; message: string }
   > = {
     [OrderStatus.PENDING]: {
-      subject: `ยืนยันการสั่งซื้อ #${id} (รอชำระเงิน)`,
+      subject: `Confirm order#${id} (Waiting Payment)`,
       preview:
-        'ขอบคุณสำหรับการสั่งซื้อ โปรดดำเนินการชำระเงินเพื่อยืนยันออเดอร์',
-      heading: 'คำสั่งซื้อรอการชำระเงิน',
-      message: `ขอบคุณสำหรับการสั่งซื้อ #${id} ขณะนี้ระบบกำลังรอการยืนยันยอดชำระเงินเพื่อดำเนินการในขั้นตอนถัดไป`,
+        'Thank you for your order. Please proceed with payment to confirm your order.',
+      heading: 'Order placed awaiting payment.',
+      message: `Thank you for your order. #${id} The system is currently awaiting payment confirmation before proceeding to the next step.`,
     },
     [OrderStatus.PAID]: {
-      subject: `ได้รับยอดชำระเงินสำหรับคำสั่งซื้อ #${id} เรียบร้อยแล้ว`,
-      preview: 'เราได้รับยอดชำระเงินของคุณแล้ว',
-      heading: 'ชำระเงินเรียบร้อยแล้ว',
-      message: `ได้รับยอดชำระเงินสำหรับคำสั่งซื้อ #${id} เรียบร้อยแล้ว ขณะนี้เรากำลังเตรียมข้อมูลเพื่อดำเนินการให้คุณโดยเร็วที่สุด`,
+      subject: `Payment has been received for the order. #${id} Completed`,
+      preview: 'We have received your payment.',
+      heading: 'Payment has been completed.',
+      message: `Payment has been received for the purchase order. #${id} Your request is complete. We are now preparing the information to process your request as soon as possible.`,
     },
     [OrderStatus.PROCESSING]: {
-      subject: `คำสั่งซื้อ #${id} กำลังอยู่ระหว่างการจัดเตรียม`,
-      preview: 'สินค้าของคุณกำลังถูกจัดเตรียม',
-      heading: 'กำลังเตรียมรายการสินค้า',
-      message: `เรากำลังจัดเตรียมสินค้าสำหรับคำสั่งซื้อ #${id} และจะแจ้งให้ทราบทันทีเมื่อสินค้าพร้อมสำหรับการดำเนินการขั้นถัดไป`,
+      subject: `Order #${id} Currently being prepared.`,
+      preview: 'Your order is being prepared.',
+      heading: 'กPreparing the product.',
+      message: `We are preparing the goods for your order. #${id} We will notify you as soon as the product is ready for the next step.`,
     },
     [OrderStatus.READY_FOR_PICKUP]: {
-      subject: `คำสั่งซื้อ #${id} พร้อมสำหรับการรับสินค้าแล้ว`,
-      preview: 'คุณสามารถมารับสินค้าได้ตามสาขาที่ระบุ',
-      heading: 'สินค้าพร้อมสำหรับการรับแล้ว',
-      message: `สินค้าสำหรับคำสั่งซื้อ #${id} ได้ถูกจัดเตรียมเรียบร้อยแล้ว คุณสามารถเดินทางมารับสินค้าได้ที่สาขาตามข้อมูลด้านล่างนี้`,
+      subject: `Order #${id} Ready for pickup.`,
+      preview: 'You can pick up your order at the specified branch.',
+      heading: 'The item is ready for pickup.',
+      message: `Items for the order. #${id} Your order has been prepared. You can pick it up at the branch listed below.`,
     },
     [OrderStatus.DELIVERED]: {
-      subject: `คำสั่งซื้อ #${id} สำเร็จเรียบร้อยแล้ว`,
-      preview: 'ขอบคุณที่ไว้วางใจเลือกซื้อสินค้ากับเรา',
-      heading: 'คำสั่งซื้อสำเร็จเรียบร้อยแล้ว',
-      message: `คำสั่งซื้อ #${id} ได้ดำเนินการเสร็จสิ้นเรียบร้อยแล้ว ขอบคุณที่คุณไว้วางใจเลือกซื้อสินค้าจาก FAOS เราหวังว่าจะได้ให้บริการคุณอีกในครั้งถัดไป`,
+      subject: `Order #${id} Successfully`,
+      preview: 'Thank you for your trust in choosing to purchase products from us.',
+      heading: 'คThe order has been successfully completed.',
+      message: `Order #${id} The transaction has been completed successfully. Thank you for your trust in choosing FAOS. We hope to serve you again in the future.`,
     },
     [OrderStatus.CANCELLED]: {
       subject: `แจ้งยกเลิกคำสั่งซื้อ #${id}`,
@@ -106,14 +106,14 @@ const OrderTemplate = ({ order }: Props) => {
       <Body style={main}>
         <Container style={container}>
           <Heading style={h1}>{config.heading}</Heading>
-          <Text style={text}>สวัสดีคุณ {shippingName || 'ลูกค้า'},</Text>
+          <Text style={text}>Hello {shippingName || 'Customer'},</Text>
           <Text style={text}>{config.message}</Text>
 
           {status === OrderStatus.READY_FOR_PICKUP && isPickup && (
             <Section style={infoBlock}>
-              <Text style={infoTitle}>ข้อมูลการรับสินค้า</Text>
+              <Text style={infoTitle}>Product receiving information</Text>
               <Text style={text}>
-                <strong>สถานที่รับ:</strong>{' '}
+                <strong>Devlivery to:</strong>{' '}
                 {storefront?.name || 'หน้าร้านตามที่ระบุ'}
               </Text>
               <Text style={text}>
