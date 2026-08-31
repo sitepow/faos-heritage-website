@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&family=Google+Sans+Flex:wght@400;500;600;700;800&display=swap');
 @import url('@radix-ui/colors/tomato.css');
 @import url('@radix-ui/colors/mauve.css');
 @import url('@radix-ui/colors/tomato-dark.css');
@@ -6,16 +6,20 @@
 @import 'tailwindcss';
 @config '../tailwind.config.cjs';
 
+
 @layer base {
   :root {
-    --font-anuphan: 'Anuphan';
-    --font-montserrat: 'Montserrat';
+    --font-anuphan: 'Anuphan', sans-serif;
+    --font-google-sans: 'Google Sans Flex', sans-serif;
 
     --thai-line-height: 1.6;
     --thai-heading-line-height: 1.4;
   }
+
+  
   html,
   body {
+    font-family: var(--font-google-sans), var(--font-anuphan), sans-serif;
     line-height: var(--thai-line-height);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -23,13 +27,14 @@
     background-color: #ffffff;
     color: var(--mauve-12);
   }
-
+  
   h1,
   h2,
   h3,
   h4,
   h5,
-  h6 {
+ h6 {
+    font-family: var(--font-google-sans), var(--font-anuphan), sans-serif;
     line-height: var(--thai-heading-line-height) !important;
     padding-top: 0.2em;
     padding-bottom: 0.05em;
@@ -40,9 +45,10 @@
   font-family: var(--font-anuphan), sans-serif !important;
 }
 
+
 .mdxeditor.light-editor,
 .mdxeditor.dark-editor {
-  /* ใส่ Montserrat นำหน้า เพื่อให้เป็นฟอนต์หลัก */
+   /* กำหนด Google Sans Flex นำหน้า แล้วตามด้วย Anuphan สำหรับภาษาไทย */
   font-family:
     var(--font-montserrat), var(--font-anuphan), sans-serif !important;
   font-size: 1.5rem !important;
@@ -53,12 +59,14 @@
   font-size: 2.25rem !important;
   margin-bottom: 1.5rem !important;
 }
+
 .mdxeditor.light-editor h2,
 .mdxeditor.dark-editor h2 {
   font-size: 1.875rem !important;
   margin-top: 1.5rem !important;
   margin-bottom: 1rem !important;
 }
+
 .mdxeditor.light-editor h3,
 .mdxeditor.dark-editor h3 {
   font-size: 1.5rem !important;
@@ -219,5 +227,5 @@ article.prose li {
 .mdxeditor.light-editor h6,
 .mdxeditor.dark-editor h6 {
   font-family:
-    var(--font-montserrat), var(--font-anuphan), sans-serif !important;
+    var(--font-google-sans), var(--font-anuphan), sans-serif !important;
 }
