@@ -61,7 +61,7 @@ const InventoryPage = () => {
         const worksheet = XLSX.utils.aoa_to_sheet([[]])
 
         const titleRow = [
-          [`รายงานความเคลื่อนไหวสต็อก (ช่วงวันที่: ${result.meta.dateRange})`],
+          [`Stock Movement (ช่วงวันที่: ${result.meta.dateRange})`],
         ]
         XLSX.utils.sheet_add_aoa(worksheet, titleRow, { origin: 'A1' })
 
@@ -74,9 +74,9 @@ const InventoryPage = () => {
 
         const summaryStartRow = result.data.length + 4
         const summaryData = [
-          ['สรุปภาพรวมความเคลื่อนไหว'],
-          ['รวมยอดรับเข้าทั้งหมด', result.meta.summary.totalIn],
-          ['รวมยอดเบิกออกทั้งหมด', result.meta.summary.totalOut],
+          ['Summary Stock movement'],
+          ['Total income', result.meta.summary.totalIn],
+          ['Total withdraw', result.meta.summary.totalOut],
           ['ยอดสุทธิ (Net Change)', result.meta.summary.netChange],
         ]
         XLSX.utils.sheet_add_aoa(worksheet, summaryData, {
@@ -147,7 +147,7 @@ const InventoryPage = () => {
           </div>
         }
         selectedCount={selectedCount}
-        title='จัดการสต็อกสินค้า'
+        title='Stock Management'
       />
 
       <InventoryTable
