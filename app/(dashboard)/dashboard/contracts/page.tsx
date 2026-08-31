@@ -35,15 +35,15 @@ const ContractPage = () => {
   const statsData = useMemo(() => {
     const list = contracts || []
     return [
-      { name: 'สัญญาทั้งหมด', value: list.length },
+      { name: 'All Contract', value: list.length },
       {
-        name: 'สัญญาที่ใช้งานอยู่',
+        name: 'Active contract',
         value: list.filter(
           (c: ContractListItem) => c.status === ContractStatus.ACTIVE,
         ).length,
       },
       {
-        name: 'รอการตรวจสอบ',
+        name: 'Wating vertify',
         value: list.filter(
           (c: ContractListItem) => c.status === ContractStatus.PENDING,
         ).length,
@@ -76,12 +76,12 @@ const ContractPage = () => {
               startContent={<PlusIcon size={18} />}
               onPress={onOpenPOS}
             >
-              สร้างสัญญาใหม่
+              Create new contract
             </Button>
           )
         }
         selectedCount={selectedCount}
-        title='จัดการสัญญาคู่ค้า'
+        title='Bussiness partner management'
       />
 
       <ContractTable
