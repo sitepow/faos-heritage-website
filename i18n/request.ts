@@ -11,7 +11,7 @@ const MESSAGE_LOADERS: Record<SupportedLocale, MessageLoader> = {
   th: () => import('@/messages/th'),
   us: () => import('@/messages/us'),
   jp: () => import('@/messages/jp'),
-  vn: () => import('@/messages/vn'),
+  //vn: () => import('@/messages/vn'),
 }
 
 export default getRequestConfig(async ({ requestLocale }) => {
