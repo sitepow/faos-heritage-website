@@ -14,7 +14,7 @@ const COUNTRY_CONFIG = {
   //NL: { name: 'Netherlands', currency: 'EUR', locale: 'nl-NL' },
   //MY: { name: 'Malaysia', currency: 'MYR', locale: 'ms-MY' },
   //SG: { name: 'Singapore', currency: 'SGD', locale: 'en-SG' },
-  //JP: { name: 'Japan', currency: 'JPY', locale: 'ja-JP' },
+  JP: { name: 'Japan', currency: 'JPY', locale: 'ja-JP' },
   //CN: { name: 'China', currency: 'CNY', locale: 'zh-CN' },
   //IS: { name: 'Iceland', currency: 'ISK', locale: 'is-IS' },
   //VN: { name: 'Vietnam', currency: 'VND', locale: 'vi-VN' },
