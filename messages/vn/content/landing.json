@@ -1,0 +1,204 @@
+{
+  "landing": {
+    "hero": {
+      "badgeTag": "100% AUTHENTIC GREECE",
+      "badgeText": "Dầu ô liu & mật ong rừng nguyên chất chọn lọc từ Hy Lạp",
+      "headlinePrefix": "Hương vị nguyên bản từ Hy Lạp ",
+      "headlineHighlight": "Tuyển chọn vì sức khỏe tốt nhất của bạn",
+      "subtitle": "Trải nghiệm dầu ô liu Extra Virgin ép lạnh lần đầu (Cold-Pressed) và mật ong rừng 100% tự nhiên từ Sparta & Crete. Giàu chất chống oxy hóa Polyphenol đỉnh cao.",
+      "ctaShop": "Xem tất cả sản phẩm",
+      "ctaStory": "Câu chuyện & tiêu chuẩn của chúng tôi",
+      "reviewsProof": "4.9/5 Được hơn 15.000+ gia đình và đầu bếp tin dùng",
+      "checks": {
+        "coldPressed": "Ép lạnh lần đầu < 27°C",
+        "organic": "Chứng nhận hữu cơ EU Organic",
+        "express": "Giao hàng nhanh toàn quốc, chính hãng 100%"
+      },
+      "featuredProduct": "Sản phẩm nổi bật #{number}",
+      "defaultSummary": "Dầu ô liu nguyên chất và mật ong rừng 100% từ những nông trại tốt nhất Hy Lạp.",
+      "startingPrice": "Giá từ",
+      "viewDetails": "Xem chi tiết",
+      "greekProductAlt": "Sản phẩm Hy Lạp"
+    },
+    "trustMarquee": {
+      "subtitle": "Tiêu chuẩn quốc tế, xuất xứ được bảo hộ & thanh toán an toàn",
+      "badges": {
+        "promptpay": {
+          "title": "PromptPay QR",
+          "description": "Quét mã thanh toán tiện lợi"
+        },
+        "stripe": {
+          "title": "Stripe Payments",
+          "description": "Visa, Mastercard & JCB"
+        },
+        "coldPressed": {
+          "title": "First Cold Pressed",
+          "description": "Ép lạnh lần đầu < 27°C"
+        },
+        "origin": {
+          "title": "Sparta & Crete PDO",
+          "description": "Chỉ dẫn địa lý xuất xứ chính gốc"
+        },
+        "organic": {
+          "title": "EU Bio Organic",
+          "description": "Tiêu chuẩn nông nghiệp hữu cơ châu Âu"
+        },
+        "acidity": {
+          "title": "Ultra Low Acidity",
+          "description": "Độ axit cực thấp < 0.3%"
+        },
+        "polyphenols": {
+          "title": "High Polyphenols",
+          "description": "Hàm lượng chống oxy hóa cao"
+        },
+        "honey": {
+          "title": "Raw Greek Honey",
+          "description": "Mật ong rừng tự nhiên chưa qua xử lý nhiệt"
+        },
+        "delivery": {
+          "title": "Express Delivery",
+          "description": "Giao hàng tận nhà nhanh chóng"
+        },
+        "guarantee": {
+          "title": "100% Satisfaction",
+          "description": "Cam kết chất lượng chính hãng 100%"
+        },
+        "security": {
+          "title": "SSL 256-bit Security",
+          "description": "Bảo mật thanh toán tối đa"
+        }
+      }
+    },
+    "whyFaos": {
+      "tag": "HEALTH COMPARISON",
+      "title": "Tại sao dầu ô liu cao cấp từ Hy Lạp lại khác biệt?",
+      "description": "Lựa chọn điều tốt nhất cho cơ thể bạn với sự thấu hiểu thực sự. So sánh sự khác biệt giữa dầu ăn thông thường và dầu ô liu ép lạnh đích thực từ Hy Lạp.",
+      "problem": {
+        "tag": "Dầu thực vật tinh luyện / dầu pha trộn",
+        "title": "Rủi ro sức khỏe bạn có thể chưa biết",
+        "description": "Hầu hết các loại dầu giá rẻ trên thị trường đều qua xử lý nhiệt độ cao và hóa chất, thúc đẩy quá trình viêm mãn tính trong cơ thể.",
+        "items": [
+          "Trích xuất bằng nhiệt độ cao và dung môi hóa học",
+          "Chứa tỷ lệ Omega-6 quá cao gây viêm mạch máu",
+          "Các vitamin và chất chống oxy hóa tự nhiên bị phá hủy hoàn toàn",
+          "Thường là dầu pha trộn hương liệu, không rõ nguồn gốc"
+        ],
+        "warning": "⚠️ Có thể làm tăng nguy cơ gan nhiễm mỡ, xơ vữa động mạch và lão hóa sớm."
+      },
+      "solution": {
+        "tag": "FAOS Extra Virgin Olive Oil từ Hy Lạp",
+        "title": "Tiêu chuẩn Thực phẩm là Thuốc (Food as Medicine)",
+        "description": "100% nguyên chất từ giống ô liu Koroneiki cổ thụ tại Sparta & Crete, giữ trọn giá trị tự nhiên quý giá.",
+        "items": [
+          "Ép lạnh lần đầu (First Cold-Pressed) dưới 27°C trong vòng 24h sau thu hoạch",
+          "Giàu axit béo không bão hòa đơn (Omega-9) tốt cho tim mạch và giảm cholesterol xấu",
+          "Hàm lượng dồi dào Polyphenol và Vitamin E chống oxy hóa cấp tế bào",
+          "Có chứng nhận EU Bio Organic và Sparta/Crete PDO đảm bảo độ tinh khiết 100%"
+        ],
+        "guarantee": "✅ Cam kết độ tươi mới, độ axit cực thấp < 0.3%"
+      }
+    },
+    "metrics": {
+      "verified": "Verified",
+      "items": {
+        "organic": {
+          "label": "Organic & Pure",
+          "description": "Chiết xuất lạnh tự nhiên 100% không hóa chất"
+        },
+        "acidity": {
+          "label": "Ultra-Low Acidity",
+          "description": "Độ axit cực thấp bảo tồn trọn vẹn chất chống oxy hóa"
+        },
+        "heritage": {
+          "label": "Years Heritage",
+          "description": "Kinh nghiệm tuyển chọn trực tiếp từ các nông trại Hy Lạp"
+        },
+        "families": {
+          "label": "Happy Families",
+          "description": "Được hàng ngàn gia đình yêu sức khỏe tin cậy"
+        }
+      }
+    },
+    "heritageBento": {
+      "headerTitle": "The Greek Heritage & Craftsmanship",
+      "headerDescription": "Vì sao thực phẩm và dầu ô liu từ cái nôi Hy Lạp lại vượt trội. Cảm nhận độ tinh khiết và tiêu chuẩn quốc tế.",
+      "cards": {
+        "origin": {
+          "name": "Nuôi dưỡng tại vùng đất tốt nhất — Sparta & Crete",
+          "description": "Những cây ô liu Koroneiki hàng trăm năm tuổi phát triển dưới ánh nắng Địa Trung Hải và gió biển Ionian, đất núi lửa giàu khoáng chất tạo nên hương thơm trái cây độc đáo và giá trị dinh dưỡng cao nhất.",
+          "cta": "Khám phá sản phẩm từ Sparta & Crete"
+        },
+        "coldPressed": {
+          "name": "Ép lạnh First Cold Pressed",
+          "description": "Ép cơ học ở nhiệt độ dưới 27°C trong vòng 24h sau thu hoạch. Giữ trọn Polyphenol và Vitamin E tự nhiên.",
+          "cta": "Tìm hiểu quy trình ép lạnh"
+        },
+        "honey": {
+          "name": "Mật ong rừng Hy Lạp 100% Unheated Raw",
+          "description": "Thu hoạch từ hoa xạ hương (Thyme) và rừng thông tự nhiên. Không nấu hay pha siro, giữ nguyên enzym sống có lợi.",
+          "cta": "Xem mật ong rừng nguyên chất"
+        },
+        "organic": {
+          "name": "Chứng nhận EU Bio Organic & Truy xuất nguồn gốc",
+          "description": "Kiểm định nghiêm ngặt bởi các viện châu Âu. Không thuốc trừ sâu, phẩm màu hay chất bảo quản.",
+          "cta": "Kiểm tra tiêu chuẩn & chứng nhận"
+        }
+      }
+    },
+    "howItWorks": {
+      "tag": "SIMPLE 3-STEP JOURNEY",
+      "title": "Chỉ 3 bước đơn giản cho sức khỏe tốt hơn mỗi ngày",
+      "description": "Từ các vườn ô liu truyền thống tại Hy Lạp đến bàn ăn gia đình bạn, mang đến nguồn dinh dưỡng thuần khiết.",
+      "steps": {
+        "step1": {
+          "tag": "ORIGIN HARVEST",
+          "title": "Thu hoạch thủ công tươi mới từ Hy Lạp",
+          "description": "Thu hoạch bằng tay những quả ô liu Koroneiki từ cây cổ thụ tại Sparta & Crete vào thời điểm dinh dưỡng trọn vẹn nhất."
+        },
+        "step2": {
+          "tag": "COLD EXTRACTION",
+          "title": "Ép lạnh giữ trọn tinh chất tự nhiên",
+          "description": "Ép lạnh dưới 27°C trong 24h để khóa trọn vẹn hợp chất Polyphenol và axit béo tốt cho tim mạch."
+        },
+        "step3": {
+          "tag": "DAILY VITALITY",
+          "title": "Khỏe mạnh trong từng bữa ăn",
+          "description": "Đóng chai thủy tinh tối màu bảo vệ khỏi ánh sáng. Dùng 1-2 thìa mỗi ngày trực tiếp hoặc trộn salad để bảo vệ tim mạch và trẻ hóa cơ thể."
+        }
+      }
+    },
+    "postExplore": {
+      "tag": "Bài viết & kiến thức",
+      "title": "Bí quyết sức khỏe & ẩm thực Địa Trung Hải",
+      "description": "Cập nhật kiến thức hữu ích, lợi ích của dầu ô liu và công thức món ăn cho sức khỏe bền vững.",
+      "viewAll": "Xem tất cả bài viết"
+    },
+    "partner": {
+      "viewMap": "Xem bản đồ & địa điểm"
+    },
+    "activity": {
+      "tag": "COMMUNITY & EVENTS",
+      "sensoryWorkshop": "Sensory Experience Workshop",
+      "exhibition": "Trưng bày sản phẩm & nếm thử dầu ô liu",
+      "expandPhotos": "Xem toàn bộ ảnh sự kiện ({count} ảnh)",
+      "collapsePhotos": "Thu gọn ảnh"
+    },
+    "faq": {
+      "guideText": "Xem hướng dẫn chi tiết, các bước sử dụng và thông tin liên quan đến chủ đề này.",
+      "readAllLink": "Đọc toàn bộ hướng dẫn & chi tiết"
+    },
+    "cta": {
+      "tag": "ELEVATE YOUR HEALTH TODAY",
+      "titleLine1": "Sẵn sàng trải nghiệm dầu ô liu nguyên bản",
+      "titleLine2": "và mật ong rừng tự nhiên từ Hy Lạp?",
+      "description": "Bắt đầu chăm sóc sức khỏe tim mạch và cơ thể bạn ngay hôm nay với các sản phẩm hữu cơ cao cấp chính gốc.",
+      "shopNow": "Mua sản phẩm ngay",
+      "contactLine": "Tư vấn thêm qua LINE",
+      "guarantees": {
+        "authentic": "Cam kết chính hãng 100%",
+        "shipping": "Giao hàng nhanh 1-3 ngày làm việc",
+        "payment": "Thẻ tín dụng & thanh toán an toàn"
+      }
+    }
+  }
+}

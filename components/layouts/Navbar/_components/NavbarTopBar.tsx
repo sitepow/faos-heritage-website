@@ -1,10 +1,10 @@
 'use client'
 
+import { Sparkles } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
 import type { ComponentProps } from 'react'
 
-import { NavbarActions } from './NavbarActions'
 import { NavbarLocaleSwitcher } from './NavbarLocaleSwitcher'
 import { Container } from '../../Container'
 
@@ -17,18 +17,25 @@ const NavbarTopBar = ({ className, ...props }: ComponentProps<'div'>) => {
   return (
     <div
       className={cn(
-        'text-foreground border-default-100 border-b bg-[#f8f8f8] dark:bg-[#0e0e0e]',
+        'relative z-20 border-b border-neutral-200/60 bg-neutral-50/90 text-neutral-600 backdrop-blur-xs transition-colors dark:border-neutral-800/60 dark:bg-neutral-950/90 dark:text-neutral-400',
         className,
       )}
       {...props}
     >
-      <Container className='flex flex-wrap items-center justify-between gap-5 px-5 py-2.5'>
-        <p className='text-sm font-medium tracking-wide'>{tBrand('slogan')}</p>
+      <Container className='flex h-9 items-center justify-between gap-4 px-4 sm:px-6'>
+        {/* Left: Brand Slogan */}
+        <div className='flex items-center gap-2 overflow-hidden'>
+          <Sparkles className='h-3.5 w-3.5 shrink-0 text-[#ba8c25] dark:text-[#f59e0b]' />
+          <p className='truncate text-xs font-medium tracking-wide'>
+            {tBrand('slogan')}
+          </p>
+        </div>
 
-        <div className='flex flex-wrap items-center gap-2'>
+        {/* Right: Language / Currency & Theme */}
+        <div className='flex shrink-0 items-center gap-2.5'>
           <NavbarLocaleSwitcher />
+          <div className='h-3.5 w-px bg-neutral-200 dark:bg-neutral-800' />
           <ThemeSwitch />
-          <NavbarActions />
         </div>
       </Container>
     </div>

@@ -1,6 +1,7 @@
 'use client'
 
-import { Image } from '@heroui/react'
+/* eslint-disable @next/next/no-img-element */
+import { memo } from 'react'
 
 import type { ComponentProps } from 'react'
 
@@ -15,41 +16,52 @@ interface ProductImageProps extends ComponentProps<'div'> {
   hasAnyDiscount?: boolean
   discount?: number
   showBadge?: boolean
+  aspectRatio?: 'square' | 'portrait' | 'auto'
 }
 
-const ProductImage = ({
-  image,
-  className,
-  hasAnyDiscount,
-  discount = 0,
-  showBadge = false,
-  ...props
-}: ProductImageProps) => {
-  const imageSrc = image && image.trim() !== '' ? image : IMAGE_FALLBACK.EMPTY
+const ProductImage = memo(
+  ({
+    image,
+    className,
+    hasAnyDiscount,
+    discount = 0,
+    showBadge = false,
+    aspectRatio = 'square',
+    ...props
+  }: ProductImageProps) => {
+    const imageSrc = image && image.trim() !== '' ? image : IMAGE_FALLBACK.EMPTY
 
-  return (
-    <div
-      className={cn(
-        'border-default-100 dark:bg-default-50 relative aspect-square size-full shrink-0 rounded-xl border transition-all duration-1000 ease-in-out',
-        className,
-      )}
-      {...props}
-    >
-      <Image
-        alt='product-image'
-        className={'size-full rounded-xl object-cover'}
-        classNames={{
-          wrapper: 'absolute inset-0 !max-w-none size-full',
-        }}
-        radius='none'
-        src={imageSrc || undefined}
-      />
+    let aspectClass = 'aspect-square'
+    if (aspectRatio === 'portrait') {
+      aspectClass = 'aspect-4/5'
+    } else if (aspectRatio === 'auto') {
+      aspectClass = ''
+    }
 
-      {showBadge && (
-        <BadgeOverlay discount={discount} hasAnyDiscount={hasAnyDiscount} />
-      )}
-    </div>
-  )
-}
+    return (
+      <div
+        className={cn(
+          'relative w-full shrink-0 overflow-hidden bg-neutral-100/70 transition-colors dark:bg-neutral-900/50',
+          aspectClass,
+          className,
+        )}
+        {...props}
+      >
+        <img
+          alt='product'
+          className='h-full w-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105'
+          loading='lazy'
+          src={imageSrc || undefined}
+        />
+
+        {showBadge && (
+          <BadgeOverlay discount={discount} hasAnyDiscount={hasAnyDiscount} />
+        )}
+      </div>
+    )
+  },
+)
+
+ProductImage.displayName = 'ProductImage'
 
 export { ProductImage }

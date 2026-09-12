@@ -1,25 +1,30 @@
+import { cn } from '@/utils'
+
 interface BadgeOverlayProps {
   hasAnyDiscount?: boolean
   discount: number
+  className?: string
 }
 
-const BadgeOverlay = ({ hasAnyDiscount, discount }: BadgeOverlayProps) => {
-  return (
-    <div className='absolute -top-2 -right-2 z-20 flex gap-2 md:top-8 md:right-8'>
-      {hasAnyDiscount && discount > 0 && (
-        <div className='flex size-14 rotate-12 animate-bounce flex-col items-center justify-center rounded-full border-2 border-white bg-red-500 font-bold text-white shadow-lg md:h-20 md:w-20 md:border-4 dark:border-neutral-900'>
-          <span className='text-[8px] leading-none md:text-[10px]'>UP TO</span>
-          <span className='text-sm md:text-xl'>{discount}%</span>
-        </div>
-      )}
+const BadgeOverlay = ({
+  hasAnyDiscount,
+  discount,
+  className,
+}: BadgeOverlayProps) => {
+  if (!hasAnyDiscount || discount <= 0) {
+    return null
+  }
 
-      <div className='flex size-14 rotate-12 animate-bounce flex-col items-center justify-center rounded-full border-2 border-white bg-orange-500 font-bold text-white shadow-lg md:h-20 md:w-20 md:border-4 dark:border-neutral-900'>
-        <span className='text-center text-[10px] leading-none'>
-          LIMITED
-          <br />
-          STOCK
-        </span>
-      </div>
+  return (
+    <div
+      className={cn(
+        'absolute top-2.5 left-2.5 z-20 flex items-center gap-1.5',
+        className,
+      )}
+    >
+      <span className='inline-flex items-center rounded-full bg-red-500/90 px-2 py-0.5 text-[11px] font-bold text-white shadow-sm backdrop-blur-xs transition-transform duration-200 group-hover:scale-105'>
+        -{discount}%
+      </span>
     </div>
   )
 }

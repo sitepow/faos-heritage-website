@@ -2,7 +2,7 @@
 
 import { Button } from '@heroui/react'
 import { XIcon } from 'lucide-react'
-import { useMemo } from 'react'
+import { memo, useMemo } from 'react'
 
 import type { GetCartsResult } from '@/features/cart/action'
 
@@ -24,7 +24,7 @@ interface Props {
   cart: CartItemData
 }
 
-const CartItem = ({ cart }: Props) => {
+const CartItem = memo(({ cart }: Props) => {
   const { currencyOptions } = useExchangeRate()
   const {
     quantity,
@@ -103,6 +103,8 @@ const CartItem = ({ cart }: Props) => {
       </div>
     </div>
   )
-}
+})
+
+CartItem.displayName = 'CartItem'
 
 export { CartItem }

@@ -1,0 +1,204 @@
+{
+  "landing": {
+    "hero": {
+      "badgeTag": "100% AUTHENTIC GREECE",
+      "badgeText": "Authentic Olive Oil & Raw Honey from the World's Finest Origins",
+      "headlinePrefix": "Authentic Taste of Greece ",
+      "headlineHighlight": "Handcrafted for Your Optimum Health",
+      "subtitle": "Experience First Cold-Pressed Extra Virgin Olive Oil and 100% pure raw honey from Sparta & Crete, Greece. Chemical-free and rich in peak polyphenol antioxidants.",
+      "ctaShop": "Shop All Products",
+      "ctaStory": "Our Story & Standards",
+      "reviewsProof": "4.9/5 Trusted by over 15,000+ families and gourmet chefs",
+      "checks": {
+        "coldPressed": "First Cold-Pressed < 27°C",
+        "organic": "EU Organic Certified",
+        "express": "Express Shipping, 100% Authentic"
+      },
+      "featuredProduct": "Featured Product #{number}",
+      "defaultSummary": "Handpicked 100% authentic olive oil and wild raw honey from the finest Greek groves.",
+      "startingPrice": "Starting from",
+      "viewDetails": "View Details",
+      "greekProductAlt": "Greek product"
+    },
+    "trustMarquee": {
+      "subtitle": "International Standards, Protected Origin & Secure Checkout",
+      "badges": {
+        "promptpay": {
+          "title": "PromptPay QR",
+          "description": "Instant QR Scan & Pay"
+        },
+        "stripe": {
+          "title": "Stripe Payments",
+          "description": "Visa, Mastercard & JCB"
+        },
+        "coldPressed": {
+          "title": "First Cold Pressed",
+          "description": "Cold Extracted < 27°C"
+        },
+        "origin": {
+          "title": "Sparta & Crete PDO",
+          "description": "Protected Designation of Origin"
+        },
+        "organic": {
+          "title": "EU Bio Organic",
+          "description": "European Bio Standards"
+        },
+        "acidity": {
+          "title": "Ultra Low Acidity",
+          "description": "Ultra Low Acidity < 0.3%"
+        },
+        "polyphenols": {
+          "title": "High Polyphenols",
+          "description": "Rich in Natural Antioxidants"
+        },
+        "honey": {
+          "title": "Raw Greek Honey",
+          "description": "100% Pure & Unheated"
+        },
+        "delivery": {
+          "title": "Express Delivery",
+          "description": "Fast Door-to-Door Delivery"
+        },
+        "guarantee": {
+          "title": "100% Satisfaction",
+          "description": "Guaranteed Premium Quality"
+        },
+        "security": {
+          "title": "SSL 256-bit Security",
+          "description": "Highest Level Payment Security"
+        }
+      }
+    },
+    "whyFaos": {
+      "tag": "HEALTH COMPARISON",
+      "title": "Why Does Premium Greek Olive Oil Make a Difference?",
+      "description": "Make an informed choice for your body. Compare regular refined cooking oils with authentic First Cold-Pressed Greek Extra Virgin Olive Oil.",
+      "problem": {
+        "tag": "Refined Seed Oils / Blended Oils",
+        "title": "Hidden Health Risks in Common Oils",
+        "description": "Mass-market cheap oils undergo chemical extraction and extreme heat, accelerating free radicals and chronic bodily inflammation.",
+        "items": [
+          "Extracted with high heat and toxic chemical solvents",
+          "Excessive Omega-6 ratio triggering vascular inflammation",
+          "Natural antioxidants and essential vitamins stripped completely",
+          "Often blended, colored, and lacking traceable origins"
+        ],
+        "warning": "⚠️ May increase risk of fatty liver, clogged arteries, and premature aging."
+      },
+      "solution": {
+        "tag": "FAOS Greek Extra Virgin Olive Oil",
+        "title": "Food as Medicine Standard",
+        "description": "100% pure monovarietal Koroneiki olives harvested from organic family groves in Sparta & Crete, delivering full therapeutic benefits.",
+        "items": [
+          "First Cold-Pressed under 27°C within 24 hours of harvest",
+          "Rich in monounsaturated fats (Omega-9) supporting heart health & lowering LDL",
+          "Packed with active Polyphenols and Vitamin E for cellular defense",
+          "EU Bio Organic & PDO certified, guaranteeing 100% purity and traceability"
+        ],
+        "guarantee": "✅ Guaranteed peak freshness with ultra-low acidity < 0.3%"
+      }
+    },
+    "metrics": {
+      "verified": "Verified",
+      "items": {
+        "organic": {
+          "label": "Organic & Pure",
+          "description": "100% natural cold extraction without chemicals"
+        },
+        "acidity": {
+          "label": "Ultra-Low Acidity",
+          "description": "Exceptional low acidity preserving active antioxidants"
+        },
+        "heritage": {
+          "label": "Years Heritage",
+          "description": "Generations of olive mastery direct from Greece"
+        },
+        "families": {
+          "label": "Happy Families",
+          "description": "Trusted by health-conscious families across the country"
+        }
+      }
+    },
+    "heritageBento": {
+      "headerTitle": "The Greek Heritage & Craftsmanship",
+      "headerDescription": "Discover why origin and ancestral harvesting techniques make all the difference in purity and international acclaim.",
+      "cards": {
+        "origin": {
+          "name": "Nurtured in Greece's Finest Soils — Sparta & Crete",
+          "description": "Centuries-old Koroneiki olive trees thriving under Mediterranean sun and Aegean coastal breezes, producing intense fruity aroma and unmatched medicinal value.",
+          "cta": "Explore Sparta & Crete Products"
+        },
+        "coldPressed": {
+          "name": "First Cold Pressed Extraction",
+          "description": "Mechanically extracted under 27°C within 24 hours of harvest. Zero chemicals, preserving maximum bio-active Polyphenols and Vitamin E.",
+          "cta": "Learn About Cold Extraction"
+        },
+        "honey": {
+          "name": "100% Raw Unheated Greek Honey",
+          "description": "Harvested from wild mountain thyme and natural pine forests. Unpasteurized and free from added syrups, keeping live enzymes intact.",
+          "cta": "Explore Wild Raw Honey"
+        },
+        "organic": {
+          "name": "EU Bio Organic Certified & Fully Traceable",
+          "description": "Rigorously lab-tested by European organic bodies. 100% free from pesticides, additives, and preservatives for your peace of mind.",
+          "cta": "Verify Certifications & Standards"
+        }
+      }
+    },
+    "howItWorks": {
+      "tag": "SIMPLE 3-STEP JOURNEY",
+      "title": "3 Simple Steps to Everyday Vitality",
+      "description": "From ancient Greek orchards straight to your dining table, bringing authentic wellness to your daily routine.",
+      "steps": {
+        "step1": {
+          "tag": "ORIGIN HARVEST",
+          "title": "Hand-Harvested Fresh from Greece",
+          "description": "Carefully hand-picked Koroneiki olives from ancient trees in Sparta & Crete at peak nutritional ripeness."
+        },
+        "step2": {
+          "tag": "COLD EXTRACTION",
+          "title": "Cold-Extracted Nature's Gold",
+          "description": "First cold pressed under 27°C within 24 hours to lock in delicate antioxidants and heart-healthy monounsaturated fatty acids."
+        },
+        "step3": {
+          "tag": "DAILY VITALITY",
+          "title": "Daily Health in Every Meal",
+          "description": "Bottled in dark UV-protective glass and delivered fresh. Take 1-2 tablespoons raw daily or drizzle over your favorite dishes for vibrant health."
+        }
+      }
+    },
+    "postExplore": {
+      "tag": "Articles & Insights",
+      "title": "Mediterranean Wellness & Recipes",
+      "description": "Discover scientific health insights, olive oil benefits, and Mediterranean recipes for long-term vitality.",
+      "viewAll": "View All Articles"
+    },
+    "partner": {
+      "viewMap": "View Map & Locations"
+    },
+    "activity": {
+      "tag": "COMMUNITY & EVENTS",
+      "sensoryWorkshop": "Sensory Experience Workshop",
+      "exhibition": "Olive Oil Tasting & Product Showcase",
+      "expandPhotos": "View All Event Photos ({count} Photos)",
+      "collapsePhotos": "Collapse Photos"
+    },
+    "faq": {
+      "guideText": "Explore in-depth guidelines, usage instructions, and helpful details on this topic.",
+      "readAllLink": "Read Complete Guide & Details"
+    },
+    "cta": {
+      "tag": "ELEVATE YOUR HEALTH TODAY",
+      "titleLine1": "Ready to Experience Authentic Greek",
+      "titleLine2": "Olive Oil & Raw Honey?",
+      "description": "Start caring for your heart and cellular health today with premium European organic products from origin. Fast and secure delivery to your doorstep.",
+      "shopNow": "Shop Products Now",
+      "contactLine": "Contact Us via LINE",
+      "guarantees": {
+        "authentic": "100% Authentic Guarantee",
+        "shipping": "Express Delivery in 1-3 Days",
+        "payment": "PromptPay & Credit Cards Accepted"
+      }
+    }
+  }
+}

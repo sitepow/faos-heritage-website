@@ -9,10 +9,14 @@ import { AppSection } from '@/components/layouts/AppSection'
 import { ActivitySection } from '@/components/section/ActivitySection'
 import { FaqSection } from '@/components/section/FaqSection'
 import { AffiliateBanner } from '@/components/ui/AffiliateBanner/AffiliateBanner'
-import { CategoryLists } from '@/components/ui/CategoryLists'
+import { BrandHeritageBento } from '@/components/ui/BrandHeritageBento'
+import { BrandMetrics } from '@/components/ui/BrandMetrics'
+import { CallToActionSection } from '@/components/ui/CallToActionSection'
 import { HeroSection } from '@/components/ui/HeroSection'
+import { HowItWorksSection } from '@/components/ui/HowItWorksSection'
 import { PartnerSection } from '@/components/ui/PartnerSection'
-import { SectionHeader } from '@/components/ui/SectionHeader'
+import { TrustMarquee } from '@/components/ui/TrustMarquee'
+import { WhyFaosSection } from '@/components/ui/WhyFaosSection'
 import { YouTubeList } from '@/components/ui/YouTubeList'
 import { PAGINATION } from '@/constants'
 import { getProductsInfinite } from '@/features/product/action'
@@ -27,13 +31,12 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: 'meta' })
 
   return constructMetadata({
-    title: t('home.title'),
     description: t('home.description'),
+    title: t('home.title'),
   })
 }
 
 const HomePage = async () => {
-  const t = await getTranslations('shared.categoryDiscovery')
   const locale = await getLocale()
   const products = await getProductsInfinite({
     limit: PAGINATION.ITEMS_PER_PAGE,
@@ -42,25 +45,54 @@ const HomePage = async () => {
 
   return (
     <AppSection>
+      {/* 1. Hero Section */}
       <HeroSection />
-      <header className='flex flex-col gap-10 pb-10'>
-        <SectionHeader
-          as='h1'
-          description={t('description')}
-          title={t('title')}
+
+      {/* 2. Trust Badges & Logistics Marquee */}
+      <TrustMarquee />
+
+      {/* 3. Problem vs Solution Comparison */}
+      <WhyFaosSection />
+
+      {/* 4. Brand Metrics Counters */}
+      <BrandMetrics />
+
+      {/* 5. Category Discovery & Products Grid */}
+      <div className='scroll-mt-24' id='products'>
+        <ProductExploreSection
+          initialData={products}
+          itemsPerPage={PAGINATION.ITEMS_PER_PAGE}
         />
-        <CategoryLists />
-      </header>
-      <ProductExploreSection
-        initialData={products}
-        itemsPerPage={PAGINATION.ITEMS_PER_PAGE}
-      />
+      </div>
+
+      {/* 6. Brand Heritage Bento Grid */}
+      <div className='scroll-mt-24' id='heritage'>
+        <BrandHeritageBento />
+      </div>
+
+      {/* 7. How It Works (3 Steps) */}
+      <HowItWorksSection />
+
+      {/* 8. Articles, Recipes & Blog */}
       <PostExploreSection itemsPerPage={PAGINATION.ITEMS_PER_PAGE} />
-      <ActivitySection />
-      <AffiliateBanner />
-      <YouTubeList />
+
+      {/* 9. Retail Partners & Storefronts */}
       <PartnerSection />
+
+      {/* 10. News & Activities */}
+      <ActivitySection />
+
+      {/* 11. Affiliate Community */}
+      <AffiliateBanner />
+
+      {/* 12. Video Highlights */}
+      <YouTubeList />
+
+      {/* 13. FAQ Accordion */}
       <FaqSection />
+
+      {/* 14. Bottom Call-to-Action Banner */}
+      <CallToActionSection />
     </AppSection>
   )
 }

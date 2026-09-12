@@ -1,97 +1,68 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
 
+import { MapPin } from 'lucide-react'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
-import { useState, useEffect, useRef } from 'react'
+import React from 'react'
 
 import { SectionHeader } from './SectionHeader'
 
+import { Marquee } from '@/components/magicui/marquee'
 import { IMAGE_FALLBACK } from '@/constants'
 import { useActiveStorefronts } from '@/features/storefront/hook'
+import { useGsapReveal } from '@/hooks/useGsap'
 
 interface PartnerImageProps {
   name: string
   image: string
 }
 
-const PartnerImage = ({ name, image }: PartnerImageProps) => {
-  const [bgColor, setBgColor] = useState<string>('#ffffff')
-  const imgRef = useRef<HTMLImageElement>(null)
-
-  const extractEdgeColor = () => {
-    const img = imgRef.current
-    if (img && img.complete && img.src && !img.src.includes('data:image')) {
-      try {
-        const canvas = document.createElement('canvas')
-        const context = canvas.getContext('2d')
-        if (context) {
-          canvas.width = img.naturalWidth
-          canvas.height = img.naturalHeight
-          context.drawImage(img, 0, 0)
-
-          const data = context.getImageData(0, 0, 1, 1).data
-          const r = data[0]
-          const g = data[1]
-          const b = data[2]
-          const a = data[3]
-
-          if (a < 255) {
-            setBgColor('#ffffff')
-          } else {
-            setBgColor(`rgb(${r}, ${g}, ${b})`)
-          }
-        }
-      } catch {
-        setBgColor('#ffffff')
-      }
-    }
-  }
-
-  useEffect(() => {
-    if (imgRef.current?.complete) {
-      extractEdgeColor()
-    }
-  }, [image])
-
+const PartnerImage = React.memo(({ name, image }: PartnerImageProps) => {
   return (
-    <div className='flex h-32 w-full items-center justify-center'>
+    <div className='flex size-16 shrink-0 items-center justify-center overflow-hidden rounded-full border border-neutral-200 bg-white p-1.5 shadow-sm dark:border-neutral-700 dark:bg-neutral-800'>
       <img
-        ref={imgRef}
         alt={name}
-        className='border-default-100 size-32 rounded-full border object-contain'
-        crossOrigin='anonymous'
-        height={80}
+        className='size-full rounded-full object-contain'
+        loading='lazy'
         src={image || IMAGE_FALLBACK.EMPTY}
-        style={{ backgroundColor: bgColor }}
-        width={160}
-        onLoad={extractEdgeColor}
       />
     </div>
   )
-}
+})
+
+PartnerImage.displayName = 'PartnerImage'
 
 const PartnerSection = () => {
   const t = useTranslations('shared.partner')
+  const tLanding = useTranslations('landing.partner')
   const { data: storefronts, isLoading } = useActiveStorefronts({
     ignoreAdmin: true,
   })
+  const containerRef = useGsapReveal({ y: 20 })
 
-  if (isLoading) {
+  if (isLoading || !storefronts?.length) {
     return null
   }
 
   return (
-    <section className='py-12'>
+    <section ref={containerRef} className='relative w-full py-12'>
       <div className='container mx-auto px-4'>
-        <SectionHeader description={t('description')} title={t('title')} />
+        <div className='gsap-reveal mb-8'>
+          <SectionHeader description={t('description')} title={t('title')} />
+        </div>
 
-        <div className='flex flex-wrap items-start justify-center'>
-          {storefronts?.map((partner) => {
-            return (
+        {/* Magic UI Marquee with left/right fade masks */}
+        <div className='relative w-full overflow-hidden py-4'>
+          {/* Gradient Masks */}
+          <div className='from-background pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r to-transparent sm:w-28' />
+          <div className='from-background pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l to-transparent sm:w-28' />
+
+          <Marquee pauseOnHover className='[--duration:35s]' repeat={4}>
+            {storefronts.map((partner) => (
               <Link
                 key={partner.id}
-                className='flex w-80 flex-col items-center justify-start gap-5 p-4 text-center grayscale transition-all duration-300 hover:grayscale-0 lg:w-96'
+                className='group flex items-center gap-4 rounded-2xl border border-neutral-200/80 bg-white/70 px-5 py-3.5 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-amber-500/40 hover:shadow-lg hover:shadow-amber-500/5 dark:border-white/10 dark:bg-neutral-900/60 dark:hover:border-amber-400/40'
                 href={partner.googleMapUrl || '#'}
                 rel='noopener noreferrer'
                 target='_blank'
@@ -100,12 +71,21 @@ const PartnerSection = () => {
                   image={partner.image || IMAGE_FALLBACK.EMPTY}
                   name={partner.name}
                 />
-                <p className='max-w-3/4 text-lg tracking-tight antialiased opacity-70 sm:text-xl'>
-                  {partner.name}
-                </p>
+                <div className='flex flex-col text-left'>
+                  <span className='font-semibold text-neutral-800 transition-colors group-hover:text-amber-700 dark:text-neutral-100 dark:group-hover:text-amber-300'>
+                    {partner.name}
+                  </span>
+                  <span className='flex items-center gap-1 text-xs text-neutral-500 dark:text-neutral-400'>
+                    <MapPin
+                      className='text-amber-600 dark:text-amber-400'
+                      size={12}
+                    />
+                    {tLanding('viewMap')}
+                  </span>
+                </div>
               </Link>
-            )
-          })}
+            ))}
+          </Marquee>
         </div>
       </div>
     </section>

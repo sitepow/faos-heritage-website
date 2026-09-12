@@ -1,0 +1,204 @@
+{
+  "landing": {
+    "hero": {
+      "badgeTag": "100% AUTHENTIC GREECE",
+      "badgeText": "世界最高の産地から厳選された本場ギリシャのオリーブオイル＆純粋生ハチミツ",
+      "headlinePrefix": "ギリシャ本場の味わい ",
+      "headlineHighlight": "健やかな毎日のために厳選",
+      "subtitle": "スパルタとクレタ島から届く、一番搾り（コールドプレス）エクストラバージンオリーブオイルと100%天然生ハチミツ。化学物質不使用で、最高峰のポリフェノール抗酸化成分を含んでいます。",
+      "ctaShop": "すべての商品を見る",
+      "ctaStory": "私たちの物語と基準",
+      "reviewsProof": "4.9/5 15,000人以上の家族や一流シェフに選ばれています",
+      "checks": {
+        "coldPressed": "一番搾り低温抽出 < 27°C",
+        "organic": "EU有機認証（EU Bio Organic）",
+        "express": "全国迅速配送・100%本物保証"
+      },
+      "featuredProduct": "おすすめ商品 #{number}",
+      "defaultSummary": "ギリシャ最良の農園から厳選された100%天然オリーブオイルと純粋生ハチミツをお届けします。",
+      "startingPrice": "販売価格",
+      "viewDetails": "詳細を見る",
+      "greekProductAlt": "ギリシャ産商品"
+    },
+    "trustMarquee": {
+      "subtitle": "国際基準の品質、原産地呼称保護、安全な決済システム",
+      "badges": {
+        "promptpay": {
+          "title": "PromptPay QR",
+          "description": "簡単・スピーディなQR決済"
+        },
+        "stripe": {
+          "title": "Stripe Payments",
+          "description": "Visa, Mastercard & JCB"
+        },
+        "coldPressed": {
+          "title": "First Cold Pressed",
+          "description": "27°C以下の低温圧搾"
+        },
+        "origin": {
+          "title": "Sparta & Crete PDO",
+          "description": "EU原産地呼称保護（PDO）"
+        },
+        "organic": {
+          "title": "EU Bio Organic",
+          "description": "欧州オーガニック基準"
+        },
+        "acidity": {
+          "title": "Ultra Low Acidity",
+          "description": "超低酸度 < 0.3%"
+        },
+        "polyphenols": {
+          "title": "High Polyphenols",
+          "description": "高濃度ポリフェノール抗酸化成分"
+        },
+        "honey": {
+          "title": "Raw Greek Honey",
+          "description": "非加熱100%天然生ハチミツ"
+        },
+        "delivery": {
+          "title": "Express Delivery",
+          "description": "安心のスピード配送"
+        },
+        "guarantee": {
+          "title": "100% Satisfaction",
+          "description": "100%本物品質保証"
+        },
+        "security": {
+          "title": "SSL 256-bit Security",
+          "description": "最高水準の暗号化セキュリティ"
+        }
+      }
+    },
+    "whyFaos": {
+      "tag": "HEALTH COMPARISON",
+      "title": "ギリシャ産プレミアムオリーブオイルが選ばれる理由とは？",
+      "description": "正しい知識で体に最適な選択を。市販の一般的な食用油とギリシャ産コールドプレスエクストラバージンオリーブオイルの違いをご確認ください。",
+      "problem": {
+        "tag": "加工植物油 / 一般的な混合油",
+        "title": "知らずに摂っている健康リスク",
+        "description": "市販の安価な油の多くは化学溶剤と高温処理によって抽出され、体内の慢性的な炎症を引き起こす要因となります。",
+        "items": [
+          "高温処理および化学溶剤を用いた抽出工程",
+          "オメガ6過多による血管の慢性的な炎症リスク",
+          "天然のビタミンや抗酸化成分が失われている",
+          "混合油や着色料が含まれ、産地の追跡が困難"
+        ],
+        "warning": "⚠️ 脂肪肝、動脈硬化、早期老化のリスクを高める可能性があります。"
+      },
+      "solution": {
+        "tag": "FAOS ギリシャ産エクストラバージンオリーブオイル",
+        "title": "医食同源（Food as Medicine）の基準",
+        "description": "スパルタとクレタ島の厳選されたコロネイキ種オリーブのみを100%使用し、自然の恵みをそのままお届けします。",
+        "items": [
+          "収穫後24時間以内に27°C以下でコールドプレス（一番搾り）",
+          "心臓の健康を支え悪玉コレステロールを減らすオレイン酸（オメガ9）が豊富",
+          "抗酸化作用に優れたポリフェノールと天然ビタミンEが豊富",
+          "EU Bio Organicおよび原産地呼称PDO認証により100%の純度を保証"
+        ],
+        "guarantee": "✅ 鮮度保証・超低酸度 < 0.3%"
+      }
+    },
+    "metrics": {
+      "verified": "Verified",
+      "items": {
+        "organic": {
+          "label": "Organic & Pure",
+          "description": "化学物質不使用・100%天然低温抽出"
+        },
+        "acidity": {
+          "label": "Ultra-Low Acidity",
+          "description": "有効成分を損なわない超低酸度"
+        },
+        "heritage": {
+          "label": "Years Heritage",
+          "description": "ギリシャの農園から受け継がれる熟練の技"
+        },
+        "families": {
+          "label": "Happy Families",
+          "description": "健康志向の多くのご家庭に選ばれています"
+        }
+      }
+    },
+    "heritageBento": {
+      "headerTitle": "The Greek Heritage & Craftsmanship",
+      "headerDescription": "なぜ発祥の地のオリーブオイルと食品は特別なのか。本物の純度と国際基準をご体感ください。",
+      "cards": {
+        "origin": {
+          "name": "最高の環境で育まれた原産地 — スパルタ＆クレタ島",
+          "description": "地中海の太陽とイオニア海の海風、ミネラル豊かな土壌で育った樹齢数百年のコロネイキ種オリーブ。豊かな香りと最高峰の薬効成分を誇ります。",
+          "cta": "スパルタ＆クレタ島の商品を見る"
+        },
+        "coldPressed": {
+          "name": "コールドプレス（一番搾り）抽出",
+          "description": "収穫後24時間以内に27°C以下で機械抽出。無添加・無化学工程で、ポリフェノールやビタミンEを損なうことなく閉じ込めました。",
+          "cta": "低温抽出プロセスについて知る"
+        },
+        "honey": {
+          "name": "100%非加熱 天然ギリシャ生ハチミツ",
+          "description": "野生のタイムや松林から採蜜。加熱処理や水あめの添加を一切行わず、天然の酵素とプロポリスの抗菌力をそのまま維持しています。",
+          "cta": "天然生ハチミツを見る"
+        },
+        "organic": {
+          "name": "EU Bio Organic認証・全商品トレーサビリティ対応",
+          "description": "欧州の厳格な検査基準をクリア。農薬・合成着色料・保存料完全不使用で、安全かつ確かな品質をお届けします。",
+          "cta": "品質基準と認証を確認する"
+        }
+      }
+    },
+    "howItWorks": {
+      "tag": "SIMPLE 3-STEP JOURNEY",
+      "title": "健やかな毎日のためのシンプルな3ステップ",
+      "description": "古代ギリシャの伝統的な農園から、本物のオリーブオイルと生ハチミツをご家庭の食卓へお届けします。",
+      "steps": {
+        "step1": {
+          "tag": "ORIGIN HARVEST",
+          "title": "ギリシャ産の手摘みオリーブ",
+          "description": "スパルタとクレタ島に育つ樹齢100年以上の古代コロネイキ種から、栄養価が最も高い時期に丁寧に手摘みで収穫。"
+        },
+        "step2": {
+          "tag": "COLD EXTRACTION",
+          "title": "自然の栄養を逃さない低温抽出",
+          "description": "収穫後24時間以内に27°C以下のコールドプレス（一番搾り）を行い、ポリフェノールと良質な脂肪酸を完璧に保持。"
+        },
+        "step3": {
+          "tag": "DAILY VITALITY",
+          "title": "毎日の食卓で健康習慣",
+          "description": "遮光ガラス瓶に詰めてお届け。毎日大さじ1〜2杯そのまま飲んだり、お気に入りの料理にかけて手軽に健康習慣を始められます。"
+        }
+      }
+    },
+    "postExplore": {
+      "tag": "お役立ちコラム",
+      "title": "地中海健康法＆レシピ",
+      "description": "オリーブオイルの効能や地中海式健康法、持続可能な健康生活のための役立つレシピをお届けします。",
+      "viewAll": "すべての記事を見る"
+    },
+    "partner": {
+      "viewMap": "地図・店舗案内を見る"
+    },
+    "activity": {
+      "tag": "COMMUNITY & EVENTS",
+      "sensoryWorkshop": "感覚体験ワークショップ",
+      "exhibition": "オリーブオイル試飲会＆展示会",
+      "expandPhotos": "イベント写真を見る (全{count}枚)",
+      "collapsePhotos": "写真を折りたたむ"
+    },
+    "faq": {
+      "guideText": "このトピックに関する詳しい使い方や手順、関連情報をご覧いただけます。",
+      "readAllLink": "完全ガイド・詳細を見る"
+    },
+    "cta": {
+      "tag": "ELEVATE YOUR HEALTH TODAY",
+      "titleLine1": "本物のギリシャ産オリーブオイルと",
+      "titleLine2": "天然生ハチミツを体験してみませんか？",
+      "description": "最高峰のオーガニック製品で、心臓と体の健康ケアを今日から始めましょう。ご自宅まで安全にお届けします。",
+      "shopNow": "今すぐ商品を見る",
+      "contactLine": "LINEでお問い合わせ",
+      "guarantees": {
+        "authentic": "100%本物保証",
+        "shipping": "スピード発送（1〜3営業日）",
+        "payment": "各種決済・クレジットカード対応"
+      }
+    }
+  }
+}

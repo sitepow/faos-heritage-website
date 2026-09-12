@@ -1,5 +1,5 @@
 import { useDisclosure } from '@heroui/react'
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useMemo, useEffect, useCallback } from 'react'
 
 import type { GetCartsResult } from '../action'
 
@@ -42,65 +42,107 @@ const useCartItem = (cart: CartItemData) => {
     [cart?.product?.variants, variantId],
   )
 
-  const state = {
-    currentPrice: priceInfo.price,
-    currentStock:
-      currentVariant?.stockQuantity ?? cart?.product?.stockQuantity ?? 0,
-  }
+  const state = useMemo(
+    () => ({
+      currentPrice: priceInfo.price,
+      currentStock:
+        currentVariant?.stockQuantity ?? cart?.product?.stockQuantity ?? 0,
+    }),
+    [
+      priceInfo.price,
+      currentVariant?.stockQuantity,
+      cart?.product?.stockQuantity,
+    ],
+  )
 
   useEffect(() => {
     setVariantId(cart?.variantId || null)
     setQuantity(cart?.quantity ?? 1)
   }, [cart?.variantId, cart?.quantity])
 
-  const handleUpdate = (newQty: number, newVariantId: string | null) => {
-    if (!cart?.id || !newVariantId) {
-      return
-    }
+  const handleUpdate = useCallback(
+    (newQty: number, newVariantId: string | null) => {
+      if (!cart?.id || !newVariantId) {
+        return
+      }
 
-    if (newQty === cart.quantity && newVariantId === cart.variantId) {
-      return
-    }
+      if (newQty === cart.quantity && newVariantId === cart.variantId) {
+        return
+      }
 
-    if (newQty === 0) {
-      onOpenDelete()
-    } else {
-      debouncedUpdate({
-        cartId: cart.id,
-        quantity: newQty,
-        variantId: newVariantId,
-      })
-    }
-  }
+      if (newQty === 0) {
+        onOpenDelete()
+      } else {
+        debouncedUpdate({
+          cartId: cart.id,
+          quantity: newQty,
+          variantId: newVariantId,
+        })
+      }
+    },
+    [cart?.id, cart?.quantity, cart?.variantId, debouncedUpdate, onOpenDelete],
+  )
 
-  const actions = {
-    handleQuantityChange: (val: number) => {
+  const handleQuantityChange = useCallback(
+    (val: number) => {
       const stock = state.currentStock ?? 0
       const targetQty = val > stock ? stock : val
 
       setQuantity(targetQty)
       handleUpdate(targetQty, variantId)
     },
-    handleVariantChange: (newVariantId: string) => {
+    [state.currentStock, handleUpdate, variantId],
+  )
+
+  const handleVariantChange = useCallback(
+    (newVariantId: string) => {
       setVariantId(newVariantId)
       handleUpdate(quantity, newVariantId)
     },
-    handleDelete: () => cart?.id && removeCart(cart.id),
-  }
+    [handleUpdate, quantity],
+  )
 
-  return {
-    quantity,
-    variantId,
-    ...state,
-    priceInfo,
-    isDeleteQtyOpen,
-    onOpenChange,
-    loading: {
+  const handleDelete = useCallback(() => {
+    if (cart?.id) {
+      removeCart(cart.id)
+    }
+  }, [cart?.id, removeCart])
+
+  const actions = useMemo(
+    () => ({
+      handleQuantityChange,
+      handleVariantChange,
+      handleDelete,
+    }),
+    [handleQuantityChange, handleVariantChange, handleDelete],
+  )
+
+  return useMemo(
+    () => ({
+      quantity,
+      variantId,
+      ...state,
+      priceInfo,
+      isDeleteQtyOpen,
+      onOpenChange,
+      loading: {
+        isUpdating,
+        isRemoving,
+      },
+      actions,
+    }),
+    [
+      quantity,
+      variantId,
+      state,
+      priceInfo,
+      isDeleteQtyOpen,
+      onOpenChange,
       isUpdating,
       isRemoving,
-    },
-    actions,
-  }
+      actions,
+    ],
+  )
 }
 
 export { useCartItem }

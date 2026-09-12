@@ -1,6 +1,6 @@
 import '@/styles/globals.css'
 
-import { IBM_Plex_Sans_Thai } from 'next/font/google'
+import localFont from 'next/font/local'
 
 // import type { Viewport } from 'next'
 import type { PropsWithChildren } from 'react'
@@ -16,19 +16,36 @@ import { cn } from '@/utils'
 //   ],
 // }
 
-const anuphan = IBM_Plex_Sans_Thai({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-anuphan',
+const pgHomeplace = localFont({
+  src: [
+    {
+      path: './fonts/PG Homeplace Thin.ttf',
+      weight: '100',
+      style: 'normal',
+    },
+    {
+      path: './fonts/PG Homeplace.ttf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: './fonts/PG Homeplace Bold.ttf',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-pg-homeplace',
+  display: 'swap',
+  declarations: [{ prop: 'size-adjust', value: '140%' }],
 })
 
 const RootLayout = ({ children }: PropsWithChildren) => {
   return (
-    <html suppressHydrationWarning>
+    <html suppressHydrationWarning className={pgHomeplace.variable}>
       <body
         className={cn(
           'text-foreground bg-background relative flex h-dvh min-h-screen flex-col antialiased',
-          anuphan.className,
+          pgHomeplace.className,
         )}
       >
         <Providers>{children}</Providers>

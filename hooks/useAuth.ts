@@ -1,12 +1,13 @@
 import { Role } from '@prisma/client'
 import { useSession } from 'next-auth/react'
+import { useMemo } from 'react'
 
 const useAuth = () => {
   const { data: session, status } = useSession()
 
   const user = session?.user
   const userId = user?.id
-  const roles: Role[] = user?.roles || []
+  const roles: Role[] = useMemo(() => user?.roles || [], [user?.roles])
 
   const isAuthenticated = status === 'authenticated'
   const isLoading = status === 'loading'
@@ -19,20 +20,36 @@ const useAuth = () => {
   const isStockManager = isStockViewer || isStockEditor
   const canManageStock = isAdmin || isStockManager
 
-  return {
-    userId,
-    user,
-    roles,
-    isAuthenticated,
-    isLoading,
-    isAdmin,
-    isStockManager,
-    isStockViewer,
-    isStockEditor,
-    isPOS,
-    canManageStock,
-    session,
-  }
+  return useMemo(
+    () => ({
+      userId,
+      user,
+      roles,
+      isAuthenticated,
+      isLoading,
+      isAdmin,
+      isStockManager,
+      isStockViewer,
+      isStockEditor,
+      isPOS,
+      canManageStock,
+      session,
+    }),
+    [
+      userId,
+      user,
+      roles,
+      isAuthenticated,
+      isLoading,
+      isAdmin,
+      isStockManager,
+      isStockViewer,
+      isStockEditor,
+      isPOS,
+      canManageStock,
+      session,
+    ],
+  )
 }
 
 export { useAuth }

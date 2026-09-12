@@ -1,27 +1,34 @@
 'use client'
 
-import {
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
-  Button,
-} from '@heroui/react'
-import { ChevronDownIcon } from 'lucide-react'
+import { Check, ChevronDown } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 
 import type { ComponentProps } from 'react'
 
 import { useAppStore } from '@/app/store'
 import { CountryFlagAvatar } from '@/components/ui/CountryFlagAvatar'
+import { Button } from '@/components/ui/button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 import { CURRENCY_LOCALE_MAP } from '@/constants'
 import { usePathname, useRouter } from '@/i18n/navigation'
-import { cn, getSingleKey } from '@/utils'
+import { cn } from '@/utils'
 
 type CountryCode = (typeof CURRENCY_LOCALE_MAP)[number]['country']
 
-const NavbarLocaleSwitcher = ({ className }: ComponentProps<'span'>) => {
+interface NavbarLocaleSwitcherProps extends ComponentProps<'div'> {
+  showCurrency?: boolean
+}
+
+const NavbarLocaleSwitcher = ({
+  className,
+  showCurrency = true,
+}: NavbarLocaleSwitcherProps) => {
   const tCountry = useTranslations('global.country')
 
   const routeLocale = useLocale()
@@ -29,6 +36,7 @@ const NavbarLocaleSwitcher = ({ className }: ComponentProps<'span'>) => {
   const pathname = usePathname()
 
   const { appLocale, setAppLocale } = useAppStore()
+  const prevRouteLocaleRef = useRef(routeLocale)
 
   const selectedByRoute = useMemo(
     () =>
@@ -39,13 +47,28 @@ const NavbarLocaleSwitcher = ({ className }: ComponentProps<'span'>) => {
   )
 
   useEffect(() => {
-    if (selectedByRoute) {
+    // Only update appLocale if the route locale actually changed (e.g. navigated to /us, /jp, /th)
+    if (prevRouteLocaleRef.current !== routeLocale) {
+      prevRouteLocaleRef.current = routeLocale
+      if (selectedByRoute) {
+        setAppLocale({
+          ...selectedByRoute,
+          name: tCountry(selectedByRoute.country),
+        })
+      }
+    } else if (!appLocale?.currency && selectedByRoute) {
       setAppLocale({
         ...selectedByRoute,
         name: tCountry(selectedByRoute.country),
       })
     }
-  }, [selectedByRoute, setAppLocale, tCountry])
+  }, [
+    routeLocale,
+    selectedByRoute,
+    setAppLocale,
+    tCountry,
+    appLocale?.currency,
+  ])
 
   const handleRouteLocaleChange = (nextCountryCode: CountryCode) => {
     const selected = CURRENCY_LOCALE_MAP.find(
@@ -64,9 +87,9 @@ const NavbarLocaleSwitcher = ({ className }: ComponentProps<'span'>) => {
     })
   }
 
-  const handleCurrencyChange = (localeKey: string) => {
+  const handleCurrencyChange = (currencyCode: string) => {
     const selected = CURRENCY_LOCALE_MAP.find(
-      (item) => item.locale === localeKey,
+      (item) => item.currency === currencyCode,
     )
 
     if (!selected) {
@@ -74,87 +97,108 @@ const NavbarLocaleSwitcher = ({ className }: ComponentProps<'span'>) => {
     }
 
     setAppLocale({
-      ...selected,
+      country: selected.country,
+      currency: selected.currency,
+      locale: selected.locale,
       name: tCountry(selected.country),
     })
   }
 
+  const currentCurrency =
+    appLocale?.currency || selectedByRoute?.currency || 'THB'
+
   return (
-    <div className='flex items-center gap-2'>
-      <Dropdown placement='bottom-end'>
-        <DropdownTrigger>
+    <div className={cn('flex items-center gap-1', className)}>
+      {/* Country / Language Dropdown */}
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
           <Button
-            className={cn('text-foreground p-0', className)}
-            startContent={<CountryFlagAvatar countryCode={appLocale.country} />}
-            variant='light'
+            className='h-8 gap-1.5 px-2 text-xs font-medium text-neutral-700 hover:bg-neutral-200/60 hover:text-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800/60 dark:hover:text-neutral-100'
+            size='sm'
+            variant='ghost'
           >
-            <div className='flex items-center gap-2'>
-              <span>
-                {selectedByRoute
-                  ? tCountry(selectedByRoute.country)
-                  : tCountry('country')}
-              </span>
-              <ChevronDownIcon />
-            </div>
+            <CountryFlagAvatar
+              countryCode={
+                appLocale?.country || selectedByRoute?.country || 'TH'
+              }
+            />
+            <span className='max-w-[70px] truncate sm:max-w-none'>
+              {selectedByRoute
+                ? tCountry(selectedByRoute.country)
+                : tCountry('country')}
+            </span>
+            <ChevronDown className='h-3 w-3 opacity-60' />
           </Button>
-        </DropdownTrigger>
+        </DropdownMenuTrigger>
 
-        <DropdownMenu
-          className='h-auto overflow-y-scroll'
-          selectedKeys={
-            selectedByRoute ? new Set([selectedByRoute.country]) : new Set()
-          }
-          selectionMode='single'
-          onSelectionChange={(keys) => {
-            const value = getSingleKey<CountryCode>(keys)
+        <DropdownMenuContent align='end' className='w-44 py-1 shadow-xl'>
+          {CURRENCY_LOCALE_MAP.map((item) => {
+            const isSelected = selectedByRoute?.country === item.country
+            return (
+              <DropdownMenuItem
+                key={item.country}
+                className='flex items-center justify-between py-2 text-xs'
+                onClick={() => handleRouteLocaleChange(item.country)}
+              >
+                <div className='flex items-center gap-2'>
+                  <CountryFlagAvatar countryCode={item.country} />
+                  <span className='font-medium'>{tCountry(item.country)}</span>
+                </div>
+                {isSelected && (
+                  <Check className='h-3.5 w-3.5 text-[#ba8c25] dark:text-[#f59e0b]' />
+                )}
+              </DropdownMenuItem>
+            )
+          })}
+        </DropdownMenuContent>
+      </DropdownMenu>
 
-            if (value) {
-              handleRouteLocaleChange(value)
-            }
-          }}
-        >
-          {CURRENCY_LOCALE_MAP.map((item) => (
-            <DropdownItem key={item.country}>
-              <div className='flex items-center gap-2'>
-                <CountryFlagAvatar countryCode={item.country} />
-                {tCountry(item.country)}
-              </div>
-            </DropdownItem>
-          ))}
-        </DropdownMenu>
-      </Dropdown>
+      {/* Currency Dropdown */}
+      {showCurrency && (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              className='h-8 gap-1 px-2 text-xs font-medium text-neutral-700 hover:bg-neutral-200/60 hover:text-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800/60 dark:hover:text-neutral-100'
+              size='sm'
+              variant='ghost'
+            >
+              <span className='font-semibold tracking-wider uppercase'>
+                {currentCurrency}
+              </span>
+              <ChevronDown className='h-3 w-3 opacity-60' />
+            </Button>
+          </DropdownMenuTrigger>
 
-      <Dropdown placement='bottom-end'>
-        <DropdownTrigger>
-          <Button
-            className={cn('text-foreground p-0', className)}
-            variant='light'
+          <DropdownMenuContent
+            align='end'
+            className='max-h-60 w-48 overflow-y-auto py-1 shadow-xl'
           >
-            <div className='flex items-center gap-1'>
-              <span className='uppercase'>
-                {appLocale.currency || tCountry('currency')}
-              </span>
-              <ChevronDownIcon />
-            </div>
-          </Button>
-        </DropdownTrigger>
-
-        <DropdownMenu
-          className='h-[250px] overflow-y-scroll'
-          selectedKeys={new Set([appLocale.locale])}
-          selectionMode='single'
-          onSelectionChange={(keys) => {
-            const value = getSingleKey<string>(keys)
-            if (value) handleCurrencyChange(value)
-          }}
-        >
-          {CURRENCY_LOCALE_MAP.map((item) => (
-            <DropdownItem key={item.locale}>
-              {item.currency} - {tCountry(item.country)}
-            </DropdownItem>
-          ))}
+            {CURRENCY_LOCALE_MAP.map((item) => {
+              const isSelected = currentCurrency === item.currency
+              return (
+                <DropdownMenuItem
+                  key={item.currency}
+                  className='flex items-center justify-between py-2 text-xs'
+                  onClick={() => handleCurrencyChange(item.currency)}
+                >
+                  <div className='flex items-center gap-1.5'>
+                    <span className='font-bold uppercase'>{item.currency}</span>
+                    <span className='text-neutral-400 dark:text-neutral-500'>
+                      -
+                    </span>
+                    <span className='text-neutral-600 dark:text-neutral-400'>
+                      {tCountry(item.country)}
+                    </span>
+                  </div>
+                  {isSelected && (
+                    <Check className='h-3.5 w-3.5 text-[#ba8c25] dark:text-[#f59e0b]' />
+                  )}
+                </DropdownMenuItem>
+              )
+            })}
+          </DropdownMenuContent>
         </DropdownMenu>
-      </Dropdown>
+      )}
     </div>
   )
 }

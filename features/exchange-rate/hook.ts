@@ -17,7 +17,7 @@ interface Props {
 }
 
 const useExchangeRate = (overrides?: Props) => {
-  const { appLocale } = useAppStore()
+  const appLocale = useAppStore((state) => state.appLocale)
 
   const currentCurrency =
     overrides?.currency || appLocale?.currency || CURRENCY.DEFAULT_CODE
@@ -27,7 +27,9 @@ const useExchangeRate = (overrides?: Props) => {
   const exchangeRate = useQuery({
     queryKey: exchangeRateQueryKeys.lists.byCurrency(currentCurrency),
     queryFn: () => getExchangeRates(),
-    refetchOnWindowFocus: true,
+    refetchOnWindowFocus: false,
+    staleTime: 1000 * 60 * 30,
+    gcTime: 1000 * 60 * 60,
     retry: 1,
   })
 

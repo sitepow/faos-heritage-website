@@ -11,7 +11,9 @@ const config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-anuphan)'],
+        sans: ['var(--font-pg-homeplace)', 'sans-serif'],
+        'pg-homeplace': ['var(--font-pg-homeplace)', 'sans-serif'],
+        anuphan: ['var(--font-pg-homeplace)', 'sans-serif'],
       },
       typography: () => ({
         DEFAULT: {

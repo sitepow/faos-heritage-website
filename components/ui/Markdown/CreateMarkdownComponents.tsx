@@ -70,7 +70,7 @@ const CreateMarkdownComponents = (fallbackAlt: string): Components => ({
       return (
         <div
           className={cn(
-            'font-anuphan my-6 rounded-r-lg border-l-[4px] p-4 leading-relaxed shadow-sm',
+            'font-pg-homeplace my-6 rounded-r-lg border-l-[4px] p-4 leading-relaxed shadow-sm',
             colorStyle,
           )}
         >
