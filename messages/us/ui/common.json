@@ -108,7 +108,9 @@
       "PAIR": "Pair",
       "ROLL": "Roll",
       "SHEET": "Sheet",
-      "UNIT": "Unit"
+      "UNIT": "Unit",
+      "CAR": "Car",
+      "HOUSE": "House"
     },
     "orderStatus": {
       "PENDING": "Pending Payment",
@@ -118,6 +120,18 @@
       "DELIVERED": "Delivered",
       "CANCELLED": "Cancelled",
       "REFUNDED": "Refunded"
+    },
+    "affiliateStatus": {
+      "PENDING": "Pending Verification",
+      "APPROVED": "Approved",
+      "REJECTED": "Application Rejected",
+      "SUSPENDED": "Suspended"
+    },
+    "payoutStatus": {
+      "PENDING": "Processing",
+      "COMPLETED": "Completed / Pending Withdrawal",
+      "REJECTED": "Payment Rejected",
+      "PAID": "Payment Successful"
     }
   },
   "alert": {

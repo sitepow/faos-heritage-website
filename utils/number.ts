@@ -40,11 +40,20 @@ const resolveCurrencyValue = (
   return value * rates[currency]
 }
 
-const getCurrencyFormatter = (locale: string, currency: string) =>
-  new Intl.NumberFormat(locale, {
+const APP_LOCALE_TO_INTL: Record<string, string> = {
+  th: 'th-TH',
+  us: 'en-US',
+  jp: 'ja-JP',
+  vn: 'vi-VN',
+}
+
+const getCurrencyFormatter = (locale: string, currency: string) => {
+  const targetLocale = APP_LOCALE_TO_INTL[locale.toLowerCase()] || locale
+  return new Intl.NumberFormat(targetLocale, {
     style: 'currency',
     currency: currency === 'TH' ? 'THB' : currency,
   })
+}
 
 const formatCurrency = (
   value: number,

@@ -108,7 +108,9 @@
       "PAIR": "ペア",
       "ROLL": "ロール",
       "SHEET": "枚",
-      "UNIT": "単位"
+      "UNIT": "単位",
+      "CAR": "台",
+      "HOUSE": "棟"
     },
     "orderStatus": {
       "PENDING": "支払い待ち",
@@ -118,6 +120,18 @@
       "DELIVERED": "配達済み",
       "CANCELLED": "キャンセル済み",
       "REFUNDED": "返金済み"
+    },
+    "affiliateStatus": {
+      "PENDING": "審査待ち",
+      "APPROVED": "承認済み",
+      "REJECTED": "申請却下",
+      "SUSPENDED": "利用停止"
+    },
+    "payoutStatus": {
+      "PENDING": "処理中",
+      "COMPLETED": "完了 / 出金待ち",
+      "REJECTED": "支払い却下",
+      "PAID": "支払い完了"
     }
   },
   "alert": {

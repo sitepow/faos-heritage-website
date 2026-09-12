@@ -39,6 +39,17 @@ const DATE_CONFIGS: Record<FormatType, Intl.DateTimeFormatOptions> = {
   },
 }
 
+const APP_LOCALE_TO_INTL: Record<string, string> = {
+  th: 'th-TH',
+  us: 'en-US',
+  jp: 'ja-JP',
+  vn: 'vi-VN',
+}
+
+const resolveIntlLocale = (locale: string = 'th'): string => {
+  return APP_LOCALE_TO_INTL[locale.toLowerCase()] || locale
+}
+
 const formatDate = (
   value: FormatDateValue,
   locale: string = 'th',
@@ -55,14 +66,14 @@ const formatDate = (
     return null
   }
 
-  const targetLocale = locale === 'th' ? 'th-TH' : locale
+  const targetLocale = resolveIntlLocale(locale)
   const options = customOptions || DATE_CONFIGS[formatType]
 
   return new Intl.DateTimeFormat(targetLocale, options).format(date)
 }
 
 const formatCompactNumber = (number: number, locale: string = 'th'): string => {
-  const targetLocale = locale === 'th' ? 'th-TH' : locale
+  const targetLocale = resolveIntlLocale(locale)
 
   return new Intl.NumberFormat(targetLocale, {
     notation: 'compact',
