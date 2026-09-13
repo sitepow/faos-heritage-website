@@ -72,7 +72,7 @@ const OrderTable = ({
   const { data: session } = useSession()
   const router = useRouter()
 
-  const userRoles = session?.user?.roles || []
+  const userRoles = (session?.user as { roles?: Role[] })?.roles || []
   const isPOSOnly =
     userRoles.includes(Role.POS) && !userRoles.includes(Role.ADMIN)
 
