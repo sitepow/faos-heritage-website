@@ -2,7 +2,15 @@
 import { Card, CardBody } from '@heroui/react'
 import { signIn } from 'next-auth/react'
 
-const SocialButtons = ({ dividerText }: { dividerText: string }) => {
+interface SocialButtonsProps {
+  dividerText: string
+  callbackUrl?: string
+}
+
+const SocialButtons = ({
+  dividerText,
+  callbackUrl = '/',
+}: SocialButtonsProps) => {
   const providers = [
     { id: 'google', name: 'Google', icon: '/images/social/google.png' },
     // { id: 'facebook', name: 'Facebook', icon: '/images/social/facebook.png' },
@@ -25,7 +33,7 @@ const SocialButtons = ({ dividerText }: { dividerText: string }) => {
             isPressable
             className='border-default-100 border'
             shadow='none'
-            onClick={() => signIn(p.id)}
+            onClick={() => signIn(p.id, { callbackUrl })}
           >
             <CardBody className='flex-row items-center justify-center gap-2 p-2'>
               <img

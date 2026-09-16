@@ -86,7 +86,7 @@ const PostLocalizationTable = ({
           {localeList.map((locale) => (
             <TableRow key={locale.id}>
               <TableCell>
-                <span className='text-default-500 font-mono text-xs font-bold'>
+                <span className='text-default-500 text-xs font-bold'>
                   #{locale.id.slice(-8).toUpperCase()}
                 </span>
               </TableCell>

@@ -61,11 +61,15 @@ const ProductClient = ({ initialData, slug }: Props) => {
   const breadcrumbItems = [
     { label: tBreadcrumb('home'), href: '/' },
     { label: tBreadcrumb('products'), href: '/products' },
-    {
-      label: categoryName!,
-      href: categorySlug ? `/categories/${categorySlug}` : '#',
-    },
-    { label: product?.name!, href: '#' },
+    ...(categoryName
+      ? [
+          {
+            label: categoryName,
+            href: categorySlug ? `/categories/${categorySlug}` : '#',
+          },
+        ]
+      : []),
+    { label: product?.name || '', href: '#' },
   ]
 
   const productId = product?.id || ''

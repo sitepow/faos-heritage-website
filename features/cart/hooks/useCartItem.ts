@@ -27,7 +27,7 @@ const useCartItem = (cart: CartItemData) => {
   const debouncedUpdate = useDebouncedChange<{
     cartId: string
     quantity: number
-    variantId: string
+    variantId?: string | null
   }>((payload) => {
     updateCart(payload)
   }, 500)
@@ -62,7 +62,7 @@ const useCartItem = (cart: CartItemData) => {
 
   const handleUpdate = useCallback(
     (newQty: number, newVariantId: string | null) => {
-      if (!cart?.id || !newVariantId) {
+      if (!cart?.id) {
         return
       }
 

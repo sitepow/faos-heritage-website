@@ -267,6 +267,7 @@ const processStockMovement = async (
       quantity: amount,
       type,
       reference: orderId,
+      orderId,
     },
   })
 }
@@ -404,337 +405,49 @@ const createOrder = async (input: CreateOrderInput) =>
   withAuth(async () => {
     const { userId } = await getServerUser()
 
-    return prisma.$transaction(async (tx) => {
-      const {
-        items,
-        addressId,
-        storefrontId,
-        deliveryType,
-        pickupDate,
-        currency,
-        exchangeRate,
-        exchangeLocale,
-        referrerId,
-      } = input
-
-      let address = null
-      let storefront = null
-
-      if (deliveryType === 'SHIPPING') {
-        if (!addressId) {
-          return fail(ERROR_CODES.BAD_REQUEST)
-        }
-
-        address = await tx.address.findUnique({ where: { id: addressId } })
-
-        if (!address || items.length === 0) {
-          return fail(ERROR_CODES.BAD_REQUEST)
-        }
-      } else {
-        if (!storefrontId) {
-          return fail(ERROR_CODES.BAD_REQUEST)
-        }
-
-        storefront = await tx.storefront.findUnique({
-          where: { id: storefrontId },
-        })
-
-        if (!storefront || items.length === 0) {
-          return fail(ERROR_CODES.BAD_REQUEST)
-        }
-      }
-
-      let validAffiliate = null
-      let finalReferrerCode = null
-
-      if (referrerId) {
-        const affiliate = await tx.affiliateProfile.findUnique({
-          where: { affiliateCode: referrerId },
-          select: {
-            id: true,
-            status: true,
-            baseRate: true,
-            highValueRate: true,
-            thresholdAmount: true,
-          },
-        })
-
-        if (affiliate && affiliate.status === AffiliateStatus.APPROVED) {
-          validAffiliate = affiliate
-          finalReferrerCode = referrerId
-        }
-      }
-
-      const products = await tx.product.findMany({
-        where: { id: { in: items.map((i) => i.productId) } },
-        include: { variants: true },
-      })
-
-      const productMap = new Map(products.map((p) => [p.id, p]))
-      const orderItemsPayload: Prisma.OrderItemCreateManyOrderInput[] = []
-      const shippingItems: { quantity: number; weight: number }[] = []
-      let totalBaseProductDiscount = 0
-      let subtotalSum = 0
-
-      for (const item of items) {
-        const product = productMap.get(item.productId)
-
-        if (!product) {
-          return fail(ERROR_CODES.DATA_NOT_FOUND)
-        }
-
-        const { price: effectiveBasePrice, discountAmount } =
-          getProductPriceInfo(product, item.variantId)
-        const variant = item.variantId
-          ? product.variants.find((v) => v.id === item.variantId)
-          : null
-        const priceLocal = Number(
-          (effectiveBasePrice * exchangeRate).toFixed(2),
-        )
-
-        totalBaseProductDiscount += discountAmount * item.quantity
-        const currentItemBaseSubtotal = effectiveBasePrice * item.quantity
-        subtotalSum += currentItemBaseSubtotal
-
-        orderItemsPayload.push({
-          productId: product.id,
-          variantId: item.variantId,
-          productName: product.name,
-          variantName: variant?.name,
-          quantity: item.quantity,
-          basePrice: effectiveBasePrice,
-          baseSubtotal: currentItemBaseSubtotal,
-          price: priceLocal,
-          subtotal: priceLocal * item.quantity,
-          currency,
-        })
-
-        shippingItems.push({
-          quantity: item.quantity,
-          weight: decimalToNumber(variant?.weight ?? product.weight ?? 0),
-        })
-      }
-
-      let baseShipping = 0
-      if (deliveryType === DeliveryType.SHIPPING && address) {
-        baseShipping = await calculateShippingCost({
-          items: shippingItems,
-          countryCode: address.countryCode,
-          totalPrice: subtotalSum,
-        })
-      }
-
-      const exchange = (val: number) => Number((val * exchangeRate).toFixed(2))
-      const baseTotal = subtotalSum + baseShipping
-
-      const order = await tx.order.create({
-        data: {
-          user: { connect: { id: userId } },
-          deliveryType,
-          currency,
-          exchangeRate,
-          exchangeLocale,
-          baseSubtotal: subtotalSum,
-          baseShipping,
-          baseDiscount: totalBaseProductDiscount,
-          baseTax: 0,
-          baseTotal,
-          subtotal: exchange(subtotalSum),
-          shippingCost: exchange(baseShipping),
-          discount: exchange(totalBaseProductDiscount),
-          tax: 0,
-          total: exchange(baseTotal),
-          referrerCode: finalReferrerCode,
-          items: { createMany: { data: orderItemsPayload } },
-
-          ...(deliveryType === 'SHIPPING' && address
-            ? {
-                address: { connect: { id: addressId } },
-                shippingName: address.name,
-                shippingPhone: address.phone,
-                shippingAddressText: formatFullAddress(address),
-              }
-            : {}),
-
-          ...(deliveryType === 'PICKUP' && storefront
-            ? {
-                storefront: { connect: { id: storefrontId } },
-                pickupDate: pickupDate ? new Date(pickupDate) : null,
-                pickupStoreLocation: storefront.name,
-              }
-            : {}),
-        },
-      })
-
-      if (validAffiliate) {
-        const isHighValue =
-          Number(baseTotal) >= Number(validAffiliate.thresholdAmount)
-        const appliedRate = isHighValue
-          ? validAffiliate.highValueRate
-          : validAffiliate.baseRate
-        const commissionAmount = (Number(baseTotal) * Number(appliedRate)) / 100
-
-        await tx.affiliateCommission.create({
-          data: {
-            affiliateId: validAffiliate.id,
-            orderId: order.id,
-            orderAmount: baseTotal,
-            appliedRate: appliedRate,
-            commissionAmount: commissionAmount,
-            status: PayoutStatus.PENDING,
-          },
-        })
-      }
-
-      await Promise.all([
-        ...items.map((item) =>
-          processStockMovement(tx, {
-            ...item,
-            type: StockMovementType.SALE,
-            orderId: order.id,
-            direction: 'decrement',
-          }),
-        ),
-        tx.cart.deleteMany({ where: { userId } }),
-      ])
-
-      return ok(order.id)
-    })
-  })
-
-const createAdminOrder = async (input: CreateOrderInput) =>
-  withRole(
-    [Role.ADMIN, Role.STOCK_EDITOR, Role.STOCK_VIEWER, Role.POS],
-    async () => {
-      const { userId } = await getServerUser()
-
-      return prisma.$transaction(async (tx) => {
+    try {
+      return await prisma.$transaction(async (tx) => {
         const {
           items,
+          addressId,
           storefrontId,
           deliveryType,
+          pickupDate,
           currency,
           exchangeRate,
           exchangeLocale,
           referrerId,
-          discount = 0,
-          tax = 0,
-          isPos,
         } = input
 
-        if (deliveryType !== DeliveryType.PICKUP || !storefrontId) {
-          return fail(ERROR_CODES.BAD_REQUEST)
-        }
+        let address = null
+        let storefront = null
 
-        const storefront = await tx.storefront.findUnique({
-          where: { id: storefrontId },
-        })
-
-        if (!storefront || items.length === 0) {
-          return fail(ERROR_CODES.BAD_REQUEST)
-        }
-
-        const storeInventories = await tx.storefrontInventory.findMany({
-          where: {
-            storefrontId,
-            OR: items.map((i) => ({
-              productId: i.productId,
-              variantId: i.variantId ?? null,
-            })),
-          },
-          include: { product: true, variant: true },
-        })
-
-        const inventoryMap = new Map(
-          storeInventories.map((inv) => [
-            `${inv.productId}-${inv.variantId || 'none'}`,
-            inv,
-          ]),
-        )
-
-        const orderItemsPayload: Prisma.OrderItemCreateManyOrderInput[] = []
-        let subtotalSum = 0
-
-        for (const item of items) {
-          const inventory = inventoryMap.get(
-            `${item.productId}-${item.variantId || 'none'}`,
-          )
-
-          if (!inventory || inventory.stockQuantity < item.quantity) {
-            throw new Error('INSUFFICIENT_STOREFRONT_STOCK')
+        if (deliveryType === 'SHIPPING') {
+          if (!addressId) {
+            return fail(ERROR_CODES.BAD_REQUEST)
           }
 
-          const effectiveBasePrice = Number(inventory.netPrice)
-          const priceLocal = Number(
-            (effectiveBasePrice * exchangeRate).toFixed(2),
-          )
-          const currentItemBaseSubtotal = effectiveBasePrice * item.quantity
-          subtotalSum += currentItemBaseSubtotal
+          address = await tx.address.findUnique({ where: { id: addressId } })
 
-          orderItemsPayload.push({
-            productId: item.productId,
-            variantId: item.variantId,
-            productName: inventory.product.name,
-            variantName: inventory.variant?.name,
-            quantity: item.quantity,
-            basePrice: effectiveBasePrice,
-            baseSubtotal: currentItemBaseSubtotal,
-            price: priceLocal,
-            subtotal: priceLocal * item.quantity,
-            currency,
+          if (!address || items.length === 0) {
+            return fail(ERROR_CODES.BAD_REQUEST)
+          }
+        } else {
+          if (!storefrontId) {
+            return fail(ERROR_CODES.BAD_REQUEST)
+          }
+
+          storefront = await tx.storefront.findUnique({
+            where: { id: storefrontId },
           })
 
-          await tx.storefrontInventory.update({
-            where: { id: inventory.id },
-            data: { stockQuantity: { decrement: item.quantity } },
-          })
-
-          await tx.stockHistory.create({
-            data: {
-              productId: item.productId,
-              variantId: item.variantId ?? null,
-              userId: userId,
-              quantity: -item.quantity,
-              type: StockMovementType.SALE,
-              fromStorefrontId: storefrontId,
-              note: `รายการสั่งซื้อหน้าร้าน (POS) - รอชำระเงิน - สาขา: ${storefront.name}`,
-            },
-          })
+          if (!storefront || items.length === 0) {
+            return fail(ERROR_CODES.BAD_REQUEST)
+          }
         }
 
-        const baseSubtotal = subtotalSum
-        const baseDiscount = discount
-        const baseTax = tax
-        const baseTotal = Math.max(0, baseSubtotal - baseDiscount + baseTax)
-
-        const exchange = (val: number) =>
-          Number((val * exchangeRate).toFixed(2))
-
-        const order = await tx.order.create({
-          data: {
-            user: { connect: { id: userId } },
-            isPos: isPos || false,
-            deliveryType: DeliveryType.PICKUP,
-            status: OrderStatus.PENDING,
-            paymentStatus: PaymentStatus.PENDING,
-            currency,
-            exchangeRate,
-            exchangeLocale,
-            baseSubtotal,
-            baseDiscount,
-            baseTax,
-            baseShipping: 0,
-            baseTotal,
-            subtotal: exchange(baseSubtotal),
-            discount: exchange(baseDiscount),
-            tax: exchange(baseTax),
-            shippingCost: 0,
-            total: exchange(baseTotal),
-            pickupStoreLocation: storefront.name,
-            storefront: { connect: { id: storefrontId } },
-            items: { createMany: { data: orderItemsPayload } },
-          },
-        })
+        let validAffiliate = null
+        let finalReferrerCode = null
 
         if (referrerId) {
           const affiliate = await tx.affiliateProfile.findUnique({
@@ -749,34 +462,348 @@ const createAdminOrder = async (input: CreateOrderInput) =>
           })
 
           if (affiliate && affiliate.status === AffiliateStatus.APPROVED) {
-            const isHighValue =
-              Number(baseTotal) >= Number(affiliate.thresholdAmount)
-            const appliedRate = isHighValue
-              ? affiliate.highValueRate
-              : affiliate.baseRate
-            const commissionAmount =
-              (Number(baseTotal) * Number(appliedRate)) / 100
-
-            await tx.affiliateCommission.create({
-              data: {
-                affiliateId: affiliate.id,
-                orderId: order.id,
-                orderAmount: baseTotal,
-                appliedRate: appliedRate,
-                commissionAmount: commissionAmount,
-                status: PayoutStatus.PENDING,
-              },
-            })
-
-            await tx.order.update({
-              where: { id: order.id },
-              data: { referrerCode: referrerId },
-            })
+            validAffiliate = affiliate
+            finalReferrerCode = referrerId
           }
         }
 
+        const products = await tx.product.findMany({
+          where: { id: { in: items.map((i) => i.productId) } },
+          include: { variants: true },
+        })
+
+        const productMap = new Map(products.map((p) => [p.id, p]))
+        const orderItemsPayload: Prisma.OrderItemCreateManyOrderInput[] = []
+        const shippingItems: { quantity: number; weight: number }[] = []
+        let totalBaseProductDiscount = 0
+        let subtotalSum = 0
+
+        for (const item of items) {
+          const product = productMap.get(item.productId)
+
+          if (!product) {
+            return fail(ERROR_CODES.DATA_NOT_FOUND)
+          }
+
+          const { price: effectiveBasePrice, discountAmount } =
+            getProductPriceInfo(product, item.variantId)
+          const variant = item.variantId
+            ? product.variants.find((v) => v.id === item.variantId)
+            : null
+          const priceLocal = Number(
+            (effectiveBasePrice * exchangeRate).toFixed(2),
+          )
+
+          totalBaseProductDiscount += discountAmount * item.quantity
+          const currentItemBaseSubtotal = effectiveBasePrice * item.quantity
+          subtotalSum += currentItemBaseSubtotal
+
+          orderItemsPayload.push({
+            productId: product.id,
+            variantId: item.variantId,
+            productName: product.name,
+            variantName: variant?.name,
+            quantity: item.quantity,
+            basePrice: effectiveBasePrice,
+            baseSubtotal: currentItemBaseSubtotal,
+            price: priceLocal,
+            subtotal: priceLocal * item.quantity,
+            currency,
+          })
+
+          shippingItems.push({
+            quantity: item.quantity,
+            weight: decimalToNumber(variant?.weight ?? product.weight ?? 0),
+          })
+        }
+
+        let baseShipping = 0
+        if (deliveryType === DeliveryType.SHIPPING && address) {
+          baseShipping = await calculateShippingCost({
+            items: shippingItems,
+            countryCode: address.countryCode,
+            totalPrice: subtotalSum,
+          })
+        }
+
+        const exchange = (val: number) =>
+          Number((val * exchangeRate).toFixed(2))
+        const baseTotal = subtotalSum + baseShipping
+
+        const order = await tx.order.create({
+          data: {
+            user: { connect: { id: userId } },
+            deliveryType,
+            currency,
+            exchangeRate,
+            exchangeLocale,
+            baseSubtotal: subtotalSum,
+            baseShipping,
+            baseDiscount: totalBaseProductDiscount,
+            baseTax: 0,
+            baseTotal,
+            subtotal: exchange(subtotalSum),
+            shippingCost: exchange(baseShipping),
+            discount: exchange(totalBaseProductDiscount),
+            tax: 0,
+            total: exchange(baseTotal),
+            referrerCode: finalReferrerCode,
+            items: { createMany: { data: orderItemsPayload } },
+
+            ...(deliveryType === 'SHIPPING' && address
+              ? {
+                  address: { connect: { id: addressId } },
+                  shippingName: address.name,
+                  shippingPhone: address.phone,
+                  shippingAddressText: formatFullAddress(address),
+                }
+              : {}),
+
+            ...(deliveryType === 'PICKUP' && storefront
+              ? {
+                  storefront: { connect: { id: storefrontId } },
+                  pickupDate: pickupDate ? new Date(pickupDate) : null,
+                  pickupStoreLocation: storefront.name,
+                }
+              : {}),
+          },
+        })
+
+        if (validAffiliate) {
+          const isHighValue =
+            Number(baseTotal) >= Number(validAffiliate.thresholdAmount)
+          const appliedRate = isHighValue
+            ? validAffiliate.highValueRate
+            : validAffiliate.baseRate
+          const commissionAmount =
+            (Number(baseTotal) * Number(appliedRate)) / 100
+
+          await tx.affiliateCommission.create({
+            data: {
+              affiliateId: validAffiliate.id,
+              orderId: order.id,
+              orderAmount: baseTotal,
+              appliedRate: appliedRate,
+              commissionAmount: commissionAmount,
+              status: PayoutStatus.PENDING,
+            },
+          })
+        }
+
+        await Promise.all([
+          ...items.map((item) =>
+            processStockMovement(tx, {
+              ...item,
+              type: StockMovementType.SALE,
+              orderId: order.id,
+              direction: 'decrement',
+            }),
+          ),
+          tx.cart.deleteMany({ where: { userId } }),
+        ])
+
         return ok(order.id)
       })
+    } catch (err: unknown) {
+      if (err instanceof Error && err.message === 'INSUFFICIENT_STOCK') {
+        return fail(ERROR_CODES.STOCK_INSUFFICIENT)
+      }
+      return fail(ERROR_CODES.SYSTEM_ERROR)
+    }
+  })
+
+const createAdminOrder = async (input: CreateOrderInput) =>
+  withRole(
+    [Role.ADMIN, Role.STOCK_EDITOR, Role.STOCK_VIEWER, Role.POS],
+    async () => {
+      const { userId } = await getServerUser()
+
+      try {
+        return await prisma.$transaction(async (tx) => {
+          const {
+            items,
+            storefrontId,
+            deliveryType,
+            currency,
+            exchangeRate,
+            exchangeLocale,
+            referrerId,
+            discount = 0,
+            tax = 0,
+            isPos,
+          } = input
+
+          if (deliveryType !== DeliveryType.PICKUP || !storefrontId) {
+            return fail(ERROR_CODES.BAD_REQUEST)
+          }
+
+          const storefront = await tx.storefront.findUnique({
+            where: { id: storefrontId },
+          })
+
+          if (!storefront || items.length === 0) {
+            return fail(ERROR_CODES.BAD_REQUEST)
+          }
+
+          const storeInventories = await tx.storefrontInventory.findMany({
+            where: {
+              storefrontId,
+              OR: items.map((i) => ({
+                productId: i.productId,
+                variantId: i.variantId ?? null,
+              })),
+            },
+            include: { product: true, variant: true },
+          })
+
+          const inventoryMap = new Map(
+            storeInventories.map((inv) => [
+              `${inv.productId}-${inv.variantId || 'none'}`,
+              inv,
+            ]),
+          )
+
+          const orderItemsPayload: Prisma.OrderItemCreateManyOrderInput[] = []
+          let subtotalSum = 0
+
+          for (const item of items) {
+            const inventory = inventoryMap.get(
+              `${item.productId}-${item.variantId || 'none'}`,
+            )
+
+            if (!inventory || inventory.stockQuantity < item.quantity) {
+              throw new Error('INSUFFICIENT_STOREFRONT_STOCK')
+            }
+
+            const effectiveBasePrice = Number(inventory.netPrice)
+            const priceLocal = Number(
+              (effectiveBasePrice * exchangeRate).toFixed(2),
+            )
+            const currentItemBaseSubtotal = effectiveBasePrice * item.quantity
+            subtotalSum += currentItemBaseSubtotal
+
+            orderItemsPayload.push({
+              productId: item.productId,
+              variantId: item.variantId,
+              productName: inventory.product.name,
+              variantName: inventory.variant?.name,
+              quantity: item.quantity,
+              basePrice: effectiveBasePrice,
+              baseSubtotal: currentItemBaseSubtotal,
+              price: priceLocal,
+              subtotal: priceLocal * item.quantity,
+              currency,
+            })
+
+            await tx.storefrontInventory.update({
+              where: { id: inventory.id },
+              data: { stockQuantity: { decrement: item.quantity } },
+            })
+          }
+
+          const baseSubtotal = subtotalSum
+          const baseDiscount = discount
+          const baseTax = tax
+          const baseTotal = Math.max(0, baseSubtotal - baseDiscount + baseTax)
+
+          const exchange = (val: number) =>
+            Number((val * exchangeRate).toFixed(2))
+
+          const order = await tx.order.create({
+            data: {
+              user: { connect: { id: userId } },
+              isPos: isPos || false,
+              deliveryType: DeliveryType.PICKUP,
+              status: OrderStatus.PENDING,
+              paymentStatus: PaymentStatus.PENDING,
+              currency,
+              exchangeRate,
+              exchangeLocale,
+              baseSubtotal,
+              baseDiscount,
+              baseTax,
+              baseShipping: 0,
+              baseTotal,
+              subtotal: exchange(baseSubtotal),
+              discount: exchange(baseDiscount),
+              tax: exchange(baseTax),
+              shippingCost: 0,
+              total: exchange(baseTotal),
+              pickupStoreLocation: storefront.name,
+              storefront: { connect: { id: storefrontId } },
+              items: { createMany: { data: orderItemsPayload } },
+            },
+          })
+
+          await Promise.all(
+            items.map((item) =>
+              tx.stockHistory.create({
+                data: {
+                  productId: item.productId,
+                  variantId: item.variantId ?? null,
+                  userId,
+                  orderId: order.id,
+                  reference: order.id,
+                  quantity: -item.quantity,
+                  type: StockMovementType.SALE,
+                  fromStorefrontId: storefrontId,
+                  note: `รายการสั่งซื้อหน้าร้าน (POS) - รอชำระเงิน - สาขา: ${storefront.name}`,
+                },
+              }),
+            ),
+          )
+
+          if (referrerId) {
+            const affiliate = await tx.affiliateProfile.findUnique({
+              where: { affiliateCode: referrerId },
+              select: {
+                id: true,
+                status: true,
+                baseRate: true,
+                highValueRate: true,
+                thresholdAmount: true,
+              },
+            })
+
+            if (affiliate && affiliate.status === AffiliateStatus.APPROVED) {
+              const isHighValue =
+                Number(baseTotal) >= Number(affiliate.thresholdAmount)
+              const appliedRate = isHighValue
+                ? affiliate.highValueRate
+                : affiliate.baseRate
+              const commissionAmount =
+                (Number(baseTotal) * Number(appliedRate)) / 100
+
+              await tx.affiliateCommission.create({
+                data: {
+                  affiliateId: affiliate.id,
+                  orderId: order.id,
+                  orderAmount: baseTotal,
+                  appliedRate: appliedRate,
+                  commissionAmount: commissionAmount,
+                  status: PayoutStatus.PENDING,
+                },
+              })
+
+              await tx.order.update({
+                where: { id: order.id },
+                data: { referrerCode: referrerId },
+              })
+            }
+          }
+
+          return ok(order.id)
+        })
+      } catch (err: unknown) {
+        if (
+          err instanceof Error &&
+          (err.message === 'INSUFFICIENT_STOREFRONT_STOCK' ||
+            err.message === 'INSUFFICIENT_STOCK')
+        ) {
+          return fail(ERROR_CODES.STOCK_INSUFFICIENT)
+        }
+        return fail(ERROR_CODES.SYSTEM_ERROR)
+      }
     },
   )
 

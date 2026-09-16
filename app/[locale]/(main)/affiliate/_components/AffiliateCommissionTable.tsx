@@ -67,7 +67,7 @@ const AffiliateCommissionTable = ({
                       <PackageIcon className='text-default-400' size={14} />
                     }
                     title={
-                      <span className='text-tiny font-mono font-bold'>
+                      <span className='text-tiny font-bold'>
                         #{item.orderId.slice(-8).toUpperCase()}
                       </span>
                     }

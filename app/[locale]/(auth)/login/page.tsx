@@ -73,7 +73,7 @@ const LoginPage = () => {
             </Tab>
           </Tabs>
 
-          <SocialButtons dividerText={t('divider')} />
+          <SocialButtons callbackUrl={callbackUrl} dividerText={t('divider')} />
         </Card>
       </div>
     </div>

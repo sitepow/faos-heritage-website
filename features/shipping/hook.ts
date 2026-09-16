@@ -12,6 +12,8 @@ import {
 } from './action'
 import { shippingQueryKeys } from './query-key'
 
+import { getProductPriceInfo } from '@/utils/product-price'
+
 interface UseShippingParams {
   userId?: string
   address?: { countryCode: string } | null
@@ -48,13 +50,7 @@ const useShipping = ({ userId, address, carts }: UseShippingParams) => {
   })
 
   const totalPrice = (carts ?? []).reduce((sum, cart) => {
-    const product = cart.product
-    const variants = product?.variants ?? []
-
-    const variantPrice = variants.find((v) => v.id === cart.variantId)?.price
-    const productPrice = product?.price ?? 0
-    const price = Number(variantPrice ?? productPrice)
-
+    const { price } = getProductPriceInfo(cart.product, cart.variantId)
     return sum + price * (cart.quantity ?? 0)
   }, 0)
 

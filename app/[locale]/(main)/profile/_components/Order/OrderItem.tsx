@@ -4,7 +4,6 @@ import { Button, Alert, useDisclosure } from '@heroui/react'
 import { OrderStatus } from '@prisma/client'
 import { useMutation } from '@tanstack/react-query'
 import { ArrowRight, ArrowUpRightIcon, DownloadIcon } from 'lucide-react'
-import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useMemo } from 'react'
 
@@ -37,7 +36,6 @@ const OrderItem = ({ order, hideButton }: Props) => {
   const tProductUnit = useTranslations('global.productUnit')
   const tOrderStatus = useTranslations('global.orderStatus')
 
-  const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const isPending = order?.status === OrderStatus.PENDING
@@ -61,7 +59,7 @@ const OrderItem = ({ order, hideButton }: Props) => {
     mutationFn: () => createStripeCheckout({ orderId: order?.id! }),
     onSuccess: (result) => {
       if (result.success) {
-        router.push(result.data.checkoutUrl)
+        window.location.href = result.data.checkoutUrl
       }
     },
   })

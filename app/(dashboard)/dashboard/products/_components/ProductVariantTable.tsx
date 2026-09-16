@@ -87,7 +87,7 @@ const ProductVariantTable = ({
               <TableRow key={variant.id}>
                 <TableCell>
                   <div className='flex flex-col'>
-                    <span className='text-default-400 font-mono text-[10px]'>
+                    <span className='text-default-400 text-[10px]'>
                       #{variant.id.slice(-6).toUpperCase()}
                     </span>
                   </div>

@@ -84,7 +84,7 @@ const BlogCategoryTable = ({
         {categoryList.map((cat) => (
           <TableRow key={cat?.id!}>
             <TableCell>
-              <span className='text-default-500 font-mono text-xs font-bold'>
+              <span className='text-default-500 text-xs font-bold'>
                 #{cat?.id.slice(-8).toUpperCase()}
               </span>
             </TableCell>

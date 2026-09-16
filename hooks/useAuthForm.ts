@@ -1,6 +1,5 @@
 import { Role } from '@prisma/client'
 import { useMutation } from '@tanstack/react-query'
-import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 
 import type { UserLoginInput, UserRegisterInput } from '@/features/user/schema'
@@ -8,10 +7,9 @@ import type { ActionResult } from '@/lib/errors'
 import type { ErrorCode } from '@/lib/errors/error-codes'
 
 import { createUser } from '@/features/user/action'
+import { ERROR_CODES } from '@/lib/errors/error-codes'
 
 const useAuthForm = (callbackUrl: string) => {
-  const router = useRouter()
-
   const loginMutation = useMutation({
     mutationFn: async (form: UserLoginInput): Promise<ActionResult<void>> => {
       const res = await signIn('credentials', {
@@ -20,9 +18,14 @@ const useAuthForm = (callbackUrl: string) => {
       })
 
       if (res?.error) {
+        const errorCode: ErrorCode =
+          res.error === 'CredentialsSignin'
+            ? ERROR_CODES.INVALID_CREDENTIALS
+            : (res.error as ErrorCode)
+
         return {
           success: false,
-          code: res.error as ErrorCode,
+          code: errorCode,
         }
       }
 
@@ -33,7 +36,7 @@ const useAuthForm = (callbackUrl: string) => {
     },
     onSuccess: (result) => {
       if (result.success) {
-        router.push(callbackUrl)
+        window.location.href = callbackUrl
       }
     },
   })
@@ -51,13 +54,18 @@ const useAuthForm = (callbackUrl: string) => {
         return
       }
 
-      await signIn('credentials', {
+      const res = await signIn('credentials', {
         email: form.email,
         password: form.password,
         redirect: false,
       })
 
-      router.push(callbackUrl)
+      if (res?.error) {
+        window.location.href = '/login'
+        return
+      }
+
+      window.location.href = callbackUrl
     },
   })
 

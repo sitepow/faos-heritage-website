@@ -131,7 +131,7 @@ const OrderTable = ({
             return (
               <TableRow key={order.id}>
                 <TableCell>
-                  <span className='text-default-500 font-mono text-xs font-bold'>
+                  <span className='text-default-500 text-xs font-bold'>
                     #{order.id.slice(-8).toUpperCase()}
                   </span>
                 </TableCell>

@@ -79,7 +79,7 @@ export const HowItWorksSection = () => {
                   <div className='flex size-11 items-center justify-center rounded-xl bg-amber-500/10 transition-colors group-hover:bg-amber-500/20 dark:bg-amber-400/15'>
                     {item.icon}
                   </div>
-                  <span className='font-mono text-2xl font-black text-neutral-300 transition-colors group-hover:text-amber-600 dark:text-neutral-700 dark:group-hover:text-amber-400'>
+                  <span className='text-2xl font-black text-neutral-300 transition-colors group-hover:text-amber-600 dark:text-neutral-700 dark:group-hover:text-amber-400'>
                     {item.step}
                   </span>
                 </div>

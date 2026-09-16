@@ -19,7 +19,7 @@ type CreateCartParams = {
 type UpdateCartParams = {
   cartId: string
   quantity: number
-  variantId?: string
+  variantId?: string | null
 }
 
 type GetCartsResult = Awaited<ReturnType<typeof getCarts>>
@@ -65,39 +65,24 @@ const createCart = async (params: CreateCartParams) =>
         return fail(ERROR_CODES.PRODUCT_OUT_OF_STOCK)
       }
 
+      const targetVariantId = variantId || null
       const existing = await prisma.cart.findFirst({
-        where: { userId, productId },
+        where: { userId, productId, variantId: targetVariantId },
       })
 
       if (existing) {
-        const isSameVariant = existing.variantId === (variantId || null)
-
-        if (isSameVariant) {
-          const newQty = existing.quantity + quantity
-          if (newQty > stock) {
-            return fail(ERROR_CODES.PRODUCT_OUT_OF_STOCK)
-          }
-
-          await prisma.cart.update({
-            where: { id: existing.id },
-            data: { quantity: newQty },
-          })
-        } else {
-          await prisma.$transaction([
-            prisma.cart.delete({ where: { id: existing.id } }),
-            prisma.cart.create({
-              data: {
-                userId,
-                productId,
-                variantId: variantId || null,
-                quantity,
-              },
-            }),
-          ])
+        const newQty = existing.quantity + quantity
+        if (newQty > stock) {
+          return fail(ERROR_CODES.PRODUCT_OUT_OF_STOCK)
         }
+
+        await prisma.cart.update({
+          where: { id: existing.id },
+          data: { quantity: newQty },
+        })
       } else {
         await prisma.cart.create({
-          data: { userId, productId, variantId: variantId || null, quantity },
+          data: { userId, productId, variantId: targetVariantId, quantity },
         })
       }
 

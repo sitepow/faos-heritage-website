@@ -13,10 +13,10 @@ import { TableConfigHeader } from '../products/_components/TableConfigHeader'
 import { ConfirmDeleteModal } from '@/app/(dashboard)/_components/ConfirmDeleteModal'
 import { Container } from '@/components/layouts/Container'
 import { StatCard } from '@/components/ui/StatCard'
-import { UserForm } from '@/features/user/ui/UserForm'
 import { useUsers, useUserStat } from '@/features/user/hook'
 import { useUserMutation } from '@/features/user/mutation'
 import { useAuthStore } from '@/features/user/store'
+import { UserForm } from '@/features/user/ui/UserForm'
 import { formatDate } from '@/utils'
 
 const UserPage = () => {
@@ -58,12 +58,12 @@ const UserPage = () => {
     if (!userList.length) return
 
     const exportData = userList.map((user) => ({
-      'รหัสผู้ใช้งาน': `#${user.id.slice(-8).toUpperCase()}`,
+      รหัสผู้ใช้งาน: `#${user.id.slice(-8).toUpperCase()}`,
       'ชื่อ-นามสกุล': user.name || 'ไม่ระบุชื่อ',
-      'อีเมล': user.email,
-      'บทบาท': user.roles.join(', '),
-      'สถานะ': user.isActive ? 'ปกติ' : 'ถูกระงับ',
-      'วันที่ลงทะเบียน': formatDate(user.createdAt),
+      อีเมล: user.email,
+      บทบาท: user.roles.join(', '),
+      สถานะ: user.isActive ? 'ปกติ' : 'ถูกระงับ',
+      วันที่ลงทะเบียน: formatDate(user.createdAt),
     }))
 
     const worksheet = XLSX.utils.json_to_sheet(exportData)
@@ -138,10 +138,10 @@ const UserPage = () => {
             <Button
               className='font-bold'
               color='default'
-              variant='flat'
-              startContent={<DownloadIcon size={18} />}
-              onPress={handleExportExcel}
               isDisabled={userList.length === 0}
+              startContent={<DownloadIcon size={18} />}
+              variant='flat'
+              onPress={handleExportExcel}
             >
               ดาวน์โหลด Userlist
             </Button>

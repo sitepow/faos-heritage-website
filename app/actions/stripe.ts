@@ -106,20 +106,21 @@ const createStripeCheckout = async ({
   }
 
   const targetUrl = callbackUrl || PROFILE_ORDER_PATH
+  const currency = (order.currency || 'thb').toLowerCase()
+  const paymentMethodTypes: Stripe.Checkout.SessionCreateParams.PaymentMethodType[] =
+    currency === 'thb' ? ['card', 'promptpay'] : ['card']
+
   let session: Stripe.Checkout.Session
 
   try {
     session = await stripe.checkout.sessions.create({
       mode: 'payment',
-      payment_method_types: ['card', 'promptpay'],
+      payment_method_types: paymentMethodTypes,
       customer_email: order.user?.email ?? undefined,
 
-      shipping_options: buildShippingOptions(
-        order.shippingCost,
-        order.currency,
-      ),
+      shipping_options: buildShippingOptions(order.shippingCost, currency),
 
-      line_items: buildLineItems(order.items, order.currency),
+      line_items: buildLineItems(order.items, currency),
 
       metadata: {
         orderId: order.id,

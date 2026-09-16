@@ -65,7 +65,7 @@ const AffiliatePayoutTable = ({ payouts, isLoading }: Props) => {
                     }
                     title={
                       <div className='flex items-center gap-2'>
-                        <span className='text-tiny font-mono font-bold uppercase'>
+                        <span className='text-tiny font-bold uppercase'>
                           #{item.id.slice(-8)}
                         </span>
                         <Chip
@@ -95,7 +95,7 @@ const AffiliatePayoutTable = ({ payouts, isLoading }: Props) => {
                             className='hover:bg-default-50 flex items-center justify-between rounded-lg px-1 py-1.5 transition-colors'
                           >
                             <div className='flex flex-col gap-0.5'>
-                              <span className='font-mono text-[10px] leading-none font-bold'>
+                              <span className='text-[10px] leading-none font-bold'>
                                 #{comm.orderId.slice(-8).toUpperCase()}
                               </span>
                               <span className='text-default-400 text-[9px]'>

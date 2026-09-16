@@ -31,8 +31,8 @@ import {
   useAffiliateCommissions,
   useAffiliatePayouts,
 } from '@/features/affiliate-payout/hook'
-import { calculateCommissionByStatus } from '@/features/affiliate-payout/util'
 import { PayoutForm } from '@/features/affiliate-payout/ui/PayoutForm'
+import { calculateCommissionByStatus } from '@/features/affiliate-payout/util'
 import { useTranslateStatus } from '@/hooks/useTranslateStatus'
 import { formatCurrency, formatDate } from '@/utils'
 
@@ -174,7 +174,7 @@ const AffiliateHistoryPage = () => {
                       }
                     >
                       <TableCell>
-                        <span className='text-default-500 font-mono text-xs font-bold'>
+                        <span className='text-default-500 text-xs font-bold'>
                           #{item.id.slice(-8).toUpperCase()}
                         </span>
                       </TableCell>
@@ -193,7 +193,7 @@ const AffiliateHistoryPage = () => {
                               />
                             }
                             title={
-                              <span className='text-tiny font-mono font-bold'>
+                              <span className='text-tiny font-bold'>
                                 #{item.orderId.slice(-8).toUpperCase()}
                               </span>
                             }

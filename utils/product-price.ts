@@ -21,9 +21,10 @@ const getProductPriceInfo = (
       ? product.variants?.find((v) => v.id === variantId)
       : null
 
-  const originalPrice = Number(variant?.price ?? product.price ?? 0)
-
-  const price = Number(variant?.salePrice ?? product.salePrice ?? originalPrice)
+  const isVariant = !!variant
+  const originalPrice = Number(isVariant ? variant.price : (product.price ?? 0))
+  const salePrice = isVariant ? variant.salePrice : product.salePrice
+  const price = Number(salePrice ?? originalPrice)
 
   const discountAmount = originalPrice - price
   const hasDiscount = discountAmount > 0

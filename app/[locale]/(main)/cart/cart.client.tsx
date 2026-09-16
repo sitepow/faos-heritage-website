@@ -1,5 +1,7 @@
 'use client'
 
+import { Button } from '@heroui/react'
+import Link from 'next/link'
 import { useLocale, useTranslations } from 'next-intl'
 
 import { CartItem } from './_components/CartItem'
@@ -31,12 +33,32 @@ const CartClient = () => {
           {t('title', { count: carts?.length || 0 })}
         </span>
 
-        {isEmptyCarts && <EmptyState description={t('empty')} />}
+        {!userId ? (
+          <EmptyState
+            color='default'
+            description='กรุณาเข้าสู่ระบบเพื่อดูสินค้าในตะกร้าของคุณ'
+          >
+            <div className='mt-3 flex justify-center'>
+              <Button
+                as={Link}
+                color='primary'
+                href={`/login?callbackUrl=/${locale}/cart`}
+                size='sm'
+              >
+                เข้าสู่ระบบ
+              </Button>
+            </div>
+          </EmptyState>
+        ) : (
+          <>
+            {isEmptyCarts && <EmptyState description={t('empty')} />}
 
-        {isHasCarts &&
-          carts?.map((cart) => <CartItem key={cart?.id} cart={cart} />)}
+            {isHasCarts &&
+              carts?.map((cart) => <CartItem key={cart?.id} cart={cart} />)}
 
-        {isHasCarts && <CartSummaryCard />}
+            {isHasCarts && <CartSummaryCard />}
+          </>
+        )}
       </Container>
     </AppSection>
   )
