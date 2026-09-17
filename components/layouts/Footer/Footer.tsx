@@ -7,6 +7,7 @@ import type { ComponentProps } from 'react'
 import { Container } from '../Container'
 import { FooterBottom } from './_components/FooterBottom'
 import { FooterSection } from './_components/FooterSection'
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 import { cn } from '@/utils/style'
 
@@ -34,6 +35,9 @@ const Footer = ({ className, ...props }: ComponentProps<'footer'>) => {
         ))}
       </Container>
       <FooterBottom />
+      
+      {/* เพิ่มปุ่ม WhatsApp ลอยไว้มุมขวาล่าง */}
+      <WhatsAppButton />
     </footer>
   )
 }
